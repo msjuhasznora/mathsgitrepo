@@ -39,20 +39,24 @@ Finite differences, finite elements.
 \subsection{Decay property for hyperbolic systems with dissipation - Prof. Kawashima}
 The aim of the course is to study dissipative structure and decay property for hyperbolic systems with dissipation. Consider the following two equations.
 
-\vspace*{1\baselineskip}
+\begin{equation} \label{eq:symmetricdiffusion}
+u_{t} + Au_{x} = Bu_{xx}
+\end{equation}
 
-\begin{tabular}{ c c }
-  symmetric diffusion & symmetric relaxation \\
-  \hline
-  $ u_{t} + Au_{x} = Bu_{xx} $ & $u_{t} + Au_{x} -Lu = 0$ \\
-  \hline
-  $B$ symmetric and nonnegative & $L$ symmetric and nonnegative \\
-\end{tabular}
+\begin{equation} \label{eq:symmetricrelaxation}
+u_{t} + Au_{x} -Lu = 0
+\end{equation}
+
+It is always assumed that the matrix $A$ is symmetric. Throughout the course of this lecture different versions of these two equations are examined in terms of the assumptions that are made on matrices $B$ and $L$, or what type of additional effects are involved. The simplest case is when one assumes $B$ and $L$ to be symmetric and nonnegative.
+
+Equation \ref{eq:symmetricdiffusion} describres the symmetric diffusion process while symmetric relaxation is modeled by equation \ref{eq:symmetricrelaxation}.
+
 
 \subsection{Advanced Topics on Numerical Methods - Prof. Guglielmi}
 A-stability, B-stability, Runge-Kutta.
 
 \subsection{Introduction to the Incompressible Navier-Stokes equation and the mathematical theory of Turbulence - Prof. Marcati}
+Euler and Navier-Stokes equations.
 
 %SEMINARS
 \section{Seminars}
