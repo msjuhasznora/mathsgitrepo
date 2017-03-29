@@ -13,7 +13,7 @@
 
 \begin{abstract}
 
-This document describes the university classes, GSSI classes, summer schools and seminars attended in the 2016 / 2017 academic year.\\
+This document describes the university classes, GSSI classes, summer schools and seminars attended in the 2016 / 2017 academic year. The bibliography contains the list of the books and articles that mean the basis of this research project.\\
 
 \end{abstract}
 \newpage
@@ -47,10 +47,19 @@ u_{t} + Au_{x} = Bu_{xx}
 u_{t} + Au_{x} -Lu = 0
 \end{equation}
 
-It is always assumed that the matrix $A$ is symmetric. Throughout the course of this lecture different versions of these two equations are examined in terms of the assumptions that are made on matrices $B$ and $L$, or what type of additional effects are involved. The simplest case is when one assumes $B$ and $L$ to be symmetric and nonnegative.
+Equation \ref{eq:symmetricdiffusion} describes the symmetric diffusion process while symmetric relaxation is modeled by equation \ref{eq:symmetricrelaxation}.
 
-Equation \ref{eq:symmetricdiffusion} describres the symmetric diffusion process while symmetric relaxation is modeled by equation \ref{eq:symmetricrelaxation}.
+It is always assumed that the matrix $A$ is symmetric. Throughout the course of this lecture three different versions of these two equations are examined in terms of the assumptions that are made on matrices $B$ and $L$, and what type of additional effects are involved. The simplest case is when one assumes $B$ and $L$ to be symmetric and nonnegative. From this base case we can move in two different directions and arrive at two different versions of these systems. In the first variation, the very same equations are considered with modified conditions, ie. matrices $B$ and $L$ are still assumed to be non-negative, but the symmetry assumption is dropped. In the second variation one considers the original assumptions on symmetry and non-negativity, but the equations are modified with a memory part. More specifically, the equations in the third case are the following.
 
+\begin{equation} \label{eq:symmetricdiffusionmemo}
+u_{t} + Au_{x} = a(t) \star Bu_{xx}
+\end{equation}
+
+\begin{equation} \label{eq:symmetricrelaxationmemo}
+u_{t} + Au_{x} -a(t) \star Lu = 0
+\end{equation}
+
+Fourier transform.
 
 \subsection{Advanced Topics on Numerical Methods - Prof. Guglielmi}
 A-stability, B-stability, Runge-Kutta.
