@@ -1,5 +1,8 @@
 \documentclass{article}
 \usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{commath}
 
 %PREAMBLE
 \title{Activities 2016 / 2017}
@@ -47,7 +50,7 @@ u_{t} + Au_{x} = Bu_{xx}
 u_{t} + Au_{x} -Lu = 0
 \end{equation}
 
-Equation \ref{eq:symmetricdiffusion} describes the symmetric diffusion process while symmetric relaxation is modeled by equation \ref{eq:symmetricrelaxation}.
+Equation \ref{eq:symmetricdiffusion} describes the symmetric diffusion process, while symmetric relaxation is modeled by equation \ref{eq:symmetricrelaxation}.
 
 It is always assumed that the matrix $A$ is symmetric. Throughout the course of this lecture three different versions of these two equations are examined in terms of the assumptions that are made on matrices $B$ and $L$, and what type of additional effects are involved. The simplest case is when one assumes $B$ and $L$ to be symmetric and nonnegative. From this base case we can move in two different directions and arrive at two different versions of these systems. In the first variation, the very same equations are considered with modified conditions, ie. matrices $B$ and $L$ are still assumed to be non-negative, but the symmetry assumption is dropped. In the second variation one considers the original assumptions on symmetry and non-negativity, but the equations are modified with a memory part. More specifically, the equations in the third case are the following.
 
@@ -59,7 +62,42 @@ u_{t} + Au_{x} = a(t) \star Bu_{xx}
 u_{t} + Au_{x} -a(t) \star Lu = 0
 \end{equation}
 
-Fourier transform.
+During the course the case $a(t) = \mathrm{e}^{-t}$ is considered.
+
+To expound the most important definition, first take the Fourier transforms of equations \ref{eq:symmetricdiffusion} and \ref{eq:symmetricrelaxation}, and then consider the corresponding eigenvalue problem.
+
+\begin{equation} \label{eq:symmetricdiffusioneigenv}
+( \lambda + I \xi A + \xi ^2 B ) \phi = 0
+\end{equation}
+
+\begin{equation} \label{eq:symmetricrelaxationeigenv}
+( \lambda + I \xi A + L ) \phi = 0
+\end{equation}
+
+Equations \ref{eq:symmetricdiffusion} and \ref{eq:symmetricrelaxation} are called uniformly dissipative of type $(p,q)$ if
+
+\begin{equation} \label{eq:uniformdissipativity}
+\operatorname{Re}(\lambda(I \xi)) \leq \frac{c\abs{\xi}^{2p}}{(1 + \abs{\xi}^2)^q}
+\end{equation}
+
+This concept stands at the center throughout the course and in each of the above mentioned cases we will assert a condition for the system to be uniformly dissipative. In each case this condition will be the Craftmanship Condition, which grasps a very similar meaning in every case, but is naturally defined differently, depending on the concrete equation.
+
+For example, for equation \ref{eq:symmetricdiffusion} the Craftmanship Condition by definition is satisfied if there exists a skew-symmetric matrix K such that $ {(KA)}^{sy} + B$ is positive definit. Craftmanship Condition in other cases is defined similarly, naturally adapted to the equation.
+
+To continue with our basic case, equation \ref{eq:symmetricdiffusion}, with B being symmetric and non-negative, if Craftmanship Condition is satisfied, then the solution is uniformly dissipative of type $(1,1)$ and the following bound holds
+
+\[ \abs{\hat{u}(t,\xi)} \leq C \mathrm{e}^{-c\rho(\xi)t} \abs{\hat{u}_0 (\xi)} , \]
+
+where $\rho(\xi) = \frac{\xi^2}{1 + \xi^2}$. Moreover, we have the decay estimate
+
+\[ \norm{\partial _{x} ^{k} u(t)}_{L^2} \leq C(1+t)^{-\frac{1}{4}-\frac{k}{2}} \norm{u_0}_{L^1} + C\mathrm{e}^{-ct} \norm{\partial ^k _x u_0}_{L^2}.\]
+
+It can be shown that for both equations  \ref{eq:symmetricdiffusion} and \ref{eq:symmetricrelaxation}, Craftmanship Condition is sufficient and necessary condition for the system to be uniformly dissipative of $(1,1)$. For the nonsymmetric case of equation \ref{eq:symmetricrelaxation} the respective Craftmanship Condition is sufficient to be uniformly dissipative.
+
+For the systems with memory-type dissipation, ie. for equations \ref{eq:symmetricdiffusionmemo} and \ref{eq:symmetricrelaxationmemo} with a method of introducing a new variable and increasing the dimension of the system we find that memory-type symmetric diffusion is essentially the same as the original relaxation equation with symmetric $L$ matrix, and memory-type symmetric relaxation is essentially the same as the original relaxation equation with non-symmetric $L$ matrix. Craftmanship Conditions can be defined analogously, and the conditions for the respective systems hold and fail equivalently in the diffusion case, for the relaxation system the Craftmanship Condition of the original system is sufficient condition for the Craftmanship Condition of the memory-type system to be satisfied. Analogous results to the above mentioned decay estimate and solution bound can be stated for the non-symmetric and the symmetric memory-type systems as well.
+
+The course explores the relationship between the five different systems defined in the beginning, the Craftmanship Condition, and uniform dissipativity (including decay estimates).
+
 
 \subsection{Advanced Topics on Numerical Methods - Prof. Guglielmi}
 A-stability, B-stability, Runge-Kutta.
