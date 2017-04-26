@@ -30,8 +30,42 @@ This document describes the university classes, GSSI classes, summer schools and
 \subsection{Numerical Analysis 2 - Prof. Guglielmi}
 Euler method. Steepest descent gradient method. Conjugate directions method. Matlab.
 
-\subsection{High Performance Parallel Computing - Prof. Shcherbatyy, Prof. Pera}
-Basic Linux commands. 
+\subsection{High Performance Parallel Computing - Prof. Shcherbatyy, Prof. Protasov, Prof. Khapko, Prof. Pera}
+
+\subsubsection{Optimization of complex systems - Prof. Shcherbatyy}
+This section of the HPC lecture introduces optimization problems of complex systems. Two motivational, illustrative applications are considered in the beginning of the course, partly to fix the terminology and introduce notions such as state function and control function. Let's consider the following problem: how to boil a potato by heating its boundary in an optimal way. To put in into mathematical forms, let $\Omega$ be the potato, $\Gamma$ its boundary. Let $u(x)$ denote the heat source or the control function on $\Gamma$, and finally let $y(x)$ be the temperature, or in other words, the state function in $\Omega$.
+
+We have an elliptic boundary control problem
+
+\[ -\Delta y = 0 , x \in \Omega \]
+\[ \frac{\partial y}{\partial n} = \alpha (u - y), x \in \Gamma, \]
+
+and to express the objective we formulate
+
+\[ \min_{y,u} J(y, u) = \frac{1}{2} \int_{\Omega} (y(x) - y_d(x))^2 dx - \frac{\gamma}{2} \int_{\gamma} {u(x)}^2 ds(x),\]
+
+while the following inequality constraints hold
+
+\[ u_a(x) \leq u(x) \leq u_b(x), x \in \Gamma.\]
+
+A different version of this problem is when we have distributed control inside $\Omega$.
+
+Using finite differences or finite elements method we obtain a discrete problem of the following form
+
+\[ \min_{Y,U} \frac{1}{2}\sum_{i = 1} ^ {N} (y_i - y_{d,i})^2 + \gamma u_i^2,\]
+
+subject to $A_h Y = B_h U$ and $U_a \leq U \leq U_b,$ where $Y,U \in \mathbb{R}^N$ and $A_h, B_h \in \mathbb{R}^{N \times N}$. The general solution methods contain Newton method, steepest descent gradient method and conjugate gradient method, which were elaborated also in Numerical Analysis 2.
+
+The problem we considered above has application in distributed heating in medicine.
+
+Finally, the topic of sensitivity analysis was introduced, which, roughly speaking, calculates the rates of change in the output variables of a system which result from small perturbations in the problem parameters. Direct differentiation method and adjoint method were considered in detail.
+
+\subsubsection{Prof. Protasov}
+
+\subsubsection{Prof. Khapko}
+
+\subsubsection{Prof. Pera}
+Basic Linux commands. Practical part, actual parallel computing.
 
 %GSSI
 \section{Gran Sasso Science Institute}
@@ -115,6 +149,24 @@ Euler and Navier-Stokes equations.
 \subsubsection{A two phase model with cross and self attractive interactions - Prof. Novaga}
 
 \subsubsection{Traveling waves for collective movements on a network - Prof. Corli}
+
+\subsection{School on Uncertainty Quantification for Hyperbolic Equations and Related Topics, 24th-28th April 2017}
+
+\subsubsection{Uncertainty propagation in transport equations and kinetic polynomials - Prof. Depres}
+
+\subsubsection{Stochastic asymptotic-preserving methods for multiscale kinetic and quantum transport with uncertainties - Prof. Jin}
+
+\subsubsection{Kinetic methods for uncertainty propagations in SODEs and SPDEs: from data-driven approximations to functional differential equations - Prof. Venturi}
+
+\subsubsection{Approximation of stochastic partial differential equations driven by Levy fields - Andreas Barth}
+
+\subsubsection{Uncertainty qualification in sediment transport shallow flows - M. J. Castro Diaz}
+
+\subsubsection{Stochastic Galerkin methods for the Boltzmann equation with uncertainty - Jingwei Hu}
+
+\subsubsection{From uncertain systems of conservation laws to playing with orthonormal polynomial basis - Gael Poette}
+
+\subsubsection{Structure preserving methods for mean-field equations with random inputs - Mattia Zanella}
 
 %SUMMER SCHOOLS
 \section{Summer schools}
