@@ -39,7 +39,7 @@ Euler method. Steepest descent gradient method. Conjugate directions method. Mat
 \subsection{High Performance Parallel Computing - several Professors}
 
 \subsubsection{Numerical solutions of calculus of variations problems - Prof. Protasov}
-Let's consider the following problem, also known as The Simplest Problem. We aim to minimize the function $J(x) = \int_{t_0}^{t_1}L(t,x,\dot{x})dt ,$ where $t \in (t_0,t_1)$ and $x \in C^1[t_0,t_1]$. The most important equation we need when discussing this problem is the Euler-Lagrange equation, \ref{eq:eulerlagrange}.
+Let's consider the following problem, also known as The Simplest Problem. We aim to minimize the function $J(x) = \int_{t_0}^{t_1}L(t,x,\dot{x})dt ,$ where $t \in (t_0,t_1)$ and $x \in C^1[t_0,t_1]$. The most important equation we need when discussing this problem is the Euler-Lagrange equation, equation \ref{eq:eulerlagrange}.
 
 \begin{equation} \label{eq:eulerlagrange}
 \frac{d}{dt}L_{\dot{x}} = L_x
@@ -61,7 +61,7 @@ It is important to note that when a solution $x$ is not smooth enough, ie. if it
 
 As a variation of the original problem, the Bolza problem is introduced, in which we want to minimize $J(x) = \int_{t_0}^{t_1}L(t,x,\dot{x})dt + l(x_0, x_1)$, and accordingly, a similar theorem to the previous one is described for a $\hat{x}$ solution of the problem.
 
-A good example for the many applications of The Simplest Problem is the solution of the Isoperimetric Problem in which it is shown it is the circle that has the biggest possible area among forms with concrete length. In the solution a pair of Lagrange multipliers are used and the theorem that had been shown.
+A good example for the many applications of The Simplest Problem is the solution of the Isoperimetric Problem in which it is shown that among forms with a concrete given length it is the circle that has the biggest possible area. In the solution a pair of Lagrange multipliers are used and the theorem that had been shown.
 
 As an interesting aspect, Jacob Steiner's intuitive but wrong version of the proof is described for the same Isoperimetric Problem from 1850  as to illustrate the significance of the Euler-Lagrange method.
 
@@ -74,7 +74,7 @@ The next problem we considered throughout the course of this lectur was the foll
    \end{cases}
 \]
 
-The approach we were introduced is the so-called "shooting method".
+The approach we were introduced to is the so-called "shooting method".
 Instead of solving the above problem, we can consider the Cauchy problem.
 
 \[
@@ -86,7 +86,6 @@ Instead of solving the above problem, we can consider the Cauchy problem.
 
 This Cauchy problem is basically the same as the more simple one, with first order derivatives, using the new notation $x_1 = x, x_2 = \dot{x}$. For the Cauchy problem there exists an existence and uniqueness theorem which says that if $f$ is Lipschitz continuous, then we have a unique solution on an interval. Taking this approach we only have to connect somehow the solution of this new problem to the original BVP. This can be done by introducing a new variable, $\alpha \in \mathbb{R}$, and then we can consider several solutions ("shootings") $P(\alpha) = x_{\alpha}(t_1) - x_1$, and find $P(\alpha) = 0$ by the bisection, or double decision method.
 
-\vspace{5mm}
 Difference schemes and difference equations are also discussed. An equation is stable if and only if all roots of the characteristic polynomial are strictly smaller than $1$ by modulus, and it is called $\alpha$-stable is the polynomial has one root equal to $1$ and all other roots are smaller than $1$.
 
 \subsubsection{Optimization of complex systems - Prof. Shcherbatyy}
@@ -115,7 +114,7 @@ subject to $A_h Y = B_h U$ and $U_a \leq U \leq U_b,$ where $Y,U \in \mathbb{R}^
 
 The problem we considered above has application in distributed heating in medicine.
 
-Finally, the topic of sensitivity analysis was introduced, which, roughly speaking, calculates the rates of change in the output variables of a system which result from small perturbations in the problem parameters. Direct differentiation method and adjoint method were considered in detail.
+Finally, the topic of sensitivity analysis was introduced, which, roughly speaking, calculates the rates of change in the output variables of a system which result from small perturbations in the problem parameters. Direct differentiation method and adjoint method were discussed in detail.
 
 \subsubsection{Numerical solution of Boundary value problems for PDEs - Prof. Khapko}
 
