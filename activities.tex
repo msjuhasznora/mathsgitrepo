@@ -7,8 +7,8 @@
 \usepackage{outlines}
 
 \usepackage{enumitem}
-\setlist[enumerate,2]{label=\roman*)}
-\setlist[enumerate,3]{label=\alph*)}
+\setlist[enumerate,1]{label=\roman*)}
+\setlist[enumerate,2]{label=\alph*)}
 
 %PREAMBLE
 \title{Activities 2016 / 2017}
@@ -57,7 +57,7 @@ Three special cases of equation \ref{eq:eulerlagrange} are considered which are 
 
 \end{outline}
 
-It is important to note that when a solution $x$ is not smooth enough, ie. if it lives in a wider space than $C^1$, it can be rejected by the Euler-Lagrange method, however it is still a solution to The Simplest Problem.
+It is important to note that when a solution $x$ is not smooth enough, ie. if it lives in a wider space than $\mathcal{C}^1$, it can be rejected by the Euler-Lagrange method, however it is still a solution to The Simplest Problem.
 
 As a variation of the original problem, the Bolza problem is introduced, in which we want to minimize $J(x) = \int_{t_0}^{t_1}L(t,x,\dot{x})dt + l(x_0, x_1)$, and accordingly, a similar theorem to the previous one is described for a $\hat{x}$ solution of the problem.
 
@@ -117,6 +117,67 @@ The problem we considered above has application in distributed heating in medici
 Finally, the topic of sensitivity analysis was introduced, which, roughly speaking, calculates the rates of change in the output variables of a system which result from small perturbations in the problem parameters. Direct differentiation method and adjoint method were discussed in detail.
 
 \subsubsection{Numerical solution of Boundary value problems for PDEs - Prof. Khapko}
+
+As an introduction, fundamental results from theory such as Green's theorem, Gauss divergence theorem and Maximum Principle are drawn up, and Interior Dirichlet Problem (equation \ref{interiordirichletproblem}), Interior Neuman Problem (equation \ref{interiorneumanproblem}) and Poisson Equation ($-\Delta u = F, x \in D$) are defined.
+
+\begin{equation}\label{interiordirichletproblem}
+   \begin{cases}
+               \Delta u = 0, x \in D\\
+               u = f, x \in \partial D
+   \end{cases}
+\end{equation}
+
+\begin{equation}\label{interiorneumanproblem}
+   \begin{cases}
+               \Delta u = 0, x \in D\\
+               \frac{\partial u}{\partial \nu} = g, x \in \partial D
+   \end{cases}
+\end{equation}
+
+\begin{outline}[enumerate]
+
+Throughout the lecture four methods are described for solving boundary value problems.
+
+\1 Finite Difference Method. We are looking for an approximation of the solution of the BVP at a finite number of grid points. The function derivatives are approximated by means of Taylor expansion. If we use the $u_{ij} \approx u(ih, jh)$ approximation, this gives us a system of linear equations and the five-point stencil for FDM, and eventually the matrix representation $A_h u_h = q_h$. Finally, consistence is defined, a sufficient condition is said for convergence, and an upper bound estimation if given for the infinity norm of the error.
+
+\1 Galerkin-Ritz method. We begin with the following problem.
+
+\[
+   \begin{cases}
+               \Delta u = F, x \in D\\
+               \frac{\partial u}{\partial \nu} = 0, x \in \partial D
+   \end{cases}
+\]
+
+The notion of test functions is introduced. We define the function space $V$ as
+
+\[ V = \{v \in \mathcal{C}(\bar{D}), \frac{\partial v}{\partial x_i} \text{exist and is piecewise continuous, } v = 0 \text{ on } \partial D \}.\]
+
+Since any $v$ is zero on the boundary,  we have
+
+\[ \int_D \nabla u(x) \nabla v(x) dx = \int_D F(x)v(x)dx.\]
+
+Denoting by $a(u, v)$ the left hand side, we have an equation of form $a(u,v) = b(v)$, also called the variational equation. A function $u$ that satisfies this equation for all $v \in V$ is called a weak or variational solution.
+
+Through the Galerkin dimension reduction we arrive to the new problem
+
+\[\text{find } u_h \in V_h \text{ with } a(u_h,v) = b(v), \text{ }\forall v \in V\]
+
+where $V_h$ is a finite dimensional subspace of $V$ and $a$ is a bilinear function. Once in a finite dimensional space, we can write the matrix form of the problem by means of the basis. Boundedness and ellipticity is defined and Cea's lemma is described.
+
+\1 Finite Elements Method. The original domain is divided into subdomains called elements. The construction of basic functions is described. The approximating function in the rectangle-shaped elements case is a combination of four bilinear interpolating polynomials, also called shape functions.
+
+\1 Boundary Integral Equation Method. The $\Phi (x)$ fundamental solution, both for 2 and 3 dimensions, for the Laplace equation is defined, $u(x)$ single-layer and $v(x)$ double-layer potentials are
+
+\[ u(x) = \int_{\partial D} \phi(y) \Phi(x,y) ds(y),\]
+
+\[ v(x) = \int_{\partial D} \phi(y) \frac{\partial}{\partial \nu(y)}\Phi(x,y) ds(y),\]
+
+where $\phi$ is a continuous function on the boundary.
+
+The Fredholm integral equation of the first kind is introduced, which states that the single layer potential is a solution of the Dirichlet BVP, provided that $\phi$ is a solution of $u(x) = \phi (x). $ The second kind analogous version is also described. Finally the Nystrom method is applied for the Fredholm equation.
+
+\end{outline}
 
 \subsubsection{Programming and using Caliban - Prof. Pera}
 Basic Linux commands. Practical part, actual parallel computing.
