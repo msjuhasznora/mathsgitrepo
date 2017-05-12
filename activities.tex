@@ -186,7 +186,38 @@ Basic Linux commands. Practical part, actual parallel computing.
 \section{Gran Sasso Science Institute}
 
 \subsection{Introduction to Finite Elements Method - Prof. Boffi}
-Finite differences, finite elements.
+This course focuses on finite differences and finite elements. We begin by considering the following classical problem.
+
+\begin{equation}
+   \begin{cases}
+               - \Delta u = f, x \in \Omega\\
+               u = g, x \in \partial \Omega = \Gamma
+   \end{cases}
+\end{equation}
+
+Following discretization and defining the discrete Laplace operator, a new problem in introduced.
+
+\begin{equation}
+   \begin{cases}
+               - \Delta_h u_h = f, x \in \Omega_h\\
+               u_h = g, x \in \Gamma_h
+   \end{cases}
+\end{equation}
+
+If $u \in \mathcal{C}^2(\bar{\Omega})$, then $\lim_{h \to 0} \norm{\Delta_h u - \Delta u}_{L^{\infty} (\Omega_h)} = 0$.
+
+The technical implementation is discussed and a concrete example is given for the case $N=4, h=\frac{1}{4}$. The idea is that even though we have a two-dimensional grid with points in which we approximate the values of the function $u$, we can turn the values into a column vector by using a linear ordering of the nodes. Eventually this gives us an equation of form $Au = b$, where $A$ is a matrix coming from the approximation of the Laplacian, $u$ is the one dimensional vecor of the originally two dimensional grid point values and $b$ is a combination of the function values of $f$ and $g$. The special structure of the matrix is described, and the consistency theorem is stated.
+
+In connection with the Galerkin method, the Lax-Milgran theorem is noted. The definition of coercivity is introduced: $\exists \beta: a(v,v) \geq \beta \norm{v}^2 \forall v$. We briefly discuss relationship between the inf-sup condition, dense range condition and coercivity.
+
+The introductory part of finite element method begins by describing the finite dimension version of the Galerkin method and by stating Cea's lemma, basically saying that the error is bounded by the best approximation.
+
+Of the many interesting questions about finite elements two are described in more detail:
+
+\begin{outline}[enumerate]
+\1 Grid
+\1 Lagrangian functions
+\end{outline}
 
 \subsection{Decay property for hyperbolic systems with dissipation - Prof. Kawashima}
 The aim of the course is to study dissipative structure and decay property for hyperbolic systems with dissipation. Consider the following two equations.
