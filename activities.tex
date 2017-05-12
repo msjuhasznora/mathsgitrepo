@@ -212,12 +212,16 @@ In connection with the Galerkin method, the Lax-Milgran theorem is noted. The de
 
 The introductory part of finite element method begins by describing the finite dimension version of the Galerkin method and by stating Cea's lemma, basically saying that the error is bounded by the best approximation.
 
-Of the many interesting questions about finite elements two are described in more detail:
+The accuracy from a finite elements model is directly related to the finite element mesh that we use. The finite element mesh is used to subdivide the model into smaller domains called elements, over which a set of equations are solved. These equations approximately represent the governing equation of interest via a set of polynomial functions defined over each element. As these elements are made smaller and smaller, as the mesh is refined, the computed solution will approach the true solution.
+
+Of the many interesting questions about finite elements we mention two:
 
 \begin{outline}[enumerate]
-\1 Grid
-\1 Lagrangian functions
+\1 Refining the grid - what metrics, criteria and processes should be used for refining the mesh?
+\1 In the $U = \sum_{j=1}^{N} c_j \Phi(x_j, y_j)$ how do we actually define the basis functions?
 \end{outline}
+
+We address the second question in more detail, we show examples for Lagrange shape functions on triangles, the case of rectangle-shaped elements is also mentioned.
 
 \subsection{Decay property for hyperbolic systems with dissipation - Prof. Kawashima}
 The aim of the course is to study dissipative structure and decay property for hyperbolic systems with dissipation. Consider the following two equations.
