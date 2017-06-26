@@ -34,7 +34,34 @@ This document describes the university classes, GSSI classes, summer schools and
 \section{University of L'Aquila}
 
 \subsection{Numerical Analysis 2 - Prof. Guglielmi}
-Euler method. Steepest descent gradient method. Conjugate directions method. Matlab.
+The main topics covered by this class are systems of nonlinear equations, nonlinear optimization (constrained and unconstrained), numerical method for the Cauchy problem, and boundary value problems for ODEs.
+
+The bisection method and Newton method are defined, and a few educational examples are shown for interesting cases, such as when $f(x) = arctan(x)$ and the method does not converge globally, or when $f(x)$ is chosen to be $x^{20} - 1$ and $x_0 = 2$ and we have seen the the convergence to the fix point in the beginning is quite slow.
+
+The numerical optimization topic was started by discussing the necessary and sufficient conditions for a minimum point. For the solution we introduce the algorithm of the Steepest descent gradient method. The idea is to follow the maximal decrease of the function, and to restrict the problem from $\mathbb{R}^n$ to $\mathbb{R}$. We point out that the following problems are equivalent.
+
+\begin{outline}[enumerate]
+
+\1 solving $Qx = b$ for $Q$ being SPD.
+
+\1 the minimum problem for the quadratic case $f(x)$ being $x^TQx - x^Tb$
+
+\end{outline}
+
+Creating a $Q$ matrix from the discretization values from a differential equation and a $b$ vector from the function values, the method is also used for obtaining approximate solutions for ODEs. Condition number and convergence are discussed, and the notion of conjugate directions is also introduced, finally we define the Conjugate gradient method. We implemented an interesting application from approximation theory of the above methods in Matlab (approximate a function by a polynomial).
+
+In the case of constrained optimization we define a continuous function $P$  to be a penalization function ascended to a set $\mathcal{S}$ if it is nonnegative everywhere and it is $0$ if and only if $x \in {S}$. We eventually associate $q(c,x) = f(x) + cP(x)$ to the original $f(x)$ function that we had to optimize with given constraints, and we optimize $q$ instead, unconstrained.
+
+The third chapter of the course deals with the Cauchy problem.
+
+\begin{equation}
+   \begin{cases}
+               y'(x) = f(x, y(x)) \\
+               y(0) = y_0
+   \end{cases}
+\end{equation}
+
+We assume $f(x,y)$ to be continuous and to be Lipscitz-continuous with respect to $y$. Theory states that under these assumptions the CP has a solution which is unique. Our goal is to find an approximation, for this we use the Euler method and we describe a theorem that assures that under suitable conditions the Euler method converges linearly.
 
 \subsection{High Performance Parallel Computing - several Professors}
 
@@ -65,7 +92,7 @@ A good example for the many applications of The Simplest Problem is the solution
 
 As an interesting aspect, Jacob Steiner's intuitive but wrong version of the proof is described for the same Isoperimetric Problem from 1850  as to illustrate the significance of the Euler-Lagrange method.
 
-The next problem we considered throughout the course of this lectur was the following boundary value problem.
+The next problem we considered throughout the course of this lecture was the following boundary value problem.
 
 \[
    \begin{cases}
