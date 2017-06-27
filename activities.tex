@@ -34,7 +34,7 @@ This document describes the university classes, GSSI classes, summer schools and
 \section{University of L'Aquila}
 
 \subsection{Numerical Analysis 2 - Prof. Guglielmi}
-The main topics covered by this class are systems of nonlinear equations, nonlinear optimization (constrained and unconstrained), numerical method for the Cauchy problem, and boundary value problems for ODEs.
+The main topics covered by this class are systems of nonlinear equations, nonlinear optimization (constrained and unconstrained), numerical method for the Cauchy problem.
 
 The bisection method and Newton method are defined, and a few educational examples are shown for interesting cases, such as when $f(x) = arctan(x)$ and the method does not converge globally, or when $f(x)$ is chosen to be $x^{20} - 1$ and $x_0 = 2$ and we have seen the the convergence to the fix point in the beginning is quite slow.
 
@@ -63,7 +63,18 @@ The third chapter of the course deals with the Cauchy problem.
 
 We assume $f(x,y)$ to be continuous and to be Lipschitz-continuous with respect to $y$. Theory states that under these assumptions the CP has a solution which is unique. Our goal is to find an approximation, for this we use the Euler method and we describe a theorem that assures that under suitable conditions the Euler method converges linearly.
 
-The question is, how to generalize the Euler-method? We can do that through the extension of quadrature (Runge-Kutta methods) or through interpolation (multi-step method).
+The question is, how to generalize the Euler-method? One can do that either by increasing the number of steps, or either by keeping one step but increasing the number of stages.
+
+\begin{outline}[enumerate]
+
+\1 Multistep methods. In this case we gain efficiency by using the information from previous steps. Explicit Adams method, implicit Adams method, and backward differentiation formulas were given. This way naturally leads to the theory of difference equations, to the polynomials associated with them, and the notions attached to these (for example zero stability is defined via the polynomial that belongs to the difference equation).
+
+\1 The extension of the quadrature formula (Runge-Kutta methods). These methods use intermediate steps to obtain a higher order method. The Runge-Kutta methods are often described by their display from Butcher's work. The main equations are the following.
+
+\[ k_i = f(t_0 + c_i h, y_0 + h \sum_{j=1}^s a_{ij}K_j) \]
+\[ y_1 = y_0 + h \sum_{i=1}^s b_i K_i \]
+
+\end{outline}
 
 \subsection{High Performance Parallel Computing - several Professors}
 
