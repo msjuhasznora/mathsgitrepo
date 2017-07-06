@@ -330,6 +330,17 @@ The course explores the relationship between the five different systems defined 
 \subsection{Advanced Topics on Numerical Methods - Prof. Guglielmi}
 The first chapter of this course is about quadrature formulas. An $s$-stage quadrature formula is given by $Q[g] = \sum_{i=1}^s b_i g(c_i)$, where $\{c_i\}_{i=1}^s$  are the abscissas of the method and $\{b_i\}_{i=1}^s$ are the weights. Three simple examples are the midpoint formula, the trapezoidal rule and the Simpson formula. After introducing the concept of order, the important role of orthogonal polynomials has been expanded. To introduce these polynomials let us take a weight function $w(t) > 0$, $t \in (a,b)$ such that $\int_a^b \abs{t}^k w(t) dt < \infty$. We can define the scalar product of functions $f$ and $g$ over the weight function $w$ as $<f, g> = \int_a ^ b w(t) f(t) g(t) dt$. Two functions are said to be orthogonal, as usual, if their scalar product is zero. Our aim was to construct a set of polynomials that that includes exactly one polynomial of order $j$, called $p_j (x)$, and all of which are mutually orthogonal over the specified weight function. We achieve this by Gram-Schmidt orthogonalization. The polynomial $p_j (x)$ has exactly $j$ distinct roots in the interval $(a,b)$. We are interested to find all the roots of such a polynomial because the abscissas of the $N$-point Gaussian quadrature formulas with the weight function $w(x)$ in the interval $(a,b)$ are exactly the roots of the orthogonal polynomial $p_N(x)$. This is the fundamental theorem of Gaussian quadratures. Once the abscissas are known, the weights might be find via solving a set of linear equations.
 
+The Runge-Kutta method is introduced in a similar way as described in "Numerical Analysis 2". Explicit, semi-implicit, and implicit methods are distinguished based on the matrix belonging to the problem. We also examine the IVP in a different light, which gives us the notion of collocation methods. This method approximates the solution $y$ by a polynomial $p$ of degree $n$, which at all collocation points $t_k$ satisfies
+
+\begin{equation}
+   \begin{cases}
+               p(t_0) = y_0\\
+               p'(t_0 + c_i h) = f(t_0 + c_i h, p(t_0 + c_i h)).
+   \end{cases}
+\end{equation}
+
+Defining an IVP for unknowns $y$ and $z$ with the same function $f$ we arrive to different notions of stability. A Runge-Kutta method is said to be B-stable if - when applied to a dissipative problem - is such that $\norm{y_1 - z_1} \leq \norm{y_0 - z_0}$. A-stability on the other hand is defined by $\norm{y_1} \leq \norm{y_0}$. Introducing $R(z) = 1 + z b^T (I - zA)^{-1}e$ we can state that a Runge-Kutta method is A-stable if and only if $R(z)$ has no poles in $\mathbb{C}^{-}$ and $\abs{R(y)} \leq 1, \forall y \in \mathbb{R}$.
+
 \subsection{Introduction to the Incompressible Navier-Stokes equation and the mathematical theory of Turbulence - Prof. Marcati}
 Euler and Navier-Stokes equations.
 
