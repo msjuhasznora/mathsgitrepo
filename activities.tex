@@ -341,8 +341,14 @@ The Runge-Kutta method is introduced in a similar way as described in "Numerical
 
 Defining an IVP for unknowns $y$ and $z$ with the same function $f$ we arrive to different notions of stability. A Runge-Kutta method is said to be B-stable if - when applied to a dissipative problem - is such that $\norm{y_1 - z_1} \leq \norm{y_0 - z_0}$. A-stability on the other hand is defined by $\norm{y_1} \leq \norm{y_0}$. Introducing $R(z) = 1 + z b^T (I - zA)^{-1}e$ we can state that a Runge-Kutta method is A-stable if and only if $R(z)$ has no poles in $\mathbb{C}^{-}$ and $\abs{R(y)} \leq 1, \forall y \in \mathbb{R}$.
 
-\subsection{Introduction to the Incompressible Navier-Stokes equation and the mathematical theory of Turbulence - Prof. Marcati}
-Euler and Navier-Stokes equations.
+\subsection{Introduction to the Incompressible Navier-Stokes equation - Prof. Marcati}
+This course introduces notions, concepts - including the definition of the Navier-Stokes equation itself - and selected results from theory of the Euler and Navier-Stokes equations. The Navier-Stokes equations describe the motion of a Newtonian fluid. In this course we consider viscous, homogenous and incompressible fluids and a balance of forces is also assumed. The equation describing the motion is
+\begin{equation}
+   \begin{cases}
+               \partial_t u + (u \cdot \nabla)u + \nabla p = \nu \Delta u\\
+               \nabla \cdot u = 0.
+   \end{cases}
+\end{equation}
 
 %SEMINARS
 \section{Seminars}
