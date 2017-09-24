@@ -342,13 +342,23 @@ The Runge-Kutta method is introduced in a similar way as described in "Numerical
 Defining an IVP for unknowns $y$ and $z$ with the same function $f$ we arrive to different notions of stability. A Runge-Kutta method is said to be B-stable if - when applied to a dissipative problem - is such that $\norm{y_1 - z_1} \leq \norm{y_0 - z_0}$. A-stability on the other hand is defined by $\norm{y_1} \leq \norm{y_0}$. Introducing $R(z) = 1 + z b^T (I - zA)^{-1}e$ we can state that a Runge-Kutta method is A-stable if and only if $R(z)$ has no poles in $\mathbb{C}^{-}$ and $\abs{R(y)} \leq 1, \forall y \in \mathbb{R}$.
 
 \subsection{Introduction to the Incompressible Navier-Stokes equation - Prof. Marcati}
-This course introduces notions, concepts - including the definition of the Navier-Stokes equation itself - and selected results from theory of the Euler and Navier-Stokes equations. The Navier-Stokes equations describe the motion of a Newtonian fluid. In this course we consider viscous, homogenous and incompressible fluids and a balance of forces is also assumed. The equation describing the motion is
-\begin{equation}
+This course introduces concepts - including the notion of the Navier-Stokes equation itself - and selected results from it's theory. The Navier-Stokes equations describe the motion of a Newtonian fluid. In this course we consider viscous, homogenous and incompressible fluids, and a balance of forces is also assumed. The equation describing the motion is
+\begin{equation} \label{eq:ins}
    \begin{cases}
                \partial_t u + (u \cdot \nabla)u + \nabla p = \nu \Delta u\\
                \nabla \cdot u = 0.
    \end{cases}
 \end{equation}
+
+We distinguish classical and weak solutions based on whether the derivatives exist in the classical sense or only in a distributional sense. The concept of mollifiers is discussed. As an important aspect of this theory, the energy method is introduced.
+We call a solution Leray Weak Solution if it is a weak solution of equation \ref{eq:ins} on the interval $[0,T]$ and it satisfies a given energy inequality. Leray's theorem states that for $\forall T > 0$ there exists a weak Leray Weak Solution for the incompressible Navier-Stokes equation.
+
+We consider the following inequalities by Ladyzhenskaya
+
+\[ \text{In } 2 \text{ dimensions } \norm{u}_{L^4} \leq C \norm{u}_{L^2}^{1/2} \norm{\nabla u}_{L^2}^{1/2}, \]
+\[ \text{in } 3 \text{ dimensions } \norm{u}_{L^4} \leq C \norm{u}_{L^2}^{1/4} \norm{u}_{L^2}^{3/4}. \]
+
+The uniqueness result is as follows. Given $u_1$ and $u_2$ two Leray weak solutions where $u_1(0) = u_2(0)$. Then in the two dimensional case we have $u_1 \equiv u_2$. In three dimensions the same does not necessarily hold, but if we have the extra condition $u_1 \in L_t^{8/3}L_x^4$ satisfied, then we have $u_1 \equiv u_2$ also in this case.
 
 %SEMINARS
 \section{Seminars}
