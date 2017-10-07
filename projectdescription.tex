@@ -3,6 +3,7 @@
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{commath}
+\usepackage{hyperref}
 
 \usepackage{outlines}
 
@@ -37,8 +38,32 @@ The 3-dimensional equations of the atmosphere. Two horizontal dimensions, one ve
 \section{Equations describing pollution}
 Three-dimensional species-continuity equation from the ScienceDirect article describing the Bulgarian pollution event.
 
+Species continuity equation, equations of chemical kinetics.
+
+\[ \frac{\partial C_j}{\partial t} + \nabla \cdot J_j = r_j\]
+
+where $C_j$ is local molar concentration of species $j$ and the components of $J_j$ represent the local molar flux and $r_j$ is a volume based formation rate. By nature it describes a connection between time variations in the species concentration in a fixed point, the local motion of the species, and the rate the species is formed by chemical reactions.
+
+Rectangular coordinates:
+\[ \frac{\partial C_j}{\partial t} + \frac{\partial J_jx}{\partial x} + \frac{\partial J_jy}{\partial y} + \frac{\partial J_jz}{\partial z} = r_j\]
+
+See more:  \href{http://onlinelibrary.wiley.com/store/10.1002/9780470385821.app2/asset/app2.pdf?v=1&t=j8hq64jc&s=73a5b190bd254e88c91326f7e9c6b660aeca4949}{Species Continuity Equation Link}
+
+In a slightly different, more expanded form the same thing, $1 \leq i \leq N$:
+
+\[ \frac{\partial}{\partial t} (\rho Y_i) + \nabla \cdot (\rho Y_i u_i) = \omega_i,\]
+
+where $Y_i$ is the mass fraction of the species $i$. Using fluxes and the Fick diffusion law it can also be written as
+
+\[ \frac{\partial}{\partial t} (\rho Y_i) + \nabla \cdot (\rho Y_i u) - \rho D_i \Delta Y_i = \omega_i,\]
+
+where $D_i$ is a diffusion coefficient.
+
 \section{Creating a synchronized system of an atmosphere containing pollution}
 The first two chapters describe two independent / autonomous 3D systems in different situations, having independent solutions (if they do). The first task is to merge the two models coming from different places so that they make sense in a jointed sense (still in 3D), and have common variables, common solution.
+
+The unknown functions are velocity $u$ of the mixture, its pressure $p$, the temperature $T$, and the mass densities $Y_i$, $1 \leq i \leq N.$
+Equations: N-S, temperature equation of the mixture, and  the species continuity equation.
 
 \section{Dimension reduction for the jointed system}
 The 3D model is too complex to work with, on the other hand the phenomena can be seen as quasi-horizontal, which is why we perform dimension reduction for the merged system, the goal is to have a synchronized 2D system describing pollution and atmosphere.
