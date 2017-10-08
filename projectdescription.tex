@@ -32,20 +32,43 @@ This document describes the outline of this project's plan.\\
 \newpage
 
 %UNIVAQ
-\section{Equations of the atmosphere}
-The 3-dimensional equations of the atmosphere. Two horizontal dimensions, one vertical dimension, mass continuity, equation of state and amount of water.
+\section{Equations of the atmosphere (3D, z - p variable change, without terrain-influenced coordinate-change)}
 
-\section{Equations describing pollution}
-Three-dimensional species-continuity equation from the ScienceDirect article describing the Bulgarian pollution event.
+\begin{description}
+  \item[$\bullet$] Comments with a bullet sign mean questions / ideas / thoughts to be discussed.
+\end{description}
 
-Species continuity equation, equations of chemical kinetics.
+The 3-dimensional equations of the atmosphere. Two horizontal dimensions, one vertical dimension (using the change of coordinates according to hydrostatic approximation, ie. $p$ instead of $z$), mass continuity, equation of state and amount of water. Equations from the Temam-Ziane article (p34).
+
+\[ \frac{\partial \bold{v}}{\partial t} + \nabla_{\bold{v}}\bold{v} + \omega \frac{\partial \bold{v}}{\partial p} + 2 \Omega \sin \theta \bold{k} \times \bold{v} + \nabla \Phi -L_{\bold{v}} \bold{v} = F_\bold{v}  \]
+
+\[ \frac{\partial \Phi}{\partial p} + \frac{RT}{p} = 0 \]
+
+\[ \nabla \cdot \bold{v} + \frac{\partial \omega}{\partial p} = 0\]
+
+\[ \frac{\partial T}{\partial t} + \nabla_{\bold{v}} T + \omega \frac{\partial T}{\partial p} - \frac{R \bar{T}}{c_p p} \omega - L_T T = F_T\]
+
+\[ \frac{\partial q}{\partial t} + \nabla_{\bold{v}}q + \omega \frac{\partial q}{\partial p} -L_q q = F_q \]
+
+\[ p = R \rho T\]
+
+With $\Omega$ being the angular velocity, $L_{arb}$ a Laplace operator, $\Phi$ geopotential.
+
+\begin{description}
+  \item[$\bullet$] Dry air is a perfect gas, but humid air is not. For dry air the gases in the atmosphere have a simple equation of state known as the ideal gas law.
+  \item[$\bullet$] For moist air, the gas constant changes because water vapor is less dense than dry air. To simplify things, a virtual temperature, $T_v$ can be defined to include the effects of water vapor on density: $T_v = T (1 + 0.61 w) $, where $w$ is the water vapor mixing ratio (g water vapor / kg dry air) and all temperatures are in K.  Moist air of temperature $T$ behaves as dry air of temperature $T_v$.
+\end{description}
+
+\section{Chemical kinetics - equations describing pollution (3D, without terrain-influenced coordinate-change)}
+
+Species continuity equation, equations of chemical kinetics. See the green Temam book chapter 11 and the onlinelibrary article.
 
 \[ \frac{\partial C_j}{\partial t} + \nabla \cdot J_j = r_j\]
 
-where $C_j$ is local molar concentration of species $j$ and the components of $J_j$ represent the local molar flux and $r_j$ is a volume based formation rate. By nature it describes a connection between time variations in the species concentration in a fixed point, the local motion of the species, and the rate the species is formed by chemical reactions.
+where $C_j$ is the local molar concentration of species $j$ and the components of $J_j$ represent the local molar flux and $r_j$ is a volume based formation rate. By nature it describes a connection between time variations in the species concentration in a fixed point, the local motion of the species, and the rate the species is formed by chemical reactions.
 
 Rectangular coordinates:
-\[ \frac{\partial C_j}{\partial t} + \frac{\partial J_jx}{\partial x} + \frac{\partial J_jy}{\partial y} + \frac{\partial J_jz}{\partial z} = r_j\]
+\[ \frac{\partial C_j}{\partial t} + \frac{\partial J_{jx}}{\partial x} + \frac{\partial J_{jy}}{\partial y} + \frac{\partial J_{jz}}{\partial z} = r_j\]
 
 See more:  \href{http://onlinelibrary.wiley.com/store/10.1002/9780470385821.app2/asset/app2.pdf?v=1&t=j8hq64jc&s=73a5b190bd254e88c91326f7e9c6b660aeca4949}{Species Continuity Equation Link}
 
@@ -53,17 +76,79 @@ In a slightly different, more expanded form the same thing, $1 \leq i \leq N$:
 
 \[ \frac{\partial}{\partial t} (\rho Y_i) + \nabla \cdot (\rho Y_i u_i) = \omega_i,\]
 
-where $Y_i$ is the mass fraction of the species $i$. Using fluxes and the Fick diffusion law it can also be written as
+where $Y_i$ is the mass fraction of the species $i$ and $\omega_i$ is a term of sink-source nature. 
 
-\[ \frac{\partial}{\partial t} (\rho Y_i) + \nabla \cdot (\rho Y_i u) - \rho D_i \Delta Y_i = \omega_i,\]
+\section{Creating a synchronized system of an atmosphere containing pollution (3D, hydrostatic approximation, without terrain-influenced coordinate-change)}
+The first two chapters describe two independent / autonomous 3D systems in different situations, with independent solutions. The first task is to merge the two models coming from different places so that they make sense in a jointed sense (still in 3D), and have common variables, common solution.
 
-where $D_i$ is a diffusion coefficient.
+Possible / common approach for merging (Temam book p174 and p176):
 
-\section{Creating a synchronized system of an atmosphere containing pollution}
-The first two chapters describe two independent / autonomous 3D systems in different situations, having independent solutions (if they do). The first task is to merge the two models coming from different places so that they make sense in a jointed sense (still in 3D), and have common variables, common solution.
+\begin{outline}[enumerate]
 
-The unknown functions are velocity $u$ of the mixture, its pressure $p$, the temperature $T$, and the mass densities $Y_i$, $1 \leq i \leq N.$
-Equations: N-S, temperature equation of the mixture, and  the species continuity equation.
+\1 on one hand we write the fluid equations of the mixture considered as a single fluid with denisty $\rho_0$, pressure $p$, temperature $T$, velocity $\bold{v}$,
+\1 on the other hand we consider the equations describing the evolution of each mass fraction (or species concentration) $Y_i$ or ($C_i$). 
+
+\end{outline}
+
+The unknown functions are velocity $\bold{v}$ of the mixture, its pressure $p$, the temperature $T$, and the mass densities $Y_i = \frac{\rho_i (t,x)}{\rho}$ (Eulerian description), $1 \leq i \leq N.$
+Equations: N-S, temperature equation of the mixture, species continuity equation.
+
+Changes: $\rho = \rho_0$ homogeneous fluid, instead of $u_i$ in the continuity equation we use the notation $\bold{v}_i$.
+
+\[ \frac{\partial \bold{v}}{\partial t} + \nabla_{\bold{v}}\bold{v} + \omega \frac{\partial \bold{v}}{\partial p} + 2 \Omega \sin \theta \bold{k} \times \bold{v} + \nabla \Phi -L_{\bold{v}} \bold{v} = F_\bold{v}  \]
+
+\[ \frac{\partial \Phi}{\partial p} + \frac{RT}{p} = 0 \]
+
+\[ \nabla \cdot \bold{v} + \frac{\partial \omega}{\partial p} = 0\]
+
+\[ \frac{\partial T}{\partial t} + \nabla_{\bold{v}} T + \omega \frac{\partial T}{\partial p} - \frac{R \bar{T}}{c_p p} \omega - L_T T = F_T\]
+
+\[ \frac{\partial q}{\partial t} + \nabla_{\bold{v}}q + \omega \frac{\partial q}{\partial p} -L_q q = F_q \]
+
+\[ p = R \rho_0 T\]
+
+\[ \frac{\partial}{\partial t} (\rho_0 Y_i) + \nabla \cdot (\rho_0 Y_i \bold{v}_i) = \omega_i, \text{  } 1 \leq i \leq N \]
+
+\begin{description}
+  \item[$\bullet$] In the Temam book the null divergence condition is assumed but in this case we are talking about air, which is compressible
+\end{description}
+
+\section{Terrain influenced coordinates}
+
+A more general version of the species continuity equation describing chemical kinetics is a version including terrain-influenced coordinates.
+The terrain-influenced coordinate $\eta$ is defined as the following (see the Linus Magnusson article):
+
+\[ \eta (x,y,z) = s \frac{z-z_G (x,y)}{s - z_G(x,y)},\]
+
+where $s$ is the top height of the model and $z_G$ is the height of the ground.
+
+Calculation of the $J_{\eta}$ Jacobian matrix of changing from $(x, y, z) $ to $ (x, y, \eta) $:
+
+\[ \left( \begin{array}{ccc}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+\frac{\partial z_G}{\partial x}(\frac{\eta - s}{s - z_G}) & \frac{\partial z_G}{\partial y}(\frac{\eta - s}{s - z_G}) & \frac{s}{s-z_G} \end{array} \right)\]
+
+Using this $J_{\eta}$ Jacobian matrix of the coordinate change on the chemical kinetics equation and separate horizontal and vertical velocity it gives
+
+\[ \frac{\partial(\rho_0 Y_i J_{\eta})}{\partial t} + \nabla_{\eta} \cdot (\rho_0 Y_i J_{\eta} \bold{v}_{horiz}) + \frac{\partial \rho_0 Y_i J_{\eta} \bold{v}_{vert}}{\partial \eta} = J_{\eta} \omega_i. \]
+
+\begin{description}
+  \item[$\bullet$] The role of $m^2$ in the ScienceDirect paper, $\nabla_{\eta}$ is not linear or why do the $m^2$ items don't cancel each other.
+  \item[$\bullet$] The correctness of the new equation with $J_{\eta}$.
+\end{description}
+
+This is basically the same where the ScienceDirect equation is.
+
+Like this it can not be matched with the original system, since that uses pressure and this uses terrain-influenced transformed vertical coordinates. 
+
+\section{One way of matching chemical kinetics equation in terrain influenced coordinates and equations of the atmosphere.}
+
+One thing we can do is to consider the set of the equations of the atmosphere in classical cartesian coordinates (instead of taking $p$ for vertical coordinate instead of $z$), use the terrain influenced coordinate change on the equations of the atmosphere and couple them with the kinetics equation from the previous section. (This might also be convenient because the "Mathematical justification..." paper is also does not use the pressure instead of $z$ approach.) 
+
+TODO: equation from Science Direct
+
+TODO: equation from atmosphere paper with $z$.
 
 \section{Dimension reduction for the jointed system}
 The 3D model is too complex to work with, on the other hand the phenomena can be seen as quasi-horizontal, which is why we perform dimension reduction for the merged system, the goal is to have a synchronized 2D system describing pollution and atmosphere.
