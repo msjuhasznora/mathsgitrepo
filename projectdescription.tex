@@ -4,6 +4,8 @@
 \usepackage{amsmath}
 \usepackage{commath}
 \usepackage{hyperref}
+\usepackage{amsthm}
+\newtheorem*{remark}{Remark}
 
 \usepackage{outlines}
 
@@ -31,14 +33,13 @@ This document describes the outline of this project's plan.\\
 \tableofcontents
 \newpage
 
-%UNIVAQ
 \section{Equations of the atmosphere (3D, z - p variable change, without terrain-influenced coordinate-change)}
 
 \begin{description}
   \item[$\bullet$] Comments with a bullet sign mean questions / ideas / thoughts to be discussed.
 \end{description}
 
-The 3-dimensional equations of the atmosphere. Two horizontal dimensions, one vertical dimension (using the change of coordinates according to hydrostatic approximation, ie. $p$ instead of $z$), mass continuity, equation of state and amount of water. Equations from the Temam-Ziane article (p34).
+The 3-dimensional equations of the atmosphere. Two horizontal dimensions, one vertical dimension (using the change of coordinates according to hydrostatic approximation, ie. $p$ instead of $z$), mass continuity, equation of state and amount of water. Equations from the Temam-Ziane article (p34). Variables: $(x,y,p)$.
 
 \[ \frac{\partial \bold{v}}{\partial t} + \nabla_{\bold{v}}\bold{v} + \omega \frac{\partial \bold{v}}{\partial p} + 2 \Omega \sin \theta \bold{k} \times \bold{v} + \nabla \Phi -L_{\bold{v}} \bold{v} = F_\bold{v}  \]
 
@@ -78,7 +79,7 @@ In a slightly different, more expanded form the same thing, $1 \leq i \leq N$:
 
 where $Y_i$ is the mass fraction of the species $i$ and $\omega_i$ is a term of sink-source nature. 
 
-\section{Creating a synchronized system of an atmosphere containing pollution (3D, hydrostatic approximation, without terrain-influenced coordinate-change)}
+\section{ONE. Creating a synchronized system of an atmosphere containing pollution (3D, $(x,y,p)$, without terrain-influenced coordinate-change)}
 The first two chapters describe two independent / autonomous 3D systems in different situations, with independent solutions. The first task is to merge the two models coming from different places so that they make sense in a jointed sense (still in 3D), and have common variables, common solution.
 
 Possible / common approach for merging (Temam book p174 and p176):
@@ -93,7 +94,7 @@ Possible / common approach for merging (Temam book p174 and p176):
 The unknown functions are velocity $\bold{v}$ of the mixture, its pressure $p$, the temperature $T$, and the mass densities $Y_i = \frac{\rho_i (t,x)}{\rho}$ (Eulerian description), $1 \leq i \leq N.$
 Equations: N-S, temperature equation of the mixture, species continuity equation.
 
-Changes: $\rho = \rho_0$ homogeneous fluid, instead of $u_i$ in the continuity equation we use the notation $\bold{v}_i$.
+Changes: $\rho = \rho_0$ homogeneous fluid, instead of $u_i$ in the continuity equation we use the notation $\bold{v}_i$. Since the equations of the atmosphere in this case are in $(x,y,p)$ coordinates, we use the $J_{zp}$ Jacobian in the species continuity equation to sync.
 
 \[ \frac{\partial \bold{v}}{\partial t} + \nabla_{\bold{v}}\bold{v} + \omega \frac{\partial \bold{v}}{\partial p} + 2 \Omega \sin \theta \bold{k} \times \bold{v} + \nabla \Phi -L_{\bold{v}} \bold{v} = F_\bold{v}  \]
 
@@ -107,7 +108,11 @@ Changes: $\rho = \rho_0$ homogeneous fluid, instead of $u_i$ in the continuity e
 
 \[ p = R \rho_0 T\]
 
-\[ \frac{\partial}{\partial t} (\rho_0 Y_i) + \nabla \cdot (\rho_0 Y_i \bold{v}_i) = \omega_i, \text{  } 1 \leq i \leq N \]
+\[ \frac{\partial}{\partial t} (\rho_0 Y_i J_{zp}) + \nabla \cdot (\rho_0 J_{zp} Y_i \bold{v}_i) = \omega_i J_{zp}, \text{  } 1 \leq i \leq N \]
+
+\begin{remark}
+In the above equations $\omega$ is a notation for the speed of the wind in the common atmosphere equations, while $\omega_i$ stands for the production rate of species in the continuity equation.
+\end{remark}
 
 \begin{description}
   \item[$\bullet$] In the Temam book the null divergence condition is assumed but in this case we are talking about air, which is compressible
@@ -142,13 +147,59 @@ This is basically the same where the ScienceDirect equation is.
 
 Like this it can not be matched with the original system, since that uses pressure and this uses terrain-influenced transformed vertical coordinates. 
 
-\section{One way of matching chemical kinetics equation in terrain influenced coordinates and equations of the atmosphere.}
+\section{TWO. A way of matching chemical kinetics equation in terrain influenced coordinates and equations of the atmosphere. Variables: $(x,y,\eta)$}
 
-One thing we can do is to consider the set of the equations of the atmosphere in classical cartesian coordinates (instead of taking $p$ for vertical coordinate instead of $z$), use the terrain influenced coordinate change on the equations of the atmosphere and couple them with the kinetics equation from the previous section. (This might also be convenient because the "Mathematical justification..." paper is also does not use the pressure instead of $z$ approach.) 
+One thing we can do is to consider the set of the equations of the atmosphere in classical cartesian coordinates (instead of taking $p$ for vertical coordinate instead of $z$), use the terrain influenced coordinate change on the equations of the atmosphere and couple them with the kinetics equation from the previous section. (This might also be convenient because the "Mathematical justification..." paper is also does not use the pressure instead of $z$ approach.)
+\newline
+\newline
+Equations describing the motion of the atmosphere as one single mixture:
 
-TODO: equation from Science Direct
+\[ \frac{\partial \bold{v} J_{\eta}}{\partial t} + \nabla_{\bold{v}}\bold{v} J_{\eta} + w J_{\eta} \frac{\partial \bold{v} J_{\eta}}{\partial z} + \frac{1}{\rho_0}\nabla p J_{\eta}+ 2 \Omega \sin \theta \bold{k} \times \bold{v} J_{\eta} -\mu_{\bold{v}}\Delta \bold{v} J_{\eta} -\nu_{\bold{v}} \frac{\partial ^ 2 \bold{v} J_{\eta}}{\partial z^2} = 0  \]
 
-TODO: equation from atmosphere paper with $z$.
+\[ \frac{\partial p J_{\eta}}{\partial z} = - \rho_0 g \]
+
+\[ \frac{\partial \rho_0}{\partial t} + \rho_0 (\nabla \bold{v} + \frac{\partial w J_{\eta}}{\partial z}) + \bold{v} \nabla \rho_0 + w \frac{\partial \rho_0}{\partial z} = 0 \]
+
+\[ \frac{\partial T J_{\eta}}{\partial t} + \nabla_{\bold{v}} T J_{\eta} + w J_{\eta} \frac{\partial T J_{\eta}}{\partial z} - \mu_T \Delta T J_{\eta} -\nu_T \frac{\partial^2 T J_{\eta}}{\partial z^2} -\frac{RT J_{\eta}}{p J_{\eta}} \frac{\mathrm{d}p J_{\eta}}{\mathrm{d}t} = Q_T \]
+
+\[ \frac{\partial q J_{\eta}}{\partial t} + \nabla_{\bold{v}}q J_{\eta}+ w J_{\eta} \frac{\partial q J_{\eta}}{\partial z} - \mu_q \Delta q J_{\eta} - \nu_q \frac{\partial ^2 q J_{\eta}}{\partial z^2} = 0 \]
+
+\[ p J_{\eta} = R \rho_0 T J_{\eta}\]
+
+Chemical kinetics equation describing pollution as individual motions of $N$ species:
+
+\[ \frac{\partial(\rho_0 Y_i J_{\eta})}{\partial t} + \nabla_{\eta} \cdot (\rho_0 Y_i J_{\eta} \bold{v}) + \frac{\partial \rho_0 Y_i J_{\eta} w}{\partial \eta} = J_{\eta} \omega_i. \]
+
+\begin{remark}
+The equation above describing $\rho$ is kept for now as it is in the original set, however $\rho$ is assumed to be constant $\rho_0$, so most part of the equation disappears.
+\end{remark}
+
+\section{THREE. Sync in cartesian coordinates. Variables: $(x,y,z)$}
+
+Take the original chemical kinetics equation in cartesian coordinates and couple it with the equations of the atmosphere without terrain-influenced coordinate change and without using the exponentially (monotonously) decreasing p-z relationship:
+
+\[ \frac{\partial \bold{v} }{\partial t} + \nabla_{\bold{v}}\bold{v} + w  \frac{\partial \bold{v} }{\partial z} + \frac{1}{\rho_0}\nabla p + 2 \Omega \sin \theta \bold{k} \times \bold{v}  -\mu_{\bold{v}}\Delta \bold{v}  -\nu_{\bold{v}} \frac{\partial ^ 2 \bold{v} }{\partial z^2} = 0  \]
+
+\[ \frac{\partial p }{\partial z} = - \rho_0 g \]
+
+\[ \frac{\partial \rho_0}{\partial t} + \rho_0 (\nabla \bold{v} + \frac{\partial w }{\partial z}) + \bold{v} \nabla \rho_0 + w \frac{\partial \rho_0}{\partial z} = 0 \]
+
+\[ \frac{\partial T }{\partial t} + \nabla_{\bold{v}} T  + w  \frac{\partial T }{\partial z} - \mu_T \Delta T  -\nu_T \frac{\partial^2 T }{\partial z^2} -\frac{RT}{p} \frac{\mathrm{d}p}{\mathrm{d}t} = Q_T \]
+
+\[ \frac{\partial q }{\partial t} + \nabla_{\bold{v}}q + w \frac{\partial q}{\partial z} - \mu_q \Delta q  - \nu_q \frac{\partial ^2 q }{\partial z^2} = 0 \]
+
+\[ p = R \rho_0 T \]
+
+\[ \frac{\partial}{\partial t} (\rho Y_i) + \nabla \cdot (\rho Y_i u_i) = \omega_i, \text{  } 1 \leq i \leq N \]
+
+We see different approaches for dealing with the vertical coordinate, such as:
+\begin{outline}[enumerate]
+\1 leaving it as classical cartesian coordinate
+\1 changing to pressure as vertical coordinate because of well-behaving monotonous relationship between height and pressure,
+\1 introducing the terrain-influenced vertical coordinate.
+\end{outline}
+
+But eventually we will do dimension reduction because of the quasi-horizontal nature of the atmosphere, so it might be useful to consider the one described in this section.
 
 \section{Dimension reduction for the jointed system}
 The 3D model is too complex to work with, on the other hand the phenomena can be seen as quasi-horizontal, which is why we perform dimension reduction for the merged system, the goal is to have a synchronized 2D system describing pollution and atmosphere.
