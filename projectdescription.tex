@@ -110,6 +110,8 @@ Changes: $\rho = \rho_0$ homogeneous fluid, instead of $u_i$ in the continuity e
 
 \[ \frac{\partial}{\partial t} (\rho_0 Y_i J_{zp}) + \nabla \cdot (\rho_0 J_{zp} Y_i \bold{v}_i) = \omega_i J_{zp}, \text{  } 1 \leq i \leq N \]
 
+\[ \rho_0 = \sum_{i =1}^{N} \rho_i, p = \sum_{i =1}^{N} p_i, (\bold{v}, \omega) = \sum_{i =1}^{N}\frac{\rho_i}{\rho_0} \bold{v_i}J_{zp} \]
+
 \begin{remark}
 In the above equations $\omega$ is a notation for the speed of the wind in the common atmosphere equations, while $\omega_i$ stands for the production rate of species in the continuity equation.
 \end{remark}
@@ -168,7 +170,9 @@ Equations describing the motion of the atmosphere as one single mixture:
 
 Chemical kinetics equation describing pollution as individual motions of $N$ species:
 
-\[ \frac{\partial(\rho_0 Y_i J_{\eta})}{\partial t} + \nabla_{\eta} \cdot (\rho_0 Y_i J_{\eta} \bold{v}) + \frac{\partial \rho_0 Y_i J_{\eta} w}{\partial \eta} = J_{\eta} \omega_i. \]
+\[ \frac{\partial(\rho_0 Y_i J_{\eta})}{\partial t} + \nabla_{\eta} \cdot (\rho_0 Y_i J_{\eta} \bold{v}) + \frac{\partial \rho_0 Y_i J_{\eta} w}{\partial \eta} = J_{\eta} \omega_i, \]
+
+\[ \rho_0 = \sum_{i =1}^{N} \rho_i, p = \sum_{i =1}^{N} p_i, \bold{v}J_{\eta} = \sum_{i =1}^{N}\frac{\rho_i}{\rho_0} \bold{v_i}J_{\eta},w J_{\eta} = \sum_{i =1}^{N}\frac{\rho_i}{\rho_0} w J_{\eta} \]
 
 \begin{remark}
 The equation above describing $\rho$ is kept for now as it is in the original set, however $\rho$ is assumed to be constant $\rho_0$, so most part of the equation disappears.
@@ -191,6 +195,8 @@ Take the original chemical kinetics equation in cartesian coordinates and couple
 \[ p = R \rho_0 T \]
 
 \[ \frac{\partial}{\partial t} (\rho Y_i) + \nabla \cdot (\rho Y_i u_i) = \omega_i, \text{  } 1 \leq i \leq N \]
+
+\[ \rho_0 = \sum_{i =1}^{N} \rho_i, p = \sum_{i =1}^{N} p_i, (\bold{v}, w) = \sum_{i =1}^{N}\frac{\rho_i}{\rho_0} u_i \]
 
 We see different approaches for dealing with the vertical coordinate, such as:
 \begin{outline}[enumerate]
