@@ -110,7 +110,7 @@ Changes: $\rho = \rho_0$ homogeneous fluid, instead of $u_i$ in the continuity e
 
 \[ \frac{\partial}{\partial t} (\rho_0 Y_i J_{zp}) + \nabla \cdot (\rho_0 J_{zp} Y_i \bold{v}_i) = \omega_i J_{zp}, \text{  } 1 \leq i \leq N \]
 
-\[ \rho_0 = \sum_{i =1}^{N} \rho_i, p = \sum_{i =1}^{N} p_i, (\bold{v}, \omega) = \sum_{i =1}^{N}\frac{\rho_i}{\rho_0} \bold{v_i}J_{zp} \]
+\[ \rho_0 = \sum_{i =1}^{N} \rho_i, (\bold{v}, \omega) = \sum_{i =1}^{N}\frac{\rho_i}{\rho_0} \bold{v_i}J_{zp} \]
 
 \begin{remark}
 In the above equations $\omega$ is a notation for the speed of the wind in the common atmosphere equations, while $\omega_i$ stands for the production rate of species in the continuity equation.
@@ -180,7 +180,7 @@ The equation above describing $\rho$ is kept for now as it is in the original se
 
 \section{THREE. Sync in cartesian coordinates. Variables: $(x,y,z)$}
 
-Take the original chemical kinetics equation in cartesian coordinates and couple it with the equations of the atmosphere without terrain-influenced coordinate change and without using the exponentially (monotonously) decreasing p-z relationship:
+Take the original chemical kinetics equation in cartesian coordinates and couple it with the equations of the atmosphere without terrain-influenced coordinate change and without using the exponentially (monotonously) decreasing p-z relationship. Here we use the notation $(\bold{v}, w)_i$ for the species velocities instead of $u_i$.
 
 \[ \frac{\partial \bold{v} }{\partial t} + \nabla_{\bold{v}}\bold{v} + w  \frac{\partial \bold{v} }{\partial z} + \frac{1}{\rho_0}\nabla p + 2 \Omega \sin \theta \bold{k} \times \bold{v}  -\mu_{\bold{v}}\Delta \bold{v}  -\nu_{\bold{v}} \frac{\partial ^ 2 \bold{v} }{\partial z^2} = 0  \]
 
@@ -194,9 +194,9 @@ Take the original chemical kinetics equation in cartesian coordinates and couple
 
 \[ p = R \rho_0 T \]
 
-\[ \frac{\partial}{\partial t} (\rho Y_i) + \nabla \cdot (\rho Y_i u_i) = \omega_i, \text{  } 1 \leq i \leq N \]
+\[ \frac{\partial}{\partial t} (\rho Y_i) + \nabla \cdot (\rho Y_i (\bold{v}, w)_i) = \omega_i, \text{  } 1 \leq i \leq N \]
 
-\[ \rho_0 = \sum_{i =1}^{N} \rho_i, p = \sum_{i =1}^{N} p_i, (\bold{v}, w) = \sum_{i =1}^{N}\frac{\rho_i}{\rho_0} u_i \]
+\[ \rho_0 = \sum_{i =1}^{N} \rho_i, p = \sum_{i =1}^{N} p_i, (\bold{v}, w) = \sum_{i =1}^{N}\frac{\rho_i}{\rho_0} (\bold{v}, w)_i \]
 
 We see different approaches for dealing with the vertical coordinate, such as:
 \begin{outline}[enumerate]
