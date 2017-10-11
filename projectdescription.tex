@@ -198,16 +198,24 @@ Take the original chemical kinetics equation in cartesian coordinates and couple
 
 \[ \rho_0 = \sum_{i =1}^{N} \rho_i, p = \sum_{i =1}^{N} p_i, (\bold{v}, w) = \sum_{i =1}^{N}\frac{\rho_i}{\rho_0} (\bold{v}, w)_i \]
 
-The left-handside of the pollution equation will be expanded (todo). The right hand-side, $\omega_i$ can be written in a linear way, a combination of a production and absorption term, but not more generally unless we have only two species all together.
+\section{Choosing and refining the model}
 
-We see different approaches for dealing with the vertical coordinate, such as:
+We have seen different approaches for dealing with the vertical coordinate, such as:
 \begin{outline}[enumerate]
 \1 leaving it as classical cartesian coordinate
 \1 changing to pressure as vertical coordinate because of well-behaving monotonous relationship between height and pressure,
 \1 introducing the terrain-influenced vertical coordinate.
 \end{outline}
 
-But eventually we will do dimension reduction because of the quasi-horizontal nature of the atmosphere, so it might be useful to consider the one described in this section.
+But eventually we will do dimension reduction because of the quasi-horizontal nature of the atmosphere, so it is very useful and convenient to consider the one in cartesian coordinates (see THREE).
+
+For refining the model we are considering the approach described in the ScienceDirect article regarding the chemical kinetics equation.
+
+% Prof Gabriele said it is not really possible to write \omega_i in a more detailed way unless there are only two species involved since it will depend very much on the nature of the concrete species, according to him it is a good idea to use the approach given in the green book (linear approach, combination of production and loss)
+
+In the ScienceDirect article we start from the continuity equation in the following form:
+
+\[ \frac{\partial( \varphi_i J_s)}{\partial t} + m^2 \nabla_s \cdot (\frac{\varphi_i J_s V_s}{m^2}) + \frac{\partial(\varphi_i J_s s)}{\partial s} = J_s Q_{\varphi}\]
 
 \section{Dimension reduction for the jointed system}
 The 3D model is too complex to work with, on the other hand the phenomena can be seen as quasi-horizontal, which is why we perform dimension reduction for the merged system, the goal is to have a synchronized 2D system describing pollution and atmosphere.
