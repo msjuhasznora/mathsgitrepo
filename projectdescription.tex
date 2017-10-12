@@ -217,6 +217,54 @@ In the ScienceDirect article we start from the continuity equation in the follow
 
 \[ \frac{\partial( \varphi_i J_s)}{\partial t} + m^2 \nabla_s \cdot (\frac{\varphi_i J_s V_s}{m^2}) + \frac{\partial(\varphi_i J_s s)}{\partial s} = J_s Q_{\varphi}\]
 
+The simplification and changes that are made are the following:
+
+\begin{itemize}
+  \item[$\square$]  drop the $J_s$ Jacobian
+  \item[$\square$]  drop $m^2$
+  \item[$\square$]  instead of $\nabla_s$ use $\nabla_{horiz}$
+  \item[$\square$]  instead of $V_s$ use $V_{horiz}$
+  \item[$\square$]  instead of $s$ use $V_{vertic}$
+  \item[$\square$]  use Cartesian $z$ instead of $\xi$, as an always increasing function of height
+  \item[$\square$]  simply $\mathrm{d}z / \mathrm{d} t$ for $\hat{\nu}^3$
+\end{itemize}
+
+(4.3) becomes
+
+\[ \frac{\partial \bar{\varphi_i} }{\partial t} + \nabla_{h} ((\bar{\varphi_i} + \varphi_i '')(\bar{V_{h}} + V_{h}'')) + \frac{\partial}{\partial z}(\bar{\varphi}_i + \varphi_i '')(\bar{V_{v}} + V_{v}'') = Q_{\varphi_i}\]
+
+The approximations are the same, we arrive to (4.4)
+
+\[ \frac{\partial \bar{\varphi_i}}{\partial t}  + \nabla_{h} (\bar{\varphi_i} \bar{V_h}) + \frac{\partial}{\partial z} (\bar{\varphi_i} \bar{V_v}) + \nabla_h (\bar{\rho }\bar{q_i ''} \bar{V_h}) + \frac{\partial}{\partial z} (\bar{\rho} \bar{q_i ''} \bar{V_v}'') = Q_{\varphi_i} \]
+
+Regarding the matrix $K$ we have the following approximations:
+
+\[ \overline{q_i'' u_1''} = -K^{1l} \frac{\partial \bar{q_i}}{\partial x^l}\]  \[ \overline{q_i'' u_2''} = -K^{2l} \frac{\partial \bar{q_i}}{\partial x^l} \] \[ \overline{q_i'' u_3''} = -K^{3l} \frac{\partial \bar{q_i}}{\partial x^l}\]
+
+The matrix K is diagonal in Cartesian coordinates. Firstly, it is assumed also in the article, secondly, this is also what we arrive to when applying $$ \frac{\partial \hat{x}^3}{\partial y} = \frac{\partial z}{\partial y} = 0.$$ So basically from the matrix $K$ we have the $K_{11}, K_{22}, K_{33}$ elements.
+
+By using the notations $\overline{V_v} = \overline{u_3}$ and $\overline{V_h} = (\overline{u_1}, \overline{u_2})$ we have
+
+\[ \nabla_h (\bar{\rho }\bar{q_i ''} \bar{V_h}) = \frac{\partial}{\partial x} \bar{\rho} \bar{q_i ''} \bar{u_1} + \frac{\partial}{\partial y} \bar{\rho} \bar{q_i ''} \bar{u_2} \approx \frac{\partial}{\partial x} \bar{\rho} (-K_{11} \frac{\partial \bar{q_i}}{\partial x}) + \frac{\partial}{\partial y} \bar{\rho} (-K_{22} \frac{\partial \bar{q_i}}{\partial y})\]
+
+ \[ \frac{\partial}{\partial z} (\bar{\rho} \overline{q_i '' V_v}) = \frac{\partial}{\partial z} (\bar{\rho} \bar{q_i ''} \bar{u_3}) \approx \frac{\partial}{\partial z} (- \bar{\rho} K_{33} \frac{\partial \bar{q_i}}{\partial z}) \]
+ 
+ Which gives us the following.
+ 
+ \[ \frac{\partial \bar{\varphi_i}}{\partial t}  + \nabla_{h} (\bar{\varphi_i} \bar{V_h}) + \frac{\partial}{\partial z} (\bar{\varphi_i} \bar{V_v}) + \frac{\partial}{\partial x} \bar{\rho} (-K_{11} \frac{\partial \bar{q_i}}{\partial x}) + \frac{\partial}{\partial y} \bar{\rho} (-K_{22} \frac{\partial \bar{q_i}}{\partial y}) + \frac{\partial}{\partial z} (- \bar{\rho} K_{33} \frac{\partial \bar{q_i}}{\partial z}) = \]
+ \[ = R_{\varphi} (\bar{\varphi_1}, \dots , \bar{\varphi_N}) + Q_{\varphi_i} + \frac{\partial (\bar{\varphi_i})}{\partial t} \rvert_{cld} + \frac{\partial (\bar{\varphi_i})}{\partial t} \rvert_{aero} + \frac{\partial (\bar{\varphi_i})}{\partial t} \rvert_{ping},\]
+ 
+while the other parts containing non-diagonal items of the matrix $K$ in the ScienceDirect article are not present in this Cartesian coordinate version.
+
+\begin{remark}
+In the above version even the source / sink term is in more details now, representing production or loss from chemical reactions, remissions, cloud mixing and aquaous-phase chemical production, aerosol process and plume-in-grid process.
+\end{remark}
+
+Here $\varphi_i$ stands for the same variable as $\rho_i$ stands for in the green book, also here $q_i = \varphi_i / \rho$, so the meaning of $q_i$ here as the same as $Y_i$ in the green book, so we can write
+
+ \[ \frac{\partial \bar{\rho_i}}{\partial t}  + \nabla_{h} (\bar{\rho_i} \bar{V_h}) + \frac{\partial}{\partial z} (\bar{\rho_i} \bar{V_v}) + \frac{\partial}{\partial x} \bar{\rho} (-K_{11} \frac{\partial \bar{Y_i}}{\partial x}) + \frac{\partial}{\partial y} \bar{\rho} (-K_{22} \frac{\partial \bar{Y_i}}{\partial y}) + \frac{\partial}{\partial z} (- \bar{\rho} K_{33} \frac{\partial \bar{Y_i}}{\partial z}) = \]
+ \[ = R_{\rho_i} (\bar{\rho_1}, \dots , \bar{\rho_N}) + Q_{\rho_i} + \frac{\partial (\bar{\rho_i})}{\partial t} \rvert_{cld} + \frac{\partial (\bar{\rho_i})}{\partial t} \rvert_{aero} + \frac{\partial (\bar{\rho_i})}{\partial t} \rvert_{ping},\]
+
 \section{Dimension reduction for the jointed system}
 The 3D model is too complex to work with, on the other hand the phenomena can be seen as quasi-horizontal, which is why we perform dimension reduction for the merged system, the goal is to have a synchronized 2D system describing pollution and atmosphere.
 
