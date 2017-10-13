@@ -6,7 +6,7 @@
 \title{PhD report for the academic year 2016/2017}
 \subtitle{Merged mathematical models of the polluted atmosphere}
 \author{Nora Juhasz}
-\institute{Department of Information Engineering, Computer Science and Mathematics \\ Supervisor: Prof. Donatella Donatelli}
+\institute{Department of Information Engineering, Computer Science and Mathematics \\ University of L'Aquila \\ Supervisor: Prof. Donatella Donatelli}
 
 \pgfdeclareimage[width = 10mm]{disimlogo}{LogoDisim.png}
 \logo{\pgfuseimage{disimlogo}}
@@ -19,35 +19,116 @@
 
 \section{Current state of the research project}
 
-\begin{frame}{Modeling of the polluted atmosphere}
+\begin{frame}{Modeling of the atmosphere}
 
-  General description\dots
+  The beginning step of this research project was to collect sets of equations that describe well the motion of the atmosphere, firstly without considering the effect of pollution. The nature / source of these equations are the following:
   \begin{itemize}
-  \item Say something here
-    \begin{itemize}
-    \item
-      First item.
-      \pause
-    \item    
-      Second item.
-    \end{itemize}
   \item
-    using overlay specifications:
-    \begin{itemize}
-    \item<3->
-      First item.
-    \item<4->
-      Second item.
-    \end{itemize}
+    conservation of momentum, Navier-Stokes equation
   \item
-    using the general \texttt{uncover} command:
-    \begin{itemize}
-      \uncover<5->{\item
-        First item.}
-      \uncover<6->{\item
-        Second item.}
-    \end{itemize}
+    conservation of mass (continuity equation)
+  \item
+    thermodynamics equation (conservation of energy)
+  \item
+    equation of state
+  \item
+    equation describing the quantity of water vapor (ocean analogy: salinity)
   \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Different approaches for the equations}
+
+  Using these equations we can create three main different versions of sets of equations that describe the atmosphere:
+  \begin{itemize}
+  \item
+    Using the classical $(x, y, z)$ cartesian coordinates,
+  \item
+    Introducing a terrain-influenced coordinate $\eta$ instead of $z$,
+  \item
+    Using the well-behaving, monotonous relationship between pressure and height and use $p$ as a vertical coordinate.
+  
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}{An example set of equations}
+
+As an example, the equations of the atmosphere in $(x, y, p)$ coordinates:
+
+\[ \frac{\partial \bold{v}}{\partial t} + \nabla_{\bold{v}}\bold{v} + \omega \frac{\partial \bold{v}}{\partial p} + 2 \Omega \sin \theta \bold{k} \times \bold{v} + \nabla \Phi -L_{\bold{v}} \bold{v} = F_\bold{v}  \]
+
+\[ \frac{\partial \Phi}{\partial p} + \frac{RT}{p} = 0, \nabla \cdot \bold{v} + \frac{\partial \omega}{\partial p} = 0 \]
+
+\[ \frac{\partial T}{\partial t} + \nabla_{\bold{v}} T + \omega \frac{\partial T}{\partial p} - \frac{R \bar{T}}{c_p p} \omega - L_T T = F_T\]
+
+\[ \frac{\partial q}{\partial t} + \nabla_{\bold{v}}q + \omega \frac{\partial q}{\partial p} -L_q q = F_q \]
+
+\[ p = R \rho T\]
+
+\end{frame}
+
+\begin{frame}{Equation describing pollution}
+
+The species continuity equation (equations of chemical kinetics) has the following form:
+
+\[ \frac{\partial C_j}{\partial t} + \nabla \cdot J_j = r_j,\]
+
+where
+
+\begin{itemize}
+\item $C_j$ is the local molar concentration of species $j$, (time variations in the species concentration),
+\item the components of $J_j$ represent the local molar flux, (local motion of the species), and
+\item $r_j$ is a volume based formation rate.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Syncronising}
+To merge the equations of the atmosphere and the equation of pollution we use the following approach.
+\begin{itemize}
+\item we write the fluid equations of the mixture considered as a single fluid with denisty $\rho_0$, pressure $p$, temperature $T$, velocity $\bold{v}$,
+\item we consider the equations describing the evolution of each mass fraction (or species concentration) $Y_i$ or ($C_i$). 
+\item we add "connecting" / "glue" equations regarding the quantities of the species to sum up for the quantity presented in the atmosphere equation
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Syncronising}
+One of the issues about syncronising was the fact that the equations of the atmosphere and pollution are often not in the same coordinate system.
+For solving this we could either
+\begin{itemize}
+\item use Jacobians in the equations, or
+\item use the cartesian coordinate system for both systems
+\end{itemize}
+We have chosen the later, since because of the quasi-horizontal nature of the atmosphere we will perform dimension reduction. 
+\end{frame}
+
+\begin{frame}{Current state part 1}
+
+\[ \frac{\partial \bold{v} }{\partial t} + \nabla_{\bold{v}}\bold{v} + w  \frac{\partial \bold{v} }{\partial z} + \frac{1}{\rho_0}\nabla p + 2 \Omega \sin \theta \bold{k} \times \bold{v}  -\mu_{\bold{v}}\Delta \bold{v}  -\nu_{\bold{v}} \frac{\partial ^ 2 \bold{v} }{\partial z^2} = 0  \]
+
+\[ \frac{\partial p }{\partial z} = - \rho_0 g \]
+
+\[ \frac{\partial \rho_0}{\partial t} + \rho_0 (\nabla \bold{v} + \frac{\partial w }{\partial z}) + \bold{v} \nabla \rho_0 + w \frac{\partial \rho_0}{\partial z} = 0 \]
+
+\[ \frac{\partial T }{\partial t} + \nabla_{\bold{v}} T  + w  \frac{\partial T }{\partial z} - \mu_T \Delta T  -\nu_T \frac{\partial^2 T }{\partial z^2} -\frac{RT}{p} \frac{\mathrm{d}p}{\mathrm{d}t} = Q_T \]
+
+\[ \frac{\partial q }{\partial t} + \nabla_{\bold{v}}q + w \frac{\partial q}{\partial z} - \mu_q \Delta q  - \nu_q \frac{\partial ^2 q }{\partial z^2} = 0 \]
+
+\[ p = R \rho_0 T \]
+
+\end{frame}
+
+\begin{frame}{Current state part 2}
+
+ \[ \frac{\partial \bar{\rho_i}}{\partial t}  + \nabla_{h} (\bar{\rho_i} \bar{V_h}) + \frac{\partial}{\partial z} (\bar{\rho_i} \bar{V_v}) + \frac{\partial}{\partial x} (-\bar{\rho}K_{11} \frac{\partial \bar{Y_i}}{\partial x}) + \]
+ \[+ \frac{\partial}{\partial y} (-\bar{\rho}K_{22} \frac{\partial \bar{Y_i}}{\partial y}) + \frac{\partial}{\partial z} (- \bar{\rho} K_{33} \frac{\partial \bar{Y_i}}{\partial z}) = \]
+ \[ = R_{\rho_i} (\bar{\rho_1}, \dots , \bar{\rho_N}) + Q_{\rho_i} + \frac{\partial (\bar{\rho_i})}{\partial t} \rvert_{cld} + \frac{\partial (\bar{\rho_i})}{\partial t} \rvert_{aero} + \frac{\partial (\bar{\rho_i})}{\partial t} \rvert_{ping},\]
+ 
+ (which is a more refined version of the previous pollution equation)
+
+\[ \rho_0 = \sum_{i =1}^{N} \rho_i, p = \sum_{i =1}^{N} p_i, (\bold{v}, w) = \sum_{i =1}^{N}\frac{\rho_i}{\rho_0} (\bold{v}, w)_i \]
+
 \end{frame}
 
 \section{Outlook}
@@ -59,12 +140,9 @@
   \item
     Outlook
     \begin{itemize}
-    \item
-      Dimension reduction-
-    \item
-      Theoretical solutions
-    \item
-      Sumerical simulations.
+  \item Dimension reduction for the merged system. The 3D model is too complex to work with, on the other hand the phenomena can be seen as quasi-horizontal, which is why we perform dimension reduction for the merged system, the goal is to have a synchronized 2D system describing pollution and atmosphere.
+  \item Solutions for the for the new, two-dimensional merged system.
+  \item Numerical simulations of solutions.
     \end{itemize}
   \end{itemize}
 \end{frame}
@@ -75,12 +153,11 @@
 \subsection{University of L'Aquila}
 
 \begin{frame}{The courses attended at the University of L'Aquila}
-
   \begin{itemize}
   \item
-    Use \texttt{itemize} a lot.
+    Numerical Analysis 2 - Prof. Guglielmi
   \item
-    Use very short sentences or short phrases.
+    High Performance Parallel Computing - the course was taught by four professors. Prof. Protasov, Prof Shcherbatyy and Prof. Khapko described rather \textbf{theoretical topics}, while Prof. Pera was introducing the main concepts and first examples of parallel computing and \textbf{Fortran}.
   \end{itemize}
 \end{frame}
 
@@ -90,9 +167,13 @@
 
   \begin{itemize}
   \item
-    Use \texttt{itemize} a lot.
+    Introduction to Finite Elements Method - Prof. Boffi
   \item
-    Use very short sentences or short phrases.
+    Decay property for hyperbolic systems with dissipation - Prof. Kawashima
+  \item
+    Advanced Topics on Numerical Methods - Prof. Guglielmi
+  \item
+    Introduction to the incompressible Naver-Stokes equation - Prof. Marcati  
   \end{itemize}
 \end{frame}
 
@@ -102,9 +183,11 @@
 
   \begin{itemize}
   \item
-    Use \texttt{itemize} a lot.
+    PDEs Day, 21st March 2017
   \item
-    Use very short sentences or short phrases.
+    School on Uncertainty Quantification for Hyperbolic Equations and Related Topics, 24th-28th April 2017
+  \item
+    CIME School 2017  - Mathematical Analysis of the Navier-Stokes Equations, Cetraro
   \end{itemize}
 \end{frame}
 
