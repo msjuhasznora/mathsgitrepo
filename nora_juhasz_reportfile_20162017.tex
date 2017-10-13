@@ -1,0 +1,582 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{commath}
+\usepackage{amsthm}
+\newtheorem*{remark}{Remark}
+\usepackage{enumitem}
+\usepackage{outlines}
+\setlist[enumerate,1]{label=\roman*)}
+\setlist[enumerate,2]{label=\alph*)}
+
+%PREAMBLE
+\title{Report of PhD activities in the academic year 2016 / 2017}
+\author{Nora Juhasz}
+
+%CONTENT
+\begin{document}
+
+\maketitle
+\newpage
+
+\begin{abstract}
+
+This document describes the courses, schools and seminars attended in the 2016 / 2017 academic year, moreover it outlines the current state of the research project.\\
+
+\end{abstract}
+\newpage
+
+\tableofcontents
+\newpage
+
+\section{Academic courses and schools}
+%UNIVAQ
+\subsection{University of L'Aquila}
+
+\subsubsection{Numerical Analysis 2 - Prof. Guglielmi}
+The main topics covered by this class are systems of nonlinear equations, nonlinear optimization (constrained and unconstrained), numerical methods for the Cauchy problem.
+
+The bisection method and Newton method are defined, and a few educational examples are shown for interesting cases, such as when $f(x) = arctan(x)$ and the method does not converge globally, or when $f(x)$ is chosen to be $x^{20} - 1$ and $x_0 = 2$ and we have seen the the convergence to the fix point in the beginning is quite slow.
+
+The numerical optimization topic was started by discussing the necessary and sufficient conditions for a minimum point. For the solution we introduce the algorithm of the Steepest descent gradient method. The idea is to follow the maximal decrease of the function, and to restrict the problem from $\mathbb{R}^n$ to $\mathbb{R}$. We point out that the following problems are equivalent.
+
+\begin{outline}[enumerate]
+
+\1 solving $Qx = b$ for $Q$ being SPD.
+
+\1 the minimum problem for the quadratic case $f(x)$ being $x^TQx - x^Tb$
+
+\end{outline}
+
+Creating a $Q$ matrix from the discretization values from a differential equation and a $b$ vector from the function values, the method is also used for obtaining approximate solutions for ODEs. Condition number and convergence are discussed, and the notion of conjugate directions is also introduced, finally we define the Conjugate gradient method. We implemented an interesting application from approximation theory of the above methods in Matlab (approximate a function by a polynomial).
+
+In the case of constrained optimization we define a continuous function $P$  to be a penalization function ascended to a set $\mathcal{S}$ if it is nonnegative everywhere and it is $0$ if and only if $x \in {S}$. We eventually associate $q(c,x) = f(x) + cP(x)$ to the original $f(x)$ function that we had to optimize with given constraints, and we optimize $q$ instead, unconstrained.
+
+The third chapter of the course deals with the Cauchy problem.
+
+\begin{equation}
+   \begin{cases}
+               y'(x) = f(x, y(x)) \\
+               y(0) = y_0
+   \end{cases}
+\end{equation}
+
+We assume $f(x,y)$ to be continuous and to be Lipschitz-continuous with respect to $y$. Theory states that under these assumptions the CP has a solution which is unique. Our goal is to find an approximation, for this we use the Euler method and we describe a theorem that assures that under suitable conditions the Euler method converges linearly.
+
+The question is, how to generalize the Euler-method? One can do that either by increasing the number of steps, or either by keeping one step but increasing the number of stages.
+
+\begin{outline}[enumerate]
+
+\1 Multistep methods. In this case we gain efficiency by using the information from previous steps. Explicit Adams method, implicit Adams method, and backward differentiation formulas were given. This way naturally leads to the theory of difference equations, to the polynomials associated with them, and the notions attached to these (for example zero stability is defined via the polynomial that belongs to the difference equation).
+
+\1 The extension of the quadrature formula (Runge-Kutta methods). These methods use intermediate steps to obtain a higher order method. The Runge-Kutta methods are often described by their display from Butcher's work. The main equations are the following.
+
+\[ k_i = f(t_0 + c_i h, y_0 + h \sum_{j=1}^s a_{ij}K_j) \]
+\[ y_1 = y_0 + h \sum_{i=1}^s b_i K_i \]
+
+\end{outline}
+
+\subsubsection{High Performance Parallel Computing - several Professors}
+
+\paragraph{Numerical solutions of calculus of variations problems - Prof. Protasov}
+Let's consider the following problem, also known as The Simplest Problem. We aim to minimize the function $J(x) = \int_{t_0}^{t_1}L(t,x,\dot{x})dt ,$ where $t \in (t_0,t_1)$ and $x \in C^1[t_0,t_1]$. The most important equation we need when discussing this problem is the Euler-Lagrange equation, equation \ref{eq:eulerlagrange}.
+
+\begin{equation} \label{eq:eulerlagrange}
+\frac{d}{dt}L_{\dot{x}} = L_x
+\end{equation}
+
+It is proved that if $\hat{x}$ provides local minimum to The Simplest Problem, then it satisfies the Euler-Lagrange equation and several examples are shown. It is also highlighted that if $L$ is convex, then $\hat{x}$ is necessarily an absolute minimum.
+
+Three special cases of equation \ref{eq:eulerlagrange} are considered which are useful when solving problems.
+
+\begin{outline}[enumerate]
+
+\1 $L$ does not depend explicitly on $\dot{x}$, ie. $L = L(t,x)$. In this case equation \ref{eq:eulerlagrange} is reduced to $L_x = 0$.
+\1 $L$ has the form of $L = L(t, \dot{x})$, and hence $L_{\dot{x}}$ is constant.
+\1 When $L$ does not explicitly depend on the time variable $t$ we have $\dot{x}L_{\dot{x}} - L$ being constant.
+
+\end{outline}
+
+It is important to note that when a solution $x$ is not smooth enough, ie. if it lives in a wider space than $\mathcal{C}^1$, it can be rejected by the Euler-Lagrange method, however it is still a solution to The Simplest Problem.
+
+As a variation of the original problem, the Bolza problem is introduced, in which we want to minimize $J(x) = \int_{t_0}^{t_1}L(t,x,\dot{x})dt + l(x_0, x_1)$, and accordingly, a similar theorem to the previous one is described for a $\hat{x}$ solution of the problem.
+
+A good example for the many applications of The Simplest Problem is the solution of the Isoperimetric Problem in which it is shown that among forms with a concrete given length it is the circle that has the biggest possible area. In the solution a pair of Lagrange multipliers are used and the theorem that had been shown.
+
+As an interesting aspect, Jacob Steiner's intuitive but wrong version of the proof is described for the same Isoperimetric Problem from 1850  as to illustrate the significance of the Euler-Lagrange method.
+
+The next problem we considered throughout the course of this lecture was the following boundary value problem.
+
+\[
+   \begin{cases}
+               \ddot{x} = f(t,x,\dot{x})\\
+               x(t_0) = x_0, x(t_1) = x_1
+   \end{cases}
+\]
+
+The approach we were introduced to is the so-called "shooting method".
+Instead of solving the above problem, we can consider the Cauchy problem.
+
+\[
+   \begin{cases}
+               \ddot{x} = f(t,x,\dot{x})\\
+               x(t_0) = x_0, \dot{x}(t_0) = v_0
+   \end{cases}
+\]
+
+This Cauchy problem is basically the same as the more simple one, with first order derivatives, using the new notation $x_1 = x, x_2 = \dot{x}$. For the Cauchy problem there exists an existence and uniqueness theorem which says that if $f$ is Lipschitz continuous, then we have a unique solution on an interval. Taking this approach we only have to connect somehow the solution of this new problem to the original BVP. This can be done by introducing a new variable, $\alpha \in \mathbb{R}$, and then we can consider several solutions ("shootings") $P(\alpha) = x_{\alpha}(t_1) - x_1$, and find $P(\alpha) = 0$ by the bisection, or double decision method.
+
+Difference schemes and difference equations are also discussed. An equation is stable if and only if all roots of the characteristic polynomial are strictly smaller than $1$ by modulus, and it is called $\alpha$-stable is the polynomial has one root equal to $1$ and all other roots are smaller than $1$.
+
+\paragraph{Optimization of complex systems - Prof. Shcherbatyy}
+This section of the HPC lecture introduces optimization problems of complex systems. Two motivational, illustrative applications are considered in the beginning of the course, partly to fix the terminology and introduce notions such as state function and control function. Let's consider the following problem: how to boil a potato by heating its boundary in an optimal way. To put in into mathematical forms, let $\Omega$ be the potato, $\Gamma$ its boundary. Let $u(x)$ denote the heat source or the control function on $\Gamma$, and finally let $y(x)$ be the temperature, or in other words, the state function in $\Omega$.
+
+We have an elliptic boundary control problem
+
+\[ -\Delta y = 0 , x \in \Omega \]
+\[ \frac{\partial y}{\partial n} = \alpha (u - y), x \in \Gamma, \]
+
+and to express the objective we formulate
+
+\[ \min_{y,u} J(y, u) = \frac{1}{2} \int_{\Omega} (y(x) - y_d(x))^2 dx - \frac{\gamma}{2} \int_{\gamma} {u(x)}^2 ds(x),\]
+
+while the following inequality constraints hold
+
+\[ u_a(x) \leq u(x) \leq u_b(x), x \in \Gamma.\]
+
+A different version of this problem is when we have distributed control inside $\Omega$.
+
+Using finite differences or finite elements method we obtain a discrete problem of the following form
+
+\[ \min_{Y,U} \frac{1}{2}\sum_{i = 1} ^ {N} (y_i - y_{d,i})^2 + \gamma u_i^2,\]
+
+subject to $A_h Y = B_h U$ and $U_a \leq U \leq U_b,$ where $Y,U \in \mathbb{R}^N$ and $A_h, B_h \in \mathbb{R}^{N \times N}$. The general solution methods contain Newton method, steepest descent gradient method and conjugate gradient method, which were elaborated also in Numerical Analysis 2.
+
+The problem we considered above has application in distributed heating in medicine.
+
+Finally, the topic of sensitivity analysis was introduced, which, roughly speaking, calculates the rates of change in the output variables of a system which result from small perturbations in the problem parameters. Direct differentiation method and adjoint method were discussed in detail.
+
+\paragraph{Numerical solution of Boundary value problems for PDEs - Prof. Khapko}
+
+As an introduction, fundamental results from theory such as Green's theorem, Gauss divergence theorem and Maximum Principle are drawn up, and Interior Dirichlet Problem (equation \ref{interiordirichletproblem}), Interior Neuman Problem (equation \ref{interiorneumanproblem}) and Poisson Equation ($-\Delta u = F, x \in D$) are defined.
+
+\begin{equation}\label{interiordirichletproblem}
+   \begin{cases}
+               \Delta u = 0, x \in D\\
+               u = f, x \in \partial D
+   \end{cases}
+\end{equation}
+
+\begin{equation}\label{interiorneumanproblem}
+   \begin{cases}
+               \Delta u = 0, x \in D\\
+               \frac{\partial u}{\partial \nu} = g, x \in \partial D
+   \end{cases}
+\end{equation}
+
+\begin{outline}[enumerate]
+
+Throughout the lecture four methods are described for solving boundary value problems.
+
+\1 Finite Difference Method. We are looking for an approximation of the solution of the BVP at a finite number of grid points. The function derivatives are approximated by means of Taylor expansion. If we use the $u_{ij} \approx u(ih, jh)$ approximation, this gives us a system of linear equations and the five-point stencil for FDM, and eventually the matrix representation $A_h u_h = q_h$. Finally, consistence is defined, a sufficient condition is said for convergence, and an upper bound estimation if given for the infinity norm of the error.
+
+\1 Galerkin-Ritz method. We begin with the following problem.
+
+\[
+   \begin{cases}
+               \Delta u = F, x \in D\\
+               \frac{\partial u}{\partial \nu} = 0, x \in \partial D
+   \end{cases}
+\]
+
+The notion of test functions is introduced. We define the function space $V$ as
+
+\[ V = \{v \in \mathcal{C}(\bar{D}), \frac{\partial v}{\partial x_i} \text{exist and is piecewise continuous, } v = 0 \text{ on } \partial D \}.\]
+
+Since any $v$ is zero on the boundary,  we have
+
+\[ \int_D \nabla u(x) \nabla v(x) dx = \int_D F(x)v(x)dx.\]
+
+Denoting by $a(u, v)$ the left hand side, we have an equation of form $a(u,v) = b(v)$, also called the variational equation. A function $u$ that satisfies this equation for all $v \in V$ is called a weak or variational solution.
+
+Through the Galerkin dimension reduction we arrive to the new problem
+
+\[\text{find } u_h \in V_h \text{ with } a(u_h,v) = b(v), \text{ }\forall v \in V\]
+
+where $V_h$ is a finite dimensional subspace of $V$ and $a$ is a bilinear function. Once in a finite dimensional space, we can write the matrix form of the problem by means of the basis. Boundedness and ellipticity is defined and Cea's lemma is described.
+
+\1 Finite Elements Method. The original domain is divided into subdomains called elements. The construction of basic functions is described. The approximating function in the rectangle-shaped elements case is a combination of four bilinear interpolating polynomials, also called shape functions.
+
+\1 Boundary Integral Equation Method. The $\Phi (x)$ fundamental solution, both for 2 and 3 dimensions, for the Laplace equation is defined, $u(x)$ single-layer and $v(x)$ double-layer potentials are
+
+\[ u(x) = \int_{\partial D} \phi(y) \Phi(x,y) ds(y),\]
+
+\[ v(x) = \int_{\partial D} \phi(y) \frac{\partial}{\partial \nu(y)}\Phi(x,y) ds(y),\]
+
+where $\phi$ is a continuous function on the boundary.
+
+The Fredholm integral equation of the first kind is introduced, which states that the single layer potential is a solution of the Dirichlet BVP, provided that $\phi$ is a solution of $u(x) = \phi (x). $ The second kind analogous version is also described. Finally the Nystrom method is applied for the Fredholm equation.
+
+\end{outline}
+
+\paragraph{High Performance Parallel Computing - Prof. Pera}
+
+A supercomputer can basically be seen as a set of simple computers that cooperate with each other to solve a complex problem quickly. As an interesting example, the L'Aquila Caliban Cluster's details were listed. For performance evaluation, the notions of speed up and efficiency, and overhead have been defined.
+Part of this practical class has been dedicated for an introduction to basic linux commands regarding files, permissions, directories, paths and processes. Loops and the if-else condition were also introduced, along with a few short executable scripts. File transfer and remote login were discussed too.
+An illustrative example was given on computing the numerical value of $\pi$ using parallel computing, gradually changing both the number of generated points and the number of processes.
+The Fortran programming language was introduced and finally we saw features and description of the Message Passing Interface (notions such as blocking vs. non-blocking, synchronous vs. asynchronous communication).
+
+%GSSI
+\subsection{Gran Sasso Science Institute}
+
+\subsubsection{Introduction to Finite Elements Method - Prof. Boffi}
+This course focuses on finite differences and finite elements. We begin by considering the following classical problem.
+
+\begin{equation}
+   \begin{cases}
+               - \Delta u = f, x \in \Omega\\
+               u = g, x \in \partial \Omega = \Gamma
+   \end{cases}
+\end{equation}
+
+Following discretization and defining the discrete Laplace operator, a new problem in introduced.
+
+\begin{equation}
+   \begin{cases}
+               - \Delta_h u_h = f, x \in \Omega_h\\
+               u_h = g, x \in \Gamma_h
+   \end{cases}
+\end{equation}
+
+If $u \in \mathcal{C}^2(\bar{\Omega})$, then $\lim_{h \to 0} \norm{\Delta_h u - \Delta u}_{L^{\infty} (\Omega_h)} = 0$.
+
+The technical implementation is discussed and a concrete example is given for the case $N=4, h=\frac{1}{4}$. The idea is that even though we have a two-dimensional grid with points in which we approximate the values of the function $u$, we can turn the values into a column vector by using a linear ordering of the nodes. Eventually this gives us an equation of form $Au = b$, where $A$ is a matrix coming from the approximation of the Laplacian, $u$ is the one dimensional vecor of the originally two dimensional grid point values and $b$ is a combination of the function values of $f$ and $g$. The special structure of the matrix is described, and the consistency theorem is stated.
+
+In connection with the Galerkin method, the Lax-Milgran theorem is noted. The definition of coercivity is introduced: $\exists \beta: a(v,v) \geq \beta \norm{v}^2 \forall v$. We briefly discuss relationship between the inf-sup condition, dense range condition and coercivity.
+
+The introductory part of finite element method begins by describing the finite dimension version of the Galerkin method and by stating Cea's lemma, basically saying that the error is bounded by the best approximation.
+
+The accuracy from a finite elements model is directly related to the finite element mesh that we use. The finite element mesh is used to subdivide the model into smaller domains called elements, over which a set of equations are solved. These equations approximately represent the governing equation of interest via a set of polynomial functions defined over each element. As these elements are made smaller and smaller, as the mesh is refined, the computed solution will approach the true solution.
+
+Of the many interesting questions about finite elements we mention two:
+
+\begin{outline}[enumerate]
+\1 Refining the grid - what metrics, criteria and processes should be used for refining the mesh?
+\1 In the $U = \sum_{j=1}^{N} c_j \Phi(x_j, y_j)$ how do we actually define the basis functions?
+\end{outline}
+
+We address the second question in more detail, we show examples for Lagrange shape functions on triangles, the case of rectangle-shaped elements is also mentioned.
+
+\subsubsection{Decay property for hyperbolic systems with dissipation - Prof. Kawashima}
+The aim of the course is to study dissipative structure and decay property for hyperbolic systems with dissipation. Consider the following two equations.
+
+\begin{equation} \label{eq:symmetricdiffusion}
+u_{t} + Au_{x} = Bu_{xx}
+\end{equation}
+
+\begin{equation} \label{eq:symmetricrelaxation}
+u_{t} + Au_{x} -Lu = 0
+\end{equation}
+
+Equation \ref{eq:symmetricdiffusion} describes the symmetric diffusion process, while symmetric relaxation is modeled by equation \ref{eq:symmetricrelaxation}.
+
+It is always assumed that the matrix $A$ is symmetric. Throughout the course of this lecture three different versions of these two equations are examined in terms of the assumptions that are made on matrices $B$ and $L$, and what type of additional effects are involved. The simplest case is when one assumes $B$ and $L$ to be symmetric and nonnegative. From this base case we can move in two different directions and arrive at two different versions of these systems. In the first variation, the very same equations are considered with modified conditions, ie. matrices $B$ and $L$ are still assumed to be non-negative, but the symmetry assumption is dropped. In the second variation one considers the original assumptions on symmetry and non-negativity, but the equations are modified with a memory part. More specifically, the equations in the third case are the following.
+
+\begin{equation} \label{eq:symmetricdiffusionmemo}
+u_{t} + Au_{x} = a(t) \star Bu_{xx}
+\end{equation}
+
+\begin{equation} \label{eq:symmetricrelaxationmemo}
+u_{t} + Au_{x} -a(t) \star Lu = 0
+\end{equation}
+
+During the course the case $a(t) = \mathrm{e}^{-t}$ is considered.
+
+To expound the most important definition, first take the Fourier transforms of equations \ref{eq:symmetricdiffusion} and \ref{eq:symmetricrelaxation}, and then consider the corresponding eigenvalue problem.
+
+\begin{equation} \label{eq:symmetricdiffusioneigenv}
+( \lambda + I \xi A + \xi ^2 B ) \phi = 0
+\end{equation}
+
+\begin{equation} \label{eq:symmetricrelaxationeigenv}
+( \lambda + I \xi A + L ) \phi = 0
+\end{equation}
+
+Equations \ref{eq:symmetricdiffusion} and \ref{eq:symmetricrelaxation} are called uniformly dissipative of type $(p,q)$ if
+
+\begin{equation} \label{eq:uniformdissipativity}
+\operatorname{Re}(\lambda(I \xi)) \leq \frac{c\abs{\xi}^{2p}}{(1 + \abs{\xi}^2)^q}
+\end{equation}
+
+This concept stands at the center throughout the course and in each of the above mentioned cases we will assert a condition for the system to be uniformly dissipative. In each case this condition will be the Craftmanship Condition, which grasps a very similar meaning in every case, but is naturally defined differently, depending on the concrete equation.
+
+For example, for equation \ref{eq:symmetricdiffusion} the Craftmanship Condition by definition is satisfied if there exists a skew-symmetric matrix K such that $ {(KA)}^{sy} + B$ is positive definit. Craftmanship Condition in other cases is defined similarly, naturally adapted to the equation.
+
+To continue with our basic case, equation \ref{eq:symmetricdiffusion}, with B being symmetric and non-negative, if Craftmanship Condition is satisfied, then the solution is uniformly dissipative of type $(1,1)$ and the following bound holds
+
+\[ \abs{\hat{u}(t,\xi)} \leq C \mathrm{e}^{-c\rho(\xi)t} \abs{\hat{u}_0 (\xi)} , \]
+
+where $\rho(\xi) = \frac{\xi^2}{1 + \xi^2}$. Moreover, we have the decay estimate
+
+\[ \norm{\partial _{x} ^{k} u(t)}_{L^2} \leq C(1+t)^{-\frac{1}{4}-\frac{k}{2}} \norm{u_0}_{L^1} + C\mathrm{e}^{-ct} \norm{\partial ^k _x u_0}_{L^2}.\]
+
+It can be shown that for both equations  \ref{eq:symmetricdiffusion} and \ref{eq:symmetricrelaxation}, Craftmanship Condition is sufficient and necessary condition for the system to be uniformly dissipative of $(1,1)$. For the nonsymmetric case of equation \ref{eq:symmetricrelaxation} the respective Craftmanship Condition is sufficient to be uniformly dissipative.
+
+For the systems with memory-type dissipation, ie. for equations \ref{eq:symmetricdiffusionmemo} and \ref{eq:symmetricrelaxationmemo} with a method of introducing a new variable and increasing the dimension of the system we find that memory-type symmetric diffusion is essentially the same as the original relaxation equation with symmetric $L$ matrix, and memory-type symmetric relaxation is essentially the same as the original relaxation equation with non-symmetric $L$ matrix. Craftmanship Conditions can be defined analogously, and the conditions for the respective systems hold and fail equivalently in the diffusion case, for the relaxation system the Craftmanship Condition of the original system is sufficient condition for the Craftmanship Condition of the memory-type system to be satisfied. Analogous results to the above mentioned decay estimate and solution bound can be stated for the non-symmetric and the symmetric memory-type systems as well.
+
+The course explores the relationship between the five different systems defined in the beginning, the Craftmanship Condition, and uniform dissipativity (including decay estimates).
+
+
+\subsubsection{Advanced Topics on Numerical Methods - Prof. Guglielmi}
+The first chapter of this course is about quadrature formulas. An $s$-stage quadrature formula is given by $Q[g] = \sum_{i=1}^s b_i g(c_i)$, where $\{c_i\}_{i=1}^s$  are the abscissas of the method and $\{b_i\}_{i=1}^s$ are the weights. Three simple examples are the midpoint formula, the trapezoidal rule and the Simpson formula. After introducing the concept of order, the important role of orthogonal polynomials has been expanded. To introduce these polynomials let us take a weight function $w(t) > 0$, $t \in (a,b)$ such that $\int_a^b \abs{t}^k w(t) dt < \infty$. We can define the scalar product of functions $f$ and $g$ over the weight function $w$ as $<f, g> = \int_a ^ b w(t) f(t) g(t) dt$. Two functions are said to be orthogonal, as usual, if their scalar product is zero. Our aim was to construct a set of polynomials that that includes exactly one polynomial of order $j$, called $p_j (x)$, and all of which are mutually orthogonal over the specified weight function. We achieve this by Gram-Schmidt orthogonalization. The polynomial $p_j (x)$ has exactly $j$ distinct roots in the interval $(a,b)$. We are interested to find all the roots of such a polynomial because the abscissas of the $N$-point Gaussian quadrature formulas with the weight function $w(x)$ in the interval $(a,b)$ are exactly the roots of the orthogonal polynomial $p_N(x)$. This is the fundamental theorem of Gaussian quadratures. Once the abscissas are known, the weights might be find via solving a set of linear equations.
+
+The Runge-Kutta method is introduced in a similar way as described in "Numerical Analysis 2". Explicit, semi-implicit, and implicit methods are distinguished based on the matrix belonging to the problem. We also examine the IVP in a different light, which gives us the notion of collocation methods. This method approximates the solution $y$ by a polynomial $p$ of degree $n$, which at all collocation points $t_k$ satisfies
+
+\begin{equation}
+   \begin{cases}
+               p(t_0) = y_0\\
+               p'(t_0 + c_i h) = f(t_0 + c_i h, p(t_0 + c_i h)).
+   \end{cases}
+\end{equation}
+
+Defining an IVP for unknowns $y$ and $z$ with the same function $f$ we arrive to different notions of stability. A Runge-Kutta method is said to be B-stable if - when applied to a dissipative problem - is such that $\norm{y_1 - z_1} \leq \norm{y_0 - z_0}$. A-stability on the other hand is defined by $\norm{y_1} \leq \norm{y_0}$. Introducing $R(z) = 1 + z b^T (I - zA)^{-1}e$ we can state that a Runge-Kutta method is A-stable if and only if $R(z)$ has no poles in $\mathbb{C}^{-}$ and $\abs{R(y)} \leq 1, \forall y \in \mathbb{R}$.
+
+\subsubsection{Introduction to the Incompressible Navier-Stokes equation - Prof. Marcati}
+This course introduces concepts - including the notion of the Navier-Stokes equation itself - and selected results from it's theory. The Navier-Stokes equations describe the motion of a Newtonian fluid. In this course we consider viscous, homogenous and incompressible fluids, and a balance of forces is also assumed. The equation describing the motion is
+\begin{equation} \label{eq:ins}
+   \begin{cases}
+               \partial_t u + (u \cdot \nabla)u + \nabla p = \nu \Delta u\\
+               \nabla \cdot u = 0.
+   \end{cases}
+\end{equation}
+
+We distinguish classical and weak solutions based on whether the derivatives exist in the classical sense or only in a distributional sense. The concept of mollifiers is discussed. As an important aspect of this theory, the energy method is introduced.
+We call a solution Leray Weak Solution if it is a weak solution of equation \ref{eq:ins} on the interval $[0,T]$ and it satisfies a given energy inequality. Leray's theorem states that for $\forall T > 0$ there exists a weak Leray Weak Solution for the incompressible Navier-Stokes equation.
+
+We consider the following inequalities by Ladyzhenskaya
+
+\[ \text{In } 2 \text{ dimensions } \norm{u}_{L^4} \leq C \norm{u}_{L^2}^{1/2} \norm{\nabla u}_{L^2}^{1/2}, \]
+\[ \text{in } 3 \text{ dimensions } \norm{u}_{L^4} \leq C \norm{u}_{L^2}^{1/4} \norm{u}_{L^2}^{3/4}. \]
+
+The uniqueness result is as follows. Given $u_1$ and $u_2$ two Leray weak solutions where $u_1(0) = u_2(0)$. Then in the two dimensional case we have $u_1 \equiv u_2$. In three dimensions the same does not necessarily hold, but if we have the extra condition $u_1 \in L_t^{8/3}L_x^4$ satisfied, then we have $u_1 \equiv u_2$ also in this case.
+
+%SEMINARS
+\subsection{Seminars}
+
+\subsubsection{PDEs Day, 21st March 2017}
+
+\begin{outline}[enumerate]
+
+\1 Viscous vortex rings with axial symmetry - Prof. Gallay
+
+\1A two phase model with cross and self attractive interactions - Prof. Novaga
+
+\1 Traveling waves for collective movements on a network - Prof. Corli
+
+\end{outline}
+
+\subsubsection{School on Uncertainty Quantification for Hyperbolic Equations and Related Topics, 24th-28th April 2017}
+
+\begin{outline}[enumerate]
+
+\1 Uncertainty propagation in transport equations and kinetic polynomials - Prof. Depres
+
+\1 Stochastic asymptotic-preserving methods for multiscale kinetic and quantum transport with uncertainties - Prof. Jin
+
+\1 Kinetic methods for uncertainty propagations in SODEs and SPDEs: from data-driven approximations to functional differential equations - Prof. Venturi
+
+\1 Approximation of stochastic partial differential equations driven by Levy fields - Andreas Barth
+
+\1 Uncertainty qualification in sediment transport shallow flows - M. J. Castro Diaz
+
+\1 Stochastic Galerkin methods for the Boltzmann equation with uncertainty - Jingwei Hu
+
+\1 From uncertain systems of conservation laws to playing with orthonormal polynomial basis - Gael Poette
+
+\1 Structure preserving methods for mean-field equations with random inputs - Mattia Zanella
+
+\end{outline}
+
+%SUMMER SCHOOLS
+\subsection{Summer schools}
+
+\subsubsection{CIME School 2017  - Mathematical Analysis of the Navier-Stokes Equations, Cetraro}
+
+\begin{outline}[enumerate]
+
+\1 Analysis of basic problems in liquid-solid interaction - Prof. Galdi
+
+\1 Analysis of Incompressible Viscous Fluid Flow: an Approach by Maximal $L^p$-Regularity - Prof. Hieber
+
+\1 Method of the Besov space and its applications to the strong solutions of the Navier-Stokes equations - Prof. Kozono
+
+\1 Partial regularity for the 3D Navier Stokes equations and applications - Prof. Robinson
+
+\end{outline}
+
+\section{Current state of the research topic - Atmosphere modelling}
+
+The main task has been to get familiar with basic concepts and results of both atmosphere modeling and pollution modeling. There are several available sources on each topic separately, what we have been aiming to do is to start to get to know both of these fields and to merge them together in an organic way. In the following we first describe the equations of the atmosphere and the equation of pollution, then present different possible ways of using and combining them.
+
+The most common approach for merging the two models so that they make sense in a jointed sense (have common variables and common solution) is the following:
+
+\begin{outline}[enumerate]
+
+\1 on one hand we write the fluid equations of the mixture considered as a single fluid with denisty $\rho_0$, pressure $p$, temperature $T$, velocity $\bold{v}$,
+\1 on the other hand we consider the equations describing the evolution of each mass fraction (or species concentration) $Y_i$ or ($C_i$). 
+
+\end{outline}
+
+\subsection{Equations of the atmosphere in $3$ dimensions}
+
+These 3-dimensional equations of the atmosphere use 2 horizontal dimensions and one vertical dimension (using the coordinate change $p$ - $z$). They basically come from using the mass continuity, equation of state and the equation describing the amount of water. The variables we use: $(x,y,p)$.
+
+\[ \frac{\partial \bold{v}}{\partial t} + \nabla_{\bold{v}}\bold{v} + \omega \frac{\partial \bold{v}}{\partial p} + 2 \Omega \sin \theta \bold{k} \times \bold{v} + \nabla \Phi -L_{\bold{v}} \bold{v} = F_\bold{v}  \]
+
+\[ \frac{\partial \Phi}{\partial p} + \frac{RT}{p} = 0 \]
+
+\[ \nabla \cdot \bold{v} + \frac{\partial \omega}{\partial p} = 0\]
+
+\[ \frac{\partial T}{\partial t} + \nabla_{\bold{v}} T + \omega \frac{\partial T}{\partial p} - \frac{R \bar{T}}{c_p p} \omega - L_T T = F_T\]
+
+\[ \frac{\partial q}{\partial t} + \nabla_{\bold{v}}q + \omega \frac{\partial q}{\partial p} -L_q q = F_q \]
+
+\[ p = R \rho T\]
+
+With $\Omega$ being the angular velocity, $L_{arb}$ a Laplace operator, $\Phi$ the geopotential.
+
+\subsection{Chemical kinetics - equations describing pollution in 3D}
+
+The species continuity equation (equations of chemical kinetics) has the following form:
+
+\[ \frac{\partial C_j}{\partial t} + \nabla \cdot J_j = r_j,\]
+
+where $C_j$ is the local molar concentration of species $j$, the components of $J_j$ represent the local molar flux and $r_j$ is a volume based formation rate. By nature it describes a connection between time variations in the species concentration in a fixed point, the local motion of the species, and the rate the species is formed by chemical reactions.
+
+In a slightly different, more expanded form the same thing has the following structure, $1 \leq i \leq N$:
+
+\[ \frac{\partial}{\partial t} (\rho Y_i) + \nabla \cdot (\rho Y_i u_i) = \omega_i,\]
+
+where $Y_i$ is the mass fraction of the species $i$ and $\omega_i$ is a term of sink-source nature. 
+
+\subsection{A synchronized system of the atmosphere containing pollution (3D, $(x,y,p)$, without terrain-influenced coordinate-change)}
+
+The unknown functions are velocity $\bold{v}$ of the mixture, its pressure $p$, the temperature $T$, and the mass densities $Y_i = \frac{\rho_i (t,x)}{\rho}$ (Eulerian description), $1 \leq i \leq N.$
+The equations we use: Navier-Stokes equations, temperature equation of the mixture, species continuity equation.
+
+The changes that has been applied: $\rho = \rho_0$, we are considering a homogeneous fluid, and instead of $u_i$ in the continuity equation we use the notation $\bold{v}_i$. Since the equations of the atmosphere in this case are in $(x,y,p)$ coordinates, we use the $J_{zp}$ Jacobian in the species continuity equation to sync.
+
+\[ \frac{\partial \bold{v}}{\partial t} + \nabla_{\bold{v}}\bold{v} + \omega \frac{\partial \bold{v}}{\partial p} + 2 \Omega \sin \theta \bold{k} \times \bold{v} + \nabla \Phi -L_{\bold{v}} \bold{v} = F_\bold{v}  \]
+
+\[ \frac{\partial \Phi}{\partial p} + \frac{RT}{p} = 0 \]
+
+\[ \nabla \cdot \bold{v} + \frac{\partial \omega}{\partial p} = 0\]
+
+\[ \frac{\partial T}{\partial t} + \nabla_{\bold{v}} T + \omega \frac{\partial T}{\partial p} - \frac{R \bar{T}}{c_p p} \omega - L_T T = F_T\]
+
+\[ \frac{\partial q}{\partial t} + \nabla_{\bold{v}}q + \omega \frac{\partial q}{\partial p} -L_q q = F_q \]
+
+\[ p = R \rho_0 T\]
+
+\[ \frac{\partial}{\partial t} (\rho_0 Y_i J_{zp}) + \nabla \cdot (\rho_0 J_{zp} Y_i \bold{v}_i) = \omega_i J_{zp}, \text{  } 1 \leq i \leq N \]
+
+\[ \rho_0 = \sum_{i =1}^{N} \rho_i, (\bold{v}, \omega) = \sum_{i =1}^{N}\frac{\rho_i}{\rho_0} \bold{v_i}J_{zp} \]
+
+\begin{remark}
+In the above equations $\omega$ is a notation for the speed of the wind in the common atmosphere equations, while $\omega_i$ stands for the production rate of species in the continuity equation.
+\end{remark}
+
+\subsection{Terrain influenced coordinates}
+
+A more general version of the species continuity equation describing chemical kinetics is a version including terrain-influenced coordinates.
+The terrain-influenced coordinate $\eta$ is defined as the following (see the Linus Magnusson online article):
+
+\[ \eta (x,y,z) = s \frac{z-z_G (x,y)}{s - z_G(x,y)},\]
+
+where $s$ is the top height of the model and $z_G$ is the height of the ground.
+
+Using the $J_{\eta}$ Jacobian matrix of the coordinate change on the chemical kinetics equation and separate horizontal and vertical velocity it gives
+
+\[ \frac{\partial(\rho_0 Y_i J_{\eta})}{\partial t} + \nabla_{\eta} \cdot (\rho_0 Y_i J_{\eta} \bold{v}_{horiz}) + \frac{\partial \rho_0 Y_i J_{\eta} \bold{v}_{vert}}{\partial \eta} = J_{\eta} \omega_i. \]
+
+\subsection{Matching the chemical kinetics equation in terrain influenced coordinates and equations of the atmosphere. Variables: $(x,y,\eta)$}
+
+One thing we can do is to consider the set of the equations of the atmosphere in classical cartesian coordinates (instead of taking $p$- $z$ coordinate change), use the terrain influenced coordinate change on the equations of the atmosphere and couple them with the kinetics equation from the previous section.
+\newline
+\newline
+Equations describing the motion of the atmosphere as one single mixture:
+
+\[ \frac{\partial \bold{v} J_{\eta}}{\partial t} + \nabla_{\bold{v}}\bold{v} J_{\eta} + w J_{\eta} \frac{\partial \bold{v} J_{\eta}}{\partial z} + \frac{1}{\rho_0}\nabla p J_{\eta}+ 2 \Omega \sin \theta \bold{k} \times \bold{v} J_{\eta} -\mu_{\bold{v}}\Delta \bold{v} J_{\eta} -\nu_{\bold{v}} \frac{\partial ^ 2 \bold{v} J_{\eta}}{\partial z^2} = 0  \]
+
+\[ \frac{\partial p J_{\eta}}{\partial z} = - \rho_0 g \]
+
+\[ \frac{\partial \rho_0}{\partial t} + \rho_0 (\nabla \bold{v} + \frac{\partial w J_{\eta}}{\partial z}) + \bold{v} \nabla \rho_0 + w \frac{\partial \rho_0}{\partial z} = 0 \]
+
+\[ \frac{\partial T J_{\eta}}{\partial t} + \nabla_{\bold{v}} T J_{\eta} + w J_{\eta} \frac{\partial T J_{\eta}}{\partial z} - \mu_T \Delta T J_{\eta} -\nu_T \frac{\partial^2 T J_{\eta}}{\partial z^2} -\frac{RT J_{\eta}}{p J_{\eta}} \frac{\mathrm{d}p J_{\eta}}{\mathrm{d}t} = Q_T \]
+
+\[ \frac{\partial q J_{\eta}}{\partial t} + \nabla_{\bold{v}}q J_{\eta}+ w J_{\eta} \frac{\partial q J_{\eta}}{\partial z} - \mu_q \Delta q J_{\eta} - \nu_q \frac{\partial ^2 q J_{\eta}}{\partial z^2} = 0 \]
+
+\[ p J_{\eta} = R \rho_0 T J_{\eta}\]
+
+Chemical kinetics equation describing pollution as individual motions of $N$ species:
+
+\[ \frac{\partial(\rho_0 Y_i J_{\eta})}{\partial t} + \nabla_{\eta} \cdot (\rho_0 Y_i J_{\eta} \bold{v}) + \frac{\partial \rho_0 Y_i J_{\eta} w}{\partial \eta} = J_{\eta} \omega_i, \]
+
+\[ \rho_0 = \sum_{i =1}^{N} \rho_i, p = \sum_{i =1}^{N} p_i, \bold{v}J_{\eta} = \sum_{i =1}^{N}\frac{\rho_i}{\rho_0} \bold{v_i}J_{\eta},w J_{\eta} = \sum_{i =1}^{N}\frac{\rho_i}{\rho_0} w J_{\eta} \]
+
+\begin{remark}
+The equation above describing $\rho$ is kept for now as it is in the original set, however $\rho$ is assumed to be constant $\rho_0$, so most part of the equation disappears.
+\end{remark}
+
+\subsection{Syncronizing in cartesian coordinates. Variables: $(x,y,z)$}
+
+Let's take the original chemical kinetics equation in cartesian coordinates and match it with the equations of the atmosphere without terrain-influenced coordinate change and without using the exponentially (monotonously) decreasing $p$-$z$ relationship. Here we use the notation $(\bold{v}, w)_i$ for the species velocities instead of $u_i$.
+
+\[ \frac{\partial \bold{v} }{\partial t} + \nabla_{\bold{v}}\bold{v} + w  \frac{\partial \bold{v} }{\partial z} + \frac{1}{\rho_0}\nabla p + 2 \Omega \sin \theta \bold{k} \times \bold{v}  -\mu_{\bold{v}}\Delta \bold{v}  -\nu_{\bold{v}} \frac{\partial ^ 2 \bold{v} }{\partial z^2} = 0  \]
+
+\[ \frac{\partial p }{\partial z} = - \rho_0 g \]
+
+\[ \frac{\partial \rho_0}{\partial t} + \rho_0 (\nabla \bold{v} + \frac{\partial w }{\partial z}) + \bold{v} \nabla \rho_0 + w \frac{\partial \rho_0}{\partial z} = 0 \]
+
+\[ \frac{\partial T }{\partial t} + \nabla_{\bold{v}} T  + w  \frac{\partial T }{\partial z} - \mu_T \Delta T  -\nu_T \frac{\partial^2 T }{\partial z^2} -\frac{RT}{p} \frac{\mathrm{d}p}{\mathrm{d}t} = Q_T \]
+
+\[ \frac{\partial q }{\partial t} + \nabla_{\bold{v}}q + w \frac{\partial q}{\partial z} - \mu_q \Delta q  - \nu_q \frac{\partial ^2 q }{\partial z^2} = 0 \]
+
+\[ p = R \rho_0 T \]
+
+\[ \frac{\partial}{\partial t} (\rho Y_i) + \nabla \cdot (\rho Y_i (\bold{v}, w)_i) = \omega_i, \text{  } 1 \leq i \leq N \]
+
+\[ \rho_0 = \sum_{i =1}^{N} \rho_i, p = \sum_{i =1}^{N} p_i, (\bold{v}, w) = \sum_{i =1}^{N}\frac{\rho_i}{\rho_0} (\bold{v}, w)_i \]
+
+\subsection{Choosing and refining the model}
+
+We have seen different approaches for dealing with the vertical coordinate, such as:
+\begin{outline}[enumerate]
+\1 leaving it as classical cartesian coordinate
+\1 changing to pressure as vertical coordinate because of well-behaving monotonous relationship between height and pressure,
+\1 introducing the terrain-influenced vertical coordinate.
+\end{outline}
+
+For the time being we choose the model written in cartesian coordinates since it is the most convenient one to begin from when we want to perform dimension reduction, which we aim to do later because of the quasi-horizontal nature of the atmosphere.
+
+For refining the equation of pollution we are considering the following approach regarding the chemical kinetics equation.
+
+ \[ \frac{\partial \bar{\rho_i}}{\partial t}  + \nabla_{h} (\bar{\rho_i} \bar{V_h}) + \frac{\partial}{\partial z} (\bar{\rho_i} \bar{V_v}) + \frac{\partial}{\partial x} (-\bar{\rho}K_{11} \frac{\partial \bar{Y_i}}{\partial x}) + \frac{\partial}{\partial y} (-\bar{\rho}K_{22} \frac{\partial \bar{Y_i}}{\partial y}) + \frac{\partial}{\partial z} (- \bar{\rho} K_{33} \frac{\partial \bar{Y_i}}{\partial z}) = \]
+ \[ = R_{\rho_i} (\bar{\rho_1}, \dots , \bar{\rho_N}) + Q_{\rho_i} + \frac{\partial (\bar{\rho_i})}{\partial t} \rvert_{cld} + \frac{\partial (\bar{\rho_i})}{\partial t} \rvert_{aero} + \frac{\partial (\bar{\rho_i})}{\partial t} \rvert_{ping},\]
+ 
+which is a more detailed version of the equation, explicitly and individually containing on one hand the time rate of change of pollutant concentration, horizontal advection, vertical advection, horizontal diffusion, vertical diffusion and on the other hand the production or loss from chemical reactions, remissions, cloud mixing and aqueous-phase chemical production, aerosol process and plume-in-grid process.
+
+\subsection{Outlook}
+
+\begin{itemize}
+  \item Dimension reduction for the merged system. The 3D model is too complex to work with, on the other hand the phenomena can be seen as quasi-horizontal, which is why we perform dimension reduction for the merged system, the goal is to have a synchronized 2D system describing pollution and atmosphere.
+  \item Solutions for the for the new, two-dimensional merged system.
+  \item Numerical simulations of solutions.
+\end{itemize}
+
+\nocite{*}
+\bibliographystyle{apalike}
+\bibliography{bibliography}
+
+\end{document}
