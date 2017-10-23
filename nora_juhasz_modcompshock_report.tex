@@ -24,7 +24,7 @@
 \begin{frame}{Presentation of fellow's background}
   \begin{itemize}
   \item
-    Master degree in 2013, University of Szeged, Hungary
+    Master degree in Applied Mathematics, University of Szeged, Hungary
   \item
     Starting date of Marie Curie fellowship at the University of L'Aquila: 1st of October, 2016
   \item
@@ -44,7 +44,7 @@
   \item
     \textbf{University of L'Aquila}: Numerical Analysis 2, High Performance Parallel Computing
   \item
-    \textbf{Gran Sasso Science Institute}: Introduction to Finite Elements Method, Decay property for hyperbolic systems with dissipation, Advanced Topics on Numerical Methods, Introduction to the incompressible Naver-Stokes equation
+    \textbf{Gran Sasso Science Institute}: Introduction to Finite Elements Method, Decay property for hyperbolic systems with dissipation, Advanced Topics on Numerical Methods, Introduction to the incompressible Navier-Stokes equation
   \item
     \textbf{Seminars, workshops}: PDEs Day (GSSI), School on Uncertainty Quantification for Hyperbolic Equations and Related Topics, CIME School 2017  - Mathematical Analysis of the Navier-Stokes Equations (Cetraro)
   \end{itemize}
@@ -76,6 +76,8 @@
   \begin{itemize}
   \item
     Using the classical $(x, y, z)$ cartesian coordinates,
+  \item
+    Using the spherical coordinates $(\theta, \varphi, z)$,
   \item
     Introducing a terrain-influenced coordinate $\eta$ instead of $z$,
   \item
@@ -130,10 +132,11 @@ To merge the equations of the atmosphere and the equation of pollution we use th
 One of the issues about synchronising was the fact that the equations of the atmosphere and pollution are often not in the same coordinate system.
 For solving this we could either
 \begin{itemize}
-\item use Jacobians in the equations, or
-\item use the cartesian coordinate system for both systems
+\item use Jacobians corresponding to the rescaled vertical coordinate in the equations, or
+\item use the Jacobian of the spherical coordinate transform, or
+\item simultaneously both of the above
 \end{itemize}
-We have chosen the later, since because of the quasi-horizontal nature of the atmosphere we will perform dimension reduction. 
+We have chosen to deal only with the spherical coordinate change, since because of the quasi-horizontal nature of the atmosphere we will perform dimension reduction. 
 \end{frame}
 
 \begin{frame}{Current state part 1}
@@ -154,13 +157,12 @@ We have chosen the later, since because of the quasi-horizontal nature of the at
 
 \begin{frame}{Current state part 2}
 
- \[ \frac{\partial \bar{\rho_i}}{\partial t}  + \nabla_{h} (\bar{\rho_i} \bar{V_h}) + \frac{\partial}{\partial z} (\bar{\rho_i} \bar{V_v}) + \frac{\partial}{\partial x} (-\bar{\rho}K_{11} \frac{\partial \bar{Y_i}}{\partial x}) + \]
- \[+ \frac{\partial}{\partial y} (-\bar{\rho}K_{22} \frac{\partial \bar{Y_i}}{\partial y}) + \frac{\partial}{\partial z} (- \bar{\rho} K_{33} \frac{\partial \bar{Y_i}}{\partial z}) = \]
+ \[ \frac{\partial \bar{\rho_i}}{\partial t}  + \nabla_{h} \cdot (\bar{\rho_i} \bar{\bold{v}}) + \frac{\partial}{\partial z} (\bar{\rho_i} \bar{w})  -\bar{\rho} \nabla_{h} \cdot (K_{11}, K_{22}) \nabla \bar{Y_i} + \frac{\partial}{\partial z} (-\bar{\rho} K_{33} \frac{\partial \bar{Y_i}}{\partial z}) = \]
  \[ = R_{\rho_i} (\bar{\rho_1}, \dots , \bar{\rho_N}) + Q_{\rho_i} + \frac{\partial (\bar{\rho_i})}{\partial t} \rvert_{cld} + \frac{\partial (\bar{\rho_i})}{\partial t} \rvert_{aero} + \frac{\partial (\bar{\rho_i})}{\partial t} \rvert_{ping},\]
  
  (which is a more refined version of the previous pollution equation)
 
-\[ \rho_0 = \sum_{i =1}^{N} \rho_i, p = \sum_{i =1}^{N} p_i, (\bold{v}, w) = \sum_{i =1}^{N}\frac{\rho_i}{\rho_0} (\bold{v}, w)_i \]
+\[ \rho_0 = \sum_{i =1}^{N} \rho_i \]
 
 \end{frame}
 
