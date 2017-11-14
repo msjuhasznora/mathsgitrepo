@@ -1,0 +1,112 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{commath}
+\usepackage{hyperref}
+\usepackage{amsthm}
+\newtheorem*{remark}{Remark}
+
+\usepackage{outlines}
+
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\roman*)}
+\setlist[enumerate,2]{label=\alph*)}
+
+%PREAMBLE
+\title{phd journal}
+\author{Nora Juhasz}
+
+%CONTENT
+\begin{document}
+
+\maketitle
+\newpage
+
+\tableofcontents
+\newpage
+
+\section{Talk with Prof. Omar @ 19oct17}
+
+Questions and ideas:
+\begin{enumerate}
+\item 1.) is this set of equations for incompressible or compressible? Incompressibility assumption for air is used even in many applied areas, it is not crazy, even though air is compressible.
+\item 2.) do we have close to zero horizontal viscosity? If that disappears, the equation actually becomes first grade. However, without viscosity things are more difficult, it is easier if we have it.
+\item 3.) FENICS: https://fenicsproject.org/
+\item 4.) http://www.sciencedirect.com/science/article/pii/S0377042700005124
+\item 5.) CLAWPACK: https://depts.washington.edu/clawpack/clawpack-4.3/links.html
+\item 6.) Shallow water equation
+\item 7.) Coursera: https://www.coursera.org/learn/finite-element-method
+\item 8.) Bernardo Cockburn: Devising discontinuous Galerkin methods for non-linear hyperbolic conservation laws
+\end{enumerate}
+
+\section{Talk with Prof. Donatelli @ 19oct17}
+
+\begin{enumerate}
+\item 1.) Read the Intech article
+\item 2.) Coursera courses
+\item The article from Prof. Omar
+\end{enumerate}
+
+
+\section{Talk with Prof. Donatelli @ 30oct17}
+
+\begin{enumerate}
+\item decide which coordinate system we will use
+\item do the dimension reduction
+\end{enumerate}
+
+\section{Choosing the coordinate system}
+
+Arguments from different sources:
+\begin{enumerate}
+\item Green book. Using \textbf{spherical coordinates}. On p187 it says "to write the equations of the atmosphere and the ocean \textbf{around the whole globe}. It is thus natural to introduce the spherical coordinates." On p188: "essentially of replacing the domain actually filled by the atmosphere by the product of the sphere $S^2$ and an interval for the variable $z$."
+\item Temam-Ziane article. There is actually some hint on \textbf{page 6}. After a brief description of the equations of the sphere, in spherical coordinates, we concentrate our efforts on the corresponding $\beta$-plane case in Cartesian coordinates. It rather goes for that. However, when the spherical coordinates are introduced later, there is no particular explanation for that.
+\item Dimension reduction article.
+\end{enumerate}
+
+It seems that the reason or choice behind each article / source is the following: the local or global nature of the equations, maybe?
+
+\section{Talk with Prof. Donatelli @ 7nov17}
+
+\begin{enumerate}
+\item While in the Temam-Ziane article the equations of the atmosphere are in spherical coordinates, the mathematical proofs and "difficult" parts are all done in Cartesian system, and they use the $\beta$-plane approximation. It is a sort of regional and simpler approach, mainly because of the Cartesian coordinates. The general one is in spherical, it is global.
+\item Question: "It is reasonable to study regional problems, in particular at midlatitudes and" - Why is that.
+\item Since all the proofs (Temam Ziane article) and detailed ideas (approximation proof article, ScienceDirect) that we've seen so far are in Cartesian, it would probably be extremely useful to have those as a reference point as we move forwards, so that suggests to go with Cartesian.
+\item Step 1. Since the Cartesian is more familiar and more known and more available, we could do dimension reduction firstly in that one.
+\item Step 2. The Lions article seems of big importance and something to know anyway, as a second step to go through in a detailed way that article, and
+\item Step 3. To do the model in spherical as well. See the challenges, have basically the same 2D model in different coordinate systems.
+\end{enumerate}
+
+
+
+\section{Talk with Prof. Donatelli @ 9nov17}
+
+\begin{enumerate}
+\item From the Bulgarian article on pollution: collect properties or equations for the physical quantities
+\item Dimension reduction: read hints in the Intech article (106)
+\item Geoffrey K Vallis paper, read the local vs global issue, why we decided to go with the Cartesian one.
+\item Lions paper: spherical coordinates.
+\end{enumerate}
+
+The conclusion we have had on choosing the coordinate system. Basically what happens is that \textbf{spherical coordinate system} is used generally when the modeling is done on a global scale, ie. when the phenomena is global. The advantage of it is that it is natural and global, the disadvantage is that the spaces it brings along are more complicated to handle. On the other hand, \textbf{Cartesian coordinates} are used when the modeling is done on a more local way. It is not the most natural system to use, but it has the advantage of being more simple, both mathematically and computational-wise: the simulation algorithms are available mostly in Cartesian coordinate system.
+
+We have decided to go for the Cartesian coordinate system, since the pollution effects we are considering are of local nature. As a possible step, maybe later we will look at the spherical one.
+
+\begin{enumerate}
+\item Around p66 p67 of the Geoffrey article, there is some explanation of why f-plane and $\beta$-plane are called as they are and what they are.
+\item Intech article, p106, what terms matter and what terms don't when it comes to dimension reduction.
+
+\section{Talk with Prof. Donatelli @ 14nov17}
+
+Based on the INTECH article, we plan to choose the coordinate system in a way that the $x$ direction matches the downwind, $y$ is for crosswind, and we plan to eliminate $z$. Now the question is, is it okay the choose a coordinate system being on the back of the wind? It means that the coordinate system is defined or chosen by the wind basically. This should be fine for a limited amount of time for that we can assume some stability in the wind direction. In case the main wind direction changes, we need to justify that the equations of the atmosphere are still valid in the original way as they were. Since the pollution concentration and the equations of the atmosphere make 1 system, they need to be expressed in the same coordinate system. If we choose this for the concentration, the same must be chosen for the equations of the atmosphere.
+
+The reason why we choose this is because we want to take advantage of the
+
+\[ \abs{U \frac{\partial C}{\partial x}} >> \abs{ (\frac{\partial}{\partial x}) (K_x \frac{\partial C}{\partial x}) },\]
+
+which means that the downwind diffusion is neglected in comparison to transport due mean wind, and which is intuitively probably, assumable true in case $x$ actually is the downwind direction, ie the coordinate system matches the wind.
+
+\end{enumerate}
+
+\end{document}
