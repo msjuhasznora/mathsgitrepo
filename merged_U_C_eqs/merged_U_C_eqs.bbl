@@ -1,0 +1,55 @@
+\begin{thebibliography}{}
+
+\bibitem[Ali et~al., 1998]{ali1998partial}
+Ali, I., Kalla, S., and Khajah, H. (1998).
+\newblock A partial differential equation related to a problem in atmospheric
+  pollution.
+\newblock {\em Mathematical and computer modelling}, 28(12):1--6.
+
+\bibitem[Andria et~al., 2000]{andria2000mathematical}
+Andria, G., Lay-Ekuakille, A., and Notarnicola, M. (2000).
+\newblock Mathematical models for atmospheric and industrial pollutant
+  prediction.
+\newblock In {\em XVI IMEKO World Congress, Vienna, Austria}.
+
+\bibitem[Arya, 2001]{arya2001introduction}
+Arya, P.~S. (2001).
+\newblock {\em Introduction to micrometeorology}, volume~79.
+\newblock Elsevier.
+
+\bibitem[Az{\'e}rad and Guill{\'e}n, 2001]{azerad2001mathematical}
+Az{\'e}rad, P. and Guill{\'e}n, F. (2001).
+\newblock Mathematical justification of the hydrostatic approximation in the
+  primitive equations of geophysical fluid dynamics.
+\newblock {\em SIAM Journal on Mathematical Analysis}, 33(4):847--859.
+
+\bibitem[Goyal and Kumar, 2011]{goyal2011mathematical}
+Goyal, P. and Kumar, A. (2011).
+\newblock Mathematical modeling of air pollutants: An application to indian
+  urban city.
+\newblock In {\em Air Quality-Models and Applications}. InTech.
+
+\bibitem[Monin, 1959]{monin1959boundary}
+Monin, A. (1959).
+\newblock On the boundary condition on the earth surface for diffusing
+  pollution.
+\newblock In {\em Advances in Geophysics}, volume~6, pages 435--436. Elsevier.
+
+\bibitem[Prodanova et~al., 2008]{prodanova2008application}
+Prodanova, M., Perez, J.~L., Syrakov, D., San~Jose, R., Ganev, K., Miloshev,
+  N., and Roglev, S. (2008).
+\newblock Application of mathematical models to simulate an extreme air
+  pollution episode in the bulgarian city of stara zagora.
+\newblock {\em Applied Mathematical Modelling}, 32(8):1607--1619.
+
+\bibitem[Temam and Ziane, 2005]{temam2005some}
+Temam, R. and Ziane, M. (2005).
+\newblock Some mathematical problems in geophysical fluid dynamics.
+\newblock {\em Handbook of mathematical fluid dynamics}, 3:535--658.
+
+\bibitem[Yeh and Huang, 1975]{yeh1975three}
+Yeh, G.-T. and Huang, C.-H. (1975).
+\newblock Three-dimensional air pollutant modeling in the lower atmosphere.
+\newblock {\em Boundary-Layer Meteorology}, 9(4):381--390.
+
+\end{thebibliography}
