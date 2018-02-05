@@ -3,44 +3,44 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: merged_U_C_eqs.aux
 The style file: apalike.bst
 Database file #1: merged_U_C_eqs.bib
-You've used 9 entries,
+You've used 10 entries,
             1935 wiz_defined-function locations,
-            531 strings with 5289 characters,
-and the built_in function-call counts, 3711 in all, are:
-= -- 368
-> -- 140
-< -- 9
-+ -- 48
-- -- 46
-* -- 310
-:= -- 633
-add.period$ -- 29
-call.type$ -- 9
-change.case$ -- 67
-chr.to.int$ -- 9
-cite$ -- 9
-duplicate$ -- 147
-empty$ -- 275
-format.name$ -- 63
-if$ -- 737
+            536 strings with 5435 characters,
+and the built_in function-call counts, 3997 in all, are:
+= -- 394
+> -- 147
+< -- 11
++ -- 50
+- -- 48
+* -- 330
+:= -- 685
+add.period$ -- 32
+call.type$ -- 10
+change.case$ -- 72
+chr.to.int$ -- 10
+cite$ -- 10
+duplicate$ -- 161
+empty$ -- 298
+format.name$ -- 66
+if$ -- 793
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 10
-newline$ -- 48
-num.names$ -- 27
-pop$ -- 65
+missing$ -- 12
+newline$ -- 53
+num.names$ -- 30
+pop$ -- 72
 preamble$ -- 1
-purify$ -- 68
+purify$ -- 74
 quote$ -- 0
-skip$ -- 105
+skip$ -- 116
 stack$ -- 0
-substring$ -- 261
-swap$ -- 20
-text.length$ -- 3
+substring$ -- 273
+swap$ -- 22
+text.length$ -- 4
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 52
+type$ -- 56
 warning$ -- 0
-while$ -- 31
+while$ -- 33
 width$ -- 0
-write$ -- 120
+write$ -- 133

@@ -1,16 +1,17 @@
 \contentsline {section}{\numberline {1}Introduction}{4}
-\contentsline {section}{\numberline {2}Inland domain}{4}
-\contentsline {subsection}{\numberline {2.1}Description of the domain and boundary conditions}{4}
-\contentsline {subsection}{\numberline {2.2}The three main sets of equations}{5}
-\contentsline {subsubsection}{\numberline {2.2.1}The original set of equations}{5}
-\contentsline {subsubsection}{\numberline {2.2.2}Rescaling}{5}
-\contentsline {subsubsection}{\numberline {2.2.3}Anisotropic Navier-Stokes plus pollution}{6}
-\contentsline {subsubsection}{\numberline {2.2.4}Hydrostatic Navier-Stokes plus pollution}{6}
-\contentsline {subsection}{\numberline {2.3}Main theorem}{7}
-\contentsline {subsection}{\numberline {2.4}Weak formulation}{7}
-\contentsline {subsection}{\numberline {2.5}Energy inequality and a priori estimates}{7}
-\contentsline {subsection}{\numberline {2.6}Passing to the limit}{7}
-\contentsline {section}{\numberline {3}Coastal domain}{7}
-\contentsline {subsection}{\numberline {3.1}Domain structure}{7}
-\contentsline {section}{\numberline {4}Concluding remarks, future work}{8}
-\contentsline {section}{\numberline {5}TODO}{8}
+\contentsline {section}{\numberline {2}Rescaling the main equations}{4}
+\contentsline {subsection}{\numberline {2.1}The original set of equations}{4}
+\contentsline {subsection}{\numberline {2.2}Rescaling due to shallow domain}{4}
+\contentsline {section}{\numberline {3}Inland domain}{5}
+\contentsline {subsection}{\numberline {3.1}Description of the domain and boundary conditions}{5}
+\contentsline {subsection}{\numberline {3.2}Equations}{6}
+\contentsline {subsubsection}{\numberline {3.2.1}Anisotropic Navier-Stokes plus pollution}{6}
+\contentsline {subsubsection}{\numberline {3.2.2}Hydrostatic Navier-Stokes plus pollution}{6}
+\contentsline {subsection}{\numberline {3.3}Main theorem}{7}
+\contentsline {subsection}{\numberline {3.4}Weak formulation}{7}
+\contentsline {subsection}{\numberline {3.5}Energy inequality and a priori estimates}{7}
+\contentsline {subsection}{\numberline {3.6}Passing to the limit}{7}
+\contentsline {section}{\numberline {4}Coastal domain}{7}
+\contentsline {subsection}{\numberline {4.1}Domain structure}{7}
+\contentsline {section}{\numberline {5}Concluding remarks, future work}{8}
+\contentsline {section}{\numberline {6}TODO}{8}
