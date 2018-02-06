@@ -81,6 +81,7 @@ dispersion of pollutants is commonly modeled by convection / advection - diffusi
     \[v_1 = u_1^{\epsilon}, v_2 = u_2^{\epsilon}, v_3 = \epsilon u_3^{\epsilon}, p = p^{\epsilon} \]
     \[\nu_x = \nu_1, \nu_y = \nu_2 , \nu_z = \epsilon ^ 2\nu_3 \]
     \[ \tau ^ \epsilon _ i = \epsilon \theta_i \]
+    \[ K_z = \epsilon ^ 2 K_3 \]
     
     So we have a new domain
     
@@ -93,7 +94,7 @@ dispersion of pollutants is commonly modeled by convection / advection - diffusi
     which leads us to using
     \[ K_x = \epsilon K_1\]
     
-    Putting this condition and the previously rescaled equations together with the above boundary conditions, we arrive to the merged anisotropic equations of the polluted atmosphere above inland surface.
+    Putting this condition and the previously described rescaling terms together to the original equations, we arrive to the merged anisotropic equations of the polluted atmosphere above inland surface.
   
   \subsection{Rescaled merged equations - Anisotropic Navier-Stokes plus pollution}
   
@@ -212,10 +213,6 @@ In the paper of \cite{temam2005some}, on p35 it is suggested that the domain we 
     \end{equation}
     
     \begin{equation}    
-    \nu_3 \partial_3 u_1 = \theta_1, \nu_3 \partial_3 u_2 = \theta_2 , u_3 = 0 \text{ on } \Gamma_s \times (0,T)
-    \end{equation}
-    
-    \begin{equation}    
     u_i (\cdot, t=0) = u_{0 i}, C (\cdot, t=0) = C_0 \text{ in } \Omega, \text{$i$ = 1,2}
     \end{equation}
     
@@ -234,7 +231,7 @@ In the paper of \cite{temam2005some}, on p35 it is suggested that the domain we 
   Let $\bold{u}_0$ $\in$ $L^2 (\Omega)^3$, with $\nabla \cdot \bold{u}_0 = 0, \bold{u}_0 \cdot \bold{n} = 0$ on $\partial \Omega$, and $\theta_1, \theta_2 \in L^2 (0,T; H^(-1/2)(\Gamma_s))$; there exists a weak solution $\bold{u}$ of the hydrostatic Navier-Stokes equations as the aspect ratio $\epsilon$ tends to $0$.
   \end{theorem}
   
-  \item The task we want to do is to extend this result in the sense that it becomes valid to the merged set of equations as well.
+  \item The task we want to do is to extend this result in the sense that it becomes valid to the merged set of equations as well, $\mathbf{s} = (\mathbf{u}, C)$.
   
 \end{itemize}
 
@@ -242,7 +239,50 @@ In the paper of \cite{temam2005some}, on p35 it is suggested that the domain we 
 
 Weak formulation of the merged equations in both the anisotropic and hydrostatic case.
 
+  \subsection{Weak formulation of the anisotropic system}
+  
+  \begin{equation}
+    \begin{split}
+      & \int_0^T -(\mathbf{u}^\epsilon_H, \partial_t \mathbf{v}_H) + (\nabla_\nu \mathbf{u}^\epsilon_H, \nabla_\nu \mathbf{v}_H) - (\mathbf{u}^\epsilon_H, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{v}_H) + (b(\mathbf{u}^\epsilon_H), \mathbf{v}_H) dt \\
+      & + \epsilon \beta \big[ \int_0 ^ T (u_3 ^\epsilon, v_1) - (u_1^\epsilon, v_3) \big] d t\\
+      & + \epsilon^2 \big[ \int _0 ^ T -(u_3^\epsilon, \partial_t v_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, v_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu v_3) d t\big] \\
+      &+ \int_0^T -(C^\epsilon, \partial_t \tilde{C}^\epsilon) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}^\epsilon) + \\
+      & \epsilon K_1 (\partial_1 C^\epsilon, \partial_1 \tilde{C}^\epsilon) - \epsilon K_1 \big[(\partial_1 C^\epsilon) \tilde{C} \big] _{\Gamma_G} + K_2 (\partial_2 C^\epsilon, \partial_2 \tilde{C}^\epsilon) + K_3 (\partial_3 C^\epsilon, \partial_3 \tilde{C}^\epsilon) dt =\\
+      & = - (\mathbf{u}^\epsilon_{0H}, \mathbf{v}^\epsilon_H(0)) - \epsilon^2 (u_{03}^\epsilon, v_3^\epsilon (0)) - (C^\epsilon (0), \tilde{C} (0)) + \int_0^T (S,\tilde{C}) d t
+    \end{split}
+  \end{equation}
+  
+  To pass to the limit in the terms that do not include pollution in the anisotropic equation has already been worked out in the \cite{azerad2001mathematical} article. What we need to work on is how to legitimately pass to the limit with the $C$ terms. To do this we firstly will use the key tool of the previously mentioned article, the energy inequality. Once we have a priori estimates for the functions in the linear terms, we can pass to the limit with those without particular problems; the challenging part will be to prove convergence for the $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}^\epsilon)$ term, here we will need a stronger result than just the weak convergence of the present functions in the product.
+  
+  \subsection{Weak formulation of the hydrostatic system}
+  
+  Add specific assumptions on the test functions.
+  
+  \begin{equation}
+    \begin{split}
+      & \int_0^T -(\mathbf{u}_H, \partial_t \mathbf{v}_H) + (\nabla_\nu \mathbf{u}_H, \nabla_\nu \mathbf{v}_H) - (\mathbf{u}_H, (\mathbf{u} \cdot \nabla) \mathbf{v}_H) + (b(\mathbf{u}_H), \mathbf{v}_H) dt \\
+      &+ \int_0^T -(C, \partial_t \tilde{C}) -(\mathbf{u}C, \nabla \tilde{C}) + K_2 (\partial_2 C, \partial_2 \tilde{C}) + K_3 (\partial_3 C, \partial_3 \tilde{C}) dt =\\
+      & = - (\mathbf{u}_{0H}, \mathbf{v}_H(0)) - (C(0), \tilde{C}(0)) + \int_0^T (S,\tilde{C}) d t
+    \end{split}
+  \end{equation}
+
 \section{Energy inequality and a priori estimates}
+
+  \subsection{Energy inequality}
+  
+  Calculating the energy inequality for the merged system we arrive to
+  
+  \begin{equation}
+    \begin{split}  
+    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \{    \norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \} d \tau + \\
+    & \int_0 ^ t \{\epsilon K_1 \norm{\partial_1 C^\epsilon}_{L^2}^2  + K_2 \norm{\partial_2 C^\epsilon}_{L^2}^2 + K_3 \norm{\partial_3 C^\epsilon}_{L^2}^2 \} d \tau \leq \\
+    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) + \int_0^t (S,C) d \tau + \int _ 0 ^ t \epsilon K_1 \langle \partial_1 C, C \rangle_{\Gamma_G} d \tau
+    \end{split}
+  \end{equation}    
+  
+  In order to use the energy inequality to extract a priori estimates, we need to know that the righthand side of the inequality is bounded. Since the $S$ source term is assumed to be as smooth as we need it to be, the only term we need to work a little bit more is $\int _ 0 ^ t \epsilon K_1 \langle \partial_1 C, C \rangle_{\Gamma_G} d \tau$.
+  
+  \subsection{A priori estimates}
 
 \section{Passing to the limit}
 

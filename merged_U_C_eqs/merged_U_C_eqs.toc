@@ -8,7 +8,11 @@
 \contentsline {section}{\numberline {5}Hydrostatic Navier-Stokes plus pollution}{7}
 \contentsline {section}{\numberline {6}Main theorem}{8}
 \contentsline {section}{\numberline {7}Weak formulation}{8}
-\contentsline {section}{\numberline {8}Energy inequality and a priori estimates}{8}
-\contentsline {section}{\numberline {9}Passing to the limit}{8}
-\contentsline {section}{\numberline {10}Future work}{8}
-\contentsline {section}{\numberline {11}TODO}{9}
+\contentsline {subsection}{\numberline {7.1}Weak formulation of the anisotropic system}{8}
+\contentsline {subsection}{\numberline {7.2}Weak formulation of the hydrostatic system}{9}
+\contentsline {section}{\numberline {8}Energy inequality and a priori estimates}{9}
+\contentsline {subsection}{\numberline {8.1}Energy inequality}{9}
+\contentsline {subsection}{\numberline {8.2}A priori estimates}{9}
+\contentsline {section}{\numberline {9}Passing to the limit}{9}
+\contentsline {section}{\numberline {10}Future work}{10}
+\contentsline {section}{\numberline {11}TODO}{10}
