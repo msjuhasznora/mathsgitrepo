@@ -41,39 +41,23 @@ Abstract
 
 We investigate existence of a weak solution for the merged motion-pollution atmosphere model. At this point the functions we work with are $\mathbf{v} = (\mathbf{v}_H, v_3)$, and $C$, representing velocity and concentration, respectively (we are not considering other variables such as water vapor quantity or temperature).
 
+We underline the fact that this work is for the case of $\textbf{inland}$ scenario.
 
-\begin{figure}[!h]
-\centering
-\begin{tikzpicture}
-\fill[color=blue!10] (2,0) -- (2,3) arc (360:180:2cm and 0.5cm) -- (-2,0) arc (180:360:2cm and 0.5cm);
-\fill[color=blue!5] (0,3) circle (2cm and 0.5cm);
-\draw[thick] (-2,3) -- (-2,0) arc (180:360:2cm and 0.5cm) -- (2,3) ++ (-2,0) circle (2cm and 0.5cm);
-\draw[densely dashed, thick] (-2,0) arc (180:0:2cm and 0.5cm);
-\draw (-2,1) -- (-3,1) --(-5,-1) -- (3,-1) -- (5,1) -- (2,1);
-\draw[dashed] (-2,1) -- (2,1);
-\fill[green!10,opacity=0.5] 
- (-2,0) -- (-2,1) -- (-3,1) -- (-5,-1) -- (3,-1) -- (5,1) -- (2,1) -- (2,0) arc (0:180:2cm and -0.5cm);
- \fill[color=green!5] (0,0) circle (2cm and 0.5cm);
- \draw (0,1.5) node {$\Omega$};
-  \draw (0,3) node {$\Gamma_U$};
-  \draw (0,0) node {$\Gamma_G$};
-  \draw (-2.3,1.5) node {$\Gamma_L$};
-  \draw (2.3,1.5) node {$\Gamma_L$};
-  \draw[thick] (2,0) arc (360:180:2cm and 0.5cm);
-\end{tikzpicture}
-\end{figure}
+Contaminants emitted into the atmosphere are transported by the wind, turbulent behaviour results in mixing and dispersion, gravity acts to deposit containment on the ground.
 
 
-% We ignore large scale effects such as Coriolis force or curvature of the Earth.
-% Include B Hosseini thesis in the reference list
-% Contaminants emitted into the atmosphere are transported by the wind, turbulent behaviour results in mixing and dispersion, gravity acts to deposit containment on the ground.
-% dispersion of pollutants is commonly modelled by convection / advection - diffusion equation.
+\section{Equations describing the polluted atmosphere}
 
-The set of equations, the choice of the locally acceptable Cartesian coordinate system we are using for the velocity terms are similar to those suggested by the \cite{azerad2001mathematical} article. For describing the effect of pollution we use a continuity equation written in Cartesian coordinates for the concentration.
+The first step is to choose a coordinate system, set the domain we start with and an appropriate set of equations describing both atmosphere motions and the effect of pollution. The set of equations, the choice of the locally acceptable Cartesian coordinate system we are using for the velocity terms are similar to those suggested by the \cite{azerad2001mathematical} article, we ignore large scale effects such as the curvature of the Earth. For describing the effect of pollution we use a continuity equation written in Cartesian coordinates for the concentration.
 
-\section{Rescaling the main equations}
+The coordinate system we choose to work with is local, we neglect curvature and work with Cartesian coordinates which is chosen to be adjusted to the downwind direction, ie. $z$ is the vertical direction, while $x$ is the downwind, $y$ is the crosswind direction. 
 
-\subsection{The original set of equations}
+The original domain:
+\begin{equation}
+\Omega_{\epsilon} = 
+\end{equation}
+
+The equations describing the atmosphere are the incompressible Navier-Stokes:
 
     \begin{equation}
     \partial_t \bold{v} + (\bold{v} \cdot \nabla)\bold{v} -\Delta_{\nu} \bold{v} + \nabla q + 2 \bold{w} \times \bold{v}= \bold{g} \text{ in } \Omega_{\epsilon} \times (0,T)
@@ -82,62 +66,38 @@ The set of equations, the choice of the locally acceptable Cartesian coordinate 
     \begin{equation}
     \nabla \cdot \bold{v} = 0 \text{ in } \Omega_{\epsilon} \times (0,T)
     \end{equation}
+
+dispersion of pollutants is commonly modeled by convection / advection - diffusion equation. The diffusion-reaction equation describing the pollutant chemicals in the air:
     
     \begin{equation}
     \partial_t C + \bold{v} \cdot \nabla C = K_x \frac{\partial ^2 C}{\partial x ^ 2} + K_y \frac{\partial ^2 C}{\partial y ^ 2} + K_z \frac{\partial ^2 C}{\partial z ^ 2} + S
     \end{equation}
     
-    \subsection{Rescaling due to shallow domain}
+\section{Rescaling}
+
+  \subsection{Rescaling due to shallow domain}
 
     \[x=x_1, y=x_2, z=\epsilon x_3 \]
     \[v_1 = u_1^{\epsilon}, v_2 = u_2^{\epsilon}, v_3 = \epsilon u_3^{\epsilon}, p = p^{\epsilon} \]
     \[\nu_x = \nu_1, \nu_y = \nu_2 , \nu_z = \epsilon ^ 2\nu_3 \]
     \[ \tau ^ \epsilon _ i = \epsilon \theta_i \]
-
-
-We consider the new equations with different versions of boundary conditions, we consider both inland and coastal scenarios.
-
-%%% *** INLAND DOMAIN *** %%%
-\section{Inland domain}
-
-%% Domain Structure
-\subsection{Description of the domain and boundary conditions}
-
-The first case we are investigating is that of inland domains $\Omega$, ie the case of landscapes and cities with no significant nearby water surface. The boundary division of the $\partial \Omega$ domain and the boundary conditions we choose to use are the following.
+    
+    So we have a new domain
+    
+    \[ \Omega = \]
   
-\begin{figure}[!h]
-\centering
-\begin{tikzpicture}
-\draw (0,0) -- (2,0)node[below] {$\Gamma_G$} -- (4,0) -- (4,2)node[right] {$\Gamma_L$} -- (4,4) -- (2,4)node[above] {$\Gamma_U$} -- (0,4) -- (0,2)node[left] {$\Gamma_L$} -- (0,0);
-\draw (2,2)node{$\Omega$};
-\draw[green, thick] (0,0) -- (4,0);
-\end{tikzpicture}
-\end{figure}
-
-  \begin{itemize}
-  
-      \item The upper boundary of the domain we are considering is chosen to be at the isobar representing the planetary boundary layer (\cite{arya2001introduction}), on this $p = p_0$ pressure level the upper boundary of the local domain is denoted by $\Gamma_U$. On $\Gamma_U$ we use $\bold{u}_H = 0, u_3 = 0, C(x,y,z) = 0$ boundary conditions.
-    \item On both sides the lateral boundary of the rectangle shaped $\Omega$ domain is given by $\Gamma_L$. Here we use the same boundary conditions as on the upper level, ie. we have $\bold{u}_H = 0, u_3 = 0, C(x,y,z) = 0$.
-    \begin{remark}
-    If we wanted to use $C(x,y,z) = c$ with some $c$ constant value, we could make a change of variables distracting that background flow and arrive back to the same mathematical problem with $C$ being zero.
-    \end{remark}
-    \item On the $z=0$ ground level we have $u_H = 0, u_3 = 0$ boundary conditions for the air velocity. This is the mathematical way of expressing no-slip boundary conditions for the horizontal wind speed and the impervious nature of the ground with respect to the wind. As for the concentration, the way we can choose ground level boundary conditions is the following. Firstly, we assume that the pollution is not absorbed by the ground, so we use $\partial_3 C = 0$ on $\Gamma_G$. For the horizontal partial derivatives of the pollution, we can separate downwind and crosswind direction boundary conditions. In the crosswind direction we use $\partial_2 C = 0$ while in the downwind (stronger) direction our assumption is more relaxed, we only assume that $\partial_1 C$ is finite in the boundary norm.
-  
-  \end{itemize}
-  
-\subsection{Equations}
-
-    In this case we use an additional scaling equation, which is different in nature from the previous ones in the sense that it is not derived from the shallowness of the domain but rather suggested by the fact that in the downwind direction it is natural to assume that the diffusion is negligible compared to downwind transport,ie.
+  \subsection{Rescaling due to special choice of coordinate system}
+  Here we exploit the fact that we chose the coordinate system in a way so that the $x$ axis matches the downwind direction. In this case we use an additional scaling equation, which is different in nature from the previous ones in the sense that it is not derived from the shallowness of the domain but rather suggested by the fact that in the downwind direction it is natural to assume that the diffusion is negligible compared to downwind transport, ie.
     
     \begin{equation} \abs{v_1 \partial_x C} \gg \abs{ K_x \frac{\partial ^2 C}{\partial x_1 ^ 2} }\end{equation}
     which leads us to using
     \[ K_x = \epsilon K_1\]
     
     Putting this condition and the previously rescaled equations together with the above boundary conditions, we arrive to the merged anisotropic equations of the polluted atmosphere above inland surface.
-    
-\subsubsection{Anisotropic Navier-Stokes plus pollution}
-
-    \begin{equation}
+  
+  \subsection{Rescaled merged equations - Anisotropic Navier-Stokes plus pollution}
+  
+      \begin{equation}
     \partial_t u^\epsilon _1 + \bold{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\alpha u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
     \end{equation}
     
@@ -165,9 +125,71 @@ The first case we are investigating is that of inland domains $\Omega$, ie the c
     \partial_t C^\epsilon + \bold{u^\epsilon} \cdot \nabla C^\epsilon = \epsilon K_1 \frac{\partial ^2 C^\epsilon}{\partial x_1 ^ 2} + K_2 \frac{\partial ^2 C^\epsilon}{\partial x_2 ^ 2} + K_3 \frac{\partial ^2 C^\epsilon}{\partial x_3 ^ 2} + S
     \end{equation}
     
-    Taking the limit we arrive to the hydrostatic version.
+\section{Boundary conditions}
+
+It is vital to choose boundary conditions for the pollution concentration that are physically as accurate as possible and at the same time not unnecessarily complicated.
+
+\begin{figure}[!h]
+  \centering
+  \begin{tikzpicture}
+    \fill[color=blue!10] (2,0) -- (2,3) arc (360:180:2cm and 0.5cm) -- (-2,0) arc (180:360:2cm and 0.5cm);
+    \fill[color=blue!5] (0,3) circle (2cm and 0.5cm);
     
-    \subsubsection{Hydrostatic Navier-Stokes plus pollution}
+    \draw[thick] (-2,3) -- (-2,0) arc (180:360:2cm and 0.5cm) -- (2,3) ++ (-2,0) circle (2cm and 0.5cm);
+    \draw[densely dashed, thick] (-2,0) arc (180:0:2cm and 0.5cm);
+    \draw (-2,1) -- (-3,1) --(-5,-1) -- (3,-1) -- (5,1) -- (2,1);
+    \draw[dashed] (-2,1) -- (2,1);
+    
+    \fill[green!10,opacity=0.5] (-2,0) -- (-2,1) -- (-3,1) -- (-5,-1) -- (3,-1) -- (5,1) -- (2,1) -- (2,0) arc (0:180:2cm and -0.5cm);
+    \fill[color=green!5] (0,0) circle (2cm and 0.5cm);
+    
+    \draw (0,1.5) node {$\Omega$};
+    \draw (0,3) node {$\Gamma_U$};
+    \draw (0,0) node {$\Gamma_G$};
+    \draw (-2.3,1.5) node {$\Gamma_L$};
+    \draw (2.3,1.5) node {$\Gamma_L$};
+    
+    \draw[thick] (2,0) arc (360:180:2cm and 0.5cm);
+  \end{tikzpicture}
+\end{figure}
+
+The boundary division of the $\partial \Omega$: the upper boundary of the $\Omega$ domain is denoted by $\Gamma_U$, the lateral boundary is $\Gamma_L$, and the lower boundary of the domain is $\Gamma_G$.
+As we mentioned before, the case we are investigating is that of inland domains $\Omega$, ie the case of landscapes and cities with no significant nearby water surface.  This is very important since the boundary conditions for both wind velocity and pollution concentration in the air air different depending whether we are above solid ground or water surface. The boundary conditions we choose to use in the inland scenario are the following, shown in a cross-section.
+
+\begin{figure}[!h]
+  \centering
+  \begin{tikzpicture}
+  
+    \draw[blue] (0,0) -- (2,0) -- (4,0) -- (4,2) -- (4,4) -- (2,4) -- (0,4) -- (0,2) -- (0,0);
+    \draw[green, thick] (0,0) -- (4,0);
+    
+    \draw (2,2)node{$\Omega$};
+    \draw (2,0)node[below] {$\mathbf{u_\epsilon} = 0, \partial_3 C = 0, \partial_2 C = 0, \partial_1 C$ bounded};
+    \draw (4,2)node[right] {$\mathbf{u_\epsilon} = 0, C_\epsilon=0 $};
+    \draw (2,4)node[above] {$\mathbf{u_\epsilon} = 0, C_\epsilon=0 $};
+    \draw (0,2)node[left] {$\mathbf{u_\epsilon} = 0, C_\epsilon=0 $};
+    
+  \end{tikzpicture}
+\end{figure}
+
+An explanation of the boundary conditions:
+
+  \begin{itemize}
+  
+      \item The upper boundary of the domain we are considering is chosen to be at the isobar representing the planetary boundary layer (\cite{arya2001introduction}), on this $p = p_0$ pressure level the upper boundary of the local domain is denoted by $\Gamma_U$. On $\Gamma_U$ we use $\bold{u}_H = 0, u_3 = 0, C(x,y,z) = 0$ boundary conditions.
+    \item On both sides the lateral boundary of the rectangle shaped $\Omega$ domain is given by $\Gamma_L$. Here we use the same boundary conditions as on the upper level, ie. we have $\bold{u}_H = 0, u_3 = 0, C(x,y,z) = 0$.
+    \begin{remark}
+    If we wanted to use $C(x,y,z) = c$ with some $c$ constant value, we could make a change of variables distracting that background flow and arrive back to the same mathematical problem with $C$ being zero.
+    \end{remark}
+    \item On the $z=0$ ground level we have $u_H = 0, u_3 = 0$ boundary conditions for the air velocity. This is the mathematical way of expressing no-slip boundary conditions for the horizontal wind speed and the impervious nature of the ground with respect to the wind. As for the concentration, the way we can choose ground level boundary conditions is the following. Firstly, we assume that the pollution is not absorbed by the ground, so we use $\partial_3 C = 0$ on $\Gamma_G$ (see also for example \cite{yeh1975three}). For the horizontal partial derivatives of the pollution, we can separate downwind and crosswind direction boundary conditions. In the crosswind direction we use $\partial_2 C = 0$ while in the downwind (stronger) direction our assumption is more relaxed, we only assume that $\partial_1 C$ is finite in the boundary norm.
+  
+  \end{itemize}
+  
+\begin{remark}
+In the paper of \cite{temam2005some}, on p35 it is suggested that the domain we work on has the form of $p_0 < p < p_1$, because for the thin portion of air between the earth and the isobar $p = p_1$, another specific simplified model would be necessary. So a way to make the model more precise is to cut the domain at an isobar a little bit off the physical ground. This would of course radically change the boundary conditions we use for the functions, because it would take away the advantage of having a wall-like, natural and physical boundary condition for our domain to support it. If we are positively above the ground, $\partial_3 C = 0$ would represent a strange reflective layer.
+\end{remark}
+
+\section{Hydrostatic Navier-Stokes plus pollution}
 
     \begin{equation}    
     \partial_t u_1 + \bold{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\alpha u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T)
@@ -201,10 +223,10 @@ The first case we are investigating is that of inland domains $\Omega$, ie the c
         \partial_t C + \bold{u} \cdot \nabla C = K_2 \frac{\partial ^2 C}{\partial x_2 ^ 2} + K_3 \frac{\partial ^2 C}{\partial x_3 ^ 2} + S
     \end{equation}
 
-\subsection{Main theorem}
+
+\section{Main theorem}
 
 \begin{itemize}
-
   
   \item The article of \cite{azerad2001mathematical} proved an existence theorem for weak solution of the equations describing the atmosphere without pollution.
   
@@ -216,23 +238,24 @@ The first case we are investigating is that of inland domains $\Omega$, ie the c
   
 \end{itemize}
 
-\subsection{Weak formulation}
+\section{Weak formulation}
 
 Weak formulation of the merged equations in both the anisotropic and hydrostatic case.
 
-\subsection{Energy inequality and a priori estimates}
+\section{Energy inequality and a priori estimates}
 
-\subsection{Passing to the limit}
+\section{Passing to the limit}
 
 In the linear terms it is not particularly challenging since we have weak convergence. In the nonlinear term we needed a result that provided a weak convergence of the product of functions for which we only had weak convergence.
 
-%%% *** COASTAL DOMAIN *** %%%
-\section{Coastal domain}
+%%% *** FUTURE WORK *** %%%
+\section{Future work}
 
-%% Domain Structure
-\subsection{Domain structure}
+\begin{itemize}
 
-Making the model physically more precise, accurate, and adapted for near seaside conditions are the following.
+  \item Use more sophisticated ground-level boundary conditions instead of $\partial_3 C = 0$ in the inland case, for example \cite{monin1959boundary}.
+
+  \item Making the model physically more precise, accurate, and adapted for near seaside conditions are the following.
     
 \begin{figure}[!h]
 \centering
@@ -247,26 +270,8 @@ Making the model physically more precise, accurate, and adapted for near seaside
 
 On the ground layer we naturally separate the boundary into two different parts, $\Gamma_E$ denoting the part of the boundary above the ground, and $\Gamma_I$ denoting the section that is interacting with the sea. The separation is a sort of expansion or generalization of the ground boundary since while above ground parts it is reasonable to use no-slip conditions, above the ocean it is natural to assume that the wind has an interaction with the waves, there is no such rigidness as in the ground case. For this case we could use $\nu_3 \frac{\partial \bold{u}_H}{\partial x_3} = \theta_H, u_3 = 0$. For the pollution concentration as well, above sea territory it is not natural to use $\partial_3 C = 0$.
 
-%%% *** CONCLUDING REMARKS *** %%%
-\section{Concluding remarks, future work}
-
-\begin{itemize}
-
-\item In the paper of \cite{temam2005some}, on p35 it is suggested that the domain we work on has the form of $p_0 < p < p_1$, because for the thin portion of air between the earth and the isobar $p = p_1$, another specific simplified model would be necessary. So a way to make the model more precise is to cut the domain at an isobar a little bit off the physical ground. This would of course radically change the boundary conditions we use for the functions, because it would take away the advantage of having a wall-like, natural and physical boundary condition for our domain to support it. If we are positively above the ground, $\partial_3 C = 0$ would represent a strange reflective layer.
-
-\begin{figure}[!h]
-\centering
-\begin{tikzpicture}
-\draw (0,0) -- (2,0)node[below] {$\Gamma_G = \Gamma_E \bigcup \Gamma_I$} -- (4,0) -- (4,2)node[right] {$\Gamma_L$} -- (4,4) -- (2,4)node[above] {$\Gamma_U$} -- (0,4) -- (0,2)node[left] {$\Gamma_L$} -- (0,0);
-\draw (2,2)node{$\Omega$};
-\draw[green, thick] (0,-1) -- (2,-1);
-\draw[blue,thick,dashed] (2,-1) -- (4,-1);
-\end{tikzpicture}
-\end{figure}
-
-\item Use more sophisticated ground-level boundary conditions instead of $\partial_3 C = 0$ in the inland case.
-
 \end{itemize}
+
 
 %%% *** TODO *** %%%
 \section{TODO}
@@ -281,6 +286,7 @@ On the ground layer we naturally separate the boundary into two different parts,
 
 \nocite{*}
 \bibliographystyle{apalike}
+% Include B Hosseini thesis in the reference list
 \bibliography{merged_U_C_eqs}
 
 \end{document}

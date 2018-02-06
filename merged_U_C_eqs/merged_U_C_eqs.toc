@@ -1,17 +1,14 @@
 \contentsline {section}{\numberline {1}Introduction}{4}
-\contentsline {section}{\numberline {2}Rescaling the main equations}{4}
-\contentsline {subsection}{\numberline {2.1}The original set of equations}{4}
-\contentsline {subsection}{\numberline {2.2}Rescaling due to shallow domain}{4}
-\contentsline {section}{\numberline {3}Inland domain}{5}
-\contentsline {subsection}{\numberline {3.1}Description of the domain and boundary conditions}{5}
-\contentsline {subsection}{\numberline {3.2}Equations}{6}
-\contentsline {subsubsection}{\numberline {3.2.1}Anisotropic Navier-Stokes plus pollution}{6}
-\contentsline {subsubsection}{\numberline {3.2.2}Hydrostatic Navier-Stokes plus pollution}{6}
-\contentsline {subsection}{\numberline {3.3}Main theorem}{7}
-\contentsline {subsection}{\numberline {3.4}Weak formulation}{7}
-\contentsline {subsection}{\numberline {3.5}Energy inequality and a priori estimates}{7}
-\contentsline {subsection}{\numberline {3.6}Passing to the limit}{7}
-\contentsline {section}{\numberline {4}Coastal domain}{7}
-\contentsline {subsection}{\numberline {4.1}Domain structure}{7}
-\contentsline {section}{\numberline {5}Concluding remarks, future work}{8}
-\contentsline {section}{\numberline {6}TODO}{8}
+\contentsline {section}{\numberline {2}Equations describing the polluted atmosphere}{4}
+\contentsline {section}{\numberline {3}Rescaling}{4}
+\contentsline {subsection}{\numberline {3.1}Rescaling due to shallow domain}{4}
+\contentsline {subsection}{\numberline {3.2}Rescaling due to special choice of coordinate system}{5}
+\contentsline {subsection}{\numberline {3.3}Rescaled merged equations - Anisotropic Navier-Stokes plus pollution}{5}
+\contentsline {section}{\numberline {4}Boundary conditions}{6}
+\contentsline {section}{\numberline {5}Hydrostatic Navier-Stokes plus pollution}{7}
+\contentsline {section}{\numberline {6}Main theorem}{8}
+\contentsline {section}{\numberline {7}Weak formulation}{8}
+\contentsline {section}{\numberline {8}Energy inequality and a priori estimates}{8}
+\contentsline {section}{\numberline {9}Passing to the limit}{8}
+\contentsline {section}{\numberline {10}Future work}{8}
+\contentsline {section}{\numberline {11}TODO}{9}

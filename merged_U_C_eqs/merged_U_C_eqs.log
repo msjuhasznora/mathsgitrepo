@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.1.5)  5 FEB 2018 18:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.1.5)  6 FEB 2018 13:28
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -630,21 +630,22 @@ LaTeX Warning: No \author given.
  [3]
 
 Package amsfonts Warning: Obsolete command \bold; \mathbf should be used instea
-d on input line 79.
+d on input line 63.
 
 [4]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 119.
+Overfull \hbox (5.84172pt too wide) in paragraph at lines 98--98
+[]\OT1/cmr/bx/n/12 Rescaled merged equa-tions - Anisotropic Navier-Stokes
+ []
+
+[5]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 179.
 
  (/usr/local/texlive/2016/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 119.
- [5] [6]
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[7]
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 179.
+ [6] [7]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
@@ -656,7 +657,7 @@ Here is how much of TeX's memory you used:
  18499 multiletter control sequences out of 15000+600000
  13075 words of font info for 50 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,8n,67p,841b,698s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,8n,67p,884b,698s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive
 /2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/
 2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2
@@ -674,7 +675,7 @@ s/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2016/texmf-dist/fonts/t
 ype1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type
 1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1
 /public/amsfonts/cm/cmti10.pfb>
-Output written on merged_U_C_eqs.pdf (10 pages, 201164 bytes).
+Output written on merged_U_C_eqs.pdf (10 pages, 207335 bytes).
 PDF statistics:
  104 PDF objects out of 1000 (max. 8388607)
  75 compressed objects within 1 object stream
