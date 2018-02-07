@@ -12,7 +12,7 @@
 \contentsline {subsection}{\numberline {7.2}Weak formulation of the hydrostatic system}{9}
 \contentsline {section}{\numberline {8}Energy inequality and a priori estimates}{9}
 \contentsline {subsection}{\numberline {8.1}Energy inequality}{9}
-\contentsline {subsection}{\numberline {8.2}A priori estimates}{9}
-\contentsline {section}{\numberline {9}Passing to the limit}{9}
-\contentsline {section}{\numberline {10}Future work}{10}
-\contentsline {section}{\numberline {11}TODO}{10}
+\contentsline {subsection}{\numberline {8.2}A priori estimates}{10}
+\contentsline {section}{\numberline {9}Passing to the limit}{10}
+\contentsline {section}{\numberline {10}Future work}{11}
+\contentsline {section}{\numberline {11}TODO}{11}

@@ -280,9 +280,46 @@ Weak formulation of the merged equations in both the anisotropic and hydrostatic
     \end{split}
   \end{equation}    
   
-  In order to use the energy inequality to extract a priori estimates, we need to know that the righthand side of the inequality is bounded. Since the $S$ source term is assumed to be as smooth as we need it to be, the only term we need to work a little bit more is $\int _ 0 ^ t \epsilon K_1 \langle \partial_1 C, C \rangle_{\Gamma_G} d \tau$.
+  In order to use the energy inequality to extract a priori estimates, we need to know that the righthand side of the inequality is bounded. Since the $S$ source term is assumed to be as smooth as we need it to be, the only term we need to work further is $\int _ 0 ^ t \epsilon K_1 \langle \partial_1 C, C \rangle_{\Gamma_G} d \tau$.
   
+  We can estimate this term in the following way.
+  
+  \begin{equation}
+    \begin{split}  
+    &  \int _ 0 ^ t \epsilon K_1 \langle \partial_1 C, C \rangle_{\Gamma_G} d \tau \leq K_1 \int _ 0 ^ t \sqrt{\epsilon} \norm{\partial_1 C}_{L^2 (\Gamma_G)} \sqrt{\epsilon} \norm{C}_{L^2 (\Gamma_G)} \leq \\
+    & \frac{1}{\delta} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C}^2 _{L^2 (\Gamma_G)} + \delta K_1 \int_0 ^ t \frac{\epsilon}{2} \norm{C}^2 _{L^2 (\Gamma_G)} \leq \\
+    & \mathit{B.T.} + \delta \frac{\epsilon}{2} K_1 c_T \int_0 ^ t \norm{C}^2 _{W^{1,2} (\Omega)},
+    \end{split}
+  \end{equation}  
+  
+  where $c_T$ is the constant provided by the trace theorem, and \textit{B.T.} denotes the boundary term which is bounded because of the a priori assumptions made on boundary conditions. Now we can carry on with the estimate by using the $W^{1,2}$ norm definition, exploit the fact that we are on a bounded domain and then applying the Sobolev inequality (for $n=3, p=2, p* = 6$, denoting its constant by $c_S$), so we have
+  
+  \begin{equation}
+    \begin{split}   
+      & \int _ 0 ^ t \epsilon K_1 \langle \partial_1 C, C \rangle_{\Gamma_G} d \tau \leq \\
+      & \mathit{B.T.}  + \delta \frac{\epsilon}{2} K_1 c_T \int_0 ^ t \{  \norm{C}^2 _{L^2 (\Omega)} + \norm{\nabla C} ^ 2 _{L^2 (\Omega)}\} d \tau \leq \\
+      & \mathit{B.T.}  + \delta \frac{\epsilon}{2} K_1 c_T \int_0 ^ t \{  \norm{C}^2 _{L^6 (\Omega)} + \norm{\nabla C} ^ 2 _{L^2 (\Omega)}\} d \tau \leq \\
+      & \mathit{B.T.} + \delta \frac{\epsilon}{2} K_1 c_T \int_0 ^ t \{ c_S \norm{\nabla C}^2 _{L^2 (\Omega) }  + \norm{\nabla C}^2 _{L^2 (\Omega) } \} d \tau = \\
+      & \mathit{B.T.} + \delta \frac{\epsilon}{2} K_1 c_T (c_S + 1) \int_0 ^ t \norm{\nabla C}^2 _{L^2 (\Omega) } d \tau
+    \end{split}
+  \end{equation}  
+  
+Which means that the energy inequality takes the form of
+
+  \begin{equation}
+    \begin{split}  
+    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \{    \norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \} d \tau + \\
+    & \int_0 ^ t \{(\epsilon K_1 - \delta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_1 C^\epsilon}_{L^2}^2  + (K_2 - \delta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_2 C^\epsilon}_{L^2}^2 + \\
+    & + (K_3 - \delta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_3 C^\epsilon}_{L^2}^2 \} d \tau \leq \\
+    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) + \int_0^t (S,C) d \tau + \frac{1}{\delta} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C}^2 _{L^2 (\Gamma_G)}
+    \end{split}
+  \end{equation}  
+    
+  The right hand side of the energy inequality is now apparently bounded, and it is easy to see that the coefficients of the pollution terms are positive, since the $\delta$ constant of the generalized Young inequality can be freely chosen in a way such that the requirements $\epsilon K_1 (1 - \delta \frac{1}{2} c_T (c_S + 1)) > 0, (K_2 - \delta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) > 0, (K_3 - \delta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) > 0 $ are all satisfied.
+    
   \subsection{A priori estimates}
+  
+  
 
 \section{Passing to the limit}
 
