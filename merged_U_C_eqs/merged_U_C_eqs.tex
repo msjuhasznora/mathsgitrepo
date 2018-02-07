@@ -9,6 +9,7 @@
 \setlist[enumerate,1]{label=\roman*)}
 \setlist[enumerate,2]{label=\alph*)}
 \newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
 \newtheorem*{remark}{Remark}
 
 \usepackage{tikz}
@@ -317,13 +318,58 @@ Which means that the energy inequality takes the form of
     
   The right hand side of the energy inequality is now apparently bounded, and it is easy to see that the coefficients of the pollution terms are positive, since the $\delta$ constant of the generalized Young inequality can be freely chosen in a way such that the requirements $\epsilon K_1 (1 - \delta \frac{1}{2} c_T (c_S + 1)) > 0, (K_2 - \delta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) > 0, (K_3 - \delta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) > 0 $ are all satisfied.
     
-  \subsection{A priori estimates}
+  \subsection{A priori estimates and weak convergence}
   
+  Now we can extract a priori estimates from the final form of the energy inequality. We have
   
+  \begin{itemize}
+  
+    \item $L_t^\infty L_x^2$ boundedness for $u_1, u_2, \epsilon u_3$,
+    \item $L_t^2 H_x^1$ boundedness for $u_1, u_2, \epsilon u_3$,
+    \item $L_t^\infty L_x^2$ boundedness for $C$,
+    \item $L_t^2 L_x^2$ boundedness for $\sqrt{\epsilon} \partial_1 C, \partial_2 C, \partial_3 C$.
+  
+  \end{itemize}
+  
+  Because of the boundedness we have weak convergence, ie. there are subsequences still denoted by the same way, for which we have $C^\epsilon \rightharpoonup C$ in $L_t^\infty L_x^2$, $\partial_2 C^\epsilon \rightharpoonup \partial_2 C $ and $\partial_3 C^\epsilon \rightharpoonup \partial_3 C $ in $L_t^2 L_x^2$, and $\sqrt{\epsilon} \partial_1 C^\epsilon \rightharpoonup e$ for some limit element $e$ in $L_t^2 L_x^2$.
 
 \section{Passing to the limit}
 
-In the linear terms it is not particularly challenging since we have weak convergence. In the nonlinear term we needed a result that provided a weak convergence of the product of functions for which we only had weak convergence.
+Passing to the limit is done without problems for the terms that do not include pollution term, since that has been proved before in the \cite{azerad2001mathematical} article.
+In the linear terms the weak convergence guaranteed by the a priori estimates will be enough. In the nonlinear term we need an additional result that provides a weak convergence of the product of functions for which we only had weak convergence separately.
+
+  \subsection{Linear terms}
+  
+    For the linear terms we can apply the boundedness provided by the a priori estimates and arrive to weak convergence.
+    
+    The line integral term is bounded because the partial is bounded and $\tilde{C}$ is smooth.
+    
+    Other linear terms are ok. 22.01.18 7 p9
+  
+  \subsection{Nonlinear term}
+  
+  We need some sort of compactness theorem to handle $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C})$.
+  
+  \begin{remark}
+  As a matter of fact, we actually have three terms here, namely $(u^\epsilon_i C^\epsilon, \partial_i \tilde{C})$ for $i = 1,2,3$, and for the values $1,2$ of $i$ the weak convergence of the $u^\epsilon_i C^\epsilon$ product is given by the fact that, as it is proved in the reference article, we actually have strong convergence for the horizontal velocities, and because of the a priori estimate from the energy bound we know we have weak convergence for the $C^\epsilon$ term. But this argument does not really solve the challenge caused by nonlinearity because it does not hold for $u_3$, so we still need an additional compactness theorem as mentioned before.
+  \end{remark}
+  
+  In this case the Aubin-Lions lemma can not be applied since it would require for $C^\epsilon$ to be in a compactly embedded space such as $L^2 H^1$, which is not the case here because we only know boundedness results for $\sqrt{\epsilon} \partial_1 C$, but not for $\partial_1 C$.
+  
+  We will show that the following lemma from \cite{lions1996mathematical} is applicable in our case.
+  
+  \begin{lemma}
+    Let $g_n$, $h_n$ converge weakly to $g,h$ respectively in $L^{p_1}(0,T; L^{p_2}(\Omega))$, $L^{q_1}(0,T; L^{q_2}(\Omega))$ where $1 \leq p_1, p_2 \leq + \infty,$
+    \[ \frac{1}{p_1} + \frac{1}{q_1} =  \frac{1}{p_2} + \frac{1}{q_2} = 1. \]
+    We assume in addition that
+    \begin{itemize}
+      \item $\frac{\partial g^n}{\partial t}$ is bounded in $L^1 (0,T; W^{-m, 1} (\Omega))$ for some $m \geq 0$ independent of $n$.
+      \item $\norm{h^n - h^n(\cdot + \xi, t)}_{L^{q_1}(0,T; L^{q_2}(\Omega))} \to 0$ as $\abs{\xi} \to 0$, uniformly in $n$.
+    \end{itemize}
+    Then, $g^n h^n$ converges to $gh$ (in the sense of distributions on $\Omega \times (0,T)$).
+  \end{lemma}
+  
+  
 
 %%% *** FUTURE WORK *** %%%
 \section{Future work}
@@ -353,7 +399,7 @@ On the ground layer we naturally separate the boundary into two different parts,
 %%% *** TODO *** %%%
 \section{TODO}
 
-1.) Write down the whole process for the version when we touch the ground and there is no ocean
+1.) Write down the whole process for the version when we touch the ground and there is no ocean. Specify spaces.
 
 2.) When we touch the ground and there is ocean but no eps in the continuity eq
 
