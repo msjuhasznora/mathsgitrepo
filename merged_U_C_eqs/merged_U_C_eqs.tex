@@ -382,7 +382,15 @@ In the linear terms the weak convergence guaranteed by the a priori estimates wi
      
      \begin{itemize}
      
-       \item \textbf{Bound for the time derivative}. Bound
+       \item \textbf{Bound for the time derivative}.
+         \[  \frac{\partial C^\epsilon}{\partial t} = - u^\epsilon \nabla C^\epsilon + \sqrt{\epsilon} \underbrace{K_1 \partial_1 \underbrace{\partial_1 \sqrt{\epsilon} C^\epsilon}_\text{$L^2$}}_\text{$W^{-1,2}$} + \underbrace{K_2 \partial_2 \underbrace{\partial_2 C^\epsilon}_\text{$L^2$}}_\text{$W^{-1,2}$} + \underbrace{K_3 \partial_3 \underbrace{\partial_3 C^\epsilon}_\text{$L^2$}}_\text{$W^{-1,2}$} -S \]
+         
+         Since the $S$ source term was assumed to be very regular, we see that the second part of the right hand side is in $W^{-1,2}$. On the other hand, the first part is in $W^{-1,1}$, because we have
+         
+         \[ u^\epsilon \nabla C^\epsilon = \underbrace{\nabla \cdot (\underbrace{u^\epsilon C^\epsilon}_{L^1})}_{W^{-1,1}} - \underbrace{\nabla \cdot (u^\epsilon)}_{0} C. \]
+         
+         Eventually we have $\frac{\partial C}{\partial t} \in L^1 W^{-1,1}$.
+         
        \item \textbf{Equicontinuity}. Equi
        
      \end{itemize}
