@@ -88,7 +88,7 @@ dispersion of pollutants is commonly modeled by convection / advection - diffusi
     
     \[ \Omega = \]
   
-  \subsection{Rescaling due to special choice of coordinate system}
+  \subsection{Rescaling due to a special choice of coordinate system}
   Here we exploit the fact that we chose the coordinate system in a way so that the $x$ axis matches the downwind direction. In this case we use an additional scaling equation, which is different in nature from the previous ones in the sense that it is not derived from the shallowness of the domain but rather suggested by the fact that in the downwind direction it is natural to assume that the diffusion is negligible compared to downwind transport, ie.
     
     \begin{equation} \abs{v_1 \partial_x C} \gg \abs{ K_x \frac{\partial ^2 C}{\partial x_1 ^ 2} }\end{equation}
@@ -281,7 +281,7 @@ Weak formulation of the merged equations in both the anisotropic and hydrostatic
     \end{split}
   \end{equation}    
   
-  In order to use the energy inequality to extract a priori estimates, we need to know that the righthand side of the inequality is bounded. Since the $S$ source term is assumed to be as smooth as we need it to be, the only term we need to work further is $\int _ 0 ^ t \epsilon K_1 \langle \partial_1 C, C \rangle_{\Gamma_G} d \tau$.
+  In order to use the energy inequality to extract a priori estimates, we need to know that the right hand side of the inequality is bounded. Since the $S$ source term is assumed to be as smooth as we need it to be, the only term we need to work further is $\int _ 0 ^ t \epsilon K_1 \langle \partial_1 C, C \rangle_{\Gamma_G} d \tau$.
   
   We can estimate this term in the following way.
   
@@ -358,7 +358,7 @@ In the linear terms the weak convergence guaranteed by the a priori estimates wi
   
   We will show that the following lemma from \cite{lions1996mathematical} is applicable in our case.
   
-  \begin{lemma}
+  \begin{lemma} \label{PLL}
     Let $g_n$, $h_n$ converge weakly to $g,h$ respectively in $L^{p_1}(0,T; L^{p_2}(\Omega))$, $L^{q_1}(0,T; L^{q_2}(\Omega))$ where $1 \leq p_1, p_2 \leq + \infty,$
     \[ \frac{1}{p_1} + \frac{1}{q_1} =  \frac{1}{p_2} + \frac{1}{q_2} = 1. \]
     We assume in addition that
@@ -369,6 +369,25 @@ In the linear terms the weak convergence guaranteed by the a priori estimates wi
     Then, $g^n h^n$ converges to $gh$ (in the sense of distributions on $\Omega \times (0,T)$).
   \end{lemma}
   
+  What we will show in the following is that for the functions $u^\epsilon_i$ and $C^\epsilon$ the assumptions of Lemma \ref{PLL} are satisfied, which means that $u_i^\epsilon C^\epsilon \rightharpoonup  u_i C$ holds.
+  
+   \begin{lemma}
+     We have $u_i^\epsilon C^\epsilon \rightharpoonup  u_i C$.
+   \end{lemma}
+   
+   \begin{proof}
+     We have seen from the a priori estimates that $C^\epsilon \rightharpoonup C$ in $L_t^\infty L_x^2$, and we know from the reference article that $u_i^\epsilon \rightharpoonup u_i$ in $L_t^2 L_x^2$.
+     
+     Let's choose $q_1 = q_2 = p_1 = p_2 = 2.$ This is fine since we are on a finite domain, so $C^\epsilon \in L^\infty L^2$ implies $C^\epsilon \in L^2 L^2$.
+     
+     \begin{itemize}
+     
+       \item \textbf{Bound for the time derivative}. Bound
+       \item \textbf{Equicontinuity}. Equi
+       
+     \end{itemize}
+        
+   \end{proof}
   
 
 %%% *** FUTURE WORK *** %%%
