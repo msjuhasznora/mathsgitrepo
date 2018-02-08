@@ -42,7 +42,7 @@ Abstract
 
 We investigate existence of a weak solution for the merged motion-pollution atmosphere model. At this point the functions we work with are $\mathbf{v} = (\mathbf{v}_H, v_3)$, and $C$, representing velocity and concentration, respectively (we are not considering other variables such as water vapor quantity or temperature).
 
-We underline the fact that this work is for the case of $\textbf{inland}$ scenario.
+We underline the fact that this work is for the case of $\textbf{inland}$ scenario. Even though the \cite{azerad2001mathematical} article works with the equations of the ocean, this work is the extension of that article in the sense that we transfer and exploit its main result for the case of the atmosphere, and for this reason it is the main reference article for this work.
 
 Contaminants emitted into the atmosphere are transported by the wind, turbulent behaviour results in mixing and dispersion, gravity acts to deposit containment on the ground.
 
@@ -68,7 +68,7 @@ The equations describing the atmosphere are the incompressible Navier-Stokes:
     \nabla \cdot \bold{v} = 0 \text{ in } \Omega_{\epsilon} \times (0,T)
     \end{equation}
 
-dispersion of pollutants is commonly modeled by convection / advection - diffusion equation. The diffusion-reaction equation describing the pollutant chemicals in the air:
+The dispersion of pollutants is commonly modeled by convection / advection - diffusion equation. The diffusion-reaction equation describing the pollutant chemicals in the air:
     
     \begin{equation}
     \partial_t C + \bold{v} \cdot \nabla C = K_x \frac{\partial ^2 C}{\partial x ^ 2} + K_y \frac{\partial ^2 C}{\partial y ^ 2} + K_z \frac{\partial ^2 C}{\partial z ^ 2} + S
@@ -436,9 +436,7 @@ In the linear terms the weak convergence guaranteed by the a priori estimates wi
 
 \begin{itemize}
 
-  \item Use more sophisticated ground-level boundary conditions instead of $\partial_3 C = 0$ in the inland case, for example \cite{monin1959boundary}.
-
-  \item Making the model physically more precise, accurate, and adapted for near seaside conditions are the following.
+  \item Making the model physically more precise, accurate, and adapted for near seaside conditions are the following. \textbf{Apply to generalizations: one, drop the $\epsilon$ from $K_1$, since it comes from a very specifically fixed coordinate choice, and two, add ocean. Prove for this version.}
     
 \begin{figure}[!h]
 \centering
@@ -452,6 +450,8 @@ In the linear terms the weak convergence guaranteed by the a priori estimates wi
 
 
 On the ground layer we naturally separate the boundary into two different parts, $\Gamma_E$ denoting the part of the boundary above the ground, and $\Gamma_I$ denoting the section that is interacting with the sea. The separation is a sort of expansion or generalization of the ground boundary since while above ground parts it is reasonable to use no-slip conditions, above the ocean it is natural to assume that the wind has an interaction with the waves, there is no such rigidness as in the ground case. For this case we could use $\nu_3 \frac{\partial \bold{u}_H}{\partial x_3} = \theta_H, u_3 = 0$. For the pollution concentration as well, above sea territory it is not natural to use $\partial_3 C = 0$.
+
+  \item Use more sophisticated ground-level boundary conditions instead of $\partial_3 C = 0$ in the inland case, for example \cite{monin1959boundary}.
 
 \end{itemize}
 
@@ -467,9 +467,10 @@ On the ground layer we naturally separate the boundary into two different parts,
 
 4.) Look into the 2 articles and the idea boundary condition which could be a way for improvement.
 
+5.) Include B Hosseini thesis in the reference list, include 4 physics book in the reference list.
+
 \nocite{*}
 \bibliographystyle{apalike}
-% Include B Hosseini thesis in the reference list
 \bibliography{merged_U_C_eqs}
 
 \end{document}
