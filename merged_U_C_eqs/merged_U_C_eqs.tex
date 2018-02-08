@@ -183,7 +183,7 @@ An explanation of the boundary conditions:
     \begin{remark}
     If we wanted to use $C(x,y,z) = c$ with some $c$ constant value, we could make a change of variables distracting that background flow and arrive back to the same mathematical problem with $C$ being zero.
     \end{remark}
-    \item On the $z=0$ ground level we have $u_H = 0, u_3 = 0$ boundary conditions for the air velocity. This is the mathematical way of expressing no-slip boundary conditions for the horizontal wind speed and the impervious nature of the ground with respect to the wind. As for the concentration, the way we can choose ground level boundary conditions is the following. Firstly, we assume that the pollution is not absorbed by the ground, so we use $\partial_3 C = 0$ on $\Gamma_G$ (see also for example \cite{yeh1975three}). For the horizontal partial derivatives of the pollution, we can separate downwind and crosswind direction boundary conditions. In the crosswind direction we use $\partial_2 C = 0$ while in the downwind (stronger) direction our assumption is more relaxed, we only assume that $\partial_1 C$ is finite in the boundary norm.
+    \item On the $z=0$ ground level we have $u_H = 0, u_3 = 0$ boundary conditions for the air velocity. This is the mathematical way of expressing no-slip boundary conditions for the horizontal wind speed and the impervious nature of the ground with respect to the wind. As for the concentration, the way we can choose ground level boundary conditions is the following. Firstly, we assume that the pollution is not absorbed by the ground, so we use $\partial_3 C = 0$ on $\Gamma_G$ (see also for example \cite{yeh1975three}). For the horizontal partial derivatives of the pollution, we can separate downwind and crosswind direction boundary conditions. In the crosswind direction we use $\partial_2 C = 0$ while in the downwind (stronger) direction our assumption is more relaxed, we only assume that $\partial_1 C$ is finite in the boundary norm, ie in $L^2 L^2 (0,T; \Gamma_G)$.
   
   \end{itemize}
   
@@ -340,11 +340,25 @@ In the linear terms the weak convergence guaranteed by the a priori estimates wi
 
   \subsection{Linear terms}
   
-    For the linear terms we can apply the boundedness provided by the a priori estimates and arrive to weak convergence.
+    For the linear terms we can directly apply the weak convergence results of the previous section.
+  
+    \begin{enumerate}[label=(\roman*)]
     
-    The line integral term is bounded because the partial is bounded and $\tilde{C}$ is smooth.
+      \item The convergence of the $(C^\epsilon, \frac{\partial \tilde{C}}{\partial t})$ term is easy to see, since we have $C^\epsilon \rightharpoonup C$ in $L_t^\infty L_x^2$.
+      
+      \item For the term we have $\epsilon K_1 \int_0 ^T (\partial_1 C^\epsilon, \partial_1 \tilde{C}) = \sqrt{\epsilon} K_1 \int_0 ^T (\sqrt{\epsilon} \partial_1 C^\epsilon, \partial_1 \tilde{C})$, which goes to 0 as $\epsilon \to 0$ because of the Cauchy-Schwartz inequality, since we have $\sqrt{\epsilon} \partial_1 C^\epsilon$ bounded in $L^2_t L^2_x$, and $\tilde{C}$ is a test function.
+      
+      \item As we have seen before, we have $\partial_2 C^\epsilon \rightharpoonup \partial_2 C $ in $L_t^2 L_x^2$, which by definition provides that
     
-    Other linear terms are ok. 22.01.18 7 p9
+        \[ \int_0 ^ T (\partial_2 C^\epsilon , f) d \mathrm{t} \to \int_0^T (\partial_2 C, f) d\mathrm{t} \qquad \forall f \in L^2_t L^2_x.\]
+    
+      \item Analogously,
+      
+        \[ \int_0 ^ T (\partial_3 C^\epsilon , f) d \mathrm{t} \to \int_0^T (\partial_3 C, f) d\mathrm{t} \qquad \forall f \in L^2_t L^2_x.\]
+      
+      \item The $\epsilon K_1 \int_0^T \big[(\partial_1 C^\epsilon) \tilde{C} \big] _{\Gamma_G} d\mathrm{t}$ line integral vanishes as $\epsilon \to 0$ since by the Cauchy-Schwartz equation we can estimate the integral by two bounded terms ($\partial_1 C^\epsilon$ was assumed to be finite in norm on the lower boundary).
+      
+    \end{enumerate}
   
   \subsection{Nonlinear term}
   
@@ -391,7 +405,26 @@ In the linear terms the weak convergence guaranteed by the a priori estimates wi
          
          Eventually we have $\frac{\partial C}{\partial t} \in L^1 W^{-1,1}$.
          
-       \item \textbf{Equicontinuity}. Equi
+       \item \textbf{Equicontinuity}. We need to show that $\norm{u_i^n - u_i^n (\cdot + \xi,t)}_{L^2 L^2} \to 0$ as $\xi \to 0$. Since in the time domain the condition naturally holds, we will focus on the space part of the proof.
+       
+       First we show that for a function $f$ in the function space $C^\infty_0$ the condition holds.
+       
+       \[ \norm{f(x + \xi) - f(x)}_{L^2} = (\int_\Omega \abs{f(x+\xi) - f(x)}^2 d x)^{1/2} \leq \]
+       \[ \left(\int_\Omega ( \sup_x \abs{f(x+\xi) - f(x)} )^2 d \mathrm{x}\right)^{1/2} = \norm{f(x+\xi) - f(x)}_{L^\infty} \cdot {\abs{\Omega}} ^ {1/p }.\]
+       
+       So we have
+       
+       \[ \lim_{\xi \to 0} \norm{f(x + \xi) - f(x)}_{L^2} \leq {\abs{\Omega}} ^ {1/p } \cdot \lim_{\xi \to 0} (\sup_x \abs{f(x+\xi) - f(x)}) = 0,\]
+       
+       since $f \in C_0^\infty$.
+       
+       As a second step we show that the condition holds for any function $f \in L^2$. Here we exploit the fact that $C_0^\infty$ is dense in the $L^p$ function space. By definition this means that $\exists \varphi_n \in C_0 ^ \infty (\Omega)$ such that $\varphi_n \to f$ in $L^p (\Omega)$. With this we have
+       
+       \[ \norm{f(x + \xi) - f(x)}_{L^2} = \]
+       \[ \norm{f(x + \xi) - \varphi_n (x + \xi) + \varphi_n (x + \xi) -\varphi_n (x) + \varphi_n (x) - f(x)}_{L^2} \leq \]
+       \[ \norm{f(x+\xi) - \varphi_n (x+\xi)}_{L^2} + \norm{\varphi_n (x+\xi) - \varphi_n (x)}_{L^2} + \norm{\varphi_n (x) - f(x)}_{L^2}\]
+       
+       The first and third term goes to $0$ as $\xi \to 0$, since $\varphi_n \to f$ in $L^p (\Omega)$. On the other hand in the first part of the proof we have shown exactly that the second term goes to $0$. Which proves that $\norm{u_i^n - u_i^n (\cdot + \xi,t)}_{L^2 L^2} \to 0$ as $\xi \to 0$. Eventually this means that we can apply the lemma with $h^n = u_i ^ \epsilon, g^n = C^\epsilon$, which proves the statement of the lemma.
        
      \end{itemize}
         
