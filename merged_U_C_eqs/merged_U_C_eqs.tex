@@ -44,35 +44,35 @@ We investigate the existence of a weak solution for the merged motion-pollution 
 
 We underline the fact that this work is for the case of $\textbf{inland}$ scenario. Even though the \cite{azerad2001mathematical} article works with the equations of the ocean, this work is the extension of that article in the sense that we transfer and exploit its main result for the case of the atmosphere, and for this reason it is the main reference article for this work.
 
-Contaminants emitted into the atmosphere are transported by the wind, turbulent behaviour results in mixing and dispersion, gravity acts to deposit containment on the ground.
-
-
 \section{The equations describing the polluted atmosphere}
 
-The first step is to choose a coordinate system, set the domain we start with and an appropriate set of equations describing both atmosphere motions and the effect of pollution. The set of equations, the choice of the locally acceptable Cartesian coordinate system we are using for the velocity terms are similar to those suggested by the \cite{azerad2001mathematical} article, we ignore large scale effects such as the curvature of the Earth. For describing the effect of pollution we use a continuity equation written in Cartesian coordinates for the concentration.
+The first step is to choose a coordinate system, set the domain we start with and an appropriate set of equations describing both atmosphere motions and the effect of pollution. The set of equations, the choice of the locally acceptable Cartesian coordinate system we are using for the velocity terms are similar to those suggested by the \cite{azerad2001mathematical} article. We ignore large scale effects such as the curvature of the Earth. For describing the effect of pollution we use a continuity equation written in Cartesian coordinates for the concentration.
 
-The coordinate system we choose to work with is local, we neglect curvature and work with Cartesian coordinates which is chosen to be adjusted to the downwind direction, ie. $z$ is the vertical direction, while $x$ is the downwind, $y$ is the crosswind direction. 
+We fix the local Cartesian coordinate system to be adjusted to the downwind direction, ie. $z$ is the vertical direction, while $x$ is the downwind, $y$ is the crosswind direction. It is a legitimate thing to do if we are considering a time interval which is not too long in the sense that it is reasonable to assume that we have a permanent, relatively stable main wind direction. It is true that this is a certain restriction on the model, but as we will see later, exploiting this choice will help us simplify the model a bit.  
 
-The original domain:
+Let us consider the following domain to begin with. This domain is a local slice of the atmosphere filled with homogeneous air that we assume to be incompressible, and a pollutant of concentration $C$.
+
 \begin{equation}
-\Omega_{\epsilon} = 
+  \Omega_{\epsilon} = \{(x,y,z) \in \mathbb{R}^3 ; (x,y) \in \omega, 0 \leq z \leq \epsilon h(x,y) \},
 \end{equation}
 
-The equations describing the atmosphere are the incompressible Navier-Stokes:
+where $\omega$ is a Lipschitz-domain in $\mathbb{R}^2$, and $h$ is a nonnegative Lipschitzian application.
 
-    \begin{equation}
-    \partial_t \bold{v} + (\bold{v} \cdot \nabla)\bold{v} -\Delta_{\nu} \bold{v} + \nabla q + 2 \bold{w} \times \bold{v}= \bold{g} \text{ in } \Omega_{\epsilon} \times (0,T)
-    \end{equation}
-    
-    \begin{equation}
-    \nabla \cdot \bold{v} = 0 \text{ in } \Omega_{\epsilon} \times (0,T)
-    \end{equation}
+The equations describing the air velocity in the atmosphere are the incompressible Navier-Stokes equations:
 
-The dispersion of pollutants is commonly modeled by convection / advection - diffusion equation. The diffusion-reaction equation describing the pollutant chemicals in the air:
+\begin{equation}
+  \partial_t \bold{v} + (\bold{v} \cdot \nabla)\bold{v} -\Delta_{\nu} \bold{v} + \nabla q + 2 \bold{w} \times \bold{v}= \bold{g} \text{ in } \Omega_{\epsilon} \times (0,T)
+\end{equation}
     
-    \begin{equation}
-    \partial_t C + \bold{v} \cdot \nabla C = K_x \frac{\partial ^2 C}{\partial x ^ 2} + K_y \frac{\partial ^2 C}{\partial y ^ 2} + K_z \frac{\partial ^2 C}{\partial z ^ 2} + S
-    \end{equation}
+\begin{equation}
+  \nabla \cdot \bold{v} = 0 \text{ in } \Omega_{\epsilon} \times (0,T)
+\end{equation}
+
+Contaminants emitted into the atmosphere are transported by the wind, mixed and dispersed by turbulent behavior, and deposited onto the ground by gravity. The dispersion of pollutants is commonly modeled by a continuity equation, and this is what we will use to describe the pollution phenomena as well.
+    
+\begin{equation}
+  \partial_t C + \bold{v} \cdot \nabla C = K_x \frac{\partial ^2 C}{\partial x ^ 2} + K_y \frac{\partial ^2 C}{\partial y ^ 2} + K_z \frac{\partial ^2 C}{\partial z ^ 2} + S
+\end{equation}
     
 \section{Rescaling}
 
@@ -86,7 +86,7 @@ The dispersion of pollutants is commonly modeled by convection / advection - dif
     
     So we have a new domain
     
-    \[ \Omega = \]
+    \[ \Omega =  \{(x_1,x_2,x_3) \in \mathbb{R}^3 ; (x_1,x_2) \in \omega, 0 \leq x_3 \leq h (x_1 , x_2) \},\]
   
   \subsection{Rescaling due to a special choice of coordinate system}
   Here we exploit the fact that we chose the coordinate system in a way so that the $x$ axis matches the downwind direction. In this case we use an additional scaling equation, which is different in nature from the previous ones in the sense that it is not derived from the shallowness of the domain but rather suggested by the fact that in the downwind direction it is natural to assume that the diffusion is negligible compared to downwind transport, ie.
@@ -436,7 +436,7 @@ In the linear terms the weak convergence guaranteed by the a priori estimates wi
 
 \begin{itemize}
 
-  \item Making the model physically more precise, accurate, and adapted for near seaside conditions are the following. \textbf{Apply to generalizations: one, drop the $\epsilon$ from $K_1$, since it comes from a very specifically fixed coordinate choice, and two, add ocean. Prove for this version.}
+  \item Making the model physically more precise, accurate, and adapted for near seaside conditions are the following. \textbf{Apply two generalizations: one, drop the $\epsilon$ from $K_1$, since it comes from a very specifically fixed coordinate choice, and two, add ocean. Prove for this version.}
     
 \begin{figure}[!h]
 \centering
