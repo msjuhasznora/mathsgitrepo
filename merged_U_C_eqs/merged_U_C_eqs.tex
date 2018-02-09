@@ -81,7 +81,6 @@ Contaminants emitted into the atmosphere are transported by the wind, mixed and 
     \[x=x_1, y=x_2, z=\epsilon x_3 \]
     \[v_1 = u_1^{\epsilon}, v_2 = u_2^{\epsilon}, v_3 = \epsilon u_3^{\epsilon}, p = p^{\epsilon} \]
     \[\nu_x = \nu_1, \nu_y = \nu_2 , \nu_z = \epsilon ^ 2\nu_3 \]
-    \[ \tau ^ \epsilon _ i = \epsilon \theta_i \]
     \[ K_z = \epsilon ^ 2 K_3 \]
     
     So we have a new domain
@@ -229,7 +228,7 @@ In the paper of \cite{temam2005some}, on p35 it is suggested that the domain we 
   \item The article of \cite{azerad2001mathematical} proved an existence theorem for weak solution of the equations describing the atmosphere without pollution.
   
   \begin{theorem}
-  Let $\bold{u}_0$ $\in$ $L^2 (\Omega)^3$, with $\nabla \cdot \bold{u}_0 = 0, \bold{u}_0 \cdot \bold{n} = 0$ on $\partial \Omega$, and $\theta_1, \theta_2 \in L^2 (0,T; H^(-1/2)(\Gamma_s))$; there exists a weak solution $\bold{u}$ of the hydrostatic Navier-Stokes equations as the aspect ratio $\epsilon$ tends to $0$.
+  Let $\bold{u}_0$ $\in$ $L^2 (\Omega)^3$, with $\nabla \cdot \bold{u}_0 = 0, \bold{u}_0 \cdot \bold{n} = 0$ on $\partial \Omega$, and $\theta_1, \theta_2 \in L^2 (0,T; H^{-1/2}(\Gamma_s))$; there exists a weak solution $\bold{u}$ of the hydrostatic Navier-Stokes equations as the aspect ratio $\epsilon$ tends to $0$.
   \end{theorem}
   
   \item The task we want to do is to extend this result in the sense that it becomes valid to the merged set of equations as well, $\mathbf{s} = (\mathbf{u}, C)$.
@@ -253,7 +252,7 @@ Weak formulation of the merged equations in both the anisotropic and hydrostatic
     \end{split}
   \end{equation}
   
-  To pass to the limit in the terms that do not include pollution in the anisotropic equation has already been worked out in the \cite{azerad2001mathematical} article. What we need to work on is how to legitimately pass to the limit with the $C$ terms. To do this we firstly will use the key tool of the previously mentioned article, the energy inequality. Once we have a priori estimates for the functions in the linear terms, we can pass to the limit with those without particular problems; the challenging part will be to prove convergence for the $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}^\epsilon)$ term, here we will need a stronger result than just the weak convergence of the present functions in the product.
+  To pass to the limit in the terms that do not include pollution in the anisotropic equation has already been worked out in the \cite{azerad2001mathematical} article. What we need to work on is how to legitimately pass to the limit with the $C$ terms. To do this our first key tool will be the energy inequality. Once we have a priori estimates for the functions in the linear terms, we can pass to the limit with those without particular problems; the challenging part will be to prove convergence for the $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}^\epsilon)$ term, here we will need a stronger result than just the weak convergence of the present functions in the product.
   
   \subsection{Weak formulation of the hydrostatic system}
   
@@ -459,15 +458,9 @@ On the ground layer we naturally separate the boundary into two different parts,
 %%% *** TODO *** %%%
 \section{TODO}
 
-1.) Write down the whole process for the version when we touch the ground and there is no ocean. Specify spaces.
+1.) Specify spaces.
 
-2.) When we touch the ground and there is ocean but no eps in the continuity eq
-
-3.) Look into the physics books
-
-4.) Look into the 2 articles and the idea boundary condition which could be a way for improvement.
-
-5.) Include B Hosseini thesis in the reference list, include 4 physics book in the reference list.
+2.) Include B Hosseini thesis in the reference list, include 4 physics book in the reference list.
 
 \nocite{*}
 \bibliographystyle{apalike}
