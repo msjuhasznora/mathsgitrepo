@@ -46,7 +46,7 @@ We underline the fact that this work is for the case of $\textbf{inland}$ scenar
 
 \section{The equations describing the polluted atmosphere}
 
-The first step is to choose a coordinate system, set the domain we start with and an appropriate set of equations describing both atmosphere motions and the effect of pollution. The set of equations, the choice of the locally acceptable Cartesian coordinate system we are using for the velocity terms are similar to those suggested by the \cite{azerad2001mathematical} article. We ignore large scale effects such as the curvature of the Earth. For describing the effect of pollution we use a continuity equation written in Cartesian coordinates for the concentration.
+The first step is to choose a coordinate system, set the domain we start with and an appropriate set of equations describing both atmosphere motions and the effect of pollution. The set of equations, the choice of the locally acceptable Cartesian coordinate system we are using for the velocity terms are similar to those suggested by our reference article. We ignore large scale effects such as the curvature of the Earth. For describing the effect of pollution we use a continuity equation written in Cartesian coordinates for the concentration.
 
 We fix the local Cartesian coordinate system to be adjusted to the downwind direction, ie. $z$ is the vertical direction, while $x$ is the downwind, $y$ is the crosswind direction. It is a legitimate thing to do if we are considering a time interval which is not too long in the sense that it is reasonable to assume that we have a permanent, relatively stable main wind direction. It is true that this is a certain restriction on the model, but as we will see later, exploiting this choice will help us simplify the model a bit.  
 
@@ -92,7 +92,7 @@ In this equation $S$ represents a source term. From now on we will assume that $
   \subsection{Rescaling due to a special choice of coordinate system}
   Here we exploit the fact that we chose the coordinate system in a way so that the $x$ axis matches the downwind direction. In this case we use an additional scaling equation, which is different in nature from the previous ones in the sense that it is not derived from the shallowness of the domain but rather suggested by the fact that in the downwind direction it is natural to assume that the diffusion is negligible compared to downwind transport, ie.
     
-    \begin{equation} \abs{v_1 \partial_x C} \gg \abs{ K_x \frac{\partial ^2 C}{\partial x_1 ^ 2} }\end{equation}
+    \begin{equation} \abs{u_1 \partial_{x_1} C} \gg \abs{ K_x \frac{\partial ^2 C}{\partial x_1 ^ 2} }\end{equation}
     which leads us to using
     \[ K_x = \epsilon K_1\]
     
@@ -157,7 +157,7 @@ It is vital to choose boundary conditions for the pollution concentration that a
 \end{figure}
 
 The boundary division of the $\partial \Omega$: the upper boundary of the $\Omega$ domain is denoted by $\Gamma_U$, the lateral boundary is $\Gamma_L$, and the lower boundary of the domain is $\Gamma_G$.
-As we mentioned before, the case we are investigating is that of inland domains $\Omega$, ie the case of landscapes and cities with no significant nearby water surface.  This is very important since the boundary conditions for both wind velocity and pollution concentration in the air air different depending whether we are above solid ground or water surface. The boundary conditions we choose to use in the inland scenario are the following, shown in a cross-section.
+As we mentioned before, the case we are investigating is that of inland domains $\Omega$, ie the case of landscapes and cities with no significant nearby water surface.  This is very important since the boundary conditions for both wind velocity and pollution concentration in the air are different depending whether we are above solid ground or water surface. The boundary conditions we choose to use in the inland scenario are the following, shown in a cross-section.
 
 \begin{figure}[!h]
   \centering
