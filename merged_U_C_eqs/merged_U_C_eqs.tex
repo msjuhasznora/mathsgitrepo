@@ -237,7 +237,19 @@ In the paper of \cite{temam2005some}, on p35 it is suggested that the domain we 
 
 \section{Weak formulation}
 
-Weak formulation of the merged equations in both the anisotropic and hydrostatic case.
+We need to calculate the weak formulation of the merged equations in both the anisotropic and hydrostatic case. Since this inland atmosphere model has slightly different boundary conditions even in the velocity equations than the model of the ocean, we will see that the weak formulation of our system has minor differences from the ocean scenario.
+
+  \subsection{Weak formulation of the hydrostatic system}
+  
+  Find $\mathbf{s}$ = $(\mathbf{u}, C)$ such that $\mathbf{u} = (\mathbf{u}_H, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_H \in L^\infty (0,T; L^2(\Omega)^2)$
+  
+  \begin{equation}
+    \begin{split}
+      & \int_0^T -(\mathbf{u}_H, \partial_t \mathbf{v}_H) + (\nabla_\nu \mathbf{u}_H, \nabla_\nu \mathbf{v}_H) - (\mathbf{u}_H, (\mathbf{u} \cdot \nabla) \mathbf{v}_H) + (b(\mathbf{u}_H), \mathbf{v}_H) dt \\
+      &+ \int_0^T -(C, \partial_t \tilde{C}) -(\mathbf{u}C, \nabla \tilde{C}) + K_2 (\partial_2 C, \partial_2 \tilde{C}) + K_3 (\partial_3 C, \partial_3 \tilde{C}) dt =\\
+      & = - (\mathbf{u}_{0H}, \mathbf{v}_H(0)) - (C(0), \tilde{C}(0)) + \int_0^T (S,\tilde{C}) d t
+    \end{split}
+  \end{equation}
 
   \subsection{Weak formulation of the anisotropic system}
   
@@ -253,18 +265,6 @@ Weak formulation of the merged equations in both the anisotropic and hydrostatic
   \end{equation}
   
   To pass to the limit in the terms that do not include pollution in the anisotropic equation has already been worked out in the \cite{azerad2001mathematical} article. What we need to work on is how to legitimately pass to the limit with the $C$ terms. To do this our first key tool will be the energy inequality. Once we have a priori estimates for the functions in the linear terms, we can pass to the limit with those without particular problems; the challenging part will be to prove convergence for the $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}^\epsilon)$ term, here we will need a stronger result than just the weak convergence of the present functions in the product.
-  
-  \subsection{Weak formulation of the hydrostatic system}
-  
-  Add specific assumptions on the test functions.
-  
-  \begin{equation}
-    \begin{split}
-      & \int_0^T -(\mathbf{u}_H, \partial_t \mathbf{v}_H) + (\nabla_\nu \mathbf{u}_H, \nabla_\nu \mathbf{v}_H) - (\mathbf{u}_H, (\mathbf{u} \cdot \nabla) \mathbf{v}_H) + (b(\mathbf{u}_H), \mathbf{v}_H) dt \\
-      &+ \int_0^T -(C, \partial_t \tilde{C}) -(\mathbf{u}C, \nabla \tilde{C}) + K_2 (\partial_2 C, \partial_2 \tilde{C}) + K_3 (\partial_3 C, \partial_3 \tilde{C}) dt =\\
-      & = - (\mathbf{u}_{0H}, \mathbf{v}_H(0)) - (C(0), \tilde{C}(0)) + \int_0^T (S,\tilde{C}) d t
-    \end{split}
-  \end{equation}
 
 \section{Energy inequality and a priori estimates}
 
