@@ -73,6 +73,8 @@ Contaminants emitted into the atmosphere are transported by the wind, mixed and 
 \begin{equation}
   \partial_t C + \bold{v} \cdot \nabla C = K_x \frac{\partial ^2 C}{\partial x ^ 2} + K_y \frac{\partial ^2 C}{\partial y ^ 2} + K_z \frac{\partial ^2 C}{\partial z ^ 2} + S
 \end{equation}
+
+In this equation $S$ represents a source term. From now on we will assume that $S$ is as regular as needed. 
     
 \section{Rescaling}
 
@@ -225,13 +227,17 @@ In the paper of \cite{temam2005some}, on p35 it is suggested that the domain we 
 
 \begin{itemize}
   
-  \item The article of \cite{azerad2001mathematical} proved an existence theorem for weak solution of the equations describing the atmosphere without pollution.
+  \item The article of \cite{azerad2001mathematical} proved an existence theorem for weak solution of the equations describing the ocean without pollution. We can use a slightly modified version of this, translated to the inland atmosphere domain.
   
   \begin{theorem}
-  Let $\bold{u}_0$ $\in$ $L^2 (\Omega)^3$, with $\nabla \cdot \bold{u}_0 = 0, \bold{u}_0 \cdot \bold{n} = 0$ on $\partial \Omega$, and $\theta_1, \theta_2 \in L^2 (0,T; H^{-1/2}(\Gamma_s))$; there exists a weak solution $\bold{u}$ of the hydrostatic Navier-Stokes equations as the aspect ratio $\epsilon$ tends to $0$.
+  Let $\bold{u}_0$ $\in$ $L^2 (\Omega)^3$, with $\nabla \cdot \bold{u}_0 = 0, \bold{u}_0 \cdot \bold{n} = 0$ on $\partial \Omega$; there exists a weak solution $\bold{u}$ of the hydrostatic Navier-Stokes equations as the aspect ratio $\epsilon$ tends to $0$.
   \end{theorem}
   
-  \item The task we want to do is to extend this result in the sense that it becomes valid to the merged set of equations as well, $\mathbf{s} = (\mathbf{u}, C)$.
+  \item The task we want to do is to extend this result in the sense that it becomes valid to the merged set of $(\mathbf{u}, C)$ equations as well.
+  
+    \begin{theorem}
+  Let $\bold{u}_0$ $\in$ $L^2 (\Omega)^3$, with $\nabla \cdot \bold{u}_0 = 0, \bold{u}_0 \cdot \bold{n} = 0$ on $\partial \Omega$; and let $C(0)\in$ $L^2 (\Omega)^3$, $C(0) = 0$ on $ \partial \Omega$, there exists a weak solution ($\bold{u}$, C) of the hydrostatic Navier-Stokes equations as the aspect ratio $\epsilon$ tends to $0$.
+  \end{theorem}
   
 \end{itemize}
 
@@ -241,7 +247,19 @@ We need to calculate the weak formulation of the merged equations in both the an
 
   \subsection{Weak formulation of the hydrostatic system}
   
-  Find $\mathbf{s}$ = $(\mathbf{u}, C)$ such that $\mathbf{u} = (\mathbf{u}_H, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_H \in L^\infty (0,T; L^2(\Omega)^2)$
+  For the weak formulation we will use the modified version of the spaces defined in the original article.
+  
+  \[H^1_{\Gamma} (\Omega) = \{ v \in H^1(\Omega); v=0 \text{ on } \partial \Omega = \Gamma \} \]
+  
+  \[ \mathbf{V} = \]
+  
+  \[ H (\partial_3, \Omega)\]
+  
+  \[ H_0 (\partial_3, \Omega)\]
+  
+  \[ \mathbf{W} = \]
+  
+  Find $(\mathbf{u}, C)$ such that $\mathbf{u} = (\mathbf{u}_H, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_H \in L^\infty (0,T; L^2(\Omega)^2),$ and $C$ with $\partial_2 C, \partial_3 C \in L^2_t L^2_x$, $C \in L^\infty L^2$ and $C(0) \in L^2_x$, such that
   
   \begin{equation}
     \begin{split}
@@ -250,8 +268,12 @@ We need to calculate the weak formulation of the merged equations in both the an
       & = - (\mathbf{u}_{0H}, \mathbf{v}_H(0)) - (C(0), \tilde{C}(0)) + \int_0^T (S,\tilde{C}) d t
     \end{split}
   \end{equation}
+  
+  for all $(\mathbf{v}, \tilde{C})$ with $\mathbf{v} = (\mathbf{v}_H, v_3) \in H^1 (0,T, \mathbf{W})$, with $v_H (T) = 0$ and $\partial_3 \mathbf{v}_H \in L^\infty (0, T; L^3 (\Omega)^2)$ and $\tilde{C}$ with $\tilde{C} \in L^2 (0,T, H^1)$, $\tilde{C} \in H^1 (0,T, L^2)$, $\tilde{C} (T) = 0$. 
 
   \subsection{Weak formulation of the anisotropic system}
+  
+  Find $\mathbf{u}^\epsilon = (\mathbf{u}_H, u^\epsilon_3) \in L^2 (0,t ; \mathbf{V}) \cap L^\infty (0, T; L^2 (\Omega)^3)$ and $C$ with $C \in L^\infty L^2$, $C \in L^2 (0,T; H^1)$, $C(0) \in L^2_x$ such that
   
   \begin{equation}
     \begin{split}
@@ -263,6 +285,8 @@ We need to calculate the weak formulation of the merged equations in both the an
       & = - (\mathbf{u}^\epsilon_{0H}, \mathbf{v}^\epsilon_H(0)) - \epsilon^2 (u_{03}^\epsilon, v_3^\epsilon (0)) - (C^\epsilon (0), \tilde{C} (0)) + \int_0^T (S,\tilde{C}) d t
     \end{split}
   \end{equation}
+  
+  for all $\mathbf{v} = (\mathbf{v}_H, v_3) \in H^1 (0,T;\mathbf{V})$ with $\mathbf{v}(T) = 0$ and $\tilde{C}$ such that $\tilde{C} \in H^1 (0,T, H^1)$ and $\tilde{C} (T) = 0$.
   
   To pass to the limit in the terms that do not include pollution in the anisotropic equation has already been worked out in the \cite{azerad2001mathematical} article. What we need to work on is how to legitimately pass to the limit with the $C$ terms. To do this our first key tool will be the energy inequality. Once we have a priori estimates for the functions in the linear terms, we can pass to the limit with those without particular problems; the challenging part will be to prove convergence for the $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}^\epsilon)$ term, here we will need a stronger result than just the weak convergence of the present functions in the product.
 
@@ -461,6 +485,8 @@ On the ground layer we naturally separate the boundary into two different parts,
 1.) Specify spaces.
 
 2.) Include B Hosseini thesis in the reference list, include 4 physics book in the reference list.
+
+3.) $\mathbf{u} C$ product to be in $L^2$ in the hydrostatic weak formulation.
 
 \nocite{*}
 \bibliographystyle{apalike}
