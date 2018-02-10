@@ -249,15 +249,15 @@ We need to calculate the weak formulation of the merged equations in both the an
   
   For the weak formulation we will use the modified version of the spaces defined in the original article.
   
-  \[H^1_{\Gamma} (\Omega) = \{ v \in H^1(\Omega); v=0 \text{ on } \partial \Omega = \Gamma \} \]
+  \[ H^1_{\Gamma} (\Omega) = \{ v \in H^1(\Omega); v=0 \text{ on } \partial \Omega = \Gamma \} \]
   
-  \[ \mathbf{V} = \]
+  \[ \mathbf{V} = \{ \mathbf{v} \in  H^1_{\Gamma} (\Omega) \times H^1_{\Gamma} (\Omega) \times H^1_0 (\Omega); \nabla \cdot \mathbf{v} = 0 \text{ in } \Omega \} \]
   
-  \[ H (\partial_3, \Omega)\]
+  \[ H (\partial_3, \Omega) = \{ v \in L^2(\Omega); \partial_3 v \in L^2 (\Omega)\} \]
   
-  \[ H_0 (\partial_3, \Omega)\]
+  \[ H_0 (\partial_3, \Omega) = \{ v \in H(\partial_3, \Omega); v n_3 = 0 \text{ on } \partial \Omega \} \]
   
-  \[ \mathbf{W} = \]
+  \[ \mathbf{W} = \{ \mathbf{u} \in  H^1_{\Gamma} (\Omega) \times H^1_{\Gamma} (\Omega) \times _0 (\partial_3, \Omega); \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \} \]
   
   Find $(\mathbf{u}, C)$ such that $\mathbf{u} = (\mathbf{u}_H, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_H \in L^\infty (0,T; L^2(\Omega)^2),$ and $C$ with $\partial_2 C, \partial_3 C \in L^2_t L^2_x$, $C \in L^\infty L^2$ and $C(0) \in L^2_x$, such that
   
