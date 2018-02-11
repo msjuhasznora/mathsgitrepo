@@ -453,26 +453,43 @@ In the linear terms the weak convergence guaranteed by the a priori estimates wi
         
    \end{proof}
   
+\section{A generalized model}
+
+We now will present a generalization of the previous model by applying the following modifications.
+
+\begin{itemize}
+
+  \item Drop the assumption about the coordinate system being fixed onto the main wind direction, ie. drop the $\epsilon$ from $K_x$, \textemdash it comes from a specifically chosen coordinate system.
+  \item Adapt the model for coastal conditions.
+
+\end{itemize}
+
+\begin{figure}[!h]
+\centering
+\begin{tikzpicture}
+\draw (0,0) -- (2,0) -- (4,0) -- (4,2) -- (4,4) -- (2,4) -- (0,4) -- (0,2) -- (0,0);
+\draw (2,2)node{$\Omega$};
+\draw[green, thick] (0,0) -- (2,0);
+\draw[blue,thick,dashed] (2,0) -- (4,0);
+
+    \draw (2,2)node{$\Omega$};
+    \draw (4,2)node[right] {$\Gamma_L$ $\mathbf{u_\epsilon} = 0, C_\epsilon=0 $};
+    \draw (2,4)node[above] {$\Gamma_U$ $\mathbf{u_\epsilon} = 0, C_\epsilon=0 $};
+    \draw (0,2)node[left] {$\Gamma_L$ $\mathbf{u_\epsilon} = 0, C_\epsilon=0 $};
+    \draw (1,0)node[below]{$\Gamma_E$};
+    \draw (3,0)node[below]{$\Gamma_I$};
+    
+\end{tikzpicture}
+\end{figure}
+
+On the ground layer we naturally separate the boundary into two different parts in this model, $\Gamma_G = \Gamma_E \bigcup \Gamma_I$; $\Gamma_E$ denoting the part of the boundary above the ground, and $\Gamma_I$ denoting the section that is interacting with the sea. The separation is a sort of expansion or generalization of the ground boundary since while above ground parts it is reasonable to use no-slip conditions, above the ocean it is natural to assume that the wind has an interaction with the waves, there is no such rigidness as in the ground case. For this case we will include $\theta$, which represents the wind traction on the ocean surface. For the pollution concentration as well, above sea territory it is not natural to use $\partial_3 C = 0$, since the particles can now sink under the boundary level.
+
+On $\Gamma_E$ we have the same boundary conditions as in the inland case, $\mathbf{u}^\epsilon = 0, \partial_3 C = 0, \partial_2 C = 0, \partial_1 C$ bounded. On $\Gamma_I$ on the other hand we have $\nu_3 \partial_3 \bold{u}^\epsilon_H = \theta_H, u_3 = 0$ and $\partial_1 C, \partial_2 C, \partial_3 C$ bounded in the boundary norm, similarly to what we saw in the inland model.
 
 %%% *** FUTURE WORK *** %%%
 \section{Future work}
 
 \begin{itemize}
-
-  \item Making the model physically more precise, accurate, and adapted for near seaside conditions are the following. \textbf{Apply two generalizations: one, drop the $\epsilon$ from $K_1$, since it comes from a very specifically fixed coordinate choice, and two, add ocean. Prove for this version.}
-    
-\begin{figure}[!h]
-\centering
-\begin{tikzpicture}
-\draw (0,0) -- (2,0)node[below] {$\Gamma_G = \Gamma_E \bigcup \Gamma_I$} -- (4,0) -- (4,2)node[right] {$\Gamma_L$} -- (4,4) -- (2,4)node[above] {$\Gamma_U$} -- (0,4) -- (0,2)node[left] {$\Gamma_L$} -- (0,0);
-\draw (2,2)node{$\Omega$};
-\draw[green, thick] (0,0) -- (2,0);
-\draw[blue,thick,dashed] (2,0) -- (4,0);
-\end{tikzpicture}
-\end{figure}
-
-
-On the ground layer we naturally separate the boundary into two different parts, $\Gamma_E$ denoting the part of the boundary above the ground, and $\Gamma_I$ denoting the section that is interacting with the sea. The separation is a sort of expansion or generalization of the ground boundary since while above ground parts it is reasonable to use no-slip conditions, above the ocean it is natural to assume that the wind has an interaction with the waves, there is no such rigidness as in the ground case. For this case we could use $\nu_3 \frac{\partial \bold{u}_H}{\partial x_3} = \theta_H, u_3 = 0$. For the pollution concentration as well, above sea territory it is not natural to use $\partial_3 C = 0$.
 
   \item Use more sophisticated ground-level boundary conditions instead of $\partial_3 C = 0$ in the inland case, for example \cite{monin1959boundary}.
 
