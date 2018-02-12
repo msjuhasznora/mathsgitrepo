@@ -6,6 +6,11 @@ Ali, I., Kalla, S., and Khajah, H. (1998).
   pollution.
 \newblock {\em Mathematical and computer modelling}, 28(12):1--6.
 
+\bibitem[Anderson and Wendt, 1995]{anderson1995computational}
+Anderson, J.~D. and Wendt, J. (1995).
+\newblock {\em Computational fluid dynamics}, volume 206.
+\newblock Springer.
+
 \bibitem[Andria et~al., 2000]{andria2000mathematical}
 Andria, G., Lay-Ekuakille, A., and Notarnicola, M. (2000).
 \newblock Mathematical models for atmospheric and industrial pollutant
@@ -40,6 +45,11 @@ Monin, A. (1959).
 \newblock On the boundary condition on the earth surface for diffusing
   pollution.
 \newblock In {\em Advances in Geophysics}, volume~6, pages 435--436. Elsevier.
+
+\bibitem[Pedlosky, 2013]{pedlosky2013geophysical}
+Pedlosky, J. (2013).
+\newblock {\em Geophysical fluid dynamics}.
+\newblock Springer Science \& Business Media.
 
 \bibitem[Prodanova et~al., 2008]{prodanova2008application}
 Prodanova, M., Perez, J.~L., Syrakov, D., San~Jose, R., Ganev, K., Miloshev,

@@ -518,6 +518,37 @@ The weak formulation of the coastal generalized systems will be different from t
 
 \subsection{Energy inequality}
 
+The analogous terms that we saw in the weak formulation will be different in the energy inequality as well. The coastal, generalized version of the energy inequality will be the following. The different parts are again noted by underline.
+
+  \begin{equation}
+    \begin{split}  
+    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \{    \norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \} d \tau + \\
+    & \int_0 ^ t \{\underline{K_1} \norm{\partial_1 C^\epsilon}_{L^2}^2  + K_2 \norm{\partial_2 C^\epsilon}_{L^2}^2 + K_3 \norm{\partial_3 C^\epsilon}_{L^2}^2 \} d \tau \leq \\
+    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) + \int_0^t (S,C) d \tau - \underline{\int_0^t \langle \theta_H, \mathbf{u}_H \rangle _{\Gamma_I}}\\
+    & \int _ 0 ^ t \underline{K_1} \langle \partial_1 C, C \rangle_{\Gamma_G} + \underline{K_2 \langle \partial_2 C, C \rangle_{\Gamma_I} } + \underline{K_3 \langle \partial_3 C, C \rangle_{\Gamma_I} } d \tau
+    \end{split}
+  \end{equation} 
+  
+Analogously as we estimated the boundary term in the energy inequality before, we can do the estimate
+  
+  \[ \int _ 0 ^ t K_i \langle \partial_i C, C \rangle_{\Gamma_I} d \tau \leq \frac{1}{\delta} \frac{K_i}{2} \int_0 ^ t \norm{\partial_i C}^2 _{L^2 (\Gamma_I)} + \delta \frac{K_i}{2} c_T (c_S + 1) \int_0 ^ t \norm{\nabla C}^2 _{L^2 (\Omega) } d \tau \]
+  
+for $i = 1,2,3.$
+The first term for every value of $i$ is ab ovo bounded, so it causes no trouble on the right hand side. The term containing the wind is also assumed to be bounded.
+
+Eventually we have
+
+  \begin{equation}
+    \begin{split}  
+    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \{    \norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \} d \tau + \\
+    & \int_0 ^ t \{ (K_1 - \delta \frac{K_1 + K_2 + K_3}{2} c_T (c_S + 1)) \norm{\partial_1 C^\epsilon}_{L^2}^2  + \\
+    & (K_2 - \delta \frac{K_1 + K_2 + K_3}{2} c_T (c_S + 1)) \norm{\partial_2 C^\epsilon}_{L^2}^2 + \\
+    & (K_3 - \delta \frac{K_1 + K_2 + K_3}{2} c_T (c_S + 1)) \norm{\partial_3 C^\epsilon}_{L^2}^2 \} d \tau \leq \\
+    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) + \int_0^t (S,C) d \tau - \underline{\int_0^t \langle \theta_H, \mathbf{u}_H \rangle _{\Gamma_I}}\\
+    & \int _ 0 ^ t \underline{ \frac{1}{\delta_1} \frac{K_1}{2} \int_0 ^ t \norm{\partial_1 C}^2 _{L^2 (\Gamma_G)} } + \underline{ \frac{1}{\delta_2} \frac{K_2}{2} \int_0 ^ t \norm{\partial_2 C}^2 _{L^2 (\Gamma_I)}  } + \underline{ \frac{1}{\delta_3} \frac{K_3}{2} \int_0 ^ t \norm{\partial_3 C}^2 _{L^2 (\Gamma_I)} } d \tau
+    \end{split}
+  \end{equation} 
+
 \subsection{Passing to the limit}
 
 %%% *** FUTURE WORK *** %%%
