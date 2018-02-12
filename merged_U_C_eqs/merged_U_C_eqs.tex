@@ -511,7 +511,7 @@ The weak formulation of the coastal generalized systems will be different from t
     \begin{split}
       & \int_0^T -(\mathbf{u}_H, \partial_t \mathbf{v}_H) + (\nabla_\nu \mathbf{u}_H, \nabla_\nu \mathbf{v}_H) - (\mathbf{u}_H, (\mathbf{u} \cdot \nabla) \mathbf{v}_H) + (b(\mathbf{u}_H), \mathbf{v}_H) dt \\
       &+ \int_0^T -(C, \partial_t \tilde{C}) -(\mathbf{u}C, \nabla \tilde{C}) + \underline{K_1 (\partial_1 C, \partial_1 \tilde{C}) - K_1 \big[(\partial_1 C) \tilde{C} \big]_{\Gamma_G}} + \\
-      & K_2 (\partial_2 C, \partial_2 \tilde{C}) - \underline{ K_2 \big[(\partial_2 C) \tilde{C} \big]_{\Gamma_I}} + K_3 (\partial_3 C, \partial_3 \tilde{C}) dt - \underline{ K_3 \big[(\partial_3 C) \tilde{C} \big]_{\Gamma_I}} =\\
+      & K_2 (\partial_2 C, \partial_2 \tilde{C}) - \underline{ K_2 \big[(\partial_2 C) \tilde{C} \big]_{\Gamma_I}} + K_3 (\partial_3 C, \partial_3 \tilde{C}) - \underline{ K_3 \big[(\partial_3 C) \tilde{C} \big]_{\Gamma_I}} dt =\\
       & = - (\mathbf{u}_{0H}, \mathbf{v}_H(0)) -\underline{\int_0^T \langle \theta_H, \mathbf{v}_H \rangle_{\Gamma_I}} - (C(0), \tilde{C}(0)) + \int_0^T (S,\tilde{C}) d t
     \end{split}
   \end{equation}
@@ -541,15 +541,30 @@ Eventually we have
   \begin{equation}
     \begin{split}  
     & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \{    \norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \} d \tau + \\
-    & \int_0 ^ t \{ (K_1 - \delta \frac{K_1 + K_2 + K_3}{2} c_T (c_S + 1)) \norm{\partial_1 C^\epsilon}_{L^2}^2  + \\
-    & (K_2 - \delta \frac{K_1 + K_2 + K_3}{2} c_T (c_S + 1)) \norm{\partial_2 C^\epsilon}_{L^2}^2 + \\
-    & (K_3 - \delta \frac{K_1 + K_2 + K_3}{2} c_T (c_S + 1)) \norm{\partial_3 C^\epsilon}_{L^2}^2 \} d \tau \leq \\
+    & \int_0 ^ t \underline{ \{ (K_1 - \delta \frac{K_1 + K_2 + K_3}{2} c_T (c_S + 1)) \norm{\partial_1 C^\epsilon}_{L^2}^2}  + \\
+    & \underline{(K_2 - \delta \frac{K_1 + K_2 + K_3}{2} c_T (c_S + 1)) \norm{\partial_2 C^\epsilon}_{L^2}^2} + \\
+    & \underline{(K_3 - \delta \frac{K_1 + K_2 + K_3}{2} c_T (c_S + 1)) \norm{\partial_3 C^\epsilon}_{L^2}^2 \} } d \tau \leq \\
     & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) + \int_0^t (S,C) d \tau - \underline{\int_0^t \langle \theta_H, \mathbf{u}_H \rangle _{\Gamma_I}}\\
     & \int _ 0 ^ t \underline{ \frac{1}{\delta_1} \frac{K_1}{2} \int_0 ^ t \norm{\partial_1 C}^2 _{L^2 (\Gamma_G)} } + \underline{ \frac{1}{\delta_2} \frac{K_2}{2} \int_0 ^ t \norm{\partial_2 C}^2 _{L^2 (\Gamma_I)}  } + \underline{ \frac{1}{\delta_3} \frac{K_3}{2} \int_0 ^ t \norm{\partial_3 C}^2 _{L^2 (\Gamma_I)} } d \tau
     \end{split}
-  \end{equation} 
+  \end{equation}
+  
+Even though by first look the inequality seems different from the inland one, it basically provides the same estimates and weak convergences. We have
+  
+\begin{itemize}
+  
+  \item $L_t^\infty L_x^2$ boundedness for $u_1, u_2, \epsilon u_3$,
+  \item $L_t^2 H_x^1$ boundedness for $u_1, u_2, \epsilon u_3$,
+  \item $L_t^\infty L_x^2$ boundedness for $C$,
+  \item $L_t^2 L_x^2$ boundedness for $ \partial_1 C, \partial_2 C, \partial_3 C$, basically we have $L_t^2 H_x^1$ boundedness for $C$.
+  
+\end{itemize}
 
 \subsection{Passing to the limit}
+
+As for passing to the limit, everything is very similar to the inland version, except for the terms $K_i \big[(\partial_i C^\epsilon) \tilde{C} \big]_{\Gamma_I}$.
+
+\[ \int_0 ^ T K_i \big[(\partial_i C^\epsilon - \partial_i C) \tilde{C} \big]_{\Gamma_I} dt\]
 
 %%% *** FUTURE WORK *** %%%
 \section{Future work}
