@@ -486,6 +486,40 @@ On the ground layer we naturally separate the boundary into two different parts 
 
 On $\Gamma_E$ we have the same boundary conditions as in the inland case, $\mathbf{u}^\epsilon = 0, \partial_3 C = 0, \partial_2 C = 0, \partial_1 C$ bounded. On $\Gamma_I$ on the other hand we have $\nu_3 \partial_3 \bold{u}^\epsilon_H = \theta_H, u_3 = 0$ and $\partial_1 C, \partial_2 C, \partial_3 C$ bounded in the boundary norm, similarly to what we saw in the inland model.
 
+We will discuss in more details the parts that are different from the inland case.
+
+\subsection{Weak formulation}
+
+The weak formulation of the coastal generalized systems will be different from the original inland version in that \textit{a)} it will contain a boundary term for the wind because of the air - ocean interface, \textit{b)} it will contain boundary terms for $\partial_2 C, \partial_3 C$, which had been assumed to be zero before on the ground, and finally \textit{c)} here the $\partial_1 C$ terms are present that were absent in the previous version because of the $\epsilon$ used in $K_x$. The terms which are new or different in this version are underlined.
+
+\subsubsection{Anisotropic system}
+
+  \begin{equation}
+    \begin{split}
+      & \int_0^T -(\mathbf{u}^\epsilon_H, \partial_t \mathbf{v}_H) + (\nabla_\nu \mathbf{u}^\epsilon_H, \nabla_\nu \mathbf{v}_H) - (\mathbf{u}^\epsilon_H, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{v}_H) + (b(\mathbf{u}^\epsilon_H), \mathbf{v}_H) dt \\
+      & + \epsilon \beta \big[ \int_0 ^ T (u_3 ^\epsilon, v_1) - (u_1^\epsilon, v_3) \big] d t\\
+      & + \epsilon^2 \big[ \int _0 ^ T -(u_3^\epsilon, \partial_t v_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, v_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu v_3) d t\big] \\
+      &+ \int_0^T -(C^\epsilon, \partial_t \tilde{C}^\epsilon) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}^\epsilon) + \underline {K_1} (\partial_1 C^\epsilon, \partial_1 \tilde{C}^\epsilon) - \underline {K_1} \big[(\partial_1 C^\epsilon) \tilde{C} \big] _{\Gamma_G} + \\
+      & K_2 (\partial_2 C^\epsilon, \partial_2 \tilde{C}^\epsilon) - \underline{ K_2 \big[(\partial_2 C^\epsilon) \tilde{C} \big]_{\Gamma_I}} + K_3 (\partial_3 C^\epsilon, \partial_3 \tilde{C}^\epsilon) - \underline{ K_3 \big[(\partial_3 C^\epsilon) \tilde{C} \big]_{\Gamma_I}} dt =\\
+      & = - (\mathbf{u}^\epsilon_{0H}, \mathbf{v}^\epsilon_H(0)) -\underline{\int_0^T \langle \theta_H, \mathbf{v}_H \rangle_{\Gamma_I}} - \epsilon^2 (u_{03}^\epsilon, v_3^\epsilon (0)) - (C^\epsilon (0), \tilde{C} (0)) + \int_0^T (S,\tilde{C}) d t
+    \end{split}
+  \end{equation}
+
+\subsubsection{Hydrostatic system}
+
+  \begin{equation}
+    \begin{split}
+      & \int_0^T -(\mathbf{u}_H, \partial_t \mathbf{v}_H) + (\nabla_\nu \mathbf{u}_H, \nabla_\nu \mathbf{v}_H) - (\mathbf{u}_H, (\mathbf{u} \cdot \nabla) \mathbf{v}_H) + (b(\mathbf{u}_H), \mathbf{v}_H) dt \\
+      &+ \int_0^T -(C, \partial_t \tilde{C}) -(\mathbf{u}C, \nabla \tilde{C}) + \underline{K_1 (\partial_1 C, \partial_1 \tilde{C}) - K_1 \big[(\partial_1 C) \tilde{C} \big]_{\Gamma_G}} + \\
+      & K_2 (\partial_2 C, \partial_2 \tilde{C}) - \underline{ K_2 \big[(\partial_2 C) \tilde{C} \big]_{\Gamma_I}} + K_3 (\partial_3 C, \partial_3 \tilde{C}) dt - \underline{ K_3 \big[(\partial_3 C) \tilde{C} \big]_{\Gamma_I}} =\\
+      & = - (\mathbf{u}_{0H}, \mathbf{v}_H(0)) -\underline{\int_0^T \langle \theta_H, \mathbf{v}_H \rangle_{\Gamma_I}} - (C(0), \tilde{C}(0)) + \int_0^T (S,\tilde{C}) d t
+    \end{split}
+  \end{equation}
+
+\subsection{Energy inequality}
+
+\subsection{Passing to the limit}
+
 %%% *** FUTURE WORK *** %%%
 \section{Future work}
 
@@ -499,11 +533,9 @@ On $\Gamma_E$ we have the same boundary conditions as in the inland case, $\math
 %%% *** TODO *** %%%
 \section{TODO}
 
-1.) Specify spaces.
+1.) Include B Hosseini thesis in the reference list, include 4 physics book in the reference list.
 
-2.) Include B Hosseini thesis in the reference list, include 4 physics book in the reference list.
-
-3.) $\mathbf{u} C$ product to be in $L^2$ in the hydrostatic weak formulation.
+2.) $\mathbf{u} C$ product to be in $L^2$ in the hydrostatic weak formulation - spaces.
 
 \nocite{*}
 \bibliographystyle{apalike}
