@@ -53,7 +53,7 @@ We fix the local Cartesian coordinate system to be adjusted to the downwind dire
 Let us consider the following domain to begin with. This domain is a local slice of the atmosphere filled with homogeneous air that we assume to be incompressible, and a pollutant of concentration $C$.
 
 \begin{equation}
-  \Omega_{\epsilon} = \{(x,y,z) \in \mathbb{R}^3 ; (x,y) \in \omega, 0 \leq z \leq \epsilon h(x,y) \},
+  \Omega_{\epsilon} = \{(x,y,z) \in \mathbb{R}^3 ; (x,y) \in \omega, 0 < z < \epsilon h(x,y) \},
 \end{equation}
 
 where $\omega$ is a Lipschitz-domain in $\mathbb{R}^2$, and $h$ is a nonnegative Lipschitzian application.
@@ -87,7 +87,7 @@ In this equation $S$ represents a source term. From now on we will assume that $
     
     So we have a new domain
     
-    \[ \Omega =  \{(x_1,x_2,x_3) \in \mathbb{R}^3 ; (x_1,x_2) \in \omega, 0 \leq x_3 \leq h (x_1 , x_2) \},\]
+    \[ \Omega =  \{(x_1,x_2,x_3) \in \mathbb{R}^3 ; (x_1,x_2) \in \omega, 0 < x_3 < h (x_1 , x_2) \},\]
   
   \subsection{Rescaling due to a special choice of coordinate system}
   Here we exploit the fact that we chose the coordinate system in a way so that the $x$ axis matches the downwind direction. In this case we use an additional scaling equation, which is different in nature from the previous ones in the sense that it is not derived from the shallowness of the domain but rather suggested by the fact that in the downwind direction it is natural to assume that the diffusion is negligible compared to downwind transport, ie.
