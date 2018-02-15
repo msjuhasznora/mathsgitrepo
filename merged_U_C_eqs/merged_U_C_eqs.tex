@@ -184,7 +184,7 @@ An explanation of the boundary conditions:
     \begin{remark}
     If we wanted to use $C(x,y,z) = c$ with some $c$ constant value, we could make a change of variables distracting that background flow and arrive back to the same mathematical problem with $C$ being zero.
     \end{remark}
-    \item On the $z=0$ ground level we have $u_H = 0, u_3 = 0$ boundary conditions for the air velocity. This is the mathematical way of expressing no-slip boundary conditions for the horizontal wind speed and the impervious nature of the ground with respect to the wind. As for the concentration, the way we can choose ground level boundary conditions is the following. Firstly, we assume that the pollution is not absorbed by the ground, so we use $\partial_3 C = 0$ on $\Gamma_G$ (see also for example \cite{yeh1975three}). For the horizontal partial derivatives of the pollution, we can separate downwind and crosswind direction boundary conditions. In the crosswind direction we use $\partial_2 C = 0$ while in the downwind (stronger) direction our assumption is more relaxed, we only assume that $\partial_1 C$ is finite in the boundary norm, ie in $L^2 L^2 (0,T; \Gamma_G)$.
+    \item In this model we neglect topological variations, and the $z=0$ plane represents the lower boundary. On the ground level we have $u_H = 0, u_3 = 0$ boundary conditions for the air velocity. This is the mathematical way of expressing no-slip boundary conditions for the horizontal wind speed and the impervious nature of the ground with respect to the wind. As for the concentration, the way we can choose ground level boundary conditions is the following. Firstly, we assume that the pollution is not absorbed by the ground, so we use $\partial_3 C = 0$ on $\Gamma_G$ (see also for example \cite{yeh1975three}). For the horizontal partial derivatives of the pollution, we can separate downwind and crosswind direction boundary conditions. In the crosswind direction we use $\partial_2 C = 0$ while in the downwind (stronger) direction our assumption is more relaxed, we only assume that $\partial_1 C$ is finite in the boundary norm, ie in $L^2 L^2 (0,T; \Gamma_G)$.
   
   \end{itemize}
   
@@ -567,11 +567,19 @@ As for passing to the limit, everything is very similar to the inland version, e
 \[ \int_0 ^ T K_i \big[(\partial_i C^\epsilon - \partial_i C) \tilde{C} \big]_{\Gamma_I} dt\]
 
 %%% *** FUTURE WORK *** %%%
-\section{Future work}
+\section{Future work, remarks}
 
 \begin{itemize}
 
+  \item We mentioned a small ambiguity regarding where to cut the lower boundary of the domain we are considering. Other authors use the $z=0$ simplified ground level cut as well, such as \cite{hosseini2013}.
+
   \item Use more sophisticated ground-level boundary conditions instead of $\partial_3 C = 0$ in the inland case, for example \cite{monin1959boundary}.
+  
+  \item We could consider multiple contaminants.
+  
+  \item It is possible and not unreasonable in certain cases to use isotropic diffusivities $K_x = K_y = K_z$.
+  
+  \item It is option to simply take $K_x = 0$, without using $\epsilon$ as suggested by \cite{hosseini2013}, advection / convection effect being dominant compared to diffusion. It could also be possible to assume that $K_x = K_z$ due to symmetry (p16).
 
 \end{itemize}
 
