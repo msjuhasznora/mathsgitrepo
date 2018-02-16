@@ -591,11 +591,20 @@ If we assume $\partial_i C^\epsilon$ is a given constant on the lower boundary, 
 %%% *** TODO *** %%%
 \section{TODO}
 
-1.) Include B Hosseini thesis in the reference list, include 4 physics book in the reference list.
+\begin{enumerate}[label=(\roman*)]
 
-2.) $\mathbf{u} C$ product to be in $L^2$ in the hydrostatic weak formulation - spaces.
+  \item $\mathbf{u} C$ product to be in $L^2$ in the hydrostatic weak formulation - spaces.
 
-3.) trace theorem can be used with $\norm{u}_{W^{1,p}(U)}$ if $u$ is in that space, but in the inland case, $C^\epsilon$ is not in $H^1$ in space.
+  \item trace theorem can be used with $\norm{u}_{W^{1,p}(U)}$ if $u$ is in that space, but in the inland case, $C^\epsilon$ is not in $H^1$ in space.
+
+  \item Work on the mathematical description on the source term $S$ and give examples.
+
+  \item Appendix: Proof an existence, adding the pollution equation. What the reference article has showed is that the weak solutions converge to somewhere. Without having an existence theorem for the Navier-Stokes equations, it could be just converging to the empty set. The reference article states a convergence, but the existence is shown in the Temam article. We need to do the analogous version for the pollution. Show existence.
+
+  \item Solve the convergence part in the generalized, ocean version. Similarly as the wind is treated in the boundary. Check also the $u^\epsilon$ terms - on the boundary there was no need for convergence? 
+  When we say "a function $C^\epsilon$ is bounded on the boundary", what we mean truly is that there exists a function $g$ defined on the boundary, this function $g$ is for example in $H^1 (\Gamma_g)$, with this we have $\partial_1 g \in L^2$. Check if $C^\epsilon _ {\Gamma_g} = g \in H^1 (\Gamma_g)$ is enough for the convergence.
+
+\end{enumerate}
 
 \nocite{*}
 \bibliographystyle{apalike}
