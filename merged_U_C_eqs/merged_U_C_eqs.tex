@@ -26,7 +26,7 @@
 
 \begin{abstract}
 
-Considered as a geophysical fluid, the polluted atmosphere shares the shallow domain characteristics with other natural large-scale fluids such as seas and oceans. This means that its domain is excessively greater horizontally than in the vertical dimension, leading to the classic hydrostatic approximation of the Navier-Stokes equations. The authors of the \cite{azerad2001mathematical} article have proved a convergence theorem for this model with respect to the ocean, without considering pollution effects. In this present work we provide a generalization of their result, extending the fluid velocity equations with an additional convection-diffusion equation representing pollutants in the atmosphere.
+Considered as a geophysical fluid, the polluted atmosphere shares the shallow domain characteristics with other natural large-scale fluids such as seas and oceans. This means that its domain is excessively greater horizontally than in the vertical dimension, leading to the classic hydrostatic approximation of the Navier-Stokes equations. The authors of the \cite{azerad2001mathematical} article have proved a convergence theorem for this model with respect to the ocean, without considering pollution effects. In this present work we provide a generalization of their result translated to the atmosphere, extending the fluid velocity equations with an additional convection-diffusion equation representing pollutants in the atmosphere.
 
 \end{abstract}
 
@@ -42,13 +42,15 @@ Considered as a geophysical fluid, the polluted atmosphere shares the shallow do
 
 We investigate the convergence of the weak solutions for the merged motion-pollution atmosphere model. At this point the functions we work with are $\mathbf{v} = (\mathbf{v}_H, v_3)$, and $C$, representing velocity and concentration, respectively (we are not considering other variables such as water vapor quantity or temperature).
 
-We underline the fact that this work is for the case of $\textbf{inland}$ scenario. Even though the \cite{azerad2001mathematical} article works with the equations of the ocean, this work is the extension of that article in the sense that we transfer and exploit its main result for the case of the atmosphere, and for this reason it is the main reference article for this work.
+We underline the fact that this work is for the case of $\textbf{inland}$ scenario.
+
+Even though the \cite{azerad2001mathematical} article works with the equations of the ocean, this work is the extension of that article in the sense that we transfer and exploit its main result for the case of the atmosphere, and for this reason it is the main reference article for this work.
 
 \section{The equations describing the polluted atmosphere}
 
 The first step is to choose a coordinate system, set the domain we start with and an appropriate set of equations describing both atmosphere motions and the effect of pollution. The set of equations, the choice of the locally acceptable Cartesian coordinate system we are using for the velocity terms are similar to those suggested by our reference article. We ignore large scale effects such as the curvature of the Earth. For describing the effect of pollution we use a continuity equation written in Cartesian coordinates for the concentration.
 
-We fix the local Cartesian coordinate system to be adjusted to the downwind direction, ie. $z$ is the vertical direction, while $x$ is the downwind, $y$ is the crosswind direction. It is a legitimate thing to do if we are considering a time interval which is not too long in the sense that it is reasonable to assume that we have a permanent, relatively stable main wind direction. It is true that this is a certain restriction on the model, but as we will see later, exploiting this choice will help us simplify the model a bit.  
+We fix the local Cartesian coordinate system to be adjusted to the downwind direction, ie. $z$ is the vertical direction, while $x$ is the downwind, and $y$ is the crosswind direction. It is a legitimate thing to do if we are considering a time interval which is not too long in the sense that it is reasonable to assume that we have a permanent, relatively stable main wind direction. It is true that this is a certain restriction on the model, but as we will see later, exploiting this choice will help us simplify the model a bit.  
 
 Let us consider the following domain to begin with. This domain is a local slice of the atmosphere filled with homogeneous air that we assume to be incompressible, and a pollutant of concentration $C$.
 
@@ -180,7 +182,7 @@ An explanation of the boundary conditions:
   \begin{itemize}
   
       \item The upper boundary of the domain we are considering is chosen to be at the isobar representing the planetary boundary layer (\cite{arya2001introduction}), on this $p = p_0$ pressure level the upper boundary of the local domain is denoted by $\Gamma_U$. On $\Gamma_U$ we use $\bold{u}_H = 0, u_3 = 0, C(x,y,z) = 0$ boundary conditions.
-    \item On both sides the lateral boundary of the rectangle shaped $\Omega$ domain is given by $\Gamma_L$. Here we use the same boundary conditions as on the upper level, ie. we have $\bold{u}_H = 0, u_3 = 0, C(x,y,z) = 0$.
+    \item On $\Gamma_L$ we use the same boundary conditions as on the upper level, ie. we have $\bold{u}_H = 0, u_3 = 0, C(x,y,z) = 0$.
     \begin{remark}
     If we wanted to use $C(x,y,z) = c$ with some $c$ constant value, we could make a change of variables distracting that background flow and arrive back to the same mathematical problem with $C$ being zero.
     \end{remark}
@@ -288,7 +290,7 @@ We need to calculate the weak formulation of the merged equations in both the an
   
   for all $\mathbf{v} = (\mathbf{v}_H, v_3) \in H^1 (0,T;\mathbf{V})$ with $\mathbf{v}(T) = 0$ and $\tilde{C}$ such that $\tilde{C} \in H^1 (0,T, H^1)$ and $\tilde{C} (T) = 0$.
   
-  To pass to the limit in the terms that do not include pollution in the anisotropic equation has already been worked out in the \cite{azerad2001mathematical} article. What we need to work on is how to legitimately pass to the limit with the $C$ terms. To do this our first key tool will be the energy inequality. Once we have a priori estimates for the functions in the linear terms, we can pass to the limit with those without particular problems; the challenging part will be to prove convergence for the $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}^\epsilon)$ term, here we will need a stronger result than just the weak convergence of the present functions in the product.
+  To pass to the limit in the terms that do not include pollution in the anisotropic equation has already been worked out in the original article. What we need to work on is how to legitimately pass to the limit with the terms including the new function $C^\epsilon$. To do this our first key tool will be the energy inequality. Once we have a priori estimates for the functions in the linear terms, we can pass to the limit with those without particular problems; the challenging part will be to prove convergence for the $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}^\epsilon)$ term, here we will need a stronger result than just the weak convergence of the present functions in the product.
 
 \section{Energy inequality and a priori estimates}
 
@@ -347,10 +349,10 @@ Which means that the energy inequality takes the form of
   
   \begin{itemize}
   
-    \item $L_t^\infty L_x^2$ boundedness for $u_1, u_2, \epsilon u_3$,
-    \item $L_t^2 H_x^1$ boundedness for $u_1, u_2, \epsilon u_3$,
-    \item $L_t^\infty L_x^2$ boundedness for $C$,
-    \item $L_t^2 L_x^2$ boundedness for $\sqrt{\epsilon} \partial_1 C, \partial_2 C, \partial_3 C$.
+    \item $L_t^\infty L_x^2$ boundedness for $u^\epsilon_1, u^\epsilon_2, \epsilon u^\epsilon_3$,
+    \item $L_t^2 H_x^1$ boundedness for $u^\epsilon_1, u^\epsilon_2, \epsilon u^\epsilon_3$,
+    \item $L_t^\infty L_x^2$ boundedness for $C^\epsilon$,
+    \item $L_t^2 L_x^2$ boundedness for $\sqrt{\epsilon} \partial_1 C^\epsilon, \partial_2 C^\epsilon, \partial_3 C^\epsilon$.
   
   \end{itemize}
   
@@ -358,8 +360,8 @@ Which means that the energy inequality takes the form of
 
 \section{Passing to the limit}
 
-Passing to the limit is done without problems for the terms that do not include pollution term, since that has been proved before in the \cite{azerad2001mathematical} article.
-In the linear terms the weak convergence guaranteed by the a priori estimates will be enough. In the nonlinear term we need an additional result that provides a weak convergence of the product of functions for which we only had weak convergence separately.
+Passing to the limit is done without problems for the terms that do not include any pollution terms, since that had been worked out before.
+In the linear terms the weak convergence guaranteed by the a priori estimates will be sufficient. In the nonlinear term we need an additional result that provides a weak convergence of the product of functions for which we only have weak convergence separately.
 
   \subsection{Linear terms}
   
@@ -369,7 +371,7 @@ In the linear terms the weak convergence guaranteed by the a priori estimates wi
     
       \item The convergence of the $(C^\epsilon, \frac{\partial \tilde{C}}{\partial t})$ term is easy to see, since we have $C^\epsilon \rightharpoonup C$ in $L_t^\infty L_x^2$.
       
-      \item For the term we have $\epsilon K_1 \int_0 ^T (\partial_1 C^\epsilon, \partial_1 \tilde{C}) = \sqrt{\epsilon} K_1 \int_0 ^T (\sqrt{\epsilon} \partial_1 C^\epsilon, \partial_1 \tilde{C})$, which goes to 0 as $\epsilon \to 0$ because of the Cauchy-Schwartz inequality, since we have $\sqrt{\epsilon} \partial_1 C^\epsilon$ bounded in $L^2_t L^2_x$, and $\tilde{C}$ is a test function.
+      \item For the next term we have $\epsilon K_1 \int_0 ^T (\partial_1 C^\epsilon, \partial_1 \tilde{C}) = \sqrt{\epsilon} K_1 \int_0 ^T (\sqrt{\epsilon} \partial_1 C^\epsilon, \partial_1 \tilde{C})$, which goes to 0 as $\epsilon \to 0$ because of the Cauchy-Schwartz inequality, since we have $\sqrt{\epsilon} \partial_1 C^\epsilon$ bounded in $L^2_t L^2_x$, and $\tilde{C}$ is a test function.
       
       \item As we have seen before, we have $\partial_2 C^\epsilon \rightharpoonup \partial_2 C $ in $L_t^2 L_x^2$, which by definition provides that
     
@@ -415,14 +417,14 @@ In the linear terms the weak convergence guaranteed by the a priori estimates wi
    \begin{proof}
      We have seen from the a priori estimates that $C^\epsilon \rightharpoonup C$ in $L_t^\infty L_x^2$, and we know from the reference article that $u_i^\epsilon \rightharpoonup u_i$ in $L_t^2 L_x^2$.
      
-     Let's choose $q_1 = q_2 = p_1 = p_2 = 2.$ This is fine since we are on a finite domain, so $C^\epsilon \in L^\infty L^2$ implies $C^\epsilon \in L^2 L^2$.
+     Let us choose $q_1 = q_2 = p_1 = p_2 = 2.$ This is fine since we are on a finite domain, so $C^\epsilon \in L^\infty L^2$ implies $C^\epsilon \in L^2 L^2$.
      
      \begin{itemize}
      
        \item \textbf{Bound for the time derivative}.
          \[  \frac{\partial C^\epsilon}{\partial t} = - u^\epsilon \nabla C^\epsilon + \sqrt{\epsilon} \underbrace{K_1 \partial_1 \underbrace{\partial_1 \sqrt{\epsilon} C^\epsilon}_\text{$L^2$}}_\text{$W^{-1,2}$} + \underbrace{K_2 \partial_2 \underbrace{\partial_2 C^\epsilon}_\text{$L^2$}}_\text{$W^{-1,2}$} + \underbrace{K_3 \partial_3 \underbrace{\partial_3 C^\epsilon}_\text{$L^2$}}_\text{$W^{-1,2}$} -S \]
          
-         Since the $S$ source term was assumed to be very regular, we see that the second part of the right hand side is in $W^{-1,2}$. On the other hand, the first part is in $W^{-1,1}$, because we have
+         Since the $S$ source term was assumed to be regular, we see that the second part of the right hand side is in $W^{-1,2}$. On the other hand, the first part is in $W^{-1,1}$, because we have
          
          \[ u^\epsilon \nabla C^\epsilon = \underbrace{\nabla \cdot (\underbrace{u^\epsilon C^\epsilon}_{L^1})}_{W^{-1,1}} - \underbrace{\nabla \cdot (u^\epsilon)}_{0} C. \]
          
@@ -432,7 +434,7 @@ In the linear terms the weak convergence guaranteed by the a priori estimates wi
        
        First we show that for a function $f$ in the function space $C^\infty_0$ the condition holds.
        
-       \[ \norm{f(x + \xi) - f(x)}_{L^2} = (\int_\Omega \abs{f(x+\xi) - f(x)}^2 d x)^{1/2} \leq \]
+       \[ \norm{f(x + \xi) - f(x)}_{L^2} = \left(\int_\Omega \abs{f(x+\xi) - f(x)}^2 d x \right)^{1/2} \leq \]
        \[ \left(\int_\Omega ( \sup_x \abs{f(x+\xi) - f(x)} )^2 d \mathrm{x}\right)^{1/2} = \norm{f(x+\xi) - f(x)}_{L^\infty} \cdot {\abs{\Omega}} ^ {1/p }.\]
        
        So we have
@@ -482,15 +484,15 @@ We now will present a generalization of the previous model by applying the follo
 \end{tikzpicture}
 \end{figure}
 
-On the ground layer we naturally separate the boundary into two different parts in this model, $\Gamma_G = \Gamma_E \bigcup \Gamma_I$; $\Gamma_E$ denoting the part of the boundary above the ground, and $\Gamma_I$ denoting the section that is interacting with the sea. The separation is a sort of expansion or generalization of the ground boundary since while above ground parts it is reasonable to use no-slip conditions, above the ocean it is natural to assume that the wind has an interaction with the waves, there is no such rigidness as in the ground case. For this case we will include $\theta$, which represents the wind traction on the ocean surface. For the pollution concentration as well, above sea territory it is not natural to use $\partial_3 C = 0$, since the particles can now sink under the boundary level.
+On the ground layer we naturally separate the boundary into two different parts in this model, $\Gamma_G = \Gamma_E \bigcup \Gamma_I$; $\Gamma_E$ denoting the part of the boundary above the ground, and $\Gamma_I$ denoting the section that is interacting with the sea. The separation is a sort of expansion or generalization of the ground boundary since while above ground parts it is reasonable to use no-slip conditions, above the ocean it is natural to assume that the wind has an interaction with the waves, there is no such rigidness as in the ground case. For this cause we will include $\theta$, which represents the wind traction on the ocean surface. Analogously, we need to make similar changes for the pollution concentration as well, above sea territory it is not natural to use $\partial_3 C = 0$, since the particles can now sink under the boundary level.
 
-On $\Gamma_E$ we have the same boundary conditions as in the inland case, $\mathbf{u}^\epsilon = 0, \partial_3 C^\epsilon = 0, \partial_2 C^\epsilon = 0, \partial_1 C^\epsilon$ bounded. On $\Gamma_I$ on the other hand we have $\nu_3 \partial_3 \bold{u}^\epsilon_H = \theta_H, u_3 = 0$ with assuming a finite wind energy, ie the functions $\theta$ being in $L^2(0,T; H^{-1/2}(\Gamma_I))$. For the pollution concentration we use the same approach and assume that the functions $\partial_1 C^\epsilon, \partial_2 C^\epsilon, \partial_3 C^\epsilon$ are equal to some sufficiently regular, $\epsilon$-independent functions defined on the respective boundaries, so we have $\partial_1 C^\epsilon = \sigma_1$ on $\Gamma_G$, and $\partial_2 C^\epsilon = \sigma_2$, $\partial_3 C^\epsilon = \sigma_3$ on $\Gamma_I$ for functions $\sigma_1 \in L^2(0,T;H^1(\Gamma_G)), \sigma_2, \sigma_3 \in L^2(0,T;H^1(\Gamma_I))$.
+On $\Gamma_E$ we have the same boundary conditions as in the inland case, $\mathbf{u}^\epsilon = 0, \partial_3 C^\epsilon = 0, \partial_2 C^\epsilon = 0, \partial_1 C^\epsilon$ bounded. On $\Gamma_I$ on the other hand we have $\nu_3 \partial_3 \bold{u}^\epsilon_H = \theta_H, u_3 = 0$ with assuming a finite wind energy, ie the functions $\theta$ being in $L^2(0,T; H^{-1/2}(\Gamma_I))$. For the pollution concentration we use the same approach and assume that the functions $\partial_1 C^\epsilon, \partial_2 C^\epsilon, \partial_3 C^\epsilon$ are equal to some sufficiently regular, $\epsilon$-independent functions defined on the respective boundaries. More accurately, we assume that $C^\epsilon_{\Gamma_G} = \sigma$, where $\sigma \in L^2(0,T;H^1(\Gamma_G))$. If the partial derivatives of $\sigma$ are denoted by $\sigma_1, \sigma_2, \sigma_3$, we have $\partial_1 C^\epsilon = \sigma_1$ on $\Gamma_G$, and $\partial_2 C^\epsilon = \sigma_2$, $\partial_3 C^\epsilon = \sigma_3$ on $\Gamma_I$. (Of course $\sigma$ has to be a function such that we have $\sigma_2$ and $\sigma_3$ equal to zero on the $\Gamma_E$ part).
 
 We will discuss in more details the parts that are different from the inland case.
 
 \subsection{Weak formulation}
 
-The weak formulation of the coastal generalized systems will be different from the original inland version in that \textit{a)} it will contain a boundary term for the wind because of the air - ocean interface, \textit{b)} it will contain boundary terms for $\partial_2 C, \partial_3 C$, which had been assumed to be zero before on the ground, and finally \textit{c)} here the $\partial_1 C$ terms are present that were absent in the previous version because of the $\epsilon$ used in $K_x$. The terms which are new or different in this version are underlined.
+The weak formulation of the coastal generalized systems will be different from the original inland version in that \textit{a)} it will contain a boundary term for the wind because of the air - ocean interface, \textit{b)} it will contain boundary terms for $\partial_2 C, \partial_3 C$, which had been assumed to be zero before on the ground, and finally \textit{c)} here the $\partial_1 C$ terms are present that were absent in the previous version because of the $\epsilon$ used in $K_x$. For enhanced straightforwardness we have underlined the terms which are new or different in this version.
 
 \subsubsection{Anisotropic system}
 
@@ -525,31 +527,11 @@ The analogous terms that we saw in the weak formulation will be different in the
     & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \{    \norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \} d \tau + \\
     & \int_0 ^ t \{\underline{K_1} \norm{\partial_1 C^\epsilon}_{L^2}^2  + K_2 \norm{\partial_2 C^\epsilon}_{L^2}^2 + K_3 \norm{\partial_3 C^\epsilon}_{L^2}^2 \} d \tau \leq \\
     & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) + \int_0^t (S,C^\epsilon) d \tau - \underline{\int_0^t \langle \theta_H, \mathbf{u}_H \rangle _{\Gamma_I}}\\
-    & \int _ 0 ^ t \underline{K_1} \langle \partial_1 C^\epsilon, C^\epsilon \rangle_{\Gamma_G} + \underline{K_2 \langle \partial_2 C^\epsilon, C^\epsilon \rangle_{\Gamma_I} } + \underline{K_3 \langle \partial_3 C^\epsilon, C^\epsilon \rangle_{\Gamma_I} } d \tau
+    & \int _ 0 ^ t \underline{K_1} \langle \sigma_1, \sigma \rangle_{\Gamma_G} + \underline{K_2 \langle \sigma_2 , \sigma \rangle_{\Gamma_I} } + \underline{K_3 \langle \sigma_3, \sigma \rangle_{\Gamma_I} } d \tau
     \end{split}
   \end{equation} 
   
-Analogously as we estimated the boundary term in the energy inequality before, we can do the estimate
-  
-  \[ \int _ 0 ^ t K_i \langle \partial_i C^\epsilon, C^\epsilon \rangle_{\Gamma_I} d \tau \leq \frac{1}{\delta} \frac{K_i}{2} \int_0 ^ t \norm{\partial_i C^\epsilon}^2 _{L^2 (\Gamma_I)} + \delta \frac{K_i}{2} c_T (c_S + 1) \int_0 ^ t \norm{\nabla C^\epsilon}^2 _{L^2 (\Omega) } d \tau \]
-  
-for $i = 1,2,3.$
-The first term for every value of $i$ is ab ovo bounded, so it causes no trouble on the right hand side. The term containing the wind is also assumed to be bounded.
-
-Eventually we have
-
-  \begin{equation}
-    \begin{split}  
-    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \{    \norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \} d \tau + \\
-    & \int_0 ^ t \underline{ \{ (K_1 - \delta \frac{K_1 + K_2 + K_3}{2} c_T (c_S + 1)) \norm{\partial_1 C^\epsilon}_{L^2}^2}  + \\
-    & \underline{(K_2 - \delta \frac{K_1 + K_2 + K_3}{2} c_T (c_S + 1)) \norm{\partial_2 C^\epsilon}_{L^2}^2} + \\
-    & \underline{(K_3 - \delta \frac{K_1 + K_2 + K_3}{2} c_T (c_S + 1)) \norm{\partial_3 C^\epsilon}_{L^2}^2 \} } d \tau \leq \\
-    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) + \int_0^t (S,C^\epsilon) d \tau - \underline{\int_0^t \langle \theta_H, \mathbf{u}_H \rangle _{\Gamma_I}}\\
-    & \int _ 0 ^ t \underline{ \frac{1}{\delta_1} \frac{K_1}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)} } + \underline{ \frac{1}{\delta_2} \frac{K_2}{2} \int_0 ^ t \norm{\partial_2 C^\epsilon}^2 _{L^2 (\Gamma_I)}  } + \underline{ \frac{1}{\delta_3} \frac{K_3}{2} \int_0 ^ t \norm{\partial_3 C^\epsilon}^2 _{L^2 (\Gamma_I)} } d \tau
-    \end{split}
-  \end{equation}
-  
-Even though by first look the inequality seems different from the inland one, it basically provides the same estimates and weak convergences. We have
+Since the $\sigma$ boundary function is in $L^2 H^1$, we have boundedness on the right hand side. Even though by first look the inequality seems a bit different from the inland one, it practically provides the same estimates and weak convergences. We have
   
 \begin{itemize}
   
@@ -560,9 +542,13 @@ Even though by first look the inequality seems different from the inland one, it
   
 \end{itemize}
 
+\begin{remark}
+  Note that this version of the energy inequality has a sort of stability in function with respect to reintroducing $\epsilon$ as a multiplicator in $K_x$. In fact, if we have $\epsilon K_1$ again instead of $K_1$ in the inequality, it holds the same, and provides the same boundedness results as we saw in the inland case. This means that we can either use this fix coordinate system, but we can also go back to using a coordinate system matching the downwind direction and assuming that the flow is convection dominated (ie diffusion is negligable).
+\end{remark}
+
 \subsection{Passing to the limit}
 
-As for passing to the limit as $\epsilon \to 0$ in the coastal version of anisotropic system seen above, there is no mathematical novelty compared to the inland case.
+As for passing to the limit as $\epsilon \to 0$ in the coastal version of the anisotropic system seen above, there is no mathematical novelty compared to the inland case.
 
 %%% *** FUTURE WORK *** %%%
 \section{Future work, remarks}
@@ -595,7 +581,7 @@ As for passing to the limit as $\epsilon \to 0$ in the coastal version of anisot
   
   \item $\mathbf{u} C$ product to be in $L^2$ in the hydrostatic weak formulation - spaces.  
 
-  \item trace theorem can be used with $\norm{u}_{W^{1,p}(U)}$ if $u$ is in that space, but in the inland case, $C^\epsilon$ is not in $H^1$ in space.
+  \item The Trace theorem can be used with $\norm{u}_{W^{1,p}(U)}$ if $u$ is in that space, but in the inland case, $C^\epsilon$ is not a priori in the $H^1$ in space, we need to say something here when we pass from the line integral to the main domain.
   
 \end{enumerate}
 
