@@ -26,7 +26,7 @@
 
 \begin{abstract}
 
-Considered as a geophysical fluid, the polluted atmosphere shares the shallow domain characteristics with other natural large-scale fluids such as seas and oceans. This means that its domain is excessively greater horizontally than in the vertical dimension, leading to the classic hydrostatic approximation of the Navier-Stokes equations. The authors of the \cite{azerad2001mathematical} article have proved an existence theorem for this model with respect to the ocean, without considering pollution effects. In this present work we provide a generalization of their result, extending the fluid velocity equations with an additional convection-diffusion equation representing pollutants in the atmosphere.
+Considered as a geophysical fluid, the polluted atmosphere shares the shallow domain characteristics with other natural large-scale fluids such as seas and oceans. This means that its domain is excessively greater horizontally than in the vertical dimension, leading to the classic hydrostatic approximation of the Navier-Stokes equations. The authors of the \cite{azerad2001mathematical} article have proved a convergence theorem for this model with respect to the ocean, without considering pollution effects. In this present work we provide a generalization of their result, extending the fluid velocity equations with an additional convection-diffusion equation representing pollutants in the atmosphere.
 
 \end{abstract}
 
@@ -40,7 +40,7 @@ Considered as a geophysical fluid, the polluted atmosphere shares the shallow do
 %%%% INTRODUCTION %%%%
 \section{Introduction}
 
-We investigate the existence of a weak solution for the merged motion-pollution atmosphere model. At this point the functions we work with are $\mathbf{v} = (\mathbf{v}_H, v_3)$, and $C$, representing velocity and concentration, respectively (we are not considering other variables such as water vapor quantity or temperature).
+We investigate the convergence of the weak solutions for the merged motion-pollution atmosphere model. At this point the functions we work with are $\mathbf{v} = (\mathbf{v}_H, v_3)$, and $C$, representing velocity and concentration, respectively (we are not considering other variables such as water vapor quantity or temperature).
 
 We underline the fact that this work is for the case of $\textbf{inland}$ scenario. Even though the \cite{azerad2001mathematical} article works with the equations of the ocean, this work is the extension of that article in the sense that we transfer and exploit its main result for the case of the atmosphere, and for this reason it is the main reference article for this work.
 
@@ -227,7 +227,7 @@ In the paper of \cite{temam2005some}, on p35 it is suggested that the domain we 
 
 \begin{itemize}
   
-  \item The article of \cite{azerad2001mathematical} proved an existence theorem for weak solution of the equations describing the ocean without pollution. We can use a slightly modified version of this, translated to the inland atmosphere domain.
+  \item The article of \cite{azerad2001mathematical} proved a convergence theorem for weak solutions of the equations describing the ocean without pollution. We can use a modified version of this, translated to the polluted inland atmosphere domain.
   
   \begin{theorem}
   Let $\bold{u}_0$ $\in$ $L^2 (\Omega)^3$, with $\nabla \cdot \bold{u}_0 = 0, \bold{u}_0 \cdot \bold{n} = 0$ on $\partial \Omega$; there exists a weak solution $\bold{u}$ of the hydrostatic Navier-Stokes equations as the aspect ratio $\epsilon$ tends to $0$.
@@ -484,7 +484,7 @@ We now will present a generalization of the previous model by applying the follo
 
 On the ground layer we naturally separate the boundary into two different parts in this model, $\Gamma_G = \Gamma_E \bigcup \Gamma_I$; $\Gamma_E$ denoting the part of the boundary above the ground, and $\Gamma_I$ denoting the section that is interacting with the sea. The separation is a sort of expansion or generalization of the ground boundary since while above ground parts it is reasonable to use no-slip conditions, above the ocean it is natural to assume that the wind has an interaction with the waves, there is no such rigidness as in the ground case. For this case we will include $\theta$, which represents the wind traction on the ocean surface. For the pollution concentration as well, above sea territory it is not natural to use $\partial_3 C = 0$, since the particles can now sink under the boundary level.
 
-On $\Gamma_E$ we have the same boundary conditions as in the inland case, $\mathbf{u}^\epsilon = 0, \partial_3 C = 0, \partial_2 C = 0, \partial_1 C$ bounded. On $\Gamma_I$ on the other hand we have $\nu_3 \partial_3 \bold{u}^\epsilon_H = \theta_H, u_3 = 0$ and $\partial_1 C, \partial_2 C, \partial_3 C$ bounded in the boundary norm, similarly to what we saw in the inland model.
+On $\Gamma_E$ we have the same boundary conditions as in the inland case, $\mathbf{u}^\epsilon = 0, \partial_3 C^\epsilon = 0, \partial_2 C^\epsilon = 0, \partial_1 C^\epsilon$ bounded. On $\Gamma_I$ on the other hand we have $\nu_3 \partial_3 \bold{u}^\epsilon_H = \theta_H, u_3 = 0$ with assuming a finite wind energy, ie the functions $\theta$ being in $L^2(0,T; H^{-1/2}(\Gamma_I))$. For the pollution concentration we use the same approach and assume that the functions $\partial_1 C^\epsilon, \partial_2 C^\epsilon, \partial_3 C^\epsilon$ are equal to some sufficiently regular, $\epsilon$-independent functions defined on the respective boundaries, so we have $\partial_1 C^\epsilon = \sigma_1$ on $\Gamma_G$, and $\partial_2 C^\epsilon = \sigma_2$, $\partial_3 C^\epsilon = \sigma_3$ on $\Gamma_I$ for functions $\sigma_1 \in L^2(0,T;H^1(\Gamma_G)), \sigma_2, \sigma_3 \in L^2(0,T;H^1(\Gamma_I))$.
 
 We will discuss in more details the parts that are different from the inland case.
 
@@ -499,8 +499,8 @@ The weak formulation of the coastal generalized systems will be different from t
       & \int_0^T -(\mathbf{u}^\epsilon_H, \partial_t \mathbf{v}_H) + (\nabla_\nu \mathbf{u}^\epsilon_H, \nabla_\nu \mathbf{v}_H) - (\mathbf{u}^\epsilon_H, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{v}_H) + (b(\mathbf{u}^\epsilon_H), \mathbf{v}_H) dt \\
       & + \epsilon \beta \big[ \int_0 ^ T (u_3 ^\epsilon, v_1) - (u_1^\epsilon, v_3) \big] d t\\
       & + \epsilon^2 \big[ \int _0 ^ T -(u_3^\epsilon, \partial_t v_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, v_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu v_3) d t\big] \\
-      &+ \int_0^T -(C^\epsilon, \partial_t \tilde{C}^\epsilon) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}^\epsilon) + \underline {K_1} (\partial_1 C^\epsilon, \partial_1 \tilde{C}^\epsilon) - \underline {K_1} \big[(\partial_1 C^\epsilon) \tilde{C} \big] _{\Gamma_G} + \\
-      & K_2 (\partial_2 C^\epsilon, \partial_2 \tilde{C}^\epsilon) - \underline{ K_2 \big[(\partial_2 C^\epsilon) \tilde{C} \big]_{\Gamma_I}} + K_3 (\partial_3 C^\epsilon, \partial_3 \tilde{C}^\epsilon) - \underline{ K_3 \big[(\partial_3 C^\epsilon) \tilde{C} \big]_{\Gamma_I}} dt =\\
+      &+ \int_0^T -(C^\epsilon, \partial_t \tilde{C}^\epsilon) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}^\epsilon) + \underline {K_1} (\partial_1 C^\epsilon, \partial_1 \tilde{C}^\epsilon) - \underline {K_1} \langle \sigma_1 , \tilde{C} \rangle _{\Gamma_G} + \\
+      & K_2 (\partial_2 C^\epsilon, \partial_2 \tilde{C}^\epsilon) - \underline{ K_2 \langle \sigma_2 , \tilde{C} \rangle_{\Gamma_I}} + K_3 (\partial_3 C^\epsilon, \partial_3 \tilde{C}^\epsilon) - \underline{ K_3 \langle\sigma_3 , \tilde{C} \rangle_{\Gamma_I}} dt =\\
       & = - (\mathbf{u}^\epsilon_{0H}, \mathbf{v}^\epsilon_H(0)) -\underline{\int_0^T \langle \theta_H, \mathbf{v}_H \rangle_{\Gamma_I}} - \epsilon^2 (u_{03}^\epsilon, v_3^\epsilon (0)) - (C^\epsilon (0), \tilde{C} (0)) + \int_0^T (S,\tilde{C}) d t
     \end{split}
   \end{equation}
@@ -510,8 +510,8 @@ The weak formulation of the coastal generalized systems will be different from t
   \begin{equation}
     \begin{split}
       & \int_0^T -(\mathbf{u}_H, \partial_t \mathbf{v}_H) + (\nabla_\nu \mathbf{u}_H, \nabla_\nu \mathbf{v}_H) - (\mathbf{u}_H, (\mathbf{u} \cdot \nabla) \mathbf{v}_H) + (b(\mathbf{u}_H), \mathbf{v}_H) dt \\
-      &+ \int_0^T -(C, \partial_t \tilde{C}) -(\mathbf{u}C, \nabla \tilde{C}) + \underline{K_1 (\partial_1 C, \partial_1 \tilde{C}) - K_1 \big[(\partial_1 C) \tilde{C} \big]_{\Gamma_G}} + \\
-      & K_2 (\partial_2 C, \partial_2 \tilde{C}) - \underline{ K_2 \big[(\partial_2 C) \tilde{C} \big]_{\Gamma_I}} + K_3 (\partial_3 C, \partial_3 \tilde{C}) - \underline{ K_3 \big[(\partial_3 C) \tilde{C} \big]_{\Gamma_I}} dt =\\
+      &+ \int_0^T -(C, \partial_t \tilde{C}) -(\mathbf{u}C, \nabla \tilde{C}) + \underline{K_1 (\partial_1 C, \partial_1 \tilde{C}) - K_1 \langle \sigma_1 , \tilde{C} \rangle _{\Gamma_G}} + \\
+      & K_2 (\partial_2 C, \partial_2 \tilde{C}) - \underline{ K_2 \langle \sigma_2 , \tilde{C} \rangle_{\Gamma_I}} + K_3 (\partial_3 C, \partial_3 \tilde{C}) - \underline{ K_3 \langle\sigma_3 , \tilde{C} \rangle_{\Gamma_I}} dt =\\
       & = - (\mathbf{u}_{0H}, \mathbf{v}_H(0)) -\underline{\int_0^T \langle \theta_H, \mathbf{v}_H \rangle_{\Gamma_I}} - (C(0), \tilde{C}(0)) + \int_0^T (S,\tilde{C}) d t
     \end{split}
   \end{equation}
@@ -562,13 +562,7 @@ Even though by first look the inequality seems different from the inland one, it
 
 \subsection{Passing to the limit}
 
-As for passing to the limit, everything is very similar to the inland version, except for the terms $K_i \big[(\partial_i C^\epsilon) \tilde{C} \big]_{\Gamma_I}$.
-
-\[ \int_0 ^ T K_i \big[(\partial_i C^\epsilon - \partial_i C) \tilde{C} \big]_{\Gamma_I} dt \leq \]
-\[ \delta K_i \int_0 ^ T \norm{\partial_i C^\epsilon - \partial_i C}^2 _{L^2 (\Gamma_I)} + \frac{1}{\delta}  K_i c_T (c_S + 1) \int_0 ^ T \big \| \tilde{C} \big \| ^2 _{L^2 (\Gamma_I) } \]
-
-Since $\tilde{C}$ is a test function, we can assume that the second term disappears.
-If we assume $\partial_i C^\epsilon$ is a given constant on the lower boundary, then it would work.
+As for passing to the limit as $\epsilon \to 0$ in the coastal version of anisotropic system seen above, there is no mathematical novelty compared to the inland case.
 
 %%% *** FUTURE WORK *** %%%
 \section{Future work, remarks}
@@ -581,29 +575,28 @@ If we assume $\partial_i C^\epsilon$ is a given constant on the lower boundary, 
   
   \item We could consider multiple contaminants.
   
-  \item It is possible and not unreasonable in certain cases to use isotropic diffusivities $K_x = K_y = K_z$.
+  \item It is possible and not unreasonable in certain cases to use isotropic diffusivities $K_x = K_y = K_z \neq 0$.
   
-  \item It is option to simply take $K_x = 0$, without using $\epsilon$ as suggested by \cite{hosseini2013}, advection / convection effect being dominant compared to diffusion. It could also be possible to assume that $K_x = K_z$ due to symmetry (p16).
+  \item It is an option to simply take $K_x = 0$, without using $\epsilon$ as suggested by \cite{hosseini2013}, the advection/convection effect being dominant compared to diffusion. It could also be possible to assume that $K_x = K_z$ due to symmetry in some cases(p16).
 
 \end{itemize}
 
 
-%%% *** TODO *** %%%
-\section{TODO}
+%%% *** Todo *** %%%
+\section{Todo}
 
 \begin{enumerate}[label=(\roman*)]
 
-  \item $\mathbf{u} C$ product to be in $L^2$ in the hydrostatic weak formulation - spaces.
-
-  \item trace theorem can be used with $\norm{u}_{W^{1,p}(U)}$ if $u$ is in that space, but in the inland case, $C^\epsilon$ is not in $H^1$ in space.
-
   \item Work on the mathematical description on the source term $S$ and give examples.
 
-  \item Appendix: Proof an existence, adding the pollution equation. What the reference article has showed is that the weak solutions converge to somewhere. Without having an existence theorem for the Navier-Stokes equations, it could be just converging to the empty set. The reference article states a convergence, but the existence is shown in the Temam article. We need to do the analogous version for the pollution. Show existence.
+  \item Appendix: Proof an existence, adding the pollution equation. What the reference article has showed is that the weak solutions converge to the solution of the hydrostatic system. Without having an existence theorem for the hydrostatic Navier-Stokes equations, it could be just converging to the empty set. The reference article states only convergence, but the existence is shown in the Temam article, which it implicitly relies on. We need to do the analogous version for the existence for pollution. Show existence.
+  
+  \item Think: The aspect ratio going to zero makes sense on the global level, where we have 11 kms versus 40 thousand kilometers. But it seems to lose sense when we say we are dealing with a local model. In a local model the horizontal dimension is no longer as big, compared to the vertical.
+  
+  \item $\mathbf{u} C$ product to be in $L^2$ in the hydrostatic weak formulation - spaces.  
 
-  \item Solve the convergence part in the generalized, ocean version. Similarly as the wind is treated in the boundary. Check also the $u^\epsilon$ terms - on the boundary there was no need for convergence? 
-  When we say "a function $C^\epsilon$ is bounded on the boundary", what we mean truly is that there exists a function $g$ defined on the boundary, this function $g$ is for example in $H^1 (\Gamma_g)$, with this we have $\partial_1 g \in L^2$. Check if $C^\epsilon _ {\Gamma_g} = g \in H^1 (\Gamma_g)$ is enough for the convergence.
-
+  \item trace theorem can be used with $\norm{u}_{W^{1,p}(U)}$ if $u$ is in that space, but in the inland case, $C^\epsilon$ is not in $H^1$ in space.
+  
 \end{enumerate}
 
 \nocite{*}
