@@ -486,7 +486,7 @@ We now will present a generalization of the previous model by applying the follo
 
 On the ground layer we naturally separate the boundary into two different parts in this model, $\Gamma_G = \Gamma_E \bigcup \Gamma_I$; $\Gamma_E$ denoting the part of the boundary above the ground, and $\Gamma_I$ denoting the section that is interacting with the sea. The separation is a sort of expansion or generalization of the ground boundary since while above ground parts it is reasonable to use no-slip conditions, above the ocean it is natural to assume that the wind has an interaction with the waves, there is no such rigidness as in the ground case. For this cause we will include $\theta$, which represents the wind traction on the ocean surface. Analogously, we need to make similar changes for the pollution concentration as well, above sea territory it is not natural to use $\partial_3 C = 0$, since the particles can now sink under the boundary level.
 
-On $\Gamma_E$ we have the same boundary conditions as in the inland case, $\mathbf{u}^\epsilon = 0, \partial_3 C^\epsilon = 0, \partial_2 C^\epsilon = 0, \partial_1 C^\epsilon$ bounded. On $\Gamma_I$ on the other hand we have $\nu_3 \partial_3 \bold{u}^\epsilon_H = \theta_H, u_3 = 0$ with assuming a finite wind energy, ie the functions $\theta$ being in $L^2(0,T; H^{-1/2}(\Gamma_I))$. For the pollution concentration we use the same approach and assume that the functions $\partial_1 C^\epsilon, \partial_2 C^\epsilon, \partial_3 C^\epsilon$ are equal to some sufficiently regular, $\epsilon$-independent functions defined on the respective boundaries. More accurately, we assume that $C^\epsilon_{\Gamma_G} = \sigma$, where $\sigma \in L^2(0,T;H^1(\Gamma_G))$. If the partial derivatives of $\sigma$ are denoted by $\sigma_1, \sigma_2, \sigma_3$, we have $\partial_1 C^\epsilon = \sigma_1$ on $\Gamma_G$, and $\partial_2 C^\epsilon = \sigma_2$, $\partial_3 C^\epsilon = \sigma_3$ on $\Gamma_I$. (Of course $\sigma$ has to be a function such that we have $\sigma_2$ and $\sigma_3$ equal to zero on the $\Gamma_E$ part).
+On $\Gamma_E$ we have the same boundary conditions as in the inland case, $\mathbf{u}^\epsilon = 0, \partial_3 C^\epsilon = 0, \partial_2 C^\epsilon = 0, \partial_1 C^\epsilon$ bounded. On $\Gamma_I$ on the other hand we have $\nu_3 \partial_3 \bold{u}^\epsilon_H = \theta_H, u_3 = 0$ with assuming a finite wind energy, ie the functions $\theta$ being in $L^2(0,T; H^{-1/2}(\Gamma_I))$. For the pollution concentration we use the same approach and assume that the functions $\partial_1 C^\epsilon, \partial_2 C^\epsilon, \partial_3 C^\epsilon$ are equal to some sufficiently regular, $\epsilon$-independent functions defined on the respective boundaries. More accurately, we assume that we have a $C^\epsilon_{\Gamma_G} = \sigma$ sediment function on the lower boundary, where $\sigma \in L^2(0,T;H^1(\Gamma_G))$. If the partial derivatives of $\sigma$ are denoted by $\sigma_1, \sigma_2, \sigma_3$, we have $\partial_1 C^\epsilon = \sigma_1$ on $\Gamma_G$, and $\partial_2 C^\epsilon = \sigma_2$, $\partial_3 C^\epsilon = \sigma_3$ on $\Gamma_I$. (Of course $\sigma$ has to be a function such that we have $\sigma_2$ and $\sigma_3$ equal to zero on the $\Gamma_E$ part).
 
 We will discuss in more details the parts that are different from the inland case.
 
@@ -542,13 +542,56 @@ Since the $\sigma$ boundary function is in $L^2 H^1$, we have boundedness on the
   
 \end{itemize}
 
-\begin{remark}
-  Note that this version of the energy inequality has a sort of stability in function with respect to reintroducing $\epsilon$ as a multiplicator in $K_x$. In fact, if we have $\epsilon K_1$ again instead of $K_1$ in the inequality, it holds the same, and provides the same boundedness results as we saw in the inland case. This means that we can either use this fix coordinate system, but we can also go back to using a coordinate system matching the downwind direction and assuming that the flow is convection dominated (ie diffusion is negligable).
-\end{remark}
-
 \subsection{Passing to the limit}
 
 As for passing to the limit as $\epsilon \to 0$ in the coastal version of the anisotropic system seen above, there is no mathematical novelty compared to the inland case.
+
+\section{Convection dominated coastal model}
+
+Note that the previous version of the energy inequality (seaside scenario) has a sort of stability with respect to reintroducing $\epsilon$ as a factor in $K_x$. By this robustness we mean that if we have $\epsilon K_1$ again instead of $K_1$ in the inequality, it holds the same, and provides the same boundedness results as we saw in the inland case. This means that we can either use this "informationless", fix coordinate system, but we can also go back to using a coordinate system matching the downwind direction and assuming that the flow is convection dominated (ie diffusion is negligible).
+
+We can see that the differences are little compared to the coastal model without $\epsilon$-diffusion.
+
+We use a regular $\sigma$ function on the $\Gamma_G$ boundary, with $C^\epsilon = \sigma \in H^1 (\Gamma_G)$.
+
+Even if we used the inequality used in the inland case for estimating the $\partial_1 C^\epsilon $ boundary term, we would end up needing the $\frac{1}{\delta} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)}$ term to be bounded, which means that even considering that result, we still need $H^1$ regularity for $\sigma$ on the lower boundary, and the presence of the $\epsilon$ term does not help to relax it.
+
+\subsection{Anisotropic system}
+
+  \begin{equation}
+    \begin{split}
+      & \int_0^T -(\mathbf{u}^\epsilon_H, \partial_t \mathbf{v}_H) + (\nabla_\nu \mathbf{u}^\epsilon_H, \nabla_\nu \mathbf{v}_H) - (\mathbf{u}^\epsilon_H, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{v}_H) + (b(\mathbf{u}^\epsilon_H), \mathbf{v}_H) dt \\
+      & + \epsilon \beta \big[ \int_0 ^ T (u_3 ^\epsilon, v_1) - (u_1^\epsilon, v_3) \big] d t\\
+      & + \epsilon^2 \big[ \int _0 ^ T -(u_3^\epsilon, \partial_t v_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, v_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu v_3) d t\big] \\
+      &+ \int_0^T -(C^\epsilon, \partial_t \tilde{C}^\epsilon) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}^\epsilon) + \epsilon K_1 (\partial_1 C^\epsilon, \partial_1 \tilde{C}^\epsilon) - \epsilon K_1 \langle \sigma_1 , \tilde{C} \rangle _{\Gamma_G} + \\
+      & K_2 (\partial_2 C^\epsilon, \partial_2 \tilde{C}^\epsilon) - K_2 \langle \sigma_2 , \tilde{C} \rangle_{\Gamma_I} + K_3 (\partial_3 C^\epsilon, \partial_3 \tilde{C}^\epsilon) - K_3 \langle\sigma_3 , \tilde{C} \rangle_{\Gamma_I} dt =\\
+      & = - (\mathbf{u}^\epsilon_{0H}, \mathbf{v}^\epsilon_H(0)) - \int_0^T \langle \theta_H, \mathbf{v}_H \rangle_{\Gamma_I} - \epsilon^2 (u_{03}^\epsilon, v_3^\epsilon (0)) - (C^\epsilon (0), \tilde{C} (0)) + \int_0^T (S,\tilde{C}) d t
+    \end{split}
+  \end{equation}
+
+\subsection{Hydrostatic system}
+
+  \begin{equation}
+    \begin{split}
+      & \int_0^T -(\mathbf{u}_H, \partial_t \mathbf{v}_H) + (\nabla_\nu \mathbf{u}_H, \nabla_\nu \mathbf{v}_H) - (\mathbf{u}_H, (\mathbf{u} \cdot \nabla) \mathbf{v}_H) + (b(\mathbf{u}_H), \mathbf{v}_H) dt \\
+      &+ \int_0^T -(C, \partial_t \tilde{C}) -(\mathbf{u}C, \nabla \tilde{C}) + \\
+      & K_2 (\partial_2 C, \partial_2 \tilde{C}) - K_2 \langle \sigma_2 , \tilde{C} \rangle_{\Gamma_I} + K_3 (\partial_3 C, \partial_3 \tilde{C}) - K_3 \langle\sigma_3 , \tilde{C} \rangle_{\Gamma_I} dt =\\
+      & = - (\mathbf{u}_{0H}, \mathbf{v}_H(0)) -\int_0^T \langle \theta_H, \mathbf{v}_H \rangle_{\Gamma_I} - (C(0), \tilde{C}(0)) + \int_0^T (S,\tilde{C}) d t
+    \end{split}
+  \end{equation}
+
+\subsection{Energy inequality}
+
+  \begin{equation}
+    \begin{split}  
+    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \{    \norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \} d \tau + \\
+    & \int_0 ^ t \{\epsilon K_1 \norm{\partial_1 C^\epsilon}_{L^2}^2  + K_2 \norm{\partial_2 C^\epsilon}_{L^2}^2 + K_3 \norm{\partial_3 C^\epsilon}_{L^2}^2 \} d \tau \leq \\
+    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) + \int_0^t (S,C^\epsilon) d \tau - \int_0^t \langle \theta_H, \mathbf{u}_H \rangle _{\Gamma_I}\\
+    & \int _ 0 ^ t \epsilon K_1 \langle \sigma_1, \sigma \rangle_{\Gamma_G} + K_2 \langle \sigma_2 , \sigma \rangle_{\Gamma_I}  + K_3 \langle \sigma_3, \sigma \rangle_{\Gamma_I}  d \tau
+    \end{split}
+  \end{equation}
+  
+Since $\sigma$ is in $H^1$ on $\Gamma_G$, the right hand side is bounded, and we derive the same boundedness results as we had in the inland case. Passing to the limit works as before.
 
 %%% *** FUTURE WORK *** %%%
 \section{Future work, remarks}
@@ -581,7 +624,7 @@ As for passing to the limit as $\epsilon \to 0$ in the coastal version of the an
   
   \item $\mathbf{u} C$ product to be in $L^2$ in the hydrostatic weak formulation - spaces.  
 
-  \item The Trace theorem can be used with $\norm{u}_{W^{1,p}(U)}$ if $u$ is in that space, but in the inland case, $C^\epsilon$ is not a priori in the $H^1$ in space, we need to say something here when we pass from the line integral to the main domain.
+  \item Officially the Trace theorem can be used with $\norm{u}_{W^{1,p}(U)}$ if $u$ is in that space, but in the inland case, $C^\epsilon$ is not a priori in the $H^1$ in space, we need to say something here when we pass from the line integral to the main domain.
   
 \end{enumerate}
 
