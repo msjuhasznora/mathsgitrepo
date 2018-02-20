@@ -76,7 +76,7 @@ Contaminants emitted into the atmosphere are transported by the wind, mixed and 
   \partial_t C + \bold{v} \cdot \nabla C = K_x \frac{\partial ^2 C}{\partial x ^ 2} + K_y \frac{\partial ^2 C}{\partial y ^ 2} + K_z \frac{\partial ^2 C}{\partial z ^ 2} + S
 \end{equation}
 
-In this equation $S$ represents a source term. From now on we will assume that $S$ is as regular as needed. 
+In this equation $S$ represents a source term, from now on we will assume that $S$ is as regular as needed. 
     
 \section{Rescaling}
 
@@ -87,16 +87,16 @@ In this equation $S$ represents a source term. From now on we will assume that $
     \[\nu_x = \nu_1, \nu_y = \nu_2 , \nu_z = \epsilon ^ 2\nu_3 \]
     \[ K_z = \epsilon ^ 2 K_3 \]
     
-    So we have a new domain
+    So we have the following new domain
     
-    \[ \Omega =  \{(x_1,x_2,x_3) \in \mathbb{R}^3 ; (x_1,x_2) \in \omega, 0 < x_3 < h (x_1 , x_2) \},\]
+    \[ \Omega =  \{(x_1,x_2,x_3) \in \mathbb{R}^3 ; (x_1,x_2) \in \omega, 0 < x_3 < h (x_1 , x_2) \}.\]
   
   \subsection{Rescaling due to a special choice of coordinate system}
   Here we exploit the fact that we chose the coordinate system in a way so that the $x$ axis matches the downwind direction. In this case we use an additional scaling equation, which is different in nature from the previous ones in the sense that it is not derived from the shallowness of the domain but rather suggested by the fact that in the downwind direction it is natural to assume that the diffusion is negligible compared to downwind transport, ie.
     
     \begin{equation} \abs{u_1 \partial_{x_1} C} \gg \abs{ K_x \frac{\partial ^2 C}{\partial x_1 ^ 2} }\end{equation}
     which leads us to using
-    \[ K_x = \epsilon K_1\]
+    \[ K_x = \epsilon K_1.\]
     
     Putting this condition and the previously described rescaling terms together to the original equations, we arrive to the merged anisotropic equations of the polluted atmosphere above inland surface.
   
@@ -360,7 +360,7 @@ Which means that the energy inequality takes the form of
 
 \section{Passing to the limit}
 
-Passing to the limit is done without problems for the terms that do not include any pollution terms, since that had been worked out before.
+Passing to the limit is done without problems for the terms that do not include the pollution function, since that had been worked out before.
 In the linear terms the weak convergence guaranteed by the a priori estimates will be sufficient. In the nonlinear term we need an additional result that provides a weak convergence of the product of functions for which we only have weak convergence separately.
 
   \subsection{Linear terms}
@@ -554,7 +554,7 @@ We can see that the differences are little compared to the coastal model without
 
 We use a regular $\sigma$ function on the $\Gamma_G$ boundary, with $C^\epsilon = \sigma \in H^1 (\Gamma_G)$.
 
-Even if we used the inequality used in the inland case for estimating the $\partial_1 C^\epsilon $ boundary term, we would end up needing the $\frac{1}{\delta} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)}$ term to be bounded, which means that even considering that result, we still need $H^1$ regularity for $\sigma$ on the lower boundary, and the presence of the $\epsilon$ term does not help to relax it.
+Even if we used the inequality introduced in the inland case for estimating the $\partial_1 C^\epsilon $ boundary term, we would end up needing the $\frac{1}{\delta} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)}$ term to be bounded, which means that even considering that result, we still need $H^1$ regularity for $\sigma$ on the lower boundary, and the presence of the $\epsilon$ term does not help to relax it.
 
 \subsection{Anisotropic system}
 
@@ -618,15 +618,20 @@ Since $\sigma$ is in $H^1$ on $\Gamma_G$, the right hand side is bounded, and we
 
   \item Work on the mathematical description on the source term $S$ and give examples.
 
-  \item Appendix: Proof an existence, adding the pollution equation. What the reference article has showed is that the weak solutions converge to the solution of the hydrostatic system. Without having an existence theorem for the hydrostatic Navier-Stokes equations, it could be just converging to the empty set. The reference article states only convergence, but the existence is shown in the Temam article, which it implicitly relies on. We need to do the analogous version for the existence for pollution. Show existence.
-  
-  \item Think: The aspect ratio going to zero makes sense on the global level, where we have 11 kms versus 40 thousand kilometers. But it seems to lose sense when we say we are dealing with a local model. In a local model the horizontal dimension is no longer as big, compared to the vertical.
+  \item Appendix
   
   \item $\mathbf{u} C$ product to be in $L^2$ in the hydrostatic weak formulation - spaces.  
 
   \item Officially the Trace theorem can be used with $\norm{u}_{W^{1,p}(U)}$ if $u$ is in that space, but in the inland case, $C^\epsilon$ is not a priori in the $H^1$ in space, we need to say something here when we pass from the line integral to the main domain.
   
+  \item Add a section that covers issues regarding how physically meaningful the model is. \textit{(a)} What is our exact concept of what happens to the pollutants inside the domain, ie. what is the expectation for example after a relatively long time. \textit{(b)} Physical features such as we can not at the same time use $\epsilon$ in the inland domain where there is significant friction for the wind and not use $\epsilon$ at the ocean surface. \textit{(c)} The aspect ratio going to zero makes sense on the global level, where we have 11 kms versus 40 000 kms. But it seems like we need an extra argument when we say we are dealing with a local model. In a local model the horizontal dimension is no longer as big, compared to the vertical. The point is, in case we are considering for example a city, it is a very local domain with Cartesian coordinates, however we want to incorporate a feature that seems only legitimate when on a global scale.
+  
 \end{enumerate}
+
+\appendix
+\section{Appendix}
+
+Proof an existence, adding the pollution equation. What the reference article has showed is that the weak solutions converge to the solution of the hydrostatic system. Without having an existence theorem for the hydrostatic Navier-Stokes equations, it could be just converging to the empty set. The reference article states only convergence, but the existence is shown in the Temam article, which it implicitly relies on. We need to do the analogous version for the existence for pollution. Show existence.
 
 \nocite{*}
 \bibliographystyle{apalike}
