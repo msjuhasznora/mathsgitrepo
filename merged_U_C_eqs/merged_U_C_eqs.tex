@@ -629,9 +629,35 @@ Since $\sigma$ is in $H^1$ on $\Gamma_G$, the right hand side is bounded, and we
 \end{enumerate}
 
 \appendix
-\section{Appendix}
 
-Proof an existence, adding the pollution equation. What the reference article has showed is that the weak solutions converge to the solution of the hydrostatic system. Without having an existence theorem for the hydrostatic Navier-Stokes equations, it could be just converging to the empty set. The reference article states only convergence, but the existence is shown in the Temam article, which it implicitly relies on. We need to do the analogous version for the existence for pollution. Show existence.
+\section{The existence of weak solution of the hydrostatic system of the polluted atmosphere}
+
+What our reference article has showed is that the weak solutions converge to the solution of the hydrostatic system of the unpolluted ocean. Without having an existence theorem for the hydrostatic Navier-Stokes equations, the weak solutions of the anisotropic system could just be converging to the empty set. The reference article states only convergence, but the existence is implicitly assumed since it is a well-known result, and is shown for example in the \cite{temam2005some} article.
+
+To complete our work of expanding the original result describing the unpolluted ocean to a fluid containing a certain pollution concentration, we also need an existence theorem for the weak solutions of the hydrostatic system containing pollution.
+
+The idea is that the polluted atmosphere can be viewed as the air-analogous version of the salty sea water in terms of the equations that represent it. In both cases we have a fluid which can be seen approximately as a homogenous incompressible fluid carrying some other particles in a significant concentration, the basis fluid motion is well described by the incompressible Navier-Stokes equations, and the additional concentration is described by an advection-diffusion equation. 
+
+The paper of \cite{temam2005some} provides an existence result for an arbitrary time interval $[0, t_1]$ for the system describing the salty ocean water with temperature. The structure of the equations is essentially the same, if we drop the equation describing the temperature, we basically arrive to the same system that describes the polluted atmosphere.
+
+We will look in detail into the differences caused by altered concentration description part.
+
+Firstly, note that the equation describing the salinity concentration is exactly the same as the pollution convection-diffusion equation:
+
+\[ \frac{\partial S}{\partial t} + \nabla_{\mathbf{v}} S + w \frac{\partial S}{\partial z} - \mu_S \Delta S -\nu_S \frac{\partial ^ 2 S}{\partial z^2} = F_S.\]
+
+The differences: \textit{(a)} for the salinity they use a mean integral equals zero condition after a shift, which is not a big constriction, since the shift is can be reversed. And also, this is something that we use as well anyway, since we subtracted the background flow when discussing the boundary conditions. \textit{(b)} On every boundary they use a partial S equals zero in the outer direction. This coincides with our lower and upper boundary conditions, but on the lateral boundary we use a constant fix. Check: what is the difference that this causes in the terms that appear in the weak formulation, what is the effect. Other: Maybe we could actually switch as well from using Dirichlet BCs on the laterals to using Newton, see what changes in our original weak formulation.
+
+Three things to do: see what happens in theirs if we go with ours, see what happens with ours if we go with theirs.
+\begin{itemize}
+  \item Use the Temam, flux equals 0 Neumann BC. Then the existence is ok, since everything is the same. But what happens to the energy inequality and weak formulation. Also, see the remark later.
+  \item Use the C equals 0 Dirichlet BC, then we know the weak formulation and EIQ, but what happens to the existence.
+  \item Use the flux C equals const on the laterals. How does that change the weak formulation, the existence, and the EIQ.
+\end{itemize}
+
+\begin{remark}
+Note that the \cite{temam2005some} article works with the beta plane approximation, which is appropriate for example for midlatitude regional studies, where the curvature is minimal. If you take this as the idea, and consider a local part of the ocean, you will most likely not have genuine physical lateral boundaries for the ocean water in the model, such as would be a coast for example. But what he uses as a lateral boundary condition is: the salt flux is 0, which represents a wall-like boundary. What would be natural is salt flux = const, but it would of make things mathematically more complicated on the other hand. See, balance: physically meaningful, mathematically manageable. 
+\end{remark}
 
 \nocite{*}
 \bibliographystyle{apalike}
