@@ -68,6 +68,12 @@ Temam, R. and Ziane, M. (2005).
 \newblock Some mathematical problems in geophysical fluid dynamics.
 \newblock {\em Handbook of mathematical fluid dynamics}, 3:535--658.
 
+\bibitem[Wang et~al., 2014]{wang2014ocean}
+Wang, Q., Zhou, W., Wang, D., and Dong, D. (2014).
+\newblock Ocean model open boundary conditions with volume, heat and salinity
+  conservation constraints.
+\newblock {\em Advances in Atmospheric Sciences}, 31(1):188--196.
+
 \bibitem[Yeh and Huang, 1975]{yeh1975three}
 Yeh, G.-T. and Huang, C.-H. (1975).
 \newblock Three-dimensional air pollutant modeling in the lower atmosphere.

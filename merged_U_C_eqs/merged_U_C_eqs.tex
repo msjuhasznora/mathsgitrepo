@@ -194,6 +194,8 @@ An explanation of the boundary conditions:
 In the paper of \cite{temam2005some}, on p35 it is suggested that the domain we work on has the form of $p_0 < p < p_1$, because for the thin portion of air between the earth and the isobar $p = p_1$, another specific simplified model would be necessary. So a way to make the model more precise is to cut the domain at an isobar a little bit off the physical ground. This would of course radically change the boundary conditions we use for the functions, because it would take away the advantage of having a wall-like, natural and physical boundary condition for our domain to support it. If we are positively above the ground, $\partial_3 C = 0$ would represent a strange reflective layer.
 \end{remark}
 
+Note that we have a domain where the lower and upper boundaries represent a physically existent layer (ie the ground and the planetary boundary layer), but outside the lateral boundary the physical world continues without influence and without any particular external condition. On boundaries of such nature we have to apply OBCs (open boundary conditions), which is not a trivial task, see for example \cite{wang2014ocean}. We need to avoid any spurious reflection or constraint which is unnatural, but at the same time we want the model to remain mathematically manageable.
+
 \section{Hydrostatic Navier-Stokes plus pollution}
 
     \begin{equation}    
@@ -646,7 +648,7 @@ Firstly, note that the equation describing the salinity concentration is exactly
 
 \[ \frac{\partial S}{\partial t} + \nabla_{\mathbf{v}} S + w \frac{\partial S}{\partial z} - \mu_S \Delta S -\nu_S \frac{\partial ^ 2 S}{\partial z^2} = F_S.\]
 
-The differences: \textit{(a)} for the salinity they use a mean integral equals zero condition after a shift, which is not a big constriction, since the shift is can be reversed. And also, this is something that we use as well anyway, since we subtracted the background flow when discussing the boundary conditions. \textit{(b)} On every boundary they use a partial S equals zero in the outer direction. This coincides with our lower and upper boundary conditions, but on the lateral boundary we use a constant fix. Check: what is the difference that this causes in the terms that appear in the weak formulation, what is the effect. Other: Maybe we could actually switch as well from using Dirichlet BCs on the laterals to using Newton, see what changes in our original weak formulation.
+The differences: \textit{(a)} for the salinity they use a mean integral equals zero condition after a shift, which is not a big constriction, since the shift can be reversed. And also, this is something that we use as well anyway, since we subtracted the background flow when discussing the boundary conditions. \textit{(b)} On every boundary they use a partial S equals zero in the outer direction. This coincides with our lower and upper boundary conditions, but on the lateral boundary we use a constant fix. Check: what is the difference that this causes in the terms that appear in the weak formulation, what is the effect. Other: Maybe we could actually switch as well from using Dirichlet BCs on the laterals to using Newton, see what changes in our original weak formulation.
 
 Three things to do: see what happens in theirs if we go with ours, see what happens with ours if we go with theirs.
 \begin{itemize}
