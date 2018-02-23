@@ -6,8 +6,8 @@
 \usepackage{amsthm}
 \usepackage{enumitem}
 \usepackage{outlines}
-\setlist[enumerate,1]{label=\roman*)}
-\setlist[enumerate,2]{label=\alph*)}
+\setlist[enumerate,1]{label=\alph*)}
+\setlist[enumerate,2]{label=\roman*)}
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
 \newtheorem*{remark}{Remark}
@@ -609,6 +609,12 @@ Since $\sigma$ is in $H^1$ on $\Gamma_G$, the right hand side is bounded, and we
   \item It is possible and not unreasonable in certain cases to use isotropic diffusivities $K_x = K_y = K_z \neq 0$.
   
   \item It is an option to simply take $K_x = 0$, without using $\epsilon$ as suggested by \cite{hosseini2013}, the advection/convection effect being dominant compared to diffusion. It could also be possible to assume that $K_x = K_z$ due to symmetry in some cases(p16).
+  
+  \item Use the flux C equals const on the laterals. How does that change the weak formulation, the existence, and the EIQ.
+  
+  \item Try to apply the
+  \[ \frac{\partial \Phi}{\partial t} + u \frac{\partial \Phi}{\partial n} = 0 \]
+  radiation condition derived by the wave equation on the lateral boundary, where $u$ is the current in the direction to the normal to the boundary. This is suggested by \cite{marsaleix2006considerations} and \cite{wang2014ocean}.
 
 \end{itemize}
 
@@ -628,41 +634,42 @@ Since $\sigma$ is in $H^1$ on $\Gamma_G$, the right hand side is bounded, and we
   
   \item Add a section that covers issues regarding how physically meaningful the model is. \textit{(a)} What is our exact concept of what happens to the pollutants inside the domain, ie. what is the expectation for example after a relatively long time. \textit{(b)} Physical features such as we can not at the same time use $\epsilon$ in the inland domain where there is significant friction for the wind and not use $\epsilon$ at the ocean surface. \textit{(c)} The aspect ratio going to zero makes sense on the global level, where we have 11 kms versus 40 000 kms. But it seems like we need an extra argument when we say we are dealing with a local model. In a local model the horizontal dimension is no longer as big, compared to the vertical. The point is, in case we are considering for example a city, it is a very local domain with Cartesian coordinates, however we want to incorporate a feature that seems only legitimate when on a global scale.
   
+  \item: Think about this: Note that the \cite{temam2005some} article works with the beta plane approximation, which is appropriate for example for midlatitude regional studies, where the curvature is minimal. If you take this as the idea, and consider a local part of the ocean, you will most likely not have genuine physical lateral boundaries for the ocean water in the model, such as would be a coast for example. But what he uses as a lateral boundary condition is: the salt flux is 0, which represents a wall-like boundary. What would be natural is salt flux = const, but it would of make things mathematically more complicated on the other hand. See, balance: physically meaningful, mathematically manageable. 
+  
 \end{enumerate}
 
 \appendix
 
 \section{The existence of weak solution of the hydrostatic system of the polluted atmosphere}
 
-What our reference article has showed is that the weak solutions converge to the solution of the hydrostatic system of the unpolluted ocean. Without having an existence theorem for the hydrostatic Navier-Stokes equations, the weak solutions of the anisotropic system could just be converging to the empty set. The reference article states only convergence, but the existence is implicitly assumed since it is a well-known result, and is shown for example in the \cite{temam2005some} article.
+What we have showed is that the weak solutions converge to the solution of the hydrostatic system of the polluted atmosphere. Without having an existence theorem for the hydrostatic equations, the weak solutions of the anisotropic system could just be converging to the empty set. The reference article for unpolluted fluids states only the convergence part as well, but the existence is implicitly assumed since it is a well-known result.
 
-To complete our work of expanding the original result describing the unpolluted ocean to a fluid containing a certain pollution concentration, we also need an existence theorem for the weak solutions of the hydrostatic system containing pollution.
+To complete our work of expanding the original result to the case of a fluid containing a certain pollution concentration, we also need an existence theorem for the weak solutions of the hydrostatic system containing pollution.
 
 The idea is that the polluted atmosphere can be viewed as the air-analogous version of the salty sea water in terms of the equations that represent it. In both cases we have a fluid which can be seen approximately as a homogenous incompressible fluid carrying some other particles in a significant concentration, the basis fluid motion is well described by the incompressible Navier-Stokes equations, and the additional concentration is described by an advection-diffusion equation. 
 
-The paper of \cite{temam2005some} provides an existence result for an arbitrary time interval $[0, t_1]$ for the system describing the salty ocean water with temperature. The structure of the equations is essentially the same, if we drop the equation describing the temperature, we basically arrive to the same system that describes the polluted atmosphere.
+The paper of \cite{temam2005some} provides an existence result for an arbitrary time interval $[0, t_1]$ for the system describing the salty ocean water with temperature. The structure of the equations themselves describing the system is essentially the same, if we drop the equation describing the temperature, we basically arrive to the same system that describes the polluted atmosphere.
 
-We will look in detail into the differences caused by altered concentration description part.
+The differences are the following:
 
-Firstly, note that the equation describing the salinity concentration is exactly the same as the pollution convection-diffusion equation:
+\begin{enumerate}
+
+\item Boundary conditions: On every boundary they use a partial S equals zero in the outer direction. This coincides with our lower and upper boundary conditions, but on the lateral boundary we use a constant fix. Check: what is the difference that this causes in the terms that appear in the weak formulation, what is the effect. Other: Maybe we could actually switch as well from using Dirichlet BCs on the laterals to using Newton, see what changes in our original weak formulation.
+
+\item Spatial weak formulation: In the Temam article they use spatial weak formulation.
+
+\item The $K_1$ term: In the pollution equation the $K_1$ term is missing.
+
+\item Concentration mean integral: for the salinity they use a mean integral equals zero condition after a shift, which is not a big constriction, since the shift can be reversed. And also, this is something that we use as well anyway, since we subtracted the background flow when discussing the boundary conditions.
+
+\item The $K_C$ term: To get coercivity, in the weak formulation for the concentration part we multiply by $K_C \tilde{C}$, not just $\tilde{C}$.
+
+\end{enumerate}
+
+What needs to be done basically is to do the weak formulation our way, which means both space and time, and prove existence following the steps they did in their article for their version.
 
 \[ \frac{\partial S}{\partial t} + \nabla_{\mathbf{v}} S + w \frac{\partial S}{\partial z} - \mu_S \Delta S -\nu_S \frac{\partial ^ 2 S}{\partial z^2} = F_S.\]
 
-The differences: \textit{(a)} for the salinity they use a mean integral equals zero condition after a shift, which is not a big constriction, since the shift can be reversed. And also, this is something that we use as well anyway, since we subtracted the background flow when discussing the boundary conditions. \textit{(b)} On every boundary they use a partial S equals zero in the outer direction. This coincides with our lower and upper boundary conditions, but on the lateral boundary we use a constant fix. Check: what is the difference that this causes in the terms that appear in the weak formulation, what is the effect. Other: Maybe we could actually switch as well from using Dirichlet BCs on the laterals to using Newton, see what changes in our original weak formulation.
-
-Three things to do: see what happens in theirs if we go with ours, see what happens with ours if we go with theirs.
-\begin{itemize}
-  \item Use the Temam, flux equals 0 Neumann BC. Then the existence is ok, since everything is the same. But what happens to the energy inequality and weak formulation. Also, see the remark later.
-  \item Use the C equals 0 Dirichlet BC, then we know the weak formulation and EIQ, but what happens to the existence.
-  \item Use the flux C equals const on the laterals. How does that change the weak formulation, the existence, and the EIQ.
-  \item Try to apply the
-  \[ \frac{\partial \Phi}{\partial t} + u \frac{\partial \Phi}{\partial n} = 0 \]
-  radiation condition derived by the wave equation on the lateral boundary, where $u$ is the current in the direction to the normal to the boundary. This is suggested by \cite{marsaleix2006considerations} and \cite{wang2014ocean}.
-\end{itemize}
-
-\begin{remark}
-Note that the \cite{temam2005some} article works with the beta plane approximation, which is appropriate for example for midlatitude regional studies, where the curvature is minimal. If you take this as the idea, and consider a local part of the ocean, you will most likely not have genuine physical lateral boundaries for the ocean water in the model, such as would be a coast for example. But what he uses as a lateral boundary condition is: the salt flux is 0, which represents a wall-like boundary. What would be natural is salt flux = const, but it would of make things mathematically more complicated on the other hand. See, balance: physically meaningful, mathematically manageable. 
-\end{remark}
 
 \nocite{*}
 \bibliographystyle{apalike}
