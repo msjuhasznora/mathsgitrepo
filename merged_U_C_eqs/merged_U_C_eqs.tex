@@ -642,9 +642,9 @@ Since $\sigma$ is in $H^1$ on $\Gamma_G$, the right hand side is bounded, and we
 
 \section{The existence of weak solution of the hydrostatic system of the polluted atmosphere}
 
-What we have showed is that the weak solutions converge to the solution of the hydrostatic system of the polluted atmosphere. Without having an existence theorem for the hydrostatic equations, the weak solutions of the anisotropic system could just be converging to the empty set. The reference article for unpolluted fluids states only the convergence part as well, but the existence is implicitly assumed since it is a well-known result.
+What we have showed is that the weak solutions of the anisotropic system converge to the weak solution of the hydrostatic system of the polluted atmosphere. Without having an existence theorem for the hydrostatic equations, the weak solutions of the anisotropic system could just be converging to the empty set. The reference article for unpolluted fluids states only the convergence part as well, but the existence is implicitly assumed since it is a well-known result.
 
-To complete our work of expanding the original result to the case of a fluid containing a certain pollution concentration, we also need an existence theorem for the weak solutions of the hydrostatic system containing pollution.
+To complete our work of expanding the original result to the case of a fluid containing a certain pollution concentration, we also need an existence theorem for the weak solution of the hydrostatic system containing pollution.
 
 The idea is that the polluted atmosphere can be viewed as the air-analogous version of the salty sea water in terms of the equations that represent it. In both cases we have a fluid which can be seen approximately as a homogenous incompressible fluid carrying some other particles in a significant concentration, the basis fluid motion is well described by the incompressible Navier-Stokes equations, and the additional concentration is described by an advection-diffusion equation. 
 
@@ -654,22 +654,127 @@ The differences are the following:
 
 \begin{enumerate}
 
-\item Boundary conditions: On every boundary they use a partial S equals zero in the outer direction. This coincides with our lower and upper boundary conditions, but on the lateral boundary we use a constant fix. Check: what is the difference that this causes in the terms that appear in the weak formulation, what is the effect. Other: Maybe we could actually switch as well from using Dirichlet BCs on the laterals to using Newton, see what changes in our original weak formulation.
+\item Boundary conditions: On every boundary they use a zero flux for the salinity, $\frac{\partial S}{\partial \mathbf{n}_s} = 0$. This coincides with our lower boundary conditions, but on the lateral boundary we use a fix constant.
 
-\item Spatial weak formulation: In the Temam article they use spatial weak formulation.
+\item Spatial weak formulation: In the \cite{temam2005some} article they use spatial weak formulation and assume stronger regularities on the functions.
 
-\item The $K_1$ term: In the pollution equation the $K_1$ term is missing.
+\item The $K_1$ term: In the pollution equation the $K_1$ term is missing in our version of the concentration equation.
 
-\item Concentration mean integral: for the salinity they use a mean integral equals zero condition after a shift, which is not a big constriction, since the shift can be reversed. And also, this is something that we use as well anyway, since we subtracted the background flow when discussing the boundary conditions.
+\item Concentration mean integral: for the salinity they use a mean integral equals zero condition after a shift, which is not a big constriction, since the shift can be reversed. (This is something that we use as well anyway, since we subtracted the background flow when discussing the boundary conditions.)
 
-\item The $K_C$ term: To get coercivity, in the weak formulation for the concentration part we multiply by $K_C \tilde{C}$, not just $\tilde{C}$.
+\item The $K_C$ term: In order to have coercivity, in the weak formulation for the concentration part we multiply by $K_C \tilde{C}$, not just by $\tilde{C}$.
 
 \end{enumerate}
 
-What needs to be done basically is to do the weak formulation our way, which means both space and time, and prove existence following the steps they did in their article for their version.
+Remember that the weak formulation that we need an existence theorem for is
 
-\[ \frac{\partial S}{\partial t} + \nabla_{\mathbf{v}} S + w \frac{\partial S}{\partial z} - \mu_S \Delta S -\nu_S \frac{\partial ^ 2 S}{\partial z^2} = F_S.\]
+  \begin{equation}
+    \begin{split}
+      & \int_0^T -(\mathbf{u}_H, \partial_t \mathbf{v}_H) + (\nabla_\nu \mathbf{u}_H, \nabla_\nu \mathbf{v}_H) - (\mathbf{u}_H, (\mathbf{u} \cdot \nabla) \mathbf{v}_H) + (b(\mathbf{u}_H), \mathbf{v}_H) dt \\
+      &+ \int_0^T -(C, \partial_t \tilde{C}) -(\mathbf{u}C, \nabla \tilde{C}) + K_2 (\partial_2 C, \partial_2 \tilde{C}) + K_3 (\partial_3 C, \partial_3 \tilde{C}) dt =\\
+      & = - (\mathbf{u}_{0H}, \mathbf{v}_H(0)) - (C(0), \tilde{C}(0)) + \int_0^T (S,\tilde{C}) d t
+    \end{split}
+  \end{equation}
 
+While the form the article provides the result for has the form of
+
+\[ (\frac{d}{dt} U, \tilde{U})_H + a(U, \tilde{U}) + b(U,U,\tilde{U}) + e(U, \tilde{U}) = l(\tilde{U}),\]
+
+where the definition of the above terms can be found on page 21 in the article of \cite{temam2005some}. In this version the weak formulation is only performed in space, and the space derivatives are not in every case translated to the text function when it is possible.
+
+\textbf{Step 1.} The first step is to redefine the norms so that they match our system.
+
+\[ ((U, \tilde{U})) = ((v, \tilde{v}))_1 + K_C ((C, \tilde{C}))_2 \]
+
+\[ ((U, \tilde{U}))_1 = \int_0^T \int_\Omega \nabla_\nu v \nabla_\nu \tilde{v} d \omega d t \]
+
+\[ ((C, \tilde{C}))_2 = \int_0 ^ T \int _\Omega K_2 \partial_2 C \partial_2 \tilde{C} + K_3 \partial_3 C \partial_3 \tilde{C} d \omega dt \]
+
+\[\norm{U} = ((U,U)) ^ {1/2}\]
+
+\[ (U, \tilde{U}, U^{\#})_H = \int_0 ^ T \int _\Omega -v \tilde{v} - K_C C \tilde{C} d \omega dt - \int_\Omega v_{0} v^{\#} (0) d \Omega - \int_\Omega C(0) C^{\#} (0) d \omega\]
+
+\[\abs{U}_H = \abs{(U,U,U)_H}^{1/2}\]
+
+\begin{remark}
+The inner product on $H$ now can be defined as $(U, \tilde{U}, \tilde{U})$. We need three functions here instead of two because we have extra terms in this expression compared to the original article, namely the boundary terms which come from the weak formulation in the time domain. If we defined $(U,U)_H$ - as suggested by the original definition - as
+
+\[ (U, \tilde{U})_H = \int_0 ^ T \int _\Omega -v \tilde{v} - K_C C \tilde{C} d \omega dt - \int_\Omega v_{0} \tilde{v} (0) d \Omega - \int_\Omega C(0) \tilde{C} (0) d \omega,\]
+
+then with $(U, \frac{d}{dt}\tilde{U})_H$ we would have $\int_\Omega C(0) \partial_t \tilde{C} (0) d \omega$, which is not what we have in the weak formulation, so we need three functions as arguments instead of two.
+
+\end{remark}
+
+\textbf{Step 2.} With this, now the weak formulation of the polluted atmosphere can be brought to an analogous format as seen above:
+
+\[ (U, \frac{d}{dt} \tilde{U}, \tilde{U})_H + a(U, \tilde{U}) + b(U,U,\tilde{U}) + e(U, \tilde{U}) = l(\tilde{U}),\]
+
+with
+
+\[ a(U,\tilde{U}) = a_1 (U, \tilde{U}) + K_C a_2 (U, \tilde{U})\]
+
+\[ a_1 (U, \tilde{U}) = \int_0 ^T \int_\Omega \nabla_\nu v \nabla_\nu \tilde{v} d\omega dt\]
+
+\[ a_2 (U, \tilde{U}) = \int_0 ^T \int_\Omega K_2 \partial_2 C \partial_2 \tilde{C} + K_3 \partial_3 C \partial_3 \tilde{C} d\omega dt\]
+
+\[ b = b_1 + K_2 b_2\]
+
+\[ b_1 (U, \tilde{U}, U^\#) = - \int_0^T \int_\Omega (v \tilde{v} + v \tilde{w}) \nabla v^\# \]
+
+\[ b_2 (U, \tilde{U}, U^\#) = - \int_0^T \int_\Omega (v \tilde{C} + w \tilde{C}) \nabla C^\# \]
+
+\[ e(U, \tilde{U}) = \int_0^T \int_\Omega b(v) \tilde{v} d\omega dt \]
+
+\[ l(\tilde{U}) = - \int_0^T \int_\Omega S \tilde{C} d\omega dt. \]
+
+Here the term $b(\mathbf{u}_H) = \alpha (-u_2, u_1)$ represents the cross product, and we use the fact that the vertical velocity $w$ can be expressed as $w = w(v)$ because the divergence of the three dimensional velocity is zero.
+
+\textbf{Step 3.} The next step is to check if the properties that yield the foundation of the proof still hold. It is easy to see that $a$ is trilinear continuous, the coercivity of $a$ is also trivial, moreover $e$ is bilinear continuous and $e(U,U) = 0$.
+
+What changes slightly is the proof of the results available on the expression $b$ since the space derivatives in our case are applied on the test function.
+
+\begin{itemize}
+
+  \item To prove the bound for $U, \tilde{U} \in V, U^\# \in V_{(2)}$, in this case we can not use the $L_\infty$ bound on the third term, since we would eventually arrive to $\norm{C^\#}_{H^3}$, which means that we can not close the bound that way. We can use
+  
+  \[ \int_0^T \int_\Omega w \tilde{C} \nabla C^\# d \omega dt \leq c \int_0^T \norm{w}_{L^2} \big \| \tilde{C} \big \| _{L^4} \big \| \nabla C^\# \big \| _{L^4} dt \leq \]
+  \[ \leq c  \norm{U} \big \|\tilde{U}\big \| \int_0^T \big \|\nabla C^\#  \big \|_{H^1} dt \leq c \norm{U} \big \|\tilde{U}\big \| \big \| U^\# \big \|_{V^{(2)}} \]
+  
+  \item For $U, U^\#  \in V, \tilde{U} \in V_{(2)}$ we use
+  
+  \[ \int_0^T \int_\Omega w \tilde{C} \nabla C^\# d \omega dt \leq c \int_0 ^T \big \| \tilde{C} \big \| _{L^\infty} \norm{ w}_{L^2}\big \| \nabla C^\# \big \| _{L^2} dt  \leq c \norm{U} \big \|\tilde{U}\big \| _{V^{(2)}} \big \| U^\# \big \|,\]
+  
+  exploiting the fact that in $n=3$ we have $H^2 \subset L^\infty.$
+  
+  \item The proof of $b(U, \tilde{U}, U^\# ) = - b(U, U^\#, \tilde{U} )$ will be done for the concentration part. We use the integration by parts formula, observing that the boundary terms disappear, and finally using the fact that the divergence of the velocity is zero we arrive to
+  
+  \[ \int_0 ^T \int_\Omega (v \tilde{C} + w \tilde{C}) \nabla C^\# =  - \int_0 ^T \int_\Omega (v C^\# + w C^\# ) \nabla \tilde{C}, \]
+  
+  which is exactly what was needed.
+  
+  \item The establishment of the improvement of the first bound works the same way as in the original article, except that we don't apply the switch provided by the result of the previous point, ie we perform the estimate 
+  
+  \[ \int_0 ^ T \int_\Omega w \tilde{C} \nabla C^\# d \omega dt \leq \int_0 ^ T \norm{w}_{L^2} \big \| \tilde{C} \big \| _{L^3} \big \| \nabla C^\# \big \| _{L^6} dt,\]
+  
+  and after this everything follows the same way.
+
+\end{itemize}
+
+This means that all the basic results and properties of the functions $a, b, e$ still hold in this version.
+
+\textbf{Step 4.} The operator form of the equation.
+
+The change in this part of the proof is that we will need an additional operator $Z$ for the time derivative part. In the original version $\frac{dU}{dt}$ was used as an operator acting on $\tilde{U}$, the result defined to be their inner product. This time the time derivation is applied on the test function, so we will need the following operator $Z$:
+
+\[ < Z(U), \tilde{U}> = (U, \frac{d\tilde{U}}{dt}, \tilde{U})_H.\]
+
+With this the operator form of the equation is
+
+\[ ZU + AU + B(U,U) + EU = l.\]
+
+\textbf{Step 5.} The stationary case works as it worked in the original article, since the operator form of the new version is created in a way that $ZU$ contains all the time-related part, after dropping it we arrive to the same equation as in the original case.
+
+\textbf{Step 6.} Time-dependent case.
 
 \nocite{*}
 \bibliographystyle{apalike}
