@@ -776,6 +776,14 @@ With this the operator form of the equation is
 
 \textbf{Step 6.} Time-dependent case.
 
+The discretization in this case has the form of
+
+\[ (U^n, \frac{d\tilde{U}}{dt}, \tilde{U})_H + a(U^n, U^n) + b(U^n, U^n, \tilde{U}) + e(U^n, \tilde{U}) = l(\tilde{U}), \]
+
+since in this case we do not have the approximate time derivative on the solution function - instead it is applied on the test function, which is smooth enough that we can apply it directly.
+
+The existence of $U^n$ comes similarly from the time-independent result, then we pass to the limit.
+
 \nocite{*}
 \bibliographystyle{apalike}
 \bibliography{merged_U_C_eqs}
