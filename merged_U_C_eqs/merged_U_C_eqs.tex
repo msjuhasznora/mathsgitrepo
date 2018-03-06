@@ -132,7 +132,7 @@ In this equation $S$ represents a source term, from now on we will assume that $
     
 \section{Boundary conditions}
 
-It is vital to choose boundary conditions for the pollution concentration that are physically as accurate as possible and at the same time not unnecessarily complicated.
+It is vital to choose boundary conditions for the pollution concentration that are physically as accurate as possible and at the same time not unnecessarily complicated. As we can see in many other articles and as we will see later in this one, in the case of LAMs (limited area models) finding the right boundary conditions can be a nontrivial task.
 
 \begin{figure}[!h]
   \centering
@@ -614,7 +614,7 @@ Since $\sigma$ is in $H^1$ on $\Gamma_G$, the right hand side is bounded, and we
   
   \item Try to apply the
   \[ \frac{\partial \Phi}{\partial t} + u \frac{\partial \Phi}{\partial n} = 0 \]
-  radiation condition derived by the wave equation on the lateral boundary, where $u$ is the current in the direction to the normal to the boundary. This is suggested by \cite{marsaleix2006considerations} and \cite{wang2014ocean}.
+  radiation condition derived by the wave equation on the lateral boundary, where $u$ is the current in the direction to the normal to the boundary. This is suggested articles such as \cite{marsaleix2006considerations} and \cite{wang2014ocean}.
 
 \end{itemize}
 
@@ -681,6 +681,11 @@ While the equation the article provides the result for has the form of
 \[ (\frac{d}{dt} U, \tilde{U})_H + a(U, \tilde{U}) + b(U,U,\tilde{U}) + e(U, \tilde{U}) = l(\tilde{U}),\]
 
 where the definition of the above terms can be found on page 21 in the article of \cite{temam2005some}. In this version the weak formulation is only performed in space, and the space derivatives are not in every case translated to the text function when it is possible.
+
+What the above equation means for example for the salinity is 
+
+\[ \int_\mathcal{M} K_S \frac{d}{dt} S \cdot \tilde{S} d \mathcal{M} + K_S \int_\mathcal{M} (\mu_s \nabla S \nabla \tilde{S} + \nu_S \frac{\partial S}{\partial z}\frac{\partial \tilde{S}}{\partial z}) d \mathcal{M} +\]
+\[+ K_S \int _\mathcal{M} (v \nabla S + w \frac{\partial S}{\partial z}) \tilde{S} d\mathcal{M} = K_S \int_\mathcal{M} F_S \tilde{S} d\mathcal{M} + \big ( K_S \mu_S \frac{\partial S}{\partial x} \tilde{S} \big ) _{\Gamma_i} .\]
 
 \textbf{Step 1.} The first step is to redefine the norms so that they match our system.
 

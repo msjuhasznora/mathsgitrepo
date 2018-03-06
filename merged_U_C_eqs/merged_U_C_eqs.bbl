@@ -1,5 +1,10 @@
 \begin{thebibliography}{}
 
+\bibitem[Adams and Fournier, 2003]{adams2003sobolev}
+Adams, R.~A. and Fournier, J.~J. (2003).
+\newblock {\em Sobolev spaces}, volume 140.
+\newblock Academic press.
+
 \bibitem[Ali et~al., 1998]{ali1998partial}
 Ali, I., Kalla, S., and Khajah, H. (1998).
 \newblock A partial differential equation related to a problem in atmospheric
@@ -38,6 +43,11 @@ Goyal, P. and Kumar, A. (2011).
 Hosseini, B. (2013).
 \newblock Dispersion of pollutants in the atmosphere: a numerical study.
 \newblock Master's thesis, Simom Fraser University.
+
+\bibitem[Kathirgamanathan et~al., 2002]{kathirgamanathan2002source}
+Kathirgamanathan, P., McKibbin, R., and McLachlan, R. (2002).
+\newblock Source term estimation of pollution from an instantaneous point
+  source.
 
 \bibitem[Lions, 1996]{lions1996mathematical}
 Lions, P.-L. (1996).
@@ -85,5 +95,12 @@ Wang, Q., Zhou, W., Wang, D., and Dong, D. (2014).
 Yeh, G.-T. and Huang, C.-H. (1975).
 \newblock Three-dimensional air pollutant modeling in the lower atmosphere.
 \newblock {\em Boundary-Layer Meteorology}, 9(4):381--390.
+
+\bibitem[Zhuk et~al., 2016]{zhuk2016source}
+Zhuk, S., Tchrakian, T.~T., Moore, S., Ord{\'o}n͂ez-Hurtado, R., and Shorten,
+  R. (2016).
+\newblock On source-term parameter estimation for linear advection-diffusion
+  equations with uncertain coefficients.
+\newblock {\em SIAM Journal on Scientific Computing}, 38(4):A2334--A2356.
 
 \end{thebibliography}
