@@ -793,6 +793,28 @@ where $\psi$ is a function defined on $[0,T]$, used to create the time-dependent
 
 which is what we needed.
 
+\section{The regularity of the source term}
+
+The term $S$ represents the sources and sinks of pollutant in the atmosphere i.e. its emission, removal from the atmosphere by dry and wet deposition, chemical reactions. So far we always assumed that this source term is simply "regular enough", ie. is in $L^2_t L^2_x$ to perform the computations we needed. In this section we introduce functions that represent a pollution source reasonably well.
+
+\begin{enumerate}[label=(\roman*)]
+
+  \item One approach is to use the Dirac delta function to describe a pollutant released instantaneously from an elevated point source of strength $Q$ located at $(x^*, y^*, z^*)$: $S(x,y,z) = Q \delta (x-x^*) \delta (y-y^*) \delta (z - z^*).$ Another common notation for the source location in related articles is $(0,0,H).$ For example \cite{goyal2011mathematical} and \cite{kathirgamanathan2002source} use delta functions to mathematically grasp the pollution source (the former in a steady state model, no time is involved).
+
+  \item Another option is, as described in \cite{zhuk2016source}, is to use a Gaussian model, practically an approximate Dirac delta function. A gas plume with intensity $I$ originating at emission coordinates $\mathbf{x}^*$ begins at time $t^*$.
+At the beginning we assume zero concentration.
+An abrupt gas emission is modeled by a source term represented as a product of Gaussian functions (centered at $\mathbf{x}^*$ with standard deviation $\kappa$) and a Heaviside function $s$ (switching from 0 to $I$ at time $t^*.$)
+In fact, this source term models the continuous emission of the gas at constant rate and fixed location.
+Basically $s(t;t^*)$ is a function which activates the source, namely $s(t;t^*) := IH(t - t^*)$ where $H(\cdot)$ is the Heaviside step function and $0 \leq t^* \leq T.$
+Gaussian modeling of the source term: $s(t; t^*)g(\mathbf{x} - \mathbf{x_s})$. The shape of the source is given by the function $g$. We model the source by what is called a 'nascent delta function', that is a smooth function which converges to the delta function in the sense of distributions as $\kappa$ is close to zero. Specifically,
+
+\[ g(\mathbf{x}-\mathbf{x_s}) = C \kappa^{-1} e ^ {\frac{-(x-x^*)^2 - (y-y^*)^2 - (z-z^*)^2}{\kappa^2}},\]
+
+where $x_s = (x^*, y^*)$ is the source location, C is a normalization constant, and $\kappa$ is a small constant.
+
+This version of the source term is continuous and bounded on $\Omega$, it is actually in $L^\infty$ in space (and in $L^2$ as a consequence). Since the time dependence of this source is described by the Heaviside function, the time norm is finite as well.
+\end{enumerate}
+
 \nocite{*}
 \bibliographystyle{apalike}
 \bibliography{merged_U_C_eqs}
