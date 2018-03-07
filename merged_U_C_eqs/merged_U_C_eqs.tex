@@ -48,7 +48,19 @@ Even though the \cite{azerad2001mathematical} article works with the equations o
 
 \subsection{Notations}
 
-The most used notations.
+\begin{enumerate}
+
+\item $\epsilon = $ the aspect ratio which goes to zero
+\item $\nu = $ viscosity
+\item $\Omega_\epsilon, \Omega = $ the original and the rescaled, $\epsilon$-independent domain, respectively
+\item $g = $ represents the force due to gravity, which also includes the centrifugal effect
+\item $\mathbf{w}$ represents the earth rotation angular speed, $l(y) = $ latitude
+\item $\alpha = 2 f \sin (l(x_2))$, $\beta = 2 f \cos (l(x_2))$
+\item $( \cdot,\cdot) = $ the scalar product in $L^2(\Omega)^d$ or the duality $L^p (\Omega)$, $L^{p'} (\Omega)$
+\item $< \cdot,\cdot>_{\Gamma} = $ the scalar product or duality on the boundary curve $\Gamma$ ($H^{-1/2}(\Gamma)$, $H^{1/2}(\Gamma)$)
+\item $b(\mathbf{u}_H)$ = $\alpha (-u_2 , u_1)$
+
+\end{enumerate}
 
 \section{The equations describing the polluted atmosphere}
 
@@ -188,10 +200,6 @@ An explanation of the boundary conditions:
     \item In this model we neglect topological variations, and the $z=0$ plane represents the lower boundary. On the ground level we have $u_H = 0, u_3 = 0$ boundary conditions for the air velocity. This is the mathematical way of expressing no-slip boundary conditions for the horizontal wind speed and the impervious nature of the ground with respect to the wind. As for the concentration, the way we can choose ground level boundary conditions is the following. Firstly, we assume that the pollution is not absorbed by the ground, so we use $\partial_3 C = 0$ on $\Gamma_G$ (see also for example \cite{yeh1975three}). For the horizontal partial derivatives of the pollution, we can separate downwind and crosswind direction boundary conditions. In the crosswind direction we use $\partial_2 C = 0$ while in the downwind (stronger) direction our assumption is more relaxed, we only assume that $\partial_1 C$ is finite in the boundary norm, i.e. in $L^2 L^2 (0,T; \Gamma_G)$.
   
   \end{itemize}
-  
-\begin{remark}
-In the paper of \cite{temam2005some}, on p35 it is suggested that the domain we work on has the form of $p_0 < p < p_1$, because for the thin portion of air between the earth and the isobar $p = p_1$, another specific simplified model would be necessary. So a way to make the model more precise is to cut the domain at an isobar a little bit off the physical ground. This would of course radically change the boundary conditions we use for the functions, because it would take away the advantage of having a wall-like, natural and physical boundary condition for our domain to support it. If we are positively above the ground, $\partial_3 C = 0$ would represent a strange reflective layer.
-\end{remark}
 
 Note that we have a domain where the lower and upper boundaries represent a physically existent layer (i.e. the ground and the planetary boundary layer), but outside the lateral boundary the physical world continues without influence and without any particular external condition. On boundaries of such nature we have to apply OBCs (open boundary conditions), which is not a trivial task, see for example \cite{wang2014ocean}. We need to avoid any spurious reflection or constraint which is unnatural, but at the same time we want the model to remain mathematically manageable.
 
@@ -594,7 +602,11 @@ Even if we used the inequality introduced in the inland case for estimating the 
 Since $\sigma$ is in $H^1$ on $\Gamma_G$, the right hand side is bounded, and we derive the same boundedness results as we had in the inland case. Passing to the limit works as before.
 
 %%% *** FUTURE WORK *** %%%
-\section{Future work, remarks}
+\section{Future work, concluding remarks}
+
+\begin{remark}
+In the paper of \cite{temam2005some}, on p35 it is suggested that the domain we work on has the form of $p_0 < p < p_1$, because for the thin portion of air between the earth and the isobar $p = p_1$, another specific simplified model would be necessary. So a way to make the model more precise is to cut the domain at an isobar a little bit off the physical ground. This would of course radically change the boundary conditions we use for the functions, because it would take away the advantage of having a wall-like, natural and physical boundary condition for our domain to support it. If we are positively above the ground, $\partial_3 C = 0$ would represent a strange reflective layer.
+\end{remark}
 
 \begin{itemize}
 
