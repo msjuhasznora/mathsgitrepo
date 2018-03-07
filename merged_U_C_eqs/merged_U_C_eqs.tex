@@ -46,6 +46,10 @@ We underline the fact that this work is for the case of $\textbf{inland}$ scenar
 
 Even though the \cite{azerad2001mathematical} article works with the equations of the ocean, this work is the extension of that article in the sense that we transfer and exploit its main result for the case of the atmosphere, and for this reason it is the main reference article for this work.
 
+\subsection{Notations}
+
+The most used notations.
+
 \section{The equations describing the polluted atmosphere}
 
 The first step is to choose a coordinate system, set the domain we start with and an appropriate set of equations describing both atmosphere motions and the effect of pollution. The set of equations, the choice of the locally acceptable Cartesian coordinate system we are using for the velocity terms are similar to those suggested by our reference article. We ignore large scale effects such as the curvature of the Earth. For describing the effect of pollution we use a continuity equation written in Cartesian coordinates for the concentration.
@@ -78,9 +82,7 @@ Contaminants emitted into the atmosphere are transported by the wind, mixed and 
 
 In this equation $S$ represents a source term, from now on we will assume that $S$ is as regular as needed. 
     
-\section{Rescaling}
-
-  \subsection{Rescaling due to shallow domain}
+As usual in asymptotic analysis, we perform a vertical scaling to make the domain independent of $\epsilon.$
 
     \[x=x_1, y=x_2, z=\epsilon x_3 \]
     \[v_1 = u_1^{\epsilon}, v_2 = u_2^{\epsilon}, v_3 = \epsilon u_3^{\epsilon}, p = p^{\epsilon} \]
@@ -91,8 +93,7 @@ In this equation $S$ represents a source term, from now on we will assume that $
     
     \[ \Omega =  \{(x_1,x_2,x_3) \in \mathbb{R}^3 ; (x_1,x_2) \in \omega, 0 < x_3 < h (x_1 , x_2) \}.\]
   
-  \subsection{Rescaling due to a special choice of coordinate system}
-  Here we exploit the fact that we chose the coordinate system in a way so that the $x$ axis matches the downwind direction. In this case we use an additional scaling equation, which is different in nature from the previous ones in the sense that it is not derived from the shallowness of the domain but rather suggested by the fact that in the downwind direction it is natural to assume that the diffusion is negligible compared to downwind transport, i.e.
+As a second step of the rescaling process, here we also exploit the fact that we chose the coordinate system in a way so that the $x$ axis matches the downwind direction. In this case we use an additional scaling equation, which is different in nature from the previous ones in the sense that it is not derived from the shallowness of the domain but rather suggested by the fact that in the downwind direction it is natural to assume that the diffusion is negligible compared to downwind transport, i.e.
     
     \begin{equation} \abs{u_1 \partial_{x_1} C} \gg \abs{ K_x \frac{\partial ^2 C}{\partial x_1 ^ 2} }\end{equation}
     which leads us to using
@@ -100,9 +101,7 @@ In this equation $S$ represents a source term, from now on we will assume that $
     
     Putting this condition and the previously described rescaling terms together to the original equations, we arrive to the merged anisotropic equations of the polluted atmosphere above inland surface.
   
-  \subsection{Rescaled merged equations - Anisotropic Navier-Stokes plus pollution}
-  
-      \begin{equation}
+    \begin{equation}
     \partial_t u^\epsilon _1 + \bold{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\alpha u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
     \end{equation}
     
@@ -114,8 +113,12 @@ In this equation $S$ represents a source term, from now on we will assume that $
     \epsilon^2 \{  \partial_t u_3^\epsilon + \bold{u}^\epsilon \cdot \nabla u_3^\epsilon -\Delta_\nu u_3^{\epsilon} \} - \epsilon \beta u_1^\epsilon + \partial_3 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
     \end{equation}
     
-     \begin{equation}
+    \begin{equation}
     \nabla \cdot \bold{u}^\epsilon= 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation}
+    \partial_t C^\epsilon + \bold{u^\epsilon} \cdot \nabla C^\epsilon = \epsilon K_1 \frac{\partial ^2 C^\epsilon}{\partial x_1 ^ 2} + K_2 \frac{\partial ^2 C^\epsilon}{\partial x_2 ^ 2} + K_3 \frac{\partial ^2 C^\epsilon}{\partial x_3 ^ 2} + S \text{ in } \Omega \times (0,T)
     \end{equation}
     
     \begin{equation}
@@ -126,11 +129,7 @@ In this equation $S$ represents a source term, from now on we will assume that $
     \bold{u}^\epsilon (\cdot, t = 0) = \bold{u}_0, C^\epsilon (\cdot, t=0) = C^\epsilon_0  \text{ in } \Omega
     \end{equation}
     
-    \begin{equation}
-    \partial_t C^\epsilon + \bold{u^\epsilon} \cdot \nabla C^\epsilon = \epsilon K_1 \frac{\partial ^2 C^\epsilon}{\partial x_1 ^ 2} + K_2 \frac{\partial ^2 C^\epsilon}{\partial x_2 ^ 2} + K_3 \frac{\partial ^2 C^\epsilon}{\partial x_3 ^ 2} + S
-    \end{equation}
-    
-\section{Boundary conditions}
+To make the above set of equations complete, we need to decide on the boundary conditions for the pollution term.
 
 It is vital to choose boundary conditions for the pollution concentration that are physically as accurate as possible and at the same time not unnecessarily complicated. As we can see in many other articles and as we will see later in this one, in the case of LAMs (limited area models) finding the right boundary conditions can be a nontrivial task.
 
@@ -196,7 +195,7 @@ In the paper of \cite{temam2005some}, on p35 it is suggested that the domain we 
 
 Note that we have a domain where the lower and upper boundaries represent a physically existent layer (i.e. the ground and the planetary boundary layer), but outside the lateral boundary the physical world continues without influence and without any particular external condition. On boundaries of such nature we have to apply OBCs (open boundary conditions), which is not a trivial task, see for example \cite{wang2014ocean}. We need to avoid any spurious reflection or constraint which is unnatural, but at the same time we want the model to remain mathematically manageable.
 
-\section{Hydrostatic Navier-Stokes plus pollution}
+If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and $\epsilon$ in the anisotropic equations, we formally arrive to the hydrostatic Navier-Stokes equations combined with pollution.
 
     \begin{equation}    
     \partial_t u_1 + \bold{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\alpha u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T)
@@ -215,17 +214,16 @@ Note that we have a domain where the lower and upper boundaries represent a phys
     \end{equation}
     
     \begin{equation}    
+    \partial_t C + \bold{u} \cdot \nabla C = K_2 \frac{\partial ^2 C}{\partial x_2 ^ 2} + K_3 \frac{\partial ^2 C}{\partial x_3 ^ 2} + S \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation}    
     u_1 = u_2 = u_3 n_3 = 0 \text{ on } \Gamma \times (0,T)
     \end{equation}
     
     \begin{equation}    
     u_i (\cdot, t=0) = u_{0 i}, C (\cdot, t=0) = C_0 \text{ in } \Omega, \text{$i$ = 1,2}
     \end{equation}
-    
-    \begin{equation}    
-        \partial_t C + \bold{u} \cdot \nabla C = K_2 \frac{\partial ^2 C}{\partial x_2 ^ 2} + K_3 \frac{\partial ^2 C}{\partial x_3 ^ 2} + S
-    \end{equation}
-
 
 \section{Main theorem}
 
@@ -294,7 +292,7 @@ We need to calculate the weak formulation of the merged equations in both the an
   
   To pass to the limit in the terms that do not include pollution in the anisotropic equation has already been worked out in the original article. What we need to work on is how to legitimately pass to the limit with the terms including the new function $C^\epsilon$. To do this our first key tool will be the energy inequality. Once we have a priori estimates for the functions in the linear terms, we can pass to the limit with those without particular problems; the challenging part will be to prove convergence for the $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}^\epsilon)$ term, here we will need a stronger result than just the weak convergence of the present functions in the product.
 
-\section{Energy inequality and a priori estimates}
+\section{Proof of the main theorem}
 
   \subsection{Energy inequality}
   
@@ -360,12 +358,12 @@ Which means that the energy inequality takes the form of
   
   Because of the boundedness we have weak convergence, i.e. there are subsequences still denoted by the same way, for which we have $C^\epsilon \rightharpoonup C$ in $L_t^\infty L_x^2$, $\partial_2 C^\epsilon \rightharpoonup \partial_2 C $ and $\partial_3 C^\epsilon \rightharpoonup \partial_3 C $ in $L_t^2 L_x^2$, and $\sqrt{\epsilon} \partial_1 C^\epsilon \rightharpoonup e$ for some limit element $e$ in $L_t^2 L_x^2$.
 
-\section{Passing to the limit}
+\subsection{Passing to the limit}
 
 Passing to the limit is done without problems for the terms that do not include the pollution function, since that had been worked out before.
 In the linear terms the weak convergence guaranteed by the a priori estimates will be sufficient. In the nonlinear term we need an additional result that provides a weak convergence of the product of functions for which we only have weak convergence separately.
 
-  \subsection{Linear terms}
+  \subsubsection{Linear terms}
   
     For the linear terms we can directly apply the weak convergence results of the previous section.
   
@@ -387,7 +385,7 @@ In the linear terms the weak convergence guaranteed by the a priori estimates wi
       
     \end{enumerate}
   
-  \subsection{Nonlinear term}
+  \subsubsection{Nonlinear term}
   
   We need some sort of compactness theorem to handle $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C})$.
   
