@@ -605,12 +605,19 @@ Since $\sigma$ is in $H^1$ on $\Gamma_G$, the right hand side is bounded, and we
 \section{Future work, concluding remarks}
 
 \begin{remark}
-In the paper of \cite{temam2005some}, on p35 it is suggested that the domain we work on has the form of $p_0 < p < p_1$, because for the thin portion of air between the earth and the isobar $p = p_1$, another specific simplified model would be necessary. So a way to make the model more precise is to cut the domain at an isobar a little bit off the physical ground. This would of course radically change the boundary conditions we use for the functions, because it would take away the advantage of having a wall-like, natural and physical boundary condition for our domain to support it. If we are positively above the ground, $\partial_3 C = 0$ would represent a strange reflective layer.
+In the paper of \cite{temam2005some}, on p35 it is suggested that the domain we work on has the form of $p_0 < p < p_1$, because for the thin portion of air between the earth and the isobar $p = p_1$, another specific simplified model would be necessary. (However other authors use the $z=0$ simplified ground level cut as well, such as \cite{hosseini2013}) This means that a way to make the model more precise is to cut the domain at an isobar a little bit off the physical ground. This would of course radically change the boundary conditions we use for the functions (in fact it is not trivial how to change them for this case), because it would take away the advantage of having a wall-like, natural and physical boundary condition for our domain to support it. If we are positively above the ground, $\partial_3 C = 0$ would represent a strange reflective layer.
 \end{remark}
 
-\begin{itemize}
+\begin{remark}
+Note that the aspect ratio going to zero is not only legitimate on a global scale. When we switch from a global model to a local one in order to be able to use the beta plane approximation, we still have hundreds of thousands square kilometers versus 1---5 kilometers.
+\end{remark}
 
-  \item We mentioned a small ambiguity regarding where to cut the lower boundary of the domain we are considering. Other authors use the $z=0$ simplified ground level cut as well, such as \cite{hosseini2013}.
+\begin{remark}
+The \cite{temam2005some} article works with the beta plane approximation, which is appropriate for example for midlatitude regional studies, where the curvature is minimal. If we take this as the starting idea, and consider a local part of the ocean, we will most likely not have genuine physical lateral boundaries for the ocean water in the model, such as would be a coast for example. Nevertheless what the article uses as a lateral boundary condition is the salt flux being zero, which represents a wall-like boundary. What would possibly be more natural is the salt flux being constant, but it would naturally make things mathematically more complicated on the other hand. This is another example of how challenging it can be to find the right boundary terms when we are handling OBCs. 
+\end{remark}
+
+Future work:
+\begin{itemize}
 
   \item Use more sophisticated ground-level boundary conditions instead of $\partial_3 C = 0$ in the inland case, for example \cite{monin1959boundary}.
   
@@ -619,8 +626,6 @@ In the paper of \cite{temam2005some}, on p35 it is suggested that the domain we 
   \item It is possible and not unreasonable in certain cases to use isotropic diffusivities $K_x = K_y = K_z \neq 0$.
   
   \item It is an option to simply take $K_x = 0$, without using $\epsilon$ as suggested by \cite{hosseini2013}, the advection/convection effect being dominant compared to diffusion. It could also be possible to assume that $K_x = K_z$ due to symmetry in some cases(p16).
-  
-  \item Use the flux C equals const on the laterals. How does that change the weak formulation, the existence, and the EIQ.
   
   \item Try to apply the
   \[ \frac{\partial \Phi}{\partial t} + u \frac{\partial \Phi}{\partial n} = 0 \]
@@ -642,9 +647,7 @@ In the paper of \cite{temam2005some}, on p35 it is suggested that the domain we 
 
   \item Officially the Trace theorem can be used with $\norm{u}_{W^{1,p}(U)}$ if $u$ is in that space, but in the inland case, $C^\epsilon$ is not a priori in the $H^1$ in space, we need to say something here when we pass from the line integral to the main domain.
   
-  \item Add a section that covers issues regarding how physically meaningful the model is. \textit{(a)} What is our exact concept of what happens to the pollutants inside the domain, i.e. what is the expectation for example after a relatively long time. \textit{(b)} Physical features such as we can not at the same time use $\epsilon$ in the inland domain where there is significant friction for the wind and not use $\epsilon$ at the ocean surface. \textit{(c)} The aspect ratio going to zero makes sense on the global level, where we have 11 kms versus 40 000 kms. But it seems like we need an extra argument when we say we are dealing with a local model. In a local model the horizontal dimension is no longer as big, compared to the vertical. The point is, in case we are considering for example a city, it is a very local domain with Cartesian coordinates, however we want to incorporate a feature that seems only legitimate when on a global scale.
-  
-  \item: Think about this: Note that the \cite{temam2005some} article works with the beta plane approximation, which is appropriate for example for midlatitude regional studies, where the curvature is minimal. If you take this as the idea, and consider a local part of the ocean, you will most likely not have genuine physical lateral boundaries for the ocean water in the model, such as would be a coast for example. But what he uses as a lateral boundary condition is: the salt flux is 0, which represents a wall-like boundary. What would be natural is salt flux = const, but it would of make things mathematically more complicated on the other hand. See, balance: physically meaningful, mathematically manageable. 
+  \item This has to work: Physical features such as we can not at the same time use $\epsilon$ in the inland domain where there is significant friction for the wind and not use $\epsilon$ at the ocean surface.
   
 \end{enumerate}
 
