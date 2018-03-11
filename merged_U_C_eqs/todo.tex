@@ -1,0 +1,36 @@
+Todo.
+
+from today.
+1.) for the ocean: keep the H^1 sediment function and the epsilon. make a remark that by dropping the epsilon from the equations, the H^1 sediment function can be relaxed, we can do the same estimate with only using the partial derivate estimates.
+
+2.) drop the part where we use a wind-independent coordinate system, merge 6 and 7. 
+
+3.) in the introduction, add a plan of the paper.
+
+4.) remove subsubsection from linear terms, nonlinear terms
+
+5.) kappa = epsilon, stick to Gaussian, remark: others
+
+6.) move all information on the source term to the main part of the article
+
+7.) revisit all the places where S was used, rename it to S^\epsilon in the anisotropic places, say a few words when passing to the limit, or at the energy inequality, that since \tilde{C} is smooth, the application of delta just takes the value, the limit function is delta. explain it that while in the anisotropic case it is necessary to use the approximate function (C in the energy ieq), in the hydrostatic case we can use delta, since in the weak formulation we only multiply by \tilde{C}, which is continuous and fine.
+
+from the article.
+
+  \item $\mathbf{u} C$ product to be in $L^2$ in the hydrostatic weak formulation - spaces.  
+
+  \item Officially the Trace theorem can be used with $\norm{u}_{W^{1,p}(U)}$ if $u$ is in that space, but in the inland case, $C^\epsilon$ is not a priori in the $H^1$ in space, we need to say something here when we pass from the line integral to the main domain.
+  
+Future Work.
+
+  \item Use more sophisticated ground-level boundary conditions instead of $\partial_3 C = 0$ in the inland case, for example \cite{monin1959boundary}.
+  
+  \item We could consider multiple contaminants.
+  
+  \item It is possible and not unreasonable in certain cases to use isotropic diffusivities $K_x = K_y = K_z \neq 0$.
+  
+  \item It is an option to simply take $K_x = 0$, without using $\epsilon$ as suggested by \cite{hosseini2013}, the advection/convection effect being dominant compared to diffusion. It could also be possible to assume that $K_x = K_z$ due to symmetry in some cases(p16).
+  
+  \item Try to apply the
+  \[ \frac{\partial \Phi}{\partial t} + u \frac{\partial \Phi}{\partial n} = 0 \]
+  radiation condition derived by the wave equation on the lateral boundary, where $u$ is the current in the direction to the normal to the boundary. This is suggested articles such as \cite{marsaleix2006considerations} and \cite{wang2014ocean}.
