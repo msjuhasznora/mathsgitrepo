@@ -38,7 +38,7 @@ Considered as a geophysical fluid, the polluted atmosphere shares the shallow do
 \newpage
 
 %%%% INTRODUCTION %%%%
-\section{Introduction}
+\section{Introduction} \label{Introduction}
 
 We investigate the convergence of the weak solutions for the merged motion-pollution atmosphere model. At this point the functions we work with are $\mathbf{v} = (\mathbf{v}_H, v_3)$, and $C$, representing velocity and concentration, respectively (we are not considering other variables such as water vapor quantity or temperature).
 
@@ -46,7 +46,7 @@ We underline the fact that this work is for the case of $\textbf{inland}$ scenar
 
 Even though the \cite{azerad2001mathematical} article works with the equations of the ocean, this work is the extension of that article in the sense that we transfer and exploit its main result for the case of the atmosphere, and for this reason it is the main reference article for this work.
 
-This paper is organized in the following way. In section 2 we describe the physical model of the polluted atmosphere and the scaling leading to the hydrostatic equations. The main theorem is stated in section 3. In section 4 we describe the function spaces we work in and present the weak formulation. The main theorem's proof is described in section 5, and a generalized model is introduced in chapter 6. A few concluding remarks can be found in section 7, finally in the appendix of the article we present an existence result for the hydrostatic equations of the polluted atmosphere.
+This paper is organized in the following way. In section \ref{eqsdescribingatmpluspollution} we describe the physical model of the polluted atmosphere and the scaling leading to the hydrostatic equations. The main theorem is stated in section \ref{maintheorem}. In section \ref{weakformulation} we describe the function spaces we work in and present the weak formulation. The main theorem's proof is described in section \ref{proof}, and a generalized model is introduced in chapter \ref{convdomcoastal}. A few concluding remarks can be found in section \ref{concludingremarks}, finally in the appendix of the article we present an existence result for the hydrostatic equations of the polluted atmosphere.
 
 \subsection{Notations}
 
@@ -64,7 +64,7 @@ This paper is organized in the following way. In section 2 we describe the physi
 
 \end{enumerate}
 
-\section{The equations describing the polluted atmosphere}
+\section{The equations describing the polluted atmosphere} \label{eqsdescribingatmpluspollution}
 
 The first step is to choose a coordinate system, set the domain we start with and an appropriate set of equations describing both atmosphere motions and the effect of pollution. The set of equations, the choice of the locally acceptable Cartesian coordinate system we are using for the velocity terms are similar to those suggested by our reference article. We ignore large scale effects such as the curvature of the Earth. For describing the effect of pollution we use a continuity equation written in Cartesian coordinates for the concentration.
 
@@ -235,7 +235,7 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
     u_i (\cdot, t=0) = u_{0 i}, C (\cdot, t=0) = C_0 \text{ in } \Omega, \text{$i$ = 1,2}
     \end{equation}
 
-\section{Main theorem}
+\section{Main theorem} \label{maintheorem}
 
 \begin{itemize}
   
@@ -253,7 +253,7 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
   
 \end{itemize}
 
-\section{Weak formulation}
+\section{Weak formulation} \label{weakformulation}
 
 We need to calculate the weak formulation of the merged equations in both the anisotropic and hydrostatic case. Since this inland atmosphere model has slightly different boundary conditions even in the velocity equations than the model of the ocean, we will see that the weak formulation of our system has minor differences from the ocean scenario.
 
@@ -302,7 +302,7 @@ We need to calculate the weak formulation of the merged equations in both the an
   
   To pass to the limit in the terms that do not include pollution in the anisotropic equation has already been worked out in the original article. What we need to work on is how to legitimately pass to the limit with the terms including the new function $C^\epsilon$. To do this our first key tool will be the energy inequality. Once we have a priori estimates for the functions in the linear terms, we can pass to the limit with those without particular problems; the challenging part will be to prove convergence for the $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}^\epsilon)$ term, here we will need a stronger result than just the weak convergence of the present functions in the product.
 
-\section{Proof of the main theorem}
+\section{Proof of the main theorem} \label{proof}
 
   \subsection{Energy inequality}
   
@@ -460,17 +460,12 @@ In the linear terms the weak convergence guaranteed by the a priori estimates wi
      \end{itemize}
         
    \end{proof}
-  
-\section{A generalized model}
 
-We now will present a generalization of the previous model by applying the following modifications.
 
-\begin{itemize}
+%%% *** CONVECTION DOMINATED COASTAL MODEL *** %%%  
+\section{A generalized model} \label{convdomcoastal}
 
-  \item Drop the assumption about the coordinate system being fixed onto the main wind direction, i.e. drop the $\epsilon$ from $K_x$, \textemdash it comes from a specifically chosen coordinate system.
-  \item Adapt the model for coastal conditions.
-
-\end{itemize}
+We now will present the convection dominated coastal model, which is a generalization of the previous inland model by adapting the model for seaside conditions.
 
 \begin{figure}[!h]
 \centering
@@ -490,79 +485,15 @@ We now will present a generalization of the previous model by applying the follo
 \end{tikzpicture}
 \end{figure}
 
-On the ground layer we naturally separate the boundary into two different parts in this model, $\Gamma_G = \Gamma_E \bigcup \Gamma_I$; $\Gamma_E$ denoting the part of the boundary above the ground, and $\Gamma_I$ denoting the section that is interacting with the sea. The separation is a sort of expansion or generalization of the ground boundary since while above ground parts it is reasonable to use no-slip conditions, above the ocean it is natural to assume that the wind has an interaction with the waves, there is no such rigidness as in the ground case. For this cause we will include $\theta$, which represents the wind traction on the ocean surface. Analogously, we need to make similar changes for the pollution concentration as well, above sea territory it is not natural to use $\partial_3 C = 0$, since the particles can now sink under the boundary level.
+On the ground layer we naturally separate the boundary into two different parts in this model, $\Gamma_G = \Gamma_E \bigcup \Gamma_I$; $\Gamma_E$ denoting the part of the boundary above the ground, and $\Gamma_I$ denoting the section that is interacting with the sea. The separation is a sort of expansion or generalization of the ground boundary --- while above ground parts it is reasonable to use no-slip conditions, above the ocean it is natural to assume that the wind has an interaction with the waves, there is no such rigidness as in the ground case. For this cause we will include $\theta$, which represents the wind traction on the ocean surface. Analogously, we need to make similar changes for the pollution concentration as well, above sea territory it is not natural to use $\partial_3 C = 0$, since the particles can now sink under the boundary level.
 
 On $\Gamma_E$ we have the same boundary conditions as in the inland case, $\mathbf{u}^\epsilon = 0, \partial_3 C^\epsilon = 0, \partial_2 C^\epsilon = 0, \partial_1 C^\epsilon$ bounded. On $\Gamma_I$ on the other hand we have $\nu_3 \partial_3 \bold{u}^\epsilon_H = \theta_H, u_3 = 0$ with assuming a finite wind energy, i.e. the functions $\theta$ being in $L^2(0,T; H^{-1/2}(\Gamma_I))$. For the pollution concentration we use the same approach and assume that the functions $\partial_1 C^\epsilon, \partial_2 C^\epsilon, \partial_3 C^\epsilon$ are equal to some sufficiently regular, $\epsilon$-independent functions defined on the respective boundaries. More accurately, we assume that we have a $C^\epsilon_{\Gamma_G} = \sigma$ sediment function on the lower boundary, where $\sigma \in L^2(0,T;H^1(\Gamma_G))$. If the partial derivatives of $\sigma$ are denoted by $\sigma_1, \sigma_2, \sigma_3$, we have $\partial_1 C^\epsilon = \sigma_1$ on $\Gamma_G$, and $\partial_2 C^\epsilon = \sigma_2$, $\partial_3 C^\epsilon = \sigma_3$ on $\Gamma_I$. (Of course $\sigma$ has to be a function such that we have $\sigma_2$ and $\sigma_3$ equal to zero on the $\Gamma_E$ part).
 
 We will discuss in more details the parts that are different from the inland case.
 
-\subsection{Weak formulation}
+The weak formulation of the coastal generalized systems will be different from the original inland version in that \textit{a)} it will contain a boundary term for the wind because of the air - ocean interface, and \textit{b)} it will contain boundary terms for $\partial_2 C, \partial_3 C$, which had been assumed to be zero before on the ground.
 
-The weak formulation of the coastal generalized systems will be different from the original inland version in that \textit{a)} it will contain a boundary term for the wind because of the air - ocean interface, \textit{b)} it will contain boundary terms for $\partial_2 C, \partial_3 C$, which had been assumed to be zero before on the ground, and finally \textit{c)} here the $\partial_1 C$ terms are present that were absent in the previous version because of the $\epsilon$ used in $K_x$. For enhanced straightforwardness we have underlined the terms which are new or different in this version.
-
-\subsubsection{Anisotropic system}
-
-  \begin{equation}
-    \begin{split}
-      & \int_0^T -(\mathbf{u}^\epsilon_H, \partial_t \mathbf{v}_H) + (\nabla_\nu \mathbf{u}^\epsilon_H, \nabla_\nu \mathbf{v}_H) - (\mathbf{u}^\epsilon_H, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{v}_H) + (b(\mathbf{u}^\epsilon_H), \mathbf{v}_H) dt \\
-      & + \epsilon \beta \big[ \int_0 ^ T (u_3 ^\epsilon, v_1) - (u_1^\epsilon, v_3) \big] d t\\
-      & + \epsilon^2 \big[ \int _0 ^ T -(u_3^\epsilon, \partial_t v_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, v_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu v_3) d t\big] \\
-      &+ \int_0^T -(C^\epsilon, \partial_t \tilde{C}^\epsilon) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}^\epsilon) + \underline {K_1} (\partial_1 C^\epsilon, \partial_1 \tilde{C}^\epsilon) - \underline {K_1} \langle \sigma_1 , \tilde{C} \rangle _{\Gamma_G} + \\
-      & K_2 (\partial_2 C^\epsilon, \partial_2 \tilde{C}^\epsilon) - \underline{ K_2 \langle \sigma_2 , \tilde{C} \rangle_{\Gamma_I}} + K_3 (\partial_3 C^\epsilon, \partial_3 \tilde{C}^\epsilon) - \underline{ K_3 \langle\sigma_3 , \tilde{C} \rangle_{\Gamma_I}} dt =\\
-      & = - (\mathbf{u}^\epsilon_{0H}, \mathbf{v}^\epsilon_H(0)) -\underline{\int_0^T \langle \theta_H, \mathbf{v}_H \rangle_{\Gamma_I}} - \epsilon^2 (u_{03}^\epsilon, v_3^\epsilon (0)) - (C^\epsilon (0), \tilde{C} (0)) + \int_0^T (S,\tilde{C}) d t
-    \end{split}
-  \end{equation}
-
-\subsubsection{Hydrostatic system}
-
-  \begin{equation}
-    \begin{split}
-      & \int_0^T -(\mathbf{u}_H, \partial_t \mathbf{v}_H) + (\nabla_\nu \mathbf{u}_H, \nabla_\nu \mathbf{v}_H) - (\mathbf{u}_H, (\mathbf{u} \cdot \nabla) \mathbf{v}_H) + (b(\mathbf{u}_H), \mathbf{v}_H) dt \\
-      &+ \int_0^T -(C, \partial_t \tilde{C}) -(\mathbf{u}C, \nabla \tilde{C}) + \underline{K_1 (\partial_1 C, \partial_1 \tilde{C}) - K_1 \langle \sigma_1 , \tilde{C} \rangle _{\Gamma_G}} + \\
-      & K_2 (\partial_2 C, \partial_2 \tilde{C}) - \underline{ K_2 \langle \sigma_2 , \tilde{C} \rangle_{\Gamma_I}} + K_3 (\partial_3 C, \partial_3 \tilde{C}) - \underline{ K_3 \langle\sigma_3 , \tilde{C} \rangle_{\Gamma_I}} dt =\\
-      & = - (\mathbf{u}_{0H}, \mathbf{v}_H(0)) -\underline{\int_0^T \langle \theta_H, \mathbf{v}_H \rangle_{\Gamma_I}} - (C(0), \tilde{C}(0)) + \int_0^T (S,\tilde{C}) d t
-    \end{split}
-  \end{equation}
-
-\subsection{Energy inequality}
-
-The analogous terms that we saw in the weak formulation will be different in the energy inequality as well. The coastal, generalized version of the energy inequality will be the following. The different parts are again noted by underline.
-
-  \begin{equation}
-    \begin{split}  
-    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \{    \norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \} d \tau + \\
-    & \int_0 ^ t \{\underline{K_1} \norm{\partial_1 C^\epsilon}_{L^2}^2  + K_2 \norm{\partial_2 C^\epsilon}_{L^2}^2 + K_3 \norm{\partial_3 C^\epsilon}_{L^2}^2 \} d \tau \leq \\
-    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) + \int_0^t (S,C^\epsilon) d \tau - \underline{\int_0^t \langle \theta_H, \mathbf{u}_H \rangle _{\Gamma_I}}\\
-    & \int _ 0 ^ t \underline{K_1} \langle \sigma_1, \sigma \rangle_{\Gamma_G} + \underline{K_2 \langle \sigma_2 , \sigma \rangle_{\Gamma_I} } + \underline{K_3 \langle \sigma_3, \sigma \rangle_{\Gamma_I} } d \tau
-    \end{split}
-  \end{equation} 
-  
-Since the $\sigma$ boundary function is in $L^2 H^1$, we have boundedness on the right hand side. Even though by first look the inequality seems a bit different from the inland one, it practically provides the same estimates and weak convergences. We have
-  
-\begin{itemize}
-  
-  \item $L_t^\infty L_x^2$ boundedness for $u^\epsilon_1, u^\epsilon_2, \epsilon u^\epsilon_3$,
-  \item $L_t^2 H_x^1$ boundedness for $u^\epsilon_1, u^\epsilon_2, \epsilon u^\epsilon_3$,
-  \item $L_t^\infty L_x^2$ boundedness for $C^\epsilon$,
-  \item $L_t^2 L_x^2$ boundedness for $ \partial_1 C^\epsilon, \partial_2 C^\epsilon, \partial_3 C^\epsilon$, basically we have $L_t^2 H_x^1$ boundedness for $C^\epsilon$.
-  
-\end{itemize}
-
-\subsection{Passing to the limit}
-
-As for passing to the limit as $\epsilon \to 0$ in the coastal version of the anisotropic system seen above, there is no mathematical novelty compared to the inland case.
-
-\section{Convection dominated coastal model}
-
-Note that the previous version of the energy inequality (seaside scenario) has a sort of stability with respect to reintroducing $\epsilon$ as a factor in $K_x$. By this robustness we mean that if we have $\epsilon K_1$ again instead of $K_1$ in the inequality, it holds the same, and provides the same boundedness results as we saw in the inland case. This means that we can either use this "informationless", fix coordinate system, but we can also go back to using a coordinate system matching the downwind direction and assuming that the flow is convection dominated (i.e. diffusion is negligible).
-
-We can see that the differences are little compared to the coastal model without $\epsilon$-diffusion.
-
-We use a regular $\sigma$ function on the $\Gamma_G$ boundary, with $C^\epsilon = \sigma \in H^1 (\Gamma_G)$.
-
-Even if we used the inequality introduced in the inland case for estimating the $\partial_1 C^\epsilon $ boundary term, we would end up needing the $\frac{1}{\delta} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)}$ term to be bounded, which means that even considering that result, we still need $H^1$ regularity for $\sigma$ on the lower boundary, and the presence of the $\epsilon$ term does not help to relax it.
-
-\subsection{Anisotropic system}
+The weak form of the anisotropic system is the following.
 
   \begin{equation}
     \begin{split}
@@ -575,7 +506,7 @@ Even if we used the inequality introduced in the inland case for estimating the 
     \end{split}
   \end{equation}
 
-\subsection{Hydrostatic system}
+The weak version of the hydrostatic equations:
 
   \begin{equation}
     \begin{split}
@@ -586,7 +517,7 @@ Even if we used the inequality introduced in the inland case for estimating the 
     \end{split}
   \end{equation}
 
-\subsection{Energy inequality}
+The analogous terms that we saw in the weak formulation will be different in the energy inequality as well. The coastal, generalized version of the energy inequality becomes the following.
 
   \begin{equation}
     \begin{split}  
@@ -597,10 +528,25 @@ Even if we used the inequality introduced in the inland case for estimating the 
     \end{split}
   \end{equation}
   
-Since $\sigma$ is in $H^1$ on $\Gamma_G$, the right hand side is bounded, and we derive the same boundedness results as we had in the inland case. Passing to the limit works as before.
+Since the $\sigma$ boundary function is in $L^2 H^1$, we have boundedness on the right hand side. Even though by first look the inequality seems a bit different from the inland one, it practically provides the same estimates and weak convergences. We have
+  
+\begin{itemize}
+  
+  \item $L_t^\infty L_x^2$ boundedness for $u^\epsilon_1, u^\epsilon_2, \epsilon u^\epsilon_3$,
+  \item $L_t^2 H_x^1$ boundedness for $u^\epsilon_1, u^\epsilon_2, \epsilon u^\epsilon_3$,
+  \item $L_t^\infty L_x^2$ boundedness for $C^\epsilon$,
+  \item $L_t^2 L_x^2$ boundedness for $ \sqrt{\epsilon} \partial_1 C^\epsilon, \partial_2 C^\epsilon, \partial_3 C^\epsilon$.
+  
+\end{itemize}
+
+As for passing to the limit as $\epsilon \to 0$ in the coastal version of the anisotropic system seen above, there is no mathematical novelty compared to the inland case.
+
+\begin{remark}
+If we switch to the "informationless", fix coordinate system that does not match the downwind direction and we drop the assumption on the flow being convection dominated ($\epsilon$ - diffusion), then we can relax the restrictions on $C^\epsilon$ on the boundary. This is true because in this case we do not have a disappearing $\epsilon$ term in front of the $K_1$ constant, and we can use the analogous estimate as in the inland case at the energy inequality and arrive to having a $(K_1 - \delta \frac{K_1 + K_2 + K_3}{2} c_T (c_S + 1)) \norm{\partial_1 C^\epsilon}_{L^2}^2$ term with a positive coefficient on the left hand side and a bounded $\frac{1}{\delta_i} \frac{K_i}{2} \int_0 ^ t \norm{\partial_i C^\epsilon}^2 _{L^2 (\Gamma_G)}$ integral on the right hand side --- the only assumption we need is $\partial_i C^\epsilon$ to be in $L^2_t L^2_x$ on the boundary.
+\end{remark}
 
 %%% *** CONCLUDING REMARKS *** %%%
-\section{Concluding remarks}
+\section{Concluding remarks} \label{concludingremarks}
 
 \begin{remark}
 In the paper of \cite{temam2005some}, on p35 it is suggested that the domain we work on has the form of $p_0 < p < p_1$, because for the thin portion of air between the earth and the isobar $p = p_1$, another specific simplified model would be necessary. (However other authors use the $z=0$ simplified ground level cut as well, such as \cite{hosseini2013}) This means that a way to make the model more precise is to cut the domain at an isobar a little bit off the physical ground. This would of course radically change the boundary conditions we use for the functions (in fact it is not trivial how to change them for this case), because it would take away the advantage of having a wall-like, natural and physical boundary condition for our domain to support it. If we are positively above the ground, $\partial_3 C = 0$ would represent a strange reflective layer.
