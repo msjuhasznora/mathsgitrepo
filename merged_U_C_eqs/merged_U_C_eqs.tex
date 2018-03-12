@@ -15,10 +15,10 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows,shapes,trees, calc}
 
-%%%% PREAMBLE %%%%
+%%% *** PREAMBLE *** %%%
 \title{Weak solution of the merged mathematical equations of the polluted atmosphere}
 
-%%%% CONTENT %%%%
+%%%***  CONTENT *** %%%
 \begin{document}
 
 \maketitle
@@ -37,7 +37,7 @@ Considered as a geophysical fluid, the polluted atmosphere shares the shallow do
 \tableofcontents
 \newpage
 
-%%%% INTRODUCTION %%%%
+%%% *** INTRODUCTION *** %%%
 \section{Introduction} \label{Introduction}
 
 We investigate the convergence of the weak solutions for the merged motion-pollution atmosphere model. At this point the functions we work with are $\mathbf{v} = (\mathbf{v}_H, v_3)$, and $C$, representing velocity and concentration, respectively (we are not considering other variables such as water vapor quantity or temperature).
@@ -64,6 +64,7 @@ This paper is organized in the following way. In section \ref{eqsdescribingatmpl
 
 \end{enumerate}
 
+%%% *** THE EQUATIONS DESCRIBING THE POLLUTED ATMOSPHERE *** %%%
 \section{The equations describing the polluted atmosphere} \label{eqsdescribingatmpluspollution}
 
 The first step is to choose a coordinate system, set the domain we start with and an appropriate set of equations describing both atmosphere motions and the effect of pollution. The set of equations, the choice of the locally acceptable Cartesian coordinate system we are using for the velocity terms are similar to those suggested by our reference article. We ignore large scale effects such as the curvature of the Earth. For describing the effect of pollution we use a continuity equation written in Cartesian coordinates for the concentration.
@@ -246,6 +247,7 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
     Here $S$ stands for the $\delta$ limit distribution. We keep the notation $S$ for generality, since as we will see later, instead of the approximate delta functions and the delta distribution, it is possible to use any sort of "sufficiently smooth" source term (which can be independent from $\epsilon$ in the anisotropic case as well) that is bounded in $L^2_t L^2_x.$
   \end{remark}
 
+%%% *** MAIN THEOREM *** %%%
 \section{Main theorem} \label{maintheorem}
 
 \begin{itemize}
@@ -264,6 +266,7 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
   
 \end{itemize}
 
+%%% *** WEAK FORMULATION *** %%%
 \section{Weak formulation} \label{weakformulation}
 
 We need to calculate the weak formulation of the merged equations in both the anisotropic and hydrostatic case. Since this inland atmosphere model has slightly different boundary conditions even in the velocity equations than the model of the ocean, we will see that the weak formulation of our system has minor differences from the ocean scenario.
@@ -306,7 +309,7 @@ We need to calculate the weak formulation of the merged equations in both the an
 
   \subsection{Weak formulation of the anisotropic system}
   
-  Find $\mathbf{u}^\epsilon = (\mathbf{u}_H, u^\epsilon_3) \in L^2 (0,t ; \mathbf{V}) \cap L^\infty (0, T; L^2 (\Omega)^3)$ and $C$ with $C \in L^\infty L^2$, $C \in L^2 (0,T; H^1)$, $C(0) \in L^2_x$ such that
+  Find $\mathbf{u}^\epsilon = (\mathbf{u}_H, u^\epsilon_3) \in L^2 (0,t ; \mathbf{V}) \cap L^\infty (0, T; L^2 (\Omega)^3)$ and $C^\epsilon$ with $C^\epsilon \in L^\infty L^2$, $C^\epsilon \in L^2 (0,T; H^1)$, $C^\epsilon(0) \in L^2_x$ such that
   
   \begin{equation}
     \begin{split}
@@ -315,16 +318,17 @@ We need to calculate the weak formulation of the merged equations in both the an
       & + \epsilon^2 \big[ \int _0 ^ T -(u_3^\epsilon, \partial_t v_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, v_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu v_3) d t\big] \\
       &+ \int_0^T -(C^\epsilon, \partial_t \tilde{C}^\epsilon) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}^\epsilon) + \\
       & \epsilon K_1 (\partial_1 C^\epsilon, \partial_1 \tilde{C}^\epsilon) - \epsilon K_1 \big[(\partial_1 C^\epsilon) \tilde{C} \big] _{\Gamma_G} + K_2 (\partial_2 C^\epsilon, \partial_2 \tilde{C}^\epsilon) + K_3 (\partial_3 C^\epsilon, \partial_3 \tilde{C}^\epsilon) \diff t =\\
-      & = - (\mathbf{u}^\epsilon_{0H}, \mathbf{v}^\epsilon_H(0)) - \epsilon^2 (u_{03}^\epsilon, v_3^\epsilon (0)) - (C^\epsilon (0), \tilde{C} (0)) + \int_0^T (S^\epsilon,\tilde{C}) \diff t
+      & = - (\mathbf{u}^\epsilon_{0H}, \mathbf{v}^\epsilon_H(0)) - \epsilon^2 (u_{03}^\epsilon, v_3^\epsilon (0)) - (C^\epsilon (0), \tilde{C}^\epsilon (0)) + \int_0^T (S^\epsilon,\tilde{C}^\epsilon) \diff t
     \end{split}
   \end{equation}
   
   for all $\mathbf{v} = (\mathbf{v}_H, v_3) \in H^1 (0,T;\mathbf{V})$ with $\mathbf{v}(T) = 0$ and $\tilde{C}$ such that $\tilde{C} \in H^1 (0,T, H^1)$ and $\tilde{C} (T) = 0$.
   
-  Note that in this case the source term is a nascent delta function, the Gaussian pulse is continuous and is in $L^\infty_x(\Omega),$ so we do not have any problems with the source term. If we used a source function of a different and more general form, it needs to satisfy the $L^2 L^2$ boundedness criteria for the weak formulation to make sense.
+  Note that in this case the source term is a nascent delta function, the Gaussian pulse is in $L^\infty_x(\Omega),$ so we do not have any problems with the source term. If we used a source function of a different and more general form, it needs to satisfy the $L^2 L^2$ boundedness criteria for the weak formulation to make sense.
   
   To pass to the limit in the terms that do not include pollution in the anisotropic equation has already been worked out in the original article. What we need to work on is how to legitimately pass to the limit with the terms including the new function $C^\epsilon$. To do this our first key tool will be the energy inequality. Once we have a priori estimates for the functions in the linear terms, we can pass to the limit with those without particular problems; the challenging part will be to prove convergence for the $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}^\epsilon)$ term, here we will need a stronger result than just the weak convergence of the present functions in the product.
 
+%%% *** PROOF *** %%%
 \section{Proof of the main theorem} \label{proof}
 
   \subsection{Energy inequality}
@@ -334,12 +338,12 @@ We need to calculate the weak formulation of the merged equations in both the an
   \begin{equation}
     \begin{split}  
     & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \{    \norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \} \diff \tau + \\
-    & \int_0 ^ t \{\epsilon K_1 \norm{\partial_1 C^\epsilon}_{L^2}^2  + K_2 \norm{\partial_2 C^\epsilon}_{L^2}^2 + K_3 \norm{\partial_3 C^\epsilon}_{L^2}^2 \} d \tau \leq \\
-    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) + \int_0^t (S,C^\epsilon) \diff \tau + \int _ 0 ^ t \epsilon K_1 \langle \partial_1 C^\epsilon, C^\epsilon \rangle_{\Gamma_G} \diff \tau
+    & \int_0 ^ t \{\epsilon K_1 \norm{\partial_1 C^\epsilon}_{L^2}^2  + K_2 \norm{\partial_2 C^\epsilon}_{L^2}^2 + K_3 \norm{\partial_3 C^\epsilon}_{L^2}^2 \} d \tau \leq  \int_0^t (S^\epsilon,C^\epsilon) \diff \tau + \\
+    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) + \int _ 0 ^ t \epsilon K_1 \langle \partial_1 C^\epsilon, C^\epsilon \rangle_{\Gamma_G} \diff \tau
     \end{split}
   \end{equation}    
   
-  In order to use the energy inequality to extract a priori estimates, we need to know that the right hand side of the inequality is bounded. Since the $S$ source term is assumed to be as smooth as we need it to be, the only term we need to work further is $\int _ 0 ^ t \epsilon K_1 \langle \partial_1 C^\epsilon, C^\epsilon \rangle_{\Gamma_G} d \tau$.
+  In order to use the energy inequality to extract a priori estimates, we need to know that the right hand side of the inequality is bounded. Since the $S^\epsilon$ source term is in $L^\infty_x (\Omega)$, the only term we need to work on further is $\int _ 0 ^ t \epsilon K_1 \langle \partial_1 C^\epsilon, C^\epsilon \rangle_{\Gamma_G} d \tau$.
   
   We can estimate this term in the following way.
   
@@ -369,8 +373,8 @@ Which means that the energy inequality takes the form of
     \begin{split}  
     & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \{    \norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \} \diff \tau + \\
     & \int_0 ^ t \{(\epsilon K_1 - \delta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_1 C^\epsilon}_{L^2}^2  + (K_2 - \delta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_2 C^\epsilon}_{L^2}^2 + \\
-    & + (K_3 - \delta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_3 C^\epsilon}_{L^2}^2 \} \diff \tau \leq \\
-    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) + \int_0^t (S,C^\epsilon) \diff \tau + \frac{1}{\delta} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)}
+    & + (K_3 - \delta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_3 C^\epsilon}_{L^2}^2 \} \diff \tau \leq \frac{1}{\delta} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)} + \\
+    & + \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau
     \end{split}
   \end{equation}  
     
@@ -413,6 +417,8 @@ In the linear terms the weak convergence guaranteed by the a priori estimates wi
         \[ \int_0 ^ T (\partial_3 C^\epsilon , f) d \mathrm{t} \to \int_0^T (\partial_3 C, f) \diff t \qquad \forall f \in L^2_t L^2_x.\]
       
       \item The $\epsilon K_1 \int_0^T \big[(\partial_1 C^\epsilon) \tilde{C} \big] _{\Gamma_G} \diff t$ line integral vanishes as $\epsilon \to 0$ since by the Cauchy-Schwartz equation we can estimate the integral by two bounded terms ($\partial_1 C^\epsilon$ was assumed to be finite in norm on the lower boundary).
+      
+      \item To prove $(S^\epsilon, \tilde{C}) \to  (\delta, \tilde{C}) $ we need to see that $\lim_{\epsilon \to 0} \int_\Omega S^\epsilon \cdot \tilde{C} \diff \omega \to \tilde{C}(\mathbf{x}_s).$
       
     \end{enumerate}
   
