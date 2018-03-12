@@ -94,9 +94,14 @@ Contaminants emitted into the atmosphere are transported by the wind, mixed and 
   \partial_t C + \bold{v} \cdot \nabla C = K_x \frac{\partial ^2 C}{\partial x ^ 2} + K_y \frac{\partial ^2 C}{\partial y ^ 2} + K_z \frac{\partial ^2 C}{\partial z ^ 2} + S
 \end{equation}
 
-In this equation $S$ represents a source term, from now on we will assume that $S$ is as regular as needed. 
+In this equation $S$ represents the sources and sinks of the pollutant in the atmosphere i.e. its emission, removal from the atmosphere by dry and wet deposition, and chemical reactions. We will use the approach suggested by \cite{zhuk2016source} and use what is called a parametrized nascent delta function (a Gaussian impulse, specifically) to describe the source term $S$.
+
+Let us consider a gas plume with intensity $I$ originating at emission coordinates $\mathbf{x}^*$ beginning at time $t^*$. At the beginning we assume zero concentration.
+An abrupt gas emission is modeled by a source term represented as a product of an approximate delta function $\delta_\kappa (\mathbf{x} - \mathbf{x}^*)$ (centered at $\mathbf{x}^*$ with a constant parameter $\kappa$) and a Heaviside function $s$ (switching from 0 to $I$ at time $t^*.$)
+In fact, this source term models the continuous emission of the gas at constant rate and fixed location.
+Basically $s(t;t^*)$ is a function which activates the source, namely $s(t;t^*) := IH(t - t^*)$ where $H(\cdot)$ is the Heaviside step function and $0 \leq t^* \leq T.$ We arrive to the complete source term model of the form $S_\kappa (t, t^*, x, x^*) = s(t; t^*) \delta_\kappa (\mathbf{x} - \mathbf{x_s})$.
     
-As usual in asymptotic analysis, we perform a vertical scaling to make the domain independent of $\epsilon.$
+In the following we will describe a usual practice in asymptotic analysis, namely we perform a vertical scaling to make the domain independent of $\epsilon.$
 
     \[x=x_1, y=x_2, z=\epsilon x_3 \]
     \[v_1 = u_1^{\epsilon}, v_2 = u_2^{\epsilon}, v_3 = \epsilon u_3^{\epsilon}, p = p^{\epsilon} \]
@@ -112,6 +117,8 @@ As a second step of the rescaling process, here we also exploit the fact that we
     \begin{equation} \abs{u_1 \partial_{x_1} C} \gg \abs{ K_x \frac{\partial ^2 C}{\partial x_1 ^ 2} }\end{equation}
     which leads us to using
     \[ K_x = \epsilon K_1.\]
+    
+Finally, as we mentioned before, we use Gaussian approximate delta functions to represent the source, so it is convenient to involve the $\epsilon$ term in one additional point in the functions, which is the standard deviation parameter of the distribution describing the source --- because as later we will take the limit as $\epsilon$ goes to zero, it will result in having the $\delta_\epsilon \to \delta$ delta distribution representing the hydrostatic source term, which is a physically natural choice. In other words, we choose $\kappa$ to be $\epsilon$ and the following function will give shape to the source term: $\delta_\epsilon (\mathbf{x}-\mathbf{x_s}) = C \epsilon^{-1} e ^ {\frac{-(\mathbf{x}-\mathbf{x_s})^2}{\epsilon^2}}$.
     
     Putting this condition and the previously described rescaling terms together to the original equations, we arrive to the merged anisotropic equations of the polluted atmosphere above inland surface.
   
@@ -132,7 +139,7 @@ As a second step of the rescaling process, here we also exploit the fact that we
     \end{equation}
     
     \begin{equation}
-    \partial_t C^\epsilon + \bold{u^\epsilon} \cdot \nabla C^\epsilon = \epsilon K_1 \frac{\partial ^2 C^\epsilon}{\partial x_1 ^ 2} + K_2 \frac{\partial ^2 C^\epsilon}{\partial x_2 ^ 2} + K_3 \frac{\partial ^2 C^\epsilon}{\partial x_3 ^ 2} + S \text{ in } \Omega \times (0,T)
+    \partial_t C^\epsilon + \bold{u^\epsilon} \cdot \nabla C^\epsilon = \epsilon K_1 \frac{\partial ^2 C^\epsilon}{\partial x_1 ^ 2} + K_2 \frac{\partial ^2 C^\epsilon}{\partial x_2 ^ 2} + K_3 \frac{\partial ^2 C^\epsilon}{\partial x_3 ^ 2} + S_\epsilon \text{ in } \Omega \times (0,T)
     \end{equation}
     
     \begin{equation}
@@ -234,6 +241,10 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
     \begin{equation}    
     u_i (\cdot, t=0) = u_{0 i}, C (\cdot, t=0) = C_0 \text{ in } \Omega, \text{$i$ = 1,2}
     \end{equation}
+    
+  \begin{remark}
+    Here $S$ stands for the $\delta$ limit distribution. We keep the notation $S$ for generality, since as we will see later, instead of the approximate delta functions and the delta distribution, it is possible to use any sort of "sufficiently smooth" source term (which can be independent from $\epsilon$ in the anisotropic case as well) that is bounded in $L^2_t L^2_x.$
+  \end{remark}
 
 \section{Main theorem} \label{maintheorem}
 
@@ -549,15 +560,30 @@ If we switch to the "informationless", fix coordinate system that does not match
 \section{Concluding remarks} \label{concludingremarks}
 
 \begin{remark}
-In the paper of \cite{temam2005some}, on p35 it is suggested that the domain we work on has the form of $p_0 < p < p_1$, because for the thin portion of air between the earth and the isobar $p = p_1$, another specific simplified model would be necessary. (However other authors use the $z=0$ simplified ground level cut as well, such as \cite{hosseini2013}) This means that a way to make the model more precise is to cut the domain at an isobar a little bit off the physical ground. This would of course radically change the boundary conditions we use for the functions (in fact it is not trivial how to change them for this case), because it would take away the advantage of having a wall-like, natural and physical boundary condition for our domain to support it. If we are positively above the ground, $\partial_3 C = 0$ would represent a strange reflective layer.
+\normalfont In the paper of \cite{temam2005some}, on p35 it is suggested that the domain we work on has the form of $p_0 < p < p_1$, because for the thin portion of air between the earth and the isobar $p = p_1$, another specific simplified model would be necessary. (However other authors use the $z=0$ simplified ground level cut as well, such as \cite{hosseini2013}) This means that a way to make the model more precise is to cut the domain at an isobar a little bit off the physical ground. This would of course radically change the boundary conditions we use for the functions (in fact it is not trivial how to change them for this case), because it would take away the advantage of having a wall-like, natural and physical boundary condition for our domain to support it. If we are positively above the ground, $\partial_3 C = 0$ would represent a strange reflective layer.
 \end{remark}
 
 \begin{remark}
-Note that the aspect ratio going to zero is not only legitimate on a global scale. When we switch from a global model to a local one in order to be able to use the beta plane approximation, we still have hundreds of thousands square kilometers versus 1---5 kilometers.
+\normalfont Note that the aspect ratio going to zero is not only legitimate on a global scale. When we switch from a global model to a local one in order to be able to use the beta plane approximation, we still have hundreds of thousands square kilometers versus 1---5 kilometers.
 \end{remark}
 
 \begin{remark}
-The \cite{temam2005some} article works with the beta plane approximation, which is appropriate for example for midlatitude regional studies, where the curvature is minimal. If we take this as the starting idea, and consider a local part of the ocean, we will most likely not have genuine physical lateral boundaries for the ocean water in the model, such as would be a coast for example. Nevertheless what the article uses as a lateral boundary condition is the salt flux being zero, which represents a wall-like boundary. What would possibly be more natural is the salt flux being constant, but it would naturally make things mathematically more complicated on the other hand. This is another example of how challenging it can be to find the right boundary terms when we are handling OBCs. 
+\normalfont The \cite{temam2005some} article works with the beta plane approximation, which is appropriate for example for midlatitude regional studies, where the curvature is minimal. If we take this as the starting idea, and consider a local part of the ocean, we will most likely not have genuine physical lateral boundaries for the ocean water in the model, such as would be a coast for example. Nevertheless what the article uses as a lateral boundary condition is the salt flux being zero, which represents a wall-like boundary. What would possibly be more natural is the salt flux being constant, but it would naturally make things mathematically more complicated on the other hand. This is another example of how challenging it can be to find the right boundary terms when we are handling OBCs. 
+\end{remark}
+
+\begin{remark}
+\normalfont We chose the Gaussian nascent delta function to give shape to the source term, but it can be defined in several different ways using the many different pulses that approximate the delta function (choosing only those however that are physically meaningful in our case, for example its values are nonnegative), e.g.
+
+  \begin{enumerate}
+  
+    \item the unit impulse: $\delta_\epsilon (\mathbf{x}-\mathbf{x_s}) = \epsilon/2, \abs{(\mathbf{x}-\mathbf{x_s})} < 1/\epsilon $,
+  
+    \item the Lorentzian pulse: $\delta_\epsilon (\mathbf{x}-\mathbf{x_s}) = \epsilon / (1 + \pi^2 \epsilon^2 (\mathbf{x}-\mathbf{x_s})^2$).
+
+  \end{enumerate}
+  
+  The Gaussian and Lorentzian version of the source term is continuous and bounded on $\Omega$, it is actually in $L^\infty$ in space (and in $L^2$ as a consequence), while it is easy to see that the piecewise constant unit pulse is in $L^2$ as well. Since the time dependence of this source is described by the Heaviside function, the time norm is also finite.
+  
 \end{remark}
 
 %%% *** APPENDIX *** %%%
@@ -715,33 +741,6 @@ where $\psi$ is a function defined on $[0,T]$, used to create the time-dependent
 \[ = (U_0, \tilde{U}(0)) + \int_0 ^ T l(\tilde{U}) dt, \]
 
 which is what we needed.
-
-\section{The regularity of the source term}
-
-The term $S$ represents the sources and sinks of the pollutant in the atmosphere i.e. its emission, removal from the atmosphere by dry and wet deposition, and chemical reactions. So far we always assumed that this source term is simply "regular enough", i.e. is in $L^2_t L^2_x$ to perform the computations we needed. In this section we introduce functions that represent a pollution source reasonably well.
-
-\begin{enumerate}
-
-  \item One approach is to use the Dirac delta to represent a pollutant released instantaneously from an elevated point source of strength $Q$ located at $(x^*, y^*, z^*)$. In this case the source term is given by $S(x,y,z) = Q \delta (x-x^*) \delta (y-y^*) \delta (z - z^*),$ for example \cite{goyal2011mathematical} uses the delta distribution to grasp the pollution source (in a steady state model, no time dependence is involved). When trying to describe the 'infinite - zero' nature of a boundary condition or a source, the Dirac delta can be a natural choice, but since it is not a function, by definition it is not in $L^2.$
-
-  \item Another option is, as described in \cite{zhuk2016source}, is to use what is called a parametrized nascent delta function, i.e. a smooth function which converges to the delta distribution. Let us consider a gas plume with intensity $I$ originating at emission coordinates $\mathbf{x}^*$ beginning at time $t^*$. At the beginning we assume zero concentration.
-An abrupt gas emission is modeled by a source term represented as a product of an approximate delta function $\delta_\kappa (\mathbf{x} - \mathbf{x}^*)$ (centered at $\mathbf{x}^*$ with a constant parameter $\kappa$) and a Heaviside function $s$ (switching from 0 to $I$ at time $t^*.$)
-In fact, this source term models the continuous emission of the gas at constant rate and fixed location.
-Basically $s(t;t^*)$ is a function which activates the source, namely $s(t;t^*) := IH(t - t^*)$ where $H(\cdot)$ is the Heaviside step function and $0 \leq t^* \leq T.$ We arrive to the complete source term model of the form $s(t; t^*) \delta_\kappa (\mathbf{x} - \mathbf{x_s})$. The shape of the source is given by the function $\delta_\kappa$, which can be defined in several different ways using the many different pulses that approximate the delta function (choosing only those however that are physically meaningful in our case, for example its values are nonnegative), e.g.
-
-\begin{enumerate}
-
-  \item the Gaussian pulse: $\delta_\kappa (\mathbf{x}-\mathbf{x_s}) = C \kappa^{-1} e ^ {\frac{-(\mathbf{x}-\mathbf{x_s})^2}{\kappa^2}},$
-  
-  \item the unit impulse: $\delta_\kappa (\mathbf{x}-\mathbf{x_s}) = \kappa/2, \abs{(\mathbf{x}-\mathbf{x_s})} < 1/\kappa $,
-  
-  \item the Lorentzian pulse: $\delta_\kappa (\mathbf{x}-\mathbf{x_s}) = \kappa / (1 + \pi^2 \kappa^2 (\mathbf{x}-\mathbf{x_s})^2$).
-
-\end{enumerate}
-
-The Gaussian and Lorentzian version of the source term is continuous and bounded on $\Omega$, it is actually in $L^\infty$ in space (and in $L^2$ as a consequence), while it is easy to see that the piecewise constant unit pulse is in $L^2$ as well. Since the time dependence of this source is described by the Heaviside function, the time norm is also finite.
-
-\end{enumerate}
 
 \nocite{*}
 \bibliographystyle{apalike}
