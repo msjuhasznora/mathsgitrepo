@@ -10,7 +10,7 @@
 \setlist[enumerate,2]{label=\roman*)}
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
-\newtheorem*{remark}{Remark}
+\newtheorem{remark}{Remark}
 \newcommand*\diff{\mathop{}\!\mathrm{d}}
 \usepackage{tikz}
 \usetikzlibrary{arrows,shapes,trees, calc}
@@ -275,7 +275,7 @@ We need to calculate the weak formulation of the merged equations in both the an
   
   For the weak formulation we will use the modified version of the spaces defined in the original article.
   
-  \[ H^1_{\Gamma} (\Omega) = \{ v \in H^1(\Omega); v=0 \text{ on } \partial \Omega = \Gamma \} \]
+  \[ H^1_{\Gamma} (\Omega) = \overline{C_\Gamma ^ \infty (\Omega)} ^ {H^1 (\Omega)} = \{ v \in H^1(\Omega); v=0 \text{ on } \partial \Omega = \Gamma \} \]
   
   \[ \mathbf{V} = \{ \mathbf{v} \in  H^1_{\Gamma} (\Omega) \times H^1_{\Gamma} (\Omega) \times H^1_0 (\Omega); \nabla \cdot \mathbf{v} = 0 \text{ in } \Omega \} \]
   
@@ -295,7 +295,7 @@ We need to calculate the weak formulation of the merged equations in both the an
     \end{split}
   \end{equation}
   
-  for all $(\mathbf{v}, \tilde{C})$ with $\mathbf{v} = (\mathbf{v}_H, v_3) \in H^1 (0,T, \mathbf{W})$, with $v_H (T) = 0$ and $\partial_3 \mathbf{v}_H \in L^\infty (0, T; L^3 (\Omega)^2)$ and $\tilde{C}$ with $\tilde{C} \in L^2 (0,T, H^1)$, $\tilde{C} \in H^1 (0,T, L^2)$, $\tilde{C} (T) = 0$, and $\tilde{C}$ being continuous in $\mathbf{x}_s$. 
+  for all $(\mathbf{v}, \tilde{C})$ with $\mathbf{v} = (\mathbf{v}_H, v_3) \in H^1 (0,T, \mathbf{W})$, with $v_H (T) = 0$ and $\partial_3 \mathbf{v}_H \in L^\infty (0, T; L^3 (\Omega)^2)$ and $\tilde{C}$ with $\tilde{C} \in L^2 (0,T, H^1)$, $\tilde{C} \in H^1 (0,T, L^2)$, $\tilde{C} (T) = 0$. 
   
   Note that the term $\int_0^T (S,\tilde{C}) \diff t$ makes sense since in this case $S$ denotes the delta distribution and we have 
   
@@ -586,6 +586,8 @@ If we switch to the "informationless", fix coordinate system that does not match
 
 %%% *** CONCLUDING REMARKS *** %%%
 \section{Concluding remarks} \label{concludingremarks}
+
+We are finishing this work shortly mentioning ideas regarding the physical aspects of the model and some additional choices concerning the source term specifically.
 
 \begin{remark}
 \normalfont In the paper of \cite{temam2005some}, on p35 it is suggested that the domain we work on has the form of $p_0 < p < p_1$, because for the thin portion of air between the earth and the isobar $p = p_1$, another specific simplified model would be necessary. (However other authors use the $z=0$ simplified ground level cut as well, such as \cite{hosseini2013}) This means that a way to make the model more precise is to cut the domain at an isobar a little bit off the physical ground. This would of course radically change the boundary conditions we use for the functions (in fact it is not trivial how to change them for this case), because it would take away the advantage of having a wall-like, natural and physical boundary condition for our domain to support it. If we are positively above the ground, $\partial_3 C = 0$ would represent a strange reflective layer.
