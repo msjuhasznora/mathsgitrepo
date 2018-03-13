@@ -100,7 +100,7 @@ In this equation $S$ represents the sources and sinks of the pollutant in the at
 Let us consider a gas plume with intensity $I$ originating at emission coordinates $\mathbf{x}_s$ beginning at time $t_s$. At the beginning we assume zero concentration.
 An abrupt gas emission is modeled by a source term represented as a product of an approximate delta function $\delta_\kappa (\mathbf{x} - \mathbf{x}_s)$ (centered at $\mathbf{x}_s$ with a constant parameter $\kappa$) and a Heaviside function $s$ (switching from 0 to $I$ at time $t_s.$)
 In fact, this source term models the continuous emission of the gas at constant rate and fixed location.
-Basically $s(t;t_s)$ is a function which activates the source, namely $s(t;t_s) := IH(t - t_s)$ where $H(\cdot)$ is the Heaviside step function and $0 \leq t_s \leq T.$ We arrive to the complete source term model of the form $S_\kappa (t, t_s, x, x_s) = s(t; t_s) \delta_\kappa (\mathbf{x} - \mathbf{x_s})$.
+Basically $s(t;t_s)$ is a function which activates the source, namely $s(t;t_s) := IH(t - t_s)$ where $H(\cdot)$ is the Heaviside step function and $0 \leq t_s \leq T.$ We arrive to the complete source term model of the form $S_\kappa (t, t_s, x, x_s) = s(t; t_s) \delta_\kappa (\mathbf{x} - \mathbf{x_s}),$ while in the limit model the source term $S$ naturally stands for the $\delta$ distribution.
     
 In the following we will describe a usual practice in asymptotic analysis, namely we perform a vertical scaling to make the domain independent of $\epsilon.$
 
@@ -315,7 +315,7 @@ We need to calculate the weak formulation of the merged equations in both the an
     \begin{split}
       & \int_0^T -(\mathbf{u}^\epsilon_H, \partial_t \mathbf{v}_H) + (\nabla_\nu \mathbf{u}^\epsilon_H, \nabla_\nu \mathbf{v}_H) - (\mathbf{u}^\epsilon_H, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{v}_H) + (b(\mathbf{u}^\epsilon_H), \mathbf{v}_H) \diff t \\
       & + \epsilon \beta \big[ \int_0 ^ T (u_3 ^\epsilon, v_1) - (u_1^\epsilon, v_3) \big] \diff t\\
-      & + \epsilon^2 \big[ \int _0 ^ T -(u_3^\epsilon, \partial_t v_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, v_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu v_3) d t\big] \\
+      & + \epsilon^2 \big[ \int _0 ^ T -(u_3^\epsilon, \partial_t v_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, v_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu v_3) \diff t\big] \\
       &+ \int_0^T -(C^\epsilon, \partial_t \tilde{C}^\epsilon) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}^\epsilon) + \\
       & \epsilon K_1 (\partial_1 C^\epsilon, \partial_1 \tilde{C}^\epsilon) - \epsilon K_1 \big[(\partial_1 C^\epsilon) \tilde{C} \big] _{\Gamma_G} + K_2 (\partial_2 C^\epsilon, \partial_2 \tilde{C}^\epsilon) + K_3 (\partial_3 C^\epsilon, \partial_3 \tilde{C}^\epsilon) \diff t =\\
       & = - (\mathbf{u}^\epsilon_{0H}, \mathbf{v}^\epsilon_H(0)) - \epsilon^2 (u_{03}^\epsilon, v_3^\epsilon (0)) - (C^\epsilon (0), \tilde{C}^\epsilon (0)) + \int_0^T (S^\epsilon,\tilde{C}^\epsilon) \diff t
@@ -422,7 +422,7 @@ In the linear terms the weak convergence guaranteed by the a priori estimates wi
       
       \[ \int_\Omega \gamma \epsilon^{-1} e ^ {\frac{-(\mathbf{x}-\mathbf{x_s})^2}{\epsilon^2}} \tilde{C}(x) \diff x = \int_{\Omega_y} \gamma e^{-y^2} \tilde{C} (\epsilon y + x_s) \diff y\]
       
-      This term can be dominated by $ \big \| \tilde{C} \big \| _\infty \cdot \int_{\Omega_y} \gamma e^{-y^2} \tilde{C} \diff y = \big \| \tilde{C} \big \| _\infty,$ so we can apply the dominated convergence theorem and arrive to
+      This term can be dominated by $ \big \| \tilde{C} \big \| _\infty \cdot \int_{\Omega_y} \gamma e^{-y^2} \tilde{C} \diff y = \big \| \tilde{C} \big \| _\infty,$ so we can apply the dominated convergence theorem using that the test function $\tilde{C} \in L^2_t L^\infty _x$ and arrive to
       
       \[ \lim_{\epsilon \to 0} (S^\epsilon, \tilde{C}) = \int_{\Omega_y} \lim_{\epsilon \to 0} \gamma e^{-y^2} \tilde{C} (\epsilon y + x_s) \diff y = \int_{\Omega_y} \gamma e^{-y^2} \tilde{C} (x_s) \diff y = \tilde{C} (x_s), \]
       
@@ -465,11 +465,13 @@ In the linear terms the weak convergence guaranteed by the a priori estimates wi
      \begin{itemize}
      
        \item \textbf{Bound for the time derivative}.
-         \[  \frac{\partial C^\epsilon}{\partial t} = - u^\epsilon \nabla C^\epsilon + \sqrt{\epsilon} \underbrace{K_1 \partial_1 \underbrace{\partial_1 \sqrt{\epsilon} C^\epsilon}_\text{$L^2$}}_\text{$W^{-1,2}$} + \underbrace{K_2 \partial_2 \underbrace{\partial_2 C^\epsilon}_\text{$L^2$}}_\text{$W^{-1,2}$} + \underbrace{K_3 \partial_3 \underbrace{\partial_3 C^\epsilon}_\text{$L^2$}}_\text{$W^{-1,2}$} -S \]
+         \[  \frac{\partial C^\epsilon}{\partial t} = - u^\epsilon \nabla C^\epsilon + \sqrt{\epsilon} K_1 \partial_1 \partial_1 \sqrt{\epsilon} C^\epsilon + K_2 \partial_2 \partial_2 C^\epsilon + K_3 \partial_3 \partial_3 C^\epsilon -S^\epsilon \]
          
-         Since the $S$ source term was assumed to be regular, we see that the second part of the right hand side is in $W^{-1,2}$. On the other hand, the first part is in $W^{-1,1}$, because we have
+         On one hand, the $S^\epsilon$ Gaussian source term is smooth, and we see that the second part of the right hand side is in $W^{-1,2}$, simply using that $\partial_1 \sqrt{\epsilon} C^\epsilon, \partial_2 C^\epsilon, \partial_3 C^\epsilon$ are in $L^2$. On the other hand, the first part is in $W^{-1,1}$, because we have
          
-         \[ u^\epsilon \nabla C^\epsilon = \underbrace{\nabla \cdot (\underbrace{u^\epsilon C^\epsilon}_{L^1})}_{W^{-1,1}} - \underbrace{\nabla \cdot (u^\epsilon)}_{0} C. \]
+         \[ u^\epsilon \nabla C^\epsilon = \nabla \cdot (u^\epsilon C^\epsilon) - \nabla \cdot (u^\epsilon) C, \]
+         
+         and we just have to use that the divergence of $u^\epsilon$ is zero and $u^\epsilon C^\epsilon$ is in $L^1_x.$
          
          Eventually we have $\frac{\partial C}{\partial t} \in L^1 W^{-1,1}$.
          
@@ -539,7 +541,7 @@ The weak form of the anisotropic system is the following.
       & + \epsilon^2 \big[ \int _0 ^ T -(u_3^\epsilon, \partial_t v_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, v_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu v_3) \diff t\big] \\
       &+ \int_0^T -(C^\epsilon, \partial_t \tilde{C}^\epsilon) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}^\epsilon) + \epsilon K_1 (\partial_1 C^\epsilon, \partial_1 \tilde{C}^\epsilon) - \epsilon K_1 \langle \sigma_1 , \tilde{C} \rangle _{\Gamma_G} + \\
       & K_2 (\partial_2 C^\epsilon, \partial_2 \tilde{C}^\epsilon) - K_2 \langle \sigma_2 , \tilde{C} \rangle_{\Gamma_I} + K_3 (\partial_3 C^\epsilon, \partial_3 \tilde{C}^\epsilon) - K_3 \langle\sigma_3 , \tilde{C} \rangle_{\Gamma_I} \diff t =\\
-      & = - (\mathbf{u}^\epsilon_{0H}, \mathbf{v}^\epsilon_H(0)) - \int_0^T \langle \theta_H, \mathbf{v}_H \rangle_{\Gamma_I} - \epsilon^2 (u_{03}^\epsilon, v_3^\epsilon (0)) - (C^\epsilon (0), \tilde{C} (0)) + \int_0^T (S,\tilde{C}) \diff t
+      & = - (\mathbf{u}^\epsilon_{0H}, \mathbf{v}^\epsilon_H(0)) - \int_0^T \langle \theta_H, \mathbf{v}_H \rangle_{\Gamma_I} - \epsilon^2 (u_{03}^\epsilon, v_3^\epsilon (0)) - (C^\epsilon (0), \tilde{C} (0)) + \int_0^T (S^\epsilon,\tilde{C}) \diff t
     \end{split}
   \end{equation}
 
@@ -560,12 +562,12 @@ The analogous terms that we saw in the weak formulation will be different in the
     \begin{split}  
     & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \{    \norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \} \diff \tau + \\
     & \int_0 ^ t \{\epsilon K_1 \norm{\partial_1 C^\epsilon}_{L^2}^2  + K_2 \norm{\partial_2 C^\epsilon}_{L^2}^2 + K_3 \norm{\partial_3 C^\epsilon}_{L^2}^2 \} \diff \tau \leq \\
-    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) + \int_0^t (S,C^\epsilon) d \tau - \int_0^t \langle \theta_H, \mathbf{u}_H \rangle _{\Gamma_I}\\
+    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau - \int_0^t \langle \theta_H, \mathbf{u}_H \rangle _{\Gamma_I}\\
     & \int _ 0 ^ t \epsilon K_1 \langle \sigma_1, \sigma \rangle_{\Gamma_G} + K_2 \langle \sigma_2 , \sigma \rangle_{\Gamma_I}  + K_3 \langle \sigma_3, \sigma \rangle_{\Gamma_I}  \diff \tau
     \end{split}
   \end{equation}
   
-Since the $\sigma$ boundary function is in $L^2 H^1$, we have boundedness on the right hand side. Even though by first look the inequality seems a bit different from the inland one, it practically provides the same estimates and weak convergences. We have
+Since the $\sigma$ boundary function is in $L^2 H^1$, we have boundedness on the right hand side. Even though by first look the inequality seems a bit different from the inland one, it provides the same estimates and weak convergences. We have
   
 \begin{itemize}
   
@@ -758,7 +760,7 @@ Basically with the time discretization form of
 
 we arrive to the expression
 
-\[ - \int_0^T (U, \tilde{U})_H \psi ' dt + \int_0^T \big [ a(U, \tilde{U}) + b(U,U, \tilde{U}) + e(U, \tilde{U}) \big ] \psi \diff t = \]
+\[ - \int_0^T (U, \tilde{U})_H \psi ' \diff t + \int_0^T \big [ a(U, \tilde{U}) + b(U,U, \tilde{U}) + e(U, \tilde{U}) \big ] \psi \diff t = \]
 \[ = (U_0, \tilde{U}) \psi (0) + \int_0 ^ T l(\tilde{U}) \psi \diff t, \]
 
 where $\psi$ is a function defined on $[0,T]$, used to create the time-dependent version $\tilde{U}\psi$ of the test function. If we rename this product simply to be $\tilde{U}$, the time-dependent test function, we arrive exactly to,
