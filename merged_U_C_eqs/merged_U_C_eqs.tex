@@ -119,7 +119,7 @@ As a second step of the rescaling process, here we also exploit the fact that we
     which leads us to using
     \[ K_x = \epsilon K_1.\]
     
-Finally, as we mentioned before, we use Gaussian approximate delta functions to represent the source, so it is convenient to involve the $\epsilon$ term in one additional point in the functions, which is the standard deviation parameter of the distribution describing the source --- because as later we will take the limit as $\epsilon$ goes to zero, it will result in having the $\delta_\epsilon \to \delta$ delta distribution representing the hydrostatic source term, which is a physically natural choice. In other words, we choose $\kappa$ to be $\epsilon$ and the following function will give shape to the source term: $\delta_\epsilon (\mathbf{x}-\mathbf{x_s}) = \gamma \epsilon^{-1} e ^ {\frac{-(\mathbf{x}-\mathbf{x_s})^2}{\epsilon^2}}$; and finally $S_\epsilon = I H(t-t_s) \gamma \epsilon^{-1} e ^ {\frac{-(\mathbf{x}-\mathbf{x_s})^2}{\epsilon^2}},$ where $\gamma$ is a normalizing constant.
+Finally, as we mentioned before, we use Gaussian approximate delta functions to represent the source, so it is convenient to involve the $\epsilon$ term in one additional point in the functions, which is the standard deviation parameter of the distribution describing the source --- because as later we will take the limit as $\epsilon$ goes to zero, it will result in having the $\delta$ distribution representing the hydrostatic source term, which is a physically natural choice. In other words, we choose $\kappa$ to be $\epsilon$ and the following function will give shape to the source term: $\delta_\epsilon (\mathbf{x}-\mathbf{x_s}) = \gamma \epsilon^{-1} e ^ {\frac{-(\mathbf{x}-\mathbf{x_s})^2}{\epsilon^2}}$; and finally $S_\epsilon = I H(t-t_s) \gamma \epsilon^{-1} e ^ {\frac{-(\mathbf{x}-\mathbf{x_s})^2}{\epsilon^2}},$ where $\gamma$ is a normalizing constant.
     
     Putting this condition and the previously described rescaling terms together to the original equations, we arrive to the merged anisotropic equations of the polluted atmosphere above inland surface.
   
@@ -295,11 +295,11 @@ We need to calculate the weak formulation of the merged equations in both the an
     \end{split}
   \end{equation}
   
-  for all $(\mathbf{v}, \tilde{C})$ with $\mathbf{v} = (\mathbf{v}_H, v_3) \in H^1 (0,T, \mathbf{W})$, with $v_H (T) = 0$ and $\partial_3 \mathbf{v}_H \in L^\infty (0, T; L^3 (\Omega)^2)$ and $\tilde{C}$ with $\tilde{C} \in L^2 (0,T, H^1)$, $\tilde{C} \in H^1 (0,T, L^2)$, $\tilde{C} (T) = 0$, and $\tilde{C}$ being continuous in $x_s$. 
+  for all $(\mathbf{v}, \tilde{C})$ with $\mathbf{v} = (\mathbf{v}_H, v_3) \in H^1 (0,T, \mathbf{W})$, with $v_H (T) = 0$ and $\partial_3 \mathbf{v}_H \in L^\infty (0, T; L^3 (\Omega)^2)$ and $\tilde{C}$ with $\tilde{C} \in L^2 (0,T, H^1)$, $\tilde{C} \in H^1 (0,T, L^2)$, $\tilde{C} (T) = 0$, and $\tilde{C}$ being continuous in $\mathbf{x}_s$. 
   
   Note that the term $\int_0^T (S,\tilde{C}) \diff t$ makes sense since in this case $S$ denotes the delta distribution and we have 
   
-  \[ (S,\tilde{C}) = \int_\Omega \delta(\mathbf{x} - \mathbf{x}_s) \tilde{C}(\mathbf{x}) \diff \omega = \tilde{C}(\mathbf{x}_s),\]
+  \[ (S,\tilde{C}) = \int_\Omega \delta(\mathbf{x} - \mathbf{x}_s) \tilde{C}(\mathbf{x}) \diff \mathbf{x} = \tilde{C}(\mathbf{x}_s),\]
   
   using the basic properties of $\delta$ and the continuity of $\tilde{C}$ in $x_s$.
   
@@ -418,15 +418,15 @@ In the linear terms the weak convergence guaranteed by the a priori estimates wi
       
       \item The $\epsilon K_1 \int_0^T \big[(\partial_1 C^\epsilon) \tilde{C} \big] _{\Gamma_G} \diff t$ line integral vanishes as $\epsilon \to 0$ since by the Cauchy-Schwartz equation we can estimate the integral by two bounded terms ($\partial_1 C^\epsilon$ was assumed to be finite in norm on the lower boundary).
       
-      \item To prove $(S^\epsilon, \tilde{C}) \to  (\delta, \tilde{C}) $ we need to see that $\lim_{\epsilon \to 0} \int_\Omega S^\epsilon \cdot \tilde{C} \diff \omega \to \tilde{C}(\mathbf{x}_s).$ Using the substituation $y = (x-x_s) / \epsilon$ we have
+      \item To prove $(S^\epsilon, \tilde{C}) \to  (S, \tilde{C}) $ we need to see that $\lim_{\epsilon \to 0} \int_\Omega S^\epsilon (\mathbf{x}, \mathbf{x}_s) \cdot \tilde{C}(\mathbf{x}) \diff \mathbf{x} \to \tilde{C}(\mathbf{x}_s).$ Using the substituation $\mathbf{y} = (\mathbf{x}-\mathbf{x}_s) / \epsilon$ we have
       
-      \[ \int_\Omega \gamma \epsilon^{-1} e ^ {\frac{-(\mathbf{x}-\mathbf{x_s})^2}{\epsilon^2}} \tilde{C}(x) \diff x = \int_{\Omega_y} \gamma e^{-y^2} \tilde{C} (\epsilon y + x_s) \diff y\]
+      \[ \int_\Omega \gamma \epsilon^{-1} e ^ {\frac{-(\mathbf{x}-\mathbf{x}_s)^2}{\epsilon^2}} \tilde{C}(\mathbf{x}) \diff \mathbf{x} = \int_{\Omega_\mathbf{y}} \gamma e^{-\mathbf{y}^2} \tilde{C} (\epsilon \mathbf{y} + \mathbf{x}_s) \diff \mathbf{y}\]
       
-      This term can be dominated by $ \big \| \tilde{C} \big \| _\infty \cdot \int_{\Omega_y} \gamma e^{-y^2} \tilde{C} \diff y = \big \| \tilde{C} \big \| _\infty,$ so we can apply the dominated convergence theorem using that the test function $\tilde{C} \in L^2_t L^\infty _x$ and arrive to
+      This term can be dominated by $ \big \| \tilde{C} \big \| _\infty \cdot \int_{\Omega_\mathbf{y}} \gamma e^{-\mathbf{y}^2} \tilde{C} \diff \mathbf{y} = \big \| \tilde{C} \big \| _\infty,$ so we can apply the dominated convergence theorem using that the test function $\tilde{C} \in L^2_t L^\infty _x$ and arrive to
       
-      \[ \lim_{\epsilon \to 0} (S^\epsilon, \tilde{C}) = \int_{\Omega_y} \lim_{\epsilon \to 0} \gamma e^{-y^2} \tilde{C} (\epsilon y + x_s) \diff y = \int_{\Omega_y} \gamma e^{-y^2} \tilde{C} (x_s) \diff y = \tilde{C} (x_s), \]
+      \[ \lim_{\epsilon \to 0} (S^\epsilon, \tilde{C}) = \int_{\Omega_\mathbf{y}} \lim_{\epsilon \to 0} \gamma e^{-\mathbf{y}^2} \tilde{C} (\epsilon \mathbf{y} + \mathbf{x}_s) \diff \mathbf{y} = \int_{\Omega_\mathbf{y}} \gamma e^{-\mathbf{y}^2} \tilde{C} (\mathbf{x}_s) \diff \mathbf{y} = \tilde{C} (\mathbf{x}_s), \]
       
-      using the continuity of $\tilde{C}$ in $x_s.$ 
+      using the continuity of $\tilde{C}$ in $\mathbf{x}_s.$ 
       
     \end{enumerate}
   
