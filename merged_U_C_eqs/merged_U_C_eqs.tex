@@ -40,7 +40,7 @@ Considered as a geophysical fluid, the polluted atmosphere shares the shallow do
 %%% *** INTRODUCTION *** %%%
 \section{Introduction} \label{Introduction}
 
-A widely use concept in the field of large-scale geophysical fluids is to take advantage of their approximately flat structure when modeling them with the Navier-Stokes equations. The main idea is to exploit the fact that when we are working on domains such as the ocean or the atmosphere, we are working on an "almost" two-dimensional set, and thus we can significantly simplify the model in the vertical direction, or even eliminate the third dimension and arrive to a limit model in two dimensions.
+A widely used concept in the field of large-scale geophysical fluids is to take advantage of their approximately flat structure when modeling them with the Navier-Stokes equations. The main idea is to exploit the fact that when we are working on domains such as the ocean or the atmosphere, we are working on an "almost" two-dimensional set, and thus we can significantly simplify the model in the vertical direction, or even eliminate the third dimension and arrive to a limit model in two dimensions.
 A common practice for example is to depth-integrate the Navier-Stokes equations for big lakes and seas and obtain the shallow water equations.
 Our approach is different, we keep the vertical velocity and will arrive to a three dimensional limit model.
 We use the
@@ -64,6 +64,8 @@ This paper is organized in the following way. In section \ref{eqsdescribingatmpl
 \item $\epsilon = $ the aspect ratio
 \item $\nu = $ viscosity
 \item $\Omega_\epsilon, \Omega = $ the original and the rescaled, $\epsilon$-independent domain, respectively
+\item $\nabla = (\partial_x, \partial_y, \partial_z) $ the gradient vector
+\item $ \Delta_\nu = \nu_x \partial^2_{xx} + \nu_y \partial^2_{yy}  + \nu_z \partial^2_{zz} $ the anisotropic Laplacian
 \item $g = $ represents the force due to gravity, which also includes the centrifugal effect
 \item $\mathbf{w}$ represents the earth rotation angular speed, $l(y) = $ latitude
 \item $\alpha = 2 f \sin (l(x_2))$, $\beta = 2 f \cos (l(x_2))$
@@ -78,7 +80,7 @@ This paper is organized in the following way. In section \ref{eqsdescribingatmpl
 
 We begin by choosing a coordinate system, set the domain we start with and an appropriate set of equations describing both atmosphere motions and the effect of pollution. The set of equations, the choice of the locally acceptable Cartesian coordinate system we are using for the velocity terms are similar to those suggested by our reference article. We ignore large scale effects such as the curvature of the Earth. For describing the effect of pollution we use a continuity equation written in Cartesian coordinates for the concentration.
 
-We fix the local Cartesian coordinate system to be adjusted to the downwind direction, i.e. $z$ is the vertical direction, while $x$ is the downwind, and $y$ is the crosswind direction. It is a legitimate thing to do if we are considering a time interval which is not too long in the sense that it is reasonable to assume that we have a permanent, relatively stable main wind direction. It is true that this is a certain restriction on the model, but as we will see later, exploiting this choice will help us simplify the model a bit.  
+We fix the local Cartesian coordinate system to be adjusted to the downwind direction, i.e. $z$ is the vertical direction, while $x$ is the downwind, and $y$ is the crosswind direction. It is a legitimate thing to do if we are considering a time interval which is not too long in the sense that it is reasonable to assume that we have a permanent, relatively stable main wind direction.  
 
 Let us consider the following domain to begin with. This domain is a local slice of the atmosphere filled with homogeneous air that we assume to be incompressible, and a pollutant of concentration $C$.
 
@@ -88,7 +90,7 @@ Let us consider the following domain to begin with. This domain is a local slice
 
 where $\omega$ is a Lipschitz-domain in $\mathbb{R}^2$, and $h$ is a nonnegative Lipschitzian application.
 
-The equations describing the air velocity in the atmosphere are the incompressible Navier-Stokes equations:
+The equations governing the air velocity in the atmosphere are the incompressible Navier-Stokes equations, in which we use different viscosities according to vertical or horizontal directions, and the density is taken to be identically equal to one:
 
 \begin{equation}
   \partial_t \bold{v} + (\bold{v} \cdot \nabla)\bold{v} -\Delta_{\nu} \bold{v} + \nabla q + 2 \bold{w} \times \bold{v}= \bold{g} \text{ in } \Omega_{\epsilon} \times (0,T)
@@ -97,6 +99,8 @@ The equations describing the air velocity in the atmosphere are the incompressib
 \begin{equation}
   \nabla \cdot \bold{v} = 0 \text{ in } \Omega_{\epsilon} \times (0,T)
 \end{equation}
+
+The initial and boundary values will be discussed later.
 
 Contaminants emitted into the atmosphere are transported by the wind, mixed and dispersed by turbulent behavior, and deposited onto the ground by gravity. The dispersion of pollutants is commonly modeled by a continuity equation, and this is what we will use to describe the pollution phenomena as well.
     
@@ -114,15 +118,23 @@ Basically $s(t;t_s)$ is a function which activates the source, namely $s(t;t_s) 
 In the following we will describe a usual practice in asymptotic analysis, namely we perform a vertical scaling to make the domain independent of $\epsilon.$
 
     \[x=x_1, y=x_2, z=\epsilon x_3 \]
-    \[v_1 = u_1^{\epsilon}, v_2 = u_2^{\epsilon}, v_3 = \epsilon u_3^{\epsilon}, p = p^{\epsilon} \]
-    \[\nu_x = \nu_1, \nu_y = \nu_2 , \nu_z = \epsilon ^ 2\nu_3 \]
-    \[ K_z = \epsilon ^ 2 K_3 \]
     
-    So we have the following new domain
+    So we have the following new , $\epsilon$ - independent domain
     
     \[ \Omega =  \{(x_1,x_2,x_3) \in \mathbb{R}^3 ; (x_1,x_2) \in \omega, 0 < x_3 < h (x_1 , x_2) \}.\]
-  
-As a second step of the rescaling process, here we also exploit the fact that we chose the coordinate system in a way so that the $x$ axis matches the downwind direction. In this case we use an additional scaling equation, which is different in nature from the previous ones in the sense that it is not derived from the shallowness of the domain but rather suggested by the fact that in the downwind direction it is natural to assume that the diffusion is negligible compared to downwind transport, i.e.
+    
+     The corresponding scaling regarding the kinematic and viscosity terms are
+     
+    \[v_1 = u_1^{\epsilon}, v_2 = u_2^{\epsilon}, v_3 = \epsilon u_3^{\epsilon}, p = p^{\epsilon}, \]
+    \[\nu_x = \nu_1, \nu_y = \nu_2 , \nu_z = \epsilon ^ 2\nu_3, \]
+    
+    where the later embodies the different eddy viscosity hypothesis that we mentioned earlier. Basically it can be heuristically deduced from the viscosity dimensions $\text{typical length}^2 / \text{typical time}$, more details can be found on the subject in \cite{besson1992some} and in the main reference article.
+    
+    Finally, we use an analogous rescaling methodology for the diffusivity constants, so
+    
+    \[ K_y = K_2, K_z = \epsilon ^ 2 K_3 \]
+    
+    As for $K_x$ we will use an additional idea. As a second step of the rescaling process, here we also exploit the fact that we chose the coordinate system in a way so that the $x$ axis matches the downwind direction. In this case we use an additional scaling equation, which is different in nature from the previous ones in the sense that it is not derived from the shallowness of the domain but rather suggested by the fact that in the downwind direction it is natural to assume that the diffusion is negligible compared to downwind transport, i.e.
     
     \begin{equation} \abs{u_1 \partial_{x_1} C} \gg \abs{ K_x \frac{\partial ^2 C}{\partial x_1 ^ 2} }\end{equation}
     which leads us to using
@@ -222,7 +234,7 @@ An explanation of the boundary conditions:
 
 Note that we have a domain where the lower and upper boundaries represent a physically existent layer (i.e. the ground and the planetary boundary layer), but outside the lateral boundary the physical world continues without influence and without any particular external condition. On boundaries of such nature we have to apply OBCs (open boundary conditions), which is not a trivial task, see for example \cite{wang2014ocean}. We need to avoid any spurious reflection or constraint which is unnatural, but at the same time we want the model to remain mathematically manageable.
 
-If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and $\epsilon$ in the anisotropic equations, we formally arrive to the hydrostatic Navier-Stokes equations combined with pollution.
+If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and $\epsilon$ in the anisotropic equations, we formally arrive to the hydrostatic Navier-Stokes equations (i.e., primitive equations) combined with pollution.
 
     \begin{equation}    
     \partial_t u_1 + \bold{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\alpha u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T)
