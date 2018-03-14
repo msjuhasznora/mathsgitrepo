@@ -4,45 +4,45 @@ The top-level auxiliary file: merged_U_C_eqs.aux
 The style file: apalike.bst
 Database file #1: merged_U_C_eqs.bib
 Warning--empty journal in kathirgamanathan2002source
-You've used 18 entries,
+You've used 19 entries,
             1935 wiz_defined-function locations,
-            583 strings with 6730 characters,
-and the built_in function-call counts, 6950 in all, are:
-= -- 676
-> -- 274
-< -- 17
-+ -- 92
-- -- 90
-* -- 584
-:= -- 1213
-add.period$ -- 55
-call.type$ -- 18
-change.case$ -- 130
-chr.to.int$ -- 18
-cite$ -- 19
-duplicate$ -- 269
-empty$ -- 500
-format.name$ -- 120
-if$ -- 1356
+            592 strings with 6942 characters,
+and the built_in function-call counts, 7354 in all, are:
+= -- 718
+> -- 287
+< -- 18
++ -- 96
+- -- 94
+* -- 621
+:= -- 1281
+add.period$ -- 58
+call.type$ -- 19
+change.case$ -- 137
+chr.to.int$ -- 19
+cite$ -- 20
+duplicate$ -- 283
+empty$ -- 530
+format.name$ -- 127
+if$ -- 1435
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 22
-newline$ -- 92
-num.names$ -- 54
-pop$ -- 131
+missing$ -- 23
+newline$ -- 97
+num.names$ -- 57
+pop$ -- 135
 preamble$ -- 1
-purify$ -- 135
+purify$ -- 142
 quote$ -- 0
-skip$ -- 198
+skip$ -- 209
 stack$ -- 0
-substring$ -- 462
-swap$ -- 30
+substring$ -- 499
+swap$ -- 31
 text.length$ -- 6
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 98
+type$ -- 104
 warning$ -- 1
-while$ -- 55
+while$ -- 59
 width$ -- 0
-write$ -- 233
+write$ -- 246
 (There was 1 warning)

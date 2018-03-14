@@ -144,31 +144,31 @@ Finally, as we mentioned before, we use Gaussian approximate delta functions to 
     
     Putting this condition and the previously described rescaling terms together to the original equations, we arrive to the merged anisotropic equations of the polluted atmosphere above inland surface.
   
-    \begin{equation}
+    \begin{equation} \label{ANSC1}
     \partial_t u^\epsilon _1 + \bold{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\alpha u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
     \end{equation}
     
-    \begin{equation}
+    \begin{equation} \label{ANSC2}
     \partial_t u_2^\epsilon + \bold{u}^\epsilon \cdot \nabla u_2^\epsilon -\Delta_\nu u_2^\epsilon + \alpha u_1^\epsilon + \partial_2 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
     \end{equation}
     
-    \begin{equation}
+    \begin{equation} \label{ANSC3}
     \epsilon^2 \{  \partial_t u_3^\epsilon + \bold{u}^\epsilon \cdot \nabla u_3^\epsilon -\Delta_\nu u_3^{\epsilon} \} - \epsilon \beta u_1^\epsilon + \partial_3 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
     \end{equation}
     
-    \begin{equation}
+    \begin{equation} \label{ANSC4}
     \nabla \cdot \bold{u}^\epsilon= 0 \text{ in } \Omega \times (0,T)
     \end{equation}
     
-    \begin{equation}
+    \begin{equation} \label{ANSC5}
     \partial_t C^\epsilon + \bold{u^\epsilon} \cdot \nabla C^\epsilon = \epsilon K_1 \frac{\partial ^2 C^\epsilon}{\partial x_1 ^ 2} + K_2 \frac{\partial ^2 C^\epsilon}{\partial x_2 ^ 2} + K_3 \frac{\partial ^2 C^\epsilon}{\partial x_3 ^ 2} + S_\epsilon \text{ in } \Omega \times (0,T)
     \end{equation}
     
-    \begin{equation}
+    \begin{equation} \label{ANSC6}
     \bold{u}^\epsilon = 0 \text{ on } \Gamma \times (0,T)
     \end{equation} 
     
-    \begin{equation}
+    \begin{equation} \label{ANSC7}
     \bold{u}^\epsilon (\cdot, t = 0) = \bold{u}_0, C^\epsilon (\cdot, t=0) = C^\epsilon_0  \text{ in } \Omega
     \end{equation}
     
@@ -236,31 +236,31 @@ Note that we have a domain where the lower and upper boundaries represent a phys
 
 If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and $\epsilon$ in the anisotropic equations, we formally arrive to the hydrostatic Navier-Stokes equations (i.e., primitive equations) combined with pollution.
 
-    \begin{equation}    
+    \begin{equation} \label{HNSC1}    
     \partial_t u_1 + \bold{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\alpha u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T)
     \end{equation}
     
-    \begin{equation}    
+    \begin{equation} \label{HNSC2}   
     \partial_t u_2 + \bold{u} \cdot \nabla u_2 - \Delta_\nu u_2 -\alpha u_1 + \partial_2 p = 0 \text{ in } \Omega \times (0,T)
     \end{equation}
     
-    \begin{equation}    
+    \begin{equation} \label{HNSC3}   
     \partial_3 p = 0 \text{ in } \Omega \times (0,T)
     \end{equation}
     
-    \begin{equation}    
+    \begin{equation} \label{HNSC4}   
     \nabla \cdot \bold{u} = 0 \text{ in } \Omega \times (0,T)
     \end{equation}
     
-    \begin{equation}    
+    \begin{equation} \label{HNSC5}   
     \partial_t C + \bold{u} \cdot \nabla C = K_2 \frac{\partial ^2 C}{\partial x_2 ^ 2} + K_3 \frac{\partial ^2 C}{\partial x_3 ^ 2} + S \text{ in } \Omega \times (0,T)
     \end{equation}
     
-    \begin{equation}    
+    \begin{equation} \label{HNSC6}   
     u_1 = u_2 = u_3 n_3 = 0 \text{ on } \Gamma \times (0,T)
     \end{equation}
     
-    \begin{equation}    
+    \begin{equation} \label{HNSC7}   
     u_i (\cdot, t=0) = u_{0 i}, C (\cdot, t=0) = C_0 \text{ in } \Omega, \text{$i$ = 1,2}
     \end{equation}
     
@@ -271,21 +271,15 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
 %%% *** MAIN THEOREM *** %%%
 \section{Main theorem} \label{maintheorem}
 
-\begin{itemize}
-  
-  \item The article of \cite{azerad2001mathematical} proved a convergence theorem for weak solutions of the equations describing the ocean without pollution. We can use a modified version of this, translated to the polluted inland atmosphere domain.
-  
-  \begin{theorem}
-  Let $\bold{u}_0$ $\in$ $L^2 (\Omega)^3$, with $\nabla \cdot \bold{u}_0 = 0, \bold{u}_0 \cdot \bold{n} = 0$ on $\partial \Omega$; there exists a weak solution $\bold{u}$ of the hydrostatic Navier-Stokes equations as the aspect ratio $\epsilon$ tends to $0$.
-  \end{theorem}
-  
-  \item The task we want to do is to extend this result in the sense that it becomes valid to the merged set of $(\mathbf{u}, C)$ equations as well.
+Let $T$ be a fixed positive duration. Below is described our main result.
   
     \begin{theorem}
-  Let $\bold{u}_0$ $\in$ $L^2 (\Omega)^3$, with $\nabla \cdot \bold{u}_0 = 0, \bold{u}_0 \cdot \bold{n} = 0$ on $\partial \Omega$; and let $C(0)\in$ $L^2 (\Omega)^3$, $C(0) = 0$ on $ \partial \Omega$, there exists a weak solution ($\bold{u}$, C) of the hydrostatic Navier-Stokes equations as the aspect ratio $\epsilon$ tends to $0$.
+  Let $\bold{u}_0$ $\in$ $L^2 (\Omega)^3$, with $\nabla \cdot \bold{u}_0 = 0, \bold{u}_0 \cdot \bold{n} = 0$ on $\partial \Omega$; and let $C(0)\in$ $L^2 (\Omega)^3$, $C(0) = 0$ on $ \partial \Omega$; there exists a weak solution ($\mathbf{u}$, C) of the hydrostatic Navier-Stokes equations (\ref{HNSC1}) - (\ref{HNSC7}), obtained as a limit of weak solutions $(\mathbf{u^\epsilon}, C^\epsilon)$ of the anisotropic Navier-Stokes equations (\ref{ANSC1}) - (\ref{ANSC7}) as the aspect ratio $\epsilon$ tends to $0$.
   \end{theorem}
   
-\end{itemize}
+In this extended case as well, the proof relies on a priori estimates gained from the energy inequality in anisotropic spaces --- as we will see, this is sufficient to pass to the limit in the linear terms. 
+
+The challenge caused by the nonlinear term will be met by proving that a compactness result from \cite{lions1996mathematical} is applicable for it.
 
 %%% *** WEAK FORMULATION *** %%%
 \section{Weak formulation} \label{weakformulation}

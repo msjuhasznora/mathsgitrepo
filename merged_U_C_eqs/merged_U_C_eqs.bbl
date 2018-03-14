@@ -33,6 +33,13 @@ Az{\'e}rad, P. and Guill{\'e}n, F. (2001).
   primitive equations of geophysical fluid dynamics.
 \newblock {\em SIAM Journal on Mathematical Analysis}, 33(4):847--859.
 
+\bibitem[Besson and Laydi, 1992]{besson1992some}
+Besson, O. and Laydi, M. (1992).
+\newblock Some estimates for the anisotropic navier-stokes equations and for
+  the hydrostatic approximation.
+\newblock {\em ESAIM: Mathematical Modelling and Numerical Analysis},
+  26(7):855--865.
+
 \bibitem[Goyal and Kumar, 2011]{goyal2011mathematical}
 Goyal, P. and Kumar, A. (2011).
 \newblock Mathematical modeling of air pollutants: An application to indian
