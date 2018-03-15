@@ -332,9 +332,9 @@ In this section we calculate the weak formulation of the merged equations in bot
       & \int_0^T -(\mathbf{u}^\epsilon_H, \partial_t \mathbf{v}_H) + (\nabla_\nu \mathbf{u}^\epsilon_H, \nabla_\nu \mathbf{v}_H) - (\mathbf{u}^\epsilon_H, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{v}_H) + (b(\mathbf{u}^\epsilon_H), \mathbf{v}_H) \diff t \\
       & + \epsilon \beta \big[ \int_0 ^ T (u_3 ^\epsilon, v_1) - (u_1^\epsilon, v_3) \big] \diff t\\
       & + \epsilon^2 \big[ \int _0 ^ T -(u_3^\epsilon, \partial_t v_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, v_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu v_3) \diff t\big] \\
-      &+ \int_0^T -(C^\epsilon, \partial_t \tilde{C}^\epsilon) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}^\epsilon) + \\
-      & \epsilon K_1 (\partial_1 C^\epsilon, \partial_1 \tilde{C}^\epsilon) - \epsilon K_1 \big[(\partial_1 C^\epsilon) \tilde{C} \big] _{\Gamma_G} + K_2 (\partial_2 C^\epsilon, \partial_2 \tilde{C}^\epsilon) + K_3 (\partial_3 C^\epsilon, \partial_3 \tilde{C}^\epsilon) \diff t =\\
-      & = - (\mathbf{u}^\epsilon_{0H}, \mathbf{v}^\epsilon_H(0)) - \epsilon^2 (u_{03}^\epsilon, v_3^\epsilon (0)) - (C^\epsilon (0), \tilde{C}^\epsilon (0)) + \int_0^T (S^\epsilon,\tilde{C}^\epsilon) \diff t
+      &+ \int_0^T -(C^\epsilon, \partial_t \tilde{C}) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) + \\
+      & \epsilon K_1 (\partial_1 C^\epsilon, \partial_1 \tilde{C}) - \epsilon K_1 \big[(\partial_1 C^\epsilon) \tilde{C} \big] _{\Gamma_G} + K_2 (\partial_2 C^\epsilon, \partial_2 \tilde{C}) + K_3 (\partial_3 C^\epsilon, \partial_3 \tilde{C}) \diff t =\\
+      & = - (\mathbf{u}^\epsilon_{0H}, \mathbf{v}_H(0)) - \epsilon^2 (u_{03}^\epsilon, v_3 (0)) - (C^\epsilon (0), \tilde{C} (0)) + \int_0^T (S^\epsilon,\tilde{C}) \diff t
     \end{split}
   \end{equation}
   
@@ -342,7 +342,7 @@ In this section we calculate the weak formulation of the merged equations in bot
   
   Note that in this case the source term is a nascent delta function, the Gaussian pulse is in $L^\infty_x(\Omega),$ so we do not have any problems with the source term. If we used a source function of a different and more general form, it needs to satisfy the $L^2 L^2$ boundedness criteria for the weak formulation to make sense.
   
-  To pass to the limit in the terms that do not include pollution in the anisotropic equation has already been done in the original article. What we need to work on is how to legitimately take the limit in the terms including the new function $C^\epsilon$. To do this our first key tool will be the energy inequality. Once we have a priori estimates for the functions in the linear terms, we can pass to the limit with those without any particular problem; however to prove convergence for the $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}^\epsilon)$ term we will need a stronger result than only the weak convergence of the present functions in the product.
+  To pass to the limit in the terms that do not include pollution in the anisotropic equation has already been done in the original article. What we need to work on is how to legitimately take the limit in the terms including the new function $C^\epsilon$. To do this our first key tool will be the energy inequality. Once we have a priori estimates for the functions in the linear terms, we can pass to the limit with those without any particular problem; however to prove convergence for the $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C})$ term we will need a stronger result than only the weak convergence of the present functions in the product.
 
 %%% *** PROOF *** %%%
 \section{Proof of the main theorem} \label{proof}
@@ -421,7 +421,7 @@ In the linear terms the weak convergence guaranteed by the a priori estimates wi
     
       \item The convergence of the $(C^\epsilon, \frac{\partial \tilde{C}}{\partial t})$ term is easy to see, since we have $C^\epsilon \rightharpoonup C$ in $L_t^\infty L_x^2$.
       
-      \item For the next term we have $\epsilon K_1 \int_0 ^T (\partial_1 C^\epsilon, \partial_1 \tilde{C}^\epsilon) = \sqrt{\epsilon} K_1 \int_0 ^T (\sqrt{\epsilon} \partial_1 C^\epsilon, \partial_1 \tilde{C}^\epsilon)$, which goes to 0 as $\epsilon \to 0$ because of the Cauchy-Schwartz inequality, since we have $\sqrt{\epsilon} \partial_1 C^\epsilon$ bounded in $L^2_t L^2_x$, and $\tilde{C}^\epsilon$ is a test function.
+      \item For the next term we have $\epsilon K_1 \int_0 ^T (\partial_1 C^\epsilon, \partial_1 \tilde{C}) = \sqrt{\epsilon} K_1 \int_0 ^T (\sqrt{\epsilon} \partial_1 C^\epsilon, \partial_1 \tilde{C})$, which goes to 0 as $\epsilon \to 0$ because of the Cauchy-Schwartz inequality, since we have $\sqrt{\epsilon} \partial_1 C^\epsilon$ bounded in $L^2_t L^2_x$, and $\tilde{C}$ is a test function.
       
       \item As we have seen before, we have $\partial_2 C^\epsilon \rightharpoonup \partial_2 C $ in $L_t^2 L_x^2$, which by definition provides that
     
@@ -566,9 +566,9 @@ Find $\mathbf{u}^\epsilon = (\mathbf{u}_H, u^\epsilon_3) \in L^2 (0,t ; \mathbf{
       & \int_0^T -(\mathbf{u}^\epsilon_H, \partial_t \mathbf{v}_H) + (\nabla_\nu \mathbf{u}^\epsilon_H, \nabla_\nu \mathbf{v}_H) - (\mathbf{u}^\epsilon_H, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{v}_H) + (b(\mathbf{u}^\epsilon_H), \mathbf{v}_H) \diff t \\
       & + \epsilon \beta \big[ \int_0 ^ T (u_3 ^\epsilon, v_1) - (u_1^\epsilon, v_3) \big] \diff t\\
       & + \epsilon^2 \big[ \int _0 ^ T -(u_3^\epsilon, \partial_t v_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, v_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu v_3) \diff t\big] \\
-      &+ \int_0^T -(C^\epsilon, \partial_t \tilde{C}^\epsilon) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}^\epsilon) + \epsilon K_1 (\partial_1 C^\epsilon, \partial_1 \tilde{C}^\epsilon) - \epsilon K_1 \langle \sigma_1 , \tilde{C} \rangle _{\Gamma_G} + \\
-      & K_2 (\partial_2 C^\epsilon, \partial_2 \tilde{C}^\epsilon) - K_2 \langle \sigma_2 , \tilde{C} \rangle_{\Gamma_I} + K_3 (\partial_3 C^\epsilon, \partial_3 \tilde{C}^\epsilon) - K_3 \langle\sigma_3 , \tilde{C} \rangle_{\Gamma_I} \diff t =\\
-      & = - (\mathbf{u}^\epsilon_{0H}, \mathbf{v}^\epsilon_H(0)) - \int_0^T \langle \theta_H, \mathbf{v}_H \rangle_{\Gamma_I} - \epsilon^2 (u_{03}^\epsilon, v_3^\epsilon (0)) - (C^\epsilon (0), \tilde{C} (0)) + \int_0^T (S^\epsilon,\tilde{C}) \diff t
+      &+ \int_0^T -(C^\epsilon, \partial_t \tilde{C}) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) + \epsilon K_1 (\partial_1 C^\epsilon, \partial_1 \tilde{C}) - \epsilon K_1 \langle \sigma_1 , \tilde{C} \rangle _{\Gamma_G} + \\
+      & K_2 (\partial_2 C^\epsilon, \partial_2 \tilde{C}) - K_2 \langle \sigma_2 , \tilde{C} \rangle_{\Gamma_I} + K_3 (\partial_3 C^\epsilon, \partial_3 \tilde{C}) - K_3 \langle\sigma_3 , \tilde{C} \rangle_{\Gamma_I} \diff t =\\
+      & = - (\mathbf{u}^\epsilon_{0H}, \mathbf{v}_H(0)) - \int_0^T \langle \theta_H, \mathbf{v}_H \rangle_{\Gamma_I} - \epsilon^2 (u_{03}^\epsilon, v_3 (0)) - (C^\epsilon (0), \tilde{C} (0)) + \int_0^T (S^\epsilon,\tilde{C}) \diff t
     \end{split}
   \end{equation}
   
@@ -659,7 +659,7 @@ The paper of \cite{temam2005some} provides an existence result for an arbitrary 
 
 The main difference consists in the boundary conditions: on every boundary they use a zero flux for the salinity, $\frac{\partial S}{\partial \mathbf{n}_s} = 0$. This coincides with our lower boundary conditions, but on the lateral boundary we use a fix constant.
 
-The weak formulation we want to prove an existence theorem for (see equation (\ref{hydrostaticWF})) is a bit different from the equation the article provides the result for: 
+The weak formulation we want to prove an existence theorem for (see equation (\ref{hydrostaticWF})) is different from the equation the article provides the result for: 
 
 \[ \big (\frac{\diff}{\diff t} U, \tilde{U} \big )_H + a(U, \tilde{U}) + b(U,U,\tilde{U}) + e(U, \tilde{U}) = l(\tilde{U}),\]
 
