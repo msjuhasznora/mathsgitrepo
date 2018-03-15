@@ -274,7 +274,7 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
 Let $T$ be a fixed positive duration. Below is described our main result.
   
     \begin{theorem}
-  Let $\bold{u}_0$ $\in$ $L^2 (\Omega)^3$, with $\nabla \cdot \bold{u}_0 = 0, \bold{u}_0 \cdot \bold{n} = 0$ on $\partial \Omega$; and let $C(0)\in$ $L^2 (\Omega)^3$, $C(0) = 0$ on $ \partial \Omega$; there exists a weak solution ($\mathbf{u}$, C) of the hydrostatic Navier-Stokes equations (\ref{HNSC1}) - (\ref{HNSC7}), obtained as a limit of weak solutions $(\mathbf{u^\epsilon}, C^\epsilon)$ of the anisotropic Navier-Stokes equations (\ref{ANSC1}) - (\ref{ANSC7}) as the aspect ratio $\epsilon$ tends to $0$.
+  Let $\bold{u}_0$ $\in$ $L^2 (\Omega)^3$, with $\nabla \cdot \bold{u}_0 = 0, \bold{u}_0 \cdot \bold{n} = 0$ on $\partial \Omega$; and let $C(0)\in$ $L^2 (\Omega)^3$, $C(0) = 0$ on $ \partial \Omega$; there exists a weak solution ($\mathbf{u}$, C) of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1}) - (\ref{HNSC7}), obtained as a limit of weak solutions $(\mathbf{u^\epsilon}, C^\epsilon)$ of the anisotropic equations (\ref{ANSC1}) - (\ref{ANSC7}) as the aspect ratio $\epsilon$ tends to $0$.
   \end{theorem}
   
 In this extended case as well, the proof relies on a priori estimates gained from the energy inequality in anisotropic spaces --- as we will see, this is sufficient to pass to the limit in the linear terms. 
@@ -284,9 +284,7 @@ The challenge caused by the nonlinear term will be met by proving that a compact
 %%% *** WEAK FORMULATION *** %%%
 \section{Weak formulation} \label{weakformulation}
 
-We need to calculate the weak formulation of the merged equations in both the anisotropic and hydrostatic case. Since this inland atmosphere model has slightly different boundary conditions even in the velocity equations than the model of the ocean, we will see that the weak formulation of our system has minor differences from the ocean scenario.
-
-  \subsection{Weak formulation of the hydrostatic system}
+In this section we calculate the weak formulation of the merged equations in both the anisotropic and hydrostatic case. Since this inland atmosphere model has slightly different boundary conditions even in the velocity equations than the model of the ocean, we will see that the weak formulation of our system has minor differences from the original seawater scenario.
   
   For the weak formulation we will use the modified version of the spaces defined in the original article.
   
@@ -299,6 +297,8 @@ We need to calculate the weak formulation of the merged equations in both the an
   \[ H_0 (\partial_3, \Omega) = \overline{C_0 ^\infty (\Omega)}^{H (\partial_3, \Omega)} = \{ v \in H(\partial_3, \Omega); v n_3 = 0 \text{ on } \partial \Omega \} \]
   
   \[ \mathbf{W} = \{ \mathbf{u} \in  H^1_{\Gamma} (\Omega) \times H^1_{\Gamma} (\Omega) \times H_0 (\partial_3, \Omega); \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \} \]
+  
+  We use $\mathbf{u}_H = (u_1, u_2)$ to denote the horizontal velocity, $b(\mathbf{u}_H) = \alpha (-u_2, u_1)$ and $\nabla_\nu = (\nu_1^{1/2}, \nu_2^{1/2}, \nu_3^{1/2}).$ Then the weak formulation of the hydrostatic system (\ref{HNSC1}) - (\ref{HNSC7}) takes the following form.
   
   Find $(\mathbf{u}, C)$ such that $\mathbf{u} = (\mathbf{u}_H, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_H \in L^\infty (0,T; L^2(\Omega)^2),$ and $C$ with $\partial_2 C, \partial_3 C \in L^2_t L^2_x$, $C \in L^\infty L^2$ and $C(0) \in L^2_x$, such that
   
@@ -322,7 +322,7 @@ We need to calculate the weak formulation of the merged equations in both the an
   If $S$ is chosen to be different from the limit of the Gaussian nascent delta function, then it is easy to see that the sufficient assumption we have to make on a general $S$ hydrostatic pollution function is that it should be in $L^2_t L^2_x$. 
   \end{remark}
 
-  \subsection{Weak formulation of the anisotropic system}
+  The weak form of the anisotropic system is as follows.
   
   Find $\mathbf{u}^\epsilon = (\mathbf{u}_H, u^\epsilon_3) \in L^2 (0,t ; \mathbf{V}) \cap L^\infty (0, T; L^2 (\Omega)^3)$ and $C^\epsilon$ with $C^\epsilon \in L^\infty L^2$, $C^\epsilon \in L^2 (0,T; H^1)$, $C^\epsilon(0) \in L^2_x$ such that
   
@@ -341,24 +341,26 @@ We need to calculate the weak formulation of the merged equations in both the an
   
   Note that in this case the source term is a nascent delta function, the Gaussian pulse is in $L^\infty_x(\Omega),$ so we do not have any problems with the source term. If we used a source function of a different and more general form, it needs to satisfy the $L^2 L^2$ boundedness criteria for the weak formulation to make sense.
   
-  To pass to the limit in the terms that do not include pollution in the anisotropic equation has already been worked out in the original article. What we need to work on is how to legitimately pass to the limit with the terms including the new function $C^\epsilon$. To do this our first key tool will be the energy inequality. Once we have a priori estimates for the functions in the linear terms, we can pass to the limit with those without particular problems; the challenging part will be to prove convergence for the $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}^\epsilon)$ term, here we will need a stronger result than just the weak convergence of the present functions in the product.
+  To pass to the limit in the terms that do not include pollution in the anisotropic equation has already been done in the original article. What we need to work on is how to legitimately take the limit in the terms including the new function $C^\epsilon$. To do this our first key tool will be the energy inequality. Once we have a priori estimates for the functions in the linear terms, we can pass to the limit with those without any particular problem; however to prove convergence for the $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}^\epsilon)$ term we will need a stronger result than only the weak convergence of the present functions in the product.
 
 %%% *** PROOF *** %%%
 \section{Proof of the main theorem} \label{proof}
+ 
+ The proof begins by extracting a priori estimates for the solution of the anisotropic system of the polluted atmosphere (\ref{ANSC1}) - (\ref{ANSC7}).
 
   \subsection{Energy inequality}
   
-  Calculating the energy inequality for the merged system we arrive to
+  As we mentioned before, one of the most fundamental tools in this proof is the energy inequality. If we calculate it for the anisotropic system, we arrive to the following result. For a.e. $t \in [0,T],$
   
   \begin{equation}
     \begin{split}  
     & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \{    \norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \} \diff \tau + \\
     & \int_0 ^ t \{\epsilon K_1 \norm{\partial_1 C^\epsilon}_{L^2}^2  + K_2 \norm{\partial_2 C^\epsilon}_{L^2}^2 + K_3 \norm{\partial_3 C^\epsilon}_{L^2}^2 \} d \tau \leq  \int_0^t (S^\epsilon,C^\epsilon) \diff \tau + \\
-    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) + \int _ 0 ^ t \epsilon K_1 \langle \partial_1 C^\epsilon, C^\epsilon \rangle_{\Gamma_G} \diff \tau
+    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) + \int _ 0 ^ t \epsilon K_1 \langle \partial_1 C^\epsilon, C^\epsilon \rangle_{\Gamma_G} \diff \tau.
     \end{split}
   \end{equation}    
   
-  In order to use the energy inequality to extract a priori estimates, we need to know that the right hand side of the inequality is bounded. Since the $S^\epsilon$ source term is in $L^\infty_x (\Omega)$, the only term we need to work on further is $\int _ 0 ^ t \epsilon K_1 \langle \partial_1 C^\epsilon, C^\epsilon \rangle_{\Gamma_G} d \tau$.
+  In this present form the energy inequality is not ready to be used for getting a priori estimates because it is not obvious if the right hand side of the inequality is bounded. Since the $S^\epsilon$ source term is in $L^\infty_x (\Omega)$, the only term we need to work on further is $\int _ 0 ^ t \epsilon K_1 \langle \partial_1 C^\epsilon, C^\epsilon \rangle_{\Gamma_G} d \tau$.
   
   We can estimate this term in the following way.
   
@@ -366,19 +368,19 @@ We need to calculate the weak formulation of the merged equations in both the an
     \begin{split}  
     &  \int _ 0 ^ t \epsilon K_1 \langle \partial_1 C^\epsilon, C^\epsilon \rangle_{\Gamma_G} \diff \tau \leq K_1 \int _ 0 ^ t \sqrt{\epsilon} \norm{\partial_1 C^\epsilon}_{L^2 (\Gamma_G)} \sqrt{\epsilon} \norm{C^\epsilon}_{L^2 (\Gamma_G)} \leq \\
     & \frac{1}{\delta} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)} + \delta K_1 \int_0 ^ t \frac{\epsilon}{2} \norm{C^\epsilon}^2 _{L^2 (\Gamma_G)} \leq \\
-    & \mathit{B.T.} + \delta \frac{\epsilon}{2} K_1 c_T \int_0 ^ t \norm{C^\epsilon}^2 _{W^{1,2} (\Omega)},
+    & \frac{1}{\delta} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)} + \delta \frac{\epsilon}{2} K_1 c_T \int_0 ^ t \norm{C^\epsilon}^2 _{W^{1,2} (\Omega)},
     \end{split}
   \end{equation}  
   
-  where $c_T$ is the constant provided by the trace theorem, and \textit{B.T.} denotes the boundary term which is bounded because of the a priori assumptions made on boundary conditions. Now we can carry on with the estimate by using the $W^{1,2}$ norm definition, exploit the fact that we are on a bounded domain and then applying the Sobolev inequality (for $n=3, p=2, p* = 6$, denoting its constant by $c_S$), so we have
+  where $c_T$ is the constant provided by the trace theorem, and the boundary term is bounded because of the a priori assumptions made on the boundary conditions. Now we can carry on with the estimate by using the $W^{1,2}$ norm definition, exploit the fact that we are on a bounded domain and then applying the Sobolev inequality (for $n=3, p=2, p* = 6$, denoting its constant by $c_S$), so we have
   
   \begin{equation}
     \begin{split}   
-      & \int _ 0 ^ t \epsilon K_1 \langle \partial_1 C^\epsilon, C^\epsilon \rangle_{\Gamma_G} \diff \tau \leq \\
-      & \mathit{B.T.}  + \delta \frac{\epsilon}{2} K_1 c_T \int_0 ^ t \{  \norm{C^\epsilon}^2 _{L^2 (\Omega)} + \norm{\nabla C^\epsilon} ^ 2 _{L^2 (\Omega)}\} \diff \tau \leq \\
-      & \mathit{B.T.}  + \delta \frac{\epsilon}{2} K_1 c_T \int_0 ^ t \{  \norm{C^\epsilon}^2 _{L^6 (\Omega)} + \norm{\nabla C^\epsilon} ^ 2 _{L^2 (\Omega)}\} \diff \tau \leq \\
-      & \mathit{B.T.} + \delta \frac{\epsilon}{2} K_1 c_T \int_0 ^ t \{ c_S \norm{\nabla C^\epsilon}^2 _{L^2 (\Omega) }  + \norm{\nabla C^\epsilon}^2 _{L^2 (\Omega) } \} \diff \tau = \\
-      & \mathit{B.T.} + \delta \frac{\epsilon}{2} K_1 c_T (c_S + 1) \int_0 ^ t \norm{\nabla C^\epsilon}^2 _{L^2 (\Omega) } \diff \tau
+      & \delta \frac{\epsilon}{2} K_1 c_T \int_0 ^ t \norm{C^\epsilon}^2 _{W^{1,2} (\Omega)} = \\
+      & \delta \frac{\epsilon}{2} K_1 c_T \int_0 ^ t \{  \norm{C^\epsilon}^2 _{L^2 (\Omega)} + \norm{\nabla C^\epsilon} ^ 2 _{L^2 (\Omega)}\} \diff \tau \leq \\
+      & \delta \frac{\epsilon}{2} K_1 c_T \int_0 ^ t \{  \norm{C^\epsilon}^2 _{L^6 (\Omega)} + \norm{\nabla C^\epsilon} ^ 2 _{L^2 (\Omega)}\} \diff \tau \leq \\
+      & \delta \frac{\epsilon}{2} K_1 c_T \int_0 ^ t \{ c_S \norm{\nabla C^\epsilon}^2 _{L^2 (\Omega) }  + \norm{\nabla C^\epsilon}^2 _{L^2 (\Omega) } \} \diff \tau = \\
+      & \delta \frac{\epsilon}{2} K_1 c_T (c_S + 1) \int_0 ^ t \norm{\nabla C^\epsilon}^2 _{L^2 (\Omega) } \diff \tau.
     \end{split}
   \end{equation}  
   
