@@ -303,7 +303,7 @@ In this section we calculate the weak formulation of the merged equations in bot
   
   Find $(\mathbf{u}, C)$ such that $\mathbf{u} = (\mathbf{u}_H, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_H \in L^\infty (0,T; L^2(\Omega)^2),$ and $C$ with $\partial_2 C, \partial_3 C \in L^2_t L^2_x$, $C \in L^\infty L^2$ and $C(0) \in L^2_x$, such that
   
-  \begin{equation}
+  \begin{equation} \label{hydrostaticWF}
     \begin{split}
       & \int_0^T -(\mathbf{u}_H, \partial_t \mathbf{v}_H) + (\nabla_\nu \mathbf{u}_H, \nabla_\nu \mathbf{v}_H) - (\mathbf{u}_H, (\mathbf{u} \cdot \nabla) \mathbf{v}_H) + (b(\mathbf{u}_H), \mathbf{v}_H) \diff t \\
       &+ \int_0^T -(C, \partial_t \tilde{C}) -(\mathbf{u}C, \nabla \tilde{C}) + K_2 (\partial_2 C, \partial_2 \tilde{C}) + K_3 (\partial_3 C, \partial_3 \tilde{C}) \diff t =\\
@@ -400,7 +400,7 @@ Which means that the energy inequality takes the form of
     
   \subsection{A priori estimates and weak convergence}
   
-  Now we can extract a priori estimates from the final form of the energy inequality. We have obtain the following
+  Now we can extract a priori estimates from the final form of the energy inequality. We obtain the following
   
   \begin{prop}
   
@@ -529,7 +529,7 @@ In the linear terms the weak convergence guaranteed by the a priori estimates wi
 %%% *** CONVECTION DOMINATED COASTAL MODEL *** %%%  
 \section{Convection dominated coastal model} \label{convdomcoastal}
 
-We now will present a generalized model, which is an extension of the previous inland model by adapting the model for seaside conditions.
+We now present a generalized model, which is an extension of the previous inland model by adapting the model for seaside conditions.
 
 \begin{figure}[!h]
 \centering
@@ -615,14 +615,14 @@ If we switch to the "informationless", fix coordinate system that does not match
 %%% *** CONCLUDING REMARKS *** %%%
 \section{Concluding remarks} \label{concludingremarks}
 
-We are finishing this work shortly mentioning ideas regarding the physical aspects of the model and some additional choices concerning the source term specifically.
+We are finishing this work briefly mentioning a few ideas regarding the physical aspects of the model and some additional choices concerning the source term specifically.
 
 \begin{remark}
-\normalfont In the paper of \cite{temam2005some}, on p35 it is suggested that the domain we work on has the form of $p_0 < p < p_1$, because for the thin portion of air between the earth and the isobar $p = p_1$, another specific simplified model would be necessary. (However other authors use the $z=0$ simplified ground level cut as well, such as \cite{hosseini2013}) This means that a way to make the model more precise is to cut the domain at an isobar a little bit off the physical ground. This would of course radically change the boundary conditions we use for the functions (in fact it is not trivial how to change them for this case), because it would take away the advantage of having a wall-like, natural and physical boundary condition for our domain to support it. If we are positively above the ground, $\partial_3 C = 0$ would represent a strange reflective layer.
+\normalfont In the paper of \cite{temam2005some} it is suggested that the domain we work on has the form of $p_0 < p < p_1$, because for the thin portion of air between the earth and the isobar $p = p_1$, another specific simplified model would be necessary. This means that a way to make the model more precise is to cut the domain at an isobar a little bit off the physical ground. This would of course radically change the boundary conditions we use for the functions (in fact it is not trivial how to change them for this case), because it would take away the advantage of having a wall-like, natural and physical boundary condition for the domain we work on. If we are positively above the ground, $\partial_3 C = 0$ would represent a strange reflective layer.
 \end{remark}
 
 \begin{remark}
-\normalfont Note that the aspect ratio going to zero is not only legitimate on a global scale. When we switch from a global model to a local one in order to be able to use the beta plane approximation, we still have hundreds of thousands square kilometers versus 1---5 kilometers.
+\normalfont Note that the aspect ratio going to zero is not only legitimate on a global scale. When we switch from a global model to a local one in order to be able to use the beta plane approximation, we still have hundreds of thousands of square kilometers versus 1---5 kilometers.
 \end{remark}
 
 \begin{remark}
@@ -649,7 +649,7 @@ We are finishing this work shortly mentioning ideas regarding the physical aspec
 
 \section{The existence of weak solution of the hydrostatic system of the polluted atmosphere}
 
-What we have showed is that the weak solutions of the anisotropic system converge to the weak solution of the hydrostatic system of the polluted atmosphere. Without having an existence theorem for the hydrostatic equations, the weak solutions of the anisotropic system could just be converging to the empty set. The reference article for unpolluted fluids states only the convergence part as well, but the existence is implicitly assumed since it is a well-known result.
+What we have showed is that the weak solutions of the anisotropic system converge to the weak solution of the hydrostatic system of the polluted atmosphere. Without having an existence theorem for the hydrostatic equations, the weak solutions of the anisotropic system could just be converging to the empty set. The reference article for unpolluted fluids states only the convergence part as well, but the existence is implicitly assumed.
 
 To complete our work of expanding the original result to the case of a fluid containing a certain pollution concentration, we also need an existence theorem.
 
@@ -657,33 +657,9 @@ The idea is that the polluted atmosphere can be viewed as the air-analogous vers
 
 The paper of \cite{temam2005some} provides an existence result for an arbitrary time interval $[0, t_1]$ for the system describing the salty ocean water with temperature. The structure of the equations themselves describing the system is essentially the same, if we drop the equation describing the temperature, we basically arrive to the same system that describes the polluted atmosphere.
 
-The differences are the following:
+The main difference consists in the boundary conditions: on every boundary they use a zero flux for the salinity, $\frac{\partial S}{\partial \mathbf{n}_s} = 0$. This coincides with our lower boundary conditions, but on the lateral boundary we use a fix constant.
 
-\begin{enumerate}
-
-\item Boundary conditions: On every boundary they use a zero flux for the salinity, $\frac{\partial S}{\partial \mathbf{n}_s} = 0$. This coincides with our lower boundary conditions, but on the lateral boundary we use a fix constant.
-
-\item Spatial weak formulation: In the \cite{temam2005some} article they use spatial weak formulation.
-
-\item The $K_1$ term: In the pollution equation the $K_1$ term is missing in our version of the concentration equation.
-
-\item Concentration mean integral: for the salinity they use a mean integral equals zero condition after a shift, which is not a big constriction, since the shift can be reversed. (This is something that we use as well anyway, since we subtracted the background flow when discussing the boundary conditions.)
-
-\item The $K_C$ term: In order to have coercivity, in the weak formulation for the concentration part we multiply by $K_C \tilde{C}$, not just by $\tilde{C}$.
-
-\end{enumerate}
-
-Remember that the weak formulation that we need an existence theorem for is
-
-  \begin{equation}
-    \begin{split}
-      & \int_0^T -(\mathbf{u}_H, \partial_t \mathbf{v}_H) + (\nabla_\nu \mathbf{u}_H, \nabla_\nu \mathbf{v}_H) - (\mathbf{u}_H, (\mathbf{u} \cdot \nabla) \mathbf{v}_H) + (b(\mathbf{u}_H), \mathbf{v}_H) \diff t \\
-      &+ \int_0^T -(C, \partial_t \tilde{C}) -(\mathbf{u}C, \nabla \tilde{C}) + K_2 (\partial_2 C, \partial_2 \tilde{C}) + K_3 (\partial_3 C, \partial_3 \tilde{C}) \diff t =\\
-      & = - (\mathbf{u}_{0H}, \mathbf{v}_H(0)) - (C(0), \tilde{C}(0)) + \int_0^T (S,\tilde{C}) \diff t
-    \end{split}
-  \end{equation}
-
-While the equation the article provides the result for has the form of
+The weak formulation we want to prove an existence theorem for (see equation (\ref{hydrostaticWF})) is a bit different from the equation the article provides the result for: 
 
 \[ \big (\frac{\diff}{\diff t} U, \tilde{U} \big )_H + a(U, \tilde{U}) + b(U,U,\tilde{U}) + e(U, \tilde{U}) = l(\tilde{U}),\]
 
@@ -694,7 +670,9 @@ What the above equation means for example for the salinity is
 \[ \int_\mathcal{M} K_S \frac{\diff}{\diff t} S \cdot \tilde{S} d \mathcal{M} + K_S \int_\mathcal{M} \big (\mu_s \nabla S \nabla \tilde{S} + \nu_S \frac{\partial S}{\partial z}\frac{\partial \tilde{S}}{\partial z} \big ) \diff \mathcal{M} +\]
 \[+ K_S \int _\mathcal{M} \big (v \nabla S + w \frac{\partial S}{\partial z} \big ) \tilde{S} \diff \mathcal{M} = K_S \int_\mathcal{M} F_S \tilde{S} \diff \mathcal{M} + \big ( K_S \mu_S \frac{\partial S}{\partial x} \tilde{S} \big ) _{\Gamma_i} .\]
 
-\textbf{Step 1.} The first step is to redefine the norms so that they match our system.
+We will follow step by step the structure of the proof in \cite{temam2005some}, redefining the necessary quantities to be valid for our case and verify that the proof holds in the case of the polluted atmosphere as well (this is necessary not only because of using altered boundary conditions but also because the regularities of the functions are different in some cases as mentioned above).
+
+\textbf{Step 1.} Firstly we redefine the norms in order to make them match our system.
 
 \[ ((U, \tilde{U})) = ((v, \tilde{v}))_1 + K_C ((C, \tilde{C}))_2 \]
 
@@ -708,7 +686,7 @@ What the above equation means for example for the salinity is
 
 \[\abs{U}_H = \abs{(U,U)_H}^{1/2}\]
 
-\textbf{Step 2.} With this, now the weak formulation of the polluted atmosphere can be brought to an analogous format as seen above:
+\textbf{Step 2.} Now the hydrostatic weak formulation of the polluted atmosphere can be brought to an analogous format as seen above:
 
 \[ \int_0 ^T (U, \frac{\diff}{\diff t} \tilde{U})_H \diff t + \int_0 ^T a(U, \tilde{U}) + b(U,U,\tilde{U}) + e(U, \tilde{U}) \diff t = \]
 \[ = \int_0 ^T l(\tilde{U}) \diff t + \int_0 ^T \int_\Omega U_{0} \tilde{U} (0) d \omega \diff t \]
@@ -754,7 +732,7 @@ What changes slightly is the proof of the results available on the expression $b
   
   \[ \int_0 ^T  (\mathbf{u} \nabla C, \tilde{C}) \diff t =  - \int_0 ^T  (- \mathbf{u} C, \nabla \tilde{C}) \diff t, \]
   
-  using the integration by parts formula, observing that the boundary terms disappear, and finally using the fact that the divergence of the velocity.
+  using the integration by parts formula, observing that the boundary terms disappear, and finally using the fact that the divergence of the velocity is zero.
   
   \item The establishment of the improvement of the first bound works the same way as in the original article, except that we don't apply the switch provided by the result of the previous point, i.e. we perform the estimate 
   
@@ -766,7 +744,7 @@ What changes slightly is the proof of the results available on the expression $b
 
 This means that all the basic results and properties of the functions $a, b, e$ still hold in this version.
 
-\textbf{Step 4.} The operator form of the equation.
+\textbf{Step 4.} In this step we provide the operator form of the equation.
 
 The change in this part of the proof is that we will need an additional operator $Z$ for the time derivative part. In the original version $\frac{\diff U}{\diff t}$ was used as an operator acting on $\tilde{U}$, the result defined to be their inner product. In this version, because we apply the weak formulation in space-time, the time derivation is applied on the test function, so we will need the following operator $Z$:
 
@@ -780,9 +758,9 @@ where all the other operators are understood in a way that the time integration 
 
 \textbf{Step 5.} The stationary case works as it worked in the original article, since the operator form of the new version is created in a way that $ZU$ and $U_0$ contains all the time-related part, after dropping it we arrive to the same equation as in the original case.
 
-\textbf{Step 6.} Time-dependent case. Once again we remind ourselves that in this case, since in our version we performed the weak formulation also in time, we can not use notations such as $\frac{d \tilde{U}_k}{dt}$ for the operator that will result in the inner product of the function's time derivative and the test function. Instead, we can use $Z\tilde{U}_k$, which as an operator acting on $\tilde{U}$ yields the inner product of the function and the time derivative of the test function.
+\textbf{Step 6.} Finally we discuss the details of the time-dependent case. Once again we remind ourselves that in this case, since in our version we performed the weak formulation in time as well, we can not use notations such as $\frac{\diff U_k}{\diff t}$. Instead, we will use $Z U_k$, which as an operator acting on $\tilde{U}$ yields the inner product of the function and the time derivative of the test function.
 
-Even though the time derivative here is applied on the test function, it does not make sense to write something like $\tilde{U}^n - \tilde{U}^{n-1}$, since $\tilde{U}$ is the test function. But using the time difference for the solution function actually works, and the original article arrives from the same start to a weak formulation where the derivative is applied on the test function.
+Even though the time derivative here is applied on the test function, using the time difference for the solution function does work, in fact the original article arrives from the same start to a weak formulation where the derivative is applied on the test function.
 
 Basically with the time discretization form of
 
