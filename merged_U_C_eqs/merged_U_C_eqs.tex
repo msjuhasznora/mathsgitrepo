@@ -11,6 +11,7 @@
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
 \newtheorem{remark}{Remark}
+\newtheorem{prop}{Proposition}
 \newcommand*\diff{\mathop{}\!\mathrm{d}}
 \usepackage{tikz}
 \usetikzlibrary{arrows,shapes,trees, calc}
@@ -273,8 +274,8 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
 
 Let $T$ be a fixed positive duration. Below is described our main result.
   
-    \begin{theorem}
-  Let $\bold{u}_0$ $\in$ $L^2 (\Omega)^3$, with $\nabla \cdot \bold{u}_0 = 0, \bold{u}_0 \cdot \bold{n} = 0$ on $\partial \Omega$; and let $C(0)\in$ $L^2 (\Omega)^3$, $C(0) = 0$ on $ \partial \Omega$; there exists a weak solution ($\mathbf{u}$, C) of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1}) - (\ref{HNSC7}), obtained as a limit of weak solutions $(\mathbf{u^\epsilon}, C^\epsilon)$ of the anisotropic equations (\ref{ANSC1}) - (\ref{ANSC7}) as the aspect ratio $\epsilon$ tends to $0$.
+  \begin{theorem}
+    Let $\bold{u}_0$ $\in$ $L^2 (\Omega)^3$, with $\nabla \cdot \bold{u}_0 = 0, \bold{u}_0 \cdot \bold{n} = 0$ on $\partial \Omega$; and let $C(0)\in$ $L^2 (\Omega)^3$, $C(0) = 0$ on $ \partial \Omega$; there exists a weak solution ($\mathbf{u}$, C) of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1}) - (\ref{HNSC7}), obtained as a limit of weak solutions $(\mathbf{u^\epsilon}, C^\epsilon)$ of the anisotropic equations (\ref{ANSC1}) - (\ref{ANSC7}) as the aspect ratio $\epsilon$ tends to $0$.
   \end{theorem}
   
 In this extended case as well, the proof relies on a priori estimates gained from the energy inequality in anisotropic spaces --- as we will see, this is sufficient to pass to the limit in the linear terms. 
@@ -391,7 +392,7 @@ Which means that the energy inequality takes the form of
     & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \{    \norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \} \diff \tau + \\
     & \int_0 ^ t \{(\epsilon K_1 - \delta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_1 C^\epsilon}_{L^2}^2  + (K_2 - \delta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_2 C^\epsilon}_{L^2}^2 + \\
     & + (K_3 - \delta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_3 C^\epsilon}_{L^2}^2 \} \diff \tau \leq \frac{1}{\delta} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)} + \\
-    & + \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau
+    & + \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau.
     \end{split}
   \end{equation}  
     
@@ -399,22 +400,19 @@ Which means that the energy inequality takes the form of
     
   \subsection{A priori estimates and weak convergence}
   
-  Now we can extract a priori estimates from the final form of the energy inequality. We have
+  Now we can extract a priori estimates from the final form of the energy inequality. We have obtain the following
   
-  \begin{itemize}
+  \begin{prop}
   
-    \item $L_t^\infty L_x^2$ boundedness for $u^\epsilon_1, u^\epsilon_2, \epsilon u^\epsilon_3$,
-    \item $L_t^2 H_x^1$ boundedness for $u^\epsilon_1, u^\epsilon_2, \epsilon u^\epsilon_3$,
-    \item $L_t^\infty L_x^2$ boundedness for $C^\epsilon$,
-    \item $L_t^2 L_x^2$ boundedness for $\sqrt{\epsilon} \partial_1 C^\epsilon, \partial_2 C^\epsilon, \partial_3 C^\epsilon$.
+  We have $L_t^\infty L_x^2$ boundedness for $u^\epsilon_1, u^\epsilon_2, \epsilon u^\epsilon_3$ and $C^\epsilon$; $L_t^2 H_x^1$ boundedness for $u^\epsilon_1, u^\epsilon_2, \epsilon u^\epsilon_3$, and $L_t^2 L_x^2$ boundedness for $\sqrt{\epsilon} \partial_1 C^\epsilon, \partial_2 C^\epsilon, \partial_3 C^\epsilon$.
+
+  \end{prop}
   
-  \end{itemize}
-  
-  Because of the boundedness we have weak convergence, i.e. there are subsequences still denoted by the same way, for which we have $C^\epsilon \rightharpoonup C$ in $L_t^\infty L_x^2$, $\partial_2 C^\epsilon \rightharpoonup \partial_2 C $ and $\partial_3 C^\epsilon \rightharpoonup \partial_3 C $ in $L_t^2 L_x^2$, and $\sqrt{\epsilon} \partial_1 C^\epsilon \rightharpoonup e$ for some limit element $e$ in $L_t^2 L_x^2$.
+  As a consequence, weak convergence is gained as well, i.e., there are subsequences still denoted by the same way, for which we have $C^\epsilon \rightharpoonup C$ in $L_t^\infty L_x^2$, $\partial_2 C^\epsilon \rightharpoonup \partial_2 C $ and $\partial_3 C^\epsilon \rightharpoonup \partial_3 C $ in $L_t^2 L_x^2$, and $\sqrt{\epsilon} \partial_1 C^\epsilon \rightharpoonup e$ for some limit element $e$ in $L_t^2 L_x^2$.
 
 \subsection{Passing to the limit}
 
-Passing to the limit is done without problems for the terms that do not include the pollution function, since that had been worked out before.
+Taking the limit for the terms that do not include $C^\epsilon$ had been worked out before.
 In the linear terms the weak convergence guaranteed by the a priori estimates will be sufficient. In the nonlinear term we need an additional result that provides a weak convergence of the product of functions for which we only have weak convergence separately.
   
     For the linear terms we can directly apply the weak convergence results of the previous section.
@@ -423,7 +421,7 @@ In the linear terms the weak convergence guaranteed by the a priori estimates wi
     
       \item The convergence of the $(C^\epsilon, \frac{\partial \tilde{C}}{\partial t})$ term is easy to see, since we have $C^\epsilon \rightharpoonup C$ in $L_t^\infty L_x^2$.
       
-      \item For the next term we have $\epsilon K_1 \int_0 ^T (\partial_1 C^\epsilon, \partial_1 \tilde{C}) = \sqrt{\epsilon} K_1 \int_0 ^T (\sqrt{\epsilon} \partial_1 C^\epsilon, \partial_1 \tilde{C})$, which goes to 0 as $\epsilon \to 0$ because of the Cauchy-Schwartz inequality, since we have $\sqrt{\epsilon} \partial_1 C^\epsilon$ bounded in $L^2_t L^2_x$, and $\tilde{C}$ is a test function.
+      \item For the next term we have $\epsilon K_1 \int_0 ^T (\partial_1 C^\epsilon, \partial_1 \tilde{C}^\epsilon) = \sqrt{\epsilon} K_1 \int_0 ^T (\sqrt{\epsilon} \partial_1 C^\epsilon, \partial_1 \tilde{C}^\epsilon)$, which goes to 0 as $\epsilon \to 0$ because of the Cauchy-Schwartz inequality, since we have $\sqrt{\epsilon} \partial_1 C^\epsilon$ bounded in $L^2_t L^2_x$, and $\tilde{C}^\epsilon$ is a test function.
       
       \item As we have seen before, we have $\partial_2 C^\epsilon \rightharpoonup \partial_2 C $ in $L_t^2 L_x^2$, which by definition provides that
     
@@ -435,7 +433,11 @@ In the linear terms the weak convergence guaranteed by the a priori estimates wi
       
       \item The $\epsilon K_1 \int_0^T \big[(\partial_1 C^\epsilon) \tilde{C} \big] _{\Gamma_G} \diff t$ line integral vanishes as $\epsilon \to 0$ since by the Cauchy-Schwartz equation we can estimate the integral by two bounded terms ($\partial_1 C^\epsilon$ was assumed to be finite in norm on the lower boundary).
       
-      \item To prove $(S^\epsilon, \tilde{C}) \to  (S, \tilde{C}) $ we need to see that $\lim_{\epsilon \to 0} \int_\Omega S^\epsilon (\mathbf{x}, \mathbf{x}_s) \cdot \tilde{C}(\mathbf{x}) \diff \mathbf{x} \to \tilde{C}(\mathbf{x}_s).$ Using the substituation $\mathbf{y} = (\mathbf{x}-\mathbf{x}_s) / \epsilon$ we have
+      \item To prove $(S^\epsilon, \tilde{C}) \to  (S, \tilde{C}), $ we need to show that 
+      
+      \[ \lim_{\epsilon \to 0} \int_\Omega S^\epsilon (\mathbf{x}, \mathbf{x}_s) \cdot \tilde{C}(\mathbf{x}) \diff \mathbf{x} \to \tilde{C}(\mathbf{x}_s).\] 
+      
+      Using the substituation $\mathbf{y} = (\mathbf{x}-\mathbf{x}_s) / \epsilon$ we have
       
       \[ \int_\Omega \gamma \epsilon^{-1} e ^ {\frac{-(\mathbf{x}-\mathbf{x}_s)^2}{\epsilon^2}} \tilde{C}(\mathbf{x}) \diff \mathbf{x} = \int_{\Omega_\mathbf{y}} \gamma e^{-\mathbf{y}^2} \tilde{C} (\epsilon \mathbf{y} + \mathbf{x}_s) \diff \mathbf{y}\]
       
@@ -443,14 +445,14 @@ In the linear terms the weak convergence guaranteed by the a priori estimates wi
       
       \[ \lim_{\epsilon \to 0} (S^\epsilon, \tilde{C}) = \int_{\Omega_\mathbf{y}} \lim_{\epsilon \to 0} \gamma e^{-\mathbf{y}^2} \tilde{C} (\epsilon \mathbf{y} + \mathbf{x}_s) \diff \mathbf{y} = \int_{\Omega_\mathbf{y}} \gamma e^{-\mathbf{y}^2} \tilde{C} (\mathbf{x}_s) \diff \mathbf{y} = \tilde{C} (\mathbf{x}_s), \]
       
-      using the continuity of $\tilde{C}$ in $\mathbf{x}_s.$ 
+      using the continuity of $\tilde{C}.$ 
       
     \end{enumerate}
   
-  As for the nonlinear term $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C})$, we need some sort of compactness theorem to handle it.
+  As for the nonlinear term $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C})$, we need a compactness theorem to take its limit.
   
   \begin{remark}
-  As a matter of fact, we actually have three terms here, namely $(u^\epsilon_i C^\epsilon, \partial_i \tilde{C})$ for $i = 1,2,3$, and for the values $1,2$ of $i$ the weak convergence of the $u^\epsilon_i C^\epsilon$ product is given by the fact that, as it is proved in the reference article, we actually have strong convergence for the horizontal velocities, and because of the a priori estimate from the energy bound we know we have weak convergence for the $C^\epsilon$ term. But this argument does not really solve the challenge caused by nonlinearity because it does not hold for $u_3$, so we still need an additional compactness theorem as mentioned before.
+  As a matter of fact, we actually have three terms here, namely $(u^\epsilon_i C^\epsilon, \partial_i \tilde{C})$ for $i = 1,2,3$, and for the values $1,2$ of $i$ the weak convergence of the $u^\epsilon_i C^\epsilon$ product is given by the fact that, as it is proved in the reference article, we actually have strong convergence for the horizontal velocities, and because of the a priori estimate from the energy bound we know we have weak convergence for the $C^\epsilon$ term. But this argument does not solve the challenge caused by nonlinearity because it does not hold for $u_3$, so we still need an additional compactness theorem as mentioned before.
   \end{remark}
   
   In this case the Aubin-Lions lemma can not be applied since it would require for $C^\epsilon$ to be in a compactly embedded space such as $L^2 H^1$, which is not the case here because we only know boundedness results for $\sqrt{\epsilon} \partial_1 C$, but not for $\partial_1 C$.
@@ -477,18 +479,18 @@ In the linear terms the weak convergence guaranteed by the a priori estimates wi
    \begin{proof}
      We have seen from the a priori estimates that $C^\epsilon \rightharpoonup C$ in $L_t^\infty L_x^2$, and we know from the reference article that $u_i^\epsilon \rightharpoonup u_i$ in $L_t^2 L_x^2$.
      
-     Let us choose $q_1 = q_2 = p_1 = p_2 = 2.$ This is fine since we are on a finite domain, so $C^\epsilon \in L^\infty L^2$ implies $C^\epsilon \in L^2 L^2$.
+     Since we are on a finite domain and thus $C^\epsilon \in L^\infty L^2$ implies $C^\epsilon \in L^2 L^2$, let us choose $q_1 = q_2 = p_1 = p_2 = 2.$
      
      \begin{itemize}
      
        \item \textbf{Bound for the time derivative}.
          \[  \frac{\partial C^\epsilon}{\partial t} = - u^\epsilon \nabla C^\epsilon + \sqrt{\epsilon} K_1 \partial_1 \partial_1 \sqrt{\epsilon} C^\epsilon + K_2 \partial_2 \partial_2 C^\epsilon + K_3 \partial_3 \partial_3 C^\epsilon -S^\epsilon \]
          
-         On one hand, the $S^\epsilon$ Gaussian source term is smooth, and we see that the second part of the right hand side is in $W^{-1,2}$, simply using that $\partial_1 \sqrt{\epsilon} C^\epsilon, \partial_2 C^\epsilon, \partial_3 C^\epsilon$ are in $L^2$. On the other hand, the first part is in $W^{-1,1}$, because we have
+         On one hand, the $S^\epsilon$ Gaussian source term is smooth, and we see that the second part of the right hand side is in $W^{-1,2}$, simply using that $\partial_1 \sqrt{\epsilon} C^\epsilon, \partial_2 C^\epsilon, \partial_3 C^\epsilon$ are in $L^2$. On the other hand, the first term is in $W^{-1,1}$, because we have
          
          \[ u^\epsilon \nabla C^\epsilon = \nabla \cdot (u^\epsilon C^\epsilon) - \nabla \cdot (u^\epsilon) C, \]
          
-         and we just have to use that the divergence of $u^\epsilon$ is zero and $u^\epsilon C^\epsilon$ is in $L^1_x.$
+         and we only have to use that the divergence of $u^\epsilon$ is zero and $u^\epsilon C^\epsilon$ is in $L^1_x.$
          
          Eventually we have $\frac{\partial C}{\partial t} \in L^1 W^{-1,1}$.
          
@@ -505,23 +507,29 @@ In the linear terms the weak convergence guaranteed by the a priori estimates wi
        
        since $f \in C_0^\infty$.
        
-       As a second step we show that the condition holds for any function $f \in L^2$. Here we exploit the fact that $C_0^\infty$ is dense in the $L^p$ function space. By definition this means that $\exists \varphi_n \in C_0 ^ \infty (\Omega)$ such that $\varphi_n \to f$ in $L^p (\Omega)$. With this we have
+       Now we show that the condition holds for any function $f \in L^2$. Here we exploit the fact that $C_0^\infty$ is dense in the $L^p$ function space. By definition this means that $\exists \varphi_n \in C_0 ^ \infty (\Omega)$ such that $\varphi_n \to f$ in $L^p (\Omega)$. With this we have
        
        \[ \norm{f(x + \xi) - f(x)}_{L^2} = \]
        \[ \norm{f(x + \xi) - \varphi_n (x + \xi) + \varphi_n (x + \xi) -\varphi_n (x) + \varphi_n (x) - f(x)}_{L^2} \leq \]
-       \[ \norm{f(x+\xi) - \varphi_n (x+\xi)}_{L^2} + \norm{\varphi_n (x+\xi) - \varphi_n (x)}_{L^2} + \norm{\varphi_n (x) - f(x)}_{L^2}\]
+       \[ \norm{f(x+\xi) - \varphi_n (x+\xi)}_{L^2} + \norm{\varphi_n (x+\xi) - \varphi_n (x)}_{L^2} + \norm{\varphi_n (x) - f(x)}_{L^2}.\]
        
        The first and third term goes to $0$ as $\xi \to 0$, since $\varphi_n \to f$ in $L^p (\Omega)$. On the other hand in the first part of the proof we have shown exactly that the second term goes to $0$. Which proves that $\norm{u_i^n - u_i^n (\cdot + \xi,t)}_{L^2 L^2} \to 0$ as $\xi \to 0$. Eventually this means that we can apply the lemma with $h^n = u_i ^ \epsilon, g^n = C^\epsilon$, which proves the statement of the lemma.
        
      \end{itemize}
         
    \end{proof}
+   
+   We finally arrive to
+   
+   \[ \int_0^T (\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) \diff t \to \int_0^T (\mathbf{u} C, \nabla \tilde{C}) \diff t,\]
+   
+   which, combined with the previously described linear terms, proves the main theorem.
 
 
 %%% *** CONVECTION DOMINATED COASTAL MODEL *** %%%  
-\section{A generalized model} \label{convdomcoastal}
+\section{Convection dominated coastal model} \label{convdomcoastal}
 
-We now will present the convection dominated coastal model, which is a generalization of the previous inland model by adapting the model for seaside conditions.
+We now will present a generalized model, which is an extension of the previous inland model by adapting the model for seaside conditions.
 
 \begin{figure}[!h]
 \centering
@@ -541,17 +549,19 @@ We now will present the convection dominated coastal model, which is a generaliz
 \end{tikzpicture}
 \end{figure}
 
-On the ground layer we naturally separate the boundary into two different parts in this model, $\Gamma_G = \Gamma_E \bigcup \Gamma_I$; $\Gamma_E$ denoting the part of the boundary above the ground, and $\Gamma_I$ denoting the section that is interacting with the sea. The separation is a sort of expansion or generalization of the ground boundary --- while above ground parts it is reasonable to use no-slip conditions, above the ocean it is natural to assume that the wind has an interaction with the waves, there is no such rigidness as in the ground case. For this cause we will include $\theta$, which represents the wind traction on the ocean surface. Analogously, we need to make similar changes for the pollution concentration as well, above sea territory it is not natural to use $\partial_3 C = 0$, since the particles can now sink under the boundary level.
+On the ground layer we naturally separate the boundary into two different parts in this model, $\Gamma_G = \Gamma_E \bigcup \Gamma_I$; $\Gamma_E$ denoting the part of the boundary above the ground, and $\Gamma_I$ denoting the section that is interacting with the sea. While above ground parts it is reasonable to use no-slip conditions, above the ocean it is natural to assume that the wind has an interaction with the waves, there is no such rigidness as in the ground case. For this cause we will include $\theta$, which represents the wind traction on the ocean surface. Analogously, we need to make similar changes for the pollution concentration as well, above sea territory it is not natural to use $\partial_3 C = 0$, since the particles can now sink under the boundary level.
 
-On $\Gamma_E$ we have the same boundary conditions as in the inland case, $\mathbf{u}^\epsilon = 0, \partial_3 C^\epsilon = 0, \partial_2 C^\epsilon = 0, \partial_1 C^\epsilon$ bounded. On $\Gamma_I$ on the other hand we have $\nu_3 \partial_3 \bold{u}^\epsilon_H = \theta_H, u_3 = 0$ with assuming a finite wind energy, i.e. the functions $\theta$ being in $L^2(0,T; H^{-1/2}(\Gamma_I))$. For the pollution concentration we use the same approach and assume that the functions $\partial_1 C^\epsilon, \partial_2 C^\epsilon, \partial_3 C^\epsilon$ are equal to some sufficiently regular, $\epsilon$-independent functions defined on the respective boundaries. More accurately, we assume that we have a $C^\epsilon_{\Gamma_G} = \sigma$ sediment function on the lower boundary, where $\sigma \in L^2(0,T;H^1(\Gamma_G))$. If the partial derivatives of $\sigma$ are denoted by $\sigma_1, \sigma_2, \sigma_3$, we have $\partial_1 C^\epsilon = \sigma_1$ on $\Gamma_G$, and $\partial_2 C^\epsilon = \sigma_2$, $\partial_3 C^\epsilon = \sigma_3$ on $\Gamma_I$. (Of course $\sigma$ has to be a function such that we have $\sigma_2$ and $\sigma_3$ equal to zero on the $\Gamma_E$ part).
+On $\Gamma_E$ we have the same boundary conditions as in the inland case, $\mathbf{u}^\epsilon = 0,$ and for the concentration we have $\partial_3 C^\epsilon = \partial_2 C^\epsilon = 0,$ and $\partial_1 C^\epsilon$ being bounded. On $\Gamma_I$ on the other hand we have $\nu_3 \partial_3 \bold{u}^\epsilon_H = \theta_H, u_3 = 0$ with assuming a finite wind energy, i.e. the function $\theta$ being in $L^2(0,T; H^{-1/2}(\Gamma_I))$. For the pollution concentration we use the same approach and assume that the functions $\partial_1 C^\epsilon, \partial_2 C^\epsilon, \partial_3 C^\epsilon$ are equal to some sufficiently regular, $\epsilon$-independent functions defined on the respective boundary. More accurately, we assume that we have a $C^\epsilon_{\Gamma_G} = \sigma$ sediment function on the lower boundary, where $\sigma \in L^2(0,T;H^1(\Gamma_G))$. If the partial derivatives of $\sigma$ are denoted by $\sigma_1, \sigma_2$ and $\sigma_3$, we have $\partial_1 C^\epsilon = \sigma_1$ on $\Gamma_G$, and $\partial_2 C^\epsilon = \sigma_2$, $\partial_3 C^\epsilon = \sigma_3$ on $\Gamma_I$. (Of course $\sigma$ has to be a function such that we have $\sigma_2$ and $\sigma_3$ equal to zero on the $\Gamma_E$ part).
 
-We will discuss in more details the parts that are different from the inland case.
+In what follows we highlight the parts that will be different from the inland case. 
 
-The weak formulation of the coastal generalized systems will be different from the original inland version in that \textit{a)} it will contain a boundary term for the wind because of the air - ocean interface, and \textit{b)} it will contain boundary terms for $\partial_2 C, \partial_3 C$, which had been assumed to be zero before on the ground.
+The weak formulation of the coastal generalized system will be different from the original inland version in that \textit{a)} it will contain a boundary term for the wind because of the air - ocean interface, and \textit{b)} it will contain boundary terms for $\partial_2 C, \partial_3 C$, which had been assumed to be zero before on the ground.
 
-The weak form of the anisotropic system is the following.
+Calculating the weak formulation of the anisotropic system for the coastal model we arrive to the equation below.
 
-  \begin{equation}
+Find $\mathbf{u}^\epsilon = (\mathbf{u}_H, u^\epsilon_3) \in L^2 (0,t ; \mathbf{V}) \cap L^\infty (0, T; L^2 (\Omega)^3)$ and $C^\epsilon$ with $C^\epsilon \in L^\infty L^2$, $C^\epsilon \in L^2 (0,T; H^1)$, $C^\epsilon(0) \in L^2_x$ such that
+
+  \begin{equation} \label{coastalAnisotropic}
     \begin{split}
       & \int_0^T -(\mathbf{u}^\epsilon_H, \partial_t \mathbf{v}_H) + (\nabla_\nu \mathbf{u}^\epsilon_H, \nabla_\nu \mathbf{v}_H) - (\mathbf{u}^\epsilon_H, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{v}_H) + (b(\mathbf{u}^\epsilon_H), \mathbf{v}_H) \diff t \\
       & + \epsilon \beta \big[ \int_0 ^ T (u_3 ^\epsilon, v_1) - (u_1^\epsilon, v_3) \big] \diff t\\
@@ -561,10 +571,14 @@ The weak form of the anisotropic system is the following.
       & = - (\mathbf{u}^\epsilon_{0H}, \mathbf{v}^\epsilon_H(0)) - \int_0^T \langle \theta_H, \mathbf{v}_H \rangle_{\Gamma_I} - \epsilon^2 (u_{03}^\epsilon, v_3^\epsilon (0)) - (C^\epsilon (0), \tilde{C} (0)) + \int_0^T (S^\epsilon,\tilde{C}) \diff t
     \end{split}
   \end{equation}
+  
+   for all $\mathbf{v} = (\mathbf{v}_H, v_3) \in H^1 (0,T;\mathbf{V})$ with $\mathbf{v}(T) = 0$ and $\tilde{C}$ such that $\tilde{C} \in H^1 (0,T, H^1)$ and $\tilde{C} (T) = 0$.
 
-The weak version of the hydrostatic equations:
+On the other hand, the weak formulation of the hydrostatic case will take the following form.
 
-  \begin{equation}
+Find $(\mathbf{u}, C)$ such that $\mathbf{u} = (\mathbf{u}_H, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_H \in L^\infty (0,T; L^2(\Omega)^2),$ and $C$ with $\partial_2 C, \partial_3 C \in L^2_t L^2_x$, $C \in L^\infty L^2$ and $C(0) \in L^2_x$, such that
+
+  \begin{equation} \label{coastalHydrostatic}
     \begin{split}
       & \int_0^T -(\mathbf{u}_H, \partial_t \mathbf{v}_H) + (\nabla_\nu \mathbf{u}_H, \nabla_\nu \mathbf{v}_H) - (\mathbf{u}_H, (\mathbf{u} \cdot \nabla) \mathbf{v}_H) + (b(\mathbf{u}_H), \mathbf{v}_H) \diff t \\
       &+ \int_0^T -(C, \partial_t \tilde{C}) -(\mathbf{u}C, \nabla \tilde{C}) + \\
@@ -572,30 +586,27 @@ The weak version of the hydrostatic equations:
       & = - (\mathbf{u}_{0H}, \mathbf{v}_H(0)) -\int_0^T \langle \theta_H, \mathbf{v}_H \rangle_{\Gamma_I} - (C(0), \tilde{C}(0)) + \int_0^T (S,\tilde{C}) \diff t
     \end{split}
   \end{equation}
+  
+  for all $(\mathbf{v}, \tilde{C})$ with $\mathbf{v} = (\mathbf{v}_H, v_3) \in H^1 (0,T, \mathbf{W})$, with $v_H (T) = 0$ and $\partial_3 \mathbf{v}_H \in L^\infty (0, T; L^3 (\Omega)^2)$ and $\tilde{C}$ with $\tilde{C} \in L^2 (0,T, H^1)$, $\tilde{C} \in H^1 (0,T, L^2)$, $\tilde{C} (T) = 0$. 
 
-The analogous terms that we saw in the weak formulation will be different in the energy inequality as well. The coastal, generalized version of the energy inequality becomes the following.
+Naturally, the analogous terms that we saw were different in the weak formulation will be different also in the energy inequality as well. The coastal, generalized version of the energy inequality becomes
 
   \begin{equation}
     \begin{split}  
     & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \{    \norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \} \diff \tau + \\
     & \int_0 ^ t \{\epsilon K_1 \norm{\partial_1 C^\epsilon}_{L^2}^2  + K_2 \norm{\partial_2 C^\epsilon}_{L^2}^2 + K_3 \norm{\partial_3 C^\epsilon}_{L^2}^2 \} \diff \tau \leq \\
     & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau - \int_0^t \langle \theta_H, \mathbf{u}_H \rangle _{\Gamma_I}\\
-    & \int _ 0 ^ t \epsilon K_1 \langle \sigma_1, \sigma \rangle_{\Gamma_G} + K_2 \langle \sigma_2 , \sigma \rangle_{\Gamma_I}  + K_3 \langle \sigma_3, \sigma \rangle_{\Gamma_I}  \diff \tau
+    & \int _ 0 ^ t \epsilon K_1 \langle \sigma_1, \sigma \rangle_{\Gamma_G} + K_2 \langle \sigma_2 , \sigma \rangle_{\Gamma_I}  + K_3 \langle \sigma_3, \sigma \rangle_{\Gamma_I}  \diff \tau.
     \end{split}
   \end{equation}
   
-Since the $\sigma$ boundary function is in $L^2 H^1$, we have boundedness on the right hand side. Even though by first look the inequality seems a bit different from the inland one, it provides the same estimates and weak convergences. We have
-  
-\begin{itemize}
-  
-  \item $L_t^\infty L_x^2$ boundedness for $u^\epsilon_1, u^\epsilon_2, \epsilon u^\epsilon_3$,
-  \item $L_t^2 H_x^1$ boundedness for $u^\epsilon_1, u^\epsilon_2, \epsilon u^\epsilon_3$,
-  \item $L_t^\infty L_x^2$ boundedness for $C^\epsilon$,
-  \item $L_t^2 L_x^2$ boundedness for $ \sqrt{\epsilon} \partial_1 C^\epsilon, \partial_2 C^\epsilon, \partial_3 C^\epsilon$.
-  
-\end{itemize}
+Since the $\sigma$ boundary function is in $L^2 H^1$, we have boundedness on the right hand side. The inequality provides the same estimates and weak convergence results. As for passing to the limit as $\epsilon \to 0$ in the coastal version of the anisotropic system seen above, there is no mathematical novelty compared to the inland case.
 
-As for passing to the limit as $\epsilon \to 0$ in the coastal version of the anisotropic system seen above, there is no mathematical novelty compared to the inland case.
+Eventually we arrive to the extended, coastal version of the main theorem, which is stated below.
+
+\begin{theorem}
+  Let $\bold{u}_0$ $\in$ $L^2 (\Omega)^3$, with $\nabla \cdot \bold{u}_0 = 0, \bold{u}_0 \cdot \bold{n} = 0$ on $\partial \Omega$; and let $C(0)\in$ $L^2 (\Omega)^3$, $C(0) = 0$ on $ \partial \Omega$; there exists a weak solution ($\mathbf{u}$, C) of the hydrostatic equations of the polluted atmosphere (\ref{coastalHydrostatic}), obtained as a limit of weak solutions $(\mathbf{u^\epsilon}, C^\epsilon)$ of the anisotropic equations (\ref{coastalAnisotropic}) as the aspect ratio $\epsilon$ tends to $0$.
+\end{theorem}
 
 \begin{remark}
 If we switch to the "informationless", fix coordinate system that does not match the downwind direction and we drop the assumption on the flow being convection dominated ($\epsilon$ - diffusion), then we can relax the restrictions on $C^\epsilon$ on the boundary. This is true because in this case we do not have a disappearing $\epsilon$ term in front of the $K_1$ constant, and we can use the analogous estimate as in the inland case at the energy inequality and arrive to having a $(K_1 - \delta \frac{K_1 + K_2 + K_3}{2} c_T (c_S + 1)) \norm{\partial_1 C^\epsilon}_{L^2}^2$ term with a positive coefficient on the left hand side and a bounded $\frac{1}{\delta_i} \frac{K_i}{2} \int_0 ^ t \norm{\partial_i C^\epsilon}^2 _{L^2 (\Gamma_G)}$ integral on the right hand side --- the only assumption we need is $\partial_i C^\epsilon$ to be in $L^2_t L^2_x$ on the boundary.
