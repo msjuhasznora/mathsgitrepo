@@ -50,7 +50,7 @@ We use the
 
 aspect ratio and the fact that, as the above described general ideas suggest, it is natural to take the limit model as $\epsilon$ goes to zero.
 
-In this work we provide a sort of expansion of the convergence result of \cite{azerad2001mathematical}. The main result of their article is for the case of the Navier-Stokes equations of the ocean, without the inclusion of salinity. Their main focus is on the assumption that the pressure is hydrostatic, i.e., increases linearly in the vertical direction, and the authors justify this assumption by asymptotic analysis, taking the small parameter $\epsilon$ to zero. In the derivation of the primitive equations, one of the fundamental tools is the anisotropic viscosity hypothesis, i.e., that the ratio between the horizontal and vertical scales leads to horizontal and vertical viscosities of significantly different magnitude, specifically we can use $\nu = (\nu_1, \nu_2, \epsilon^2 \nu_3)$. With this they verify that the weak solutions of the Navier-Stokes equations converge to a weak solution of the limit problem with hydrostatic pressure.
+In this work we provide a sort of expansion of the convergence result of \cite{azerad2001mathematical}. The main theorem of their article is for the case of the Navier-Stokes equations of the ocean, without the inclusion of salinity. Their primary focus is on the assumption that the pressure is hydrostatic, i.e., increases linearly in the vertical direction, and the authors justify this assumption by asymptotic analysis, taking the small parameter $\epsilon$ to zero. In the derivation of the primitive equations, one of the fundamental tools is the anisotropic viscosity hypothesis, i.e., that the ratio between the horizontal and vertical scales leads to horizontal and vertical viscosities of significantly different magnitude, specifically we can use $\nu = (\nu_1, \nu_2, \epsilon^2 \nu_3)$. With this they verify that the weak solutions of the Navier-Stokes equations converge to a weak solution of the limit problem with hydrostatic pressure.
 
 We will use the identical anisotropic viscosities describing the atmosphere by means of the Navier-Stokes eqations, and adapt their main result for the atmospheric case, therefore their article is the main pillar and reference for this work. In this paper we are providing a generalization of their result in the sense that we obtain a theorem describing the atmospheric flow combined with pollution effects, which constitutes the main novelty part, and the merged physical phenomena can naturally be seen as the air-analogous version of the salty sea (a homogeneous fluid carrying some other particles of a certain concentration).
 
@@ -64,7 +64,7 @@ This paper is organized in the following way. In section \ref{eqsdescribingatmpl
 
 \item $\epsilon = $ the aspect ratio
 \item $\nu = $ viscosity
-\item $\Omega_\epsilon, \Omega = $ the original and the rescaled, $\epsilon$-independent domain, respectively
+\item $\Omega_\epsilon, \Omega = $ the original and the rescaled ($\epsilon$-independent) domain, respectively
 \item $\nabla = (\partial_x, \partial_y, \partial_z) $ the gradient vector
 \item $ \Delta_\nu = \nu_x \partial^2_{xx} + \nu_y \partial^2_{yy}  + \nu_z \partial^2_{zz} $ the anisotropic Laplacian
 \item $g = $ represents the force due to gravity, which also includes the centrifugal effect
@@ -120,7 +120,7 @@ In the following we will describe a usual practice in asymptotic analysis, namel
 
     \[x=x_1, y=x_2, z=\epsilon x_3 \]
     
-    So we have the following new , $\epsilon$ - independent domain
+    So we have the following new, $\epsilon$ - independent domain
     
     \[ \Omega =  \{(x_1,x_2,x_3) \in \mathbb{R}^3 ; (x_1,x_2) \in \omega, 0 < x_3 < h (x_1 , x_2) \}.\]
     
@@ -141,7 +141,7 @@ In the following we will describe a usual practice in asymptotic analysis, namel
     which leads us to using
     \[ K_x = \epsilon K_1.\]
     
-Finally, as we mentioned before, we use Gaussian approximate delta functions to represent the source, so it is convenient to involve the $\epsilon$ term in one additional point in the functions, which is the standard deviation parameter of the distribution describing the source --- because as later we will take the limit as $\epsilon$ goes to zero, it will result in having the $\delta$ distribution representing the hydrostatic source term, which is a physically natural choice. In other words, we choose $\kappa$ to be $\epsilon$ and the following function will give shape to the source term: $\delta_\epsilon (\mathbf{x}-\mathbf{x_s}) = \gamma \epsilon^{-1} e ^ {\frac{-(\mathbf{x}-\mathbf{x_s})^2}{\epsilon^2}}$; and finally $S_\epsilon = I H(t-t_s) \gamma \epsilon^{-1} e ^ {\frac{-(\mathbf{x}-\mathbf{x_s})^2}{\epsilon^2}},$ where $\gamma$ is a normalizing constant.
+Finally, as we mentioned before, we use Gaussian approximate delta functions to represent the source, so it is convenient to involve the $\epsilon$ term in one additional point in the functions, which is the standard deviation parameter of the distribution describing the source --- since later we will take the limit as $\epsilon$ goes to zero, it will result in having the $\delta$ distribution representing the hydrostatic source term, which is a physically natural choice. In other words, we choose $\kappa$ to be $\epsilon$ and the following function will give shape to the source term: $\delta_\epsilon (\mathbf{x}-\mathbf{x_s}) = \gamma \epsilon^{-1} e ^ {\frac{-(\mathbf{x}-\mathbf{x_s})^2}{\epsilon^2}}$; and finally $S_\epsilon = I H(t-t_s) \gamma \epsilon^{-1} e ^ {\frac{-(\mathbf{x}-\mathbf{x_s})^2}{\epsilon^2}},$ where $\gamma$ is a normalizing constant.
     
     Putting this condition and the previously described rescaling terms together to the original equations, we arrive to the merged anisotropic equations of the polluted atmosphere above inland surface.
   
@@ -315,7 +315,7 @@ In this section we calculate the weak formulation of the merged equations in bot
   
   \[ \mathbf{W} = \{ \mathbf{u} \in  H^1_{\Gamma} (\Omega) \times H^1_{\Gamma} (\Omega) \times H_0 (\partial_3, \Omega); \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \} \]
   
-  We use $\mathbf{u}_H = (u_1, u_2)$ to denote the horizontal velocity, $b(\mathbf{u}_H) = \alpha (-u_2, u_1)$ and $\nabla_\nu = (\nu_1^{1/2}, \nu_2^{1/2}, \nu_3^{1/2}).$ Then the weak formulation of the hydrostatic system (\ref{HNSC1}) - (\ref{HNSC7}) takes the following form.
+  We use $\mathbf{u}_H = (u_1, u_2)$ to denote the horizontal velocity, $b(\mathbf{u}_H) = \alpha (-u_2, u_1)$ and $\nabla_\nu = (\nu_1^{1/2}, \nu_2^{1/2}, \nu_3^{1/2}).$ Then the weak formulation of the hydrostatic system (\ref{HNSC1}) - (\ref{HNSC8}) takes the following form.
   
   Find $(\mathbf{u}, C)$ such that $\mathbf{u} = (\mathbf{u}_H, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_H \in L^\infty (0,T; L^2(\Omega)^2),$ and $C$ with $\partial_2 C, \partial_3 C \in L^2_t L^2_x$, $C \in L^\infty L^2$ and $C(0) \in L^2_x$, such that
   
@@ -363,7 +363,7 @@ In this section we calculate the weak formulation of the merged equations in bot
 %%% *** PROOF *** %%%
 \section{Proof of the main theorem} \label{proof}
  
- The proof begins by extracting a priori estimates for the solution of the anisotropic system of the polluted atmosphere (\ref{ANSC1}) - (\ref{ANSC7}).
+ The proof begins by extracting a priori estimates for the solution of the anisotropic system of the polluted atmosphere (\ref{ANSC1}) - (\ref{ANSC8}).
 
   \subsection{Energy inequality}
   
