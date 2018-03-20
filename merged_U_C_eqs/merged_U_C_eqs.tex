@@ -296,7 +296,7 @@ Let $T$ be a fixed positive duration. Below is described our main result.
   
 In this extended case as well, the proof relies on a priori estimates gained from the energy inequality in anisotropic spaces --- as we will see, this is sufficient to pass to the limit in the linear terms. 
 
-The challenge caused by the nonlinear term will be met by proving that a compactness result from \cite{lions1996mathematical} is applicable for it.
+The challenge caused by the nonlinear term will be met by proving that a compactness result from \cite{lions1996mathematical} is applicable to handle it.
 
 %%% *** WEAK FORMULATION *** %%%
 \section{Weak formulation} \label{weakformulation}
@@ -327,13 +327,13 @@ In this section we calculate the weak formulation of the merged equations in bot
     \end{split}
   \end{equation}
   
-  for all $(\mathbf{v}, \tilde{C})$ with $\mathbf{v} = (\mathbf{v}_H, v_3) \in H^1 (0,T, \mathbf{W})$, with $v_H (T) = 0$ and $\partial_3 \mathbf{v}_H \in L^\infty (0, T; L^3 (\Omega)^2)$ and $\tilde{C}$ with $\tilde{C} \in L^2 (0,T, H^1_{\Gamma} (\Omega))$, $\tilde{C} \in H^1 (0,T, L^2)$, $\tilde{C} (T) = 0$. 
+  for all $(\mathbf{v}, \tilde{C})$ with $\mathbf{v} = (\mathbf{v}_H, v_3) \in H^1 (0,T, \mathbf{W})$, with $v_H (T) = 0$ and $\partial_3 \mathbf{v}_H \in L^\infty (0, T; L^3 (\Omega)^2)$ and $\tilde{C}$ with $\tilde{C} \in L^2 (0,T, H^3_{\Gamma} (\Omega))$, $\tilde{C} \in H^1 (0,T, L^2)$, $\tilde{C} (T) = 0$. 
   
   Note that the term $\int_0^T (S,\tilde{C}) \diff t$ makes sense since in this case $S$ denotes the delta distribution and we have 
   
   \[ (S,\tilde{C}) = \int_\Omega \delta(\mathbf{x} - \mathbf{x}_s) \tilde{C}(\mathbf{x}) \diff \mathbf{x} = \tilde{C}(\mathbf{x}_s),\]
   
-  using the basic properties of $\delta$ and the continuity of $\tilde{C}$ in $x_s$.
+  using the basic properties of $\delta$ and the continuity of $\tilde{C}.$
   
   \begin{remark}
   If $S$ is chosen to be different from the limit of the Gaussian nascent delta function, then it is easy to see that the sufficient assumption we have to make on a general $S$ hydrostatic pollution function is that it should be in $L^2_t L^2_x$. 
@@ -354,7 +354,7 @@ In this section we calculate the weak formulation of the merged equations in bot
     \end{split}
   \end{equation}
   
-  for all $\mathbf{v} = (\mathbf{v}_H, v_3) \in H^1 (0,T;\mathbf{V})$ with $\mathbf{v}(T) = 0$ and $\tilde{C}$ such that $\tilde{C} \in H^1 (0,T, H^1_{\Gamma} (\Omega))$ and $\tilde{C} (T) = 0$.
+  for all $\mathbf{v} = (\mathbf{v}_H, v_3) \in H^1 (0,T;\mathbf{V})$ with $\mathbf{v}(T) = 0$ and $\tilde{C}$ such that $\tilde{C} \in H^1 (0,T, H^3_{\Gamma} (\Omega))$ and $\tilde{C} (T) = 0$.
   
   Note that in this case the source term is a nascent delta function, the Gaussian pulse is in $L^\infty_x(\Omega),$ so we do not have any problems with the source term. If we used a source function of a different and more general form, it needs to satisfy the $L^2 L^2$ boundedness criteria for the weak formulation to make sense.
   
@@ -588,7 +588,7 @@ Find $\mathbf{u}^\epsilon = (\mathbf{u}_H, u^\epsilon_3) \in L^2 (0,t ; \mathbf{
     \end{split}
   \end{equation}
   
-   for all $\mathbf{v} = (\mathbf{v}_H, v_3) \in H^1 (0,T;\mathbf{V})$ with $\mathbf{v}(T) = 0$ and $\tilde{C}$ such that $\tilde{C} \in H^1 (0,T, H^1_{\Gamma} (\Omega))$ and $\tilde{C} (T) = 0$.
+   for all $\mathbf{v} = (\mathbf{v}_H, v_3) \in H^1 (0,T;\mathbf{V})$ with $\mathbf{v}(T) = 0$ and $\tilde{C}$ such that $\tilde{C} \in H^1 (0,T, H^3_{\Gamma} (\Omega))$ and $\tilde{C} (T) = 0$.
 
 On the other hand, the weak formulation of the hydrostatic case will take the following form.
 
@@ -603,7 +603,7 @@ Find $(\mathbf{u}, C)$ such that $\mathbf{u} = (\mathbf{u}_H, u_3) \in L^2 (0, T
     \end{split}
   \end{equation}
   
-  for all $(\mathbf{v}, \tilde{C})$ with $\mathbf{v} = (\mathbf{v}_H, v_3) \in H^1 (0,T, \mathbf{W})$, with $v_H (T) = 0$ and $\partial_3 \mathbf{v}_H \in L^\infty (0, T; L^3 (\Omega)^2)$ and $\tilde{C}$ with $\tilde{C} \in L^2 (0,T, H^1_{\Gamma} (\Omega))$, $\tilde{C} \in H^1 (0,T, L^2)$, $\tilde{C} (T) = 0$. 
+  for all $(\mathbf{v}, \tilde{C})$ with $\mathbf{v} = (\mathbf{v}_H, v_3) \in H^1 (0,T, \mathbf{W})$, with $v_H (T) = 0$ and $\partial_3 \mathbf{v}_H \in L^\infty (0, T; L^3 (\Omega)^2)$ and $\tilde{C}$ with $\tilde{C} \in L^2 (0,T, H^3_{\Gamma} (\Omega))$, $\tilde{C} \in H^1 (0,T, L^2)$, $\tilde{C} (T) = 0$. 
 
 Naturally, the analogous terms that we saw were different in the weak formulation will be different also in the energy inequality as well. The coastal, generalized version of the energy inequality becomes
 
