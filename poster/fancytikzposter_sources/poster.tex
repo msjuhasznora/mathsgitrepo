@@ -10,57 +10,7 @@
 
 \usepackage{fancytikzposter} 
 
-
-%%%%% --------- Change here if you want ---------- %%%%%
-%% margin for the geometry package, must be changed before using the geometry package
-%% default value is 4cm
-% \setmargin{4}
-
-%% the space between the blocks
-%% default value is 2cm
-% \setblockspacing{2}
-
-%% the height of the title stripe in block nodes, decrease it to save space
-%% default value is 3cm
-% \setblocktitleheight{3}
-
-%% the number of columns in the poster, possible values 2,3
-%% default value is 2
 \setcolumnnumber{3}
-
-%% the space between two or more groups of authors from different institutions
-%% used in \maketitle
-% \setinstituteshift{10}
-
-%% which template to use
-%% N1 simple, standard look, with a colored background and gray boxes
-%% N2 board with nodes
-%% N3 another standard look
-%% N4 envelope-like look
-%% N5 with a wave-like head, original idea taken from
-%%%% http://fc09.deviantart.net/fs71/f/2010/322/1/1/scientific_poster_by_nabuy-d333ria.jpg
-%\usetemplate{6}
-
-%% components of the templates
-%% (the maximal possible numbers are mentioned as the parameters)
-% \usecolortemplate{4}
-% \usebackgroundtemplate{5}
-% \usetitletemplate{2}
-% \useblocknodetemplate{5}
-% \useplainblocktemplate{4}
-% \useinnerblocktemplate{2}
-
-
-%% the height of the head drawing on top 
-%% applicable to templates N3, 4 and 5
-% \setheaddrawingheight{14}
-
-
-%% change the basic colors
-%\definecolor{myblue}{HTML}{008888} 
-%\setfirstcolor{myblue}% default 116699
-%\setsecondcolor{gray!80!}% default CCCCCC
-%\setthirdcolor{red!80!black}% default 991111
 
 \definecolor{mygreen}{HTML}{2ECC71}
 \definecolor{mygrey}{HTML}{797D7F}
@@ -69,52 +19,14 @@
 \setsecondcolor{mygrey}
 \setthirdcolor{mypink}
 
-%% change the more specific colors
-% \setbackgrounddarkcolor{colorone!70!black}
-% \setbackgroundlightcolor{colorone!70!}
-% \settitletextcolor{textcolor}
-% \settitlefillcolor{white}
-% \settitledrawcolor{colortwo}
-% \setblocktextcolor{textcolor}
-% \setblockfillcolor{white}
-% \setblocktitletextcolor{colorone}
-% \setblocktitlefillcolor{colortwo} %the color of the border
-% \setplainblocktextcolor{textcolor}
-% \setplainblockfillcolor{colorthree!40!}
-% \setplainblocktitletextcolor{textcolor}
-% \setplainblocktitlefillcolor{colorthree!60!}
-% \setinnerblocktextcolor{textcolor}
-% \setinnerblockfillcolor{white}
-% \setinnerblocktitletextcolor{white}
-% \setinnerblocktitlefillcolor{colorthree}
-
-
-
-
 %%% size of the document and the margins
 %% A0
  \usepackage[margin=\margin cm, paperwidth=118.9cm, paperheight=84.1cm]{geometry} 
 %\usepackage[margin=\margin cm, paperwidth=84.1cm, paperheight=118.9cm]{geometry}
-%% B1
-% \usepackage[margin=\margin cm, paperwidth=70cm, paperheight=100cm]{geometry}
 
-
-
-%% changing the fonts
 \usepackage{cmbright}
-%\usepackage[default]{cantarell}
-%\usepackage{avant}
-%\usepackage[math]{iwona}
 \usepackage[math]{kurier}
 \usepackage[T1]{fontenc}
-
-
-%% add your packages here
-\usepackage{hyperref}
-
-
-
-
 
 \title{The polluted atmosphere as a shallow domain}
 \author{Nora Juhasz\\
@@ -122,57 +34,43 @@
   \texttt{ms.juhasz.nora@gmail.com}
 }
 
-
 \begin{document}
 
-%%%%% ---------- the background picture ---------- %%%%%
-%% to change it modify the macro \BackgroundPicture
 \ClearShipoutPicture
 \AddToShipoutPicture{\BackgroundPicture}
 
 \noindent % to have the picture right in the center
 \begin{tikzpicture}
   \initializesizeandshifts
-  % \setxshift{15}
-  % \setyshift{2}
 
-
-  %% the title block, #1 - shift, the default value is (0,0), #2 - width, #3 - scale
-  %% the alias of the title block is `title', so we can refer to its boundaries later
   \ifthenelse{\equal{\template}{1}}{ 
     \titleblock{47}{1}
   }{
     \titleblock{47}{1.5}
   }
 
-  %% a logo can be added to the title block
-  %% #1 - anchor relative to the title block, #2 - shift, #3 - width, #3 - file name
-  %\ifthenelse{\equal{\template}{2}}{ 
-  %  \addlogo[south west]{(2,0)}{3cm}{LogoDisim.png}
-  %}{
-   % \addlogo[south west]{(2,0)}{3cm}{LogoDisim.png}
-  %}
-
+  \addlogo[south west]{(1,1)}{3cm}{LogoDisim.png}
 
   %% a block node, with the specified position (optional), title and the content
   %% #1 - where (optional), #2 - title, #3 - text
   %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
-  \blocknode%
-  {The equations of the polluted atmosphere}%
+  \blocknode
+  {The equations of the polluted atmosphere}
   {Navier - Stokes equations combined with convection-diffusion:
 
     \coloredbox{colorthree!50!}{
-      \% EQST 1 \\
+      EQST 1 \\
 
-      \% EQST 2 \\
+      EQST 2 \\
       
-      \% EQST 3 \\
+       EQST 3 \\
             
-       \% EQST 4 \\
+        EQST 4 \\
                   
-        \% EQST 5 \\
+         EQST 5 \\
         
-        \% EQST 6 \\        
+        EQST 6 \\      
+        
     }
   }
 
@@ -191,32 +89,42 @@
     The smart comment in details. 
   }
 
-  %% by default, the position of the new block node is right below the previous
-  %% block node, stored in (currenty)
-  %% box is the alias of the previous block, so we can refer to its boundaries
-
   %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
-  \blocknode{Shallow domain in fluid dynamics}%
+  \blocknode{Shallow domain in fluid dynamics}
   {Discuss shallow domains. Ocean, salinity, atmosphere, pollution.  }
   
-    \plainblock[5]{($(currenty)+(1,2)$)}{25}{Fancy comment} %
+    \plainblock[5]{($(currenty)+(1,2)$)}{25}{Fancy comment} 
   {
     
     \vspace{0.3cm}
     Exciting and clever highlight.}
+    
+   \blocknode[($(currenty)-(0,5)$)]{Shallow domain in fluid dynamics}
+  {Discuss shallow domains. Ocean, salinity, atmosphere, pollution.  }
+    
   
     %%%%%%%%%%%%% NEW COLUMN %%%%%%%%%%%%%%% 
   \startsecondcolumn 
 
-  %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
 
-  
-  \blocknode{Compactness}%
+  %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
+  \blocknode{Compactness}
   {Issues.
     \begin{itemize}
     \item[] \textbackslash Compactness stuff.
     \end{itemize}
     More compactness stuff. \\
+    
+            \vspace{0.5cm}
+    Let's see some figures.
+ 
+    \begin{tikzfigure}[A local slice of the atmosphere]
+      \begin{tikzpicture}
+      
+        \node[inner sep=0pt] (domain) at (0,0) {\includegraphics[width=.25\textwidth]{domain.jpg}};
+      
+      \end{tikzpicture}
+    \end{tikzfigure}  
 
   }
   
@@ -250,13 +158,58 @@
  
     \begin{tikzfigure}[A local slice of the atmosphere]
       \begin{tikzpicture}
-      \node[inner sep=0pt] (russell) at (0,0)
-    {\includegraphics[width=.25\textwidth]{LogoDisim.png}};
+      
+        \node[inner sep=0pt] (ratmospherelayers) at (0,0) {\includegraphics[width=.25\textwidth]{atmosphere.jpg}};
+      
       \end{tikzpicture}
     \end{tikzfigure}
+    
+    Picture credit: mountwashington.org.
+  }
+  
+      %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
+  \blocknode {Extra results}
+  {Fanciness:
+    \begin{itemize}
+    \item 1
+\item 1
+
+    \end{itemize}
+  }
+ 
+
+  %%%%%%%%%%%%% NEW COLUMN %%%%%%%%%%%%%%% 
+  \startthirdcolumn 
+
+
+  %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
+  \blocknode {Extra results}
+  {Fanciness:
+    \begin{itemize}
+    \item 1
+
+    \item 2
+
+    \end{itemize}
   }
   
     %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
+  \blocknode {Extra results}
+  {Fanciness:
+    \begin{itemize}
+    \item 1
+\item 1
+    \item 2
+    \item 1
+    \item 1
+    \item 1
+    \item 1
+    \item 1
+
+    \end{itemize}
+  }
+  
+      %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
   \calloutblock{($(box.south east)-(8,-2)$)}
   {($(box.south east)-(16,2)$)}
   {30cm}
@@ -269,38 +222,26 @@
     \end{itemize}
     The alias for such blocks is \emph{note}.
   }
-
-  %%%%%%%%%%%%% NEW COLUMN %%%%%%%%%%%%%%% 
-  \startthirdcolumn 
-
-
-  %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
-  \blocknode {Personalizing the Poster}%
-  {It is possible to adjust the layout of the poster. To impose your own
-    setting, you can use these macros:
+  
+   \getcurrentrow{note}
+ \coordinate (currenty) at ($(currentrow)+(xshift)-(yshift)$);
+  
+      %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
+  \blocknode {Extra results}
+  {Fanciness:
     \begin{itemize}
-    \item Macros for changing sizes
-
-
-    \item Other structural macros
-
-
-    \item Macro for adding logos to the title block
-
-
-    \item Macros for the basic colors
-
-
-    \item Macros for specific colors:
+    \item 1
+\item 1
+    \item 2
+    \item 1
+    \item 1
+    \item 1
+    \item 1
+    \item 1
 
     \end{itemize}
   }
 
 \end{tikzpicture}
 
-
 \end{document}
-
-
-
-
