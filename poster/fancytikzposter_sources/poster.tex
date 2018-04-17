@@ -154,49 +154,41 @@
     }
   }
   
-    %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
-  \blocknode{5 Weak formulation}%
-  {There are three types of colored boxes/blocks that you can use inside block
-    nodes to highlight information. \\
-    
-    \begin{tabular}[t]{ll}
-      \begin{minipage}{0.5\linewidth}
-        \innerblock{Theorem} {Statement}
-      \end{minipage}
-      & 
-      \textbackslash innerblock\{Theorem\}\{Statement\}\\
-
-      \begin{minipage}{0.5\linewidth}
-        \innerblockplain[colorone!80!]{Text}
-      \end{minipage}
-      &
-      \textbackslash innerblockplain[colorone!80!]\{Text\}\\ 
-
-      \begin{minipage}{0.5\linewidth}
-        \coloredbox{colorthree!50!}{Text}
-      \end{minipage}
-      &
-      \textbackslash coloredbox\{colorthree!50!\}\{Text\}
-    \end{tabular}
-  }
+  %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
+  \blocknode{The main theorem}%
+  {
   
-      %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
-  \blocknode {6 Energy inequality}
-  {Fanciness:
     \begin{itemize}
-    \item 1
-\item 1
-
-    \end{itemize}
+  
+    \item We provide an expansion of the convergence result of \cite{azerad2001mathematical}.
+    \item The main theorem of their article is for the case of the Navier-Stokes equations of the ocean, without the inclusion of salinity.
+    \item We prove that the hydrostatic approximation is still justifiable with the additional pollution concentration effect.
+    \item The theorem is valid locally (see graph below).
+  
+  \end{itemize}
+  
+  \vspace{0.5cm}
+      
+    \begin{tabular}[t]{ll}
+      \begin{minipage}{1.0\linewidth}
+        \innerblock{Theorem} {Let $\bold{u}_0$ $\in$ $L^2 (\Omega)^3$, with $\nabla \cdot \bold{u}_0 = 0, \bold{u}_0 \cdot \bold{n} = 0$ on $\partial \Omega$; and let $C(0)\in$ $L^2 (\Omega)^3$, $C(0) = 0$ on $ \partial \Omega$; there exists a weak solution ($\mathbf{u}$, C) of the hydrostatic equations of the polluted atmosphere, obtained as a limit of weak solutions $(\mathbf{u^\epsilon}, C^\epsilon)$ of the anisotropic equations as the aspect ratio $\epsilon$ tends to $0$.}
+      \end{minipage}
+    \end{tabular}
+    
+    \begin{tikzfigure}[A local slice of the atmosphere]
+      \begin{tikzpicture}
+      
+        \node[inner sep=0pt] (domain) at (0,0) {\includegraphics[width=.25\textwidth]{domain.jpg}};
+      
+      \end{tikzpicture}
+    \end{tikzfigure}  
   }
- 
 
   %%%%%%%%%%%%% NEW COLUMN %%%%%%%%%%%%%%% 
-  \startthirdcolumn 
-
-
+  \startthirdcolumn
+  
   %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
-  \blocknode {7 A priori estimates, weak convergence}
+  \blocknode {A priori estimates, weak convergence}
   {Fanciness:
     \begin{itemize}
     \item 1
@@ -207,18 +199,11 @@
   }
   
     %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
-  \blocknode {8 Compactness}
+  \blocknode {Compactness}
   {Fanciness:
             \vspace{0.5cm}
     Let's see some figures.
- 
-    \begin{tikzfigure}[A local slice of the atmosphere]
-      \begin{tikzpicture}
-      
-        \node[inner sep=0pt] (domain) at (0,0) {\includegraphics[width=.25\textwidth]{domain.jpg}};
-      
-      \end{tikzpicture}
-    \end{tikzfigure}  
+
   }
   
       %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
@@ -239,7 +224,7 @@
  \coordinate (currenty) at ($(currentrow)+(xshift)-(yshift)$);
   
       %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
-  \blocknode {9 Existence}
+  \blocknode {Existence}
   {Fanciness:
     \begin{itemize}
     \item 1
@@ -256,4 +241,7 @@
 
 \end{tikzpicture}
 
+\nocite{*}
+\bibliographystyle{apalike}
+\bibliography{poster}
 \end{document}
