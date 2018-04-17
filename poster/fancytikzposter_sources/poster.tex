@@ -54,82 +54,108 @@
   %% a block node, with the specified position (optional), title and the content
   %% #1 - where (optional), #2 - title, #3 - text
   %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
-  \blocknode
-  {The equations of the polluted atmosphere}
-  {Navier - Stokes equations combined with convection-diffusion:
+  \blocknode{The shallow domain concept}
+  {
+  \begin{itemize}
+    \item  Natural, large-scale geophysical fluids share the shallow domain characteristics
+    \item  "almost" two-dimensional set $\to$ we can significantly simplify the model in the vertical direction
+    \item  a domain that is excessively greater horizontally than in the vertical dimension $\to$ leading to the classic hydrostatic approximation of the Navier-Stokes equations
+  \end{itemize}
+  
+  \vspace{0.5cm}
 
-    \coloredbox{colorthree!50!}{
-      EQST 1 \\
-
-      EQST 2 \\
-      
-       EQST 3 \\
-            
-        EQST 4 \\
-                  
-         EQST 5 \\
-        
-        EQST 6 \\      
-        
-    }
+  \begin{tikzfigure}[A local slice of the atmosphere. Picture credit: mountwashington.org]
+    \begin{tikzpicture}
+      \node[inner sep=0pt] (atmospherelayers) at (0,0) {\includegraphics[width=.25\textwidth]{atmosphere.jpg}};
+      \end{tikzpicture}
+  \end{tikzfigure}
+  
+  The main ideas and tools in this scenario:
+  \begin{itemize}
+    \item introduce the aspect ratio $\epsilon = \frac{\text{characteristic depth}}{\text{characteristic width}},$
+    \item anisotropic viscosity hypothesis,
+    \item rescaling, $x=x_1, y=x_2, z=\epsilon x_3.$
+  \end{itemize}
+  
   }
-
 
   %% a callout block
   %% #1 - rotate angle (optional), #2 - from, #3 - where, #4 - width, #5 - text
   %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
-  \calloutblock{($(box.center)+(-2,-8)$)}
-  {($(box.center)+(10,-1)$)}
-  {16cm}
+  \calloutblock
+  {($(box.center)+(-2,-11.5)$)} %% the point of the arrow part of the block
+  {($(box.center)+(12,-7)$)} %% the center of the body of the block
+  {15cm} %% the width of the block
   {\small
-    Smart note on one of the equations:
-    \begin{itemize}
-    \item[] \% EQST 6 comment\\
-    \end{itemize}
-    The smart comment in details. 
+  Correspondingly, we rescale
+  
+  \begin{itemize}
+    \item the kinematic terms: $v_3 = \epsilon u_3^{\epsilon},$
+    \item the viscosity terms: $\nu_z = \epsilon ^ 2\nu_3,$
+    \item the diffusivity terms: $K_x = \epsilon K_1, K_y = K_2, K_z = \epsilon ^ 2 K_3.$
+  \end{itemize}
   }
 
   %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
-  \blocknode{Shallow domain in fluid dynamics}
-  {Discuss shallow domains. Ocean, salinity, atmosphere, pollution.  }
+  \blocknode{The anisotropic equations}
+  { 
+    \coloredbox{colorthree!50!}{
+      
+    \[ \partial_t u^\epsilon _1 + \bold{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\alpha u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T) \]
+    
+    \[ \partial_t u_2^\epsilon + \bold{u}^\epsilon \cdot \nabla u_2^\epsilon -\Delta_\nu u_2^\epsilon + \alpha u_1^\epsilon + \partial_2 p^\epsilon = 0 \text{ in } \Omega \times (0,T) \]
+    
+    \[\epsilon^2 \{  \partial_t u_3^\epsilon + \bold{u}^\epsilon \cdot \nabla u_3^\epsilon -\Delta_\nu u_3^{\epsilon} \} - \epsilon \beta u_1^\epsilon + \partial_3 p^\epsilon = 0 \text{ in } \Omega \times (0,T) \]
+    
+    \[ \nabla \cdot \bold{u}^\epsilon= 0 \text{ in } \Omega \times (0,T) \]
+    
+    \[ \partial_t C^\epsilon + \bold{u}^\epsilon \cdot \nabla C^\epsilon = \epsilon K_1 \frac{\partial ^2 C^\epsilon}{\partial x_1 ^ 2} + K_2 \frac{\partial ^2 C^\epsilon}{\partial x_2 ^ 2} + K_3 \frac{\partial ^2 C^\epsilon}{\partial x_3 ^ 2} + S_\epsilon \text{ in } \Omega \times (0,T) \]
+    
+    \[ \bold{u}^\epsilon = 0 \text{ on } \Gamma \times (0,T) \] 
+    
+    \[ \bold{u}^\epsilon (\cdot, t = 0) = \bold{u}_0, C^\epsilon (\cdot, t=0) = C^\epsilon_0  \text{ in } \Omega \]
+
+    \[ C^\epsilon = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \partial_2 C^\epsilon = \partial_3 C^\epsilon = 0 \text{ on } \Gamma_G \times (0,T), \partial_1 C^\epsilon \in L^2 L^2 (0,T; \Gamma_G) \]
+        
+    }
+  }
   
-    \plainblock[5]{($(currenty)+(1,2)$)}{25}{Fancy comment} 
+  \plainblock[5]{($(currenty)+(1,3)$)}{25}{The original equations} 
   {
-    
     \vspace{0.3cm}
-    Exciting and clever highlight.}
-    
-   \blocknode[($(currenty)-(0,5)$)]{Shallow domain in fluid dynamics}
-  {Discuss shallow domains. Ocean, salinity, atmosphere, pollution.  }
+    We use the incompressible Navier-Stokes equations in all three space dimensions for the fluid velocity.
+  }
     
   
-    %%%%%%%%%%%%% NEW COLUMN %%%%%%%%%%%%%%% 
+  %%%%%%%%%%%%% NEW COLUMN %%%%%%%%%%%%%%% 
   \startsecondcolumn 
 
-
   %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
-  \blocknode{Compactness}
-  {Issues.
-    \begin{itemize}
-    \item[] \textbackslash Compactness stuff.
-    \end{itemize}
-    More compactness stuff. \\
+  \blocknode{The limit model}
+  {In the vertical dimension we arrive to the hydrostatic approximation.
+    \vspace{0.5cm}
+    \coloredbox{colorthree!50!}{
     
-            \vspace{0.5cm}
-    Let's see some figures.
- 
-    \begin{tikzfigure}[A local slice of the atmosphere]
-      \begin{tikzpicture}
-      
-        \node[inner sep=0pt] (domain) at (0,0) {\includegraphics[width=.25\textwidth]{domain.jpg}};
-      
-      \end{tikzpicture}
-    \end{tikzfigure}  
-
+    \[ \partial_t u_1 + \bold{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\alpha u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T) \]
+    
+    \[ \partial_t u_2 + \bold{u} \cdot \nabla u_2 - \Delta_\nu u_2 -\alpha u_1 + \partial_2 p = 0 \text{ in } \Omega \times (0,T) \]
+    
+    \[ \partial_3 p = 0 \text{ in } \Omega \times (0,T) \]
+    
+    \[ \nabla \cdot \bold{u} = 0 \text{ in } \Omega \times (0,T) \]
+    
+    \[ \partial_t C + \bold{u} \cdot \nabla C = K_2 \frac{\partial ^2 C}{\partial x_2 ^ 2} + K_3 \frac{\partial ^2 C}{\partial x_3 ^ 2} + S \text{ in } \Omega \times (0,T)\]
+    
+    \[ u_1 = u_2 = u_3 n_3 = 0 \text{ on } \Gamma \times (0,T) \]
+    
+    \[ u_i (\cdot, t=0) = u_{0 i}, C (\cdot, t=0) = C_0 \text{ in } \Omega, \text{$i$ = 1,2} \]
+    
+    \[ C = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \partial_2 C = \partial_3 C = 0 \text{ on } \Gamma_G \times (0,T), \partial_1 C \in L^2 L^2 (0,T; \Gamma_G) \]
+    }
   }
   
     %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
-  \blocknode{Useful Macro Within Block Nodes}%
+  \blocknode{5 Weak formulation}%
   {There are three types of colored boxes/blocks that you can use inside block
     nodes to highlight information. \\
     
@@ -152,23 +178,10 @@
       &
       \textbackslash coloredbox\{colorthree!50!\}\{Text\}
     \end{tabular}
-
-    \vspace{0.5cm}
-    Let's see some figures.
- 
-    \begin{tikzfigure}[A local slice of the atmosphere]
-      \begin{tikzpicture}
-      
-        \node[inner sep=0pt] (ratmospherelayers) at (0,0) {\includegraphics[width=.25\textwidth]{atmosphere.jpg}};
-      
-      \end{tikzpicture}
-    \end{tikzfigure}
-    
-    Picture credit: mountwashington.org.
   }
   
       %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
-  \blocknode {Extra results}
+  \blocknode {6 Energy inequality}
   {Fanciness:
     \begin{itemize}
     \item 1
@@ -183,7 +196,7 @@
 
 
   %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
-  \blocknode {Extra results}
+  \blocknode {7 A priori estimates, weak convergence}
   {Fanciness:
     \begin{itemize}
     \item 1
@@ -194,19 +207,18 @@
   }
   
     %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
-  \blocknode {Extra results}
+  \blocknode {8 Compactness}
   {Fanciness:
-    \begin{itemize}
-    \item 1
-\item 1
-    \item 2
-    \item 1
-    \item 1
-    \item 1
-    \item 1
-    \item 1
-
-    \end{itemize}
+            \vspace{0.5cm}
+    Let's see some figures.
+ 
+    \begin{tikzfigure}[A local slice of the atmosphere]
+      \begin{tikzpicture}
+      
+        \node[inner sep=0pt] (domain) at (0,0) {\includegraphics[width=.25\textwidth]{domain.jpg}};
+      
+      \end{tikzpicture}
+    \end{tikzfigure}  
   }
   
       %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
@@ -227,7 +239,7 @@
  \coordinate (currenty) at ($(currentrow)+(xshift)-(yshift)$);
   
       %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
-  \blocknode {Extra results}
+  \blocknode {9 Existence}
   {Fanciness:
     \begin{itemize}
     \item 1
