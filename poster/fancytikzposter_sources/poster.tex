@@ -9,7 +9,7 @@
 \documentclass{a0poster}
 
 \usepackage{fancytikzposter} 
-
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
 \setcolumnnumber{3}
 
 \definecolor{mygreen}{HTML}{2ECC71}
@@ -25,6 +25,9 @@
 %\usepackage[margin=\margin cm, paperwidth=84.1cm, paperheight=118.9cm]{geometry}
 
 \usepackage{cmbright}
+\usepackage{amsmath}
+\usepackage{commath}
+\usepackage{amsthm}
 \usepackage[math]{kurier}
 \usepackage[T1]{fontenc}
 
@@ -171,7 +174,7 @@
       
     \begin{tabular}[t]{ll}
       \begin{minipage}{1.0\linewidth}
-        \innerblock{Theorem} {Let $\bold{u}_0$ $\in$ $L^2 (\Omega)^3$, with $\nabla \cdot \bold{u}_0 = 0, \bold{u}_0 \cdot \bold{n} = 0$ on $\partial \Omega$; and let $C(0)\in$ $L^2 (\Omega)^3$, $C(0) = 0$ on $ \partial \Omega$; there exists a weak solution ($\mathbf{u}$, C) of the hydrostatic equations of the polluted atmosphere, obtained as a limit of weak solutions $(\mathbf{u^\epsilon}, C^\epsilon)$ of the anisotropic equations as the aspect ratio $\epsilon$ tends to $0$.}
+        \innerblock{Theorem} {Let $\bold{u}_0$ $\in$ $L^2 (\Omega)^3$, with $\nabla \cdot \bold{u}_0 = 0, \bold{u}_0 \cdot \bold{n} = 0$ on $\partial \Omega$; and let $C(0)\in$ $L^2 (\Omega)^3$, $C(0) = 0$ on $ \partial \Omega$; there exists a weak solution ($\mathbf{u}$, C) of the hydrostatic equations of the polluted atmosphere, obtained as a limit of weak solutions $(\mathbf{u}^\epsilon, C^\epsilon)$ of the anisotropic equations as the aspect ratio $\epsilon$ tends to $0$.}
       \end{minipage}
     \end{tabular}
     
@@ -189,53 +192,65 @@
   
   %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
   \blocknode {A priori estimates, weak convergence}
-  {Fanciness:
+  {The weak form of the anisotropic system has the following structure.
+    \vspace{0.5cm}
+    \coloredbox{colorthree!50!}{
+    
+      \[
+   \begin{split}
+      & \int_0^T -(\mathbf{u}^\epsilon_H, \partial_t \mathbf{v}_H) + (\nabla_\nu \mathbf{u}^\epsilon_H, \nabla_\nu \mathbf{v}_H) - (\mathbf{u}^\epsilon_H, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{v}_H) + (b(\mathbf{u}^\epsilon_H), \mathbf{v}_H) \diff t \\
+      & + \epsilon \beta \big[ \int_0 ^ T (u_3 ^\epsilon, v_1) - (u_1^\epsilon, v_3) \big] \diff t\\
+      & + \epsilon^2 \big[ \int _0 ^ T -(u_3^\epsilon, \partial_t v_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, v_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu v_3) \diff t\big] \\
+      &+ \int_0^T -(C^\epsilon, \partial_t \tilde{C}) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) + \\
+      & \epsilon K_1 (\partial_1 C^\epsilon, \partial_1 \tilde{C}) - \epsilon K_1 \big[(\partial_1 C^\epsilon) \tilde{C} \big] _{\Gamma_G} + K_2 (\partial_2 C^\epsilon, \partial_2 \tilde{C}) + K_3 (\partial_3 C^\epsilon, \partial_3 \tilde{C}) \diff t =\\
+      & = - (\mathbf{u}^\epsilon_{0H}, \mathbf{v}_H(0)) - \epsilon^2 (u_{03}^\epsilon, v_3 (0)) - (C^\epsilon (0), \tilde{C} (0)) + \int_0^T (S^\epsilon,\tilde{C}) \diff t
+    \end{split}
+      \]
+    
+    }
+    \vspace{0.5cm}
+    The main steps for proving the weak convergence are the following.
     \begin{itemize}
-    \item 1
-
-    \item 2
-
+      \item Energy inequality.
+      \item A priori estimates: $L_t^\infty L_x^2$ boundedness for $C^\epsilon;$ $L_t^2 L_x^2$ boundedness for $\sqrt{\epsilon} \partial_1 C^\epsilon, \partial_2 C^\epsilon, \partial_3 C^\epsilon.$
+      \item Weak convergence of the linear terms.
+      \item Weak convergence of $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C})$
     \end{itemize}
   }
   
-    %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
-  \blocknode {Compactness}
-  {Fanciness:
-            \vspace{0.5cm}
-    Let's see some figures.
-
-  }
-  
       %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
-  \calloutblock{($(box.south east)-(8,-2)$)}
-  {($(box.south east)-(16,2)$)}
+  \calloutblock
+  {($(box.center)+(-5,-14)$)} %% the point of the arrow part of the block
+  {($(box.center)+(0,-18)$)} %% the center of the body of the block
   {30cm}
   {
-    There are also callout blocks that allow for a more interesting layout of the
-    poster. 
+    We need a compactness result to obtain $u_i^\epsilon C^\epsilon \rightharpoonup  u_i C.$
+    
+    For this we show that
+    
     \begin{itemize}
-    \item[] \textbackslash calloutblock[rotate angle]\{from
-      coordinate\}\{coordinate\}\{Block Width\}\{Block Content\} 
+    
+      \item we have a bound for the time derivative of the concentration:
+      
+      \[  \frac{\partial C^\epsilon}{\partial t} = - u^\epsilon \nabla C^\epsilon + \sqrt{\epsilon} K_1 \partial_1 \partial_1 \sqrt{\epsilon} C^\epsilon + K_2 \partial_2 \partial_2 C^\epsilon + K_3 \partial_3 \partial_3 C^\epsilon -S^\epsilon, \]
+      
+      Eventually we have $\frac{\partial C}{\partial t} \in L^1 W^{-1,1},$
+      
+      \item we have an equicontinuity for velocity: $\norm{u_i^n - u_i^n (\cdot + \xi,t)}_{L^2 L^2} \to 0$ as $\xi \to 0.$
+    
     \end{itemize}
-    The alias for such blocks is \emph{note}.
+    
+    Combining these results allow us to apply a compactness theorem that provides the convergence.
   }
   
-   \getcurrentrow{note}
- \coordinate (currenty) at ($(currentrow)+(xshift)-(yshift)$);
-  
-      %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
-  \blocknode {Existence}
-  {Fanciness:
+  \getcurrentrow{note}
+  \coordinate (currenty) at ($(currentrow)+(xshift)-(yshift)$);
+ 
+  \blocknode {Additional results}
+  {
     \begin{itemize}
-    \item 1
-\item 1
-    \item 2
-    \item 1
-    \item 1
-    \item 1
-    \item 1
-    \item 1
-
+      \item Apart from the convergence theorem we also provide an existence theorem for the extended system.
+      \item We have generalized the main theorem for the seaside case, when there is interaction between water and air $\to$ different BCs.
     \end{itemize}
   }
 
