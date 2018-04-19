@@ -5,6 +5,8 @@
 % Generic (CC BY-NC 2.0) license
 % http://creativecommons.org/licenses/by-nc/2.0/ 
 
+% change sizes: \tiny 12pt \scriptsize 14.4pt \footnotesize 17.28pt \small 20.74pt \normalsize 24.88pt
+% http://ctan.mirror.garr.it/mirrors/CTAN/macros/latex/contrib/a0poster/a0_eng.pdf
 
 \documentclass{a0poster}
 
@@ -34,7 +36,8 @@
 \title{The polluted atmosphere as a shallow domain}
 \author{Nora Juhasz\\
   DISIM, University of L'Aquila, Italy\\
-  \texttt{ms.juhasz.nora@gmail.com}
+  \texttt{ms.juhasz.nora@gmail.com}\\
+  joint work with D. Donatelli, University of L'Aquila
 }
 
 \begin{document}
@@ -60,9 +63,9 @@
   \blocknode{The shallow domain concept}
   {
   \begin{itemize}
-    \item  Natural, large-scale geophysical fluids share the shallow domain characteristics
-    \item  "almost" two-dimensional set $\to$ we can significantly simplify the model in the vertical direction
-    \item  a domain that is excessively greater horizontally than in the vertical dimension $\to$ leading to the classic hydrostatic approximation of the Navier-Stokes equations
+    \item Natural, large-scale geophysical fluids share the shallow domain characteristics
+    \item "almost" two-dimensional set $\to$ we can significantly simplify the model in the vertical direction
+    \item a domain that is excessively greater horizontally than in the vertical dimension $\to$ leading to the classic hydrostatic approximation of the Navier-Stokes equations
   \end{itemize}
   
   \vspace{0.5cm}
@@ -242,7 +245,7 @@
   \getcurrentrow{note}
   \coordinate (currenty) at ($(currentrow)+(xshift)-(yshift)$);
  
-  \blocknode[($(currenty)-(0,1)$)] {Additional results}
+  \blocknode[($(currenty)-(0,1.25)$)] {Additional results}
   {
     \begin{itemize}
       \item Apart from the convergence theorem we also provide an existence theorem for the extended system.
