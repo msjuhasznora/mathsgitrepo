@@ -55,7 +55,8 @@
     \titleblock{47}{1.5}
   }
 
-  \addlogo[south west]{(1,1)}{3cm}{LogoDisim.png}
+  \addlogo[south west]{(1,1)}{7cm}{ModCompShock.jpg}
+  \addlogo[south east]{(-1,1)}{4.5cm}{LogoDisim.png}
 
   %% a block node, with the specified position (optional), title and the content
   %% #1 - where (optional), #2 - title, #3 - text
@@ -101,6 +102,35 @@
     \item the diffusivity terms: $K_x = \epsilon K_1, K_y = K_2, K_z = \epsilon ^ 2 K_3.$
   \end{itemize}
   }
+  
+    %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
+  \blocknode{Modelling - challenges and choices}
+  {
+  \begin{itemize}
+    \item Coordinate system $\to$ we fix it in a way so that $x$ and $y$ match the downwind and crosswind direction, respectively (while $z$ represents the vertical dimension).
+    
+    Natural assumption in the downwind direction: diffusion is negligible compared to downwind transport, i.e.
+     
+    \[ \abs{u_1 \partial_{x_1} C} \gg \abs{ K_x \frac{\partial ^2 C}{\partial x_1 ^ 2} },\]
+     
+    so we can take advantage of the additional scaling equation $K_x = \epsilon K_1$.
+     
+    \item Domain $\to$ we use locally acceptable Cartesian coordinates --- this allows us the ignore large-scale effects such as the curvature of the Earth.
+     
+      \begin{tikzfigure}[A local slice of the atmosphere]
+        \begin{tikzpicture}
+      
+          \node[inner sep=0pt] (domain) at (0,0) {\includegraphics[width=.15\textwidth]{domain.jpg}};
+      
+        \end{tikzpicture}
+      \end{tikzfigure}
+  
+    Challenges: local area model $\to$ open boundary conditions on the lateral boundary. We use a fix zero approach --- the concentration being set to zero actually stands for a constant concentration with the background flow being removed.
+    
+    \item Source function of the concentration $\to$ Gaussian impulse approach. We use a parametrized nascent delta function to describe the source term, with the parameter being $\epsilon$. We have $S_\epsilon (t, t_s, x, x_s) = s(t, t_s) \delta_\epsilon (x - x_s),$ with the activation term $s(t,t_s)= IH(t - t_s)$ where $H(\cdot)$ is the Heaviside step function. In the limit model we naturally arrive to the delta distribution as a source.
+    
+  \end{itemize}
+  }
 
   %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
   \blocknode{The anisotropic equations}
@@ -129,12 +159,17 @@
   \plainblock[5]{($(currenty)+(1,3)$)}{25}{The original equations} 
   {
     \vspace{0.3cm}
-    We use the incompressible Navier-Stokes equations in all three space dimensions for the fluid velocity.
+    We use the
+    
+    incompressible Navier-Stokes equations in all three space dimensions for the fluid velocity.
   }
+  
+  %%%%%%%%%%%%% NEW COLUMN %%%%%%%%%%%%%%% 
+  \startsecondcolumn 
 
   %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
-  \blocknode[($(currenty)-(0,5)$)]{The limit model}
-  {In the vertical dimension we arrive to the hydrostatic approximation.
+  \blocknode{The limit model}
+  { \small In the vertical dimension we arrive to the hydrostatic approximation.
     \vspace{0.5cm}
     \coloredbox{colorthree!50!}{
     
@@ -156,72 +191,56 @@
     }
   }
   
-  %%%%%%%%%%%%% NEW COLUMN %%%%%%%%%%%%%%% 
-  \startsecondcolumn 
-  
   %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
   \blocknode{The main theorem}%
   {
-  
-    \begin{itemize}
-  
-    \item We provide an expansion of the convergence result of \cite{azerad2001mathematical}.
-    \item The main theorem of their article is for the case of the Navier-Stokes equations of the ocean, without the inclusion of salinity.
-    \item We prove that the hydrostatic approximation is still justifiable with the additional pollution concentration effect.
-    \item The theorem is valid locally (see graph below).
-  
-  \end{itemize}
-  
-  \vspace{0.5cm}
       
     \begin{tabular}[t]{ll}
       \begin{minipage}{1.0\linewidth}
         \innerblock{Theorem} {Let $\bold{u}_0$ $\in$ $L^2 (\Omega)^3$, with $\nabla \cdot \bold{u}_0 = 0, \bold{u}_0 \cdot \bold{n} = 0$ on $\partial \Omega$; and let $C(0)\in$ $L^2 (\Omega)^3$, $C(0) = 0$ on $ \partial \Omega$; there exists a weak solution ($\mathbf{u}$, C) of the hydrostatic equations of the polluted atmosphere, obtained as a limit of weak solutions $(\mathbf{u}^\epsilon, C^\epsilon)$ of the anisotropic equations as the aspect ratio $\epsilon$ tends to $0$.}
       \end{minipage}
     \end{tabular}
-    
-    \begin{tikzfigure}[A local slice of the atmosphere]
-      \begin{tikzpicture}
-      
-        \node[inner sep=0pt] (domain) at (0,0) {\includegraphics[width=.25\textwidth]{domain.jpg}};
-      
-      \end{tikzpicture}
-    \end{tikzfigure}  
+ 
   }
   
   %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
   \blocknode {A priori estimates, weak convergence}
-  {The weak form of the anisotropic system has the following structure.
-    \vspace{0.5cm}
-    \coloredbox{colorthree!50!}{
-    
-      \[
-   \begin{split}
-      & \int_0^T -(\mathbf{u}^\epsilon_H, \partial_t \mathbf{v}_H) + (\nabla_\nu \mathbf{u}^\epsilon_H, \nabla_\nu \mathbf{v}_H) - (\mathbf{u}^\epsilon_H, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{v}_H) + (b(\mathbf{u}^\epsilon_H), \mathbf{v}_H) \diff t \\
-      & + \epsilon \beta \big[ \int_0 ^ T (u_3 ^\epsilon, v_1) - (u_1^\epsilon, v_3) \big] \diff t\\
-      & + \epsilon^2 \big[ \int _0 ^ T -(u_3^\epsilon, \partial_t v_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, v_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu v_3) \diff t\big] \\
-      &+ \int_0^T -(C^\epsilon, \partial_t \tilde{C}) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) + \\
-      & \epsilon K_1 (\partial_1 C^\epsilon, \partial_1 \tilde{C}) - \epsilon K_1 \big[(\partial_1 C^\epsilon) \tilde{C} \big] _{\Gamma_G} + K_2 (\partial_2 C^\epsilon, \partial_2 \tilde{C}) + K_3 (\partial_3 C^\epsilon, \partial_3 \tilde{C}) \diff t =\\
-      & = - (\mathbf{u}^\epsilon_{0H}, \mathbf{v}_H(0)) - \epsilon^2 (u_{03}^\epsilon, v_3 (0)) - (C^\epsilon (0), \tilde{C} (0)) + \int_0^T (S^\epsilon,\tilde{C}) \diff t
-    \end{split}
-      \]
-    
-    }
-    \vspace{0.5cm}
-    The main steps for proving the weak convergence are the following.
+  {
+  
+    \small The main steps for proving the weak convergence are the following.
     \begin{itemize}
       \item Energy inequality.
+    \end{itemize}
+      
+    \coloredbox{colorthree!50!}{
+    
+    \[
+    \begin{split}  
+    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \{    \norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \} \diff \tau + \\
+    & \int_0 ^ t \{(\epsilon K_1 - \gamma \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_1 C^\epsilon}_{L^2}^2  + (K_2 - \gamma \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_2 C^\epsilon}_{L^2}^2 + \\
+    & + (K_3 - \gamma \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_3 C^\epsilon}_{L^2}^2 \} \diff \tau \leq \frac{1}{\gamma} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)} + \\
+    & + \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau.
+    \end{split}
+    \]
+    
+    }
+      
+    \begin{itemize}  
       \item A priori estimates: $L_t^\infty L_x^2$ boundedness for $C^\epsilon;$ $L_t^2 L_x^2$ boundedness for $\sqrt{\epsilon} \partial_1 C^\epsilon, \partial_2 C^\epsilon, \partial_3 C^\epsilon.$
       \item Weak convergence of the linear terms.
-      \item Weak convergence of $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C})$
+      \item Weak convergence of nonlinear terms.
+      \begin{itemize}
+        \item Nonlinear terms not including the $C^\epsilon$ term - divergence free condition
+        \item The term $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}).$
+      \end{itemize}
     \end{itemize}
   }
   
       %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
   \calloutblock
-  {($(box.center)+(-5,-14)$)} %% the point of the arrow part of the block
-  {($(box.center)+(0,-18)$)} %% the center of the body of the block
-  {30cm}
+  {($(box.center)+(-11,-11)$)} %% the point of the arrow part of the block
+  {($(box.center)+(2,-14)$)} %% the center of the body of the block
+  {33cm}
   {
     We need a compactness result to obtain $u_i^\epsilon C^\epsilon \rightharpoonup  u_i C.$
     
@@ -248,8 +267,8 @@
   \blocknode[($(currenty)-(0,1.25)$)] {Additional results}
   {
     \begin{itemize}
-      \item Apart from the convergence theorem we also provide an existence theorem for the extended system.
-      \item We have generalized the main theorem for the seaside case, when there is interaction between water and air $\to$ different BCs.
+      \item We also provide an existence theorem for the extended system.
+      \item We have generalized the main theorem for the seaside case, when there is interaction between water and air $\to$ different boundary conditions.
     \end{itemize}
   }
 
