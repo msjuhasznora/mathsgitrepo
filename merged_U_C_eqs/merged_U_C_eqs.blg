@@ -1,48 +1,48 @@
 This is BibTeX, Version 0.99d (TeX Live 2016)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: merged_U_C_eqs.aux
-The style file: apalike.bst
+The style file: plain.bst
 Database file #1: merged_U_C_eqs.bib
 Warning--empty journal in kathirgamanathan2002source
 You've used 19 entries,
-            1935 wiz_defined-function locations,
-            592 strings with 6942 characters,
-and the built_in function-call counts, 7354 in all, are:
-= -- 718
+            2118 wiz_defined-function locations,
+            618 strings with 7263 characters,
+and the built_in function-call counts, 6110 in all, are:
+= -- 596
 > -- 287
-< -- 18
-+ -- 96
+< -- 6
++ -- 114
 - -- 94
-* -- 621
-:= -- 1281
-add.period$ -- 58
+* -- 430
+:= -- 1038
+add.period$ -- 59
 call.type$ -- 19
-change.case$ -- 137
-chr.to.int$ -- 19
+change.case$ -- 99
+chr.to.int$ -- 0
 cite$ -- 20
-duplicate$ -- 283
-empty$ -- 530
-format.name$ -- 127
-if$ -- 1435
-int.to.chr$ -- 1
-int.to.str$ -- 0
+duplicate$ -- 230
+empty$ -- 485
+format.name$ -- 94
+if$ -- 1256
+int.to.chr$ -- 0
+int.to.str$ -- 19
 missing$ -- 23
-newline$ -- 97
-num.names$ -- 57
-pop$ -- 135
+newline$ -- 98
+num.names$ -- 38
+pop$ -- 113
 preamble$ -- 1
-purify$ -- 142
+purify$ -- 85
 quote$ -- 0
-skip$ -- 209
+skip$ -- 147
 stack$ -- 0
-substring$ -- 499
-swap$ -- 31
+substring$ -- 365
+swap$ -- 32
 text.length$ -- 6
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 104
+type$ -- 66
 warning$ -- 1
 while$ -- 59
-width$ -- 0
-write$ -- 246
+width$ -- 21
+write$ -- 209
 (There was 1 warning)

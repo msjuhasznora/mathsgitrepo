@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[11pt]{article}
 \usepackage{graphicx}
 \usepackage{amssymb}
 \usepackage{amsmath}
@@ -56,7 +56,9 @@ We will use the identical anisotropic viscosities describing the atmosphere by m
 
 Thus, we investigate the convergence of the weak solutions of the polluted atmosphere modeled by the incompressible anisotropic Navier-Stokes equations combined with a convection-diffusion equation, and show that in this extended case as well, the weak solutions converge to the solution of the hydrostatic limit model.
 
-This paper is organized in the following way. In section \ref{eqsdescribingatmpluspollution} we describe the physical model of the polluted atmosphere and the scaling leading to the hydrostatic equations. The main theorem is stated in section \ref{maintheorem}. In section \ref{weakformulation} we describe the function spaces we work in and present the weak formulation. The main theorem's proof is described in section \ref{proof}, and a generalized model is introduced in chapter \ref{convdomcoastal}. A few concluding remarks can be found in section \ref{concludingremarks}, finally in the appendix of the article we present an existence result for the hydrostatic equations of the polluted atmosphere.
+This paper is organized in the following way. In section \ref{eqsdescribingatmpluspollution} we describe the physical model of the polluted atmosphere and the scaling leading to the hydrostatic equations. The main theorem is stated in section \ref{maintheorem}. In section \ref{weakformulation} we introduce the function spaces we work in and present the weak formulation. The main theorem's proof is described in section \ref{proof}, and a generalized model is introduced in chapter \ref{convdomcoastal}. A few concluding remarks can be found in section \ref{concludingremarks}, finally in the appendix of the article we present an existence result for the hydrostatic equations of the polluted atmosphere.
+
+We end up this section with some notations we will use through the paper.
 
 \subsection{Notations}
 
@@ -72,18 +74,19 @@ This paper is organized in the following way. In section \ref{eqsdescribingatmpl
 \item $\alpha = 2 f \sin (l(x_2))$, $\beta = 2 f \cos (l(x_2))$
 \item $( \cdot,\cdot) = $ the scalar product in $L^2(\Omega)^d$ or the duality $L^p (\Omega)$, $L^{p'} (\Omega)$
 \item $< \cdot,\cdot>_{\Gamma} = $ the scalar product or duality on the boundary curve $\Gamma$ ($H^{-1/2}(\Gamma)$, $H^{1/2}(\Gamma)$)
+\item $\mathbf{u}_H$ = the horizontal velocity components $(u_1, u_2)$
 \item $b(\mathbf{u}_H)$ = $\alpha (-u_2 , u_1)$
 
 \end{enumerate}
 
 %%% *** THE EQUATIONS DESCRIBING THE POLLUTED ATMOSPHERE *** %%%
-\section{The equations describing the polluted atmosphere} \label{eqsdescribingatmpluspollution}
+\section{The polluted atmosphere model} \label{eqsdescribingatmpluspollution}
 
-We begin by choosing a coordinate system, set the domain we start with and an appropriate set of equations describing both atmosphere motions and the effect of pollution. The set of equations, the choice of the locally acceptable Cartesian coordinate system we are using for the velocity terms are similar to those suggested by our reference article. We ignore large scale effects such as the curvature of the Earth. For describing the effect of pollution we use a continuity equation written in Cartesian coordinates for the concentration.
+We begin by choosing a coordinate system, set the domain we start with and an appropriate set of equations describing both atmosphere motions and the effect of pollution. We ignore large scale effects such as the curvature of the Earth. For describing the effect of pollution we use a continuity equation written in Cartesian coordinates for the concentration.
 
-We fix the local Cartesian coordinate system to be adjusted to the downwind direction, i.e. $z$ is the vertical direction, while $x$ is the downwind, and $y$ is the crosswind direction. It is a legitimate thing to do if we are considering a time interval which is not too long in the sense that it is reasonable to assume that we have a permanent, relatively stable main wind direction.  
+We fix the local Cartesian coordinate system to be adjusted to the downwind direction, i.e. $z$ is the vertical direction, while $x$ is the downwind, and $y$ is the crosswind direction. It is a legitimate assumption if we are considering a time interval which is not too long in the sense that it is reasonable to assume that we have a permanent, relatively stable main wind direction.  
 
-Let us consider the following domain to begin with. This domain is a local slice of the atmosphere filled with homogeneous air that we assume to be incompressible, and a pollutant of concentration $C$.
+The domain we consider is a local slice of the atmosphere filled with homogeneous air that we assume to be incompressible, and a pollutant of concentration $C,$ therefore it is defined by the set
 
 \begin{equation}
   \Omega_{\epsilon} = \{(x,y,z) \in \mathbb{R}^3 ; (x,y) \in \omega, 0 < z < \epsilon h(x,y) \},
@@ -91,7 +94,7 @@ Let us consider the following domain to begin with. This domain is a local slice
 
 where $\omega$ is a Lipschitz-domain in $\mathbb{R}^2$, and $h$ is a nonnegative Lipschitzian application.
 
-The equations governing the air velocity in the atmosphere are the incompressible Navier-Stokes equations, in which we use different viscosities according to vertical or horizontal directions, and the density is taken to be identically equal to one:
+The equations governing the air velocity $\bold{v}$ in the atmosphere are the incompressible Navier-Stokes equations, in which we use different viscosities according to vertical or horizontal directions, and the density is taken to be identically equal to one:
 
 \begin{equation}
   \partial_t \bold{v} + (\bold{v} \cdot \nabla)\bold{v} -\Delta_{\nu} \bold{v} + \nabla q + 2 \bold{w} \times \bold{v}= \bold{g} \text{ in } \Omega_{\epsilon} \times (0,T)
@@ -101,24 +104,30 @@ The equations governing the air velocity in the atmosphere are the incompressibl
   \nabla \cdot \bold{v} = 0 \text{ in } \Omega_{\epsilon} \times (0,T)
 \end{equation}
 
-The initial and boundary values will be discussed later.
-
-Contaminants emitted into the atmosphere are transported by the wind, mixed and dispersed by turbulent behavior, and deposited onto the ground by gravity. The dispersion of pollutants is commonly modeled by a continuity equation, and this is what we will use to describe the pollution phenomena as well.
+Contaminants emitted into the atmosphere are transported by the wind, mixed and dispersed by turbulent behavior, and deposited onto the ground by gravity. The dispersion of pollutants is commonly modeled by a diffusive equation of the form
     
-\begin{equation}
-  \partial_t C + \bold{v} \cdot \nabla C = K_x \frac{\partial ^2 C}{\partial x ^ 2} + K_y \frac{\partial ^2 C}{\partial y ^ 2} + K_z \frac{\partial ^2 C}{\partial z ^ 2} + S
+\begin{equation} \label{diffusive}
+  \partial_t C + \bold{v} \cdot \nabla C = K_x \frac{\partial ^2 C}{\partial x ^ 2} + K_y \frac{\partial ^2 C}{\partial y ^ 2} + K_z \frac{\partial ^2 C}{\partial z ^ 2} + S,
 \end{equation}
+
+where $C$ is the pollution concentration.
 
 In this equation $S$ represents the sources and sinks of the pollutant in the atmosphere i.e. its emission, removal from the atmosphere by dry and wet deposition, and chemical reactions. We will use the approach suggested by \cite{zhuk2016source} and use what is called a parametrized nascent delta function (a Gaussian impulse, specifically) to describe the source term $S$.
 
 Let us consider a gas plume with intensity $I$ originating at emission coordinates $\mathbf{x}_s$ beginning at time $t_s$. At the beginning we assume zero concentration.
 An abrupt gas emission is modeled by a source term represented as a product of an approximate delta function $\delta_\kappa (\mathbf{x} - \mathbf{x}_s)$ (centered at $\mathbf{x}_s$ with a constant parameter $\kappa$) and a Heaviside function $s$ (switching from 0 to $I$ at time $t_s.$)
 In fact, this source term models the continuous emission of the gas at constant rate and fixed location.
-Basically $s(t;t_s)$ is a function which activates the source, namely $s(t;t_s) := IH(t - t_s)$ where $H(\cdot)$ is the Heaviside step function and $0 \leq t_s \leq T.$ We arrive to the complete source term model of the form $S_\kappa (t, t_s, x, x_s) = s(t; t_s) \delta_\kappa (\mathbf{x} - \mathbf{x_s}),$ while in the limit model the source term $S$ naturally stands for the $\delta$ distribution.
-    
-In the following we will describe a usual practice in asymptotic analysis, namely we perform a vertical scaling to make the domain independent of $\epsilon.$
+Basically $s(t;t_s)$ is a function which activates the source, namely $s(t;t_s) := IH(t - t_s)$ where $H(\cdot)$ is the Heaviside step function and $0 \leq t_s \leq T.$ We arrive to the complete source term model of the form
 
-    \[x=x_1, y=x_2, z=\epsilon x_3 \]
+\begin{equation} \label{approxsourceterm}
+  S_\kappa (t, t_s, x, x_s) = s(t; t_s) \delta_\kappa (\mathbf{x} - \mathbf{x_s}),
+\end{equation}
+
+while in the limit model the source term $S$ naturally stands for the $\delta$ distribution.
+    
+Now, we perform a vertical scaling to make the domain independent of $\epsilon.$
+
+    \[x=x_1, \quad y=x_2, \quad z=\epsilon x_3 \]
     
     So we have the following new, $\epsilon$ - independent domain
     
@@ -126,24 +135,34 @@ In the following we will describe a usual practice in asymptotic analysis, namel
     
      The corresponding scaling regarding the kinematic and viscosity terms are
      
-    \[v_1 = u_1^{\epsilon}, v_2 = u_2^{\epsilon}, v_3 = \epsilon u_3^{\epsilon}, p = p^{\epsilon}, \]
-    \[\nu_x = \nu_1, \nu_y = \nu_2 , \nu_z = \epsilon ^ 2\nu_3, \]
+    \[v_1 = u_1^{\epsilon}, \quad v_2 = u_2^{\epsilon}, \quad v_3 = \epsilon u_3^{\epsilon}, \quad p = p^{\epsilon}, \]
+    \[\nu_x = \nu_1, \quad \nu_y = \nu_2 , \quad \nu_z = \epsilon ^ 2\nu_3, \]
     
-    where the later embodies the different eddy viscosity hypothesis that we mentioned earlier. Basically it can be heuristically deduced from the viscosity dimensions $\text{typical length}^2 / \text{typical time}$, more details can be found on the subject in \cite{besson1992some} and in the main reference article.
+    where the later embodies the different eddy viscosity hypothesis that we mentioned earlier. Basically it can be heuristically deduced from the viscosity dimensions: $\text{typical length}^2 / \text{typical time}$, more details on the subject can be found in \cite{besson1992some}, \cite{azerad2001mathematical}.
     
-    Finally, we use an analogous rescaling methodology for the diffusivity constants, so
+    Finally, we use an analogous rescaling methodology for the diffusivity constants in (\ref{diffusive}),
     
-    \[ K_y = K_2, K_z = \epsilon ^ 2 K_3 \]
+    \[ K_y = K_2, K_z = \epsilon ^ 2 K_3. \]
     
-    As for $K_x$ we will use an additional idea. As a second step of the rescaling process, here we also exploit the fact that we chose the coordinate system in a way so that the $x$ axis matches the downwind direction. In this case we use an additional scaling equation, which is different in nature from the previous ones in the sense that it is not derived from the shallowness of the domain but rather suggested by the fact that in the downwind direction it is natural to assume that the diffusion is negligible compared to downwind transport, i.e.
+    As a second step of the rescaling process, we also exploit the fact that we chose the coordinate system in a way so that the $x$ axis matches the downwind direction. In this case we use an additional scaling equation, which is different in nature from the previous ones in the sense that it is not derived from the shallowness of the domain but rather suggested by the fact that in the downwind direction it is natural to assume that the diffusion is negligible compared to downwind transport, i.e.
     
     \begin{equation} \abs{u_1 \partial_{x_1} C} \gg \abs{ K_x \frac{\partial ^2 C}{\partial x_1 ^ 2} }\end{equation}
     which leads us to using
     \[ K_x = \epsilon K_1.\]
     
-Finally, as we mentioned before, we use Gaussian approximate delta functions to represent the source, so it is convenient to involve the $\epsilon$ term in one additional point in the functions, which is the standard deviation parameter of the distribution describing the source --- since later we will take the limit as $\epsilon$ goes to zero, it will result in having the $\delta$ distribution representing the hydrostatic source term, which is a physically natural choice. In other words, we choose $\kappa$ to be $\epsilon$ and the following function will give shape to the source term: $\delta_\epsilon (\mathbf{x}-\mathbf{x_s}) = \gamma \epsilon^{-1} e ^ {\frac{-(\mathbf{x}-\mathbf{x_s})^2}{\epsilon^2}}$; and finally $S_\epsilon = I H(t-t_s) \gamma \epsilon^{-1} e ^ {\frac{-(\mathbf{x}-\mathbf{x_s})^2}{\epsilon^2}},$ where $\gamma$ is a normalizing constant.
+Finally, as we mentioned before, we use a Gaussian approximated delta function to represent the source, so it is convenient to reformulate (\ref{approxsourceterm}) in terms of $\epsilon$, which is the standard deviation parameter of the distribution describing the source --- since later we will take the limit as $\epsilon$ goes to zero, it will result in having the $\delta$ distribution representing the hydrostatic source term, which is a physically natural choice. In other words, we choose $\kappa$ to be $\epsilon$ and the following function will give shape to the source term:
+
+\[\delta_\epsilon (\mathbf{x}-\mathbf{x_s}) = \gamma \epsilon^{-1} e ^ {\frac{-(\mathbf{x}-\mathbf{x_s})^2}{\epsilon^2}};\]
+
+and finally
+
+\begin{equation}
+S_\epsilon = I H(t-t_s) \gamma \epsilon^{-1} e ^ {\frac{-(\mathbf{x}-\mathbf{x_s})^2}{\epsilon^2}},
+\end{equation}
+
+where $\gamma$ is a normalizing constant.
     
-    Putting this condition and the previously described rescaling terms together to the original equations, we arrive to the merged anisotropic equations of the polluted atmosphere above inland surface.
+    Putting this condition and the previously described rescaling terms together to the original equations, we arrive to the merged anisotropic equations of the polluted atmosphere above inland surface:
   
     \begin{equation} \label{ANSC1}
     \partial_t u^\epsilon _1 + \bold{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\alpha u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
@@ -165,17 +184,19 @@ Finally, as we mentioned before, we use Gaussian approximate delta functions to 
     \partial_t C^\epsilon + \bold{u^\epsilon} \cdot \nabla C^\epsilon = \epsilon K_1 \frac{\partial ^2 C^\epsilon}{\partial x_1 ^ 2} + K_2 \frac{\partial ^2 C^\epsilon}{\partial x_2 ^ 2} + K_3 \frac{\partial ^2 C^\epsilon}{\partial x_3 ^ 2} + S_\epsilon \text{ in } \Omega \times (0,T)
     \end{equation}
     
-    \begin{equation} \label{ANSC6}
-    \bold{u}^\epsilon = 0 \text{ on } \Gamma \times (0,T)
-    \end{equation} 
+%    \begin{equation} \label{ANSC6}
+%    \bold{u}^\epsilon = 0 \text{ on } \Gamma \times (0,T)
+%    \end{equation} 
+
+The initial condition for the velocity and the pollution concentration are
     
     \begin{equation} \label{ANSC7}
-    \bold{u}^\epsilon (\cdot, t = 0) = \bold{u}_0, C^\epsilon (\cdot, t=0) = C^\epsilon_0  \text{ in } \Omega
+    \bold{u}^\epsilon (\cdot, t = 0) = \bold{u}_0, C^\epsilon (\cdot, t=0) = C_0  \text{ in } \Omega.
     \end{equation}
     
-To make the above set of equations complete, we need to decide on the boundary conditions for the pollution term.
+To make the above set of equations complete, we need to assign the boundary conditions.
 
-It is vital to choose boundary conditions for the pollution concentration that are physically as accurate as possible and at the same time not unnecessarily complicated. As we can see in many other articles and as we will see later in this one, in the case of LAMs (limited area models) finding the right boundary conditions can be a nontrivial task.
+Concerning the pollution concentration it is vital to choose boundary conditions that are physically as accurate as possible and at the same time not unnecessarily complicated. As we can see in many related papers, in the case of LAMs (limited area models) finding the right boundary conditions can be a nontrivial task.
 
 \begin{figure}[!h]
   \centering
@@ -201,7 +222,7 @@ It is vital to choose boundary conditions for the pollution concentration that a
   \end{tikzpicture}
 \end{figure}
 
-The boundary division of the $\partial \Omega$: the upper boundary of the $\Omega$ domain is denoted by $\Gamma_U$, the lateral boundary is $\Gamma_L$, and the lower boundary of the domain is $\Gamma_G$.
+In order to describe the boundary condition in a precise way we need to divide $\Gamma = \partial \Omega$ as follows. The upper boundary of the $\Omega$ domain is denoted by $\Gamma_U$, the lateral boundary is $\Gamma_L$, and the lower boundary of the domain is $\Gamma_G$.
 As we mentioned before, the case we are investigating is that of inland domains $\Omega$, i.e. the case of landscapes and cities with no significant nearby water surface.  This is very important since the boundary conditions for both wind velocity and pollution concentration in the air are different depending whether we are above solid ground or water surface. The boundary conditions we choose to use in the inland scenario are the following, shown in a cross-section.
 
 \begin{figure}[!h]
@@ -795,7 +816,7 @@ where $\psi$ is a function defined on $[0,T]$, used to create the time-dependent
 which is what we needed.
 
 \nocite{*}
-\bibliographystyle{apalike}
+\bibliographystyle{plain}
 \bibliography{merged_U_C_eqs}
 
 \end{document}
