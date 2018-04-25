@@ -11,6 +11,7 @@
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
 \newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
 \newtheorem{prop}{Proposition}
 \newcommand*\diff{\mathop{}\!\mathrm{d}}
 \usepackage{tikz}
@@ -56,7 +57,7 @@ We will use the identical anisotropic viscosities describing the atmosphere by m
 
 Thus, we investigate the convergence of the weak solutions of the polluted atmosphere modeled by the incompressible anisotropic Navier-Stokes equations combined with a convection-diffusion equation, and show that in this extended case as well, the weak solutions converge to the solution of the hydrostatic limit model.
 
-This paper is organized in the following way. In section \ref{eqsdescribingatmpluspollution} we describe the physical model of the polluted atmosphere and the scaling leading to the hydrostatic equations. The main theorem is stated in section \ref{maintheorem}. In section \ref{weakformulation} we introduce the function spaces we work in and present the weak formulation. The main theorem's proof is described in section \ref{proof}, and a generalized model is introduced in chapter \ref{convdomcoastal}. A few concluding remarks can be found in section \ref{concludingremarks}, finally in the appendix of the article we present an existence result for the hydrostatic equations of the polluted atmosphere.
+This paper is organized in the following way. In section \ref{eqsdescribingatmpluspollution} we describe the physical model of the polluted atmosphere and the scaling leading to the hydrostatic equations. In section \ref{weakformulationmainresult} we introduce the function spaces we work in, and we present the weak formulation and the main theorem. The main theorem's proof is described in section \ref{proof}, and a generalized model is introduced in chapter \ref{convdomcoastal}. A few concluding remarks can be found in section \ref{concludingremarks}, finally in the appendix of the article we present an existence result for the hydrostatic equations of the polluted atmosphere.
 
 We end up this section with some notations we will use through the paper.
 
@@ -68,8 +69,10 @@ We end up this section with some notations we will use through the paper.
 \item $\nu = $ viscosity
 \item $\Omega_\epsilon, \Omega = $ the original and the rescaled ($\epsilon$-independent) domain, respectively
 \item $\nabla = (\partial_x, \partial_y, \partial_z) $ the gradient vector
+\item $\nabla_\nu = (\nu_x^{1/2} \partial_x, \nu_y^{1/2} \partial_y, \nu_z^{1/2} \partial_z)$
 \item $ \Delta_\nu = \nu_x \partial^2_{xx} + \nu_y \partial^2_{yy}  + \nu_z \partial^2_{zz} $ the anisotropic Laplacian
-\item $g = $ represents the force due to gravity, which also includes the centrifugal effect
+\item $\mathbf{g} = $ represents the force due to gravity, which also includes the centrifugal effect
+\item $\varphi = $ the gravity potential term, i.e. $\mathbf{g} = \nabla \varphi$
 \item $\mathbf{w}$ represents the earth rotation angular speed, $l(y) = $ latitude
 \item $\alpha = 2 f \sin (l(x_2))$, $\beta = 2 f \cos (l(x_2))$
 \item $( \cdot,\cdot) = $ the scalar product in $L^2(\Omega)^d$ or the duality $L^p (\Omega)$, $L^{p'} (\Omega)$
@@ -92,9 +95,9 @@ The domain we consider is a local slice of the atmosphere filled with homogeneou
   \Omega_{\epsilon} = \{(x,y,z) \in \mathbb{R}^3 ; (x,y) \in \omega, 0 < z < \epsilon h(x,y) \},
 \end{equation}
 
-where $\omega$ is a Lipschitz-domain in $\mathbb{R}^2$, and $h$ is a nonnegative Lipschitzian application.
+where $\omega$ is a Lipschitz-domain in $\mathbb{R}^2$, $h$ is a nonnegative Lipschitzian application, and $\epsilon$ incorporates the shallowness of the domain.
 
-The equations governing the air velocity $\bold{v}$ in the atmosphere are the incompressible Navier-Stokes equations, in which we use different viscosities according to vertical or horizontal directions, and the density is taken to be identically equal to one:
+The equations governing the air velocity $\bold{v}$ and pressure $q$ in the atmosphere are the incompressible Navier-Stokes equations, in which we use different viscosities according to vertical or horizontal directions, and the density is taken to be identically equal to one:
 
 \begin{equation}
   \partial_t \bold{v} + (\bold{v} \cdot \nabla)\bold{v} -\Delta_{\nu} \bold{v} + \nabla q + 2 \bold{w} \times \bold{v}= \bold{g} \text{ in } \Omega_{\epsilon} \times (0,T)
@@ -138,7 +141,7 @@ Now, we perform a vertical scaling to make the domain independent of $\epsilon.$
     \[v_1 = u_1^{\epsilon}, \quad v_2 = u_2^{\epsilon}, \quad v_3 = \epsilon u_3^{\epsilon}, \quad p = p^{\epsilon}, \]
     \[\nu_x = \nu_1, \quad \nu_y = \nu_2 , \quad \nu_z = \epsilon ^ 2\nu_3, \]
     
-    where the later embodies the different eddy viscosity hypothesis that we mentioned earlier. Basically it can be heuristically deduced from the viscosity dimensions: $\text{typical length}^2 / \text{typical time}$, more details on the subject can be found in \cite{besson1992some}, \cite{azerad2001mathematical}.
+    where the later embodies the different eddy viscosity hypothesis that we mentioned earlier, and $p$ is the pressure term including the gravity potential $\varphi,$ i.e., $p = q - \varphi$. Basically it can be heuristically deduced from the viscosity dimensions: $\text{typical length}^2 / \text{typical time}$, more details on the subject can be found in \cite{besson1992some}, \cite{azerad2001mathematical}.
     
     Finally, we use an analogous rescaling methodology for the diffusivity constants in (\ref{diffusive}),
     
@@ -223,7 +226,7 @@ Concerning the pollution concentration it is vital to choose boundary conditions
 \end{figure}
 
 In order to describe the boundary condition in a precise way we need to divide $\Gamma = \partial \Omega$ as follows. The upper boundary of the $\Omega$ domain is denoted by $\Gamma_U$, the lateral boundary is $\Gamma_L$, and the lower boundary of the domain is $\Gamma_G$.
-As we mentioned before, the case we are investigating is that of inland domains $\Omega$, i.e. the case of landscapes and cities with no significant nearby water surface.  This is very important since the boundary conditions for both wind velocity and pollution concentration in the air are different depending whether we are above solid ground or water surface. The boundary conditions we choose to use in the inland scenario are the following, shown in a cross-section.
+As we mentioned before, the case we are investigating is that of inland domains $\Omega$, i.e. the case of landscapes and cities with no significant nearby water surface.  This is very important since the boundary conditions for both wind velocity and pollution concentration in the air are different depending whether we are above solid ground or water surface. The boundary conditions we choose to use in the inland scenario are the following:
 
 \begin{figure}[!h]
   \centering
@@ -233,31 +236,55 @@ As we mentioned before, the case we are investigating is that of inland domains 
     \draw[green, thick] (0,0) -- (4,0);
     
     \draw (2,2)node{$\Omega$};
-    \draw (2,0)node[below] {$\mathbf{u_\epsilon} = 0, \partial_3 C = 0, \partial_2 C = 0, \partial_1 C$ bounded};
-    \draw (4,2)node[right] {$\mathbf{u_\epsilon} = 0, C_\epsilon=0 $};
-    \draw (2,4)node[above] {$\mathbf{u_\epsilon} = 0, C_\epsilon=0 $};
-    \draw (0,2)node[left] {$\mathbf{u_\epsilon} = 0, C_\epsilon=0 $};
+    \draw (2,0)node[below] {$\mathbf{u^\epsilon} = 0, \partial_3 C^\epsilon = 0, \partial_2 C^\epsilon = 0, \partial_1 C^\epsilon$ bounded};
+    \draw (4,2)node[right] {$\mathbf{u^\epsilon} = 0, C^\epsilon=0 $};
+    \draw (2,4)node[above] {$\mathbf{u^\epsilon} = 0, C^\epsilon=0 $};
+    \draw (0,2)node[left] {$\mathbf{u^\epsilon} = 0, C^\epsilon=0 $};
     
   \end{tikzpicture}
 \end{figure}
 
-An explanation of the boundary conditions:
-
   \begin{itemize}
   
-      \item The upper boundary of the domain we are considering is chosen to be at the isobar representing the planetary boundary layer (\cite{arya2001introduction}), on this $p = p_0$ pressure level the upper boundary of the local domain is denoted by $\Gamma_U$. On $\Gamma_U$ we use $\bold{u}_H = 0, u_3 = 0, C(x,y,z) = 0$ boundary conditions.
-    \item On $\Gamma_L$ we use the same boundary conditions as on the upper level, i.e. we have $\bold{u}_H = 0, u_3 = 0, C(x,y,z) = 0$.
+    \item The upper boundary $\Gamma_U$ of the domain we are considering is chosen to be at the isobar representing the planetary boundary layer (\cite{arya2001introduction}), therefore we assume
+    
+    \begin{equation}
+      \bold{u}_H = 0, u_3 = 0, C = 0 \text{ on } \Gamma_U \times (0,T)
+    \end{equation}
+      
+    \item On $\Gamma_L$ we use the same boundary conditions as on the upper level, i.e. we have
+    
+    \begin{equation}
+      \bold{u}_H = 0, u_3 = 0, C = 0  \text{ on } \Gamma_L \times (0,T).
+    \end{equation}
+    
+    
     \begin{remark}
     If we wanted to use $C(x,y,z) = c$ with some $c$ constant value, we could make a change of variables distracting that background flow and arrive back to the same mathematical problem with $C$ being zero.
     \end{remark}
-    \item In this model we neglect topological variations, and the $z=0$ plane represents the lower boundary. On the ground level we have $u_H = 0, u_3 = 0$ boundary conditions for the air velocity. This is the mathematical way of expressing no-slip boundary conditions for the horizontal wind speed and the impervious nature of the ground with respect to the wind. As for the concentration, the way we can choose ground level boundary conditions is the following. Firstly, we assume that the pollution is not absorbed by the ground, so we use $\partial_3 C = 0$ on $\Gamma_G$ (see also for example \cite{yeh1975three}). For the horizontal partial derivatives of the pollution, we can separate downwind and crosswind direction boundary conditions. In the crosswind direction we use $\partial_2 C = 0$ while in the downwind (stronger) direction our assumption is more relaxed, we only assume that $\partial_1 C$ is finite in the boundary norm, i.e. in $L^2 L^2 (0,T; \Gamma_G)$.
+    \item In this model we neglect topological variations, and the $z=0$ plane represents the lower boundary. On the ground level we have
+    
+    \begin{equation}
+      u_H = 0, u_3 = 0.
+    \end{equation}
+    
+    This is the mathematical way of expressing no-slip boundary conditions for the horizontal wind speed and the impervious nature of the ground with respect to the wind. As for the concentration, the way we can choose ground level boundary conditions is the following. Firstly, we assume that the pollution is not absorbed by the ground, so we use
+    
+    $$\partial_3 C = 0 \text{ on } \Gamma_G$$
+    
+    (see also for example \cite{yeh1975three}). For the horizontal partial derivatives of the pollution, we can separate downwind and crosswind direction boundary conditions. In the crosswind direction we use
+    
+    $$\partial_2 C = 0$$
+    
+    while in the downwind (stronger) direction our assumption is more relaxed, we only assume that $\partial_1 C$ is finite in the boundary norm, i.e. in $L^2 L^2 (0,T; \Gamma_G)$.
   
   \end{itemize}
   
-  So we have the following additional equation to describe the anisotropic system:
+  Finally, the boundary condition to describe the anisotropic system can be summarized as follows:
   
     \begin{equation} \label{ANSC8}
       \begin{split}
+        & \bold{u}^\epsilon = 0 \text{ on } \Gamma \times (0,T), \\
         &C^\epsilon = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
         & \partial_2 C^\epsilon = \partial_3 C^\epsilon = 0 \text{ on } \Gamma_G \times (0,T), \partial_1 C^\epsilon \in L^2 L^2 (0,T; \Gamma_G) \\
       \end{split}
@@ -306,39 +333,30 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
     Here $S$ stands for the $\delta$ limit distribution. We keep the notation $S$ for generality, since as we will see later, instead of the approximate delta functions and the delta distribution, it is possible to use any sort of "sufficiently smooth" source term (which can be independent from $\epsilon$ in the anisotropic case as well) that is bounded in $L^2_t L^2_x.$
   \end{remark}
 
-%%% *** MAIN THEOREM *** %%%
-\section{Main theorem} \label{maintheorem}
+%%% *** WEAK FORMULATION AND MAIN RESULT*** %%%
+\section{Weak formulation and Main Result} \label{weakformulationmainresult}
 
-Let $T$ be a fixed positive duration. Below is described our main result.
+In this section we describe the weak formulation of the merged equations in both the anisotropic and hydrostatic case we are going to use in the paper.
   
-  \begin{theorem}
-    Let $\bold{u}_0$ $\in$ $L^2 (\Omega)^3$, with $\nabla \cdot \bold{u}_0 = 0, \bold{u}_0 \cdot \bold{n} = 0$ on $\partial \Omega$; and let $C(0)\in$ $L^2 (\Omega)^3$, $C(0) = 0$ on $ \partial \Omega$; there exists a weak solution ($\mathbf{u}$, C) of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1}) - (\ref{HNSC8}), obtained as a limit of weak solutions $(\mathbf{u^\epsilon}, C^\epsilon)$ of the anisotropic equations (\ref{ANSC1}) - (\ref{ANSC8}) as the aspect ratio $\epsilon$ tends to $0$.
-  \end{theorem}
+  We need to define the following spaces:
   
-In this extended case as well, the proof relies on a priori estimates gained from the energy inequality in anisotropic spaces --- as we will see, this is sufficient to pass to the limit in the linear terms. 
-
-The challenge caused by the nonlinear term will be met by proving that a compactness result from \cite{lions1996mathematical} is applicable to handle it.
-
-%%% *** WEAK FORMULATION *** %%%
-\section{Weak formulation} \label{weakformulation}
-
-In this section we calculate the weak formulation of the merged equations in both the anisotropic and hydrostatic case. Since this inland atmosphere model has slightly different boundary conditions even in the velocity equations than the model of the ocean, we will see that the weak formulation of our system has minor differences from the original seawater scenario.
+  \[ C^{\infty}_\Gamma (\Omega) = \{ \varphi \in C^\infty (\bar{\Omega}); \varphi = 0 \text{ on some neighbourhood of } \Gamma\} \]
   
-  For the weak formulation we will use the modified version of the spaces defined in the original article.
-  
-  \[ H^1_{\Gamma} (\Omega) = \overline{C_\Gamma ^ \infty (\Omega)} ^ {H^1 (\Omega)} = \{ v \in H^1(\Omega); v=0 \text{ on } \partial \Omega = \Gamma \} \]
+  \[ H^k_{\Gamma} (\Omega) = \overline{C_\Gamma ^ \infty (\Omega)} ^ {H^1 (\Omega)} = \{ v \in H^k(\Omega); v=0 \text{ on } \Gamma \} \]
   
   \[ \mathbf{V} = \{ \mathbf{v} \in  H^1_{\Gamma} (\Omega) \times H^1_{\Gamma} (\Omega) \times H^1_0 (\Omega); \nabla \cdot \mathbf{v} = 0 \text{ in } \Omega \} \]
   
   \[ H (\partial_3, \Omega) = \{ v \in L^2(\Omega); \partial_3 v \in L^2 (\Omega)\} \]
   
-  \[ H_0 (\partial_3, \Omega) = \overline{C_0 ^\infty (\Omega)}^{H (\partial_3, \Omega)} = \{ v \in H(\partial_3, \Omega); v n_3 = 0 \text{ on } \partial \Omega \} \]
+  \[ H_0 (\partial_3, \Omega) = \overline{C_0 ^\infty (\Omega)}^{H (\partial_3, \Omega)} = \{ v \in H(\partial_3, \Omega); v n_3 = 0 \text{ on } \Gamma \} \]
   
   \[ \mathbf{W} = \{ \mathbf{u} \in  H^1_{\Gamma} (\Omega) \times H^1_{\Gamma} (\Omega) \times H_0 (\partial_3, \Omega); \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \} \]
   
-  We use $\mathbf{u}_H = (u_1, u_2)$ to denote the horizontal velocity, $b(\mathbf{u}_H) = \alpha (-u_2, u_1)$ and $\nabla_\nu = (\nu_1^{1/2}, \nu_2^{1/2}, \nu_3^{1/2}).$ Then the weak formulation of the hydrostatic system (\ref{HNSC1}) - (\ref{HNSC8}) takes the following form.
+  Then the weak formulation of the hydrostatic system (\ref{HNSC1}) - (\ref{HNSC8}) takes the following form.
   
-  Find $(\mathbf{u}, C)$ such that $\mathbf{u} = (\mathbf{u}_H, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_H \in L^\infty (0,T; L^2(\Omega)^2),$ and $C$ with $\partial_2 C, \partial_3 C \in L^2_t L^2_x$, $C \in L^\infty L^2$ and $C(0) \in L^2_x$, such that
+  \begin{definition}
+  
+  Find $(\mathbf{u}, C)$ such that $\mathbf{u} = (\mathbf{u}_H, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_H \in L^\infty (0,T; L^2(\Omega)^2),$ and $C \in L_t^\infty L_x^2$ with $\partial_2 C, \partial_3 C \in L^2_t L^2_x$, such that
   
   \begin{equation} \label{hydrostaticWF}
     \begin{split}
@@ -350,21 +368,25 @@ In this section we calculate the weak formulation of the merged equations in bot
   
   for all $(\mathbf{v}, \tilde{C})$ with $\mathbf{v} = (\mathbf{v}_H, v_3) \in H^1 (0,T, \mathbf{W})$, with $v_H (T) = 0$ and $\partial_3 \mathbf{v}_H \in L^\infty (0, T; L^3 (\Omega)^2)$ and $\tilde{C}$ with $\tilde{C} \in L^2 (0,T, H^3_{\Gamma} (\Omega))$, $\tilde{C} \in H^1 (0,T, L^2)$, $\tilde{C} (T) = 0$. 
   
+  \end{definition}
+  
   Note that the term $\int_0^T (S,\tilde{C}) \diff t$ makes sense since in this case $S$ denotes the delta distribution and we have 
   
-  \[ (S,\tilde{C}) = \int_\Omega \delta(\mathbf{x} - \mathbf{x}_s) \tilde{C}(\mathbf{x}) \diff \mathbf{x} = \tilde{C}(\mathbf{x}_s),\]
-  
-  using the basic properties of $\delta$ and the continuity of $\tilde{C}.$
+  \[ (S,\tilde{C}) = \int_\Omega \delta(\mathbf{x} - \mathbf{x}_s) \tilde{C}(\mathbf{x}) \diff \mathbf{x} = \tilde{C}(\mathbf{x}_s).\]
   
   \begin{remark}
   If $S$ is chosen to be different from the limit of the Gaussian nascent delta function, then it is easy to see that the sufficient assumption we have to make on a general $S$ hydrostatic pollution function is that it should be in $L^2_t L^2_x$. 
   \end{remark}
+  
+  The existence of weak solution for the hydrostatic system (\ref{HNSC1}) - (\ref{HNSC8}) can be proved in the spirit of \cite{temam2005some}. In appendix A we will outline the main steps of the proof and the differences compared to the ocean model.
 
   The weak form of the anisotropic system is as follows.
   
-  Find $\mathbf{u}^\epsilon = (\mathbf{u}_H, u^\epsilon_3) \in L^2 (0,t ; \mathbf{V}) \cap L^\infty (0, T; L^2 (\Omega)^3)$ and $C^\epsilon$ with $C^\epsilon \in L^\infty L^2$, $C^\epsilon \in L^2 (0,T; H^1)$, $C^\epsilon(0) \in L^2_x$ such that
+  \begin{definition} \label{definitionanisotropicWF}
   
-  \begin{equation}
+  Find $\mathbf{u}^\epsilon = (\mathbf{u}_H, u^\epsilon_3) \in L^2 (0,T ; \mathbf{V}) \cap L^\infty (0, T; L^2 (\Omega)^3)$ and $C^\epsilon$ with $C^\epsilon \in L_t^\infty L_x^2 \cap L^2 (0,T; H^1)$, such that
+  
+  \begin{equation} \label{anisotropicWF}
     \begin{split}
       & \int_0^T -(\mathbf{u}^\epsilon_H, \partial_t \mathbf{v}_H) + (\nabla_\nu \mathbf{u}^\epsilon_H, \nabla_\nu \mathbf{v}_H) - (\mathbf{u}^\epsilon_H, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{v}_H) + (b(\mathbf{u}^\epsilon_H), \mathbf{v}_H) \diff t \\
       & + \epsilon \beta \big[ \int_0 ^ T (u_3 ^\epsilon, v_1) - (u_1^\epsilon, v_3) \big] \diff t\\
@@ -377,9 +399,22 @@ In this section we calculate the weak formulation of the merged equations in bot
   
   for all $\mathbf{v} = (\mathbf{v}_H, v_3) \in H^1 (0,T;\mathbf{V})$ with $\mathbf{v}(T) = 0$ and $\tilde{C}$ such that $\tilde{C} \in H^1 (0,T, H^3_{\Gamma} (\Omega))$ and $\tilde{C} (T) = 0$.
   
-  Note that in this case the source term is a nascent delta function, the Gaussian pulse is in $L^\infty_x(\Omega),$ so we do not have any problems with the source term. If we used a source function of a different and more general form, it needs to satisfy the $L^2 L^2$ boundedness criteria for the weak formulation to make sense.
+  \end{definition}
   
-  To pass to the limit in the terms that do not include pollution in the anisotropic equation has already been done in the original article. What we need to work on is how to legitimately take the limit in the terms including the new function $C^\epsilon$. To do this our first key tool will be the energy inequality. Once we have a priori estimates for the functions in the linear terms, we can pass to the limit with those without any particular problem; however to prove convergence for the $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C})$ term we will need a stronger result than only the weak convergence of the present functions in the product.
+  Note that since in our case the source term $S_\epsilon$ is given by (\ref{approxsourceterm}), thus the last term in (\ref{anisotropicWF}) is well defined. If we use a source function of a different and more general form, it needs to satisfy the $L_t^2 L_x^2$ boundedness criteria for the weak formulation to make sense.
+  
+%%To pass to the limit in the terms that do not include pollution in the anisotropic equation has already been done in the original article. What we need to work on is how to legitimately take the limit in the terms including the new function $C^\epsilon$. To do this our first key tool will be the energy inequality. Once we have a priori estimates for the functions in the linear terms, we can pass to the limit with those without any particular problem; however to prove convergence for the $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C})$ term we will need a stronger result than only the weak convergence of the present functions in the product. NOT HERE
+
+We will omit the proof of the existence of weak solutions (see Definition \ref{definitionanisotropicWF}.) for the anisotropic system (\ref{ANSC1}) - (\ref{ANSC8}) since it follows by standard finite-dimensional Galerkin approximation.
+
+Now we are ready to state our main result.
+  
+\begin{theorem}
+  Let $\bold{u}_0$ $\in$ $L^2 (\Omega)^3$, with $\nabla \cdot \bold{u}_0 = 0, \bold{u}_0 \cdot \bold{n} = 0$ on $\partial \Omega$; and let $C_0 \in$ $L^2 (\Omega)^3$, $C_0 = 0$ on $ \partial \Omega$; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\bold{u}^\epsilon, C^\epsilon)$ of the anisotropic equations (\ref{ANSC1}) - (\ref{ANSC8}) converge to a weak solution $(\mathbf{u}, C)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1}) - (\ref{HNSC8}).
+\end{theorem}
+  
+%% In this extended case as well, the proof relies on a priori estimates gained from the energy inequality in anisotropic spaces --- as we will see, this is sufficient to pass to the limit in the linear terms. 
+%% The challenge caused by the nonlinear term will be met by proving that a compactness result from \cite{lions1996mathematical} is applicable to handle it. PUT LATER
 
 %%% *** PROOF *** %%%
 \section{Proof of the main theorem} \label{proof}
