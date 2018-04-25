@@ -5,6 +5,8 @@
 \usepackage{commath}
 \usepackage{amsthm}
 \usepackage{enumitem}
+\usepackage{float} 
+\usepackage{array}
 \usepackage{outlines}
 \setlist[enumerate,1]{label=\alph*)}
 \setlist[enumerate,2]{label=\roman*)}
@@ -402,62 +404,49 @@ In this section we describe the weak formulation of the merged equations in both
   \end{definition}
   
   Note that since in our case the source term $S_\epsilon$ is given by (\ref{approxsourceterm}), thus the last term in (\ref{anisotropicWF}) is well defined. If we use a source function of a different and more general form, it needs to satisfy the $L_t^2 L_x^2$ boundedness criteria for the weak formulation to make sense.
-  
-%%To pass to the limit in the terms that do not include pollution in the anisotropic equation has already been done in the original article. What we need to work on is how to legitimately take the limit in the terms including the new function $C^\epsilon$. To do this our first key tool will be the energy inequality. Once we have a priori estimates for the functions in the linear terms, we can pass to the limit with those without any particular problem; however to prove convergence for the $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C})$ term we will need a stronger result than only the weak convergence of the present functions in the product. NOT HERE
 
 We will omit the proof of the existence of weak solutions (see Definition \ref{definitionanisotropicWF}.) for the anisotropic system (\ref{ANSC1}) - (\ref{ANSC8}) since it follows by standard finite-dimensional Galerkin approximation.
 
 Now we are ready to state our main result.
   
-\begin{theorem}
+\begin{theorem} \label{maintheorem}
   Let $\bold{u}_0$ $\in$ $L^2 (\Omega)^3$, with $\nabla \cdot \bold{u}_0 = 0, \bold{u}_0 \cdot \bold{n} = 0$ on $\partial \Omega$; and let $C_0 \in$ $L^2 (\Omega)^3$, $C_0 = 0$ on $ \partial \Omega$; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\bold{u}^\epsilon, C^\epsilon)$ of the anisotropic equations (\ref{ANSC1}) - (\ref{ANSC8}) converge to a weak solution $(\mathbf{u}, C)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1}) - (\ref{HNSC8}).
 \end{theorem}
-  
-%% In this extended case as well, the proof relies on a priori estimates gained from the energy inequality in anisotropic spaces --- as we will see, this is sufficient to pass to the limit in the linear terms. 
-%% The challenge caused by the nonlinear term will be met by proving that a compactness result from \cite{lions1996mathematical} is applicable to handle it. PUT LATER
 
 %%% *** PROOF *** %%%
 \section{Proof of the main theorem} \label{proof}
  
- The proof begins by extracting a priori estimates for the solution of the anisotropic system of the polluted atmosphere (\ref{ANSC1}) - (\ref{ANSC8}).
+ This section is devoted to the proof of Theorem \ref{maintheorem}. In the extended case with the pollution equation the proof relies on a priori estimates gained from the energy inequality and, as we will see this is sufficient to pass to the limit in the linear terms. Concerning the nonlinear terms that do not include pollution we will follow \cite{azerad2001mathematical}. What we need to work on is how to handle the nonlinear terms including the new function $C^\epsilon.$ The challenge caused by these nonlinear terms will be met by proving that a compactness result from \cite{lions1996mathematical} is applicable to handle them.
 
   \subsection{Energy inequality}
   
-  As we mentioned before, one of the most fundamental tools in this proof is the energy inequality. If we calculate it for the anisotropic system, we arrive to the following result. For a.e. $t \in [0,T],$
+  As we mentioned before, one of the most fundamental tools in this proof is the energy inequality. If we calculate it for the anisotropic system, we arrive to the following result. For a.e. $t \in [0,T]$ the following holds:
   
-  \begin{equation}
+  \begin{equation} \label{energyIEQ}
     \begin{split}  
     & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \{    \norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \} \diff \tau + \\
     & \int_0 ^ t \{\epsilon K_1 \norm{\partial_1 C^\epsilon}_{L^2}^2  + K_2 \norm{\partial_2 C^\epsilon}_{L^2}^2 + K_3 \norm{\partial_3 C^\epsilon}_{L^2}^2 \} d \tau \leq  \int_0^t (S^\epsilon,C^\epsilon) \diff \tau + \\
-    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) + \int _ 0 ^ t \epsilon K_1 \langle \partial_1 C^\epsilon, C^\epsilon \rangle_{\Gamma_G} \diff \tau.
+    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon_0}_{L^2}^2) + \int _ 0 ^ t \epsilon K_1 \langle \partial_1 C^\epsilon, C^\epsilon \rangle_{\Gamma_G} \diff \tau =\\
+    & I_1 + I_2 + I_3.
     \end{split}
   \end{equation}    
   
-  In this present form the energy inequality is not ready to be used for getting a priori estimates because it is not obvious if the right hand side of the inequality is bounded. Since the $S^\epsilon$ source term is in $L^\infty_x (\Omega)$, the only term we need to work on further is $\int _ 0 ^ t \epsilon K_1 \langle \partial_1 C^\epsilon, C^\epsilon \rangle_{\Gamma_G} d \tau$.
+  From the hypothesis on the initial data and since the $S^\epsilon$ source term is in $L^\infty_x (\Omega)$, $I_1$ and $I_2$ are bounded. The only term we need to work on further is $I_3$.
   
-  We can estimate this term in the following way.
+  By using the Holder inequality for any $\gamma > 0,$ we can estimate this term in the following way.
   
   \begin{equation}
     \begin{split}  
-    &  \int _ 0 ^ t \epsilon K_1 \langle \partial_1 C^\epsilon, C^\epsilon \rangle_{\Gamma_G} \diff \tau \leq K_1 \int _ 0 ^ t \sqrt{\epsilon} \norm{\partial_1 C^\epsilon}_{L^2 (\Gamma_G)} \sqrt{\epsilon} \norm{C^\epsilon}_{L^2 (\Gamma_G)} \leq \\
-    & \frac{1}{\delta} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)} + \delta K_1 \int_0 ^ t \frac{\epsilon}{2} \norm{C^\epsilon}^2 _{L^2 (\Gamma_G)} \leq \\
-    & \frac{1}{\delta} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)} + \delta \frac{\epsilon}{2} K_1 c_T \int_0 ^ t \norm{C^\epsilon}^2 _{W^{1,2} (\Omega)},
+    &  I_3 = \int _ 0 ^ t \epsilon K_1 \langle \partial_1 C^\epsilon, C^\epsilon \rangle_{\Gamma_G} \diff \tau \leq K_1 \int _ 0 ^ t \sqrt{\epsilon} \norm{\partial_1 C^\epsilon}_{L^2 (\Gamma_G)} \sqrt{\epsilon} \norm{C^\epsilon}_{L^2 (\Gamma_G)} \leq \\
+    & \frac{1}{\gamma} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)} + \gamma K_1 \int_0 ^ t \frac{\epsilon}{2} \norm{C^\epsilon}^2 _{L^2 (\Gamma_G)} \leq \\
+    & \frac{1}{\gamma} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)} + \gamma \frac{\epsilon}{2} K_1 c_T \int_0 ^ t \norm{C^\epsilon}^2 _{W^{1,2} (\Omega)} \leq \\
+    & \frac{1}{\gamma} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)} + \gamma \frac{\epsilon}{2} K_1 c_T (c_S + 1) \int_0 ^ t \norm{\nabla C^\epsilon}^2 _{L^2 (\Omega) } \diff \tau,
     \end{split}
   \end{equation}  
   
-  where $c_T$ is the constant provided by the trace theorem, and the boundary term is bounded because of the a priori assumptions made on the boundary conditions. Now we can carry on with the estimate by using the $W^{1,2}$ norm definition, exploit the fact that we are on a bounded domain and then applying the Sobolev inequality (for $n=3, p=2, p* = 6$, denoting its constant by $c_S$), so we have
+  where $c_T$ and $c_S$ are the constants provided by the trace theorem and Sobolev embeddings, and the boundary term is bounded because of the a priori assumptions made on the boundary conditions.
   
-  \begin{equation}
-    \begin{split}   
-      & \delta \frac{\epsilon}{2} K_1 c_T \int_0 ^ t \norm{C^\epsilon}^2 _{W^{1,2} (\Omega)} = \\
-      & \delta \frac{\epsilon}{2} K_1 c_T \int_0 ^ t \{  \norm{C^\epsilon}^2 _{L^2 (\Omega)} + \norm{\nabla C^\epsilon} ^ 2 _{L^2 (\Omega)}\} \diff \tau \leq \\
-      & \delta \frac{\epsilon}{2} K_1 c_T \int_0 ^ t \{  \norm{C^\epsilon}^2 _{L^6 (\Omega)} + \norm{\nabla C^\epsilon} ^ 2 _{L^2 (\Omega)}\} \diff \tau \leq \\
-      & \delta \frac{\epsilon}{2} K_1 c_T \int_0 ^ t \{ c_S \norm{\nabla C^\epsilon}^2 _{L^2 (\Omega) }  + \norm{\nabla C^\epsilon}^2 _{L^2 (\Omega) } \} \diff \tau = \\
-      & \delta \frac{\epsilon}{2} K_1 c_T (c_S + 1) \int_0 ^ t \norm{\nabla C^\epsilon}^2 _{L^2 (\Omega) } \diff \tau.
-    \end{split}
-  \end{equation}  
-  
-Which means that the energy inequality takes the form of
+The energy inequality (\ref{energyIEQ}) now takes the form
 
   \begin{equation}
     \begin{split}  
@@ -472,15 +461,25 @@ Which means that the energy inequality takes the form of
     
   \subsection{A priori estimates and weak convergence}
   
-  Now we can extract a priori estimates from the final form of the energy inequality. We obtain the following
+  From the final form of the energy inequality we obtain a priori estimates that we summarize in the following proposition.
   
   \begin{prop}
-  
-  We have $L_t^\infty L_x^2$ boundedness for $u^\epsilon_1, u^\epsilon_2, \epsilon u^\epsilon_3$ and $C^\epsilon$; $L_t^2 H_x^1$ boundedness for $u^\epsilon_1, u^\epsilon_2, \epsilon u^\epsilon_3$, and $L_t^2 L_x^2$ boundedness for $\sqrt{\epsilon} \partial_1 C^\epsilon, \partial_2 C^\epsilon, \partial_3 C^\epsilon$.
-
+    The sequences $u^\epsilon_1, u^\epsilon_2, \epsilon u^\epsilon_3$ are bounded in $L^\infty (0,T; L^2(\Omega)) \cap L^2(0,T; H^1(\Omega))$, $C^\epsilon$ is bounded in $L^\infty (0,T; L^2(\Omega));$ furthermore the sequences $\sqrt{\epsilon} \partial_1 C^\epsilon,$ $ \partial_2 C^\epsilon,$ and $ \partial_3 C^\epsilon$ are bounded in $L^2(0,T;L^2(\Omega))$.
   \end{prop}
   
-  As a consequence, weak convergence is gained as well, i.e., there are subsequences still denoted by the same way, for which we have $C^\epsilon \rightharpoonup C$ in $L_t^\infty L_x^2$, $\partial_2 C^\epsilon \rightharpoonup \partial_2 C $ and $\partial_3 C^\epsilon \rightharpoonup \partial_3 C $ in $L_t^2 L_x^2$, and $\sqrt{\epsilon} \partial_1 C^\epsilon \rightharpoonup e$ for some limit element $e$ in $L_t^2 L_x^2$.
+  As a consequence, up to there are subsequences still denoted by the same way, for which we have the following convergence results.
+  
+\begin{center}
+    \begin{tabular}{r l l}
+    $ \mathbf{u}_H^\epsilon \rightharpoonup \mathbf{u}_H $ & weakly in $L^\infty (0,T; L^2(\Omega)) \cap L^2(0,T; H^1(\Omega))$ & \parbox{2.3cm}{\begin{equation} \end{equation} }\\
+    $ \epsilon u_3^\epsilon \rightharpoonup f $ & weakly for some limit element $f$ & \\
+     & in $L^\infty (0,T; L^2(\Omega)) \cap L^2(0,T; H^1(\Omega))$ & \parbox{2.3cm}{\begin{equation} \end{equation} }\\
+    $C^\epsilon \rightharpoonup C$ & weakly in $L_t^\infty L_x^2$ & \parbox{2.3cm}{\begin{equation} \end{equation} }  \\
+    $\partial_2 C^\epsilon \rightharpoonup \partial_2 C $ & weakly in $L_t^2 L_x^2$ & \parbox{2.3cm}{\begin{equation} \end{equation} }\\
+    $\partial_3 C^\epsilon \rightharpoonup \partial_3 C $ & weakly in $L_t^2 L_x^2$  & \parbox{2.3cm}{\begin{equation} \end{equation} }\\
+    $\sqrt{\epsilon} \partial_1 C^\epsilon \rightharpoonup e$ & weakly for some limit element $e$ in $L_t^2 L_x^2$ & \parbox{2.3cm}{\begin{equation} \end{equation} }\\
+    \end{tabular}
+\end{center}
 
 \subsection{Passing to the limit}
 
