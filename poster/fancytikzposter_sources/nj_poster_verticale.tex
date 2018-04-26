@@ -55,14 +55,14 @@
     \titleblock{47}{1.5}
   }
 
-  \addlogo[south west]{(1,1)}{7cm}{ModCompShock.jpg}
-  \addlogo[south east]{(-1,1)}{4.5cm}{LogoDisim.png}
+  \addlogo[south west]{(1,1)}{5cm}{ModCompShock.jpg}
+  \addlogo[south east]{(-1,1)}{3.5cm}{LogoDisim.png}
 
   %% a block node, with the specified position (optional), title and the content
   %% #1 - where (optional), #2 - title, #3 - text
   %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
   \blocknode{The shallow domain concept}
-  {
+  { \small
   \begin{itemize}
     \item Natural, large-scale geophysical fluids share the shallow domain characteristics
     \item "almost" two-dimensional set $\to$ we can significantly simplify the model in the vertical direction
@@ -73,7 +73,7 @@
 
   \begin{tikzfigure}[A local slice of the atmosphere. Picture credit: mountwashington.org]
     \begin{tikzpicture}
-      \node[inner sep=0pt] (atmospherelayers) at (0,0) {\includegraphics[width=.25\textwidth]{atmosphere.jpg}};
+      \node[inner sep=0pt] (atmospherelayers) at (0,0) {\includegraphics[width=.35\textwidth]{atmosphere.jpg}};
       \end{tikzpicture}
   \end{tikzfigure}
   
@@ -91,7 +91,7 @@
   %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
   \calloutblock
   {($(box.center)+(-2,-11.5)$)} %% the point of the arrow part of the block
-  {($(box.center)+(12,-7)$)} %% the center of the body of the block
+  {($(box.center)+(12,-9)$)} %% the center of the body of the block
   {15cm} %% the width of the block
   {\small
   Correspondingly, we rescale
@@ -104,7 +104,7 @@
   }
   
     %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
-  \blocknode{Modelling - challenges and choices}
+  \blocknode[($(currenty)-(0,1.25)$)]{Modelling - challenges and choices}
   {
   \begin{itemize}
     \item Coordinate system $\to$ we fix it in a way so that $x$ and $y$ match the downwind and crosswind direction, respectively (while $z$ represents the vertical dimension).
@@ -120,7 +120,7 @@
       \begin{tikzfigure}[A local slice of the atmosphere]
         \begin{tikzpicture}
       
-          \node[inner sep=0pt] (domain) at (0,0) {\includegraphics[width=.15\textwidth]{domain.jpg}};
+          \node[inner sep=0pt] (domain) at (0,0) {\includegraphics[width=.35\textwidth]{domain.jpg}};
       
         \end{tikzpicture}
       \end{tikzfigure}
@@ -134,7 +134,7 @@
 
   %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
   \blocknode{The anisotropic equations}
-  { 
+  { \small
     \coloredbox{colorthree!50!}{
       
     \[ \partial_t u^\epsilon _1 + \bold{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\alpha u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T) \]
