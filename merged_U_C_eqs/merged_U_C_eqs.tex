@@ -464,137 +464,84 @@ The energy inequality (\ref{energyIEQ}) now takes the form
   From the final form of the energy inequality we obtain a priori estimates that we summarize in the following proposition.
   
   \begin{prop}
-    The sequences $u^\epsilon_1, u^\epsilon_2, \epsilon u^\epsilon_3$ are bounded in $L^\infty (0,T; L^2(\Omega)) \cap L^2(0,T; H^1(\Omega))$, $C^\epsilon$ is bounded in $L^\infty (0,T; L^2(\Omega));$ furthermore the sequences $\sqrt{\epsilon} \partial_1 C^\epsilon,$ $ \partial_2 C^\epsilon,$ and $ \partial_3 C^\epsilon$ are bounded in $L^2(0,T;L^2(\Omega))$.
+    The sequences
+    
+  \begin{center}
+    \begin{tabular}{r l r}
+    $u^\epsilon_1, u^\epsilon_2, \epsilon u^\epsilon_3$, $C^\epsilon$ & are bounded in $L^\infty (0,T; L^2(\Omega)),$ & \parbox{2.8cm}{\begin{equation} \label{proposition1} \end{equation} }\\
+    $u^\epsilon_1, u^\epsilon_2, \epsilon u^\epsilon_3$ & are bounded in $L^2(0,T; H^1(\Omega)),$ & \parbox{2.8cm}{\begin{equation}\label{proposition2} \end{equation} }\\ 
+    $\sqrt{\epsilon} \partial_1 C^\epsilon,$ $ \partial_2 C^\epsilon,$ $ \partial_3 C^\epsilon$ & are bounded in $L^2(0,T;L^2(\Omega)).$ & \parbox{2.8cm}{\begin{equation}\label{proposition3} \end{equation} }\\
+    \end{tabular}
+  \end{center}
+    
   \end{prop}
   
-  As a consequence, up to there are subsequences still denoted by the same way, for which we have the following convergence results.
+  As a consequence, up to there are subsequences still denoted by the same way, for which we have the following weak convergence results.
   
 \begin{center}
     \begin{tabular}{r l l}
-    $ \mathbf{u}_H^\epsilon \rightharpoonup \mathbf{u}_H $ & weakly in $L^\infty (0,T; L^2(\Omega)) \cap L^2(0,T; H^1(\Omega))$ & \parbox{2.3cm}{\begin{equation} \label{weakconvuh} \end{equation} }\\
-    $ \epsilon u_3^\epsilon \rightharpoonup f $ & weakly for some limit element $f$ & \\
-     & in $L^\infty (0,T; L^2(\Omega)) \cap L^2(0,T; H^1(\Omega))$ & \parbox{2.3cm}{\begin{equation} \end{equation} }\\
-    $C^\epsilon \rightharpoonup C$ & weakly in $L_t^\infty L_x^2$ & \parbox{2.3cm}{\begin{equation} \end{equation} }  \\
-    $\partial_2 C^\epsilon \rightharpoonup \partial_2 C $ & weakly in $L_t^2 L_x^2$ & \parbox{2.3cm}{\begin{equation} \end{equation} }\\
-    $\partial_3 C^\epsilon \rightharpoonup \partial_3 C $ & weakly in $L_t^2 L_x^2$  & \parbox{2.3cm}{\begin{equation} \end{equation} }\\
-    $\sqrt{\epsilon} \partial_1 C^\epsilon \rightharpoonup e$ & weakly for some limit element $e$ in $L_t^2 L_x^2$ & \parbox{2.3cm}{\begin{equation} \end{equation} }\\
+    $ \mathbf{u}_H^\epsilon \rightharpoonup \mathbf{u}_H $ & in $L_t^\infty L_x^2 \cap L_t^2 H_x^1$ & \parbox{2.4cm}{\begin{equation} \end{equation} }\\
+    $ \epsilon u_3^\epsilon \rightharpoonup f $ & for some limit element $f$ in $L_t^\infty L_x^2 \cap L_t^2 H_x^1$ & \parbox{2.4cm}{\begin{equation} \end{equation} }\\
+    $C^\epsilon \rightharpoonup C$ &  in $L_t^\infty L_x^2$ & \parbox{2.4cm}{\begin{equation} \label{WeakConvCEps1} \end{equation} }  \\
+    $\partial_2 C^\epsilon \rightharpoonup \partial_2 C $ & in $L_t^2 L_x^2$ & \parbox{2.4cm}{\begin{equation} \label{WeakConvCEps2} \end{equation} }\\
+    $\partial_3 C^\epsilon \rightharpoonup \partial_3 C $ & in $L_t^2 L_x^2$  & \parbox{2.4cm}{\begin{equation} \label{WeakConvCEps3} \end{equation} }\\
+    $\sqrt{\epsilon} \partial_1 C^\epsilon \rightharpoonup e$ & for some limit element $e$ in $L_t^2 L_x^2$ & \parbox{2.4cm}{\begin{equation} \label{WeakConvCEps4} \end{equation} }\\
     \end{tabular}
 \end{center}
 
 \subsection{Passing to the limit}
-
-Taking the limit for the terms that do not include $C^\epsilon$ had been worked out before.
-In the linear terms the weak convergence guaranteed by the a priori estimates will be sufficient. In the nonlinear term we need an additional result that provides a weak convergence of the product of functions for which we only have weak convergence separately.
   
-    For the linear terms we can directly apply the weak convergence results of the previous section.
-  
-    \begin{enumerate}[label=(\roman*)]
+    For the linear terms we can directly apply the weak convergence results of (\ref{WeakConvCEps1}) - (\ref{WeakConvCEps4}).
     
-      \item The convergence of the $(C^\epsilon, \frac{\partial \tilde{C}}{\partial t})$ term is easy to see, since we have $C^\epsilon \rightharpoonup C$ in $L_t^\infty L_x^2$.
-      
-      \item For the next term we have $\epsilon K_1 \int_0 ^T (\partial_1 C^\epsilon, \partial_1 \tilde{C}) = \sqrt{\epsilon} K_1 \int_0 ^T (\sqrt{\epsilon} \partial_1 C^\epsilon, \partial_1 \tilde{C})$, which goes to 0 as $\epsilon \to 0$ because of the Cauchy-Schwartz inequality, since we have $\sqrt{\epsilon} \partial_1 C^\epsilon$ bounded in $L^2_t L^2_x$, and $\tilde{C}$ is a test function.
-      
-      \item As we have seen before, we have $\partial_2 C^\epsilon \rightharpoonup \partial_2 C $ in $L_t^2 L_x^2$, which by definition provides that
+    By using (\ref{WeakConvCEps1}), (\ref{WeakConvCEps2}) and (\ref{WeakConvCEps3}) we get
     
-        \[ \int_0 ^ T (\partial_2 C^\epsilon , f) d \mathrm{t} \to \int_0^T (\partial_2 C, f) \diff t \qquad \forall f \in L^2_t L^2_x.\]
+    \[ \int_0 ^ T (C^\epsilon , \frac{\partial \tilde{C}}{\partial t}) d \mathrm{t} \to \int_0^T (C, \frac{\partial \tilde{C}}{\partial t}) \diff t,\]
     
-      \item Analogously,
+    \[ \int_0 ^ T (\partial_2 C^\epsilon , f) + (\partial_3 C^\epsilon , f) d \mathrm{t} \to \int_0^T (\partial_2 C, f) + (\partial_3 C, f) \diff t \qquad \forall f \in L^2_t L^2_x.\]
       
-        \[ \int_0 ^ T (\partial_3 C^\epsilon , f) d \mathrm{t} \to \int_0^T (\partial_3 C, f) \diff t \qquad \forall f \in L^2_t L^2_x.\]
+    For the next term we have $\epsilon K_1 \int_0 ^T (\partial_1 C^\epsilon, \partial_1 \tilde{C}) = \sqrt{\epsilon} K_1 \int_0 ^T (\sqrt{\epsilon} \partial_1 C^\epsilon, \partial_1 \tilde{C})$, which goes to 0 as $\epsilon \to 0$ because of the Cauchy-Schwartz inequality, since we have $\sqrt{\epsilon} \partial_1 C^\epsilon$ bounded in $L^2_t L^2_x$, and $\tilde{C}$ is a test function.
       
-      \item The $\epsilon K_1 \int_0^T \big[(\partial_1 C^\epsilon) \tilde{C} \big] _{\Gamma_G} \diff t$ line integral vanishes as $\epsilon \to 0$ since by the Cauchy-Schwartz equation we can estimate the integral by two bounded terms ($\partial_1 C^\epsilon$ was assumed to be finite in norm on the lower boundary).
+    The $\epsilon K_1 \int_0^T \big[(\partial_1 C^\epsilon) \tilde{C} \big] _{\Gamma_G} \diff t$ line integral vanishes as $\epsilon \to 0$ since by the Cauchy-Schwartz equation we can estimate the integral by two bounded terms ($\partial_1 C^\epsilon$ was assumed to be finite in norm on the lower boundary).
       
-      \item To prove $(S^\epsilon, \tilde{C}) \to  (S, \tilde{C}), $ we need to show that 
+    For the source term, by applying standard results for distribution functions, we get $(S^\epsilon, \tilde{C}) \to  (S, \tilde{C}).$ 
       
-      \[ \lim_{\epsilon \to 0} \int_\Omega S^\epsilon (\mathbf{x}, \mathbf{x}_s) \cdot \tilde{C}(\mathbf{x}) \diff \mathbf{x} \to \tilde{C}(\mathbf{x}_s).\] 
-      
-      Using the substituation $\mathbf{y} = (\mathbf{x}-\mathbf{x}_s) / \epsilon$ we have
-      
-      \[ \int_\Omega \gamma \epsilon^{-1} e ^ {\frac{-(\mathbf{x}-\mathbf{x}_s)^2}{\epsilon^2}} \tilde{C}(\mathbf{x}) \diff \mathbf{x} = \int_{\Omega_\mathbf{y}} \gamma e^{-\mathbf{y}^2} \tilde{C} (\epsilon \mathbf{y} + \mathbf{x}_s) \diff \mathbf{y}\]
-      
-      This term can be dominated by $ \big \| \tilde{C} \big \| _\infty \cdot \int_{\Omega_\mathbf{y}} \gamma e^{-\mathbf{y}^2} \tilde{C} \diff \mathbf{y} = \big \| \tilde{C} \big \| _\infty,$ so we can apply the dominated convergence theorem using that the test function $\tilde{C} \in L^2_t L^\infty _x$ and arrive to
-      
-      \[ \lim_{\epsilon \to 0} (S^\epsilon, \tilde{C}) = \int_{\Omega_\mathbf{y}} \lim_{\epsilon \to 0} \gamma e^{-\mathbf{y}^2} \tilde{C} (\epsilon \mathbf{y} + \mathbf{x}_s) \diff \mathbf{y} = \int_{\Omega_\mathbf{y}} \gamma e^{-\mathbf{y}^2} \tilde{C} (\mathbf{x}_s) \diff \mathbf{y} = \tilde{C} (\mathbf{x}_s), \]
-      
-      using the continuity of $\tilde{C}.$ 
-      
-    \end{enumerate}
+Finally we have to deal with the nonlinear term $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}).$
   
-  As for the nonlinear term $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C})$, we need a compactness theorem to take its limit.
+By analyzing this nonlinear term in a more precise way we see that $(u_i C^\epsilon, \partial_i \tilde{C})$ for $i=1,2$ is weakly convergent since from \cite{azerad2001mathematical} we have strong convergence of the horizontal velocities, while in the case of $i=3$ this property does not hold for $u_3$ and from the energy bound we do not have more than the weak convergence of $C^\epsilon$ .
   
-  \begin{remark}
-  As a matter of fact, we actually have three terms here, namely $(u^\epsilon_i C^\epsilon, \partial_i \tilde{C})$ for $i = 1,2,3$, and for the values $1,2$ of $i$ the weak convergence of the $u^\epsilon_i C^\epsilon$ product is given by the fact that, as it is proved in the reference article, we actually have strong convergence for the horizontal velocities, and because of the a priori estimate from the energy bound we know we have weak convergence for the $C^\epsilon$ term. But this argument does not solve the challenge caused by nonlinearity because it does not hold for $u_3$, so we still need an additional compactness theorem as mentioned before.
-  \end{remark}
+  In this case the classical Aubin-Lions lemma can not be applied since it would require for $C^\epsilon$ to be in a compactly embedded space such as $L^2 H^1$, which is not the case here because we only know boundedness results for $\sqrt{\epsilon} \partial_1 C$, but not for $\partial_1 C$.
   
-  In this case the Aubin-Lions lemma can not be applied since it would require for $C^\epsilon$ to be in a compactly embedded space such as $L^2 H^1$, which is not the case here because we only know boundedness results for $\sqrt{\epsilon} \partial_1 C$, but not for $\partial_1 C$.
-  
-  We will show that the following lemma from \cite{lions1996mathematical} is applicable in our case.
+   Therefore we will use the following compactness result, \cite{lions1996mathematical}.
   
   \begin{lemma} \label{PLL}
-    Let $g_n$, $h_n$ converge weakly to $g,h$ respectively in $L^{p_1}(0,T; L^{p_2}(\Omega))$, $L^{q_1}(0,T; L^{q_2}(\Omega))$ where $1 \leq p_1, p_2 \leq + \infty,$
+    Let $g^\epsilon$, $h^\epsilon$ converge weakly to $g,h$ respectively in $L^{p_1}(0,T; L^{p_2}(\Omega))$, $L^{q_1}(0,T; L^{q_2}(\Omega))$ where $1 \leq p_1, p_2 \leq + \infty,$
     \[ \frac{1}{p_1} + \frac{1}{q_1} =  \frac{1}{p_2} + \frac{1}{q_2} = 1. \]
     We assume in addition that
-    \begin{itemize}
-      \item $\frac{\partial g^n}{\partial t}$ is bounded in $L^1 (0,T; W^{-m, 1} (\Omega))$ for some $m \geq 0$ independent of $n$.
-      \item $\norm{h^n - h^n(\cdot + \xi, t)}_{L^{q_1}(0,T; L^{q_2}(\Omega))} \to 0$ as $\abs{\xi} \to 0$, uniformly in $n$.
-    \end{itemize}
-    Then, $g^n h^n$ converges to $gh$ (in the sense of distributions on $\Omega \times (0,T)$).
+    $$\frac{\partial g^\epsilon}{\partial t} \text{ is bounded in } L^1 (0,T; W^{-m, 1} (\Omega)) \text{ for some } m \geq 0 \text{ independent of } \epsilon,$$
+    and
+    $$\norm{h^\epsilon - h^\epsilon(\cdot + \xi, t)}_{L^{q_1}(0,T; L^{q_2}(\Omega))} \to 0 \text{ as } \abs{\xi} \to 0, \text{ uniformly in } \epsilon.$$
+    Then, $g^\epsilon h^\epsilon$ converges to $gh$ (in the sense of distributions on $\Omega \times (0,T)$).
   \end{lemma}
   
-  What we will show in the following is that for the functions $u^\epsilon_i$ and $C^\epsilon$ the assumptions of Lemma \ref{PLL} are satisfied, which means that $u_i^\epsilon C^\epsilon \rightharpoonup  u_i C$ holds.
-  
-   \begin{lemma}
-     We have $u_i^\epsilon C^\epsilon \rightharpoonup  u_i C$.
-   \end{lemma}
+  What we will show in the following is that for $h^\epsilon = u^\epsilon_i$ and $g^\epsilon = C^\epsilon$ the assumptions of Lemma \ref{PLL} are satisfied, which means that $u_i^\epsilon C^\epsilon \rightharpoonup  u_i C$ in the sense of distribution.
    
-   \begin{proof}
-     We have seen from the a priori estimates that $C^\epsilon \rightharpoonup C$ in $L_t^\infty L_x^2$, and we know from the reference article that $u_i^\epsilon \rightharpoonup u_i$ in $L_t^2 L_x^2$.
+     From (\ref{WeakConvCEps1}) we have that $C^\epsilon \rightharpoonup C$ in $L_t^\infty L_x^2$, and since we are on a finite domain, the same convergence holds in $L_t^2 L_x^2.$ Hence we can choose $q_1 = q_2 = p_1 = p_2 = 2.$
      
-     Since we are on a finite domain and thus $C^\epsilon \in L^\infty L^2$ implies $C^\epsilon \in L^2 L^2$, let us choose $q_1 = q_2 = p_1 = p_2 = 2.$
+     To estimate the time derivative of $C^\epsilon$ we use (\ref{ANSC5}) that can be rewritten in the following way since $u^\epsilon$ is divergence-free.
      
-     \begin{itemize}
-     
-       \item \textbf{Bound for the time derivative}.
-         \[  \frac{\partial C^\epsilon}{\partial t} = - u^\epsilon \nabla C^\epsilon + \sqrt{\epsilon} K_1 \partial_1 \partial_1 \sqrt{\epsilon} C^\epsilon + K_2 \partial_2 \partial_2 C^\epsilon + K_3 \partial_3 \partial_3 C^\epsilon -S^\epsilon \]
+         \[  \frac{\partial C^\epsilon}{\partial t} = - \nabla \cdot (u^\epsilon C^\epsilon) + \sqrt{\epsilon} K_1 \partial_1 \partial_1 \sqrt{\epsilon} C^\epsilon + K_2 \partial_2 \partial_2 C^\epsilon + K_3 \partial_3 \partial_3 C^\epsilon -S^\epsilon \]
          
-         On one hand, the $S^\epsilon$ Gaussian source term is smooth, and we see that the second part of the right hand side is in $W^{-1,2}$, simply using that $\partial_1 \sqrt{\epsilon} C^\epsilon, \partial_2 C^\epsilon, \partial_3 C^\epsilon$ are in $L^2$. On the other hand, the first term is in $W^{-1,1}$, because we have
+         Now, the $S^\epsilon$ Gaussian source term is smooth; from (\ref{ANSC4}), (\ref{proposition1}) we get $ \nabla \cdot (u^\epsilon C^\epsilon) \in W_x^{-1,1}$ and from (\ref{proposition3}) we have that the remaining terms are in $W_x^{-1,2}.$
          
-         \[ u^\epsilon \nabla C^\epsilon = \nabla \cdot (u^\epsilon C^\epsilon) - \nabla \cdot (u^\epsilon) C, \]
+         We can conclude that $\frac{\partial C}{\partial t} \in L_t^1 W_x^{-1,1}$.
          
-         and we only have to use that the divergence of $u^\epsilon$ is zero and $u^\epsilon C^\epsilon$ is in $L^1_x.$
-         
-         Eventually we have $\frac{\partial C}{\partial t} \in L^1 W^{-1,1}$.
-         
-       \item \textbf{Equicontinuity}. We need to show that $\norm{u_i^n - u_i^n (\cdot + \xi,t)}_{L^2 L^2} \to 0$ as $\xi \to 0$. Since in the time domain the condition naturally holds, we will focus on the space part of the proof.
-       
-       First we show that for a function $f$ in the function space $C^\infty_0$ the condition holds.
-       
-       \[ \norm{f(x + \xi) - f(x)}_{L^2} = \left(\int_\Omega \abs{f(x+\xi) - f(x)}^2 d x \right)^{1/2} \leq \]
-       \[ \left(\int_\Omega ( \sup_x \abs{f(x+\xi) - f(x)} )^2 d \mathrm{x}\right)^{1/2} = \norm{f(x+\xi) - f(x)}_{L^\infty} \cdot {\abs{\Omega}} ^ {1/p }.\]
-       
-       So we have
-       
-       \[ \lim_{\xi \to 0} \norm{f(x + \xi) - f(x)}_{L^2} \leq {\abs{\Omega}} ^ {1/p } \cdot \lim_{\xi \to 0} (\sup_x \abs{f(x+\xi) - f(x)}) = 0,\]
-       
-       since $f \in C_0^\infty$.
-       
-       Now we show that the condition holds for any function $f \in L^2$. Here we exploit the fact that $C_0^\infty$ is dense in the $L^p$ function space. By definition this means that $\exists \varphi_n \in C_0 ^ \infty (\Omega)$ such that $\varphi_n \to f$ in $L^p (\Omega)$. With this we have
-       
-       \[ \norm{f(x + \xi) - f(x)}_{L^2} = \]
-       \[ \norm{f(x + \xi) - \varphi_n (x + \xi) + \varphi_n (x + \xi) -\varphi_n (x) + \varphi_n (x) - f(x)}_{L^2} \leq \]
-       \[ \norm{f(x+\xi) - \varphi_n (x+\xi)}_{L^2} + \norm{\varphi_n (x+\xi) - \varphi_n (x)}_{L^2} + \norm{\varphi_n (x) - f(x)}_{L^2}.\]
-       
-       The first and third term goes to $0$ as $\xi \to 0$, since $\varphi_n \to f$ in $L^p (\Omega)$. On the other hand in the first part of the proof we have shown exactly that the second term goes to $0$. Which proves that $\norm{u_i^n - u_i^n (\cdot + \xi,t)}_{L^2 L^2} \to 0$ as $\xi \to 0$. Eventually this means that we can apply the lemma with $h^n = u_i ^ \epsilon, g^n = C^\epsilon$, which proves the statement of the lemma.
-       
-     \end{itemize}
-        
-   \end{proof}
-   
-   We finally arrive to
+      The property that $\norm{u_i^\epsilon - u_i^\epsilon(\cdot + \xi, t)} \to 0$ as $\abs{\xi} \to 0$ follows since $u_i^\epsilon \in L^2_t L^2_x.$
+      
+      Now we can apply Lemma \ref{PLL} with $g^\epsilon = C^\epsilon, h^\epsilon = u^\epsilon, q_1 = q_2 = p_1 = p_2 = 2, m=-1$ and we finally arrive to
    
    \[ \int_0^T (\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) \diff t \to \int_0^T (\mathbf{u} C, \nabla \tilde{C}) \diff t,\]
    
-   which, combined with the previously described linear terms, proves the main theorem.
+   which, combined with the previously described linear terms, concludes the proof of the main theorem.
 
 
 %%% *** CONVECTION DOMINATED COASTAL MODEL *** %%%  
@@ -611,9 +558,9 @@ We now present a generalized model, which is an extension of the previous inland
 \draw[blue,thick,dashed] (2,0) -- (4,0);
 
     \draw (2,2)node{$\Omega$};
-    \draw (4,2)node[right] {$\Gamma_L$ $\mathbf{u_\epsilon} = 0, C_\epsilon=0 $};
-    \draw (2,4)node[above] {$\Gamma_U$ $\mathbf{u_\epsilon} = 0, C_\epsilon=0 $};
-    \draw (0,2)node[left] {$\Gamma_L$ $\mathbf{u_\epsilon} = 0, C_\epsilon=0 $};
+    \draw (4,2)node[right] {$\Gamma_L$ $\mathbf{u^\epsilon} = 0, C^\epsilon=0 $};
+    \draw (2,4)node[above] {$\Gamma_U$ $\mathbf{u^\epsilon} = 0, C^\epsilon=0 $};
+    \draw (0,2)node[left] {$\Gamma_L$ $\mathbf{u^\epsilon} = 0, C^\epsilon=0 $};
     \draw (1,0)node[below]{$\Gamma_E$};
     \draw (3,0)node[below]{$\Gamma_I$};
     
@@ -626,28 +573,36 @@ On $\Gamma_E$ we have the same boundary conditions as in the inland case, $\math
 
 In what follows we highlight the parts that will be different from the inland case. 
 
-The weak formulation of the coastal generalized system will be different from the original inland version in that \textit{a)} it will contain a boundary term for the wind because of the air - ocean interface, and \textit{b)} it will contain boundary terms for $\partial_2 C, \partial_3 C$, which had been assumed to be zero before on the ground.
+The weak formulation of the coastal generalized system will be different from the original inland version in that
+\begin{itemize}
+  \item it will contain a boundary term for the wind because of the air - ocean interface,
+  \item it will contain boundary terms for $\partial_2 C, \partial_3 C$, which had been assumed to be zero before on the ground.
+\end{itemize}
 
-Calculating the weak formulation of the anisotropic system for the coastal model we arrive to the equation below.
+The weak formulation is as follows.
 
-Find $\mathbf{u}^\epsilon = (\mathbf{u}_H, u^\epsilon_3) \in L^2 (0,t ; \mathbf{V}) \cap L^\infty (0, T; L^2 (\Omega)^3)$ and $C^\epsilon$ with $C^\epsilon \in L^\infty L^2$, $C^\epsilon \in L^2 (0,T; H^1)$, $C^\epsilon(0) \in L^2_x$ such that
+\begin{definition}
+Find $\mathbf{u}^\epsilon = (\mathbf{u}_H, u^\epsilon_3) \in L^2 (0,T ; \mathbf{V}) \cap L^\infty (0, T; L^2 (\Omega)^3)$ and $C^\epsilon$ with $C^\epsilon \in L^\infty L^2$, $C^\epsilon \in L^2 (0,T; H^1)$, $C^\epsilon(0) \in L^2_x$ such that
 
   \begin{equation} \label{coastalAnisotropic}
     \begin{split}
       & \int_0^T -(\mathbf{u}^\epsilon_H, \partial_t \mathbf{v}_H) + (\nabla_\nu \mathbf{u}^\epsilon_H, \nabla_\nu \mathbf{v}_H) - (\mathbf{u}^\epsilon_H, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{v}_H) + (b(\mathbf{u}^\epsilon_H), \mathbf{v}_H) \diff t \\
       & + \epsilon \beta \big[ \int_0 ^ T (u_3 ^\epsilon, v_1) - (u_1^\epsilon, v_3) \big] \diff t\\
       & + \epsilon^2 \big[ \int _0 ^ T -(u_3^\epsilon, \partial_t v_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, v_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu v_3) \diff t\big] \\
-      &+ \int_0^T -(C^\epsilon, \partial_t \tilde{C}) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) + \epsilon K_1 (\partial_1 C^\epsilon, \partial_1 \tilde{C}) - \epsilon K_1 \langle \sigma_1 , \tilde{C} \rangle _{\Gamma_G} + \\
-      & K_2 (\partial_2 C^\epsilon, \partial_2 \tilde{C}) - K_2 \langle \sigma_2 , \tilde{C} \rangle_{\Gamma_I} + K_3 (\partial_3 C^\epsilon, \partial_3 \tilde{C}) - K_3 \langle\sigma_3 , \tilde{C} \rangle_{\Gamma_I} \diff t =\\
-      & = - (\mathbf{u}^\epsilon_{0H}, \mathbf{v}_H(0)) - \int_0^T \langle \theta_H, \mathbf{v}_H \rangle_{\Gamma_I} - \epsilon^2 (u_{03}^\epsilon, v_3 (0)) - (C^\epsilon (0), \tilde{C} (0)) + \int_0^T (S^\epsilon,\tilde{C}) \diff t
+      &+ \int_0^T \bigg \{ -(C^\epsilon, \partial_t \tilde{C}) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) + \epsilon K_1 (\partial_1 C^\epsilon, \partial_1 \tilde{C}) - \epsilon K_1 \langle \sigma_1 , \tilde{C} \rangle _{\Gamma_G} + \\
+      & K_2 (\partial_2 C^\epsilon, \partial_2 \tilde{C}) - K_2 \langle \sigma_2 , \tilde{C} \rangle_{\Gamma_I} + K_3 (\partial_3 C^\epsilon, \partial_3 \tilde{C}) - K_3 \langle\sigma_3 , \tilde{C} \rangle_{\Gamma_I} \bigg \} \diff t \\
+      & = - (\mathbf{u}^\epsilon_{0H}, \mathbf{v}_H(0)) - \int_0^T \langle \theta_H, \mathbf{v}_H \rangle_{\Gamma_I} - \epsilon^2 (u_{03}^\epsilon, v_3 (0)) - (C_0^\epsilon, \tilde{C} (0)) + \int_0^T (S^\epsilon,\tilde{C}) \diff t
     \end{split}
   \end{equation}
   
    for all $\mathbf{v} = (\mathbf{v}_H, v_3) \in H^1 (0,T;\mathbf{V})$ with $\mathbf{v}(T) = 0$ and $\tilde{C}$ such that $\tilde{C} \in H^1 (0,T, H^3_{\Gamma} (\Omega))$ and $\tilde{C} (T) = 0$.
 
+\end{definition}
+
 On the other hand, the weak formulation of the hydrostatic case will take the following form.
 
-Find $(\mathbf{u}, C)$ such that $\mathbf{u} = (\mathbf{u}_H, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_H \in L^\infty (0,T; L^2(\Omega)^2),$ and $C$ with $\partial_2 C, \partial_3 C \in L^2_t L^2_x$, $C \in L^\infty L^2$ and $C(0) \in L^2_x$, such that
+\begin{definition}
+Find $(\mathbf{u}, C)$ such that $\mathbf{u} = (\mathbf{u}_H, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_H \in L^\infty (0,T; L^2(\Omega)^2),$ and $C$ with $\partial_2 C, \partial_3 C \in L^2_t L^2_x$, $C \in L^\infty L^2$ and $C_0 \in L^2_x$, such that
 
   \begin{equation} \label{coastalHydrostatic}
     \begin{split}
@@ -659,8 +614,9 @@ Find $(\mathbf{u}, C)$ such that $\mathbf{u} = (\mathbf{u}_H, u_3) \in L^2 (0, T
   \end{equation}
   
   for all $(\mathbf{v}, \tilde{C})$ with $\mathbf{v} = (\mathbf{v}_H, v_3) \in H^1 (0,T, \mathbf{W})$, with $v_H (T) = 0$ and $\partial_3 \mathbf{v}_H \in L^\infty (0, T; L^3 (\Omega)^2)$ and $\tilde{C}$ with $\tilde{C} \in L^2 (0,T, H^3_{\Gamma} (\Omega))$, $\tilde{C} \in H^1 (0,T, L^2)$, $\tilde{C} (T) = 0$. 
+\end{definition}
 
-Naturally, the analogous terms that we saw were different in the weak formulation will be different also in the energy inequality as well. The coastal, generalized version of the energy inequality becomes
+The coastal, generalized version of the energy inequality becomes
 
   \begin{equation}
     \begin{split}  
@@ -676,17 +632,17 @@ Since the $\sigma$ boundary function is in $L^2 H^1$, we have boundedness on the
 Eventually we arrive to the extended, coastal version of the main theorem, which is stated below.
 
 \begin{theorem}
-  Let $\bold{u}_0$ $\in$ $L^2 (\Omega)^3$, with $\nabla \cdot \bold{u}_0 = 0, \bold{u}_0 \cdot \bold{n} = 0$ on $\partial \Omega$; $C(0)\in$ $L^2 (\Omega)^3$, $C(0) = 0$ on $ \partial \Omega$; let $\theta_1, \theta_2 \in L^2 (0, T; H^{-1/2}(\Gamma_I))$ and $\sigma \in L^2 (0, T; H^1 (\Gamma_G))$, there exists a weak solution ($\mathbf{u}$, C) of the hydrostatic coastal equations of the polluted atmosphere (\ref{coastalHydrostatic}), obtained as a limit of weak solutions $(\mathbf{u^\epsilon}, C^\epsilon)$ of the anisotropic coastal equations (\ref{coastalAnisotropic}) as the aspect ratio $\epsilon$ tends to $0$.
+  Let $\bold{u}_0$ $\in$ $L^2 (\Omega)^3$, with $\nabla \cdot \bold{u}_0 = 0, \bold{u}_0 \cdot \bold{n} = 0$ on $\partial \Omega$; $C(0)\in$ $L^2 (\Omega)^3$, $C(0) = 0$ on $ \partial \Omega$; let $\theta_1, \theta_2 \in L^2 (0, T; H^{-1/2}(\Gamma_I))$ and $\sigma \in L^2 (0, T; H^1 (\Gamma_G))$; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u^\epsilon}, C^\epsilon)$ of the coastal anisotropic equations (\ref{coastalAnisotropic}) converge to a weak solution ($\mathbf{u}$, C) of the hydrostatic coastal equations of the polluted atmosphere (\ref{coastalHydrostatic}).
 \end{theorem}
 
 \begin{remark}
-If we switch to the "informationless", fix coordinate system that does not match the downwind direction and we drop the assumption on the flow being convection dominated ($\epsilon$ - diffusion), then we can relax the restrictions on $C^\epsilon$ on the boundary. This is true because in this case we do not have a disappearing $\epsilon$ term in front of the $K_1$ constant, and we can use the analogous estimate as in the inland case at the energy inequality and arrive to having a $(K_1 - \delta \frac{K_1 + K_2 + K_3}{2} c_T (c_S + 1)) \norm{\partial_1 C^\epsilon}_{L^2}^2$ term with a positive coefficient on the left hand side and a bounded $\frac{1}{\delta_i} \frac{K_i}{2} \int_0 ^ t \norm{\partial_i C^\epsilon}^2 _{L^2 (\Gamma_G)}$ integral on the right hand side --- the only assumption we need is $\partial_i C^\epsilon$ to be in $L^2_t L^2_x$ on the boundary.
+If we switch to the "informationless", fix coordinate system that does not match the downwind direction and we drop the assumption on the flow being convection dominated ($\epsilon$ - diffusion), then we can relax the restrictions on $C^\epsilon$ on the boundary. Indeed, in this case we do not have a vanishing $\epsilon$ term in front of the $K_1$ constant, and we can use the analogous estimate as in the inland case at the energy inequality and arrive to having a $(K_1 - \delta \frac{K_1 + K_2 + K_3}{2} c_T (c_S + 1)) \norm{\partial_1 C^\epsilon}_{L^2}^2$ term with a positive coefficient on the left hand side and a bounded $\frac{1}{\delta_i} \frac{K_i}{2} \int_0 ^ t \norm{\partial_i C^\epsilon}^2 _{L^2 (\Gamma_G)}$ integral on the right hand side --- the only assumption we need is $\partial_i C^\epsilon$ to be in $L^2_t L^2_x$ on the boundary.
 \end{remark}
 
 %%% *** CONCLUDING REMARKS *** %%%
 \section{Concluding remarks} \label{concludingremarks}
 
-We are finishing this work briefly mentioning a few ideas regarding the physical aspects of the model and some additional choices concerning the source term specifically.
+We are finishing this paper briefly mentioning a few ideas regarding the physical aspects of the model and some additional choices concerning the source term specifically.
 
 \begin{remark}
 \normalfont In the paper of \cite{temam2005some} it is suggested that the domain we work on has the form of $p_0 < p < p_1$, because for the thin portion of air between the earth and the isobar $p = p_1$, another specific simplified model would be necessary. This means that a way to make the model more precise is to cut the domain at an isobar a little bit off the physical ground. This would of course radically change the boundary conditions we use for the functions (in fact it is not trivial how to change them for this case), because it would take away the advantage of having a wall-like, natural and physical boundary condition for the domain we work on. If we are positively above the ground, $\partial_3 C = 0$ would represent a strange reflective layer.
@@ -694,10 +650,6 @@ We are finishing this work briefly mentioning a few ideas regarding the physical
 
 \begin{remark}
 \normalfont Note that the aspect ratio going to zero is not only legitimate on a global scale. When we switch from a global model to a local one in order to be able to use the beta plane approximation, we still have hundreds of thousands of square kilometers versus 1---5 kilometers.
-\end{remark}
-
-\begin{remark}
-\normalfont The \cite{temam2005some} article works with the beta plane approximation, which is appropriate for example for midlatitude regional studies, where the curvature is minimal. If we take this as the starting idea, and consider a local part of the ocean, we will most likely not have genuine physical lateral boundaries for the ocean water in the model, such as would be a coast for example. Nevertheless what the article uses as a lateral boundary condition is the salt flux being zero, which represents a wall-like boundary. What would possibly be more natural is the salt flux being constant, but it would naturally make things mathematically more complicated on the other hand. This is another example of how challenging it can be to find the right boundary terms when we are handling OBCs. 
 \end{remark}
 
 \begin{remark}
@@ -720,9 +672,7 @@ We are finishing this work briefly mentioning a few ideas regarding the physical
 
 \section{The existence of weak solution of the hydrostatic system of the polluted atmosphere}
 
-What we have showed is that the weak solutions of the anisotropic system converge to the weak solution of the hydrostatic system of the polluted atmosphere. Without having an existence theorem for the hydrostatic equations, the weak solutions of the anisotropic system could just be converging to the empty set. The reference article for unpolluted fluids states only the convergence part as well, but the existence is implicitly assumed.
-
-To complete our work of expanding the original result to the case of a fluid containing a certain pollution concentration, we also need an existence theorem.
+In this section for completeness we sketch the proof of the existence of weak solutions of the system (\ref{HNSC1}) - (\ref{HNSC8}).
 
 The idea is that the polluted atmosphere can be viewed as the air-analogous version of the salty sea water in terms of the equations that represent it. In both cases we have a fluid which can be seen approximately as a homogenous incompressible fluid carrying some other particles in a significant concentration, the basis fluid motion is well described by the incompressible Navier-Stokes equations, and the additional concentration is described by an advection-diffusion equation. 
 
@@ -730,30 +680,19 @@ The paper of \cite{temam2005some} provides an existence result for an arbitrary 
 
 The main difference consists in the boundary conditions: on every boundary they use a zero flux for the salinity, $\frac{\partial S}{\partial \mathbf{n}_s} = 0$. This coincides with our lower boundary conditions, but on the lateral boundary we use a fix constant.
 
-The weak formulation we want to prove an existence theorem for (see equation (\ref{hydrostaticWF})) is different from the equation the article provides the result for: 
-
-\[ \big (\frac{\diff}{\diff t} U, \tilde{U} \big )_H + a(U, \tilde{U}) + b(U,U,\tilde{U}) + e(U, \tilde{U}) = l(\tilde{U}),\]
-
-where the definition of the above terms can be found on page 21 in the article of \cite{temam2005some}. In this version the weak formulation is only performed in space, and the space derivatives are not in every case translated to the test function when it is possible.
-
-What the above equation means for example for the salinity is 
-
-\[ \int_\mathcal{M} K_S \frac{\diff}{\diff t} S \cdot \tilde{S} d \mathcal{M} + K_S \int_\mathcal{M} \big (\mu_s \nabla S \nabla \tilde{S} + \nu_S \frac{\partial S}{\partial z}\frac{\partial \tilde{S}}{\partial z} \big ) \diff \mathcal{M} +\]
-\[+ K_S \int _\mathcal{M} \big (v \nabla S + w \frac{\partial S}{\partial z} \big ) \tilde{S} \diff \mathcal{M} = K_S \int_\mathcal{M} F_S \tilde{S} \diff \mathcal{M} + \big ( K_S \mu_S \frac{\partial S}{\partial x} \tilde{S} \big ) _{\Gamma_i} .\]
-
 We will follow step by step the structure of the proof in \cite{temam2005some}, redefining the necessary quantities to be valid for our case and verify that the proof holds in the case of the polluted atmosphere as well (this is necessary not only because of using altered boundary conditions but also because the regularities of the functions are different in some cases as mentioned above).
 
 \textbf{Step 1.} Firstly we redefine the norms in order to make them match our system.
 
-\[ ((U, \tilde{U})) = ((v, \tilde{v}))_1 + K_C ((C, \tilde{C}))_2 \]
+\[ ((U, \tilde{U})) = ((\mathbf{v}, \tilde{\mathbf{v}}))_1 + K_C ((C, \tilde{C}))_2 \]
 
-\[ ((v, \tilde{v}))_1 = \int_\Omega \nabla_\nu v \nabla_\nu \tilde{v} \diff \omega \]
+\[ ((\mathbf{v}, \tilde{\mathbf{v}}))_1 = \int_\Omega \nabla_\nu \mathbf{v} \nabla_\nu \tilde{\mathbf{v}} \diff \omega \]
 
 \[ ((C, \tilde{C}))_2 = \int _\Omega K_2 \partial_2 C \partial_2 \tilde{C} + K_3 \partial_3 C \partial_3 \tilde{C} \diff \omega \]
 
 \[\norm{U} = ((U,U)) ^ {1/2}\]
 
-\[ (U, \tilde{U})_H = \int _\Omega -v \tilde{v} - K_C C \tilde{C} \diff \omega \]
+\[ (U, \tilde{U})_H = \int _\Omega -\mathbf{v} \tilde{\mathbf{v}} - K_C C \tilde{C} \diff \omega \]
 
 \[\abs{U}_H = \abs{(U,U)_H}^{1/2}\]
 
@@ -766,23 +705,23 @@ with
 
 \[ a(U,\tilde{U}) = a_1 (U, \tilde{U}) + K_C a_2 (U, \tilde{U})\]
 
-\[ a_1 (U, \tilde{U}) = \int_\Omega \nabla_\nu v \nabla_\nu \tilde{v} \diff \omega \]
+\[ a_1 (U, \tilde{U}) = \int_\Omega \nabla_\nu \mathbf{v} \nabla_\nu \tilde{\mathbf{v}} \diff \omega \]
 
 \[ a_2 (U, \tilde{U}) = \int_\Omega K_2 \partial_2 C \partial_2 \tilde{C} + K_3 \partial_3 C \partial_3 \tilde{C} \diff \omega \]
 
 \[ b = b_1 + K_2 b_2\]
 
-\[ b_1 (U, \tilde{U}, U^\#) = - \int_\Omega (v \tilde{v} + v \tilde{w}) \nabla v^\# \]
+\[ b_1 (U, \tilde{U}, U^\#) = - \int_\Omega (\mathbf{v} \tilde{\mathbf{v}} + \mathbf{v} \tilde{w}) \nabla \mathbf{v}^\# \]
 
-\[ b_2 (U, \tilde{U}, U^\#) = -  \int_\Omega (v \tilde{C} + w \tilde{C}) \nabla C^\# \]
+\[ b_2 (U, \tilde{U}, U^\#) = -  \int_\Omega (\mathbf{v} \tilde{C} + w \tilde{C}) \nabla C^\# \]
 
-\[ e(U, \tilde{U}) = \int_\Omega b(v) \tilde{v} \diff \omega \]
+\[ e(U, \tilde{U}) = \int_\Omega b(\mathbf{v}) \tilde{\mathbf{v}} \diff \omega \]
 
 \[ l(\tilde{U}) = - \int_\Omega S \tilde{C} \diff \omega. \]
 
-Here the term $b(\mathbf{u}_H) = \alpha (-u_2, u_1)$ represents the cross product, and we use the fact that the vertical velocity $w$ can be expressed as $w = w(v)$ because the divergence of the three dimensional velocity is zero.
+Here the term $b(\mathbf{u}_H) = \alpha (-u_2, u_1)$ represents the cross product, and we use the fact that the vertical velocity $w$ can be expressed as $w = w(\mathbf{v})$ because the divergence of the three dimensional velocity is zero.
 
-\textbf{Step 3.} The next step is to check if the properties that yield the foundation of the proof still hold. It is easy to see that $a$ is trilinear continuous, the coercivity of $a$ is also trivial, moreover $e$ is bilinear continuous and $e(U,U) = 0$.
+\textbf{Step 3.} It is straightforward to see that $a$ is trilinear continuous, the coercivity of $a$ is also trivial, moreover $e$ is bilinear continuous and $e(U,U) = 0$.
 
 What changes slightly is the proof of the results available on the expression $b$ since the space derivatives in our case are applied on the test function.
 
@@ -791,19 +730,17 @@ What changes slightly is the proof of the results available on the expression $b
   \item To prove the bound for $U, \tilde{U} \in V, U^\# \in V_{(2)}$, in this case we can not use the $L_\infty$ bound on the third term, since we would eventually arrive to $\norm{C^\#}_{H^3}$, which means that we can not close the bound that way. We can use
   
   \[ \int_\Omega w \tilde{C} \nabla C^\# d \omega \leq c  \norm{w}_{L^2} \big \| \tilde{C} \big \| _{L^4} \big \| \nabla C^\# \big \| _{L^4} \leq \]
-  \[ \leq c  \norm{U} \big \|\tilde{U}\big \|  \big \|\nabla C^\#  \big \|_{H^1} \leq c \norm{U} \big \|\tilde{U}\big \| \big \| U^\# \big \|_{V^{(2)}} \]
+  \[ \leq c  \norm{U} \big \|\tilde{U}\big \|  \big \|\nabla C^\#  \big \|_{H^1} \leq c \norm{U} \big \|\tilde{U}\big \| \big \| U^\# \big \|_{V^{(2)}}. \]
   
-  \item For $U, U^\#  \in V, \tilde{U} \in V_{(2)}$ we use
+  \item For $U, U^\#  \in V, \tilde{U} \in V_{(2)}$ we have
   
-  \[ \int_\Omega w \tilde{C} \nabla C^\# d \omega \leq c  \big \| \tilde{C} \big \| _{L^\infty} \norm{ w}_{L^2}\big \| \nabla C^\# \big \| _{L^2}  \leq c \norm{U} \big \|\tilde{U}\big \| _{V^{(2)}} \big \| U^\# \big \|,\]
+  \[ \int_\Omega w \tilde{C} \nabla C^\# d \omega \leq c  \big \| \tilde{C} \big \| _{L^\infty} \norm{ w}_{L^2}\big \| \nabla C^\# \big \| _{L^2}  \leq c \norm{U} \big \|\tilde{U}\big \| _{V^{(2)}} \big \| U^\# \big \|.\]
   
-  exploiting the fact that in $n=3$ we have $H^2 \subset L^\infty.$
-  
-  \item The proof of $b(U, \tilde{U}, U^\# ) = - b(U, U^\#, \tilde{U} )$ can be derived similarly as we derived
+  \item The proof of $b(U, \tilde{U}, U^\# ) = - b(U, U^\#, \tilde{U} )$ can be derived similarly as we have
   
   \[ \int_0 ^T  (\mathbf{u} \nabla C, \tilde{C}) \diff t =  - \int_0 ^T  (- \mathbf{u} C, \nabla \tilde{C}) \diff t, \]
   
-  using the integration by parts formula, observing that the boundary terms disappear, and finally using the fact that the divergence of the velocity is zero.
+  observing that the boundary terms disappear.
   
   \item The establishment of the improvement of the first bound works the same way as in the original article, except that we don't apply the switch provided by the result of the previous point, i.e. we perform the estimate 
   
@@ -821,15 +758,13 @@ The change in this part of the proof is that we will need an additional operator
 
 \[ < Z(U), \tilde{U}> = \int_0^T (U, \frac{d\tilde{U}}{dt})_H \diff t .\]
 
-With this the operator form of the equation is
+With this, the operator form of the equation is
 
 \[ ZU + AU + B(U,U) + EU = l + U_0,\]
 
 where all the other operators are understood in a way that the time integration is included. Since in this version we work with both time-space and only-space (stationary case) weak formulation as well, it is always assumed that we use the one according to the context.
 
-\textbf{Step 5.} The stationary case works as it worked in the original article, since the operator form of the new version is created in a way that $ZU$ and $U_0$ contains all the time-related part, after dropping it we arrive to the same equation as in the original case.
-
-\textbf{Step 6.} Finally we discuss the details of the time-dependent case. Once again we remind ourselves that in this case, since in our version we performed the weak formulation in time as well, we can not use notations such as $\frac{\diff U_k}{\diff t}$. Instead, we will use $Z U_k$, which as an operator acting on $\tilde{U}$ yields the inner product of the function and the time derivative of the test function.
+\textbf{Step 5.} Finally we discuss the details of the time-dependent case. Once again we remind ourselves that in this case, since in our version we performed the weak formulation in time as well, we can not use notations such as $\frac{\diff U_k}{\diff t}$. Instead, we will use $Z U_k$, which as an operator acting on $\tilde{U}$ yields the inner product of the function and the time derivative of the test function.
 
 Even though the time derivative here is applied on the test function, using the time difference for the solution function does work, in fact the original article arrives from the same start to a weak formulation where the derivative is applied on the test function.
 
@@ -850,7 +785,7 @@ where $\psi$ is a function defined on $[0,T]$, used to create the time-dependent
 which is what we needed.
 
 \nocite{*}
-\bibliographystyle{plain}
+\bibliographystyle{abbrv}
 \bibliography{merged_U_C_eqs}
 
 \end{document}
