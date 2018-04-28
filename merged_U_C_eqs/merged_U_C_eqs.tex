@@ -147,7 +147,7 @@ Now, we perform a vertical scaling to make the domain independent of $\epsilon.$
     
     Finally, we use an analogous rescaling methodology for the diffusivity constants in (\ref{diffusive}),
     
-    \[ K_y = K_2, K_z = \epsilon ^ 2 K_3. \]
+    \[ K_y = K_2, \quad K_z = \epsilon ^ 2 K_3. \]
     
     As a second step of the rescaling process, we also exploit the fact that we chose the coordinate system in a way so that the $x$ axis matches the downwind direction. In this case we use an additional scaling equation, which is different in nature from the previous ones in the sense that it is not derived from the shallowness of the domain but rather suggested by the fact that in the downwind direction it is natural to assume that the diffusion is negligible compared to downwind transport, i.e.
     
@@ -196,7 +196,7 @@ where $\gamma$ is a normalizing constant.
 The initial condition for the velocity and the pollution concentration are
     
     \begin{equation} \label{ANSC7}
-    \bold{u}^\epsilon (\cdot, t = 0) = \bold{u}_0, C^\epsilon (\cdot, t=0) = C_0  \text{ in } \Omega.
+    \bold{u}^\epsilon (\cdot, t = 0) = \bold{u}_0, \quad C^\epsilon (\cdot, t=0) = C_0  \quad \text{ in } \Omega.
     \end{equation}
     
 To make the above set of equations complete, we need to assign the boundary conditions.
@@ -251,13 +251,13 @@ As we mentioned before, the case we are investigating is that of inland domains 
     \item The upper boundary $\Gamma_U$ of the domain we are considering is chosen to be at the isobar representing the planetary boundary layer (\cite{arya2001introduction}), therefore we assume
     
     \begin{equation}
-      \bold{u}_H = 0, u_3 = 0, C = 0 \text{ on } \Gamma_U \times (0,T)
+      \bold{u}_H = 0, \quad u_3 = 0, \quad C = 0 \quad \text{ on } \Gamma_U \times (0,T)
     \end{equation}
       
     \item On $\Gamma_L$ we use the same boundary conditions as on the upper level, i.e. we have
     
     \begin{equation}
-      \bold{u}_H = 0, u_3 = 0, C = 0  \text{ on } \Gamma_L \times (0,T).
+      \bold{u}_H = 0, \quad u_3 = 0, \quad C = 0  \quad \text{ on } \Gamma_L \times (0,T).
     \end{equation}
     
     
@@ -267,7 +267,7 @@ As we mentioned before, the case we are investigating is that of inland domains 
     \item In this model we neglect topological variations, and the $z=0$ plane represents the lower boundary. On the ground level we have
     
     \begin{equation}
-      u_H = 0, u_3 = 0.
+      \bold{u}_H = 0, \quad u_3 = 0 \quad \text{ on } \Gamma_G \times (0,T) .
     \end{equation}
     
     This is the mathematical way of expressing no-slip boundary conditions for the horizontal wind speed and the impervious nature of the ground with respect to the wind. As for the concentration, the way we can choose ground level boundary conditions is the following. Firstly, we assume that the pollution is not absorbed by the ground, so we use
@@ -276,7 +276,7 @@ As we mentioned before, the case we are investigating is that of inland domains 
     
     (see also for example \cite{yeh1975three}). For the horizontal partial derivatives of the pollution, we can separate downwind and crosswind direction boundary conditions. In the crosswind direction we use
     
-    $$\partial_2 C = 0$$
+    $$\partial_2 C = 0 \text{ on } \Gamma_G$$
     
     while in the downwind (stronger) direction our assumption is more relaxed, we only assume that $\partial_1 C$ is finite in the boundary norm, i.e. in $L^2 L^2 (0,T; \Gamma_G)$.
   
@@ -288,7 +288,7 @@ As we mentioned before, the case we are investigating is that of inland domains 
       \begin{split}
         & \bold{u}^\epsilon = 0 \text{ on } \Gamma \times (0,T), \\
         &C^\epsilon = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
-        & \partial_2 C^\epsilon = \partial_3 C^\epsilon = 0 \text{ on } \Gamma_G \times (0,T), \partial_1 C^\epsilon \in L^2 L^2 (0,T; \Gamma_G) \\
+        & \partial_2 C^\epsilon = \partial_3 C^\epsilon = 0 \text{ on } \Gamma_G \times (0,T), \quad \partial_1 C^\epsilon \in L^2 L^2 (0,T; \Gamma_G) \\
       \end{split}
     \end{equation}
 
@@ -344,7 +344,7 @@ In this section we describe the weak formulation of the merged equations in both
   
   \[ C^{\infty}_\Gamma (\Omega) = \{ \varphi \in C^\infty (\bar{\Omega}); \varphi = 0 \text{ on some neighbourhood of } \Gamma\} \]
   
-  \[ H^k_{\Gamma} (\Omega) = \overline{C_\Gamma ^ \infty (\Omega)} ^ {H^1 (\Omega)} = \{ v \in H^k(\Omega); v=0 \text{ on } \Gamma \} \]
+  \[ H^k_{\Gamma} (\Omega) = \overline{C_\Gamma ^ \infty (\Omega)} ^ {H^k (\Omega)} = \{ v \in H^k(\Omega); v=0 \text{ on } \Gamma \} \]
   
   \[ \mathbf{V} = \{ \mathbf{v} \in  H^1_{\Gamma} (\Omega) \times H^1_{\Gamma} (\Omega) \times H^1_0 (\Omega); \nabla \cdot \mathbf{v} = 0 \text{ in } \Omega \} \]
   
@@ -386,7 +386,7 @@ In this section we describe the weak formulation of the merged equations in both
   
   \begin{definition} \label{definitionanisotropicWF}
   
-  Find $\mathbf{u}^\epsilon = (\mathbf{u}_H, u^\epsilon_3) \in L^2 (0,T ; \mathbf{V}) \cap L^\infty (0, T; L^2 (\Omega)^3)$ and $C^\epsilon$ with $C^\epsilon \in L_t^\infty L_x^2 \cap L^2 (0,T; H^1)$, such that
+  Find $\mathbf{u}^\epsilon = (\mathbf{u}_H, u^\epsilon_3) \in L^2 (0,T ; \mathbf{V}) \cap L^\infty (0, T; L^2 (\Omega)^3)$ and $C^\epsilon \in L^\infty (0,T; L^2(\Omega)) \cap L^2 (0,T; H^1(\Omega))$, such that
   
   \begin{equation} \label{anisotropicWF}
     \begin{split}
@@ -403,7 +403,7 @@ In this section we describe the weak formulation of the merged equations in both
   
   \end{definition}
   
-  Note that since in our case the source term $S_\epsilon$ is given by (\ref{approxsourceterm}), thus the last term in (\ref{anisotropicWF}) is well defined. If we use a source function of a different and more general form, it needs to satisfy the $L_t^2 L_x^2$ boundedness criteria for the weak formulation to make sense.
+  Note that since in our case the source term $S_\epsilon$ is given by (\ref{approxsourceterm}), the last term in (\ref{anisotropicWF}) is well defined. If we use a source function of a different and more general form, it needs to satisfy the $L_t^2 L_x^2$ boundedness criteria for the weak formulation to make sense.
 
 We will omit the proof of the existence of weak solutions (see Definition \ref{definitionanisotropicWF}.) for the anisotropic system (\ref{ANSC1}) - (\ref{ANSC8}) since it follows by standard finite-dimensional Galerkin approximation.
 
@@ -507,11 +507,11 @@ The energy inequality (\ref{energyIEQ}) now takes the form
       
 Finally we have to deal with the nonlinear term $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}).$
   
-By analyzing this nonlinear term in a more precise way we see that $(u_i C^\epsilon, \partial_i \tilde{C})$ for $i=1,2$ is weakly convergent since from \cite{azerad2001mathematical} we have strong convergence of the horizontal velocities, while in the case of $i=3$ this property does not hold for $u_3$ and from the energy bound we do not have more than the weak convergence of $C^\epsilon$ .
+By analyzing this nonlinear term in a more precise way we see that $(u_i C^\epsilon, \partial_i \tilde{C})$ for $i=1,2$ is weakly convergent since from \cite{azerad2001mathematical} we have the strong convergence of the horizontal velocities, while in the case of $i=3$ this property does not hold for $u_3$ and from the energy bound we do not have more than the weak convergence of $C^\epsilon$ .
   
   In this case the classical Aubin-Lions lemma can not be applied since it would require for $C^\epsilon$ to be in a compactly embedded space such as $L^2 H^1$, which is not the case here because we only know boundedness results for $\sqrt{\epsilon} \partial_1 C$, but not for $\partial_1 C$.
   
-   Therefore we will use the following compactness result, \cite{lions1996mathematical}.
+   Therefore we will use the following compactness result from \cite{lions1996mathematical}.
   
   \begin{lemma} \label{PLL}
     Let $g^\epsilon$, $h^\epsilon$ converge weakly to $g,h$ respectively in $L^{p_1}(0,T; L^{p_2}(\Omega))$, $L^{q_1}(0,T; L^{q_2}(\Omega))$ where $1 \leq p_1, p_2 \leq + \infty,$
@@ -607,8 +607,8 @@ Find $(\mathbf{u}, C)$ such that $\mathbf{u} = (\mathbf{u}_H, u_3) \in L^2 (0, T
   \begin{equation} \label{coastalHydrostatic}
     \begin{split}
       & \int_0^T -(\mathbf{u}_H, \partial_t \mathbf{v}_H) + (\nabla_\nu \mathbf{u}_H, \nabla_\nu \mathbf{v}_H) - (\mathbf{u}_H, (\mathbf{u} \cdot \nabla) \mathbf{v}_H) + (b(\mathbf{u}_H), \mathbf{v}_H) \diff t \\
-      &+ \int_0^T -(C, \partial_t \tilde{C}) -(\mathbf{u}C, \nabla \tilde{C}) + \\
-      & K_2 (\partial_2 C, \partial_2 \tilde{C}) - K_2 \langle \sigma_2 , \tilde{C} \rangle_{\Gamma_I} + K_3 (\partial_3 C, \partial_3 \tilde{C}) - K_3 \langle\sigma_3 , \tilde{C} \rangle_{\Gamma_I} \diff t =\\
+      &+ \int_0^T \bigg \{ -(C, \partial_t \tilde{C}) -(\mathbf{u}C, \nabla \tilde{C}) + \\
+      & K_2 (\partial_2 C, \partial_2 \tilde{C}) - K_2 \langle \sigma_2 , \tilde{C} \rangle_{\Gamma_I} + K_3 (\partial_3 C, \partial_3 \tilde{C}) - K_3 \langle\sigma_3 , \tilde{C} \rangle_{\Gamma_I}\bigg \}  \diff t =\\
       & = - (\mathbf{u}_{0H}, \mathbf{v}_H(0)) -\int_0^T \langle \theta_H, \mathbf{v}_H \rangle_{\Gamma_I} - (C(0), \tilde{C}(0)) + \int_0^T (S,\tilde{C}) \diff t
     \end{split}
   \end{equation}
