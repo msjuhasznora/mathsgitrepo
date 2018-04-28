@@ -1,12 +1,12 @@
 This is BibTeX, Version 0.99d (TeX Live 2016)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: merged_U_C_eqs.aux
-The style file: plain.bst
+The style file: abbrv.bst
 Database file #1: merged_U_C_eqs.bib
 Warning--empty journal in kathirgamanathan2002source
 You've used 19 entries,
             2118 wiz_defined-function locations,
-            618 strings with 7263 characters,
+            618 strings with 6979 characters,
 and the built_in function-call counts, 6110 in all, are:
 = -- 596
 > -- 287
