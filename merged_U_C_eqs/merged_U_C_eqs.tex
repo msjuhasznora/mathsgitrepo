@@ -120,7 +120,7 @@ where $C$ is the pollution concentration.
 In this equation $S$ represents the sources and sinks of the pollutant in the atmosphere i.e. its emission, removal from the atmosphere by dry and wet deposition, and chemical reactions. We will use the approach suggested by \cite{zhuk2016source} and use what is called a parametrized nascent delta function (a Gaussian impulse, specifically) to describe the source term $S$.
 
 Let us consider a gas plume with intensity $I$ originating at emission coordinates $\mathbf{x}_s$ beginning at time $t_s$. At the beginning we assume zero concentration.
-An abrupt gas emission is modeled by a source term represented as a product of an approximate delta function $\delta_\kappa (\mathbf{x} - \mathbf{x}_s)$ (centered at $\mathbf{x}_s$ with a constant parameter $\kappa$) and a Heaviside function $s$ (switching from 0 to $I$ at time $t_s.$)
+An abrupt gas emission is modeled by a source term represented as a product of an approximated delta function $\delta_\kappa (\mathbf{x} - \mathbf{x}_s)$ (centered at $\mathbf{x}_s$ with a constant parameter $\kappa$) and a Heaviside function $s$ (switching from 0 to $I$ at time $t_s.$)
 In fact, this source term models the continuous emission of the gas at constant rate and fixed location.
 Basically $s(t;t_s)$ is a function which activates the source, namely $s(t;t_s) := IH(t - t_s)$ where $H(\cdot)$ is the Heaviside step function and $0 \leq t_s \leq T.$ We arrive to the complete source term model of the form
 
@@ -332,7 +332,7 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
     \end{equation}
     
   \begin{remark}
-    Here $S$ stands for the $\delta$ limit distribution. We keep the notation $S$ for generality, since as we will see later, instead of the approximate delta functions and the delta distribution, it is possible to use any sort of "sufficiently smooth" source term (which can be independent from $\epsilon$ in the anisotropic case as well) that is bounded in $L^2_t L^2_x.$
+    Here $S$ stands for the $\delta$ limit distribution. We keep the notation $S$ for generality, since as we will see later, instead of the approximated delta functions and the delta distribution, it is possible to use any sort of "sufficiently smooth" source term (which can be independent from $\epsilon$ in the anisotropic case as well) that is bounded in $L^2_t L^2_x.$
   \end{remark}
 
 %%% *** WEAK FORMULATION AND MAIN RESULT*** %%%
@@ -433,14 +433,14 @@ Now we are ready to state our main result.
   
   From the hypothesis on the initial data and since the $S^\epsilon$ source term is in $L^\infty_x (\Omega)$, $I_1$ and $I_2$ are bounded. The only term we need to work on further is $I_3$.
   
-  By using the Holder inequality for any $\gamma > 0,$ we can estimate this term in the following way.
+  By using the generalized Young inequality for any $\zeta > 0,$ we can estimate this term in the following way.
   
   \begin{equation}
     \begin{split}  
     &  I_3 = \int _ 0 ^ t \epsilon K_1 \langle \partial_1 C^\epsilon, C^\epsilon \rangle_{\Gamma_G} \diff \tau \leq K_1 \int _ 0 ^ t \sqrt{\epsilon} \norm{\partial_1 C^\epsilon}_{L^2 (\Gamma_G)} \sqrt{\epsilon} \norm{C^\epsilon}_{L^2 (\Gamma_G)} \leq \\
-    & \frac{1}{\gamma} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)} + \gamma K_1 \int_0 ^ t \frac{\epsilon}{2} \norm{C^\epsilon}^2 _{L^2 (\Gamma_G)} \leq \\
-    & \frac{1}{\gamma} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)} + \gamma \frac{\epsilon}{2} K_1 c_T \int_0 ^ t \norm{C^\epsilon}^2 _{W^{1,2} (\Omega)} \leq \\
-    & \frac{1}{\gamma} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)} + \gamma \frac{\epsilon}{2} K_1 c_T (c_S + 1) \int_0 ^ t \norm{\nabla C^\epsilon}^2 _{L^2 (\Omega) } \diff \tau,
+    & \frac{1}{\zeta} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)} + \zeta K_1 \int_0 ^ t \frac{\epsilon}{2} \norm{C^\epsilon}^2 _{L^2 (\Gamma_G)} \leq \\
+    & \frac{1}{\zeta} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)} + \zeta \frac{\epsilon}{2} K_1 c_T \int_0 ^ t \norm{C^\epsilon}^2 _{W^{1,2} (\Omega)} \leq \\
+    & \frac{1}{\zeta} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)} + \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1) \int_0 ^ t \norm{\nabla C^\epsilon}^2 _{L^2 (\Omega) } \diff \tau,
     \end{split}
   \end{equation}  
   
@@ -451,13 +451,13 @@ The energy inequality (\ref{energyIEQ}) now takes the form
   \begin{equation}
     \begin{split}  
     & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \{    \norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \} \diff \tau + \\
-    & \int_0 ^ t \{(\epsilon K_1 - \delta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_1 C^\epsilon}_{L^2}^2  + (K_2 - \delta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_2 C^\epsilon}_{L^2}^2 + \\
-    & + (K_3 - \delta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_3 C^\epsilon}_{L^2}^2 \} \diff \tau \leq \frac{1}{\delta} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)} + \\
+    & \int_0 ^ t \{(\epsilon K_1 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_1 C^\epsilon}_{L^2}^2  + (K_2 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_2 C^\epsilon}_{L^2}^2 + \\
+    & + (K_3 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_3 C^\epsilon}_{L^2}^2 \} \diff \tau \leq \frac{1}{\zeta} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)} + \\
     & + \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau.
     \end{split}
   \end{equation}  
     
-  The right hand side of the energy inequality is now apparently bounded, and it is easy to see that the coefficients of the pollution terms are positive, since the $\delta$ constant of the generalized Young inequality can be freely chosen in a way such that the requirements $\epsilon K_1 (1 - \delta \frac{1}{2} c_T (c_S + 1)) > 0, (K_2 - \delta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) > 0, (K_3 - \delta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) > 0 $ are all satisfied.
+  The right hand side of the energy inequality is now apparently bounded, and it is easy to see that the coefficients of the pollution terms are positive, since the $\zeta$ constant of the generalized Young inequality can be freely chosen in a way such that the requirements $\epsilon K_1 (1 - \zeta \frac{1}{2} c_T (c_S + 1)) > 0, (K_2 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) > 0, (K_3 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) > 0 $ are all satisfied.
     
   \subsection{A priori estimates and weak convergence}
   
@@ -602,7 +602,7 @@ Find $\mathbf{u}^\epsilon = (\mathbf{u}_H, u^\epsilon_3) \in L^2 (0,T ; \mathbf{
 On the other hand, the weak formulation of the hydrostatic case will take the following form.
 
 \begin{definition}
-Find $(\mathbf{u}, C)$ such that $\mathbf{u} = (\mathbf{u}_H, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_H \in L^\infty (0,T; L^2(\Omega)^2),$ and $C$ with $\partial_2 C, \partial_3 C \in L^2_t L^2_x$, $C \in L^\infty L^2$ and $C_0 \in L^2_x$, such that
+Find $(\mathbf{u}, C)$ such that $\mathbf{u} = (\mathbf{u}_H, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_H \in L^\infty (0,T; L^2(\Omega)^2),$ and $C \in L_t^\infty L_x^2$ with $\partial_2 C, \partial_3 C \in L^2_t L^2_x$, and $C_0 \in L^2_x$, such that
 
   \begin{equation} \label{coastalHydrostatic}
     \begin{split}
@@ -636,7 +636,7 @@ Eventually we arrive to the extended, coastal version of the main theorem, which
 \end{theorem}
 
 \begin{remark}
-If we switch to the "informationless", fix coordinate system that does not match the downwind direction and we drop the assumption on the flow being convection dominated ($\epsilon$ - diffusion), then we can relax the restrictions on $C^\epsilon$ on the boundary. Indeed, in this case we do not have a vanishing $\epsilon$ term in front of the $K_1$ constant, and we can use the analogous estimate as in the inland case at the energy inequality and arrive to having a $(K_1 - \delta \frac{K_1 + K_2 + K_3}{2} c_T (c_S + 1)) \norm{\partial_1 C^\epsilon}_{L^2}^2$ term with a positive coefficient on the left hand side and a bounded $\frac{1}{\delta_i} \frac{K_i}{2} \int_0 ^ t \norm{\partial_i C^\epsilon}^2 _{L^2 (\Gamma_G)}$ integral on the right hand side --- the only assumption we need is $\partial_i C^\epsilon$ to be in $L^2_t L^2_x$ on the boundary.
+If we switch to the "informationless", fix coordinate system that does not match the downwind direction and we drop the assumption on the flow being convection dominated ($\epsilon$ - diffusion), then we can relax the restrictions on $C^\epsilon$ on the boundary. Indeed, in this case we do not have a vanishing $\epsilon$ term in front of the $K_1$ constant, and we can use the analogous estimate as in the inland case at the energy inequality and arrive to having a $(K_1 - \zeta \frac{K_1 + K_2 + K_3}{2} c_T (c_S + 1)) \norm{\partial_1 C^\epsilon}_{L^2}^2$ term with a positive coefficient on the left hand side and a bounded $\frac{1}{\zeta_i} \frac{K_i}{2} \int_0 ^ t \norm{\partial_i C^\epsilon}^2 _{L^2 (\Gamma_G)}$ integral on the right hand side --- the only assumption we need is $\partial_i C^\epsilon$ to be in $L^2_t L^2_x$ on the boundary.
 \end{remark}
 
 %%% *** CONCLUDING REMARKS *** %%%
