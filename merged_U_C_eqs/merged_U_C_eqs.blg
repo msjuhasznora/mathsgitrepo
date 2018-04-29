@@ -4,45 +4,45 @@ The top-level auxiliary file: merged_U_C_eqs.aux
 The style file: abbrv.bst
 Database file #1: merged_U_C_eqs.bib
 Warning--empty journal in kathirgamanathan2002source
-You've used 19 entries,
+You've used 20 entries,
             2118 wiz_defined-function locations,
-            618 strings with 6979 characters,
-and the built_in function-call counts, 6110 in all, are:
-= -- 596
-> -- 287
+            625 strings with 7098 characters,
+and the built_in function-call counts, 6389 in all, are:
+= -- 626
+> -- 294
 < -- 6
-+ -- 114
-- -- 94
-* -- 430
-:= -- 1038
-add.period$ -- 59
-call.type$ -- 19
-change.case$ -- 99
++ -- 117
+- -- 96
+* -- 450
+:= -- 1085
+add.period$ -- 62
+call.type$ -- 20
+change.case$ -- 103
 chr.to.int$ -- 0
-cite$ -- 20
-duplicate$ -- 230
-empty$ -- 485
-format.name$ -- 94
-if$ -- 1256
+cite$ -- 21
+duplicate$ -- 241
+empty$ -- 510
+format.name$ -- 96
+if$ -- 1313
 int.to.chr$ -- 0
-int.to.str$ -- 19
-missing$ -- 23
-newline$ -- 98
-num.names$ -- 38
-pop$ -- 113
+int.to.str$ -- 20
+missing$ -- 24
+newline$ -- 103
+num.names$ -- 40
+pop$ -- 115
 preamble$ -- 1
-purify$ -- 85
+purify$ -- 88
 quote$ -- 0
-skip$ -- 147
+skip$ -- 154
 stack$ -- 0
-substring$ -- 365
-swap$ -- 32
+substring$ -- 389
+swap$ -- 33
 text.length$ -- 6
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 66
+type$ -- 70
 warning$ -- 1
-while$ -- 59
-width$ -- 21
-write$ -- 209
+while$ -- 63
+width$ -- 22
+write$ -- 220
 (There was 1 warning)

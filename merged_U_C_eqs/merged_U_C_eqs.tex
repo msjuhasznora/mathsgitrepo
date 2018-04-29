@@ -480,8 +480,8 @@ The energy inequality (\ref{energyIEQ}) now takes the form
   
 \begin{center}
     \begin{tabular}{r l l}
-    $ \mathbf{u}_H^\epsilon \rightharpoonup \mathbf{u}_H $ & in $L_t^\infty L_x^2 \cap L_t^2 H_x^1$ & \parbox{2.4cm}{\begin{equation} \end{equation} }\\
-    $ \epsilon u_3^\epsilon \rightharpoonup f $ & for some limit element $f$ in $L_t^\infty L_x^2 \cap L_t^2 H_x^1$ & \parbox{2.4cm}{\begin{equation} \end{equation} }\\
+    $ \mathbf{u}_H^\epsilon \rightharpoonup \mathbf{u}_H $ & in $L_t^\infty L_x^2 \cap L_t^2 H_x^1$ & \parbox{2.4cm}{\begin{equation} \label{WeakConvUHEps} \end{equation} }\\
+    $ \epsilon u_3^\epsilon \rightharpoonup f $ & for some limit element $f$ in $L_t^\infty L_x^2 \cap L_t^2 H_x^1$ & \parbox{2.4cm}{\begin{equation} \label{WeakConvU3Eps} \end{equation} }\\
     $C^\epsilon \rightharpoonup C$ &  in $L_t^\infty L_x^2$ & \parbox{2.4cm}{\begin{equation} \label{WeakConvCEps1} \end{equation} }  \\
     $\partial_2 C^\epsilon \rightharpoonup \partial_2 C $ & in $L_t^2 L_x^2$ & \parbox{2.4cm}{\begin{equation} \label{WeakConvCEps2} \end{equation} }\\
     $\partial_3 C^\epsilon \rightharpoonup \partial_3 C $ & in $L_t^2 L_x^2$  & \parbox{2.4cm}{\begin{equation} \label{WeakConvCEps3} \end{equation} }\\
@@ -490,8 +490,10 @@ The energy inequality (\ref{energyIEQ}) now takes the form
 \end{center}
 
 \subsection{Passing to the limit}
+
+    Taking the limit for the linear velocity terms that do not include the concentration function $C^\epsilon$ we can use (\ref{WeakConvUHEps}), (\ref{WeakConvU3Eps}), the zero divergence condition of $\mathbf{u}^\epsilon,$ and the Poincare inequality to obtain weak convergences which are sufficient to pass to the limit in the linear expressions in (\ref{anisotropicWF}). As for the nonlinear terms, the convergence can be shown using a compactness theorem by \cite{simon1986compact}, and exploiting the $H_0(\partial_3, \Omega)$ regularity of $u_3$ provided by the zero divergence condition. The details are omitted since they are analogous to those described in \cite{azerad2001mathematical}.
   
-    For the linear terms we can directly apply the weak convergence results of (\ref{WeakConvCEps1}) - (\ref{WeakConvCEps4}).
+    For the linear terms including the concentration $C^\epsilon$ we can directly apply the weak convergence results of (\ref{WeakConvCEps1}) - (\ref{WeakConvCEps4}).
     
     By using (\ref{WeakConvCEps1}), (\ref{WeakConvCEps2}) and (\ref{WeakConvCEps3}) we get
     
@@ -529,9 +531,9 @@ By analyzing this nonlinear term in a more precise way we see that $(u_i C^\epsi
      
      To estimate the time derivative of $C^\epsilon$ we use (\ref{ANSC5}) that can be rewritten in the following way since $u^\epsilon$ is divergence-free.
      
-         \[  \frac{\partial C^\epsilon}{\partial t} = - \nabla \cdot (u^\epsilon C^\epsilon) + \sqrt{\epsilon} K_1 \partial_1 \partial_1 \sqrt{\epsilon} C^\epsilon + K_2 \partial_2 \partial_2 C^\epsilon + K_3 \partial_3 \partial_3 C^\epsilon -S^\epsilon \]
+         \[  \frac{\partial C^\epsilon}{\partial t} = - \nabla \cdot (\mathbf{u}^\epsilon C^\epsilon) + \sqrt{\epsilon} K_1 \partial_1 \partial_1 \sqrt{\epsilon} C^\epsilon + K_2 \partial_2 \partial_2 C^\epsilon + K_3 \partial_3 \partial_3 C^\epsilon -S^\epsilon \]
          
-         Now, the $S^\epsilon$ Gaussian source term is smooth; from (\ref{ANSC4}), (\ref{proposition1}) we get $ \nabla \cdot (u^\epsilon C^\epsilon) \in W_x^{-1,1}$ and from (\ref{proposition3}) we have that the remaining terms are in $W_x^{-1,2}.$
+         Now, the $S^\epsilon$ Gaussian source term is smooth; from (\ref{ANSC4}), (\ref{proposition1}) we get $ \nabla \cdot (\mathbf{u}^\epsilon C^\epsilon) \in W_x^{-1,1}$ and from (\ref{proposition3}) we have that the remaining terms are in $W_x^{-1,2}.$
          
          We can conclude that $\frac{\partial C}{\partial t} \in L_t^1 W_x^{-1,1}$.
          
