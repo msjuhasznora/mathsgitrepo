@@ -3,46 +3,47 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: merged_U_C_eqs.aux
 The style file: abbrv.bst
 Database file #1: merged_U_C_eqs.bib
+Warning--empty journal in swart2016utrecht
 Warning--empty journal in kathirgamanathan2002source
-You've used 20 entries,
+You've used 22 entries,
             2118 wiz_defined-function locations,
-            625 strings with 7098 characters,
-and the built_in function-call counts, 6389 in all, are:
-= -- 626
-> -- 294
+            634 strings with 7335 characters,
+and the built_in function-call counts, 6838 in all, are:
+= -- 669
+> -- 314
 < -- 6
-+ -- 117
-- -- 96
-* -- 450
-:= -- 1085
-add.period$ -- 62
-call.type$ -- 20
-change.case$ -- 103
++ -- 126
+- -- 102
+* -- 471
+:= -- 1169
+add.period$ -- 68
+call.type$ -- 22
+change.case$ -- 112
 chr.to.int$ -- 0
-cite$ -- 21
-duplicate$ -- 241
-empty$ -- 510
-format.name$ -- 96
-if$ -- 1313
+cite$ -- 24
+duplicate$ -- 261
+empty$ -- 544
+format.name$ -- 102
+if$ -- 1402
 int.to.chr$ -- 0
-int.to.str$ -- 20
-missing$ -- 24
-newline$ -- 103
-num.names$ -- 40
-pop$ -- 115
+int.to.str$ -- 22
+missing$ -- 26
+newline$ -- 113
+num.names$ -- 44
+pop$ -- 124
 preamble$ -- 1
-purify$ -- 88
+purify$ -- 95
 quote$ -- 0
-skip$ -- 154
+skip$ -- 170
 stack$ -- 0
-substring$ -- 389
-swap$ -- 33
+substring$ -- 400
+swap$ -- 34
 text.length$ -- 6
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 70
-warning$ -- 1
-while$ -- 63
-width$ -- 22
-write$ -- 220
-(There was 1 warning)
+type$ -- 78
+warning$ -- 2
+while$ -- 67
+width$ -- 24
+write$ -- 240
+(There were 2 warnings)
