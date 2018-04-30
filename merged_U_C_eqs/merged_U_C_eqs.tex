@@ -682,7 +682,7 @@ The paper of \cite{temam2005some} provides an existence result for an arbitrary 
 
 The main difference consists in the boundary conditions: on every boundary they use a zero flux for the salinity, $\frac{\partial S}{\partial \mathbf{n}_s} = 0$. This coincides with our lower boundary conditions, but on the lateral boundary we use a fix constant.
 
-We will follow step by step the structure of the proof in \cite{temam2005some}, redefining the necessary quantities to be valid for our case and verify that the proof holds in the case of the polluted atmosphere as well (this is necessary not only because of using altered boundary conditions but also because the regularities of the functions are different in some cases as mentioned above).
+We will follow step by step the structure of the proof in \cite{temam2005some}, redefining the necessary quantities to be valid for our case and verify that the proof holds in the case of the polluted atmosphere as well (this is necessary not only because of using altered boundary conditions but also because the regularities of the functions are different in some cases).
 
 \textbf{Step 1.} Firstly we redefine the norms in order to make them match our system.
 
@@ -698,7 +698,7 @@ We will follow step by step the structure of the proof in \cite{temam2005some}, 
 
 \[\abs{U}_H = \abs{(U,U)_H}^{1/2}\]
 
-\textbf{Step 2.} Now the hydrostatic weak formulation of the polluted atmosphere can be brought to an analogous format as seen above:
+\textbf{Step 2.} Now the hydrostatic weak formulation of the polluted atmosphere can be brought to an analogous format as seen in \cite{temam2005some}:
 
 \[ \int_0 ^T (U, \frac{\diff}{\diff t} \tilde{U})_H \diff t + \int_0 ^T a(U, \tilde{U}) + b(U,U,\tilde{U}) + e(U, \tilde{U}) \diff t = \]
 \[ = \int_0 ^T l(\tilde{U}) \diff t + \int_0 ^T \int_\Omega U_{0} \tilde{U} (0) d \omega \diff t \]
@@ -729,7 +729,7 @@ What changes slightly is the proof of the results available on the expression $b
 
 \begin{itemize}
 
-  \item To prove the bound for $U, \tilde{U} \in V, U^\# \in V_{(2)}$, in this case we can not use the $L_\infty$ bound on the third term, since we would eventually arrive to $\norm{C^\#}_{H^3}$, which means that we can not close the bound that way. We can use
+  \item To prove the bound for $U, \tilde{U} \in V, U^\# \in V_{(2)}$, in this case we can not use the $L_\infty$ bound on the third term, since we would eventually arrive to $\big \| C^\# \big \| _{H^3}$, which means that we can not close the bound that way. We can use
   
   \[ \int_\Omega w \tilde{C} \nabla C^\# d \omega \leq c  \norm{w}_{L^2} \big \| \tilde{C} \big \| _{L^4} \big \| \nabla C^\# \big \| _{L^4} \leq \]
   \[ \leq c  \norm{U} \big \|\tilde{U}\big \|  \big \|\nabla C^\#  \big \|_{H^1} \leq c \norm{U} \big \|\tilde{U}\big \| \big \| U^\# \big \|_{V^{(2)}}. \]
@@ -744,11 +744,17 @@ What changes slightly is the proof of the results available on the expression $b
   
   observing that the boundary terms disappear.
   
-  \item The establishment of the improvement of the first bound works the same way as in the original article, except that we don't apply the switch provided by the result of the previous point, i.e. we perform the estimate 
+  \item The establishment of the improvement $$ \lvert b(U, \tilde{U}, U^\#) \rvert  \leq c   \norm{U}   \lvert \tilde{U} \rvert _H^{1/2}     \big \| \tilde{U} \big \| ^{1/2}    \big \| U^\# \big \| _{V_{(2)}}     $$ of the first bound for $U, \tilde{U} \in V, U^{\#} \in V_{(2)}$, we consider the most typical term and we bound it by
   
-  \[  \int_\Omega w \tilde{C} \nabla C^\# \diff \omega  \leq  \norm{w}_{L^2} \big \| \tilde{C} \big \| _{L^3} \big \| \nabla C^\# \big \| _{L^6} ,\]
+  \[  \int_\Omega w \tilde{C} \nabla C^\# \diff \omega  \leq  \norm{w}_{L^2} \big \| \tilde{C} \big \| _{L^3} \big \| \nabla C^\# \big \| _{L^6}.\]
   
-  and after this everything follows the same way.
+  Note that since our definition of the form $b$ is different from \cite{temam2005some}, thus we need to skip the switch of function arguments caused by the application of $ \lvert b(U, \tilde{U}, U^\#) \rvert = \lvert b(U, U^\#, \tilde{U}) \rvert$ in the original version of the proof, otherwise the bound can not be closed.
+  
+  Now, using the $\norm{\varphi}_{L^3} \leq c \norm{\varphi}_{L^2}^{1/2} \norm{\varphi}_{H^1}^{1/2}$ Sobolev-Ladyzhenskaya inequality in space dimension $3,$ we can bound this term by
+  
+  \[ c \norm{\mathbf{v}} \big \| U^\# \big \| _{V_{(2)}} \lvert \tilde{U} \rvert ^ {1/2} \big \| \tilde{U} \big \| ^{1/2} ,\]
+  
+  which yields the inequality.
 
 \end{itemize}
 
