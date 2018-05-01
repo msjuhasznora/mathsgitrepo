@@ -758,7 +758,27 @@ What changes slightly is the proof of the results available on the expression $b
 
 \end{itemize}
 
-This means that all the basic results and properties of the functions $a, b, e$ still hold in this version.
+This means that all the necessary properties of the forms $a, b$ and $e$ are equally valid for our set of equations (\ref{HNSC1}) - (\ref{HNSC8}), and we can use them to prove a stationary-case existence theorem identically as the proof is constructed in \cite{temam2005some}. 
+
+The weak formulation is as follows.
+
+%% the F = (F_v, F_T, F_S) source term from the article reduces only to $S$ in our case, and the $g = (g_v, g_T)$ boundary term in our version is simply 0 because of our boundary conditions.
+
+\begin{definition}
+Given a source term $S$ in $L^2(\Omega),$ find $U = (\mathbf{v}, C) \in V,$ such that
+\begin{equation} \label{FWSTAT} a(U, \tilde{U}) + b(U,U, \tilde{U}) + e(U, \tilde{U}) = l(U, \tilde{U}) \end{equation}
+for every $\tilde{U} \in V_{(2)}.$
+\end{definition}
+
+We have the following theorem establishing the existence of solutions of the stationary equations.
+
+\begin{theorem}
+We are given $S$ in $L^2(\Omega),$ then the problem (\ref{FWSTAT}) possesses at least one solution $U \in V$ such that
+
+\[ \norm{U} \leq \frac{1}{c_1} \norm{l}_{V'},\] where $c_1$ is the coercivity constant.
+
+\end{theorem}
+
 
 \textbf{Step 4.} In this step we provide the operator form of the equation.
 
