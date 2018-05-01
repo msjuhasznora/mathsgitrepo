@@ -769,7 +769,7 @@ The weak formulation is as follows.
 %% the F = (F_v, F_T, F_S) source term from the article reduces only to $S$ in our case, and the $g = (g_v, g_T)$ boundary term in our version is simply 0 because of our boundary conditions.
 
 \begin{definition}
-Given a source term $S$ in $L^2(\Omega),$ find $U = (\mathbf{v}, C) \in V,$ such that
+Given a source term $S$ in $L^2(\Omega),$ find $U = (\mathbf{v}, C),$ that satisfies the conditions of (\ref{hydrostaticWF}) in the space dimensions, moreover
 \begin{equation} \label{FWSTAT} a(U, \tilde{U}) + b(U,U, \tilde{U}) + e(U, \tilde{U}) = l(U, \tilde{U}) \end{equation}
 for every $\tilde{U} \in V_{(2)}.$
 \end{definition}
@@ -799,29 +799,52 @@ term in (\ref{EXISTENCEFORMAT}) in terms of operators. In the original version $
 
 With this, the operator form of the equation becomes
 
-\[ ZU + AU + B(U,U) + EU = l + U_0,\]
+\[ ZU + AU + B(U,U) + EU = l + U_0.\]
 
-where all the other operators are understood in a way where the time integration is included, as we mentioned before.
+\textbf{Step 5.} Finally we discuss the details of the time-dependent case, where we establish the existence, for all time, of the solutions for the system (\ref{hydrostaticWF}). Again, we point out that in this case, since in our version we performed the weak formulation in time as well, we can not use notations such as $\frac{\diff U_k}{\diff t}$. Instead, we will use $Z U_k$, which as an operator acting on $\tilde{U}$ that yields the inner product of the function and the time derivative of the test function.
 
-\textbf{Step 5.} Finally we discuss the details of the time-dependent case. Once again we remind ourselves that in this case, since in our version we performed the weak formulation in time as well, we can not use notations such as $\frac{\diff U_k}{\diff t}$. Instead, we will use $Z U_k$, which as an operator acting on $\tilde{U}$ yields the inner product of the function and the time derivative of the test function.
+The weak formulation in the time-dependent case takes the following form.
 
-Even though the time derivative here is applied on the test function, using the time difference for the solution function does work, in fact the original article arrives from the same start to a weak formulation where the derivative is applied on the test function.
+\begin{definition}
 
-Basically with the time discretization form of
+Given $T,$ $U_0 \in H,$ and a source term $S$ in $L^2(\Omega),$ find $U$ that satisfies the conditions of (\ref{hydrostaticWF}), moreover
 
-\[ \frac{1}{\Delta t}(U^n - U^{n-1}, \tilde{U})_H + a(U^n, U^n) + b(U^n, U^n, \tilde{U}) + e(U^n, \tilde{U}) = l(\tilde{U}), \]
+\begin{equation}
+  \begin{split}
+   \int_0^T (U, \frac{\diff}{\diff t} \tilde{U}) &+ a(U, \tilde{U}) + b(U,U, \tilde{U})+ e(U, \tilde{U}) \diff t =\\
+   \int_0^T l(\tilde{U}) \diff t & + (U_0, \tilde{U}(0)), \forall \tilde{U} \in V_{(2)}\\
+ \end{split}
+\end{equation}
 
-we arrive to the expression
+\end{definition}
 
-\[ - \int_0^T (U, \tilde{U})_H \psi ' \diff t + \int_0^T \big [ a(U, \tilde{U}) + b(U,U, \tilde{U}) + e(U, \tilde{U}) \big ] \psi \diff t = \]
+We proceed by using finite differences in time, taking an arbitrary integer $N,$ setting a time step $k = \Delta t = T/N,$ and recursively for $n = 1, ... , N$ considering
+
+\[ U^0 = U_0,\]
+\begin{equation}
+  \begin{split}
+    - \frac{1}{\Delta t} (U^n - U^{n-1}, \tilde{U})_H & +  a(U^n, \tilde{U}) + b(U^n,U^n, \tilde{U})\\
+    & + e(U^n, \tilde{U}) = l^n(\tilde{U}), \forall \tilde{U} \in V_{(2)}. \\
+  \end{split}
+\end{equation}
+
+Following the proof of the existence of $U^n \in V,$ proving some a priori estimates, introducing approximate functions on (0,T), and using the Aubin compactness theorem in an identical way as described in \cite{temam2005some}, we pass to the limit and arrive to
+
+\[ \int_0^T (U, \tilde{U})_H \psi ' \diff t + \int_0^T \big [ a(U, \tilde{U}) + b(U,U, \tilde{U}) + e(U, \tilde{U}) \big ] \psi \diff t = \]
 \[ = (U_0, \tilde{U}) \psi (0) + \int_0 ^ T l(\tilde{U}) \psi \diff t, \]
 
-where $\psi$ is a function defined on $[0,T]$, used to create the time-dependent version $\tilde{U}\psi$ of the test function. If we rename this product simply to be $\tilde{U}$, the time-dependent test function, we arrive exactly to,
+where $\psi$ is a function defined on $[0,T]$, used to create the time-dependent version $\tilde{U}\psi$ of the test function. Renaming this product simply to be $\tilde{U}(t)$, the time-dependent test function, we arrive exactly to
 
-\[ - \int_0^T (U, \partial_t \tilde{U})_H \diff t + \int_0^T \big [ a(U, \tilde{U}) + b(U,U, \tilde{U}) + e(U, \tilde{U}) \big ] \diff t = \]
+\[ \int_0^T (U, \partial_t \tilde{U})_H \diff t + \int_0^T \big [ a(U, \tilde{U}) + b(U,U, \tilde{U}) + e(U, \tilde{U}) \big ] \diff t = \]
 \[ = (U_0, \tilde{U}(0)) + \int_0 ^ T l(\tilde{U}) \diff t, \]
 
-which is what we needed.
+which finally leads us to the main existence result of this section.
+
+\begin{theorem}
+
+Given $T > 0$, $U_0 \in H,$ and a source term $S$ in $L^2(\Omega),$ then there exists $U$ which is solution to (\ref{hydrostaticWF}).
+
+\end{theorem}
 
 \nocite{*}
 \bibliographystyle{abbrv}
