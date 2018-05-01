@@ -700,8 +700,12 @@ We will follow step by step the structure of the proof in \cite{temam2005some}, 
 
 \textbf{Step 2.} Now the hydrostatic weak formulation of the polluted atmosphere can be brought to an analogous format as seen in \cite{temam2005some}:
 
-\[ \int_0 ^T (U, \frac{\diff}{\diff t} \tilde{U})_H \diff t + \int_0 ^T a(U, \tilde{U}) + b(U,U,\tilde{U}) + e(U, \tilde{U}) \diff t = \]
-\[ = \int_0 ^T l(\tilde{U}) \diff t + \int_0 ^T \int_\Omega U_{0} \tilde{U} (0) d \omega \diff t \]
+\begin{equation} \label{EXISTENCEFORMAT}
+  \begin{split}
+& \int_0 ^T (U, \frac{\diff}{\diff t} \tilde{U})_H \diff t + \int_0 ^T a(U, \tilde{U}) + b(U,U,\tilde{U}) + e(U, \tilde{U}) \diff t = \\
+&  = \int_0 ^T l(\tilde{U}) \diff t + \int_0 ^T \int_\Omega U_{0} \tilde{U} (0) d \omega \diff t\\
+  \end{split}
+\end{equation}
 
 with
 
@@ -770,7 +774,7 @@ Given a source term $S$ in $L^2(\Omega),$ find $U = (\mathbf{v}, C) \in V,$ such
 for every $\tilde{U} \in V_{(2)}.$
 \end{definition}
 
-We have the following theorem establishing the existence of solutions of the stationary equations.
+We have the following theorem establishing the existence of solutions of the stationary equations, which can be proved by Galerkin method using the fundamental results we verified for the functions $a,b$ and $e$.
 
 \begin{theorem}
 We are given $S$ in $L^2(\Omega),$ then the problem (\ref{FWSTAT}) possesses at least one solution $U \in V$ such that
@@ -779,18 +783,25 @@ We are given $S$ in $L^2(\Omega),$ then the problem (\ref{FWSTAT}) possesses at 
 
 \end{theorem}
 
+\textbf{Step 4.} In this step we provide the operator form of the equation (\ref{EXISTENCEFORMAT}) in the Hilbert space $V'_{(2)}$.
 
-\textbf{Step 4.} In this step we provide the operator form of the equation.
+The operators $A, B$ and $E$ can be set analogously as in the original version except for the additional integration because of the weak formulation we performed in the time dimension; $A$ for example is defined to be a linear continuous form from $V$ into $V',$ given by the formula
 
-The change in this part of the proof is that we will need an additional operator $Z$ for the time derivative part. In the original version $\frac{\diff U}{\diff t}$ was used as an operator acting on $\tilde{U}$, the result defined to be their inner product. In this version, because we apply the weak formulation in space-time, the time derivation is applied on the test function, so we will need the following operator $Z$:
+\[ <AU, \tilde{U} > = \int_0 ^T a(U, \tilde{U}) \diff t, \forall U, \tilde{U} \in V.\]
+
+The main difference in this part of the proof is that we will need an additional operator $Z$ for the time derivative part, since we have to capture the
+
+\[ \int_0 ^T (U, \frac{\diff}{\diff t} \tilde{U})_H \diff t \]
+
+term in (\ref{EXISTENCEFORMAT}) in terms of operators. In the original version $\frac{\diff U}{\diff t}$ was used as an operator acting on $\tilde{U}$, the result defined to be their inner product. In our case, because we apply the weak formulation in space-time, the time derivation is applied on the test function, so we introduce the following operator $Z$:
 
 \[ < Z(U), \tilde{U}> = \int_0^T (U, \frac{d\tilde{U}}{dt})_H \diff t .\]
 
-With this, the operator form of the equation is
+With this, the operator form of the equation becomes
 
 \[ ZU + AU + B(U,U) + EU = l + U_0,\]
 
-where all the other operators are understood in a way that the time integration is included. Since in this version we work with both time-space and only-space (stationary case) weak formulation as well, it is always assumed that we use the one according to the context.
+where all the other operators are understood in a way where the time integration is included, as we mentioned before.
 
 \textbf{Step 5.} Finally we discuss the details of the time-dependent case. Once again we remind ourselves that in this case, since in our version we performed the weak formulation in time as well, we can not use notations such as $\frac{\diff U_k}{\diff t}$. Instead, we will use $Z U_k$, which as an operator acting on $\tilde{U}$ yields the inner product of the function and the time derivative of the test function.
 
