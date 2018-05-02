@@ -491,7 +491,7 @@ The energy inequality (\ref{energyIEQ}) now takes the form
 
 \subsection{Passing to the limit}
 
-    Taking the limit for the linear velocity terms that do not include the concentration function $C^\epsilon$ we can use (\ref{WeakConvUHEps}), (\ref{WeakConvU3Eps}), the zero divergence condition of $\mathbf{u}^\epsilon,$ and the Poincare inequality to obtain weak convergences which are sufficient to pass to the limit in the linear expressions in (\ref{anisotropicWF}). As for the nonlinear terms, the convergence can be shown using a compactness theorem by \cite{simon1986compact}, and exploiting the $H_0(\partial_3, \Omega)$ regularity of $u_3$ provided by the zero divergence condition. The details are omitted since they are analogous to those described in \cite{azerad2001mathematical}.
+    Taking the limit for the linear velocity terms that do not include the concentration function $C^\epsilon$ we can use (\ref{WeakConvUHEps}), (\ref{WeakConvU3Eps}), (\ref{ANSC4}), and the Poincare inequality to obtain weak convergences which are sufficient to pass to the limit in the linear expressions in (\ref{anisotropicWF}). As for the nonlinear terms, the convergence can be shown using a compactness theorem by \cite{simon1986compact}, and exploiting the $H_0(\partial_3, \Omega)$ regularity of $u_3$ provided by the zero divergence condition. The details are omitted since they are analogous to those described in \cite{azerad2001mathematical}.
   
     For the linear terms including the concentration $C^\epsilon$ we can directly apply the weak convergence results of (\ref{WeakConvCEps1}) - (\ref{WeakConvCEps4}).
     
@@ -752,7 +752,7 @@ What changes slightly is the proof of the results available on the expression $b
   
   \[  \int_\Omega w \tilde{C} \nabla C^\# \diff \omega  \leq  \norm{w}_{L^2} \big \| \tilde{C} \big \| _{L^3} \big \| \nabla C^\# \big \| _{L^6}.\]
   
-  Note that since our definition of the form $b$ is different from \cite{temam2005some}, thus we need to skip the switch of function arguments caused by the application of $ \lvert b(U, \tilde{U}, U^\#) \rvert = \lvert b(U, U^\#, \tilde{U}) \rvert$ in the original version of the proof, otherwise the bound can not be closed.
+  Note that since our definition of the form $b$ is different from \cite{temam2005some}, thus we need to skip the switch of function arguments caused by the application of $ \lvert b(U, \tilde{U}, U^\#) \rvert = \lvert b(U, U^\#, \tilde{U}) \rvert$, otherwise the bound can not be closed.
   
   Now, using the $\norm{\varphi}_{L^3} \leq c \norm{\varphi}_{L^2}^{1/2} \norm{\varphi}_{H^1}^{1/2}$ Sobolev-Ladyzhenskaya inequality in space dimension $3,$ we can bound this term by
   
@@ -785,15 +785,15 @@ We are given $S$ in $L^2(\Omega),$ then the problem (\ref{FWSTAT}) possesses at 
 
 \textbf{Step 4.} In this step we provide the operator form of the equation (\ref{EXISTENCEFORMAT}) in the Hilbert space $V'_{(2)}$.
 
-The operators $A, B$ and $E$ can be set analogously as in the original version except for the additional integration because of the weak formulation we performed in the time dimension; $A$ for example is defined to be a linear continuous form from $V$ into $V',$ given by the formula
+The operators $A, B$ and $E$ can be set analogously as in the original version except for the additional integration in the time dimension; $A$ for example is defined to be a linear continuous form from $V$ into $V',$ given by the formula
 
-\[ <AU, \tilde{U} > = \int_0 ^T a(U, \tilde{U}) \diff t, \forall U, \tilde{U} \in V.\]
+\[ <AU, \tilde{U} > = \int_0 ^T a(U, \tilde{U}) \diff t, \quad \forall U, \tilde{U} \in V.\]
 
 The main difference in this part of the proof is that we will need an additional operator $Z$ for the time derivative part, since we have to capture the
 
 \[ \int_0 ^T (U, \frac{\diff}{\diff t} \tilde{U})_H \diff t \]
 
-term in (\ref{EXISTENCEFORMAT}) in terms of operators. In the original version $\frac{\diff U}{\diff t}$ was used as an operator acting on $\tilde{U}$, the result defined to be their inner product. In our case, because we apply the weak formulation in space-time, the time derivation is applied on the test function, so we introduce the following operator $Z$:
+inner product in terms of operators. In the original version $\frac{\diff U}{\diff t}$ was used as an operator acting on $\tilde{U}$, the result defined to be their inner product. In our case, since we apply the weak formulation in space-time, and the time derivation is applied on the test function, we introduce the following operator $Z$:
 
 \[ < Z(U), \tilde{U}> = \int_0^T (U, \frac{d\tilde{U}}{dt})_H \diff t .\]
 
@@ -801,7 +801,7 @@ With this, the operator form of the equation becomes
 
 \[ ZU + AU + B(U,U) + EU = l + U_0.\]
 
-\textbf{Step 5.} Finally we discuss the details of the time-dependent case, where we establish the existence, for all time, of the solutions for the system (\ref{hydrostaticWF}). Again, we point out that in this case, since in our version we performed the weak formulation in time as well, we can not use notations such as $\frac{\diff U_k}{\diff t}$. Instead, we will use $Z U_k$, which as an operator acting on $\tilde{U}$ that yields the inner product of the function and the time derivative of the test function.
+\textbf{Step 5.} Finally we discuss the details of the time-dependent case, where we establish the existence, for all time, of the solutions for the system (\ref{hydrostaticWF}).
 
 The weak formulation in the time-dependent case takes the following form.
 
@@ -809,10 +809,10 @@ The weak formulation in the time-dependent case takes the following form.
 
 Given $T,$ $U_0 \in H,$ and a source term $S$ in $L^2(\Omega),$ find $U$ that satisfies the conditions of (\ref{hydrostaticWF}), moreover
 
-\begin{equation}
+\begin{equation} \label{timedependentWFE}
   \begin{split}
    \int_0^T (U, \frac{\diff}{\diff t} \tilde{U}) &+ a(U, \tilde{U}) + b(U,U, \tilde{U})+ e(U, \tilde{U}) \diff t =\\
-   \int_0^T l(\tilde{U}) \diff t & + (U_0, \tilde{U}(0)), \forall \tilde{U} \in V_{(2)}\\
+   \int_0^T l(\tilde{U}) \diff t & + (U_0, \tilde{U}(0)), \quad \forall \tilde{U} \in V_{(2)}\\
  \end{split}
 \end{equation}
 
@@ -824,7 +824,7 @@ We proceed by using finite differences in time, taking an arbitrary integer $N,$
 \begin{equation}
   \begin{split}
     - \frac{1}{\Delta t} (U^n - U^{n-1}, \tilde{U})_H & +  a(U^n, \tilde{U}) + b(U^n,U^n, \tilde{U})\\
-    & + e(U^n, \tilde{U}) = l^n(\tilde{U}), \forall \tilde{U} \in V_{(2)}. \\
+    & + e(U^n, \tilde{U}) = l^n(\tilde{U}), \quad \forall \tilde{U} \in V_{(2)}. \\
   \end{split}
 \end{equation}
 
@@ -838,11 +838,11 @@ where $\psi$ is a function defined on $[0,T]$, used to create the time-dependent
 \[ \int_0^T (U, \partial_t \tilde{U})_H \diff t + \int_0^T \big [ a(U, \tilde{U}) + b(U,U, \tilde{U}) + e(U, \tilde{U}) \big ] \diff t = \]
 \[ = (U_0, \tilde{U}(0)) + \int_0 ^ T l(\tilde{U}) \diff t, \]
 
-which finally leads us to the main existence result of this section.
+which is the same as (\ref{timedependentWFE}), and which thus finally leads us to the main existence result of this section.
 
 \begin{theorem}
 
-Given $T > 0$, $U_0 \in H,$ and a source term $S$ in $L^2(\Omega),$ then there exists $U$ which is solution to (\ref{hydrostaticWF}).
+Given $T > 0$, $U_0 \in H,$ and a source term $S$ in $L^2(\Omega),$ then there exists $(\mathbf{u}, C)$ with $u_3 = - \int_0^T \nabla \cdot \mathbf{u}_H$, $\mathbf{u} = (\mathbf{u}_H, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_H \in L^\infty (0,T; L^2(\Omega)^2),$ and $C \in L_t^\infty L_x^2$ with $\partial_2 C, \partial_3 C \in L^2_t L^2_x$, which is solution to (\ref{hydrostaticWF}).
 
 \end{theorem}
 
