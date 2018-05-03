@@ -338,7 +338,7 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
 %%% *** WEAK FORMULATION AND MAIN RESULT*** %%%
 \section{Weak formulation and Main Result} \label{weakformulationmainresult}
 
-In this section we describe the weak formulation of the merged equations in both the anisotropic and hydrostatic case we are going to use in the paper.
+In this section we describe the weak formulation of the merged equations in both the anisotropic and hydrostatic case we are going to use in the paper, and we state our main result.
   
   We need to define the following spaces:
   
@@ -416,7 +416,7 @@ Now we are ready to state our main result.
 %%% *** PROOF *** %%%
 \section{Proof of the main theorem} \label{proof}
  
- This section is devoted to the proof of Theorem \ref{maintheorem}. In the extended case with the pollution equation the proof relies on a priori estimates gained from the energy inequality and, as we will see this is sufficient to pass to the limit in the linear terms. Concerning the nonlinear terms that do not include pollution we will follow \cite{azerad2001mathematical}. What we need to work on is how to handle the nonlinear terms including the new function $C^\epsilon.$ The challenge caused by these nonlinear terms will be met by proving that a compactness result from \cite{lions1996mathematical} is applicable to handle them.
+ This section is devoted to the proof of Theorem \ref{maintheorem}. In the extended case with the pollution equation the proof relies on a priori estimates gained from the energy inequality and, as we will see this is sufficient to pass to the limit in the linear terms. Concerning the nonlinear terms that do not include pollution we will follow \cite{azerad2001mathematical}. What we need to work on is how to handle the nonlinear term including the new function $C^\epsilon.$ The challenge caused by this nonlinear term will be met by proving that a compactness result from \cite{lions1996mathematical} is applicable to handle it.
 
   \subsection{Energy inequality}
   
@@ -448,7 +448,7 @@ Now we are ready to state our main result.
   
 The energy inequality (\ref{energyIEQ}) now takes the form
 
-  \begin{equation}
+  \begin{equation} \label{finalformEIEQ}
     \begin{split}  
     & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \{    \norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \} \diff \tau + \\
     & \int_0 ^ t \{(\epsilon K_1 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_1 C^\epsilon}_{L^2}^2  + (K_2 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_2 C^\epsilon}_{L^2}^2 + \\
@@ -464,11 +464,12 @@ The energy inequality (\ref{energyIEQ}) now takes the form
   From the final form of the energy inequality we obtain uniform a priori estimates that we summarize in the following proposition.
   
   \begin{prop}
-    The sequences
+    Let $u^\epsilon_1, u^\epsilon_2, u^\epsilon_3$ and $C^\epsilon$ be the weak solutions of (\ref{anisotropicWF}). Then the sequences
     
   \begin{center}
     \begin{tabular}{r l r}
     $u^\epsilon_1, u^\epsilon_2, \epsilon u^\epsilon_3$, $C^\epsilon$ & are bounded in $L^\infty (0,T; L^2(\Omega)),$ & \parbox{2.8cm}{\begin{equation} \label{proposition1} \end{equation} }\\
+    $u^\epsilon_3$ & is bounded in $L^2 (0,T; L^2(\Omega)),$ & \parbox{2.8cm}{\begin{equation} \label{propositionExtra} \end{equation} }\\
     $u^\epsilon_1, u^\epsilon_2, \epsilon u^\epsilon_3$ & are bounded in $L^2(0,T; H^1(\Omega)),$ & \parbox{2.8cm}{\begin{equation}\label{proposition2} \end{equation} }\\ 
     $\sqrt{\epsilon} \partial_1 C^\epsilon,$ $ \partial_2 C^\epsilon,$ $ \partial_3 C^\epsilon$ & are bounded in $L^2(0,T;L^2(\Omega)).$ & \parbox{2.8cm}{\begin{equation}\label{proposition3} \end{equation} }\\
     \end{tabular}
@@ -476,22 +477,27 @@ The energy inequality (\ref{energyIEQ}) now takes the form
     
   \end{prop}
   
-  As a consequence, up to there are subsequences still denoted by the same way, for which we have the following weak convergence results.
+  \begin{proof}
+  It is straightforward that (\ref{proposition1}), (\ref{proposition2}) and (\ref{proposition3}) follow directly by the energy inequality (\ref{finalformEIEQ}). On the other hand, (\ref{propositionExtra}) can be verified by using the divergence free condition and that as a consequence, we have $\partial_3 u_3 = - \partial_1 u_1 - \partial_2 u_2$ bounded in $L^2_t L^2 _x$. The bound holds for $u_3$ itself as well, owing to the Poincare inequality in the vertical direction, and using that $u_3$ vanishes on the boundary.
+  \end{proof}
+  
+  As a consequence, up to subsequences still denoted by the same way, we have the following weak convergence results.
   
 \begin{center}
     \begin{tabular}{r l l}
-    $ \mathbf{u}_H^\epsilon \rightharpoonup \mathbf{u}_H $ & in $L_t^\infty L_x^2 \cap L_t^2 H_x^1$ & \parbox{2.4cm}{\begin{equation} \label{WeakConvUHEps} \end{equation} }\\
-    $ \epsilon u_3^\epsilon \rightharpoonup f $ & for some limit element $f$ in $L_t^\infty L_x^2 \cap L_t^2 H_x^1$ & \parbox{2.4cm}{\begin{equation} \label{WeakConvU3Eps} \end{equation} }\\
-    $C^\epsilon \rightharpoonup C$ &  in $L_t^\infty L_x^2$ & \parbox{2.4cm}{\begin{equation} \label{WeakConvCEps1} \end{equation} }  \\
-    $\partial_2 C^\epsilon \rightharpoonup \partial_2 C $ & in $L_t^2 L_x^2$ & \parbox{2.4cm}{\begin{equation} \label{WeakConvCEps2} \end{equation} }\\
-    $\partial_3 C^\epsilon \rightharpoonup \partial_3 C $ & in $L_t^2 L_x^2$  & \parbox{2.4cm}{\begin{equation} \label{WeakConvCEps3} \end{equation} }\\
-    $\sqrt{\epsilon} \partial_1 C^\epsilon \rightharpoonup e$ & for some limit element $e$ in $L_t^2 L_x^2$ & \parbox{2.4cm}{\begin{equation} \label{WeakConvCEps4} \end{equation} }\\
+    $ \mathbf{u}_H^\epsilon \rightharpoonup \mathbf{u}_H $ & weakly in $L_t^\infty L_x^2 \cap L_t^2 H_x^1$ & \parbox{2.4cm}{\begin{equation} \label{WeakConvUHEps} \end{equation} }\\
+    $ \epsilon u_3^\epsilon \rightharpoonup f $ & weakly for some limit element $f$ in $L_t^\infty L_x^2 \cap L_t^2 H_x^1$ & \parbox{2.4cm}{\begin{equation} \label{WeakConvU3Eps} \end{equation} }\\
+    $ u_3^\epsilon \rightharpoonup u_3 $ & weakly in $L_t^2 L_x^2$ & \parbox{2.4cm}{\begin{equation} \label{WeakConvU3NoEps} \end{equation} }\\
+    $C^\epsilon \rightharpoonup C$ & weakly in $L_t^\infty L_x^2$ & \parbox{2.4cm}{\begin{equation} \label{WeakConvCEps1} \end{equation} }  \\
+    $\partial_2 C^\epsilon \rightharpoonup \partial_2 C $ & weakly in $L_t^2 L_x^2$ & \parbox{2.4cm}{\begin{equation} \label{WeakConvCEps2} \end{equation} }\\
+    $\partial_3 C^\epsilon \rightharpoonup \partial_3 C $ & weakly in $L_t^2 L_x^2$  & \parbox{2.4cm}{\begin{equation} \label{WeakConvCEps3} \end{equation} }\\
+    $\sqrt{\epsilon} \partial_1 C^\epsilon \rightharpoonup e$ & weakly for some limit element $e$ in $L_t^2 L_x^2$ & \parbox{2.4cm}{\begin{equation} \label{WeakConvCEps4} \end{equation} }\\
     \end{tabular}
 \end{center}
 
 \subsection{Passing to the limit}
 
-    Taking the limit for the linear velocity terms that do not include the concentration function $C^\epsilon$ we can use (\ref{WeakConvUHEps}), (\ref{WeakConvU3Eps}), (\ref{ANSC4}), and the Poincare inequality to obtain weak convergences which are sufficient to pass to the limit in the linear expressions in (\ref{anisotropicWF}). As for the nonlinear terms, the convergence can be shown using a compactness theorem by \cite{simon1986compact}, and exploiting the $H_0(\partial_3, \Omega)$ regularity of $u_3$ provided by the zero divergence condition. The details are omitted since they are analogous to those described in \cite{azerad2001mathematical}.
+    Taking the limit for the linear velocity terms that do not include the concentration function $C^\epsilon$ we can use (\ref{WeakConvUHEps}), (\ref{WeakConvU3Eps}) and (\ref{WeakConvU3NoEps}), to obtain weak convergences which are sufficient to pass to the limit in the linear expressions in (\ref{anisotropicWF}). As for the nonlinear terms, the convergence can be shown using a compactness theorem by \cite{simon1986compact}. The details are omitted since they are analogous to those described in \cite{azerad2001mathematical}.
   
     For the linear terms including the concentration $C^\epsilon$ we can directly apply the weak convergence results of (\ref{WeakConvCEps1}) - (\ref{WeakConvCEps4}).
     
@@ -529,11 +535,11 @@ By analyzing this nonlinear term in a more precise way we see that $(u_i C^\epsi
    
      From (\ref{WeakConvCEps1}) we have that $C^\epsilon \rightharpoonup C$ in $L_t^\infty L_x^2$, and since we are on a finite domain, the same convergence holds in $L_t^2 L_x^2.$ Hence we can choose $q_1 = q_2 = p_1 = p_2 = 2.$
      
-     To estimate the time derivative of $C^\epsilon$ we use (\ref{ANSC5}) that can be rewritten in the following way since $u^\epsilon$ is divergence-free.
+     To estimate the time derivative of $C^\epsilon$ we use (\ref{ANSC5}), that since the $u^\epsilon$ is divergence-free can be rewritten as
      
          \[  \frac{\partial C^\epsilon}{\partial t} = - \nabla \cdot (\mathbf{u}^\epsilon C^\epsilon) + \sqrt{\epsilon} K_1 \partial_1 \partial_1 \sqrt{\epsilon} C^\epsilon + K_2 \partial_2 \partial_2 C^\epsilon + K_3 \partial_3 \partial_3 C^\epsilon -S^\epsilon \]
          
-         Now, the $S^\epsilon$ Gaussian source term is smooth; from (\ref{ANSC4}), (\ref{proposition1}) we get $ \nabla \cdot (\mathbf{u}^\epsilon C^\epsilon) \in W_x^{-1,1}$ and from (\ref{proposition3}) we have that the remaining terms are in $W_x^{-1,2}.$
+         Now, the $S^\epsilon$ Gaussian source term is smooth; from (\ref{proposition1}), (\ref{propositionExtra}) we get $ \nabla \cdot (\mathbf{u}^\epsilon C^\epsilon) \in W_x^{-1,1}$ and from (\ref{proposition3}) we have that the remaining terms are in $W_x^{-1,2}.$
          
          We can conclude that $\frac{\partial C}{\partial t} \in L_t^1 W_x^{-1,1}$.
          
