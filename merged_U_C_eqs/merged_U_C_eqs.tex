@@ -461,7 +461,7 @@ The energy inequality (\ref{energyIEQ}) now takes the form
     
   \subsection{A priori estimates and weak convergence}
   
-  From the final form of the energy inequality we obtain a priori estimates that we summarize in the following proposition.
+  From the final form of the energy inequality we obtain uniform a priori estimates that we summarize in the following proposition.
   
   \begin{prop}
     The sequences
@@ -836,7 +836,7 @@ We proceed by using finite differences in time, taking an arbitrary integer $N,$
   \end{split}
 \end{equation}
 
-We use $\frac{1}{\Delta t} (U^n - U^{n-1}, \tilde{U})_H$ to approximate $(U, \frac{\diff}{\diff t} \tilde{U}),$ but note that we will have a minus sign difference from the original version, as seen in the above expression.
+We use $- \frac{1}{\Delta t} (U^n - U^{n-1}, \tilde{U})_H$ to approximate $(U, \frac{\diff}{\diff t} \tilde{U}),$ and note that we will have a minus sign difference from the original version --- as seen in the above expression --- since we apply the time derivative on the test function.
 
 Following the proof of the existence of $U^n \in V,$ proving some a priori estimates, introducing approximate functions on (0,T), and using the Aubin compactness theorem in an identical way as described in \cite{temam2005some}, we pass to the limit and arrive to
 
