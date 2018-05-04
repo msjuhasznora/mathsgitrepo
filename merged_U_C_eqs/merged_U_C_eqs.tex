@@ -424,8 +424,8 @@ Now we are ready to state our main result.
   
   \begin{equation} \label{energyIEQ}
     \begin{split}  
-    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \{    \norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \} \diff \tau + \\
-    & \int_0 ^ t \{\epsilon K_1 \norm{\partial_1 C^\epsilon}_{L^2}^2  + K_2 \norm{\partial_2 C^\epsilon}_{L^2}^2 + K_3 \norm{\partial_3 C^\epsilon}_{L^2}^2 \} d \tau \leq  \int_0^t (S^\epsilon,C^\epsilon) \diff \tau + \\
+    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \{    \norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \} \diff \tau \\
+    & + \int_0 ^ t \{\epsilon K_1 \norm{\partial_1 C^\epsilon}_{L^2}^2  + K_2 \norm{\partial_2 C^\epsilon}_{L^2}^2 + K_3 \norm{\partial_3 C^\epsilon}_{L^2}^2 \} d \tau \leq  \int_0^t (S^\epsilon,C^\epsilon) \diff \tau + \\
     & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon_0}_{L^2}^2) + \int _ 0 ^ t \epsilon K_1 \langle \partial_1 C^\epsilon, C^\epsilon \rangle_{\Gamma_G} \diff \tau =\\
     & I_1 + I_2 + I_3.
     \end{split}
@@ -433,7 +433,7 @@ Now we are ready to state our main result.
   
   From the hypothesis on the initial data and since the $S^\epsilon$ source term is in $L^\infty_x (\Omega)$, $I_1$ and $I_2$ are bounded. The only term we need to work on further is $I_3$.
   
-  By using the generalized Young inequality for any $\zeta > 0,$ we can estimate this term in the following way.
+  By using the Holder inequality and the generalized Young inequality for any $\zeta > 0,$ we can estimate this term in the following way.
   
   \begin{equation}
     \begin{split}  
@@ -450,8 +450,8 @@ The energy inequality (\ref{energyIEQ}) now takes the form
 
   \begin{equation} \label{finalformEIEQ}
     \begin{split}  
-    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \{    \norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \} \diff \tau + \\
-    & \int_0 ^ t \{(\epsilon K_1 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_1 C^\epsilon}_{L^2}^2  + (K_2 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_2 C^\epsilon}_{L^2}^2 + \\
+    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \{    \norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \} \diff \tau \\
+    & + \int_0 ^ t \{(\epsilon K_1 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_1 C^\epsilon}_{L^2}^2  + (K_2 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_2 C^\epsilon}_{L^2}^2 \\
     & + (K_3 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_3 C^\epsilon}_{L^2}^2 \} \diff \tau \leq \frac{1}{\zeta} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)} + \\
     & + \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau.
     \end{split}
@@ -493,7 +493,7 @@ The energy inequality (\ref{energyIEQ}) now takes the form
 
 \subsection{Passing to the limit}
 
-    Taking the limit for the linear velocity terms that do not include the concentration function $C^\epsilon$ we can use (\ref{WeakConvUHEps}), (\ref{WeakConvU3Eps}) and (\ref{WeakConvU3NoEps}), to obtain weak convergences which are sufficient to pass to the limit in the linear expressions in (\ref{anisotropicWF}). As for the nonlinear terms, the convergence can be shown using a compactness theorem by \cite{simon1986compact}. The details are omitted since they are analogous to those described in \cite{azerad2001mathematical}.
+    Taking the limit for the linear velocity terms that do not include the concentration function $C^\epsilon$ we can use (\ref{WeakConvUHEps}), (\ref{WeakConvU3Eps}) and (\ref{WeakConvU3NoEps}) to pass to the limit in the linear expressions in (\ref{anisotropicWF}). As for the nonlinear terms, the convergence can be shown using a compactness theorem by \cite{simon1986compact}. The details are omitted since they are analogous to those described in \cite{azerad2001mathematical}.
   
     For the linear terms including the concentration $C^\epsilon$ we can directly apply the weak convergence results of (\ref{WeakConvCEps1}) - (\ref{WeakConvCEps4}).
     
@@ -595,7 +595,8 @@ Find $\mathbf{u}^\epsilon = (\mathbf{u}_H, u^\epsilon_3) \in L^2 (0,T ; \mathbf{
       & + \epsilon^2 \big[ \int _0 ^ T -(u_3^\epsilon, \partial_t \tilde{u}_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, \tilde{u}_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu \tilde{u}_3) \diff t\big] \\
       &+ \int_0^T \bigg \{ -(C^\epsilon, \partial_t \tilde{C}) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) + \epsilon K_1 (\partial_1 C^\epsilon, \partial_1 \tilde{C}) - \epsilon K_1 \langle \sigma_1 , \tilde{C} \rangle _{\Gamma_G} + \\
       & K_2 (\partial_2 C^\epsilon, \partial_2 \tilde{C}) - K_2 \langle \sigma_2 , \tilde{C} \rangle_{\Gamma_I} + K_3 (\partial_3 C^\epsilon, \partial_3 \tilde{C}) - K_3 \langle\sigma_3 , \tilde{C} \rangle_{\Gamma_I} \bigg \} \diff t \\
-      & = - (\mathbf{u}^\epsilon_{0H}, \mathbf{\tilde{u}}_H(0)) - \int_0^T \langle \theta_H, \mathbf{\tilde{u}}_H \rangle_{\Gamma_I} - \epsilon^2 (u_{03}^\epsilon, \tilde{u}_3 (0)) - (C_0^\epsilon, \tilde{C} (0)) + \int_0^T (S^\epsilon,\tilde{C}) \diff t
+      & = - (\mathbf{u}^\epsilon_{0H}, \mathbf{\tilde{u}}_H(0)) - \int_0^T \langle \theta_H, \mathbf{\tilde{u}}_H \rangle_{\Gamma_I} - \epsilon^2 (u_{03}^\epsilon, \tilde{u}_3 (0)) \\
+      & - (C_0^\epsilon, \tilde{C} (0)) + \int_0^T (S^\epsilon,\tilde{C}) \diff t
     \end{split}
   \end{equation}
   
@@ -624,7 +625,8 @@ The coastal, generalized version of the energy inequality becomes
 
   \begin{equation}
     \begin{split}  
-    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \{    \norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \} \diff \tau + \\
+    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \\
+    & \int_0 ^ t \{    \norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \} \diff \tau + \\
     & \int_0 ^ t \{\epsilon K_1 \norm{\partial_1 C^\epsilon}_{L^2}^2  + K_2 \norm{\partial_2 C^\epsilon}_{L^2}^2 + K_3 \norm{\partial_3 C^\epsilon}_{L^2}^2 \} \diff \tau \leq \\
     & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau - \int_0^t \langle \theta_H, \mathbf{u}_H \rangle _{\Gamma_I}\\
     & \int _ 0 ^ t \epsilon K_1 \langle \sigma_1, \sigma \rangle_{\Gamma_G} + K_2 \langle \sigma_2 , \sigma \rangle_{\Gamma_I}  + K_3 \langle \sigma_3, \sigma \rangle_{\Gamma_I}  \diff \tau.
