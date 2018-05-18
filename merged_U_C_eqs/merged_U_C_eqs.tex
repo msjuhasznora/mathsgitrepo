@@ -53,7 +53,7 @@ We use the
 
 aspect ratio and the fact that, as the above described general ideas suggest, it is natural to consider asymptotic models and to take the limit model as $\epsilon$ goes to zero.
 
-In this paper we consider the phenomena of a contaminant being emitted into, mixing with, and being deposited from the homogeneous and clean air. This topic is found in the intersection of heavily applied fields such as mathematical fluid dynamics, atmosphere modeling, and meteorology; for a profound insight see e.g. the books \cite{arya2001introduction}, \cite{pedlosky2013geophysical} and \cite{temam2001ams}.
+In this paper we consider the phenomena of a contaminant being emitted into, mixing with, and being deposited from the homogeneous and clean air. This topic is found in the intersection of heavily applied fields such as mathematical fluid dynamics, atmosphere modeling, and meteorology; for a profound insight see e.g. the books \cite{arya2001introduction}, \cite{pedlosky2013geophysical} and \cite{temam2001navier}.
 
 Our focus is to create a self-contained model describing the atmospheric flow combined with the pollution effects and to investigate the asymptotic behavior of the weak solutions of this model. The model itself, new to our knowledge, utilizes classical concepts as its foundation and it merges them with relatively new or more specific ideas. On the one hand, we use general and well-known approaches such as the wind flow being modeled by the incompressible anisotropic Navier-Stokes equations, and using a convection-diffusion equation to describe the pollution effect. On the other hand, the model also incorporates notions like taking advantage of a downwind-direction matching coordinate system (\cite{goyal2011mathematical}), using a Gaussian pulse as a source term (\cite{zhuk2016source}), and rescaling the diffusivity parameters according to the largely different horizontal and vertical scales (similarly to the way the viscosity terms are scaled in \cite{azerad2001mathematical}).
 
@@ -132,7 +132,7 @@ while in the limit model the source term $S$ naturally stands for the $\delta$ d
     
 Now, we perform a vertical scaling to make the domain independent of $\epsilon.$
 
-    \[x=x_1, \quad y=x_2, \quad z=\epsilon x_3 \]
+    \[x=x_1, \quad y=x_2, \quad z=\epsilon x_3. \]
     
     So we have the following new, $\epsilon$ - independent domain
     
@@ -276,13 +276,13 @@ As we mentioned before, the case we are investigating is that of inland domains 
     
     (see also for example \cite{yeh1975three}). For the horizontal partial derivatives of the pollution, we can separate downwind and crosswind direction boundary conditions. In the crosswind direction we use
     
-    $$\partial_2 C^\epsilon = 0 \text{ on } \Gamma_G$$
+    $$\partial_2 C^\epsilon = 0 \text{ on } \Gamma_G,$$
     
-    while in the downwind (stronger) direction our assumption is more relaxed, we only assume that $\partial_1 C^\epsilon$ is finite in the boundary norm, i.e. in $L^2 L^2 (0,T; \Gamma_G)$.
+    while in the downwind (stronger) direction our assumption is more relaxed, we only assume that $\partial_1 C^\epsilon$ is finite in the boundary norm, i.e. in $L^2 (0,T; \Gamma_G)$.
   
   \end{itemize}
   
-  Finally, the boundary condition to describe the anisotropic system can be summarized as follows:
+  Finally, the boundary conditions to describe the anisotropic system can be summarized as follows:
   
     \begin{equation} \label{ANSC8}
       \begin{split}
@@ -356,14 +356,14 @@ In this section we describe the weak formulation of the merged equations in both
   
   Then the weak formulation of the hydrostatic system (\ref{HNSC1}) - (\ref{HNSC8}) takes the following form.
   
-  \begin{definition}
+  \begin{definition} \label{definitionhydrostaticWF}
   
   Find $(\mathbf{u}, C)$ such that $\mathbf{u} = (\mathbf{u}_H, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_H \in L^\infty (0,T; L^2(\Omega)^2),$ and $C \in L_t^\infty L_x^2$ with $\partial_2 C, \partial_3 C \in L^2_t L^2_x$, such that
   
   \begin{equation} \label{hydrostaticWF}
     \begin{split}
-      & \int_0^T -(\mathbf{u}_H, \partial_t \mathbf{\tilde{u}}_H) + (\nabla_\nu \mathbf{u}_H, \nabla_\nu \mathbf{\tilde{u}}_H) - (\mathbf{u}_H, (\mathbf{u} \cdot \nabla) \mathbf{\tilde{u}}_H) + (b(\mathbf{u}_H), \mathbf{\tilde{u}}_H) \diff t \\
-      &+ \int_0^T -(C, \partial_t \tilde{C}) -(\mathbf{u}C, \nabla \tilde{C}) + K_2 (\partial_2 C, \partial_2 \tilde{C}) + K_3 (\partial_3 C, \partial_3 \tilde{C}) \diff t =\\
+      & \int_0^T \bigg[ -(\mathbf{u}_H, \partial_t \mathbf{\tilde{u}}_H) + (\nabla_\nu \mathbf{u}_H, \nabla_\nu \mathbf{\tilde{u}}_H) - (\mathbf{u}_H, (\mathbf{u} \cdot \nabla) \mathbf{\tilde{u}}_H) + (b(\mathbf{u}_H), \mathbf{\tilde{u}}_H) \bigg ] \diff t \\
+      &+ \int_0^T \bigg[ -(C, \partial_t \tilde{C}) -(\mathbf{u}C, \nabla \tilde{C}) + K_2 (\partial_2 C, \partial_2 \tilde{C}) + K_3 (\partial_3 C, \partial_3 \tilde{C}) \bigg ] \diff t \\
       & = - (\mathbf{u}_{0H}, \mathbf{\tilde{u}}_H(0)) - (C(0), \tilde{C}(0)) + \int_0^T (S,\tilde{C}) \diff t
     \end{split}
   \end{equation}
@@ -390,11 +390,11 @@ In this section we describe the weak formulation of the merged equations in both
   
   \begin{equation} \label{anisotropicWF}
     \begin{split}
-      & \int_0^T -(\mathbf{u}^\epsilon_H, \partial_t \mathbf{\tilde{u}}_H) + (\nabla_\nu \mathbf{u}^\epsilon_H, \nabla_\nu \mathbf{\tilde{u}}_H) - (\mathbf{u}^\epsilon_H, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{\tilde{u}}_H) + (b(\mathbf{u}^\epsilon_H), \mathbf{\tilde{u}}_H) \diff t \\
-      & + \epsilon \beta \big[ \int_0 ^ T (u_3 ^\epsilon, \tilde{u}_1) - (u_1^\epsilon, \tilde{u}_3) \big] \diff t\\
-      & + \epsilon^2 \big[ \int _0 ^ T -(u_3^\epsilon, \partial_t \tilde{u}_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, \tilde{u}_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu \tilde{u}_3) \diff t\big] \\
-      &+ \int_0^T -(C^\epsilon, \partial_t \tilde{C}) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) + \\
-      & \epsilon K_1 (\partial_1 C^\epsilon, \partial_1 \tilde{C}) - \epsilon K_1 \big[(\partial_1 C^\epsilon) \tilde{C} \big] _{\Gamma_G} + K_2 (\partial_2 C^\epsilon, \partial_2 \tilde{C}) + K_3 (\partial_3 C^\epsilon, \partial_3 \tilde{C}) \diff t =\\
+      & \int_0^T \bigg [ -(\mathbf{u}^\epsilon_H, \partial_t \mathbf{\tilde{u}}_H) + (\nabla_\nu \mathbf{u}^\epsilon_H, \nabla_\nu \mathbf{\tilde{u}}_H) - (\mathbf{u}^\epsilon_H, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{\tilde{u}}_H) + (b(\mathbf{u}^\epsilon_H), \mathbf{\tilde{u}}_H) \bigg ] \diff t \\
+      & + \epsilon \beta \int_0 ^ T \bigg [ (u_3 ^\epsilon, \tilde{u}_1) - (u_1^\epsilon, \tilde{u}_3) \bigg ] \diff t\\
+      & + \epsilon^2 \int _0 ^ T \bigg [ -(u_3^\epsilon, \partial_t \tilde{u}_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, \tilde{u}_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu \tilde{u}_3) \bigg ] \diff t \\
+      &+ \int_0^T \bigg [ -(C^\epsilon, \partial_t \tilde{C}) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) + \\
+      & \epsilon K_1 (\partial_1 C^\epsilon, \partial_1 \tilde{C}) - \epsilon K_1 \big[(\partial_1 C^\epsilon) \tilde{C} \big] _{\Gamma_G} + K_2 (\partial_2 C^\epsilon, \partial_2 \tilde{C}) + K_3 (\partial_3 C^\epsilon, \partial_3 \tilde{C}) \bigg ] \diff t =\\
       & = - (\mathbf{u}^\epsilon_{0H}, \mathbf{\tilde{u}}_H(0)) - \epsilon^2 (u_{03}^\epsilon, \tilde{u}_3 (0)) - (C^\epsilon (0), \tilde{C} (0)) + \int_0^T (S^\epsilon,\tilde{C}) \diff t
     \end{split}
   \end{equation}
@@ -410,7 +410,7 @@ We will omit the proof of the existence of weak solutions (see Definition \ref{d
 Now we are ready to state our main result.
   
 \begin{theorem} \label{maintheorem}
-  Let $\mathbf{u}_0$ $\in$ $L^2 (\Omega)^3$, with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 \cdot \mathbf{n} = 0$ on $\partial \Omega$; and let $C_0 \in$ $L^2 (\Omega)$, $C_0 = 0$ on $ \partial \Omega$; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, C^\epsilon)$ of the anisotropic equations (\ref{ANSC1}) - (\ref{ANSC8}) converge to a weak solution $(\mathbf{u}, C)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1}) - (\ref{HNSC8}).
+  Let $\mathbf{u}_0$ $\in$ $L^2 (\Omega)^3$, with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 \cdot \mathbf{n} = 0$ on $\partial \Omega$; let $C_0 \in$ $L^2 (\Omega)$, $C_0 = 0$ on $ \partial \Omega$, and assume that the boundary conditions (\ref{ANSC8}) hold; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, C^\epsilon)$ of the anisotropic equations (\ref{ANSC1}) - (\ref{ANSC5}) converge to a weak solution $(\mathbf{u}, C)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1}) - (\ref{HNSC5}).
 \end{theorem}
 
 %%% *** PROOF *** %%%
@@ -420,14 +420,15 @@ Now we are ready to state our main result.
 
   \subsection{Energy inequality}
   
-  As we mentioned before, one of the most fundamental tools in this proof is the energy inequality. If we calculate it for the anisotropic system, we arrive to the following result. For a.e. $t \in [0,T]$ the following holds:
+  As we mentioned before, one of the most fundamental tools in this proof is the energy inequality. If we calculate it for the anisotropic system, we obtain that for a.e. $t \in [0,T]$ the following holds:
   
   \begin{equation} \label{energyIEQ}
     \begin{split}  
     & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \{    \norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \} \diff \tau \\
-    & + \int_0 ^ t \{\epsilon K_1 \norm{\partial_1 C^\epsilon}_{L^2}^2  + K_2 \norm{\partial_2 C^\epsilon}_{L^2}^2 + K_3 \norm{\partial_3 C^\epsilon}_{L^2}^2 \} d \tau \leq  \int_0^t (S^\epsilon,C^\epsilon) \diff \tau + \\
-    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon_0}_{L^2}^2) + \int _ 0 ^ t \epsilon K_1 \langle \partial_1 C^\epsilon, C^\epsilon \rangle_{\Gamma_G} \diff \tau =\\
-    & I_1 + I_2 + I_3.
+    & + \int_0 ^ t \{\epsilon K_1 \norm{\partial_1 C^\epsilon}_{L^2}^2  + K_2 \norm{\partial_2 C^\epsilon}_{L^2}^2 + K_3 \norm{\partial_3 C^\epsilon}_{L^2}^2 \} d \tau \\
+    & \leq \int_0^t (S^\epsilon,C^\epsilon) \diff \tau + \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon_0}_{L^2}^2) \\
+    & + \int _ 0 ^ t \epsilon K_1 \langle \partial_1 C^\epsilon, C^\epsilon \rangle_{\Gamma_G} \diff \tau \\
+    & = I_1 + I_2 + I_3.
     \end{split}
   \end{equation}    
   
@@ -437,10 +438,10 @@ Now we are ready to state our main result.
   
   \begin{equation}
     \begin{split}  
-    &  I_3 = \int _ 0 ^ t \epsilon K_1 \langle \partial_1 C^\epsilon, C^\epsilon \rangle_{\Gamma_G} \diff \tau \leq K_1 \int _ 0 ^ t \sqrt{\epsilon} \norm{\partial_1 C^\epsilon}_{L^2 (\Gamma_G)} \sqrt{\epsilon} \norm{C^\epsilon}_{L^2 (\Gamma_G)} \leq \\
-    & \frac{1}{\zeta} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)} + \zeta K_1 \int_0 ^ t \frac{\epsilon}{2} \norm{C^\epsilon}^2 _{L^2 (\Gamma_G)} \leq \\
-    & \frac{1}{\zeta} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)} + \zeta \frac{\epsilon}{2} K_1 c_T \int_0 ^ t \norm{C^\epsilon}^2 _{W^{1,2} (\Omega)} \leq \\
-    & \frac{1}{\zeta} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)} + \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1) \int_0 ^ t \norm{\nabla C^\epsilon}^2 _{L^2 (\Omega) } \diff \tau,
+    I_3 & = \int _ 0 ^ t \epsilon K_1 \langle \partial_1 C^\epsilon, C^\epsilon \rangle_{\Gamma_G} \diff \tau \leq K_1 \int _ 0 ^ t \sqrt{\epsilon} \norm{\partial_1 C^\epsilon}_{L^2 (\Gamma_G)} \sqrt{\epsilon} \norm{C^\epsilon}_{L^2 (\Gamma_G)} \\
+    & \leq \frac{1}{\zeta} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)} + \zeta K_1 \int_0 ^ t \frac{\epsilon}{2} \norm{C^\epsilon}^2 _{L^2 (\Gamma_G)} \\
+    & \leq \frac{1}{\zeta} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)} + \zeta \frac{\epsilon}{2} K_1 c_T \int_0 ^ t \norm{C^\epsilon}^2 _{W^{1,2} (\Omega)} \\
+    & \leq \frac{1}{\zeta} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)} + \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1) \int_0 ^ t \norm{\nabla C^\epsilon}^2 _{L^2 (\Omega) } \diff \tau,
     \end{split}
   \end{equation}  
   
@@ -452,8 +453,9 @@ The energy inequality (\ref{energyIEQ}) now takes the form
     \begin{split}  
     & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \{    \norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \} \diff \tau \\
     & + \int_0 ^ t \{(\epsilon K_1 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_1 C^\epsilon}_{L^2}^2  + (K_2 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_2 C^\epsilon}_{L^2}^2 \\
-    & + (K_3 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_3 C^\epsilon}_{L^2}^2 \} \diff \tau \leq \frac{1}{\zeta} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)} + \\
-    & + \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau.
+    & + (K_3 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_3 C^\epsilon}_{L^2}^2 \} \diff \tau \\
+    & \leq \frac{1}{\zeta} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)} + \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) \\
+    & + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau.
     \end{split}
   \end{equation}  
     
@@ -464,7 +466,7 @@ The energy inequality (\ref{energyIEQ}) now takes the form
   From the final form of the energy inequality we obtain uniform a priori estimates that we summarize in the following proposition.
   
   \begin{prop}
-    Let $u^\epsilon_1, u^\epsilon_2, u^\epsilon_3$ and $C^\epsilon$ be the weak solutions of (\ref{anisotropicWF}). Then the sequences
+    Let $u^\epsilon_1, u^\epsilon_2, u^\epsilon_3$ and $C^\epsilon$ be the weak solutions of the system (\ref{ANSC1}) - (\ref{ANSC5}) in the sense of Definition \ref{definitionanisotropicWF}, assuming that the boundary conditions (\ref{ANSC8}) hold. Then the sequences
     
     \begin{align}
       & u^\epsilon_1, u^\epsilon_2, \epsilon u^\epsilon_3, C^\epsilon & \quad & \text{are bounded in $L^\infty (0,T; L^2(\Omega)),$} \label{proposition1} \\
@@ -493,7 +495,7 @@ The energy inequality (\ref{energyIEQ}) now takes the form
 
 \subsection{Passing to the limit}
 
-    Taking the limit for the linear velocity terms that do not include the concentration function $C^\epsilon$ we can use (\ref{WeakConvUHEps}), (\ref{WeakConvU3Eps}) and (\ref{WeakConvU3NoEps}) to pass to the limit in the linear expressions in (\ref{anisotropicWF}). As for the nonlinear terms, the convergence can be shown using a compactness theorem by \cite{simon1986compact}. The details are omitted since they are analogous to those described in \cite{azerad2001mathematical}.
+    In order to conclude the proof of Theorem \ref{maintheorem} we pass to the limit in the weak formulation (\ref{anisotropicWF}). To take the limit for the linear velocity terms that do not include the concentration function $C^\epsilon$ we can use (\ref{WeakConvUHEps}), (\ref{WeakConvU3Eps}) and (\ref{WeakConvU3NoEps}). As for the nonlinear terms, the convergence can be shown using a compactness theorem by \cite{simon1986compact}. The details are omitted since they are analogous to those described in \cite{azerad2001mathematical}.
   
     For the linear terms including the concentration $C^\epsilon$ we can directly apply the weak convergence results of (\ref{WeakConvCEps1}) - (\ref{WeakConvCEps4}).
     
@@ -531,15 +533,15 @@ By analyzing this nonlinear term in a more precise way we see that $(u_i C^\epsi
    
      From (\ref{WeakConvCEps1}) we have that $C^\epsilon \rightharpoonup C$ in $L_t^\infty L_x^2$, and since we are on a finite domain, the same convergence holds in $L_t^2 L_x^2.$ Hence we can choose $q_1 = q_2 = p_1 = p_2 = 2.$
      
-     To estimate the time derivative of $C^\epsilon$ we use (\ref{ANSC5}), that since the $u^\epsilon$ is divergence-free can be rewritten as
+     To estimate the time derivative of $C^\epsilon$ we use (\ref{ANSC5}), that since $u^\epsilon$ is divergence-free can be rewritten as
      
          \[  \frac{\partial C^\epsilon}{\partial t} = - \nabla \cdot (\mathbf{u}^\epsilon C^\epsilon) + \sqrt{\epsilon} K_1 \partial_1 \partial_1 \sqrt{\epsilon} C^\epsilon + K_2 \partial_2 \partial_2 C^\epsilon + K_3 \partial_3 \partial_3 C^\epsilon -S^\epsilon \]
          
          Now, the $S^\epsilon$ Gaussian source term is smooth; from (\ref{proposition1}), (\ref{propositionExtra}) we get $ \nabla \cdot (\mathbf{u}^\epsilon C^\epsilon) \in W_x^{-1,1}$ and from (\ref{proposition3}) we have that the remaining terms are in $W_x^{-1,2}.$
          
-         We can conclude that $\frac{\partial C}{\partial t} \in L_t^1 W_x^{-1,1}$.
+      Hence we can conclude that $$\frac{\partial C}{\partial t} \in L_t^1 W_x^{-1,1}.$$
          
-      The property that $\norm{u_i^\epsilon - u_i^\epsilon(\cdot + \xi, t)} \to 0$ as $\abs{\xi} \to 0$ follows since $u_i^\epsilon \in L^2_t L^2_x.$
+      The property that $$\norm{u_i^\epsilon - u_i^\epsilon(\cdot + \xi, t)} \to 0 \text{ as } \abs{\xi} \to 0$$ follows since $u_i^\epsilon \in L^2_t L^2_x.$
       
       Now we can apply Lemma \ref{PLL} with $g^\epsilon = C^\epsilon, h^\epsilon = u^\epsilon, q_1 = q_2 = p_1 = p_2 = 2, m=-1$ and we finally arrive to
    
@@ -590,9 +592,9 @@ Find $\mathbf{u}^\epsilon = (\mathbf{u}_H, u^\epsilon_3) \in L^2 (0,T ; \mathbf{
 
   \begin{equation} \label{coastalAnisotropic}
     \begin{split}
-      & \int_0^T -(\mathbf{u}^\epsilon_H, \partial_t \mathbf{\tilde{u}}_H) + (\nabla_\nu \mathbf{u}^\epsilon_H, \nabla_\nu \mathbf{\tilde{u}}_H) - (\mathbf{u}^\epsilon_H, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{\tilde{u}}_H) + (b(\mathbf{u}^\epsilon_H), \mathbf{\tilde{u}}_H) \diff t \\
-      & + \epsilon \beta \big[ \int_0 ^ T (u_3 ^\epsilon, \tilde{u}_1) - (u_1^\epsilon, \tilde{u}_3) \big] \diff t\\
-      & + \epsilon^2 \big[ \int _0 ^ T -(u_3^\epsilon, \partial_t \tilde{u}_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, \tilde{u}_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu \tilde{u}_3) \diff t\big] \\
+      & \int_0^T \bigg \{ -(\mathbf{u}^\epsilon_H, \partial_t \mathbf{\tilde{u}}_H) + (\nabla_\nu \mathbf{u}^\epsilon_H, \nabla_\nu \mathbf{\tilde{u}}_H) - (\mathbf{u}^\epsilon_H, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{\tilde{u}}_H) + (b(\mathbf{u}^\epsilon_H), \mathbf{\tilde{u}}_H) \bigg \} \diff t \\
+      & + \epsilon \beta \int_0 ^ T \bigg \{ (u_3 ^\epsilon, \tilde{u}_1) - (u_1^\epsilon, \tilde{u}_3) \bigg \} \diff t\\
+      & + \epsilon^2 \int _0 ^ T \bigg \{ -(u_3^\epsilon, \partial_t \tilde{u}_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, \tilde{u}_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu \tilde{u}_3) \bigg \} \diff t \\
       &+ \int_0^T \bigg \{ -(C^\epsilon, \partial_t \tilde{C}) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) + \epsilon K_1 (\partial_1 C^\epsilon, \partial_1 \tilde{C}) - \epsilon K_1 \langle \sigma_1 , \tilde{C} \rangle _{\Gamma_G} + \\
       & K_2 (\partial_2 C^\epsilon, \partial_2 \tilde{C}) - K_2 \langle \sigma_2 , \tilde{C} \rangle_{\Gamma_I} + K_3 (\partial_3 C^\epsilon, \partial_3 \tilde{C}) - K_3 \langle\sigma_3 , \tilde{C} \rangle_{\Gamma_I} \bigg \} \diff t \\
       & = - (\mathbf{u}^\epsilon_{0H}, \mathbf{\tilde{u}}_H(0)) - \int_0^T \langle \theta_H, \mathbf{\tilde{u}}_H \rangle_{\Gamma_I} - \epsilon^2 (u_{03}^\epsilon, \tilde{u}_3 (0)) \\
@@ -611,7 +613,7 @@ Find $(\mathbf{u}, C)$ such that $\mathbf{u} = (\mathbf{u}_H, u_3) \in L^2 (0, T
 
   \begin{equation} \label{coastalHydrostatic}
     \begin{split}
-      & \int_0^T -(\mathbf{u}_H, \partial_t \mathbf{\tilde{u}}_H) + (\nabla_\nu \mathbf{u}_H, \nabla_\nu \mathbf{\tilde{u}}_H) - (\mathbf{u}_H, (\mathbf{u} \cdot \nabla) \mathbf{\tilde{u}}_H) + (b(\mathbf{u}_H), \mathbf{\tilde{u}}_H) \diff t \\
+      & \int_0^T \bigg \{ -(\mathbf{u}_H, \partial_t \mathbf{\tilde{u}}_H) + (\nabla_\nu \mathbf{u}_H, \nabla_\nu \mathbf{\tilde{u}}_H) - (\mathbf{u}_H, (\mathbf{u} \cdot \nabla) \mathbf{\tilde{u}}_H) + (b(\mathbf{u}_H), \mathbf{\tilde{u}}_H) \bigg \} \diff t \\
       &+ \int_0^T \bigg \{ -(C, \partial_t \tilde{C}) -(\mathbf{u}C, \nabla \tilde{C}) + \\
       & K_2 (\partial_2 C, \partial_2 \tilde{C}) - K_2 \langle \sigma_2 , \tilde{C} \rangle_{\Gamma_I} + K_3 (\partial_3 C, \partial_3 \tilde{C}) - K_3 \langle\sigma_3 , \tilde{C} \rangle_{\Gamma_I}\bigg \}  \diff t =\\
       & = - (\mathbf{u}_{0H}, \mathbf{\tilde{u}}_H(0)) -\int_0^T \langle \theta_H, \mathbf{\tilde{u}}_H \rangle_{\Gamma_I} - (C(0), \tilde{C}(0)) + \int_0^T (S,\tilde{C}) \diff t
@@ -625,11 +627,10 @@ The coastal, generalized version of the energy inequality becomes
 
   \begin{equation}
     \begin{split}  
-    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \\
-    & \int_0 ^ t \{    \norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \} \diff \tau + \\
-    & \int_0 ^ t \{\epsilon K_1 \norm{\partial_1 C^\epsilon}_{L^2}^2  + K_2 \norm{\partial_2 C^\epsilon}_{L^2}^2 + K_3 \norm{\partial_3 C^\epsilon}_{L^2}^2 \} \diff \tau \leq \\
-    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau - \int_0^t \langle \theta_H, \mathbf{u}_H \rangle _{\Gamma_I}\\
-    & \int _ 0 ^ t \epsilon K_1 \langle \sigma_1, \sigma \rangle_{\Gamma_G} + K_2 \langle \sigma_2 , \sigma \rangle_{\Gamma_I}  + K_3 \langle \sigma_3, \sigma \rangle_{\Gamma_I}  \diff \tau.
+    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \{ \norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \} \diff \tau \\
+    & + \int_0 ^ t \{\epsilon K_1 \norm{\partial_1 C^\epsilon}_{L^2}^2  + K_2 \norm{\partial_2 C^\epsilon}_{L^2}^2 + K_3 \norm{\partial_3 C^\epsilon}_{L^2}^2 \} \diff \tau \\
+    & \leq \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau \\
+    & - \int_0^t \langle \theta_H, \mathbf{u}_H \rangle _{\Gamma_I} + \int _ 0 ^ t \epsilon K_1 \langle \sigma_1, \sigma \rangle_{\Gamma_G} + K_2 \langle \sigma_2 , \sigma \rangle_{\Gamma_I}  + K_3 \langle \sigma_3, \sigma \rangle_{\Gamma_I}  \diff \tau.
     \end{split}
   \end{equation}
   
@@ -651,7 +652,7 @@ If we switch to the "informationless", fix coordinate system that does not match
 We are finishing this paper briefly mentioning a few ideas regarding the physical aspects of the model and some additional choices concerning the source term specifically.
 
 \begin{remark}
-\normalfont In the paper of \cite{temam2005some} it is suggested that the domain we work on has the form of $p_0 < p < p_1$, because for the thin portion of air between the earth and the isobar $p = p_1$, another specific simplified model would be necessary. This means that a way to make the model more precise is to cut the domain at an isobar a little bit off the physical ground. This would of course radically change the boundary conditions we use for the functions (in fact it is not trivial how to change them for this case), because it would take away the advantage of having a wall-like, natural and physical boundary condition for the domain we work on. If we are positively above the ground, $\partial_3 C = 0$ would represent a strange reflective layer.
+\normalfont In the paper \cite{temam2005some} it is suggested that the domain we work on has the form of $p_0 < p < p_1$, because for the thin portion of air between the earth and the isobar $p = p_1$, another specific simplified model would be necessary. This means that a way to make the model more precise is to cut the domain at an isobar a little bit off the physical ground. This would of course radically change the boundary conditions we use for the functions (in fact it is not trivial how to change them for this case), because it would take away the advantage of having a wall-like, natural and physical boundary condition for the domain we work on. If we are positively above the ground, $\partial_3 C = 0$ would represent a strange reflective layer.
 \end{remark}
 
 \begin{remark}
@@ -690,9 +691,9 @@ We will follow step by step the structure of the proof in \cite{temam2005some}, 
 
 \textbf{Step 1.} Firstly we redefine the norms and the functional setting in order to make them match our system.
 
-In order to be consistent with the notations of \cite{temam2005some}, throughout this section we will use the $V = V_1 \times V_2, H = H_1 \times H_2, \mathcal{V} = \mathcal{V}_1 \times \mathcal{V}_2,$ and $V_{(2)}$ function spaces --- they are defined analogously.
+Throughout this section we will use the $V = V_1 \times V_2, H = H_1 \times H_2, \mathcal{V} = \mathcal{V}_1 \times \mathcal{V}_2,$ and $V_{(2)}$ function spaces.
 
-We denote by $U$ the vector $(\mathbf{u}_H, C)$ (three scalar functions). The scalar products and norms in the case of the polluted atmosphere are defined as follows.
+We denote by $U$ the vector $(\mathbf{u}_H, C).$ The scalar products and norms in the case of the polluted atmosphere are defined as follows.
 
 \[ ((U, \tilde{U})) = ((\mathbf{u}_H, \mathbf{\tilde{u}}_H))_1 + K_C ((C, \tilde{C}))_2 \]
 
@@ -706,7 +707,7 @@ We denote by $U$ the vector $(\mathbf{u}_H, C)$ (three scalar functions). The sc
 
 \[\abs{U}_H = \abs{(U,U)_H}^{1/2}\]
 
-\textbf{Step 2.} Now the hydrostatic weak formulation of the polluted atmosphere can be brought to an analogous format as seen in \cite{temam2005some}:
+\textbf{Step 2.} Now the hydrostatic weak formulation of the polluted atmosphere can be written as
 
 \begin{equation} \label{EXISTENCEFORMAT}
   \begin{split}
@@ -779,7 +780,7 @@ The weak formulation is as follows.
 %% our concentration source is delta, S = \delta.  we need the L^2 regularity only for the weak formulation to make sense.
 
 \begin{definition}
-Given a source term $S = \delta$ or $S \in L^2(\Omega),$ find $U = (\mathbf{v}, C),$ that satisfies the conditions of (\ref{hydrostaticWF}) in the space dimensions, moreover
+Given a source term $S = \delta$ or $S \in L^2(\Omega),$ find $U = (\mathbf{v}, C),$ that satisfies the hypothesis of Definition \ref{definitionhydrostaticWF} in the space dimensions, moreover
 \begin{equation} \label{FWSTAT} a(U, \tilde{U}) + b(U,U, \tilde{U}) + e(U, \tilde{U}) = l(U, \tilde{U}) \end{equation}
 for every $\tilde{U} \in V_{(2)}.$
 \end{definition}
@@ -813,7 +814,7 @@ With this, the operator form of the equation becomes
 
 \[ ZU + AU + B(U,U) + EU = l + U_0.\]
 
-\textbf{Step 5.} Finally we discuss the details of the time-dependent case, where we establish the existence, for all time, of the solutions for the system (\ref{hydrostaticWF}).
+\textbf{Step 5.} Finally we discuss the details of the time-dependent case, where we establish the existence, for all time, of the solutions for the system (\ref{HNSC1})-(\ref{HNSC5}).
 
 The weak formulation in the time-dependent case takes the following form.
 
@@ -836,7 +837,7 @@ We proceed by using finite differences in time, taking an arbitrary integer $N,$
 \begin{equation}
   \begin{split}
     - \frac{1}{\Delta t} (U^n - U^{n-1}, \tilde{U})_H & +  a(U^n, \tilde{U}) + b(U^n,U^n, \tilde{U})\\
-    & + e(U^n, \tilde{U}) = l^n(\tilde{U}), \quad \forall \tilde{U} \in V_{(2)}. \\
+    & + e(U^n, \tilde{U}) = l^n(\tilde{U}), \quad \text{ for any } \tilde{U} \in V_{(2)} \\
   \end{split}
 \end{equation}
 
