@@ -728,11 +728,9 @@ We denote by $U$ the vector $(\mathbf{u}_H, C).$ The scalar products and norms i
 
 \textbf{Step 2.} Now the hydrostatic weak formulation of the polluted atmosphere can be written as
 
+%% make a comment about the regularities and why it is fine to use the time derivative here.
 \begin{equation} \label{EXISTENCEFORMAT}
-  \begin{split}
-& \int_0 ^T (U, \frac{\diff}{\diff t} \tilde{U})_H \diff t + \int_0 ^T a(U, \tilde{U}) + b(U,U,\tilde{U}) + e(U, \tilde{U}) \diff t = \\
-&  = \int_0 ^T l(\tilde{U}) \diff t + \int_0 ^T \int_\Omega U_{0} \tilde{U} (0) d \omega \diff t\\
-  \end{split}
+  \bigg ( \frac{\diff}{\diff t} U, \tilde{U} \bigg ) _H + a(U, \tilde{U}) + b(U,U,\tilde{U}) + e(U, \tilde{U}) = l(\tilde{U}) \\
 \end{equation}
 
 with
@@ -830,21 +828,13 @@ We are given $S = \delta$ or $S$ in $L^2(\Omega),$ then the problem (\ref{FWSTAT
 
 \textbf{Step 4.} In this step we provide the operator form of the equation (\ref{EXISTENCEFORMAT}) in the Hilbert space $V'_{(2)}$.
 
-The operators $A, B$ and $E$ can be set analogously as in the original version except for the additional integration in the time dimension; $A$ for example is defined to be a linear continuous form from $V$ into $V',$ given by the formula
+The operators $ \frac{\diff U}{\diff t}, A, B$ and $E$ can be set analogously as in the original version; $A$ for example is defined to be a linear continuous form from $V$ into $V',$ given by the formula
 
-\[ <AU, \tilde{U} > = \int_0 ^T a(U, \tilde{U}) \diff t, \quad \forall U, \tilde{U} \in V.\]
+\[ <AU, \tilde{U} > =a(U, \tilde{U}), \quad \forall U, \tilde{U} \in V.\]
 
-The main difference in this part of the proof is that we will need an additional operator $Z$ for the time derivative part, since we have to capture the
+The operator form of equation (\ref{EXISTENCEFORMAT}) becomes
 
-\[ \int_0 ^T (U, \frac{\diff}{\diff t} \tilde{U})_H \diff t \]
-
-inner product in terms of operators. In the original version $\frac{\diff U}{\diff t}$ was used as an operator acting on $\tilde{U}$, the result defined to be their inner product. In our case, since we apply the weak formulation in space-time, and the time derivation is applied on the test function, we introduce the following operator $Z$:
-
-\[ < Z(U), \tilde{U}> = \int_0^T (U, \frac{d\tilde{U}}{dt})_H \diff t .\]
-
-With this, the operator form of the equation becomes
-
-\[ ZU + AU + B(U,U) + EU = l + U_0.\]
+\[ \frac{\diff U}{\diff t} + AU + B(U,U) + EU = l.\]
 
 \textbf{Step 5.} Finally we discuss the details of the time-dependent case, where we establish the existence, for all time, of the solutions for the system (\ref{HNSC1})-(\ref{HNSC5}).
 
@@ -856,8 +846,8 @@ Given $T,$ $U_0 \in H,$ and a source term $S = \delta$ or $S \in L^2(\Omega),$ f
 
 \begin{equation} \label{timedependentWFE}
   \begin{split}
-   \int_0^T (U, \frac{\diff}{\diff t} \tilde{U}) &+ a(U, \tilde{U}) + b(U,U, \tilde{U})+ e(U, \tilde{U}) \diff t =\\
-   \int_0^T l(\tilde{U}) \diff t & + (U_0, \tilde{U}(0)), \quad \forall \tilde{U} \in V_{(2)}\\
+   \bigg ( \frac{\diff}{\diff t} U, \tilde{U} \bigg ) + a(U, \tilde{U}) + b(U,U, \tilde{U})+ e(U, \tilde{U})  & = l(\tilde{U}) \quad \forall \tilde{U} \in V_{(2)} \\
+    U(0) &= U_0
  \end{split}
 \end{equation}
 
@@ -868,21 +858,19 @@ We proceed by using finite differences in time, taking an arbitrary integer $N,$
 \[ U^0 = U_0,\]
 \begin{equation}
   \begin{split}
-    - \frac{1}{\Delta t} (U^n - U^{n-1}, \tilde{U})_H & +  a(U^n, \tilde{U}) + b(U^n,U^n, \tilde{U})\\
+    \frac{1}{\Delta t} (U^n - U^{n-1}, \tilde{U})_H & +  a(U^n, \tilde{U}) + b(U^n,U^n, \tilde{U})\\
     & + e(U^n, \tilde{U}) = l^n(\tilde{U}), \quad \text{ for any } \tilde{U} \in V_{(2)} \\
   \end{split}
 \end{equation}
 
-We use $- \frac{1}{\Delta t} (U^n - U^{n-1}, \tilde{U})_H$ to approximate $(U, \frac{\diff}{\diff t} \tilde{U}),$ and note that we will have a minus sign difference from the original version --- as seen in the above expression --- since we apply the time derivative on the test function.
-
 Following the proof of the existence of $U^n \in V,$ proving some a priori estimates, introducing approximate functions on (0,T), and using the Aubin compactness theorem in an identical way as described in \cite{temam2005some}, we pass to the limit and arrive to
 
-\[ \int_0^T (U, \tilde{U})_H \psi ' \diff t + \int_0^T \big [ a(U, \tilde{U}) + b(U,U, \tilde{U}) + e(U, \tilde{U}) \big ] \psi \diff t = \]
+\[ - \int_0^T (U, \tilde{U})_H \psi ' \diff t + \int_0^T \big [ a(U, \tilde{U}) + b(U,U, \tilde{U}) + e(U, \tilde{U}) \big ] \psi \diff t = \]
 \[ = (U_0, \tilde{U}) \psi (0) + \int_0 ^ T l(\tilde{U}) \psi \diff t, \]
 
 where $\psi$ is a function defined on $[0,T]$, used to create the time-dependent version $\tilde{U}\psi$ of the test function. Renaming this product simply to be $\tilde{U}(t)$, the time-dependent test function, we arrive exactly to
 
-\[ \int_0^T (U, \partial_t \tilde{U})_H \diff t + \int_0^T \big [ a(U, \tilde{U}) + b(U,U, \tilde{U}) + e(U, \tilde{U}) \big ] \diff t = \]
+\[ - \int_0^T (U, \partial_t \tilde{U})_H \diff t + \int_0^T \big [ a(U, \tilde{U}) + b(U,U, \tilde{U}) + e(U, \tilde{U}) \big ] \diff t = \]
 \[ = (U_0, \tilde{U}(0)) + \int_0 ^ T l(\tilde{U}) \diff t, \]
 
 which is the same as (\ref{timedependentWFE}), and which thus finally leads us to the main existence result of this section.
