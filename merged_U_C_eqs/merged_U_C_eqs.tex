@@ -698,8 +698,8 @@ $$ V_1 = \{ \mathbf{u}_H \in H^1_\Gamma (\Omega) \times H^1_\Gamma (\Omega), \na
 
 $$ V_2 = \{ C \in L^2(\Omega); \partial_2 C, \partial_3 C \in L^2(\Omega)\}, $$
 
-%%SUPERVISE, TEMPORARY. H is the space in where we take the inner product between dU / dt and tilde{U}, and where we take U_0 from.
-$$ H_1 = \{ \mathbf{u}_H \in (L^2(\Omega))^2, \nabla \cdot \int_h^0 \mathbf{u}_H \diff z = 0, n_H  \cdot \int_h^0 \mathbf{u}_H \diff z = 0 \text{ on } \Gamma_L \}, $$
+%% H is the space in where we take the inner product between dU / dt and tilde{U}, and where we take U_0 from, essentially the L^2 version of the V space.
+$$ H_1 =  \{ \mathbf{u}_H \in H^0_\Gamma (\Omega) \times H^0_\Gamma (\Omega), \nabla \cdot \int_h^0 \mathbf{u}_H \diff z = 0  \}, $$
 
 and
 
