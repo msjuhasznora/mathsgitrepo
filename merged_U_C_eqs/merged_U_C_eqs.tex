@@ -592,11 +592,11 @@ Find $\mathbf{u}^\epsilon = (\mathbf{u}_H, u^\epsilon_3) \in L^2 (0,T ; \mathbf{
 
   \begin{equation} \label{coastalAnisotropic}
     \begin{split}
-      & \int_0^T \bigg \{ -(\mathbf{u}^\epsilon_H, \partial_t \mathbf{\tilde{u}}_H) + (\nabla_\nu \mathbf{u}^\epsilon_H, \nabla_\nu \mathbf{\tilde{u}}_H) - (\mathbf{u}^\epsilon_H, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{\tilde{u}}_H) + (b(\mathbf{u}^\epsilon_H), \mathbf{\tilde{u}}_H) \bigg \} \diff t \\
-      & + \epsilon \beta \int_0 ^ T \bigg \{ (u_3 ^\epsilon, \tilde{u}_1) - (u_1^\epsilon, \tilde{u}_3) \bigg \} \diff t\\
-      & + \epsilon^2 \int _0 ^ T \bigg \{ -(u_3^\epsilon, \partial_t \tilde{u}_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, \tilde{u}_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu \tilde{u}_3) \bigg \} \diff t \\
-      &+ \int_0^T \bigg \{ -(C^\epsilon, \partial_t \tilde{C}) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) + \epsilon K_1 (\partial_1 C^\epsilon, \partial_1 \tilde{C}) - \epsilon K_1 \langle \sigma_1 , \tilde{C} \rangle _{\Gamma_G} + \\
-      & K_2 (\partial_2 C^\epsilon, \partial_2 \tilde{C}) - K_2 \langle \sigma_2 , \tilde{C} \rangle_{\Gamma_I} + K_3 (\partial_3 C^\epsilon, \partial_3 \tilde{C}) - K_3 \langle\sigma_3 , \tilde{C} \rangle_{\Gamma_I} \bigg \} \diff t \\
+      & \int_0^T \bigg [ -(\mathbf{u}^\epsilon_H, \partial_t \mathbf{\tilde{u}}_H) + (\nabla_\nu \mathbf{u}^\epsilon_H, \nabla_\nu \mathbf{\tilde{u}}_H) - (\mathbf{u}^\epsilon_H, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{\tilde{u}}_H) + (b(\mathbf{u}^\epsilon_H), \mathbf{\tilde{u}}_H) \bigg ] \diff t \\
+      & + \epsilon \beta \int_0 ^ T \bigg [ (u_3 ^\epsilon, \tilde{u}_1) - (u_1^\epsilon, \tilde{u}_3) \bigg ] \diff t\\
+      & + \epsilon^2 \int _0 ^ T \bigg [ -(u_3^\epsilon, \partial_t \tilde{u}_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, \tilde{u}_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu \tilde{u}_3) \bigg ] \diff t \\
+      &+ \int_0^T \bigg [ -(C^\epsilon, \partial_t \tilde{C}) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) + \epsilon K_1 (\partial_1 C^\epsilon, \partial_1 \tilde{C}) - \epsilon K_1 \langle \sigma_1 , \tilde{C} \rangle _{\Gamma_G} + \\
+      & K_2 (\partial_2 C^\epsilon, \partial_2 \tilde{C}) - K_2 \langle \sigma_2 , \tilde{C} \rangle_{\Gamma_I} + K_3 (\partial_3 C^\epsilon, \partial_3 \tilde{C}) - K_3 \langle\sigma_3 , \tilde{C} \rangle_{\Gamma_I} \bigg ] \diff t \\
       & = - (\mathbf{u}^\epsilon_{0H}, \mathbf{\tilde{u}}_H(0)) - \int_0^T \langle \theta_H, \mathbf{\tilde{u}}_H \rangle_{\Gamma_I} - \epsilon^2 (u_{03}^\epsilon, \tilde{u}_3 (0)) \\
       & - (C_0^\epsilon, \tilde{C} (0)) + \int_0^T (S^\epsilon,\tilde{C}) \diff t
     \end{split}
