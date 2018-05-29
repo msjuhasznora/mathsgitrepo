@@ -360,11 +360,11 @@ In this section we describe the weak formulation of the merged equations in both
   
   Find $(\mathbf{u}, C)$ such that $\mathbf{u} = (\mathbf{u}_H, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_H \in L^\infty (0,T; L^2(\Omega)^2),$ and $C \in L_t^\infty L_x^2$ with $\partial_2 C, \partial_3 C \in L^2_t L^2_x$, such that
   
-  \begin{equation} \label{hydrostaticWF}
+  \begin{equation}
     \begin{split}
       & \int_0^T \bigg[ -(\mathbf{u}_H, \partial_t \mathbf{\tilde{u}}_H) + (\nabla_\nu \mathbf{u}_H, \nabla_\nu \mathbf{\tilde{u}}_H) - (\mathbf{u}_H, (\mathbf{u} \cdot \nabla) \mathbf{\tilde{u}}_H) + (b(\mathbf{u}_H), \mathbf{\tilde{u}}_H) \bigg ] \diff t \\
       &+ \int_0^T \bigg[ -(C, \partial_t \tilde{C}) -(\mathbf{u}C, \nabla \tilde{C}) + K_2 (\partial_2 C, \partial_2 \tilde{C}) + K_3 (\partial_3 C, \partial_3 \tilde{C}) \bigg ] \diff t \\
-      & = - (\mathbf{u}_{0H}, \mathbf{\tilde{u}}_H(0)) - (C(0), \tilde{C}(0)) + \int_0^T (S,\tilde{C}) \diff t
+      & = - (\mathbf{u}_{0H}, \mathbf{\tilde{u}}_H(0)) - (C(0), \tilde{C}(0)) + \int_0^T (S,\tilde{C}) \diff t \raisetag{20pt}\label{hydrostaticWF}
     \end{split}
   \end{equation}
   
@@ -388,14 +388,14 @@ In this section we describe the weak formulation of the merged equations in both
   
   Find $\mathbf{u}^\epsilon = (\mathbf{u}_H, u^\epsilon_3) \in L^2 (0,T ; \mathbf{V}) \cap L^\infty (0, T; L^2 (\Omega)^3)$ and $C^\epsilon \in L^\infty (0,T; L^2(\Omega)) \cap L^2 (0,T; H^1(\Omega))$, such that
   
-  \begin{equation} \label{anisotropicWF}
+  \begin{equation}
     \begin{split}
       & \int_0^T \bigg [ -(\mathbf{u}^\epsilon_H, \partial_t \mathbf{\tilde{u}}_H) + (\nabla_\nu \mathbf{u}^\epsilon_H, \nabla_\nu \mathbf{\tilde{u}}_H) - (\mathbf{u}^\epsilon_H, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{\tilde{u}}_H) + (b(\mathbf{u}^\epsilon_H), \mathbf{\tilde{u}}_H) \bigg ] \diff t \\
-      & + \epsilon \beta \int_0 ^ T \bigg [ (u_3 ^\epsilon, \tilde{u}_1) - (u_1^\epsilon, \tilde{u}_3) \bigg ] \diff t\\
-      & + \epsilon^2 \int _0 ^ T \bigg [ -(u_3^\epsilon, \partial_t \tilde{u}_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, \tilde{u}_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu \tilde{u}_3) \bigg ] \diff t \\
-      &+ \int_0^T \bigg [ -(C^\epsilon, \partial_t \tilde{C}) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) + \\
-      & \epsilon K_1 (\partial_1 C^\epsilon, \partial_1 \tilde{C}) - \epsilon K_1 \big[(\partial_1 C^\epsilon) \tilde{C} \big] _{\Gamma_G} + K_2 (\partial_2 C^\epsilon, \partial_2 \tilde{C}) + K_3 (\partial_3 C^\epsilon, \partial_3 \tilde{C}) \bigg ] \diff t =\\
-      & = - (\mathbf{u}^\epsilon_{0H}, \mathbf{\tilde{u}}_H(0)) - \epsilon^2 (u_{03}^\epsilon, \tilde{u}_3 (0)) - (C^\epsilon (0), \tilde{C} (0)) + \int_0^T (S^\epsilon,\tilde{C}) \diff t
+      & + \epsilon \beta \int_0 ^ T \big [ (u_3 ^\epsilon, \tilde{u}_1) - (u_1^\epsilon, \tilde{u}_3) \big ] \diff t\\
+      & + \epsilon^2 \int _0 ^ T \big [ -(u_3^\epsilon, \partial_t \tilde{u}_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, \tilde{u}_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu \tilde{u}_3) \big ] \diff t \\
+      & + \int_0^T \bigg [ -(C^\epsilon, \partial_t \tilde{C}) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) + \epsilon K_1 (\partial_1 C^\epsilon, \partial_1 \tilde{C}) - \epsilon K_1 \big[(\partial_1 C^\epsilon) \tilde{C} \big] _{\Gamma_G} \\
+      & + K_2 (\partial_2 C^\epsilon, \partial_2 \tilde{C}) + K_3 (\partial_3 C^\epsilon, \partial_3 \tilde{C}) \bigg ] \diff t =\\
+      & = - (\mathbf{u}^\epsilon_{0H}, \mathbf{\tilde{u}}_H(0)) - \epsilon^2 (u_{03}^\epsilon, \tilde{u}_3 (0)) - (C^\epsilon (0), \tilde{C} (0)) + \int_0^T (S^\epsilon,\tilde{C}) \diff t \raisetag{20pt} \label{anisotropicWF}
     \end{split}
   \end{equation}
   
@@ -422,13 +422,13 @@ Now we are ready to state our main result.
   
   As we mentioned before, one of the most fundamental tools in this proof is the energy inequality. If we calculate it for the anisotropic system, we obtain that for a.e. $t \in [0,T]$ the following holds:
   
-  \begin{equation} \label{energyIEQ}
+  \begin{equation}
     \begin{split}  
-    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \{    \norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \} \diff \tau \\
-    & + \int_0 ^ t \{\epsilon K_1 \norm{\partial_1 C^\epsilon}_{L^2}^2  + K_2 \norm{\partial_2 C^\epsilon}_{L^2}^2 + K_3 \norm{\partial_3 C^\epsilon}_{L^2}^2 \} d \tau \\
+    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \big[ \norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \big] \diff \tau \\
+    & + \int_0 ^ t  \big [ \epsilon K_1 \norm{\partial_1 C^\epsilon}_{L^2}^2  + K_2 \norm{\partial_2 C^\epsilon}_{L^2}^2 + K_3 \norm{\partial_3 C^\epsilon}_{L^2}^2 \big ] d \tau \\
     & \leq \int_0^t (S^\epsilon,C^\epsilon) \diff \tau + \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon_0}_{L^2}^2) \\
     & + \int _ 0 ^ t \epsilon K_1 \langle \partial_1 C^\epsilon, C^\epsilon \rangle_{\Gamma_G} \diff \tau \\
-    & = I_1 + I_2 + I_3.
+    & = I_1 + I_2 + I_3. \raisetag{70pt} \label{energyIEQ}
     \end{split}
   \end{equation}    
   
@@ -449,13 +449,13 @@ Now we are ready to state our main result.
   
 The energy inequality (\ref{energyIEQ}) now takes the form
 
-  \begin{equation} \label{finalformEIEQ}
+  \begin{equation}
     \begin{split}  
-    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \{    \norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \} \diff \tau \\
-    & + \int_0 ^ t \{(\epsilon K_1 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_1 C^\epsilon}_{L^2}^2  + (K_2 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_2 C^\epsilon}_{L^2}^2 \\
-    & + (K_3 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_3 C^\epsilon}_{L^2}^2 \} \diff \tau \\
+    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \big [\norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2 \big ] \diff \tau \\
+    & + \int_0 ^ t \bigg[ (\epsilon K_1 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_1 C^\epsilon}_{L^2}^2  + (K_2 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_2 C^\epsilon}_{L^2}^2 \\
+    & + (K_3 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_3 C^\epsilon}_{L^2}^2 \bigg] \diff \tau \\
     & \leq \frac{1}{\zeta} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)} + \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) \\
-    & + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau.
+    & + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau. \raisetag{20pt} \label{finalformEIEQ}
     \end{split}
   \end{equation}  
     
@@ -590,15 +590,15 @@ The weak formulation is as follows.
 \begin{definition}
 Find $\mathbf{u}^\epsilon = (\mathbf{u}_H, u^\epsilon_3) \in L^2 (0,T ; \mathbf{V}) \cap L^\infty (0, T; L^2 (\Omega)^3)$ and $C^\epsilon$ with $C^\epsilon \in L^\infty L^2$, $C^\epsilon \in L^2 (0,T; H^1)$, $C^\epsilon(0) \in L^2_x$ such that
 
-  \begin{equation} \label{coastalAnisotropic}
+  \begin{equation}
     \begin{split}
       & \int_0^T \bigg [ -(\mathbf{u}^\epsilon_H, \partial_t \mathbf{\tilde{u}}_H) + (\nabla_\nu \mathbf{u}^\epsilon_H, \nabla_\nu \mathbf{\tilde{u}}_H) - (\mathbf{u}^\epsilon_H, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{\tilde{u}}_H) + (b(\mathbf{u}^\epsilon_H), \mathbf{\tilde{u}}_H) \bigg ] \diff t \\
-      & + \epsilon \beta \int_0 ^ T \bigg [ (u_3 ^\epsilon, \tilde{u}_1) - (u_1^\epsilon, \tilde{u}_3) \bigg ] \diff t\\
-      & + \epsilon^2 \int _0 ^ T \bigg [ -(u_3^\epsilon, \partial_t \tilde{u}_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, \tilde{u}_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu \tilde{u}_3) \bigg ] \diff t \\
+      & + \epsilon \beta \int_0 ^ T \big [ (u_3 ^\epsilon, \tilde{u}_1) - (u_1^\epsilon, \tilde{u}_3) \big ] \diff t\\
+      & + \epsilon^2 \int _0 ^ T \big [ -(u_3^\epsilon, \partial_t \tilde{u}_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, \tilde{u}_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu \tilde{u}_3) \big ] \diff t \\
       &+ \int_0^T \bigg [ -(C^\epsilon, \partial_t \tilde{C}) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) + \epsilon K_1 (\partial_1 C^\epsilon, \partial_1 \tilde{C}) - \epsilon K_1 \langle \sigma_1 , \tilde{C} \rangle _{\Gamma_G} + \\
       & K_2 (\partial_2 C^\epsilon, \partial_2 \tilde{C}) - K_2 \langle \sigma_2 , \tilde{C} \rangle_{\Gamma_I} + K_3 (\partial_3 C^\epsilon, \partial_3 \tilde{C}) - K_3 \langle\sigma_3 , \tilde{C} \rangle_{\Gamma_I} \bigg ] \diff t \\
       & = - (\mathbf{u}^\epsilon_{0H}, \mathbf{\tilde{u}}_H(0)) - \int_0^T \langle \theta_H, \mathbf{\tilde{u}}_H \rangle_{\Gamma_I} - \epsilon^2 (u_{03}^\epsilon, \tilde{u}_3 (0)) \\
-      & - (C_0^\epsilon, \tilde{C} (0)) + \int_0^T (S^\epsilon,\tilde{C}) \diff t
+      & - (C_0^\epsilon, \tilde{C} (0)) + \int_0^T (S^\epsilon,\tilde{C}) \diff t \raisetag{50pt} \label{coastalAnisotropic}
     \end{split}
   \end{equation}
   
@@ -611,12 +611,12 @@ On the other hand, the weak formulation of the hydrostatic case will take the fo
 \begin{definition}
 Find $(\mathbf{u}, C)$ such that $\mathbf{u} = (\mathbf{u}_H, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_H \in L^\infty (0,T; L^2(\Omega)^2),$ and $C \in L_t^\infty L_x^2$ with $\partial_2 C, \partial_3 C \in L^2_t L^2_x$, and $C_0 \in L^2_x$, such that
 
-  \begin{equation} \label{coastalHydrostatic}
+  \begin{equation}
     \begin{split}
-      & \int_0^T \bigg \{ -(\mathbf{u}_H, \partial_t \mathbf{\tilde{u}}_H) + (\nabla_\nu \mathbf{u}_H, \nabla_\nu \mathbf{\tilde{u}}_H) - (\mathbf{u}_H, (\mathbf{u} \cdot \nabla) \mathbf{\tilde{u}}_H) + (b(\mathbf{u}_H), \mathbf{\tilde{u}}_H) \bigg \} \diff t \\
-      & + \int_0^T \bigg \{ -(C, \partial_t \tilde{C}) -(\mathbf{u}C, \nabla \tilde{C}) \\
-      & + K_2 (\partial_2 C, \partial_2 \tilde{C}) - K_2 \langle \sigma_2 , \tilde{C} \rangle_{\Gamma_I} + K_3 (\partial_3 C, \partial_3 \tilde{C}) - K_3 \langle\sigma_3 , \tilde{C} \rangle_{\Gamma_I}\bigg \}  \diff t \\
-      & = - (\mathbf{u}_{0H}, \mathbf{\tilde{u}}_H(0)) -\int_0^T \langle \theta_H, \mathbf{\tilde{u}}_H \rangle_{\Gamma_I} - (C(0), \tilde{C}(0)) + \int_0^T (S,\tilde{C}) \diff t
+      & \int_0^T \bigg [ -(\mathbf{u}_H, \partial_t \mathbf{\tilde{u}}_H) + (\nabla_\nu \mathbf{u}_H, \nabla_\nu \mathbf{\tilde{u}}_H) - (\mathbf{u}_H, (\mathbf{u} \cdot \nabla) \mathbf{\tilde{u}}_H) + (b(\mathbf{u}_H), \mathbf{\tilde{u}}_H) \bigg ] \diff t \\
+      & + \int_0^T \bigg [ -(C, \partial_t \tilde{C}) -(\mathbf{u}C, \nabla \tilde{C}) \\
+      & + K_2 (\partial_2 C, \partial_2 \tilde{C}) - K_2 \langle \sigma_2 , \tilde{C} \rangle_{\Gamma_I} + K_3 (\partial_3 C, \partial_3 \tilde{C}) - K_3 \langle\sigma_3 , \tilde{C} \rangle_{\Gamma_I}\bigg ]  \diff t \\
+      & = - (\mathbf{u}_{0H}, \mathbf{\tilde{u}}_H(0)) -\int_0^T \langle \theta_H, \mathbf{\tilde{u}}_H \rangle_{\Gamma_I} \diff t - (C(0), \tilde{C}(0)) + \int_0^T (S,\tilde{C}) \diff t \raisetag{20pt} \label{coastalHydrostatic}
     \end{split}
   \end{equation}
   
@@ -627,10 +627,10 @@ The coastal, generalized version of the energy inequality becomes
 
   \begin{equation}
     \begin{split}  
-    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \{ \norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \} \diff \tau \\
-    & + \int_0 ^ t \{\epsilon K_1 \norm{\partial_1 C^\epsilon}_{L^2}^2  + K_2 \norm{\partial_2 C^\epsilon}_{L^2}^2 + K_3 \norm{\partial_3 C^\epsilon}_{L^2}^2 \} \diff \tau \\
+    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \big [ \norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2 \big ] \diff \tau \\
+    & + \int_0 ^ t \big [ \epsilon K_1 \norm{\partial_1 C^\epsilon}_{L^2}^2  + K_2 \norm{\partial_2 C^\epsilon}_{L^2}^2 + K_3 \norm{\partial_3 C^\epsilon}_{L^2}^2 \big ] \diff \tau \\
     & \leq \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau \\
-    & - \int_0^t \langle \theta_H, \mathbf{u}_H \rangle _{\Gamma_I} + \int _ 0 ^ t \epsilon K_1 \langle \sigma_1, \sigma \rangle_{\Gamma_G} + K_2 \langle \sigma_2 , \sigma \rangle_{\Gamma_I}  + K_3 \langle \sigma_3, \sigma \rangle_{\Gamma_I}  \diff \tau.
+    & - \int_0^t \langle \theta_H, \mathbf{u}_H \rangle _{\Gamma_I} \diff \tau + \int _ 0 ^ t \big [ \epsilon K_1 \langle \sigma_1, \sigma \rangle_{\Gamma_G} + K_2 \langle \sigma_2 , \sigma \rangle_{\Gamma_I}  + K_3 \langle \sigma_3, \sigma \rangle_{\Gamma_I} \big ] \diff \tau. \raisetag{50pt} \label{EIQCG}
     \end{split}
   \end{equation}
   
@@ -783,7 +783,7 @@ finally we also adjust the original steps that provide the antisymmetric propert
   
   \item The proof of $$b(U, \tilde{U}, U^\# ) = - b(U, U^\#, \tilde{U} ) \text{ for } U, \tilde{U}, U^\# \in V \text{ and } \tilde{U} \text{ or } U^\# \text{ in } V_{(2)}$$ can be derived by integration by parts as we have
   
-  \[ \int_0 ^T  (\mathbf{u} \nabla C, \tilde{C}) \diff t =  - \int_0 ^T  (- \mathbf{u} C, \nabla \tilde{C}) \diff t, \]
+  \[ \int_0 ^T  (\mathbf{u} \nabla C, \tilde{C}) \diff t =  - \int_0 ^T  ( \mathbf{u} C, \nabla \tilde{C}) \diff t, \]
   
   observing that the boundary terms disappear.
   
