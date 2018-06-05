@@ -8,6 +8,7 @@
 \usepackage{float} 
 \usepackage{array}
 \usepackage{outlines}
+\usepackage{setspace}
 \setlist[enumerate,1]{label=\alph*)}
 \setlist[enumerate,2]{label=\roman*)}
 \newtheorem{theorem}{Theorem}
@@ -22,15 +23,24 @@
 %%% *** PREAMBLE *** %%%
 \title{Weak solution of the merged mathematical equations of the polluted atmosphere}
 
+\author{
+  \large{\bf{Donatella Donatelli} and \bf{N\'ora Juh\'asz}} \\[1ex]
+  \normalsize Department of Information Engineering, Computer Science and Mathematics \\
+  \normalsize University of L'Aquila \\
+  \normalsize 67100 L'Aquila, Italy. \\
+  \normalsize {donatella.donatelli@univaq.it},  {ms.juhasz.nora@gmail.com}
+}
+
+\date{}
+
 %%%***  CONTENT *** %%%
 \begin{document}
 
 \maketitle
-\newpage
 
 \begin{abstract}
 
-Considered as a geophysical fluid, the polluted atmosphere shares the shallow domain characteristics with other natural large-scale fluids such as seas and oceans. This means that its domain is excessively greater horizontally than in the vertical dimension, leading to the classic hydrostatic approximation of the Navier-Stokes equations. The authors of the \cite{azerad2001mathematical} article have proved a convergence theorem for this model with respect to the ocean, without considering pollution effects. In this present work we provide a generalization of their result translated to the atmosphere, extending the fluid velocity equations with an additional convection-diffusion equation representing pollutants in the atmosphere.
+Considered as a geophysical fluid, the polluted atmosphere shares the shallow domain characteristics with other natural large-scale fluids such as seas and oceans. This means that its domain is excessively greater horizontally than in the vertical dimension, leading to the classic hydrostatic approximation of the Navier-Stokes equations. The authors of the \cite{azerad2001mathematical} article have proved a convergence theorem for this model with respect to the ocean, without considering pollution effects. The novelty of this present work is to provide a generalization of their result translated to the atmosphere, extending the fluid velocity equations with an additional convection-diffusion equation representing pollutants in the atmosphere.
 
 \end{abstract}
 
@@ -112,7 +122,7 @@ The equations governing the air velocity $\mathbf{v}$ and pressure $q$ in the at
 Contaminants emitted into the atmosphere are transported by the wind, mixed and dispersed by turbulent behavior, and deposited onto the ground by gravity. The dispersion of pollutants is commonly modeled by a diffusive equation of the form
     
 \begin{equation} \label{diffusive}
-  \partial_t C + \mathbf{v} \cdot \nabla C = K_x \frac{\partial ^2 C}{\partial x ^ 2} + K_y \frac{\partial ^2 C}{\partial y ^ 2} + K_z \frac{\partial ^2 C}{\partial z ^ 2} + S,
+  \partial_t C + \mathbf{v} \cdot \nabla C = K_x \partial_{xx} ^2 C + K_y  \partial_{yy} ^2  C + K_z  \partial_{zz} ^2  C + S,
 \end{equation}
 
 where $C$ is the pollution concentration.
@@ -134,7 +144,9 @@ Now, we perform a vertical scaling to make the domain independent of $\epsilon.$
 
     \[x=x_1, \quad y=x_2, \quad z=\epsilon x_3. \]
     
-    So we have the following new, $\epsilon$ - independent domain
+    For simplicity of notation we will use $\partial_i = \partial_{x_i} $ for $i = 1,2,3.$
+    
+    We have the following new, $\epsilon$ - independent domain
     
     \[ \Omega =  \{(x_1,x_2,x_3) \in \mathbb{R}^3 ; (x_1,x_2) \in \omega, 0 < x_3 < h (x_1 , x_2) \}.\]
     
@@ -145,13 +157,15 @@ Now, we perform a vertical scaling to make the domain independent of $\epsilon.$
     
     where the later embodies the different eddy viscosity hypothesis that we mentioned earlier, and $p$ is the pressure term including the gravity potential $\varphi,$ i.e., $p = q - \varphi$. Basically it can be heuristically deduced from the viscosity dimensions: $\text{typical length}^2 / \text{typical time}$, more details on the subject can be found in \cite{besson1992some}, \cite{azerad2001mathematical}.
     
+    Note that from this point we have $\nabla = (\partial_1, \partial_2, \partial_3) $ and $ \Delta_\nu = \nu_1 \partial^2_{11} + \nu_2 \partial^2_{22}  + \nu_3 \partial^2_{33} $. 
+    
     Finally, we use an analogous rescaling methodology for the diffusivity constants in (\ref{diffusive}),
     
     \[ K_y = K_2, \quad K_z = \epsilon ^ 2 K_3. \]
     
     As a second step of the rescaling process, we also exploit the fact that we chose the coordinate system in a way so that the $x$ axis matches the downwind direction. In this case we use an additional scaling equation, which is different in nature from the previous ones in the sense that it is not derived from the shallowness of the domain but rather suggested by the fact that in the downwind direction it is natural to assume that the diffusion is negligible compared to downwind transport, i.e.
     
-    \begin{equation} \abs{u_1 \partial_{x_1} C} \gg \abs{ K_x \frac{\partial ^2 C}{\partial x_1 ^ 2} }\end{equation}
+    \begin{equation} \abs{u_1 \partial_{1} C} \gg \abs{ K_x \partial_{11} ^2 C }\end{equation}
     which leads us to using
     \[ K_x = \epsilon K_1.\]
     
@@ -186,7 +200,7 @@ where $\gamma$ is a normalizing constant.
     \end{equation}
     
     \begin{equation} \label{ANSC5}
-    \partial_t C^\epsilon + \mathbf{u^\epsilon} \cdot \nabla C^\epsilon = \epsilon K_1 \frac{\partial ^2 C^\epsilon}{\partial x_1 ^ 2} + K_2 \frac{\partial ^2 C^\epsilon}{\partial x_2 ^ 2} + K_3 \frac{\partial ^2 C^\epsilon}{\partial x_3 ^ 2} + S_\epsilon \text{ in } \Omega \times (0,T)
+    \partial_t C^\epsilon + \mathbf{u^\epsilon} \cdot \nabla C^\epsilon = \epsilon K_1 \partial_{11} ^ 2 C^\epsilon + K_2 \partial_{22} ^ 2 C^\epsilon + K_3 \partial_{33} ^ 2 C^\epsilon + S_\epsilon \text{ in } \Omega \times (0,T)
     \end{equation}
     
 %    \begin{equation} \label{ANSC6}
@@ -313,7 +327,7 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
     \end{equation}
     
     \begin{equation} \label{HNSC5}   
-    \partial_t C + \mathbf{u} \cdot \nabla C = K_2 \frac{\partial ^2 C}{\partial x_2 ^ 2} + K_3 \frac{\partial ^2 C}{\partial x_3 ^ 2} + S \text{ in } \Omega \times (0,T)
+    \partial_t C + \mathbf{u} \cdot \nabla C = K_2 \partial_{22} ^ 2 C + K_3 \partial_{33} ^2 C + S \text{ in } \Omega \times (0,T)
     \end{equation}
     
     \begin{equation} \label{HNSC6}   
@@ -394,7 +408,7 @@ In this section we describe the weak formulation of the merged equations in both
       & + \epsilon \beta \int_0 ^ T \big [ (u_3 ^\epsilon, \tilde{u}_1) - (u_1^\epsilon, \tilde{u}_3) \big ] \diff t\\
       & + \epsilon^2 \int _0 ^ T \big [ -(u_3^\epsilon, \partial_t \tilde{u}_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, \tilde{u}_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu \tilde{u}_3) \big ] \diff t \\
       & + \int_0^T \bigg [ -(C^\epsilon, \partial_t \tilde{C}) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) + \epsilon K_1 (\partial_1 C^\epsilon, \partial_1 \tilde{C}) - \epsilon K_1 \big[(\partial_1 C^\epsilon) \tilde{C} \big] _{\Gamma_G} \\
-      & + K_2 (\partial_2 C^\epsilon, \partial_2 \tilde{C}) + K_3 (\partial_3 C^\epsilon, \partial_3 \tilde{C}) \bigg ] \diff t =\\
+      & + K_2 (\partial_2 C^\epsilon, \partial_2 \tilde{C}) + K_3 (\partial_3 C^\epsilon, \partial_3 \tilde{C}) \bigg ] \diff t \\
       & = - (\mathbf{u}^\epsilon_{0H}, \mathbf{\tilde{u}}_H(0)) - \epsilon^2 (u_{03}^\epsilon, \tilde{u}_3 (0)) - (C^\epsilon (0), \tilde{C} (0)) + \int_0^T (S^\epsilon,\tilde{C}) \diff t \raisetag{20pt} \label{anisotropicWF}
     \end{split}
   \end{equation}
@@ -485,7 +499,7 @@ The energy inequality (\ref{energyIEQ}) now takes the form
   
   \begin{align} 
     &  \mathbf{u}_H^\epsilon \rightharpoonup \mathbf{u}_H &\quad & \text{weakly in $L_t^\infty L_x^2 \cap L_t^2 H_x^1$,} \label{WeakConvUHEps} \\
-    &  \epsilon u_3^\epsilon \rightharpoonup f &\quad & \text{weakly for some limit element $f$ in $L_t^\infty L_x^2 \cap L_t^2 H_x^1$,} \label{WeakConvU3Eps} \\ 
+    &  \epsilon^2 u_3^\epsilon \to 0 &\quad & \text{strongly in $L_t^\infty L_x^2 \cap L_t^2 H_x^1$,} \label{WeakConvU3Eps} \\ 
     & u_3^\epsilon \rightharpoonup u_3  &\quad & \text{weakly in $L_t^2 L_x^2$,} \label{WeakConvU3NoEps} \\
     & C^\epsilon \rightharpoonup C &\quad & \text{weakly in $L_t^\infty L_x^2$,} \label{WeakConvCEps1} \\
     & \partial_2 C^\epsilon \rightharpoonup \partial_2 C &\quad & \text{weakly in $L_t^2 L_x^2$,} \label{WeakConvCEps2} \\
@@ -495,25 +509,25 @@ The energy inequality (\ref{energyIEQ}) now takes the form
 
 \subsection{Passing to the limit}
 
-    In order to conclude the proof of Theorem \ref{maintheorem} we pass to the limit in the weak formulation (\ref{anisotropicWF}). To take the limit for the linear velocity terms that do not include the concentration function $C^\epsilon$ we can use (\ref{WeakConvUHEps}), (\ref{WeakConvU3Eps}) and (\ref{WeakConvU3NoEps}). As for the nonlinear terms, the convergence can be shown using a time compactness theorem that is based on a result by Simon \cite{simon1986compact}. The key point is to apply a sort of generalization of the classical translation criterium of Riesz-Frechet-Kolmogorov which enables us to get strong convergence for the horizontal velocities. This is achieved by establishing a bound for the perturbation of $\mathbf{u}_H$ of the form $\norm{\tau_h \mathbf{u}_H - \mathbf{u}_H}_{L^p(0,T-h, \mathbf{Y})} \leq \varphi(h) + \psi(\epsilon),$ where $\mathbf{Y}$ is a Banach space and $\varphi$ and $\psi$ are appropriate functions with their limits vanishing at zero. After obtaining strong convergence for $\mathbf{u}_H,$ the proof of the convergence for these nonlinear terms can be closed by applying basic interpolation techniques and the generalized Holder inequality. The details are omitted since they are analogous to those described in \cite{azerad2001mathematical}.
+    In order to conclude the proof of Theorem \ref{maintheorem} we pass to the limit in the weak formulation (\ref{anisotropicWF}). To take the limit for the linear velocity terms that do not include the concentration function $C^\epsilon$ we can use (\ref{WeakConvUHEps}), (\ref{WeakConvU3Eps}) and (\ref{WeakConvU3NoEps}), and the bounds (\ref{propositionExtra}), (\ref{proposition2}). As for the nonlinear terms, the convergence can be shown using a time compactness theorem that is based on a result by Simon \cite{simon1986compact}. The key point is to apply a sort of generalization of the classical translation criterium of Riesz-Frechet-Kolmogorov which enables us to get strong convergence for the horizontal velocities. This is achieved by establishing a bound for the perturbation of $\mathbf{u}_H$ of the form $\norm{\tau_h \mathbf{u}_H - \mathbf{u}_H}_{L^p(0,T-h, \mathbf{Y})} \leq \varphi(h) + \psi(\epsilon),$ where $\mathbf{Y}$ is a Banach space, $\varphi$ and $\psi$ are appropriate functions with their limits vanishing at zero, and $\tau_h \mathbf{u}_H = \mathbf{u}_H (t+h) $. After obtaining strong convergence for $\mathbf{u}_H,$ the proof of the convergence for these nonlinear terms can be closed by applying basic interpolation techniques and the generalized Holder inequality. The details are omitted since they are analogous to those described in \cite{azerad2001mathematical}.
   
     For the linear terms including the concentration $C^\epsilon$ we can directly apply the weak convergence results of (\ref{WeakConvCEps1}) - (\ref{WeakConvCEps4}).
     
     By using (\ref{WeakConvCEps1}), (\ref{WeakConvCEps2}) and (\ref{WeakConvCEps3}) we get
     
-    \[ \int_0 ^ T (C^\epsilon , \frac{\partial \tilde{C}}{\partial t}) d \mathrm{t} \to \int_0^T (C, \frac{\partial \tilde{C}}{\partial t}) \diff t,\]
+    \[ \int_0 ^ T (C^\epsilon , \partial_t \tilde{C}) d \mathrm{t} \to \int_0^T (C, \partial_t \tilde{C}) \diff t,\]
     
-    \[ \int_0 ^ T (\partial_2 C^\epsilon , f) + (\partial_3 C^\epsilon , f) d \mathrm{t} \to \int_0^T (\partial_2 C, f) + (\partial_3 C, f) \diff t \qquad \forall f \in L^2_t L^2_x.\]
+    \[ \int_0 ^ T (\partial_2 C^\epsilon , \partial_2 \tilde{C}) + (\partial_3 C^\epsilon , \partial_3 \tilde{C}) d \mathrm{t} \to \int_0^T (\partial_2 C, \partial_2 \tilde{C}) + (\partial_3 C, \partial_3 \tilde{C}) \diff t.\]
       
-    For the next term we have $\epsilon K_1 \int_0 ^T (\partial_1 C^\epsilon, \partial_1 \tilde{C}) = \sqrt{\epsilon} K_1 \int_0 ^T (\sqrt{\epsilon} \partial_1 C^\epsilon, \partial_1 \tilde{C})$, which goes to 0 as $\epsilon \to 0$ because of the Cauchy-Schwartz inequality, since we have $\sqrt{\epsilon} \partial_1 C^\epsilon$ bounded in $L^2_t L^2_x$, and $\tilde{C}$ is a test function.
+    For the next term we have $\epsilon K_1 \int_0 ^T (\partial_1 C^\epsilon, \partial_1 \tilde{C}) = \sqrt{\epsilon} K_1 \int_0 ^T (\sqrt{\epsilon} \partial_1 C^\epsilon, \partial_1 \tilde{C})$, which goes to 0 as $\epsilon \to 0$ since we have $\sqrt{\epsilon} \partial_1 C^\epsilon$ bounded in $L^2_t L^2_x.$
       
-    The $\epsilon K_1 \int_0^T \big[(\partial_1 C^\epsilon) \tilde{C} \big] _{\Gamma_G} \diff t$ line integral vanishes as $\epsilon \to 0$ since by the Cauchy-Schwartz equation we can estimate the integral by two bounded terms ($\partial_1 C^\epsilon$ was assumed to be finite in norm on the lower boundary).
+    The $\epsilon K_1 \int_0^T \big[(\partial_1 C^\epsilon) \tilde{C} \big] _{\Gamma_G} \diff t$ line integral vanishes as $\epsilon \to 0$ because $\partial_1 C^\epsilon$ was assumed to be finite in norm on the lower boundary.
       
     For the source term, by applying standard results for distribution functions, we get $(S^\epsilon, \tilde{C}) \to  (S, \tilde{C}).$ 
       
 Finally we have to deal with the nonlinear term $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}).$
   
-By analyzing this nonlinear term in a more precise way we see that $(u_i C^\epsilon, \partial_i \tilde{C})$ for $i=1,2$ is weakly convergent since from \cite{azerad2001mathematical} we have the strong convergence of the horizontal velocities, while in the case of $i=3$ this property does not hold for $u_3$ and from the energy bound we do not have more than the weak convergence of $C^\epsilon$ .
+By analyzing this nonlinear term in a more precise way we see that $(u_i C^\epsilon, \partial_i \tilde{C})$ for $i=1,2$ is weakly convergent since as we mentioned before (\cite{azerad2001mathematical}) we have the strong convergence of the horizontal velocities, while in the case of $i=3$ this property does not hold for $u_3$ and from the energy bound we do not have more than the weak convergence of $C^\epsilon$ .
   
   In this case the classical Aubin-Lions lemma can not be applied since it would require for $C^\epsilon$ to be in a compactly embedded space such as $L^2 H^1$, which is not the case here because we only know boundedness results for $\sqrt{\epsilon} \partial_1 C$, but not for $\partial_1 C$.
   
@@ -533,13 +547,11 @@ By analyzing this nonlinear term in a more precise way we see that $(u_i C^\epsi
    
      From (\ref{WeakConvCEps1}) we have that $C^\epsilon \rightharpoonup C$ in $L_t^\infty L_x^2$, and since we are on a finite domain, the same convergence holds in $L_t^2 L_x^2.$ Hence we can choose $q_1 = q_2 = p_1 = p_2 = 2.$
      
-     To estimate the time derivative of $C^\epsilon$ we use (\ref{ANSC5}), that since $\mathbf{u}^\epsilon$ is divergence-free can be rewritten as
+     To estimate the time derivative of $C^\epsilon$ we use (\ref{ANSC5}), which since $\mathbf{u}^\epsilon$ is divergence-free can be rewritten as
      
          \[  \frac{\partial C^\epsilon}{\partial t} = - \nabla \cdot (\mathbf{u}^\epsilon C^\epsilon) + \sqrt{\epsilon} K_1 \partial_1 \partial_1 \sqrt{\epsilon} C^\epsilon + K_2 \partial_2 \partial_2 C^\epsilon + K_3 \partial_3 \partial_3 C^\epsilon -S^\epsilon \]
          
-         Now, the $S^\epsilon$ Gaussian source term is smooth; from (\ref{proposition1}), (\ref{propositionExtra}) we get $ \nabla \cdot (\mathbf{u}^\epsilon C^\epsilon) \in W_x^{-1,1}$ and from (\ref{proposition3}) we have that the remaining terms are in $W_x^{-1,2}.$
-         
-      Hence we can conclude that $$\frac{\partial C}{\partial t} \in L_t^1 W_x^{-1,1}.$$
+         Now, the $S^\epsilon$ Gaussian source term is smooth; from (\ref{proposition1}), (\ref{propositionExtra}) we get $ \nabla \cdot (\mathbf{u}^\epsilon C^\epsilon) \in W_x^{-1,1}$ and from (\ref{proposition3}) we have that the remaining terms are in $W_x^{-1,2}.$ Hence we can conclude that $$\partial_t C \in L_t^1 W_x^{-1,1}.$$
          
       The property that $$\norm{u_i^\epsilon - u_i^\epsilon(\cdot + \xi, t)} \to 0 \text{ as } \abs{\xi} \to 0$$ follows since $u_i^\epsilon \in L^2_t L^2_x.$
       
@@ -694,7 +706,7 @@ We will follow step by step the structure of the proof in \cite{temam2005some}, 
 Throughout this section we will use the $V = V_1 \times V_2, H = H_1 \times H_2, \mathcal{V} = \mathcal{V}_1 \times \mathcal{V}_2,$ and $V_{(2)}$ function spaces, where $V$ and $H$ essentially represent $H^1$ and $L^2$ regularities, while $\mathcal{V}$ and $V_{(2)}$ stand for a subset of the $C^{\infty}$ function space and its closure in $H^2,$ respectively. In more details, we introduce
 
 %% V --- hypothesis of Definition 1. We don't need to add the boundary zero conditions for the velocity or the L^2 regularity because they are all covered by H^1_Gamma.
-$$ V_1 = \{ \mathbf{u}_H \in H^1_\Gamma (\Omega) \times H^1_\Gamma (\Omega), \nabla \cdot \int_h^0 \mathbf{u}_H \diff z = 0  \} $$
+$$ V_1 = \{ \mathbf{u}_H \in H^1_\Gamma (\Omega) \times H^1_\Gamma (\Omega), \nabla \cdot \int_h^0 \mathbf{u}_H \diff z = 0  \}, $$
 
 $$ V_2 = \{ C \in L^2(\Omega); \partial_2 C, \partial_3 C \in L^2(\Omega)\}, $$
 
@@ -718,11 +730,11 @@ We denote by $U$ the vector $(\mathbf{u}_H, C).$ The scalar products and norms i
 
 \[ ((\mathbf{u}_H, \mathbf{\tilde{u}}_H))_1 = \int_\Omega \nabla_\nu \mathbf{u}_H \nabla_\nu \mathbf{\tilde{u}}_H \diff \omega \]
 
-\[ ((C, \tilde{C}))_2 = \int _\Omega K_2 \partial_2 C \partial_2 \tilde{C} + K_3 \partial_3 C \partial_3 \tilde{C} \diff \omega \]
+\[ ((C, \tilde{C}))_2 = \int _\Omega \big [ K_2 \partial_2 C \partial_2 \tilde{C} + K_3 \partial_3 C \partial_3 \tilde{C} \big ] \diff \omega \]
 
 \[\norm{U} = ((U,U)) ^ {1/2}\]
 
-\[ (U, \tilde{U})_H = \int _\Omega -\mathbf{u}_H \mathbf{\tilde{u}}_H - K_C C \tilde{C} \diff \omega \]
+\[ (U, \tilde{U})_H = \int _\Omega \big [ -\mathbf{u}_H \mathbf{\tilde{u}}_H - K_C C \tilde{C} \big ] \diff \omega \]
 
 \[\abs{U}_H = \abs{(U,U)_H}^{1/2}\]
 
