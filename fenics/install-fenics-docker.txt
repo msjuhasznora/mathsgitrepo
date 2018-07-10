@@ -1,0 +1,37 @@
+Steps x installing FEniCS using Docker:
+
+0.) You can install FEniCS in the following ways
+ - Anaconda
+ - Build from source
+ - using a Docker container
+
+Based on personal experience would definitely would recommend Docker for now. The steps are the following.
+
+(Docker is a tool that can package an application and its dependencies in a virtual container that can run on any (Linux) server. This helps enable flexibility and portability on where the application can run)
+
+1.) (if you don’t have a docker ID yet) create a docker ID at https://cloud.docker.com/
+
+2.) download docker: https://store.docker.com/editions/community/docker-ce-desktop-mac
+
+3.) install Docker.
+
+4.) curl -s https://get.fenicsproject.org | bash
+
+5.) create a working directory where you will use the project, and cd into that folder:
+mkdir /Users/yourfolder/FEniCS-project
+cd /Users/yourfolder/FEniCS-project
+
+6.) $fenicsproject run
+
+7.) you can find documented files at ~/demo/python/documented/poisson
+
+8.) run files using the command “python3” instead of “python”
+
+9.) the plotting mechanism in the tutorial is deprecated, you can use:
+import matplotlib.pyplot as plt
+plot(u)
+plt.show()
+
+10.) the results can be found at a NON FIX ADDRESS eg http://127.0.0.1:3002 , always written in the result of running “fenicsproject run” (NOT at http://127.0.0.1:8000, which is what the terminal version says after running a specific python file)
+
+11.) the content of /home/fenics/shared is the same as /Users/yourfolder/FEniCS-project.
