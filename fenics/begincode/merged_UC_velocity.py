@@ -12,10 +12,10 @@ import numpy as np
 T = 10.0           # final time
 num_steps = 100    # number of time steps
 dt = T / num_steps # time step size
-eps = 1.00         # we will take this to zero
-nu = 0.01          # viscosity, later set to (nu_1, nu_2, nu_3)
-alpha = 1.0        # alpha
-beta = 1.0         # beta
+eps = 1         # we will take this to zero
+nu = 1          # viscosity, later set to (nu_1, nu_2, nu_3)
+alpha = 1        # alpha
+beta = 1         # beta
 
 print("Constants defined.")
 
@@ -24,17 +24,12 @@ mesh = UnitCubeMesh(16, 16, 16)
 
 print("Mesh created.")
 
-P1 = VectorElement('Lagrange', tetrahedron, 2, dim = 2)
-P2 = FiniteElement('Lagrange', tetrahedron, 2)
-element = MixedElement([P1, P2])
+P1 = VectorElement('Lagrange', tetrahedron, 2, dim = 2) # element for the horizontal velocity
+P2 = FiniteElement('Lagrange', tetrahedron, 2) # element for the vertical velocity
+element = MixedElement([P1, P2]) # mixed element for the 3D velocity
 V = FunctionSpace(mesh, element)
 
 print("Function space created.")
-
-# Define function space for the horizontal velocity
-#U_H = VectorFunctionSpace(mesh, 'P', 2, dim = 2)
-# Define function space for the vertical velocity
-#U_V = FunctionSpace(mesh, 'P', 2)
 
 # Define test functions
 v_h, v_3 = TestFunctions(V)
@@ -55,22 +50,19 @@ u_hn, u_3n = split(u_n)
 k = Constant(dt)
 nu = Constant(nu)
 eps = Constant(eps)
-alpha = Constant(alpha)
-beta = Constant(beta)
 
 # Define variational problem
-
-# *dx*dx*dx : if we multiply everything, we can simplify with this.
-
-F = dot((u_h - u_hn)/k, v_h) \
-  - dot(u_h, dot(u, grad(v_h))) \
-  + dot(alpha * (- u_2, u_1), v_h)\
-  + dot(nu * grad(u_h), nu * grad(v_h)) \
-  + eps^2 * dot((u_3 - u_3n)/k, v_3) \
-  + eps^2 * dot(dot(u, grad(u_3)), v_3) \
-  + eps^2 * dot(nu * u_3, nu * v_3) \
-  + eps *  dot(beta * u_3, v_1) \
-  - eps * dot(beta * u_1 , v_3)
+F = dot((u_h - u_hn)/k, v_h) * dx \
+  - dot(u_1, dot(u, grad(v_1))) * dx \
+  - dot(u_2, dot(u, grad(v_2))) * dx \
+  + dot(alpha * (- u_2, u_1), v_h) * dx \
+  + dot(nu * grad(u_1), nu * grad(v_1)) * dx \
+  + dot(nu * grad(u_2), nu * grad(v_2)) * dx \
+  + eps^2 * dot((u_3 - u_3n)/k, v_3) * dx \
+  + eps^2 * dot(dot(u, grad(u_3)), v_3) * dx \
+  + eps^2 * dot(nu * u_3, nu * v_3) * dx \
+  + eps *  dot(beta * u_3, v_1) * dx \
+  - eps * dot(beta * u_1 , v_3) * dx
 
 print("Variational problem defined.")
 
