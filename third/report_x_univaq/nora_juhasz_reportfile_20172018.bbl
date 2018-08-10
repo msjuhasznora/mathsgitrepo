@@ -1,0 +1,132 @@
+\begin{thebibliography}{}
+
+\bibitem[Adams and Fournier, 2003]{adams2003sobolev}
+Adams, R.~A. and Fournier, J.~J. (2003).
+\newblock {\em Sobolev spaces}, volume 140.
+\newblock Academic press.
+
+\bibitem[Ali et~al., 1998]{ali1998partial}
+Ali, I., Kalla, S., and Khajah, H. (1998).
+\newblock A partial differential equation related to a problem in atmospheric
+  pollution.
+\newblock {\em Mathematical and computer modelling}, 28(12):1--6.
+
+\bibitem[Anderson and Wendt, 1995]{anderson1995computational}
+Anderson, J.~D. and Wendt, J. (1995).
+\newblock {\em Computational fluid dynamics}, volume 206.
+\newblock Springer.
+
+\bibitem[Andria et~al., 2000]{andria2000mathematical}
+Andria, G., Lay-Ekuakille, A., and Notarnicola, M. (2000).
+\newblock Mathematical models for atmospheric and industrial pollutant
+  prediction.
+\newblock In {\em XVI IMEKO World Congress, Vienna, Austria}.
+
+\bibitem[Arya, 2001]{arya2001introduction}
+Arya, P.~S. (2001).
+\newblock {\em Introduction to micrometeorology}, volume~79.
+\newblock Elsevier.
+
+\bibitem[Az{\'e}rad and Guill{\'e}n, 2001]{azerad2001mathematical}
+Az{\'e}rad, P. and Guill{\'e}n, F. (2001).
+\newblock Mathematical justification of the hydrostatic approximation in the
+  primitive equations of geophysical fluid dynamics.
+\newblock {\em SIAM Journal on Mathematical Analysis}, 33(4):847--859.
+
+\bibitem[Besson and Laydi, 1992]{besson1992some}
+Besson, O. and Laydi, M. (1992).
+\newblock Some estimates for the anisotropic navier-stokes equations and for
+  the hydrostatic approximation.
+\newblock {\em ESAIM: Mathematical Modelling and Numerical Analysis},
+  26(7):855--865.
+
+\bibitem[de~Swart, 2016]{swart2016utrecht}
+de~Swart, H.~E. (2016).
+\newblock The governing equations and the dominant balances of flow in the
+  atmosphere and ocean.
+\newblock {\em USPC Summerschool, Utrecht}.
+
+\bibitem[Goyal and Kumar, 2011]{goyal2011mathematical}
+Goyal, P. and Kumar, A. (2011).
+\newblock Mathematical modeling of air pollutants: An application to indian
+  urban city.
+\newblock In {\em Air Quality-Models and Applications}. InTech.
+
+\bibitem[Hosseini, 2013]{hosseini2013}
+Hosseini, B. (2013).
+\newblock Dispersion of pollutants in the atmosphere: a numerical study.
+\newblock Master's thesis, Simom Fraser University.
+
+\bibitem[Kathirgamanathan et~al., 2002]{kathirgamanathan2002source}
+Kathirgamanathan, P., McKibbin, R., and McLachlan, R. (2002).
+\newblock Source term estimation of pollution from an instantaneous point
+  source.
+\newblock {\em Research Letters in Information Mathematic Science, Vol. 3, pp.
+  59-67.}
+
+\bibitem[Lions, 1996]{lions1996mathematical}
+Lions, P.-L. (1996).
+\newblock {\em Mathematical Topics in Fluid Mechanics: Volume 2: Compressible
+  Models}, volume~2.
+\newblock Oxford University Press on Demand.
+
+\bibitem[Marsaleix et~al., 2006]{marsaleix2006considerations}
+Marsaleix, P., Auclair, F., and Estournel, C. (2006).
+\newblock Considerations on open boundary conditions for regional and coastal
+  ocean models.
+\newblock {\em Journal of Atmospheric and Oceanic Technology},
+  23(11):1604--1613.
+
+\bibitem[Monin, 1959]{monin1959boundary}
+Monin, A. (1959).
+\newblock On the boundary condition on the earth surface for diffusing
+  pollution.
+\newblock In {\em Advances in Geophysics}, volume~6, pages 435--436. Elsevier.
+
+\bibitem[Pedlosky, 2013]{pedlosky2013geophysical}
+Pedlosky, J. (2013).
+\newblock {\em Geophysical fluid dynamics}.
+\newblock Springer Science \& Business Media.
+
+\bibitem[Prodanova et~al., 2008]{prodanova2008application}
+Prodanova, M., Perez, J.~L., Syrakov, D., San~Jose, R., Ganev, K., Miloshev,
+  N., and Roglev, S. (2008).
+\newblock Application of mathematical models to simulate an extreme air
+  pollution episode in the bulgarian city of stara zagora.
+\newblock {\em Applied Mathematical Modelling}, 32(8):1607--1619.
+
+\bibitem[Simon, 1986]{simon1986compact}
+Simon, J. (1986).
+\newblock Compact sets in the space $l^p(0, t; b)$.
+\newblock {\em Annali di Matematica pura ed applicata}, 146(1):65--96.
+
+\bibitem[Temam, 2001]{temam2001navier}
+Temam, R. (2001).
+\newblock {\em Navier-Stokes equations: theory and numerical analysis}, volume
+  343.
+\newblock American Mathematical Soc.
+
+\bibitem[Temam and Ziane, 2005]{temam2005some}
+Temam, R. and Ziane, M. (2005).
+\newblock Some mathematical problems in geophysical fluid dynamics.
+\newblock {\em Handbook of mathematical fluid dynamics}, 3:535--658.
+
+\bibitem[Wang et~al., 2014]{wang2014ocean}
+Wang, Q., Zhou, W., Wang, D., and Dong, D. (2014).
+\newblock Ocean model open boundary conditions with volume, heat and salinity
+  conservation constraints.
+\newblock {\em Advances in Atmospheric Sciences}, 31(1):188--196.
+
+\bibitem[Yeh and Huang, 1975]{yeh1975three}
+Yeh, G.-T. and Huang, C.-H. (1975).
+\newblock Three-dimensional air pollutant modeling in the lower atmosphere.
+\newblock {\em Boundary-Layer Meteorology}, 9(4):381--390.
+
+\bibitem[Zhuk et~al., 2016]{zhuk2016source}
+Zhuk, S., Tchrakian, T.~T., Moore, S., Ord{\'o}n͂ez-Hurtado, R., and Shorten,
+  R. (2016).
+\newblock On source-term parameter estimation for linear advection-diffusion
+  equations with uncertain coefficients.
+\newblock {\em SIAM Journal on Scientific Computing}, 38(4):A2334--A2356.
+
+\end{thebibliography}

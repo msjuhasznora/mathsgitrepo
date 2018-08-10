@@ -1,0 +1,46 @@
+This is BibTeX, Version 0.99d (TeX Live 2016)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: nora_juhasz_reportfile_20172018.aux
+The style file: apalike.bst
+Database file #1: merged_U_C_eqs.bib
+You've used 22 entries,
+            1935 wiz_defined-function locations,
+            610 strings with 7432 characters,
+and the built_in function-call counts, 8265 in all, are:
+= -- 808
+> -- 308
+< -- 22
++ -- 104
+- -- 100
+* -- 686
+:= -- 1447
+add.period$ -- 68
+call.type$ -- 22
+change.case$ -- 154
+chr.to.int$ -- 22
+cite$ -- 22
+duplicate$ -- 324
+empty$ -- 601
+format.name$ -- 136
+if$ -- 1611
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 27
+newline$ -- 113
+num.names$ -- 66
+pop$ -- 148
+preamble$ -- 1
+purify$ -- 160
+quote$ -- 0
+skip$ -- 242
+stack$ -- 0
+substring$ -- 556
+swap$ -- 36
+text.length$ -- 7
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 120
+warning$ -- 0
+while$ -- 67
+width$ -- 0
+write$ -- 286

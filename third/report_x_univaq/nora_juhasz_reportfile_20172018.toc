@@ -1,0 +1,12 @@
+\contentsline {section}{\numberline {1}Current state of the research topic - Atmosphere modelling}{4}
+\contentsline {subsection}{\numberline {1.1}Achievements}{4}
+\contentsline {subsection}{\numberline {1.2}Outlook}{4}
+\contentsline {section}{\numberline {2}Courses, summer schools and seminars}{4}
+\contentsline {subsection}{\numberline {2.1}Courses}{4}
+\contentsline {subsubsection}{\numberline {2.1.1}Atmosphere dynamics - Prof Cucci, Prof. Redaelli, University of L'Aquila}{4}
+\contentsline {subsubsection}{\numberline {2.1.2}Finite - Prof Russo, GSSI}{4}
+\contentsline {subsection}{\numberline {2.2}Conferences, seminars, summer schools}{4}
+\contentsline {subsubsection}{\numberline {2.2.1}Conference month}{4}
+\contentsline {subsubsection}{\numberline {2.2.2}Women in Mathematics}{4}
+\contentsline {subsubsection}{\numberline {2.2.3}Seminar}{4}
+\contentsline {subsubsection}{\numberline {2.2.4}Prague}{4}
