@@ -4,9 +4,11 @@
 \contentsline {section}{\numberline {2}Courses, summer schools and seminars}{4}
 \contentsline {subsection}{\numberline {2.1}Courses}{4}
 \contentsline {subsubsection}{\numberline {2.1.1}Atmosphere dynamics - Prof Cucci, Prof. Redaelli, University of L'Aquila}{4}
-\contentsline {subsubsection}{\numberline {2.1.2}Finite - Prof Russo, GSSI}{4}
+\contentsline {subsubsection}{\numberline {2.1.2}Numerical methods for hyperbolic problems - Prof. G. Russo (University of Catania), GSSI}{4}
 \contentsline {subsection}{\numberline {2.2}Conferences, seminars, summer schools}{4}
-\contentsline {subsubsection}{\numberline {2.2.1}Conference month}{4}
-\contentsline {subsubsection}{\numberline {2.2.2}Women in Mathematics}{4}
-\contentsline {subsubsection}{\numberline {2.2.3}Seminar}{4}
-\contentsline {subsubsection}{\numberline {2.2.4}Prague}{4}
+\contentsline {subsubsection}{\numberline {2.2.1}Intensive Program on Fluids and Waves, GSSI}{4}
+\contentsline {subsubsection}{\numberline {2.2.2}Women in applied and computational Mathematics, GSSI}{5}
+\contentsline {subsubsection}{\numberline {2.2.3}Evans function methods in the stability analysis of periodic wavetrains, Prof. R. Plaza}{5}
+\contentsline {subsubsection}{\numberline {2.2.4}On the spectral stability of traveling fronts for reaction diffusion-degenerate equations, Prof. R. Plaza}{5}
+\contentsline {subsubsection}{\numberline {2.2.5}Secondment at the University of Sussex, Prof. O. Lakkis}{5}
+\contentsline {subsubsection}{\numberline {2.2.6}Prague}{5}
