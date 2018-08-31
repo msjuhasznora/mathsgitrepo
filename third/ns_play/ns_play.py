@@ -16,9 +16,11 @@
 # DONE STEP3: change from Chorin to IPCS (in all 3 steps we have p0,
 # which stands for the previous time step.)
 # DONE STEP4: use meaningful notations instead of "u_" etc.
+# DONE STEP5: redefine weak form with the actual one we use, with epsilon etc
+# DONE STEP: mark the Neumann boundary
 
 # STEP: Neumann BCs.
-# STEP: redefine weak form with epsilon
+
 # STEP: check weak convergence for the ocean version, and air w/o C.
 
 # STEP: add new space C.
@@ -55,6 +57,16 @@ q = TestFunction(Q)
 u1, u2, u3 = split(u)
 v1, v2, v3 = split(v)
 
+class UpperBoundary(SubDomain):
+    def inside(self, x, on_boundary):
+        return near(x[2], 1.0)
+#upperboundary = UpperBoundary()
+#boundaries = FacetFunction('size_t', mesh)
+#boundaries = FacetFunction('size_t', mesh)​
+#boundaries.set_all(0)
+#upperboundary.mark(boundaries, 1)
+#ds = Measure('ds')[boundaries]
+
 # Set parameter values
 dt = 0.01
 T = 3
@@ -62,23 +74,31 @@ nu = 0.01 # since after rescaling nu is eps-indep, we can use nu1 = nu2 = nu3 = 
 eps = 1
 theta1 = 1 # constant wind traction
 theta2 = 1
+alpha = 1
+beta = 1
 
 # Define time-dependent pressure boundary condition
-p_in = Expression("sin(3.0*t)", t = 0.0, degree = 2)
+#p_in = Expression("sin(3.0*t)", t = 0.0, degree = 2)
 
 # Define boundary conditions
 # originals
-noslip  = DirichletBC(V, (0, 0, 0),
-                      "on_boundary && \
-                       (x[0] < DOLFIN_EPS | x[0] > 1.0 - DOLFIN_EPS | x[1] > 1.0 - DOLFIN_EPS | x[1] < DOLFIN_EPS)")
-inflow  = DirichletBC(Q, p_in, "on_boundary && (x[2] > 1.0 - DOLFIN_EPS)")
-outflow = DirichletBC(Q, 0, "on_boundary && (x[2] < DOLFIN_EPS)")
+#noslip  = DirichletBC(V, (0, 0, 0),
+#                      "on_boundary && \
+#                       (x[0] < DOLFIN_EPS | x[0] > 1.0 - DOLFIN_EPS | x[1] > 1.0 - DOLFIN_EPS | x[1] < DOLFIN_EPS)")
+#inflow  = DirichletBC(Q, p_in, "on_boundary && (x[2] > 1.0 - DOLFIN_EPS)")
+#outflow = DirichletBC(Q, 0, "on_boundary && (x[2] < DOLFIN_EPS)")
 # new
+
 noslipbasin = DirichletBC(V, (0, 0, 0), "on_boundary && x[2] < 1.0 - DOLFIN_EPS")
+def Dirichlet_boundary(x, on_boundary):
+    return on_boundary and \
+           (x[2] < 1.0 - DOLFIN_EPS)
+
+
 # bc1 = DirichletBC(W.sub(0), inflow, sub_domains, 1)
 # it sets the value arg2 to the elements marked with arg4 of the sub_domains structure arg3 in the space arg1.
-bcu = [noslip]
-bcp = [inflow, outflow]
+bcu = [noslipbasin]
+bcp = []
 
 # Create functions
 u_prev = Function(V)
@@ -98,8 +118,14 @@ U = 0.5 * (u_prev + u)
 
 # Tentative velocity step
 # knowing u_prev, p_prev, we GET: u, ie u^*, the tentative velocity
-F1 = (1/k)*( (u1 - u_prev1)*v1 + (u2 - u_prev2)*v2 + eps*eps*(u3 - u_prev3)*v3 )*dx + inner(grad(u_prev)*u_prev, v)*dx + \
-     nu*inner(grad(u), grad(v))*dx + inner(grad(p_prev), v)*dx - inner(f, v)*dx
+F1 = (1/k)*( (u1 - u_prev1)*v1 + (u2 - u_prev2)*v2 + eps*eps*(u3 - u_prev3)*v3 ) * dx + \
+     u_prev1 * inner(u_prev, grad(v1)) * dx - u_prev2 * inner(u_prev, grad(v2)) * dx + \
+     eps*eps*inner(u_prev, grad(u_prev3)) * v3 * dx + \
+     - alpha * u_prev2 * v1 * dx + alpha * u_prev1 * v2 * dx + \
+     inner(grad(u1),grad(v1)) * dx + inner(grad(u2),grad(v2)) * dx + eps*eps*inner(grad(u3),grad(v3)) * dx + \
+     eps * beta * u_prev3 * v1 * dx - eps * beta * u_prev1 * v3 * dx + \
+     inner(grad(p_prev), v) * dx - inner(f, v) * dx
+#     - theta1 * v1 * ds(1) - theta2 * v2 * ds(1)
 a1 = lhs(F1)
 L1 = rhs(F1)
 
@@ -135,7 +161,7 @@ t = dt
 while t < T + DOLFIN_EPS:
 
     # Update pressure boundary condition
-    p_in.t = t
+    #p_in.t = t
 
     # Compute tentative velocity step
     b1 = assemble(L1)
