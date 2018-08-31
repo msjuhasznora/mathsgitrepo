@@ -60,22 +60,19 @@ v1, v2, v3 = split(v)
 class UpperBoundary(SubDomain):
     def inside(self, x, on_boundary):
         return near(x[2], 1.0)
-#upperboundary = UpperBoundary()
-#boundaries = FacetFunction('size_t', mesh)
-#boundaries = FacetFunction('size_t', mesh)​
-#boundaries.set_all(0)
-#upperboundary.mark(boundaries, 1)
-#ds = Measure('ds')[boundaries]
+upperboundary = UpperBoundary()
+boundaries = MeshFunction("size_t", mesh, mesh.topology().dim() - 1)
+boundaries.set_all(0)
+upperboundary.mark(boundaries, 1)
+ds = Measure('ds')[boundaries]
 
 # Set parameter values
 dt = 0.01
-T = 3
+T = 1
 nu = 0.01 # since after rescaling nu is eps-indep, we can use nu1 = nu2 = nu3 = nu
-eps = 1
-theta1 = 1 # constant wind traction
-theta2 = 1
-alpha = 1
-beta = 1
+eps = 1.0
+alpha = 1.0
+beta = 1.0
 
 # Define time-dependent pressure boundary condition
 #p_in = Expression("sin(3.0*t)", t = 0.0, degree = 2)
@@ -90,10 +87,6 @@ beta = 1
 # new
 
 noslipbasin = DirichletBC(V, (0, 0, 0), "on_boundary && x[2] < 1.0 - DOLFIN_EPS")
-def Dirichlet_boundary(x, on_boundary):
-    return on_boundary and \
-           (x[2] < 1.0 - DOLFIN_EPS)
-
 
 # bc1 = DirichletBC(W.sub(0), inflow, sub_domains, 1)
 # it sets the value arg2 to the elements marked with arg4 of the sub_domains structure arg3 in the space arg1.
@@ -111,7 +104,7 @@ p_next = Function(Q)
 # Define coefficients
 k = Constant(dt)
 f = Constant((0, 0, 0))
-U = 0.5 * (u_prev + u)
+theta = Constant((0.5, 0.5, 0))
 
 ### in all 3 steps, the unknown function is
 ### denoted by u and p, whose type is by definition "TrialFunction"
@@ -124,8 +117,8 @@ F1 = (1/k)*( (u1 - u_prev1)*v1 + (u2 - u_prev2)*v2 + eps*eps*(u3 - u_prev3)*v3 )
      - alpha * u_prev2 * v1 * dx + alpha * u_prev1 * v2 * dx + \
      inner(grad(u1),grad(v1)) * dx + inner(grad(u2),grad(v2)) * dx + eps*eps*inner(grad(u3),grad(v3)) * dx + \
      eps * beta * u_prev3 * v1 * dx - eps * beta * u_prev1 * v3 * dx + \
-     inner(grad(p_prev), v) * dx - inner(f, v) * dx
-#     - theta1 * v1 * ds(1) - theta2 * v2 * ds(1)
+     inner(grad(p_prev), v) * dx - inner(f, v) * dx + \
+     - inner(theta, v) * ds(1)
 a1 = lhs(F1)
 L1 = rhs(F1)
 
