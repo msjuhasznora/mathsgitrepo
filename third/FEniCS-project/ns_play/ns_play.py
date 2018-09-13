@@ -16,6 +16,7 @@
 # DONE STEP6: mark the Neumann boundary
 
 # *todo*
+# STEP: add the parts that in the complete space disappeared because of the div free condition.
 # STEP: check weak convergence for the ocean version, and air w/o C.
 # STEP: add new space C.
 # STEP: add source term

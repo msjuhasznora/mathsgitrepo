@@ -1,4 +1,0 @@
-\beamer@endinputifotherversion {3.36pt}
-\beamer@sectionintoc {1}{Presentation of fellow's background}{2}{0}{1}
-\beamer@sectionintoc {2}{Training activities in the academic year 2017/2018}{3}{0}{2}
-\beamer@sectionintoc {3}{Current state of the research project}{4}{0}{3}

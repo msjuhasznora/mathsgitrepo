@@ -11,4 +11,4 @@
 \contentsline {subsubsection}{\numberline {2.2.3}Evans function methods in the stability analysis of periodic wavetrains, Prof. R. Plaza}{5}
 \contentsline {subsubsection}{\numberline {2.2.4}On the spectral stability of traveling fronts for reaction diffusion-degenerate equations, Prof. R. Plaza}{5}
 \contentsline {subsubsection}{\numberline {2.2.5}Secondment at the University of Sussex, Prof. O. Lakkis}{5}
-\contentsline {subsubsection}{\numberline {2.2.6}Prague}{5}
+\contentsline {subsubsection}{\numberline {2.2.6}Waves in Flows Summer School in Prague}{5}
