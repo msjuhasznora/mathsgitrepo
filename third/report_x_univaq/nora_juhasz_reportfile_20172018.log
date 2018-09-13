@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.1.5)  13 SEP 2018 17:26
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.1.5)  13 SEP 2018 20:38
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -254,10 +254,10 @@ Overfull \hbox (7.97585pt too wide) in paragraph at lines 74--74
 -tion diffusion-
  []
 
-(./nora_juhasz_reportfile_20172018.bbl [5] [6]
+[5] (./nora_juhasz_reportfile_20172018.bbl [6]
 Missing character: There is no Í in font cmr10!
 Missing character: There is no ‚ in font cmr10!
-) [7]
+ [7]) [8]
 (./nora_juhasz_reportfile_20172018.aux) ) 
 Here is how much of TeX's memory you used:
  2914 strings out of 493014
@@ -266,7 +266,7 @@ Here is how much of TeX's memory you used:
  6402 multiletter control sequences out of 15000+600000
  12456 words of font info for 48 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,6n,26p,971b,202s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,6n,26p,1194b,288s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2016/texmf-dist/fo
 nts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fon
 ts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/font
@@ -278,10 +278,10 @@ e1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1
 ublic/amsfonts/cm/cmr17.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/pub
 lic/amsfonts/cm/cmr9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public
 /amsfonts/cm/cmti10.pfb>
-Output written on nora_juhasz_reportfile_20172018.pdf (7 pages, 147718 bytes).
+Output written on nora_juhasz_reportfile_20172018.pdf (8 pages, 148885 bytes).
 PDF statistics:
- 68 PDF objects out of 1000 (max. 8388607)
- 48 compressed objects within 1 object stream
+ 71 PDF objects out of 1000 (max. 8388607)
+ 50 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
