@@ -5,7 +5,7 @@ parameters["std_out_all_processes"] = False;
 mesh = UnitCubeMesh(5,5,5)
 
 V = VectorFunctionSpace(mesh, "Lagrange", 2, dim = 3)
-Q = FunctionSpace(mesh, "Lagrange", 1, dim = 1)
+Q = FunctionSpace(mesh, "Lagrange", 1)
 
 u = TrialFunction(V)
 p = TrialFunction(Q)
@@ -25,7 +25,7 @@ ds = Measure('ds')[boundaries]
 
 dt = 0.01
 T = 1
-eps = 1.0
+eps = 0.01
 alpha = 1.0
 beta = 1.0
 
@@ -47,26 +47,35 @@ k = Constant(dt)
 f = Constant((0, 0, 0))
 theta = Constant((0.5, 0.5, 0))
 
-F1 = (1/k)*( (u1 - u_prev1)*v1 + (u2 - u_prev2)*v2 + eps*eps*(u3 - u_prev3)*v3 ) * dx + \
-     - u_prev1 * inner(u_prev, grad(v1)) * dx - u_prev2 * inner(u_prev, grad(v2)) * dx + \
+F1_anisotropic = (1/k)*( (u1 - u_prev1)*v1 + (u2 - u_prev2)*v2 + eps*eps*(u3 - u_prev3)*v3 ) * dx + \
+     inner(u_prev, grad(u_prev1)) * v1 * dx + inner(u_prev, grad(u_prev2)) * v2 * dx + \
      eps*eps*inner(u_prev, grad(u_prev3)) * v3 * dx + \
-     - div(u_prev) * u_prev1 * v1 * dx - div(u_prev) * u_prev2 * v2 * dx + \
      - alpha * u_prev2 * v1 * dx + alpha * u_prev1 * v2 * dx + \
-     inner(grad(u_prev1),grad(v1)) * dx + inner(grad(u_prev2),grad(v2)) * dx + eps*eps*inner(grad(u_prev3),grad(v3)) * dx + \
+     inner(grad(u1),grad(v1)) * dx + inner(grad(u2),grad(v2)) * dx + eps*eps*inner(grad(u3),grad(v3)) * dx + \
      eps * beta * u_prev3 * v1 * dx - eps * beta * u_prev1 * v3 * dx + \
-     + inner(grad(p_prev), v) * dx - inner(f, v) * dx + \
-     + div(u_prev) * q * dx + \
+     - inner(f, v) * dx + \
      - inner(theta, v) * ds(1)
-a1 = lhs(F1)
-L1 = rhs(F1)
+
+# here we only have u1 and u2, the third component is gone, the method does not converge.
+# if we add div(u) * q, the problem is that below, the process
+# always solves for only one trial function. this needs to be fixed.
+F1_hydrostatic = (1/k)*( (u1 - u_prev1)*v1 + (u2 - u_prev2)*v2 ) * dx + \
+     inner(u_prev, grad(u_prev1)) * v1 * dx + inner(u_prev, grad(u_prev2)) * v2 * dx + \
+     - alpha * u_prev2 * v1 * dx + alpha * u_prev1 * v2 * dx + \
+     inner(grad(u1),grad(v1)) * dx + inner(grad(u2),grad(v2)) * dx + \
+     - inner(f, v) * dx + \
+     - inner(theta, v) * ds(1)
+
+a1 = lhs(F1_hydrostatic)
+L1 = rhs(F1_hydrostatic)
 
 # Pressure update
 a2 = inner(grad(p), grad(q))*dx
-L2 = inner(grad(p_prev), grad(q))*dx - (1/k)*div(u_next)*q*dx
+L2 = - (1/k)*div(u_next)*q*dx
 
 # Velocity update
 a3 = inner(u, v)*dx
-L3 = inner(u_next, v)*dx - k*inner(grad(p_next - p_prev), v)*dx
+L3 = inner(u_next, v)*dx - k*inner(grad(p_next), v)*dx
 
 # Assemble matrices
 A1 = assemble(a1)
