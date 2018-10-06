@@ -45,56 +45,55 @@ This document describes the achievements, current state and future plans of the 
 
 \subsection{The shallow domain concept}
 
-  \begin{itemize}
-    \item Natural, large-scale geophysical fluids share the shallow domain characteristics
-    \item "almost" two-dimensional set $\to$ we can significantly simplify the model in the vertical direction
-    \item a domain that is excessively greater horizontally than in the vertical dimension $\to$ leading to the classic hydrostatic approximation of the Navier-Stokes equations
-  \end{itemize}
-  
-  The main ideas and tools in this scenario:
-  \begin{itemize}
-    \item introduce the aspect ratio $\epsilon = \frac{\text{characteristic depth}}{\text{characteristic width}},$
-    \item anisotropic viscosity hypothesis,
-    \item rescaling, $x=x_1, y=x_2, z=\epsilon x_3.$
-  \end{itemize}
-  
-    Correspondingly, we rescale
-  
-  \begin{itemize}
-    \item the kinematic terms: $v_3 = \epsilon u_3^{\epsilon},$
-    \item the viscosity terms: $\nu_z = \epsilon ^ 2\nu_3,$
-    \item the diffusivity terms: $K_x = \epsilon K_1, K_y = K_2, K_z = \epsilon ^ 2 K_3.$
-  \end{itemize}
+Considered as a geophysical fluid, the polluted atmosphere shares the shallow domain characteristics with other natural large-scale fluids such as seas and oceans. This means that its domain is excessively greater horizontally than in the vertical dimension, leading to the classic hydrostatic approximation of the Navier-Stokes equations. The authors of the \cite{azerad2001mathematical} article have proved a convergence theorem for this model with respect to the ocean, without considering pollution effects. The novelty achieved this year in this project is to provide a generalisation of their result translated to the atmosphere, extending the fluid velocity equations with an additional convection-diffusion equation representing pollutants in the atmosphere.
 
-\subsection{Modelling - challenges and choices}
+The model we constructed utilises classical concepts as its foundation and it merges them with relatively new or more specific ideas. On the one hand, we use general and well-known approaches such as the wind flow being modelled by the incompressible anisotropic Navier-Stokes equations, and using a convection-diffusion equation to describe the pollution effect. On the other hand, the model also incorporates notions like taking advantage of a downwind-direction matching coordinate system, using a Gaussian pulse as a source term, and rescaling the diffusivity parameters according to the largely different horizontal and vertical scales. 
 
-  \begin{itemize}
-    \item Coordinate system $\to$ we fix it in a way so that $x$ and $y$ match the downwind and crosswind direction, respectively (while $z$ represents the vertical dimension).
+The equations governing the air velocity $\mathbf{v}$ and pressure $q$ in the atmosphere are the incompressible Navier-Stokes equations, in which we use different viscosities according to vertical or horizontal directions, and the density is taken to be identically equal to one:
+
+\begin{equation}
+  \partial_t \mathbf{v} + (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + \nabla q + 2 \mathbf{w} \times \mathbf{v}= \mathbf{g} \text{ in } \Omega_{\epsilon} \times (0,T)
+\end{equation}
     
-    Natural assumption in the downwind direction: diffusion is negligible compared to downwind transport, i.e.
-     
+\begin{equation}
+  \nabla \cdot \mathbf{v} = 0 \text{ in } \Omega_{\epsilon} \times (0,T)
+\end{equation}
+
+Contaminants emitted into the atmosphere are transported by the wind, mixed and dispersed by turbulent behavior, and deposited onto the ground by gravity. The dispersion of pollutants is commonly modeled by a diffusive equation of the form
+    
+\begin{equation} \label{diffusive}
+  \partial_t C + \mathbf{v} \cdot \nabla C = K_x \partial_{xx} ^2 C + K_y  \partial_{yy} ^2  C + K_z  \partial_{zz} ^2  C + S,
+\end{equation}
+
+where $C$ is the pollution concentration.
+
+One of the main tools that we use in order to exploit the "almost" two-dimensional structure of the atmosphere is to introduce the aspect ratio $$\epsilon = \frac{\text{characteristic depth}}{\text{characteristic width}},$$ which incorporates the shallowness in a mathematical way. This makes a natural scaling process possible: we use the $x=x_1, y=x_2, z=\epsilon x_3$ new coordinates on a new, $\epsilon$-independent domain. Correspondingly, we rescale the kinematic terms, the viscosity terms and the diffusivity coefficients as well.
+
+    \[v_1 = u_1^{\epsilon}, \quad v_2 = u_2^{\epsilon}, \quad v_3 = \epsilon u_3^{\epsilon}, \quad p = p^{\epsilon}, \]
+    \[\nu_x = \nu_1, \quad \nu_y = \nu_2 , \quad \nu_z = \epsilon ^ 2\nu_3, \]
+    \[ K_y = K_2, \quad K_z = \epsilon ^ 2 K_3. \]
+    
+    As we have referred to it earlier, we choose to fix the coordinate system in a way so that $x$ and $y$ match the downwind and crosswind direction, respectively (while $z$ represents the vertical dimension). Thus, as a second step of the rescaling process, we can also exploit the fact that we chose the coordinate system in a way so that the $x$ axis matches the downwind direction. In this case we use an additional scaling equation, which is different in nature from the previous ones in the sense that it is not derived from the shallowness of the domain but rather suggested by the fact that in the downwind direction it is natural to assume that the diffusion is negligible compared to downwind transport, i.e.
+    
     \[ \abs{u_1 \partial_{x_1} C} \gg \abs{ K_x \frac{\partial ^2 C}{\partial x_1 ^ 2} },\]
-     
-    so we can take advantage of the additional scaling equation $K_x = \epsilon K_1$.
-     
-    \item Domain $\to$ we use locally acceptable Cartesian coordinates --- this allows us the ignore large-scale effects such as the curvature of the Earth.
+    which leads us to using
+    \[ K_x = \epsilon K_1.\]
     
-    \begin{figure}
+    We use a local cartesian coordinate system so that we can neglect the curvature of the Earth.
+    
+        \begin{figure}
   \includegraphics[width=\linewidth]{domain.jpg}
   \caption{A local slice of the atmosphere}
   \label{fig:atmosphere}
 \end{figure}
+
+ Here we mention that the challenge of the local area model is to define open boundary conditions on the lateral boundary. We use a fix zero approach --- the concentration being set to zero actually stands for a constant concentration with the background flow being removed.
     
+   Finally, for modelling the source function of the concentration we use the Gaussian impulse approach. We use a parametrised nascent delta function to describe the source term, with the parameter being $\epsilon$. We have $S_\epsilon (t, t_s, x, x_s) = s(t, t_s) \delta_\epsilon (x - x_s),$ with the activation term $s(t,t_s)= IH(t - t_s)$ where $H(\cdot)$ is the Heaviside step function. In the limit model we naturally arrive to the delta distribution as a source.
+
+  \subsection{The anisotropic Navier-Stokes equations and the primitive equations}
   
-    Challenges: local area model $\to$ open boundary conditions on the lateral boundary. We use a fix zero approach --- the concentration being set to zero actually stands for a constant concentration with the background flow being removed.
-    
-    \item Source function of the concentration $\to$ Gaussian impulse approach. We use a parametrized nascent delta function to describe the source term, with the parameter being $\epsilon$. We have $S_\epsilon (t, t_s, x, x_s) = s(t, t_s) \delta_\epsilon (x - x_s),$ with the activation term $s(t,t_s)= IH(t - t_s)$ where $H(\cdot)$ is the Heaviside step function. In the limit model we naturally arrive to the delta distribution as a source.
-    
-  \end{itemize}
-  
-  \subsection{The anisotropic Navier-Stokes equations}
-  
-  We use the incompressible Navier-Stokes equations in all three space dimensions for the fluid velocity.
+  Putting together all the concepts and ideas described in the previous section, we arrive to two sets of equations that we will need in order to present the main theorem. The first set of equations (anisotropic case) uses the Navier-Stokes equations in all three dimensions.
   
     \[ \partial_t u^\epsilon _1 + \mathbf{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\alpha u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T) \]
     
@@ -111,11 +110,10 @@ This document describes the achievements, current state and future plans of the 
     \[ \mathbf{u}^\epsilon (\cdot, t = 0) = \mathbf{u}_0, C^\epsilon (\cdot, t=0) = C^\epsilon_0  \text{ in } \Omega \]
 
     \[ C^\epsilon = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \partial_2 C^\epsilon = \partial_3 C^\epsilon = 0 \text{ on } \Gamma_G \times (0,T), \partial_1 C^\epsilon \in L^2 L^2 (0,T; \Gamma_G) \]
-      
-\subsection{The limit model}
 
-  In the vertical dimension we arrive to the hydrostatic approximation.
-
+    The  hydrostatic model, on the other hand, is obtained by formally taking the limit as $\epsilon$ vanishes both in the velocity and pollution equations.
+ The limit model is made of the following equations.
+ 
     \[ \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\alpha u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T) \]
     
     \[ \partial_t u_2 + \mathbf{u} \cdot \nabla u_2 - \Delta_\nu u_2 -\alpha u_1 + \partial_2 p = 0 \text{ in } \Omega \times (0,T) \]
@@ -135,16 +133,15 @@ This document describes the achievements, current state and future plans of the 
 
 \subsection{Main result}
 
-Let $\mathbf{u}_0$ $\in$ $L^2 (\Omega)^3$, with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 \cdot \mathbf{n} = 0$ on $\partial \Omega$; and let $C(0)\in$ $L^2 (\Omega)^3$, $C(0) = 0$ on $ \partial \Omega$; there exists a weak solution ($\mathbf{u}$, C) of the hydrostatic equations of the polluted atmosphere, obtained as a limit of weak solutions $(\mathbf{u}^\epsilon, C^\epsilon)$ of the anisotropic equations as the aspect ratio $\epsilon$ tends to $0$.
+The main theorem describes a more meaningful connection between these two sets of equations. It says that not only is it true that we formally get the hydrostatic model from the original one by taking the limit in the equations, but also, we show that the weak solutions of the anisotropic model converge to a weak solution of the hydrostatic limit model --- in other words, taking the limit we arrive to a justification of the hydrostatic model for the case of the polluted atmosphere, where, instead of the originally used wind momentum equation, the hydrostatic air pressure assumption is used to describe the process in the vertical dimension.
 
-\subsection{Proof}
+\begin{theorem}
 
-A priori estimates, weak convergence
+Let $\mathbf{u}_0$ $\in$ $L^2 (\Omega)^3$, with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 \cdot \mathbf{n} = 0$ on $\partial \Omega$; and let $C(0)\in$ $L^2 (\Omega)^3$, $C(0) = 0$ on $ \partial \Omega$; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, C^\epsilon)$ of the anisotropic equations converge to a weak solution ($\mathbf{u}$, C) of the hydrostatic equations of the polluted atmosphere.
 
-    The main steps for proving the weak convergence are the following.
-    \begin{itemize}
-      \item Energy inequality.
-    \end{itemize}
+\end{theorem}
+
+The beginning step of the proof is to obtain the following energy inequality that yields priori estimates such as $L_t^\infty L_x^2$ boundedness for $C^\epsilon;$ $L_t^2 L_x^2$ boundedness for $\sqrt{\epsilon} \partial_1 C^\epsilon, \partial_2 C^\epsilon, \partial_3 C^\epsilon.$
     
   \begin{equation}
     \begin{split}  
@@ -155,21 +152,8 @@ A priori estimates, weak convergence
     & + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau.
     \end{split}
   \end{equation}
-    
-        \begin{itemize}  
-      \item A priori estimates: $L_t^\infty L_x^2$ boundedness for $C^\epsilon;$ $L_t^2 L_x^2$ boundedness for $\sqrt{\epsilon} \partial_1 C^\epsilon, \partial_2 C^\epsilon, \partial_3 C^\epsilon.$
-      \item Weak convergence of the linear terms.
-      \item Weak convergence of nonlinear terms.
-      \begin{itemize}
-        \item Nonlinear terms not including the $C^\epsilon$ term - divergence free condition
-        \item The term $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}).$
-      \end{itemize}
-    \end{itemize}
-    
-    
-    We need a compactness result to obtain $u_i^\epsilon C^\epsilon \rightharpoonup  u_i C.$
-    
-    For this we show that
+  
+  Once we have boundedness, we have the weak convergence of the linear terms, while the weak convergence of the nonlinear terms not including the pollution term had been shown before by \cite{azerad2001mathematical}. We prove the convergence of the term $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C})$ by using a compactness result. We show that $u_i^\epsilon C^\epsilon \rightharpoonup  u_i C$ following these two steps:
     
     \begin{itemize}
     
@@ -183,17 +167,14 @@ A priori estimates, weak convergence
     
     \end{itemize}
     
-    Combining these results allow us to apply a compactness theorem that provides the convergence.
+    Combining these results allow us to apply a compactness theorem that yields the convergence.
     
-        \begin{itemize}
-      \item We also provide an existence theorem for the extended system.
-      \item We have generalized the main theorem for the seaside case, when there is interaction between water and air $\to$ different boundary conditions.
-    \end{itemize}
+  Additionally, we also provide an existence theorem for the limit model.
 
 
 \subsection{Outlook}
 
-Convergence, diffusion matrix, FEM.
+We plan to use a diffusion matrix instead of the original coefficients, investigate the case of strong convergence, and visualise the results by the finite element method.
 
 %SEMINARS, SUMMER SCHOOLS
 \section{Courses, summer schools and seminars}
