@@ -4,15 +4,25 @@
 \usepackage{amsmath}
 \usepackage{commath}
 \usepackage{amsthm}
-\newtheorem*{remark}{Remark}
 \usepackage{enumitem}
+\usepackage{float} 
+\usepackage{array}
 \usepackage{outlines}
-\setlist[enumerate,1]{label=\roman*)}
-\setlist[enumerate,2]{label=\alph*)}
+\usepackage{setspace}
+\setlist[enumerate,1]{label=\alph*)}
+\setlist[enumerate,2]{label=\roman*)}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+\newtheorem{prop}{Proposition}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,trees, calc}
 
 %PREAMBLE
 \title{Report of PhD activities in the academic year 2017 / 2018}
-\author{Nora Juhasz}
+\author{N\'ora Juh\'asz}
 
 %CONTENT
 \begin{document}
@@ -33,23 +43,157 @@ This document describes the achievements, current state and future plans of the 
 %RESULTS
 \section{Current state of the research topic - Atmosphere modelling}
 
-\subsection{Previous considerations}
+\subsection{The shallow domain concept}
 
-We had previously examined several different approaches to mathematically model both the atmosphere as a geophysical fluid, and a pollutant source in it as well. Some of the possibilities we considered were
-\begin{itemize}
-  \item to use the classical 3D Cartesian coordinates $(x,y,z)$
-  \item to use the monotonous relationship between altitude and pressure and use the $(x, y, p)$ coordinates
-  \item introduce the terrain influenced $(x, y, \eta)$ coordinate system that includes height-related geographical diversity
-  \item switch to spherical coordinate system and obtain the possibility to model globally
-\end{itemize}
+  \begin{itemize}
+    \item Natural, large-scale geophysical fluids share the shallow domain characteristics
+    \item "almost" two-dimensional set $\to$ we can significantly simplify the model in the vertical direction
+    \item a domain that is excessively greater horizontally than in the vertical dimension $\to$ leading to the classic hydrostatic approximation of the Navier-Stokes equations
+  \end{itemize}
+  
+  The main ideas and tools in this scenario:
+  \begin{itemize}
+    \item introduce the aspect ratio $\epsilon = \frac{\text{characteristic depth}}{\text{characteristic width}},$
+    \item anisotropic viscosity hypothesis,
+    \item rescaling, $x=x_1, y=x_2, z=\epsilon x_3.$
+  \end{itemize}
+  
+    Correspondingly, we rescale
+  
+  \begin{itemize}
+    \item the kinematic terms: $v_3 = \epsilon u_3^{\epsilon},$
+    \item the viscosity terms: $\nu_z = \epsilon ^ 2\nu_3,$
+    \item the diffusivity terms: $K_x = \epsilon K_1, K_y = K_2, K_z = \epsilon ^ 2 K_3.$
+  \end{itemize}
 
-The model we decided to consider that is sufficiently simple to be mathematically manageable but at the same time meaningful first step.
+\subsection{Modelling - challenges and choices}
 
-\subsection{The model}
+  \begin{itemize}
+    \item Coordinate system $\to$ we fix it in a way so that $x$ and $y$ match the downwind and crosswind direction, respectively (while $z$ represents the vertical dimension).
+    
+    Natural assumption in the downwind direction: diffusion is negligible compared to downwind transport, i.e.
+     
+    \[ \abs{u_1 \partial_{x_1} C} \gg \abs{ K_x \frac{\partial ^2 C}{\partial x_1 ^ 2} },\]
+     
+    so we can take advantage of the additional scaling equation $K_x = \epsilon K_1$.
+     
+    \item Domain $\to$ we use locally acceptable Cartesian coordinates --- this allows us the ignore large-scale effects such as the curvature of the Earth.
+    
+    \begin{figure}
+  \includegraphics[width=\linewidth]{domain.jpg}
+  \caption{A local slice of the atmosphere}
+  \label{fig:atmosphere}
+\end{figure}
+    
+  
+    Challenges: local area model $\to$ open boundary conditions on the lateral boundary. We use a fix zero approach --- the concentration being set to zero actually stands for a constant concentration with the background flow being removed.
+    
+    \item Source function of the concentration $\to$ Gaussian impulse approach. We use a parametrized nascent delta function to describe the source term, with the parameter being $\epsilon$. We have $S_\epsilon (t, t_s, x, x_s) = s(t, t_s) \delta_\epsilon (x - x_s),$ with the activation term $s(t,t_s)= IH(t - t_s)$ where $H(\cdot)$ is the Heaviside step function. In the limit model we naturally arrive to the delta distribution as a source.
+    
+  \end{itemize}
+  
+  \subsection{The anisotropic Navier-Stokes equations}
+  
+  We use the incompressible Navier-Stokes equations in all three space dimensions for the fluid velocity.
+  
+    \[ \partial_t u^\epsilon _1 + \mathbf{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\alpha u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T) \]
+    
+    \[ \partial_t u_2^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_2^\epsilon -\Delta_\nu u_2^\epsilon + \alpha u_1^\epsilon + \partial_2 p^\epsilon = 0 \text{ in } \Omega \times (0,T) \]
+    
+    \[\epsilon^2 \{  \partial_t u_3^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon -\Delta_\nu u_3^{\epsilon} \} - \epsilon \beta u_1^\epsilon + \partial_3 p^\epsilon = 0 \text{ in } \Omega \times (0,T) \]
+    
+    \[ \nabla \cdot \mathbf{u}^\epsilon= 0 \text{ in } \Omega \times (0,T) \]
+    
+    \[ \partial_t C^\epsilon + \mathbf{u}^\epsilon \cdot \nabla C^\epsilon = \epsilon K_1 \frac{\partial ^2 C^\epsilon}{\partial x_1 ^ 2} + K_2 \frac{\partial ^2 C^\epsilon}{\partial x_2 ^ 2} + K_3 \frac{\partial ^2 C^\epsilon}{\partial x_3 ^ 2} + S_\epsilon \text{ in } \Omega \times (0,T) \]
+    
+    \[ \mathbf{u}^\epsilon = 0 \text{ on } \Gamma \times (0,T) \] 
+    
+    \[ \mathbf{u}^\epsilon (\cdot, t = 0) = \mathbf{u}_0, C^\epsilon (\cdot, t=0) = C^\epsilon_0  \text{ in } \Omega \]
+
+    \[ C^\epsilon = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \partial_2 C^\epsilon = \partial_3 C^\epsilon = 0 \text{ on } \Gamma_G \times (0,T), \partial_1 C^\epsilon \in L^2 L^2 (0,T; \Gamma_G) \]
+      
+\subsection{The limit model}
+
+  In the vertical dimension we arrive to the hydrostatic approximation.
+
+    \[ \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\alpha u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T) \]
+    
+    \[ \partial_t u_2 + \mathbf{u} \cdot \nabla u_2 - \Delta_\nu u_2 -\alpha u_1 + \partial_2 p = 0 \text{ in } \Omega \times (0,T) \]
+    
+    \[ \partial_3 p = 0 \text{ in } \Omega \times (0,T) \]
+    
+    \[ \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \times (0,T) \]
+    
+    \[ \partial_t C + \mathbf{u} \cdot \nabla C = K_2 \frac{\partial ^2 C}{\partial x_2 ^ 2} + K_3 \frac{\partial ^2 C}{\partial x_3 ^ 2} + S \text{ in } \Omega \times (0,T)\]
+    
+    \[ u_1 = u_2 = u_3 n_3 = 0 \text{ on } \Gamma \times (0,T) \]
+    
+    \[ u_i (\cdot, t=0) = u_{0 i}, C (\cdot, t=0) = C_0 \text{ in } \Omega, \text{$i$ = 1,2} \]
+    
+    \[ C = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \partial_2 C = \partial_3 C = 0 \text{ on } \Gamma_G \times (0,T), \partial_1 C \in L^2 L^2 (0,T; \Gamma_G) \]
+   
 
 \subsection{Main result}
 
+Let $\mathbf{u}_0$ $\in$ $L^2 (\Omega)^3$, with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 \cdot \mathbf{n} = 0$ on $\partial \Omega$; and let $C(0)\in$ $L^2 (\Omega)^3$, $C(0) = 0$ on $ \partial \Omega$; there exists a weak solution ($\mathbf{u}$, C) of the hydrostatic equations of the polluted atmosphere, obtained as a limit of weak solutions $(\mathbf{u}^\epsilon, C^\epsilon)$ of the anisotropic equations as the aspect ratio $\epsilon$ tends to $0$.
+
+\subsection{Proof}
+
+A priori estimates, weak convergence
+
+    The main steps for proving the weak convergence are the following.
+    \begin{itemize}
+      \item Energy inequality.
+    \end{itemize}
+    
+  \begin{equation}
+    \begin{split}  
+    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \big [\norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2 \big ] \diff \tau \\
+    & + \int_0 ^ t \bigg[ (\epsilon K_1 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_1 C^\epsilon}_{L^2}^2  + (K_2 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_2 C^\epsilon}_{L^2}^2 \\
+    & + (K_3 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_3 C^\epsilon}_{L^2}^2 \bigg] \diff \tau \\
+    & \leq \frac{1}{\zeta} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)} + \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) \\
+    & + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau.
+    \end{split}
+  \end{equation}
+    
+        \begin{itemize}  
+      \item A priori estimates: $L_t^\infty L_x^2$ boundedness for $C^\epsilon;$ $L_t^2 L_x^2$ boundedness for $\sqrt{\epsilon} \partial_1 C^\epsilon, \partial_2 C^\epsilon, \partial_3 C^\epsilon.$
+      \item Weak convergence of the linear terms.
+      \item Weak convergence of nonlinear terms.
+      \begin{itemize}
+        \item Nonlinear terms not including the $C^\epsilon$ term - divergence free condition
+        \item The term $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}).$
+      \end{itemize}
+    \end{itemize}
+    
+    
+    We need a compactness result to obtain $u_i^\epsilon C^\epsilon \rightharpoonup  u_i C.$
+    
+    For this we show that
+    
+    \begin{itemize}
+    
+      \item we have a bound for the time derivative of the concentration:
+      
+      \[  \frac{\partial C^\epsilon}{\partial t} = - u^\epsilon \nabla C^\epsilon + \sqrt{\epsilon} K_1 \partial_1 \partial_1 \sqrt{\epsilon} C^\epsilon + K_2 \partial_2 \partial_2 C^\epsilon + K_3 \partial_3 \partial_3 C^\epsilon -S^\epsilon, \]
+      
+      Eventually we have $\frac{\partial C}{\partial t} \in L^1 W^{-1,1},$
+      
+      \item we have an equicontinuity for velocity: $\norm{u_i^n - u_i^n (\cdot + \xi,t)}_{L^2 L^2} \to 0$ as $\xi \to 0.$
+    
+    \end{itemize}
+    
+    Combining these results allow us to apply a compactness theorem that provides the convergence.
+    
+        \begin{itemize}
+      \item We also provide an existence theorem for the extended system.
+      \item We have generalized the main theorem for the seaside case, when there is interaction between water and air $\to$ different boundary conditions.
+    \end{itemize}
+
+
 \subsection{Outlook}
+
+Convergence, diffusion matrix, FEM.
 
 %SEMINARS, SUMMER SCHOOLS
 \section{Courses, summer schools and seminars}
@@ -96,7 +240,7 @@ The aim of this 6-week secondment was to create both the theoretical and technic
 \1 Software packages such as Docker, Anaconda, ParaView, FEniCS and Alberta have been installed
 \1 Writing scripts to login / connect to the HPC server at the Sussex University
 \1 Getting to know FEniCS: tutorial files and the FEniCS version of the "hello world" programs
-\1 Creating foundation for future work with specific theoretical details that arise when implementing this project - such as the loss of incompressibility when it comes to the FEM approach, and the use of Lagrange multipliers.
+\1 Creating a basis for future work with specific theoretical details that arise when implementing this project - such as the loss of incompressibility when it comes to the FEM approach, and the use of Lagrange multipliers.
 
 \end{outline}
 
