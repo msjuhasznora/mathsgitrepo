@@ -14,7 +14,7 @@
 \setlist[enumerate,2]{label=\alph*)}
 
 %PREAMBLE
-\title{Report response}
+\title{Report ideas}
 \author{Nora Juhasz}
 
 %CONTENT
@@ -25,32 +25,43 @@
 
 \section{Primary observations}
 
-\subsection{One. - Novelty and $L^2$ boundedness}
+\subsection{One. - $L^2$ boundedness}
 
 \subsection{Two. - Existence and coercivity}
 
 \section{Secondary observations}
 
-\subsection{One. - Boundary Condition}
+\subsection{One. - Novelty}
 
-\subsection{Two. - Boundary Condition}
+Apart from having the result on the nonlinear part, we could add the case of a diffusion matrix.
 
-\subsection{Three. - Boundary Condition}
+\subsection{Two. - The explanation of the boundary conditions}
 
-\subsection{Four. - Boundary Condition}
+For the pollution term on the ground level we do not have a free boundary. It is explained in the article that while for $\partial_2 C$ and $\partial_3 C$ it is reasonable to expect to be zero, in the dominant wind direction for the sake of physical meaningfulness we decide to use the more relaxed $L^2 L^2$ boundedness criteria.
+
+\subsection{Three. - The source term}
+
+\begin{enumerate}
+
+\item Physical meaningfulness and deactivation: ok, we can look for a more meaningful source idea and check what happens. Otherwise we have a mathematical result that is physically meaningful before and after activation, until the process lasts.
+
+\item The reason why the pollution source term is introduced in two different steps is that on p6, after describing the equations describing the pollution phenomena in general, we define what the term $S$ represents in the equation. These parts belong together. Secondly, once the equations are given, and following this, we describe the whole concept of scaling, we need to specify what happens with these source terms exactly after scaling. Essentially, the source terms are discussed before and after the scaling process - first in general, describing our choice of the delta approach, and then, secondly, more specifically, defining the term after scaling.
+
+\end{enumerate}
+
+\subsection{Four. - The impression of two-way coupling}
+
+We can make a remark either on this page, or possibly even at an earlier point, highlighting the fact the equation describing the fluid velocity field does not contain the concentration term -- it is the pollution equation that includes the velocity function.
 
 \subsection{Five. - Ignoring diffusion in the downwind direction.}
 
-Assumption $(6)$ on p7.
+Assumption $(6)$ on p7:
+\begin{equation} \abs{u_1 \partial_{1} C} \gg \abs{ K_x \partial_{11} ^2 C }\end{equation}
 
-\begin{enumerate}
-\item Wikipedia page on Peclet number
-\item http://www.dartmouth.edu/~cushman/courses/engs43/Chapter3.pdf
-\item P. Goyal and A. Kumar. Mathematical modeling of air pollutants: An application to indian urban city. In Air Quality-Models and Applications.
-\end{enumerate}
+Regarding this comment at this point we can say that our results are valid in case of a big Peclet number (ratio of advection and diffusion), which, in engineering applications is often very large. (see \href{https://en.wikipedia.org/wiki/Peclet_number}{Peclet number}). The same assumption is used in "P. Goyal and A. Kumar. Mathematical modeling of air pollutants: An application to indian urban city. In Air Quality-Models and Applications.", moreover, the following course literature which deals with rivers, oceans and atmosphere, also neglects diffusion in the streamwise direction: \href{http://www.dartmouth.edu/~cushman/courses/engs43/Chapter3.pdf}{Dartmouth}
 
 \subsection{Six. - Clarity and linguistic improvements}
 
-The approach of depth-integrating and the shallow water equations are mentioned since their root is the same physical / mathematical observation as the one used in the present article -- even if the final concept is significantly different. They are mentioned for the sake of a fuller picture and also to stress which direction we are not taking.
+The approach of depth-integrating and the shallow water equations are present in the introduction since their root is the same physical / mathematical observation as the one used in the present article -- even if the final concept is significantly different. They are mentioned for the sake of a fuller picture and also to highlight the fact that there are several possible paths and which direction we are not taking.
 
 \end{document}
