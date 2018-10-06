@@ -27,7 +27,21 @@
 
 \subsection{One. - $L^2$ boundedness}
 
+p18 / line44 does not seem to exist but it probably refers to $$\norm{u_i^\epsilon - u_i^\epsilon(\cdot + \xi, t)} \to 0 \text{ as } \abs{\xi} \to 0$$ from $u_i^\epsilon \in L^2_t L^2_x.$
+
+This holds because $C^\infty_0 (\Omega)$ is dense in $L^2 (\Omega),$ and for functions $\varphi_n$ approaching the $L^2$ function $f = u_i ^ \epsilon$ the property holds, thus it holds for $f$ as well.
+
 \subsection{Two. - Existence and coercivity}
+
+The author of the report in this comment states that the existence result that is given by the Temam article is for the anisotropic case, ie. not for the primitive equations. The author also says that the existence of the limit model seems to be the result of the Azerad-Guillen article.
+
+\begin{enumerate}
+
+\item As for the first statement, the result of the Temam article actually $\bold{is}$ for the primitive equations (not for the non-hydrostatic model). Because the existence in the Temam article is for the limit model, and our goal is also for the limit model case, the coercivity part is essentially the same, given the fact that the terms are similar.
+
+\item The Azerad-Guillen article yields a convergence result. A separate existence results guarantees the fact that the solutions of the anisotropic model do not converge to the empty set.
+
+\end{enumerate}
 
 \section{Secondary observations}
 
