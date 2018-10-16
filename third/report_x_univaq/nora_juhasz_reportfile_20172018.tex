@@ -133,7 +133,7 @@ One of the main tools that we use in order to exploit the "almost" two-dimension
 
 \subsection{Main result}
 
-The main theorem describes a more meaningful connection between these two sets of equations. It says that not only is it true that we formally get the hydrostatic model from the original one by taking the limit in the equations, but also, we show that the weak solutions of the anisotropic model converge to a weak solution of the hydrostatic limit model --- in other words, taking the limit we arrive to a justification of the hydrostatic model for the case of the polluted atmosphere, where, instead of the originally used wind momentum equation, the hydrostatic air pressure assumption is used to describe the process in the vertical dimension.
+The main theorem describes a more rigorous connection between these two sets of equations. It says that not only is it true that we formally get the hydrostatic model from the original one by taking the limit in the equations, but also, we show that the weak solutions of the anisotropic model converge to a weak solution of the hydrostatic limit model --- in other words, taking the limit we arrive to a justification of the hydrostatic model for the case of the polluted atmosphere, where, instead of the originally used wind momentum equation, the hydrostatic air pressure assumption is used to describe the process in the vertical dimension.
 
 \begin{theorem}
 
@@ -141,7 +141,7 @@ Let $\mathbf{u}_0$ $\in$ $L^2 (\Omega)^3$, with $\nabla \cdot \mathbf{u}_0 = 0, 
 
 \end{theorem}
 
-The beginning step of the proof is to obtain the following energy inequality that yields priori estimates such as $L_t^\infty L_x^2$ boundedness for $C^\epsilon;$ $L_t^2 L_x^2$ boundedness for $\sqrt{\epsilon} \partial_1 C^\epsilon, \partial_2 C^\epsilon, \partial_3 C^\epsilon.$
+The beginning step of the proof is to obtain the following energy inequality that yields a priori estimates such as $L_t^\infty L_x^2$ boundedness for $C^\epsilon;$ $L_t^2 L_x^2$ boundedness for $\sqrt{\epsilon} \partial_1 C^\epsilon, \partial_2 C^\epsilon, \partial_3 C^\epsilon.$
     
   \begin{equation}
     \begin{split}  
@@ -153,7 +153,7 @@ The beginning step of the proof is to obtain the following energy inequality tha
     \end{split}
   \end{equation}
   
-  Once we have boundedness, we have the weak convergence of the linear terms, while the weak convergence of the nonlinear terms not including the pollution term had been shown before by \cite{azerad2001mathematical}. We prove the convergence of the term $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C})$ by using a compactness result. We show that $u_i^\epsilon C^\epsilon \rightharpoonup  u_i C$ following these two steps:
+  Once we have boundedness, we have the weak convergence of the linear terms, while the weak convergence of the nonlinear terms not including the pollution term had been shown before by \cite{azerad2001mathematical}. We prove the convergence of the term $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C})$ by using a compactness result. It can be proved that $u_i^\epsilon C^\epsilon \rightharpoonup  u_i C$ following these two steps:
     
     \begin{itemize}
     
@@ -163,7 +163,7 @@ The beginning step of the proof is to obtain the following energy inequality tha
       
       Eventually we have $\frac{\partial C}{\partial t} \in L^1 W^{-1,1},$
       
-      \item we have an equicontinuity for velocity: $\norm{u_i^n - u_i^n (\cdot + \xi,t)}_{L^2 L^2} \to 0$ as $\xi \to 0.$
+      \item to prove $\norm{u_i^\epsilon - u_i^\epsilon (\cdot + \xi,t)}_{L^2 L^2} \to 0$ as $\xi \to 0,$ uniformly in $\epsilon.$
     
     \end{itemize}
     
@@ -204,7 +204,7 @@ This training activity within the European Innovating Training Network ModCompSh
 
 \subsubsection{Women in applied and computational Mathematics, GSSI}
 
-This three-day event was designed for researchers challenged by the application of various techniques in modern analysis and computational mathematics to intriguing problems arising in physics, material science and biology. The topic and the results of this present research project were represented - together with the work of many early-stage female researchers - in the poster session.
+This three-day event was designed for researchers challenged by the application of various techniques in modern analysis and computational mathematics to intriguing problems arising in physics, material science and biology. \textbf{\textit{The topic and the results of this present research project were represented - together with the work of many early-stage female researchers - in the poster session.}}
 
 \subsubsection{Evans function methods in the stability analysis of periodic wavetrains, Prof. R. Plaza}
 
@@ -212,7 +212,11 @@ This lecture series provided an introduction to recent techniques in the spectra
 
 \subsubsection{On the spectral stability of traveling fronts for reaction diffusion-degenerate equations, Prof. R. Plaza}
 
-\subsubsection{Secondment at the University of Sussex, Prof. Omar Lakkis}
+\subsubsection{Waves in Flows Summer School in Prague}
+
+The aim of this summer school was to present a comprehensive series of lectures on various aspects of waves and their role in mathematical analysis and numerical simulation of different types of flows. The school was organised as a multidisciplinary event with topics ranging from theoretical and numerical mathematics up to physics and applications. The emphasise was on models related to topics originating in environmental, biomedical and industrial applications. Besides of the course lectures, the program included a one day workshop dedicated to short lectures given by attending scientists.
+
+\section{Secondment at the University of Sussex, Prof. Omar Lakkis}
 
 The aim of this 6-week secondment was to create both the theoretical and technical foundations for numerical simulations in order to visualise the results of the project. The main results and steps are the following:
 
@@ -224,10 +228,6 @@ The aim of this 6-week secondment was to create both the theoretical and technic
 \1 Creating a basis for future work with specific theoretical details that arise when implementing this project - such as the loss of incompressibility when it comes to the FEM approach, and the use of Lagrange multipliers.
 
 \end{outline}
-
-\subsubsection{Waves in Flows Summer School in Prague}
-
-The aim of this summer school was to present a comprehensive series of lectures on various aspects of waves and their role in mathematical analysis and numerical simulation of different types of flows. The school was organised as a multidisciplinary event with topics ranging from theoretical and numerical mathematics up to physics and applications. The emphasise was on models related to topics originating in environmental, biomedical and industrial applications. Besides of the course lectures, the program included a one day workshop dedicated to short lectures given by attending scientists.
 
 \nocite{*}
 \bibliographystyle{apalike}
