@@ -1,4 +1,11 @@
 \documentclass{beamer}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{commath}
+\usepackage{amsthm}
+\usepackage{lmodern}
+\usepackage{scrextend}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
 \usetheme{Luebeck}
 \useoutertheme[subsection=false, footline=authortitle]{miniframes}
 \usecolortheme{crane}
@@ -23,11 +30,183 @@
 
 \section{State of the research project}
 
-\begin{frame}{Achievements}
+\begin{frame}{The main ideas of the model}
   \begin{itemize}
-    \item Milestone 1
-    \item Milestone 2
+    \item Geophysical fluid $\to$ shallow domain characteristics --- the domain is greater horizontally than in the vertical dimension.
+    \item Classical / general concepts as foundation:
+    \begin{itemize}
+      \item The wind flow being modelled by the incompressible Navier-Stokes equations
+      \item Using a convection - diffusion equation to describe the pollution effect
+    \end{itemize}
+    \item Relatively new or more specific ideas:
+    \begin{itemize}
+      \item Taking advantage of a downwind-direction matching coordinate system
+      \item Using a Gaussian pulse as a source term
+      \item Rescaling the diffusivity parameters according to the largely different horizontal and vertical scales
+    \end{itemize}
   \end{itemize}
+\end{frame}
+
+\begin{frame}{The governing equations}
+  \begin{itemize}
+    \item Fluid velocity equations --- incompressible Navier-Stokes equations with the density taken to be identically equal to one.
+      
+      $$\partial_t \mathbf{v} + (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + \nabla q + 2 \mathbf{w} \times \mathbf{v}= \mathbf{g} \text{ in } \Omega_{\epsilon} \times (0,T)$$
+    
+      $$\nabla \cdot \mathbf{v} = 0 \text{ in } \Omega_{\epsilon} \times (0,T)$$
+
+    \item A convection-diffusion equation representing pollutants in the atmosphere:
+    
+      $$\partial_t C + \mathbf{v} \cdot \nabla C = K_x \partial_{xx} ^2 C + K_y  \partial_{yy} ^2  C + K_z  \partial_{zz} ^2  C + S$$
+
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Scaling}
+
+One of the main tools to exploit the "almost" 2D structure of the atmosphere $\to$ introduce the aspect ratio $$\epsilon = \frac{\text{characteristic depth}}{\text{characteristic width}},$$ which incorporates the shallowness in a mathematical way. Natural scaling process:
+
+  \begin{enumerate}
+    \item $x=x_1, y=x_2, z=\epsilon x_3$
+    \item $v_1 = u_1^{\epsilon}, v_2 = u_2^{\epsilon}, v_3 = \epsilon u_3^{\epsilon}, p = p^{\epsilon},$
+    \item $\nu_x = \nu_1, \nu_y = \nu_2 , \nu_z = \epsilon ^ 2\nu_3,$
+    \item $K_y = K_2, K_z = \epsilon ^ 2 K_3.$
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Scaling - Part 2}
+
+$\textbf{Additional scaling equation}$: different in nature from the previous ones $\to$ it is not derived from the shallowness of the domain --- it is suggested by the fact that in the downwind direction it is natural to assume that $\textit{ the diffusion is negligible compared to downwind transport}$ i.e.
+
+    $$\abs{u_1 \partial_{x_1} C} \gg \abs{ K_x \frac{\partial ^2 C}{\partial x_1 ^ 2} } ,$$
+    which leads us to using
+    $$K_x = \epsilon K_1.$$
+
+\end{frame}
+
+\begin{frame}{Local domain and boundary conditions}
+  We use a local cartesian coordinate system so that we can neglect the curvature of the Earth.
+  \begin{figure}
+    \includegraphics[width=\linewidth]{domain.jpg}
+    \caption{A local slice of the atmosphere}
+    \label{fig:atmosphere}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Source term}
+  For modelling the source function of the concentration we use the Gaussian impulse approach.
+  
+  We use a parametrised nascent delta function to describe the source term, with the parameter being $\epsilon$.
+  
+  We have $$S_\epsilon (t, t_s, x, x_s) = s(t, t_s) \delta_\epsilon (x - x_s),$$ with the activation term $s(t,t_s)= IH(t - t_s)$ where $H(\cdot)$ is the Heaviside step function. In the limit model we naturally arrive to the delta distribution as a source.
+\end{frame}
+
+\begin{frame}{Anisotropic equations}
+
+  In $\Omega \times (0,T)$ we have the following system.
+
+    \[ \partial_t u^\epsilon _1 + \mathbf{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\alpha u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \]
+    
+    \[ \partial_t u_2^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_2^\epsilon -\Delta_\nu u_2^\epsilon + \alpha u_1^\epsilon + \partial_2 p^\epsilon = 0 \]
+    
+    \[\epsilon^2 \{  \partial_t u_3^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon -\Delta_\nu u_3^{\epsilon} \} - \epsilon \beta u_1^\epsilon + \partial_3 p^\epsilon = 0 \]
+    
+    \[ \nabla \cdot \mathbf{u}^\epsilon= 0  \]
+    
+    \[ \partial_t C^\epsilon + \mathbf{u}^\epsilon \cdot \nabla C^\epsilon = \epsilon K_1 \frac{\partial ^2 C^\epsilon}{\partial x_1 ^ 2} + K_2 \frac{\partial ^2 C^\epsilon}{\partial x_2 ^ 2} + K_3 \frac{\partial ^2 C^\epsilon}{\partial x_3 ^ 2} + S_\epsilon \]
+    
+\end{frame}
+
+\begin{frame}{Anisotropic equations - Part 2}
+
+  The initial and boundary conditions are chosen to be
+
+    \[ \mathbf{u}^\epsilon = 0 \text{ on } \Gamma \times (0,T), \]
+    
+    \[ \mathbf{u}^\epsilon (\cdot, t = 0) = \mathbf{u}_0, C^\epsilon (\cdot, t=0) = C^\epsilon_0  \text{ in } \Omega, \]
+
+    $$C^\epsilon = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \partial_2 C^\epsilon = \partial_3 C^\epsilon = 0 \text{ on } \Gamma_G \times (0,T),$$
+    
+    $$\partial_1 C^\epsilon \in L^2 L^2 (0,T; \Gamma_G). $$
+
+\end{frame}
+
+\begin{frame}{Hydrostatic equations}
+  
+      \[ \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\alpha u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T) \]
+    
+    \[ \partial_t u_2 + \mathbf{u} \cdot \nabla u_2 - \Delta_\nu u_2 -\alpha u_1 + \partial_2 p = 0 \text{ in } \Omega \times (0,T) \]
+    
+    \[ \partial_3 p = 0 \text{ in } \Omega \times (0,T) \]
+    
+    \[ \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \times (0,T) \]
+    
+    \[ \partial_t C + \mathbf{u} \cdot \nabla C = K_2 \frac{\partial ^2 C}{\partial x_2 ^ 2} + K_3 \frac{\partial ^2 C}{\partial x_3 ^ 2} + S \text{ in } \Omega \times (0,T)\]
+
+\end{frame}
+    
+\begin{frame}{Hydrostatic equations - Part 2}
+    \[ u_1 = u_2 = u_3 n_3 = 0 \text{ on } \Gamma \times (0,T) \]
+    
+    \[ u_i (\cdot, t=0) = u_{0 i}, C (\cdot, t=0) = C_0 \text{ in } \Omega, \text{$i$ = 1,2} \]
+    
+    $$C = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \partial_2 C = \partial_3 C = 0 \text{ on } \Gamma_G \times (0,T),$$
+    
+    $$ \partial_1 C \in L^2 L^2 (0,T; \Gamma_G) $$
+  
+\end{frame}
+
+\begin{frame}{Main theorem}
+
+  We show a rigorous connection between the two sets --- taking the limit in the solutions we arrive to a justification of the hydrostatic model for the case of the polluted atmosphere.
+
+  \begin{theorem}
+
+  Let $\mathbf{u}_0$ $\in$ $L^2 (\Omega)^3$, with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 \cdot \mathbf{n} = 0$ on $\partial \Omega$; and let $C(0)\in$ $L^2 (\Omega)^3$, $C(0) = 0$ on $ \partial \Omega$; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, C^\epsilon)$ of the anisotropic equations converge to a weak solution ($\mathbf{u}$, C) of the hydrostatic equations of the polluted atmosphere.
+
+  \end{theorem}
+
+\end{frame}
+
+\begin{frame}{Energy inequality}
+    \changefontsizes{10pt}
+  \begin{equation*}
+    \begin{split}  
+    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \big [\norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2 \big ] \diff \tau \\
+    & + \int_0 ^ t \bigg[ (\epsilon K_1 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_1 C^\epsilon}_{L^2}^2  + (K_2 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_2 C^\epsilon}_{L^2}^2 \\
+    & + (K_3 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_3 C^\epsilon}_{L^2}^2 \bigg] \diff \tau \\
+    & \leq \frac{1}{\zeta} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)} + \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) \\
+    & + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau
+    \end{split}
+  \end{equation*}
+\end{frame}
+
+\begin{frame}{Proof steps - Part 1}
+  \begin{enumerate}
+    \item The beginning step of the proof is to obtain the energy inequality that yields a priori estimates such as $L_t^\infty L_x^2$ boundedness for $C^\epsilon;$ $L_t^2 L_x^2$ boundedness for $\sqrt{\epsilon} \partial_1 C^\epsilon, \partial_2 C^\epsilon, \partial_3 C^\epsilon.$
+  
+    \item Once we have boundedness, we have the weak convergence of the linear terms, while the weak convergence of the nonlinear terms not including the pollution term had been shown before by \cite{azerad2001mathematical}.
+    
+    \item We prove the convergence of the term $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C})$ by using a compactness result. It can be proved that $u_i^\epsilon C^\epsilon \rightharpoonup  u_i C$ following these two steps:
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Proof steps - Part 2}
+
+    \begin{itemize}
+    
+      \item we have a bound for the time derivative of the concentration:
+      
+      \[  \frac{\partial C^\epsilon}{\partial t} = - u^\epsilon \nabla C^\epsilon + \sqrt{\epsilon} K_1 \partial_1 \partial_1 \sqrt{\epsilon} C^\epsilon + K_2 \partial_2 \partial_2 C^\epsilon + K_3 \partial_3 \partial_3 C^\epsilon -S^\epsilon, \]
+      
+      Eventually we have $\frac{\partial C}{\partial t} \in L^1 W^{-1,1},$
+      
+      \item to prove $\norm{u_i^\epsilon - u_i^\epsilon (\cdot + \xi,t)}_{L^2 L^2} \to 0$ as $\xi \to 0,$ uniformly in $\epsilon.$
+    
+    \end{itemize}
+    
+    Combining these results allow us to apply a compactness theorem that yields the convergence.
+    
 \end{frame}
 
 \section{Lectures, seminars and summer schools}
@@ -69,5 +248,9 @@ The main results and steps are the following:
 \end{enumerate}
   
 \end{frame}
+
+\nocite{*}
+\bibliographystyle{apalike}
+\bibliography{merged_U_C_eqs_report_slides}
 
 \end{document}
