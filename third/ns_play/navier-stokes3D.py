@@ -1,9 +1,29 @@
+# case: ocean, with wind on the surface
+
+# steps:
+
+# DONE STEP 1: modify the 2D L-shape domain to a 3D domain.
+# DONE STEP 2: specify the order and the dimension for the velocity FEM space.
+# (order argument, optional argument: dim =, fill both in this case, unlike 2D )
+# DONE STEP 3: use meaningful notations instead of "u_" etc.
+# DONE STEP 4: redefine weak form with the actual one we use, with epsilon etc
+# DONE STEP 5: mark the Neumann boundary
+
+# STEP: Neumann BCs.
+
+# STEP: check weak convergence for the ocean version, and air w/o C.
+
+# STEP: add new space C.
+# STEP: add source term
+# STEP: C function, (2,1,1) space, stability, BBL condition?
+
 import matplotlib.pyplot as plt
 from dolfin import *
 
 parameters["std_out_all_processes"] = False;
 mesh = UnitCubeMesh(5,5,5)
 
+# order, dimension
 V = VectorFunctionSpace(mesh, "Lagrange", 2, dim = 3)
 Q = FunctionSpace(mesh, "Lagrange", 1)
 
@@ -25,14 +45,17 @@ ds = Measure('ds')[boundaries]
 
 dt = 0.01
 T = 1
-eps = 0.01
+eps = 0.001
 alpha = 1.0
 beta = 1.0
 
 # ADD: v3 = 0 on top surface !!!
 noslipbasin = DirichletBC(V, (0, 0, 0), "on_boundary && x[2] < 1.0 - DOLFIN_EPS")
+zerotop = DirichletBC(V.sub(2), 0, "on_boundary && x[2] > 1.0 - DOLFIN_EPS")
 
-bcu = [noslipbasin]
+bcu = [noslipbasin, zerotop]
+# TODOthink about this, the bcp part. we originally didn't have this since we did not
+# have a pressure part, but now we do
 bcp = []
 
 u_prev = Function(V)
@@ -47,6 +70,13 @@ k = Constant(dt)
 f = Constant((0, 0, 0))
 theta = Constant((0.5, 0.5, 0))
 
+#Chorin.
+
+### reader's comment: in all 3 steps, the unknown function is
+### denoted by u and p, whose type is by definition "TrialFunction"
+
+# Define variational problem for step 1
+### knowing u_prev, p_prev, we GET: u, ie u^*, the tentative velocity
 F1_anisotropic = (1/k)*( (u1 - u_prev1)*v1 + (u2 - u_prev2)*v2 + eps*eps*(u3 - u_prev3)*v3 ) * dx + \
      inner(u_prev, grad(u_prev1)) * v1 * dx + inner(u_prev, grad(u_prev2)) * v2 * dx + \
      eps*eps*inner(u_prev, grad(u_prev3)) * v3 * dx + \
@@ -66,14 +96,20 @@ F1_hydrostatic = (1/k)*( (u1 - u_prev1)*v1 + (u2 - u_prev2)*v2 ) * dx + \
      - inner(f, v) * dx + \
      - inner(theta, v) * ds(1)
 
-a1 = lhs(F1_hydrostatic)
-L1 = rhs(F1_hydrostatic)
+a1 = lhs(F1_anisotropic)
+L1 = rhs(F1_anisotropic)
 
 # Pressure update
+# Define variational problem for step 2
+### this is where we GET p, ie p^*. from the previous
+### step we solve for u^*, save it in u_next, and so at this
+### point u_next contains u^* (see later at the time steps)
 a2 = inner(grad(p), grad(q))*dx
 L2 = - (1/k)*div(u_next)*q*dx
 
 # Velocity update
+# Define variational problem for step 3
+### we know u_next and p_next, here we GET u.
 a3 = inner(u, v)*dx
 L3 = inner(u_next, v)*dx - k*inner(grad(p_next), v)*dx
 
@@ -89,8 +125,8 @@ prec = "amg" if has_krylov_solver_preconditioner("amg") else "default"
 parameters['krylov_solver']['nonzero_initial_guess'] = True
 
 # Create files for storing solution
-ufile = File("results/velocity.pvd")
-pfile = File("results/pressure.pvd")
+ufile = File("results0.001/velocity.pvd")
+pfile = File("results0.001/pressure.pvd")
 
 # Time-stepping
 t = dt
