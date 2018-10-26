@@ -1,4 +1,4 @@
 \beamer@endinputifotherversion {3.36pt}
 \beamer@sectionintoc {1}{State of the research project}{2}{0}{1}
-\beamer@sectionintoc {2}{Lectures}{3}{0}{2}
-\beamer@sectionintoc {3}{Seminars and schools}{4}{0}{3}
+\beamer@sectionintoc {2}{Secondment}{17}{0}{2}
+\beamer@sectionintoc {3}{Lectures, seminars and summer schools}{18}{0}{3}
