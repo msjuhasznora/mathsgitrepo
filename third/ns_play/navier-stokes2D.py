@@ -98,8 +98,8 @@ prec = "amg" if has_krylov_solver_preconditioner("amg") else "default"
 parameters['krylov_solver']['nonzero_initial_guess'] = True
 
 # Create files for storing solution
-ufile = File("resultsH" + str(meshsize) + "_" + str(dt) + "/velocity.pvd")
-pfile = File("resultsH" + str(meshsize) + "_" + str(dt) + "/pressure.pvd")
+ufile = File("resultsH" + "_mesh" + str(meshsize) + "_dt" + str(dt) + "/velocity.pvd")
+pfile = File("resultsH" + "_mesh" + str(meshsize) + "_dt" + str(dt) + "/pressure.pvd")
 
 # Time-stepping
 t = dt

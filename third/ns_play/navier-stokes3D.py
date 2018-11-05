@@ -21,7 +21,8 @@ import matplotlib.pyplot as plt
 from dolfin import *
 
 parameters["std_out_all_processes"] = False;
-mesh = UnitCubeMesh(5,5,5)
+meshsize = 20
+mesh = UnitCubeMesh(meshsize, meshsize, meshsize)
 
 # order, dimension
 V = VectorFunctionSpace(mesh, "Lagrange", 2, dim = 3)
@@ -43,13 +44,12 @@ boundaries.set_all(0)
 upperboundary.mark(boundaries, 1)
 ds = Measure('ds')[boundaries]
 
-dt = 0.01
+dt = 0.05
 T = 1
-eps = 0.001
+eps = 1.0
 alpha = 1.0
 beta = 1.0
 
-# ADD: v3 = 0 on top surface !!!
 noslipbasin = DirichletBC(V, (0, 0, 0), "on_boundary && x[2] < 1.0 - DOLFIN_EPS")
 zerotop = DirichletBC(V.sub(2), 0, "on_boundary && x[2] > 1.0 - DOLFIN_EPS")
 
@@ -72,7 +72,7 @@ theta = Constant((0.5, 0.5, 0))
 
 #Chorin.
 
-### reader's comment: in all 3 steps, the unknown function is
+### in all 3 steps, the unknown function is
 ### denoted by u and p, whose type is by definition "TrialFunction"
 
 # Define variational problem for step 1
@@ -125,8 +125,8 @@ prec = "amg" if has_krylov_solver_preconditioner("amg") else "default"
 parameters['krylov_solver']['nonzero_initial_guess'] = True
 
 # Create files for storing solution
-ufile = File("results0.001/velocity.pvd")
-pfile = File("results0.001/pressure.pvd")
+ufile = File("resultsA" + "_mesh" + str(meshsize) + "_dt" + str(dt) + "_eps" + str(eps) + "/velocity.pvd")
+pfile = File("resultsA" + "_mesh" + str(meshsize) + "_dt" + str(dt) + "_eps" + str(eps) + "/pressure.pvd")
 
 # Time-stepping
 t = dt
