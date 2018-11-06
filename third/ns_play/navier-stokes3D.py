@@ -21,7 +21,7 @@ import matplotlib.pyplot as plt
 from dolfin import *
 
 parameters["std_out_all_processes"] = False;
-meshsize = 20
+meshsize = 10
 mesh = UnitCubeMesh(meshsize, meshsize, meshsize)
 
 # order, dimension
@@ -46,7 +46,7 @@ ds = Measure('ds')[boundaries]
 
 dt = 0.05
 T = 1
-eps = 1.0
+eps = 0.9
 alpha = 1.0
 beta = 1.0
 
@@ -77,6 +77,11 @@ theta = Constant((0.5, 0.5, 0))
 
 # Define variational problem for step 1
 ### knowing u_prev, p_prev, we GET: u, ie u^*, the tentative velocity
+
+### idea to fix the disappearing dependence of the first stop of u3. we could split the method to further steps,
+### and we could introduce two different FEM spaces for u_h and u_3. in a first step we could calculate a tentative horizontal
+### velocity, and then as a sort of correction, update u_3 in a scheme where u_3 is the only trial function.
+
 F1_anisotropic = (1/k)*( (u1 - u_prev1)*v1 + (u2 - u_prev2)*v2 + eps*eps*(u3 - u_prev3)*v3 ) * dx + \
      inner(u_prev, grad(u_prev1)) * v1 * dx + inner(u_prev, grad(u_prev2)) * v2 * dx + \
      eps*eps*inner(u_prev, grad(u_prev3)) * v3 * dx + \
@@ -87,8 +92,7 @@ F1_anisotropic = (1/k)*( (u1 - u_prev1)*v1 + (u2 - u_prev2)*v2 + eps*eps*(u3 - u
      - inner(theta, v) * ds(1)
 
 # here we only have u1 and u2, the third component is gone, the method does not converge.
-# if we add div(u) * q, the problem is that below, the process
-# always solves for only one trial function. this needs to be fixed.
+# if we add div(u) * q, the problem is that below, then we have an additional test function. this needs to be fixed.
 F1_hydrostatic = (1/k)*( (u1 - u_prev1)*v1 + (u2 - u_prev2)*v2 ) * dx + \
      inner(u_prev, grad(u_prev1)) * v1 * dx + inner(u_prev, grad(u_prev2)) * v2 * dx + \
      - alpha * u_prev2 * v1 * dx + alpha * u_prev1 * v2 * dx + \
