@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.1.5)  8 NOV 2018 11:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.1.5)  8 NOV 2018 12:18
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -667,9 +667,9 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [8]
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 266.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 267.
  [9] [10] [11]
-Overfull \hbox (3.81363pt too wide) in paragraph at lines 386--387
+Overfull \hbox (3.81363pt too wide) in paragraph at lines 387--388
 \OML/cmm/m/it/10.95 @[][] \OMS/cmsy/m/n/10.95 2 \OML/cmm/m/it/10.95 L[]\OT1/cmr
 /m/n/10.95 (0\OML/cmm/m/it/10.95 ; T\OT1/cmr/m/n/10.95 ; \OML/cmm/m/it/10.95 L[
 ]\OT1/cmr/m/n/10.95 (
@@ -682,22 +682,22 @@ cmr/m/n/10.95 (0\OML/cmm/m/it/10.95 ; T; L[]\OT1/cmr/m/n/10.95 )$\OT1/cmr/m/it/
  []
 
 [12]
-Overfull \hbox (0.2061pt too wide) in paragraph at lines 415--415
+Overfull \hbox (0.2061pt too wide) in paragraph at lines 416--416
 [] 
  []
 
 [13]
-Overfull \hbox (7.36667pt too wide) in paragraph at lines 448--448
+Overfull \hbox (7.36667pt too wide) in paragraph at lines 449--449
 [] 
  []
 
 [14]
-Overfull \hbox (8.49088pt too wide) in paragraph at lines 475--475
+Overfull \hbox (8.49088pt too wide) in paragraph at lines 476--476
 [] 
  []
 
 [15] [16]
-Overfull \hbox (0.56483pt too wide) in paragraph at lines 523--524
+Overfull \hbox (0.56483pt too wide) in paragraph at lines 524--525
 []\OT1/cmr/m/n/10.95 For the next term we have $\OML/cmm/m/it/10.95 ^^OK[] [][]
 \OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 @[]C[]; @[][]\OT1/cmr/m/n/10.95 ) = []\
 OML/cmm/m/it/10.95 K[] [][]\OT1/cmr/m/n/10.95 ([]\OML/cmm/m/it/10.95 @[]C[]; @[
@@ -705,7 +705,7 @@ OML/cmm/m/it/10.95 K[] [][]\OT1/cmr/m/n/10.95 ([]\OML/cmm/m/it/10.95 @[]C[]; @[
  []
 
 
-Overfull \hbox (4.6005pt too wide) in paragraph at lines 538--539
+Overfull \hbox (4.6005pt too wide) in paragraph at lines 539--540
 []\OT1/cmr/bx/n/10.95 Lemma 1. []\OT1/cmr/m/it/10.95 Let $\OML/cmm/m/it/10.95 g
 []$\OT1/cmr/m/it/10.95 , $\OML/cmm/m/it/10.95 h[]$ \OT1/cmr/m/it/10.95 con-verg
 e weakly to $\OML/cmm/m/it/10.95 g; h$ \OT1/cmr/m/it/10.95 re-spec-tively in $\
@@ -715,12 +715,12 @@ OML/cmm/m/it/10.95 L[]\OT1/cmr/m/n/10.95 (0\OML/cmm/m/it/10.95 ; T\OT1/cmr/m/n/
  []
 
 [17] [18] [19]
-Overfull \hbox (0.2061pt too wide) in paragraph at lines 616--616
+Overfull \hbox (0.2061pt too wide) in paragraph at lines 617--617
 [] 
  []
 
 [20]
-Overfull \hbox (3.81363pt too wide) in paragraph at lines 636--637
+Overfull \hbox (3.81363pt too wide) in paragraph at lines 637--638
 \OML/cmm/m/it/10.95 @[][] \OMS/cmsy/m/n/10.95 2 \OML/cmm/m/it/10.95 L[]\OT1/cmr
 /m/n/10.95 (0\OML/cmm/m/it/10.95 ; T\OT1/cmr/m/n/10.95 ; \OML/cmm/m/it/10.95 L[
 ]\OT1/cmr/m/n/10.95 (
@@ -733,17 +733,17 @@ cmr/m/n/10.95 (0\OML/cmm/m/it/10.95 ; T; L[]\OT1/cmr/m/n/10.95 )$\OT1/cmr/m/it/
  []
 
 
-Overfull \hbox (7.36667pt too wide) in paragraph at lines 648--648
+Overfull \hbox (7.36667pt too wide) in paragraph at lines 649--649
 [] 
  []
 
 [21] [22]
-Overfull \hbox (0.13087pt too wide) in paragraph at lines 701--702
+Overfull \hbox (0.13087pt too wide) in paragraph at lines 713--714
 []\OT1/cmr/m/n/10.95 The main dif-fer-ence con-sists in the bound-ary con-di-ti
 ons: on ev-ery bound-
  []
 
-[23] [24] [25] [26] [27] [28] (./merged_atmosphere_eqs.bbl [29] [30]
+[23] [24] [25] [26] [27] [28] [29] (./merged_atmosphere_eqs.bbl [30]
 Missing character: There is no Í in font cmr10!
 Missing character: There is no ‚ in font cmr10!
 ) [31]
@@ -775,7 +775,7 @@ fb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb
 ></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
 </usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.
 pfb>
-Output written on merged_atmosphere_eqs.pdf (31 pages, 310928 bytes).
+Output written on merged_atmosphere_eqs.pdf (31 pages, 312039 bytes).
 PDF statistics:
  180 PDF objects out of 1000 (max. 8388607)
  127 compressed objects within 2 object streams

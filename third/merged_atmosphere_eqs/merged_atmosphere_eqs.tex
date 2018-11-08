@@ -66,7 +66,7 @@ aspect ratio and the fact that, as the above described general ideas suggest, it
 
 In this paper we consider the phenomena of a contaminant being emitted into, mixing with, and being deposited from the homogeneous and clean air. This topic is found in the intersection of heavily applied fields such as mathematical fluid dynamics, atmosphere modeling, and meteorology; for a profound insight see e.g. the books \cite{arya2001introduction}, \cite{pedlosky2013geophysical} and \cite{temam2001navier}.
 
-Our focus is to create a self-contained model describing the atmospheric flow combined with the pollution effects and to investigate the asymptotic behavior of the weak solutions of this model. The model itself, new to our knowledge, utilizes classical concepts as its foundation and it merges them with relatively new or more specific ideas. On the one hand, we use general and well-known approaches such as the wind flow being modeled by the incompressible anisotropic Navier-Stokes equations, and using a convection-diffusion equation to describe the pollution effect. On the other hand, the model also incorporates notions like taking advantage of a downwind-direction matching coordinate system (\cite{goyal2011mathematical}), using a Gaussian pulse as a source term (\cite{zhuk2016source}), and rescaling the diffusivity parameters according to the largely different horizontal and vertical scales (similarly to the way the viscosity terms are scaled in \cite{azerad2001mathematical}).
+Our focus is to create a self-contained model describing the atmospheric flow combined with the pollution effects and to investigate the asymptotic behavior of the weak solutions of this model. The model itself, new to our knowledge, utilizes classical concepts as its foundation and it merges them with relatively new or more specific ideas. On the one hand, we use general and well-known approaches such as the wind flow being modeled by the incompressible anisotropic Navier-Stokes equations, and using a convection-diffusion equation to describe the pollution effect. On the other hand, the model also incorporates notions like using a Gaussian pulse as a source term (\cite{zhuk2016source}), and rescaling the diffusivity parameters according to the largely different horizontal and vertical scales (similarly to the way the viscosity terms are scaled in \cite{azerad2001mathematical}).
 
 Specifically, as for the limit behavior of the weak solutions of the model we construct, we show that the weak solutions of this model converge to a weak solution of the hydrostatic limit model --- in other words, taking the limit we arrive to a justification of the hydrostatic model for the case of the polluted atmosphere, where, instead of the originally used wind momentum equation, the hydrostatic air pressure assumption is used to describe the process in the vertical dimension. Since the polluted atmosphere as a merged physical phenomena can naturally be seen as the air-analogous version of the salty sea, with this convergence result we are providing an expansion of the main theorem of \cite{azerad2001mathematical} in the sense that we obtain a result describing the atmospheric flow combined with pollution effects, while the authors of \cite{azerad2001mathematical} provide a similar result for the ocean excluding salinity.
 
@@ -84,10 +84,11 @@ We end up this section with some notations we will use through the paper.
 \item $\nabla$ stands for the gradient vector; specifically, $(\partial_x, \partial_y, \partial_z)$ before, and $(\partial_1, \partial_2, \partial_3)$ after rescaling
 \item $\nabla_\nu = (\nu_x^{1/2} \partial_x, \nu_y^{1/2} \partial_y, \nu_z^{1/2} \partial_z)$ on $\Omega_\epsilon$, $\nabla_\nu = (\nu_1^{1/2} \partial_1, \nu_2^{1/2} \partial_2, \nu_3^{1/2} \partial_3)$ on the rescaled domain $\Omega$
 \item $ \Delta_\nu$ stands for the anisotropic Laplacian operators $\nu_x \partial^2_{xx} + \nu_y \partial^2_{yy}  + \nu_z \partial^2_{zz}$ and $\nu_1 \partial^2_{11} + \nu_2 \partial^2_{22}  + \nu_3 \partial^2_{33}$ on the original and rescaled domains, respectively
-\item $\mathbf{g} = $ represents the force due to gravity, which also includes the centrifugal effect
+\item $\mathbf{g}$ represents the force due to gravity, which also includes the centrifugal effect
 \item $\varphi = $ the gravity potential term, i.e. $\mathbf{g} = \nabla \varphi$
 \item $\mathbf{w}$ represents the earth rotation angular speed, $l(y) = $ latitude
 \item $\alpha = 2 f \sin (l(x_2))$, $\beta = 2 f \cos (l(x_2))$
+\item $\mathbf{K}$ represents the diffusion matrix 
 \item $( \cdot,\cdot) = $ the scalar product in $L^2(\Omega)^d$ or the duality $L^p (\Omega)$, $L^{p'} (\Omega)$
 \item $< \cdot,\cdot>_{\Gamma} = $ the scalar product or duality on the boundary curve $\Gamma$ ($H^{-1/2}(\Gamma)$, $H^{1/2}(\Gamma)$)
 \item $\mathbf{u}_H$ = the horizontal velocity components $(u_1, u_2)$
@@ -100,7 +101,7 @@ We end up this section with some notations we will use through the paper.
 
 We begin by choosing a coordinate system, set the domain we start with and an appropriate set of equations describing both atmosphere motions and the effect of pollution. We ignore large scale effects such as the curvature of the Earth. For describing the effect of pollution we use a continuity equation written in Cartesian coordinates for the concentration.
 
-We fix the local Cartesian coordinate system to be adjusted to the downwind direction, i.e. $z$ is the vertical direction, while $x$ is the downwind, and $y$ is the crosswind direction. It is a legitimate assumption if we are considering a time interval which is not too long in the sense that it is reasonable to assume that we have a permanent, relatively stable main wind direction.  
+We fix a local Cartesian coordinate system where the axes are independent from the wind. Other possibilities and considerations regarding choosing the coordinate system are described briefly in the concluding remarks.
 
 The domain we consider is a local slice of the atmosphere filled with homogeneous air that we assume to be incompressible, and a pollutant of concentration $C,$ therefore it is defined by the set
 
@@ -684,6 +685,17 @@ We are finishing this paper briefly mentioning a few ideas regarding the physica
   \end{enumerate}
   
   The Gaussian and Lorentzian version of the source term is continuous and bounded on $\Omega$, it is actually in $L^\infty$ in space (and in $L^2$ as a consequence), while it is easy to see that the piecewise constant unit pulse is in $L^2$ as well. Since the time dependence of this source is described by the Heaviside function, the time norm is also finite.
+  
+\end{remark}
+
+\begin{remark}
+However the results of this article were achieved in a classical, fixed Cartesian coordinate system, there are other possibilities to build up the model in. We will briefly consider two of these.
+
+  \begin{enumerate}
+  
+    \item We fix the local Cartesian coordinate system to be adjusted to the downwind direction, i.e. $z$ is the vertical direction, while $x$ is the downwind, and $y$ is the crosswind direction. It is a legitimate assumption if we are considering a time interval which is not too long in the sense that it is reasonable to assume that we have a permanent, relatively stable main wind direction.  taking advantage of a downwind-direction matching coordinate system (\cite{goyal2011mathematical}).
+
+  \end{enumerate} Wind-matching.
   
 \end{remark}
 
