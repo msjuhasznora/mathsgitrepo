@@ -163,13 +163,7 @@ Now, we perform a vertical scaling to make the domain independent of $\epsilon.$
     
     Finally, we use an analogous rescaling methodology for the diffusivity constants in (\ref{diffusive}),
     
-    \[ K_y = K_2, \quad K_z = \epsilon ^ 2 K_3. \]
-    
-    As a second step of the rescaling process, we also exploit the fact that we chose the coordinate system in a way so that the $x$ axis matches the downwind direction. In this case we use an additional scaling equation, which is different in nature from the previous ones in the sense that it is not derived from the shallowness of the domain but rather suggested by the fact that in the downwind direction it is natural to assume that the diffusion is negligible compared to downwind transport, i.e.
-    
-    \begin{equation} \abs{u_1 \partial_{1} C} \gg \abs{ K_x \partial_{11} ^2 C }\end{equation}
-    which leads us to using
-    \[ K_x = \epsilon K_1.\]
+    \[ K_x = K_1, \quad K_y = K_2, \quad K_z = \epsilon ^ 2 K_3. \]
     
 Finally, as we mentioned before, we use a Gaussian approximated delta function to represent the source, so it is convenient to reformulate (\ref{approxsourceterm}) in terms of $\epsilon$, which is the standard deviation parameter of the distribution describing the source --- since later we will take the limit as $\epsilon$ goes to zero, it will result in having the $\delta$ distribution representing the hydrostatic source term, which is a physically natural choice. In other words, we choose $\kappa$ to be $\epsilon$ and the following function will give shape to the source term:
 
@@ -450,7 +444,7 @@ Now we are ready to state our main result.
   
   From the hypothesis on the initial data and since the $S^\epsilon$ source term is in $L^\infty_x (\Omega)$, $I_1$ and $I_2$ are bounded. The only term we need to work on further is $I_3$.
   
-  By using the Holder inequality and the generalized Young inequality for any $\zeta > 0,$ we can estimate this term in the following way.
+  By using the Holder inequality and the generalised Young inequality for any $\zeta > 0,$ we can estimate this term in the following way.
   
   \begin{equation}
     \begin{split}  
@@ -475,11 +469,11 @@ The energy inequality (\ref{energyIEQ}) now takes the form
     \end{split}
   \end{equation}  
     
-  The right hand side of the energy inequality is now apparently bounded, and it is easy to see that the coefficients of the pollution terms are positive, since the $\zeta$ constant of the generalized Young inequality can be freely chosen in a way such that the requirements $\epsilon K_1 (1 - \zeta \frac{1}{2} c_T (c_S + 1)) > 0, (K_2 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) > 0, (K_3 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) > 0 $ are all satisfied.
+  The right hand side of the energy inequality is now apparently bounded, and it is easy to see that the coefficients of the pollution terms are positive, since the $\zeta$ constant of the generalised Young inequality can be freely chosen in a way such that the requirements $\epsilon K_1 (1 - \zeta \frac{1}{2} c_T (c_S + 1)) > 0, (K_2 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) > 0, (K_3 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) > 0 $ are all satisfied.
     
   \subsection{A priori estimates and weak convergence}
   
-  From the final form of the energy inequality we obtain uniform a priori estimates that we summarize in the following proposition.
+  From the final form of the energy inequality we obtain uniform a priori estimates that we summarise in the following proposition.
   
   \begin{prop}
     Let $u^\epsilon_1, u^\epsilon_2, u^\epsilon_3$ and $C^\epsilon$ be the weak solutions of the system (\ref{ANSC1}) - (\ref{ANSC5}) in the sense of Definition \ref{definitionanisotropicWF}. Then it holds,
@@ -529,37 +523,9 @@ The energy inequality (\ref{energyIEQ}) now takes the form
       
 Finally we have to deal with the nonlinear term $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}).$
   
-By analyzing this nonlinear term in a more precise way we see that $(u_i C^\epsilon, \partial_i \tilde{C})$ for $i=1,2$ is weakly convergent since as we mentioned before (\cite{azerad2001mathematical}) we have the strong convergence of the horizontal velocities, while in the case of $i=3$ this property does not hold for $u_3$ and from the energy bound we do not have more than the weak convergence of $C^\epsilon$ .
+By analysing this nonlinear term in a more precise way we see that $(u_i C^\epsilon, \partial_i \tilde{C})$ for $i=1,2$ is weakly convergent since as we mentioned before (\cite{azerad2001mathematical}) we have the strong convergence of the horizontal velocities, while in the case of $i=3$ this property does not hold for $u_3$ and from the energy bound we do not have more than the weak convergence of $C^\epsilon$ .
   
-  In this case the classical Aubin-Lions lemma can not be applied since it would require for $C^\epsilon$ to be in a compactly embedded space such as $L^2 H^1$, which is not the case here because we only know boundedness results for $\sqrt{\epsilon} \partial_1 C$, but not for $\partial_1 C$.
-  
-   Therefore we will use the following compactness result from \cite{lions1996mathematical}.
-  
-  \begin{lemma} \label{PLL}
-    Let $g^\epsilon$, $h^\epsilon$ converge weakly to $g,h$ respectively in $L^{p_1}(0,T; L^{p_2}(\Omega))$, $L^{q_1}(0,T; L^{q_2}(\Omega))$ where $1 \leq p_1, p_2 \leq + \infty,$
-    \[ \frac{1}{p_1} + \frac{1}{q_1} =  \frac{1}{p_2} + \frac{1}{q_2} = 1. \]
-    We assume in addition that
-    $$\frac{\partial g^\epsilon}{\partial t} \text{ is bounded in } L^1 (0,T; W^{-m, 1} (\Omega)) \text{ for some } m \geq 0 \text{ independent of } \epsilon,$$
-    and
-    $$\norm{h^\epsilon - h^\epsilon(\cdot + \xi, t)}_{L^{q_1}(0,T; L^{q_2}(\Omega))} \to 0 \text{ as } \abs{\xi} \to 0, \text{ uniformly in } \epsilon.$$
-    Then, $g^\epsilon h^\epsilon$ converges to $gh$ (in the sense of distributions on $\Omega \times (0,T)$).
-  \end{lemma}
-  
-  What we will show in the following is that for $h^\epsilon = u^\epsilon_i$ and $g^\epsilon = C^\epsilon$ the assumptions of Lemma \ref{PLL} are satisfied, which means that $u_i^\epsilon C^\epsilon \rightharpoonup  u_i C$ in the sense of distribution.
-   
-     From (\ref{WeakConvCEps1}) we have that $C^\epsilon \rightharpoonup C$ in $L_t^\infty L_x^2$, and since we are on a finite domain, the same convergence holds in $L_t^2 L_x^2.$ Hence we can choose $q_1 = q_2 = p_1 = p_2 = 2.$
-     
-     To estimate the time derivative of $C^\epsilon$ we use (\ref{ANSC5}), which since $\mathbf{u}^\epsilon$ is divergence-free can be rewritten as
-     
-         \[  \frac{\partial C^\epsilon}{\partial t} = - \nabla \cdot (\mathbf{u}^\epsilon C^\epsilon) + \sqrt{\epsilon} K_1 \partial_1 \partial_1 \sqrt{\epsilon} C^\epsilon + K_2 \partial_2 \partial_2 C^\epsilon + K_3 \partial_3 \partial_3 C^\epsilon -S^\epsilon \]
-         
-         Now, the $S^\epsilon$ Gaussian source term is smooth; from (\ref{proposition1}), (\ref{propositionExtra}) we get $ \nabla \cdot (\mathbf{u}^\epsilon C^\epsilon) \in W_x^{-1,1}$ and from (\ref{proposition3}) we have that the remaining terms are in $W_x^{-1,2}.$ Hence we can conclude that $$\partial_t C \in L_t^1 W_x^{-1,1}.$$
-         
-      The property that $$\norm{u_i^\epsilon - u_i^\epsilon(\cdot + \xi, t)} \to 0 \text{ as } \abs{\xi} \to 0$$ follows since $u_i^\epsilon \in L^2_t L^2_x.$
-      
-      Now we can apply Lemma \ref{PLL} with $g^\epsilon = C^\epsilon, h^\epsilon = u^\epsilon, q_1 = q_2 = p_1 = p_2 = 2, m=-1$ and we finally arrive to
-   
-   \[ \int_0^T (\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) \diff t \to \int_0^T (\mathbf{u} C, \nabla \tilde{C}) \diff t,\]
+TODO Description of the convergence of the nonlinear term.
    
    which, combined with the previously described linear terms, concludes the proof of the main theorem.
 
@@ -567,7 +533,7 @@ By analyzing this nonlinear term in a more precise way we see that $(u_i C^\epsi
 %%% *** CONVECTION DOMINATED COASTAL MODEL *** %%%  
 \section{Convection dominated coastal model} \label{convdomcoastal}
 
-We now present a generalized model, which is an extension of the previous inland model by adapting the model for seaside conditions.
+We now present a generalised model, which is an extension of the previous inland model by adapting the model for seaside conditions.
 
 \begin{figure}[!h]
 \centering
@@ -593,7 +559,7 @@ On $\Gamma_E$ we have the same boundary conditions as in the inland case, $\math
 
 In what follows we highlight the parts that will be different from the inland case. 
 
-The weak formulation of the coastal generalized system will be different from the original inland version in that
+The weak formulation of the coastal generalised system will be different from the original inland version in that
 \begin{itemize}
   \item it will contain a boundary term for the wind because of the air - ocean interface,
   \item it will contain boundary terms for $\partial_2 C, \partial_3 C$, which had been assumed to be zero before on the ground.
@@ -637,7 +603,7 @@ Find $(\mathbf{u}, C)$ such that $\mathbf{u} = (\mathbf{u}_H, u_3) \in L^2 (0, T
   for all $(\mathbf{\tilde{u}}, \tilde{C})$ with $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_H, \tilde{u}_3) \in H^1 (0,T, \mathbf{W})$, with $\tilde{u}_H (T) = 0$ and $\partial_3 \mathbf{\tilde{u}}_H \in L^\infty (0, T; L^3 (\Omega)^2)$ and $\tilde{C}$ with $\tilde{C} \in L^2 (0,T, H^3_{\Gamma} (\Omega))$, $\tilde{C} \in H^1 (0,T, L^2)$, $\tilde{C} (T) = 0$. 
 \end{definition}
 
-The coastal, generalized version of the energy inequality becomes
+The coastal, generalised version of the energy inequality becomes
 
   \begin{equation}
     \begin{split}  
@@ -656,10 +622,6 @@ Eventually we arrive to the extended, coastal version of the main theorem, which
   Let $\mathbf{u}_0$ $\in$ $L^2 (\Omega)^3$, with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 \cdot \mathbf{n} = 0$ on $\partial \Omega$; $C(0)\in$ $L^2 (\Omega)^3$, $C(0) = 0$ on $ \partial \Omega$; let $\theta_1, \theta_2 \in L^2 (0, T; H^{-1/2}(\Gamma_I))$ and finally let $\sigma \in L^2 (0, T; H^1 (\Gamma_G))$; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u^\epsilon}, C^\epsilon)$ of the coastal anisotropic equations (\ref{coastalAnisotropic}) converge to a weak solution ($\mathbf{u}$, C) of the hydrostatic coastal equations of the polluted atmosphere (\ref{coastalHydrostatic}).
 \end{theorem}
 
-\begin{remark}
-If we switch to the "informationless", fix coordinate system that does not match the downwind direction and we drop the assumption on the flow being convection dominated ($\epsilon$ - diffusion), then we can relax the restrictions on $C^\epsilon$ on the boundary. Indeed, in this case we do not have a vanishing $\epsilon$ term in front of the $K_1$ constant, and we can use the analogous estimate as in the inland case at the energy inequality and arrive to having a $(K_1 - \zeta \frac{K_1 + K_2 + K_3}{2} c_T (c_S + 1)) \norm{\partial_1 C^\epsilon}_{L^2}^2$ term with a positive coefficient on the left hand side and a bounded $\frac{1}{\zeta_i} \frac{K_i}{2} \int_0 ^ t \norm{\partial_i C^\epsilon}^2 _{L^2 (\Gamma_G)}$ integral on the right hand side --- the only assumption we need is $\partial_i C^\epsilon$ to be in $L^2_t L^2_x$ on the boundary.
-\end{remark}
-
 %%% *** CONCLUDING REMARKS *** %%%
 \section{Concluding remarks} \label{concludingremarks}
 
@@ -670,7 +632,7 @@ We are finishing this paper briefly mentioning a few ideas regarding the physica
 \end{remark}
 
 \begin{remark}
-\normalfont Note that the aspect ratio going to zero is not only legitimate on a global scale. When we switch from a global model to a local one in order to be able to use the beta plane approximation, we still have hundreds of thousands of square kilometers versus 1---5 kilometers.
+\normalfont Note that the aspect ratio going to zero is not only legitimate on a global scale. When we switch from a global model to a local one in order to be able to use the beta plane approximation, we still have hundreds of thousands of square kilometres versus 1---5 kilometres.
 \end{remark}
 
 \begin{remark}
@@ -693,9 +655,18 @@ However the results of this article were achieved in a classical, fixed Cartesia
 
   \begin{enumerate}
   
-    \item We fix the local Cartesian coordinate system to be adjusted to the downwind direction, i.e. $z$ is the vertical direction, while $x$ is the downwind, and $y$ is the crosswind direction. It is a legitimate assumption if we are considering a time interval which is not too long in the sense that it is reasonable to assume that we have a permanent, relatively stable main wind direction.  taking advantage of a downwind-direction matching coordinate system (\cite{goyal2011mathematical}).
+    \item One option is to fix the coordinate system in such a way the the $x$ axis matches the downwind direction (\cite{goyal2011mathematical}). In other words, $z$ is the vertical direction, while $x$ is the main wind, and $y$ is the crosswind direction. It is a legitimate assumption if we are considering a time interval which is not too long in the sense that it is reasonable to assume that we have a permanent, relatively stable downwind direction. This adjusted coordinate system makes it possible to add another equation in the scaling process, which is different in nature from the previous ones in the sense that it is not derived from the shallowness of the domain but rather suggested by the fact that in the downwind direction it is natural to assume that the diffusion is negligible compared to downwind transport, i.e.
+    
+    \begin{equation} \abs{u_1 \partial_{1} C} \gg \abs{ K_x \partial_{11} ^2 C }\end{equation}
+    which leads us to using
+    \[ K_x = \epsilon K_1\]
+    in this convection dominated scenario.
+    
+    Adding this equation on the one hand makes the concentration equation in the hydrostatic limit model one term shorter, since the first diffusion term drops out. On the other hand it leads to a new mathematical challenge handling the weak convergence of the nonlinear term $\mathbf{u}^\epsilon C^\epsilon$ in a situation where we do not have the $H^1_x$ regularity of $C^\epsilon$ --- as we have $L^2_x$ boundedness only for $\sqrt{\epsilon} \partial_1 C^\epsilon$, and not for $\partial_1 C^\epsilon$ itself. We plan to investigate this situation in an upcoming article.
+    
+    \item Another possibility is to adjust the coordinate system in a way that the $x$ axis matches not with the downwind, but the wind velocity vector function $\mathbf{u}^epsilon$ itself. This option brings along a $\mathbf{u}^epsilon$-dependent coordinate transform matrix in every equation, however it also makes the velocity vector one dimensional in the new coordinate system, which can be a potential benefit in a computational application.
 
-  \end{enumerate} Wind-matching.
+  \end{enumerate}
   
 \end{remark}
 
