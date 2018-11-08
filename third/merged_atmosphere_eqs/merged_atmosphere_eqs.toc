@@ -1,0 +1,11 @@
+\contentsline {section}{\numberline {1}Introduction}{3}
+\contentsline {subsection}{\numberline {1.1}Notations}{4}
+\contentsline {section}{\numberline {2}The polluted atmosphere model}{5}
+\contentsline {section}{\numberline {3}Weak formulation and Main Result}{12}
+\contentsline {section}{\numberline {4}Proof of the main theorem}{14}
+\contentsline {subsection}{\numberline {4.1}Energy inequality}{14}
+\contentsline {subsection}{\numberline {4.2}A priori estimates and weak convergence}{16}
+\contentsline {subsection}{\numberline {4.3}Passing to the limit}{16}
+\contentsline {section}{\numberline {5}Convection dominated coastal model}{19}
+\contentsline {section}{\numberline {6}Concluding remarks}{22}
+\contentsline {section}{\numberline {A}The existence of weak solution of the hydrostatic system of the polluted atmosphere}{23}

@@ -1,30 +1,18 @@
-# case: ocean, with wind on the surface
+# case: ocean with find shear on top. Navier-Stokes + Chorin
 
-# steps:
-
-# DONE STEP 1: modify the 2D L-shape domain to a 3D domain.
-# DONE STEP 2: specify the order and the dimension for the velocity FEM space.
-# (order argument, optional argument: dim =, fill both in this case, unlike 2D )
-# DONE STEP 3: use meaningful notations instead of "u_" etc.
-# DONE STEP 4: redefine weak form with the actual one we use, with epsilon etc
-# DONE STEP 5: mark the Neumann boundary
-
-# STEP: Neumann BCs.
-
-# STEP: check weak convergence for the ocean version, and air w/o C.
-
-# STEP: add new space C.
-# STEP: add source term
+# remaining steps:
+# fix the weak convergence
+# STEP: add new space C for the concentration with source term
 # STEP: C function, (2,1,1) space, stability, BBL condition?
 
 import matplotlib.pyplot as plt
 from dolfin import *
 
 parameters["std_out_all_processes"] = False;
-meshsize = 10
+meshsize = 25
 mesh = UnitCubeMesh(meshsize, meshsize, meshsize)
 
-# order, dimension
+# (order argument, optional argument: dim =, fill both in this case, unlike 2D )
 V = VectorFunctionSpace(mesh, "Lagrange", 2, dim = 3)
 Q = FunctionSpace(mesh, "Lagrange", 1)
 
@@ -44,9 +32,9 @@ boundaries.set_all(0)
 upperboundary.mark(boundaries, 1)
 ds = Measure('ds')[boundaries]
 
-dt = 0.05
+dt = 0.01
 T = 1
-eps = 0.9
+eps = 0.006
 alpha = 1.0
 beta = 1.0
 
@@ -65,12 +53,17 @@ u_next1, u_next2, u_next3 = split(u_next)
 p_prev = Function(Q)
 p_next = Function(Q)
 
+wind_shear_x = 100.0
+wind_shear_y = 100.0
+
 # Define coefficients
 k = Constant(dt)
 f = Constant((0, 0, 0))
-theta = Constant((0.5, 0.5, 0))
+theta = Constant((wind_shear_x, wind_shear_y, 0))
 
-#Chorin.
+#Chorin method. / Incremental pressure correction in 3 steps,
+# as described in https://fenicsproject.org/pub/tutorial/pdf/fenics-tutorial-vol1.pdf
+# on p57.
 
 ### in all 3 steps, the unknown function is
 ### denoted by u and p, whose type is by definition "TrialFunction"
@@ -80,7 +73,8 @@ theta = Constant((0.5, 0.5, 0))
 
 ### idea to fix the disappearing dependence of the first stop of u3. we could split the method to further steps,
 ### and we could introduce two different FEM spaces for u_h and u_3. in a first step we could calculate a tentative horizontal
-### velocity, and then as a sort of correction, update u_3 in a scheme where u_3 is the only trial function.
+### velocity, and then as a sort of correction, update u_3 in a scheme where u_3 is the only trial function and
+### the equation for u_3 includes the results for u_H from the previous step.
 
 F1_anisotropic = (1/k)*( (u1 - u_prev1)*v1 + (u2 - u_prev2)*v2 + eps*eps*(u3 - u_prev3)*v3 ) * dx + \
      inner(u_prev, grad(u_prev1)) * v1 * dx + inner(u_prev, grad(u_prev2)) * v2 * dx + \
@@ -91,8 +85,7 @@ F1_anisotropic = (1/k)*( (u1 - u_prev1)*v1 + (u2 - u_prev2)*v2 + eps*eps*(u3 - u
      - inner(f, v) * dx + \
      - inner(theta, v) * ds(1)
 
-# here we only have u1 and u2, the third component is gone, the method does not converge.
-# if we add div(u) * q, the problem is that below, then we have an additional test function. this needs to be fixed.
+# here we only have u1 and u2, the third component is gone, the method does not converge. to be fixed.
 F1_hydrostatic = (1/k)*( (u1 - u_prev1)*v1 + (u2 - u_prev2)*v2 ) * dx + \
      inner(u_prev, grad(u_prev1)) * v1 * dx + inner(u_prev, grad(u_prev2)) * v2 * dx + \
      - alpha * u_prev2 * v1 * dx + alpha * u_prev1 * v2 * dx + \
@@ -129,8 +122,8 @@ prec = "amg" if has_krylov_solver_preconditioner("amg") else "default"
 parameters['krylov_solver']['nonzero_initial_guess'] = True
 
 # Create files for storing solution
-ufile = File("resultsA" + "_mesh" + str(meshsize) + "_dt" + str(dt) + "_eps" + str(eps) + "/velocity.pvd")
-pfile = File("resultsA" + "_mesh" + str(meshsize) + "_dt" + str(dt) + "_eps" + str(eps) + "/pressure.pvd")
+ufile = File("resultsA" + "_mesh" + str(meshsize) + "_dt" + str(dt) + "_eps" + str(eps) + "ws" + str(wind_shear_x) + "_" + str(wind_shear_y) + "/velocity.pvd")
+pfile = File("resultsA" + "_mesh" + str(meshsize) + "_dt" + str(dt) + "_eps" + str(eps) + "ws" + str(wind_shear_x) + "_" + str(wind_shear_y) + "/pressure.pvd")
 
 # Time-stepping
 t = dt
