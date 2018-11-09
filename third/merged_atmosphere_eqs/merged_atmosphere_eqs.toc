@@ -2,7 +2,7 @@
 \contentsline {subsection}{\numberline {1.1}Notations}{4}
 \contentsline {section}{\numberline {2}The polluted atmosphere model}{5}
 \contentsline {section}{\numberline {3}Weak formulation and Main Result}{11}
-\contentsline {section}{\numberline {4}Proof of the main theorem}{13}
+\contentsline {section}{\numberline {4}Proof of the main theorem}{14}
 \contentsline {subsection}{\numberline {4.1}Energy inequality}{14}
 \contentsline {subsection}{\numberline {4.2}A priori estimates and weak convergence}{15}
 \contentsline {subsection}{\numberline {4.3}Passing to the limit}{16}

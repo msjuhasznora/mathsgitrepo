@@ -3,44 +3,48 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: merged_atmosphere_eqs.aux
 The style file: abbrv.bst
 Database file #1: merged_atmosphere_eqs.bib
-You've used 22 entries,
+Warning--entry type for "diffusion-tensor" isn't style-file defined
+--line 11 of file merged_atmosphere_eqs.bib
+Warning--to sort, need author or key in diffusion-tensor
+You've used 23 entries,
             2118 wiz_defined-function locations,
-            635 strings with 7435 characters,
-and the built_in function-call counts, 6822 in all, are:
-= -- 667
-> -- 308
+            637 strings with 7509 characters,
+and the built_in function-call counts, 6970 in all, are:
+= -- 679
+> -- 309
 < -- 7
-+ -- 124
++ -- 125
 - -- 100
-* -- 469
-:= -- 1164
-add.period$ -- 68
-call.type$ -- 22
-change.case$ -- 110
+* -- 474
+:= -- 1178
+add.period$ -- 69
+call.type$ -- 23
+change.case$ -- 113
 chr.to.int$ -- 0
-cite$ -- 22
-duplicate$ -- 263
-empty$ -- 549
+cite$ -- 24
+duplicate$ -- 270
+empty$ -- 572
 format.name$ -- 100
-if$ -- 1403
+if$ -- 1440
 int.to.chr$ -- 0
-int.to.str$ -- 22
+int.to.str$ -- 23
 missing$ -- 27
-newline$ -- 113
+newline$ -- 116
 num.names$ -- 44
-pop$ -- 124
+pop$ -- 132
 preamble$ -- 1
-purify$ -- 94
+purify$ -- 96
 quote$ -- 0
-skip$ -- 168
+skip$ -- 178
 stack$ -- 0
-substring$ -- 400
-swap$ -- 37
+substring$ -- 405
+swap$ -- 38
 text.length$ -- 7
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 76
-warning$ -- 0
+type$ -- 80
+warning$ -- 1
 while$ -- 67
-width$ -- 24
-write$ -- 242
+width$ -- 25
+write$ -- 247
+(There were 2 warnings)

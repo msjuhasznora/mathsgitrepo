@@ -121,18 +121,18 @@ The equations governing the air velocity $\mathbf{v}$ and pressure $q$ in the at
   \nabla \cdot \mathbf{v} = 0 \text{ in } \Omega_{\epsilon} \times (0,T)
 \end{equation}
 
-Contaminants emitted into the atmosphere are transported by the wind, mixed and dispersed by turbulent behavior, and deposited onto the ground by gravity. The dispersion of pollutants is commonly modeled by a diffusive equation of the form
+Contaminants emitted into the atmosphere are transported by the wind, mixed and dispersed by turbulent behaviour, and deposited onto the ground by gravity. The dispersion of pollutants is commonly modelled by a diffusive equation of the form
     
 \begin{equation} \label{diffusive}
-  \partial_t C + \mathbf{v} \cdot \nabla C = K_x \partial_{xx} ^2 C + K_y  \partial_{yy} ^2  C + K_z  \partial_{zz} ^2  C + S,
+  \partial_t C + \mathbf{v} \cdot \nabla C = \nabla \cdot (\mathbf{K} \nabla C) + S,
 \end{equation}
 
-where $C$ is the pollution concentration.
+where $C$ is the pollution concentration and $\mathbf{K}$ is the diffusion matrix --- the diagonal terms represent the strength of the diffusion in the $x, y, z$ directions, while the off-diagonal terms reflect the correlation of random motions between each pair of principal directions (\cite{diffusion-tensor}).
 
-In this equation $S$ represents the sources and sinks of the pollutant in the atmosphere i.e. its emission, removal from the atmosphere by dry and wet deposition, and chemical reactions. We will use the approach suggested by \cite{zhuk2016source} and use what is called a parametrized nascent delta function (a Gaussian impulse, specifically) to describe the source term $S$.
+In this equation $S$ represents the sources and sinks of the pollutant in the atmosphere i.e. its emission, removal from the atmosphere by dry and wet deposition, and chemical reactions. We will use the approach suggested by \cite{zhuk2016source} and use what is called a parametrised nascent delta function (a Gaussian impulse, specifically) to describe the source term $S$.
 
 Let us consider a gas plume with intensity $I$ originating at emission coordinates $\mathbf{x}_s$ beginning at time $t_s$. At the beginning we assume zero concentration.
-An abrupt gas emission is modeled by a source term represented as a product of an approximated delta function $\delta_\kappa (\mathbf{x} - \mathbf{x}_s)$ (centered at $\mathbf{x}_s$ with a constant parameter $\kappa$) and a Heaviside function $s$ (switching from 0 to $I$ at time $t_s.$)
+An abrupt gas emission is modelled by a source term represented as a product of an approximated delta function $\delta_\kappa (\mathbf{x} - \mathbf{x}_s)$ (centered at $\mathbf{x}_s$ with a constant parameter $\kappa$) and a Heaviside function $s$ (switching from 0 to $I$ at time $t_s.$)
 In fact, this source term models the continuous emission of the gas at constant rate and fixed location.
 Basically $s(t;t_s)$ is a function which activates the source, namely $s(t;t_s) := IH(t - t_s)$ where $H(\cdot)$ is the Heaviside step function and $0 \leq t_s \leq T.$ We arrive to the complete source term model of the form
 
@@ -161,11 +161,25 @@ Now, we perform a vertical scaling to make the domain independent of $\epsilon.$
     
     Note that from this point we have $\nabla = (\partial_1, \partial_2, \partial_3) $ and $ \Delta_\nu = \nu_1 \partial^2_{11} + \nu_2 \partial^2_{22}  + \nu_3 \partial^2_{33} $. 
     
-    Finally, we use an analogous rescaling methodology for the diffusivity constants in (\ref{diffusive}),
+    We use an analogous rescaling methodology for the diffusivity constants in (\ref{diffusive}),
     
-    \[ K_x = K_1, \quad K_y = K_2, \quad K_z = \epsilon ^ 2 K_3. \]
+\begin{gather}
+ \begin{bmatrix} K_{xx} & K_{xy} & K_{xz} \\ K_{yx} & K_{yy} & K_{yz} \\ K_{zx} & K_{zy} & K_{zz} \end{bmatrix}
+ =
+  \begin{bmatrix}
+    1 & 1 & \epsilon
+  \end{bmatrix}
+  \begin{bmatrix}
+    M_{11} & M_{12} & M_{13} \\ M_{21} & M_{22} & M_{23} \\ M_{31} & M_{32} & M_{33}
+  \end{bmatrix}
+  \begin{bmatrix}
+           1 \\
+           1 \\
+           \epsilon
+  \end{bmatrix}
+\end{gather} 
     
-Finally, as we mentioned before, we use a Gaussian approximated delta function to represent the source, so it is convenient to reformulate (\ref{approxsourceterm}) in terms of $\epsilon$, which is the standard deviation parameter of the distribution describing the source --- since later we will take the limit as $\epsilon$ goes to zero, it will result in having the $\delta$ distribution representing the hydrostatic source term, which is a physically natural choice. In other words, we choose $\kappa$ to be $\epsilon$ and the following function will give shape to the source term:
+Eventually, as we mentioned before, we use a Gaussian approximated delta function to represent the source, so it is convenient to reformulate (\ref{approxsourceterm}) in terms of $\epsilon$, which is the standard deviation parameter of the distribution describing the source --- since later we will take the limit as $\epsilon$ goes to zero, it will result in having the $\delta$ distribution representing the hydrostatic source term, which is a physically natural choice. In other words, we choose $\kappa$ to be $\epsilon$ and the following function will give shape to the source term:
 
 \[\delta_\epsilon (\mathbf{x}-\mathbf{x_s}) = \gamma \epsilon^{-1} e ^ {\frac{-(\mathbf{x}-\mathbf{x_s})^2}{\epsilon^2}};\]
 
@@ -196,7 +210,7 @@ where $\gamma$ is a normalizing constant.
     \end{equation}
     
     \begin{equation} \label{ANSC5}
-    \partial_t C^\epsilon + \mathbf{u^\epsilon} \cdot \nabla C^\epsilon = \epsilon K_1 \partial_{11} ^ 2 C^\epsilon + K_2 \partial_{22} ^ 2 C^\epsilon + K_3 \partial_{33} ^ 2 C^\epsilon + S_\epsilon \text{ in } \Omega \times (0,T)
+    \partial_t C^\epsilon + \mathbf{u^\epsilon} \cdot \nabla C^\epsilon = \nabla \cdot (\mathbf{M} \nabla C^\epsilon) + S_\epsilon \text{ in } \Omega \times (0,T)
     \end{equation}
     
 %    \begin{equation} \label{ANSC6}
@@ -210,8 +224,6 @@ The initial condition for the velocity and the pollution concentration are
     \end{equation}
     
 To make the above set of equations complete, we need to assign the boundary conditions.
-
-Concerning the pollution concentration it is vital to choose boundary conditions that are physically as accurate as possible and at the same time not unnecessarily complicated. As we can see in many related papers, in the case of LAMs (limited area models) finding the right boundary conditions can be a nontrivial task.
 
 \begin{figure}[!h]
   \centering
@@ -237,6 +249,8 @@ Concerning the pollution concentration it is vital to choose boundary conditions
   \end{tikzpicture}
 \end{figure}
 
+Concerning the pollution concentration it is vital to choose boundary conditions that are physically as accurate as possible and at the same time not unnecessarily complicated. As we can see in many related papers, in the case of LAMs (limited area models) finding the right boundary conditions can be a nontrivial task.
+
 In order to describe the boundary condition in a precise way we need to divide $\Gamma = \partial \Omega$ as follows. The upper boundary of the $\Omega$ domain is denoted by $\Gamma_U$, the lateral boundary is $\Gamma_L$, and the lower boundary of the domain is $\Gamma_G$.
 As we mentioned before, the case we are investigating is that of inland domains $\Omega$, i.e. the case of landscapes and cities with no significant nearby water surface.  This is very important since the boundary conditions for both wind velocity and pollution concentration in the air are different depending whether we are above solid ground or water surface. The boundary conditions we choose to use in the inland scenario are the following:
 
@@ -248,7 +262,7 @@ As we mentioned before, the case we are investigating is that of inland domains 
     \draw[green, thick] (0,0) -- (4,0);
     
     \draw (2,2)node{$\Omega$};
-    \draw (2,0)node[below] {$\mathbf{u^\epsilon} = 0, \partial_3 C^\epsilon = 0, \partial_2 C^\epsilon = 0, \partial_1 C^\epsilon$ bounded};
+    \draw (2,0)node[below] {$\mathbf{u^\epsilon} = 0,$ $ \partial_1 C^\epsilon$ and $ \partial_2 C^\epsilon$ are bounded, $\partial_3 C^\epsilon = 0$};
     \draw (4,2)node[right] {$\mathbf{u^\epsilon} = 0, C^\epsilon=0 $};
     \draw (2,4)node[above] {$\mathbf{u^\epsilon} = 0, C^\epsilon=0 $};
     \draw (0,2)node[left] {$\mathbf{u^\epsilon} = 0, C^\epsilon=0 $};
@@ -284,21 +298,19 @@ As we mentioned before, the case we are investigating is that of inland domains 
     
     $$\partial_3 C^\epsilon = 0 \text{ on } \Gamma_G$$
     
-    (see also for example \cite{yeh1975three}). For the horizontal partial derivatives of the pollution, we can separate downwind and crosswind direction boundary conditions. In the crosswind direction we use
+    (see also for example \cite{yeh1975three}). As we will see later in the case of the coastal domain, this condition can be relaxed without significantly effecting the proof. For the horizontal partial derivatives of the pollution, we require finiteness in the boundary norm, i.e. we have
     
-    $$\partial_2 C^\epsilon = 0 \text{ on } \Gamma_G,$$
-    
-    while in the downwind (stronger) direction our assumption is more relaxed, we only assume that $\partial_1 C^\epsilon$ is finite in the boundary norm, i.e. in $L^2 (0,T; \Gamma_G)$.
+    $$\partial_1 C^\epsilon, \partial_2 C^\epsilon \text{ are finite in } L^2 (0,T; \Gamma_G).$$
   
   \end{itemize}
   
-  Finally, the boundary conditions to describe the anisotropic system can be summarized as follows:
+  Finally, the boundary conditions to describe the anisotropic system can be summarised as follows:
   
     \begin{equation} \label{ANSC8}
       \begin{split}
         & \mathbf{u}^\epsilon = 0 \text{ on } \Gamma \times (0,T), \\
         &C^\epsilon = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
-        & \partial_2 C^\epsilon = \partial_3 C^\epsilon = 0 \text{ on } \Gamma_G \times (0,T), \quad \partial_1 C^\epsilon \in L^2 L^2 (0,T; \Gamma_G) \\
+        & \partial_1 C^\epsilon, \partial_2 C^\epsilon \in L^2 L^2 (0,T; \Gamma_G), \quad \partial_3 C^\epsilon = 0 \text{ on } \Gamma_G \times (0,T)\\
       \end{split}
     \end{equation}
 
@@ -323,7 +335,7 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
     \end{equation}
     
     \begin{equation} \label{HNSC5}   
-    \partial_t C + \mathbf{u} \cdot \nabla C = K_2 \partial_{22} ^ 2 C + K_3 \partial_{33} ^2 C + S \text{ in } \Omega \times (0,T)
+    \partial_t C + \mathbf{u} \cdot \nabla C = \nabla \cdot (\mathbf{M} \nabla C) + S \text{ in } \Omega \times (0,T)
     \end{equation}
     
     \begin{equation} \label{HNSC6}   
@@ -337,7 +349,7 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
     \begin{equation} \label{HNSC8}
       \begin{split}
         &C = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
-        & \partial_2 C = \partial_3 C = 0 \text{ on } \Gamma_G \times (0,T), \partial_1 C \in L^2 L^2 (0,T; \Gamma_G) \\
+        & \partial_1 C, \partial_2 C \in L^2 L^2 (0,T; \Gamma_G), \partial_3 C = 0 \text{ on } \Gamma_G \times (0,T) \\
       \end{split}
     \end{equation}
     
@@ -651,7 +663,7 @@ We are finishing this paper briefly mentioning a few ideas regarding the physica
 \end{remark}
 
 \begin{remark}
-However the results of this article were achieved in a classical, fixed Cartesian coordinate system, there are other possibilities to build up the model in. We will briefly consider two of these.
+\normalfont However the results of this article were achieved in a classical, fixed Cartesian coordinate system, there are other possibilities to build up the model in. We will briefly consider two of these.
 
   \begin{enumerate}
   
@@ -664,7 +676,7 @@ However the results of this article were achieved in a classical, fixed Cartesia
     
     Adding this equation on the one hand makes the concentration equation in the hydrostatic limit model one term shorter, since the first diffusion term drops out. On the other hand it leads to a new mathematical challenge handling the weak convergence of the nonlinear term $\mathbf{u}^\epsilon C^\epsilon$ in a situation where we do not have the $H^1_x$ regularity of $C^\epsilon$ --- as we have $L^2_x$ boundedness only for $\sqrt{\epsilon} \partial_1 C^\epsilon$, and not for $\partial_1 C^\epsilon$ itself. We plan to investigate this situation in an upcoming article.
     
-    \item Another possibility is to adjust the coordinate system in a way that the $x$ axis matches not with the downwind, but the wind velocity vector function $\mathbf{u}^epsilon$ itself. This option brings along a $\mathbf{u}^epsilon$-dependent coordinate transform matrix in every equation, however it also makes the velocity vector one dimensional in the new coordinate system, which can be a potential benefit in a computational application.
+    \item Another possibility is to adjust the coordinate system in a way that the $x$ axis matches not with the downwind, but the wind velocity vector function $\mathbf{u}^\epsilon$ itself. This option brings along a $\mathbf{u}^\epsilon$-dependent coordinate transform matrix in every equation, however it also makes the velocity vector one dimensional in the new coordinate system, which can be a potential benefit in a computational application.
 
   \end{enumerate}
   
