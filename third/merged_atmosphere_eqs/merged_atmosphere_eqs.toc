@@ -7,5 +7,5 @@
 \contentsline {subsection}{\numberline {4.2}A priori estimates and weak convergence}{15}
 \contentsline {subsection}{\numberline {4.3}Passing to the limit}{16}
 \contentsline {section}{\numberline {5}Convection dominated coastal model}{17}
-\contentsline {section}{\numberline {6}Concluding remarks}{21}
+\contentsline {section}{\numberline {6}Concluding remarks}{20}
 \contentsline {section}{\numberline {A}The existence of weak solution of the hydrostatic system of the polluted atmosphere}{22}

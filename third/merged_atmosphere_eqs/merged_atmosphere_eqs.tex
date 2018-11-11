@@ -500,7 +500,7 @@ The energy inequality (\ref{energyIEQ}) now takes the form after applying the co
       & u^\epsilon_1, u^\epsilon_2, \epsilon u^\epsilon_3, C^\epsilon & \quad & \text{are bounded in $L^\infty (0,T; L^2(\Omega)),$} \label{proposition1} \\
       & u^\epsilon_3 & \quad & \text{is bounded in $L^2 (0,T; L^2(\Omega)),$} \label{propositionExtra} \\
       & u^\epsilon_1, u^\epsilon_2, \epsilon u^\epsilon_3 & \quad & \text{are bounded in $L^2(0,T; H^1(\Omega)),$} \label{proposition2} \\
-      & \sqrt{\epsilon} \partial_1 C^\epsilon, \partial_2 C^\epsilon, \partial_3 C^\epsilon & \quad & \text{are bounded in $L^2(0,T;L^2(\Omega)).$} \label{proposition3}
+      & C^\epsilon & \quad & \text{is bounded in $L^2(0,T;H^1(\Omega)).$} \label{proposition3}
     \end{align}
     
   \end{prop}
@@ -515,37 +515,34 @@ The energy inequality (\ref{energyIEQ}) now takes the form after applying the co
     &  \mathbf{u}_H^\epsilon \rightharpoonup \mathbf{u}_H &\quad & \text{weakly in $L_t^\infty L_x^2 \cap L_t^2 H_x^1$,} \label{WeakConvUHEps} \\
     &  \epsilon^2 u_3^\epsilon \to 0 &\quad & \text{strongly in $L_t^\infty L_x^2 \cap L_t^2 H_x^1$,} \label{WeakConvU3Eps} \\ 
     & u_3^\epsilon \rightharpoonup u_3  &\quad & \text{weakly in $L_t^2 L_x^2$,} \label{WeakConvU3NoEps} \\
-    & C^\epsilon \rightharpoonup C &\quad & \text{weakly in $L_t^\infty L_x^2$,} \label{WeakConvCEps1} \\
-    & \partial_2 C^\epsilon \rightharpoonup \partial_2 C &\quad & \text{weakly in $L_t^2 L_x^2$,} \label{WeakConvCEps2} \\
-    & \partial_3 C^\epsilon \rightharpoonup \partial_3 C &\quad & \text{weakly in $L_t^2 L_x^2$,} \label{WeakConvCEps3} \\
-    & \sqrt{\epsilon} \partial_1 C^\epsilon \rightharpoonup e &\quad & \text{weakly for some limit element $e$ in $L_t^2 L_x^2$.} \label{WeakConvCEps4}
+    & C^\epsilon \rightharpoonup C &\quad & \text{weakly in $L_t^\infty L_x^2 \cap L_t^2 H_x^1$} \label{WeakConvCEps1}
   \end{align} 
 
 \subsection{Passing to the limit}
 
     In order to conclude the proof of Theorem \ref{maintheorem} we pass to the limit in the weak formulation (\ref{anisotropicWF}). To take the limit for the linear velocity terms that do not include the concentration function $C^\epsilon$ we can use (\ref{WeakConvUHEps}), (\ref{WeakConvU3Eps}) and (\ref{WeakConvU3NoEps}), and the bounds (\ref{propositionExtra}), (\ref{proposition2}). As for the nonlinear terms, the convergence can be shown using a time compactness theorem that is based on a result by Simon \cite{simon1986compact}. The key point is to apply a sort of generalization of the classical translation criterium of Riesz-Frechet-Kolmogorov which enables us to get strong convergence for the horizontal velocities. This is achieved by establishing a bound for the perturbation of $\mathbf{u}_H$ of the form $\norm{\tau_h \mathbf{u}_H - \mathbf{u}_H}_{L^p(0,T-h, \mathbf{Y})} \leq \varphi(h) + \psi(\epsilon),$ where $\mathbf{Y}$ is a Banach space, $\varphi$ and $\psi$ are appropriate functions with their limits vanishing at zero, and $\tau_h \mathbf{u}_H = \mathbf{u}_H (t+h) $. After obtaining strong convergence for $\mathbf{u}_H,$ the proof of the convergence for these nonlinear terms can be closed by applying basic interpolation techniques and the generalized Holder inequality. The details are omitted since they are analogous to those described in \cite{azerad2001mathematical}.
   
-    For the linear terms including the concentration $C^\epsilon$ we can directly apply the weak convergence results of (\ref{WeakConvCEps1}) - (\ref{WeakConvCEps4}).
+    For the linear terms including the concentration $C^\epsilon$ we can directly apply the weak convergence result of (\ref{WeakConvCEps1}).
     
-    By using (\ref{WeakConvCEps1}), (\ref{WeakConvCEps2}) and (\ref{WeakConvCEps3}) we get
+    We get
     
     \[ \int_0 ^ T (C^\epsilon , \partial_t \tilde{C}) d \mathrm{t} \to \int_0^T (C, \partial_t \tilde{C}) \diff t,\]
     
-    \[ \int_0 ^ T (\partial_2 C^\epsilon , \partial_2 \tilde{C}) + (\partial_3 C^\epsilon , \partial_3 \tilde{C}) d \mathrm{t} \to \int_0^T (\partial_2 C, \partial_2 \tilde{C}) + (\partial_3 C, \partial_3 \tilde{C}) \diff t.\]
+    \[ \int_0 ^ T  (\mathbf{M} \nabla C^\epsilon, \nabla \tilde{C}) d \mathrm{t} \to \int_0^T (\mathbf{M} \nabla C, \nabla \tilde{C}) \diff t,\]
       
-    For the next term we have $\epsilon K_1 \int_0 ^T (\partial_1 C^\epsilon, \partial_1 \tilde{C}) = \sqrt{\epsilon} K_1 \int_0 ^T (\sqrt{\epsilon} \partial_1 C^\epsilon, \partial_1 \tilde{C})$, which goes to 0 as $\epsilon \to 0$ since we have $\sqrt{\epsilon} \partial_1 C^\epsilon$ bounded in $L^2_t L^2_x.$
-      
-    The $\epsilon K_1 \int_0^T \big[(\partial_1 C^\epsilon) \tilde{C} \big] _{\Gamma_G} \diff t$ line integral vanishes as $\epsilon \to 0$ because $\partial_1 C^\epsilon$ was assumed to be finite in norm on the lower boundary.
+    \[ \int_0 ^ T  \big[((\nabla C^\epsilon)^ T \mathbf{M}) \tilde{C} \vec{\mathbf{1}} \big] _{\Gamma_G} d \mathrm{t} \to \int_0^T \big[((\nabla C)^ T \mathbf{M}) \tilde{C} \vec{\mathbf{1}} \big] _{\Gamma_G} \diff t.\]
       
     For the source term, by applying standard results for distribution functions, we get $(S^\epsilon, \tilde{C}) \to  (S, \tilde{C}).$ 
       
 Finally we have to deal with the nonlinear term $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}).$
   
-By analysing this nonlinear term in a more precise way we see that $(u_i C^\epsilon, \partial_i \tilde{C})$ for $i=1,2$ is weakly convergent since as we mentioned before (\cite{azerad2001mathematical}) we have the strong convergence of the horizontal velocities, while in the case of $i=3$ this property does not hold for $u_3$ and from the energy bound we do not have more than the weak convergence of $C^\epsilon$ .
+By analysing this nonlinear term in a more precise way we see that $u^\epsilon_i C^\epsilon$ for $i=1,2$ is weakly convergent since as we mentioned before (\cite{azerad2001mathematical}) we have the strong convergence of the horizontal velocities. In the case of $i=3$ this property does not hold for $u_3$ --- for the vertical velocity we use the compact embedding $H^1 \hookrightarrow L^2$ and (\ref{WeakConvCEps1}). This provides
   
-TODO Description of the convergence of the nonlinear term.
+  $$C^\epsilon \to C  \quad  \text{strongly in $L_t^2 L_x^2$,}$$
+  
+  which, using (\ref{WeakConvU3NoEps}), yields that the product $u^\epsilon_3 C^\epsilon$ is weakly convergent.
    
-   which, combined with the previously described linear terms, concludes the proof of the main theorem.
+  This, combined with the previously described linear terms, concludes the proof of the main theorem.
 
 
 %%% *** CONVECTION DOMINATED COASTAL MODEL *** %%%  
@@ -573,7 +570,7 @@ We now present a generalised model, which is an extension of the previous inland
 
 On the ground layer we naturally separate the boundary into two different parts in this model, $\Gamma_G = \Gamma_E \cup \Gamma_I$; $\Gamma_E$ denoting the part of the boundary above the ground, and $\Gamma_I$ denoting the section that is interacting with the sea. While above ground parts it is reasonable to use no-slip conditions, above the ocean it is natural to assume that the wind has an interaction with the waves, there is no such rigidness as in the ground case. For this cause we will include $\theta$, which represents the wind traction on the ocean surface. Analogously, we need to make similar changes for the pollution concentration as well, above sea territory it is not natural to use $\partial_3 C = 0$, since the particles can now sink under the boundary level.
 
-On $\Gamma_E$ we have the same boundary conditions as in the inland case, $\mathbf{u}^\epsilon = 0,$ and for the concentration we have $\partial_3 C^\epsilon = \partial_2 C^\epsilon = 0,$ and $\partial_1 C^\epsilon$ being bounded. On $\Gamma_I$ on the other hand we have $\nu_3 \partial_3 \mathbf{u}^\epsilon_H = \theta_H, u_3 = 0$ with assuming a finite wind energy, i.e. the function $\theta$ being in $L^2(0,T; H^{-1/2}(\Gamma_I))$. For the pollution concentration we use the same approach and assume that the functions $\partial_1 C^\epsilon, \partial_2 C^\epsilon, \partial_3 C^\epsilon$ are equal to some sufficiently regular, $\epsilon$-independent functions defined on the respective boundary. More accurately, we assume that we have a $C^\epsilon_{\Gamma_G} = \sigma$ sediment function on the lower boundary, where $\sigma \in L^2(0,T;H^1(\Gamma_G))$. If the partial derivatives of $\sigma$ are denoted by $\sigma_1, \sigma_2$ and $\sigma_3$, we have $\partial_1 C^\epsilon = \sigma_1$ on $\Gamma_G$, and $\partial_2 C^\epsilon = \sigma_2$, $\partial_3 C^\epsilon = \sigma_3$ on $\Gamma_I$. (Of course $\sigma$ has to be a function such that we have $\sigma_2$ and $\sigma_3$ equal to zero on the $\Gamma_E$ part).
+On $\Gamma_E$ we have the same boundary conditions as in the inland case, $\mathbf{u}^\epsilon = 0,$ and for the concentration we have $\partial_3 C^\epsilon = 0,$ and $\partial_1 C^\epsilon, \partial_2 C^\epsilon$ being bounded. On $\Gamma_I$ on the other hand we have $\nu_3 \partial_3 \mathbf{u}^\epsilon_H = \theta_H, u_3 = 0$ with assuming a finite wind energy, i.e. the function $\theta$ being in $L^2(0,T; H^{-1/2}(\Gamma_I))$. For the pollution concentration we use the same approach and assume that the functions $\partial_1 C^\epsilon, \partial_2 C^\epsilon, \partial_3 C^\epsilon$ are equal to some sufficiently regular, $\epsilon$-independent functions defined on the respective boundary. More accurately, we assume that we have a $C^\epsilon_{\Gamma_G} = \sigma$ sediment function on the lower boundary, where $\sigma \in L^2(0,T;H^1(\Gamma_G))$. If the partial derivatives of $\sigma$ are denoted by $\sigma_1, \sigma_2$ and $\sigma_3$, we have $\partial_1 C^\epsilon = \sigma_1$ on $\Gamma_G$, and $\partial_2 C^\epsilon = \sigma_2$, $\partial_3 C^\epsilon = \sigma_3$ on $\Gamma_I$. (Of course $\sigma$ has to be a function such that we have $\sigma_2$ and $\sigma_3$ equal to zero on the $\Gamma_E$ part).
 
 In what follows we highlight the parts that will be different from the inland case. 
 
