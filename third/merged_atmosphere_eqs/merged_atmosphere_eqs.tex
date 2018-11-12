@@ -395,8 +395,16 @@ In this section we describe the weak formulation of the merged equations in both
   \begin{equation}
     \begin{split}
       & \int_0^T \bigg[ -(\mathbf{u}_H, \partial_t \mathbf{\tilde{u}}_H) + (\nabla_\nu \mathbf{u}_H, \nabla_\nu \mathbf{\tilde{u}}_H) - (\mathbf{u}_H, (\mathbf{u} \cdot \nabla) \mathbf{\tilde{u}}_H) + (b(\mathbf{u}_H), \mathbf{\tilde{u}}_H) \bigg ] \diff t \\
-      &+ \int_0^T \bigg[ -(C, \partial_t \tilde{C}) -(\mathbf{u}C, \nabla \tilde{C}) +  (\mathbf{M} \nabla C, \nabla \tilde{C}) - \big[((\nabla \sigma)^ T \mathbf{M}) \tilde{C} \vec{\mathbf{1}} \big] _{\Gamma_G} \bigg ] \diff t \\
-      & = - (\mathbf{u}_{0H}, \mathbf{\tilde{u}}_H(0)) - (C(0), \tilde{C}(0)) + \int_0^T (S,\tilde{C}) \diff t \raisetag{20pt}\label{hydrostaticWF}
+      & = - (\mathbf{u}_{0H}, \mathbf{\tilde{u}}_H(0)) \diff t \raisetag{15pt}\label{hydrostaticWF_U}
+    \end{split}
+  \end{equation}
+  
+  and
+  
+    \begin{equation}
+    \begin{split}
+      & \int_0^T \bigg[ -(C, \partial_t \tilde{C}) -(\mathbf{u}C, \nabla \tilde{C}) +  (\mathbf{M} \nabla C, \nabla \tilde{C}) - \big[((\nabla \sigma)^ T \mathbf{M}) \tilde{C} \vec{\mathbf{1}} \big] _{\Gamma_G} \bigg ] \diff t \\
+      & = - (C(0), \tilde{C}(0)) + \int_0^T (S,\tilde{C}) \diff t \raisetag{20pt} \label{hydrostaticWF_C}
     \end{split}
   \end{equation}
   
@@ -425,8 +433,16 @@ In this section we describe the weak formulation of the merged equations in both
       & \int_0^T \bigg [ -(\mathbf{u}^\epsilon_H, \partial_t \mathbf{\tilde{u}}_H) + (\nabla_\nu \mathbf{u}^\epsilon_H, \nabla_\nu \mathbf{\tilde{u}}_H) - (\mathbf{u}^\epsilon_H, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{\tilde{u}}_H) + (b(\mathbf{u}^\epsilon_H), \mathbf{\tilde{u}}_H) \bigg ] \diff t \\
       & + \epsilon \beta \int_0 ^ T \big [ (u_3 ^\epsilon, \tilde{u}_1) - (u_1^\epsilon, \tilde{u}_3) \big ] \diff t\\
       & + \epsilon^2 \int _0 ^ T \big [ -(u_3^\epsilon, \partial_t \tilde{u}_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, \tilde{u}_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu \tilde{u}_3) \big ] \diff t \\
-      & + \int_0^T \bigg [ -(C^\epsilon, \partial_t \tilde{C}) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) + (\mathbf{M} \nabla C^\epsilon, \nabla \tilde{C}) - \big[((\nabla \sigma)^ T \mathbf{M}) \tilde{C} \vec{\mathbf{1}} \big] _{\Gamma_G} \bigg ] \diff t \\
-      & = - (\mathbf{u}^\epsilon_{0H}, \mathbf{\tilde{u}}_H(0)) - \epsilon^2 (u_{03}^\epsilon, \tilde{u}_3 (0)) - (C^\epsilon (0), \tilde{C} (0)) + \int_0^T (S^\epsilon,\tilde{C}) \diff t \raisetag{20pt} \label{anisotropicWF}
+      & = - (\mathbf{u}^\epsilon_{0H}, \mathbf{\tilde{u}}_H(0)) - \epsilon^2 (u_{03}^\epsilon, \tilde{u}_3 (0)) \diff t \raisetag{10pt} \label{anisotropicWF_U}
+    \end{split}
+  \end{equation}
+  
+  and
+  
+    \begin{equation}
+    \begin{split}
+      & \int_0^T \bigg [ -(C^\epsilon, \partial_t \tilde{C}) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) + (\mathbf{M} \nabla C^\epsilon, \nabla \tilde{C}) - \big[((\nabla \sigma)^ T \mathbf{M}) \tilde{C} \vec{\mathbf{1}} \big] _{\Gamma_G} \bigg ] \diff t \\
+      & =  - (C^\epsilon (0), \tilde{C} (0)) + \int_0^T (S^\epsilon,\tilde{C}) \diff t \raisetag{20pt} \label{anisotropicWF_C}
     \end{split}
   \end{equation}
   
@@ -434,7 +450,7 @@ In this section we describe the weak formulation of the merged equations in both
   
   \end{definition}
   
-  Note that since in our case the source term $S_\epsilon$ is given by (\ref{approxsourceterm}), the last term in (\ref{anisotropicWF}) is well defined. If we use a source function of a different and more general form, it needs to satisfy the $L_t^2 L_x^2$ boundedness criteria for the weak formulation to make sense.
+  Note that since in our case the source term $S_\epsilon$ is given by (\ref{approxsourceterm}), the last term in (\ref{anisotropicWF_C}) is well defined. If we use a source function of a different and more general form, it needs to satisfy the $L_t^2 L_x^2$ boundedness criteria for the weak formulation to make sense.
 
 We will omit the proof of the existence of weak solutions (see Definition \ref{definitionanisotropicWF}.) for the anisotropic system (\ref{ANSC1}) - (\ref{ANSC8}) since it follows by standard finite-dimensional Galerkin approximation.
 
@@ -522,7 +538,7 @@ The energy inequality (\ref{energyIEQ}) now takes the form after applying the co
 
 \subsection{Passing to the limit}
 
-    In order to conclude the proof of Theorem \ref{maintheorem} we pass to the limit in the weak formulation (\ref{anisotropicWF}). To take the limit for the linear velocity terms that do not include the concentration function $C^\epsilon$ we can use (\ref{WeakConvUHEps}), (\ref{WeakConvU3Eps}) and (\ref{WeakConvU3NoEps}), and the bounds (\ref{propositionExtra}), (\ref{proposition2}). As for the nonlinear terms, the convergence can be shown using a time compactness theorem that is based on a result by Simon \cite{simon1986compact}. The key point is to apply a sort of generalization of the classical translation criterium of Riesz-Frechet-Kolmogorov which enables us to get strong convergence for the horizontal velocities. This is achieved by establishing a bound for the perturbation of $\mathbf{u}_H$ of the form $\norm{\tau_h \mathbf{u}_H - \mathbf{u}_H}_{L^p(0,T-h, \mathbf{Y})} \leq \varphi(h) + \psi(\epsilon),$ where $\mathbf{Y}$ is a Banach space, $\varphi$ and $\psi$ are appropriate functions with their limits vanishing at zero, and $\tau_h \mathbf{u}_H = \mathbf{u}_H (t+h) $. After obtaining strong convergence for $\mathbf{u}_H,$ the proof of the convergence for these nonlinear terms can be closed by applying basic interpolation techniques and the generalized Holder inequality. The details are omitted since they are analogous to those described in \cite{azerad2001mathematical}.
+    In order to conclude the proof of Theorem \ref{maintheorem} we pass to the limit in the weak formulation (\ref{anisotropicWF_U})-(\ref{anisotropicWF_C}). To take the limit for the linear velocity terms that do not include the concentration function $C^\epsilon$ we can use (\ref{WeakConvUHEps}), (\ref{WeakConvU3Eps}) and (\ref{WeakConvU3NoEps}), and the bounds (\ref{propositionExtra}), (\ref{proposition2}). As for the nonlinear terms, the convergence can be shown using a time compactness theorem that is based on a result by Simon \cite{simon1986compact}. The key point is to apply a sort of generalization of the classical translation criterium of Riesz-Frechet-Kolmogorov which enables us to get strong convergence for the horizontal velocities. This is achieved by establishing a bound for the perturbation of $\mathbf{u}_H$ of the form $\norm{\tau_h \mathbf{u}_H - \mathbf{u}_H}_{L^p(0,T-h, \mathbf{Y})} \leq \varphi(h) + \psi(\epsilon),$ where $\mathbf{Y}$ is a Banach space, $\varphi$ and $\psi$ are appropriate functions with their limits vanishing at zero, and $\tau_h \mathbf{u}_H = \mathbf{u}_H (t+h) $. After obtaining strong convergence for $\mathbf{u}_H,$ the proof of the convergence for these nonlinear terms can be closed by applying basic interpolation techniques and the generalized Holder inequality. The details are omitted since they are analogous to those described in \cite{azerad2001mathematical}.
   
     For the linear terms including the concentration $C^\epsilon$ we can directly apply the weak convergence result of (\ref{WeakConvCEps1}).
     
@@ -660,7 +676,7 @@ We denote by $U$ the vector $(\mathbf{u}_H, C).$ The scalar products and norms i
 
 \[ ((\mathbf{u}_H, \mathbf{\tilde{u}}_H))_1 = \int_\Omega \nabla_\nu \mathbf{u}_H \nabla_\nu \mathbf{\tilde{u}}_H \diff \omega \]
 
-\[ ((C, \tilde{C}))_2 = \int _\Omega \big  (\nabla C)^T \mathbf{M} \nabla \tilde{C} \diff \omega \]
+\[ ((C, \tilde{C}))_2 = \int _\Omega \big  (\nabla C)^T \mathbf{M} \nabla \tilde{C} \diff \omega - \big[((\nabla C)^ T \mathbf{M}) \tilde{C} \vec{\mathbf{1}} \big] _{\Gamma_G}\]
 
 \[\norm{U} = ((U,U)) ^ {1/2}\]
 
@@ -681,7 +697,7 @@ with
 
 \[ a_1 (U, \tilde{U}) = \int_\Omega \nabla_\nu \mathbf{u}_H \nabla_\nu \mathbf{\tilde{u}}_H \diff \omega \]
 
-\[ a_2 (U, \tilde{U}) = \int_\Omega (\nabla C)^T \mathbf{M} \nabla \tilde{C} \diff \omega \]
+\[ a_2 (U, \tilde{U}) = \int_\Omega (\nabla C)^T \mathbf{M} \nabla \tilde{C} \diff \omega - \big[((\nabla C)^ T \mathbf{M}) \tilde{C} \vec{\mathbf{1}} \big] _{\Gamma_G}\]
 
 \[ b = b_1 + K_C b_2\]
 
@@ -819,7 +835,7 @@ which is the same as (\ref{timedependentWFE}), and which thus finally leads us t
 
 \begin{theorem}
 
-Given $T > 0$, $U_0 \in H,$ and a source term $S = \delta$ or $S \in L^2(\Omega),$ then there exists $(\mathbf{u}, C)$ with $u_3 = - \int_0^T \nabla \cdot \mathbf{u}_H$, $\mathbf{u} = (\mathbf{u}_H, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_H \in L^\infty (0,T; L^2(\Omega)^2),$ and $C \in L_t^\infty L_x^2 \cap L^2_t H^1_x$, which is solution to (\ref{hydrostaticWF}).
+Given $T > 0$, $U_0 \in H,$ and a source term $S = \delta$ or $S \in L^2(\Omega),$ then there exists $(\mathbf{u}, C)$ with $u_3 = - \int_0^T \nabla \cdot \mathbf{u}_H$, $\mathbf{u} = (\mathbf{u}_H, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_H \in L^\infty (0,T; L^2(\Omega)^2),$ and $C \in L_t^\infty L_x^2 \cap L^2_t H^1_x$, which is solution to (\ref{hydrostaticWF_U})-(\ref{hydrostaticWF_C}).
 
 \end{theorem}
 
