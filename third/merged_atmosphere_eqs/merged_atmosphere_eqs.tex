@@ -483,7 +483,7 @@ The energy inequality (\ref{energyIEQ}) now takes the form after applying the co
     & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \big [\norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2 \big ] \diff \tau \\
     & + \int_0 ^ t \bigg[ (\lambda - \sum_{i,j = 1}^3 \zeta \frac{1}{2} m_{ij} c_T (c_S + 1)) \norm{\nabla C^\epsilon}_{L^2}^2  \bigg] \diff \tau \\
     & \leq \sum_{i,j = 1}^3 \frac{1}{\zeta} m_{ij} \frac{1}{2} \int_0 ^ t \norm{\partial_i C^\epsilon}^2 _{L^2 (\Gamma_G)} + \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) \\
-    & + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau. \raisetag{20pt} \label{finalformEIEQ}
+    & + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau \raisetag{20pt} \label{finalformEIEQ}
     \end{split}
   \end{equation}  
     
@@ -540,7 +540,7 @@ By analysing this nonlinear term in a more precise way we see that $u^\epsilon_i
   
   $$C^\epsilon \to C  \quad  \text{strongly in $L_t^2 L_x^2$,}$$
   
-  which, using (\ref{WeakConvU3NoEps}), yields that the product $u^\epsilon_3 C^\epsilon$ is weakly convergent.
+  which, using (\ref{WeakConvU3NoEps}), yields that the product $u^\epsilon_3 C^\epsilon$ is weakly convergent and thus $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) \to (\mathbf{u} C, \nabla \tilde{C})$.
    
   This, combined with the previously described linear terms, concludes the proof of the main theorem.
 
@@ -707,7 +707,7 @@ Throughout this section we will use the $V = V_1 \times V_2, H = H_1 \times H_2,
 %% V --- hypothesis of Definition 1. We don't need to add the boundary zero conditions for the velocity or the L^2 regularity because they are all covered by H^1_Gamma.
 $$ V_1 = \{ \mathbf{u}_H \in H^1_\Gamma (\Omega) \times H^1_\Gamma (\Omega), \nabla \cdot \int_h^0 \mathbf{u}_H \diff z = 0  \}, $$
 
-$$ V_2 = \{ C \in L^2(\Omega); \partial_2 C, \partial_3 C \in L^2(\Omega)\}, $$
+$$ V_2 = \{ C \in H^1(\Omega)\}, $$
 
 %% H is the space in where we take the inner product between dU / dt and tilde{U}, and where we take U_0 from, essentially the L^2 version of the V space.
 $$ H_1 =  \{ \mathbf{u}_H \in H^0_\Gamma (\Omega) \times H^0_\Gamma (\Omega), \nabla \cdot \int_h^0 \mathbf{u}_H \diff z = 0  \}, $$
@@ -729,7 +729,7 @@ We denote by $U$ the vector $(\mathbf{u}_H, C).$ The scalar products and norms i
 
 \[ ((\mathbf{u}_H, \mathbf{\tilde{u}}_H))_1 = \int_\Omega \nabla_\nu \mathbf{u}_H \nabla_\nu \mathbf{\tilde{u}}_H \diff \omega \]
 
-\[ ((C, \tilde{C}))_2 = \int _\Omega \big [ K_2 \partial_2 C \partial_2 \tilde{C} + K_3 \partial_3 C \partial_3 \tilde{C} \big ] \diff \omega \]
+\[ ((C, \tilde{C}))_2 = \int _\Omega \big  (\nabla C)^T \mathbf{M} \nabla \tilde{C} \diff \omega \]
 
 \[\norm{U} = ((U,U)) ^ {1/2}\]
 
@@ -750,9 +750,9 @@ with
 
 \[ a_1 (U, \tilde{U}) = \int_\Omega \nabla_\nu \mathbf{u}_H \nabla_\nu \mathbf{\tilde{u}}_H \diff \omega \]
 
-\[ a_2 (U, \tilde{U}) = \int_\Omega K_2 \partial_2 C \partial_2 \tilde{C} + K_3 \partial_3 C \partial_3 \tilde{C} \diff \omega \]
+\[ a_2 (U, \tilde{U}) = \int_\Omega (\nabla C)^T \mathbf{M} \nabla \tilde{C} \diff \omega \]
 
-\[ b = b_1 + K_2 b_2\]
+\[ b = b_1 + K_C b_2\]
 
 \[ b_1 (U, \tilde{U}, U^\#) = - \int_\Omega (\mathbf{u}_H \mathbf{\tilde{u}}_H + \mathbf{u}_H \tilde{u}_3) \nabla \mathbf{u}_H^\# \]
 
@@ -888,7 +888,7 @@ which is the same as (\ref{timedependentWFE}), and which thus finally leads us t
 
 \begin{theorem}
 
-Given $T > 0$, $U_0 \in H,$ and a source term $S = \delta$ or $S \in L^2(\Omega),$ then there exists $(\mathbf{u}, C)$ with $u_3 = - \int_0^T \nabla \cdot \mathbf{u}_H$, $\mathbf{u} = (\mathbf{u}_H, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_H \in L^\infty (0,T; L^2(\Omega)^2),$ and $C \in L_t^\infty L_x^2$ with $\partial_2 C, \partial_3 C \in L^2_t L^2_x$, which is solution to (\ref{hydrostaticWF}).
+Given $T > 0$, $U_0 \in H,$ and a source term $S = \delta$ or $S \in L^2(\Omega),$ then there exists $(\mathbf{u}, C)$ with $u_3 = - \int_0^T \nabla \cdot \mathbf{u}_H$, $\mathbf{u} = (\mathbf{u}_H, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_H \in L^\infty (0,T; L^2(\Omega)^2),$ and $C \in L_t^\infty L_x^2 \cap L^2_t H^1_x$, which is solution to (\ref{hydrostaticWF}).
 
 \end{theorem}
 
