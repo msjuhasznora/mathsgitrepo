@@ -479,16 +479,16 @@ Now we are ready to state our main result.
     \end{split}
   \end{equation}    
   
-  From the hypothesis on the initial data and since the $S^\epsilon$ source term is in $L^\infty_x (\Omega)$, $I_1$ and $I_2$ are bounded. The only terms we need to work on further are the $m_{ij} \int _ 0 ^ t  \langle \partial_i C^\epsilon, C^\epsilon \rangle_{\Gamma_G} \diff \tau$ expressions in $I_3$.
+  From the hypothesis on the initial data and since the $S^\epsilon$ source term is in $L^\infty_x (\Omega)$, $I_1$ and $I_2$ are bounded. The only terms we need to work on further are the $M_{ij} \int _ 0 ^ t  \langle \partial_i C^\epsilon, C^\epsilon \rangle_{\Gamma_G} \diff \tau$ expressions in $I_3$.
   
   By using the Holder inequality and the generalised Young inequality for any $\zeta > 0,$ we can estimate this term in the following way.
   
   \begin{equation}
     \begin{split}  
-    I_3 & = \sum_{i,j = 1}^3 \int _ 0 ^ t m_{ij} \langle \partial_i C^\epsilon, C^\epsilon \rangle_{\Gamma_G} \diff \tau \leq \sum_{i,j = 1}^3 m_{ij} \int _ 0 ^ t \norm{\partial_i C^\epsilon}_{L^2 (\Gamma_G)}  \norm{C^\epsilon}_{L^2 (\Gamma_G)} \\
-    & \leq \sum_{i,j = 1}^3 \frac{1}{\zeta} m_{ij} \frac{1}{2} \int_0 ^ t \norm{\partial_i C^\epsilon}^2 _{L^2 (\Gamma_G)} + \zeta m_{ij} \int_0 ^ t \frac{1}{2} \norm{C^\epsilon}^2 _{L^2 (\Gamma_G)} \\
-    & \leq \sum_{i,j = 1}^3 \frac{1}{\zeta} m_{ij} \frac{1}{2} \int_0 ^ t \norm{\partial_i C^\epsilon}^2 _{L^2 (\Gamma_G)} + \zeta \frac{1}{2} m_{ij} c_T \int_0 ^ t \norm{C^\epsilon}^2 _{W^{1,2} (\Omega)} \\
-    & \leq \sum_{i,j = 1}^3 \frac{1}{\zeta} m_{ij} \frac{1}{2} \int_0 ^ t \norm{\partial_i C^\epsilon}^2 _{L^2 (\Gamma_G)} + \zeta \frac{1}{2} m_{ij} c_T (c_S + 1) \int_0 ^ t \norm{\nabla C^\epsilon}^2 _{L^2 (\Omega) } \diff \tau,
+    I_3 & = \sum_{i,j = 1}^3 \int _ 0 ^ t M_{ij} \langle \partial_i C^\epsilon, C^\epsilon \rangle_{\Gamma_G} \diff \tau \leq \sum_{i,j = 1}^3 M_{ij} \int _ 0 ^ t \norm{\partial_i C^\epsilon}_{L^2 (\Gamma_G)}  \norm{C^\epsilon}_{L^2 (\Gamma_G)} \\
+    & \leq \sum_{i,j = 1}^3 \frac{1}{\zeta} M_{ij} \frac{1}{2} \int_0 ^ t \norm{\partial_i C^\epsilon}^2 _{L^2 (\Gamma_G)} + \zeta M_{ij} \int_0 ^ t \frac{1}{2} \norm{C^\epsilon}^2 _{L^2 (\Gamma_G)} \\
+    & \leq \sum_{i,j = 1}^3 \frac{1}{\zeta} M_{ij} \frac{1}{2} \int_0 ^ t \norm{\partial_i C^\epsilon}^2 _{L^2 (\Gamma_G)} + \zeta \frac{1}{2} M_{ij} c_T \int_0 ^ t \norm{C^\epsilon}^2 _{W^{1,2} (\Omega)} \\
+    & \leq \sum_{i,j = 1}^3 \frac{1}{\zeta} M_{ij} \frac{1}{2} \int_0 ^ t \norm{\partial_i C^\epsilon}^2 _{L^2 (\Gamma_G)} + \zeta \frac{1}{2} M_{ij} c_T (c_S + 1) \int_0 ^ t \norm{\nabla C^\epsilon}^2 _{L^2 (\Omega) } \diff \tau,
     \end{split}
   \end{equation}  
   
@@ -499,13 +499,13 @@ The energy inequality (\ref{energyIEQ}) now takes the form after applying the co
   \begin{equation}
     \begin{split}  
     & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \big [\norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2 \big ] \diff \tau \\
-    & + \int_0 ^ t \bigg[ (\lambda - \sum_{i,j = 1}^3 \zeta \frac{1}{2} m_{ij} c_T (c_S + 1)) \norm{\nabla C^\epsilon}_{L^2}^2  \bigg] \diff \tau \\
-    & \leq \sum_{i,j = 1}^3 \frac{1}{\zeta} m_{ij} \frac{1}{2} \int_0 ^ t \norm{\sigma_i}^2 _{L^2 (\Gamma_G)} + \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) \\
+    & + \int_0 ^ t \bigg[ (\lambda - \sum_{i,j = 1}^3 \zeta \frac{1}{2} M_{ij} c_T (c_S + 1)) \norm{\nabla C^\epsilon}_{L^2}^2  \bigg] \diff \tau \\
+    & \leq \sum_{i,j = 1}^3 \frac{1}{\zeta} M_{ij} \frac{1}{2} \int_0 ^ t \norm{\sigma_i}^2 _{L^2 (\Gamma_G)} + \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) \\
     & + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau \raisetag{80pt} \label{finalformEIEQ}
     \end{split}
   \end{equation}  
     
-  The right hand side of the energy inequality is now apparently bounded, and it is easy to see that the coefficients of the pollution terms are positive, since the $\zeta = \zeta(\lambda)$ constant of the generalised Young inequality can be freely chosen in a way such that the requirement $(\lambda - \sum \zeta \frac{1}{2} m_{ij} c_T (c_S + 1)) > 0$ is satisfied.
+  The right hand side of the energy inequality is now apparently bounded, and it is easy to see that the coefficients of the pollution terms are positive, since the $\zeta = \zeta(\lambda)$ constant of the generalised Young inequality can be freely chosen in a way such that the requirement $(\lambda - \sum \zeta \frac{1}{2} M_{ij} c_T (c_S + 1)) > 0$ is satisfied.
     
   \subsection{A priori estimates and weak convergence}
   
@@ -617,11 +617,11 @@ As we have mentioned previously, the generic definition of the $\sigma$ boundary
 
   \begin{enumerate}
   
-    \item One option is to fix the coordinate system in such a way the the $x$ axis matches the downwind direction (\cite{goyal2011mathematical}). In other words, $z$ is the vertical direction, while $x$ is the main wind, and $y$ is the crosswind direction. It is a legitimate assumption if we are considering a time interval which is not too long in the sense that it is reasonable to assume that we have a permanent, relatively stable downwind direction. This adjusted coordinate system makes it possible to add another equation in the scaling process, which is different in nature from the previous ones in the sense that it is not derived from the shallowness of the domain but rather suggested by the fact that in the downwind direction it is natural to assume that the diffusion is negligible compared to downwind transport, i.e.
+    \item One option is to fix the coordinate system in such a way that the $x$ axis matches the downwind direction (\cite{goyal2011mathematical}). In other words, $z$ is the vertical direction, while $x$ is the main wind, and $y$ is the crosswind direction. It is a legitimate assumption if we are considering a time interval which is not too long in the sense that it is reasonable to assume that we have a permanent, relatively stable downwind direction. This adjusted coordinate system makes it possible to add another equation in the scaling process, which is different in nature from the previous ones in the sense that it is not derived from the shallowness of the domain but rather suggested by the fact that in the downwind direction it is natural to assume that the diffusion is negligible compared to downwind transport, i.e.
     
-    \begin{equation} \abs{u_1 \partial_{1} C} \gg \abs{ K_x \partial_{11} ^2 C }\end{equation}
+    \begin{equation} \abs{u_1 \partial_x C} \gg \abs{ \textit{K}_{xx} \partial_{xx} ^2 C }\end{equation}
     which leads us to using
-    \[ K_x = \epsilon K_1\]
+    \[ \textit{K}_{xx} = \epsilon^2 \textit{M}_{11}, \textit{K}_{xy} = \epsilon \textit{M}_{12}, \textit{K}_{yx} = \epsilon \textit{M}_{21}, \textit{K}_{xz} = \epsilon \textit{M}_{13}, \textit{K}_{zx} = \epsilon \textit{M}_{31}\]
     in this convection dominated scenario.
     
     Adding this equation on the one hand makes the concentration equation in the hydrostatic limit model one term shorter, since the first diffusion term drops out. On the other hand it leads to a new mathematical challenge handling the weak convergence of the nonlinear term $\mathbf{u}^\epsilon C^\epsilon$ in a situation where we do not have the $H^1_x$ regularity of $C^\epsilon$ --- as we have $L^2_x$ boundedness only for $\sqrt{\epsilon} \partial_1 C^\epsilon$, and not for $\partial_1 C^\epsilon$ itself. We plan to investigate this situation in an upcoming article.

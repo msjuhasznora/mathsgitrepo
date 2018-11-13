@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.1.5)  12 NOV 2018 21:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.1.5)  13 NOV 2018 12:28
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -734,7 +734,7 @@ fb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb
 ></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
 </usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.
 pfb>
-Output written on merged_atmosphere_eqs.pdf (28 pages, 299078 bytes).
+Output written on merged_atmosphere_eqs.pdf (28 pages, 298850 bytes).
 PDF statistics:
  170 PDF objects out of 1000 (max. 8388607)
  120 compressed objects within 2 object streams
