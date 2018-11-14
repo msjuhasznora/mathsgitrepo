@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.1.5)  14 NOV 2018 10:40
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.1.5)  14 NOV 2018 11:42
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -67,6 +67,14 @@ Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 ))
+(/usr/local/texlive/2016/texmf-dist/tex/latex/tools/bm.sty
+Package: bm 2016/02/27 v1.2a Bold Symbol Support (DPC/FMi)
+\symboldoperators=\mathgroup6
+\symboldletters=\mathgroup7
+\symboldsymbols=\mathgroup8
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 142.
+LaTeX Info: Redefining \bm on input line 208.
+)
 (/usr/local/texlive/2016/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2016/03/10 v2.15b AMS math features
 \@mathmargin=\skip43
@@ -82,6 +90,7 @@ File: amsgen.sty 1999/11/30 v2.0 generic functions
 ))
 (/usr/local/texlive/2016/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+LaTeX Info: Redefining \boldsymbol on input line 28.
 \pmbraise@=\dimen106
 )
 (/usr/local/texlive/2016/texmf-dist/tex/latex/amsmath/amsopn.sty
@@ -556,18 +565,18 @@ File: tikzlibrarycalc.code.tex 2013/07/15 v3.0.1a (rcs-revision 1.9)
 ) (./merged_atmosphere_eqs.aux)
 \openout1 = `merged_atmosphere_eqs.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
 
 (/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -630,30 +639,30 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 ABD: EveryShipout initializing macros
-LaTeX Font Info:    Try loading font information for U+msa on input line 40.
+LaTeX Font Info:    Try loading font information for U+msa on input line 41.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 40.
+LaTeX Font Info:    Try loading font information for U+msb on input line 41.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 40.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 41.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <8> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 40.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 41.
 
-Overfull \hbox (22.35376pt too wide) in paragraph at lines 40--40
+Overfull \hbox (22.35376pt too wide) in paragraph at lines 41--41
  [][] 
  []
 
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <6> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 40.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 41.
 [1
 
 {/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
@@ -667,9 +676,9 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [8]
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 283.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 284.
  [9] [10] [11]
-Overfull \hbox (3.81363pt too wide) in paragraph at lines 411--412
+Overfull \hbox (3.81363pt too wide) in paragraph at lines 412--413
 \OML/cmm/m/it/10.95 @[][] \OMS/cmsy/m/n/10.95 2 \OML/cmm/m/it/10.95 L[]\OT1/cmr
 /m/n/10.95 (0\OML/cmm/m/it/10.95 ; T\OT1/cmr/m/n/10.95 ; \OML/cmm/m/it/10.95 L[
 ]\OT1/cmr/m/n/10.95 (
@@ -682,22 +691,22 @@ cmr/m/n/10.95 (0\OML/cmm/m/it/10.95 ; T; L[]\OT1/cmr/m/n/10.95 )$\OT1/cmr/m/it/
  []
 
 [12]
-Overfull \hbox (0.2061pt too wide) in paragraph at lines 438--438
+Overfull \hbox (0.2061pt too wide) in paragraph at lines 439--439
 [] 
  []
 
 [13]
-Overfull \hbox (7.36667pt too wide) in paragraph at lines 480--480
+Overfull \hbox (7.36667pt too wide) in paragraph at lines 481--481
 [] 
  []
 
 [14]
-Overfull \hbox (7.36667pt too wide) in paragraph at lines 506--506
+Overfull \hbox (7.36667pt too wide) in paragraph at lines 507--507
 [] 
  []
 
 [15] [16] [17] [18] [19]
-Overfull \hbox (0.13087pt too wide) in paragraph at lines 646--647
+Overfull \hbox (0.13087pt too wide) in paragraph at lines 647--648
 []\OT1/cmr/m/n/10.95 The main dif-fer-ence con-sists in the bound-ary con-di-ti
 ons: on ev-ery bound-
  []
@@ -708,13 +717,13 @@ Missing character: There is no ‚ in font cmr10!
 ) [28]
 (./merged_atmosphere_eqs.aux) ) 
 Here is how much of TeX's memory you used:
- 15514 strings out of 493014
- 326529 string characters out of 6133352
- 391667 words of memory out of 5000000
- 18721 multiletter control sequences out of 15000+600000
- 15827 words of font info for 59 fonts, out of 8000000 for 9000
+ 15603 strings out of 493014
+ 327497 string characters out of 6133352
+ 392990 words of memory out of 5000000
+ 18796 multiletter control sequences out of 15000+600000
+ 19809 words of font info for 72 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,19n,67p,1482b,662s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,20n,67p,1482b,662s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2016/texmf-dist/fonts/type1/
 public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/p
 ublic/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/pu
@@ -724,6 +733,7 @@ ic/amsfonts/cm/cmbx8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public
 amsfonts/cm/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmmi6.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/ams
 fonts/cm/cmmi8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmmib10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfo
 nts/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmr17.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/
 cm/cmr6.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/
@@ -734,10 +744,10 @@ fb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb
 ></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
 </usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.
 pfb>
-Output written on merged_atmosphere_eqs.pdf (28 pages, 299041 bytes).
+Output written on merged_atmosphere_eqs.pdf (28 pages, 306550 bytes).
 PDF statistics:
- 170 PDF objects out of 1000 (max. 8388607)
- 120 compressed objects within 2 object streams
+ 174 PDF objects out of 1000 (max. 8388607)
+ 123 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
