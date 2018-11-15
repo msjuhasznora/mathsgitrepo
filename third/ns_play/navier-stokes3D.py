@@ -34,7 +34,7 @@ ds = Measure('ds')[boundaries]
 
 dt = 0.01
 T = 1
-eps = 0.006
+eps = 0.01
 alpha = 1.0
 beta = 1.0
 

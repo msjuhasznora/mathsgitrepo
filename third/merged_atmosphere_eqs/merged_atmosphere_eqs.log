@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.1.5)  14 NOV 2018 11:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.1.5)  14 NOV 2018 12:06
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -678,7 +678,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 284.
  [9] [10] [11]
-Overfull \hbox (3.81363pt too wide) in paragraph at lines 412--413
+Overfull \hbox (3.81363pt too wide) in paragraph at lines 413--414
 \OML/cmm/m/it/10.95 @[][] \OMS/cmsy/m/n/10.95 2 \OML/cmm/m/it/10.95 L[]\OT1/cmr
 /m/n/10.95 (0\OML/cmm/m/it/10.95 ; T\OT1/cmr/m/n/10.95 ; \OML/cmm/m/it/10.95 L[
 ]\OT1/cmr/m/n/10.95 (
@@ -691,22 +691,22 @@ cmr/m/n/10.95 (0\OML/cmm/m/it/10.95 ; T; L[]\OT1/cmr/m/n/10.95 )$\OT1/cmr/m/it/
  []
 
 [12]
-Overfull \hbox (0.2061pt too wide) in paragraph at lines 439--439
+Overfull \hbox (0.2061pt too wide) in paragraph at lines 440--440
 [] 
  []
 
 [13]
-Overfull \hbox (7.36667pt too wide) in paragraph at lines 481--481
+Overfull \hbox (7.36667pt too wide) in paragraph at lines 482--482
 [] 
  []
 
 [14]
-Overfull \hbox (7.36667pt too wide) in paragraph at lines 507--507
+Overfull \hbox (7.36667pt too wide) in paragraph at lines 508--508
 [] 
  []
 
 [15] [16] [17] [18] [19]
-Overfull \hbox (0.13087pt too wide) in paragraph at lines 647--648
+Overfull \hbox (0.13087pt too wide) in paragraph at lines 648--649
 []\OT1/cmr/m/n/10.95 The main dif-fer-ence con-sists in the bound-ary con-di-ti
 ons: on ev-ery bound-
  []
@@ -723,7 +723,7 @@ Here is how much of TeX's memory you used:
  18796 multiletter control sequences out of 15000+600000
  19809 words of font info for 72 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,20n,67p,1482b,662s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,21n,67p,1482b,662s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2016/texmf-dist/fonts/type1/
 public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/p
 ublic/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/pu
@@ -744,7 +744,7 @@ fb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb
 ></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
 </usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.
 pfb>
-Output written on merged_atmosphere_eqs.pdf (28 pages, 306550 bytes).
+Output written on merged_atmosphere_eqs.pdf (28 pages, 306587 bytes).
 PDF statistics:
  174 PDF objects out of 1000 (max. 8388607)
  123 compressed objects within 2 object streams
