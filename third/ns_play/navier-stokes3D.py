@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 from dolfin import *
 
 parameters["std_out_all_processes"] = False;
-meshsize = 25
+meshsize = 20
 mesh = UnitCubeMesh(meshsize, meshsize, meshsize)
 
 # (order argument, optional argument: dim =, fill both in this case, unlike 2D )
@@ -32,7 +32,7 @@ boundaries.set_all(0)
 upperboundary.mark(boundaries, 1)
 ds = Measure('ds')[boundaries]
 
-dt = 0.01
+dt = 0.005
 T = 1
 eps = 0.01
 alpha = 1.0
@@ -122,8 +122,8 @@ prec = "amg" if has_krylov_solver_preconditioner("amg") else "default"
 parameters['krylov_solver']['nonzero_initial_guess'] = True
 
 # Create files for storing solution
-ufile = File("resultsA" + "_mesh" + str(meshsize) + "_dt" + str(dt) + "_eps" + str(eps) + "ws" + str(wind_shear_x) + "_" + str(wind_shear_y) + "/velocity.pvd")
-pfile = File("resultsA" + "_mesh" + str(meshsize) + "_dt" + str(dt) + "_eps" + str(eps) + "ws" + str(wind_shear_x) + "_" + str(wind_shear_y) + "/pressure.pvd")
+ufile = File("resultsA" + "_mesh" + str(meshsize) + "_dt" + str(dt) + "_eps" + str(eps) + "ws" + str(wind_shear_x) + "_" + str(wind_shear_y) + "/velocity" + "_mesh" + str(meshsize) + "_dt" + str(dt) + "_eps" + str(eps) + "ws" + str(wind_shear_x) + "_" + str(wind_shear_y) + ".pvd")
+pfile = File("resultsA" + "_mesh" + str(meshsize) + "_dt" + str(dt) + "_eps" + str(eps) + "ws" + str(wind_shear_x) + "_" + str(wind_shear_y) + "/pressure" + "_mesh" + str(meshsize) + "_dt" + str(dt) + "_eps" + str(eps) + "ws" + str(wind_shear_x) + "_" + str(wind_shear_y) + ".pvd")
 
 # Time-stepping
 t = dt

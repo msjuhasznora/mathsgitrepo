@@ -49,10 +49,13 @@ u_next1, u_next2 = split(u_next)
 p_prev = Function(Q)
 p_next = Function(Q)
 
+wind_shear_x = 100.0
+wind_shear_y = 100.0
+
 # Define coefficients
 k = Constant(dt)
 f = Constant((0, 0))
-theta = Constant((0.5, 0.5))
+theta = Constant((wind_shear_x, wind_shear_y))
 
 #Chorin.
 
@@ -98,8 +101,8 @@ prec = "amg" if has_krylov_solver_preconditioner("amg") else "default"
 parameters['krylov_solver']['nonzero_initial_guess'] = True
 
 # Create files for storing solution
-ufile = File("resultsH" + "_mesh" + str(meshsize) + "_dt" + str(dt) + "/velocity.pvd")
-pfile = File("resultsH" + "_mesh" + str(meshsize) + "_dt" + str(dt) + "/pressure.pvd")
+ufile = File("resultsH" + "_mesh" + str(meshsize) + "_dt" + str(dt) + "ws" + str(wind_shear_x) + "_" + str(wind_shear_y) + "/velocity" + "_mesh" + str(meshsize) + "_dt" + str(dt) + "ws" + str(wind_shear_x) + "_" + str(wind_shear_y) + ".pvd")
+pfile = File("resultsH" + "_mesh" + str(meshsize) + "_dt" + str(dt) + "ws" + str(wind_shear_x) + "_" + str(wind_shear_y) + "/pressure" + "_mesh" + str(meshsize) + "_dt" + str(dt) + "ws" + str(wind_shear_x) + "_" + str(wind_shear_y) + ".pvd")
 
 # Time-stepping
 t = dt
