@@ -61,7 +61,7 @@ k = Constant(dt)
 f = Constant((0, 0, 0))
 theta = Constant((wind_shear_x, wind_shear_y, 0))
 
-#Chorin method. / Incremental pressure correction in 3 steps,
+#Chorin's method. / Incremental pressure correction in 3 steps,
 # as described in https://fenicsproject.org/pub/tutorial/pdf/fenics-tutorial-vol1.pdf
 # on p57.
 
