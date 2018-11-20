@@ -7,11 +7,12 @@
 
 import matplotlib.pyplot as plt
 from dolfin import *
+import numpy as np
 
 parameters["std_out_all_processes"] = False;
-meshsize = 20
+meshsize = 25
 mesh = UnitCubeMesh(meshsize, meshsize, meshsize)
-
+values = []
 # (order argument, optional argument: dim =, fill both in this case, unlike 2D )
 V = VectorFunctionSpace(mesh, "Lagrange", 2, dim = 3)
 Q = FunctionSpace(mesh, "Lagrange", 1)
@@ -34,7 +35,6 @@ ds = Measure('ds')[boundaries]
 
 dt = 0.005
 T = 1
-eps = 0.01
 alpha = 1.0
 beta = 1.0
 
@@ -49,7 +49,6 @@ bcp = []
 u_prev = Function(V)
 u_prev1, u_prev2, u_prev3 = split(u_prev)
 u_next = Function(V)
-u_next1, u_next2, u_next3 = split(u_next)
 p_prev = Function(Q)
 p_next = Function(Q)
 
@@ -61,7 +60,7 @@ k = Constant(dt)
 f = Constant((0, 0, 0))
 theta = Constant((wind_shear_x, wind_shear_y, 0))
 
-#Chorin method. / Incremental pressure correction in 3 steps,
+#Chorin's method. / Incremental pressure correction in 3 steps,
 # as described in https://fenicsproject.org/pub/tutorial/pdf/fenics-tutorial-vol1.pdf
 # on p57.
 
@@ -76,80 +75,85 @@ theta = Constant((wind_shear_x, wind_shear_y, 0))
 ### velocity, and then as a sort of correction, update u_3 in a scheme where u_3 is the only trial function and
 ### the equation for u_3 includes the results for u_H from the previous step.
 
-F1_anisotropic = (1/k)*( (u1 - u_prev1)*v1 + (u2 - u_prev2)*v2 + eps*eps*(u3 - u_prev3)*v3 ) * dx + \
-     inner(u_prev, grad(u_prev1)) * v1 * dx + inner(u_prev, grad(u_prev2)) * v2 * dx + \
-     eps*eps*inner(u_prev, grad(u_prev3)) * v3 * dx + \
-     - alpha * u_prev2 * v1 * dx + alpha * u_prev1 * v2 * dx + \
-     inner(grad(u1),grad(v1)) * dx + inner(grad(u2),grad(v2)) * dx + eps*eps*inner(grad(u3),grad(v3)) * dx + \
-     eps * beta * u_prev3 * v1 * dx - eps * beta * u_prev1 * v3 * dx + \
-     - inner(f, v) * dx + \
-     - inner(theta, v) * ds(1)
+eps = 1.0
+while eps > DOLFIN_EPS:
 
-# here we only have u1 and u2, the third component is gone, the method does not converge. to be fixed.
-F1_hydrostatic = (1/k)*( (u1 - u_prev1)*v1 + (u2 - u_prev2)*v2 ) * dx + \
-     inner(u_prev, grad(u_prev1)) * v1 * dx + inner(u_prev, grad(u_prev2)) * v2 * dx + \
-     - alpha * u_prev2 * v1 * dx + alpha * u_prev1 * v2 * dx + \
-     inner(grad(u1),grad(v1)) * dx + inner(grad(u2),grad(v2)) * dx + \
-     - inner(f, v) * dx + \
-     - inner(theta, v) * ds(1)
+    F1_anisotropic = (1/k)*( (u1 - u_prev1)*v1 + (u2 - u_prev2)*v2 + eps*eps*(u3 - u_prev3)*v3 ) * dx + \
+        inner(u_prev, grad(u_prev1)) * v1 * dx + inner(u_prev, grad(u_prev2)) * v2 * dx + \
+        eps*eps*inner(u_prev, grad(u_prev3)) * v3 * dx + \
+        - alpha * u_prev2 * v1 * dx + alpha * u_prev1 * v2 * dx + \
+        inner(grad(u1),grad(v1)) * dx + inner(grad(u2),grad(v2)) * dx + eps*eps*inner(grad(u3),grad(v3)) * dx + \
+        eps * beta * u_prev3 * v1 * dx - eps * beta * u_prev1 * v3 * dx + \
+        - inner(f, v) * dx + \
+        - inner(theta, v) * ds(1)
 
-a1 = lhs(F1_anisotropic)
-L1 = rhs(F1_anisotropic)
+    a1 = lhs(F1_anisotropic)
+    L1 = rhs(F1_anisotropic)
 
 # Pressure update
 # Define variational problem for step 2
 ### this is where we GET p, ie p^*. from the previous
 ### step we solve for u^*, save it in u_next, and so at this
 ### point u_next contains u^* (see later at the time steps)
-a2 = inner(grad(p), grad(q))*dx
-L2 = - (1/k)*div(u_next)*q*dx
+    a2 = inner(grad(p), grad(q))*dx
+    L2 = - (1/k)*div(u_next)*q*dx
 
 # Velocity update
 # Define variational problem for step 3
 ### we know u_next and p_next, here we GET u.
-a3 = inner(u, v)*dx
-L3 = inner(u_next, v)*dx - k*inner(grad(p_next), v)*dx
+    a3 = inner(u, v)*dx
+    L3 = inner(u_next, v)*dx - k*inner(grad(p_next), v)*dx
 
 # Assemble matrices
-A1 = assemble(a1)
-A2 = assemble(a2)
-A3 = assemble(a3)
+    A1 = assemble(a1)
+    A2 = assemble(a2)
+    A3 = assemble(a3)
 
 # Use amg preconditioner if available
-prec = "amg" if has_krylov_solver_preconditioner("amg") else "default"
+    prec = "amg" if has_krylov_solver_preconditioner("amg") else "default"
 
 # Use nonzero guesses - essential for CG with non-symmetric BC
-parameters['krylov_solver']['nonzero_initial_guess'] = True
+    parameters['krylov_solver']['nonzero_initial_guess'] = True
 
 # Create files for storing solution
-ufile = File("resultsA" + "_mesh" + str(meshsize) + "_dt" + str(dt) + "_eps" + str(eps) + "ws" + str(wind_shear_x) + "_" + str(wind_shear_y) + "/velocity" + "_mesh" + str(meshsize) + "_dt" + str(dt) + "_eps" + str(eps) + "ws" + str(wind_shear_x) + "_" + str(wind_shear_y) + ".pvd")
-pfile = File("resultsA" + "_mesh" + str(meshsize) + "_dt" + str(dt) + "_eps" + str(eps) + "ws" + str(wind_shear_x) + "_" + str(wind_shear_y) + "/pressure" + "_mesh" + str(meshsize) + "_dt" + str(dt) + "_eps" + str(eps) + "ws" + str(wind_shear_x) + "_" + str(wind_shear_y) + ".pvd")
+    ufile = File("resultsM" + "_mesh" + str(meshsize) + "_dt" + str(dt) + "_eps" + str(eps) + "ws" + str(wind_shear_x) + "_" + str(wind_shear_y) + "/velocity" + "_mesh" + str(meshsize) + "_dt" + str(dt) + "_eps" + str(eps) + "ws" + str(wind_shear_x) + "_" + str(wind_shear_y) + ".pvd")
+    pfile = File("resultsM" + "_mesh" + str(meshsize) + "_dt" + str(dt) + "_eps" + str(eps) + "ws" + str(wind_shear_x) + "_" + str(wind_shear_y) + "/pressure" + "_mesh" + str(meshsize) + "_dt" + str(dt) + "_eps" + str(eps) + "ws" + str(wind_shear_x) + "_" + str(wind_shear_y) + ".pvd")
+    values.append(eps)
 
 # Time-stepping
-t = dt
-while t < T + DOLFIN_EPS:
+    t = dt
+    while t < T + DOLFIN_EPS:
 
-    # Compute tentative velocity step
-    b1 = assemble(L1)
-    [bc.apply(A1, b1) for bc in bcu]
-    solve(A1, u_next.vector(), b1, "bicgstab", "default")
+        # Compute tentative velocity step
+        b1 = assemble(L1)
+        [bc.apply(A1, b1) for bc in bcu]
+        solve(A1, u_next.vector(), b1, "bicgstab", "default")
 
-    # Pressure correction
-    b2 = assemble(L2)
-    [bc.apply(A2, b2) for bc in bcp]
-    [bc.apply(p_next.vector()) for bc in bcp]
-    solve(A2, p_next.vector(), b2, "bicgstab", prec)
+        # Pressure correction
+        b2 = assemble(L2)
+        [bc.apply(A2, b2) for bc in bcp]
+        [bc.apply(p_next.vector()) for bc in bcp]
+        solve(A2, p_next.vector(), b2, "bicgstab", prec)
 
-    # Velocity correction
-    b3 = assemble(L3)
-    [bc.apply(A3, b3) for bc in bcu]
-    solve(A3, u_next.vector(), b3, "bicgstab", "default")
+        # Velocity correction
+        b3 = assemble(L3)
+        [bc.apply(A3, b3) for bc in bcu]
+        solve(A3, u_next.vector(), b3, "bicgstab", "default")
 
-    # Save to file
-    ufile << u_next
-    pfile << p_next
+        # Save to file
+        ufile << u_next
+        pfile << p_next
 
-    # Move to next time step
-    u_prev.assign(u_next)
-    p_prev.assign(p_next)
-    t += dt
+        # Move to next time step
+        u_prev.assign(u_next)
+        p_prev.assign(p_next)
+        t += dt
+
+
+    norm_u = norm(u_next)
+    norm_u3 = norm(u_next.sub(2))
+
+    values.append(norm_u3 / norm_u)
+
+    eps = eps / 2.0
+    np.savetxt("eps_norm_values_mesh" + str(meshsize) + "_dt_" + str(dt) + ".txt", values)
