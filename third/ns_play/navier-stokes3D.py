@@ -90,37 +90,37 @@ while eps > DOLFIN_EPS:
     a1 = lhs(F1_anisotropic)
     L1 = rhs(F1_anisotropic)
 
-# Pressure update
-# Define variational problem for step 2
-### this is where we GET p, ie p^*. from the previous
-### step we solve for u^*, save it in u_next, and so at this
-### point u_next contains u^* (see later at the time steps)
+    # Pressure update
+    # Define variational problem for step 2
+    ### this is where we GET p, ie p^*. from the previous
+    ### step we solve for u^*, save it in u_next, and so at this
+    ### point u_next contains u^* (see later at the time steps)
     a2 = inner(grad(p), grad(q))*dx
     L2 = - (1/k)*div(u_next)*q*dx
 
-# Velocity update
-# Define variational problem for step 3
-### we know u_next and p_next, here we GET u.
+    # Velocity update
+    # Define variational problem for step 3
+    ### we know u_next and p_next, here we GET u.
     a3 = inner(u, v)*dx
     L3 = inner(u_next, v)*dx - k*inner(grad(p_next), v)*dx
 
-# Assemble matrices
+    # Assemble matrices
     A1 = assemble(a1)
     A2 = assemble(a2)
     A3 = assemble(a3)
 
-# Use amg preconditioner if available
+    # Use amg preconditioner if available
     prec = "amg" if has_krylov_solver_preconditioner("amg") else "default"
 
-# Use nonzero guesses - essential for CG with non-symmetric BC
+    # Use nonzero guesses - essential for CG with non-symmetric BC
     parameters['krylov_solver']['nonzero_initial_guess'] = True
 
-# Create files for storing solution
+    # Create files for storing solution
     ufile = File("resultsM" + "_mesh" + str(meshsize) + "_dt" + str(dt) + "_eps" + str(eps) + "ws" + str(wind_shear_x) + "_" + str(wind_shear_y) + "/velocity" + "_mesh" + str(meshsize) + "_dt" + str(dt) + "_eps" + str(eps) + "ws" + str(wind_shear_x) + "_" + str(wind_shear_y) + ".pvd")
     pfile = File("resultsM" + "_mesh" + str(meshsize) + "_dt" + str(dt) + "_eps" + str(eps) + "ws" + str(wind_shear_x) + "_" + str(wind_shear_y) + "/pressure" + "_mesh" + str(meshsize) + "_dt" + str(dt) + "_eps" + str(eps) + "ws" + str(wind_shear_x) + "_" + str(wind_shear_y) + ".pvd")
     values.append(eps)
 
-# Time-stepping
+    # Time-stepping
     t = dt
     while t < T + DOLFIN_EPS:
 
