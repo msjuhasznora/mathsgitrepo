@@ -554,40 +554,50 @@ Finally we have to deal with the nonlinear term $(\mathbf{u}^\epsilon C^\epsilon
   
 {\color{orange} By analysing this nonlinear term in a more precise way we see that $u^\epsilon_i C^\epsilon$ for $i=1,2$ is weakly convergent since as we mentioned before (\cite{azerad2001mathematical}) we have the strong convergence of the horizontal velocities. In the case of $i=3$ this property does not hold for $u_3$ --- for the vertical velocity we use an additional result, a compactness criterium described by Theorem 5.1 in \cite{azerad2001mathematical}. We can apply the statement of this theorem for $p=2$ and the spaces $H^1 \hookrightarrow L^2 \hookrightarrow {H^2}^*$ to arrive to the conclusion that we have $C^\epsilon \to C$ strongly in $L^2_t L^2_x,$ and thus, finally we obtain the weak convergence result $u^\epsilon_3 C^\epsilon \rightharpoonup u_3 C.$
 
-Since (\ref{WeakConvCEps1}) is already given and hence we have $L^2_t H^1_x$ regularity for $C^\epsilon$, we only have to verify the bound $\norm{\tau_h C^\epsilon - C^\epsilon}_{L^2(0,T-h, {H^2}^*)} \leq \varphi(h) + \psi(\epsilon)$ in order to close the argument regarding the weak convergence of $u^\epsilon_3 C^\epsilon$.
+In the following we will verify the conditions of the theorem for our choice of the spaces and the value of $p$. Since (\ref{WeakConvCEps1}) is already given and hence we have $L^2_t H^1_x$ regularity for $C^\epsilon$, we only have to show the bound $\norm{\tau_h C^\epsilon - C^\epsilon}_{L^2(0,T-h, {H^2}^*)} \leq \varphi(h) + \psi(\epsilon)$ in order to close the argument regarding the weak convergence of $u^\epsilon_3 C^\epsilon$.
 
 \begin{prop}
-The estimate $\norm{\tau_h C^\epsilon - C^\epsilon}_{L^2(0,T-h, {H^2}^*)} \leq C(h^{1/4} + \epsilon) holds.$
+The estimate $\norm{\tau_h C^\epsilon - C^\epsilon}_{L^2(0,T-h, {H^2}^*)} \leq C(h^{1/4} + \epsilon)$ holds.
 \end{prop}
 
 \begin{proof}
 The spatial weak form of the anisotropic system (\ref{ANSC1}) - (\ref{ANSC5}) is
 
-\[ \label{spatialWeakForm} 1 = 1\]
+\begin{equation} \bigg (\frac{\partial C^\epsilon}{\partial t}, \tilde{C} \bigg ) - (\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) + (\mathbf{M} \nabla C^\epsilon, \nabla \tilde{C}) = (S, \tilde{C}), \label{spatialWeakForm} \end{equation}
 
-Now we take a $\tilde{C} \in H^2_x$ test function in (\ref{spatialWeakForm}) and integrate over $(t, t+h),$ i. e. we have
+where in this case the equality has to hold for all $\tilde{C} \in H^2_x.$
 
-\[ i = i\]
+Now we take such a $\tilde{C} \in H^2_x$ test function in (\ref{spatialWeakForm}) and integrate over $(t, t+h),$ i. e. we have
+
+\[ (\tau_h C^\epsilon (t) - C^\epsilon (t), \tilde{C}) = \int_t^{t+h} g^\epsilon (s) \diff s,\]
 
 where
 
-\[ g^\epsilon (s) = \]
+\[ g^\epsilon (s) = (\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) - (\mathbf{M} \nabla C^\epsilon, \nabla \tilde{C}) + (S, \tilde{C}). \]
 
 In the next step we prove the bound
 
-\[ g\]
+\[ \norm{g^\epsilon}_{L^{4/3}(0,T)} \leq c \big \| \tilde{C} \big \| _{H^2}\]
 
-for $g^\epsilon (s).$
+for $g^\epsilon(s)$, where $c$ stands for a constant. In order to do this, we estimate each term of $g^\epsilon.$
 
-To close the proof we apply the Holder inequality and obtain
+\begin{align} 
+  &  (S, \tilde{C}) &\quad & \text{bounded in $L^2(0,T)$,}  \\ 
+  & (\mathbf{M} \nabla C^\epsilon, \nabla \tilde{C}) \leq \big \| \tilde{C} \big \| _{H^1} \big \| C^\epsilon \big \| _{H^1} &\quad & \text{bounded in $L^2(0,T)$,}  \\
+  & (\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) \leq \norm{\mathbf{u}^\epsilon}_{L^2} \norm{C^\epsilon}_{L^3}  \big \| \tilde{C} \big \| _{H^2} &\quad & \text{bounded in $L^{4/3}(0,T).$}
+\end{align} 
 
-\[ \int_t^{t+h} ,\]
+This ultimate bound can be verified using (\ref{proposition1}) and (\ref{propositionExtra}), moreover considering the interpolation between $L^\infty(0,T; L^2)$ and $L^2(0,T; L^6),$ which yields that $C^\epsilon$ is in $L^4(0,T; L^3)$.
 
-which yields the proof of the lemma.
+Finally we apply the Holder inequality and obtain
+
+\[ \int_t^{t+h} \abs{g^\epsilon (s)} \diff s \leq c \big \| \tilde{C} \big \| _{H^2} h^{1/4},\]
+
+which gives the proof of the lemma.
 
 \end{proof}
    
-  As a conclusion, we have the weak convergence $\mathbf{u}^\epsilon C^\epsilon \rightharpoonup \mathbf{u} C$ of the nonlinear term. This, combined with the previously described linear terms, concludes the proof of the main theorem.}
+  As a consequence, applying Theorem 5.1 in \cite{azerad2001mathematical} considering the estimate we have just verified, we obtain the strong convergence result $C^\epsilon \to C$ in $L^2(0,T; L^2),$ and eventually with this we have proved the weak convergence $\mathbf{u}^\epsilon C^\epsilon \rightharpoonup \mathbf{u} C$ of the nonlinear term. This, combined with the previously described linear terms, concludes the proof of the main theorem.}
 
 %%% *** CONCLUDING REMARKS *** %%%
 \section{Concluding remarks} \label{concludingremarks}
