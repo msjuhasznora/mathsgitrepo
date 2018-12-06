@@ -552,13 +552,42 @@ The energy inequality (\ref{energyIEQ}) now takes the form after applying the co
       
 Finally we have to deal with the nonlinear term $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}).$
   
-By analysing this nonlinear term in a more precise way we see that $u^\epsilon_i C^\epsilon$ for $i=1,2$ is weakly convergent since as we mentioned before (\cite{azerad2001mathematical}) we have the strong convergence of the horizontal velocities. In the case of $i=3$ this property does not hold for $u_3$ --- for the vertical velocity we use the compact embedding $H^1 \hookrightarrow L^2$ and (\ref{WeakConvCEps1}). This provides
-  
-  $$C^\epsilon \to C  \quad  \text{strongly in $L_t^2 L_x^2$,}$$
-  
-  which, using (\ref{WeakConvU3NoEps}), yields that the product $u^\epsilon_3 C^\epsilon$ is weakly convergent and thus, considering the previously mentioned results for $i=1,2$, we finally have $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) \to (\mathbf{u} C, \nabla \tilde{C})$.
+{\color{orange} By analysing this nonlinear term in a more precise way we see that $u^\epsilon_i C^\epsilon$ for $i=1,2$ is weakly convergent since as we mentioned before (\cite{azerad2001mathematical}) we have the strong convergence of the horizontal velocities. In the case of $i=3$ this property does not hold for $u_3$ --- for the vertical velocity we use an additional result, a compactness criterium described by Theorem 5.1 in \cite{azerad2001mathematical}. We can apply the statement of this theorem for $p=2$ and the spaces $H^1 \hookrightarrow L^2 \hookrightarrow {H^2}^*$ to arrive to the conclusion that we have $C^\epsilon \to C$ strongly in $L^2_t L^2_x,$ and thus, finally we obtain the weak convergence result $u^\epsilon_3 C^\epsilon \rightharpoonup u_3 C.$
+
+Since (\ref{WeakConvCEps1}) is already given and hence we have $L^2_t H^1_x$ regularity for $C^\epsilon$, we only have to verify the bound $\norm{\tau_h C^\epsilon - C^\epsilon}_{L^2(0,T-h, {H^2}^*)} \leq \varphi(h) + \psi(\epsilon)$ in order to close the argument regarding the weak convergence of $u^\epsilon_3 C^\epsilon$.
+
+\begin{prop}
+The estimate $\norm{\tau_h C^\epsilon - C^\epsilon}_{L^2(0,T-h, {H^2}^*)} \leq C(h^{1/4} + \epsilon) holds.$
+\end{prop}
+
+\begin{proof}
+The spatial weak form of the anisotropic system (\ref{ANSC1}) - (\ref{ANSC5}) is
+
+\[ \label{spatialWeakForm} 1 = 1\]
+
+Now we take a $\tilde{C} \in H^2_x$ test function in (\ref{spatialWeakForm}) and integrate over $(t, t+h),$ i. e. we have
+
+\[ i = i\]
+
+where
+
+\[ g^\epsilon (s) = \]
+
+In the next step we prove the bound
+
+\[ g\]
+
+for $g^\epsilon (s).$
+
+To close the proof we apply the Holder inequality and obtain
+
+\[ \int_t^{t+h} ,\]
+
+which yields the proof of the lemma.
+
+\end{proof}
    
-  This, combined with the previously described linear terms, concludes the proof of the main theorem.
+  As a conclusion, we have the weak convergence $\mathbf{u}^\epsilon C^\epsilon \rightharpoonup \mathbf{u} C$ of the nonlinear term. This, combined with the previously described linear terms, concludes the proof of the main theorem.}
 
 %%% *** CONCLUDING REMARKS *** %%%
 \section{Concluding remarks} \label{concludingremarks}
