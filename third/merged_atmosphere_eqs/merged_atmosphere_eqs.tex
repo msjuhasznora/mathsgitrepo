@@ -577,7 +577,7 @@ where
 
 In the next step we prove the bound
 
-\[ \norm{g^\epsilon}_{L^{4/3}(0,T)} \leq c \big \| \tilde{C} \big \| _{H^2}\]
+\begin{equation} \norm{g^\epsilon}_{L^{4/3}(0,T)} \leq c \big \| \tilde{C} \big \| _{H^2} \label{bound_g} \end{equation}
 
 for $g^\epsilon(s)$, where $c$ stands for a constant. In order to do this, we estimate each term of $g^\epsilon.$
 
@@ -589,7 +589,7 @@ for $g^\epsilon(s)$, where $c$ stands for a constant. In order to do this, we es
 
 This ultimate bound can be verified using (\ref{proposition1}) and (\ref{propositionExtra}), moreover considering the interpolation between $L^\infty(0,T; L^2)$ and $L^2(0,T; L^6),$ which yields that $C^\epsilon$ is in $L^4(0,T; L^3)$.
 
-Finally we apply the Holder inequality and obtain
+Finally we apply the Holder inequality combined with (\ref{bound_g}) and obtain
 
 \[ \int_t^{t+h} \abs{g^\epsilon (s)} \diff s \leq c \big \| \tilde{C} \big \| _{H^2} h^{1/4},\]
 
