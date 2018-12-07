@@ -552,7 +552,7 @@ The energy inequality (\ref{energyIEQ}) now takes the form after applying the co
       
 Finally we have to deal with the nonlinear term $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}).$
   
-{\color{orange} By analysing this nonlinear term in a more precise way we see that $u^\epsilon_i C^\epsilon$ for $i=1,2$ is weakly convergent since as we mentioned before (\cite{azerad2001mathematical}) we have the strong convergence of the horizontal velocities. In the case of $i=3$ this property does not hold for $u_3$ --- for the vertical velocity we use an additional result, a compactness criterium described by Theorem 5.1 in \cite{azerad2001mathematical}. We can apply the statement of this theorem for $p=2$ and the spaces $H^1 \hookrightarrow L^2 \hookrightarrow {H^2}^*$ to arrive to the conclusion that we have $C^\epsilon \to C$ strongly in $L^2_t L^2_x,$ and thus, finally we obtain the weak convergence result $u^\epsilon_3 C^\epsilon \rightharpoonup u_3 C.$
+{\color{orange} By analysing this nonlinear term in a more precise way we see that $u^\epsilon_i C^\epsilon$ for $i=1,2$ is weakly convergent since as we mentioned before (\cite{azerad2001mathematical}) we have the strong convergence of the horizontal velocities. In the case of $i=3$ this property does not hold for $u_3$ --- for the vertical velocity we use an additional result, a compactness criterium described by Theorem 5.1 in \cite{azerad2001mathematical}. We can apply the statement of this theorem for $p=2$ and the spaces $H^1 \hookrightarrow L^2 \hookrightarrow {H^2}^*$ to arrive to the conclusion that we have $C^\epsilon \to C$ strongly in $L^2_t L^2_x,$ and thus we obtain the weak convergence result $u^\epsilon_3 C^\epsilon \rightharpoonup u_3 C.$
 
 In the following we will verify that the theorem's conditions hold for our choice of spaces and $p$. Since (\ref{proposition3}) is already given, we only have to show the bound $\norm{\tau_h C^\epsilon - C^\epsilon}_{L^2(0,T-h, {H^2}^*)} \leq \varphi(h) + \psi(\epsilon)$ in order to close the argument regarding the weak convergence of $u^\epsilon_3 C^\epsilon$.
 
@@ -582,12 +582,12 @@ In the next step we prove the bound
 for $g^\epsilon(s)$, where $c$ stands for a constant. In order to do this, we estimate each term of $g^\epsilon.$
 
 \begin{align} 
-  &  (S^\epsilon, \tilde{C}) &\quad & \text{bounded in $L^2(0,T)$,}  \\ 
-  & (\mathbf{M} \nabla C^\epsilon, \nabla \tilde{C}) \leq c \big \| \tilde{C} \big \| _{H^1} \big \| C^\epsilon \big \| _{H^1} &\quad & \text{bounded in $L^2(0,T)$,}  \\
-  & (\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) \leq \norm{\mathbf{u}^\epsilon}_{L^2} \norm{C^\epsilon}_{L^3}  \big \| \tilde{C} \big \| _{H^2} &\quad & \text{bounded in $L^{4/3}(0,T).$}
+  &  (S^\epsilon, \tilde{C}) &\quad & \text{is bounded in $L^2(0,T)$,}  \\ 
+  & (\mathbf{M} \nabla C^\epsilon, \nabla \tilde{C}) \leq c \big \| \tilde{C} \big \| _{H^1} \big \| C^\epsilon \big \| _{H^1} &\quad & \text{is bounded in $L^2(0,T)$,}  \\
+  & (\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) \leq \norm{\mathbf{u}^\epsilon}_{L^2} \norm{C^\epsilon}_{L^3}  \big \| \tilde{C} \big \| _{H^2} &\quad & \text{is bounded in $L^{4/3}(0,T).$}
 \end{align} 
 
-The first bound regarding the source term holds because of the $L^2_t L^2_x$ regularity of the source (see (\ref{sourcedefinition}) and Remark \ref{sourceregularityremark}.), the bound of the linear term is a direct consequence of the Cauchy-Schwartz inequality, while the ultimate bound can be verified using (\ref{proposition1}) and (\ref{propositionExtra}), moreover considering the interpolation between $L^\infty(0,T; L^2)$ and $L^2(0,T; L^6),$ which yields that $C^\epsilon$ is in $L^4(0,T; L^3)$.
+The first bound regarding the source term holds because of the $L^2_t L^2_x$ regularity of the source (see (\ref{sourcedefinition}) and Remark \ref{sourceregularityremark}.); the bound of the linear term is a direct consequence of the Cauchy-Schwartz inequality; while the ultimate bound can be verified using (\ref{proposition1}) and (\ref{propositionExtra}), moreover considering the interpolation between $L^\infty(0,T; L^2)$ and $L^2(0,T; L^6),$ which yields that $C^\epsilon$ is in $L^4(0,T; L^3)$.
 
 Finally, as we have now showed (\ref{bound_g}), we apply the Holder inequality combined with this latter and arrive to
 
