@@ -2,6 +2,7 @@
 \usepackage{graphicx}
 \usepackage{amssymb}
 \usepackage{bm}
+\usepackage{mathtools}
 \usepackage{amsmath}
 \usepackage{commath}
 \usepackage{amsthm}
@@ -71,7 +72,7 @@ Our focus is to create a self-contained model describing the atmospheric flow co
 
 Specifically, as for the limit behavior of the weak solutions of the model we construct, we show that the weak solutions of this model converge to a weak solution of the hydrostatic limit model --- in other words, taking the limit we arrive to a justification of the hydrostatic model for the case of the polluted atmosphere, where, instead of the originally used wind momentum equation, the hydrostatic air pressure assumption is used to describe the process in the vertical dimension. Since the polluted atmosphere as a merged physical phenomena can naturally be seen as the air-analogous version of the salty sea, with this convergence result we are providing an expansion of the main theorem of \cite{azerad2001mathematical} in the sense that we obtain a result describing the atmospheric flow combined with pollution effects, while the authors of \cite{azerad2001mathematical} provide a similar result for the ocean excluding salinity.
 
-This paper is organised in the following way. In section \ref{eqsdescribingatmpluspollution} we describe the physical model of the polluted atmosphere and the scaling leading to the hydrostatic equations. In section \ref{weakformulationmainresult} we introduce the function spaces we work in, and we present the weak formulation and the main theorem. The main theorem's proof is described in section \ref{proof}. A few concluding remarks can be found in section \ref{concludingremarks}, finally in the appendix of the article we present an existence result for the hydrostatic equations of the polluted atmosphere.
+This paper is organised in the following way. In Section \ref{eqsdescribingatmpluspollution} we describe the physical model of the polluted atmosphere and the scaling leading to the hydrostatic equations. In Section \ref{weakformulationmainresult} we introduce the function spaces we work in, and we present the weak formulation and the main theorem. The main theorem's proof is described in Section \ref{proof}. A few concluding remarks can be found in Section \ref{concludingremarks}, finally in the appendix of the article we present an existence result for the hydrostatic equations of the polluted atmosphere.
 
 We end up this section with some notations we will use through the paper.
 
@@ -94,6 +95,7 @@ We end up this section with some notations we will use through the paper.
 \item $< \cdot,\cdot>_{\Gamma} = $ the scalar product or duality on the boundary curve $\Gamma$ ($H^{-1/2}(\Gamma)$, $H^{1/2}(\Gamma)$)
 \item $\mathbf{u}_H$ = the horizontal velocity components $(u_1, u_2)$
 \item $b(\mathbf{u}_H)$ = $\alpha (-u_2 , u_1)$
+\item $L^p_t L^q_x$ is the abbreviated notation for $L^p (0, T; L^q(\Omega))$
 
 \end{enumerate}
 
@@ -114,11 +116,11 @@ where $\omega$ is a Lipschitz-domain in $\mathbb{R}^2$, $h$ is a nonnegative Lip
 
 The equations governing the air velocity $\mathbf{v}$ and pressure $q$ in the atmosphere are the incompressible Navier-Stokes equations, in which we use different viscosities according to vertical or horizontal directions, and the density is taken to be identically equal to one:
 
-\begin{equation}
+\begin{equation} \label{originalEQ-V}
   \partial_t \mathbf{v} + (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + \nabla q + 2 \mathbf{w} \times \mathbf{v}= \mathbf{g} \text{ in } \Omega_{\epsilon} \times (0,T)
 \end{equation}
     
-\begin{equation}
+\begin{equation} \label{originalEQ-I}
   \nabla \cdot \mathbf{v} = 0 \text{ in } \Omega_{\epsilon} \times (0,T)
 \end{equation}
 
@@ -128,9 +130,9 @@ Contaminants emitted into the atmosphere are transported by the wind, mixed and 
   \partial_t C + \mathbf{v} \cdot \nabla C = \nabla \cdot (\mathbf{K} \nabla C) + S,
 \end{equation}
 
-where $C$ is the pollution concentration and $\mathbf{K}$ is the diffusion matrix --- the diagonal terms represent the strength of the diffusion in the $x, y, z$ directions, while the off-diagonal terms reflect the correlation of random motions between each pair of principal directions (\cite{diffusion-tensor}).
+where $C$ is the pollution concentration and $\mathbf{K}$ is the $3 \times 3$ diffusion matrix --- the diagonal terms represent the strength of the diffusion in the $x, y, z$ directions, while the non-diagonal terms reflect the correlation of random motions between each pair of principal directions.
 
-In this equation $S$ represents the sources and sinks of the pollutant in the atmosphere i.e. its emission, removal from the atmosphere by dry and wet deposition, and chemical reactions. We will use the approach suggested by \cite{zhuk2016source} and use what is called a parametrised nascent delta function (a Gaussian impulse, specifically) to describe the source term $S$.
+Here $S$ represents the sources of the pollutant in the atmosphere i.e. its emission, removal from the atmosphere by dry and wet deposition, and chemical reactions. In this model we will use localised point sources as in \cite{zhuk2016source} and we use what is called a parametrised nascent delta function (a Gaussian impulse, specifically) to describe the source term $S$.
 
 Let us consider a gas plume with intensity $I$ originating at emission coordinates $\mathbf{x}_s$ beginning at time $t_s$. At the beginning we assume zero concentration.
 An abrupt gas emission is modelled by a source term represented as a product of an approximated delta function $\delta_\kappa (\mathbf{x} - \mathbf{x}_s)$ (centered at $\mathbf{x}_s$ with a constant parameter $\kappa$) and a Heaviside function $s$ (switching from 0 to $I$ at time $t_s.$)
@@ -168,15 +170,7 @@ Now, we perform a vertical scaling to make the domain independent of $\epsilon.$
  \begin{bmatrix} K_{xx} & K_{xy} & K_{xz} \\ K_{yx} & K_{yy} & K_{yz} \\ K_{zx} & K_{zy} & K_{zz} \end{bmatrix}
  =
   \begin{bmatrix}
-    1 & 1 & \epsilon
-  \end{bmatrix}
-  \begin{bmatrix}
-    M_{11} & M_{12} & M_{13} \\ M_{21} & M_{22} & M_{23} \\ M_{31} & M_{32} & M_{33}
-  \end{bmatrix}
-  \begin{bmatrix}
-           1 \\
-           1 \\
-           \epsilon
+    M_{11} & M_{12} & \epsilon M_{13} \\ M_{21} & M_{22} & \epsilon M_{23} \\ \epsilon M_{31} & \epsilon M_{32} & \epsilon^2 M_{33}
   \end{bmatrix}
 \end{gather}
 
@@ -186,9 +180,9 @@ Here we emphasise that the diffusivity matrix $\mathbf{M}$ is assumed to have th
   \lambda \norm{x}^2 \leq (\mathbf{M} x, x)
 \end{equation}
 
-for all $x \in \mathbb{R}^3$ with the coercivity constant $\lambda.$
+for all $x \in \mathbb{R}^3$ with the coercivity constant $\lambda > 0.$ In other words we require that $\lambda = \min {\lambda_i} > 0$ where $\lambda_i$ are the eigenvalues of $\mathbf{M}.$
     
-Eventually, as we mentioned before, we use a Gaussian approximated delta function to represent the source, so it is convenient to reformulate (\ref{approxsourceterm}) in terms of $\epsilon$, which is the standard deviation parameter of the distribution describing the source --- since later we will take the limit as $\epsilon$ goes to zero, it will result in having the $\delta$ distribution representing the hydrostatic source term, which is a physically natural choice. In other words, we choose $\kappa$ to be $\epsilon$ and the following function will give shape to the source term:
+Eventually, as we mentioned before, we use a Gaussian approximated delta function to represent the source, so it is convenient to reformulate (\ref{approxsourceterm}) in terms of $\epsilon$, which is the standard deviation parameter of the distribution describing the source. Thus, we choose $\kappa$ to be $\epsilon$ and the following function will give shape to the source term:
 
 \[\delta_\epsilon (\mathbf{x}-\mathbf{x_s}) = \gamma \epsilon^{-1} e ^ {\frac{-(\mathbf{x}-\mathbf{x_s})^2}{\epsilon^2}};\]
 
@@ -198,9 +192,9 @@ and finally
 S^\epsilon = I H(t-t_s) \gamma \epsilon^{-1} e ^ {\frac{-(\mathbf{x}-\mathbf{x_s})^2}{\epsilon^2}},
 \end{equation}
 
-where $\gamma$ is a normalising constant.
+where $\gamma$ is a normalising constant. Later we will take the limit as $\epsilon$ goes to zero, and the above setting will result in having the $\delta$ distribution representing the hydrostatic source term, which is a physically natural choice.
     
-    Putting this condition and the previously described rescaling terms together to the original equations, we arrive to the merged anisotropic equations of the polluted atmosphere above inland surface:
+    Putting this condition and the previously described rescaling terms together to the original equations (\ref{originalEQ-V})-(\ref{diffusive}), we arrive to the merged anisotropic equations of the polluted atmosphere above inland surface:
   
     \begin{equation} \label{ANSC1}
     \partial_t u^\epsilon _1 + \mathbf{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\alpha u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
@@ -281,7 +275,7 @@ As we mentioned before, the case we are investigating is that of inland domains 
 
   \begin{itemize}
   
-    \item The upper boundary $\Gamma_U$ of the domain we are considering is chosen to be at the isobar $z=h$ representing the planetary boundary layer (\cite{arya2001introduction}), therefore we assume
+    \item The upper boundary $\Gamma_U$ of the domain we are considering is chosen to be at the isobar $z=h$ representing the planetary boundary layer (see \cite{arya2001introduction}), therefore we assume
     
     \begin{equation}
       \mathbf{u}^\epsilon_H = 0, \quad u^\epsilon_3 = 0, \quad C^\epsilon = 0 \quad \text{ on } \Gamma_U \times (0,T)
@@ -312,7 +306,7 @@ As we mentioned before, the case we are investigating is that of inland domains 
     $$\partial_1 C^\epsilon, \partial_2 C^\epsilon \text{ are finite in } L^2 (0,T; \Gamma_G).$$
   
   \end{itemize}
-  Specifically, for the pollution concentration reaching the ground level we use a similar approach as the one classically used for the wind traction reaching the top of the ocean (see for example \cite{azerad2001mathematical}, \cite{temam2005some}). We assume that the functions $\partial_1 C^\epsilon, \partial_2 C^\epsilon, \partial_3 C^\epsilon$ are equal to some sufficiently regular, $\epsilon$-independent functions defined on the respective boundary. More accurately, we assume that we have $\nabla C^\epsilon = \boldsymbol{\sigma}$ on the lower boundary, where $\boldsymbol{\sigma} \in L^2(0,T;L^2(\Gamma_G))$, and the $\sigma_i$ terms denote the components of $\boldsymbol{\sigma}$. In particular in this inland case $\sigma_3$ is equal to zero on the $\Gamma_G$.
+  Specifically, for the pollution concentration reaching the ground level we use a similar approach as the one classically used for the wind traction reaching the top of the ocean (see for example \cite{azerad2001mathematical}, \cite{temam2005some}). We assume that the functions $\partial_1 C^\epsilon, \partial_2 C^\epsilon, \partial_3 C^\epsilon$ are equal to some sufficiently regular functions defined on the respective boundary. More accurately, we assume that we have $\nabla C^\epsilon = \boldsymbol{\sigma}$ on the lower boundary, where $\boldsymbol{\sigma} \in L^2(0,T;L^2(\Gamma_G))$, and the $\sigma_i$ terms denote the components of $\boldsymbol{\sigma}$. In particular in this inland case $\sigma_3$ is equal to zero on the $\Gamma_G$.
   
   Finally, the boundary conditions to describe the anisotropic system can be summarised as follows:
   
@@ -359,7 +353,7 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
     \begin{equation} \label{HNSC8}
       \begin{split}
         &C = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
-        & \partial_1 C, \partial_2 C \in L^2 L^2 (0,T; \Gamma_G), \partial_3 C = 0 \text{ on } \Gamma_G \times (0,T) \\
+        & \partial_1 C = \sigma_1, \partial_2 C = \sigma_2, \partial_3  C = 0, \boldsymbol{\sigma} = (\sigma_1, \sigma_2, 0) \in L^2(0,T; \Gamma_G)\\
       \end{split}
     \end{equation}
     
@@ -390,12 +384,12 @@ In this section we describe the weak formulation of the merged equations in both
   
   \begin{definition} \label{definitionhydrostaticWF}
   
-  Find $(\mathbf{u}, C)$ such that $\mathbf{u} = (\mathbf{u}_H, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_H \in L^\infty (0,T; L^2(\Omega)^2),$ and $C \in L_t^\infty L_x^2$ with $C \in L^2_t H^1_x$, such that
+  Find $(\mathbf{u}, C)$ such that $\mathbf{u} = (\mathbf{u}_H, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_H \in L^\infty (0,T; L^2(\Omega)^2),$ and $C \in L^\infty(0,T; L^2(\Omega))$ with $C \in L^2(0,T; H^1(\Omega))$, such that
   
   \begin{equation}
     \begin{split}
       & \int_0^T \bigg[ -(\mathbf{u}_H, \partial_t \mathbf{\tilde{u}}_H) + (\nabla_\nu \mathbf{u}_H, \nabla_\nu \mathbf{\tilde{u}}_H) - (\mathbf{u}_H, (\mathbf{u} \cdot \nabla) \mathbf{\tilde{u}}_H) + (b(\mathbf{u}_H), \mathbf{\tilde{u}}_H) \bigg ] \diff t \\
-      & = - (\mathbf{u}_{0H}, \mathbf{\tilde{u}}_H(0)) \diff t \raisetag{15pt}\label{hydrostaticWF_U}
+      & = (\mathbf{u}_{0H}, \mathbf{\tilde{u}}_H(0)) \diff t \raisetag{15pt}\label{hydrostaticWF_U}
     \end{split}
   \end{equation}
   
@@ -404,11 +398,11 @@ In this section we describe the weak formulation of the merged equations in both
     \begin{equation}
     \begin{split}
       & \int_0^T \bigg[ -(C, \partial_t \tilde{C}) -(\mathbf{u}C, \nabla \tilde{C}) +  (\mathbf{M} \nabla C, \nabla \tilde{C}) - \int_{\Gamma_G} \boldsymbol{\sigma} \mathbf{M} \tilde{C} \vec{\boldsymbol{n}}_{\Gamma_G} \bigg ] \diff t \\
-      & = - (C(0), \tilde{C}(0)) + \int_0^T (S,\tilde{C}) \diff t \raisetag{20pt} \label{hydrostaticWF_C}
+      & = (C(0), \tilde{C}(0)) + \int_0^T (S,\tilde{C}) \diff t \raisetag{20pt} \label{hydrostaticWF_C}
     \end{split}
   \end{equation}
   
-  for all $(\mathbf{\tilde{u}}, \tilde{C})$ with $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_H, \tilde{u}_3) \in H^1 (0,T, \mathbf{W})$, with $\mathbf{\tilde{u}}_H (T) = 0$ and $\partial_3 \mathbf{\tilde{u}}_H \in L^\infty (0, T; L^3 (\Omega)^2)$ and $\tilde{C}$ with $\tilde{C} \in L^2 (0,T, H^3_{\Gamma} (\Omega))$, $\tilde{C} \in H^1 (0,T, L^2)$, $\tilde{C} (T) = 0$. 
+  for all $(\mathbf{\tilde{u}}, \tilde{C})$ with $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_H, \tilde{u}_3) \in H^1 (0,T, \mathbf{W})$, $\mathbf{\tilde{u}}_H (T) = 0$ and $\partial_3 \mathbf{\tilde{u}}_H \in L^\infty (0, T; L^3 (\Omega)^2)$ and  $\tilde{C} \in L^2 (0,T, H^2_{\Gamma} (\Omega)) \cap H^1 (0,T, L^2)$, $\tilde{C} (T) = 0$. 
   
   \end{definition}
   
@@ -416,24 +410,20 @@ In this section we describe the weak formulation of the merged equations in both
   
   \[ (S,\tilde{C}) = \int_\Omega \delta(\mathbf{x} - \mathbf{x}_s) \tilde{C}(\mathbf{x}) \diff \mathbf{x} = \tilde{C}(\mathbf{x}_s).\]
   
-  \begin{remark}
-  If $S$ is chosen to be different from the limit of the Gaussian nascent delta function, then it is easy to see that the sufficient assumption we have to make on a general $S$ hydrostatic pollution function is that it should be in $L^2_t L^2_x$. 
-  \end{remark}
-  
   The existence of weak solution for the hydrostatic system (\ref{HNSC1}) - (\ref{HNSC8}) can be proved in the spirit of \cite{temam2005some}. In appendix A we will outline the main steps of the proof and the differences compared to the ocean model.
 
   The weak form of the anisotropic system is as follows.
   
   \begin{definition} \label{definitionanisotropicWF}
   
-  Find $\mathbf{u}^\epsilon = (\mathbf{u}_H, u^\epsilon_3) \in L^2 (0,T ; \mathbf{V}) \cap L^\infty (0, T; L^2 (\Omega)^3)$ and $C^\epsilon \in L^\infty (0,T; L^2(\Omega)) \cap L^2 (0,T; H^1(\Omega))$, such that
+  Find $\mathbf{u}^\epsilon = (\mathbf{u}^\epsilon_H, u^\epsilon_3) \in L^2 (0,T ; \mathbf{V}) \cap L^\infty (0, T; L^2 (\Omega)^3)$ and $C^\epsilon \in L^\infty (0,T; L^2(\Omega)) \cap L^2 (0,T; H^1(\Omega))$, such that
   
   \begin{equation}
     \begin{split}
       & \int_0^T \bigg [ -(\mathbf{u}^\epsilon_H, \partial_t \mathbf{\tilde{u}}_H) + (\nabla_\nu \mathbf{u}^\epsilon_H, \nabla_\nu \mathbf{\tilde{u}}_H) - (\mathbf{u}^\epsilon_H, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{\tilde{u}}_H) + (b(\mathbf{u}^\epsilon_H), \mathbf{\tilde{u}}_H) \bigg ] \diff t \\
       & + \epsilon \beta \int_0 ^ T \big [ (u_3 ^\epsilon, \tilde{u}_1) - (u_1^\epsilon, \tilde{u}_3) \big ] \diff t\\
       & + \epsilon^2 \int _0 ^ T \big [ -(u_3^\epsilon, \partial_t \tilde{u}_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, \tilde{u}_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu \tilde{u}_3) \big ] \diff t \\
-      & = - (\mathbf{u}^\epsilon_{0H}, \mathbf{\tilde{u}}_H(0)) - \epsilon^2 (u_{03}^\epsilon, \tilde{u}_3 (0)) \diff t \raisetag{10pt} \label{anisotropicWF_U}
+      & = (\mathbf{u}^\epsilon_{0H}, \mathbf{\tilde{u}}_H(0)) + \epsilon^2 (u_{03}^\epsilon, \tilde{u}_3 (0)) \diff t \raisetag{10pt} \label{anisotropicWF_U}
     \end{split}
   \end{equation}
   
@@ -442,11 +432,11 @@ In this section we describe the weak formulation of the merged equations in both
     \begin{equation}
     \begin{split}
       & \int_0^T \bigg [ -(C^\epsilon, \partial_t \tilde{C}) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) + (\mathbf{M} \nabla C^\epsilon, \nabla \tilde{C}) - \int_{\Gamma_G} \boldsymbol{\sigma} \mathbf{M} \tilde{C} \vec{\boldsymbol{n}}_{\Gamma_G} \bigg ] \diff t \\
-      & =  - (C^\epsilon (0), \tilde{C} (0)) + \int_0^T (S^\epsilon,\tilde{C}) \diff t \raisetag{20pt} \label{anisotropicWF_C}
+      & =  (C^\epsilon (0), \tilde{C} (0)) + \int_0^T (S^\epsilon,\tilde{C}) \diff t \raisetag{20pt} \label{anisotropicWF_C}
     \end{split}
   \end{equation}
   
-  for all $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_H, \tilde{u}_3) \in H^1 (0,T;\mathbf{V})$ with $\mathbf{\tilde{u}}(T) = 0$ and $\tilde{C}$ such that $\tilde{C} \in H^1 (0,T, H^3_{\Gamma} (\Omega))$ and $\tilde{C} (T) = 0$.
+  for all $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_H, \tilde{u}_3) \in H^1 (0,T;\mathbf{V})$ with $\mathbf{\tilde{u}}(T) = 0$ and $\tilde{C}$ such that $\tilde{C} \in H^1 (0,T, H^2_{\Gamma} (\Omega))$ and $\tilde{C} (T) = 0$.
   
   \end{definition}
   
@@ -463,7 +453,7 @@ Now we are ready to state our main result.
 %%% *** PROOF *** %%%
 \section{Proof of the main theorem} \label{proof}
  
- This section is devoted to the proof of Theorem \ref{maintheorem}. In the extended case with the pollution equation the proof relies on a priori estimates gained from the energy inequality and, as we will see this is sufficient to pass to the limit in the linear terms. Concerning the nonlinear terms that do not include pollution we will follow \cite{azerad2001mathematical}. The nonlinear term including the new function $C^\epsilon$ can be handled using that $C^\epsilon$ is in the compact space $H^1_x.$
+ This section is devoted to the proof of Theorem \ref{maintheorem}. In the extended case with the pollution equation the proof relies on a priori estimates gained from the energy inequality and, as we will see this is sufficient to pass to the limit in the linear terms. Concerning the nonlinear terms we will prove a uniform in $\epsilon$ space time estimate for $u^\epsilon$ and $C^\epsilon$ that will allow us to apply a compactness criterion proved in \cite{azerad2001mathematical}.
 
   \subsection{Energy inequality}
   
@@ -485,14 +475,15 @@ Now we are ready to state our main result.
   
   \begin{equation}
     \begin{split}  
-    I_3 & = \sum_{i,j = 1}^3 \int _ 0 ^ t M_{ij} \langle \partial_i C^\epsilon, C^\epsilon \rangle_{\Gamma_G} \diff \tau \leq \sum_{i,j = 1}^3 M_{ij} \int _ 0 ^ t \norm{\partial_i C^\epsilon}_{L^2 (\Gamma_G)}  \norm{C^\epsilon}_{L^2 (\Gamma_G)} \\
-    & \leq \sum_{i,j = 1}^3 \frac{1}{\zeta} M_{ij} \frac{1}{2} \int_0 ^ t \norm{\partial_i C^\epsilon}^2 _{L^2 (\Gamma_G)} + \zeta M_{ij} \int_0 ^ t \frac{1}{2} \norm{C^\epsilon}^2 _{L^2 (\Gamma_G)} \\
-    & \leq \sum_{i,j = 1}^3 \frac{1}{\zeta} M_{ij} \frac{1}{2} \int_0 ^ t \norm{\partial_i C^\epsilon}^2 _{L^2 (\Gamma_G)} + \zeta \frac{1}{2} M_{ij} c_T \int_0 ^ t \norm{C^\epsilon}^2 _{W^{1,2} (\Omega)} \\
-    & \leq \sum_{i,j = 1}^3 \frac{1}{\zeta} M_{ij} \frac{1}{2} \int_0 ^ t \norm{\partial_i C^\epsilon}^2 _{L^2 (\Gamma_G)} + \zeta \frac{1}{2} M_{ij} c_T (c_S + 1) \int_0 ^ t \norm{\nabla C^\epsilon}^2 _{L^2 (\Omega) } \diff \tau,
+    I_3 & = \sum_{i=1}^3 \bigg( \big(\sum_{j=1}^3 M_{ij} \partial_j C^\epsilon \big) C \mathbf{n}_{\Gamma_G, i} \bigg) \diff \tau \leq \sum_{i,j = 1}^3 M_{ij} \int _ 0 ^ t \norm{\partial_i C^\epsilon}_{L^2 (\Gamma_G)}  \norm{C^\epsilon}_{L^2 (\Gamma_G)} \diff \tau \\
+    & \leq \sum_{i,j = 1}^3 \frac{1}{\zeta} M_{ij} \frac{1}{2} \int_0 ^ t \norm{\partial_i C^\epsilon}^2 _{L^2 (\Gamma_G)} \diff \tau + \zeta M_{ij} \int_0 ^ t \frac{1}{2} \norm{C^\epsilon}^2 _{L^2 (\Gamma_G)} \diff \tau \\
+    & \leq \sum_{i,j = 1}^3 \frac{1}{\zeta} M_{ij} \frac{1}{2} \int_0 ^ t \norm{\partial_i C^\epsilon}^2 _{L^2 (\Gamma_G)} \diff \tau + \zeta \frac{1}{2} M_{ij} c_T \int_0 ^ t \norm{C^\epsilon}^2 _{W^{1,2} (\Omega)} \diff \tau \\
+    & \leq \sum_{i,j = 1}^3 \frac{1}{\zeta} M_{ij} \frac{1}{2} \int_0 ^ t \norm{\partial_i C^\epsilon}^2 _{L^2 (\Gamma_G)} \diff \tau + \zeta \frac{1}{2} M_{ij} c_T  \int_0 ^ t \norm{\nabla C^\epsilon}^2 _{L^2 (\Omega) }  \diff \tau \\
+    & + \zeta \frac{1}{2} M_{ij} c_T  \int_0 ^ t \norm{C^\epsilon}^2 _{L^2 (\Omega) } \diff \tau,
     \end{split}
   \end{equation}  
   
-  where $c_T$ and $c_S$ are the constants provided by the trace theorem and Sobolev embeddings, and the boundary term is bounded because of the a priori assumptions made on the boundary conditions.
+  where the $c_T$ constant is provided by the trace theorem and the boundary term is bounded because of the a priori assumptions made on the boundary conditions.
   
 The energy inequality (\ref{energyIEQ}) now takes the form after applying the coercivity property (\ref{coercivity}) of the diffusion matrix.
 
@@ -500,12 +491,12 @@ The energy inequality (\ref{energyIEQ}) now takes the form after applying the co
     \begin{split}  
     & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \big [\norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2 \big ] \diff \tau \\
     & + \int_0 ^ t \bigg[ (\lambda - \sum_{i,j = 1}^3 \zeta \frac{1}{2} M_{ij} c_T (c_S + 1)) \norm{\nabla C^\epsilon}_{L^2}^2  \bigg] \diff \tau \\
-    & \leq \sum_{i,j = 1}^3 \frac{1}{\zeta} M_{ij} \frac{1}{2} \int_0 ^ t \norm{\sigma_i}^2 _{L^2 (\Gamma_G)} + \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) \\
-    & + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau \raisetag{80pt} \label{finalformEIEQ}
+    & \leq \sum_{i,j = 1}^3 \frac{1}{\zeta} M_{ij} \frac{1}{2} \int_0 ^ t \norm{\sigma_i}^2 _{L^2 (\Gamma_G)} \diff \tau + \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) \\
+    & + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau + \sum_{i,j = 1}^3 \zeta \frac{1}{2} M_{ij} c_T  \int_0 ^ t \norm{C^\epsilon}^2 _{L^2 (\Omega) } \diff \tau \raisetag{80pt} \label{finalformEIEQ}
     \end{split}
   \end{equation}  
     
-  The right hand side of the energy inequality is now apparently bounded, and it is easy to see that the coefficients of the pollution terms are positive, since the $\zeta = \zeta(\lambda)$ constant of the generalised Young inequality can be freely chosen in a way such that the requirement $(\lambda - \sum \zeta \frac{1}{2} M_{ij} c_T (c_S + 1)) > 0$ is satisfied.
+  It is now straightforward to see that the coefficients of the pollution terms are positive, since the $\zeta = \zeta(\lambda)$ constant of the generalised Young inequality can be freely chosen in a way such that the requirement $(\lambda - \sum \zeta \frac{1}{2} M_{ij} c_T (c_S + 1)) > \frac{\lambda}{2} > 0$ is satisfied.
     
   \subsection{A priori estimates and weak convergence}
   
@@ -524,7 +515,7 @@ The energy inequality (\ref{energyIEQ}) now takes the form after applying the co
   \end{prop}
   
   \begin{proof}
-  It is straightforward that (\ref{proposition1}), (\ref{proposition2}) and (\ref{proposition3}) follow directly by the energy inequality (\ref{finalformEIEQ}). On the other hand, (\ref{propositionExtra}) can be verified by using the divergence free condition and that as a consequence, we have $\partial_3 u_3 = - \partial_1 u_1 - \partial_2 u_2$ bounded in $L^2_t L^2 _x$. The bound holds for $u_3$ itself as well, owing to the Poincare inequality in the vertical direction, and using that $u_3$ vanishes on the boundary.
+  By applying the classical Gronwall inequality, (\ref{proposition1}), (\ref{proposition2}) and (\ref{proposition3}) follow directly by the energy inequality (\ref{finalformEIEQ}). On the other hand, (\ref{propositionExtra}) can be verified by using the divergence free condition and that as a consequence, we have $\partial_3 u_3 = - \partial_1 u_1 - \partial_2 u_2$ bounded in $L^2_t L^2 _x$. The bound holds for $u_3$ itself as well, owing to the Poincare inequality in the vertical direction, and using that $u_3$ vanishes on the boundary.
   \end{proof}
   
   As a consequence, up to subsequences still denoted by the same way, we have the following weak convergence results.
@@ -552,12 +543,34 @@ The energy inequality (\ref{energyIEQ}) now takes the form after applying the co
       
 Finally we have to deal with the nonlinear term $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}).$
   
-{\color{orange} By analysing this nonlinear term in a more precise way we see that $u^\epsilon_i C^\epsilon$ for $i=1,2$ is weakly convergent since as we mentioned before (\cite{azerad2001mathematical}) we have the strong convergence of the horizontal velocities. In the case of $i=3$ this property does not hold for $u_3$ --- for the vertical velocity we use an additional result, a compactness criterium described by Theorem 5.1 in \cite{azerad2001mathematical}. We can apply the statement of this theorem for $p=2$ and the spaces $H^1 \hookrightarrow L^2 \hookrightarrow {H^2}^*$ to arrive to the conclusion that we have $C^\epsilon \to C$ strongly in $L^2_t L^2_x,$ and thus we obtain the weak convergence result $u^\epsilon_3 C^\epsilon \rightharpoonup u_3 C.$
+By analysing this nonlinear term in a more precise way we see that $u^\epsilon_i C^\epsilon$ for $i=1,2$ is weakly convergent since as we mentioned before, we have the strong convergence of the horizontal velocities, while in the case of $i=3$ this property does not hold. We overcome this difficulty by proving a compactness property for the pollution concentration $C.$ The key tool will be the following compactness criterion (for the proof see Theorem 5.1 in \cite{azerad2001mathematical}).
+
+\begin{theorem}
+Let $T>0,$ and let the Banach spaces $\mathbf{X} \xhookrightarrow{\text{c}} \mathbf{B} \hookrightarrow \mathbf{Y}.$ Let $(f_\epsilon)_{\epsilon>0}$ be a family of functions of $L^p (0,T; \mathbf{X}), 1 \leq p \leq \infty,$ with the extra condition $(f_\epsilon)_{\epsilon>0} \subset \mathcal{C} (0,T; \mathbf{Y})$ if $p = \infty,$ such that
+\begin{enumerate}
+  \item $(f_\epsilon)_{\epsilon>0}$ is bounded in $L^p (0,T; \mathbf{X}),$
+  \item $\norm{\tau_h f_\epsilon - f_\epsilon}_{L^p(0,T-h; \mathbf{Y})} \leq \varphi(h) + \psi(\epsilon)$ with
+  $$
+    \begin{cases}
+      \lim_{h \to 0} \varphi(h) = 0,\\
+      \lim_{\epsilon \to 0} \psi(\epsilon) = 0.
+    \end{cases}
+  $$
+  \end{enumerate}
+  
+Then the family $(f_\epsilon)_{\epsilon>0}$ possesses a cluster point in $L^p (0,T; \mathbf{B})$ and also in $\mathcal{C}(0,T; \mathbf{B})$ if $p = \infty$ as $\epsilon \to 0.$
+\end{theorem}
+
+We will be able to apply the statement of this theorem for $p=2$ and the spaces $H^1 \hookrightarrow L^2 \hookrightarrow {H^2}^*,$ where ${H^2}^*$ is the dual of ${H^2}$, obtaining that
+
+\[C^\epsilon \to C \text{ strongly in } L^2_t L^2_x,\]
+
+and thus we have the weak convergence result $u^\epsilon_3 C^\epsilon \rightharpoonup u_3 C.$
 
 In the following we will verify that the theorem's conditions hold for our choice of spaces and $p$. Since (\ref{proposition3}) is already given, we only have to show the bound $\norm{\tau_h C^\epsilon - C^\epsilon}_{L^2(0,T-h, {H^2}^*)} \leq \varphi(h) + \psi(\epsilon)$ in order to close the argument regarding the weak convergence of $u^\epsilon_3 C^\epsilon$.
 
 \begin{prop}
-The estimate $\norm{\tau_h C^\epsilon - C^\epsilon}_{L^2(0,T-h, {H^2}^*)} \leq c(h^{1/4} + \epsilon)$ holds.
+The estimate $\norm{\tau_h C^\epsilon - C^\epsilon}_{L^2(0,T-h, {H^2}^*)} \leq c \cdot h^{1/4}$ holds.
 \end{prop}
 
 \begin{proof}
@@ -569,35 +582,35 @@ where in this case the equality has to hold for all $\tilde{C} \in H^2_x.$
 
 Now we take such a $\tilde{C} \in H^2_x$ test function in (\ref{spatialWeakForm}) and integrate over $(t, t+h),$ i. e. we have
 
-\[ (\tau_h C^\epsilon (t) - C^\epsilon (t), \tilde{C}) = \int_t^{t+h} g^\epsilon (s) \diff s,\]
+\[ (\tau_h C^\epsilon (t) - C^\epsilon (t), \tilde{C}) = \int_t^{t+h} \iota^\epsilon (s) \diff s,\]
 
 where
 
-\[ g^\epsilon (s) = (\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) - (\mathbf{M} \nabla C^\epsilon, \nabla \tilde{C}) + (S^\epsilon, \tilde{C}). \]
+\[ \iota^\epsilon (s) = (\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) - (\mathbf{M} \nabla C^\epsilon, \nabla \tilde{C}) + (S^\epsilon, \tilde{C}). \]
 
 In the next step we prove the bound
 
-\begin{equation} \norm{g^\epsilon}_{L^{4/3}(0,T)} \leq c \big \| \tilde{C} \big \| _{H^2} \label{bound_g} \end{equation}
+\begin{equation} \norm{\iota^\epsilon}_{L^{4/3}(0,T)} \leq c \big \| \tilde{C} \big \| _{H^2} \label{bound_iota} \end{equation}
 
-for $g^\epsilon(s)$, where $c$ stands for a constant. In order to do this, we estimate each term of $g^\epsilon.$
+for $\iota^\epsilon(s)$, where $c$ stands for a constant. In order to do this, we estimate each term of $\iota^\epsilon.$
 
 \begin{align} 
   &  (S^\epsilon, \tilde{C}) &\quad & \text{is bounded in $L^2(0,T)$,}  \\ 
-  & (\mathbf{M} \nabla C^\epsilon, \nabla \tilde{C}) \leq c \big \| \tilde{C} \big \| _{H^1} \big \| C^\epsilon \big \| _{H^1} &\quad & \text{is bounded in $L^2(0,T)$,}  \\
+  & \label{lineartermboundgradC} (\mathbf{M} \nabla C^\epsilon, \nabla \tilde{C}) \leq c \big \| \tilde{C} \big \| _{H^1} \big \| C^\epsilon \big \| _{H^1} &\quad & \text{is bounded in $L^2(0,T)$,}  \\
   & (\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) \leq \norm{\mathbf{u}^\epsilon}_{L^2} \norm{C^\epsilon}_{L^3}  \big \| \tilde{C} \big \| _{H^2} &\quad & \text{is bounded in $L^{4/3}(0,T).$}
 \end{align} 
 
-The first bound regarding the source term holds because of the $L^2_t L^2_x$ regularity of the source (see (\ref{sourcedefinition}) and Remark \ref{sourceregularityremark}.); the bound of the linear term is a direct consequence of the Cauchy-Schwartz inequality; while the ultimate bound can be verified using (\ref{proposition1}) and (\ref{propositionExtra}), moreover considering the interpolation between $L^\infty(0,T; L^2)$ and $L^2(0,T; L^6),$ which yields that $C^\epsilon$ is in $L^4(0,T; L^3)$.
+The first bound regarding the source term holds because of the $L^2_t L^2_x$ regularity of the source (see (\ref{sourcedefinition}) and Remark \ref{sourceregularityremark}.); the bound of the linear term (\ref{lineartermboundgradC}) is a direct consequence of the Cauchy-Schwartz inequality; while the ultimate bound can be verified using (\ref{proposition1}) and (\ref{propositionExtra}), moreover considering the interpolation between $L^\infty(0,T; L^2)$ and $L^2(0,T; L^6),$ which yields that $C^\epsilon$ is in $L^4(0,T; L^3)$.
 
-Finally, as we have now showed (\ref{bound_g}), we apply the Holder inequality combined with this latter and arrive to
+Finally, as we have now showed (\ref{bound_iota}), we apply the Holder inequality combined with this latter and arrive to
 
-\[ \int_t^{t+h} \abs{g^\epsilon (s)} \diff s \leq c \big \| \tilde{C} \big \| _{H^2} h^{1/4},\]
+\[ \int_t^{t+h} \abs{\iota^\epsilon (s)} \diff s \leq c \big \| \tilde{C} \big \| _{H^2} h^{1/4},\]
 
 which gives the proof of the lemma.
 
 \end{proof}
    
-  As a consequence, applying Theorem 5.1 in \cite{azerad2001mathematical} considering the estimate we have just verified, we obtain the strong convergence result $C^\epsilon \to C$ in $L^2(0,T; L^2),$ and eventually with this we have proved the weak convergence $\mathbf{u}^\epsilon C^\epsilon \rightharpoonup \mathbf{u} C$ of the nonlinear term. This, combined with the previously described linear terms, concludes the proof of the main theorem.}
+  Eventually, we obtain the strong convergence result $C^\epsilon \to C$ in $L^2(0,T; L^2),$ and the weak convergence $\mathbf{u}^\epsilon C^\epsilon \rightharpoonup \mathbf{u} C$ of the nonlinear term. This, combined with the previously described linear terms, concludes the proof of the main theorem.
 
 %%% *** CONCLUDING REMARKS *** %%%
 \section{Concluding remarks} \label{concludingremarks}
@@ -682,7 +695,7 @@ The idea is that the polluted atmosphere can be viewed as the air-analogous vers
 
 The paper of \cite{temam2005some} provides an existence result for an arbitrary time interval $[0, t_1]$ for the system describing the salty ocean water with temperature. The structure of the equations themselves describing the system is essentially the same, if we drop the equation describing the temperature, we basically arrive to the same system that describes the polluted atmosphere.
 
-The main difference consists in the boundary conditions: on every boundary they use a zero flux for the salinity, $\frac{\partial S}{\partial \mathbf{n}_s} = 0$. This coincides with our lower boundary conditions, but on the lateral boundary we use a fix constant.
+The main difference consists in the boundary conditions: on every boundary they use a zero flux for the salinity. This coincides with our lower boundary conditions, but on the lateral boundary we use a fix constant.
 
 We will follow step by step the structure of the proof in \cite{temam2005some}, redefining the necessary quantities to be valid for our case and verify that the proof holds in the case of the polluted atmosphere as well (this is necessary not only because of using altered boundary conditions but also because the regularities of the functions are different in some cases).
 
@@ -693,7 +706,7 @@ Throughout this section we will use the $V = V_1 \times V_2, H = H_1 \times H_2,
 %% V --- hypothesis of Definition 1. We don't need to add the boundary zero conditions for the velocity or the L^2 regularity because they are all covered by H^1_Gamma.
 $$ V_1 = \{ \mathbf{u}_H \in H^1_\Gamma (\Omega) \times H^1_\Gamma (\Omega), \nabla \cdot \int_h^0 \mathbf{u}_H \diff z = 0  \}, $$
 
-$$ V_2 = \{ C \in H^1(\Omega)\}, $$
+$$ V_2 = H^1(\Omega), $$
 
 %% H is the space in where we take the inner product between dU / dt and tilde{U}, and where we take U_0 from, essentially the L^2 version of the V space.
 $$ H_1 =  \{ \mathbf{u}_H \in H^0_\Gamma (\Omega) \times H^0_\Gamma (\Omega), \nabla \cdot \int_h^0 \mathbf{u}_H \diff z = 0  \}, $$
@@ -715,7 +728,7 @@ We denote by $U$ the vector $(\mathbf{u}_H, C).$ The scalar products and norms i
 
 \[ ((\mathbf{u}_H, \mathbf{\tilde{u}}_H))_1 = \int_\Omega \nabla_\nu \mathbf{u}_H \nabla_\nu \mathbf{\tilde{u}}_H \diff \omega \]
 
-\[ ((C, \tilde{C}))_2 = \int _\Omega \big  (\nabla C)^T \mathbf{M} \nabla \tilde{C} \diff \omega - \big[((\nabla C)^ T \mathbf{M}) \tilde{C} \vec{\mathbf{1}} \big] _{\Gamma_G}\]
+\[ ((C, \tilde{C}))_2 = \int _\Omega \big  (\nabla C)^T \mathbf{M} \nabla \tilde{C} \diff \omega \]
 
 \[\norm{U} = ((U,U)) ^ {1/2}\]
 
@@ -736,7 +749,7 @@ with
 
 \[ a_1 (U, \tilde{U}) = \int_\Omega \nabla_\nu \mathbf{u}_H \nabla_\nu \mathbf{\tilde{u}}_H \diff \omega \]
 
-\[ a_2 (U, \tilde{U}) = \int_\Omega (\nabla C)^T \mathbf{M} \nabla \tilde{C} \diff \omega - \big[((\nabla C)^ T \mathbf{M}) \tilde{C} \vec{\mathbf{1}} \big] _{\Gamma_G}\]
+\[ a_2 (U, \tilde{U}) = \int_\Omega (\nabla C)^T \mathbf{M} \nabla \tilde{C} \diff \omega \]
 
 \[ b = b_1 + K_C b_2\]
 
@@ -746,7 +759,7 @@ with
 
 \[ e(U, \tilde{U}) = \int_\Omega b(\mathbf{u}_H) \mathbf{\tilde{u}}_H \diff \omega \]
 
-\[ l(\tilde{U}) = - \int_\Omega S \tilde{C} \diff \omega. \]
+\[ l(\tilde{U}) = - \int_\Omega S \tilde{C} \diff \omega + \big[((\nabla C)^ T \mathbf{M}) \tilde{C} \vec{\mathbf{1}} \big] _{\Gamma_G}. \]
 
 Here the term $b(\mathbf{u}_H) = \alpha (-u_2, u_1)$ represents the cross product, and we use the fact that the vertical velocity $w$ can be expressed as $u_3 = u_3(\mathbf{u}_H)$ because the divergence of the three dimensional velocity is zero.
 
@@ -808,7 +821,7 @@ The weak formulation is as follows.
 
 \begin{definition}
 Given a source term $S = \delta$ or $S \in L^2(\Omega),$ find $U = (\mathbf{v}, C),$ that satisfies the hypothesis of Definition \ref{definitionhydrostaticWF} in the space dimensions, moreover
-\begin{equation} \label{FWSTAT} a(U, \tilde{U}) + b(U,U, \tilde{U}) + e(U, \tilde{U}) = l(U, \tilde{U}) \end{equation}
+\begin{equation} \label{FWSTAT} a(U, \tilde{U}) + b(U,U, \tilde{U}) + e(U, \tilde{U}) = l(\tilde{U}) \end{equation}
 for every $\tilde{U} \in V_{(2)}.$
 \end{definition}
 
@@ -874,7 +887,7 @@ which is the same as (\ref{timedependentWFE}), and which thus finally leads us t
 
 \begin{theorem}
 
-Given $T > 0$, $U_0 \in H,$ and a source term $S = \delta$ or $S \in L^2(\Omega),$ then there exists $(\mathbf{u}, C)$ with $u_3 = - \int_0^T \nabla \cdot \mathbf{u}_H$, $\mathbf{u} = (\mathbf{u}_H, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_H \in L^\infty (0,T; L^2(\Omega)^2),$ and $C \in L_t^\infty L_x^2 \cap L^2_t H^1_x$, which is solution to (\ref{hydrostaticWF_U})-(\ref{hydrostaticWF_C}).
+Given $T > 0$, $U_0 \in H,$ and a source term $S = \delta$ or $S \in L^2(\Omega),$ then there exists $(\mathbf{u}, C)$ with $u_3 = - \int_0^T \nabla \cdot \mathbf{u}_H$, $\mathbf{u} = (\mathbf{u}_H, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_H \in L^\infty (0,T; L^2(\Omega)^2),$ and $C \in L^\infty (0,T; L^2 (\Omega)) \cap L^2( 0,T; H^1(\Omega))$, which is solution to (\ref{hydrostaticWF_U})-(\ref{hydrostaticWF_C}).
 
 \end{theorem}
 
