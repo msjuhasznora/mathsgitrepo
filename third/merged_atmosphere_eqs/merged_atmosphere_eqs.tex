@@ -132,7 +132,7 @@ Contaminants emitted into the atmosphere are transported by the wind, mixed and 
 
 where $C$ is the pollution concentration and $\mathbf{K}$ is the $3 \times 3$ diffusion matrix --- the diagonal terms represent the strength of the diffusion in the $x, y, z$ directions, while the non-diagonal terms reflect the correlation of random motions between each pair of principal directions.
 
-Here $S$ represents the sources of the pollutant in the atmosphere i.e. its emission, removal from the atmosphere by dry and wet deposition, and chemical reactions. In this model we will use localised point sources as in \cite{zhuk2016source} and we use what is called a parametrised nascent delta function (a Gaussian impulse, specifically) to describe the source term $S$.
+Here $S$ represents the sources of the pollutant in the atmosphere i.e. its emission, removal from the atmosphere by dry and wet deposition, and chemical reactions. In this model we will use localised point sources as suggested in \cite{zhuk2016source} and we use what is called a parametrised nascent delta function (a Gaussian impulse, specifically) to describe the source term $S$.
 
 Let us consider a gas plume with intensity $I$ originating at emission coordinates $\mathbf{x}_s$ beginning at time $t_s$. At the beginning we assume zero concentration.
 An abrupt gas emission is modelled by a source term represented as a product of an approximated delta function $\delta_\kappa (\mathbf{x} - \mathbf{x}_s)$ (centered at $\mathbf{x}_s$ with a constant parameter $\kappa$) and a Heaviside function $s$ (switching from 0 to $I$ at time $t_s.$)
@@ -453,7 +453,7 @@ Now we are ready to state our main result.
 %%% *** PROOF *** %%%
 \section{Proof of the main theorem} \label{proof}
  
- This section is devoted to the proof of Theorem \ref{maintheorem}. In the extended case with the pollution equation the proof relies on a priori estimates gained from the energy inequality and, as we will see this is sufficient to pass to the limit in the linear terms. Concerning the nonlinear terms we will prove a uniform in $\epsilon$ space time estimate for $u^\epsilon$ and $C^\epsilon$ that will allow us to apply a compactness criterion proved in \cite{azerad2001mathematical}.
+ This section is devoted to the proof of Theorem \ref{maintheorem}. In the extended case with the pollution equation the proof relies on a priori estimates gained from the energy inequality and, as we will see this is sufficient to pass to the limit in the linear terms. Concerning the nonlinear terms we will prove a uniform in $\epsilon$ space time estimate for $\mathbf{u}^\epsilon$ and $C^\epsilon$ that will allow us to apply a compactness criterion proved in \cite{azerad2001mathematical}.
 
   \subsection{Energy inequality}
   
@@ -483,7 +483,7 @@ Now we are ready to state our main result.
     \end{split}
   \end{equation}  
   
-  where the $c_T$ constant is provided by the trace theorem and the boundary term is bounded because of the a priori assumptions made on the boundary conditions.
+  where the $c_T$ constant is provided by the trace theorem, and the boundary term is bounded because of the a priori assumptions made on the boundary conditions.
   
 The energy inequality (\ref{energyIEQ}) now takes the form after applying the coercivity property (\ref{coercivity}) of the diffusion matrix.
 
@@ -492,7 +492,7 @@ The energy inequality (\ref{energyIEQ}) now takes the form after applying the co
     & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \big [\norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2 \big ] \diff \tau \\
     & + \int_0 ^ t \bigg[ (\lambda - \sum_{i,j = 1}^3 \zeta \frac{1}{2} M_{ij} c_T (c_S + 1)) \norm{\nabla C^\epsilon}_{L^2}^2  \bigg] \diff \tau \\
     & \leq \sum_{i,j = 1}^3 \frac{1}{\zeta} M_{ij} \frac{1}{2} \int_0 ^ t \norm{\sigma_i}^2 _{L^2 (\Gamma_G)} \diff \tau + \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) \\
-    & + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau + \sum_{i,j = 1}^3 \zeta \frac{1}{2} M_{ij} c_T  \int_0 ^ t \norm{C^\epsilon}^2 _{L^2 (\Omega) } \diff \tau \raisetag{80pt} \label{finalformEIEQ}
+    & + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau + \sum_{i,j = 1}^3 \zeta \frac{1}{2} M_{ij} c_T  \int_0 ^ t \norm{C^\epsilon}^2 _{L^2 (\Omega) } \diff \tau \raisetag{90pt} \label{finalformEIEQ}
     \end{split}
   \end{equation}  
     
@@ -515,7 +515,7 @@ The energy inequality (\ref{energyIEQ}) now takes the form after applying the co
   \end{prop}
   
   \begin{proof}
-  By applying the classical Gronwall inequality, (\ref{proposition1}), (\ref{proposition2}) and (\ref{proposition3}) follow directly by the energy inequality (\ref{finalformEIEQ}). On the other hand, (\ref{propositionExtra}) can be verified by using the divergence free condition and that as a consequence, we have $\partial_3 u_3 = - \partial_1 u_1 - \partial_2 u_2$ bounded in $L^2_t L^2 _x$. The bound holds for $u_3$ itself as well, owing to the Poincare inequality in the vertical direction, and using that $u_3$ vanishes on the boundary.
+  By applying the classical Gronwall inequality, (\ref{proposition1}), (\ref{proposition2}) and (\ref{proposition3}) follow directly by the energy inequality (\ref{finalformEIEQ}). On the other hand, (\ref{propositionExtra}) can be verified by using the divergence free condition and that as a consequence, we have $\partial_3 u_3 = - \partial_1 u_1 - \partial_2 u_2$ bounded in $L^2_t L^2 _x$. The bound holds for $u_3$ itself as well, owing to the Poincar\'e inequality in the vertical direction, and using that $u_3$ vanishes on the boundary.
   \end{proof}
   
   As a consequence, up to subsequences still denoted by the same way, we have the following weak convergence results.
