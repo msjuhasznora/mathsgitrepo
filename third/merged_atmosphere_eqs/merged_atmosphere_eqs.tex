@@ -423,7 +423,7 @@ In this section we describe the weak formulation of the merged equations in both
       & \int_0^T \bigg [ -(\mathbf{u}^\epsilon_H, \partial_t \mathbf{\tilde{u}}_H) + (\nabla_\nu \mathbf{u}^\epsilon_H, \nabla_\nu \mathbf{\tilde{u}}_H) - (\mathbf{u}^\epsilon_H, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{\tilde{u}}_H) + (b(\mathbf{u}^\epsilon_H), \mathbf{\tilde{u}}_H) \bigg ] \diff t \\
       & + \epsilon \beta \int_0 ^ T \big [ (u_3 ^\epsilon, \tilde{u}_1) - (u_1^\epsilon, \tilde{u}_3) \big ] \diff t\\
       & + \epsilon^2 \int _0 ^ T \big [ -(u_3^\epsilon, \partial_t \tilde{u}_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, \tilde{u}_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu \tilde{u}_3) \big ] \diff t \\
-      & = (\mathbf{u}^\epsilon_{0H}, \mathbf{\tilde{u}}_H(0)) + \epsilon^2 (u_{03}^\epsilon, \tilde{u}_3 (0)) \diff t \raisetag{10pt} \label{anisotropicWF_U}
+      & = (\mathbf{u}^\epsilon_{0H}, \mathbf{\tilde{u}}_H(0)) + \epsilon^2 (u_{03}^\epsilon, \tilde{u}_3 (0)) \diff t \raisetag{20pt} \label{anisotropicWF_U}
     \end{split}
   \end{equation}
   
@@ -469,17 +469,18 @@ Now we are ready to state our main result.
     \end{split}
   \end{equation}    
   
-  From the hypothesis on the initial data and since the $S^\epsilon$ source term is in $L^\infty_x (\Omega)$, $I_1$ and $I_2$ are bounded. The only terms we need to work on further are the $M_{ij} \int _ 0 ^ t  \langle \partial_i C^\epsilon, C^\epsilon \rangle_{\Gamma_G} \diff \tau$ expressions in $I_3$.
+  From the hypothesis on the initial data and since the $S^\epsilon$ source term is in $L^\infty_x (\Omega)$, $I_1$ and $I_2$ are bounded. The only terms we need to work on further are the expressions in $I_3$.
   
   By using the Holder inequality and the generalised Young inequality for any $\zeta > 0,$ we can estimate this term in the following way.
   
   \begin{equation}
     \begin{split}  
-    I_3 & = \sum_{i=1}^3 \bigg( \big(\sum_{j=1}^3 M_{ij} \partial_j C^\epsilon \big) C \mathbf{n}_{\Gamma_G, i} \bigg) \diff \tau \leq \sum_{i,j = 1}^3 M_{ij} \int _ 0 ^ t \norm{\partial_i C^\epsilon}_{L^2 (\Gamma_G)}  \norm{C^\epsilon}_{L^2 (\Gamma_G)} \diff \tau \\
+    I_3 & = \int _ 0 ^ t \sum_{i=1}^3 \bigg( \big(\sum_{j=1}^3 M_{ij} \partial_j C^\epsilon \big) C \mathbf{n}_{\Gamma_G, i} \bigg) \diff \tau \\
+    & \leq \sum_{i,j = 1}^3 M_{ij} \int _ 0 ^ t \norm{\partial_i C^\epsilon}_{L^2 (\Gamma_G)}  \norm{C^\epsilon}_{L^2 (\Gamma_G)} \diff \tau \\
     & \leq \sum_{i,j = 1}^3 \frac{1}{\zeta} M_{ij} \frac{1}{2} \int_0 ^ t \norm{\partial_i C^\epsilon}^2 _{L^2 (\Gamma_G)} \diff \tau + \zeta M_{ij} \int_0 ^ t \frac{1}{2} \norm{C^\epsilon}^2 _{L^2 (\Gamma_G)} \diff \tau \\
     & \leq \sum_{i,j = 1}^3 \frac{1}{\zeta} M_{ij} \frac{1}{2} \int_0 ^ t \norm{\partial_i C^\epsilon}^2 _{L^2 (\Gamma_G)} \diff \tau + \zeta \frac{1}{2} M_{ij} c_T \int_0 ^ t \norm{C^\epsilon}^2 _{W^{1,2} (\Omega)} \diff \tau \\
     & \leq \sum_{i,j = 1}^3 \frac{1}{\zeta} M_{ij} \frac{1}{2} \int_0 ^ t \norm{\partial_i C^\epsilon}^2 _{L^2 (\Gamma_G)} \diff \tau + \zeta \frac{1}{2} M_{ij} c_T  \int_0 ^ t \norm{\nabla C^\epsilon}^2 _{L^2 (\Omega) }  \diff \tau \\
-    & + \zeta \frac{1}{2} M_{ij} c_T  \int_0 ^ t \norm{C^\epsilon}^2 _{L^2 (\Omega) } \diff \tau,
+    & + \zeta \frac{1}{2} M_{ij} c_T  \int_0 ^ t \norm{C^\epsilon}^2 _{L^2 (\Omega) } \diff \tau, \raisetag{30pt}
     \end{split}
   \end{equation}  
   
@@ -682,6 +683,13 @@ As we have mentioned previously, the generic definition of the $\boldsymbol{\sig
 
   \end{enumerate}
   
+\end{remark}
+
+\begin{remark}
+\normalfont Note that --- with some slight modifications --- the steps made leading to the final form of the energy inequality remain true even if we use an $\mathbf{M(x)}$ diffusion matrix function instead of constant coefficients. We only need to add the requirement that $M_{ij} $ is in $L^1_t L^1_x,$ and thus the norms
+$ { \big \| \sqrt{M_{ij} } \partial_i C^\epsilon \big \| } ^2 _{L^2 (\Gamma_G)} $, 
+$ {\big \| \sqrt{M_{ij} }  \nabla C^\epsilon \big \|}^2 _{L^2 (\Omega) }$
+appearing in the proof can be bounded using the Young inequality. 
 \end{remark}
 
 %%% *** APPENDIX *** %%%
