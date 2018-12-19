@@ -689,7 +689,13 @@ As we have mentioned previously, the generic definition of the $\boldsymbol{\sig
 \normalfont Note that --- with some slight modifications --- the steps made leading to the final form of the energy inequality remain true even if we use an $\mathbf{M(x)}$ diffusion matrix function instead of constant coefficients. In the process of constructing a bound for $I_3$ in (\ref{boundI_3}), the original term
 $$ \sum_{i,j = 1}^3 M_{ij} \int _ 0 ^ t \norm{\partial_i C^\epsilon}_{L^2 (\Gamma_G)}  \norm{C^\epsilon}_{L^2 (\Gamma_G)} \diff \tau$$
 now can be written as
-$$ \sum_{i,j = 1}^3 \int _ 0 ^ t \norm{ M_{ij} (x) \partial_i C^\epsilon}_{L^2 (\Gamma_G)}  \norm{C^\epsilon}_{L^2 (\Gamma_G)} \diff \tau.$$ Now, adding the requirement for $M_{ij} (x)$ to have $L^2 (\Gamma_G)$ regularity, and proceeding analogously with the Young inequality, the $$\int_0 ^ t  \norm{ M_{ij} (x) \partial_i C^\epsilon}_{L^2 (\Gamma_G)}^2 \diff \tau$$ term appearing in the proof can be bounded by $$\big \|{M_{ij} \big \|}^2_{L^2(\Gamma_G)} \int_0 ^ t \norm{\sigma_i}^2 _{L^2 (\Gamma_G)} \diff \tau$$ using the Cauchy-Schwartz inequality. On the other hand, the term that took form in the original version as $\zeta M_{ij} \int_0 ^ t \frac{1}{2} \norm{C^\epsilon}^2 _{L^2 (\Gamma_G)} \diff \tau,$ now is present without the $M_{ij}$ coefficient, since that has been incorporated into the first term of the product in (\ref{boundI_3}) --- and as a consequence, $M_{ij}$ vanishes from the lefthand side of the final form (\ref{finalformEIEQ}) of the inequality as well.
+$$ \sum_{i,j = 1}^3 \int _ 0 ^ t \norm{ M_{ij} (x) \partial_i C^\epsilon}_{L^2 (\Gamma_G)}  \norm{C^\epsilon}_{L^2 (\Gamma_G)} \diff \tau.$$
+Now, adding the requirement for $M_{ij} (x)$ to have $L^\infty (\Gamma_G)$ regularity, and proceeding analogously with the Young inequality, the
+$$\int_0 ^ t  \norm{ M_{ij} (x) \partial_i C^\epsilon}_{L^2 (\Gamma_G)}^2 \diff \tau$$
+term appearing in the proof can be bounded by
+$$\big \|{M_{ij} \big \|}^2_{L^\infty(\Gamma_G)} \int_0 ^ t \norm{\sigma_i}^2 _{L^2 (\Gamma_G)} \diff \tau.$$
+On the other hand, the term that took form in the original version as
+$\zeta M_{ij} \int_0 ^ t \frac{1}{2} \norm{C^\epsilon}^2 _{L^2 (\Gamma_G)} \diff \tau,$ now is present without the $M_{ij}$ coefficient, since that has been incorporated into the first term of the product in (\ref{boundI_3}) --- and as a consequence, $M_{ij}$ vanishes from the lefthand side of the final form (\ref{finalformEIEQ}) of the inequality as well.
 \end{remark}
 
 %%% *** APPENDIX *** %%%
