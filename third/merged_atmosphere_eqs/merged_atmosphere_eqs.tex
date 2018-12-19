@@ -474,8 +474,8 @@ Now we are ready to state our main result.
   By using the Holder inequality and the generalised Young inequality for any $\zeta > 0,$ we can estimate this term in the following way.
   
   \begin{equation}
-    \begin{split}  
-    I_3 & = \int _ 0 ^ t \sum_{i=1}^3 \bigg( \big(\sum_{j=1}^3 M_{ij} \partial_j C^\epsilon \big) C \mathbf{n}_{\Gamma_G, i} \bigg) \diff \tau \\
+    \begin{split}  \label{boundI_3}
+    I_3 & = \int _ 0 ^ t \int_{\Gamma_G} \sum_{i=1}^3 \bigg( \big(\sum_{j=1}^3 M_{ij} \partial_j C^\epsilon \big) C \mathbf{n}_{\Gamma_G, i} \bigg) \diff \tau \\
     & \leq \sum_{i,j = 1}^3 M_{ij} \int _ 0 ^ t \norm{\partial_i C^\epsilon}_{L^2 (\Gamma_G)}  \norm{C^\epsilon}_{L^2 (\Gamma_G)} \diff \tau \\
     & \leq \sum_{i,j = 1}^3 \frac{1}{\zeta} M_{ij} \frac{1}{2} \int_0 ^ t \norm{\partial_i C^\epsilon}^2 _{L^2 (\Gamma_G)} \diff \tau + \zeta M_{ij} \int_0 ^ t \frac{1}{2} \norm{C^\epsilon}^2 _{L^2 (\Gamma_G)} \diff \tau \\
     & \leq \sum_{i,j = 1}^3 \frac{1}{\zeta} M_{ij} \frac{1}{2} \int_0 ^ t \norm{\partial_i C^\epsilon}^2 _{L^2 (\Gamma_G)} \diff \tau + \zeta \frac{1}{2} M_{ij} c_T \int_0 ^ t \norm{C^\epsilon}^2 _{W^{1,2} (\Omega)} \diff \tau \\
@@ -491,13 +491,13 @@ The energy inequality (\ref{energyIEQ}) now takes the form after applying the co
   \begin{equation}
     \begin{split}  
     & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \big [\norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2 \big ] \diff \tau \\
-    & + \int_0 ^ t \bigg[ (\lambda - \sum_{i,j = 1}^3 \zeta \frac{1}{2} M_{ij} c_T (c_S + 1)) \norm{\nabla C^\epsilon}_{L^2}^2  \bigg] \diff \tau \\
+    & + \int_0 ^ t \bigg[ (\lambda - \sum_{i,j = 1}^3 \zeta \frac{1}{2} M_{ij} c_T) \norm{\nabla C^\epsilon}_{L^2}^2  \bigg] \diff \tau \\
     & \leq \sum_{i,j = 1}^3 \frac{1}{\zeta} M_{ij} \frac{1}{2} \int_0 ^ t \norm{\sigma_i}^2 _{L^2 (\Gamma_G)} \diff \tau + \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) \\
     & + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau + \sum_{i,j = 1}^3 \zeta \frac{1}{2} M_{ij} c_T  \int_0 ^ t \norm{C^\epsilon}^2 _{L^2 (\Omega) } \diff \tau \raisetag{90pt} \label{finalformEIEQ}
     \end{split}
   \end{equation}  
     
-  It is now straightforward to see that the coefficients of the pollution terms are positive, since the $\zeta = \zeta(\lambda)$ constant of the generalised Young inequality can be freely chosen in a way such that the requirement $(\lambda - \sum \zeta \frac{1}{2} M_{ij} c_T (c_S + 1)) > \frac{\lambda}{2} > 0$ is satisfied.
+  It is now straightforward to see that the coefficients of the pollution terms are positive, since the $\zeta = \zeta(\lambda)$ constant of the generalised Young inequality can be freely chosen in a way such that the requirement $(\lambda - \sum \zeta \frac{1}{2} M_{ij} c_T) > \frac{\lambda}{2} > 0$ is satisfied.
     
   \subsection{A priori estimates and weak convergence}
   
@@ -686,10 +686,10 @@ As we have mentioned previously, the generic definition of the $\boldsymbol{\sig
 \end{remark}
 
 \begin{remark}
-\normalfont Note that --- with some slight modifications --- the steps made leading to the final form of the energy inequality remain true even if we use an $\mathbf{M(x)}$ diffusion matrix function instead of constant coefficients. We only need to add the requirement that $M_{ij} $ is in $L^1_t L^1_x,$ and thus the norms
-$ { \big \| \sqrt{M_{ij} } \partial_i C^\epsilon \big \| } ^2 _{L^2 (\Gamma_G)} $, 
-$ {\big \| \sqrt{M_{ij} }  \nabla C^\epsilon \big \|}^2 _{L^2 (\Omega) }$
-appearing in the proof can be bounded using the Young inequality. 
+\normalfont Note that --- with some slight modifications --- the steps made leading to the final form of the energy inequality remain true even if we use an $\mathbf{M(x)}$ diffusion matrix function instead of constant coefficients. In the process of constructing a bound for $I_3$ in (\ref{boundI_3}), the original term
+$$ \sum_{i,j = 1}^3 M_{ij} \int _ 0 ^ t \norm{\partial_i C^\epsilon}_{L^2 (\Gamma_G)}  \norm{C^\epsilon}_{L^2 (\Gamma_G)} \diff \tau$$
+now can be written as
+$$ \sum_{i,j = 1}^3 \int _ 0 ^ t \norm{ M_{ij} (x) \partial_i C^\epsilon}_{L^2 (\Gamma_G)}  \norm{C^\epsilon}_{L^2 (\Gamma_G)} \diff \tau.$$ Now, adding the requirement for $M_{ij} (x)$ to have $L^2 (\Gamma_G)$ regularity, and proceeding analogously with the Young inequality, the $$\int_0 ^ t  \norm{ M_{ij} (x) \partial_i C^\epsilon}_{L^2 (\Gamma_G)}^2 \diff \tau$$ term appearing in the proof can be bounded by $$\big \|{M_{ij} \big \|}^2_{L^2(\Gamma_G)} \int_0 ^ t \norm{\sigma_i}^2 _{L^2 (\Gamma_G)} \diff \tau$$ using the Cauchy-Schwartz inequality. On the other hand, the term that took form in the original version as $\zeta M_{ij} \int_0 ^ t \frac{1}{2} \norm{C^\epsilon}^2 _{L^2 (\Gamma_G)} \diff \tau,$ now is present without the $M_{ij}$ coefficient, since that has been incorporated into the first term of the product in (\ref{boundI_3}) --- and as a consequence, $M_{ij}$ vanishes from the lefthand side of the final form (\ref{finalformEIEQ}) of the inequality as well.
 \end{remark}
 
 %%% *** APPENDIX *** %%%
