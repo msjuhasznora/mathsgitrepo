@@ -547,7 +547,7 @@ Finally we have to deal with the nonlinear term $(\mathbf{u}^\epsilon C^\epsilon
 By analysing this nonlinear term in a more precise way we see that $u^\epsilon_i C^\epsilon$ for $i=1,2$ is weakly convergent since as we mentioned before, we have the strong convergence of the horizontal velocities, while in the case of $i=3$ this property does not hold. We overcome this difficulty by proving a compactness property for the pollution concentration $C^\epsilon.$ The key tool will be the following compactness criterion (for the proof see Theorem 5.1 in \cite{azerad2001mathematical}).
 
 \begin{theorem}
-Let $T>0,$ and let the Banach spaces $\mathbf{X} \xhookrightarrow{\text{c}} \mathbf{B} \hookrightarrow \mathbf{Y}.$ Let $(f_\epsilon)_{\epsilon>0}$ be a family of functions of $L^p (0,T; \mathbf{X}), 1 \leq p \leq \infty,$ with the extra condition $(f_\epsilon)_{\epsilon>0} \subset \mathcal{C} (0,T; \mathbf{Y})$ if $p = \infty,$ such that
+Let $T>0,$ and let the Banach spaces $\mathbf{X} \hookrightarrow \mathbf{B} \hookrightarrow \mathbf{Y},$ where $\mathbf{X}$ is compactly embedded in $\mathbf{B},$ and $\mathbf{B}$ is continuously embedded in $\mathbf{Y}.$ Let $(f_\epsilon)_{\epsilon>0}$ be a family of functions of $L^p (0,T; \mathbf{X}), 1 \leq p \leq \infty,$ with the extra condition $(f_\epsilon)_{\epsilon>0} \subset C (0,T; \mathbf{Y})$ if $p = \infty,$ such that
 \begin{enumerate}
   \item $(f_\epsilon)_{\epsilon>0}$ is bounded in $L^p (0,T; \mathbf{X}),$
   \item $\norm{\tau_h f_\epsilon - f_\epsilon}_{L^p(0,T-h; \mathbf{Y})} \leq \varphi(h) + \psi(\epsilon)$ with
@@ -686,14 +686,23 @@ As we have mentioned previously, the generic definition of the $\boldsymbol{\sig
 \end{remark}
 
 \begin{remark}
-\normalfont Note that --- with some slight modifications --- the steps made leading to the final form of the energy inequality remain true even if we use an $\mathbf{M(x)}$ diffusion matrix function instead of constant coefficients. In the process of constructing a bound for $I_3$ in (\ref{boundI_3}), the original term
-$$ \sum_{i,j = 1}^3 M_{ij} \int _ 0 ^ t \norm{\partial_i C^\epsilon}_{L^2 (\Gamma_G)}  \norm{C^\epsilon}_{L^2 (\Gamma_G)} \diff \tau$$
-now can be written as
-$$ \sum_{i,j = 1}^3 \int _ 0 ^ t \norm{ M_{ij} (x) \partial_i C^\epsilon}_{L^2 (\Gamma_G)}  \norm{C^\epsilon}_{L^2 (\Gamma_G)} \diff \tau.$$
-Now, adding the requirement for $M_{ij} (x)$ to have $L^\infty (\Gamma_G)$ regularity, and proceeding analogously with the Young inequality, the
-$$\int_0 ^ t  \norm{ M_{ij} (x) \partial_i C^\epsilon}_{L^2 (\Gamma_G)}^2 \diff \tau$$
-term appearing in the proof can be bounded by
-$$\big \|{M_{ij} \big \|}^2_{L^\infty(\Gamma_G)} \int_0 ^ t \norm{\sigma_i}^2 _{L^2 (\Gamma_G)} \diff \tau.$$
+\normalfont Note that, --- with some slight modifications, --- the steps made leading to the final form of the energy inequality remain true even if we use a diffusion matrix function with nonconstant coefficients of the form $M(x)$ and such that the uniform ellipticity condition (\ref{coercivity}) holds in the form
+
+\begin{equation}
+   \sum_{i,j = 1}^3 M_{ij}(x) \xi_i \xi_j \geq \lambda \norm{\xi}^2
+\end{equation}
+
+for almost any $x \in \Omega$ and all $\xi \in \mathbb{R}^3$. Moreover we require $M_{ij} (x) \in L^\infty (\Omega)$ for any $i,j = 1,2,3.$
+The term $I_3$ in (\ref{boundI_3}) now can be bounded as
+
+  \begin{equation}
+    \begin{split}  
+I_3 & \leq \sum_{i,j = 1}^3 \int _ 0 ^ t \norm{ M_{ij} (x) \partial_i C^\epsilon}_{L^2 (\Gamma_G)}  \norm{C^\epsilon}_{L^2 (\Gamma_G)} \diff \tau\\
+ & \leq \sum_{i,j = 1}^3 \big \|{M_{ij} \big \|}^2_{L^\infty(\Gamma_G)} \int_0 ^ t \norm{\sigma_i} _{L^2 (\Gamma_G)} \norm{C^\epsilon} _{L^2 (\Gamma_G)} \diff \tau. 
+      \end{split}  
+  \end{equation}
+
+
 On the other hand, the term that took form in the original version as
 $\zeta M_{ij} \int_0 ^ t \frac{1}{2} \norm{C^\epsilon}^2 _{L^2 (\Gamma_G)} \diff \tau,$ now is present without the $M_{ij}$ coefficient, since that has been incorporated into the first term of the product in (\ref{boundI_3}) --- and as a consequence, $M_{ij}$ vanishes from the lefthand side of the final form (\ref{finalformEIEQ}) of the inequality as well.
 \end{remark}
