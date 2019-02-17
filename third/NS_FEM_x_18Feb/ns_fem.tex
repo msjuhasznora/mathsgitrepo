@@ -20,7 +20,7 @@
   moredelim=**[is][\color{orange}]{@}{@},
 }
 
-\title{Visualising weak convergence in mathematical models in shallow geophysical domains}
+\title{Visualising weak convergence in a mathematical model in shallow geophysical domains}
 \subtitle{A problem}
 \author{N\'ora Juh\'asz}
 
@@ -247,7 +247,7 @@ Then the family $(f_\epsilon)_{\epsilon>0}$ possesses a cluster point in $L^p (0
     
 \end{frame}
 
-\section{Visualization - FEM}
+\section{Visualisation - FEM}
 
 \begin{frame}{OCEAN}
 
@@ -263,18 +263,44 @@ Then the family $(f_\epsilon)_{\epsilon>0}$ possesses a cluster point in $L^p (0
     
 \end{frame}
 
-\begin{frame}{Some basic concepts}
+\begin{frame}{Some basic concepts - Part 1}
 
-IPCS. BBL condition. Taylor-Hood.
+IPCS - Incremental pressure correction scheme. How to update $(\mathbf{u}^n, p^n)$ to arrive to $(\mathbf{u}^{n+1}, p^{n+1})$ without increasing both quantities at the same time.
+
+\begin{enumerate}[i)]
+  \item Starting with $\mathbf{u}^n,$ calculate the so-called $\mathbf{u}^*$ tentative velocity using only the $p^n$ pressure value from the previous time step.
+  \item Updating the pressure, step from $p^n$ to $p^{n+1}$ based on $\mathbf{u}^*.$ (N-S@($\mathbf{u}^*,$ $p^n$) - N-S@($\mathbf{u}^{n+1},$ $p^{n+1}$))
+  \item Calculating the definitive $\mathbf{u}^{n+1}$ velocity based on $p^{n+1}$ and $\mathbf{u}^*.$
+\end{enumerate}
 
 \end{frame}
 
+\begin{frame}{Some basic concepts - Part 2}
+
+Note that in the original weak formulation the $p$ pressure function is vanished as a consequence of the divergence-free condition. In this discretised scenario we don't exactly have that constraint fulfilled, so we also use the pressure function in the weak formulation $\to$ we define a mixed function space composed of
+\begin{enumerate}
+  \item a VectorFunctionSpace of continuous piecewise quadratics
+  \item and a FunctionSpace of continuous piecewise linear functions.
+\end{enumerate}
+This mixed finite element space is known as the \textbf{Taylor-Hood} elements and is a stable, standard element pair for this kind of problem.
+
+\end{frame}
+
+\begin{frame}{Some basic concepts - Part 3}
+
+Why it is crucial to have the right choice of element structure: the Taylor-Hood elements satisfy the BBL condition (coercivity plus an inf-sup condition on the functions $a$ and $b,$ respectively) that guarantees the well-posedness of the saddle point problem that we have:
+
+$$ a(u,v) + b(v,\lambda) = <f,v>$$
+$$ b(u, \mu) = <g, \mu> $$
+
+We have this structure thanks to the remaining $\nabla p \cdot \mathbf{v}$ term in the Navier-Stokes equation and the $(\nabla \cdot \mathbf{u}) q = 0$ weak version of the divergence-free condition.
+\end{frame}
 
 \begin{frame}[fragile]
 \frametitle{Definitions}
 \scriptsize
 \begin{lstlisting}[frame=single,style=base]
-mesh = UnitCubeMesh(meshsize, meshsize, meshsize)
+mesh = UnitCubeMesh(meshsize, meshsize, meshsize) 
 
 V = VectorFunctionSpace(mesh, "Lagrange", 2, dim = 3)
 Q = FunctionSpace(mesh, "Lagrange", 1)
