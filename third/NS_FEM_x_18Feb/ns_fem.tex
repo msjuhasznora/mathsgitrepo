@@ -20,7 +20,7 @@
   moredelim=**[is][\color{orange}]{@}{@},
 }
 
-\title{Visualising weak convergence for mathematical models in shallow geophysical domains}
+\title{Visualising weak convergence in mathematical models in shallow geophysical domains}
 \subtitle{A problem}
 \author{N\'ora Juh\'asz}
 
@@ -32,11 +32,14 @@
 \titlepage
 \end{frame}
 
-\section{State of the research project}
+\section{Modeling and weak convergence}
 
 \begin{frame}{The main ideas of the model}
   \begin{itemize}
     \item Geophysical fluid $\to$ shallow domain characteristics --- the domain is greater horizontally than in the vertical dimension.
+    
+    $$ \Omega_{\epsilon} = \{(x,y,z) \in \mathbb{R}^3 ; (x,y) \in \omega, 0 < z < \epsilon h(x,y) \} $$
+    
     \item Classical / general concepts as foundation:
     \begin{itemize}
       \item The wind flow being modelled by the incompressible Navier-Stokes equations
@@ -58,7 +61,7 @@
 
     \item A convection-diffusion equation representing pollutants in the atmosphere:
     
-      $$\partial_t C + \mathbf{v} \cdot \nabla C = K_x \partial_{xx} ^2 C + K_y  \partial_{yy} ^2  C + K_z  \partial_{zz} ^2  C + S$$
+      $$ \partial_t C + \mathbf{v} \cdot \nabla C = \nabla \cdot (\mathbf{K} \nabla C) + S $$
 
   \end{itemize}
 \end{frame}
@@ -73,7 +76,16 @@ One of the main tools to exploit the "almost" 2D structure of the atmosphere $\t
     \item $x=x_1, y=x_2, z=\epsilon x_3$
     \item $v_1 = u_1^{\epsilon}, v_2 = u_2^{\epsilon}, v_3 = \epsilon u_3^{\epsilon}, p = p^{\epsilon},$
     \item $\nu_x = \nu_1, \nu_y = \nu_2 , \nu_z = \epsilon ^ 2\nu_3,$
-    \item $K_x = K_1, K_y = K_2, K_z = \epsilon ^ 2 K_3.$
+    \item 
+    
+    \begin{gather}
+ \begin{bmatrix} K_{xx} & K_{xy} & K_{xz} \\ K_{yx} & K_{yy} & K_{yz} \\ K_{zx} & K_{zy} & K_{zz} \end{bmatrix}
+ =
+  \begin{bmatrix}
+    M_{11} & M_{12} & \epsilon M_{13} \\ M_{21} & M_{22} & \epsilon M_{23} \\ \epsilon M_{31} & \epsilon M_{32} & \epsilon^2 M_{33}
+  \end{bmatrix}
+\end{gather}
+    
   \end{enumerate}
 \end{frame}
 
@@ -98,7 +110,7 @@ One of the main tools to exploit the "almost" 2D structure of the atmosphere $\t
     
     \[ \nabla \cdot \mathbf{u}^\epsilon= 0  \]
     
-    \[ \partial_t C^\epsilon + \mathbf{u}^\epsilon \cdot \nabla C^\epsilon = K_1 \frac{\partial ^2 C^\epsilon}{\partial x_1 ^ 2} + K_2 \frac{\partial ^2 C^\epsilon}{\partial x_2 ^ 2} + K_3 \frac{\partial ^2 C^\epsilon}{\partial x_3 ^ 2} + S_\epsilon \]
+    \[ \partial_t C^\epsilon + \mathbf{u^\epsilon} \cdot \nabla C^\epsilon = \nabla \cdot (\mathbf{M} \nabla C^\epsilon) + S^\epsilon \]
     
 \end{frame}
 
@@ -128,7 +140,7 @@ One of the main tools to exploit the "almost" 2D structure of the atmosphere $\t
     
     \[ \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \times (0,T) \]
     
-    \[ \partial_t C + \mathbf{u} \cdot \nabla C = K_1 \frac{\partial ^1 C}{\partial x_1 ^ 2} + K_2 \frac{\partial ^2 C}{\partial x_2 ^ 2} + K_3 \frac{\partial ^2 C}{\partial x_3 ^ 2} + S \text{ in } \Omega \times (0,T)\]
+    \[ \partial_t C + \mathbf{u} \cdot \nabla C = \nabla \cdot (\mathbf{M} \nabla C) + S \]
 
 \end{frame}
     
@@ -155,22 +167,59 @@ One of the main tools to exploit the "almost" 2D structure of the atmosphere $\t
 
 \end{frame}
 
+\begin{frame}{Weak formulation of the anisotropic equations}
+\changefontsizes{10pt}
+  \begin{equation}
+    \begin{split}
+      & \int_0^T \bigg [ -(\mathbf{u}^\epsilon_H, \partial_t \mathbf{\tilde{u}}_H) + (\nabla_\nu \mathbf{u}^\epsilon_H, \nabla_\nu \mathbf{\tilde{u}}_H) - (\mathbf{u}^\epsilon_H, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{\tilde{u}}_H) + (b(\mathbf{u}^\epsilon_H), \mathbf{\tilde{u}}_H) \bigg ] \diff t \\
+      & + \epsilon \beta \int_0 ^ T \big [ (u_3 ^\epsilon, \tilde{u}_1) - (u_1^\epsilon, \tilde{u}_3) \big ] \diff t\\
+      & + \epsilon^2 \int _0 ^ T \big [ -(u_3^\epsilon, \partial_t \tilde{u}_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, \tilde{u}_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu \tilde{u}_3) \big ] \diff t \\
+      & = (\mathbf{u}^\epsilon_{0H}, \mathbf{\tilde{u}}_H(0)) + \epsilon^2 (u_{03}^\epsilon, \tilde{u}_3 (0)) \diff t
+    \end{split}
+  \end{equation}
+  
+    \begin{equation}
+    \begin{split}
+      & \int_0^T \bigg [ -(C^\epsilon, \partial_t \tilde{C}) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) + (\mathbf{M} \nabla C^\epsilon, \nabla \tilde{C}) - \int_{\Gamma_G} \boldsymbol{\sigma} \mathbf{M} \tilde{C} \vec{\boldsymbol{n}}_{\Gamma_G} \bigg ] \diff t \\
+      & =  (C^\epsilon (0), \tilde{C} (0)) + \int_0^T (S^\epsilon,\tilde{C}) \diff t
+    \end{split}
+  \end{equation}
+
+\end{frame}
+
+\begin{frame}{Weak formulation of the hydrostatic equations}
+\changefontsizes{10pt}
+  \begin{equation}
+    \begin{split}
+      & \int_0^T \bigg[ -(\mathbf{u}_H, \partial_t \mathbf{\tilde{u}}_H) + (\nabla_\nu \mathbf{u}_H, \nabla_\nu \mathbf{\tilde{u}}_H) - (\mathbf{u}_H, (\mathbf{u} \cdot \nabla) \mathbf{\tilde{u}}_H) + (b(\mathbf{u}_H), \mathbf{\tilde{u}}_H) \bigg ] \diff t \\
+      & = (\mathbf{u}_{0H}, \mathbf{\tilde{u}}_H(0)) \diff t \raisetag{15pt}\label{hydrostaticWF_U}
+    \end{split}
+  \end{equation}
+  
+    \begin{equation}
+    \begin{split}
+      & \int_0^T \bigg[ -(C, \partial_t \tilde{C}) -(\mathbf{u}C, \nabla \tilde{C}) +  (\mathbf{M} \nabla C, \nabla \tilde{C}) - \int_{\Gamma_G} \boldsymbol{\sigma} \mathbf{M} \tilde{C} \vec{\boldsymbol{n}}_{\Gamma_G} \bigg ] \diff t \\
+      & = (C(0), \tilde{C}(0)) + \int_0^T (S,\tilde{C}) \diff t \raisetag{20pt} \label{hydrostaticWF_C}
+    \end{split}
+  \end{equation}
+  
+\end{frame}
+
 \begin{frame}{Energy inequality}
     \changefontsizes{10pt}
-  \begin{equation*}
+  \begin{equation}
     \begin{split}  
     & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \big [\norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2 \big ] \diff \tau \\
-    & + \int_0 ^ t \bigg[ (\epsilon K_1 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_1 C^\epsilon}_{L^2}^2  + (K_2 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_2 C^\epsilon}_{L^2}^2 \\
-    & + (K_3 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_3 C^\epsilon}_{L^2}^2 \bigg] \diff \tau \\
-    & \leq \frac{1}{\zeta} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)} + \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) \\
-    & + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau
+    & + \int_0 ^ t \bigg[ (\lambda - \sum_{i,j = 1}^3 \zeta \frac{1}{2} M_{ij} c_T) \norm{\nabla C^\epsilon}_{L^2}^2  \bigg] \diff \tau \\
+    & \leq \sum_{i,j = 1}^3 \frac{1}{\zeta} M_{ij} \frac{1}{2} \int_0 ^ t \norm{\sigma_i}^2 _{L^2 (\Gamma_G)} \diff \tau + \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) \\
+    & + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau + \sum_{i,j = 1}^3 \zeta \frac{1}{2} M_{ij} c_T  \int_0 ^ t \norm{C^\epsilon}^2 _{L^2 (\Omega) } \diff \tau \raisetag{90pt} \label{finalformEIEQ}
     \end{split}
-  \end{equation*}
+  \end{equation} 
 \end{frame}
 
 \begin{frame}{Proof steps - Part 1}
   \begin{enumerate}
-    \item The beginning step of the proof is to obtain the energy inequality that yields a priori estimates such as $L_t^\infty L_x^2$ boundedness for $C^\epsilon;$ $L_t^2 L_x^2$ boundedness for $\sqrt{\epsilon} \partial_1 C^\epsilon, \partial_2 C^\epsilon, \partial_3 C^\epsilon.$
+    \item The beginning step of the proof is to obtain the energy inequality that yields a priori estimates such as $L_t^\infty L_x^2 \cap L_t^2 H_x^1$ boundedness for $C^\epsilon;$ 
   
     \item Once we have boundedness, we have the weak convergence of the linear terms, while the weak convergence of the nonlinear terms not including the pollution term had been shown previously by Az\'erad and Guill\'en (SIAM Journal on Mathematical Analysis, 2001).
     
@@ -180,7 +229,21 @@ One of the main tools to exploit the "almost" 2D structure of the atmosphere $\t
 
 \begin{frame}{Proof steps - Part 2}
 
-    Compactness theorem.
+    \begin{theorem}
+Let $T>0,$ and let the Banach spaces $\mathbf{X} \hookrightarrow \mathbf{B} \hookrightarrow \mathbf{Y},$ where $\mathbf{X}$ is compactly embedded in $\mathbf{B},$ and $\mathbf{B}$ is continuously embedded in $\mathbf{Y}.$ Let $(f_\epsilon)_{\epsilon>0}$ be a family of functions of $L^p (0,T; \mathbf{X}), 1 \leq p \leq \infty,$ with the extra condition $(f_\epsilon)_{\epsilon>0} \subset C (0,T; \mathbf{Y})$ if $p = \infty,$ such that
+\begin{enumerate}
+  \item $(f_\epsilon)_{\epsilon>0}$ is bounded in $L^p (0,T; \mathbf{X}),$
+  \item $\norm{\tau_h f_\epsilon - f_\epsilon}_{L^p(0,T-h; \mathbf{Y})} \leq \varphi(h) + \psi(\epsilon)$ with
+  $$
+    \begin{cases}
+      \lim_{h \to 0} \varphi(h) = 0,\\
+      \lim_{\epsilon \to 0} \psi(\epsilon) = 0.
+    \end{cases}
+  $$
+  \end{enumerate}
+  
+Then the family $(f_\epsilon)_{\epsilon>0}$ possesses a cluster point in $L^p (0,T; \mathbf{B})$ and also in $\mathcal{C}(0,T; \mathbf{B})$ if $p = \infty$ as $\epsilon \to 0.$
+\end{theorem}
     
 \end{frame}
 
@@ -188,30 +251,107 @@ One of the main tools to exploit the "almost" 2D structure of the atmosphere $\t
 
 \begin{frame}{OCEAN}
 
-    About the ocean BCs and scenario.
+    As a beginning step to start the visualisation process we consider a slightly different scenario:
+    \begin{itemize}
+      \item The case of the ocean including wind traction on top
+      \item Why to do this:
+        \begin{itemize}
+          \item The Navier-Stokes equations describing the ocean as a shallow fluid are the same, we neglect the pollution concentration effect, which makes the FEM spaces more simple
+          \item The wind traction on the ocean might make the solutions easier to study in the beginning
+        \end{itemize}
+    \end{itemize}
     
 \end{frame}
 
-\begin{frame}[fragile]
-\frametitle{Title of the frame}
-\scriptsize
+\begin{frame}{Some basic concepts}
 
+IPCS. BBL condition. Taylor-Hood.
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Definitions}
+\scriptsize
+\begin{lstlisting}[frame=single,style=base]
+mesh = UnitCubeMesh(meshsize, meshsize, meshsize)
+
+V = VectorFunctionSpace(mesh, "Lagrange", 2, dim = 3)
+Q = FunctionSpace(mesh, "Lagrange", 1)
+
+u = TrialFunction(V)
+p = TrialFunction(Q)
+v = TestFunction(V)
+q = TestFunction(Q)
+\end{lstlisting}    
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The anisotropic scheme}
+\scriptsize
 \begin{lstlisting}[frame=single,style=base]
 F1_anisotropic =
-(1/k)*( (@u1@ - u_prev1)*v1 + (u2 - u_prev2)*v2 + 
-eps*eps*(u3 - u_prev3)*v3 ) * dx +
+(1/k)*( (@u1@ - u_prev1)*v1 + (@u2@ - u_prev2)*v2 + 
+eps*eps*(@u3@ - u_prev3)*v3 ) * dx +
 inner(u_prev, grad(u_prev1)) * v1 * dx +
 inner(u_prev, grad(u_prev2)) * v2 * dx +
 eps*eps*inner(u_prev, grad(u_prev3)) * v3 * dx +
 - alpha * u_prev2 * v1 * dx + alpha * u_prev1 * v2 * dx +
-inner(grad(u1),grad(v1)) * dx +
-inner(grad(u2),grad(v2)) * dx +
-eps*eps*inner(grad(u3),grad(v3)) * dx +
+inner(grad(@u1@),grad(v1)) * dx +
+inner(grad(@u2@),grad(v2)) * dx +
+eps*eps*inner(grad(@u3@),grad(v3)) * dx +
 eps * beta * u_prev3 * v1 * dx - eps * beta * u_prev1 * v3 * dx
 - inner(f, v) * dx +
 - inner(theta, v) * ds(1)
 \end{lstlisting}
-    
 \end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The anisotropic scheme}
+\scriptsize
+\begin{lstlisting}[frame=single,style=base]
+    a1 = lhs(F1_anisotropic)
+    L1 = rhs(F1_anisotropic)
+
+    a2 = inner(grad(@p@), grad(q))*dx
+    L2 = - (1/k)*div(u_next)*q*dx
+
+    a3 = inner(@u@, v)*dx
+    L3 = inner(u_next, v)*dx - k*inner(grad(p_next), v)*dx
+
+    # Assemble matrices
+    A1 = assemble(a1)
+    A2 = assemble(a2)
+    A3 = assemble(a3)
+\end{lstlisting}
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Solving}
+\scriptsize
+\begin{lstlisting}[frame=single,style=base]
+while t < T + DOLFIN_EPS:
+
+  # Compute tentative velocity step
+  b1 = assemble(L1)
+  [bc.apply(A1, b1) for bc in bcu]
+  solve(A1, u_next.vector(), b1, "bicgstab", "default")
+
+  # Pressure correction
+  b2 = assemble(L2)
+  [bc.apply(A2, b2) for bc in bcp]
+  [bc.apply(p_next.vector()) for bc in bcp]
+  solve(A2, p_next.vector(), b2, "bicgstab", prec)
+
+  # Velocity correction
+  b3 = assemble(L3)
+  [bc.apply(A3, b3) for bc in bcu]
+  solve(A3, u_next.vector(), b3, "bicgstab", "default")
+\end{lstlisting}
+\end{frame}
+
 
 \end{document}
