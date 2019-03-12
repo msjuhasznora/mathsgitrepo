@@ -43,7 +43,7 @@
 
 \begin{abstract}
 
-Considered as a geophysical fluid, the polluted atmosphere shares the shallow domain characteristics with other natural large-scale fluids such as seas and oceans. This means that its domain is excessively greater horizontally than in the vertical dimension, leading to the classic hydrostatic approximation of the Navier-Stokes equations. The authors of the \cite{azerad2001mathematical} article have proved a convergence theorem for this model with respect to the ocean, without considering pollution effects. The novelty of this present work is to provide a generalisation of their result translated to the atmosphere, extending the fluid velocity equations with an additional convection-diffusion equation representing pollutants in the atmosphere.
+Considered as a geophysical fluid, the polluted atmosphere shares the shallow domain characteristics with other natural large-scale fluids such as seas and oceans. This means that its domain is excessively greater horizontally than in the vertical dimension, leading to the classic hydrostatic approximation of the Navier-Stokes equations. The authors of the \cite{azerad2001mathematical} article have proved a convergence theorem for this model with respect to the ocean, without considering pollution effects. The novelty of this present work is to provide a generalization of their result translated to the atmosphere, extending the fluid velocity equations with an additional convection-diffusion equation representing pollutants in the atmosphere. 
 
 \end{abstract}
 
@@ -314,7 +314,8 @@ As we mentioned before, the case we are investigating is that of inland domains 
       \begin{split}
         & \mathbf{u}^\epsilon = 0 \text{ on } \Gamma \times (0,T), \\
         &C^\epsilon = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
-        & \partial_1 C^\epsilon = \sigma_1, \partial_2 C^\epsilon = \sigma_2 \in L^2 L^2 (0,T; \Gamma_G), \quad \partial_3 C^\epsilon = \sigma_3 = 0 \text{ on } \Gamma_G \times (0,T)\\
+        & \partial_1 C^\epsilon = \sigma_1, \partial_2 C^\epsilon = \sigma_2,\ \partial_3 C^\epsilon= 0 \text{ on } \Gamma_G \times (0,T), \\
+        & \boldsymbol{\sigma} = (\sigma_1, \sigma_2, 0) \in L^2(0,T; \Gamma_G)\\
       \end{split} \raisetag{40pt}
     \end{equation}
 
@@ -471,7 +472,7 @@ Now we are ready to state our main result.
   
   From the hypothesis on the initial data and since the $S^\epsilon$ source term is in $L^\infty_x (\Omega)$, $I_1$ and $I_2$ are bounded. The only terms we need to work on further are the expressions in $I_3$.
   
-  By using the Holder inequality and the generalised Young inequality for any $\zeta > 0,$ we can estimate this term in the following way.
+  By using the H\"older inequality and the generalised Young inequality for any $\zeta > 0,$ we can estimate this term in the following way.
   
   \begin{equation}
     \begin{split}  \label{boundI_3}
@@ -486,18 +487,18 @@ Now we are ready to state our main result.
   
   where the $c_T$ constant is provided by the trace theorem, and the boundary term is bounded because of the a priori assumptions made on the boundary conditions.
   
-The energy inequality (\ref{energyIEQ}) now takes the form after applying the coercivity property (\ref{coercivity}) of the diffusion matrix.
+   After applying the coercivity property (\ref{coercivity}) of the diffusion matrix, (\ref{energyIEQ}) now takes the form of the following energy inequality,
 
   \begin{equation}
     \begin{split}  
     & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \big [\norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2 \big ] \diff \tau \\
     & + \int_0 ^ t \bigg[ (\lambda - \sum_{i,j = 1}^3 \zeta \frac{1}{2} M_{ij} c_T) \norm{\nabla C^\epsilon}_{L^2}^2  \bigg] \diff \tau \\
     & \leq \sum_{i,j = 1}^3 \frac{1}{\zeta} M_{ij} \frac{1}{2} \int_0 ^ t \norm{\sigma_i}^2 _{L^2 (\Gamma_G)} \diff \tau + \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) \\
-    & + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau + \sum_{i,j = 1}^3 \zeta \frac{1}{2} M_{ij} c_T  \int_0 ^ t \norm{C^\epsilon}^2 _{L^2 (\Omega) } \diff \tau \raisetag{90pt} \label{finalformEIEQ}
+    & + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau + \sum_{i,j = 1}^3 \zeta \frac{1}{2} M_{ij} c_T  \int_0 ^ t \norm{C^\epsilon}^2 _{L^2 (\Omega) } \diff \tau. \raisetag{90pt} \label{finalformEIEQ}
     \end{split}
   \end{equation}  
     
-  It is now straightforward to see that the coefficients of the pollution terms are positive, since the $\zeta = \zeta(\lambda)$ constant of the generalised Young inequality can be freely chosen in a way such that the requirement $(\lambda - \sum \zeta \frac{1}{2} M_{ij} c_T) > \frac{\lambda}{2} > 0$ is satisfied.
+  It is now straightforward to see that the coefficients of the pollution terms are positive, since the $\zeta = \zeta(\lambda)$ constant of the generalized Young inequality can be freely chosen in a way such that the requirement $(\lambda - \sum \zeta \frac{1}{2} M_{ij} c_T) > \lambda/2 > 0$ is satisfied.
     
   \subsection{A priori estimates and weak convergence}
   
@@ -581,7 +582,7 @@ The spatial weak form of the anisotropic system (\ref{ANSC1}) - (\ref{ANSC5}) is
 
 where in this case the equality has to hold for all $\tilde{C} \in H^2_x.$
 
-Now we take such a $\tilde{C} \in H^2_x$ test function in (\ref{spatialWeakForm}) and integrate over $(t, t+h),$ i. e. we have
+Now we take a test function $\tilde{C} \in H^2_x$  in (\ref{spatialWeakForm}) and integrate over $(t, t+h),$ i. e. we have
 
 \[ (\tau_h C^\epsilon (t) - C^\epsilon (t), \tilde{C}) = \int_t^{t+h} \iota^\epsilon (s) \diff s,\]
 
