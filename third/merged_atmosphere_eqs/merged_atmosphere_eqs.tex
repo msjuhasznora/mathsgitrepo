@@ -44,7 +44,7 @@
 
 \begin{abstract}
 
-Considered as a geophysical fluid, the polluted atmosphere shares the shallow domain characteristics with other natural large-scale fluids such as seas and oceans. This means that its domain is excessively greater horizontally than in the vertical dimension, leading to the classic hydrostatic approximation of the Navier-Stokes equations. The authors of the \cite{azerad2001mathematical} article have proved a convergence theorem for this model with respect to the ocean, without considering pollution effects. The novelty of this present work is to provide a generalization of their result translated to the atmosphere, extending the fluid velocity equations with an additional convection-diffusion equation representing pollutants in the atmosphere. 
+Considered as a geophysical fluid, the polluted atmosphere shares the shallow domain characteristics with other natural large-scale fluids such as seas and oceans. This means that its domain is excessively greater horizontally than in the vertical dimension, leading to the classic hydrostatic approximation of the Navier-Stokes equations. The authors of the \cite{azerad2001mathematical} article have proved a convergence theorem for this model with respect to the ocean, without considering pollution effects. The novelty of this present work is to provide a generalisation of their result translated to the atmosphere, extending the fluid velocity equations with an additional convection-diffusion equation representing pollutants in the atmosphere. 
 
 \end{abstract}
 
@@ -105,7 +105,7 @@ We end up this section with some notations we will use through the paper.
 
 We begin by choosing a coordinate system, set the domain we start with and an appropriate set of equations describing both atmosphere motions and the effect of pollution. We ignore large scale effects such as the curvature of the Earth. For describing the effect of pollution we use a continuity equation written in Cartesian coordinates for the concentration.
 
-We fix a local Cartesian coordinate system where the axes are independent from the wind. Other possibilities and considerations regarding choosing the coordinate system are described briefly in the concluding remarks.
+We fix a local Cartesian coordinate system where the axes are independent from the wind ($x, y$ and $z$ are oriented towards east, north, and upwards, respectively). Other possibilities and considerations regarding choosing the coordinate system are described briefly in the concluding remarks.
 
 The domain we consider is a local slice of the atmosphere filled with homogeneous air that we assume to be incompressible, and a pollutant of concentration $C,$ therefore it is defined by the set
 
@@ -128,12 +128,12 @@ The equations governing the air velocity $\mathbf{v}$ and pressure $q$ in the at
 Contaminants emitted into the atmosphere are transported by the wind, mixed and dispersed by turbulent behaviour, and deposited onto the ground by gravity. The dispersion of pollutants is commonly modelled by a diffusive equation of the form
     
 \begin{equation} \label{diffusive}
-  \textcolor{orange}{\partial_t P + \mathbf{v} \cdot \nabla P = \nabla \cdot (\mathbf{K} \nabla P) + Q,}
+  \partial_t P + \mathbf{v} \cdot \nabla P = \nabla \cdot (\mathbf{K} \nabla P) + Q,
 \end{equation}
 
-where \textcolor{orange}{$P$} is the pollution concentration and $\mathbf{K}$ is the $3 \times 3$ diffusion matrix --- the diagonal terms represent the strength of the diffusion in the $x, y, z$ directions, while the non-diagonal terms reflect the correlation of random motions between each pair of principal directions.
+where $P$ is the pollution concentration and $\mathbf{K}$ is the $3 \times 3$ diffusion matrix --- the diagonal terms represent the strength of the diffusion in the $x, y, z$ directions, while the non-diagonal terms reflect the correlation of random motions between each pair of principal directions.
 
-Here \textcolor{orange}{$Q$} represents the sources of the pollutant in the atmosphere i.e. its emission, removal from the atmosphere by dry and wet deposition, and chemical reactions.
+Here $Q$ represents the sources of the pollutant in the atmosphere i.e. its emission, removal from the atmosphere by dry and wet deposition, and chemical reactions.
     
 Now, we perform a vertical scaling to make the domain independent of $\epsilon.$
 
@@ -145,12 +145,12 @@ Now, we perform a vertical scaling to make the domain independent of $\epsilon.$
     
     \[ \Omega =  \{(x_1,x_2,x_3) \in \mathbb{R}^3 ; (x_1,x_2) \in \omega, 0 < x_3 < h (x_1 , x_2) \}.\]
     
-     The corresponding scaling regarding the kinematic, \textcolor{orange}{pressure} \todo{the pressure is rescaled here as well} and viscosity terms are
+     The corresponding scaling regarding the kinematic, pressure and viscosity terms are
      
     \[v_1 = u_1^{\epsilon}, \quad v_2 = u_2^{\epsilon}, \quad v_3 = \epsilon u_3^{\epsilon}, \quad p = p^{\epsilon}, \]
     \[\nu_x = \nu_1, \quad \nu_y = \nu_2 , \quad \nu_z = \epsilon ^ 2\nu_3, \]
     
-    where the later embodies the different eddy viscosity hypothesis that we mentioned earlier, and $p$ is the pressure term including the gravity potential $\varphi,$ i.e., $p = q - \varphi$. Basically \textcolor{orange}{the scaling of the viscosity parameters} \todo{if we use "it", it looks like it refers to $p$} can be heuristically deduced from the viscosity dimensions: $\text{typical length}^2 / \text{typical time}$, more details on the subject can be found in \cite{besson1992some}, \cite{azerad2001mathematical}.
+    where the later embodies the different eddy viscosity hypothesis that we mentioned earlier, and $p$ is the pressure term including the gravity potential $\varphi,$ i.e., $p = q - \varphi$. Basically the scaling of the viscosity parameters can be heuristically deduced from the viscosity dimensions: $\text{typical length}^2 / \text{typical time}$, more details on the subject can be found in \cite{besson1992some}, \cite{azerad2001mathematical}.
     
     Note that from this point we have $\nabla = (\partial_1, \partial_2, \partial_3) $ and $ \Delta_\nu = \nu_1 \partial^2_{11} + \nu_2 \partial^2_{22}  + \nu_3 \partial^2_{33} $. 
     
@@ -172,11 +172,11 @@ Here we emphasise that the diffusivity matrix $\mathbf{M}$ is assumed to have th
 
 for all $x \in \mathbb{R}^3$ with the coercivity constant $\lambda > 0.$ In other words we require that $\lambda = \min {\lambda_i} > 0$ where $\lambda_i$ are the eigenvalues of $\mathbf{M}.$
 
-\textcolor{orange}{Finally we obtain the rescaling equations for the pollution concentration and the source term by considering their physical dimensions, namely: $\text{typical molar density} / \text{typical volume},$ from which we deduce}
+Finally we obtain the rescaling equations for the pollution concentration and the source term by considering their physical dimensions, namely: $\text{typical molar density} / \text{typical volume},$ from which we deduce
 
-    \[ \textcolor{orange}{P = \frac{1}{\epsilon} C^\epsilon, \quad Q = \frac{1}{\epsilon} S^\epsilon.} \]
+    \[ P = \frac{1}{\epsilon} C^\epsilon, \quad Q = \frac{1}{\epsilon} S^\epsilon. \]
 
-\todo{Now the description of the shape of the source function could be after introducing $S^\epsilon$ itself} In this model we will use localised point sources as suggested in \cite{zhuk2016source} and we use what is called a parametrised nascent delta function (a Gaussian impulse, specifically) to describe the source term \textcolor{orange}{$S^\epsilon$.}
+In this model we will use localised point sources as suggested in \cite{zhuk2016source} and we use what is called a parametrised nascent delta function (a Gaussian impulse, specifically) to describe the source term $S^\epsilon$.
 
 Let us consider a gas plume with intensity $I$ originating at emission coordinates $\mathbf{x}_s$ beginning at time $t_s$. At the beginning we assume zero concentration.
 An abrupt gas emission is modelled by a source term represented as a product of an approximated delta function $\delta_\kappa (\mathbf{x} - \mathbf{x}_s)$ (centered at $\mathbf{x}_s$ with a constant parameter $\kappa$) and a Heaviside function $s$ (switching from 0 to $I$ at time $t_s.$)
@@ -505,7 +505,7 @@ Now we are ready to state our main result.
     \end{split}
   \end{equation}  
     
-  It is now straightforward to see that the coefficients of the pollution terms are positive, since the $\zeta = \zeta(\lambda)$ constant of the generalized Young inequality can be freely chosen in a way such that the requirement $(\lambda - \sum \zeta \frac{1}{2} M_{ij} c_T) > \lambda/2 > 0$ is satisfied.
+  It is now straightforward to see that the coefficients of the pollution terms are positive, since the $\zeta = \zeta(\lambda)$ constant of the generalised Young inequality can be freely chosen in a way such that the requirement $(\lambda - \sum \zeta \frac{1}{2} M_{ij} c_T) > \lambda/2 > 0$ is satisfied.
     
   \subsection{A priori estimates and weak convergence}
   
