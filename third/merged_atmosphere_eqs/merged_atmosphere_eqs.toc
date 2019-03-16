@@ -5,6 +5,6 @@
 \contentsline {section}{\numberline {4}Proof of the main theorem}{14}
 \contentsline {subsection}{\numberline {4.1}Energy inequality}{14}
 \contentsline {subsection}{\numberline {4.2}A priori estimates and weak convergence}{16}
-\contentsline {subsection}{\numberline {4.3}Passing to the limit}{16}
-\contentsline {section}{\numberline {5}Concluding remarks}{17}
-\contentsline {section}{\numberline {A}The existence of weak solution of the hydrostatic system of the polluted atmosphere}{20}
+\contentsline {subsection}{\numberline {4.3}Passing to the limit}{17}
+\contentsline {section}{\numberline {5}Concluding remarks}{19}
+\contentsline {section}{\numberline {A}The existence of weak solution of the hydrostatic system of the polluted atmosphere}{23}

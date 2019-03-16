@@ -119,7 +119,7 @@ while eps > DOLFIN_EPS:
     F1_H = (1/k)*( (u1 - u_prev1)*v1 + (u2 - u_prev2)*v2 + \
         inner(u_prev_3d, grad(u_prev1)) * v1 * dx + inner(u_prev_3d, grad(u_prev2)) * v2 * dx + \
         - alpha * u_prev2 * v1 * dx + alpha * u_prev1 * v2 * dx + \
-        inner(grad(u1),grad(v1)) * dx + inner(grad(u2),grad(v2)) * dx  + \
+        inner(grad(u1),grad(v1)) * dx + inner(grad(u2),grad(v2)) * dx + \
         eps * beta * u_prev_V * v1 * dx + \
         p_prev.dx(0) * v1 * dx + p_prev.dx(1) * v2 * dx + \
         - (theta1 * v1 + theta2 * v2) * ds(1)

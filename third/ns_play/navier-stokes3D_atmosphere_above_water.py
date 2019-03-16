@@ -42,8 +42,9 @@ alpha = 1.0
 beta = 1.0
 
 zero_above_sea_level = DirichletBC(V, (0, 0, 0), "on_boundary && x[2] > DOLFIN_EPS")
+zerovertical = DirichletBC(V.sub(2), 0, "on_boundary && x[2] < DOLFIN_EPS")
 
-bcu = [zero_above_sea_level]
+bcu = [zero_above_sea_level, zerovertical]
 # TODOthink about this, the bcp part. we originally didn't have this since we did not
 # have a pressure part, but now we do
 bcp = []
@@ -86,6 +87,7 @@ while eps > DOLFIN_EPS:
         - alpha * u_prev2 * v1 * dx + alpha * u_prev1 * v2 * dx + \
         inner(grad(u1),grad(v1)) * dx + inner(grad(u2),grad(v2)) * dx + eps*eps*inner(grad(u3),grad(v3)) * dx + \
         eps * beta * u_prev3 * v1 * dx - eps * beta * u_prev1 * v3 * dx + \
+        + inner(grad(p_prev), v) * dx + \
         - inner(f, v) * dx + \
         + inner(theta, v) * ds(1)
 

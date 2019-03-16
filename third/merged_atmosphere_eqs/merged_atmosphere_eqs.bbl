@@ -1,8 +1,5 @@
 \begin{thebibliography}{10}
 
-\bibitem{diffusion-tensor}
-Questions and answers in MRI - What is a diffusion tensor?
-
 \bibitem{adams2003sobolev}
 R.~A. Adams and J.~J. Fournier.
 \newblock {\em Sobolev spaces}, volume 140.
@@ -96,17 +93,17 @@ J.~Pedlosky.
 M.~Prodanova, J.~L. Perez, D.~Syrakov, R.~San~Jose, K.~Ganev, N.~Miloshev, and
   S.~Roglev.
 \newblock Application of mathematical models to simulate an extreme air
-  pollution episode in the bulgarian city of stara zagora.
+  pollution episode in the bulgarian city of Stara Zagora.
 \newblock {\em Applied Mathematical Modelling}, 32(8):1607--1619, 2008.
 
 \bibitem{simon1986compact}
 J.~Simon.
-\newblock Compact sets in the space $l^p(0, t; b)$.
+\newblock Compact sets in the space $L^p(0, t; B)$.
 \newblock {\em Annali di Matematica pura ed applicata}, 146(1):65--96, 1986.
 
 \bibitem{temam2001navier}
 R.~Temam.
-\newblock {\em Navier-Stokes equations: theory and numerical analysis}, volume
+\newblock {\em Navier-Stokes equations: Theory and numerical analysis}, volume
   343.
 \newblock American Mathematical Soc., 2001.
 

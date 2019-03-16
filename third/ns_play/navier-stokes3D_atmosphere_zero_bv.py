@@ -73,6 +73,7 @@ while eps > DOLFIN_EPS:
         eps*eps*inner(u_prev, grad(u_prev3)) * v3 * dx + \
         - alpha * u_prev2 * v1 * dx + alpha * u_prev1 * v2 * dx + \
         inner(grad(u1),grad(v1)) * dx + inner(grad(u2),grad(v2)) * dx + eps*eps*inner(grad(u3),grad(v3)) * dx + \
+        + inner(grad(p_prev), v) * dx + \
         eps * beta * u_prev3 * v1 * dx - eps * beta * u_prev1 * v3 * dx + \
         - inner(f, v) * dx
 

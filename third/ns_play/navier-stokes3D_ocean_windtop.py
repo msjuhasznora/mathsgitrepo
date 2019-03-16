@@ -38,8 +38,8 @@ ds = Measure('ds')[boundaries]
 
 dt = 0.02
 T = 1
-alpha = 1.0
-beta = 1.0
+alpha = 5.00
+beta = 5.00
 
 noslipbasin = DirichletBC(V, (0, 0, 0), "on_boundary && x[2] < 1.0 - DOLFIN_EPS")
 zerotop = DirichletBC(V.sub(2), 0, "on_boundary && x[2] > 1.0 - DOLFIN_EPS")
@@ -120,7 +120,6 @@ while eps > DOLFIN_EPS:
 
     # Create files for storing solution
     ufile = File("results_ocean/resultsA" + str(timestamp) + "_mesh" + str(meshsize) + "_dt" + str(dt) + "_eps" + str(eps) + "ws" + str(wind_shear_x) + "_" + str(wind_shear_y) + "/velocity" + "_mesh" + str(meshsize) + "_dt" + str(dt) + "_eps" + str(eps) + "ws" + str(wind_shear_x) + "_" + str(wind_shear_y) + ".pvd")
-    pfile = File("results_ocean/resultsA" + str(timestamp) + "_mesh" + str(meshsize) + "_dt" + str(dt) + "_eps" + str(eps) + "ws" + str(wind_shear_x) + "_" + str(wind_shear_y) + "/pressure" + "_mesh" + str(meshsize) + "_dt" + str(dt) + "_eps" + str(eps) + "ws" + str(wind_shear_x) + "_" + str(wind_shear_y) + ".pvd")
     values.append(eps)
 
     # Time-stepping
@@ -128,6 +127,10 @@ while eps > DOLFIN_EPS:
     while t < T + DOLFIN_EPS:
 
         # Compute tentative velocity step
+
+        # M = u*dx()
+        # problem = LinearVariationalProblem(a, L, u, bc)
+        # solver = AdaptiveLinearVariationalSolver(problem, M)
         b1 = assemble(L1)
         [bc.apply(A1, b1) for bc in bcu]
         solve(A1, u_next.vector(), b1, "bicgstab", "default")
@@ -143,14 +146,13 @@ while eps > DOLFIN_EPS:
         [bc.apply(A3, b3) for bc in bcu]
         solve(A3, u_next.vector(), b3, "bicgstab", "default")
 
-        # Save to file
-        ufile << u_next
-        pfile << p_next
-
         # Move to next time step
         u_prev.assign(u_next)
         p_prev.assign(p_next)
         t += dt
+
+        # Save to file
+        ufile << u_next
 
 
 #    norm_u = norm(u_next, 'L2')

@@ -124,9 +124,9 @@ One of the main tools to exploit the "almost" 2D structure of the atmosphere $\t
     
     \[ \mathbf{u}^\epsilon (\cdot, t = 0) = \mathbf{u}_0, C^\epsilon (\cdot, t=0) = C^\epsilon_0  \text{ in } \Omega, \]
 
-    $$C^\epsilon = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \partial_2 C^\epsilon = \partial_3 C^\epsilon = 0 \text{ on } \Gamma_G \times (0,T),$$
+    $$C^\epsilon = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T),  \partial_3 C^\epsilon = 0 \text{ on } \Gamma_G \times (0,T),$$
     
-    $$\partial_1 C^\epsilon \in L^2 L^2 (0,T; \Gamma_G). $$
+    $$\partial_1 C^\epsilon, \partial_2 C^\epsilon \in L^2 L^2 (0,T; \Gamma_G). $$
 
 \end{frame}
 
@@ -149,9 +149,9 @@ One of the main tools to exploit the "almost" 2D structure of the atmosphere $\t
     
     \[ u_i (\cdot, t=0) = u_{0 i}, C (\cdot, t=0) = C_0 \text{ in } \Omega, \text{$i$ = 1,2} \]
     
-    $$C = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \partial_2 C = \partial_3 C = 0 \text{ on } \Gamma_G \times (0,T),$$
+    $$C = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T),  \partial_3 C = 0 \text{ on } \Gamma_G \times (0,T),$$
     
-    $$ \partial_1 C \in L^2 L^2 (0,T; \Gamma_G) $$
+    $$ \partial_1 C, \partial_2 C \in L^2 L^2 (0,T; \Gamma_G) $$
   
 \end{frame}
 
@@ -288,7 +288,7 @@ This mixed finite element space is known as the \textbf{Taylor-Hood} elements an
 
 \begin{frame}{Some basic concepts - Part 3}
 
-Why it is crucial to have the right choice of element structure: the Taylor-Hood elements satisfy the BBL condition (coercivity plus an inf-sup condition on the functions $a$ and $b,$ respectively) that guarantees the well-posedness of the saddle point problem that we have:
+Choice of element structure: the Taylor-Hood elements satisfy the BBL condition (coercivity plus an inf-sup condition on the functions $a$ and $b,$ respectively) that guarantees the well-posedness of the saddle point problem that we have:
 
 $$ a(u,v) + b(v,\lambda) = <f,v>$$
 $$ b(u, \mu) = <g, \mu> $$
@@ -333,7 +333,7 @@ eps * beta * u_prev3 * v1 * dx - eps * beta * u_prev1 * v3 * dx
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{The anisotropic scheme}
+\frametitle{Assemble}
 \scriptsize
 \begin{lstlisting}[frame=single,style=base]
     a1 = lhs(F1_anisotropic)
