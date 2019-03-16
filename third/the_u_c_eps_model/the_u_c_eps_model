@@ -1,0 +1,46 @@
+This is BibTeX, Version 0.99d (TeX Live 2016)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: merged_atmosphere_eqs.aux
+The style file: abbrv.bst
+Database file #1: merged_atmosphere_eqs.bib
+You've used 22 entries,
+            2118 wiz_defined-function locations,
+            635 strings with 7435 characters,
+and the built_in function-call counts, 6822 in all, are:
+= -- 667
+> -- 308
+< -- 7
++ -- 124
+- -- 100
+* -- 469
+:= -- 1164
+add.period$ -- 68
+call.type$ -- 22
+change.case$ -- 110
+chr.to.int$ -- 0
+cite$ -- 22
+duplicate$ -- 263
+empty$ -- 549
+format.name$ -- 100
+if$ -- 1403
+int.to.chr$ -- 0
+int.to.str$ -- 22
+missing$ -- 27
+newline$ -- 113
+num.names$ -- 44
+pop$ -- 124
+preamble$ -- 1
+purify$ -- 94
+quote$ -- 0
+skip$ -- 168
+stack$ -- 0
+substring$ -- 400
+swap$ -- 37
+text.length$ -- 7
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 76
+warning$ -- 0
+while$ -- 67
+width$ -- 24
+write$ -- 242
