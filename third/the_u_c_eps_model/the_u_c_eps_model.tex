@@ -44,7 +44,7 @@
 
 \begin{abstract}
 
-A local domain on the surface of the rotating Earth is often described by a Cartesian coordinate system where the $x, y, z$ axes represent the directions towards east, north, and upwards, respectively, as in this specific system the Coriolis force takes a simpler form. However, for modelling wind and pollution effects in the atmosphere there is another naturally distinctive, meteorologically meaningful viewpoint for fixing the orientation of the coordinate system: the introduction of downwind and crosswind, and to match the horizontal axes to these. In this paper we take this idea as a foundation, and we migrate the result of our previously stated weak convergence theorem to this more considerately chosen coordinate system. In other words, we view the atmosphere as a shallow domain, and we verify that the weak solutions of the mathematical equations of the polluted atmosphere converge to the hydrostatic limit model even under the analytical consequences by the altered velocity and concentration equations. As in this scenario the advection is dominant compared to diffusion effects along the $x$ axis, this approach brings the challenge of proving a weak convergence result for the product of the vertical velocity and the concentration, as in the energy inequality the $\partial_1 C$ term is replaced by $\epsilon \partial_1 C.$ This issue is overcome by the construction of new estimates obtained by multiplying the governing equations by higher order terms.
+A widely used approach to mathematically describe the atmosphere is to consider it as a geophysical fluid in a shallow domain --- to model it using classical fluid dynamical equations combined with the explicit inclusion of an $\epsilon$ parameter representing the small aspect ratio of the physical domain. In our previous paper we proved a weak convergence theorem for the polluted atmosphere described by the Navier-Stokes equations extended by an advection-diffusion equation. We obtained a justification of the generalised hydrostatic limit model including the pollution effect described in the case of a classical, east-north oriented Cartesian coordinate system. Here we give an improvement of this statement: we consider a meteorologically more meaningful coordinate system, and verify that the weak convergence still holds for the governing equations altered because of the consequences of the coordinate change.
 
 \end{abstract}
 
@@ -58,7 +58,11 @@ A local domain on the surface of the rotating Earth is often described by a Cart
 %%% *** INTRODUCTION *** %%%
 \section{Introduction} \label{Introduction}
 
-Additional $\epsilon.$, \ref{goyal2011mathematical} idea.
+A local domain on the surface of the rotating Earth is often described by a Cartesian coordinate system where the $x, y, z$ axes represent the directions towards east, north, and upwards, respectively, as in this specific system the Coriolis force takes a simpler form. However, for modelling wind and pollution effects in the atmosphere there is another naturally distinctive viewpoint for fixing the orientation of the coordinate system: the introduction of downwind and crosswind, and to match the horizontal axes according to these meteorological circumstances. In this paper we take this idea as a foundation, and we migrate the result of our previously stated weak convergence theorem to this more considerately chosen coordinate system. 
+
+As in this scenario the advection is dominant compared to diffusion effects along the $x$ axis, this approach naturally brings an additional $\epsilon$ term in the Laplacian of the concentration equation, the simplification of the limit model, and brings the challenge of proving a weak convergence result for the product of the vertical velocity and the concentration, as in the energy inequality the $\partial_1 C$ term is replaced by $\epsilon \partial_1 C.$ This issue is overcome by the construction of new estimates obtained by multiplying the governing equations by higher order terms.
+
+Additional $\epsilon.$, $\cite{goyal2011mathematical}$ idea.
 
 Modified boundary conditions.
 
