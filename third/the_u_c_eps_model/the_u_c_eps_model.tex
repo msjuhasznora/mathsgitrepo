@@ -72,8 +72,10 @@ Modified boundary conditions. Explain the necessity of changing the sediment fun
 As we highlighted before, the key point of this new model is to integrate some of the main ideas of a Gaussian plume dispersion model into the system describing the polluted atmosphere. Therefore we begin by fixing the local Cartesian coordinate system to be adjusted to the downwind direction, i.e. $z$ is oriented upwards, while $x$ is the downwind, and $y$ is the crosswind direction. Another assumption the Gaussian dispersion models typically use as well is that advection is more dominant than diffusion along the downwind direction, which leads to the appearance of an additional $\epsilon$ term in the concentration equation's Laplacian. Namely, we have
 
 \begin{equation} \abs{u_1 \partial_{1} C} \gg \abs{ K_x \partial_{11} ^2 C }\end{equation}
-    which leads us to using this additional scaling equation
-    \[ K_x = \epsilon K_1.\]
+
+which leads us to using this additional scaling equation
+
+\begin{equation} \label{ksepsk1} K_x = \epsilon K_1.\end{equation}
 
 \begin{remark} \normalfont
   The inclusion of these two features in a pollution model are legitimate when the following circumstances hold:
@@ -83,30 +85,62 @@ As we highlighted before, the key point of this new model is to integrate some o
   \end{itemize}
 \end{remark}
 
-Choosing this coordinate system results in changes in three main parts of the system:
-\begin{itemize}
-  \item Describe the Coriolis force and the additional terms in the equations
-  \item Describe the boundary terms.
-  \item The altered Laplacian in the concentration equation.
-\end{itemize}
+Choosing the coordinate system in this particular way results in changes in three main points of the system. One of these is the Coriolis term, since now the $x$ axis is not necessarily perpendicular to the rotation vector. We need to revisit the boundary conditions as well, and as discussed above, a modification in the pollution concentration equation also has to be taken into account. We will describe these changes and their consequences in detail --- the main challenge in proving this paper's convergence result is in fact to handle the effect of this latter change on the energy inequality.
+
+In order to obtain the set of equations that describe the phenomena we start with the original set of equations
+
+\begin{equation} \label{originalEQ-V}
+  \partial_t \mathbf{v} + (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + \nabla q + 2 \mathbf{w} \times \mathbf{v}= \mathbf{g} \text{ in } \Omega_{\epsilon} \times (0,T)
+\end{equation}
+    
+\begin{equation} \label{originalEQ-I}
+  \nabla \cdot \mathbf{v} = 0 \text{ in } \Omega_{\epsilon} \times (0,T)
+\end{equation}
+    
+\begin{equation} \label{diffusive}
+  \partial_t P + \mathbf{v} \cdot \nabla P = \nabla \cdot (\mathbf{K} \nabla P) + Q,
+\end{equation}
+
+As for the rescaling process, here we perform the same steps, with the addition of $(\ref{ksepsk1}).$
+
+To expand the $2 \mathbf{w} \times \mathbf{v}$ Coriolis term firstly it is necessary to understand the structure of the new rotation vector. Note that the downwind-matching coordinate system and the original east-north-upwards oriented system are different only in a rotation around the $z$ axis. Let $\theta$ denote the angle between the respective $x$ axes, $\phi$ denotes the latitude as usual, then the rotation vector expressed in the downwind matching coordinate system becomes
+
+\begin{gather}
+ \begin{bmatrix} \cos(\theta) & -\sin(\theta) & 0 \\ \sin(\theta) & \cos(\theta) & 0 \\ 0 & 0 & 1 \end{bmatrix} \begin{bmatrix} 0 \\ f \cos(\phi) \\ f \sin(\phi) \end{bmatrix}
+ =
+  f \begin{bmatrix} -\sin(\theta)\cos(\phi) \\ \cos(\theta) \cos(\phi) \\ \sin(\phi) \end{bmatrix}
+  =: \begin{bmatrix} \alpha \\ \beta \\ \gamma \end{bmatrix}.
+\end{gather}
+
+Using this, the Coriolis force takes the form
+
+\begin{gather}
+\begin{bmatrix} \alpha \\ \beta \\ \gamma \end{bmatrix}
+ \times
+ \begin{bmatrix} u_1 \\ u_2 \\ \epsilon u_3 \end{bmatrix}
+ =
+ \begin{bmatrix}  \beta \epsilon u_3 - \gamma u_2 \\ \alpha \epsilon u_3 - \gamma u_1 \\ \alpha u_2 - \beta u_1 \end{bmatrix}.
+\end{gather}
+
+Thus, these are the terms that appear in the three velocity equations; and finally, note that the third component is present in the vertical velocity equation multiplied by $\epsilon,$ which is obtained from the $\epsilon$ term in the denominator of $\partial_z p.$
 
 \begin{remark} \normalfont
-The intuitive meaning of what we mean by downwind and the velocity in this new coordinate system. The downwind direction is an approximately steady-in-time direction, it can be seen as the direction marked by the wind direction trackers on an airport or meteorological point. When we consider the downwind, we neglect the small changes in its orientation, it can be viewed as a time-averaged direction as long as the fluctuation is relatively small. On the other hand, the velocity is a three dimensional, time dependent vector that changes second after second. 
+The intuitive meaning of what we understand by downwind and the velocity in this new coordinate system. The downwind direction is an approximately steady-in-time direction, it can be seen as the direction marked by the wind direction trackers on an airport or meteorological point. When we consider the downwind, we neglect the small changes in its orientation, it can be viewed as a time-averaged direction as long as the fluctuation is relatively small. On the other hand, the velocity is a three dimensional, time dependent vector that changes second after second. 
 
 \end{remark}
     
     We arrive to the merged anisotropic equations of the polluted atmosphere above inland surface:
   
     \begin{equation} \label{ANSC1}
-    \partial_t u^\epsilon _1 + \mathbf{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\alpha u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+    \partial_t u^\epsilon _1 + \mathbf{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\gamma u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
     \end{equation}
     
     \begin{equation} \label{ANSC2}
-    \partial_t u_2^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_2^\epsilon -\Delta_\nu u_2^\epsilon + \alpha u_1^\epsilon + \partial_2 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+    \partial_t u_2^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_2^\epsilon -\Delta_\nu u_2^\epsilon + \alpha \epsilon u_3 - \gamma u_1^\epsilon + \partial_2 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
     \end{equation}
     
     \begin{equation} \label{ANSC3}
-    \epsilon^2 \{  \partial_t u_3^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon -\Delta_\nu u_3^{\epsilon} \} - \epsilon \beta u_1^\epsilon + \partial_3 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+    \epsilon^2 \{  \partial_t u_3^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon -\Delta_\nu u_3^{\epsilon} \} + \epsilon \alpha u_2 - \epsilon \beta u_1^\epsilon + \partial_3 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
     \end{equation}
     
     \begin{equation} \label{ANSC4}
@@ -140,11 +174,11 @@ The initial condition for the velocity and the pollution concentration are
 If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and $\epsilon$ in the anisotropic equations, we formally arrive to the hydrostatic Navier-Stokes equations (i.e., primitive equations) combined with pollution.
 
     \begin{equation} \label{HNSC1}    
-    \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\alpha u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T)
+    \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\gamma u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T)
     \end{equation}
     
     \begin{equation} \label{HNSC2}   
-    \partial_t u_2 + \mathbf{u} \cdot \nabla u_2 - \Delta_\nu u_2 -\alpha u_1 + \partial_2 p = 0 \text{ in } \Omega \times (0,T)
+    \partial_t u_2 + \mathbf{u} \cdot \nabla u_2 - \Delta_\nu u_2 -\gamma u_1 + \partial_2 p = 0 \text{ in } \Omega \times (0,T)
     \end{equation}
     
     \begin{equation} \label{HNSC3}   
@@ -195,3 +229,4 @@ Apply C in H1.
 \end{document}
 
 %%% add http://elte.prompt.hu/sites/default/files/tananyagok/AtmosphericChemistry/ch10s03.html
+%%% http://twister.caps.ou.edu/PM2000/Chapter7.pdf
