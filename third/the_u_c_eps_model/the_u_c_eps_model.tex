@@ -66,6 +66,32 @@ As in this scenario the advection is dominant compared to diffusion effects alon
 
 Modified boundary conditions. Explain the necessity of changing the sediment functions.
 
+We end up this section with some notations we will use through the paper.
+
+\subsection{Notations}
+
+\begin{enumerate}
+
+\item $\epsilon = $ the aspect ratio,
+\item $\nu = $ viscosity,
+\item $\Omega_\epsilon, \Omega = $ the original and the rescaled ($\epsilon$-independent) domain, respectively,
+\item $\nabla$ stands for the gradient vector; specifically, $(\partial_x, \partial_y, \partial_z)$ before, and $(\partial_1, \partial_2, \partial_3)$ after rescaling,
+\item $\nabla_\nu = (\nu_x^{1/2} \partial_x, \nu_y^{1/2} \partial_y, \nu_z^{1/2} \partial_z)$ on $\Omega_\epsilon$, $\nabla_\nu = (\nu_1^{1/2} \partial_1, \nu_2^{1/2} \partial_2, \nu_3^{1/2} \partial_3)$ on the rescaled domain $\Omega,$
+\item $ \Delta_\nu$ stands for the anisotropic Laplacian operators $\nu_x \partial^2_{xx} + \nu_y \partial^2_{yy}  + \nu_z \partial^2_{zz}$ and $\nu_1 \partial^2_{11} + \nu_2 \partial^2_{22}  + \nu_3 \partial^2_{33}$ on the original and rescaled domains, respectively,
+\item $\mathbf{g}$ represents the force due to gravity, which also includes the centrifugal effect,
+\item $\varphi = $ the gravity potential term, i.e. $\mathbf{g} = \nabla \varphi,$
+\item $\mathbf{\omega}$ represents the Earth rotation angular speed,
+\item $\phi = l(y) = $ latitude, $f = $ the module of the Earth rotation vector
+\item $\alpha = -2 f \sin(\theta)\cos(\phi), \beta = 2 f \cos(\theta) \cos(\phi), \gamma = 2 f \sin(\phi),$
+\item $\mathbf{K}$ represents the diffusion matrix,
+\item $( \cdot,\cdot) = $ the scalar product in $L^2(\Omega)^d$ or the duality $L^p (\Omega)$, $L^{p'} (\Omega),$
+\item $< \cdot,\cdot>_{\Gamma} = $ the scalar product or duality on the boundary curve $\Gamma$ ($H^{-1/2}(\Gamma)$, $H^{1/2}(\Gamma)$),
+\item $\mathbf{u}_H$ = the horizontal velocity components $(u_1, u_2),$
+\item $b(\mathbf{u}_H)$ = $- \gamma (u_2 , u_1),$
+\item $L^p_t L^q_x$ is the abbreviated notation for $L^p (0, T; L^q(\Omega)).$
+
+\end{enumerate}
+
 %%% *** THE POLLUTED ATMOSPHERE MODEL *** %%%
 \section{The polluted atmosphere model} \label{eqsdescribingatmpluspollution}
 
@@ -90,7 +116,7 @@ Choosing the coordinate system in this particular way results in changes in thre
 In order to obtain the set of equations that describe the phenomena we start with the original set of equations
 
 \begin{equation} \label{originalEQ-V}
-  \partial_t \mathbf{v} + (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + \nabla q + 2 \mathbf{w} \times \mathbf{v}= \mathbf{g} \text{ in } \Omega_{\epsilon} \times (0,T)
+  \partial_t \mathbf{v} + (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + \nabla q + 2 \mathbf{\omega} \times \mathbf{v}= \mathbf{g} \text{ in } \Omega_{\epsilon} \times (0,T)
 \end{equation}
     
 \begin{equation} \label{originalEQ-I}
@@ -103,16 +129,19 @@ In order to obtain the set of equations that describe the phenomena we start wit
 
 As for the rescaling process, here we perform the same steps, with the addition of $(\ref{ksepsk1}).$
 
-To expand the $2 \mathbf{w} \times \mathbf{v}$ Coriolis term firstly it is necessary to understand the structure of the new rotation vector. Note that the downwind-matching coordinate system and the original east-north-upwards oriented system are different only in a rotation around the $z$ axis. Let $\theta$ denote the angle between the respective $x$ axes, $\phi$ denotes the latitude as usual, then the rotation vector expressed in the downwind matching coordinate system becomes
+To expand the $2 \mathbf{\omega} \times \mathbf{v}$ Coriolis term firstly it is necessary to understand the structure of the new rotation vector. Note that the downwind-matching coordinate system and the original east-north-upwards oriented system are different only in a rotation around the $z$ axis. Let $\theta$ denote the angle between the respective $x$ axes, $\phi$ denotes the latitude, then the rotation vector expressed in the downwind matching coordinate system becomes
 
 \begin{gather}
  \begin{bmatrix} \cos(\theta) & -\sin(\theta) & 0 \\ \sin(\theta) & \cos(\theta) & 0 \\ 0 & 0 & 1 \end{bmatrix} \begin{bmatrix} 0 \\ f \cos(\phi) \\ f \sin(\phi) \end{bmatrix}
  =
-  f \begin{bmatrix} -\sin(\theta)\cos(\phi) \\ \cos(\theta) \cos(\phi) \\ \sin(\phi) \end{bmatrix}
-  =: \begin{bmatrix} \alpha \\ \beta \\ \gamma \end{bmatrix}.
+  f \begin{bmatrix} -\sin(\theta)\cos(\phi) \\ \cos(\theta) \cos(\phi) \\ \sin(\phi) \end{bmatrix}.
 \end{gather}
 
-Using this, the Coriolis force takes the form
+Now, let
+
+$$\alpha = -2 f \sin(\theta)\cos(\phi), \quad \beta = 2 f \cos(\theta) \cos(\phi), \quad \gamma = 2 f \sin(\phi),$$
+
+and using this, the Coriolis force takes the form
 
 \begin{gather}
 \begin{bmatrix} \alpha \\ \beta \\ \gamma \end{bmatrix}
@@ -122,10 +151,10 @@ Using this, the Coriolis force takes the form
  \begin{bmatrix}  \beta \epsilon u_3 - \gamma u_2 \\ \alpha \epsilon u_3 - \gamma u_1 \\ \alpha u_2 - \beta u_1 \end{bmatrix}.
 \end{gather}
 
-Thus, these are the terms that appear in the three velocity equations; and finally, note that the third component is present in the vertical velocity equation multiplied by $\epsilon,$ which is obtained from the $\epsilon$ term in the denominator of $\partial_z p.$
+Thus, these are the terms that appear in the three velocity equations; and finally, note that the third component is present in the rescaled version of the vertical velocity equation multiplied by $\epsilon,$ which is obtained from the $\epsilon$ term in the denominator of $\partial_z p.$
 
 \begin{remark} \normalfont
-The intuitive meaning of what we understand by downwind and the velocity in this new coordinate system. The downwind direction is an approximately steady-in-time direction, it can be seen as the direction marked by the wind direction trackers on an airport or meteorological point. When we consider the downwind, we neglect the small changes in its orientation, it can be viewed as a time-averaged direction as long as the fluctuation is relatively small. On the other hand, the velocity is a three dimensional, time dependent vector that changes second after second. 
+The intuitive meaning of what we understand by downwind and the velocity in this new coordinate system. The downwind direction is an approximately steady-in-time direction, it can be seen as the direction marked by the wind direction trackers on an airport or meteorological point. When we consider the downwind, we neglect the small perturbations in its orientation, it can be viewed as a time-averaged direction as long as the fluctuation is relatively small. On the other hand, the velocity is a three dimensional, time dependent vector that changes second after second. 
 
 \end{remark}
     
