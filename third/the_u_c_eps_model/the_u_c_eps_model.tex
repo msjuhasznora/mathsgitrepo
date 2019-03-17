@@ -185,9 +185,6 @@ The initial condition for the velocity and the pollution concentration are
     \begin{equation} \label{ANSC7}
     \mathbf{u}^\epsilon (\cdot, t = 0) = \mathbf{u}_0, \quad C^\epsilon (\cdot, t=0) = C_0  \quad \text{ in } \Omega.
     \end{equation}
-    
-
-
   
   Finally, the boundary conditions to describe the anisotropic system can be summarised as follows:
   
@@ -198,7 +195,10 @@ The initial condition for the velocity and the pollution concentration are
         & \partial_2 C^\epsilon = \partial_3 C^\epsilon = 0 \text{ on } \Gamma_G \times (0,T), \quad \partial_1 C^\epsilon \in L^2 L^2 (0,T; \Gamma_G) \\
       \end{split}
     \end{equation}
+    
+We highlight the difference between the boundary conditions of the two models. The first difference is the kind of boundary conditions that we can "afford" to have on the lower boundary for the concentration comes from the energy inequality. In the east-north-upwards oriented coordinate system we do not have an $\epsilon$ in the diffusion matrix, and thus it is not an issue to have any of the $\partial_i C$ terms to be different from 0, not even for an ocean case where $\partial_3 C$ becomes nonzero as well (they are required however to be bounded of course). On the other hand, the downwind-matching coordinate system brings in an $\epsilon$ term in front of the $K_1$ diffusion, which makes the model more sensitive to assigning boundary conditions for $C.$ This means that we can not have the relatively relaxed, boundedness requirement for any $\partial_i C$ except for $i=1.$ All other $\partial_2 C, \partial_3 C$ derivatives must be zero on the lower boundary, otherwise they would result in an $(\epsilon - \text{const.})$ negative term.
 
+The second difference is: todo \todo{add I, II, III to the BCs, and explain.}. Describe the newly obtained three criteria and add them to the equation parts as well, both anisotropic and hydrostatic.
 
 If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and $\epsilon$ in the anisotropic equations, we formally arrive to the hydrostatic Navier-Stokes equations (i.e., primitive equations) combined with pollution.
 
