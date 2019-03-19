@@ -206,12 +206,12 @@ The initial condition for the velocity and the pollution concentration are
 combined with the additional
 
     \begin{align}
-        & J(\mathbf{u}^\epsilon) \cdot \vec{\mathbf{n}}_\Gamma = \mathbf{0} \text{ on } \Gamma \times (0,T), \label{ANSC-Neumann_BC_1} \\
-        & J(\mathbf{u}^\epsilon)^T \cdot \vec{\mathbf{n}}_\Gamma = \mathbf{0} \text{ on } \Gamma \times (0,T), \label{ANSC-Neumann_BC_2} \\
+        & J(\mathbf{u}_h^\epsilon) \cdot \vec{\mathbf{n}}_\Gamma = \mathbf{0} \text{ on } \Gamma \times (0,T), \label{ANSC-Neumann_BC_1} \\
+        & J(\mathbf{u}_h^\epsilon)^T \cdot \vec{\mathbf{n}}_\Gamma = \mathbf{0} \text{ on } \Gamma \times (0,T), \label{ANSC-Neumann_BC_2} \\
         & \nabla u_3 \cdot \vec{\mathbf{n}}_\Gamma = 0 \text{ on } \Gamma \times (0,T) \label{ANSC-Neumann_BC_3}
     \end{align}
     
-Neumann boundary conditions, where $J(\mathbf{u}^\epsilon)$ is the Jacobian.
+Neumann boundary conditions, where $J(\mathbf{u}_h^\epsilon)$ is the Jacobian.
     
 We highlight the difference between the boundary conditions of the original, east-north oriented, and the new, downwind-matching model.
 
@@ -270,7 +270,7 @@ Firstly, we separate the equations into horizontal and vertical directions and m
 \begin{align}
 \partial_t \mathbf{u}_h + \mathbf{u}_h \nabla \mathbf{u}_h + u_3 \partial_3 \mathbf{u}_h - \Delta \mathbf{u}_h - \partial_{33} \mathbf{u}_h + \mathbf{c}_h + \nabla p& = 0 & / \cdot - \Delta \mathbf{u}_h  \notag\\
 \epsilon^2 (\partial_t u_3 + \mathbf{u}_h \nabla u_3 + u_3 \partial_3 u_3 - \Delta u_3 -\partial_{33} u_3) + \epsilon c_3 + \partial_z p & = 0 & / \cdot - \Delta u_3 \notag \\
-\nabla \cdot \mathbf{u}_h + \partial_3 u_3 & = 0 & \notag
+\nabla \cdot \mathbf{u}_h + \partial_3 u_3 & = 0 & \label{nulldivexpand}
 \end{align}
 
 We now show that after taking the integral of the horizontal and vertical velocity equations and summing the results, the parts including the $p$ pressure term cancel out.
@@ -288,12 +288,43 @@ In order to see this we expand the first term as
 \[ \int_\Omega \bigg ( \sum_{i,j = 1}^2 \partial_j \big (\partial_j u_i \cdot \partial_i p \big) - \sum_{i,j = 1}^2 \partial_j u_i \cdot \partial_j \partial_i p \bigg ) := T_1 + T_2\]
 
 Now,
-
-\[ T_1 = \int_\Omega \sum_{i,j = 1}^2 \partial_j \big (\partial_j u_i \cdot \partial_i p \big) = \int_\Omega \sum_{j=1}^2 \partial_j \big( \partial_j \mathbf{u}_h \cdot \nabla p \big)  \]
-\[ = \int_\Omega \text{div}(\partial_1 \mathbf{u}_h \nabla p, \partial_2 \mathbf{u}_h \nabla p )= \int_{\partial \Omega} (\partial_1 \mathbf{u}_h \nabla p, \partial_2 \mathbf{u}_h \nabla p ) \cdot \vec{\mathbf{n}}_\Gamma, \]
-\[ =\int_{\partial \Omega} \nabla p \cdot \big(J(\mathbf{u}_h) \vec{\mathbf{n}}_\Gamma \big) = 0, \]
+\begin{equation}
+  \begin{split}
+T_1 & = \int_\Omega \sum_{i,j = 1}^2 \partial_j \big (\partial_j u_i \cdot \partial_i p \big) = \int_\Omega \sum_{j=1}^2 \partial_j \big( \partial_j \mathbf{u}_h \cdot \nabla p \big)  \\
+& = \int_\Omega \text{div}(\partial_1 \mathbf{u}_h \nabla p, \partial_2 \mathbf{u}_h \nabla p )= \int_{\partial \Omega} (\partial_1 \mathbf{u}_h \nabla p, \partial_2 \mathbf{u}_h \nabla p ) \cdot \vec{\mathbf{n}}_\Gamma, \\
+& =\int_{\partial \Omega} \nabla p \cdot \big(J(\mathbf{u}_h) \vec{\mathbf{n}}_\Gamma \big) = 0,
+  \end{split}
+\end{equation}
 
 using the Neumann boundary condition (\ref{ANSC-Neumann_BC_1}) regarding the Jacobian of $\mathbf{u}_h.$
+
+\[ T_2 = - \int_\Omega \sum_{i,j = 1}^2 \partial_j u_i \cdot \partial_j \partial_i p = - \sum_{i,j = 1}^2 \int_\Omega \partial_i \big( \partial_j u_i \partial_j p \big) + \sum_{i,j = 1}^2 \int_\Omega \partial_j \partial_i u_i \partial_j p. \]
+
+We show that the first term in this expanded version of $T_2$ disappears, and thus what remains is $ \sum_{i,j = 1}^2 \int_\Omega \partial_j \partial_i u_i \partial_j p,$ i.e. $ \sum_{j = 1}^2 \int_\Omega \partial_j (\text{div} \mathbf{u}_h) \partial_j p.$
+\begin{equation}
+  \begin{split}
+ & - \sum_{i,j = 1}^2 \int_\Omega \partial_i \big( \partial_j u_i \partial_j p \big) = - \int_\Omega \sum_{i=1}^2 \partial_i \big( \nabla u_i \cdot \nabla p \big) \\
+ & = - \int_\Omega \text{div} (\nabla u_1 \cdot \nabla p, \nabla u_2 \cdot \nabla p) = - \int_{\partial \Omega} (\nabla u_1 \cdot \nabla p, \nabla u_2 \cdot \nabla p) \vec{\mathbf{n}}_\Gamma \\
+ & = - \int_{\partial \Omega} \nabla p J(\mathbf{u}_h)^T \vec{\mathbf{n}}_\Gamma = 0,
+  \end{split}
+\end{equation}
+
+using the Neumann boundary condition (\ref{ANSC-Neumann_BC_2}).
+
+From the second equation we have
+\begin{equation}
+  \begin{split}
+& \int_\Omega \Delta u_3 \partial_3 p = \int_\Omega \sum_{i=1}^2 \partial_i \big( \partial_i u_3 \partial_3 p \big) - \int_\Omega \sum_{i=1}^2 \partial_i u_3 \partial_3 \partial_i p \\
+ & = \int_\Omega \text{div} (\partial_1 u_3 \partial_3 p, \partial_2 u_3 \partial_3 p) - \int_\Omega \sum_{i=1}^2 \partial_3 \big( \partial_i u_3 \partial_i p \big) + \sum_{i=1}^2 \int_\Omega \partial_i \partial_3 u_3 \cdot \partial_i p\\
+ & = \int_{\partial \Omega} \partial_3 p \nabla u_3 \vec{\mathbf{n}}_\Gamma - \int_\Omega \partial_3 \big( \nabla u_3 \nabla p \big) - \sum_{i=1}^2 \int_\Omega \partial_i \text{div}(\mathbf{u}_h) \cdot \partial_i p\\
+ & = 0 - \int_{\partial \Omega} \nabla u_3 \nabla p \cdot {{n_3}_\Gamma} - \sum_{i=1}^2 \int_\Omega \partial_i \text{div}(\mathbf{u}_h) \cdot \partial_i p = - \sum_{i=1}^2 \int_\Omega \partial_i \text{div}(\mathbf{u}_h) \cdot \partial_i p.
+  \end{split}
+\end{equation}
+using (\ref{ANSC-Neumann_BC_3}), the fact that $\nabla u_3 \cdot {{n_3}_\Gamma} = 0$, and (\ref{nulldivexpand}).
+
+Finally, summing up the remaining terms we have $$ \sum_{j = 1}^2 \int_\Omega \partial_j (\text{div} \mathbf{u}_h) \cdot \partial_j p - \sum_{i=1}^2 \int_\Omega \partial_i \text{div}(\mathbf{u}_h) \cdot \partial_i p = 0,$$
+
+thus the terms including $p$ cancel each other.
 
 \subsubsection{Using the Gronwall inequality to obtain the $\Delta \mathbf{u}^\epsilon_h$ estimate}
 
