@@ -89,7 +89,7 @@ We end up this section with some notations we will use through the paper.
 \item $\mathbf{\omega}$ represents the Earth rotation angular speed,
 \item $\phi = l(y) = $ latitude, $f = $ the module of the Earth rotation vector
 \item $\alpha = -2 f \sin(\theta)\cos(\phi), \beta = 2 f \cos(\theta) \cos(\phi), \gamma = 2 f \sin(\phi),$
-\item $\mathbf{c}(\mathbf{u}) = (\mathbf{c}_h (\mathbf{u}), c_3 (\mathbf{u})) = ( -\gamma u_2^\epsilon + \epsilon \beta u_3^\epsilon, \alpha \epsilon u^\epsilon_3 - \gamma u_1^\epsilon, \alpha u^\epsilon_2 - \beta u_1^\epsilon),$ the Coriolis force terms 
+\item $\mathbf{c}(\mathbf{u}) = (\mathbf{c}_h (\mathbf{u}), c_3 (\mathbf{u}_h)) = ( -\gamma u_2^\epsilon + \epsilon \beta u_3^\epsilon, \alpha \epsilon u^\epsilon_3 - \gamma u_1^\epsilon, \alpha u^\epsilon_2 - \beta u_1^\epsilon),$ the Coriolis force terms 
 \item $\mathbf{K}$ represents the diffusion matrix,
 \item $( \cdot,\cdot) = $ the scalar product in $L^2(\Omega)^d$ or the duality $L^p (\Omega)$, $L^{p'} (\Omega),$
 \item $< \cdot,\cdot>_{\Gamma} = $ the scalar product or duality on the boundary curve $\Gamma$ ($H^{-1/2}(\Gamma)$, $H^{1/2}(\Gamma)$),
@@ -269,7 +269,7 @@ Firstly, we separate the equations into horizontal and vertical directions and m
 
 \begin{align}
 \partial_t \mathbf{u}_h + \mathbf{u}_h \nabla \mathbf{u}_h + u_3 \partial_3 \mathbf{u}_h - \Delta \mathbf{u}_h - \partial_{33} \mathbf{u}_h + \mathbf{c}_h (\mathbf{u}) + \nabla p& = 0 & / \cdot - \Delta \mathbf{u}_h  \notag\\
-\epsilon^2 (\partial_t u_3 + \mathbf{u}_h \nabla u_3 + u_3 \partial_3 u_3 - \Delta u_3 -\partial_{33} u_3) + \epsilon c_3 (\mathbf{u}) + \partial_z p & = 0 & / \cdot - \Delta u_3 \notag \\
+\epsilon^2 (\partial_t u_3 + \mathbf{u}_h \nabla u_3 + u_3 \partial_3 u_3 - \Delta u_3 -\partial_{33} u_3) + \epsilon c_3 (\mathbf{u}_h) + \partial_3 p & = 0 & / \cdot - \Delta u_3 \notag \\
 \nabla \cdot \mathbf{u}_h + \partial_3 u_3 & = 0 & \label{nulldivexpand}
 \end{align}
 
@@ -334,7 +334,7 @@ As we have shown previously, the pressure terms add to zero, so we don't need to
   \begin{split}
 & \frac{1}{2} \partial_t  \big( \norm{\nabla \mathbf{u}_h}^2_2 + \norm{\epsilon \nabla u_3}^2_2 \big ) + \norm{\Delta \mathbf{u}_h}^2_2 + \norm{\nabla \partial_z \mathbf{u}_h}^2_2 + \norm{\epsilon \Delta u_3}^2_2 + \norm{\epsilon \nabla \partial_z u_3} \\
 & = \int_\Omega \Delta \mathbf{u}_h \cdot \mathbf{u}_h \nabla \mathbf{u}_h + \Delta \mathbf{u}_h \cdot u_3 \partial_3 \mathbf{u}_h +  \Delta \mathbf{u}_h \mathbf{c}_h (\mathbf{u})  \\
-& + \int_\Omega \epsilon^2 \Delta u_3 \mathbf{u}_h \nabla u_3 + \epsilon^2 \Delta u_3 u_3 \partial_3 u_3 + \Delta u_3 \epsilon c_3 (\mathbf{u})
+& + \int_\Omega \epsilon^2 \Delta u_3 \mathbf{u}_h \nabla u_3 + \epsilon^2 \Delta u_3 u_3 \partial_3 u_3 + \Delta u_3 \epsilon c_3 (\mathbf{u}_h)
   \end{split}
 \end{equation}
 
@@ -365,7 +365,7 @@ while for the horizontal part of the Coriolis term -- using that each coordinate
 \begin{equation}
   \begin{split}
     & \int_\Omega \Delta \mathbf{u}_h \mathbf{c}_h (\mathbf{u}) \leq \norm{\Delta \mathbf{u}_h}_2 \norm{\mathbf{c}_h (\mathbf{u})}_2 \\
-    & \leq \delta_3 \norm{\Delta \mathbf{u}_h}^2_2 + C(\delta_3) \norm{\mathbf{c}_h (\mathbf{u})}^2_2 \leq \delta_3 \norm{\Delta \mathbf{u}_h}^2_2 + C(\delta_3) \norm{ \mathbf{u}}^2_2.
+    & \leq \delta_3 \norm{\Delta \mathbf{u}_h}^2_2 + C(\delta_3) \norm{\mathbf{c}_h (\mathbf{u})}^2_2 \leq \delta_3 \norm{\Delta \mathbf{u}_h}^2_2 + C(\delta_3) (\norm{ \mathbf{u}_h}^2_2 + \norm{ \epsilon u_3}^2_2).
   \end{split}
 \end{equation}
 
@@ -375,7 +375,7 @@ For the terms coming from the vertical velocity equation we use the Holder, Lady
   \begin{split}
     & \int_\Omega \epsilon^2 \Delta u_3 \mathbf{u}_h \nabla u_3 \leq \norm{\epsilon \Delta u_3}_2 \norm{\mathbf{u}_h}_6 \norm{\epsilon \nabla u_3}_3 \\
     & \leq \norm{\epsilon \Delta u_3}_2 \norm{\mathbf{u}_h}_6 \norm{\epsilon \nabla u_3}_2^{1/2} \norm{\epsilon \Delta u_3}_2^{1/2} =  \norm{\epsilon \Delta u_3}^{3/2}_2 \norm{\mathbf{u}_h}_6 \norm{\epsilon \nabla u_3}_2^{1/2}\\
-    & = \delta_4 \norm{\epsilon \Delta u_3}_2^2 + C(\delta_4) \norm{\mathbf{u}_h}^4_6 \norm{\epsilon \nabla u_3}^2_2,
+    & \leq \delta_4 \norm{\epsilon \Delta u_3}_2^2 + C(\delta_4) \norm{\mathbf{u}_h}^4_6 \norm{\epsilon \nabla u_3}^2_2,
   \end{split}
 \end{equation}
 
@@ -394,8 +394,21 @@ and finally for the vertical Coriolis term we have
 
 \begin{equation}
   \begin{split}
-  & \int_\Omega \Delta u_3 \epsilon c_3 (\mathbf{u}) \leq \norm{\Delta u_3}_2 \norm{c_3 (\mathbf{u})}_2 \\
-  & \leq \delta_6 \norm{\Delta u_3}^2_2 + C(\delta_6) \norm{c_3 (\mathbf{u})}_2^2 \leq \delta_6 \norm{\Delta u_3}^2_2 + C(\delta_6) \norm{\mathbf{u}}_2^2.
+  & \int_\Omega \Delta u_3 \epsilon c_3 (\mathbf{u}_h) \leq \epsilon \norm{\Delta u_3}_2 \norm{c_3 (\mathbf{u}_h)}_2 \\
+  & \leq \delta_6 \norm{\epsilon \Delta u_3}^2_2 + C(\delta_6) \norm{c_3 (\mathbf{u}_h)}_2^2 \leq \delta_6 \norm{\epsilon \Delta u_3}^2_2 + C(\delta_6) \norm{\mathbf{u}_h}_2^2.
+  \end{split}
+\end{equation}
+
+
+Considering all these inequalities, using the Poincare inequality, as a result we have
+
+\begin{equation}
+  \begin{split}
+& \frac{1}{2} \partial_t  \big( \norm{\nabla \mathbf{u}_h}^2_2 + \norm{\epsilon \nabla u_3}^2_2 \big ) + \norm{\Delta \mathbf{u}_h}^2_2 + \norm{\nabla \partial_z \mathbf{u}_h}^2_2 + \norm{\epsilon \Delta u_3}^2_2 + \norm{\epsilon \nabla \partial_z u_3} \\
+& \leq C(\delta_1) \norm{\mathbf{u}_h}^4_6 \norm{\nabla \mathbf{u}_h}_2^2 + C(\delta_2) \norm{\nabla \mathbf{u}_h}_2^2 \norm{\partial_3 \mathbf{u}_h}^2_2 \norm{\nabla \partial_3 \mathbf{u}_h}^2_2 \\
+& + C(\delta_3) (\norm{ \mathbf{u}_h}^2_2 + \norm{ \epsilon u_3}^2_2) + C(\delta_4) \norm{\mathbf{u}_h}^4_6 \norm{\epsilon \nabla u_3}^2_2 \\
+& + C(\delta_{5,1}) C(\delta_{5,2}) \norm{\epsilon u_3}^4_6 \norm{\nabla \mathbf{u}_h}^2_2 + C(\delta_6) \norm{\mathbf{u}_h}_2^2 \\
+& \leq C(\delta) \big ( \norm{\mathbf{u}_h}^4_6 +\norm{\partial_3 \mathbf{u}_h}^2_2 \norm{\nabla \partial_3 \mathbf{u}_h}^2_2 + \norm{\epsilon u_3}^4_6 + 2 \big) \big( \norm{\nabla \mathbf{u}_h}^2_2 + \norm{\epsilon \nabla u_3}^2_2 \big ).
   \end{split}
 \end{equation}
 
