@@ -23,6 +23,12 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows,shapes,trees, calc}
 
+%%% some of the changes
+%%% introduction of c = (c_h, c_3) Coriolis term in the equation for better readability in the estimate parts
+%%% the Earth rotation vector is noted now by omega, instead of w // the u,v letters are associated with fluid velocity here, and omega is probably a more classical choice anyway
+%%% to have a consistent horizontal component notation, let's choose u_h, with a small h. Let's use H letter only for Sobolev spaces
+%%% in the estimates part let's use \partial_3 instead of \partial_z etc since at that point we are after the rescaling process
+
 %%% *** PREAMBLE *** %%%
 \title{A generalised weak convergence result for the mathematical equations of the polluted atmosphere expressed in downwind matching coordinates}
 
@@ -83,11 +89,12 @@ We end up this section with some notations we will use through the paper.
 \item $\mathbf{\omega}$ represents the Earth rotation angular speed,
 \item $\phi = l(y) = $ latitude, $f = $ the module of the Earth rotation vector
 \item $\alpha = -2 f \sin(\theta)\cos(\phi), \beta = 2 f \cos(\theta) \cos(\phi), \gamma = 2 f \sin(\phi),$
+\item $\mathbf{c} = (\mathbf{c}_h, c_3) = ( -\gamma u_2^\epsilon + \epsilon \beta u_3^\epsilon, \alpha \epsilon u^\epsilon_3 - \gamma u_1^\epsilon, \alpha u^\epsilon_2 - \beta u_1^\epsilon),$ the Coriolis force terms 
 \item $\mathbf{K}$ represents the diffusion matrix,
 \item $( \cdot,\cdot) = $ the scalar product in $L^2(\Omega)^d$ or the duality $L^p (\Omega)$, $L^{p'} (\Omega),$
 \item $< \cdot,\cdot>_{\Gamma} = $ the scalar product or duality on the boundary curve $\Gamma$ ($H^{-1/2}(\Gamma)$, $H^{1/2}(\Gamma)$),
-\item $\mathbf{u}_H$ = the horizontal velocity components $(u_1, u_2),$
-\item $b(\mathbf{u}_H)$ = $- \gamma (u_2 , u_1),$
+\item $\mathbf{u}_h$ = the horizontal velocity components $(u_1, u_2),$
+\item $b(\mathbf{u}_h)$ = $- \gamma (u_2 , u_1),$
 \item $L^p_t L^q_x$ is the abbreviated notation for $L^p (0, T; L^q(\Omega)).$
 
 \end{enumerate}
@@ -165,11 +172,11 @@ The intuitive meaning of what we understand by downwind and the velocity in this
     \end{equation}
     
     \begin{equation} \label{ANSC2}
-    \partial_t u_2^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_2^\epsilon -\Delta_\nu u_2^\epsilon + \alpha \epsilon u_3 - \gamma u_1^\epsilon + \partial_2 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+    \partial_t u_2^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_2^\epsilon -\Delta_\nu u_2^\epsilon + \alpha \epsilon u^\epsilon_3 - \gamma u_1^\epsilon + \partial_2 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
     \end{equation}
     
     \begin{equation} \label{ANSC3}
-    \epsilon^2 \{  \partial_t u_3^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon -\Delta_\nu u_3^{\epsilon} \} + \epsilon \alpha u_2 - \epsilon \beta u_1^\epsilon + \partial_3 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+    \epsilon^2 \{  \partial_t u_3^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon -\Delta_\nu u_3^{\epsilon} \} + \epsilon \alpha u^\epsilon_2 - \epsilon \beta u_1^\epsilon + \partial_3 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
     \end{equation}
     
     \begin{equation} \label{ANSC4}
@@ -192,13 +199,25 @@ The initial condition for the velocity and the pollution concentration are
       \begin{split}
         & \mathbf{u}^\epsilon = 0 \text{ on } \Gamma \times (0,T), \\
         &C^\epsilon = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
-        & \partial_2 C^\epsilon = \partial_3 C^\epsilon = 0 \text{ on } \Gamma_G \times (0,T), \quad \partial_1 C^\epsilon \in L^2 L^2 (0,T; \Gamma_G) \\
+        & \partial_2 C^\epsilon = \partial_3 C^\epsilon = 0 \text{ on } \Gamma_G \times (0,T), \quad \partial_1 C^\epsilon \in L^2 L^2 (0,T; \Gamma_G), \\
       \end{split}
     \end{equation}
     
-We highlight the difference between the boundary conditions of the two models. The first difference is the kind of boundary conditions that we can "afford" to have on the lower boundary for the concentration comes from the energy inequality. In the east-north-upwards oriented coordinate system we do not have an $\epsilon$ in the diffusion matrix, and thus it is not an issue to have any of the $\partial_i C$ terms to be different from 0, not even for an ocean case where $\partial_3 C$ becomes nonzero as well (they are required however to be bounded of course). On the other hand, the downwind-matching coordinate system brings in an $\epsilon$ term in front of the $K_1$ diffusion, which makes the model more sensitive to assigning boundary conditions for $C.$ This means that we can not have the relatively relaxed, boundedness requirement for any $\partial_i C$ except for $i=1.$ All other $\partial_2 C, \partial_3 C$ derivatives must be zero on the lower boundary, otherwise they would result in an $(\epsilon - \text{const.})$ negative term.
+combined with the additional
 
-The second difference is: todo \todo{add I, II, III to the BCs, and explain.}. Describe the newly obtained three criteria and add them to the equation parts as well, both anisotropic and hydrostatic.
+    \begin{align}
+        & J(\mathbf{u}^\epsilon) \cdot \vec{\mathbf{n}}_\Gamma = \mathbf{0} \text{ on } \Gamma \times (0,T), \label{ANSC-Neumann_BC_1} \\
+        & J(\mathbf{u}^\epsilon)^T \cdot \vec{\mathbf{n}}_\Gamma = \mathbf{0} \text{ on } \Gamma \times (0,T), \label{ANSC-Neumann_BC_2} \\
+        & \nabla u_3 \cdot \vec{\mathbf{n}}_\Gamma = 0 \text{ on } \Gamma \times (0,T) \label{ANSC-Neumann_BC_3}
+    \end{align}
+    
+Neumann boundary conditions, where $J(\mathbf{u}^\epsilon)$ is the Jacobian.
+    
+We highlight the difference between the boundary conditions of the original, east-north oriented, and the new, downwind-matching model.
+
+The first difference is the kind of boundary conditions that we can "afford" to have on the lower boundary for the concentration comes from the energy inequality. In the east-north-upwards oriented coordinate system we do not have an $\epsilon$ in the diffusion matrix, and thus it is not an issue to have any of the $\partial_i C$ terms to be different from 0, not even for an ocean case where $\partial_3 C$ becomes nonzero as well (they are required however to be bounded of course). On the other hand, the downwind-matching coordinate system brings in an $\epsilon$ term in front of the $K_1$ diffusion, which makes the model more sensitive to assigning boundary conditions for $C.$ This means that we can not have the relatively relaxed, boundedness requirement for any $\partial_i C$ except for $i=1.$ All other $\partial_2 C, \partial_3 C$ derivatives must be zero on the lower boundary, otherwise they would result in an $(\epsilon - \text{const.})$ negative term.
+
+The second difference is the Neumann boundary conditions (\ref{ANSC-Neumann_BC_1})-(\ref{ANSC-Neumann_BC_3}) for the velocity. We use these additional terms when calculating the estimate for $\mathbf{u}_h.$
 
 If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and $\epsilon$ in the anisotropic equations, we formally arrive to the hydrostatic Navier-Stokes equations (i.e., primitive equations) combined with pollution.
 
@@ -243,9 +262,44 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
 %%% *** PROOF *** %%%
 \section{Proof of the main theorem} \label{proof}
 
-Estimate for laplacian v, estimate for C.
+\subsection{Estimate for $\Delta \mathbf{u}^\epsilon_h$}
 
-Apply C in H1.
+In this part of the proof we prove an estimate for $\Delta \mathbf{u}^\epsilon_h$ which we will later need in order to obtain $H_1$ regularity for $C$. We use the $\mathbf{u}^\epsilon = (\mathbf{u}^\epsilon_h, u^\epsilon_3)$ partition \todo{the $\mathbf{v}$ notation is already taken in the original velocity equation}, and in this section of the proof for better readability $\Delta$ stands for the horizontal Laplacian $\Delta_h,$ while $\nabla$ represents $\nabla_h.$
+Firstly, we separate the equations into horizontal and vertical directions and multiply them by the minus Laplacian of $\mathbf{u}_h$ and $u_3,$ respectively:
+
+\begin{align}
+\partial_t \mathbf{u}_h + \mathbf{u}_h \nabla \mathbf{u}_h + u_3 \partial_3 \mathbf{u}_h - \Delta \mathbf{u}_h - \partial_{33} \mathbf{u}_h + \mathbf{c}_h + \nabla p& = 0 & / \cdot - \Delta \mathbf{u}_h  \notag\\
+\epsilon^2 (\partial_t u_3 + \mathbf{u}_h \nabla u_3 + u_3 \partial_3 u_3 - \Delta u_3 -\partial_{33} u_3) + \epsilon c_3 + \partial_z p & = 0 & / \cdot - \Delta u_3 \notag \\
+\nabla \cdot \mathbf{u}_h + \partial_3 u_3 & = 0 & \notag
+\end{align}
+
+We now show that after taking the integral of the horizontal and vertical velocity equations and summing the results, the parts including the $p$ pressure term cancel out.
+
+\subsubsection{The $p$ terms fall out from the summed integrals}
+
+We have to show that
+
+\[ \int_\Omega \Delta \mathbf{u}_h \nabla p + \int_\Omega \Delta u_3 \nabla p = 0. \]
+
+In order to see this we expand the first term as
+
+\[ \int_\Omega \Delta \mathbf{u}_h \nabla p = \sum_{i=1}^2 \int_\Omega \Delta u_i \partial_i p = \int_\Omega \sum_{i,j=1}^2 \partial_{jj} u_i \partial_i p = \]
+
+\[ \int_\Omega \bigg ( \sum_{i,j = 1}^2 \partial_j \big (\partial_j u_i \cdot \partial_i p \big) - \sum_{i,j = 1}^2 \partial_j u_i \cdot \partial_j \partial_i p \bigg ) := T_1 + T_2\]
+
+Now,
+
+\[ T_1 = \int_\Omega \sum_{i,j = 1}^2 \partial_j \big (\partial_j u_i \cdot \partial_i p \big) = \int_\Omega \sum_{j=1}^2 \partial_j \big( \partial_j \mathbf{u}_h \cdot \nabla p \big)  \]
+\[ = \int_\Omega \text{div}(\partial_1 \mathbf{u}_h \nabla p, \partial_2 \mathbf{u}_h \nabla p )= \int_{\partial \Omega} (\partial_1 \mathbf{u}_h \nabla p, \partial_2 \mathbf{u}_h \nabla p ) \cdot \vec{\mathbf{n}}_\Gamma, \]
+\[ =\int_{\partial \Omega} \nabla p \cdot \big(J(\mathbf{u}_h) \vec{\mathbf{n}}_\Gamma \big) = 0, \]
+
+using the Neumann boundary condition (\ref{ANSC-Neumann_BC_1}) regarding the Jacobian of $\mathbf{u}_h.$
+
+\subsubsection{Using the Gronwall inequality to obtain the $\Delta \mathbf{u}^\epsilon_h$ estimate}
+
+Gronwall
+
+\subsection{$H_1$ estimate for $C$}
  
 
 %%% *** CONCLUDING REMARKS *** %%%
