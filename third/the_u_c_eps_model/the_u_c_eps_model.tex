@@ -440,7 +440,7 @@ On the left hand side for the first term this results in
 \begin{equation}
   \begin{split}
   & \big ( \partial_t C, -\Delta C -\partial_{33} C \big) _{L^2} \\
-  & = \frac{1}{2} \partial_t \big ( \norm{\nabla C}_2^2 + \norm{\partial_3 C}_2^2 \big) + \big \lbrack \partial_t \cdot \nabla C \big \rbrack_{\partial \Omega} + \big \lbrack \partial_t \cdot \partial_3 C \big \rbrack_{\partial \Omega},
+  & = \frac{1}{2} \partial_t \big ( \norm{\nabla C}_2^2 + \norm{\partial_3 C}_2^2 \big) + \big \lbrack \partial_t C \cdot \nabla C \big \rbrack_{\partial \Omega} + \big \lbrack \partial_t C \cdot \partial_3 C \big \rbrack_{\partial \Omega},
   \end{split}
 \end{equation}
 
@@ -455,7 +455,22 @@ while for the second derivatives we obtain
   \end{split}
 \end{equation}
 
-Observe \todo{write down} that all boundary terms from the previous two equations fall out.
+Observe that all boundary terms from the previous two equations fall out.
+
+Firstly, 
+$$\big \lbrack \partial_t C \cdot \partial_i C \big \rbrack_{\partial \Omega} = 0,$$ since for $i = 2,3$ we have $\partial_i C = 0$ on $\Gamma_B$ and $C=0$ on $\Gamma_L \cup \Gamma_U$, while for $i=1$ we use that $\nu_i = 0$ on the $\Gamma_B$ bottom of the boundary, thus $\int_{\Gamma_B} \partial_t C \cdot \partial_1 C \nu_1 = 0.$
+
+Secondly \todo{write down}, we examine the boundary terms coming from the expansion of the parts of the Laplacians.
+
+\begin{enumerate}
+  \item For values of $i=j$, $\int_\Gamma \partial_{jj} C \partial_i C \nu_i \diff \Gamma = \int_\Gamma \partial_i C \partial_{ij} C \nu_j \diff \Gamma,$ thus the contribution of these terms is zero.
+  \item For $i \neq j,$ on $\Gamma_B$ we have
+  \begin{enumerate}
+    \item $\int_\Gamma \partial_{jj} C \partial_i C \nu_i \diff \Gamma:$ for $i = 1,2$ we have $\nu_i = 0,$ while for $i=3$ we have $\partial_3 C = 0$ boundary condition on $\Gamma_B.$
+    \item $\int_\Gamma \partial_i C \partial_{ij} C \nu_j \diff \Gamma:$ for $j = 1,2$ again we can use $\nu_j = 0$ on this part of the boundary. For $j = 3,$ if $i=2$ we can apply $\partial_2 C = 0,$ while for $j=3, i= 1$ we can use $\partial_1 \partial_3 C = 0,$ since $\partial_3 C = 0$ on the whole $\Gamma_B$ horizontal plane, taking a horizontal derivative of it remains zero.
+  \end{enumerate}
+  \item For $i \neq j,$ on the rest of the boundary, where we have $C = 0.$ On this part of the boundary on each plane there is always a part of the product that becomes zero, as $C=0$ on that plane, and we take a directional derivative whose direction falls into that plane.
+\end{enumerate}
 
 Thus we arrive to
 
