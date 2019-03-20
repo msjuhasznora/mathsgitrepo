@@ -66,7 +66,7 @@ A widely used approach to mathematically describe the atmosphere is to consider 
 
 A local domain on the surface of the rotating Earth is often described by a Cartesian coordinate system where the $x, y, z$ axes represent the directions towards east, north, and upwards, respectively, as in this specific system the rotation vector, and as a consequence, the Coriolis force takes a simpler form. However, for modelling wind and pollution effects in the atmosphere there is another naturally distinctive viewpoint for fixing the orientation of the coordinate system: the introduction of downwind and crosswind, and to match the horizontal axes according to these meteorological parameters ($\cite{goyal2011mathematical}$). In this paper we take this idea as a foundation, and we migrate the result of our previously stated weak convergence theorem to this more considerately chosen coordinate system.
 
-Here talk a little bit about the original convergence theorem to make the new one more self-contained and for details refer to the first article.
+Here \todo{write this part} talk a little bit about the original convergence theorem to make the new one more self-contained and for details refer to the first article.
 
 As in this scenario the advection is dominant compared to diffusion effects along the $x$ axis, this approach naturally brings an additional $\epsilon$ term in the Laplacian of the concentration equation, the simplification of the limit model, and brings the challenge of proving a weak convergence result for the product of the vertical velocity and the concentration, as in the energy inequality the $\norm{\partial_1 C^\epsilon}$ term is replaced by $\norm{\sqrt{\epsilon} \partial_1 C^\epsilon}.$ This issue is overcome by the construction of new estimates obtained by multiplying the governing equations by higher order terms.
 
@@ -208,7 +208,7 @@ combined with the additional
     \begin{align}
         & J(\mathbf{u}_h^\epsilon) \cdot \vec{\mathbf{n}}_\Gamma = \mathbf{0} \text{ on } \Gamma \times (0,T), \label{ANSC-Neumann_BC_1} \\
         & J(\mathbf{u}_h^\epsilon)^T \cdot \vec{\mathbf{n}}_\Gamma = \mathbf{0} \text{ on } \Gamma \times (0,T), \label{ANSC-Neumann_BC_2} \\
-        & \nabla u_3 \cdot \vec{\mathbf{n}}_\Gamma = 0 \text{ on } \Gamma \times (0,T) \label{ANSC-Neumann_BC_3}
+        & \nabla u^\epsilon_3 \cdot \vec{\mathbf{n}}_\Gamma = 0 \text{ on } \Gamma \times (0,T) \label{ANSC-Neumann_BC_3}
     \end{align}
     
 Neumann boundary conditions, where $J(\mathbf{u}_h^\epsilon)$ is the Jacobian.
@@ -259,7 +259,7 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
 %%% *** WEAK FORMULATION AND MAIN RESULT*** %%%
 \section{Weak formulation and Main Result} \label{weakformulationmainresult}
 
-todo.
+update, analogous to the original statement, check for minor necessary changes.
   
 %%% *** PROOF *** %%%
 \section{Proof of the main theorem} \label{proof}
@@ -281,13 +281,13 @@ We now show that after taking the integral of the horizontal and vertical veloci
 
 We have to show that
 
-\[ \int_\Omega \Delta \mathbf{u}_h \nabla p + \int_\Omega \Delta u_3 \nabla p = 0. \]
+\[ \int_\Omega \Delta \mathbf{u}_h \nabla p + \int_\Omega \Delta u_3 \partial_3 p = 0. \]
 
 In order to see this we expand the first term as
 
-\[ \int_\Omega \Delta \mathbf{u}_h \nabla p = \sum_{i=1}^2 \int_\Omega \Delta u_i \partial_i p = \int_\Omega \sum_{i,j=1}^2 \partial_{jj} u_i \partial_i p = \]
+\[ \int_\Omega \Delta \mathbf{u}_h \nabla p = \sum_{i=1}^2 \int_\Omega \Delta u_i \partial_i p = \int_\Omega \sum_{i,j=1}^2 \partial_{jj} u_i \partial_i p \]
 
-\[ \int_\Omega \bigg ( \sum_{i,j = 1}^2 \partial_j \big (\partial_j u_i \cdot \partial_i p \big) - \sum_{i,j = 1}^2 \partial_j u_i \cdot \partial_j \partial_i p \bigg ) := T_1 + T_2\]
+\[ = \int_\Omega \bigg ( \sum_{i,j = 1}^2 \partial_j \big (\partial_j u_i \cdot \partial_i p \big) - \sum_{i,j = 1}^2 \partial_j u_i \cdot \partial_j \partial_i p \bigg ) := T_1 + T_2\]
 
 Now,
 \begin{equation}
@@ -347,7 +347,7 @@ Using the Holder and Ladyzhenskaya inequalities, combined with the Young inequal
 \begin{equation}
 \begin{split}
  & \int_\Omega \Delta \mathbf{u}_h \cdot \mathbf{u}_h \nabla \mathbf{u}_h \leq \norm{\Delta \mathbf{u}_h}_2 \norm{\mathbf{u}_h}_6 \norm{\nabla \mathbf{u}_h}_3 \\
- & \leq \norm{\Delta \mathbf{u}_h}_2 \norm{\mathbf{u}_h}_6 \norm{\nabla \mathbf{u}_h}_2^{1/2} \norm{\Delta \mathbf{u}_h}_2^{1/2} \leq \norm{\Delta \mathbf{u}_h}_2^{3/2} \norm{\mathbf{u}_h}_6 \norm{\nabla \mathbf{u}_h}_2^{1/2} \\
+ & \leq \norm{\Delta \mathbf{u}_h}_2 \norm{\mathbf{u}_h}_6 \norm{\nabla \mathbf{u}_h}_2^{1/2} \norm{\Delta \mathbf{u}_h}_2^{1/2} = \norm{\Delta \mathbf{u}_h}_2^{3/2} \norm{\mathbf{u}_h}_6 \norm{\nabla \mathbf{u}_h}_2^{1/2} \\
  & \leq \delta_1 \norm{\Delta \mathbf{u}_h}_2^2 + C(\delta_1) \norm{\mathbf{u}_h}^4_6 \norm{\nabla \mathbf{u}_h}_2^2.
 \end{split}
 \end{equation}
@@ -413,6 +413,8 @@ Considering all these inequalities, using the Poincare inequality, as a result w
 & \leq C(\delta) \big ( \norm{\mathbf{u}_h}^4_6 +\norm{\partial_3 \mathbf{u}_h}^2_2 \norm{\nabla \partial_3 \mathbf{u}_h}^2_2 + \norm{\epsilon u_3}^4_6 + 2 \big) \big( \norm{\nabla \mathbf{u}_h}^2_2 + \norm{\epsilon \nabla u_3}^2_2 \big ).
   \end{split}
 \end{equation}
+
+Using the Gronwall inequality we are provided with a bound for $\int_0^t \norm{\Delta \mathbf{u}_h}^2_2,$ which we will use in the next section.
 
 
 \subsection{$H_1$ estimate for $C$}
