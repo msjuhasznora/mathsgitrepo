@@ -352,11 +352,11 @@ Using the Holder and Ladyzhenskaya inequalities, combined with the Young inequal
 \end{split}
 \end{equation}
 
-Using a result from \cite{cao2007global} combined with the Young inequality we obtain 
+Using Proposition 2.2 from \cite{cao2003global} choosing $u=\mathbf{u}_h, f = \Delta \mathbf{u}_h, g = \partial_3 \mathbf{u}_h,$ combined with the Young inequality we obtain 
 
 \begin{equation}
 \begin{split}
-  & \int_\Omega \Delta \mathbf{u}_h \cdot u_3 \partial_3 \mathbf{u}_h = \int_\Omega \bigg( \int_0^z \abs{\nabla \cdot \mathbf{u}_h} \bigg) \partial_3 \mathbf{u}_h \Delta \mathbf{u}_h  \\
+  & \int_\Omega \Delta \mathbf{u}_h \cdot u_3 \partial_3 \mathbf{u}_h = \int_\Omega \bigg( - \int_0^z \nabla \cdot \mathbf{u}_h \bigg) \partial_3 \mathbf{u}_h \Delta \mathbf{u}_h \\
   & \leq \norm{\nabla \mathbf{u}_h}_2^{1/2} \norm{\partial_3 \mathbf{u}_h}^{1/2}_2 \norm{\nabla \partial_3 \mathbf{u}_h}^{1/2}_2 \norm{\Delta \mathbf{u}_h}^{3/2}_2 \\
   & \leq \delta_2 \norm{\Delta \mathbf{u}_h}^2_2 + C(\delta_2) \norm{\nabla \mathbf{u}_h}_2^2 \norm{\partial_3 \mathbf{u}_h}^2_2 \norm{\nabla \partial_3 \mathbf{u}_h}^2_2,
 \end{split}
@@ -451,7 +451,7 @@ while for the second derivatives we obtain
   & \big ( - \epsilon K_1 \partial_{11} ^ 2 C^\epsilon - K_2 \partial_{22} ^ 2 C^\epsilon - K_3 \partial_{33} ^ 2 C^\epsilon, -\Delta C -\partial_{33} C \big) _{L^2} \\
   & = \epsilon K_1 \norm{\partial_{11} C}^2_2 + K_2 \norm{\partial_{22} C}^2_2 + K_3 \norm{\partial_{33} C}^2_2 \\
   & + (\epsilon K_1 + K_2) \norm{\partial_1 \partial_2 C}_2^2 + (K_2 + K_3) \norm{\partial_2 \partial_3 C}_2^2 + (\epsilon K_1 + K_3) \norm{\partial_1 \partial_3 C}_2^2 \\
-  & + \sum_{i,j = 1}^3 \bigg (\int_\Gamma \partial_{jj} C \partial_i C \nu_i \diff \Gamma - \int_\Gamma \partial_i C \partial_{ij} C \nu_j \diff \Gamma \bigg ).
+  & + \sum_{i,j = 1}^3 K_i K_j (\epsilon \delta_{i=1} + \delta_{i \neq 1}) \bigg (\int_\Gamma \partial_{jj} C \partial_i C \nu_i \diff \Gamma - \int_\Gamma \partial_i C \partial_{ij} C \nu_j \diff \Gamma \bigg ).
   \end{split}
 \end{equation}
 
@@ -483,7 +483,60 @@ Thus we arrive to
   \end{split}
 \end{equation}
 
-At this point we have the exact same expression on the right hand side as in chapter 3.3.4 \todo{elaborate on this, also because in that article there was a misprint with the exponents} in \cite{cao2007global}, thus we have the boundedness of the left hand side by using the Gronwall inequality and the previously obtained bound for $\Delta \mathbf{u}_h.$
+In order to create a structure where eventually the Gronwall inequality can be applied, we form bounds for the terms on the right hand side as seen below.
+
+\begin{itemize}
+
+\item As we previously showed, there are no boundary term contributions from the terms $\partial_{ii} C \partial_{33} C$ when integrating by parts, thus we have
+
+\begin{equation} \norm{\Delta C + \partial_{33} C }_2 = (\norm{\Delta C}_2^2 + \norm{\nabla \partial_3 C}_2^2 + \norm{\partial_{33} C}_2^2)^{1/2}.\label{twonormoflaplacianC}\end{equation}
+
+Combining this with the Cauchy-Schwartz and the Young inequality, for the term including the $S_\epsilon$ source we are provided with
+
+\begin{equation}
+  \begin{split}
+  & \int_\Omega \abs{S_\epsilon} \abs{\Delta C + \partial_{33} C} \leq \norm{S_\epsilon}_2 (\norm{\Delta C}_2^2 + \norm{\nabla \partial_3 C}_2^2 + \norm{\partial_{33} C}_2^2)^{1/2} \\
+  & \leq \delta_1 (\norm{\Delta C}_2^2 + \norm{\nabla \partial_3 C}_2^2 + \norm{\partial_{33} C}_2^2) + C(\delta_1)\norm{S_\epsilon}_2^2.
+  \end{split}
+\end{equation}
+
+\item Using the Holder, Ladyzhenskaya and Young inequalities and taking advantage of (\ref{twonormoflaplacianC}) again,
+
+\begin{equation}
+  \begin{split}
+  & \int_\Omega \abs{ \mathbf{u}_h \cdot \nabla C } \abs{ \Delta C + \partial_{33} C } \\
+  & \leq \norm{\mathbf{u}_h}_6 \norm{\nabla C}_3 \norm{\Delta C + \partial_{33} C}_2 \\
+  & \leq \norm{\mathbf{u}_h}_6 \norm{\nabla C}_2^{1/2} \norm{\Delta C}_2^{1/2} (\norm{\Delta C}_2^2 + \norm{\nabla \partial_3 C}_2^2 + \norm{\partial_{33} C}_2^2)^{1/2} \\
+  & \leq \norm{\mathbf{u}_h}_6 \norm{\nabla C}_2^{1/2} (\norm{\Delta C}_2^2 + \norm{\nabla \partial_3 C}_2^2 + \norm{\partial_{33} C}_2^2)^{3/4} \\
+  & \leq \delta_2 (\norm{\Delta C}_2^2 + \norm{\nabla \partial_3 C}_2^2 + \norm{\partial_{33} C}_2^2) + C(\delta_2) \norm{\mathbf{u}_h}_6^4 \norm{\nabla C}_2^2
+  \end{split}
+\end{equation}
+
+\item Finally, in order to estimate the third term we apply the inequality described in Proposition 2.2 in \cite{cao2003global}.
+
+\begin{remark} As \todo{where to put this remark in the article} $\mathbf{u}_h = 0$ on the boundary, the $\norm{\mathbf{u}_h}_{H^2}$ and $\norm{\Delta \mathbf{u}_h}_{L^2} $ norms are equivalent; and as $\partial_3 C = 0$ on $\Gamma_b$ and everywhere else on the boundary $C$ is zero, $\norm{\partial_3 C}_{H^1}$ and $\norm{\nabla \partial_3}_{L^2}$ are equivalent as well.
+\end{remark}
+
+\begin{equation}
+  \begin{split}
+  & \abs{ \int_\Omega  \bigg( \int_0^z \nabla \cdot \mathbf{u}_h \diff \xi \bigg) \partial_3 C  \big( \Delta C + \partial_{33} C \big)} \\
+  & \leq \text{const.} \norm{\mathbf{u}_h}_{H^1}^{1/2} \norm{\mathbf{u}_h}_{H^2}^{1/2} \norm{\partial_3 C}_2^{1/2} \norm{\partial_3 C}_{H^1}^{1/2} \norm{\Delta C + \partial_{33} C}_2 \\
+  & = \text{const.} \norm{\nabla \mathbf{u}_h}_2^{1/2} \norm{\Delta \mathbf{u}_h}_2^{1/2} \norm{\partial_3 C}_2^{1/2} \norm{\nabla \partial_3 C}_2^{1/2} \norm{\Delta C + \partial_{33} C}_2
+  \end{split}
+\end{equation}
+
+Using (\ref{twonormoflaplacianC}), $\norm{\nabla \partial_3 C}_2^{1/2} \leq (\norm{\Delta C}_2^2 + \norm{\nabla \partial_3 C}_2^2 + \norm{\partial_{33} C}_2^2)^{1/4}$ and the Young inequality we eventually obtain
+
+\begin{equation}
+  \begin{split}
+  & \abs{ \int_\Omega  \bigg( \int_0^z \nabla \cdot \mathbf{u}_h \diff \xi \bigg) \partial_3 C  \big( \Delta C + \partial_{33} C \big)} \\
+  & \leq \text{const.} \norm{\nabla \mathbf{u}_h}_2^{1/2} \norm{\Delta \mathbf{u}_h}_2^{1/2} \norm{\partial_3 C}_2^{1/2} (\norm{\Delta C}_2^2 + \norm{\nabla \partial_3 C}_2^2 + \norm{\partial_{33} C}_2^2)^{3/4} \\
+  & \leq \delta_3 (\norm{\Delta C}_2^2 + \norm{\nabla \partial_3 C}_2^2 + \norm{\partial_{33} C}_2^2) + C(\delta_3) \norm{\nabla \mathbf{u}_h}_2^2 \norm{\Delta \mathbf{u}_h}_2^2 \norm{\partial_3 C}_2^2.
+  \end{split}
+\end{equation}
+\end{itemize}
+
+Thus we have the boundedness of the left hand side by using the Gronwall inequality and the previously obtained bound for $\Delta \mathbf{u}_h.$
  
 
 %%% *** CONCLUDING REMARKS *** %%%
