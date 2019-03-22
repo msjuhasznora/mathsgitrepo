@@ -536,7 +536,16 @@ Using (\ref{twonormoflaplacianC}), $\norm{\nabla \partial_3 C}_2^{1/2} \leq (\no
 \end{equation}
 \end{itemize}
 
-Thus we have the boundedness of the left hand side by using the Gronwall inequality and the previously obtained bound for $\Delta \mathbf{u}_h.$
+\section{How to proceed}
+
+Eventually we need to have an $H^1$ estimate for $C$.
+To achieve this, we have the estimate provided by the Gronwall inequality for $\Delta_h \mathbf{u}_h.$
+What we still need:
+ - We need the $L^\infty$ norm of the full Laplacian of the horizontal velocity, i.e. $\partial_{33} \mathbf{u}_h.$
+ - It needs to be verified what regularity exactly does the Gronwall inequality give in time for these norms. It is not an $L^\infty$ norm in time, because they are behind a time integral in an exponent.
+ - The boundary conditions need to be checked not only for the calculations of why the $p$ terms drop out, but also for the other terms when we write out what parts become a full norm.
+ - Once we have the full Laplacian of the horizontal velocity in $L^2$, we can use the equivalence of $\norm{\Delta v}_{L^2}$ and $\norm{v}_{H^2_0}$, conclude the spatial $H^2$ regularity of $\mathbf{u}_h$ and and a consequence, obtain $L^\infty$ regularity of the horizontal velocity in 3D.
+ - Once we have this, apply the article (regularised viscosity and diffusivity for primitive equations).
  
 
 %%% *** CONCLUDING REMARKS *** %%%
