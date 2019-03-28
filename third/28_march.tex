@@ -1,0 +1,86 @@
+\documentclass[11pt]{article}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{commath}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{float} 
+\usepackage{array}
+\usepackage{outlines}
+\usepackage{setspace}
+\usepackage{xcolor}
+%%% use as \textcolor{ao}{Thoughts.}
+\definecolor{ao}{rgb}{0.0, 0.5, 0.0}
+\definecolor{bittersweet}{rgb}{1.0, 0.44, 0.37}
+\usepackage[colorinlistoftodos]{todonotes}
+\setlist[enumerate,1]{label=\roman*)}
+\setlist[enumerate,2]{label=\alph*)}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+\newtheorem{prop}{Proposition}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,trees, calc}
+
+
+\title{Three options.}
+
+\begin{document}
+
+\date{}
+\maketitle
+
+\begin{enumerate}
+
+\item \textbf{One.}
+
+\textbf{One of the main points} of this article is that they have to deal with the same issue as us: they can not close the $H^1$ regularity of $T$ just using the Young inequality as the term $\sigma \norm{\Delta_H \mathbf{v}}_2^2$ can not be melted into the left hand side because there we have $\epsilon \norm{\Delta_H \mathbf{v}}_2^2.$ As the level 2 horizontal derivatives of $T$ can not be dealt with through the Young inequality because of the absence of the horizontal diffusivity, they take one derivative off of $T,$ apply it onto the velocity --- and deal with the increased derivative level of $\mathbf{v}$ instead of dealing with the double derivative on $T.$ How is this done: as the $L^\infty$ norm of $\nabla_H \mathbf{v}$ takes the regularity requirements to level 3, estimates for $\Delta \eta, \Delta \theta$ are created (level 2+1), using the idea to separate the velocity into two parts: one is the $T$-dependent part, the other is the sum of the velocity and this explicitly $T$-dependent part. Estimate these two parts separately.
+
+The equations they have:
+
+$$ \partial_t v + (v \cdot \nabla_H) v + w \partial_z v - \Delta_H v + f_0 k \times v + \nabla_H p = 0, $$
+
+$$ \partial_z p + \textcolor{bittersweet}{T} = 0, $$
+
+$$ \nabla_H \cdot v + \partial_z w = 0, $$
+
+$$ \partial_t \textcolor{bittersweet}{T}  + v \cdot \nabla_H \textcolor{bittersweet}{T}  + w \partial_z \textcolor{bittersweet}{T}  - \partial_z ^ 2 \textcolor{bittersweet}{T}  = 0. $$
+
+Now simply considering that the pressure can be expressed as the sum of a surface pressure and a $z$-dependent part, i.e. $p(x,y,z) = p_s (x,y) - \int_{-h}^z \textcolor{bittersweet}{T},$ the set of equations takes the form
+
+$$ \partial_t v + (v \cdot \nabla_H) v + w \partial_z v - \Delta_H v + f_0 k \times v + \nabla_H \big ( p_s (x,y) - \int_{-h}^z \textcolor{bittersweet}{T} \big) = 0, $$
+
+$$ \nabla_H \cdot v + \partial_z w = 0, $$
+
+$$ \partial_t \textcolor{bittersweet}{T}  + v \cdot \nabla_H \textcolor{bittersweet}{T}  + w \partial_z \textcolor{bittersweet}{T}  - \partial_z ^ 2 \textcolor{bittersweet}{T}  = 0. $$
+
+Describe the $T_1, T_2$ idea. The doubled coupling split, leads to two different $T$ terms. In this case we split $\mathbf{v}$ into $T_1$-dependent and $T_1$ independent parts. The $\norm{T}_\infty$ issue. For $T_2$ they have $\norm{T_2}_\infty \leq \norm{({T_2})_0}_\infty$
+
+Using '$ - \epsilon^2 (\partial_t u^\epsilon_3 + \mathbf{u}^\epsilon \nabla u^\epsilon_3 - \Delta u^\epsilon_3) + \epsilon \beta u^\epsilon_1$' directly instead of '$T$'.
+
+Since this is the expression we have in the place of the hydrostatic equation's $T,$ we can try and see what happens if this takes the role of the $T$ in the momentum equation.
+
+$\Phi = \int_{-h}^z \epsilon (\beta u_1 - \epsilon (\partial_t u_3 + \mathbf{u} \nabla u_3 - \Delta u_3)) - \frac{1}{2h} \int_{-h}^h \int_{-h}^z \epsilon (\beta u_1 - \epsilon (\partial_t u_3 + \mathbf{u} \nabla u_3 - \Delta u_3))$
+
+Everything until approximately page 33 and Prop. 3.8 makes sense, if we write $T_1$ formally, knowing that it is the expression of the left hand side. This works as $T$ until that point is used as 'what it is on the left hand side', and not through the diffusion-advection equation. The only exception for that is that they use the $L^\infty$ regularity that they prove for $T_2.$
+
+This approach would lead to need to have an $H^3$ regularity of $\epsilon u^\epsilon_3.$
+
+\item \textbf{Two.} The assumption of a smooth $p(x,y,z)$ pressure function: this is probably too general and too demanding --- it would simultaneously ask for the horizontal and vertical momentum equations to be generally smooth as well. 
+
+\item \textbf{Three.} The case of an $H^3$ horizontal velocity, which provides $\norm{\nabla_H \mathbf{v}}_\infty$. This will probably require something like $\mathbf{v}_0 \in H^2.$ For now it seems to be the option that could work.
+
+We need to estimate the term $\int_\Omega \abs{\nabla_h \mathbf{v}} \abs{\nabla_H T}^2.$ In this case it could be done as
+
+$\int_\Omega \abs{\nabla_h \mathbf{v}} \abs{\nabla_H T}^2 \leq \norm{\nabla_H \mathbf{v}}_{L^\infty} \norm{\nabla_H T}_2^2.$
+
+\end{enumerate}
+
+Additionally, the $\partial_{33} \mathbf{v}$ part seems ok, but in the end it provides $$\int_0^t \norm{\Delta_{\text{full}} \mathbf{v}}_2 \leq K(t)$$ regularity, and based on the above points we need a stronger regularity.
+
+\end{document}
