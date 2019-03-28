@@ -15,6 +15,7 @@
 %%% use as \textcolor{ao}{Thoughts.}
 \definecolor{ao}{rgb}{0.0, 0.5, 0.0}
 \definecolor{bittersweet}{rgb}{1.0, 0.44, 0.37}
+\definecolor{cadmiumorange}{rgb}{0.93, 0.53, 0.18}
 \usepackage[colorinlistoftodos]{todonotes}
 \setlist[enumerate,1]{label=\roman*)}
 \setlist[enumerate,2]{label=\alph*)}
@@ -59,15 +60,51 @@ $$ \nabla_H \cdot v + \partial_z w = 0, $$
 
 $$ \partial_t \textcolor{bittersweet}{T}  + v \cdot \nabla_H \textcolor{bittersweet}{T}  + w \partial_z \textcolor{bittersweet}{T}  - \partial_z ^ 2 \textcolor{bittersweet}{T}  = 0. $$
 
-Describe the $T_1, T_2$ idea. The doubled coupling split, leads to two different $T$ terms. In this case we split $\mathbf{v}$ into $T_1$-dependent and $T_1$ independent parts. The $\norm{T}_\infty$ issue. For $T_2$ they have $\norm{T_2}_\infty \leq \norm{({T_2})_0}_\infty$
+On the other hand, our set of equations is structurally the following:
 
-Using '$ - \epsilon^2 (\partial_t u^\epsilon_3 + \mathbf{u}^\epsilon \nabla u^\epsilon_3 - \Delta u^\epsilon_3) + \epsilon \beta u^\epsilon_1$' directly instead of '$T$'.
+$$ \partial_t v + (v \cdot \nabla_H) v + w \partial_z v - \Delta_H v + f_0 k \times v + \nabla_H p = 0, $$
 
-Since this is the expression we have in the place of the hydrostatic equation's $T,$ we can try and see what happens if this takes the role of the $T$ in the momentum equation.
+$$ \partial_z p + \textcolor{ao}{ \epsilon^2 (\partial_t u^\epsilon_3 + \mathbf{u}^\epsilon \nabla u^\epsilon_3 - \Delta u^\epsilon_3) + \epsilon \beta u^\epsilon_1} = 0, $$
 
-$\Phi = \int_{-h}^z \epsilon (\beta u_1 - \epsilon (\partial_t u_3 + \mathbf{u} \nabla u_3 - \Delta u_3)) - \frac{1}{2h} \int_{-h}^h \int_{-h}^z \epsilon (\beta u_1 - \epsilon (\partial_t u_3 + \mathbf{u} \nabla u_3 - \Delta u_3))$
+$$ \nabla_H \cdot v + \partial_z w = 0, $$
 
-Everything until approximately page 33 and Prop. 3.8 makes sense, if we write $T_1$ formally, knowing that it is the expression of the left hand side. This works as $T$ until that point is used as 'what it is on the left hand side', and not through the diffusion-advection equation. The only exception for that is that they use the $L^\infty$ regularity that they prove for $T_2.$
+$$ \partial_t \textcolor{cadmiumorange}{C}  + v \cdot \nabla_H \textcolor{cadmiumorange}{C}  + w \partial_z \textcolor{cadmiumorange}{C}  - \partial_z ^ 2 \textcolor{cadmiumorange}{C}  = 0. $$
+
+Let's take formally the following notations.
+
+$\textcolor{ao}{T_1} :=-  \epsilon^2 (\partial_t u^\epsilon_3 + \mathbf{u}^\epsilon \nabla u^\epsilon_3 - \Delta u^\epsilon_3) + \epsilon \beta u^\epsilon_1,$ ("$T$ as what is on the other side of $\partial_z p$")
+
+and
+
+$\textcolor{cadmiumorange}{T_2}:= C$ ("$T$ as the variable in the diffusion-advection equation").
+
+Taking these notations let's see what happens formally.
+
+$$ \partial_t v + (v \cdot \nabla_H) v + w \partial_z v - \Delta_H v + f_0 k \times v + \nabla_H p = 0, $$
+
+$$ \partial_z p + \textcolor{ao}{T_1} = 0, $$
+
+$$ \nabla_H \cdot v + \partial_z w = 0, $$
+
+$$ \partial_t \textcolor{cadmiumorange}{T_2}  + v \cdot \nabla_H \textcolor{cadmiumorange}{T_2}  + w \partial_z \textcolor{cadmiumorange}{T_2}  - \partial_z ^ 2 \textcolor{cadmiumorange}{T_2}  = 0. $$
+
+Thus we arrive to
+
+$$ \partial_t v + (v \cdot \nabla_H) v + w \partial_z v - \Delta_H v + f_0 k \times v + \nabla_H \big ( p_s (x,y) - \int_{-h}^z \textcolor{ao}{T_1} \big) = 0, $$
+
+$$ \nabla_H \cdot v + \partial_z w = 0, $$
+
+$$ \partial_t \textcolor{cadmiumorange}{T_2}  + v \cdot \nabla_H \textcolor{cadmiumorange}{T_2}  + w \partial_z \textcolor{cadmiumorange}{T_2}  - \partial_z ^ 2 \textcolor{cadmiumorange}{T_2}  = 0. $$
+
+When they write, let's define $\eta, \theta, \Phi$ through $v$ and $T,$ what they mean is $\textcolor{bittersweet}{T}$ as \textcolor{ao}{$T_1$}, or in other words, what is present on the opposite side of $\partial_z p$ (see the calculation in Appendix A.)
+
+So we have $\Phi = \int_{-h}^z \epsilon (\beta u_1 - \epsilon (\partial_t u_3 + \mathbf{u} \nabla u_3 - \Delta u_3)) - \frac{1}{2h} \int_{-h}^h \int_{-h}^z \epsilon (\beta u_1 - \epsilon (\partial_t u_3 + \mathbf{u} \nabla u_3 - \Delta u_3)), $ i.e.
+
+$\Phi = \int_{-h}^z  \textcolor{ao}{T_1} - \frac{1}{2h} \int_{-h}^h \int_{-h}^z \textcolor{ao}{T_1}.$
+
+The original doubled coupling being split, it leads to definitions like this, let's see where it goes. In this case we split $\mathbf{v}$ into $T_1$-dependent and $T_1$ independent parts.
+
+The idea of identifying the other side of the vertical momentum equation formally as a $\textcolor{ao}{T_1}$ term comes from the fact that all the way through until page 33 and Proposition. 3.9 the expression $T$ that is present in their calculations, this $T$ is just there as "what is on the other side of $\partial_z p$ " --- the only exception for this is that they use the $\norm{T_2}_\infty \leq \norm{({T_2})_0}_\infty$ regularity coming from the advection-diffusion equation. If we have something like this for $T_1$ (just theoretically, just to see where it goes), then we can follow through all the estimates until page 33, just using $T_1$ instead of $T.$
 
 This approach would lead to need to have an $H^3$ regularity of $\epsilon u^\epsilon_3.$
 
