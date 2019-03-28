@@ -14,7 +14,7 @@
 \usepackage{xcolor}
 %%% use as \textcolor{ao}{Thoughts.}
 \definecolor{ao}{rgb}{0.0, 0.5, 0.0}
-\definecolor{bittersweet}{rgb}{1.0, 0.44, 0.37}
+\definecolor{dodgerblue}{rgb}{0.12, 0.56, 1.0}
 \definecolor{cadmiumorange}{rgb}{0.93, 0.53, 0.18}
 \usepackage[colorinlistoftodos]{todonotes}
 \setlist[enumerate,1]{label=\roman*)}
@@ -46,19 +46,19 @@ The equations they have:
 
 $$ \partial_t v + (v \cdot \nabla_H) v + w \partial_z v - \Delta_H v + f_0 k \times v + \nabla_H p = 0, $$
 
-$$ \partial_z p + \textcolor{bittersweet}{T} = 0, $$
+$$ \partial_z p + \textcolor{dodgerblue}{T} = 0, $$
 
 $$ \nabla_H \cdot v + \partial_z w = 0, $$
 
-$$ \partial_t \textcolor{bittersweet}{T}  + v \cdot \nabla_H \textcolor{bittersweet}{T}  + w \partial_z \textcolor{bittersweet}{T}  - \partial_z ^ 2 \textcolor{bittersweet}{T}  = 0. $$
+$$ \partial_t \textcolor{dodgerblue}{T}  + v \cdot \nabla_H \textcolor{dodgerblue}{T}  + w \partial_z \textcolor{dodgerblue}{T}  - \partial_z ^ 2 \textcolor{dodgerblue}{T}  = 0. $$
 
-Now simply considering that the pressure can be expressed as the sum of a surface pressure and a $z$-dependent part, i.e. $p(x,y,z) = p_s (x,y) - \int_{-h}^z \textcolor{bittersweet}{T},$ the set of equations takes the form
+Now simply considering that the pressure can be expressed as the sum of a surface pressure and a $z$-dependent part, i.e. $p(x,y,z) = p_s (x,y) - \int_{-h}^z \textcolor{dodgerblue}{T},$ the set of equations takes the form
 
-$$ \partial_t v + (v \cdot \nabla_H) v + w \partial_z v - \Delta_H v + f_0 k \times v + \nabla_H \big ( p_s (x,y) - \int_{-h}^z \textcolor{bittersweet}{T} \big) = 0, $$
+$$ \partial_t v + (v \cdot \nabla_H) v + w \partial_z v - \Delta_H v + f_0 k \times v + \nabla_H \big ( p_s (x,y) - \int_{-h}^z \textcolor{dodgerblue}{T} \big) = 0, $$
 
 $$ \nabla_H \cdot v + \partial_z w = 0, $$
 
-$$ \partial_t \textcolor{bittersweet}{T}  + v \cdot \nabla_H \textcolor{bittersweet}{T}  + w \partial_z \textcolor{bittersweet}{T}  - \partial_z ^ 2 \textcolor{bittersweet}{T}  = 0. $$
+$$ \partial_t \textcolor{dodgerblue}{T}  + v \cdot \nabla_H \textcolor{dodgerblue}{T}  + w \partial_z \textcolor{dodgerblue}{T}  - \partial_z ^ 2 \textcolor{dodgerblue}{T}  = 0. $$
 
 On the other hand, our set of equations is structurally the following:
 
@@ -96,7 +96,7 @@ $$ \nabla_H \cdot v + \partial_z w = 0, $$
 
 $$ \partial_t \textcolor{cadmiumorange}{T_2}  + v \cdot \nabla_H \textcolor{cadmiumorange}{T_2}  + w \partial_z \textcolor{cadmiumorange}{T_2}  - \partial_z ^ 2 \textcolor{cadmiumorange}{T_2}  = 0. $$
 
-When they write, let's define $\eta, \theta, \Phi$ through $v$ and $T,$ what they mean is $\textcolor{bittersweet}{T}$ as \textcolor{ao}{$T_1$}, or in other words, what is present on the opposite side of $\partial_z p$ (see the calculation in Appendix A.)
+When they write, let's define $\eta, \theta, \Phi$ through $v$ and $T,$ what they mean is $\textcolor{dodgerblue}{T}$ as \textcolor{ao}{$T_1$}, or in other words, what is present on the opposite side of $\partial_z p$ (see the calculation in Appendix A.)
 
 So we have $\Phi = \int_{-h}^z \epsilon (\beta u_1 - \epsilon (\partial_t u_3 + \mathbf{u} \nabla u_3 - \Delta u_3)) - \frac{1}{2h} \int_{-h}^h \int_{-h}^z \epsilon (\beta u_1 - \epsilon (\partial_t u_3 + \mathbf{u} \nabla u_3 - \Delta u_3)), $ i.e.
 
@@ -105,6 +105,16 @@ $\Phi = \int_{-h}^z  \textcolor{ao}{T_1} - \frac{1}{2h} \int_{-h}^h \int_{-h}^z 
 The original doubled coupling being split, it leads to definitions like this, let's see where it goes. In this case we split $\mathbf{v}$ into $T_1$-dependent and $T_1$ independent parts.
 
 The idea of identifying the other side of the vertical momentum equation formally as a $\textcolor{ao}{T_1}$ term comes from the fact that all the way through until page 33 and Proposition. 3.9 the expression $T$ that is present in their calculations, this $T$ is just there as "what is on the other side of $\partial_z p$ " --- the only exception for this is that they use the $\norm{T_2}_\infty \leq \norm{({T_2})_0}_\infty$ regularity coming from the advection-diffusion equation. If we have something like this for $T_1$ (just theoretically, just to see where it goes), then we can follow through all the estimates until page 33, just using $T_1$ instead of $T.$
+
+\begin{itemize}
+
+\item Following this idea until the main inequalities on page 39, we find that some of the homogeneously present $T$ expressions on the right hand side are coming as a $\textcolor{ao}{T_1}$ considering their origin, and some come as $\textcolor{cadmiumorange}{T_2}.$ For example, the $\norm{\nabla_H \textcolor{dodgerblue}{T}}_q$ term inside the logarithm on the right hand side has a $\textcolor{ao}{T_1}$ origin (as it comes from the estimate in Proposition 3.9). For this we would need something like
+
+$\epsilon^2 (\partial_t u^\epsilon_3 + \mathbf{u}^\epsilon \nabla u^\epsilon_3 - \Delta u^\epsilon_3) + \epsilon \beta u^\epsilon_1$ to be in $H^1,$ and having $\epsilon^2 \Delta u^\epsilon_3$ in $H^1$ means a level 3 space for the vertical velocity. In this case it is probably better if we investigate the $H^3$ regularity of the horizontal velocity $v$, option three.
+
+\item The other problem is to merge the treads in situations like the one on page 35, line 7 in equation mode.
+
+\end{itemize}
 
 This approach would lead to need to have an $H^3$ regularity of $\epsilon u^\epsilon_3.$
 
