@@ -35,6 +35,7 @@
 \date{}
 \maketitle
 
+
 \tableofcontents
 \newpage
 
@@ -69,6 +70,8 @@ We use the $$ w(x,y,z,t) = - \int_0^z \nabla_H \cdot v(x,y,\xi, t) \diff \xi$$ e
 $$ \partial_i w(x,y,z,t) = - \partial_i \int_0^z \nabla_H \cdot v(x,y,\xi, t) \diff \xi = - \int_0^z \partial_1 \partial_i v_1 + \partial_2 \partial_i v_2$$
 
 $$ \int_\Omega \abs{\partial_i w(x,y,z,t)} \leq \int_\Omega \int_0^h \abs{\partial_1 \partial_i v_1} + \abs{\partial_2 \partial_i v_2} = \int_M \int_0^h \int_0^h \abs{\partial_1 \partial_i v_1} + \abs{\partial_2 \partial_i v_2}$$
+
+Using the Young inequality,
 
 $$ \int_\Omega \abs{\partial_i w(x,y,z,t)}^2 \leq C \cdot h \int_\Omega \abs{\partial_1 \partial_i v_1}^2 + \abs{\partial_2 \partial_i v_2}^2 \leq C \norm{\Delta_H v}^2_2$$
 
