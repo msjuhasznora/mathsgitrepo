@@ -1,0 +1,578 @@
+\documentclass[11pt]{article}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{commath}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{float} 
+\usepackage{array}
+\usepackage{outlines}
+\usepackage{setspace}
+\usepackage[colorinlistoftodos]{todonotes}
+\setlist[enumerate,1]{label=\alph*)}
+\setlist[enumerate,2]{label=\roman*)}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+\newtheorem{prop}{Proposition}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,trees, calc}
+
+%%% some of the changes
+%%% introduction of c = (c_h, c_3) Coriolis term in the equation for better readability in the estimate parts
+%%% the Earth rotation vector is noted now by omega, instead of w // the u,v letters are associated with fluid velocity here, and omega is probably a more classical choice anyway
+%%% to have a consistent horizontal component notation, let's choose u_h, with a small h. Let's use H letter only for Sobolev spaces
+%%% in the estimates part let's use \partial_3 instead of \partial_z etc since at that point we are after the rescaling process
+
+%%% *** PREAMBLE *** %%%
+\title{A generalised weak convergence result for the mathematical equations of the polluted atmosphere expressed in downwind matching coordinates}
+
+\author{
+  \large{\bf{Donatella Donatelli} and \bf{N\'ora Juh\'asz}
+  \thanks{The research of DD and NJ leading to these results has received funding from the European Union's Horizon 2020 Research and Innovation Programme under the Marie Sklodowska-Curie Grant Agreement No 642768 (Project Name: ModCompShock).}} \\[1ex]
+  \normalsize Department of Information Engineering, Computer Science and Mathematics \\
+  \normalsize University of L'Aquila \\
+  \normalsize 67100 L'Aquila, Italy. \\
+  \normalsize {donatella.donatelli@univaq.it},  {norjuh@univaq.it}
+}
+
+\date{}
+
+%%%***  CONTENT *** %%%
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+
+A widely used approach to mathematically describe the atmosphere is to consider it as a geophysical fluid in a shallow domain --- and thus to model it using classical fluid dynamical equations combined with the explicit inclusion of an $\epsilon$ parameter representing the small aspect ratio of the physical domain. In our previous paper we proved a weak convergence theorem for the polluted atmosphere described by the Navier-Stokes equations extended by an advection-diffusion equation. We obtained a justification of the generalised hydrostatic limit model including the pollution effect described in the case of a classical, east-north-upwards oriented local Cartesian coordinates. Here we give an improvement of this statement: we consider a meteorologically more meaningful coordinate system, incorporate the analytical consequences of this coordinate change into the governing equations, and verify that the weak convergence still holds for this altered concentration -- velocity system.
+
+\end{abstract}
+
+{\bf Keywords:} downwind-matching coordinate system, Navier-Stokes equations, shallow domains, pollution evolution equation, hydrostatic approximation, compactness, weak solutions.
+
+\newpage
+
+\tableofcontents
+\newpage
+
+%%% *** INTRODUCTION *** %%%
+\section{Introduction} \label{Introduction}
+
+A local domain on the surface of the rotating Earth is often described by a Cartesian coordinate system where the $x, y, z$ axes represent the directions towards east, north, and upwards, respectively, as in this specific system the rotation vector, and as a consequence, the Coriolis force takes a simpler form. However, for modelling wind and pollution effects in the atmosphere there is another naturally distinctive viewpoint for fixing the orientation of the coordinate system: the introduction of downwind and crosswind, and to match the horizontal axes according to these meteorological parameters ($\cite{goyal2011mathematical}$). In this paper we take this idea as a foundation, and we migrate the result of our previously stated weak convergence theorem to this more considerately chosen coordinate system.
+
+Here \todo{write this part} talk a little bit about the original convergence theorem to make the new one more self-contained and for details refer to the first article.
+
+As in this scenario the advection is dominant compared to diffusion effects along the $x$ axis, this approach naturally brings an additional $\epsilon$ term in the Laplacian of the concentration equation, the simplification of the limit model, and brings the challenge of proving a weak convergence result for the product of the vertical velocity and the concentration, as in the energy inequality the $\norm{\partial_1 C^\epsilon}$ term is replaced by $\norm{\sqrt{\epsilon} \partial_1 C^\epsilon}.$ This issue is overcome by the construction of new estimates obtained by multiplying the governing equations by higher order terms.
+
+Modified boundary conditions. Explain the necessity of changing the sediment functions.
+
+We end up this section with some notations we will use through the paper.
+
+\subsection{Notations}
+
+\begin{enumerate}
+
+\item $\epsilon = $ the aspect ratio,
+\item $\nu = $ viscosity,
+\item $\Omega_\epsilon, \Omega = $ the original and the rescaled ($\epsilon$-independent) domain, respectively,
+\item $\nabla$ stands for the gradient vector; specifically, $(\partial_x, \partial_y, \partial_z)$ before, and $(\partial_1, \partial_2, \partial_3)$ after rescaling,
+\item $\nabla_\nu = (\nu_x^{1/2} \partial_x, \nu_y^{1/2} \partial_y, \nu_z^{1/2} \partial_z)$ on $\Omega_\epsilon$, $\nabla_\nu = (\nu_1^{1/2} \partial_1, \nu_2^{1/2} \partial_2, \nu_3^{1/2} \partial_3)$ on the rescaled domain $\Omega,$
+\item $ \Delta_\nu$ stands for the anisotropic Laplacian operators $\nu_x \partial^2_{xx} + \nu_y \partial^2_{yy}  + \nu_z \partial^2_{zz}$ and $\nu_1 \partial^2_{11} + \nu_2 \partial^2_{22}  + \nu_3 \partial^2_{33}$ on the original and rescaled domains, respectively,
+\item $\mathbf{g}$ represents the force due to gravity, which also includes the centrifugal effect,
+\item $\varphi = $ the gravity potential term, i.e. $\mathbf{g} = \nabla \varphi,$
+\item $\mathbf{\omega}$ represents the Earth rotation angular speed,
+\item $\phi = l(y) = $ latitude, $f = $ the module of the Earth rotation vector
+\item $\alpha = -2 f \sin(\theta)\cos(\phi), \beta = 2 f \cos(\theta) \cos(\phi), \gamma = 2 f \sin(\phi),$
+\item $\mathbf{c}(\mathbf{u}) = (\mathbf{c}_h (\mathbf{u}), c_3 (\mathbf{u}_h)) = ( -\gamma u_2^\epsilon + \epsilon \beta u_3^\epsilon, \alpha \epsilon u^\epsilon_3 - \gamma u_1^\epsilon, \alpha u^\epsilon_2 - \beta u_1^\epsilon),$ the Coriolis force terms 
+\item $\mathbf{K}$ represents the diffusion matrix,
+\item $( \cdot,\cdot) = $ the scalar product in $L^2(\Omega)^d$ or the duality $L^p (\Omega)$, $L^{p'} (\Omega),$
+\item $< \cdot,\cdot>_{\Gamma} = $ the scalar product or duality on the boundary curve $\Gamma$ ($H^{-1/2}(\Gamma)$, $H^{1/2}(\Gamma)$),
+\item $\mathbf{u}_h$ = the horizontal velocity components $(u_1, u_2),$
+\item $b(\mathbf{u}_h)$ = $- \gamma (u_2 , u_1),$
+\item $L^p_t L^q_x$ is the abbreviated notation for $L^p (0, T; L^q(\Omega)).$
+
+\end{enumerate}
+
+%%% *** THE POLLUTED ATMOSPHERE MODEL *** %%%
+\section{The polluted atmosphere model} \label{eqsdescribingatmpluspollution}
+
+As we highlighted before, the key point of this new model is to integrate some of the main ideas of a Gaussian plume dispersion model into the system describing the polluted atmosphere. Therefore we begin by fixing the local Cartesian coordinate system to be adjusted to the downwind direction, i.e. $z$ is oriented upwards, while $x$ is the downwind, and $y$ is the crosswind direction. Another assumption the Gaussian dispersion models typically use as well is that advection is more dominant than diffusion along the downwind direction, which leads to the appearance of an additional $\epsilon$ term in the concentration equation's Laplacian. Namely, we have
+
+\begin{equation} \abs{u_1 \partial_{1} C} \gg \abs{ K_x \partial_{11} ^2 C }\end{equation}
+
+which leads us to using this additional scaling equation
+
+\begin{equation} \label{ksepsk1} K_x = \epsilon K_1.\end{equation}
+
+\begin{remark} \normalfont
+  The inclusion of these two features in a pollution model are legitimate when the following circumstances hold:
+  \begin{itemize}
+    \item We are considering a time interval which is not too long in the sense that it is reasonable to assume that we have a permanent, relatively stable main wind direction, i.e. fixing the horizontal coordinates is reasonable in the first place,
+    \item There is an adequate, relatively high wind speed --- low wind speeds in general lead to a situation where three dimensional diffusion dominates, leading to an error caused by the dominant advection assumption. Fast changing wind direction and low windspeed resulting in fast pollutant settling can make it extremely challenging to obtain reliable results from Gaussian models.
+  \end{itemize}
+\end{remark}
+
+Choosing the coordinate system in this particular way results in changes in three main points of the system. One of these is the Coriolis term, since now the $x$ axis is not necessarily perpendicular to the rotation vector. We need to revisit the boundary conditions as well, and as discussed above, a modification in the pollution concentration equation also has to be taken into account. We will describe these changes and their consequences in detail --- the main challenge in proving this paper's convergence result is in fact to handle the effect of this latter change on the energy inequality.
+
+In order to obtain the set of equations that describe the phenomena we start with the original set of equations
+
+\begin{equation} \label{originalEQ-V}
+  \partial_t \mathbf{v} + (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + \nabla q + 2 \mathbf{\omega} \times \mathbf{v}= \mathbf{g} \text{ in } \Omega_{\epsilon} \times (0,T)
+\end{equation}
+    
+\begin{equation} \label{originalEQ-I}
+  \nabla \cdot \mathbf{v} = 0 \text{ in } \Omega_{\epsilon} \times (0,T)
+\end{equation}
+    
+\begin{equation} \label{diffusive}
+  \partial_t P + \mathbf{v} \cdot \nabla P = \nabla \cdot (\mathbf{K} \nabla P) + Q,
+\end{equation}
+
+As for the rescaling process, here we perform the same steps, with the addition of $(\ref{ksepsk1}).$
+
+To expand the $2 \mathbf{\omega} \times \mathbf{v}$ Coriolis term firstly it is necessary to understand the structure of the new rotation vector. Note that the downwind-matching coordinate system and the original east-north-upwards oriented system are different only in a rotation around the $z$ axis. Let $\theta$ denote the angle between the respective $x$ axes, $\phi$ denotes the latitude, then the rotation vector expressed in the downwind matching coordinate system becomes
+
+\begin{gather}
+ \begin{bmatrix} \cos(\theta) & -\sin(\theta) & 0 \\ \sin(\theta) & \cos(\theta) & 0 \\ 0 & 0 & 1 \end{bmatrix} \begin{bmatrix} 0 \\ f \cos(\phi) \\ f \sin(\phi) \end{bmatrix}
+ =
+  f \begin{bmatrix} -\sin(\theta)\cos(\phi) \\ \cos(\theta) \cos(\phi) \\ \sin(\phi) \end{bmatrix}.
+\end{gather}
+
+Now, let
+
+$$\alpha = -2 f \sin(\theta)\cos(\phi), \quad \beta = 2 f \cos(\theta) \cos(\phi), \quad \gamma = 2 f \sin(\phi),$$
+
+and using this, the Coriolis force takes the form
+
+\begin{gather}
+\begin{bmatrix} \alpha \\ \beta \\ \gamma \end{bmatrix}
+ \times
+ \begin{bmatrix} u_1 \\ u_2 \\ \epsilon u_3 \end{bmatrix}
+ =
+ \begin{bmatrix}  \beta \epsilon u_3 - \gamma u_2 \\ \alpha \epsilon u_3 - \gamma u_1 \\ \alpha u_2 - \beta u_1 \end{bmatrix}.
+\end{gather}
+
+Thus, these are the terms that appear in the three velocity equations; and finally, note that the third component is present in the rescaled version of the vertical velocity equation multiplied by $\epsilon,$ which is obtained from the $\epsilon$ term in the denominator of $\partial_z p.$
+
+\begin{remark} \normalfont
+The intuitive meaning of what we understand by downwind and the velocity in this new coordinate system. The downwind direction is an approximately steady-in-time direction, it can be seen as the direction marked by the wind direction trackers on an airport or meteorological point. When we consider the downwind, we neglect the small perturbations in its orientation, it can be viewed as a time-averaged direction as long as the fluctuation is relatively small. On the other hand, the velocity is a three dimensional, time dependent vector that changes second after second. 
+
+\end{remark}
+    
+    We arrive to the merged anisotropic equations of the polluted atmosphere above inland surface:
+  
+    \begin{equation} \label{ANSC1}
+    \partial_t u^\epsilon _1 + \mathbf{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\gamma u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{ANSC2}
+    \partial_t u_2^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_2^\epsilon -\Delta_\nu u_2^\epsilon + \alpha \epsilon u^\epsilon_3 - \gamma u_1^\epsilon + \partial_2 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{ANSC3}
+    \epsilon^2 \{  \partial_t u_3^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon -\Delta_\nu u_3^{\epsilon} \} + \epsilon \alpha u^\epsilon_2 - \epsilon \beta u_1^\epsilon + \partial_3 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{ANSC4}
+    \nabla \cdot \mathbf{u}^\epsilon= 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{ANSC5}
+    \partial_t C^\epsilon + \mathbf{u^\epsilon} \cdot \nabla C^\epsilon = \epsilon K_1 \partial_{11} ^ 2 C^\epsilon + K_2 \partial_{22} ^ 2 C^\epsilon + K_3 \partial_{33} ^ 2 C^\epsilon + S_\epsilon \text{ in } \Omega \times (0,T)
+    \end{equation}
+
+The initial condition for the velocity and the pollution concentration are
+    
+    \begin{equation} \label{ANSC7}
+    \mathbf{u}^\epsilon (\cdot, t = 0) = \mathbf{u}_0, \quad C^\epsilon (\cdot, t=0) = C_0  \quad \text{ in } \Omega.
+    \end{equation}
+  
+  Finally, the boundary conditions to describe the anisotropic system can be summarised as follows:
+  
+    \begin{equation} \label{ANSC8}
+      \begin{split}
+        & \mathbf{u}^\epsilon = 0 \text{ on } \Gamma \times (0,T), \\
+        &C^\epsilon = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
+        & \partial_2 C^\epsilon = \partial_3 C^\epsilon = 0 \text{ on } \Gamma_G \times (0,T), \quad \partial_1 C^\epsilon \in L^2 L^2 (0,T; \Gamma_G), \\
+      \end{split}
+    \end{equation}
+    
+combined with the additional
+
+    \begin{align}
+        & J(\mathbf{u}_h^\epsilon) \cdot \vec{\mathbf{n}}_\Gamma = \mathbf{0} \text{ on } \Gamma \times (0,T), \label{ANSC-Neumann_BC_1} \\
+        & J(\mathbf{u}_h^\epsilon)^T \cdot \vec{\mathbf{n}}_\Gamma = \mathbf{0} \text{ on } \Gamma \times (0,T), \label{ANSC-Neumann_BC_2} \\
+        & \nabla u^\epsilon_3 \cdot \vec{\mathbf{n}}_\Gamma = 0 \text{ on } \Gamma \times (0,T) \label{ANSC-Neumann_BC_3}
+    \end{align}
+    
+Neumann boundary conditions, where $J(\mathbf{u}_h^\epsilon)$ is the Jacobian.
+    
+We highlight the difference between the boundary conditions of the original, east-north oriented, and the new, downwind-matching model.
+
+The first difference is the kind of boundary conditions that we can "afford" to have on the lower boundary for the concentration comes from the energy inequality. In the east-north-upwards oriented coordinate system we do not have an $\epsilon$ in the diffusion matrix, and thus it is not an issue to have any of the $\partial_i C$ terms to be different from 0, not even for an ocean case where $\partial_3 C$ becomes nonzero as well (they are required however to be bounded of course). On the other hand, the downwind-matching coordinate system brings in an $\epsilon$ term in front of the $K_1$ diffusion, which makes the model more sensitive to assigning boundary conditions for $C.$ This means that we can not have the relatively relaxed, boundedness requirement for any $\partial_i C$ except for $i=1.$ All other $\partial_2 C, \partial_3 C$ derivatives must be zero on the lower boundary, otherwise they would result in an $(\epsilon - \text{const.})$ negative term.
+
+The second difference is the Neumann boundary conditions (\ref{ANSC-Neumann_BC_1})-(\ref{ANSC-Neumann_BC_3}) for the velocity. We use these additional terms when calculating the estimate for $\mathbf{u}_h.$
+
+If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and $\epsilon$ in the anisotropic equations, we formally arrive to the hydrostatic Navier-Stokes equations (i.e., primitive equations) combined with pollution.
+
+    \begin{equation} \label{HNSC1}    
+    \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\gamma u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC2}   
+    \partial_t u_2 + \mathbf{u} \cdot \nabla u_2 - \Delta_\nu u_2 -\gamma u_1 + \partial_2 p = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC3}   
+    \partial_3 p = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC4}   
+    \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC5}   
+    \partial_t C + \mathbf{u} \cdot \nabla C = K_2 \partial_{22} ^ 2 C + K_3 \partial_{33} ^2 C + S \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC6}   
+    u_1 = u_2 = u_3 n_3 = 0 \text{ on } \Gamma \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC7}   
+    u_i (\cdot, t=0) = u_{0 i}, C (\cdot, t=0) = C_0 \text{ in } \Omega, \text{$i$ = 1,2}
+    \end{equation}
+    
+    \begin{equation} \label{HNSC8}
+      \begin{split}
+        &C = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
+        & \partial_2 C = \partial_3 C = 0 \text{ on } \Gamma_G \times (0,T), \partial_1 C \in L^2 L^2 (0,T; \Gamma_G) \\
+      \end{split}
+    \end{equation}
+
+%%% *** WEAK FORMULATION AND MAIN RESULT*** %%%
+\section{Weak formulation and Main Result} \label{weakformulationmainresult}
+
+update, analogous to the original statement, check for minor necessary changes.
+  
+%%% *** PROOF *** %%%
+\section{Proof of the main theorem} \label{proof}
+
+\subsection{Estimate for $\Delta \mathbf{u}^\epsilon_h$}
+
+In this part of the proof we prove an estimate for $\Delta \mathbf{u}^\epsilon_h$ which we will later need in order to obtain $H_1$ regularity for $C$. We use the $\mathbf{u}^\epsilon = (\mathbf{u}^\epsilon_h, u^\epsilon_3)$ partition \todo{the $\mathbf{v}$ notation is already taken in the original velocity equation}, and in this section of the proof for better readability $\Delta$ stands for the horizontal Laplacian $\Delta_h,$ while $\nabla$ represents $\nabla_h.$
+Firstly, we separate the equations into horizontal and vertical directions and multiply them by the minus Laplacian of $\mathbf{u}_h$ and $u_3,$ respectively:
+
+\begin{align}
+\partial_t \mathbf{u}_h + \mathbf{u}_h \nabla \mathbf{u}_h + u_3 \partial_3 \mathbf{u}_h - \Delta \mathbf{u}_h - \partial_{33} \mathbf{u}_h + \mathbf{c}_h (\mathbf{u}) + \nabla p& = 0 & / \cdot - \Delta \mathbf{u}_h  \notag\\
+\epsilon^2 (\partial_t u_3 + \mathbf{u}_h \nabla u_3 + u_3 \partial_3 u_3 - \Delta u_3 -\partial_{33} u_3) + \epsilon c_3 (\mathbf{u}_h) + \partial_3 p & = 0 & / \cdot - \Delta u_3 \notag \\
+\nabla \cdot \mathbf{u}_h + \partial_3 u_3 & = 0 & \label{nulldivexpand}
+\end{align}
+
+We now show that after taking the integral of the horizontal and vertical velocity equations and summing the results, the parts including the $p$ pressure term cancel out.
+
+\subsubsection{The $p$ terms fall out from the summed integrals}
+
+We have to show that
+
+\[ \int_\Omega \Delta \mathbf{u}_h \nabla p + \int_\Omega \Delta u_3 \partial_3 p = 0. \]
+
+In order to see this we expand the first term as
+
+\[ \int_\Omega \Delta \mathbf{u}_h \nabla p = \sum_{i=1}^2 \int_\Omega \Delta u_i \partial_i p = \int_\Omega \sum_{i,j=1}^2 \partial_{jj} u_i \partial_i p \]
+
+\[ = \int_\Omega \bigg ( \sum_{i,j = 1}^2 \partial_j \big (\partial_j u_i \cdot \partial_i p \big) - \sum_{i,j = 1}^2 \partial_j u_i \cdot \partial_j \partial_i p \bigg ) := T_1 + T_2\]
+
+Now,
+\begin{equation}
+  \begin{split}
+T_1 & = \int_\Omega \sum_{i,j = 1}^2 \partial_j \big (\partial_j u_i \cdot \partial_i p \big) = \int_\Omega \sum_{j=1}^2 \partial_j \big( \partial_j \mathbf{u}_h \cdot \nabla p \big)  \\
+& = \int_\Omega \text{div}(\partial_1 \mathbf{u}_h \nabla p, \partial_2 \mathbf{u}_h \nabla p )= \int_{\partial \Omega} (\partial_1 \mathbf{u}_h \nabla p, \partial_2 \mathbf{u}_h \nabla p ) \cdot \vec{\mathbf{n}}_\Gamma, \\
+& =\int_{\partial \Omega} \nabla p \cdot \big(J(\mathbf{u}_h) \vec{\mathbf{n}}_\Gamma \big) = 0,
+  \end{split}
+\end{equation}
+
+using the Neumann boundary condition (\ref{ANSC-Neumann_BC_1}) regarding the Jacobian of $\mathbf{u}_h.$
+
+\[ T_2 = - \int_\Omega \sum_{i,j = 1}^2 \partial_j u_i \cdot \partial_j \partial_i p = - \sum_{i,j = 1}^2 \int_\Omega \partial_i \big( \partial_j u_i \partial_j p \big) + \sum_{i,j = 1}^2 \int_\Omega \partial_j \partial_i u_i \partial_j p. \]
+
+We show that the first term in this expanded version of $T_2$ disappears, and thus what remains is $ \sum_{i,j = 1}^2 \int_\Omega \partial_j \partial_i u_i \partial_j p,$ i.e. $ \sum_{j = 1}^2 \int_\Omega \partial_j (\text{div} \mathbf{u}_h) \partial_j p.$
+\begin{equation}
+  \begin{split}
+ & - \sum_{i,j = 1}^2 \int_\Omega \partial_i \big( \partial_j u_i \partial_j p \big) = - \int_\Omega \sum_{i=1}^2 \partial_i \big( \nabla u_i \cdot \nabla p \big) \\
+ & = - \int_\Omega \text{div} (\nabla u_1 \cdot \nabla p, \nabla u_2 \cdot \nabla p) = - \int_{\partial \Omega} (\nabla u_1 \cdot \nabla p, \nabla u_2 \cdot \nabla p) \vec{\mathbf{n}}_\Gamma \\
+ & = - \int_{\partial \Omega} \nabla p J(\mathbf{u}_h)^T \vec{\mathbf{n}}_\Gamma = 0,
+  \end{split}
+\end{equation}
+
+using the Neumann boundary condition (\ref{ANSC-Neumann_BC_2}).
+
+From the second equation we have
+\begin{equation}
+  \begin{split}
+& \int_\Omega \Delta u_3 \partial_3 p = \int_\Omega \sum_{i=1}^2 \partial_i \big( \partial_i u_3 \partial_3 p \big) - \int_\Omega \sum_{i=1}^2 \partial_i u_3 \partial_3 \partial_i p \\
+ & = \int_\Omega \text{div} (\partial_1 u_3 \partial_3 p, \partial_2 u_3 \partial_3 p) - \int_\Omega \sum_{i=1}^2 \partial_3 \big( \partial_i u_3 \partial_i p \big) + \sum_{i=1}^2 \int_\Omega \partial_i \partial_3 u_3 \cdot \partial_i p\\
+ & = \int_{\partial \Omega} \partial_3 p \nabla u_3 \vec{\mathbf{n}}_\Gamma - \int_\Omega \partial_3 \big( \nabla u_3 \nabla p \big) - \sum_{i=1}^2 \int_\Omega \partial_i \text{div}(\mathbf{u}_h) \cdot \partial_i p\\
+ & = 0 - \int_{\partial \Omega} \nabla u_3 \nabla p \cdot {{n_3}_\Gamma} - \sum_{i=1}^2 \int_\Omega \partial_i \text{div}(\mathbf{u}_h) \cdot \partial_i p = - \sum_{i=1}^2 \int_\Omega \partial_i \text{div}(\mathbf{u}_h) \cdot \partial_i p.
+  \end{split}
+\end{equation}
+using (\ref{ANSC-Neumann_BC_3}), the fact that $\nabla u_3 \cdot {{n_3}_\Gamma} = 0$, and (\ref{nulldivexpand}).
+
+Finally, summing up the remaining terms we have $$ \sum_{j = 1}^2 \int_\Omega \partial_j (\text{div} \mathbf{u}_h) \cdot \partial_j p - \sum_{i=1}^2 \int_\Omega \partial_i \text{div}(\mathbf{u}_h) \cdot \partial_i p = 0,$$
+
+thus the terms including $p$ cancel each other.
+
+\subsubsection{Using the Gronwall inequality to obtain the $\Delta \mathbf{u}^\epsilon_h$ estimate}
+
+As we have shown previously, the pressure terms add to zero, so we don't need to consider them in the following part of the calculations. Integrating the equations on $\Omega$ we have
+
+\begin{equation}
+  \begin{split}
+& \frac{1}{2} \partial_t  \big( \norm{\nabla \mathbf{u}_h}^2_2 + \norm{\epsilon \nabla u_3}^2_2 \big ) + \norm{\Delta \mathbf{u}_h}^2_2 + \norm{\nabla \partial_z \mathbf{u}_h}^2_2 + \norm{\epsilon \Delta u_3}^2_2 + \norm{\epsilon \nabla \partial_z u_3} \\
+& = \int_\Omega \Delta \mathbf{u}_h \cdot \mathbf{u}_h \nabla \mathbf{u}_h + \Delta \mathbf{u}_h \cdot u_3 \partial_3 \mathbf{u}_h +  \Delta \mathbf{u}_h \mathbf{c}_h (\mathbf{u})  \\
+& + \int_\Omega \epsilon^2 \Delta u_3 \mathbf{u}_h \nabla u_3 + \epsilon^2 \Delta u_3 u_3 \partial_3 u_3 + \Delta u_3 \epsilon c_3 (\mathbf{u}_h)
+  \end{split}
+\end{equation}
+
+One by one the terms on the right hand side can be bounded as follows.
+
+Using the Holder and Ladyzhenskaya inequalities, combined with the Young inequality we have
+
+\begin{equation}
+\begin{split}
+ & \int_\Omega \Delta \mathbf{u}_h \cdot \mathbf{u}_h \nabla \mathbf{u}_h \leq \norm{\Delta \mathbf{u}_h}_2 \norm{\mathbf{u}_h}_6 \norm{\nabla \mathbf{u}_h}_3 \\
+ & \leq \norm{\Delta \mathbf{u}_h}_2 \norm{\mathbf{u}_h}_6 \norm{\nabla \mathbf{u}_h}_2^{1/2} \norm{\Delta \mathbf{u}_h}_2^{1/2} = \norm{\Delta \mathbf{u}_h}_2^{3/2} \norm{\mathbf{u}_h}_6 \norm{\nabla \mathbf{u}_h}_2^{1/2} \\
+ & \leq \delta_1 \norm{\Delta \mathbf{u}_h}_2^2 + C(\delta_1) \norm{\mathbf{u}_h}^4_6 \norm{\nabla \mathbf{u}_h}_2^2.
+\end{split}
+\end{equation}
+
+Using Proposition 2.2 from \cite{cao2003global} choosing $u=\mathbf{u}_h, f = \Delta \mathbf{u}_h, g = \partial_3 \mathbf{u}_h,$ combined with the Young inequality we obtain 
+
+\begin{equation}
+\begin{split}
+  & \int_\Omega \Delta \mathbf{u}_h \cdot u_3 \partial_3 \mathbf{u}_h = \int_\Omega \bigg( - \int_0^z \nabla \cdot \mathbf{u}_h \bigg) \partial_3 \mathbf{u}_h \Delta \mathbf{u}_h \\
+  & \leq \norm{\nabla \mathbf{u}_h}_2^{1/2} \norm{\partial_3 \mathbf{u}_h}^{1/2}_2 \norm{\nabla \partial_3 \mathbf{u}_h}^{1/2}_2 \norm{\Delta \mathbf{u}_h}^{3/2}_2 \\
+  & \leq \delta_2 \norm{\Delta \mathbf{u}_h}^2_2 + C(\delta_2) \norm{\nabla \mathbf{u}_h}_2^2 \norm{\partial_3 \mathbf{u}_h}^2_2 \norm{\nabla \partial_3 \mathbf{u}_h}^2_2,
+\end{split}
+\end{equation}
+
+while for the horizontal part of the Coriolis term -- using that each coordinate in the Coriolis term is essentially a linear combination of terms of $\mathbf{u}$ -- we get
+
+\begin{equation}
+  \begin{split}
+    & \int_\Omega \Delta \mathbf{u}_h \mathbf{c}_h (\mathbf{u}) \leq \norm{\Delta \mathbf{u}_h}_2 \norm{\mathbf{c}_h (\mathbf{u})}_2 \\
+    & \leq \delta_3 \norm{\Delta \mathbf{u}_h}^2_2 + C(\delta_3) \norm{\mathbf{c}_h (\mathbf{u})}^2_2 \leq \delta_3 \norm{\Delta \mathbf{u}_h}^2_2 + C(\delta_3) (\norm{ \mathbf{u}_h}^2_2 + \norm{ \epsilon u_3}^2_2).
+  \end{split}
+\end{equation}
+
+For the terms coming from the vertical velocity equation we use the Holder, Ladyzhenskaya and Young inequalities to obtain
+
+\begin{equation}
+  \begin{split}
+    & \int_\Omega \epsilon^2 \Delta u_3 \mathbf{u}_h \nabla u_3 \leq \norm{\epsilon \Delta u_3}_2 \norm{\mathbf{u}_h}_6 \norm{\epsilon \nabla u_3}_3 \\
+    & \leq \norm{\epsilon \Delta u_3}_2 \norm{\mathbf{u}_h}_6 \norm{\epsilon \nabla u_3}_2^{1/2} \norm{\epsilon \Delta u_3}_2^{1/2} =  \norm{\epsilon \Delta u_3}^{3/2}_2 \norm{\mathbf{u}_h}_6 \norm{\epsilon \nabla u_3}_2^{1/2}\\
+    & \leq \delta_4 \norm{\epsilon \Delta u_3}_2^2 + C(\delta_4) \norm{\mathbf{u}_h}^4_6 \norm{\epsilon \nabla u_3}^2_2,
+  \end{split}
+\end{equation}
+
+and
+
+\begin{equation}
+\begin{split}
+    & \int_\Omega \epsilon^2 \Delta u_3 u_3 \partial_3 u_3 \leq \norm{\epsilon \Delta u_3}_2 \norm{\epsilon u_3}_6 \norm{\nabla \mathbf{u}_h}_3 \\
+    & \leq \norm{\epsilon \Delta u_3}_2 \norm{\epsilon u_3}_6 \norm{\nabla \mathbf{u}_h}_2^{1/2} \norm{\Delta \mathbf{u}_h}_2^{1/2} \\
+    & \leq \delta_{5,1} \norm{\epsilon \Delta u_3}_2^2 + C(\delta_{5,1}) \norm{\epsilon u_3}^2_6 \norm{\nabla \mathbf{u}_h}_2 \norm{\Delta \mathbf{u}_h}_2 \\
+    & \leq \delta_{5,1} \norm{\epsilon \Delta u_3}_2^2 + C(\delta_{5,1}) \delta_{5,2}\norm{\Delta \mathbf{u}_h}_2 ^ 2 + C(\delta_{5,1}) C(\delta_{5,2}) \norm{\epsilon u_3}^4_6 \norm{\nabla \mathbf{u}_h}^2_2,
+  \end{split}
+\end{equation}
+
+and finally for the vertical Coriolis term we have
+
+\begin{equation}
+  \begin{split}
+  & \int_\Omega \Delta u_3 \epsilon c_3 (\mathbf{u}_h) \leq \epsilon \norm{\Delta u_3}_2 \norm{c_3 (\mathbf{u}_h)}_2 \\
+  & \leq \delta_6 \norm{\epsilon \Delta u_3}^2_2 + C(\delta_6) \norm{c_3 (\mathbf{u}_h)}_2^2 \leq \delta_6 \norm{\epsilon \Delta u_3}^2_2 + C(\delta_6) \norm{\mathbf{u}_h}_2^2.
+  \end{split}
+\end{equation}
+
+
+Considering all these inequalities, using the Poincare inequality, as a result we have
+
+\begin{equation}
+  \begin{split}
+& \frac{1}{2} \partial_t  \big( \norm{\nabla \mathbf{u}_h}^2_2 + \norm{\epsilon \nabla u_3}^2_2 \big ) + \norm{\Delta \mathbf{u}_h}^2_2 + \norm{\nabla \partial_z \mathbf{u}_h}^2_2 + \norm{\epsilon \Delta u_3}^2_2 + \norm{\epsilon \nabla \partial_z u_3} \\
+& \leq C(\delta_1) \norm{\mathbf{u}_h}^4_6 \norm{\nabla \mathbf{u}_h}_2^2 + C(\delta_2) \norm{\nabla \mathbf{u}_h}_2^2 \norm{\partial_3 \mathbf{u}_h}^2_2 \norm{\nabla \partial_3 \mathbf{u}_h}^2_2 \\
+& + C(\delta_3) (\norm{ \mathbf{u}_h}^2_2 + \norm{ \epsilon u_3}^2_2) + C(\delta_4) \norm{\mathbf{u}_h}^4_6 \norm{\epsilon \nabla u_3}^2_2 \\
+& + C(\delta_{5,1}) C(\delta_{5,2}) \norm{\epsilon u_3}^4_6 \norm{\nabla \mathbf{u}_h}^2_2 + C(\delta_6) \norm{\mathbf{u}_h}_2^2 \\
+& \leq C(\delta) \big ( \norm{\mathbf{u}_h}^4_6 +\norm{\partial_3 \mathbf{u}_h}^2_2 \norm{\nabla \partial_3 \mathbf{u}_h}^2_2 + \norm{\epsilon u_3}^4_6 + 2 \big) \big( \norm{\nabla \mathbf{u}_h}^2_2 + \norm{\epsilon \nabla u_3}^2_2 \big ).
+  \end{split}
+\end{equation}
+
+Using the Gronwall inequality we are provided with a bound for $\int_0^t \norm{\Delta \mathbf{u}_h}^2_2,$ which we will use in the next section.
+
+\subsection{$\norm{\partial_{33}v}_2^2$}
+
+Here for the moment being $v$ denotes the horizontal velocity.
+
+This is also needed for itself, and for the integral that appears in the inequality above: $\int_0^t \norm{\partial_3 v}^2_2 \norm{\nabla \partial_3 v}^2_2.$
+
+In order to obtain a bound for these terms, we 1.) take the $\partial_z$ derivative of the motion equation of $v$, 2.) multiply it by $\partial_z v$ and integrate on $\Omega$, and 3.) multiply the vertical equation by $-\partial_{33} w$ and integrate on $\Omega$, and finally 4.) take their sums.
+
+$$ \partial_t v + v \nabla v + w \partial_3 v - \Delta v - \partial_{33} v + \nabla p + c_h (u) = 0$$
+
+$$ \epsilon^2 (\partial_t w + v \nabla w + w \partial_3 w - \Delta w - \partial_{33} w) + \epsilon c_3 (v) + \partial_3 p = 0$$
+
+\textbf{The difference in this approach is that we firstly take the $z$ derivative, and not directly multiply by $v_{zz}.$ This allows us to realise that there is a part that becomes zero in the meanwhile.}
+
+The calculations on the paper (add) show that $\int_\Omega \nabla p \cdot \partial_{33}v + \partial_3 p \cdot \partial_{33} w = 0.$ The first thing to note here is that the $p$ terms still fall out.
+
+We have $\int_\Omega \partial_3 \nabla p \cdot \partial_3 v - \partial_3 p \cdot \partial_{33} w,$ which becomes $\int_\Omega - \nabla p \cdot \partial_{33} v - \partial_3 p \cdot \partial_{33} w,$ which is zero, as stated above. For this we only use that the appearing boundary term $\nabla p \partial_3 v n_3$ is zero because of the added Neumann boundary conditions.
+
+\subsection{$H_1$ estimate for $C$ - this does not work like this, eventually}
+
+In order to prove the weak convergence of the term $u_3 C$ we need a strong convergence result for $C,$ which we will obtain by showing the $H_1$ boundedness of the concentration function and then use the $H_1 \hookrightarrow L_2$ compact embedding.
+
+In this section, similarly as in the previous one, we use $\nabla$ and $\Delta$ to denote horizontal derivatives.
+
+We begin by taking the $u_3$ function in
+
+\begin{equation}
+  \partial_t C^\epsilon - \epsilon K_1 \partial_{11} ^ 2 C^\epsilon - K_2 \partial_{22} ^ 2 C^\epsilon - K_3 \partial_{33} ^ 2 C^\epsilon = - \mathbf{u}_h^\epsilon \cdot \nabla C^\epsilon - u_3^\epsilon \cdot \partial_3 C^\epsilon + S_\epsilon
+\end{equation}
+
+and rewrite it as
+
+$$ u^\epsilon_3 = - \int_0^z \nabla \cdot \mathbf{u}^\epsilon_h.$$
+
+We multiply the concentration equation by $-\Delta C - \partial_{33} C$ and integrate on $\Omega.$
+
+On the left hand side for the first term this results in 
+
+\begin{equation}
+  \begin{split}
+  & \big ( \partial_t C, -\Delta C -\partial_{33} C \big) _{L^2} \\
+  & = \frac{1}{2} \partial_t \big ( \norm{\nabla C}_2^2 + \norm{\partial_3 C}_2^2 \big) + \big \lbrack \partial_t C \cdot \nabla C \big \rbrack_{\partial \Omega} + \big \lbrack \partial_t C \cdot \partial_3 C \big \rbrack_{\partial \Omega},
+  \end{split}
+\end{equation}
+
+while for the second derivatives we obtain
+
+\begin{equation}
+  \begin{split}
+  & \big ( - \epsilon K_1 \partial_{11} ^ 2 C^\epsilon - K_2 \partial_{22} ^ 2 C^\epsilon - K_3 \partial_{33} ^ 2 C^\epsilon, -\Delta C -\partial_{33} C \big) _{L^2} \\
+  & = \epsilon K_1 \norm{\partial_{11} C}^2_2 + K_2 \norm{\partial_{22} C}^2_2 + K_3 \norm{\partial_{33} C}^2_2 \\
+  & + (\epsilon K_1 + K_2) \norm{\partial_1 \partial_2 C}_2^2 + (K_2 + K_3) \norm{\partial_2 \partial_3 C}_2^2 + (\epsilon K_1 + K_3) \norm{\partial_1 \partial_3 C}_2^2 \\
+  & + \sum_{i,j = 1}^3 K_i K_j (\epsilon \delta_{i=1} + \delta_{i \neq 1}) \bigg (\int_\Gamma \partial_{jj} C \partial_i C \nu_i \diff \Gamma - \int_\Gamma \partial_i C \partial_{ij} C \nu_j \diff \Gamma \bigg ).
+  \end{split}
+\end{equation}
+
+Observe that all boundary terms from the previous two equations fall out.
+
+Firstly, 
+$$\big \lbrack \partial_t C \cdot \partial_i C \big \rbrack_{\partial \Omega} = 0,$$ since for $i = 2,3$ we have $\partial_i C = 0$ on $\Gamma_B$ and $C=0$ on $\Gamma_L \cup \Gamma_U$, while for $i=1$ we use that $\nu_i = 0$ on the $\Gamma_B$ bottom of the boundary, thus $\int_{\Gamma_B} \partial_t C \cdot \partial_1 C \nu_1 = 0.$
+
+Secondly, we examine the boundary terms coming from the expansion of the parts of the Laplacians.
+
+\begin{enumerate}
+  \item For values of $i=j$, $\int_\Gamma \partial_{jj} C \partial_i C \nu_i \diff \Gamma = \int_\Gamma \partial_i C \partial_{ij} C \nu_j \diff \Gamma,$ thus the contribution of these terms is zero.
+  \item For $i \neq j,$ on $\Gamma_B$ we have
+  \begin{enumerate}
+    \item $\int_\Gamma \partial_{jj} C \partial_i C \nu_i \diff \Gamma:$ for $i = 1,2$ we have $\nu_i = 0,$ while for $i=3$ we have $\partial_3 C = 0$ boundary condition on $\Gamma_B.$
+    \item $\int_\Gamma \partial_i C \partial_{ij} C \nu_j \diff \Gamma:$ for $j = 1,2$ again we can use $\nu_j = 0$ on this part of the boundary. For $j = 3,$ if $i=2$ we can apply $\partial_2 C = 0,$ while for $j=3, i= 1$ we can use $\partial_1 \partial_3 C = 0,$ since $\partial_3 C = 0$ on the whole $\Gamma_B$ horizontal plane, taking a horizontal derivative of it remains zero.
+  \end{enumerate}
+  \item For $i \neq j,$ on the rest of the boundary, where we have $C = 0.$ On this part of the boundary on each plane there is always a part of the product that becomes zero, as $C=0$ on that plane, and we take a directional derivative whose direction falls into that plane.
+\end{enumerate}
+
+Thus we arrive to
+
+\begin{equation}
+  \begin{split}
+    &\frac{1}{2} \partial_t \big( \norm{\nabla C}_2^2 + \norm{\partial_3 C}^2_2 \big) \\
+    & + \epsilon K_1 \norm{\partial_{11} C}^2_2 + K_2 \norm{\partial_{22} C}^2_2 + K_3 \norm{\partial_{33} C}^2_2 \\
+    & + (\epsilon K_1 + K_2) \norm{\partial_1 \partial_2 C}_2^2 + (K_2 + K_3) \norm{\partial_2 \partial_3 C}_2^2 + (\epsilon K_1 + K_3) \norm{\partial_1 \partial_3 C}_2^2 \\
+    & = \int_\Omega \bigg ( \mathbf{u}_h \cdot \nabla C - \bigg( \int_0^z \nabla \cdot \mathbf{u}_h \diff \xi \bigg) \partial_3 C - S_\epsilon \bigg ) \big( \Delta C + \partial_{33} C \big).
+  \end{split}
+\end{equation}
+
+In order to create a structure where eventually the Gronwall inequality can be applied, we form bounds for the terms on the right hand side as seen below.
+
+\begin{itemize}
+
+\item As we previously showed, there are no boundary term contributions from the terms $\partial_{ii} C \partial_{33} C$ when integrating by parts, thus we have
+
+\begin{equation} \norm{\Delta C + \partial_{33} C }_2 = (\norm{\Delta C}_2^2 + \norm{\nabla \partial_3 C}_2^2 + \norm{\partial_{33} C}_2^2)^{1/2}.\label{twonormoflaplacianC}\end{equation}
+
+Combining this with the Cauchy-Schwartz and the Young inequality, for the term including the $S_\epsilon$ source we are provided with
+
+\begin{equation}
+  \begin{split}
+  & \int_\Omega \abs{S_\epsilon} \abs{\Delta C + \partial_{33} C} \leq \norm{S_\epsilon}_2 (\norm{\Delta C}_2^2 + \norm{\nabla \partial_3 C}_2^2 + \norm{\partial_{33} C}_2^2)^{1/2} \\
+  & \leq \delta_1 (\norm{\Delta C}_2^2 + \norm{\nabla \partial_3 C}_2^2 + \norm{\partial_{33} C}_2^2) + C(\delta_1)\norm{S_\epsilon}_2^2.
+  \end{split}
+\end{equation}
+
+\item Using the Holder, Ladyzhenskaya and Young inequalities and taking advantage of (\ref{twonormoflaplacianC}) again,
+
+\begin{equation}
+  \begin{split}
+  & \int_\Omega \abs{ \mathbf{u}_h \cdot \nabla C } \abs{ \Delta C + \partial_{33} C } \\
+  & \leq \norm{\mathbf{u}_h}_6 \norm{\nabla C}_3 \norm{\Delta C + \partial_{33} C}_2 \\
+  & \leq \norm{\mathbf{u}_h}_6 \norm{\nabla C}_2^{1/2} \norm{\Delta C}_2^{1/2} (\norm{\Delta C}_2^2 + \norm{\nabla \partial_3 C}_2^2 + \norm{\partial_{33} C}_2^2)^{1/2} \\
+  & \leq \norm{\mathbf{u}_h}_6 \norm{\nabla C}_2^{1/2} (\norm{\Delta C}_2^2 + \norm{\nabla \partial_3 C}_2^2 + \norm{\partial_{33} C}_2^2)^{3/4} \\
+  & \leq \delta_2 (\norm{\Delta C}_2^2 + \norm{\nabla \partial_3 C}_2^2 + \norm{\partial_{33} C}_2^2) + C(\delta_2) \norm{\mathbf{u}_h}_6^4 \norm{\nabla C}_2^2
+  \end{split}
+\end{equation}
+
+\item Finally, in order to estimate the third term we apply the inequality described in Proposition 2.2 in \cite{cao2003global}.
+
+\begin{remark} As \todo{where to put this remark in the article} $\mathbf{u}_h = 0$ on the boundary, the $\norm{\mathbf{u}_h}_{H^2}$ and $\norm{\Delta \mathbf{u}_h}_{L^2} $ norms are equivalent; and as $\partial_3 C = 0$ on $\Gamma_b$ and everywhere else on the boundary $C$ is zero, $\norm{\partial_3 C}_{H^1}$ and $\norm{\nabla \partial_3}_{L^2}$ are equivalent as well.
+\end{remark}
+
+\begin{equation}
+  \begin{split}
+  & \abs{ \int_\Omega  \bigg( \int_0^z \nabla \cdot \mathbf{u}_h \diff \xi \bigg) \partial_3 C  \big( \Delta C + \partial_{33} C \big)} \\
+  & \leq \text{const.} \norm{\mathbf{u}_h}_{H^1}^{1/2} \norm{\mathbf{u}_h}_{H^2}^{1/2} \norm{\partial_3 C}_2^{1/2} \norm{\partial_3 C}_{H^1}^{1/2} \norm{\Delta C + \partial_{33} C}_2 \\
+  & = \text{const.} \norm{\nabla \mathbf{u}_h}_2^{1/2} \norm{\Delta \mathbf{u}_h}_2^{1/2} \norm{\partial_3 C}_2^{1/2} \norm{\nabla \partial_3 C}_2^{1/2} \norm{\Delta C + \partial_{33} C}_2
+  \end{split}
+\end{equation}
+
+Using (\ref{twonormoflaplacianC}), $\norm{\nabla \partial_3 C}_2^{1/2} \leq (\norm{\Delta C}_2^2 + \norm{\nabla \partial_3 C}_2^2 + \norm{\partial_{33} C}_2^2)^{1/4}$ and the Young inequality we eventually obtain
+
+\begin{equation}
+  \begin{split}
+  & \abs{ \int_\Omega  \bigg( \int_0^z \nabla \cdot \mathbf{u}_h \diff \xi \bigg) \partial_3 C  \big( \Delta C + \partial_{33} C \big)} \\
+  & \leq \text{const.} \norm{\nabla \mathbf{u}_h}_2^{1/2} \norm{\Delta \mathbf{u}_h}_2^{1/2} \norm{\partial_3 C}_2^{1/2} (\norm{\Delta C}_2^2 + \norm{\nabla \partial_3 C}_2^2 + \norm{\partial_{33} C}_2^2)^{3/4} \\
+  & \leq \delta_3 (\norm{\Delta C}_2^2 + \norm{\nabla \partial_3 C}_2^2 + \norm{\partial_{33} C}_2^2) + C(\delta_3) \norm{\nabla \mathbf{u}_h}_2^2 \norm{\Delta \mathbf{u}_h}_2^2 \norm{\partial_3 C}_2^2.
+  \end{split}
+\end{equation}
+\end{itemize}
+
+\section{How to proceed}
+
+Eventually we need to have an $H^1$ estimate for $C$.
+To achieve this, we have the estimate provided by the Gronwall inequality for $\Delta_h \mathbf{u}_h.$
+What we still need:
+ - We need the $L^\infty$ norm of the full Laplacian of the horizontal velocity, i.e. $\partial_{33} \mathbf{u}_h.$
+ - It needs to be verified what regularity exactly does the Gronwall inequality give in time for these norms. It is not an $L^\infty$ norm in time, because they are behind a time integral in an exponent.
+ - The boundary conditions need to be checked not only for the calculations of why the $p$ terms drop out, but also for the other terms when we write out what parts become a full norm.
+ - Once we have the full Laplacian of the horizontal velocity in $L^2$, we can use the equivalence of $\norm{\Delta v}_{L^2}$ and $\norm{v}_{H^2_0}$, conclude the spatial $H^2$ regularity of $\mathbf{u}_h$ and and a consequence, obtain $L^\infty$ regularity of the horizontal velocity in 3D.
+ - Once we have this, apply the article (regularised viscosity and diffusivity for primitive equations).
+ 
+
+%%% *** CONCLUDING REMARKS *** %%%
+\section{Concluding remarks} \label{concludingremarks}
+
+\nocite{*}
+\bibliographystyle{abbrv}
+\bibliography{the_u_c_eps_model}
+
+\end{document}
+
+%%% add http://elte.prompt.hu/sites/default/files/tananyagok/AtmosphericChemistry/ch10s03.html
+%%% http://twister.caps.ou.edu/PM2000/Chapter7.pdf
