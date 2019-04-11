@@ -434,6 +434,38 @@ The calculations on the paper (add) show that $\int_\Omega \nabla p \cdot \parti
 
 We have $\int_\Omega \partial_3 \nabla p \cdot \partial_3 v - \partial_3 p \cdot \partial_{33} w,$ which becomes $\int_\Omega - \nabla p \cdot \partial_{33} v - \partial_3 p \cdot \partial_{33} w,$ which is zero, as stated above. For this we only use that the appearing boundary term $\nabla p \partial_3 v n_3$ is zero because of the added Neumann boundary conditions.
 
+So the terms including $p$ vanish.
+
+Three terms from the $v$ momentum equation become "full" norms, and go to the left hand side, the other terms will be further estimated.
+
+\begin{enumerate}
+
+\item $\int_\Omega \partial_t \partial_3 v \cdot \partial_3 v = \frac{1}{2} \partial_t \norm{\partial_3 v}_2^2$
+
+\item $\int_\Omega - \Delta \partial_3 v \cdot \partial_3 v$ gives $\norm{\nabla \partial_3 v}_2^2$
+
+\item $- \int_\Omega \partial_{333} v \partial_3 v$ becomes $\norm{v_{33}}_2^2,$ using that the boundary term vanishes as $\partial_3 v \cdot n_3 = \nabla \cdot v \cdot n_3 = 0$ on the boundary.
+
+\end{enumerate}
+
+Thus from both equations as a result, on the left hand side we have $$ \frac{1}{2} \partial_t \norm{\partial_3 v}_2^2 + \norm{\nabla \partial_3 v}_2^2 + \norm{\partial_{33} v}_2^2 +  \frac{1}{2} \partial_t \norm{\partial_3 \epsilon w}_2^2 + \norm{\nabla \partial_3 \epsilon w}_2^2 + \norm{\partial_{33} \epsilon w}_2^2.$$
+
+Now we handle the remaining terms from the horizontal momentum equation: $( \partial_3 v \cdot \nabla v + v \nabla \partial_3 v + \partial_3 w \cdot \partial_3 v + w \partial_{33}v + \partial_3 c_h (u)) \cdot \partial_3 v.$
+
+We use the fact that two terms sum up to zero using integration by parts: $\int_\Omega v \nabla \partial_3 v \cdot \partial_3 v + w \partial_{33}v \cdot \partial_3 v = 0.$ This can be shown by expressing $w$ as the integral of the divergence of $v.$
+
+The remaining terms can be estimated as
+
+\begin{enumerate}
+
+\item $- \int_\Omega \partial_3 w \cdot \partial_3 v \partial_3 v = - \int_\Omega \nabla \cdot v \partial_3 v \partial_3 v \leq C \int_\Omega \abs{v} \abs{\partial_3 v} \abs{\partial_3 \nabla v}$ using integration by parts.
+
+\item $\int_\Omega - \partial_3 v \cdot \nabla v \partial_3 v \leq$ similarly.
+\end{enumerate}
+
+So we have that these terms can be bounded by $\norm{v}_6 \norm{\partial_3 v}_3 \norm{\nabla \partial_3 v}_2 \leq \norm{v}_6 \norm{\partial_3 v}_2^{1/2} \norm{\nabla \partial_3 v}_2^{3/2} \leq \delta \norm{\nabla \partial_3 v}_2^2 + C(\delta) \norm{v}_6^4 \norm{\partial_3 v}_2^2$ 
+
+
 \subsection{$H_1$ estimate for $C$ - this does not work like this, eventually}
 
 In order to prove the weak convergence of the term $u_3 C$ we need a strong convergence result for $C,$ which we will obtain by showing the $H_1$ boundedness of the concentration function and then use the $H_1 \hookrightarrow L_2$ compact embedding.
