@@ -425,7 +425,17 @@ Using the Gronwall inequality we are provided with a bound for $\int_0^t \norm{\
 
 Here for the moment being $v$ denotes the horizontal velocity.
 
-This is also needed for itself, and for the integral that appears in the inequality above: $\int_0^t \norm{\partial_3 v}^2_2 \norm{\nabla \partial_3 v}^2_2.$
+A collection of reasons why this part needed / needs change
+
+\begin{itemize}
+
+\item The important thing here is that while in the first version of estimates for $\norm{\partial_{33} v}_2$ in a specific term we had the product of $\nabla \partial_3 v, \Delta v$ and $\partial_{33} v,$ which was too much in the sense that applying the Young inequality to obtain a sum resulted in an exponent of $4,$ which is not present on the left hand side. Here it is ok, because we can bring $\delta \norm{\nabla \partial_3 v}_2^2$ to the left hand side, applying first an integration by parts that make two terms vanish.
+
+\item This is also needed for itself, and for the integral that appears in the inequality above: $\int_0^t \norm{\partial_3 v}^2_2 \norm{\nabla \partial_3 v}^2_2.$
+
+\item In the first version we have terms on the right hand side appearing $ \delta \norm{\Delta v}_2^2,$ which, even though is not present on the right hand side for the bound of $\norm{\partial_{33} v}_2,$ but at the time I decided this can be solved by considering / applying the bounds for  $\norm{\partial_{33} v}_2$ and  $\norm{\Delta_h v}_2$ contemporarily, and with that we have the horizontal Laplacian on the LHS. However as later it has turned out, the bound for the vertical derivative has to work before the horizontal one, as we need a bound for $\int_0^t \norm{\partial_3 v}^2_2 \norm{\nabla \partial_3 v}^2_2,$ which is obtained through the vertical bound in itself.
+
+\end{itemize}
 
 In order to obtain a bound for these terms, we 1.) take the $\partial_z$ derivative of the motion equation of $v$, 2.) multiply it by $\partial_z v$ and integrate on $\Omega$, and 3.) multiply the vertical equation by $-\partial_{33} w$ and integrate on $\Omega$, and finally 4.) take their sums.
 
@@ -481,11 +491,30 @@ Bounds for the terms coming from the vertical momentum equation that did not bec
 
 \item $\int_\Omega \epsilon c_3(v) \partial_{33} w \leq \norm{c_3(v)}_2 \norm{\partial_{33} \epsilon w}_2 \leq \delta\norm{\partial_{33} \epsilon w}_2^2 + C(\delta) \norm{c_3(v)}_2^2 \leq \delta\norm{\partial_{33} \epsilon w}_2^2 + C(\delta) \norm{v}_2^2$
 
-\item $\int_\Omega v \cdot \nabla \epsilon w \cdot \partial_{33} \epsilon w \leq \norm{\epsilon \partial_{33}w}_2 \norm{v}_6 \norm{\nabla \epsilon w}_3 \leq \norm{\epsilon \partial_{33}w}_2 \norm{v}_6 \norm{\nabla \epsilon w}_2^{1/2} \norm{\Delta \epsilon w}_2^{1/2} \leq \delta \norm{\epsilon \partial_{33}w}_2^2 + C(\delta) \norm{v}_6^2 \norm{\nabla \epsilon w}_2 \norm{\Delta \epsilon w}_2 \leq \delta \norm{\epsilon \partial_{33}w}_2^2 + \delta_2 C(\delta) \norm{\Delta \epsilon w}_2^2 + C(\delta_2 )C(\delta) \norm{v}_6^4 \norm{\nabla \epsilon w}^2_2.$
+\item
 
-\item $\int_\Omega \epsilon w \cdot \partial_3 w \cdot \partial_{33} \epsilon w$
+\begin{equation}
+\begin{split}
+&\int_\Omega v \cdot \nabla \epsilon w \cdot \partial_{33} \epsilon w \leq \norm{\epsilon \partial_{33}w}_2 \norm{v}_6 \norm{\nabla \epsilon w}_3 \\
+& \leq \norm{\epsilon \partial_{33}w}_2 \norm{v}_6 \norm{\nabla \epsilon w}_2^{1/2} \norm{\Delta \epsilon w}_2^{1/2} \\
+& \leq \delta \norm{\epsilon \partial_{33}w}_2^2 + C(\delta) \norm{v}_6^2 \norm{\nabla \epsilon w}_2 \norm{\Delta \epsilon w}_2 \\
+& \leq \delta \norm{\epsilon \partial_{33}w}_2^2 + \delta_2 C(\delta) \norm{\Delta \epsilon w}_2^2 + C(\delta_2 )C(\delta) \norm{v}_6^4 \norm{\nabla \epsilon w}^2_2.
+\end{split}
+\end{equation}
+
+\item
+
+\begin{equation}
+\begin{split}
+& \int_\Omega \epsilon w \cdot \partial_3 w \cdot \partial_{33} \epsilon w = \int_\Omega \epsilon w \cdot \nabla_h v \cdot \partial_{33} \epsilon w \\
+& \leq \norm{\partial_{33} \epsilon w}_2 \norm{\epsilon w}_6 \norm{\nabla v}_3  \leq \norm{\partial_{33} \epsilon w}_2 \norm{\epsilon w}_6 \norm{\nabla v}_2^{1/2} \norm{\Delta v}_2^{1/2} \\
+& \leq \norm{\partial_{33} \epsilon w}_2^2 + C(\delta) \delta_2 \norm{\Delta v}_2^2 + C(\delta) C(\delta_2) \norm{\epsilon w}_6^4 \norm{\nabla v}_2^2.
+\end{split}
+\end{equation}
 
 \end{enumerate}
+
+Is there a "vertical Ladyzhenskaya" inequality? The problem here is that we have terms like $\delta_2 \norm{\Delta v}_2^2,$ which originally were thought to be arrangeable through using the horizontal and vertical bounds at the same time, with this having the horizontal Laplacian on the LHS, but since this bound has to work on its own, we need to make the $\delta_2 \norm{\Delta v}_2^2$ go. 
 
 The terms coming from the vertical momentum equation need to be described (they are the "bounded A" part of the "C*X + A" type structure of the Gronwall inequality), these then have to be merged with the previous bounds, and write down the Gronwall inequality.
 
