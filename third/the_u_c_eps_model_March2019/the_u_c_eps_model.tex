@@ -11,6 +11,11 @@
 \usepackage{array}
 \usepackage{outlines}
 \usepackage{setspace}
+\usepackage{xcolor}
+%%% use as \textcolor{ao}{Thoughts.}
+\definecolor{ao}{rgb}{0.0, 0.5, 0.0}
+\definecolor{trueblue}{rgb}{0.0, 0.45, 0.81}
+\definecolor{cadmiumorange}{rgb}{0.93, 0.53, 0.18}
 \usepackage[colorinlistoftodos]{todonotes}
 \setlist[enumerate,1]{label=\alph*)}
 \setlist[enumerate,2]{label=\roman*)}
@@ -450,9 +455,9 @@ Three terms from the $v$ momentum equation become "full" norms, and go to the le
 
 Thus from both equations as a result, on the left hand side we have $$ \frac{1}{2} \partial_t \norm{\partial_3 v}_2^2 + \norm{\nabla \partial_3 v}_2^2 + \norm{\partial_{33} v}_2^2 +  \frac{1}{2} \partial_t \norm{\partial_3 \epsilon w}_2^2 + \norm{\nabla \partial_3 \epsilon w}_2^2 + \norm{\partial_{33} \epsilon w}_2^2.$$
 
-Now we handle the remaining terms from the horizontal momentum equation: $( \partial_3 v \cdot \nabla v + v \nabla \partial_3 v + \partial_3 w \cdot \partial_3 v + w \partial_{33}v + \partial_3 c_h (u)) \cdot \partial_3 v.$
+Now we handle the remaining terms from the horizontal momentum equation: $( \partial_3 v \cdot \nabla v + \textcolor{ao}{v \nabla \partial_3 v} + \partial_3 w \cdot \partial_3 v + \textcolor{ao}{w \partial_{33}v} + \partial_3 c_h (u)) \cdot \partial_3 v.$
 
-We use the fact that two terms sum up to zero using integration by parts: $\int_\Omega v \nabla \partial_3 v \cdot \partial_3 v + w \partial_{33}v \cdot \partial_3 v = 0.$ This can be shown by expressing $w$ as the integral of the divergence of $v.$
+We use the fact that two terms sum up to zero using integration by parts: $\int_\Omega \textcolor{ao}{v \nabla \partial_3 v \cdot \partial_3 v + w \partial_{33}v \cdot \partial_3 v} = 0.$ This can be shown by expressing $w$ as the integral of the divergence of $v.$
 
 The remaining terms can be estimated as
 
@@ -460,12 +465,29 @@ The remaining terms can be estimated as
 
 \item $- \int_\Omega \partial_3 w \cdot \partial_3 v \partial_3 v = - \int_\Omega \nabla \cdot v \partial_3 v \partial_3 v \leq C \int_\Omega \abs{v} \abs{\partial_3 v} \abs{\partial_3 \nabla v}$ using integration by parts.
 
-\item $\int_\Omega - \partial_3 v \cdot \nabla v \partial_3 v \leq$ similarly.
+\item $\int_\Omega - \partial_3 v \cdot \nabla v \partial_3 v \leq$ similarly, same bound.
+
+\item $\int_\Omega \partial_3 c_h (u) \cdot \partial_3 v \leq \delta \norm{\partial_{33} v}_2^2 + C(\delta) \norm{c_h (u)}_2^2 \leq \delta \norm{\partial_{33} v}_2^2 + C(\delta) (\norm{v}_2^2 + \norm{\epsilon w}_2^2).$
+
 \end{enumerate}
 
-So we have that these terms can be bounded by $\norm{v}_6 \norm{\partial_3 v}_3 \norm{\nabla \partial_3 v}_2 \leq \norm{v}_6 \norm{\partial_3 v}_2^{1/2} \norm{\nabla \partial_3 v}_2^{3/2} \leq \delta \norm{\nabla \partial_3 v}_2^2 + C(\delta) \norm{v}_6^4 \norm{\partial_3 v}_2^2$
+So we have that these first two terms can be bounded by $ C \norm{v}_6 \norm{\partial_3 v}_3 \norm{\nabla \partial_3 v}_2 \leq C \norm{v}_6 \norm{\partial_3 v}_2^{1/2} \norm{\nabla \partial_3 v}_2^{3/2} \leq \delta \norm{\nabla \partial_3 v}_2^2 + C(\delta) \norm{v}_6^4 \norm{\partial_3 v}_2^2.$
 
-The terms coming from the vertical momentum equation needs to be described (they are the "bounded A" part of the "C*X + A" type structure of the Gronwall inequality), these then have to be merged with the previous bounds, and write down the Gronwall inequality.
+The important thing here is that while in the first version of estimates for $\norm{\partial_{33} v}_2$ in a specific term we had the product of $\nabla \partial_3 v, \Delta v$ and $\partial_{33} v,$ which was too much in the sense that applying the Young inequality to obtain a sum resulted in an exponent of $4,$ which is not present on the left hand side. Here it is ok, because we can bring $\delta \norm{\nabla \partial_3 v}_2^2$ to the left hand side.
+
+Bounds for the terms coming from the vertical momentum equation that did not become "full norms":
+
+\begin{enumerate}
+
+\item $\int_\Omega \epsilon c_3(v) \partial_{33} w \leq \norm{c_3(v)}_2 \norm{\partial_{33} \epsilon w}_2 \leq \delta\norm{\partial_{33} \epsilon w}_2^2 + C(\delta) \norm{c_3(v)}_2^2 \leq \delta\norm{\partial_{33} \epsilon w}_2^2 + C(\delta) \norm{v}_2^2$
+
+\item $\int_\Omega v \cdot \nabla \epsilon w \cdot \partial_{33} \epsilon w \leq \norm{\epsilon \partial_{33}w}_2 \norm{v}_6 \norm{\nabla \epsilon w}_3 \leq \norm{\epsilon \partial_{33}w}_2 \norm{v}_6 \norm{\nabla \epsilon w}_2^{1/2} \norm{\Delta \epsilon w}_2^{1/2} \leq \delta \norm{\epsilon \partial_{33}w}_2^2 + C(\delta) \norm{v}_6^2 \norm{\nabla \epsilon w}_2 \norm{\Delta \epsilon w}_2 \leq \delta \norm{\epsilon \partial_{33}w}_2^2 + \delta_2 C(\delta) \norm{\Delta \epsilon w}_2^2 + C(\delta_2 )C(\delta) \norm{v}_6^4 \norm{\nabla \epsilon w}^2_2.$
+
+\item $\int_\Omega \epsilon w \cdot \partial_3 w \cdot \partial_{33} \epsilon w$
+
+\end{enumerate}
+
+The terms coming from the vertical momentum equation need to be described (they are the "bounded A" part of the "C*X + A" type structure of the Gronwall inequality), these then have to be merged with the previous bounds, and write down the Gronwall inequality.
 
 
 \subsection{$H_1$ estimate for $C$ - this does not work like this, eventually}
