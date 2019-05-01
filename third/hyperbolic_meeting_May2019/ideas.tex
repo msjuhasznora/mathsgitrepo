@@ -163,10 +163,6 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
     \partial_t C + \mathbf{u} \cdot \nabla C = K_2 \partial_{22} ^ 2 C + K_3 \partial_{33} ^2 C + S \text{ in } \Omega \times (0,T)
     \end{equation}
     
-    \begin{equation} \label{HNSC6}   
-    u_1 = u_2 = u_3 n_3 = 0 \text{ on } \Gamma \times (0,T)
-    \end{equation}
-    
     \begin{equation} \label{HNSC7}   
     u_i (\cdot, t=0) = u_{0 i}, C (\cdot, t=0) = C_0 \text{ in } \Omega, \text{$i$ = 1,2}
     \end{equation}
@@ -181,6 +177,8 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
   Using periodic boundary conditions and the result that $v_0 \in H^1 \implies$ strong convergence of $u_3$ in $L^2 L^2$ using the Strong Convergence Justification article's result.
   
   \subsection{Main result}
+  
+  CHANGE: Actually, since we have the strong convergence of $u_3,$ we do not need this lemma, we can just directly use the strong convergence of $u_3$ to prove the weak convergence of a product whose one term if weakly convergent, and the other is strongly convergent.
   
   Using the strong convergence of $u_3$ for the case of an $H^1$ regular, periodic $v_0$, we can prove that the uniformity part of the equicontinuity estimate holds.
   
