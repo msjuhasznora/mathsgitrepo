@@ -31,21 +31,25 @@
 
 \begin{frame}
 
-A model widely used in meteorology, oceanology, limnology: the so-called primitive equations.
+\textbf{What theoretically should be used.}
+
+Atmospheric and water flow are described by the 3D Navier-Stokes equations.
 
 EQS
 
-Note: in the vertical dimension we simply the formula describing the hydrostatic pressure.
+Note: full, complete. basic conservation of momentum.
 
 \end{frame}
 
 \begin{frame}
 
-However, atmospheric and water flow are described by the 3D Navier-Stokes equations.
+\textbf{What is used,}
+
+A model widely used in meteorology, oceanology, limnology: the so-called primitive equations - the most natural simplification. Central component for describing the dynamics of geophysical fluids.
 
 EQS
 
-Note: full, complete.
+Note: in the vertical dimension we simply use the formula describing the hydrostatic pressure.
 
 \end{frame}
 
@@ -57,7 +61,19 @@ What makes this okay is if we provide an analytical justification of why, in the
 
 The KEY to the justification process is to include the following scenario into the model in mathematical terms: "we are considering a large-scale geophysical fluid on the surface of the Earth."
 
+Scale analysis shows what are the dominant terms in the full vertical momentum equation: $\frac{\partial p}{\partial z},$ and $\rho g,$ resulting in the hydrostatic approximation. This approximate relation is highly accurate (shown by experience) for large-scale fluids and it is considered as a fundamental equation for oceanography and meteorology.
+
+%% low Mach number: Boussinesq approximation, constant density. it is the conservation of mass eq. that becomes the div-free condition through the Boussinesq approximation.
+
 %% include the fact that rescaling the coordinates and the velocity is not sufficient, and we need to consider the strongly anisotropic nature of viscosity and diffusivity.
+
+%% formally get one set of equations from another set
+
+%% highlight: both the starting model and the limit model are 3D, unlike in other approaches such as shallow water equations.
+
+%% geophysical rotating frame: z, x, y
+
+%% cartesian coordinates, local validity, beta plane - we concentrate our efforts to the corresponding beta-plane.
 
 \end{frame}
 
@@ -238,6 +254,16 @@ $\textbf{Additional scaling equation}$: different in nature from the previous on
     
     Combining these results allow us to apply a compactness theorem that yields the convergence.
     
+\end{frame}
+
+\begin{frame}
+
+Existence: two steps.
+
+STEP1: stationary case, Galerkin method, the approximating $U_m$ functions exist thanks to a fix point theorem.
+
+STEP2: Finite difference it time. Approximating time-dependent functions are defined using the existence of the stationary solution, then passing to the limit.
+
 \end{frame}
 
 \end{document}
