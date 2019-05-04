@@ -30,7 +30,8 @@
 \section{I}
 
 %%% TEXT: 1) low Mach number: Boussinesq approximation, constant density. it is the conservation of mass eq. that becomes the div-free condition through the Boussinesq approximation. density taken to be identically equal to one
-%%% TEXT: 2) Note: full, complete. basic conservation of momentum.
+%%% 2) Note: full, complete. basic conservation of momentum.
+%%% 3.) A superior method to model diffusion in complex scenarios is to use the diffusion tensor, a 3 x 3 array of numbers corresponding to diffusion rates in each combination of directions. The three diagonal elements (Dxx, Dyy, Dzz) represent diffusion coefficients measured along each of the principal (x-, y- and z-) laboratory axes. The six off-diagonal terms (Dxy, Dyz, etc) reflect reflect the correlation of random motions between each pair of principal directions.
 \begin{frame}{Start: 3D Navier-Stokes}
 
 \textbf{Starting point:} fluid dynamics fact --- wind flow on the globe is governed by the 3D incompressible Navier-Stokes equations.
@@ -91,7 +92,7 @@ Scale analysis will show what are the dominant terms in the full vertical moment
 %%% "locally" - it means however the surface of a few countries
 \begin{frame}
 
-Before describing the scaling process, first of all we fix a coordinate system. We use a local Cartesian coordinate system ("$\beta$-plane approximation") $\to$ this means that the model does not take into account the curvature of the Earth, and thus is valid locally.
+Before describing the scaling process, first of all we fix a coordinate system. We use a local Cartesian coordinate system ("$\beta$-plane approximation") $\to$ this means that we can neglect the curvature of the Earth, and thus is valid locally.
 
 {Geophysical rotating frame:} $z$ --- vertical coordinate ("up"), $x$ --- north, $y$ ---east. This is an often used coordinate system choice as the Coriolis term takes a rather simple form expressed in these coordinates.
 
@@ -127,7 +128,6 @@ Rescaling the diffusivity parameters according to the largely different horizont
 
 %%% TEXT:
 \begin{frame}{Local domain and boundary conditions}
-  We use a local cartesian coordinate system so that we can neglect the curvature of the Earth.
   \begin{figure}
     \includegraphics[width=\linewidth]{domain.jpg}
     \caption{A local slice of the atmosphere}
@@ -143,12 +143,7 @@ Rescaling the diffusivity parameters according to the largely different horizont
   We have $$S_\epsilon (t, t_s, x, x_s) = s(t, t_s) \delta_\epsilon (x - x_s),$$ with the activation term $s(t,t_s)= IH(t - t_s)$ where $H(\cdot)$ is the Heaviside step function. In the limit model we naturally arrive to the delta distribution as a source.
 \end{frame}
 
-\begin{frame}
-How the two models will eventually look like when we write them out in detail, including the following specific ideas that we also use combined to the main, general foundation of the model, such as Using a Gaussian pulse as a source term.
-\end{frame}
-
-%% A superior method to model diffusion in complex scenarios is to use the diffusion tensor, a 3 x 3 array of numbers corresponding to diffusion rates in each combination of directions. The three diagonal elements (Dxx, Dyy, Dzz) represent diffusion coefficients measured along each of the principal (x-, y- and z-) laboratory axes. The six off-diagonal terms (Dxy, Dyz, etc) reflect reflect the correlation of random motions between each pair of principal directions.
-
+%%% TEXT: How the two models will eventually look like when we write them out in detail, including the following specific ideas that we also use combined to the main, general foundation of the model, such as Using a Gaussian pulse as a source term.
 \begin{frame}{Anisotropic equations}
 
   In $\Omega \times (0,T)$ we have the following system.
