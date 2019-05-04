@@ -35,39 +35,59 @@
 
 Biological tissues are highly anisotropic, meaning that their diffusion rates are not the same in every direction. For routine DW imaging we often ignore this complexity and reduce diffusion to a single average value, the apparent diffusion coefficient (ADC), but this is overly simplistic. A superior method to model diffusion in complex materials is to use the diffusion tensor, a 3 x 3 array of numbers corresponding to diffusion rates in each combination of directions. The three diagonal elements (Dxx, Dyy, Dzz) represent diffusion coefficients measured along each of the principal (x-, y- and z-) laboratory axes. The six off-diagonal terms (Dxy, Dyz, etc) reflect reflect the correlation of random motions between each pair of principal directions.
 
-Coriolis terms
+\begin{itemize}
 
-Rescaling.
+\item Coriolis terms
 
-The Gronwall part.
+\item Rescaling.
 
-Are these weak solutions and not L-H WS.
+\item The Gronwall part.
 
-trace and boundary. h -1 over 2
+\item Are these weak solutions and not L-H WS.
 
-coercivity of the diffusion matrix and the eigenvalue.
+\item trace and boundary. h -1 over 2
 
-why the $\epsilon^{-3}$ in the approximated function.
+\item coercivity of the diffusion matrix and the eigenvalue.
 
-any comment on the lateral conditions?
+\item why the $\epsilon^{-3}$ in the approximated function.
 
-IMPORTANT: u3 BCs for the limit model case. $u n_3 = 0$
+\item any comment on the lateral conditions? limit model BCs in the A-G article. On $\Gamma_s$ they use $u_3 = 0,$ while on $\Gamma_b$ they use $u_3 n_3 = 0,$ i.e. the weaker form. What is the difference between these two parts? Is this a misprint, and they should both be $u_3 n_3 = 0$?
 
-weak formulation: the form itself comes from calculations, but the regularities $L^\infty L^2$ and $L^2 H^1$ come simply from definition, not from necessity of the terms, right? For example, $L^\infty$ regularity is not needed explicitly, is it? The regularities for the test function on the other hand come from what is needed for the expressions to make sense.
+\item IMPORTANT: u3 BCs for the limit model case. $u n_3 = 0$
 
-why do we need $\tilde{u}_H$ to be in $H^1$ in time? regularities in the weak formulation.
+\item weak formulation: the form itself comes from calculations, but the regularities $L^\infty L^2$ and $L^2 H^1$ come simply from definition, not from necessity of the terms, right? For example, $L^\infty$ regularity is not needed explicitly, is it? The regularities for the test function on the other hand come from what is needed for the expressions to make sense.
 
-stating the main theorem why can we say that $C_0 = 0$ on the boundary, when it is only an $L^2$ function on the domain?
+\item why do we need $\tilde{u}_H$ to be in $H^1$ in time? regularities in the weak formulation.
 
-stating the theorem --- $u_0$ is there the initial value of $u_\epsilon, u,$ or both?  ---- It is the initial value belonging to the anisotropic system. It is needed at the energy inequality.
+\item stating the main theorem why can we say that $C_0 = 0$ on the boundary, when it is only an $L^2$ function on the domain? No, $C$ is actually an $H^1$ function on the domain.
 
-the definition of weak solutions: the u vector is in V. then we conclude at some point, $u_3$ is in $L^2 L^2$... but it was by definition in V, which is essentially $H^1$. clear this. Proposition1.
+\item stating the theorem --- $u_0$ is there the initial value of $u_\epsilon, u,$ or both?  ---- It is the initial value belonging to the anisotropic system. It is needed at the energy inequality.
 
-Definition3 - $U = (\mathbf{v}, C)$ instead of $\mathbf{v}$ I think it is $\mathbf{u}_H.$
+\item the definition of weak solutions: the u vector is in V. then we conclude at some point, $u_3$ is in $L^2 L^2$... but it was by definition in V, which is essentially $H^1$. clear this. Proposition1.
 
-OK: Existence theorem - p25 in the Temam article - it states that the solution is in $V$, which is a full $H^1$ space? Yes but in the $U = (u_H, S, T)$ there is no $u_3$ term.
+\item Definition3 - $U = (\mathbf{v}, C)$ instead of $\mathbf{v}$ I think it is $\mathbf{u}_H.$
 
-What is the main difference in the existence theorem, comparing their result and the one for $C$: a) we allow $\delta$ to be the source term, not just $L^2$ functions, b) the definition of the $b$ term in our case is different, we have the derivative on the test function, not on the second term. Is there a reason why in their case they keep the derivative on the original function in some cases and not put it onto the test function? Does our case benefit / get some more generality with this?
+\item OK: Existence theorem - p25 in the Temam article - it states that the solution is in $V$, which is a full $H^1$ space? Yes but in the $U = (u_H, S, T)$ there is no $u_3$ term.
+
+\item What is the main difference in the existence theorem, comparing their result and the one for $C$: a) we allow $\delta$ to be the source term, not just $L^2$ functions, b) the definition of the $b$ term in our case is different, we have the derivative on the test function, not on the second term. Is there a reason why in their case they keep the derivative on the original function in some cases and not put it onto the test function? Does our case benefit / get some more generality with this? The existence is checked for completeness, because of different boundary conditions and to keep the article coherent as in style (eg the derivatives are brought onto the test functions.)
+
+\item Aubin-Lions - in the article --- it can not be applied because this vector is not divergence-free. is div-free a condition of A-L?
+
+\item Cauchy-Kowalevska form
+
+\item How to interpret the 3D-ness when the flatness is "infinite"?
+
+\item In the A-G main theorem they use "$u_0 \cdot n = 0$" as a condition. But here $u_0$ is the initial data for SNS, and for that in the equations we had $u = 0$ directly. Shouldn't it be both $n$ or both direct?
+
+\item p852 remark: usually $L^2 V \cap L^\infty L^2$ regularity for the weak solutions, but for the PEs there is a change needed from $V$ to $W$.  But for the SNS we also don't have $L^2 H^1$. ?
+
+\item realisation: $u_3 n_3 = 0$ means that on the lateral part we have no BC at all for $u_3,$ right?
+
+\item as for the SNS, $u_3$ is also only in $L^2 L^2,$ why the BC there can be directly $u_3 = 0$?
+
+\item When we have $C$ in $H^1$ and $u_3$ in $L^2$, thus we have the strong convergence of $C$ in $L^2$ and the weak convergence of $u_3$ in $L^2$, we still use the theorem in the A-G article to prove the convergence of the product. Then also for the case of $H^1$ initial data, and the strongly convergent $u_3$ we need something additional, don't we. Or, maybe we don't need the theorem in the first case and only the fact of strong convergence is enough?
+
+\end{itemize}
 
 \end{document}
 
