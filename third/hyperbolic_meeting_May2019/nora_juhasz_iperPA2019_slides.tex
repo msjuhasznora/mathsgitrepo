@@ -31,7 +31,7 @@
 
 %%% TEXT: 1) low Mach number: Boussinesq approximation, constant density. it is the conservation of mass eq. that becomes the div-free condition through the Boussinesq approximation. density taken to be identically equal to one
 %%% TEXT: 2) Note: full, complete. basic conservation of momentum.
-\begin{frame}
+\begin{frame}{Start: 3D Navier-Stokes}
 
 \textbf{Starting point:} fluid dynamics fact --- wind flow on the globe is governed by the 3D incompressible Navier-Stokes equations.
 
@@ -68,7 +68,8 @@ EQ-poll
 
 \end{frame}
 
-%%% TEXT: Our goal is to provide a rigorous analytical proof that this approximation is mathematically acceptable.
+%%% TEXT: 1.) Our goal is to provide a rigorous analytical proof that this approximation is mathematically acceptable.
+%%% TEXT: 2.) The way we do this: we start by incorporating the concept of shallowness into the model and see what happens to the starting point model if we take the aspect ratio parameter closer and closer to 0 --- we will find that the two models are connected not just formally through this parameter, but also on the level of weak solutions.
 \begin{frame}
 
 \textbf{A natural question to ask:} 
@@ -80,49 +81,51 @@ EQ-poll
 
 \textbf{Justification:} An analytical proof that shows that this asymptotic limit model is meaningfully and rigorously connected to the original one in the case of large-scale geological fluids.
 
-The key to the justification process is to take this phrase \textit{"we are considering a large-scale geophysical fluid on the surface of the Earth,"} and to include its meaning into the model in mathematical terms.
+The key to the justification process is to take this phrase \textbf{\textit{"we are considering a large-scale geophysical fluid on the surface of the Earth,"}} and to include its meaning into the model in mathematical terms.
 
 Scale analysis will show what are the dominant terms in the full vertical momentum equation are $\frac{\partial p}{\partial z},$ and the gravity term, resulting in the hydrostatic approximation. 
 
 \end{frame}
 
-%%% TEXT:
+%%% TEXT: Before we do anything else: fix the coordinate system.
+%%% "locally" - it means however the surface of a few countries
 \begin{frame}
 
-Before we do anything else: fix the coordinate system.
+Before describing the scaling process, first of all we fix a coordinate system. We use a local Cartesian coordinate system ("$\beta$-plane approximation") $\to$ this means that the model does not take into account the curvature of the Earth, and thus is valid locally.
 
-Geophysical rotating frame: z, x, y
-
-Cartesian coordinates, local validity, beta plane - we concentrate our efforts to the corresponding beta-plane.
+{Geophysical rotating frame:} $z$ --- vertical coordinate ("up"), $x$ --- north, $y$ ---east. This is an often used coordinate system choice as the Coriolis term takes a rather simple form expressed in these coordinates.
 
 \end{frame}
 
-\begin{frame}
-
-The way we do this: we start by incorporating the concept of shallowness into the model and see what happens to the starting point model if we take the aspect ratio parameter closer and closer to 0 --- we will find that the two models are connected not just formally through this parameter, but also on the level of weak solutions.
+%%% TEXT:
+\begin{frame}{Scaling - part 1}
 
 Geophysical fluid $\to$ shallow domain characteristics --- the domain is greater horizontally than in the vertical dimension.
 
-SCALING.
+One of the main tools to exploit the "almost" 2D structure of the atmosphere $\to$ introduce the aspect ratio $$\epsilon = \frac{\text{characteristic depth}}{\text{characteristic width}},$$ which incorporates the shallowness in a mathematical way. Natural scaling process for the coordinates, velocity, pressure, and concentration:
 
-1. Dimensions and velocity.
-
-2. Pressure and concentration.
-
-3. Rescaling the diffusivity parameters according to the largely different horizontal and vertical scales. We highlight the fact that rescaling the coordinates and the velocity is not sufficient, and we need to consider the highly anisotropic nature of viscosity and diffusivity. This means that these rates are strongly different in horizontal and vertical directions. Ignoring this complexity not just would be overly simplistic, but it is the inclusion of this specific feature that makes it possible for the proof to work.
-
-One of the main tools to exploit the "almost" 2D structure of the atmosphere $\to$ introduce the aspect ratio $$\epsilon = \frac{\text{characteristic depth}}{\text{characteristic width}},$$ which incorporates the shallowness in a mathematical way. Natural scaling process:
-
-  \begin{enumerate}
+\begin{enumerate}
     \item $x=x_1, y=x_2, z=\epsilon x_3$
     \item $v_1 = u_1^{\epsilon}, v_2 = u_2^{\epsilon}, v_3 = \epsilon u_3^{\epsilon}, p = p^{\epsilon},$
+    \item C and S
+
+\end{enumerate}
+
+\end{frame}
+
+%%% TEXT: the physical dimension of viscosity and diffusivity
+\begin{frame}{Scaling - part 2}
+
+Rescaling the diffusivity parameters according to the largely different horizontal and vertical scales. We highlight the fact that rescaling the coordinates and the velocity is not sufficient, and we need to consider the highly anisotropic nature of viscosity and diffusivity. This means that these rates are strongly different in horizontal and vertical directions. Ignoring this complexity not just would be overly simplistic, but it is the inclusion of this specific feature that makes it possible for the proof to work.
+
+  \begin{enumerate}
     \item $\nu_x = \nu_1, \nu_y = \nu_2 , \nu_z = \epsilon ^ 2\nu_3,$
     \item $K_y = K_2, K_z = \epsilon ^ 2 K_3.$
   \end{enumerate}
 
 \end{frame}
 
-
+%%% TEXT:
 \begin{frame}{Local domain and boundary conditions}
   We use a local cartesian coordinate system so that we can neglect the curvature of the Earth.
   \begin{figure}
