@@ -29,59 +29,72 @@
 
 \section{I}
 
-%%% ONE
+%%% TEXT: 1) low Mach number: Boussinesq approximation, constant density. it is the conservation of mass eq. that becomes the div-free condition through the Boussinesq approximation. density taken to be identically equal to one
+%%% TEXT: 2) Note: full, complete. basic conservation of momentum.
 \begin{frame}
 
-\textbf{What theoretically should be used when modelling polluted wind flow.}
+\textbf{Starting point:} fluid dynamics fact --- wind flow on the globe is governed by the 3D incompressible Navier-Stokes equations.
 
-Classical / general concepts as foundation: a) The wind flow being GOVERNED by the incompressible Navier-Stokes equations, b) Using a convection - diffusion equation to describe the pollution effect
+Taking this general concept as foundation, a first idea to create a theoretically correct model for the polluted atmosphere on Earth is to take exactly this classical concept.
 
-%% low Mach number: Boussinesq approximation, constant density. it is the conservation of mass eq. that becomes the div-free condition through the Boussinesq approximation.
-
-  \begin{itemize}
-    \item Fluid velocity equations --- incompressible Navier-Stokes equations with the density taken to be identically equal to one.
-      
-      $$\partial_t \mathbf{v} + (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + \nabla q + 2 \mathbf{w} \times \mathbf{v}= \mathbf{g} \text{ in } \Omega_{\epsilon} \times (0,T)$$
+\textbf{Result:} a combination of a) the 3D incompressible Navier-Stokes equation and b) a convection-diffusion equation to describe the pollution effect.
+  
+%%% fluid velocity    
+$$\partial_t \mathbf{v} + (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + \nabla q + 2 \mathbf{w} \times \mathbf{v}= \mathbf{g} $$
     
-      $$\nabla \cdot \mathbf{v} = 0 \text{ in } \Omega_{\epsilon} \times (0,T)$$
-
-    \item A convection-diffusion equation representing pollutants in the atmosphere:
+ $$\nabla \cdot \mathbf{v} = 0 $$
     
-      $$\partial_t C + \mathbf{v} \cdot \nabla C = K_x \partial_{xx} ^2 C + K_y  \partial_{yy} ^2  C + K_z  \partial_{zz} ^2  C + S$$
-
-  \end{itemize}
-
-Atmospheric and water flow are described by the 3D Navier-Stokes equations.
-
-EQS
-
-Note: full, complete. basic conservation of momentum.
+%%% representing pollutants in the atmosphere
+$$\partial_t C + \mathbf{v} \cdot \nabla C = K_x \partial_{xx} ^2 C + K_y  \partial_{yy} ^2  C + K_z  \partial_{zz} ^2  C + S$$
 
 \end{frame}
 
-\begin{frame}
+%%% TEXT: Central component for describing the dynamics of geophysical fluids: hydrostatic approximation. In the vertical dimension we simply use the formula describing the hydrostatic pressure, instead of the complete momentum equation.
+\begin{frame}{Hydrostatic approximation}
 
-\textbf{What is actually used.}
+\textbf{Point of apparent theoretical conflict:} The previously described model is \textbf{not} what is widely used meteorology and oceanology to describe geophysical processes.
 
-A model widely used in meteorology, oceanology, limnology: the so-called primitive equations - the most natural simplification. Central component for describing the dynamics of geophysical fluids.
+\textbf{Experience shows:} The following natural simplification is highly accurate for large-scale fluids. 
 
-EQS
+The fundamental equations in meteorology --- primitive equations. 
 
-Note: in the vertical dimension we simply use the formula describing the hydrostatic pressure.
+EQ1-vv
+
+EQ2-hyd
+
+EQ3-divfree
+
+EQ-poll
 
 \end{frame}
 
+%%% TEXT: Our goal is to provide a rigorous analytical proof that this approximation is mathematically acceptable.
 \begin{frame}
 
-A natural question to ask:  Is this okay? Why is this okay?
+\textbf{A natural question to ask:} 
 
-What makes this okay is if we provide an analytical justification of why, in the case of relatively large-scale geological fluids, this asymptotic limit model actually works, and its use is valid.
+\begin{enumerate}
+  \item Is this valid?
+  \item What makes it valid?
+\end{enumerate}
 
-The KEY to the justification process is to take this phrase "we are considering a large-scale geophysical fluid on the surface of the Earth," and to include its meaning into the model in mathematical terms.
+\textbf{Justification:} An analytical proof that shows that this asymptotic limit model is meaningfully and rigorously connected to the original one in the case of large-scale geological fluids.
 
-Scale analysis will show what are the dominant terms in the full vertical momentum equation: $\frac{\partial p}{\partial z},$ and $\rho g,$ resulting in the hydrostatic approximation. This approximate relation is highly accurate (shown by experience) for large-scale fluids and it is considered as a fundamental equation for oceanography and meteorology.
+The key to the justification process is to take this phrase \textit{"we are considering a large-scale geophysical fluid on the surface of the Earth,"} and to include its meaning into the model in mathematical terms.
 
-Our goal is to provide a rigorous analytical proof that this approximation is mathematically acceptable.
+Scale analysis will show what are the dominant terms in the full vertical momentum equation are $\frac{\partial p}{\partial z},$ and the gravity term, resulting in the hydrostatic approximation. 
+
+\end{frame}
+
+%%% TEXT:
+\begin{frame}
+
+Before we do anything else: fix the coordinate system.
+
+Geophysical rotating frame: z, x, y
+
+Cartesian coordinates, local validity, beta plane - we concentrate our efforts to the corresponding beta-plane.
+
 \end{frame}
 
 \begin{frame}
@@ -96,7 +109,7 @@ SCALING.
 
 2. Pressure and concentration.
 
-3. Rescaling the diffusivity parameters according to the largely different horizontal and vertical scales. We highlight the fact that rescaling the coordinates and the velocity is not sufficient, and we need to consider the strongly anisotropic nature of viscosity and diffusivity.
+3. Rescaling the diffusivity parameters according to the largely different horizontal and vertical scales. We highlight the fact that rescaling the coordinates and the velocity is not sufficient, and we need to consider the highly anisotropic nature of viscosity and diffusivity. This means that these rates are strongly different in horizontal and vertical directions. Ignoring this complexity not just would be overly simplistic, but it is the inclusion of this specific feature that makes it possible for the proof to work.
 
 One of the main tools to exploit the "almost" 2D structure of the atmosphere $\to$ introduce the aspect ratio $$\epsilon = \frac{\text{characteristic depth}}{\text{characteristic width}},$$ which incorporates the shallowness in a mathematical way. Natural scaling process:
 
@@ -106,15 +119,6 @@ One of the main tools to exploit the "almost" 2D structure of the atmosphere $\t
     \item $\nu_x = \nu_1, \nu_y = \nu_2 , \nu_z = \epsilon ^ 2\nu_3,$
     \item $K_y = K_2, K_z = \epsilon ^ 2 K_3.$
   \end{enumerate}
-
-
-%% formally get one set of equations from another set
-
-%% highlight: both the starting model and the limit model are 3D, unlike in other approaches such as shallow water equations.
-
-%% geophysical rotating frame: z, x, y
-
-%% cartesian coordinates, local validity, beta plane - we concentrate our efforts to the corresponding beta-plane.
 
 \end{frame}
 
@@ -139,6 +143,8 @@ One of the main tools to exploit the "almost" 2D structure of the atmosphere $\t
 \begin{frame}
 How the two models will eventually look like when we write them out in detail, including the following specific ideas that we also use combined to the main, general foundation of the model, such as Using a Gaussian pulse as a source term.
 \end{frame}
+
+%% A superior method to model diffusion in complex scenarios is to use the diffusion tensor, a 3 x 3 array of numbers corresponding to diffusion rates in each combination of directions. The three diagonal elements (Dxx, Dyy, Dzz) represent diffusion coefficients measured along each of the principal (x-, y- and z-) laboratory axes. The six off-diagonal terms (Dxy, Dyz, etc) reflect reflect the correlation of random motions between each pair of principal directions.
 
 \begin{frame}{Anisotropic equations}
 
@@ -170,6 +176,7 @@ How the two models will eventually look like when we write them out in detail, i
 
 \end{frame}
 
+%%% TEXT:formally get one set of equations from another set. Highlight: both the starting model and the limit model are 3D, unlike in other approaches such as shallow water equations.
 \begin{frame}{Hydrostatic equations}
   
       \[ \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\alpha u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T) \]

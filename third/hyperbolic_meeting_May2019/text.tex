@@ -33,8 +33,6 @@
 
 \maketitle
 
-Biological tissues are highly anisotropic, meaning that their diffusion rates are not the same in every direction. For routine DW imaging we often ignore this complexity and reduce diffusion to a single average value, the apparent diffusion coefficient (ADC), but this is overly simplistic. A superior method to model diffusion in complex materials is to use the diffusion tensor, a 3 x 3 array of numbers corresponding to diffusion rates in each combination of directions. The three diagonal elements (Dxx, Dyy, Dzz) represent diffusion coefficients measured along each of the principal (x-, y- and z-) laboratory axes. The six off-diagonal terms (Dxy, Dyz, etc) reflect reflect the correlation of random motions between each pair of principal directions.
-
 \begin{itemize}
 
 \item Coriolis terms
@@ -85,7 +83,7 @@ Biological tissues are highly anisotropic, meaning that their diffusion rates ar
 
 \item as for the SNS, $u_3$ is also only in $L^2 L^2,$ why the BC there can be directly $u_3 = 0$?
 
-\item When we have $C$ in $H^1$ and $u_3$ in $L^2$, thus we have the strong convergence of $C$ in $L^2$ and the weak convergence of $u_3$ in $L^2$, we still use the theorem in the A-G article to prove the convergence of the product. Then also for the case of $H^1$ initial data, and the strongly convergent $u_3$ we need something additional, don't we. Or, maybe we don't need the theorem in the first case and only the fact of strong convergence is enough?
+\item OK: When we have $C$ in $H^1$ and $u_3$ in $L^2$, thus we have the strong convergence of $C$ in $L^2$ and the weak convergence of $u_3$ in $L^2$, we still use the theorem in the A-G article to prove the convergence of the product. Then also for the case of $H^1$ initial data, and the strongly convergent $u_3$ we need something additional, don't we. Or, maybe we don't need the theorem in the first case and only the fact of strong convergence is enough? ANSWER: The difference is that in the first case we only have $C$ in $H^1$ in space, so to have the strong convergence in time-space in $L^2 L^2,$ we need that theorem - just like we needed it to have the strong convergence in space-time for $u_H.$ For the $H^1$ initial data it is difference because the theorem stated in the Strong Conv Justification paper it already states a time-space strong convergence.
 
 \end{itemize}
 
