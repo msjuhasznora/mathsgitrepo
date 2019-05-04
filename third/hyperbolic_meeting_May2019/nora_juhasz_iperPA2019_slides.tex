@@ -27,7 +27,7 @@
 \titlepage
 \end{frame}
 
-\section{I}
+\section{Local geophysical coordinate system}
 
 %%% TEXT: 1) low Mach number: Boussinesq approximation, constant density. it is the conservation of mass eq. that becomes the div-free condition through the Boussinesq approximation. density taken to be identically equal to one
 %%% 2) Note: full, complete. basic conservation of momentum.
@@ -94,7 +94,7 @@ Scale analysis will show what are the dominant terms in the full vertical moment
 
 Before describing the scaling process, first of all we fix a coordinate system. We use a local Cartesian coordinate system ("$\beta$-plane approximation") $\to$ this means that we can neglect the curvature of the Earth, and thus is valid locally.
 
-{Geophysical rotating frame:} $z$ --- vertical coordinate ("up"), $x$ --- north, $y$ ---east. This is an often used coordinate system choice as the Coriolis term takes a rather simple form expressed in these coordinates.
+{Geophysical rotating frame:} $z$ --- vertical coordinate ("up"), $x$ --- east, $y$ ---north. This is an often used coordinate system choice as the Coriolis term takes a rather simple form expressed in these coordinates.
 
 \end{frame}
 
@@ -174,7 +174,7 @@ Rescaling the diffusivity parameters according to the largely different horizont
 
 \end{frame}
 
-%%% TEXT:formally get one set of equations from another set. Highlight: both the starting model and the limit model are 3D, unlike in other approaches such as shallow water equations.
+%%% TEXT:formally get one set of equations from the previous one. Highlight: both the starting model and the limit model are 3D, unlike in other approaches such as shallow water equations.
 \begin{frame}{Hydrostatic equations}
   
       \[ \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\alpha u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T) \]
@@ -214,57 +214,90 @@ Rescaling the diffusivity parameters according to the largely different horizont
 
 %%% UPDATE, diffusion matrix.
 \begin{frame}{Energy inequality}
-    \changefontsizes{10pt}
+  \changefontsizes{10pt}
   \begin{equation*}
     \begin{split}  
     & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \big [\norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2 \big ] \diff \tau \\
-    & + \int_0 ^ t \bigg[ (\epsilon K_1 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_1 C^\epsilon}_{L^2}^2  + (K_2 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_2 C^\epsilon}_{L^2}^2 \\
-    & + (K_3 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_3 C^\epsilon}_{L^2}^2 \bigg] \diff \tau \\
-    & \leq \frac{1}{\zeta} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)} + \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) \\
-    & + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau
+    & + \int_0 ^ t \bigg[ (\lambda - \sum_{i,j = 1}^3 \zeta \frac{1}{2} M_{ij} c_T) \norm{\nabla C^\epsilon}_{L^2}^2  \bigg] \diff \tau \\
+    & \leq \sum_{i,j = 1}^3 \frac{1}{\zeta} M_{ij} \frac{1}{2} \int_0 ^ t \norm{\sigma_i}^2 _{L^2 (\Gamma_G)} \diff \tau + \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) \\
+    & + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau + \sum_{i,j = 1}^3 \zeta \frac{1}{2} M_{ij} c_T  \int_0 ^ t \norm{C^\epsilon}^2 _{L^2 (\Omega) } \diff \tau.
     \end{split}
   \end{equation*}
 \end{frame}
 
+
+%%% TEXT:  As for the nonlinear terms, the convergence can be shown using a time compactness theorem that is based on a result by Simon \cite{simon1986compact}. The key point is to apply a sort of generalisation of the classical translation criterium of Riesz-Frechet-Kolmogorov which enables us to get strong convergence for the horizontal velocities. This is achieved by establishing a bound for the perturbation of $\mathbf{u}_H$ of the form $\norm{\tau_h \mathbf{u}_H - \mathbf{u}_H}_{L^p(0,T-h, \mathbf{Y})} \leq \varphi(h) + \psi(\epsilon),$ where $\mathbf{Y}$ is a Banach space, $\varphi$ and $\psi$ are appropriate functions with their limits vanishing at zero, and $\tau_h \mathbf{u}_H = \mathbf{u}_H (t+h) $. After obtaining strong convergence for $\mathbf{u}_H,$ the proof of the convergence for these nonlinear terms can be closed by applying basic interpolation techniques and the generalised Holder inequality. The details are omitted since they are analogous to those described in \cite{azerad2001mathematical}.
 \begin{frame}{Proof steps - Part 1}
   \begin{enumerate}
-    \item The beginning step of the proof is to obtain the energy inequality that yields a priori estimates such as $L_t^\infty L_x^2$ boundedness for $C^\epsilon;$ $L_t^2 L_x^2$ boundedness for ...
+    \item The beginning step of the proof is to obtain the energy inequality that yields a priori estimates such as $L_t^\infty L_x^2 \cap L^2 _t H^1_x$ boundedness for $C^\epsilon,$ and $L_t^2 L_x^2$ boundedness for $u^\epsilon_3.$
   
     \item Once we have boundedness, we have the weak convergence of the linear terms, while the weak convergence of the nonlinear terms not including the pollution term had been shown previously by Az\'erad and Guill\'en (SIAM Journal on Mathematical Analysis, 2001).
     
-    \item We prove the convergence of the term $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C})$ by using a compactness result. It can be proved that $u_i^\epsilon C^\epsilon \rightharpoonup  u_i C$ using this theorem.
+    \item We prove the convergence of the term $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C})$ by proving a compactness property for the pollution concentration $C^\epsilon.$ This is necessary because however it is possible to prove strong convergence for the horizontal velocities, at the same time we have less control and weaker regularity results on the vertical velocity $u_3$ because of the presence of the shallowness marker $\epsilon$.
+
   \end{enumerate}
 \end{frame}
 
 \begin{frame}
-Theorem for the nonlinear term.
+  \begin{theorem}
+  Let $T>0,$ and let the Banach spaces $\mathbf{X} \hookrightarrow \mathbf{B} \hookrightarrow \mathbf{Y},$ where $\mathbf{X}$ is compactly embedded in $\mathbf{B},$ and $\mathbf{B}$ is continuously embedded in $\mathbf{Y}.$ Let $(f_\epsilon)_{\epsilon>0}$ be a family of functions of $L^p (0,T; \mathbf{X}), 1 \leq p \leq \infty,$ with the extra condition $(f_\epsilon)_{\epsilon>0} \subset C (0,T; \mathbf{Y})$ if $p = \infty,$ such that
+  \begin{enumerate}
+    \item $(f_\epsilon)_{\epsilon>0}$ is bounded in $L^p (0,T; \mathbf{X}),$
+    \item $\norm{\tau_h f_\epsilon - f_\epsilon}_{L^p(0,T-h; \mathbf{Y})} \leq \varphi(h) + \psi(\epsilon)$ with
+    $$
+      \begin{cases}
+        \lim_{h \to 0} \varphi(h) = 0,\\
+        \lim_{\epsilon \to 0} \psi(\epsilon) = 0.
+      \end{cases}
+    $$
+    \end{enumerate}
+  
+  Then the family $(f_\epsilon)_{\epsilon>0}$ possesses a cluster point in $L^p (0,T; \mathbf{B})$ and also in $\mathcal{C}(0,T; \mathbf{B})$ if $p = \infty$ as $\epsilon \to 0.$
+  \end{theorem}
 \end{frame}
 
+%%% TEXT:  1.) Apply the previously described theorem with the right choices of p and the spaces.
+%%% 2.) Comment on existence: STEP1: stationary case, Galerkin method, the approximating $U_m$ functions exist thanks to a fix point theorem. STEP2: Finite difference it time. Approximating time-dependent functions are defined using the existence of the stationary solution, then passing to the limit.
 \begin{frame}
 
-Existence: two steps.
+We can apply the statement of this theorem for $p=2$ and the spaces $H^1 \hookrightarrow L^2 \hookrightarrow {H^2}^*,$ where ${H^2}^*$ is the dual of ${H^2}$, obtaining that
 
-STEP1: stationary case, Galerkin method, the approximating $U_m$ functions exist thanks to a fix point theorem.
+\[C^\epsilon \to C \text{ strongly in } L^2_t L^2_x,\]
 
-STEP2: Finite difference it time. Approximating time-dependent functions are defined using the existence of the stationary solution, then passing to the limit.
+and thus we have the weak convergence result $u^\epsilon_3 C^\epsilon \rightharpoonup u_3 C.$
 
 \end{frame}
 
+\section{Downwind-matching coordinate system}
 
-\section{II}
+\begin{frame}{The concept of the new coordinate system}
+\textbf{The physical idea}: A naturally distinctive and meteorologically more meaningful viewpoint for fixing the orientation of the coordinate system --- the introduction of downwind and crosswind, and to match the horizontal axes to these meteorological parameters, i.e. i.e. $z$ is oriented upwards, while $x$ is the downwind, and $y$ is the crosswind direction.
 
-\begin{frame}
-Taking advantage of a downwind-direction matching coordinate system
+As in this scenario the advection is dominant compared to diffusion effects along the $x$ axis, this approach naturally brings an additional $\epsilon$ term in the Laplacian of the concentration equation, and brings the challenge of proving a weak convergence result for the nonlinear term, as in the energy inequality the $\norm{\partial_1 C^\epsilon}$ term is replaced by $\norm{\sqrt{\epsilon} \partial_1 C^\epsilon}.$
 \end{frame}
 
-\begin{frame}{Scaling - Part 2}
+\begin{frame}{Scaling}
 
 $\textbf{Additional scaling equation}$: different in nature from the previous ones $\to$ it is not derived from the shallowness of the domain --- it is suggested by the fact that in the downwind direction it is natural to assume that $\textit{ the diffusion is negligible compared to downwind transport}$ i.e.
 
     $$\abs{u_1 \partial_{x_1} C} \gg \abs{ K_x \frac{\partial ^2 C}{\partial x_1 ^ 2} } ,$$
     which leads us to using
     $$K_x = \epsilon K_1.$$
+    
+The concentration equation becomes
+$$ \partial_t C^\epsilon + \mathbf{u^\epsilon} \cdot \nabla C^\epsilon = \epsilon K_1 \partial_{11} ^ 2 C^\epsilon + K_2 \partial_{22} ^ 2 C^\epsilon + K_3 \partial_{33} ^ 2 C^\epsilon + S_\epsilon $$
 
+\end{frame}
+
+\begin{frame}
+
+\textbf{The challenge it brings along:} $C$ is no longer in $H^1,$ thus the original perturbation theorem can not be applied to obtain a strong convergence result on $C.$
+
+\textbf{How to close to proof:} the goal is to find a minimal set of additional simplifications and assumed stronger regularities with which the proof can be adequately closed. Since we now have weaker regularities of the concentration function, we will use a stronger, $H^1$ initial data ${u_H}_0$ for the horizontal velocity, combined with a domain which is free from the issue of boundary conditions --- namely, we consider periodic boundary conditions.
+
+In this case we have the strong solution of $u_3$ in $L^2 L^2,$ (see the Strong Convergence Justification Article) which enables us to pass to the limit with the nonlinear term.
+
+%%% TODO: comment on how actually here $u_3^\eps$ converges strongly to a strong solution of the PE, but it can be viewed again as a weak solution.
 \end{frame}
 
 \end{document}
