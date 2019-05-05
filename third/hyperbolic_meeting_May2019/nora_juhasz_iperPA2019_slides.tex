@@ -93,8 +93,9 @@ Scale analysis will show that the dominant term in the full vertical momentum eq
 
 \end{frame}
 
-%%% TEXT: Before we do anything else: fix the coordinate system.
-%%% "locally" - it means however the surface of a few countries
+%%% TEXT: 1.) Before we do anything else: fix the coordinate system.
+%%% 2.) "locally" - it means however the surface of a few countries
+%%% 3.) Here the x axis is perpendicular to the Earth rotation vector, this makes the Coriolis term more simple.
 \begin{frame}
 
 Before describing the scaling process, first of all we fix a coordinate system. We use a local Cartesian coordinate system ("$\beta$-plane approximation") $\to$ this means that we can neglect the curvature of the Earth, and thus is valid locally.
@@ -295,6 +296,8 @@ and thus we have the weak convergence result $u^\epsilon_3 C^\epsilon \rightharp
 
 \section{Downwind-matching coordinate system}
 
+%%% TEXT: 1.) the idea is to migrate the previously obtained result to this scenario.
+%%% 2.) In a way it is a more considerately chosen coordinate system.
 \begin{frame}{The concept of the new coordinate system}
 \textbf{The physical idea}: A naturally distinctive and meteorologically more meaningful viewpoint for fixing the orientation of the coordinate system --- the introduction of downwind and crosswind, and to match the horizontal axes to these meteorological parameters, i.e. $z$ is oriented upwards, while $x$ is the downwind, and $y$ is the crosswind direction.
 
@@ -317,11 +320,27 @@ $$ \partial_t C^\epsilon + \mathbf{u^\epsilon} \cdot \nabla C^\epsilon = \epsilo
 %%% TEXT: 1.) comment on how actually here $u_3^\eps$ converges strongly to a strong solution of the PE, but it can be viewed again as a weak solution.
 \begin{frame}
 
-\textbf{The challenge it brings along:} $C^\epsilon$ is no longer in $H^1,$ thus the original perturbation theorem can not be applied to obtain a strong convergence result on $C^\epsilon.$
+\textbf{The challenge it brings along:} $C^\epsilon$ is no longer in $H^1,$ thus the original perturbation theorem can not be applied to obtain a strong convergence result on $C^\epsilon,$ and $u_3^\epsilon$ is only in $L^2_t L^2_x.$
 
-\textbf{How to close to proof:} the goal is to find a minimal set of additional simplifications and assumed stronger regularities with which the proof can be adequately closed. Since we now have weaker regularities of the concentration function, we will use a stronger, $H^1$ initial data ${u_H}_0$ for the horizontal velocity, combined with a domain which is free from boundary conditions --- namely, we consider a periodic domain.
+\textbf{How to close to proof:} the goal is to find a minimal set of additional simplifications and assumed stronger regularities with which the proof can be adequately closed. Since we now have weaker regularities of the concentration function, we will use a stronger space for the initial data for the horizontal velocity, combined with a domain that is more simple to handle.
 
-In this case we have the strong convergence of $u_3$ in $L^2 L^2,$ (see the result by Li and Titi, Journal de Mathématiques Pures et Appliquées, 2017) which enables us to pass to the limit with the nonlinear term.
+\end{frame}
+
+\begin{frame}
+
+More specifically, we use
+
+\begin{itemize}
+
+ \item a periodic domain,
+ 
+ \item $H^1$ initial data ${u_H}_0$ for the horizontal velocity,
+ 
+ \item and the result of Li and Titi (Journal de Mathématiques Pures et Appliquées, 2017) stating that in this case we have the strong convergence of the weak solution $u_3^\epsilon$ in $L^2 L^2$ to the strong solution of the primitive equations. 
+
+\end{itemize}
+
+Using the fact that the strong solution of the PE is a weak solution as well, we can take back the proof onto the track of weak solutions and use the strong convergence of $u_3^\epsilon$ --- this enables us to pass to the limit with the nonlinear term.
 
 \end{frame}
 
