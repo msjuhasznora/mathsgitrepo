@@ -41,36 +41,41 @@ Taking this general concept as foundation, a first idea to create a theoreticall
 \textbf{Result:} a combination of a) the 3D incompressible Navier-Stokes equation and b) a convection-diffusion equation to describe the pollution effect.
   
 %%% fluid velocity    
-$$\partial_t \mathbf{v} + (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + \nabla q + 2 \mathbf{w} \times \mathbf{v}= \mathbf{g} $$
+$$ \partial_t \mathbf{v} + (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + \nabla q + 2 \mathbf{w} \times \mathbf{v}= \mathbf{g} $$
     
- $$\nabla \cdot \mathbf{v} = 0 $$
+$$ \nabla \cdot \mathbf{v} = 0 $$
     
 %%% representing pollutants in the atmosphere
-$$\partial_t C + \mathbf{v} \cdot \nabla C = K_x \partial_{xx} ^2 C + K_y  \partial_{yy} ^2  C + K_z  \partial_{zz} ^2  C + S$$
+$$ \partial_t P + \mathbf{v} \cdot \nabla P = \nabla \cdot (\mathbf{K} \nabla P) + Q $$
 
 \end{frame}
 
 %%% TEXT: Central component for describing the dynamics of geophysical fluids: hydrostatic approximation. In the vertical dimension we simply use the formula describing the hydrostatic pressure, instead of the complete momentum equation.
 \begin{frame}{Hydrostatic approximation}
 
-\textbf{Point of apparent theoretical conflict:} The previously described model is \textbf{not} what is widely used meteorology and oceanology to describe geophysical processes.
+\textbf{Point of apparent theoretical conflict:} The previously described model is \textbf{not} what is widely used in meteorology and oceanology to describe geophysical processes.
 
 \textbf{Experience shows:} The following natural simplification is highly accurate for large-scale fluids. 
 
 The fundamental equations in meteorology --- primitive equations. 
 
-EQ1-vv
+%%% horizontal fluid velocity    
+$$ \partial_t \mathbf{v}_H + \mathbf{v}_H \cdot \nabla_H \mathbf{v}_H + v_3 \partial_z \mathbf{v}_H - \Delta_{\nu} \mathbf{v}_H + \nabla_H q + 2 (\mathbf{w} \times \mathbf{v})_H = 0 $$
 
-EQ2-hyd
+%% hydrostatic pressure
+$$ \frac{\partial p}{\partial z} = - \mathbf{g}$$
 
-EQ3-divfree
-
-EQ-poll
+%% divergence-free condition
+$$ \nabla \cdot \mathbf{v} = 0 $$
+    
+%%% representing pollutants in the atmosphere
+$$ \partial_t P + \mathbf{v} \cdot \nabla P = \nabla \cdot (\mathbf{K} \nabla P) + Q $$
 
 \end{frame}
 
 %%% TEXT: 1.) Our goal is to provide a rigorous analytical proof that this approximation is mathematically acceptable.
-%%% TEXT: 2.) The way we do this: we start by incorporating the concept of shallowness into the model and see what happens to the starting point model if we take the aspect ratio parameter closer and closer to 0 --- we will find that the two models are connected not just formally through this parameter, but also on the level of weak solutions.
+%%% 2.) The way we do this: we start by incorporating the concept of shallowness into the model and see what happens to the starting point model if we take the aspect ratio parameter closer and closer to 0 --- we will find that the two models are connected not just formally through this parameter, but also on the level of weak solutions.
+%%% 3.) Augmented pressure concept.
 \begin{frame}
 
 \textbf{A natural question to ask:} 
@@ -82,9 +87,9 @@ EQ-poll
 
 \textbf{Justification:} An analytical proof that shows that this asymptotic limit model is meaningfully and rigorously connected to the original one in the case of large-scale geological fluids.
 
-The key to the justification process is to take this phrase \textbf{\textit{"we are considering a large-scale geophysical fluid on the surface of the Earth,"}} and to include its meaning into the model in mathematical terms.
+The key to the justification process is to take this following phrase: \textbf{\textit{"we are considering a large-scale geophysical fluid on the surface of the Earth,"}} and to include its meaning into the model in mathematical terms.
 
-Scale analysis will show what are the dominant terms in the full vertical momentum equation are $\frac{\partial p}{\partial z},$ and the gravity term, resulting in the hydrostatic approximation. 
+Scale analysis will show that the dominant term in the full vertical momentum equation is $\frac{\partial p}{\partial z},$ resulting in the hydrostatic approximation.
 
 \end{frame}
 
@@ -94,7 +99,15 @@ Scale analysis will show what are the dominant terms in the full vertical moment
 
 Before describing the scaling process, first of all we fix a coordinate system. We use a local Cartesian coordinate system ("$\beta$-plane approximation") $\to$ this means that we can neglect the curvature of the Earth, and thus is valid locally.
 
-{Geophysical rotating frame:} $z$ --- vertical coordinate ("up"), $x$ --- east, $y$ ---north. This is an often used coordinate system choice as the Coriolis term takes a rather simple form expressed in these coordinates.
+{Geophysical rotating frame:}
+
+\begin{itemize}
+\item $z$ --- vertical coordinate ("upwards"),
+\item $x$ --- east,
+\item $y$ ---north.
+\end{itemize}
+
+This is an often used coordinate system choice as the Coriolis term takes a rather simple form expressed in these coordinates.
 
 \end{frame}
 
@@ -106,23 +119,34 @@ Geophysical fluid $\to$ shallow domain characteristics --- the domain is greater
 One of the main tools to exploit the "almost" 2D structure of the atmosphere $\to$ introduce the aspect ratio $$\epsilon = \frac{\text{characteristic depth}}{\text{characteristic width}},$$ which incorporates the shallowness in a mathematical way. Natural scaling process for the coordinates, velocity, pressure, and concentration:
 
 \begin{enumerate}
-    \item $x=x_1, y=x_2, z=\epsilon x_3$
-    \item $v_1 = u_1^{\epsilon}, v_2 = u_2^{\epsilon}, v_3 = \epsilon u_3^{\epsilon}, p = p^{\epsilon},$
-    \item C and S
+    \item $ x=x_1, y=x_2, z=\epsilon x_3 $
+    \item $ v_1 = u_1^{\epsilon}, v_2 = u_2^{\epsilon}, v_3 = \epsilon u_3^{\epsilon}, p = p^{\epsilon}, $
+    \item $ P = \frac{1}{\epsilon} C^\epsilon, Q = \frac{1}{\epsilon} S^\epsilon. $
 
 \end{enumerate}
 
 \end{frame}
 
-%%% TEXT: the physical dimension of viscosity and diffusivity
-\begin{frame}{Scaling - part 2}
+%%% TEXT: 1.) the physical dimension of viscosity and diffusivity
+%%% 2.) If we consider only the scaling part introduced until now, we are still ignoring a complexity, which not just would be overly simplistic, but it is the inclusion of this following specific feature that makes it possible for the proof to work.
 
-Rescaling the diffusivity parameters according to the largely different horizontal and vertical scales. We highlight the fact that rescaling the coordinates and the velocity is not sufficient, and we need to consider the highly anisotropic nature of viscosity and diffusivity. This means that these rates are strongly different in horizontal and vertical directions. Ignoring this complexity not just would be overly simplistic, but it is the inclusion of this specific feature that makes it possible for the proof to work.
+\begin{frame}{Scaling - part 2}
+We need to consider the highly anisotropic nature of viscosity and diffusivity $\to$ this means that these rates are strongly different in horizontal and vertical directions.
+Rescaling these parameters according to the largely different scales:
 
   \begin{enumerate}
-    \item $\nu_x = \nu_1, \nu_y = \nu_2 , \nu_z = \epsilon ^ 2\nu_3,$
-    \item $K_y = K_2, K_z = \epsilon ^ 2 K_3.$
+    \item $ \nu_x = \nu_1, \quad \nu_y = \nu_2 , \quad \nu_z = \epsilon ^ 2\nu_3, $
+    \item
+     \begin{gather}
+      \begin{bmatrix} K_{xx} & K_{xy} & K_{xz} \\ K_{yx} & K_{yy} & K_{yz} \\ K_{zx} & K_{zy} & K_{zz} \end{bmatrix}
+       =
+      \begin{bmatrix}
+    M_{11} & M_{12} & \epsilon M_{13} \\ M_{21} & M_{22} & \epsilon M_{23} \\ \epsilon M_{31} & \epsilon M_{32} & \epsilon^2 M_{33}
+  \end{bmatrix} \nonumber
+\end{gather}
   \end{enumerate}
+  
+The diffusivity matrix is assumed to be coercive.
 
 \end{frame}
 
@@ -156,7 +180,7 @@ Rescaling the diffusivity parameters according to the largely different horizont
     
     \[ \nabla \cdot \mathbf{u}^\epsilon= 0  \]
     
-    \[ \partial_t C^\epsilon + \mathbf{u}^\epsilon \cdot \nabla C^\epsilon = \epsilon K_1 \frac{\partial ^2 C^\epsilon}{\partial x_1 ^ 2} + K_2 \frac{\partial ^2 C^\epsilon}{\partial x_2 ^ 2} + K_3 \frac{\partial ^2 C^\epsilon}{\partial x_3 ^ 2} + S_\epsilon \]
+    \[ \partial_t C^\epsilon + \mathbf{u^\epsilon} \cdot \nabla C^\epsilon = \nabla \cdot (\mathbf{M} \nabla C^\epsilon) + S^\epsilon \]
     
 \end{frame}
 
@@ -164,20 +188,19 @@ Rescaling the diffusivity parameters according to the largely different horizont
 
   The initial and boundary conditions are chosen to be
 
-    \[ \mathbf{u}^\epsilon = 0 \text{ on } \Gamma \times (0,T), \]
-    
-    \[ \mathbf{u}^\epsilon (\cdot, t = 0) = \mathbf{u}_0, C^\epsilon (\cdot, t=0) = C^\epsilon_0  \text{ in } \Omega, \]
-
-    $$C^\epsilon = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \partial_2 C^\epsilon = \partial_3 C^\epsilon = 0 \text{ on } \Gamma_G \times (0,T),$$
-    
-    $$\partial_1 C^\epsilon \in L^2 L^2 (0,T; \Gamma_G). $$
+    $$ \mathbf{u}^\epsilon = 0 \text{ on } \Gamma \times (0,T), $$
+    $$C^\epsilon = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T),$$
+    $$ \mathbf{u}^\epsilon = 0 \text{ on } \Gamma \times (0,T),$$
+    $$ C^\epsilon = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), $$
+    $$ \partial_1 C^\epsilon = \sigma_1, \partial_2 C^\epsilon = \sigma_2,\ \partial_3 C^\epsilon= 0 \text{ on } \Gamma_G \times (0,T), $$
+    $$ \boldsymbol{\sigma} = (\sigma_1, \sigma_2, 0) \in L^2(0,T; \Gamma_G) $$
 
 \end{frame}
 
 %%% TEXT:formally get one set of equations from the previous one. Highlight: both the starting model and the limit model are 3D, unlike in other approaches such as shallow water equations.
 \begin{frame}{Hydrostatic equations}
   
-      \[ \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\alpha u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T) \]
+    \[ \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\alpha u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T) \]
     
     \[ \partial_t u_2 + \mathbf{u} \cdot \nabla u_2 - \Delta_\nu u_2 -\alpha u_1 + \partial_2 p = 0 \text{ in } \Omega \times (0,T) \]
     
@@ -185,18 +208,18 @@ Rescaling the diffusivity parameters according to the largely different horizont
     
     \[ \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \times (0,T) \]
     
-    \[ \partial_t C + \mathbf{u} \cdot \nabla C = K_2 \frac{\partial ^2 C}{\partial x_2 ^ 2} + K_3 \frac{\partial ^2 C}{\partial x_3 ^ 2} + S \text{ in } \Omega \times (0,T)\]
+    \[ \partial_t C + \mathbf{u} \cdot \nabla C = \nabla \cdot (\mathbf{M} \nabla C) + S \text{ in } \Omega \times (0,T) \]
 
 \end{frame}
     
 \begin{frame}{Hydrostatic equations - Part 2}
-    \[ u_1 = u_2 = u_3 n_3 = 0 \text{ on } \Gamma \times (0,T) \]
+    $$ u_1 = u_2 = u_3 n_3 = 0 \text{ on } \Gamma \times (0,T), $$
     
-    \[ u_i (\cdot, t=0) = u_{0 i}, C (\cdot, t=0) = C_0 \text{ in } \Omega, \text{$i$ = 1,2} \]
+    $$ u_i (\cdot, t=0) = u_{0 i}, C (\cdot, t=0) = C_0 \text{ in } \Omega, \text{$i$ = 1,2}, $$
     
-    $$C = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \partial_2 C = \partial_3 C = 0 \text{ on } \Gamma_G \times (0,T),$$
+    $$C = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), $$
     
-    $$ \partial_1 C \in L^2 L^2 (0,T; \Gamma_G) $$
+    $$ \partial_1 C = \sigma_1, \partial_2 C = \sigma_2, \partial_3  C = 0, \boldsymbol{\sigma} = (\sigma_1, \sigma_2, 0) \in L^2(0,T; \Gamma_G).$$
   
 \end{frame}
 
@@ -271,9 +294,9 @@ and thus we have the weak convergence result $u^\epsilon_3 C^\epsilon \rightharp
 \section{Downwind-matching coordinate system}
 
 \begin{frame}{The concept of the new coordinate system}
-\textbf{The physical idea}: A naturally distinctive and meteorologically more meaningful viewpoint for fixing the orientation of the coordinate system --- the introduction of downwind and crosswind, and to match the horizontal axes to these meteorological parameters, i.e. i.e. $z$ is oriented upwards, while $x$ is the downwind, and $y$ is the crosswind direction.
+\textbf{The physical idea}: A naturally distinctive and meteorologically more meaningful viewpoint for fixing the orientation of the coordinate system --- the introduction of downwind and crosswind, and to match the horizontal axes to these meteorological parameters, i.e. $z$ is oriented upwards, while $x$ is the downwind, and $y$ is the crosswind direction.
 
-As in this scenario the advection is dominant compared to diffusion effects along the $x$ axis, this approach naturally brings an additional $\epsilon$ term in the Laplacian of the concentration equation, and brings the challenge of proving a weak convergence result for the nonlinear term, as in the energy inequality the $\norm{\partial_1 C^\epsilon}$ term is replaced by $\norm{\sqrt{\epsilon} \partial_1 C^\epsilon}.$
+As in this scenario the advection is dominant compared to diffusion effects along the $x$ axis, this approach naturally brings an additional $\epsilon$ term in the Laplacian of the concentration equation, and brings the challenge of proving a weak convergence result for the nonlinear term, as in the energy inequality the $\norm{\partial_1 C^\epsilon}$ term is replaced by $\| \sqrt{\epsilon} \partial_1 C^\epsilon \|.$
 \end{frame}
 
 \begin{frame}{Scaling}
@@ -289,15 +312,15 @@ $$ \partial_t C^\epsilon + \mathbf{u^\epsilon} \cdot \nabla C^\epsilon = \epsilo
 
 \end{frame}
 
+%%% TEXT: 1.) comment on how actually here $u_3^\eps$ converges strongly to a strong solution of the PE, but it can be viewed again as a weak solution.
 \begin{frame}
 
-\textbf{The challenge it brings along:} $C$ is no longer in $H^1,$ thus the original perturbation theorem can not be applied to obtain a strong convergence result on $C.$
+\textbf{The challenge it brings along:} $C^\epsilon$ is no longer in $H^1,$ thus the original perturbation theorem can not be applied to obtain a strong convergence result on $C^\epsilon.$
 
-\textbf{How to close to proof:} the goal is to find a minimal set of additional simplifications and assumed stronger regularities with which the proof can be adequately closed. Since we now have weaker regularities of the concentration function, we will use a stronger, $H^1$ initial data ${u_H}_0$ for the horizontal velocity, combined with a domain which is free from the issue of boundary conditions --- namely, we consider periodic boundary conditions.
+\textbf{How to close to proof:} the goal is to find a minimal set of additional simplifications and assumed stronger regularities with which the proof can be adequately closed. Since we now have weaker regularities of the concentration function, we will use a stronger, $H^1$ initial data ${u_H}_0$ for the horizontal velocity, combined with a domain which is free from boundary conditions --- namely, we consider a periodic domain.
 
-In this case we have the strong solution of $u_3$ in $L^2 L^2,$ (see the Strong Convergence Justification Article) which enables us to pass to the limit with the nonlinear term.
+In this case we have the strong convergence of $u_3$ in $L^2 L^2,$ (see the result by Li and Titi, Journal de Mathématiques Pures et Appliquées, 2017) which enables us to pass to the limit with the nonlinear term.
 
-%%% TODO: comment on how actually here $u_3^\eps$ converges strongly to a strong solution of the PE, but it can be viewed again as a weak solution.
 \end{frame}
 
 \end{document}
