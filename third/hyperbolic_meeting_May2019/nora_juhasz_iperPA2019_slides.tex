@@ -113,7 +113,6 @@ This is an often used coordinate system choice as the Coriolis term takes a rath
 \end{frame}
 
 %%% TEXT: 1.) make the domain independent from epsilon by using the physical dimensions.
-%%% 2.) p is the augmented pressure, that is how it differs from q.
 \begin{frame}{Scaling - part 1}
 
 Geophysical fluid $\to$ shallow domain characteristics --- the domain is greater horizontally than in the vertical dimension.
@@ -152,7 +151,6 @@ The diffusivity matrix is assumed to be coercive.
 
 \end{frame}
 
-%%% TEXT:
 \begin{frame}{Local domain and boundary conditions}
   \begin{figure}
     \includegraphics[width=\linewidth]{domain.jpg}
@@ -169,8 +167,8 @@ The diffusivity matrix is assumed to be coercive.
   We have $$S_\epsilon (t, t_s, x, x_s) = s(t, t_s) \delta_\epsilon (x - x_s),$$ with the activation term $s(t,t_s)= IH(t - t_s)$ where $H(\cdot)$ is the Heaviside step function. In the limit model we naturally arrive to the delta distribution as a source.
 \end{frame}
 
-%%% TEXT: 1.) How the two models will eventually look like when we write them out in detail, including the following specific ideas that we also use combined to the main, general foundation of the model, such as Using a Gaussian pulse as a source term.
-%%% 2.) Why do we have an epsilon^2 on the third equation.
+%%% TEXT: 1.) How the two models will eventually look like when we write them out in detail, including the following specific ideas that we also use combined to the main, general foundation of the model, such as using a Gaussian pulse as a source term.
+%%% 2.) Why do we have an epsilon^2 on the third equation: the second epsilon comes from the denominator of the pressure term (there is a vertical derivative)
 \begin{frame}{Anisotropic equations}
 
   In $\Omega \times (0,T)$ we have the following system.
@@ -238,7 +236,6 @@ The diffusivity matrix is assumed to be coercive.
 
 \end{frame}
 
-%%% UPDATE, diffusion matrix.
 \begin{frame}{Energy inequality}
   \changefontsizes{10pt}
   \begin{equation*}
@@ -283,7 +280,7 @@ The diffusivity matrix is assumed to be coercive.
 \end{frame}
 
 %%% TEXT:  1.) Apply the previously described theorem with the right choices of p and the spaces.
-%%% 2.) Comment on existence: STEP1: stationary case, Galerkin method, the approximating $U_m$ functions exist thanks to a fix point theorem. STEP2: Finite difference it time. Approximating time-dependent functions are defined using the existence of the stationary solution, then passing to the limit.
+%%% 2.) Comment on existence: STEP1: stationary case, Galerkin method, the approximating $U_m$ functions exist thanks to a fix point theorem. STEP2: Finite difference in time. Approximating time-dependent functions are defined using the existence of the stationary solution, then passing to the limit.
 \begin{frame}
 
 We can apply the statement of this theorem for $p=2$ and the spaces $H^1 \hookrightarrow L^2 \hookrightarrow {H^2}^*,$ where ${H^2}^*$ is the dual of ${H^2}$, obtaining that
@@ -297,7 +294,7 @@ and thus we have the weak convergence result $u^\epsilon_3 C^\epsilon \rightharp
 \section{Downwind-matching coordinate system}
 
 %%% TEXT: 1.) the idea is to migrate the previously obtained result to this scenario.
-%%% 2.) In a way it is a more considerately chosen coordinate system.
+%%% 2.) In a way it is a more considerately chosen coordinate system but of course it depends on the specific needs of the model.
 \begin{frame}{The concept of the new coordinate system}
 \textbf{The physical idea}: A naturally distinctive and meteorologically more meaningful viewpoint for fixing the orientation of the coordinate system --- the introduction of downwind and crosswind, and to match the horizontal axes to these meteorological parameters, i.e. $z$ is oriented upwards, while $x$ is the downwind, and $y$ is the crosswind direction.
 
@@ -317,7 +314,6 @@ $$ \partial_t C^\epsilon + \mathbf{u^\epsilon} \cdot \nabla C^\epsilon = \epsilo
 
 \end{frame}
 
-%%% TEXT: 1.) comment on how actually here $u_3^\eps$ converges strongly to a strong solution of the PE, but it can be viewed again as a weak solution.
 \begin{frame}
 
 \textbf{The challenge it brings along:} $C^\epsilon$ is no longer in $H^1,$ thus the original perturbation theorem can not be applied to obtain a strong convergence result on $C^\epsilon,$ and $u_3^\epsilon$ is only in $L^2_t L^2_x.$
@@ -340,7 +336,7 @@ More specifically, we use
 
 \end{itemize}
 
-Using the fact that the strong solution of the PE is a weak solution as well, we can take back the proof onto the track of weak solutions and use the strong convergence of $u_3^\epsilon$ --- this enables us to pass to the limit with the nonlinear term.
+The strong solution of the PE being a weak solution as well, we can take back the proof onto the track of weak solutions and use the strong convergence of $u_3^\epsilon$ --- this enables us to pass to the limit with the nonlinear term.
 
 \end{frame}
 
