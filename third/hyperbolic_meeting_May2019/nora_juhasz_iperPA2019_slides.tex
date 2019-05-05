@@ -63,7 +63,7 @@ The fundamental equations in meteorology --- primitive equations.
 $$ \partial_t \mathbf{v}_H + \mathbf{v}_H \cdot \nabla_H \mathbf{v}_H + v_3 \partial_z \mathbf{v}_H - \Delta_{\nu} \mathbf{v}_H + \nabla_H q + 2 (\mathbf{w} \times \mathbf{v})_H = 0 $$
 
 %% hydrostatic pressure
-$$ \frac{\partial p}{\partial z} = - \mathbf{g}$$
+$$ \frac{\partial q}{\partial z} = - \mathbf{g}$$
 
 %% divergence-free condition
 $$ \nabla \cdot \mathbf{v} = 0 $$
@@ -89,7 +89,7 @@ $$ \partial_t P + \mathbf{v} \cdot \nabla P = \nabla \cdot (\mathbf{K} \nabla P)
 
 The key to the justification process is to take this following phrase: \textbf{\textit{"we are considering a large-scale geophysical fluid on the surface of the Earth,"}} and to include its meaning into the model in mathematical terms.
 
-Scale analysis will show that the dominant term in the full vertical momentum equation is $\frac{\partial p}{\partial z},$ resulting in the hydrostatic approximation.
+Scale analysis will show that the dominant term in the full vertical momentum equation is $\frac{\partial q}{\partial z}$ and the gravity term, resulting in the hydrostatic approximation.
 
 \end{frame}
 
@@ -111,7 +111,8 @@ This is an often used coordinate system choice as the Coriolis term takes a rath
 
 \end{frame}
 
-%%% TEXT:
+%%% TEXT: 1.) make the domain independent from epsilon by using the physical dimensions.
+%%% 2.) p is the augmented pressure, that is how it differs from q.
 \begin{frame}{Scaling - part 1}
 
 Geophysical fluid $\to$ shallow domain characteristics --- the domain is greater horizontally than in the vertical dimension.
@@ -167,7 +168,8 @@ The diffusivity matrix is assumed to be coercive.
   We have $$S_\epsilon (t, t_s, x, x_s) = s(t, t_s) \delta_\epsilon (x - x_s),$$ with the activation term $s(t,t_s)= IH(t - t_s)$ where $H(\cdot)$ is the Heaviside step function. In the limit model we naturally arrive to the delta distribution as a source.
 \end{frame}
 
-%%% TEXT: How the two models will eventually look like when we write them out in detail, including the following specific ideas that we also use combined to the main, general foundation of the model, such as Using a Gaussian pulse as a source term.
+%%% TEXT: 1.) How the two models will eventually look like when we write them out in detail, including the following specific ideas that we also use combined to the main, general foundation of the model, such as Using a Gaussian pulse as a source term.
+%%% 2.) Why do we have an epsilon^2 on the third equation.
 \begin{frame}{Anisotropic equations}
 
   In $\Omega \times (0,T)$ we have the following system.
@@ -188,8 +190,7 @@ The diffusivity matrix is assumed to be coercive.
 
   The initial and boundary conditions are chosen to be
 
-    $$ \mathbf{u}^\epsilon = 0 \text{ on } \Gamma \times (0,T), $$
-    $$C^\epsilon = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T),$$
+    $$ \mathbf{u}^\epsilon (\cdot, t = 0) = \mathbf{u}_0, \quad C^\epsilon (\cdot, t=0) = C_0  \quad \text{ in } \Omega, $$
     $$ \mathbf{u}^\epsilon = 0 \text{ on } \Gamma \times (0,T),$$
     $$ C^\epsilon = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), $$
     $$ \partial_1 C^\epsilon = \sigma_1, \partial_2 C^\epsilon = \sigma_2,\ \partial_3 C^\epsilon= 0 \text{ on } \Gamma_G \times (0,T), $$
@@ -213,9 +214,10 @@ The diffusivity matrix is assumed to be coercive.
 \end{frame}
     
 \begin{frame}{Hydrostatic equations - Part 2}
-    $$ u_1 = u_2 = u_3 n_3 = 0 \text{ on } \Gamma \times (0,T), $$
+
+    $$ u_i (\cdot, t=0) = u_{0 i}, \text{$i$ = 1,2}, C (\cdot, t=0) = C_0 \text{ in } \Omega, $$
     
-    $$ u_i (\cdot, t=0) = u_{0 i}, C (\cdot, t=0) = C_0 \text{ in } \Omega, \text{$i$ = 1,2}, $$
+    $$ u_1 = u_2 = u_3 n_3 = 0 \text{ on } \Gamma \times (0,T), $$
     
     $$C = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), $$
     
