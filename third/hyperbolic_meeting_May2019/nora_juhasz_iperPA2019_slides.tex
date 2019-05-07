@@ -267,14 +267,13 @@ In the limit model we naturally arrive to the delta distribution as a source.
 
 %%% TEXT: 1.) note the spaces where u^\epsilon and C^\epsilon come from - the "usual" weak solution spaces, added with specialities for BCs
 \begin{frame}{Weak formulation - anisotropic system}
-\changefontsizes{10pt}
-Find $\mathbf{u}^\epsilon$ and $C^\epsilon$, such that
+\changefontsizes{8pt}
+  Find $\mathbf{u}^\epsilon = (\mathbf{u}^\epsilon_H, u^\epsilon_3) \in L^2 (0,T ; \mathbf{V}) \cap L^\infty (0, T; L^2 (\Omega)^3)$ and $C^\epsilon \in L^\infty (0,T; L^2(\Omega)) \cap L^2 (0,T; H^1(\Omega))$, such that
   
   \begin{equation}
     \begin{split} \nonumber
       & \int_0^T \bigg [ -(\mathbf{u}^\epsilon_H, \partial_t \mathbf{\tilde{u}}_H) + (\nabla_\nu \mathbf{u}^\epsilon_H, \nabla_\nu \mathbf{\tilde{u}}_H) - (\mathbf{u}^\epsilon_H, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{\tilde{u}}_H) + (b(\mathbf{u}^\epsilon_H), \mathbf{\tilde{u}}_H) \bigg ] \diff t \\
-      & + \epsilon \beta \int_0 ^ T \big [ (u_3 ^\epsilon, \tilde{u}_1) - (u_1^\epsilon, \tilde{u}_3) \big ] \diff t\\
-      & + \epsilon^2 \int _0 ^ T \big [ -(u_3^\epsilon, \partial_t \tilde{u}_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, \tilde{u}_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu \tilde{u}_3) \big ] \diff t \\
+      & \hspace{-0.5cm}+ \epsilon \beta \int_0 ^ T \big [ (u_3 ^\epsilon, \tilde{u}_1) - (u_1^\epsilon, \tilde{u}_3) \big ] + \epsilon^2\big [ -(u_3^\epsilon, \partial_t \tilde{u}_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, \tilde{u}_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu \tilde{u}_3) \big ] \diff t \\
       & = (\mathbf{u}^\epsilon_{0H}, \mathbf{\tilde{u}}_H(0)) + \epsilon^2 (u_{03}^\epsilon, \tilde{u}_3 (0)) \diff t
     \end{split}
   \end{equation}
@@ -287,6 +286,10 @@ Find $\mathbf{u}^\epsilon$ and $C^\epsilon$, such that
       & =  (C^\epsilon (0), \tilde{C} (0)) + \int_0^T (S^\epsilon,\tilde{C}) \diff t
     \end{split}
   \end{equation}
+  
+    \hspace{0.2cm} for all $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_H, \tilde{u}_3) \in H^1 (0,T;\mathbf{V})$ with $\mathbf{\tilde{u}}(T) = 0$ and $\tilde{C}$ such that
+    
+    \hspace{0.2cm} $\tilde{C} \in H^1 (0,T, H^2_{\Gamma_A} (\Omega))$ and $\tilde{C} (T) = 0$.
 
 \end{frame}
 
@@ -393,7 +396,7 @@ As we have $C^\epsilon \in L^2_t H^1_x,$ we only need to verify $\norm{\tau_h C^
   \begin{enumerate}
      \item $(S^\epsilon, \tilde{C}) \quad  \text{is bounded in $L^2(0,T)$,}$
      \item $ (\mathbf{M} \nabla C^\epsilon, \nabla \tilde{C}) \leq c \big \| \tilde{C} \big \| _{H^1} \big \| C^\epsilon \big \| _{H^1} \quad  \text{is bounded in $L^2(0,T)$,}$
-     \item $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) \leq \norm{\mathbf{u}^\epsilon}_{L^2} \norm{C^\epsilon}_{L^3}  \big \| \tilde{C} \big \| _{H^2} \quad  \text{is bounded in $L^{4/3}(0,T).$} $
+     \item $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) \leq \norm{\mathbf{u}^\epsilon}_{L^2} \norm{C^\epsilon}_{L^3}  \big \| \tilde{C} \big \| _{H^2} \quad  \text{is bounded in $L^{4/3}(0,T),$} $ using the interpolation between $L_t^\infty L_x^2$ and $L_t^2 L_x^6$ for $C^\epsilon,$ obtaining that it is in $L_t^4 L^3_x$
   \end{enumerate}
   
   \item We apply the Holder inequality and arrive to $$ \int_t^{t+h} \abs{\iota^\epsilon (s)} \diff s \leq c  \| \tilde{C}  \| _{H^2} h^{1/4}$$
