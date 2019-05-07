@@ -5,6 +5,7 @@
 \usepackage{amsthm}
 \usepackage{lmodern}
 \usepackage{scrextend}
+\usepackage{xcolor}
 \newcommand*\diff{\mathop{}\!\mathrm{d}}
 \usetheme{Luebeck}
 \useoutertheme[subsection=false, footline=authortitle]{miniframes}
@@ -332,7 +333,7 @@ The weak convergence of the nonlinear terms that do not include the concentratio
 \end{frame}
 
 %%% TEXT: This is necessary because however it is possible to prove strong convergence for the horizontal velocities, at the same time we have less control and weaker regularity results on the vertical velocity $u_3$ because of the presence of the shallowness marker $\epsilon$.
-\begin{frame}{Proof steps: Convergence for the nonlinear pollution term}
+\begin{frame}{Proof steps: Convergence of the nonlinear pollution term}
 
 We show the convergence of the term $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C})$ by proving a compactness property for the pollution concentration $C^\epsilon.$
 
@@ -384,10 +385,25 @@ ADD DETAILS.
 
 %%% TEXT: 1.) the idea is to migrate the previously obtained result to this scenario.
 %%% 2.) In a way it is a more considerately chosen coordinate system but of course it depends on the specific needs of the model.
-\begin{frame}{The concept of the new coordinate system}
-\textbf{The physical idea}: A naturally distinctive and meteorologically more meaningful viewpoint for fixing the orientation of the coordinate system --- the introduction of downwind and crosswind, and to match the horizontal axes to these meteorological parameters, i.e. $z$ is oriented upwards, while $x$ is the downwind, and $y$ is the crosswind direction.
+\begin{frame}{Downwind-matching coordinate system}
+\textbf{The physical idea}: another viewpoint for fixing the orientation of the coordinate system:
 
-As in this scenario the advection is dominant compared to diffusion effects along the $x$ axis, this approach naturally brings an additional $\epsilon$ term in the Laplacian of the concentration equation, and brings the challenge of proving a weak convergence result for the nonlinear term, as in the energy inequality the $\norm{\partial_1 C^\epsilon}$ term is replaced by $\| \sqrt{\epsilon} \partial_1 C^\epsilon \|.$
+\begin{itemize}
+  \item naturally distinctive and meteorologically more meaningful,
+  \item introduce \textbf{downwind and crosswind},
+  \item match the horizontal axes to these meteorological parameters,
+  \item $z$ is oriented upwards, while $x$ is the downwind, and $y$ is the crosswind direction
+\end{itemize}
+
+Important features of the result model:
+
+\begin{enumerate}
+  \item advection is dominant compared to diffusion effects along the $x$ axis
+  \item an additional $\epsilon$ term in the Laplacian of the concentration equation
+\end{enumerate}
+
+\center{For simplicity, here we use a diagonal diffusion matrix.}
+
 \end{frame}
 
 \begin{frame}{Scaling}
@@ -403,17 +419,28 @@ $$ \partial_t C^\epsilon + \mathbf{u^\epsilon} \cdot \nabla C^\epsilon = \epsilo
 
 \end{frame}
 
+%%% TEXT: 1.) How to solve this issue: the goal is to find a minimal set of additional simplifications and assumed stronger regularities with which the proof can be adequately closed. Since we now have weaker regularities of the concentration function, we will use a stronger space for the initial data for the horizontal velocity, combined with a domain that is more simple to handle.
 \begin{frame}
-
+\changefontsizes{10pt}
 \textbf{The challenge it brings along:} $C^\epsilon$ is no longer in $H^1,$ thus the original perturbation theorem can not be applied to obtain a strong convergence result on $C^\epsilon,$ and $u_3^\epsilon$ is only in $L^2_t L^2_x.$
 
-\textbf{How to close to proof:} the goal is to find a minimal set of additional simplifications and assumed stronger regularities with which the proof can be adequately closed. Since we now have weaker regularities of the concentration function, we will use a stronger space for the initial data for the horizontal velocity, combined with a domain that is more simple to handle.
+  \begin{equation}\nonumber
+    \begin{split}  
+    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \big [\norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2 \big ] \diff \tau \\
+    & + \int_0 ^ t \bigg[ \textcolor{orange}{ (\epsilon K_1 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_1 C^\epsilon}_{L^2}^2}  + (K_2 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_2 C^\epsilon}_{L^2}^2 \\
+    & + (K_3 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_3 C^\epsilon}_{L^2}^2 \bigg] \diff \tau \\
+    & \leq \frac{1}{\zeta} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)} + \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) \\
+    & + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau.
+    \end{split}
+  \end{equation} 
+
+\center{Note that the $\norm{\partial_1 C^\epsilon}$ term is replaced by $\| \sqrt{\epsilon} \partial_1 C^\epsilon \|.$}
 
 \end{frame}
 
 \begin{frame}
 
-More specifically, we use
+First successful attempt:
 
 \begin{itemize}
 
@@ -426,6 +453,20 @@ More specifically, we use
 \end{itemize}
 
 The strong solution of the PE being a weak solution as well, we can take back the proof onto the track of weak solutions and use the strong convergence of $u_3^\epsilon$ --- this enables us to pass to the limit with the nonlinear term.
+
+\end{frame}
+
+\begin{frame}
+
+\textbf{Future directions:}
+
+\begin{enumerate}
+
+  \item $\Omega$ bounded domain, not periodic,
+  \item strong solutions (convergence rate),
+  \item numerical simulations (in collaboration with Prof. Omar Lakkis, University of Sussex).
+
+\end{enumerate}
 
 \end{frame}
 
