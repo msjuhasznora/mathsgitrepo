@@ -375,10 +375,30 @@ We can apply the statement of this theorem for $p=2$ and the spaces $H^1 \hookri
 
 and thus we have the weak convergence result $u^\epsilon_3 C^\epsilon \rightharpoonup u_3 C.$
 
+As we have $C^\epsilon \in L^2_t H^1_x,$ we only need to verify $\norm{\tau_h C^\epsilon - C^\epsilon}_{L^2(0,T-h, {H^2}^*)} \leq \varphi(h) + \psi(\epsilon).$
+\textbf{The main steps:}
+
+\begin{itemize}
+  \item Specifically, we prove $\norm{\tau_h C^\epsilon - C^\epsilon}_{L^2(0,T-h, {H^2}^*)} \leq c \cdot h^{1/4}$
+  \item Take the spatial weak form \begin{equation} \nonumber \bigg (\frac{\partial C^\epsilon}{\partial t}, \tilde{C} \bigg ) - (\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) + (\mathbf{M} \nabla C^\epsilon, \nabla \tilde{C}) = (S^\epsilon, \tilde{C}), \end{equation} where now $\tilde{C} \in H^2_x.$
+\end{itemize}
+
 \end{frame}
 
 \begin{frame}
-Add details of this proof.
+
+\begin{itemize}
+  \item $ (\tau_h C^\epsilon (t) - C^\epsilon (t), \tilde{C}) = \int_t^{t+h} \iota^\epsilon (s) \diff s, $ where we define $ \iota^\epsilon (s) = (\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) - (\mathbf{M} \nabla C^\epsilon, \nabla \tilde{C}) + (S^\epsilon, \tilde{C}).$
+  \item We show that $\norm{\iota^\epsilon}_{L^{4/3}(0,T)} \leq c  \| \tilde{C}  \| _{H^2}$ using
+  \begin{enumerate}
+     \item $(S^\epsilon, \tilde{C}) \quad  \text{is bounded in $L^2(0,T)$,}$
+     \item $ (\mathbf{M} \nabla C^\epsilon, \nabla \tilde{C}) \leq c \big \| \tilde{C} \big \| _{H^1} \big \| C^\epsilon \big \| _{H^1} \quad  \text{is bounded in $L^2(0,T)$,}$
+     \item $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) \leq \norm{\mathbf{u}^\epsilon}_{L^2} \norm{C^\epsilon}_{L^3}  \big \| \tilde{C} \big \| _{H^2} \quad  \text{is bounded in $L^{4/3}(0,T).$} $
+  \end{enumerate}
+  
+  \item We apply the Holder inequality and arrive to $$ \int_t^{t+h} \abs{\iota^\epsilon (s)} \diff s \leq c  \| \tilde{C}  \| _{H^2} h^{1/4}$$
+\end{itemize}
+
 \end{frame}
 
 \section{Downwind-matching coordinate system}
