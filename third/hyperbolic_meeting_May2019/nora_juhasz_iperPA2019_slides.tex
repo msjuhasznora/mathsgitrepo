@@ -11,8 +11,8 @@
 \usecolortheme{crane}
 
 \title{The polluted atmosphere as a shallow domain}
-\author{N\'ora Juh\'asz}
-\institute{Department of Information Engineering, Computer Science and Mathematics \\ University of L'Aquila \\ Supervisor: Prof. Donatella Donatelli}
+\author[N\'ora Juh\'asz]{N\'ora Juh\'asz \\[1mm] in collaboration with Prof. Donatella Donatelli}
+\institute{Department of Information Engineering, Computer Science and Mathematics \\ University of L'Aquila }
 
 \date{16th May, 2019}
 
@@ -32,13 +32,18 @@
 %%% TEXT: 1) low Mach number: Boussinesq approximation, constant density. it is the conservation of mass eq. that becomes the div-free condition through the Boussinesq approximation. density taken to be identically equal to one
 %%% 2) Note: full, complete. basic conservation of momentum.
 %%% 3.) A superior method to model diffusion in complex scenarios is to use the diffusion tensor, a 3 x 3 array of numbers corresponding to diffusion rates in each combination of directions. The three diagonal elements (Dxx, Dyy, Dzz) represent diffusion coefficients measured along each of the principal (x-, y- and z-) laboratory axes. The six off-diagonal terms (Dxy, Dyz, etc) reflect reflect the correlation of random motions between each pair of principal directions.
+%%% 4.) Taking this general concept as foundation, a first idea to create a theoretically correct model for the polluted atmosphere on Earth is to take exactly this classical concept.
 \begin{frame}{Start: 3D Navier-Stokes}
 
 \textbf{Starting point:} fluid dynamics fact --- wind flow on the globe is governed by the 3D incompressible Navier-Stokes equations.
 
-Taking this general concept as foundation, a first idea to create a theoretically correct model for the polluted atmosphere on Earth is to take exactly this classical concept.
+\textbf{Result:} 
 
-\textbf{Result:} a combination of a) the 3D incompressible Navier-Stokes equation and b) a convection-diffusion equation to describe the pollution effect.
+\setbeamertemplate{itemize items}[circle]
+  \begin{itemize}
+    \item the 3D incompressible Navier-Stokes equation, and 
+    \item a convection-diffusion equation to describe the pollution effect
+  \end{itemize}
   
 %%% fluid velocity    
 $$ \partial_t \mathbf{v} + (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + \nabla q + 2 \mathbf{w} \times \mathbf{v}= \mathbf{g} $$
@@ -55,8 +60,6 @@ $$ \partial_t P + \mathbf{v} \cdot \nabla P = \nabla \cdot (\mathbf{K} \nabla P)
 
 \textbf{Point of apparent theoretical conflict:} The previously described model is \textbf{not} what is widely used in meteorology and oceanology to describe geophysical processes.
 
-\textbf{Experience shows:} The following natural simplification is highly accurate for large-scale fluids. 
-
 The fundamental equations in meteorology --- primitive equations. 
 
 %%% horizontal fluid velocity    
@@ -71,11 +74,18 @@ $$ \nabla \cdot \mathbf{v} = 0 $$
 %%% representing pollutants in the atmosphere
 $$ \partial_t P + \mathbf{v} \cdot \nabla P = \nabla \cdot (\mathbf{K} \nabla P) + Q $$
 
+\begin{center}
+\textit{Experience shows:} This natural simplification is highly
+
+accurate for large-scale fluids. 
+\end{center}
+
 \end{frame}
 
 %%% TEXT: 1.) Our goal is to provide a rigorous analytical proof that this approximation is mathematically acceptable.
 %%% 2.) The way we do this: we start by incorporating the concept of shallowness into the model and see what happens to the starting point model if we take the aspect ratio parameter closer and closer to 0 --- we will find that the two models are connected not just formally through this parameter, but also on the level of weak solutions.
 %%% 3.) Augmented pressure concept.
+%%% 4.) An analytical proof that shows that this asymptotic limit model is meaningfully and rigorously connected to the original one in the case of large-scale geological fluids.
 \begin{frame}
 
 \textbf{A natural question to ask:} 
@@ -85,27 +95,32 @@ $$ \partial_t P + \mathbf{v} \cdot \nabla P = \nabla \cdot (\mathbf{K} \nabla P)
   \item What makes it valid?
 \end{enumerate}
 
-\textbf{Justification:} An analytical proof that shows that this asymptotic limit model is meaningfully and rigorously connected to the original one in the case of large-scale geological fluids.
+\textbf{Justification:} An analytical proof.
 
-The key to the justification process is to take this following phrase: \textbf{\textit{"we are considering a large-scale geophysical fluid on the surface of the Earth,"}} and to include its meaning into the model in mathematical terms.
+\setbeamertemplate{itemize items}[circle]
+\begin{itemize}
 
-Scale analysis will show that the dominant term in the full vertical momentum equation is $\frac{\partial q}{\partial z}$ and the gravity term, resulting in the hydrostatic approximation.
+  \item The key to the justification process is to take this following phrase: \textbf{\textit{"we are considering a large-scale geophysical fluid on the surface of the Earth,"}} and to include its meaning into the model in mathematical terms.
+
+  \item Scale analysis will show that the dominant term in the full vertical momentum equation is $\frac{\partial q}{\partial z}$ and the gravity term, resulting in the hydrostatic approximation.
+
+\end{itemize}
 
 \end{frame}
 
-%%% TEXT: 1.) Before we do anything else: fix the coordinate system.
+%%% TEXT: 1.) Before describing the scaling process, first of all we fix a coordinate system. We use a local Cartesian coordinate system 
 %%% 2.) "locally" - it means however the surface of a few countries
 %%% 3.) Here the x axis is perpendicular to the Earth rotation vector, this makes the Coriolis term more simple.
-\begin{frame}
+\begin{frame}{Local geophysical coordinate system}
 
-Before describing the scaling process, first of all we fix a coordinate system. We use a local Cartesian coordinate system ("$\beta$-plane approximation") $\to$ this means that we can neglect the curvature of the Earth, and thus is valid locally.
+\textbf{"$\beta$-plane approximation"} $\to$ this means that we can neglect the curvature of the Earth, and thus is valid locally.
 
 {Geophysical rotating frame:}
 
 \begin{itemize}
 \item $z$ --- vertical coordinate ("upwards"),
 \item $x$ --- east,
-\item $y$ ---north.
+\item $y$ --- north.
 \end{itemize}
 
 This is an often used coordinate system choice as the Coriolis term takes a rather simple form expressed in these coordinates.
@@ -113,11 +128,16 @@ This is an often used coordinate system choice as the Coriolis term takes a rath
 \end{frame}
 
 %%% TEXT: 1.) make the domain independent from epsilon by using the physical dimensions.
+%%% 2.) epsilon incorporates the shallowness in a mathematical way
 \begin{frame}{Scaling - part 1}
 
 Geophysical fluid $\to$ shallow domain characteristics --- the domain is greater horizontally than in the vertical dimension.
 
-One of the main tools to exploit the "almost" 2D structure of the atmosphere $\to$ introduce the aspect ratio $$\epsilon = \frac{\text{characteristic depth}}{\text{characteristic width}},$$ which incorporates the shallowness in a mathematical way. Natural scaling process for the coordinates, velocity, pressure, and concentration:
+One of the main tools to exploit the "almost" 2D structure of the atmosphere:
+
+$$\epsilon = \frac{\text{characteristic depth}}{\text{characteristic width}} = \text{aspect ratio}.$$
+
+\textbf{Natural scaling process:}
 
 \begin{enumerate}
     \item $ x=x_1, y=x_2, z=\epsilon x_3 $
@@ -151,24 +171,31 @@ The diffusivity matrix is assumed to be coercive.
 
 \end{frame}
 
-\begin{frame}{Local domain and boundary conditions}
-  \begin{figure}
-    \includegraphics[width=\linewidth]{domain.jpg}
-    \caption{A local slice of the atmosphere}
-    \label{fig:atmosphere}
-  \end{figure}
-\end{frame}
 
+%%% TEXT: 1.)  For modelling the source function of the concentration we use the Gaussian impulse approach.
+%%% 2.) We use a parametrised nascent delta function to describe the source term, with the parameter being $\epsilon$.
 \begin{frame}{Source term}
-  For modelling the source function of the concentration we use the Gaussian impulse approach.
-  
-  We use a parametrised nascent delta function to describe the source term, with the parameter being $\epsilon$.
-  
-  We have $$S_\epsilon (t, t_s, x, x_s) = s(t, t_s) \delta_\epsilon (x - x_s),$$ with the activation term $s(t,t_s)= IH(t - t_s)$ where $H(\cdot)$ is the Heaviside step function. In the limit model we naturally arrive to the delta distribution as a source.
+
+$$S_\epsilon (t, t_s, x, x_s) = s(t, t_s) \delta_\epsilon (x - x_s),$$
+
+with the activation term \center{$s(t,t_s)= IH(t - t_s)$.}
+
+\setbeamertemplate{itemize items}[circle]
+\begin{itemize}
+
+  \item $\delta_\epsilon$ is a nascent delta function,
+  \item $H(\cdot)$ is the Heaviside step function,
+  \item $I$ is the intensity of the source.
+
+\end{itemize}
+
+In the limit model we naturally arrive to the delta distribution as a source.
+
 \end{frame}
 
 %%% TEXT: 1.) How the two models will eventually look like when we write them out in detail, including the following specific ideas that we also use combined to the main, general foundation of the model, such as using a Gaussian pulse as a source term.
 %%% 2.) Why do we have an epsilon^2 on the third equation: the second epsilon comes from the denominator of the pressure term (there is a vertical derivative)
+%%% 3.) Point out the disappearing control on u_3
 \begin{frame}{Anisotropic equations}
 
   In $\Omega \times (0,T)$ we have the following system.
@@ -185,6 +212,14 @@ The diffusivity matrix is assumed to be coercive.
     
 \end{frame}
 
+\begin{frame}{Local domain and boundary conditions}
+  \begin{figure}
+    \includegraphics[width=\linewidth]{domain.jpg}
+    \caption{A local slice of the atmosphere}
+    \label{fig:atmosphere}
+  \end{figure}
+\end{frame}
+
 \begin{frame}{Anisotropic equations - Part 2}
 
   The initial and boundary conditions are chosen to be
@@ -197,7 +232,22 @@ The diffusivity matrix is assumed to be coercive.
 
 \end{frame}
 
-%%% TEXT:formally get one set of equations from the previous one. Highlight: both the starting model and the limit model are 3D, unlike in other approaches such as shallow water equations.
+\begin{frame}{Anisotropic equations}
+
+  In $\Omega \times (0,T)$ we have the following system.
+
+    \[ \partial_t u^\epsilon _1 + \mathbf{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\alpha u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \]
+    
+    \[ \partial_t u_2^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_2^\epsilon -\Delta_\nu u_2^\epsilon + \alpha u_1^\epsilon + \partial_2 p^\epsilon = 0 \]
+    
+    \[\epsilon^2 \{  \partial_t u_3^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon -\Delta_\nu u_3^{\epsilon} \} - \epsilon \beta u_1^\epsilon + \partial_3 p^\epsilon = 0 \]
+    
+    \[ \nabla \cdot \mathbf{u}^\epsilon= 0  \]
+    
+    \[ \partial_t C^\epsilon + \mathbf{u^\epsilon} \cdot \nabla C^\epsilon = \nabla \cdot (\mathbf{M} \nabla C^\epsilon) + S^\epsilon \]
+    
+\end{frame}
+
 \begin{frame}{Hydrostatic equations}
   
     \[ \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\alpha u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T) \]
@@ -209,19 +259,34 @@ The diffusivity matrix is assumed to be coercive.
     \[ \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \times (0,T) \]
     
     \[ \partial_t C + \mathbf{u} \cdot \nabla C = \nabla \cdot (\mathbf{M} \nabla C) + S \text{ in } \Omega \times (0,T) \]
+    
+    Initial and boundary conditions are analogous except for using $$ u_1 = u_2 = u_3 n_3 = 0 \text{ on } \Gamma \times (0,T). $$
 
 \end{frame}
-    
-\begin{frame}{Hydrostatic equations - Part 2}
 
-    $$ u_i (\cdot, t=0) = u_{0 i}, \text{$i$ = 1,2}, C (\cdot, t=0) = C_0 \text{ in } \Omega, $$
-    
-    $$ u_1 = u_2 = u_3 n_3 = 0 \text{ on } \Gamma \times (0,T), $$
-    
-    $$C = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), $$
-    
-    $$ \partial_1 C = \sigma_1, \partial_2 C = \sigma_2, \partial_3  C = 0, \boldsymbol{\sigma} = (\sigma_1, \sigma_2, 0) \in L^2(0,T; \Gamma_G).$$
+%%% TEXT: 1.) note the spaces where u^\epsilon and C^\epsilon come from - the "usual" weak solution spaces, added with specialities for BCs
+\begin{frame}{Weak formulation - anisotropic system}
+\changefontsizes{10pt}
+Find $\mathbf{u}^\epsilon$ and $C^\epsilon$, such that
   
+  \begin{equation}
+    \begin{split} \nonumber
+      & \int_0^T \bigg [ -(\mathbf{u}^\epsilon_H, \partial_t \mathbf{\tilde{u}}_H) + (\nabla_\nu \mathbf{u}^\epsilon_H, \nabla_\nu \mathbf{\tilde{u}}_H) - (\mathbf{u}^\epsilon_H, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{\tilde{u}}_H) + (b(\mathbf{u}^\epsilon_H), \mathbf{\tilde{u}}_H) \bigg ] \diff t \\
+      & + \epsilon \beta \int_0 ^ T \big [ (u_3 ^\epsilon, \tilde{u}_1) - (u_1^\epsilon, \tilde{u}_3) \big ] \diff t\\
+      & + \epsilon^2 \int _0 ^ T \big [ -(u_3^\epsilon, \partial_t \tilde{u}_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, \tilde{u}_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu \tilde{u}_3) \big ] \diff t \\
+      & = (\mathbf{u}^\epsilon_{0H}, \mathbf{\tilde{u}}_H(0)) + \epsilon^2 (u_{03}^\epsilon, \tilde{u}_3 (0)) \diff t
+    \end{split}
+  \end{equation}
+  
+  and
+  
+    \begin{equation}
+    \begin{split} \nonumber
+      & \int_0^T \bigg [ -(C^\epsilon, \partial_t \tilde{C}) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) + (\mathbf{M} \nabla C^\epsilon, \nabla \tilde{C}) - \int_{\Gamma_G} \boldsymbol{\sigma} \mathbf{M} \tilde{C} \vec{\boldsymbol{n}}_{\Gamma_G} \bigg ] \diff t \\
+      & =  (C^\epsilon (0), \tilde{C} (0)) + \int_0^T (S^\epsilon,\tilde{C}) \diff t
+    \end{split}
+  \end{equation}
+
 \end{frame}
 
 \begin{frame}{Main theorem}
@@ -236,7 +301,7 @@ The diffusivity matrix is assumed to be coercive.
 
 \end{frame}
 
-\begin{frame}{Energy inequality}
+\begin{frame}{Proof steps: Energy inequality}
   \changefontsizes{10pt}
   \begin{equation*}
     \begin{split}  
@@ -248,17 +313,37 @@ The diffusivity matrix is assumed to be coercive.
   \end{equation*}
 \end{frame}
 
+\begin{frame}{Proof steps: A priori estimates}
 
-%%% TEXT:  As for the nonlinear terms, the convergence can be shown using a time compactness theorem that is based on a result by Simon \cite{simon1986compact}. The key point is to apply a sort of generalisation of the classical translation criterium of Riesz-Frechet-Kolmogorov which enables us to get strong convergence for the horizontal velocities. This is achieved by establishing a bound for the perturbation of $\mathbf{u}_H$ of the form $\norm{\tau_h \mathbf{u}_H - \mathbf{u}_H}_{L^p(0,T-h, \mathbf{Y})} \leq \varphi(h) + \psi(\epsilon),$ where $\mathbf{Y}$ is a Banach space, $\varphi$ and $\psi$ are appropriate functions with their limits vanishing at zero, and $\tau_h \mathbf{u}_H = \mathbf{u}_H (t+h) $. After obtaining strong convergence for $\mathbf{u}_H,$ the proof of the convergence for these nonlinear terms can be closed by applying basic interpolation techniques and the generalised Holder inequality. The details are omitted since they are analogous to those described in \cite{azerad2001mathematical}.
-\begin{frame}{Proof steps - Part 1}
-  \begin{enumerate}
-    \item The beginning step of the proof is to obtain the energy inequality that yields a priori estimates such as $L_t^\infty L_x^2 \cap L^2 _t H^1_x$ boundedness for $C^\epsilon,$ and $L_t^2 L_x^2$ boundedness for $u^\epsilon_3.$
-  
-    \item Once we have boundedness, we have the weak convergence of the linear terms, while the weak convergence of the nonlinear terms not including the pollution term had been shown previously by Az\'erad and Guill\'en (SIAM Journal on Mathematical Analysis, 2001).
+    \begin{align}
+      & u^\epsilon_1, u^\epsilon_2, \epsilon u^\epsilon_3, C^\epsilon & \quad & \text{are bounded in $L^\infty (0,T; L^2(\Omega)),$} \nonumber \\
+      & u^\epsilon_3 & \quad & \text{is bounded in $L^2 (0,T; L^2(\Omega)),$} \nonumber \\
+      & u^\epsilon_1, u^\epsilon_2, \epsilon u^\epsilon_3 & \quad & \text{are bounded in $L^2(0,T; H^1(\Omega)),$} \nonumber \\
+      & C^\epsilon & \quad & \text{is bounded in $L^2(0,T;H^1(\Omega)).$} \nonumber
+    \end{align}
     
-    \item We prove the convergence of the term $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C})$ by proving a compactness property for the pollution concentration $C^\epsilon.$ This is necessary because however it is possible to prove strong convergence for the horizontal velocities, at the same time we have less control and weaker regularity results on the vertical velocity $u_3$ because of the presence of the shallowness marker $\epsilon$.
+    These boundedness results provide the weak convergence of the linear terms.
 
-  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Proof steps: Convergence of the pollution-free functions}
+
+The weak convergence of the nonlinear terms that do not include the concentration function $C$ can be proved by standard application of an Aubin-Lions type theorem.
+\end{frame}
+
+%%% TEXT: This is necessary because however it is possible to prove strong convergence for the horizontal velocities, at the same time we have less control and weaker regularity results on the vertical velocity $u_3$ because of the presence of the shallowness marker $\epsilon$.
+\begin{frame}{Proof steps: Convergence for the nonlinear pollution term}
+
+We show the convergence of the term $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C})$ by proving a compactness property for the pollution concentration $C^\epsilon.$
+
+\setbeamertemplate{itemize items}[circle]
+\begin{itemize}
+
+\item $u_i C$ for $i = 1,2$ is fine --- strong convergence of $\mathbf{u}_H$
+\item $u_3 C$ --- \textbf{?}
+
+\end{itemize}
+
 \end{frame}
 
 \begin{frame}
@@ -289,6 +374,10 @@ We can apply the statement of this theorem for $p=2$ and the spaces $H^1 \hookri
 
 and thus we have the weak convergence result $u^\epsilon_3 C^\epsilon \rightharpoonup u_3 C.$
 
+\end{frame}
+
+\begin{frame}
+ADD DETAILS.
 \end{frame}
 
 \section{Downwind-matching coordinate system}
