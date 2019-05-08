@@ -51,7 +51,13 @@
 
 \item \textbf{Calculating the norm in ${H^2}^*$:} Firstly, $H^2$ is reflexive, so ${H^2}^* = H^2.$ Secondly, taking the norm of $C$ in ${H^2}^*,$ the $\tilde{C}$ function has to have a norm less or equal than 1, by definition of norm in a dual space.
 
-\item \textbf{Defining boundary values for $\mathbf{u}^\epsilon$ and $\mathbf{u}$}: BCs.
+\item \textbf{Defining boundary values for $\mathbf{u}^\epsilon$ and $\mathbf{u}$}: The whole idea of using direct ($\mathbf{u} = 0 $) and non-direct ($\mathbf{u} \cdot \mathbf{n} = 0 $) conditions is that while for an $H^1$ $\mathbf{u}^\epsilon$ function the trace has an $H^{1/2}$ regularity, for the limit model we only have $u^3$ in $L^2(\Omega),$ thus for this case the boundary values are in $H^{-1/2}$ only. For the functions with weaker trace, we use weaker conditions on the boundary, and only those that we need. For example $u_3 n_3 = 0$ says anything at all only on the horizontal surfaces, otherwise it is "empty".
+
+ONE. The boundary conditions for the anisotropic system. Here for a fix $\epsilon$ the velocity is in $H^1,$ so the boundary values are defined directly.
+
+TWO. The boundary conditions for the hydrostatic model. On $\Gamma_s$ they use $u_3 = 0$ directly, while on $\Gamma_b$ they use $u_3 n_3 = 0.$ Actually, it seems that this is not a misprint. The point is that also $u_3 n_3 = 0$ becomes direct on horizontal surfaces, as there we have $n_3 = 1,$ and with that $u_3 n_3 = 0$ reduces to $u_3 = 0.$ The whole idea of using the normal vector is not saving any regularity, it is a tool for requiring less, for example $u_3 n_3 = 0$ is a requirement only on horizontal surfaces. The $u_3 = 0$ requirement still makes sense in the space where $u_3$ is: in $H^{-1/2},$ in the weak sense. As the dual of $H^{-1/2}$ is $H^{1/2}$, the direct $u_3 = 0$ means $$ \int_\Gamma u_3 \cdot \varphi = 0 \quad \forall \varphi \in H^{1/2}.$$
+
+\item \textbf{The condition in the main theorem:}  $\mathbf{u_0} \cdot \mathbf{n} = 0$ is weaker than $\mathbf{u_0} = 0,$ as on every surface it only requires one function out of the three to be zero.
  
 \end{itemize}
 
