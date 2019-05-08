@@ -1,0 +1,51 @@
+\documentclass[11pt]{article}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{commath}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{float} 
+\usepackage{array}
+\usepackage{outlines}
+\usepackage{setspace}
+\usepackage[colorinlistoftodos]{todonotes}
+\setlist[enumerate,1]{label=\alph*)}
+\setlist[enumerate,2]{label=\roman*)}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+\newtheorem{prop}{Proposition}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,trees, calc}
+
+%%% *** PREAMBLE *** %%%
+\title{Things to consider, ask, include and look into.}
+
+%%%***  CONTENT *** %%%
+\begin{document}
+
+\maketitle
+
+\begin{itemize}
+
+\item \textbf{How to interpret the "3D"-ness of the limit model with $\epsilon = 0:$} it represents that the vertical dimension is much smaller, compared to the horizontal dimensions. It is a relative thing.
+
+\item \textbf{The divergence-free condition and the Aubin-Lions lemma.} In the A-G article it is mentioned that the Aubin-Lions lemma can not be used because the velocity including $\epsilon$ is not divergence-free. Actually, being divergence-free is not a requirement, it is simply easier when we have it, and without it the conditions of the original A-L lemma can not be verified. This is why they use another version of it, but not because being divergence-free is a condition in itself.
+
+\item \textbf{Why do we have $\epsilon^3$ in the Gaussian:} Because it is a $3D$ Gaussian. The number of dimensions appears there.
+
+\item \textbf{Weak formulation of $\mathbf{u}^\epsilon$}: $\mathbf{u}^\epsilon$ is defined to be in $L^2 H^1$ because at this point we do all this for a fix $\epsilon,$ which is as if we simply had a constant. On the other hand, it makes sense to define it like this, because in this case the system we have is essentially the complete Navier-Stokes, for which we have the results that verify the existence of such a weak solution.
+
+\item \textbf{The structure of stating Proposition 1.:} Let $\mathbf{u}^\epsilon$ be a weak solution of the anisotropic system, then we state results such as for example $\mathbf{u}^\epsilon \in L^2 L^2.$ In this case we have switched from a fix $\epsilon$ to an $\epsilon$ tending to zero, so this is already a different scenario, that is why it is not a contradiction to use the definition of WS (which, for a fix epsilon, had $H^1$ regularity), and then state $L^2 L^2.$
+ 
+\end{itemize}
+
+\end{document}
+
+%%% add http://elte.prompt.hu/sites/default/files/tananyagok/AtmosphericChemistry/ch10s03.html
+%%% http://twister.caps.ou.edu/PM2000/Chapter7.pdf
