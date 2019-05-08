@@ -175,6 +175,7 @@ The diffusivity matrix is assumed to be coercive.
 
 %%% TEXT: 1.)  For modelling the source function of the concentration we use the Gaussian impulse approach.
 %%% 2.) We use a parametrised nascent delta function to describe the source term, with the parameter being $\epsilon$.
+%%% 3.) MENTION: Gaussian.
 \begin{frame}{Source term}
 
 $$S_\epsilon (t, t_s, x, x_s) = s(t, t_s) \delta_\epsilon (x - x_s),$$
@@ -273,7 +274,7 @@ In the limit model we naturally arrive to the delta distribution as a source.
   \begin{equation}
     \begin{split} \nonumber
       & \int_0^T \bigg [ -(\mathbf{u}^\epsilon_H, \partial_t \mathbf{\tilde{u}}_H) + (\nabla_\nu \mathbf{u}^\epsilon_H, \nabla_\nu \mathbf{\tilde{u}}_H) - (\mathbf{u}^\epsilon_H, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{\tilde{u}}_H) + (b(\mathbf{u}^\epsilon_H), \mathbf{\tilde{u}}_H) \bigg ] \diff t \\
-      & \hspace{-0.5cm}+ \epsilon \beta \int_0 ^ T \big [ (u_3 ^\epsilon, \tilde{u}_1) - (u_1^\epsilon, \tilde{u}_3) \big ] + \epsilon^2\big [ -(u_3^\epsilon, \partial_t \tilde{u}_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, \tilde{u}_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu \tilde{u}_3) \big ] \diff t \\
+      & \hspace{-0.5cm} + \int_0 ^ T \epsilon \beta \big [ (u_3 ^\epsilon, \tilde{u}_1) - (u_1^\epsilon, \tilde{u}_3) \big ] + \epsilon^2\big [ -(u_3^\epsilon, \partial_t \tilde{u}_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, \tilde{u}_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu \tilde{u}_3) \big ] \diff t \\
       & = (\mathbf{u}^\epsilon_{0H}, \mathbf{\tilde{u}}_H(0)) + \epsilon^2 (u_{03}^\epsilon, \tilde{u}_3 (0)) \diff t
     \end{split}
   \end{equation}
@@ -332,7 +333,7 @@ In the limit model we naturally arrive to the delta distribution as a source.
 
 \begin{frame}{Proof steps: Convergence of the pollution-free functions}
 
-The weak convergence of the nonlinear terms that do not include the concentration function $C$ can be proved by standard application of an Aubin-Lions type theorem.
+The weak convergence of the nonlinear terms that do not include the concentration function $C^\epsilon$ can be proved by standard application of an Aubin-Lions - type theorem.
 \end{frame}
 
 %%% TEXT: This is necessary because however it is possible to prove strong convergence for the horizontal velocities, at the same time we have less control and weaker regularity results on the vertical velocity $u_3$ because of the presence of the shallowness marker $\epsilon$.
@@ -372,13 +373,14 @@ We show the convergence of the term $(\mathbf{u}^\epsilon C^\epsilon, \nabla \ti
 %%% 2.) Comment on existence: STEP1: stationary case, Galerkin method, the approximating $U_m$ functions exist thanks to a fix point theorem. STEP2: Finite difference in time. Approximating time-dependent functions are defined using the existence of the stationary solution, then passing to the limit.
 \begin{frame}
 
-We can apply the statement of this theorem for $p=2$ and the spaces $H^1 \hookrightarrow L^2 \hookrightarrow {H^2}^*,$ where ${H^2}^*$ is the dual of ${H^2}$, obtaining that
+We can apply the statement of this theorem for $p=2$ and the spaces $H^1 \hookrightarrow L^2 \hookrightarrow {H^2}^*,$ where ${H^2}^*$ is the dual of ${H^2}$.
 
-\[C^\epsilon \to C \text{ strongly in } L^2_t L^2_x,\]
+\textbf{The applicability of the theorem}:
+\begin{enumerate}
+  \item $C^\epsilon$ is bounded in $L^2(0,T, H^1(\Omega)).$
+  \item We need to verify $\norm{\tau_h C^\epsilon - C^\epsilon}_{L^2(0,T-h, {H^2}^*)} \leq \varphi(h) + \psi(\epsilon).$
+\end{enumerate}
 
-and thus we have the weak convergence result $u^\epsilon_3 C^\epsilon \rightharpoonup u_3 C.$
-
-As we have $C^\epsilon \in L^2_t H^1_x,$ we only need to verify $\norm{\tau_h C^\epsilon - C^\epsilon}_{L^2(0,T-h, {H^2}^*)} \leq \varphi(h) + \psi(\epsilon).$
 \textbf{The main steps:}
 
 \begin{itemize}
@@ -393,13 +395,15 @@ As we have $C^\epsilon \in L^2_t H^1_x,$ we only need to verify $\norm{\tau_h C^
 \begin{itemize}
   \item $ (\tau_h C^\epsilon (t) - C^\epsilon (t), \tilde{C}) = \int_t^{t+h} \iota^\epsilon (s) \diff s, $ where we define $ \iota^\epsilon (s) = (\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) - (\mathbf{M} \nabla C^\epsilon, \nabla \tilde{C}) + (S^\epsilon, \tilde{C}).$
   \item We show that $\norm{\iota^\epsilon}_{L^{4/3}(0,T)} \leq c  \| \tilde{C}  \| _{H^2}$ using
-  \begin{enumerate}
+  \setbeamertemplate{itemize items}[circle]
+  \begin{itemize}
      \item $(S^\epsilon, \tilde{C}) \quad  \text{is bounded in $L^2(0,T)$,}$
-     \item $ (\mathbf{M} \nabla C^\epsilon, \nabla \tilde{C}) \leq c \big \| \tilde{C} \big \| _{H^1} \big \| C^\epsilon \big \| _{H^1} \quad  \text{is bounded in $L^2(0,T)$,}$
-     \item $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) \leq \norm{\mathbf{u}^\epsilon}_{L^2} \norm{C^\epsilon}_{L^3}  \big \| \tilde{C} \big \| _{H^2} \quad  \text{is bounded in $L^{4/3}(0,T),$} $ using the interpolation between $L_t^\infty L_x^2$ and $L_t^2 L_x^6$ for $C^\epsilon,$ obtaining that it is in $L_t^4 L^3_x$
-  \end{enumerate}
-  
-  \item We apply the Holder inequality and arrive to $$ \int_t^{t+h} \abs{\iota^\epsilon (s)} \diff s \leq c  \| \tilde{C}  \| _{H^2} h^{1/4}$$
+     \item $ (\mathbf{M} \nabla C^\epsilon, \nabla \tilde{C}) \leq c \big \| \tilde{C} \big \| _{H^1} \| C^\epsilon \| _{H^1} \quad  \text{is bounded in $L^2(0,T)$,}$
+     \item $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) \leq \norm{\mathbf{u}^\epsilon}_{L^2} \norm{C^\epsilon}_{L^3}  \| \tilde{C}  \| _{H^2} \quad  \text{is bounded in $L^{4/3}(0,T),$} $ using the interpolation between $L_t^\infty L_x^2$ and $L_t^2 L_x^6$ for $C^\epsilon,$ obtaining that it is in $L_t^4 L^3_x$
+  \end{itemize}
+  \setbeamertemplate{itemize items}[square]
+  \item We apply the H\"older inequality and arrive to $$ \int_t^{t+h} \abs{\iota^\epsilon (s)} \diff s \leq c  \| \tilde{C}  \| _{H^2} h^{1/4}$$
+  \item We conclude $$C^\epsilon \to C \text{ strongly in } L^2_t L^2_x,$$ and $$u^\epsilon_3 C^\epsilon \rightharpoonup u_3 C \text{ weakly.}$$
 \end{itemize}
 
 \end{frame}
@@ -485,7 +489,7 @@ The strong solution of the PE being a weak solution as well, we can take back th
 
 \begin{enumerate}
 
-  \item $\Omega$ bounded domain, not periodic,
+  \item $\Omega$ bounded domain --- not periodic,
   \item strong solutions (convergence rate),
   \item numerical simulations (in collaboration with Prof. Omar Lakkis, University of Sussex).
 
