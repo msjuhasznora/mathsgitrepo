@@ -24,7 +24,7 @@
 \usetikzlibrary{arrows,shapes,trees, calc}
 
 %%% *** PREAMBLE *** %%%
-\title{Things to consider, ask, include and look into.}
+\title{Q and A.}
 
 %%%***  CONTENT *** %%%
 \begin{document}
@@ -58,6 +58,8 @@ ONE. The boundary conditions for the anisotropic system. Here for a fix $\epsilo
 TWO. The boundary conditions for the hydrostatic model. On $\Gamma_s$ they use $u_3 = 0$ directly, while on $\Gamma_b$ they use $u_3 n_3 = 0.$ Actually, it seems that this is not a misprint. The point is that also $u_3 n_3 = 0$ becomes direct on horizontal surfaces, as there we have $n_3 = 1,$ and with that $u_3 n_3 = 0$ reduces to $u_3 = 0.$ The whole idea of using the normal vector is not saving any regularity, it is a tool for requiring less, for example $u_3 n_3 = 0$ is a requirement only on horizontal surfaces. The $u_3 = 0$ requirement still makes sense in the space where $u_3$ is: in $H^{-1/2},$ in the weak sense. As the dual of $H^{-1/2}$ is $H^{1/2}$, the direct $u_3 = 0$ means $$ \int_\Gamma u_3 \cdot \varphi = 0 \quad \forall \varphi \in H^{1/2}.$$
 
 \item \textbf{The condition in the main theorem:}  $\mathbf{u_0} \cdot \mathbf{n} = 0$ is weaker than $\mathbf{u_0} = 0,$ as on every surface it only requires one function out of the three to be zero.
+
+\item \textbf{Reprise:} The meaning of $\epsilon = 0,$ and while the limit model is still 3D. Imagine something similar to what the Earth looked like for people a more or less thousand years ago: a flat, infinite 2D surface, and of course we combine this with above it some layer of air. For this case, not just "epsilon tends to, or is close to zero" makes sense, but here $\epsilon = 0$ also makes sense. It is zero not because the vertical dimension disappears, but because in the aspect ratio we have an infinite denominator against a finite nominator.
  
 \end{itemize}
 
