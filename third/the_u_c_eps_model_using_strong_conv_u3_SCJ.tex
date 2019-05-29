@@ -311,7 +311,28 @@ Estimating the gradient by the Laplacian.
 
 \begin{enumerate}
 
-\item p17, 3rd inequality in the "big" inequality at the bottom of the page.
+\item p17, updating the inequality
+
+$$ \hspace{-1cm} \int_0 ^ T \int_M \int_{-1}^1 \abs{u^\epsilon} \abs{\nabla w^\epsilon} \diff z \int_{-1}^1 \abs{\nabla_H v} \leq C \int_0^T \norm{u^\epsilon}_2^{1/2} \norm{\nabla u^\epsilon}_2^{1/2} \norm{\nabla w^\epsilon}_2 \norm{\nabla_H v}_2^{1/2} \norm{\Delta v}_2^{1/2}.$$
+
+This inequality is a result of Lemma 2.1 ($h= u^\epsilon, g = \nabla w^\epsilon$ and $f = \nabla_H v$) combined with the Poincare inequality.
+
+As we don't have $\nabla v = 0$ on the boundary, we can not use $\norm{f} \leq \norm{\nabla f},$ since we don't have $\norm{\nabla v} \leq \norm{\Delta v}.$ Thus, instead of the original bound we will have
+
+$$C \int_0^T \norm{u^\epsilon}_2^{1/2} \norm{\nabla u^\epsilon}_2^{1/2} \norm{\nabla w^\epsilon}_2 \norm{\nabla_H v}_2^{1/2} (\norm{\nabla_H v}_2^{1/2} + \norm{\Delta v}_2^{1/2}).$$
+
+We know from the article that we have a bound for
+
+$$ C \int_0^T \norm{u^\epsilon}_2^{1/2} \norm{\nabla u^\epsilon}_2^{1/2} \norm{\nabla w^\epsilon}_2 \norm{\nabla_H v}_2^{1/2} \norm{\Delta v}_2^{1/2}, $$
+
+on the other hand, for the newly added term we can use
+
+\begin{equation}
+  \begin{split} \nonumber
+    & C \int_0^T \norm{u^\epsilon}_2^{1/2} \norm{\nabla u^\epsilon}_2^{1/2} \norm{\nabla w^\epsilon}_2 \norm{\nabla_H v}_2 \\
+    & \leq C \sup_{0 \leq t \leq T} \norm{u^\epsilon}_2^{1/2} \norm{\nabla v}_2 \bigg( \int_0^T \norm{\nabla u^\epsilon}_2 \diff t \bigg)^{1/2} \bigg ( \int_0^T \norm{\nabla w^\epsilon}_2^2 \diff t \bigg)^{1/2}.
+  \end{split}
+\end{equation}
 
 \item p22, h
 
