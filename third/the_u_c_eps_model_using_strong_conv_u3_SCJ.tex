@@ -234,16 +234,71 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
         & \partial_2 C = \partial_3 C = 0 \text{ on } \Gamma_G \times (0,T), \partial_1 C \in L^2 L^2 (0,T; \Gamma_G) \\
       \end{split}
     \end{equation}
+    
+\subsection{Energy inequality}
+
+Find $\mathbf{u}^\epsilon = (\mathbf{u}^\epsilon_H, u^\epsilon_3) \in L^2 (0,T ; \mathbf{V}) \cap L^\infty (0, T; L^2 (\Omega)^3)$ and $C^\epsilon \in L^\infty (0,T; L^2(\Omega)) \cap L^2 (0,T; H^1(\Omega))$, such that
+  
+  \begin{equation}
+    \begin{split} \nonumber
+      & \int_0^T \bigg [ -(\mathbf{u}^\epsilon_H, \partial_t \mathbf{\tilde{u}}_H) + (\nabla_\nu \mathbf{u}^\epsilon_H, \nabla_\nu \mathbf{\tilde{u}}_H) - (\mathbf{u}^\epsilon_H, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{\tilde{u}}_H) + (b(\mathbf{u}^\epsilon_H), \mathbf{\tilde{u}}_H) \bigg ] \diff t \\
+      & \hspace{-0.5cm} + \int_0 ^ T \epsilon \beta \big [ (u_3 ^\epsilon, \tilde{u}_1) - (u_1^\epsilon, \tilde{u}_3) \big ] + \epsilon^2\big [ -(u_3^\epsilon, \partial_t \tilde{u}_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, \tilde{u}_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu \tilde{u}_3) \big ] \diff t \\
+      & + \int_0 ^ T \epsilon \alpha \big [ (u_3 ^\epsilon, \tilde{u}_2) - (u_2^\epsilon, \tilde{u}_3) \big ] = (\mathbf{u}^\epsilon_{0H}, \mathbf{\tilde{u}}_H(0)) + \epsilon^2 (u_{03}^\epsilon, \tilde{u}_3 (0)) \diff t
+    \end{split}
+  \end{equation}
+  
+  and
+  
+    \begin{equation}
+    \begin{split} \nonumber
+      & \int_0^T \bigg [ -(C^\epsilon, \partial_t \tilde{C}) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) + (\mathbf{M} \nabla C^\epsilon, \nabla \tilde{C}) - \int_{\Gamma_G} \boldsymbol{\sigma} \mathbf{M} \tilde{C} \vec{\boldsymbol{n}}_{\Gamma_G} \bigg ] \diff t \\
+      & =  (C^\epsilon (0), \tilde{C} (0)) + \int_0^T (S^\epsilon,\tilde{C}) \diff t
+    \end{split}
+  \end{equation}
+  
+    \hspace{0.2cm} for all $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_H, \tilde{u}_3) \in H^1 (0,T;\mathbf{V})$ with $\mathbf{\tilde{u}}(T) = 0$ and $\tilde{C}$ such that
+    
+    \hspace{0.2cm} $\tilde{C} \in H^1 (0,T, H^2_{\Gamma_A} (\Omega))$ and $\tilde{C} (T) = 0$.
+
 
 %%% *** WEAK FORMULATION AND MAIN RESULT*** %%%
 \section{Weak formulation and Main Result} \label{weakformulationmainresult}
 
-update, analogous to the original statement, check for minor necessary changes.
+The main result is analogous to the original one, stated for the case of $\mathbf{v}_0 \in H^1.$ The domain is a bounded Lipschitzian domain.
+
+\begin{theorem} \label{maintheorem}
+  Let $\mathbf{v}_0$ $\in$ $H^1 (\Omega)$, ${u_3}_0 \in L^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 \cdot \mathbf{n} = 0$ on $\partial \Omega$; let $C_0 \in$ $L^2 (\Omega)$, $C_0 = 0$ on $ \partial \Omega$, and assume that the boundary conditions (\ref{ANSC8}) hold; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, C^\epsilon)$ of the anisotropic equations (\ref{ANSC1}) - (\ref{ANSC5}) converge to a weak solution $(\mathbf{u}, C)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1}) - (\ref{HNSC5}).
+\end{theorem}
+
+In the theorem of \cite{li2019primitive} they also use additional requirements such as zero average \todo{why? why can't they simply use the Poincare inequality and refer to the fact that they don't have boundary values?} for the initial data $\int_\Omega v_0 = 0$.
   
 %%% *** PROOF *** %%%
 \section{Proof of the main theorem} \label{proof}
 
-The proof is mainly based on the Strong Convergence Justification paper's convergence result.
+The proof is mainly based on the Strong Convergence Justification paper's convergence result. In \cite{li2019primitive} it is proved that a Leray-Hopf weak solution $(\mathbf{v}_\epsilon, w_\epsilon)$ of (SNS) converges strongly to the strong solution $(\mathbf{v}, w)$ in $L^2 L^2,$ provided that we have $\mathbf{v}_0 \in H^1,$ and the domain is periodic (see Theorem 1.1 on p5).
+
+The strong convergence of $w_\epsilon$ to $w$ allows us to bring the proof to a closure, obtaining that $u_3^\epsilon C^\epsilon$ tends to $u_3 C.$
+
+We verify here that Theorem 1.1 in \cite{li2019primitive} is also valid for the case of a bounded domain that is not periodic (i.e. we have boundary segments). We follow closely the proof provided in Section4 and update each point where the periodicity of the domain is applied in one way or another.
+
+The switch from a periodic domain to the bounded Lipschitz domain effects the proof in the following ways in detail:
+
+\begin{enumerate}[label=\roman*)]
+  \item The applicability of the Poincare inequality
+  \item Integration by parts, possible additional boundary terms in the weak form, etc.
+\end{enumerate}
+
+We will check these steps by step.
+
+Note that in this case we have the more regular $v_0 \in H^1$ condition, so we will use the $u_3 = 0$ equality on the boundary directly, instead of using $u_3 n_3 = 0,$ which was originally.
+
+Concerning the first point, i.e. the applicability of the Poincare inequality, we have to check three main types of scenarios:
+
+\begin{enumerate}[label=\Roman*)]
+  \item 1
+  \item 2
+  \item 3
+\end{enumerate}
 
 \nocite{*}
 \bibliographystyle{abbrv}
