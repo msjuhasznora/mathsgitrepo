@@ -302,14 +302,20 @@ Concerning the first point, i.e. the applicability of the Poincare inequality, w
   Estimating the function by its gradient, ie. $\norm{\mathbf{v}}$ by $\norm{\nabla \mathbf{v}}, $ $\norm{\mathbf{v}^\epsilon}$ by $\norm{\nabla \mathbf{v}^\epsilon}, $ $\norm{w}$ by $\norm{\nabla w}, $ and $\norm{w^\epsilon}$ by $\norm{\nabla w^\epsilon}. $
   
   These points are automatically verified by using following version of the Poincare inequality (which is a different variant from the zero spatial average version that is used in the article): for a function in $W^{1,2}_0$ we have that $\norm{u}_2 \leq \norm{\nabla u}_2.$ Here $W^{1,2}_0$ ($k=1, p=2$) stands for $H^1$ functions whose $0, ... , n$-th derivative is zero on the boundary, $n \leq k-1 = 1-1 = 0.$ Since the $\mathbf{u}^\epsilon, \mathbf{u}$ functions are zero in the boundary, this zero-trace version of the Poincare inequality can be applied directly.
+  
+  This means that $\norm{v}_6 \leq C \norm{\nabla v}_2$ is valid in p21, $\norm{V^\epsilon} \leq C \norm{\nabla V^\epsilon}$ on p22 is correct as well, etc.
  
 \subsubsection{Second order terms}
 
 Estimating the gradient by the Laplacian.
 
-p17, 3rd inequality in the "big" inequality at the bottom of the page.
+\begin{enumerate}
 
-p22, h
+\item p17, 3rd inequality in the "big" inequality at the bottom of the page.
+
+\item p22, h
+
+\end{enumerate}
 
 \subsection{Integration by parts}
 
@@ -340,6 +346,9 @@ p22, h
    using the divergence-free condition and $\mathbf{u}^\epsilon = 0$ on $\partial \Omega.$
    
    \item Verifying (4.9): in terms of boundary conditions the analogous ideas can be applied as in the previous step.
+   
+   \item On p22, the calculation of the I2 term trivially remains correct as $\int_{\partial \Omega} \mathbf{u} \mathbf{v} \mathbf{v}^\epsilon \vec{n} = 0.$ The calculation of $I''_2$ stays valid as well since
+   $\int_{\partial \Omega} W^\epsilon V^\epsilon v n_3 = 0.$
 
 \end{itemize}
 
