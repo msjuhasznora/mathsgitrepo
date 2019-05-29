@@ -311,7 +311,7 @@ Estimating the gradient by the Laplacian.
 
 \begin{enumerate}
 
-\item p17, updating the inequality
+\item p17, updating the inequality which originally had the following form:
 
 $$ \hspace{-1cm} \int_0 ^ T \int_M \int_{-1}^1 \abs{u^\epsilon} \abs{\nabla w^\epsilon} \diff z \int_{-1}^1 \abs{\nabla_H v} \leq C \int_0^T \norm{u^\epsilon}_2^{1/2} \norm{\nabla u^\epsilon}_2^{1/2} \norm{\nabla w^\epsilon}_2 \norm{\nabla_H v}_2^{1/2} \norm{\Delta v}_2^{1/2}.$$
 
@@ -334,7 +334,44 @@ on the other hand, for the newly added term we can use
   \end{split}
 \end{equation}
 
-\item p22, h
+\item Updating the bounds I2 and I3, and with those the final steps of the proof as well.
+
+Firstly, on p22, we update the bound for $I''_2:$
+
+$$ \int_0^{t_0} \int_M \bigg ( \int_{-1}^1 \abs{\nabla_H V^\epsilon} \diff z' \bigg) \bigg ( \int_{-1}^1 \abs{V^\epsilon} \abs{\partial_z v} \bigg ).$$
+
+Again we will use Lemma 2.1 and the Poincare inequality (for $V^\epsilon$ we can still use it). We choose $f = \nabla_H V^\epsilon, g = V^\epsilon, h = \partial_z v.$
+
+The difference this time is that instead of $\norm{h}_2^{1/2} \norm{\nabla h}_2^{1/2}$ we will have the complete $\norm{h}_2^{1/2} (\norm{h}_2^{1/2} + \norm{\nabla h}_2^{1/2}),$ as we can not apply the Poincare inequality for $\nabla v.$ 
+
+This means that eventually we arrive to the bound
+
+\begin{equation}
+  \begin{split}
+     & C \int_0^{t_0} \norm{\nabla V^\epsilon}_2^{3/2} \norm{V^\epsilon}_2^{1/2} \norm{\nabla v}_2^{1/2} (\norm{\nabla v}_2^{1/2} + \norm{\Delta v}_2^{1/2})  \\
+     & \leq \frac{1}{18} \norm{\nabla V^\epsilon}^2_2 + C \int_0^{t_0} \norm{\nabla v}_2^2 (\norm{\nabla v}_2^{1/2} + \norm{\Delta v}_2^{1/2})^4 \norm{V^\epsilon}_2^2 \diff t \\
+     & \leq \frac{1}{18} \norm{\nabla V^\epsilon}^2_2 + C \int_0^{t_0} \norm{\nabla v}_2^4 \norm{V^\epsilon}_2^2 \diff t + C \int_0^{t_0} \norm{\nabla v}_2^2  \norm{\Delta v}_2^2 \norm{V^\epsilon}_2^2 \diff t,
+  \end{split}
+\end{equation}
+
+using the Young inequality.
+
+With this we obtain the updated version of (4.13) as well:
+
+$$ I_2 \leq \frac{1}{6} \norm{\nabla V^\epsilon}^2_2 + C \int_0^{t_0} \norm{\nabla v}_2^4 \norm{V^\epsilon}_2^2 \diff t + C \int_0^{t_0} \norm{\nabla v}_2^2  \norm{\Delta v}_2^2 \norm{V^\epsilon}_2^2 \diff t$$
+
+Similarly, at the bound of I3 on p23 we arrive to this extended version with an additional $\nabla v$ term:
+
+\begin{equation}
+  \begin{split} \nonumber
+    I3 & \leq C \epsilon^2 \int_0 ^ {t_0} ( \norm{v^\epsilon}_2^2 \norm{\nabla v^\epsilon}_2^2 + \norm{\nabla v}_2^2 (\norm{\nabla v}_2^{1/2} + \norm{\Delta v}_2^{1/2})^4 + \epsilon^2 \norm{w^\epsilon}_2^2 \norm{\nabla w^\epsilon}_2^2 ) \diff t \\
+    & + \frac{1}{6} \big ( \norm{\nabla V^\epsilon}_2^2 + \epsilon^2 \norm{\nabla W^\epsilon}_2^2  \big)
+  \end{split}
+\end{equation}
+
+After this we arrive back to the original estimate of I3, because the new $\norm{\nabla v}_2^2 \cdot \norm{\nabla v}_2^2$ term can be estimated by the same Corollary 3.1, by the same $C(\norm{v_0}_{H^1}, L_1, L_2)$ term. So even though we had an additional term for some part of the estimate of I3, its estimate melts back into the one we originally had.
+
+Finally, the closure of the proof, following the changes in I2, becomes the following.
 
 \end{enumerate}
 
