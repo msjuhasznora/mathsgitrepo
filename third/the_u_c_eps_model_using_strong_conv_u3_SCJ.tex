@@ -271,11 +271,13 @@ The main result is analogous to the original one, stated for the case of $\mathb
 \end{theorem}
 
 In the theorem of \cite{li2019primitive} they also use additional requirements such as zero average \todo{why can't they simply use the Poincare inequality and refer to the fact that they don't have boundary values?} for the initial data $\int_\Omega v_0 = 0$.
+
+Note that in their case they work with a Coriolis-term-free model. However these terms are linear and typically non-problematic.
   
 %%% *** PROOF *** %%%
 \section{Proof of the main theorem} \label{proof}
 
-The proof is mainly based on the Strong Convergence Justification paper's convergence result. In \cite{li2019primitive} it is proved that a Leray-Hopf weak solution $(\mathbf{v}_\epsilon, w_\epsilon)$ of (SNS) converges strongly to the strong solution $(\mathbf{v}, w)$ in $L^2 L^2,$ provided that we have $\mathbf{v}_0 \in H^1,$ and the domain is periodic (see Theorem 1.1 on p5).
+The proof is mainly based on the Strong Convergence Justification paper's convergence result. In \cite{li2019primitive} it is proved that a \todo{they use L-H WS, we worked on WS} Leray-Hopf weak solution $(\mathbf{v}_\epsilon, w_\epsilon)$ of (SNS) converges strongly to the strong solution $(\mathbf{v}, w)$ in $L^2 L^2,$ provided that we have $\mathbf{v}_0 \in H^1,$ and the domain is periodic (see Theorem 1.1 on p5).
 
 The strong convergence of $w_\epsilon$ to $w$ allows us to bring the proof to a closure, obtaining that $u_3^\epsilon C^\epsilon$ tends to $u_3 C.$
 
@@ -305,13 +307,41 @@ Concerning the first point, i.e. the applicability of the Poincare inequality, w
 
 Estimating the gradient by the Laplacian.
 
-p17, 3rd inequality
+p17, 3rd inequality in the "big" inequality at the bottom of the page.
 
 p22, h
 
 \subsection{Integration by parts}
 
-Integration by parts, possible additional boundary terms in the weak form, etc.
+\begin{itemize}
+
+  \item The weak formulation on p17 --- there are no additional boundary terms in the non-periodic case. In terms of boundary terms there are no additional requirements.
+  
+  \item Integration by parts on p18
+  
+    $$<\partial_t w, w^\epsilon> = - \int_{\partial \Omega} \bigg ( \int_0^z \partial_t v \diff z' \bigg ) w^\epsilon n_H + \int_\Omega \bigg ( \int_0^z \partial_t v \diff z' \bigg) \nabla_H \cdot w^\epsilon,$$
+    
+    from where we arrive easily to 
+    
+     $$<\partial_t w, w^\epsilon> = \int_\Omega \bigg ( \int_0^z \partial_t v \diff z' \bigg) \nabla_H \cdot w^\epsilon,$$
+     
+     that was required, by using that $w^\epsilon = 0$ on $\partial \Omega.$
+     
+   \item Integration by parts on p19
+   
+   $$<\partial_t w, w^\epsilon - w> = \int_\Omega \bigg ( \int_0^z \partial_t v \diff z' \bigg) \nabla_H \cdot (w^\epsilon - w),$$ as the boundary term $\int_{\partial \Omega} \bigg ( \int_0^z \partial_t v \diff z' \bigg ) (w^\epsilon - w) n_H$ becomes zero, since in this version  - unlike the original one, where we had $u_3 n_3 = 0$ on $\Gamma$ - we also have $w = 0$ on $\Gamma$ (and of course $w^\epsilon = 0$ on the boundary as well). 
+   
+   \item Verifying (4.8).
+   
+   Multiplying $\partial_t v + (u \cdot \nabla) v - \Delta v + \nabla_H p = 0$ by $v^\epsilon$ and integrating on $Q_{t_0},$ the boundary term from the Laplacian falls out, as $\int_{\partial \Omega} \nabla v \cdot v^\epsilon = 0$ because  $v^\epsilon = 0$ on the boundary. On the other hand, the pressure terms vanishes since $ \int_\Omega \nabla_H p \cdot v^\epsilon = \int_\Omega (\nabla_H p \cdot v^\epsilon + \partial_z p w^\epsilon),$ using that $\partial_z p = 0,$ and thus
+   
+   $$ \int_\Omega \nabla_H p v^\epsilon = \int_{\partial \Omega} p \cdot \mathbf{u}^\epsilon \vec{n} - \int_\Omega p \cdot ( \nabla \cdot \mathbf{u}^\epsilon) = 0,$$
+   
+   using the divergence-free condition and $\mathbf{u}^\epsilon = 0$ on $\partial \Omega.$
+   
+   \item Verifying (4.9): in terms of boundary conditions the analogous ideas can be applied as in the previous step.
+
+\end{itemize}
 
 \nocite{*}
 \bibliographystyle{abbrv}
