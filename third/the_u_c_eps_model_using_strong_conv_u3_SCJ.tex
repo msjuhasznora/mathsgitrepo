@@ -270,7 +270,7 @@ The main result is analogous to the original one, stated for the case of $\mathb
   Let $\mathbf{v}_0$ $\in$ $H^1 (\Omega)$, ${u_3}_0 \in L^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 \cdot \mathbf{n} = 0$ on $\partial \Omega$; let $C_0 \in$ $L^2 (\Omega)$, $C_0 = 0$ on $ \partial \Omega$, and assume that the boundary conditions (\ref{ANSC8}) hold; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, C^\epsilon)$ of the anisotropic equations (\ref{ANSC1}) - (\ref{ANSC5}) converge to a weak solution $(\mathbf{u}, C)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1}) - (\ref{HNSC5}).
 \end{theorem}
 
-In the theorem of \cite{li2019primitive} they also use additional requirements such as zero average \todo{why? why can't they simply use the Poincare inequality and refer to the fact that they don't have boundary values?} for the initial data $\int_\Omega v_0 = 0$.
+In the theorem of \cite{li2019primitive} they also use additional requirements such as zero average \todo{why can't they simply use the Poincare inequality and refer to the fact that they don't have boundary values?} for the initial data $\int_\Omega v_0 = 0$.
   
 %%% *** PROOF *** %%%
 \section{Proof of the main theorem} \label{proof}
@@ -290,14 +290,28 @@ The switch from a periodic domain to the bounded Lipschitz domain effects the pr
 
 We will check these steps by step.
 
-Note that in this case we have the more regular $v_0 \in H^1$ condition, so we will use the $u_3 = 0$ equality on the boundary directly, instead of using $u_3 n_3 = 0,$ which was originally.
+Note that in this case we have the more regular $v_0 \in H^1$ condition, so we will use the $u_3 = 0$ equality on the boundary directly, instead of the original $u_3 n_3 = 0.$
+
+\subsection{The applicability of the Poincare inequality}
 
 Concerning the first point, i.e. the applicability of the Poincare inequality, we have to check two main types of scenarios:
 
-\begin{enumerate}[label=\Roman*)]
-  \item 1
-  \item 2
-\end{enumerate}
+\subsubsection{First order terms}
+  Estimating the function by its gradient, ie. $\norm{\mathbf{v}}$ by $\norm{\nabla \mathbf{v}}, $ $\norm{\mathbf{v}^\epsilon}$ by $\norm{\nabla \mathbf{v}^\epsilon}, $ $\norm{w}$ by $\norm{\nabla w}, $ and $\norm{w^\epsilon}$ by $\norm{\nabla w^\epsilon}. $
+  
+  These points are automatically verified by using following version of the Poincare inequality (which is a different variant from the zero spatial average version that is used in the article): for a function in $W^{1,2}_0$ we have that $\norm{u}_2 \leq \norm{\nabla u}_2.$ Here $W^{1,2}_0$ ($k=1, p=2$) stands for $H^1$ functions whose $0, ... , n$-th derivative is zero on the boundary, $n \leq k-1 = 1-1 = 0.$ Since the $\mathbf{u}^\epsilon, \mathbf{u}$ functions are zero in the boundary, this zero-trace version of the Poincare inequality can be applied directly.
+ 
+\subsubsection{Second order terms}
+
+Estimating the gradient by the Laplacian.
+
+p17, 3rd inequality
+
+p22, h
+
+\subsection{Integration by parts}
+
+Integration by parts, possible additional boundary terms in the weak form, etc.
 
 \nocite{*}
 \bibliographystyle{abbrv}
