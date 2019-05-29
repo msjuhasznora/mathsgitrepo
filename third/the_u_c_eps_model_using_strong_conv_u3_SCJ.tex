@@ -319,7 +319,7 @@ This inequality is a result of Lemma 2.1 ($h= u^\epsilon, g = \nabla w^\epsilon$
 
 As we don't have $\nabla v = 0$ on the boundary, we can not use $\norm{f} \leq \norm{\nabla f},$ since we don't have $\norm{\nabla v} \leq \norm{\Delta v}.$ Thus, instead of the original bound we will have
 
-$$C \int_0^T \norm{u^\epsilon}_2^{1/2} \norm{\nabla u^\epsilon}_2^{1/2} \norm{\nabla w^\epsilon}_2 \norm{\nabla_H v}_2^{1/2} (\norm{\nabla_H v}_2^{1/2} + \norm{\Delta v}_2^{1/2}).$$
+$$C \int_0^T \norm{u^\epsilon}_2^{1/2} \norm{\nabla u^\epsilon}_2^{1/2} \norm{\nabla w^\epsilon}_2 \norm{\nabla_H v}_2^{1/2} (\textcolor{orange}{\norm{\nabla_H v}_2^{1/2}} + \norm{\Delta v}_2^{1/2}).$$
 
 We know from the article that we have a bound for
 
@@ -333,6 +333,8 @@ on the other hand, for the newly added term we can use
     & \leq C \sup_{0 \leq t \leq T} \norm{u^\epsilon}_2^{1/2} \norm{\nabla v}_2 \bigg( \int_0^T \norm{\nabla u^\epsilon}_2 \diff t \bigg)^{1/2} \bigg ( \int_0^T \norm{\nabla w^\epsilon}_2^2 \diff t \bigg)^{1/2}.
   \end{split}
 \end{equation}
+
+So the integral is still valid.
 
 \item Updating the bounds I2 and I3, and with those the final steps of the proof as well.
 
@@ -348,9 +350,9 @@ This means that eventually we arrive to the bound
 
 \begin{equation}
   \begin{split}
-     & C \int_0^{t_0} \norm{\nabla V^\epsilon}_2^{3/2} \norm{V^\epsilon}_2^{1/2} \norm{\nabla v}_2^{1/2} (\norm{\nabla v}_2^{1/2} + \norm{\Delta v}_2^{1/2})  \\
-     & \leq \frac{1}{18} \norm{\nabla V^\epsilon}^2_2 + C \int_0^{t_0} \norm{\nabla v}_2^2 (\norm{\nabla v}_2^{1/2} + \norm{\Delta v}_2^{1/2})^4 \norm{V^\epsilon}_2^2 \diff t \\
-     & \leq \frac{1}{18} \norm{\nabla V^\epsilon}^2_2 + C \int_0^{t_0} \norm{\nabla v}_2^4 \norm{V^\epsilon}_2^2 \diff t + C \int_0^{t_0} \norm{\nabla v}_2^2  \norm{\Delta v}_2^2 \norm{V^\epsilon}_2^2 \diff t,
+     & C \int_0^{t_0} \norm{\nabla V^\epsilon}_2^{3/2} \norm{V^\epsilon}_2^{1/2} \norm{\nabla v}_2^{1/2} (\textcolor{orange}{\norm{\nabla v}_2^{1/2}} + \norm{\Delta v}_2^{1/2})  \\
+     & \leq \frac{1}{18} \norm{\nabla V^\epsilon}^2_2 + C \int_0^{t_0} \norm{\nabla v}_2^2 (\textcolor{orange}{\norm{\nabla v}_2^{1/2}} + \norm{\Delta v}_2^{1/2})^4 \norm{V^\epsilon}_2^2 \diff t \\
+     & \leq \frac{1}{18} \norm{\nabla V^\epsilon}^2_2 + \textcolor{orange}{C \int_0^{t_0} \norm{\nabla v}_2^4 \norm{V^\epsilon}_2^2 \diff t} + C \int_0^{t_0} \norm{\nabla v}_2^2  \norm{\Delta v}_2^2 \norm{V^\epsilon}_2^2 \diff t,
   \end{split}
 \end{equation}
 
@@ -358,13 +360,13 @@ using the Young inequality.
 
 With this we obtain the updated version of (4.13) as well:
 
-$$ I_2 \leq \frac{1}{6} \norm{\nabla V^\epsilon}^2_2 + C \int_0^{t_0} \norm{\nabla v}_2^4 \norm{V^\epsilon}_2^2 \diff t + C \int_0^{t_0} \norm{\nabla v}_2^2  \norm{\Delta v}_2^2 \norm{V^\epsilon}_2^2 \diff t$$
+$$ I_2 \leq \frac{1}{6} \norm{\nabla V^\epsilon}^2_2 + \textcolor{orange}{C \int_0^{t_0} \norm{\nabla v}_2^4 \norm{V^\epsilon}_2^2 \diff t} + C \int_0^{t_0} \norm{\nabla v}_2^2  \norm{\Delta v}_2^2 \norm{V^\epsilon}_2^2 \diff t$$
 
 Similarly, at the bound of I3 on p23 we arrive to this extended version with an additional $\nabla v$ term:
 
 \begin{equation}
   \begin{split} \nonumber
-    I3 & \leq C \epsilon^2 \int_0 ^ {t_0} ( \norm{v^\epsilon}_2^2 \norm{\nabla v^\epsilon}_2^2 + \norm{\nabla v}_2^2 (\norm{\nabla v}_2^{1/2} + \norm{\Delta v}_2^{1/2})^4 + \epsilon^2 \norm{w^\epsilon}_2^2 \norm{\nabla w^\epsilon}_2^2 ) \diff t \\
+    I3 & \leq C \epsilon^2 \int_0 ^ {t_0} ( \norm{v^\epsilon}_2^2 \norm{\nabla v^\epsilon}_2^2 + \norm{\nabla v}_2^2 (\textcolor{orange}{\norm{\nabla v}_2^{1/2}} + \norm{\Delta v}_2^{1/2})^4 + \epsilon^2 \norm{w^\epsilon}_2^2 \norm{\nabla w^\epsilon}_2^2 ) \diff t \\
     & + \frac{1}{6} \big ( \norm{\nabla V^\epsilon}_2^2 + \epsilon^2 \norm{\nabla W^\epsilon}_2^2  \big)
   \end{split}
 \end{equation}
@@ -372,6 +374,34 @@ Similarly, at the bound of I3 on p23 we arrive to this extended version with an 
 After this we arrive back to the original estimate of I3, because the new $\norm{\nabla v}_2^2 \cdot \norm{\nabla v}_2^2$ term can be estimated by the same Corollary 3.1, by the same $C(\norm{v_0}_{H^1}, L_1, L_2)$ term. So even though we had an additional term for some part of the estimate of I3, its estimate melts back into the one we originally had.
 
 Finally, the closure of the proof, following the changes in I2, becomes the following.
+
+\begin{equation}
+  \begin{split} \nonumber
+  f(t):= & (\norm{V^\epsilon}_2^2 + \epsilon^2 \norm{W^\epsilon}_2^2)(t) + \int_0^t (\norm{\nabla V^\epsilon}_2^2 + \epsilon^2 \norm{\nabla W^\epsilon}_2^2) \diff s \\
+  & \leq C \epsilon^2 [(\norm{v_0}_2^2 + \epsilon^2 \norm{w_0}_2^2)^2 + C(\norm{v_0}_{H^1}, L_1, L_2)] \\
+  & + \textcolor{orange}{C \int_0^{t} \norm{\nabla v}_2^4 \norm{V^\epsilon}_2^2 \diff s} + C \int_0^{t} \norm{\nabla v}_2^2  \norm{\Delta v}_2^2 \norm{V^\epsilon}_2^2 \diff s =: F(t),
+  \end{split}
+\end{equation}
+
+With this we have
+
+\begin{equation}
+  \begin{split} \nonumber
+   F'(t) = & \textcolor{orange}{C \norm{\nabla v}_2^4 \norm{V^\epsilon}_2^2} + C \norm{\nabla v}_2^2  \norm{\Delta v}_2^2 \norm{V^\epsilon}_2^2 \\
+   & \leq C (\textcolor{orange}{\norm{\nabla v}_2^4} + \norm{\nabla v}_2^2  \norm{\Delta v}_2^2)f(t) \leq C (\textcolor{orange}{\norm{\nabla v}_2^4} + \norm{\nabla v}_2^2  \norm{\Delta v}_2^2)F(t),
+  \end{split}
+\end{equation}
+
+from which, applying the Gronwall inequality, and using Corollary 3.1 we deduce
+
+\begin{equation}
+  \begin{split} \nonumber
+    f(t) \leq & F(t) \leq e^{C \int_0 ^ t (\textcolor{orange}{\norm{\nabla v}_2^4} + \norm{\nabla v}_2^2  \norm{\Delta v}_2^2) \diff s} F(0) \leq e^{C(\norm{v_0}_{H^1}, L_1, L_2)} F(0)\\
+    & \leq \epsilon^2 C(\norm{v_0}_{H^1}, L_1, L_2) (\norm{v_0}_2^2 + \epsilon^2 \norm{w_0}_2^2 + 1)^2,
+  \end{split}
+\end{equation}
+
+which implies the conclusion.
 
 \end{enumerate}
 
