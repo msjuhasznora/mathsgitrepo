@@ -437,6 +437,48 @@ which implies the conclusion.
 
 \subsection{The Coriolis term}
 
+The Coriolis terms are linear and typically non-problematic, but for completeness we will examine what happens to these additionally appearing terms in the estimates of Section4.
+
+\begin{enumerate}
+
+  \item Firstly, the weak formulation on p17 will contain the following extra terms on the left: $ \int_Q  - \gamma v_2^\epsilon \varphi_1 + \epsilon \beta w^\epsilon \varphi_1 - \alpha \epsilon w^\epsilon \varphi_2 + \gamma v_1^\epsilon \varphi_2 + \epsilon \alpha v^\epsilon_2 \varphi_3 - \epsilon \beta v^\epsilon_1 \varphi_3.$
+  
+  \item The validity of the additional integral terms follows from the regularities of $\mathbf{u}^\epsilon$ and $(\mathbf{v},w).$
+  
+  \item The first integral identity on p18 will have these new terms on the left:
+  
+    $$ \int_Q  ( - \gamma v_2^\epsilon v_1 + \epsilon \beta w^\epsilon v_1 - \alpha \epsilon w^\epsilon v_2 + \gamma v_1^\epsilon v_2 + \epsilon \alpha v^\epsilon_2 w - \epsilon \beta v^\epsilon_1 w) \chi ,$$
+    
+    and (4.5) on p18 is extended with the same term.
+    
+  \item In the integral identity on the bottom of page 19 (and in (4.4) as well) we have
+  
+   $$ \int_{Q_{t_0}}  ( - \gamma v_2^\epsilon v_1 + \epsilon \beta w^\epsilon v_1 - \alpha \epsilon w^\epsilon v_2 + \gamma v_1^\epsilon v_2 + \epsilon \alpha v^\epsilon_2 w - \epsilon \beta v^\epsilon_1 w) ,$$
+
+  \item (4.9) and (4.10) on p20 remain the same, as the $\gamma v_2 v_1 - \gamma v_1 v_2$ kind of terms cancel out, so the change does not effect these results.
+  
+  \item Thus, the inequality (4.11) on p20 will contain
+  
+    $$ I_4 = \int_{Q_{t_0}}  ( - \gamma v_2^\epsilon v_1 + \epsilon \beta w^\epsilon v_1 - \alpha \epsilon w^\epsilon v_2 + \gamma v_1^\epsilon v_2 + \epsilon \alpha v^\epsilon_2 w - \epsilon \beta v^\epsilon_1 w).$$
+    
+    We will add $ - \epsilon \beta w v_1 +  \epsilon \beta w v_1 - \epsilon \alpha w v_2 + \epsilon \alpha w v_2 = 0$ to the above term, thus instead of bounding the original one, we can bound
+
+    $$ I_4 = \int_{Q_{t_0}}  ( - \gamma v_2^\epsilon v_1 + \epsilon \beta W^\epsilon v_1 - \alpha \epsilon W^\epsilon v_2 + \gamma v_1^\epsilon v_2 + \epsilon \alpha V^\epsilon_2 w - \epsilon \beta V^\epsilon_1 w).$$
+    
+    \begin{itemize}
+    
+      \item $ \int_{Q_{t_0}} \epsilon \alpha V^\epsilon_2 w \leq \alpha \int_0^{t_0} \norm{V^\epsilon_2} \norm{\epsilon w}  \leq \alpha \int_0^{t_0} \zeta \norm{V^\epsilon_2}^2_2 + \alpha \int_0^{t_0} \frac{1}{\zeta} \epsilon^2 \norm{ w}^2_2 \leq \alpha \int_0^{t_0} \zeta \norm{\nabla V^\epsilon_2}^2_2 + \alpha \int_0^{t_0} \frac{1}{\zeta} \epsilon^2 \norm{ w}^2_2.$
+      
+      Here the $\int_0^{t_0} \zeta \norm{\nabla V^\epsilon_2}^2_2$  term can be "melted" into the left hand side, while
+      
+      $\alpha \int_0^{t_0} \frac{1}{\zeta} \epsilon^2 \norm{w}^2_2 \leq \alpha \frac{1}{\zeta} \epsilon^2 \norm{w}^2_{L^2(Q_{t_0})} \leq \alpha \frac{1}{\zeta} \epsilon^2 C(\norm{v_0}_{H^1}, L_1, L_2).$
+      
+      Here $\zeta$ is the constant of the Young
+    
+    \end{itemize}
+
+\end{enumerate}
+
 \nocite{*}
 \bibliographystyle{abbrv}
 \bibliography{the_u_c_eps_model_using_strong_conv_u3_SCJ}
