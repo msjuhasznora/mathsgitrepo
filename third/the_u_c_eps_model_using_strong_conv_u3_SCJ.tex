@@ -146,7 +146,7 @@ and using this, the Coriolis force takes the form
  \times
  \begin{bmatrix} u_1 \\ u_2 \\ \epsilon u_3 \end{bmatrix}
  =
- \begin{bmatrix}  \beta \epsilon u_3 - \gamma u_2 \\ \alpha \epsilon u_3 - \gamma u_1 \\ \alpha u_2 - \beta u_1 \end{bmatrix}.
+ \begin{bmatrix}  \beta \epsilon u_3 - \gamma u_2 \\ \gamma u_1 - \alpha \epsilon u_3  \\ \alpha u_2 - \beta u_1 \end{bmatrix}.
 \end{gather}
 
 Thus, these are the terms that appear in the three velocity equations; and finally, note that the third component is present in the rescaled version of the vertical velocity equation multiplied by $\epsilon,$ which is obtained from the $\epsilon$ term in the denominator of $\partial_z p.$
@@ -163,7 +163,7 @@ The intuitive meaning of what we understand by downwind and the velocity in this
     \end{equation}
     
     \begin{equation} \label{ANSC2}
-    \partial_t u_2^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_2^\epsilon -\Delta_\nu u_2^\epsilon + \alpha \epsilon u^\epsilon_3 - \gamma u_1^\epsilon + \partial_2 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+    \partial_t u_2^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_2^\epsilon -\Delta_\nu u_2^\epsilon + \gamma u_1^\epsilon - \alpha \epsilon u^\epsilon_3  + \partial_2 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
     \end{equation}
     
     \begin{equation} \label{ANSC3}
@@ -205,7 +205,7 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
     \end{equation}
     
     \begin{equation} \label{HNSC2}   
-    \partial_t u_2 + \mathbf{u} \cdot \nabla u_2 - \Delta_\nu u_2 -\gamma u_1 + \partial_2 p = 0 \text{ in } \Omega \times (0,T)
+    \partial_t u_2 + \mathbf{u} \cdot \nabla u_2 - \Delta_\nu u_2 + \gamma u_1 + \partial_2 p = 0 \text{ in } \Omega \times (0,T)
     \end{equation}
     
     \begin{equation} \label{HNSC3}   
@@ -257,7 +257,7 @@ The main result is analogous to the original one we stated for the case of the g
   \item $\mathbf{v}_0 \in H^1$ (for the case of the geophysical frame $L^2$ was sufficient).
   \item The domain is a bounded Lipschitzian domain, here we do not require periodicity for the domain --- unlike for the paper of Li and Titi \cite{li2019primitive}.
   \item The original statement was valid for weak solutions in general, this downwind-matching case is proved for Leray-Hopf weak solutions. The weak time continuity requirement (more specifically, $\mathbf{u}^\epsilon \in C_w( [ 0,\infty), L^2 (\Omega))$, instead of $L^\infty_t L^2_x$) is important and utilised in the proof on p19. In \cite{azerad2001mathematical} the weak time continuity is obtained only for the horizontal velocity $\mathbf{u}^\epsilon_H.$
-  \item The global well-posedness was proved for the case including the Coriolis term, but the strong convergence justification has been elaborated for a case that does not include the cross product term representing the Earth's movement. We also consider and \todo{TODO} add this detail.
+  \item The global well-posedness was proved for the case including the Coriolis term, but the strong convergence justification has been elaborated for a case that does not include the cross product term representing the Earth's movement. We also consider and add this detail.
 
 \end{itemize}
 
@@ -434,6 +434,8 @@ which implies the conclusion.
    $\int_{\partial \Omega} W^\epsilon V^\epsilon v n_3 = 0.$
 
 \end{itemize}
+
+\subsection{The Coriolis term}
 
 \nocite{*}
 \bibliographystyle{abbrv}
