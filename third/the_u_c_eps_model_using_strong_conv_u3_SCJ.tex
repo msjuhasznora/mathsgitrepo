@@ -473,7 +473,13 @@ The Coriolis terms are linear and typically non-problematic, but for completenes
       
       $\alpha \int_0^{t_0} \frac{1}{\zeta} \epsilon^2 \norm{w}^2_2 \leq \alpha \frac{1}{\zeta} \epsilon^2 \norm{w}^2_{L^2(Q_{t_0})} \leq \alpha \frac{1}{\zeta} \epsilon^2 C(\norm{v_0}_{H^1}, L_1, L_2).$
       
-      Here $\zeta$ is the constant of the Young
+      Thus we still have the $\epsilon^2$ in front of the constant, which is what was needed.
+      
+      Here $\zeta$ is the constant of the Young inequality, and it only has to be small enough to keep the coefficient of $\norm{\nabla V_\epsilon}$ positive.
+      
+      \item The estimate of the $\epsilon \beta V^\epsilon_1 w$ term is analogous.
+      
+      \item For the terms $\epsilon \beta W^\epsilon v_1,$ and $\alpha \epsilon W^\epsilon v_2$ the $\epsilon$ needs to stay with the $W^\epsilon$ terms so that we can bring it to the left hand side, but on the other hand, for $v_1$ and $v_2$ we can use (4.9).
     
     \end{itemize}
 
