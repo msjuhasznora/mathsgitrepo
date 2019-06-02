@@ -437,7 +437,7 @@ which implies the conclusion.
 
 \subsection{The Coriolis term}
 
-The Coriolis terms are linear and typically non-problematic, but for completeness we will examine what happens to these additionally appearing terms in the estimates of Section4.
+The energy inequalities do not say anything about the Coriolis terms as those fall out.
 
 \begin{enumerate}
 
@@ -480,6 +480,18 @@ The Coriolis terms are linear and typically non-problematic, but for completenes
       \item The estimate of the $\epsilon \beta V^\epsilon_1 w$ term is analogous.
       
       \item For the terms $\epsilon \beta W^\epsilon v_1,$ and $\alpha \epsilon W^\epsilon v_2$ the $\epsilon$ needs to stay with the $W^\epsilon$ terms so that we can bring it to the left hand side, but on the other hand, for $v_1$ and $v_2$ we can use (4.9).
+      
+      $$ \int_{Q_{t_0}} \alpha \epsilon W^\epsilon v_2 \leq \alpha \int_0^{t_0} \norm{\epsilon W^\epsilon}_2 \norm{v_2} \leq \alpha \int_0^{t_0} \zeta \norm{\epsilon W^\epsilon}_2^2 + \alpha \int_0^{t_0} \frac{1}{\zeta} \norm{v_2}_2^2 $$
+      
+      $$ \leq \alpha \int_0^{t_0} \zeta \epsilon^2 \norm{\nabla W^\epsilon}_2^2 \diff t + \alpha \int_0^{t_0} \frac{1}{\zeta} \norm{v_2}_2^2 $$
+      
+      The first term can be melted into the left hand side, while $C \int_0^{t_0} \norm{v_2}_{L^2(\Omega)}^2 \leq  \int_0^{t_0} C(\norm{v_0}_{H^1}, L_1, L_2).$
+      
+      This will bring an additional term to $F(t)$ on p23: $ \int_0^t C(\norm{v_0}_{H^1}, L_1, L_2).$
+      
+      \item $\epsilon \beta W^\epsilon v_1$ is structurally analogous.
+      
+      \item $ - \gamma v_2 v_1 + \gamma v_2 v_1,$ leads to the same kind of terms, while $\norm{\nabla V^\epsilon}^2$ melts into the left.
     
     \end{itemize}
 
