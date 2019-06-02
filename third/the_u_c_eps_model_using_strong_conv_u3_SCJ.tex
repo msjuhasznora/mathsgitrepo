@@ -221,7 +221,7 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
     \end{equation}
     
     \begin{equation} \label{HNSC6}   
-    u_1 = u_2 = u_3 n_3 = 0 \text{ on } \Gamma \times (0,T)
+    u_1 = u_2 = u_3 = 0 \text{ on } \Gamma \times (0,T)
     \end{equation}
     
     \begin{equation} \label{HNSC7}   
@@ -237,51 +237,46 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
     
 \subsection{Energy inequality}
 
-Find $\mathbf{u}^\epsilon = (\mathbf{u}^\epsilon_H, u^\epsilon_3) \in L^2 (0,T ; \mathbf{V}) \cap L^\infty (0, T; L^2 (\Omega)^3)$ and $C^\epsilon \in L^\infty (0,T; L^2(\Omega)) \cap L^2 (0,T; H^1(\Omega))$, such that
-  
-  \begin{equation}
-    \begin{split} \nonumber
-      & \int_0^T \bigg [ -(\mathbf{u}^\epsilon_H, \partial_t \mathbf{\tilde{u}}_H) + (\nabla_\nu \mathbf{u}^\epsilon_H, \nabla_\nu \mathbf{\tilde{u}}_H) - (\mathbf{u}^\epsilon_H, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{\tilde{u}}_H) + (b(\mathbf{u}^\epsilon_H), \mathbf{\tilde{u}}_H) \bigg ] \diff t \\
-      & \hspace{-0.5cm} + \int_0 ^ T \epsilon \beta \big [ (u_3 ^\epsilon, \tilde{u}_1) - (u_1^\epsilon, \tilde{u}_3) \big ] + \epsilon^2\big [ -(u_3^\epsilon, \partial_t \tilde{u}_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, \tilde{u}_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu \tilde{u}_3) \big ] \diff t \\
-      & + \int_0 ^ T \epsilon \alpha \big [ (u_3 ^\epsilon, \tilde{u}_2) - (u_2^\epsilon, \tilde{u}_3) \big ] = (\mathbf{u}^\epsilon_{0H}, \mathbf{\tilde{u}}_H(0)) + \epsilon^2 (u_{03}^\epsilon, \tilde{u}_3 (0)) \diff t
+  \begin{equation}\nonumber
+    \begin{split}  
+    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \big [\norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2 \big ] \diff \tau \\
+    & + \int_0 ^ t \bigg[ \textcolor{orange}{ (\epsilon K_1 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_1 C^\epsilon}_{L^2}^2}  + (K_2 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_2 C^\epsilon}_{L^2}^2 \\
+    & + (K_3 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_3 C^\epsilon}_{L^2}^2 \bigg] \diff \tau \\
+    & \leq \frac{1}{\zeta} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)} + \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) \\
+    & + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau.
     \end{split}
-  \end{equation}
-  
-  and
-  
-    \begin{equation}
-    \begin{split} \nonumber
-      & \int_0^T \bigg [ -(C^\epsilon, \partial_t \tilde{C}) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) + (\mathbf{M} \nabla C^\epsilon, \nabla \tilde{C}) - \int_{\Gamma_G} \boldsymbol{\sigma} \mathbf{M} \tilde{C} \vec{\boldsymbol{n}}_{\Gamma_G} \bigg ] \diff t \\
-      & =  (C^\epsilon (0), \tilde{C} (0)) + \int_0^T (S^\epsilon,\tilde{C}) \diff t
-    \end{split}
-  \end{equation}
-  
-    \hspace{0.2cm} for all $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_H, \tilde{u}_3) \in H^1 (0,T;\mathbf{V})$ with $\mathbf{\tilde{u}}(T) = 0$ and $\tilde{C}$ such that
-    
-    \hspace{0.2cm} $\tilde{C} \in H^1 (0,T, H^2_{\Gamma_A} (\Omega))$ and $\tilde{C} (T) = 0$.
-
+  \end{equation} 
 
 %%% *** WEAK FORMULATION AND MAIN RESULT*** %%%
-\section{Weak formulation and Main Result} \label{weakformulationmainresult}
+\section{Main Result} \label{weakformulationmainresult}
 
-The main result is analogous to the original one, stated for the case of \todo{where is the weak continuity used in the proof?} Leray-Hopf weak solutions and $\mathbf{v}_0 \in H^1.$ The domain is a bounded Lipschitzian domain.
+The main result is analogous to the original one we stated for the case of the geophysical frame, but we highlight the following specificities:
+
+\begin{itemize}
+
+  \item $\mathbf{v}_0 \in H^1.$
+  \item The domain is a bounded Lipschitzian domain, here we do not require periodicity for the domain --- unlike for the paper of Li and Titi \cite{li2019primitive}.
+  \item The original statement was valid for weak solutions in general, this downwind-matching case is proved for Leray-Hopf weak solutions. The weak time continuity requirement (more specifically, $\mathbf{u}^\epsilon \in C_w( [ 0,\infty), L^2 (\Omega))$, instead of $L^\infty_t L^2_x$) is important and utilised in the proof on p19. In \cite{azerad2001mathematical} the weak time continuity is obtained only for the horizontal velocity $\mathbf{u}^\epsilon_H.$
+  \item The global well-posedness was proved for the case including the Coriolis term, but the strong convergence justification has been elaborated for a case that does not include the cross product term representing the Earth's movement. We also consider this detail.
+
+\end{itemize}
 
 \begin{theorem} \label{maintheorem}
-  Let $\mathbf{v}_0$ $\in$ $H^1 (\Omega)$, ${u_3}_0 \in L^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 \cdot \mathbf{n} = 0$ on $\partial \Omega$; let $C_0 \in$ $L^2 (\Omega)$, $C_0 = 0$ on $ \partial \Omega$, and assume that the boundary conditions (\ref{ANSC8}) hold; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, C^\epsilon)$ of the anisotropic equations (\ref{ANSC1}) - (\ref{ANSC5}) converge to a weak solution $(\mathbf{u}, C)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1}) - (\ref{HNSC5}).
+  Let $\mathbf{v}_0$ $\in$ $H^1 (\Omega)$, ${u_3}_0 \in L^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 \cdot \mathbf{n} = 0$ on $\partial \Omega$; let $C_0 \in$ $L^2 (\Omega)$, $C_0 = 0$ on $ \partial \Omega$, and assume that the boundary conditions (\ref{ANSC8}) hold; then as the aspect ratio $\epsilon$ tends to zero, any \todo{how to write this well? $C^\epsilon$ does not have to be in $C_w$, but the velocity function needs to be a Leray-Hopf WS.} weak solution $(\mathbf{u}^\epsilon, C^\epsilon)$ of the anisotropic equations (\ref{ANSC1}) - (\ref{ANSC5}), where $\mathbf{u}^\epsilon$ is a Leray-Hopf weak solution, converges to a weak solution $(\mathbf{u}, C)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1}) - (\ref{HNSC5}).
 \end{theorem}
 
-In the theorem of \cite{li2019primitive} they also use additional requirements such as zero average \todo{why can't they simply use the Poincare inequality and refer to the fact that they don't have boundary values?} for the initial data $\int_\Omega v_0 = 0$.
-
-Note that in their case they work with a \todo{include the Coriolis term} Coriolis-term-free model. However these terms are linear and typically non-problematic.
+\begin{remark}
+In the theorem of \cite{li2019primitive} they also use additional requirements such as zero average for the initial data $\int_\Omega v_0 = 0$. In their case, because of the periodicity, they do not have any boundaries in the first place, so they can not apply the zero-trace version of the Poincare inequality. We on the other hand have velocity functions whose values are zero on the boundary, so we can use this other version of the Poincare inequality up until first order derivatives.
+\end{remark}
   
 %%% *** PROOF *** %%%
 \section{Proof of the main theorem} \label{proof}
 
-The proof is mainly based on the Strong Convergence Justification paper's convergence result. In \cite{li2019primitive} it is proved that a \todo{they use L-H WS, we worked on WS} Leray-Hopf weak solution $(\mathbf{v}_\epsilon, w_\epsilon)$ of (SNS) converges strongly to the strong solution $(\mathbf{v}, w)$ in $L^2 L^2,$ provided that we have $\mathbf{v}_0 \in H^1,$ and the domain is periodic (see Theorem 1.1 on p5).
+The proof is mainly based on the Strong Convergence Justification paper's convergence result. In \cite{li2019primitive} it is proved that a Leray-Hopf weak solution $(\mathbf{v}_\epsilon, w_\epsilon)$ of the Coriolis-term-free (SNS) converges strongly to the strong solution $(\mathbf{v}, w)$ in $L^2 L^2,$ provided that we have $\mathbf{v}_0 \in H^1,$ and the domain is periodic (see Theorem 1.1 on p5).
 
 The strong convergence of $w_\epsilon$ to $w$ allows us to bring the proof to a closure, obtaining that $u_3^\epsilon C^\epsilon$ tends to $u_3 C.$
 
-We verify here that Theorem 1.1 in \cite{li2019primitive} is also valid for the case of a bounded domain that is not periodic (i.e. we have boundary segments). We follow closely the proof provided in Section4 and update each point where the periodicity of the domain is applied in one way or another.
+We verify here that Theorem 1.1 in \cite{li2019primitive} is also valid for the case of a non-periodic, bounded domain (i.e. we have boundary segments), including the general Coriolis terms. We follow closely the proof provided in Section4 and update each point where the periodicity of the domain is applied in one way or another.
 
 The switch from a periodic domain to the bounded Lipschitz domain effects the proof in the following ways in detail:
 
@@ -290,7 +285,7 @@ The switch from a periodic domain to the bounded Lipschitz domain effects the pr
   \item Integration by parts, possible additional boundary terms in the weak form, etc.
 \end{enumerate}
 
-We will check these steps by step.
+We will check these step by step.
 
 Note that in this case we have the more regular $v_0 \in H^1$ condition, so we will use the $u_3 = 0$ equality on the boundary directly, instead of the original $u_3 n_3 = 0.$
 
@@ -301,7 +296,7 @@ Concerning the first point, i.e. the applicability of the Poincare inequality, w
 \subsubsection{First order terms}
   Estimating the function by its gradient, ie. $\norm{\mathbf{v}}$ by $\norm{\nabla \mathbf{v}}, $ $\norm{\mathbf{v}^\epsilon}$ by $\norm{\nabla \mathbf{v}^\epsilon}, $ $\norm{w}$ by $\norm{\nabla w}, $ and $\norm{w^\epsilon}$ by $\norm{\nabla w^\epsilon}. $
   
-  These points are automatically verified by using following version of the Poincare inequality (which is a different variant from the zero spatial average version that is used in the article): for a function in $W^{1,2}_0$ we have that $\norm{u}_2 \leq \norm{\nabla u}_2.$ Here $W^{1,2}_0$ ($k=1, p=2$) stands for $H^1$ functions whose $0, ... , n$-th derivative is zero on the boundary, $n \leq k-1 = 1-1 = 0.$ Since the $\mathbf{u}^\epsilon, \mathbf{u}$ functions are zero in the boundary, this zero-trace version of the Poincare inequality can be applied directly.
+  These points are automatically verified by using the following version of the Poincare inequality (which is a different variant from the zero spatial average version that is used in the article): for a function in $W^{1,2}_0$ we have that $\norm{u}_2 \leq \norm{\nabla u}_2.$ Here $W^{1,2}_0$ ($k=1, p=2$) stands for $H^1$ functions whose $0, ... , n$-th derivative is zero on the boundary, $n \leq k-1 = 1-1 = 0.$ Since the $\mathbf{u}^\epsilon, \mathbf{u}$ functions are zero in the boundary, this zero-trace version of the Poincare inequality can be applied directly.
   
   This means that $\norm{v}_6 \leq C \norm{\nabla v}_2$ is valid in p21, $\norm{V^\epsilon} \leq C \norm{\nabla V^\epsilon}$ on p22 is correct as well, etc.
  
