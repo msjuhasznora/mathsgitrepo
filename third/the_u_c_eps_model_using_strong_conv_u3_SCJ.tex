@@ -461,9 +461,9 @@ The energy inequalities do not say anything about the Coriolis terms as those fa
   
     $$ I_4 = \int_{Q_{t_0}}  ( - \gamma v_2^\epsilon v_1 + \epsilon \beta w^\epsilon v_1 - \alpha \epsilon w^\epsilon v_2 + \gamma v_1^\epsilon v_2 + \epsilon \alpha v^\epsilon_2 w - \epsilon \beta v^\epsilon_1 w).$$
     
-    We will add $ - \epsilon \beta w v_1 +  \epsilon \beta w v_1 - \epsilon \alpha w v_2 + \epsilon \alpha w v_2 = 0$ to the above term, thus instead of bounding the original one, we can bound
+    We will add $ - \epsilon \beta w v_1 +  \epsilon \beta w v_1 - \epsilon \alpha w v_2 + \epsilon \alpha w v_2 - \gamma v_2 v_1 + \gamma v_2 v_1 = 0 $ to the above term, thus instead of bounding the original one, we can bound
 
-    $$ I_4 = \int_{Q_{t_0}}  ( - \gamma v_2^\epsilon v_1 + \epsilon \beta W^\epsilon v_1 - \alpha \epsilon W^\epsilon v_2 + \gamma v_1^\epsilon v_2 + \epsilon \alpha V^\epsilon_2 w - \epsilon \beta V^\epsilon_1 w).$$
+    $$ I_4 = \int_{Q_{t_0}}  ( - \gamma V_2^\epsilon v_1 + \epsilon \beta W^\epsilon v_1 - \alpha \epsilon W^\epsilon v_2 + \gamma V_1^\epsilon v_2 + \epsilon \alpha V^\epsilon_2 w - \epsilon \beta V^\epsilon_1 w).$$
     
     \begin{itemize}
     
@@ -487,11 +487,23 @@ The energy inequalities do not say anything about the Coriolis terms as those fa
       
       The first term can be melted into the left hand side, while $C \int_0^{t_0} \norm{v_2}_{L^2(\Omega)}^2 \leq  \int_0^{t_0} C(\norm{v_0}_{H^1}, L_1, L_2).$
       
-      This will bring an additional term to $F(t)$ on p23: $ \int_0^t C(\norm{v_0}_{H^1}, L_1, L_2).$
+      This will bring an additional term to $F(t)$ on p23: $ \int_0^t C(\norm{v_0}_{H^1}, L_1, L_2).$ This is not ok, because with this we have (remember here that $V^\epsilon$ is small)
       
-      \item $\epsilon \beta W^\epsilon v_1$ is structurally analogous.
+      $$ F'(t) = C \norm{\nabla v}_2^2 \norm{\Delta v}_2^2 \norm{V^\epsilon}_2^2 + C(\norm{v_0}_{H^1}, L_1, L_2) $$
+      $$ \leq C \norm{\nabla v}_2^2 \norm{\Delta v}_2^2 f(t) + C(\norm{v_0}_{H^1}, L_1, L_2) $$
+      $$ \leq C \norm{\nabla v}_2^2 \norm{\Delta v}_2^2 F(t) + C(\norm{v_0}_{H^1}, L_1, L_2).$$
       
-      \item $ - \gamma v_2 v_1 + \gamma v_2 v_1,$ leads to the same kind of terms, while $\norm{\nabla V^\epsilon}^2$ melts into the left.
+      This means that we have to use a different version of the Gronwall inequality, $u'(t) \leq \eta(t) u(t) + \Psi(t),$ where in the original version we didn't have the $\Psi(t)$ part.
+      
+      This gives $$ f(t) \leq F(t) \leq e^{C \int_0^t \norm{\nabla v}_2^2 \norm{\Delta v}_2^2 \diff s} (F(0) + \int_0^t \Psi(s)).$$
+      
+      The point here is that it is $F(0)$ that brings in the crucial $\epsilon^2.$ With the $\int_0^t \Psi(s) = \int_0^t C $ part we seem to lose the $\epsilon^2$ smallness.
+      
+      The other way would be to separate the terms differently and keep $\epsilon$ with $v_2,$ this part with the Young inequality would give the $C \epsilon^2,$ but we would be left with estimating $W^\epsilon$ without an $\epsilon$ multiplier. We would have an additional $\int_0^t \norm{W^\epsilon}_2^2$ in the $F(t)$ function, and with that we can not really go on.
+      
+      \item $\epsilon \beta W^\epsilon v_1$ is structurally analogous / problematic.
+      
+      \item $ \gamma$ terms, they lead to the same kind of terms: $\gamma V_1^\epsilon v_2$ --- we can melt the $V_1^\epsilon$ part into the left side, and remains, as previously described, $\int_0^t \norm{v_2}_2^2.$
     
     \end{itemize}
 
