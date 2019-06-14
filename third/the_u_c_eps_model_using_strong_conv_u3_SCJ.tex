@@ -262,7 +262,7 @@ The main result is analogous to the original one we stated for the case of the g
 \end{itemize}
 
 \begin{theorem} \label{maintheorem}
-  Let $\mathbf{v}_0$ $\in$ $H^1 (\Omega)$, ${u_3}_0 \in L^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 \cdot \mathbf{n} = 0$ on $\partial \Omega$; let $C_0 \in$ $L^2 (\Omega)$, $C_0 = 0$ on $ \partial \Omega$, and assume that the boundary conditions (\ref{ANSC8}) hold; then as the aspect ratio $\epsilon$ tends to zero, any \todo{how to write this well? $C^\epsilon$ does not have to be in $C_w$, but the velocity function needs to be a Leray-Hopf WS.} weak solution $(\mathbf{u}^\epsilon, C^\epsilon)$ of the anisotropic equations (\ref{ANSC1}) - (\ref{ANSC5}), where $\mathbf{u}^\epsilon$ is a Leray-Hopf weak solution, converges to a weak solution $(\mathbf{u}, C)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1}) - (\ref{HNSC5}).
+  Let $\mathbf{v}_0$ $\in$ $H^1 (\Omega)$, ${u_3}_0 \in L^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 \cdot \mathbf{n} = 0$ on $\partial \Omega$; let $C_0 \in$ $L^2 (\Omega)$, $C_0 = 0$ on $ \partial \Omega$, and assume that the boundary conditions (\ref{ANSC8}) hold; then as the aspect ratio $\epsilon$ tends to zero, any \todo{give an exact definition of weak solutions in this case: $C^\epsilon$ does not have to be in $C_w$, but the velocity function needs to be a Leray-Hopf WS.} weak solution $(\mathbf{u}^\epsilon, C^\epsilon)$ of the anisotropic equations (\ref{ANSC1}) - (\ref{ANSC5}), where $\mathbf{u}^\epsilon$ is a Leray-Hopf weak solution, converges to a weak solution $(\mathbf{u}, C)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1}) - (\ref{HNSC5}).
 \end{theorem}
 
 \begin{remark}
@@ -437,8 +437,6 @@ which implies the conclusion.
 
 \subsection{The Coriolis term}
 
-The energy inequalities do not say anything about the Coriolis terms as those fall out.
-
 \begin{enumerate}
 
   \item Firstly, the weak formulation on p17 will contain the following extra terms on the left: $ \int_Q  - \gamma v_2^\epsilon \varphi_1 + \epsilon \beta w^\epsilon \varphi_1 - \alpha \epsilon w^\epsilon \varphi_2 + \gamma v_1^\epsilon \varphi_2 + \epsilon \alpha v^\epsilon_2 \varphi_3 - \epsilon \beta v^\epsilon_1 \varphi_3.$
@@ -451,19 +449,27 @@ The energy inequalities do not say anything about the Coriolis terms as those fa
     
     and (4.5) on p18 is extended with the same term.
     
-  \item In the integral identity on the bottom of page 19 (and in (4.4) as well) we have
+  \item In the integral identity on the bottom of page 19 (and in (4.4) as well) we have on the left hand side
   
-   $$ \int_{Q_{t_0}}  ( - \gamma v_2^\epsilon v_1 + \epsilon \beta w^\epsilon v_1 - \alpha \epsilon w^\epsilon v_2 + \gamma v_1^\epsilon v_2 + \epsilon \alpha v^\epsilon_2 w - \epsilon \beta v^\epsilon_1 w) ,$$
+   $$ \textcolor{orange}{\int_{Q_{t_0}}  ( - \gamma v_2^\epsilon v_1 + \epsilon \beta w^\epsilon v_1 - \alpha \epsilon w^\epsilon v_2 + \gamma v_1^\epsilon v_2 + \epsilon \alpha v^\epsilon_2 w - \epsilon \beta v^\epsilon_1 w)} ,$$
 
-  \item (4.9) and (4.10) on p20 remain the same, as the $\gamma v_2 v_1 - \gamma v_1 v_2$ kind of terms cancel out, so the change does not effect these results.
+  \item (4.9) and (4.10) on p20 remain the same, as the $\gamma v_2 v_1 - \gamma v_1 v_2$ kind of terms cancel out, so the change does not effect these results. The energy inequalities do not say anything about the Coriolis terms as those fall out.
   
-  \item Thus, the inequality (4.11) on p20 will contain
+  \item What changes however on page 20 is (4.8), as the (PEs) have the $\gamma u_2, \gamma u_1$ terms. This means that here we have
   
-    $$ I_4 = \int_{Q_{t_0}}  ( - \gamma v_2^\epsilon v_1 + \epsilon \beta w^\epsilon v_1 - \alpha \epsilon w^\epsilon v_2 + \gamma v_1^\epsilon v_2 + \epsilon \alpha v^\epsilon_2 w - \epsilon \beta v^\epsilon_1 w).$$
+  $$ \int_{Q_{t_0}} (\partial_t v \cdot v_\epsilon + \nabla v \nabla v_\epsilon) = - \int_{Q_{t_0}} (u \cdot \nabla) v \cdot v_\epsilon \textcolor{orange}{+ \gamma v_2 v_1^\epsilon - \gamma v_1 v_2^\epsilon}.$$
+  
+  \item Thus, the inequality (4.11) on p20, which is obtained via (4.9) + (4.10) - (4.4) - (4.8), will contain (consider that here we extract 4.4, so the sign changes once because of that, and then it changes a second time because we bring all these terms to the right hand side), on its right hand side
+  
+    $$ I_4 = \int_{Q_{t_0}}  - \gamma v_2^\epsilon v_1 + \epsilon \beta w^\epsilon v_1 - \alpha \epsilon w^\epsilon v_2 + \gamma v_1^\epsilon v_2 + \epsilon \alpha v^\epsilon_2 w - \epsilon \beta v^\epsilon_1 w - \gamma v_2 v_1^\epsilon + \gamma v_1 v_2^\epsilon,$$
     
-    We will add $ - \epsilon \beta w v_1 +  \epsilon \beta w v_1 - \epsilon \alpha w v_2 + \epsilon \alpha w v_2 - \gamma v_2 v_1 + \gamma v_2 v_1 = 0 $ to the above term, thus instead of bounding the original one, we can bound
+    where the $\gamma$ terms cancel out, and $I_4$ is reduced to
+    
+    $$ I_4 = \int_{Q_{t_0}}  \epsilon \beta w^\epsilon v_1 - \alpha \epsilon w^\epsilon v_2 + \epsilon \alpha v^\epsilon_2 w - \epsilon \beta v^\epsilon_1 w.$$
+    
+    We will add $ - \epsilon \beta w v_1 +  \epsilon \beta w v_1 - \epsilon \alpha w v_2 + \epsilon \alpha w v_2 = 0 $ to the above term, thus instead of bounding the original one, we can bound
 
-    $$ I_4 = \int_{Q_{t_0}}  ( - \gamma V_2^\epsilon v_1 + \epsilon \beta W^\epsilon v_1 - \alpha \epsilon W^\epsilon v_2 + \gamma V_1^\epsilon v_2 + \epsilon \alpha V^\epsilon_2 w - \epsilon \beta V^\epsilon_1 w).$$
+    $$ I_4 = \int_{Q_{t_0}}  ( \epsilon \beta W^\epsilon v_1 - \alpha \epsilon W^\epsilon v_2 + \epsilon \alpha V^\epsilon_2 w - \epsilon \beta V^\epsilon_1 w).$$
     
     \begin{itemize}
     
@@ -471,7 +477,9 @@ The energy inequalities do not say anything about the Coriolis terms as those fa
       
       Here the $\int_0^{t_0} \zeta \norm{\nabla V^\epsilon_2}^2_2$  term can be "melted" into the left hand side, while
       
-      $\alpha \int_0^{t_0} \frac{1}{\zeta} \epsilon^2 \norm{w}^2_2 \leq \alpha \frac{1}{\zeta} \epsilon^2 \norm{w}^2_{L^2(Q_{t_0})} \leq \alpha \frac{1}{\zeta} \epsilon^2 C(\norm{v_0}_{H^1}, L_1, L_2).$
+      $\alpha \int_0^{t_0} \frac{1}{\zeta} \epsilon^2 \norm{w}^2_2 \leq \alpha \frac{1}{\zeta} \epsilon^2 \norm{w}^2_{L^2(Q_{t_0})} \leq \alpha \frac{1}{\zeta} \epsilon^2 C(\norm{v_0}_{H^1}, L_1, L_2),$
+      
+      where we used the Corollary from Section3, and the fact that $\norm{w} \leq \norm{\nabla v}.$
       
       Thus we still have the $\epsilon^2$ in front of the constant, which is what was needed.
       
@@ -479,31 +487,16 @@ The energy inequalities do not say anything about the Coriolis terms as those fa
       
       \item The estimate of the $\epsilon \beta V^\epsilon_1 w$ term is analogous.
       
-      \item For the terms $\epsilon \beta W^\epsilon v_1,$ and $\alpha \epsilon W^\epsilon v_2$ the $\epsilon$ needs to stay with the $W^\epsilon$ terms so that we can bring it to the left hand side, but on the other hand, for $v_1$ and $v_2$ we can use (4.9).
+      \item For the term $\epsilon \beta W^\epsilon v_1$ we can use the idea that $\norm{W^\epsilon} \leq \norm{\nabla V^\epsilon}.$ This way we are able to bound the $W^\epsilon$ term without keeping the $\epsilon^2$ multiplier attached to it when we apply the Young inequality.
       
-      $$ \int_{Q_{t_0}} \alpha \epsilon W^\epsilon v_2 \leq \alpha \int_0^{t_0} \norm{\epsilon W^\epsilon}_2 \norm{v_2} \leq \alpha \int_0^{t_0} \zeta \norm{\epsilon W^\epsilon}_2^2 + \alpha \int_0^{t_0} \frac{1}{\zeta} \norm{v_2}_2^2 $$
+      $ \int_{Q_{t_0}} \epsilon \beta W^\epsilon v_1 \leq \int_0^{t_0} \epsilon \beta \norm{W^\epsilon}_2 \norm{v_1}_2 \leq \int_0^{t_0} \epsilon \beta \norm{\nabla V^\epsilon}_2 \norm{v_1}_2,$
       
-      $$ \leq \alpha \int_0^{t_0} \zeta \epsilon^2 \norm{\nabla W^\epsilon}_2^2 \diff t + \alpha \int_0^{t_0} \frac{1}{\zeta} \norm{v_2}_2^2 $$
+      finally, after applying the Young inequality we arrive to $$ \int_{Q_{t_0}} \epsilon \beta W^\epsilon v_1 \leq \beta \zeta \int_0^t \norm{\nabla V^\epsilon}_2^2 + \frac{1}{\zeta} \epsilon^2 \norm{v_1}_2^2 \leq \beta \zeta \int_0^t \norm{\nabla V^\epsilon}_2^2 + \frac{1}{\zeta} \epsilon^2 C(\norm{v_0}_{H^1}, L_1, L_2),$$
       
-      The first term can be melted into the left hand side, while $C \int_0^{t_0} \norm{v_2}_{L^2(\Omega)}^2 \leq  \int_0^{t_0} C(\norm{v_0}_{H^1}, L_1, L_2).$
+      where the first term can be melted into the left hand side.
+            
+      \item $\alpha \epsilon W^\epsilon v_2$ is structurally analogous.
       
-      This will bring an additional term to $F(t)$ on p23: $ \int_0^t C(\norm{v_0}_{H^1}, L_1, L_2).$ This is not ok, because with this we have (remember here that $V^\epsilon$ is small)
-      
-      $$ F'(t) = C \norm{\nabla v}_2^2 \norm{\Delta v}_2^2 \norm{V^\epsilon}_2^2 + C(\norm{v_0}_{H^1}, L_1, L_2) $$
-      $$ \leq C \norm{\nabla v}_2^2 \norm{\Delta v}_2^2 f(t) + C(\norm{v_0}_{H^1}, L_1, L_2) $$
-      $$ \leq C \norm{\nabla v}_2^2 \norm{\Delta v}_2^2 F(t) + C(\norm{v_0}_{H^1}, L_1, L_2).$$
-      
-      This means that we have to use a different version of the Gronwall inequality, $u'(t) \leq \eta(t) u(t) + \Psi(t),$ where in the original version we didn't have the $\Psi(t)$ part.
-      
-      This gives $$ f(t) \leq F(t) \leq e^{C \int_0^t \norm{\nabla v}_2^2 \norm{\Delta v}_2^2 \diff s} (F(0) + \int_0^t \Psi(s)).$$
-      
-      The point here is that it is $F(0)$ that brings in the crucial $\epsilon^2.$ With the $\int_0^t \Psi(s) = \int_0^t C $ part we seem to lose the $\epsilon^2$ smallness.
-      
-      The other way would be to separate the terms differently and keep $\epsilon$ with $v_2,$ this part with the Young inequality would give the $C \epsilon^2,$ but we would be left with estimating $W^\epsilon$ without an $\epsilon$ multiplier. We would have an additional $\int_0^t \norm{W^\epsilon}_2^2$ in the $F(t)$ function, and with that we can not really go on.
-      
-      \item $\epsilon \beta W^\epsilon v_1$ is structurally analogous / problematic.
-      
-      \item $ \gamma$ terms, they lead to the same kind of terms: $\gamma V_1^\epsilon v_2$ --- we can melt the $V_1^\epsilon$ part into the left side, and remains, as previously described, $\int_0^t \norm{v_2}_2^2.$
     
     \end{itemize}
 
