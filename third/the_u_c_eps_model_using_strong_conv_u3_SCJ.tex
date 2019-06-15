@@ -457,7 +457,7 @@ which implies the conclusion.
   
   \item What changes however on page 20 is (4.8), as the (PEs) have the $\gamma u_2, \gamma u_1$ terms. This means that here we have
   
-  $$ \int_{Q_{t_0}} (\partial_t v \cdot v_\epsilon + \nabla v \nabla v_\epsilon) = - \int_{Q_{t_0}} (u \cdot \nabla) v \cdot v_\epsilon \textcolor{orange}{+ \gamma v_2 v_1^\epsilon - \gamma v_1 v_2^\epsilon}.$$
+  $$ \int_{Q_{t_0}} (\partial_t v \cdot v_\epsilon + \nabla v \nabla v_\epsilon) = - \int_{Q_{t_0}} (u \cdot \nabla) v \cdot v_\epsilon \textcolor{orange}{ + \gamma v_2 v_1^\epsilon - \gamma v_1 v_2^\epsilon}. $$
   
   \item Thus, the inequality (4.11) on p20, which is obtained via (4.9) + (4.10) - (4.4) - (4.8), will contain (consider that here we extract 4.4, so the sign changes once because of that, and then it changes a second time because we bring all these terms to the right hand side), on its right hand side
   
@@ -473,11 +473,18 @@ which implies the conclusion.
     
     \begin{itemize}
     
-      \item $ \int_{Q_{t_0}} \epsilon \alpha V^\epsilon_2 w \leq \alpha \int_0^{t_0} \norm{V^\epsilon_2} \norm{\epsilon w}  \leq \alpha \int_0^{t_0} \zeta \norm{V^\epsilon_2}^2_2 + \alpha \int_0^{t_0} \frac{1}{\zeta} \epsilon^2 \norm{ w}^2_2 \leq \alpha \int_0^{t_0} \zeta \norm{\nabla V^\epsilon_2}^2_2 + \alpha \int_0^{t_0} \frac{1}{\zeta} \epsilon^2 \norm{ w}^2_2.$
+      \item Firstly, we have
+      
+      \begin{equation}
+        \begin{split}
+          & \int_{Q_{t_0}} \epsilon \alpha V^\epsilon_2 w \leq \alpha \int_0^{t_0} \norm{V^\epsilon_2} \norm{\epsilon w}  \leq \alpha \int_0^{t_0} \zeta \norm{V^\epsilon_2}^2_2 + \alpha \int_0^{t_0} \frac{1}{\zeta} \epsilon^2 \norm{ w}^2_2 \\
+          & \leq \alpha \int_0^{t_0} \zeta \norm{\nabla V^\epsilon_2}^2_2 + \alpha \int_0^{t_0} \frac{1}{\zeta} \epsilon^2 \norm{ w}^2_2.
+        \end{split}
+      \end{equation}
       
       Here the $\int_0^{t_0} \zeta \norm{\nabla V^\epsilon_2}^2_2$  term can be "melted" into the left hand side, while
       
-      $\alpha \int_0^{t_0} \frac{1}{\zeta} \epsilon^2 \norm{w}^2_2 \leq \alpha \frac{1}{\zeta} \epsilon^2 \norm{w}^2_{L^2(Q_{t_0})} \leq \alpha \frac{1}{\zeta} \epsilon^2 C(\norm{v_0}_{H^1}, L_1, L_2),$
+      $$\alpha \int_0^{t_0} \frac{1}{\zeta} \epsilon^2 \norm{w}^2_2 \leq \alpha \frac{1}{\zeta} \epsilon^2 \norm{w}^2_{L^2(Q_{t_0})} \leq \alpha \frac{1}{\zeta} \epsilon^2 C(\norm{v_0}_{H^1}, L_1, L_2),$$
       
       where we used the Corollary from Section3, and the fact that $\norm{w} \leq \norm{\nabla v}.$
       
@@ -489,9 +496,16 @@ which implies the conclusion.
       
       \item For the term $\epsilon \beta W^\epsilon v_1$ we can use the idea that $\norm{W^\epsilon} \leq \norm{\nabla V^\epsilon}.$ This way we are able to bound the $W^\epsilon$ term without keeping the $\epsilon^2$ multiplier attached to it when we apply the Young inequality.
       
-      $ \int_{Q_{t_0}} \epsilon \beta W^\epsilon v_1 \leq \int_0^{t_0} \epsilon \beta \norm{W^\epsilon}_2 \norm{v_1}_2 \leq \int_0^{t_0} \epsilon \beta \norm{\nabla V^\epsilon}_2 \norm{v_1}_2,$
+      $$ \int_{Q_{t_0}} \epsilon \beta W^\epsilon v_1 \leq \int_0^{t_0} \epsilon \beta \norm{W^\epsilon}_2 \norm{v_1}_2 \leq \int_0^{t_0} \epsilon \beta \norm{\nabla V^\epsilon}_2 \norm{v_1}_2, $$
       
-      finally, after applying the Young inequality we arrive to $$ \int_{Q_{t_0}} \epsilon \beta W^\epsilon v_1 \leq \beta \zeta \int_0^t \norm{\nabla V^\epsilon}_2^2 + \frac{1}{\zeta} \epsilon^2 \norm{v_1}_2^2 \leq \beta \zeta \int_0^t \norm{\nabla V^\epsilon}_2^2 + \frac{1}{\zeta} \epsilon^2 C(\norm{v_0}_{H^1}, L_1, L_2),$$
+      finally, after applying the Young inequality we arrive to
+      
+      \begin{equation}
+        \begin{split}
+          & \int_{Q_{t_0}} \epsilon \beta W^\epsilon v_1 \leq \beta \zeta \int_0^t \norm{\nabla V^\epsilon}_2^2 + \frac{1}{\zeta} \epsilon^2 \norm{v_1}_2^2 \\
+          & \leq \beta \zeta \int_0^t \norm{\nabla V^\epsilon}_2^2 + \frac{1}{\zeta} \epsilon^2 C(\norm{v_0}_{H^1}, L_1, L_2),
+        \end{split}
+      \end{equation}
       
       where the first term can be melted into the left hand side.
             
