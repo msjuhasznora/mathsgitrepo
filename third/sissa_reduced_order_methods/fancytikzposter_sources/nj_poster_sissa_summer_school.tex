@@ -37,7 +37,7 @@
 \author{Nora Juhasz\\
   DISIM, University of L'Aquila, Italy\\
   \texttt{ms.juhasz.nora@gmail.com}\\
-  joint work with D. Donatelli, University of L'Aquila
+  joint work with D. Donatelli, University of L'Aquila and \\ O. Lakkis, University of Sussex
 }
 
 \begin{document}
@@ -108,7 +108,7 @@
       \begin{tikzfigure}[A local slice of the atmosphere]
         \begin{tikzpicture}
       
-          \node[inner sep=0pt] (domain) at (0,0) {\includegraphics[width=.2\textwidth]{domain.jpg}};
+          \node[inner sep=0pt] (domain) at (0,0) {\includegraphics[width=.3\textwidth]{domain.jpg}};
       
         \end{tikzpicture}
       \end{tikzfigure}
@@ -161,11 +161,8 @@
     
     \[ \partial_t C + \bold{u} \cdot \nabla C = K_2 \frac{\partial ^2 C}{\partial x_2 ^ 2} + K_3 \frac{\partial ^2 C}{\partial x_3 ^ 2} + S \text{ in } \Omega \times (0,T) \]
     
-    \[ u_1 = u_2 = u_3 n_3 = 0 \text{ on } \Gamma \times (0,T) \]
-    
     \[ u_i (\cdot, t=0) = u_{0 i}, C (\cdot, t=0) = C_0 \text{ in } \Omega, \text{$i$ = 1,2} \]
-    
-    \[ C = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \partial_1 C, \partial_2 C \in L^2 L^2 (0,T; \Gamma_G), \partial_3 C = 0 \text{ on } \Gamma_G \times (0,T) \]
+   
     }
   }
   
@@ -187,28 +184,13 @@
   }
   
   %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
-  \blocknode {\textcolor{gray}{A priori estimates, weak convergence}}
+  \blocknode {\textcolor{gray}{The theoretical justification of the main theorem}}
   {
   
-    \small The main steps for proving the weak convergence are the following.
+    The main steps for proving the main theorem:
+
     \begin{itemize}
       \item Energy inequality.
-    \end{itemize}
-      
-    \coloredbox{colorthree!50!}{
-    
-    \[
-    \begin{split}  
-    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \big [\norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2 \big ] \diff \tau \\
-    & + \int_0 ^ t \bigg[ (\lambda - \sum_{i,j = 1}^3 \zeta \frac{1}{2} M_{ij} c_T) \norm{\nabla C^\epsilon}_{L^2}^2  \bigg] \diff \tau \\
-    & \leq \sum_{i,j = 1}^3 \frac{1}{\zeta} M_{ij} \frac{1}{2} \int_0 ^ t \norm{\sigma_i}^2 _{L^2 (\Gamma_G)} \diff \tau + \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) \\
-    & + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau + \sum_{i,j = 1}^3 \zeta \frac{1}{2} M_{ij} c_T  \int_0 ^ t \norm{C^\epsilon}^2 _{L^2 (\Omega) } \diff \tau.
-    \end{split}
-    \]
-    
-    }
-      
-    \begin{itemize}  
       \item A priori estimates + weak convergence of the linear terms.
       \item Weak convergence of nonlinear terms.
       \begin{itemize}
@@ -220,8 +202,8 @@
   
       %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
   \calloutblock
-  {($(box.center)+(-11,-11.5)$)} %% the point of the arrow part of the block
-  {($(box.center)+(2,-14.5)$)} %% the center of the body of the block
+  {($(box.center)+(-11,-5.5)$)} %% the point of the arrow part of the block
+  {($(box.center)+(2,-8.5)$)} %% the center of the body of the block
   {33cm}
   {
     We need a compactness result to obtain $u_3^\epsilon C^\epsilon \rightharpoonup  u_3 C.$
@@ -232,11 +214,11 @@
   \getcurrentrow{note}
   \coordinate (currenty) at ($(currentrow)+(xshift)-(yshift)$);
   
-  \blocknode{\textcolor{gray}{Numerical simulations - \textbf{a challenge}}}
+  \blocknode{\textcolor{gray}{Visual justification of the theorem - \textbf{a challenge}}}
   {
     \begin{itemize}
     
-      \item In order to visualise the convergence result we use the finite element method, and
+      \item In order to visualise the convergence result for now we use the finite element method, and
       \item the FEniCS platform.
       \item Space function choices for the velocity and the pressure:
       
