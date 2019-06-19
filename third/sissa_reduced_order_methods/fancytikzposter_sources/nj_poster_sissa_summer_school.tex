@@ -183,44 +183,13 @@
  
   }
   
-  %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
-  \blocknode {\textcolor{gray}{The theoretical justification of the main theorem}}
-  {
-  
-    The main steps for proving the main theorem:
-
-    \begin{itemize}
-      \item Energy inequality.
-      \item A priori estimates + weak convergence of the linear terms.
-      \item Weak convergence of nonlinear terms.
-      \begin{itemize}
-        \item Nonlinear terms not including the $C^\epsilon$ term - divergence free condition
-        \item The term $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}).$
-      \end{itemize}
-    \end{itemize}
-  }
-  
-      %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
-  \calloutblock
-  {($(box.center)+(-11,-5.5)$)} %% the point of the arrow part of the block
-  {($(box.center)+(2,-8.5)$)} %% the center of the body of the block
-  {33cm}
-  {
-    We need a compactness result to obtain $u_3^\epsilon C^\epsilon \rightharpoonup  u_3 C.$
-    
-    For this we prove that $C^\epsilon$ is strongly convergent in space-time in $L^2_t L^2_x$ by using a variant of the Aubin-Lions lemma.
-  }
-  
-  \getcurrentrow{note}
-  \coordinate (currenty) at ($(currentrow)+(xshift)-(yshift)$);
-  
-  \blocknode{\textcolor{gray}{Visual justification of the theorem - \textbf{a challenge}}}
+  \blocknode{\textcolor{gray}{Visualization of the convergence result: \textbf{a challenge}}}
   {
     \begin{itemize}
     
       \item In order to visualise the convergence result for now we use the finite element method, and
       \item the FEniCS platform.
-      \item Space function choices for the velocity and the pressure:
+      \item Space function choices for the velocity and the pressure --- this mixed finite element space is known as the \textbf{Taylor-Hood} elements and is a standard element pair for this kind of problem.
       
       \coloredbox{colorthree!50!}{
       
@@ -236,6 +205,26 @@
       \end{itemize}
       
     }
+  
+        %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
+  \calloutblock
+  {($(box.center)+(-8,-10.2)$)} %% the point of the arrow part of the block
+  {($(box.center)+(2,-12.2)$)} %% the center of the body of the block
+  {33cm}
+  {
+IPCS - Incremental pressure correction scheme. How to update $(\mathbf{u}^n, p^n)$
+
+to arrive to $(\mathbf{u}^{n+1}, p^{n+1})$ without increasing both quantities at the same time.
+
+\begin{enumerate}
+  \item Starting with $\mathbf{u}^n,$ calculate the so-called $\mathbf{u}^*$ tentative velocity using only the $p^n$ pressure value from the previous time step.
+  \item Updating the pressure, step from $p^n$ to $p^{n+1}$ based on $\mathbf{u}^*.$ (N-S@($\mathbf{u}^*,$ $p^n$) - N-S@($\mathbf{u}^{n+1},$ $p^{n+1}$))
+  \item Calculating the definitive $\mathbf{u}^{n+1}$ velocity based on $p^{n+1}$ and $\mathbf{u}^*.$
+\end{enumerate}
+  }
+  
+    \getcurrentrow{note}
+  \coordinate (currenty) at ($(currentrow)+(xshift)-(yshift)$);
     
     \blocknode{\textcolor{gray}{FEniCS code}}{
     
