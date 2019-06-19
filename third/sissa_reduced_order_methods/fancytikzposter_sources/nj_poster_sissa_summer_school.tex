@@ -247,23 +247,27 @@
   {
     \begin{itemize}
       \item In order to visualise the convergence result we use the finite element method
-      \item Challenge: the FEM matrix is more and more ill-conditioned as the weight of $u^\epsilon_3$ is disappearing from the momentum equation
+      \item Challenge: the FEM matrix is becoming more and more ill-conditioned as the weight of $u^\epsilon_3$ is disappearing from the momentum equation
       
-      \item CODE
-      \item CODE
-      \item CODE
-      \item CODE
-      \item CODE
-      \item CODE
-      \item CODE
-      \item CODE
-      \item CODE
-      \item CODE
-      \item CODE
-      \item CODE
-      \item CODE
-      \item CODE
-      \item CODE
+      \item Incremental pressure correction scheme - Chorin's method
+      
+      \item \texttt{    $F1\_anisotropic = (1/k)*( (u1 - u\_prev1)*v1 + (u2 - u\_prev2)*v2 + eps*eps*(u3 - u\_prev3)*v3 ) * dx + \
+        inner(u\_prev, grad(u\_prev1)) * v1 * dx + inner(u\_prev, grad(u\_prev2)) * v2 * dx + \
+        eps*eps*inner(u\_prev, grad(u\_prev3)) * v3 * dx + \
+        - \alpha * u\_prev2 * v1 * dx + \alpha * u\_prev1 * v2 * dx + \
+        inner(grad(u1),grad(v1)) * dx + inner(grad(u2),grad(v2)) * dx + \epsilon*\epsilon*inner(grad(u3),grad(v3)) * dx + \
+        \epsilon * \beta * u\_prev3 * v1 * dx - \epsilon * \beta * u\_prev1 * v3 * dx + \
+        - inner(f, v) * dx + \
+        - inner(\theta, v) * ds(1)$}
+        
+            \texttt{$a1 = lhs(F1\_anisotropic)$
+    $L1 = rhs(F1\_anisotropic) $}
+        
+      \item \texttt{  $a2 = inner(grad(p), grad(q))*dx
+    L2 = - (1/k)*div(u_next)*q*dx$}
+    
+    \item \texttt{ $a3 = inner(u, v)*dx
+    L3 = inner(u_next, v)*dx - k*inner(grad(p_next), v)*dx$ }
       
     \end{itemize}
   }
