@@ -20,6 +20,21 @@
 \setfirstcolor{mocassin}
 \setsecondcolor{coral}
 \setthirdcolor{terracotta}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{commath}
+\usepackage{amsthm}
+\usepackage{lmodern}
+\usepackage{scrextend}
+\usepackage{listings}
+\usepackage{xcolor}
+\lstdefinestyle{base}{
+  language=Python,
+  emptylines=1,
+  breaklines=true,
+  basicstyle=\ttfamily\color{black},
+  moredelim=**[is][\color{orange}]{@}{@},
+}
 
 %%% size of the document and the margins
 %% A0
@@ -189,13 +204,13 @@
     
       \item In order to visualise the convergence result for now we use the finite element method, and
       \item the FEniCS platform.
-      \item Space function choices for the velocity and the pressure --- this mixed finite element space is known as the \textbf{Taylor-Hood} elements and is a standard element pair for this kind of problem.
+      \item Space function choices for the velocity and the pressure --- this mixed finite element space is known as the \textbf{Taylor-Hood} elements and is a standard element pair for this kind of problem. In the original weak formulation the $p$ pressure function vanishes as a consequence of the divergence-free condition. In this discretised scenario we don't exactly have that constraint fulfilled, so we also use the pressure function in the weak formulation:
       
       \coloredbox{colorthree!50!}{
       
-        \texttt{V = VectorFunctionSpace(mesh, "Lagrange", 2, dim = 3)}
+        \texttt{V = VectorFunctionSpace(mesh, "Lagrange", 2, dim = 3)} --- continuous piecewise quadratics
         
-        \texttt{Q = FunctionSpace(mesh, "Lagrange", 1)}
+        \texttt{Q = FunctionSpace(mesh, "Lagrange", 1)} --- continuous piecewise linear functions
       }
       
       \item Challenge: \textbf{the FEM matrix is becoming badly conditioned} as the weight of $u^\epsilon_3$ is disappearing from the momentum equation --- as the shallowness parameter $\epsilon$ goes to zero.
@@ -208,8 +223,8 @@
   
         %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
   \calloutblock
-  {($(box.center)+(-8,-10.2)$)} %% the point of the arrow part of the block
-  {($(box.center)+(2,-12.2)$)} %% the center of the body of the block
+  {($(box.center)+(-8,-12.2)$)} %% the point of the arrow part of the block
+  {($(box.center)+(2,-14.2)$)} %% the center of the body of the block
   {33cm}
   {
 IPCS - Incremental pressure correction scheme. How to update $(\mathbf{u}^n, p^n)$
@@ -224,7 +239,7 @@ to arrive to $(\mathbf{u}^{n+1}, p^{n+1})$ without increasing both quantities at
   }
   
     \getcurrentrow{note}
-  \coordinate (currenty) at ($(currentrow)+(xshift)-(yshift)$);
+    \coordinate (currenty) at ($(currentrow)+(xshift)-(yshift)$);
     
     \blocknode{\textcolor{gray}{FEniCS code}}{
     
@@ -233,16 +248,17 @@ to arrive to $(\mathbf{u}^{n+1}, p^{n+1})$ without increasing both quantities at
       \item STEP1 --- tentative velocity calculation ignoring the pressure change
       
         \coloredbox{colorthree!50!}{
+       
       
         \texttt{ $F1\_anisotropic = $ }
       
         \texttt{ $ (1/k)*\big( (u1 - u\_prev1)*v1 + (u2 - u\_prev2)*v2 + \epsilon*\epsilon*\mathbf{(u3 - u\_prev3)*v3} \big) * dx + $ }
       
-        \texttt{ $ + inner(u\_prev, grad(u\_prev1)) * v1 * dx + inner(u\_prev, grad(u\_prev2)) * v2 * dx + \epsilon*\epsilon*inner(u\_prev, grad(u\_prev3)) * v3 * dx $}
+         \texttt{ $ + inner(u\_prev, grad(u\_prev1)) * v1 * dx + inner(u\_prev, grad(u\_prev2)) * v2 * dx + \epsilon*\epsilon*inner(u\_prev, grad(u\_prev3)) * v3 * dx $}
         
-        \texttt{ $ - \alpha * u\_prev2 * v1 * dx + \alpha * u\_prev1 * v2 * dx + inner(grad(u1),grad(v1)) * dx + inner(grad(u2),grad(v2)) * dx + \epsilon*\epsilon*\mathbf{inner(grad(u3),grad(v3))} * dx + \epsilon * \beta * u\_prev3 * v1 * dx - \epsilon * \beta * u\_prev1 * v3 * dx - inner(f, v) * dx - inner(\theta, v) * ds(1) $ }
+         \texttt{ $ - \alpha * u\_prev2 * v1 * dx + \alpha * u\_prev1 * v2 * dx + inner(grad(u1),grad(v1)) * dx + inner(grad(u2),grad(v2)) * dx + \epsilon*\epsilon*\mathbf{inner(grad(u3),grad(v3))} * dx + \epsilon * \beta * u\_prev3 * v1 * dx - \epsilon * \beta * u\_prev1 * v3 * dx - inner(f, v) * dx - inner(\theta, v) * ds(1) $ }
        
-         \texttt{ $ a1 = lhs(F1\_anisotropic), L1 = rhs(F1\_anisotropic) $}
+          \texttt{ $ a1 = lhs(F1\_anisotropic), L1 = rhs(F1\_anisotropic) $}
          
        }
     
@@ -263,6 +279,15 @@ to arrive to $(\mathbf{u}^{n+1}, p^{n+1})$ without increasing both quantities at
         }
       
     \end{itemize}
+  }
+  
+    \blocknode{\textcolor{gray}{Future work}}%
+  {
+    \begin{itemize}
+      \item We plan to visualise the behaviour of the limit model in itself, without the convergence phenomena attached to it.
+      \item Investigate further in order to see if it is possible to construct a stable method to visualise the convergence of the solutions.
+    \end{itemize}
+  
   }
 
 \end{tikzpicture}
