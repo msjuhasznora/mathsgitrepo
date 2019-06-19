@@ -209,8 +209,7 @@
     }
       
     \begin{itemize}  
-      \item A priori estimates: $L_t^\infty L_x^2$ boundedness for $u_1^\epsilon, u_2^\epsilon, \epsilon u_3^\epsilon, C^\epsilon;$ $L_t^2 H_x^1$ boundedness for $u_1^\epsilon, u_2^\epsilon, \epsilon u_3^\epsilon, C^\epsilon.$
-      \item Weak convergence of the linear terms.
+      \item A priori estimates + weak convergence of the linear terms.
       \item Weak convergence of nonlinear terms.
       \begin{itemize}
         \item Nonlinear terms not including the $C^\epsilon$ term - divergence free condition
@@ -227,17 +226,7 @@
   {
     We need a compactness result to obtain $u_3^\epsilon C^\epsilon \rightharpoonup  u_3 C.$
     
-    For this we use that
-    
-    \begin{itemize}
-    
-      \item $u_3^\epsilon$ is weakly convergent,
-      
-      \item we show that $C^\epsilon$ is strongly convergent in space-time in $L^2_t L^2_x$. We prove this by using a variant of the Aubin-Lions lemma.
-
-    \end{itemize}
-    
-    The combination of these results provides the weak convergence of the product.
+    For this we prove that $C^\epsilon$ is strongly convergent in space-time in $L^2_t L^2_x$ by using a variant of the Aubin-Lions lemma.
   }
   
   \getcurrentrow{note}
@@ -249,11 +238,30 @@
     
       \item In order to visualise the convergence result we use the finite element method, and
       \item the FEniCS platform.
+      \item Space function choices for the velocity and the pressure:
+      
+      \coloredbox{colorthree!50!}{
+      
+        \texttt{V = VectorFunctionSpace(mesh, "Lagrange", 2, dim = 3)}
+        
+        \texttt{Q = FunctionSpace(mesh, "Lagrange", 1)}
+      }
+      
       \item Challenge: \textbf{the FEM matrix is becoming badly conditioned} as the weight of $u^\epsilon_3$ is disappearing from the momentum equation --- as the shallowness parameter $\epsilon$ goes to zero.
       
       \item To obtain a discrete scheme in space and time we use the incremental pressure correction scheme --- \textbf{Chorin's 3-step method}
       
+      \end{itemize}
+      
+    }
+    
+    \blocknode{\textcolor{gray}{FEniCS code}}{
+    
+      \begin{itemize}
+      
       \item STEP1 --- tentative velocity calculation ignoring the pressure change
+      
+        \coloredbox{colorthree!50!}{
       
         \texttt{ $F1\_anisotropic = $ }
       
@@ -264,14 +272,24 @@
         \texttt{ $ - \alpha * u\_prev2 * v1 * dx + \alpha * u\_prev1 * v2 * dx + inner(grad(u1),grad(v1)) * dx + inner(grad(u2),grad(v2)) * dx + \epsilon*\epsilon*\mathbf{inner(grad(u3),grad(v3))} * dx + \epsilon * \beta * u\_prev3 * v1 * dx - \epsilon * \beta * u\_prev1 * v3 * dx - inner(f, v) * dx - inner(\theta, v) * ds(1) $ }
        
          \texttt{ $ a1 = lhs(F1\_anisotropic), L1 = rhs(F1\_anisotropic) $}
+         
+       }
     
       \item STEP2 --- updating the pressure in a separate step
       
-        \texttt{  $ a2 = inner(grad(p), grad(q))*dx, L2 = - (1/k)*\text{div}(u\_next)*q*dx $ }
+        \coloredbox{colorthree!50!}{
+      
+          \texttt{  $ a2 = inner(grad(p), grad(q))*dx, L2 = - (1/k)*\text{div}(u\_next)*q*dx $ }
+        
+        }
     
       \item STEP3 --- updating the velocity knowing the new pressure value
+      
+        \coloredbox{colorthree!50!}{
 
-        \texttt{ $ a3 = inner(u, v)*dx, L3 = inner(u\_next, v)*dx - k*inner(grad(p\_next), v)*dx $ }
+          \texttt{ $ a3 = inner(u, v)*dx, L3 = inner(u\_next, v)*dx - k*inner(grad(p\_next), v)*dx $ }
+        
+        }
       
     \end{itemize}
   }
