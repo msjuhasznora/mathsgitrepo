@@ -55,11 +55,11 @@ A widely used approach to mathematically describe the atmosphere is to consider 
 %%% *** INTRODUCTION *** %%%
 \section{Introduction} \label{Introduction}
 
-A local domain on the surface of the rotating Earth is often described by a Cartesian coordinate system where the $x, y, z$ axes represent the directions towards east, north, and upwards, respectively, as in this specific system the rotation vector, and as a consequence, the Coriolis force takes a simpler form. However, for modelling wind and pollution effects in the atmosphere there is another naturally distinctive viewpoint for fixing the orientation of the coordinate system: the introduction of downwind and crosswind, and to match the horizontal axes according to these meteorological parameters (see \cite{goyal2011mathematical}). In this paper we take this idea as a foundation, and we migrate the result of our previously stated weak convergence theorem to this more considerately chosen coordinate system.
+A local domain on the surface of the rotating Earth is often described by a Cartesian coordinate system where the $x, y, z$ axes represent the directions towards east, north, and upwards, respectively, as in this specific system the rotation vector, and as a consequence, the Coriolis force takes a simpler form. However, for modelling wind and pollution effects in the atmosphere there is another naturally distinctive viewpoint for fixing the orientation of the coordinate system: the introduction of downwind and crosswind, and to match the horizontal axes according to these meteorological parameters (see \cite{goyal2011mathematical}). We take this idea as a foundation, and we migrate the result of our previously stated weak convergence theorem to this more considerately chosen coordinate system.
 
 %% Here \todo{write this part} talk a little bit about the original convergence theorem to make the new one more self-contained and for details refer to the first article.
 
-As in this scenario the advection is dominant compared to diffusion effects along the $x$ axis, this approach naturally brings an additional $\epsilon$ term in the Laplacian of the concentration equation, the simplification of the limit model, and brings the challenge of proving a weak convergence result for the product of the vertical velocity and the concentration, as in the energy inequality the $\norm{\partial_1 C^\epsilon}$ term is replaced by $\norm{\sqrt{\epsilon} \partial_1 C^\epsilon}.$ This issue is overcome by using a more regular initial horizontal velocity function, namely $\mathbf{v} \in H^1.$ This additional, stronger initial regularity will result in a smoother $\mathbf{u}^\epsilon$ function, and thus will make up for the lost $H^1$ regularity of the concentration function $C.$
+As in this scenario the advection is dominant compared to diffusion effects along the $x$ axis, this approach naturally contributes to an additional $\epsilon$ term in the Laplacian of the concentration equation, the simplification of the limit model, and brings the challenge of proving a weak convergence result for the product of the vertical velocity and the concentration, as in the energy inequality the $\norm{\partial_1 C^\epsilon}$ term is replaced by $\norm{\sqrt{\epsilon} \partial_1 C^\epsilon}.$ This issue is overcome by using a more regular initial horizontal velocity function, namely $\mathbf{v} \in H^1.$ The additional, stronger initial regularity will result in a smoother $\mathbf{u}^\epsilon$ function, and thus will make up for the lost $H^1$ regularity of the concentration function $C.$
 
 We will also use slightly different, stricter boundary conditions --- these additional requirements are motivated by \textit{a)} the presence of $\epsilon$ next to the sediment functions, and \textit{b)} the need to eliminate certain boundary terms in the new part of the proof, which is based on a result obtained for a periodic domain (\cite{li2019primitive}).
 
@@ -127,7 +127,7 @@ In order to obtain the set of equations that describe the phenomena we start wit
 
 As for the rescaling process, here we perform the same steps, with the addition of $(\ref{ksepsk1}).$
 
-To expand the $2 \mathbf{\omega} \times \mathbf{v}$ Coriolis term firstly it is necessary to understand the structure of the new rotation vector. Note that the downwind-matching coordinate system and the original east-north-upwards oriented system are different only in a rotation around the $z$ axis. Let $\theta$ denote the angle between the respective $x$ axes, $\phi$ denotes the latitude, then the rotation vector expressed in the downwind matching coordinate system becomes
+To expand the $2 \mathbf{\omega} \times \mathbf{v}$ Coriolis term, firstly it is necessary to understand the structure of the new rotation vector. Note that the downwind-matching coordinate system and the original east-north-upwards oriented system are different only in a rotation around the $z$ axis. Let $\theta$ denote the angle between the respective $x$ axes, $\phi$ denotes the latitude, then the rotation vector expressed in the downwind matching coordinate system becomes
 
 \begin{gather}
  \begin{bmatrix} \cos(\theta) & -\sin(\theta) & 0 \\ \sin(\theta) & \cos(\theta) & 0 \\ 0 & 0 & 1 \end{bmatrix} \begin{bmatrix} 0 \\ f \cos(\phi) \\ f \sin(\phi) \end{bmatrix}
@@ -196,7 +196,7 @@ The initial condition for the velocity and the pollution concentration are
     
 We highlight the difference between the boundary conditions of the original, east-north oriented, and the new, downwind-matching model.
 
-The difference is the kind of boundary conditions that we can "afford" to have on the lower boundary for the concentration comes from the energy inequality. In the east-north-upwards oriented coordinate system we do not have an $\epsilon$ in the diffusion matrix, and thus it is not an issue to have any of the $\partial_i C$ terms to be different from 0, not even for an ocean case where $\partial_3 C$ becomes nonzero as well (they are required however to be bounded of course). On the other hand, the downwind-matching coordinate system brings in an $\epsilon$ term in front of the $K_1$ diffusion, which makes the model more sensitive to assigning boundary conditions for $C.$ This means that we can not have the relatively relaxed, boundedness requirement for any $\partial_i C$ except for $i=1.$ All other $\partial_2 C, \partial_3 C$ derivatives must be zero on the lower boundary, otherwise they would result in an $(\epsilon - \text{const.})$ negative term.
+The difference in the kind of boundary conditions that we can "afford" to have on the lower boundary for the concentration comes from the energy inequality. In the east-north-upwards oriented coordinate system we do not have an $\epsilon$ in the diffusion matrix, and thus it is not an issue to have any of the $\partial_i C$ terms to be different from 0, not even for an ocean case where $\partial_3 C$ becomes nonzero as well (they are required however to be bounded of course). On the other hand, the downwind-matching coordinate system brings in an $\epsilon$ term in front of the $K_1$ diffusion, which makes the model more sensitive to assigning boundary conditions for $C.$ This means that we can not have the relatively relaxed, boundedness requirement for any $\partial_i C$ except for $i=1.$ All other $\partial_2 C, \partial_3 C$ derivatives must be zero on the lower boundary, otherwise they would result in an $(\epsilon - \text{const.})$ negative term.
 
 If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and $\epsilon$ in the anisotropic equations, we formally arrive to the hydrostatic Navier-Stokes equations (i.e., primitive equations) combined with pollution.
 
@@ -234,29 +234,19 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
         & \partial_2 C = \partial_3 C = 0 \text{ on } \Gamma_G \times (0,T), \partial_1 C \in L^2 L^2 (0,T; \Gamma_G) \\
       \end{split}
     \end{equation}
-    
-\subsection{Energy inequality}
-
-  \begin{equation}\nonumber
-    \begin{split}  
-    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \big [\norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2 \big ] \diff \tau \\
-    & + \int_0 ^ t \bigg[ \textcolor{orange}{ (\epsilon K_1 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_1 C^\epsilon}_{L^2}^2}  + (K_2 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_2 C^\epsilon}_{L^2}^2 \\
-    & + (K_3 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_3 C^\epsilon}_{L^2}^2 \bigg] \diff \tau \\
-    & \leq \frac{1}{\zeta} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)} + \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) \\
-    & + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau.
-    \end{split}
-  \end{equation} 
 
 %%% *** WEAK FORMULATION AND MAIN RESULT*** %%%
-\section{Main Result} \label{weakformulationmainresult}
+\section{Weak Formulation and Main Result} \label{weakformulationmainresult}
+
+Weak formulation, definition of weak solutions. \todo{the importance of highlighting that we need the Leray-Hopf regularity for the velocity part as the continuity is used.}
 
 The main result is analogous to the original one we stated for the case of the geophysical frame, but we highlight the following specificities:
 
 \begin{itemize}
 
-  \item $\mathbf{v}_0 \in H^1$ (for the case of the geophysical frame $L^2$ was sufficient).
+  \item $\mathbf{v}_0 \in H^1$ (for the case of the geophysical frame $L^2$ was sufficient). \todo{add a small comment on how the original attempt of proving this theorem for an L2 initial data didn't work.}
   \item The domain is a bounded Lipschitzian domain, here we do not require periodicity for the domain --- unlike for the paper of Li and Titi \cite{li2019primitive}.
-  \item The original statement was valid for weak solutions in general, this downwind-matching case is proved for Leray-Hopf weak solutions. The weak time continuity requirement (more specifically, $\mathbf{u}^\epsilon \in C_w( [ 0,\infty), L^2 (\Omega))$, instead of $L^\infty_t L^2_x$) is important and utilised in the proof on p19. In \cite{azerad2001mathematical} the weak time continuity is obtained only for the horizontal velocity $\mathbf{u}^\epsilon_H.$
+  \item The original statement was valid for weak solutions in general, this downwind-matching case is proved for weak solutions as defined above (essentially the velocity part is required to be a Leray-Hopf weak solution). The weak time continuity requirement (more specifically, $\mathbf{u}^\epsilon \in C_w( [ 0,\infty), L^2 (\Omega))$, instead of $L^\infty_t L^2_x$) is important and utilised in the proof on p19. In \cite{azerad2001mathematical} the weak time continuity is obtained only for the horizontal velocity $\mathbf{u}^\epsilon_H.$
   \item The global well-posedness was proved for the case including the Coriolis term, but the strong convergence justification has been elaborated for a case that does not include the cross product term representing the Earth's movement. We also consider and add this detail.
 
 \end{itemize}
@@ -271,6 +261,18 @@ In the theorem of \cite{li2019primitive} they also use additional requirements s
   
 %%% *** PROOF *** %%%
 \section{Proof of the main theorem} \label{proof}
+
+Energy inequality:
+
+  \begin{equation}\nonumber
+    \begin{split}  
+    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \big [\norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2 \big ] \diff \tau \\
+    & + \int_0 ^ t \bigg[ \textcolor{orange}{ (\epsilon K_1 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_1 C^\epsilon}_{L^2}^2}  + (K_2 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_2 C^\epsilon}_{L^2}^2 \\
+    & + (K_3 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_3 C^\epsilon}_{L^2}^2 \bigg] \diff \tau \\
+    & \leq \frac{1}{\zeta} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)} + \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) \\
+    & + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau.
+    \end{split}
+  \end{equation} 
 
 The proof is mainly based on the Strong Convergence Justification paper's convergence result. In \cite{li2019primitive} it is proved that a Leray-Hopf weak solution $(\mathbf{v}_\epsilon, w_\epsilon)$ of the Coriolis-term-free (SNS) converges strongly to the strong solution $(\mathbf{v}, w)$ in $L^2 L^2,$ provided that we have $\mathbf{v}_0 \in H^1,$ and the domain is periodic (see Theorem 1.1 on p5).
 
