@@ -281,15 +281,13 @@ The first step of the proof is to calculate the energy inequality, which takes t
   
 The convergence of the linear terms and the nonlinear terms with the exception of $u_3 C$ can be proved analogously as in our previous paper, since the proof of those results are not effected by the changes induced by choosing to use downwind-matching coordinate system.
 
-Observe however that for the nonlinear term that includes the concentration function and the vertical velocity the original proof does not hold anymore because of the disappearance of the $H^1$ regularity of $C^\epsilon.$ In other words, the most important difference in this new version of the energy inequality is having $\sqrt{\epsilon} \partial_1 C^\epsilon$ in the place of $\partial_1 C^\epsilon.$
+Observe however that for the nonlinear term that includes the concentration function and the vertical velocity the original proof does not hold anymore --- because of the disappearance of the $H^1$ regularity of $C^\epsilon$ we lose the strong convergence feature of $C^\epsilon,$ which was of key importance in the previous version. In other words, the most significant difference in this new form of the energy inequality is having $\sqrt{\epsilon} \partial_1 C^\epsilon$ in the place of $\partial_1 C^\epsilon.$
 
-Thus, in the following part of the proof we verify that the weak convergence holds even for this specific term.
+In the following part of the proof we verify that the weak convergence of the nonlinear concentration term holds even for the case where the energy inequality provides weaker a priori estimates for $C^\epsilon.$
 
-The proof is mainly based on the Strong Convergence Justification paper's convergence result. In \cite{li2019primitive} it is proved that a Leray-Hopf weak solution $(\mathbf{v}_\epsilon, w_\epsilon)$ of the Coriolis-term-free (SNS) converges strongly to the strong solution $(\mathbf{v}, w)$ in $L^2 L^2,$ provided that we have $\mathbf{v}_0 \in H^1,$ and the domain is periodic (see Theorem 1.1 on p5).
+The proof is mainly based on a convergence result by \cite{li2019primitive}. In that article it is proved that a Leray-Hopf weak solution $(\mathbf{v}_\epsilon, w_\epsilon)$ of the Coriolis-term-free $\epsilon$-scaled Navier-Stokes equations converges strongly to the strong solution $(\mathbf{v}, w)$ of the primitive equations in $L^2 L^2,$ provided that we have $\mathbf{v}_0 \in H^1,$ and the domain is periodic (see Theorem 1.1 in \cite{li2019primitive}). The strong convergence of $w_\epsilon$ to $w$ allows us to bring the proof to a closure, obtaining that $u_3^\epsilon C^\epsilon$ tends to $u_3 C.$
 
-The strong convergence of $w_\epsilon$ to $w$ allows us to bring the proof to a closure, obtaining that $u_3^\epsilon C^\epsilon$ tends to $u_3 C.$
-
-We verify here that Theorem 1.1 in \cite{li2019primitive} is also valid for the case of a non-periodic, bounded domain (i.e. we have boundary segments), including the general Coriolis terms. We follow closely the proof provided in Section4 and update each point where the periodicity of the domain is applied in one way or another, or the Coriolis terms are missing.
+We verify here that Theorem 1.1 in \cite{li2019primitive} is also valid for the case of a non-periodic, bounded domain (i.e. we have boundary segments), including the general Coriolis terms that we additionally need to consider. We follow closely the proof verifying this strong convergence provided in Section 4 and we update each point where the periodicity of the domain is applied in one way or another, or the Coriolis terms are missing.
 
 \subsection{The applicability of the Poincare inequality}
 
@@ -528,6 +526,8 @@ The global well-posedness was proved for the case including the Coriolis term, b
     \end{itemize}
 
 \end{enumerate}
+
+With this we have proved our main result --- the weak convergence of the weak solutions of the polluted atmosphere hold also for the scenario of the downwind-matching coordinate system.
 
 \nocite{*}
 \bibliographystyle{abbrv}
