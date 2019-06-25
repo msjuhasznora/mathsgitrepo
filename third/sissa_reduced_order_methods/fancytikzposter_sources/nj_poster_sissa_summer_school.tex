@@ -100,7 +100,7 @@
   %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
   \calloutblock
   {($(box.center)+(-2,-7)$)} %% the point of the arrow part of the block
-  {($(box.center)+(12,-3)$)} %% the center of the body of the block
+  {($(box.center)+(12,-3.6)$)} %% the center of the body of the block
   {15cm} %% the width of the block
   {\small
   Correspondingly, we rescale
@@ -112,8 +112,8 @@
   \end{itemize}
   }
   
-    %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
-  \blocknode{\textcolor{gray}{Modelling choices}}
+  %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
+  \blocknode[($(currenty)-(0,1.6)$)]{\textcolor{gray}{Modelling choices}}
   {
   \begin{itemize}
     \item Coordinate system $\to$ we use a classical geophysical coordinate choice: north -- east -- upwards directions.
@@ -174,16 +174,16 @@
     
     \[ \nabla \cdot \bold{u} = 0 \text{ in } \Omega \times (0,T) \]
     
-    \[ \partial_t C + \bold{u} \cdot \nabla C = K_2 \frac{\partial ^2 C}{\partial x_2 ^ 2} + K_3 \frac{\partial ^2 C}{\partial x_3 ^ 2} + S \text{ in } \Omega \times (0,T) \]
+    \[ \partial_t C + \bold{u} \cdot \nabla C = K_1 \frac{\partial ^2 C}{\partial x_1 ^ 2} + K_2 \frac{\partial ^2 C}{\partial x_2 ^ 2} + K_3 \frac{\partial ^2 C}{\partial x_3 ^ 2} + S \text{ in } \Omega \times (0,T) \]
     
     \[ u_i (\cdot, t=0) = u_{0 i}, C (\cdot, t=0) = C_0 \text{ in } \Omega, \text{$i$ = 1,2} \]
    
     }
   }
   
-    %%%%%%%%%%%%% NEW COLUMN %%%%%%%%%%%%%%% 
+  %%%%%%%%%%%%% NEW COLUMN %%%%%%%%%%%%%%%
   \startsecondcolumn 
-    %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
+  %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
     
   
   %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
@@ -195,6 +195,8 @@
         \innerblock{Theorem} {Let $\bold{u}_0$ $\in$ $L^2 (\Omega)^3$, with $\nabla \cdot \bold{u}_0 = 0, \bold{u}_0 \cdot \bold{n} = 0$ on $\partial \Omega$; and let $C(0)\in$ $L^2 (\Omega)^3$, $C(0) = 0$ on $ \partial \Omega$; there exists a weak solution ($\mathbf{u}$, C) of the hydrostatic equations of the polluted atmosphere, obtained as a limit of weak solutions $(\mathbf{u}^\epsilon, C^\epsilon)$ of the anisotropic equations as the aspect ratio $\epsilon$ tends to $0$.}
       \end{minipage}
     \end{tabular}
+    
+    For details see \textit{D. Donatelli, N. Juhasz, Weak solution of the merged mathematical equations of the polluted atmosphere, Preprint 2019, arXiv:1906.09914 [math.AP].}
  
   }
   
@@ -202,18 +204,17 @@
   {
     \begin{itemize}
     
-      \item In order to visualise the convergence result for now we use the finite element method, and
-      \item the FEniCS platform.
+      \item In order to visualise the convergence result for now we use the finite element method, and the FEniCS platform.
       \item Space function choices for the velocity and the pressure --- this mixed finite element space is known as the \textbf{Taylor-Hood} elements and is a standard element pair for this kind of problem. In the original weak formulation the $p$ pressure function vanishes as a consequence of the divergence-free condition. In this discretised scenario we don't exactly have that constraint fulfilled, so we also use the pressure function in the weak formulation:
       
-      \coloredbox{colorthree!50!}{
+     \coloredbox{colorthree!50!}{
       
         \texttt{V = VectorFunctionSpace(mesh, "Lagrange", 2, dim = 3)} --- continuous piecewise quadratics
         
         \texttt{Q = FunctionSpace(mesh, "Lagrange", 1)} --- continuous piecewise linear functions
-      }
+     }
       
-      \item Challenge: \textbf{the FEM matrix is becoming badly conditioned} as the weight of $u^\epsilon_3$ is disappearing from the momentum equation --- as the shallowness parameter $\epsilon$ goes to zero.
+      \item Challenge: \textbf{the FEM matrix is becoming badly conditioned} as the weight $\epsilon^2 $ of $u^\epsilon_3$ is disappearing from the momentum equation.
       
       \item To obtain a discrete scheme in space and time we use the incremental pressure correction scheme --- \textbf{Chorin's 3-step method}
       
@@ -223,8 +224,8 @@
   
         %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
   \calloutblock
-  {($(box.center)+(-8,-12.2)$)} %% the point of the arrow part of the block
-  {($(box.center)+(2,-14.2)$)} %% the center of the body of the block
+  {($(box.center)+(-8,-11.5)$)} %% the point of the arrow part of the block
+  {($(box.center)+(2,-13.3)$)} %% the center of the body of the block
   {33cm}
   {
 IPCS - Incremental pressure correction scheme. How to update $(\mathbf{u}^n, p^n)$
@@ -250,15 +251,15 @@ to arrive to $(\mathbf{u}^{n+1}, p^{n+1})$ without increasing both quantities at
         \coloredbox{colorthree!50!}{
        
       
-        \texttt{ $F1\_anisotropic = $ }
+        \texttt{ F1\_anisotropic =  }
       
-        \texttt{ $ (1/k)*\big( (u1 - u\_prev1)*v1 + (u2 - u\_prev2)*v2 + \epsilon*\epsilon*\mathbf{(u3 - u\_prev3)*v3} \big) * dx + $ }
+        \texttt{ (1/k)*\big( (u1 - u\_prev1)*v1 + (u2 - u\_prev2)*v2 + $\epsilon^2*$\textbf{(u3 - u\_prev3)*v3} \big) * dx + inner(u\_prev, grad(u\_prev1)) * v1 * dx  }
       
-         \texttt{ $ + inner(u\_prev, grad(u\_prev1)) * v1 * dx + inner(u\_prev, grad(u\_prev2)) * v2 * dx + \epsilon*\epsilon*inner(u\_prev, grad(u\_prev3)) * v3 * dx $}
+         \texttt{ + inner(u\_prev, grad(u\_prev2)) * v2 * dx + $\epsilon^2*$inner(u\_prev, grad(u\_prev3)) * v3 * dx $ - \alpha$ * u\_prev2 * v1 * dx + $\alpha$ * u\_prev1 * v2 * dx + inner(grad(u1),grad(v1)) * dx + inner(grad(u2),grad(v2)) * dx }
         
-         \texttt{ $ - \alpha * u\_prev2 * v1 * dx + \alpha * u\_prev1 * v2 * dx + inner(grad(u1),grad(v1)) * dx + inner(grad(u2),grad(v2)) * dx + \epsilon*\epsilon*\mathbf{inner(grad(u3),grad(v3))} * dx + \epsilon * \beta * u\_prev3 * v1 * dx - \epsilon * \beta * u\_prev1 * v3 * dx - inner(f, v) * dx - inner(\theta, v) * ds(1) $ }
+         \texttt{ + $\epsilon^2$*\textbf{inner(grad(u3),grad(v3))} * dx + $\epsilon * \beta$ * u\_prev3 * v1 * dx - $\epsilon * \beta$ * u\_prev1 * v3 * dx  }
        
-          \texttt{ $ a1 = lhs(F1\_anisotropic), L1 = rhs(F1\_anisotropic) $}
+          \texttt{ a1 = lhs(F1\_anisotropic), L1 = rhs(F1\_anisotropic) }
          
        }
     
@@ -266,7 +267,7 @@ to arrive to $(\mathbf{u}^{n+1}, p^{n+1})$ without increasing both quantities at
       
         \coloredbox{colorthree!50!}{
       
-          \texttt{  $ a2 = inner(grad(p), grad(q))*dx, L2 = - (1/k)*\text{div}(u\_next)*q*dx $ }
+          \texttt{ a2 = inner(grad(p), grad(q))*dx, L2 = - (1/k)*\text{div}(u\_next)*q*dx  }
         
         }
     
@@ -274,7 +275,7 @@ to arrive to $(\mathbf{u}^{n+1}, p^{n+1})$ without increasing both quantities at
       
         \coloredbox{colorthree!50!}{
 
-          \texttt{ $ a3 = inner(u, v)*dx, L3 = inner(u\_next, v)*dx - k*inner(grad(p\_next), v)*dx $ }
+          \texttt{ a3 = inner(u, v)*dx, L3 = inner(u\_next, v)*dx - k*inner(grad(p\_next), v)*dx  }
         
         }
       
