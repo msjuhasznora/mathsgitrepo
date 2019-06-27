@@ -361,9 +361,11 @@ Now we are ready to state the main theorem.
 
 \section{Proof of the main theorem} \label{proof}
 
+This section is devoted to verify the Theorem \ref{maintheorem}. Structurally we follow a similar chain of thought as in our previous paper until the point where the proof diverges reaching the weak convergence of the nonlinear term $u_3^\epsilon C^\epsilon$ where in this case we can not benefit from an $H^1$ regular concentration function. In more detail, we begin with calculating the energy inequality and collect the a priori estimates that derive from it, then verify the rather easily obtainable weak convergence results, finally we elaborate the steps to bring to a closure the convergence of the $u_3^\epsilon C^\epsilon$ term. The main idea here is to temporarily ignore the $C^\epsilon$ function and prove a strong convergence result considering only the velocity functions. Throughout this step we go beyond the weak solutions quality and show that we are working with strong solutions. In this new setting with better regularities we can prove the convergence result we need, and finally return to the frame of weak solutions where we can merge back together the velocity and concentration functions into a unified solution.
+
   \subsection{Energy inequality}
   
-  If we calculate it for the anisotropic system, we obtain that for a.e. $t \in [0,T]$ the following holds:
+  If we calculate the energy inequality for the anisotropic system, we obtain that for a.e. $t \in [0,T]$ the following holds:
   
   \begin{equation}
     \begin{split}  
@@ -399,8 +401,6 @@ Now we are ready to state the main theorem.
   \subsection{Convergence of pollution terms}
   
   \subsection{The weak convergence of the $u_3^\epsilon C^\epsilon$ nonlinear term}
-  
-  The main idea here is to temporarily consider only the velocity functions, upgrade the weak solutions scenario and switch to a result that we obtain for strong solutions. In this new setting with better regularities we can prove the convergence result we need, and finally return to the frame of weak solutions.
   
   One of the cornerstones of this method is to first of all exploit the already well-known regularities (see \cite{cao2007global}) of the strong solution of the primitive equations. In more detail, we have the well-posedness --- existence and uniqueness --- of the strong solution of the primitive equations that include the Coriolis terms as well. Formally, we have
   
