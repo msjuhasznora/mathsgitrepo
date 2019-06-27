@@ -361,11 +361,11 @@ Now we are ready to state the main theorem.
 
 \section{Proof of the main theorem} \label{proof}
 
-This section is devoted to verify the Theorem \ref{maintheorem}. Structurally we follow a similar chain of thought as in our previous paper until the point where the proof diverges reaching the weak convergence of the nonlinear term $u_3^\epsilon C^\epsilon$ where in this case we can not benefit from an $H^1$ regular concentration function. In more detail, we begin with calculating the energy inequality and collect the a priori estimates that derive from it, then verify the rather easily obtainable weak convergence results, finally we elaborate the steps to bring to a closure the convergence of the $u_3^\epsilon C^\epsilon$ term. The main idea here is to temporarily ignore the $C^\epsilon$ function and prove a strong convergence result considering only the velocity functions. Throughout this step we go beyond the weak solutions quality and show that we are working with strong solutions. In this new setting with better regularities we can prove the convergence result we need, and finally return to the frame of weak solutions where we can merge back together the velocity and concentration functions into a unified solution.
+This section is devoted to verify the Theorem \ref{maintheorem}. Structurally we follow a similar chain of thought as in our previous paper --- until the point where the proof diverges reaching the weak convergence of the nonlinear term $u_3^\epsilon C^\epsilon$ where in this case we can not benefit from an $H^1$ regular concentration function. In more detail, we begin with calculating the energy inequality and collect the a priori estimates that derive from it, then verify the rather easily obtainable weak convergence results. Finally we elaborate the steps to bring to a closure the convergence of the $u_3^\epsilon C^\epsilon$ term. The main idea here is to temporarily ignore the $C^\epsilon$ function and prove a strong convergence result considering only the velocity functions. Throughout this step we go beyond the weak solutions quality and show that we are working with strong solutions. In this new setting with more favorable regularities we can prove the convergence result we need, and eventually return to the frame of weak solutions where we can merge back together the velocity and concentration functions into a unified solution.
 
   \subsection{Energy inequality}
   
-  If we calculate the energy inequality for the anisotropic system, we obtain that for a.e. $t \in [0,T]$ the following holds:
+  Calculating the energy inequality for the anisotropic system, we obtain that for a.e. $t \in [0,T]$ the following holds:
   
   \begin{equation}
     \begin{split}  
@@ -376,7 +376,7 @@ This section is devoted to verify the Theorem \ref{maintheorem}. Structurally we
     \end{split}
   \end{equation}
   
-  The energy inequality (\ref{energyIEQ}) now takes the form
+  Using standard techniques, the generalised Young inequality with a $\zeta > 0$ constant, the Holder inequality and the Trace Theorem, (\ref{energyIEQ}) takes the final form
 
   \begin{equation}
     \begin{split}  
@@ -388,17 +388,19 @@ This section is devoted to verify the Theorem \ref{maintheorem}. Structurally we
     \end{split}
   \end{equation}
   
-  where $c_T$ and $c_S$ are the constants provided by the trace theorem and Sobolev embeddings, and we used the Young inequality with $\zeta > 0.$ The boundary term is bounded because of the a priori assumptions made on the boundary conditions.
+  where $c_T$ and $c_S$ are the constants provided by the Trace Theorem and Sobolev embeddings. The boundary term is bounded because of the a priori assumptions made on the boundary conditions.
     
   The right hand side of the energy inequality is now apparently bounded, and it is easy to see that the coefficients of the pollution terms are positive, since the $\zeta$ constant of the generalised Young inequality can be freely chosen in a way such that the requirements $\epsilon K_1 (1 - \zeta \frac{1}{2} c_T (c_S + 1)) > 0, (K_2 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) > 0, (K_3 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) > 0 $ are all satisfied.
   
-  This form of the energy inequality also shows why the $\partial_2 C^\epsilon, \partial_3 C^\epsilon$ terms need to vanish on the boundary. If they weren't using the Trace Theorem on these boundary terms would contribute to the appearance of negative $\epsilon$-free terms in the coefficient of $\norm{\partial_1 C^\epsilon}_{L^2}^2,$ which would ruin the structure of the energy inequality.
+  This form of the energy inequality also shows why the $\partial_2 C^\epsilon, \partial_3 C^\epsilon$ terms need to vanish on the boundary. If they weren't, using the Trace Theorem on these boundary terms would contribute to the appearance of negative $\epsilon$-free terms in the coefficient of $\norm{\partial_1 C^\epsilon}_{L^2}^2,$ which would ruin the structure of the energy inequality.
   
   A \todo{linear terms} priori estimates.
   
-  \subsection{Convergence result for the velocity terms}
+  Linear terms, weak convergence ok.
   
-  \subsection{Convergence of pollution terms}
+  \subsection{The weak convergence of the nonlinear only-velocity terms and $\mathbf{u}_H^\epsilon C^\epsilon$}
+ 
+  "easy" nonlinear terms. 
   
   \subsection{The weak convergence of the $u_3^\epsilon C^\epsilon$ nonlinear term}
   
