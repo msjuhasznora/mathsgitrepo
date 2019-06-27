@@ -318,7 +318,7 @@ In this section we describe the weak formulation of the merged equations in both
 
  \begin{definition} \label{definitionanisotropicWF}
   
-  Find $\mathbf{u}^\epsilon = (\mathbf{u}_H, u^\epsilon_3) \in L^2 (0,T ; \mathbf{V}) \cap L^\infty (0, T; L^2 (\Omega)^3)$ and $C^\epsilon \in L^\infty (0,T; L^2(\Omega)) \cap L^2 (0,T; H^1(\Omega))$, such that
+  Find $\mathbf{u}^\epsilon = (\mathbf{u}_H, u^\epsilon_3) \in L^2 (0,T ; \mathbf{V}) \cap C_w (0, T; L^2 (\Omega)^3)$ and $C^\epsilon \in L^\infty (0,T; L^2(\Omega)) \cap L^2 (0,T; H^1(\Omega))$, such that
   
   \begin{equation}
     \begin{split}
@@ -343,15 +343,7 @@ In this section we describe the weak formulation of the merged equations in both
   
   \end{definition}
 
-The main theorem of this paper is analogous to our previous result \cite{pollatmws2019} stated for the case of the geophysical frame, but we highlight the following specific differences:
-
-\begin{enumerate}
-
-  \item $\mathbf{v}_0 \in H^1$ (for the case of the geophysical frame $L^2$ was sufficient). \todo{add a small comment on how the original attempt of proving this theorem for an L2 initial data didn't work.}
- 
-  \item The original statement was valid for weak solutions in general, this downwind-matching case is proved for weak solutions as defined above (essentially the velocity part is required to be a Leray-Hopf weak solution). The weak time continuity requirement (more specifically, $\mathbf{u}^\epsilon \in C_w( [ 0,\infty), L^2 (\Omega))$, instead of $L^\infty_t L^2_x$) is important and utilised in the proof on p19. In \cite{azerad2001mathematical} the weak time continuity is obtained only for the horizontal velocity $\mathbf{u}^\epsilon_H.$
-
-\end{enumerate}
+The main theorem of this paper is analogous to our previous result stated for the case of the geophysical frame, but we highlight the difference that here we use the initial data $\mathbf{v}_0 \in H^1.$ For the case of the geophysical frame an $L^2$ initial velocity was sufficient, here we need a stronger data to balance out the weaker results we can extract from the energy inequality on $C^\epsilon.$
 
 Now we are ready to state the main theorem.
 
