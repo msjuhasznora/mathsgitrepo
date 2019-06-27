@@ -272,7 +272,7 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
 %%% *** WEAK FORMULATION AND MAIN RESULT*** %%%
 \section{Weak Formulation and Main Result} \label{weakformulationmainresult}
 
-In this section we describe the weak formulation of the merged equations in both the anisotropic and hydrostatic case we are going to use in the paper, and we state our main result.
+In this section we describe the weak formulation of the merged equations in both the anisotropic and hydrostatic case, and we state our main result.
   
   We need to define the following spaces:
   
@@ -314,7 +314,7 @@ In this section we describe the weak formulation of the merged equations in both
   
   \end{definition}
   
-  The weak formulation of the anisotropic system:
+  Giving definition to the weak formulation of the anisotropic system we underline the importance of the spaces we use here --- they create a sort of in-between point between classical weak solutions and Leray-Hopf weak solutions in the sense that the concentration function does not need to be weakly continuous, but the velocity part of the solution is set to be in $C_w.$ This represents a space construction that is both minimal and corresponds to the requirements of the proof detailed later.
 
  \begin{definition} \label{definitionanisotropicWF}
   
@@ -332,7 +332,7 @@ In this section we describe the weak formulation of the merged equations in both
     and
   
     \begin{equation}
-    \begin{split}
+    \begin{split} \nonumber
       & \int_0^T \bigg [ -(C^\epsilon, \partial_t \tilde{C}) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) + \epsilon K_1 (\partial_1 C^\epsilon, \partial_1 \tilde{C}) - \epsilon K_1 \big[(\partial_1 C^\epsilon) \tilde{C} \big] _{\Gamma_G} \\
       & + K_2 (\partial_2 C^\epsilon, \partial_2 \tilde{C}) + K_3 (\partial_3 C^\epsilon, \partial_3 \tilde{C}) \bigg ] \diff t \\
       & =  - (C^\epsilon (0), \tilde{C} (0)) + \int_0^T (S^\epsilon,\tilde{C}) \diff t
@@ -342,10 +342,6 @@ In this section we describe the weak formulation of the merged equations in both
   for all $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_H, \tilde{u}_3) \in H^1 (0,T;\mathbf{V})$ with $\mathbf{\tilde{u}}(T) = 0$ and $\tilde{C}$ such that $\tilde{C} \in H^1 (0,T, H^3_{\Gamma} (\Omega))$ and $\tilde{C} (T) = 0$.
   
   \end{definition}
-
-Weak formulation, definition of weak solutions. \todo{the importance of highlighting that we need the Leray-Hopf regularity for the velocity part as the continuity is used.}
-
-Give an exact definition of weak solutions in this case: $C^\epsilon$ does not have to be in $C_w$, but the velocity function needs to be a Leray-Hopf WS.
 
 The main theorem of this paper is analogous to our previous result \cite{pollatmws2019} stated for the case of the geophysical frame, but we highlight the following specific differences:
 
