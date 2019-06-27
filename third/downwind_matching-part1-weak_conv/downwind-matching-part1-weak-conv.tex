@@ -353,15 +353,9 @@ Now we are ready to state the main theorem.
   
 %%% *** PROOF *** %%%
 
-% STRUCTURE
-% 0) Energy inequality, motivation plus a priori estimates
-% 1) Conv v, w
-% 2) From a priori estimates what we can say about C
-% 3) Nonlinear terms
-
 \section{Proof of the main theorem} \label{proof}
 
-This section is devoted to verify the Theorem \ref{maintheorem}. Structurally we follow a similar chain of thought as in our previous paper --- until the point where the proof diverges reaching the weak convergence of the nonlinear term $u_3^\epsilon C^\epsilon$ where in this case we can not benefit from an $H^1$ regular concentration function. In more detail, we begin with calculating the energy inequality and collect the a priori estimates that derive from it, then verify the rather easily obtainable weak convergence results. Finally we elaborate the steps to bring to a closure the convergence of the $u_3^\epsilon C^\epsilon$ term. The main idea here is to temporarily ignore the $C^\epsilon$ function and prove a strong convergence result considering only the velocity functions. Throughout this step we go beyond the weak solutions quality and show that we are working with strong solutions. In this new setting with more favorable regularities we can prove the convergence result we need, and eventually return to the frame of weak solutions where we can merge back together the velocity and concentration functions into a unified solution.
+This section is devoted to verify Theorem \ref{maintheorem}. Structurally we follow a similar chain of thought as in our previous paper --- until the point where the proof diverges reaching the weak convergence of the nonlinear term $u_3^\epsilon C^\epsilon$ where in this case we can not benefit from an $H^1$ regular concentration function. In more detail, we begin with calculating the energy inequality and collect the a priori estimates that derive from it, then verify the rather easily obtainable weak convergence results. Finally we elaborate the steps to bring to a closure the convergence of the $u_3^\epsilon C^\epsilon$ term. The main idea here is to temporarily ignore the $C^\epsilon$ function and prove a strong convergence result considering only the velocity functions. Throughout this step we go beyond the weak solutions quality and show that we are working with strong solutions. In this new setting with more favorable regularities we can prove the convergence result we need, and eventually return to the frame of weak solutions where we can merge back together the velocity and concentration functions into a unified solution.
 
   \subsection{Energy inequality}
   
@@ -392,37 +386,58 @@ This section is devoted to verify the Theorem \ref{maintheorem}. Structurally we
     
   The right hand side of the energy inequality is now apparently bounded, and it is easy to see that the coefficients of the pollution terms are positive, since the $\zeta$ constant of the generalised Young inequality can be freely chosen in a way such that the requirements $\epsilon K_1 (1 - \zeta \frac{1}{2} c_T (c_S + 1)) > 0, (K_2 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) > 0, (K_3 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) > 0 $ are all satisfied.
   
-  This form of the energy inequality also shows why the $\partial_2 C^\epsilon, \partial_3 C^\epsilon$ terms need to vanish on the boundary. If they weren't, using the Trace Theorem on these boundary terms would contribute to the appearance of negative $\epsilon$-free terms in the coefficient of $\norm{\partial_1 C^\epsilon}_{L^2}^2,$ which would ruin the structure of the energy inequality.
+  We note that he most significant difference in this new form of the energy inequality (\ref{finalformEIEQ}) is having $\sqrt{\epsilon} \partial_1 C^\epsilon$ in the place of $\partial_1 C^\epsilon,$ which is what we had for the case of the geophysical coordinate system. It leads to the disappearance of the $H^1$ regularity of $C^\epsilon,$ and thus we don't the strong convergence feature of the concentration function which was of key importance in the previous version for proving the weak convergence of a nonlinear term.
   
-  A \todo{linear terms} priori estimates.
+  This form of the energy inequality also shows why the $\partial_2 C^\epsilon, \partial_3 C^\epsilon$ terms need to vanish on the boundary. Otherwise, using the Trace Theorem on these boundary terms would contribute to the appearance of negative $\epsilon$-free terms in the coefficient of $\norm{\partial_1 C^\epsilon}_{L^2}^2,$ which would ruin the structure of the energy inequality.
   
-  Linear terms, weak convergence ok.
+  \subsection{A priori estimates. Weak convergence - Part 1.}
   
-  \subsection{The weak convergence of the nonlinear only-velocity terms and $\mathbf{u}_H^\epsilon C^\epsilon$}
- 
-  "easy" nonlinear terms. 
+  From the final form of the energy inequality (\ref{finalformEIEQ})we obtain uniform a priori estimates that we summarise in the following proposition.
   
-  \subsection{The weak convergence of the $u_3^\epsilon C^\epsilon$ nonlinear term}
+  \begin{prop} \label{aprioriprop}
+    Let $u^\epsilon_1, u^\epsilon_2, u^\epsilon_3$ and $C^\epsilon$ be the weak solutions of the system (\ref{ANSC1}) - (\ref{ANSC5}) in the sense of Definition \ref{definitionanisotropicWF}. Then it holds,
+    
+    \begin{align}
+      & u^\epsilon_1, u^\epsilon_2, \epsilon u^\epsilon_3, C^\epsilon & \quad & \text{are bounded in $L^\infty (0,T; L^2(\Omega)),$} \label{proposition1} \\
+      & u^\epsilon_3 & \quad & \text{is bounded in $L^2 (0,T; L^2(\Omega)),$} \label{propositionExtra} \\
+      & u^\epsilon_1, u^\epsilon_2, \epsilon u^\epsilon_3 & \quad & \text{are bounded in $L^2(0,T; H^1(\Omega)),$} \label{proposition2} \\
+      & \sqrt{\epsilon} \partial_1 C^\epsilon, \partial_2 C^\epsilon, \partial_3 C^\epsilon & \quad & \text{are bounded in $L^2(0,T;L^2(\Omega)).$} \label{proposition3}
+    \end{align}
+    
+  \end{prop}
   
-  One of the cornerstones of this method is to first of all exploit the already well-known regularities (see \cite{cao2007global}) of the strong solution of the primitive equations. In more detail, we have the well-posedness --- existence and uniqueness --- of the strong solution of the primitive equations that include the Coriolis terms as well. Formally, we have
+  The a priori estimates, the convergence of the linear terms and the nonlinear terms with the exception of $u_3^\epsilon C^\epsilon$ can be proved analogously as in our previous paper, since the proofs of those properties are not effected by the changes induced by choosing to use downwind-matching coordinate system. Hence, for completeness we will describe the main steps leading to obtaining these results, but only to moderate detail. For technical or specific issues see \cite{azerad2001mathematical} and \cite{pollatmws2019}.
+  
+  As a consequence of Proposition \ref{aprioriprop}, up to subsequences still denoted by the same way, we have the following weak convergence results.
+  
+    \begin{align} 
+    &  \mathbf{u}_H^\epsilon \rightharpoonup \mathbf{u}_H &\quad & \text{weakly in $L_t^\infty L_x^2 \cap L_t^2 H_x^1$,} \label{WeakConvUHEps} \\
+    &  \epsilon^2 u_3^\epsilon \to 0 &\quad & \text{strongly in $L_t^\infty L_x^2 \cap L_t^2 H_x^1$,} \label{WeakConvU3Eps} \\ 
+    & u_3^\epsilon \rightharpoonup u_3  &\quad & \text{weakly in $L_t^2 L_x^2$,} \label{WeakConvU3NoEps} \\
+    & C^\epsilon \rightharpoonup C &\quad & \text{weakly in $L_t^\infty L_x^2$,} \label{WeakConvCEps1} \\
+    & \partial_2 C^\epsilon \rightharpoonup \partial_2 C &\quad & \text{weakly in $L_t^2 L_x^2$,} \label{WeakConvCEps2} \\
+    & \partial_3 C^\epsilon \rightharpoonup \partial_3 C &\quad & \text{weakly in $L_t^2 L_x^2$,} \label{WeakConvCEps3} \\
+    & \sqrt{\epsilon} \partial_1 C^\epsilon \rightharpoonup e &\quad & \text{weakly for some limit element $e$ in $L_t^2 L_x^2$.} \label{WeakConvCEps4}
+  \end{align} 
+  
+  In order to conclude the proof of Theorem \ref{maintheorem} we pass to the limit in the weak formulation (\ref{anisotropicWF}). Taking the limit for the linear terms can be done in a standard way using the previously obtained results.
+   Concerning the nonlinear velocity terms, the convergence can be shown applying a generalisation of the classical translation criterium of Riesz-Frechet-Kolmogorov which enables us to get strong convergence for the horizontal velocities. This is achieved by establishing a bound for the perturbation of $\mathbf{u}_H$ of the form $\norm{\tau_h \mathbf{u}_H - \mathbf{u}_H}_{L^p(0,T-h, \mathbf{Y})} \leq \varphi(h) + \psi(\epsilon),$ where $\mathbf{Y}$ is a Banach space, $\varphi$ and $\psi$ are appropriate functions with their limits vanishing at zero, and $\tau_h \mathbf{u}_H = \mathbf{u}_H (t+h) $. After obtaining strong convergence for $\mathbf{u}_H,$ the proof of the convergence for these nonlinear terms can be closed by applying basic interpolation techniques and the generalised Holder inequality. 
+  Finally, as for the concentration-including nonlinear terms, we have the convergence of $(u_i C^\epsilon, \partial_i \tilde{C})$ for $i=1,2$ since as we mentioned before, we have the strong convergence of the horizontal velocities --- while in the case of $i=3$ this property does not hold for $u_3$ and from the energy bound we do not have more than the weak convergence of $C^\epsilon$. Because of its complexity we handle this specific term in Part 2.
+  
+  \subsection{Weak convergence --- Part 2.}
+  
+  As we mentioned before, the cornerstone idea to obtain the convergence of the remaining product term $u_3^\epsilon C^\epsilon$ is to exploit the $H^1$ regularity of the initial horizontal velocity and pass to the workframe of strong solutions.
+  In order to do this, the first step is to use the already well-known regularities (see \cite{cao2007global}) of the strong solution of the primitive equations --- we have the well-posedness of the strong solution of the primitive equations that include the Coriolis terms as well. Formally, we have
   
   \begin{theorem}
     For an $H^1$ initial data we have the $L^\infty H^1 \cap L^2 H^2$ regularity for the horizontal velocity $v.$
   \end{theorem}
   
+  This result will be indispensable later.
+  
   The following part of the proof is about verifying the strong convergence of $u_3^\epsilon,$ and is based on the idea of \cite{li2019primitive}, our scenario is different however in that \textit{a)} first of all our domain is bounded, while the domain they consider is periodic, \textit{b)} we do not assume zero-averaged functions, and finally \textit{c)} in our case the Coriolis terms are considered as well.
 
-%%%%%%%%%%%%%%
-  
-The convergence of the linear terms and the nonlinear terms with the exception of $u_3 C$ can be proved analogously as in our previous paper \cite{pollatmws2019}, since the proof of those results are not effected by the changes induced by choosing to use downwind-matching coordinate system.
-
-Observe however that for the nonlinear term that includes the concentration function and the vertical velocity the original proof does not hold anymore --- because of the disappearance of the $H^1$ regularity of $C^\epsilon$ we lose the strong convergence feature of $C^\epsilon,$ which was of key importance in the previous version. In other words, the most significant difference in this new form of the energy inequality is having $\sqrt{\epsilon} \partial_1 C^\epsilon$ in the place of $\partial_1 C^\epsilon.$
-
-In the following part of the proof we verify that the weak convergence of the nonlinear concentration term holds even for the case where the energy inequality provides weaker a priori estimates for $C^\epsilon.$
-
-The proof is mainly based on a convergence result by \cite{li2019primitive}. In that article it is proved that a Leray-Hopf weak solution $(\mathbf{v}_\epsilon, w_\epsilon)$ of the Coriolis-term-free $\epsilon$-scaled Navier-Stokes equations converges strongly to the strong solution $(\mathbf{v}, w)$ of the primitive equations in $L^2 L^2,$ provided that we have $\mathbf{v}_0 \in H^1,$ and the domain is periodic (see Theorem 1.1 in \cite{li2019primitive}). The strong convergence of $w_\epsilon$ to $w$ allows us to bring the proof to a closure, obtaining that $u_3^\epsilon C^\epsilon$ tends to $u_3 C.$
-
-We verify here that Theorem 1.1 in \cite{li2019primitive} is also valid for the case of a non-periodic, bounded domain (i.e. we have boundary segments), including the general Coriolis terms that we additionally need to consider. We follow closely the proof verifying this strong convergence provided in Section 4 and we update each point where the periodicity of the domain is applied in one way or another, or the Coriolis terms are missing.
+\section{CUT, PRE}
 
 The switch from a periodic domain to the bounded Lipschitz domain effects the proof in the following ways in detail:
 
