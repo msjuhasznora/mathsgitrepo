@@ -370,8 +370,7 @@ Now we are ready to state the main theorem.
     & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \big[ \norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \big] \diff \tau \\
     & + \int_0 ^ t  \big [ \epsilon K_1 \norm{\partial_1 C^\epsilon}_{L^2}^2  + K_2 \norm{\partial_2 C^\epsilon}_{L^2}^2 + K_3 \norm{\partial_3 C^\epsilon}_{L^2}^2 \big ] d \tau \\
     & \leq \int_0^t (S^\epsilon,C^\epsilon) \diff \tau + \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon_0}_{L^2}^2) \\
-    & + \int _ 0 ^ t \epsilon K_1 \langle \partial_1 C^\epsilon, C^\epsilon \rangle_{\Gamma_G} \diff \tau \\
-    & = I_1 + I_2 + I_3. \raisetag{70pt} \label{energyIEQ}
+    & + \int _ 0 ^ t \epsilon K_1 \langle \partial_1 C^\epsilon, C^\epsilon \rangle_{\Gamma_G} \diff \tau \raisetag{70pt} \label{energyIEQ}
     \end{split}
   \end{equation}
   
@@ -393,6 +392,8 @@ Now we are ready to state the main theorem.
   
   This form of the energy inequality also shows why the $\partial_2 C^\epsilon, \partial_3 C^\epsilon$ terms need to vanish on the boundary. If they weren't using the Trace Theorem on these boundary terms would contribute to the appearance of negative $\epsilon$-free terms in the coefficient of $\norm{\partial_1 C^\epsilon}_{L^2}^2,$ which would ruin the structure of the energy inequality.
   
+  A \todo{linear terms} priori estimates.
+  
   \subsection{Convergence result for the velocity terms}
   
   \subsection{Convergence of pollution terms}
@@ -401,19 +402,13 @@ Now we are ready to state the main theorem.
   
   The main idea here is to temporarily consider only the velocity functions, upgrade the weak solutions scenario and switch to a result that we obtain for strong solutions. In this new setting with better regularities we can prove the convergence result we need, and finally return to the frame of weak solutions.
   
-  One of the cornerstones of this method is to exploit the already well-known regularities (see \cite{cao2007global}) of the strong solution of the primitive equations. In more detail, we have the well-posedness --- existence and uniqueness --- of the strong solution of the primitive equations that include the Coriolis terms as well. Formally, we have
+  One of the cornerstones of this method is to first of all exploit the already well-known regularities (see \cite{cao2007global}) of the strong solution of the primitive equations. In more detail, we have the well-posedness --- existence and uniqueness --- of the strong solution of the primitive equations that include the Coriolis terms as well. Formally, we have
   
   \begin{theorem}
     For an $H^1$ initial data we have the $L^\infty H^1 \cap L^2 H^2$ regularity for the horizontal velocity $v.$
   \end{theorem}
   
-  The following part of the proof is about verifying the strong convergence of $u_3^\epsilon,$ and is based on the idea of \cite{li2019primitive}, but we highlight the following specific differences:
-  
-  \begin{itemize}
-    \item The domain is a bounded Lipschitzian domain, here we do not require periodicity for the domain --- unlike for the paper of Li and Titi \cite{li2019primitive}.
-    \item The theorem of \cite{li2019primitive} is stated for a case where additional requirements are used as well, such as zero average for the initial data $\int_\Omega v_0 = 0$. In their case, because of the periodicity, they do not have any boundaries in the first place, so they can not apply the zero-trace version of the Poincare inequality. We on the other hand have velocity functions whose values are zero on the boundary, so we can use this other version of the Poincare inequality up until first order derivatives.
-    \item In \cite{li2019primitive} the Coriolis terms are not present -- we show that the convergence result remains valid even for the case of considering this specific additional, physical term in the model that is necessary for the scenario of working on the surface of the Earth.
-  \end{itemize}
+  The following part of the proof is about verifying the strong convergence of $u_3^\epsilon,$ and is based on the idea of \cite{li2019primitive}, our scenario is different however in that \textit{a)} first of all our domain is bounded, while the domain they consider is periodic, \textit{b)} we do not assume zero-averaged functions, and finally \textit{c)} in our case the Coriolis terms are considered as well.
 
 %%%%%%%%%%%%%%
   
