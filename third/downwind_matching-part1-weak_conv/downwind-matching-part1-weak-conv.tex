@@ -256,7 +256,7 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
     
     \begin{equation} \label{HNSC8}
       \begin{split}
-        &C = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
+        & C = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
         & \partial_2 C = \partial_3 C = 0 \text{ on } \Gamma_G \times (0,T), \partial_1 C \in L^2 L^2 (0,T; \Gamma_G) \\
       \end{split}
     \end{equation}
@@ -297,8 +297,16 @@ In this section we describe the weak formulation of the merged equations in both
   \begin{equation}
     \begin{split}
       & \int_0^T \bigg[ -(\mathbf{u}_H, \partial_t \mathbf{\tilde{u}}_H) + (\nabla_\nu \mathbf{u}_H, \nabla_\nu \mathbf{\tilde{u}}_H) - (\mathbf{u}_H, (\mathbf{u} \cdot \nabla) \mathbf{\tilde{u}}_H) + (b(\mathbf{u}_H), \mathbf{\tilde{u}}_H) \bigg ] \diff t \\
+      & = - (\mathbf{u}_{0H}, \mathbf{\tilde{u}}_H(0)) \diff t \label{hydrostaticWF}
+    \end{split}
+  \end{equation}
+  
+  and
+  
+  \begin{equation}
+    \begin{split} \nonumber
       &+ \int_0^T \bigg[ -(C, \partial_t \tilde{C}) -(\mathbf{u}C, \nabla \tilde{C}) + K_2 (\partial_2 C, \partial_2 \tilde{C}) + K_3 (\partial_3 C, \partial_3 \tilde{C}) \bigg ] \diff t \\
-      & = - (\mathbf{u}_{0H}, \mathbf{\tilde{u}}_H(0)) - (C(0), \tilde{C}(0)) + \int_0^T (S,\tilde{C}) \diff t \raisetag{20pt}\label{hydrostaticWF}
+      & = - (C(0), \tilde{C}(0)) + \int_0^T (S,\tilde{C}) \diff t
     \end{split}
   \end{equation}
   
@@ -317,9 +325,17 @@ In this section we describe the weak formulation of the merged equations in both
       & \int_0^T \bigg [ -(\mathbf{u}^\epsilon_H, \partial_t \mathbf{\tilde{u}}_H) + (\nabla_\nu \mathbf{u}^\epsilon_H, \nabla_\nu \mathbf{\tilde{u}}_H) - (\mathbf{u}^\epsilon_H, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{\tilde{u}}_H) + (b(\mathbf{u}^\epsilon_H), \mathbf{\tilde{u}}_H) \bigg ] \diff t \\
       & + \epsilon \beta \int_0 ^ T \big [ (u_3 ^\epsilon, \tilde{u}_1) - (u_1^\epsilon, \tilde{u}_3) \big ] \diff t\\
       & + \epsilon^2 \int _0 ^ T \big [ -(u_3^\epsilon, \partial_t \tilde{u}_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, \tilde{u}_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu \tilde{u}_3) \big ] \diff t \\
-      & + \int_0^T \bigg [ -(C^\epsilon, \partial_t \tilde{C}) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) + \epsilon K_1 (\partial_1 C^\epsilon, \partial_1 \tilde{C}) - \epsilon K_1 \big[(\partial_1 C^\epsilon) \tilde{C} \big] _{\Gamma_G} \\
+      & = - (\mathbf{u}^\epsilon_{0H}, \mathbf{\tilde{u}}_H(0)) - \epsilon^2 (u_{03}^\epsilon, \tilde{u}_3 (0)) \diff t \raisetag{20pt} \label{anisotropicWF}
+    \end{split}
+  \end{equation}
+  
+    and
+  
+    \begin{equation}
+    \begin{split}
+      & \int_0^T \bigg [ -(C^\epsilon, \partial_t \tilde{C}) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) + \epsilon K_1 (\partial_1 C^\epsilon, \partial_1 \tilde{C}) - \epsilon K_1 \big[(\partial_1 C^\epsilon) \tilde{C} \big] _{\Gamma_G} \\
       & + K_2 (\partial_2 C^\epsilon, \partial_2 \tilde{C}) + K_3 (\partial_3 C^\epsilon, \partial_3 \tilde{C}) \bigg ] \diff t \\
-      & = - (\mathbf{u}^\epsilon_{0H}, \mathbf{\tilde{u}}_H(0)) - \epsilon^2 (u_{03}^\epsilon, \tilde{u}_3 (0)) - (C^\epsilon (0), \tilde{C} (0)) + \int_0^T (S^\epsilon,\tilde{C}) \diff t \raisetag{20pt} \label{anisotropicWF}
+      & =  - (C^\epsilon (0), \tilde{C} (0)) + \int_0^T (S^\epsilon,\tilde{C}) \diff t
     \end{split}
   \end{equation}
   
