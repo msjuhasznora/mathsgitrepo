@@ -450,7 +450,27 @@ This section is devoted to verify Theorem \ref{maintheorem}. Structurally we fol
   
   The result of Corollary \ref{StrongSolPE_boundedness} on the strong solutions of the primitive equations will be indispensable later, as we will use these function for testing the scaled Navier-Stokes equations.
   
-  The following part of the proof is about verifying the strong convergence of $u_3^\epsilon,$ and is based on the idea of \cite{li2019primitive}, our scenario is different however in that \textit{a)} first of all our domain is bounded, while the domain they consider is periodic, \textit{b)} we do not assume zero-averaged functions, and finally \textit{c)} in our case the Coriolis terms are considered as well.
+  The following part of the proof is about verifying the strong convergence of $u_3^\epsilon,$ and is based on the idea of \cite{li2019primitive} --- our scenario is different however in that \textit{a)} first of all our domain is bounded, while the domain they consider is periodic, \textit{b)} we do not assume zero-averaged functions, and finally \textit{c)} in our case the Coriolis terms are considered as well. Our strategy in providing the proof is to give a self-contained result that describes all the steps that build up the verification process, but we elaborate in more detail where the above mentioned \textit{a), b), c)} points have a tangible effect. Some technical details that are identical to those in \cite{li2019primitive} will be skipped.
+  
+The next step in order to estimate the difference $$(V_\epsilon, W_\epsilon): = (v_\epsilon - v, w_\epsilon - w)$$ is to practically use the strong solution $(v,w)$ as a test function when writing down the weak formulation integral identity for the scaled equations. Following this method we arrive to
+
+\begin{prop}
+
+Let $(v_\epsilon, w_\epsilon)$ and $(v,w)$ be the solutions of (\ref{ANSC1}) - (\ref{ANSC5}) and (\ref{HNSC1}) - (\ref{HNSC5}), respectively, with initial data $(v_0, w_0),$ where $v_0 \in H^1(\Omega)$ and $w_0 = - \int_0^z \nabla_H \cdot v_0 \diff z'.$ Then we have the following integral identity:
+
+\begin{equation}
+  \begin{split}
+    & - \frac{\epsilon^2}{2} \norm{w(t)}_2^2 + \bigg ( (v_\epsilon \cdot v + \epsilon^2 w_\epsilon w) \diff x \diff y \diff z  \bigg ) (t) \\
+    & + \int_{Q_t} (-v_\epsilon \cdot \partial_t v + \nabla v_\epsilon : \nabla v + \epsilon^2 \nabla w_\epsilon \cdot \nabla w) \diff x \diff y \diff z \diff s \\
+    & = \frac{\epsilon^2}{2} \norm{w_0}_2^2 + \norm{v_0}_2^2 + \epsilon^2 \int_{Q_t} \bigg ( \int_0^z \partial_t v \diff z' \bigg ) \cdot \nabla_H W_\epsilon \diff x \diff y \diff z \diff s \\
+    & - \int_{Q_t} [(u_\epsilon \cdot \nabla) v_\epsilon \cdot v + \epsilon^2 u_\epsilon \cdot w_\epsilon w] \diff x \diff y \diff z \diff s \\
+    & + \int_{Q_t}  ( \gamma v_2^\epsilon v_1 - \epsilon \beta w^\epsilon v_1 + \alpha \epsilon w^\epsilon v_2 - \gamma v_1^\epsilon v_2 - \epsilon \alpha v^\epsilon_2 w + \epsilon \beta v^\epsilon_1 w)
+  \end{split}
+\end{equation}
+
+for any $t \in [0, \infty),$ where $Q_t = \Omega \times (0,t).$
+
+\end{prop}
 
 \section{CUT, PRE}
 
