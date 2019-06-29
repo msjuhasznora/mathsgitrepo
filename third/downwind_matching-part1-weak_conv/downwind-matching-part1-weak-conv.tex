@@ -15,6 +15,7 @@
 \setlist[enumerate,1]{label=\alph*)}
 \setlist[enumerate,2]{label=\roman*)}
 \newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
 \newtheorem{lemma}{Lemma}
 \newtheorem{remark}{Remark}
 \newtheorem{definition}{Definition}
@@ -427,13 +428,27 @@ This section is devoted to verify Theorem \ref{maintheorem}. Structurally we fol
   \subsection{Weak convergence --- Part 2.}
   
   As we mentioned before, the cornerstone idea to obtain the convergence of the remaining product term $u_3^\epsilon C^\epsilon$ is to exploit the $H^1$ regularity of the initial horizontal velocity and pass to the workframe of strong solutions.
-  In order to do this, the first step is to use the already well-known regularities (see \cite{cao2007global}) of the strong solution of the primitive equations --- we have the well-posedness of the strong solution of the primitive equations that include the Coriolis terms as well. Formally, we have
+  In order to do this, the first step is to use the regularities of the strong solution of the primitive equations --- we have the already well-known existence and uniqueness of the strong solution of the primitive equations that include the Coriolis terms as well. Formally, we have Theorem 2 in \cite{cao2007global}:
   
-  \begin{theorem}
-    For an $H^1$ initial data we have the $L^\infty H^1 \cap L^2 H^2$ regularity for the horizontal velocity $v.$
+  \begin{theorem} \label{PE3DWellPosedness}
+    Let $Q \in H^1(\Omega), v_0 \in V_1, T_0 \in V_2$ and $T >0$ be given. Then there exists a unique strong solution $(v,T)$ of the reformulated Primitive Equations on the interval $[0, T]$ which depends continuously on the initial data.
   \end{theorem}
   
-  This result will be indispensable later.
+  Here $Q$ is the source term in the convection-diffusion equation, while $V_1$ and $V_2$ as usual, stand for the closures of $C^\infty$ spaces in $H^1$ with the adequate boundary conditions. By the reformulated Primitive Equations we mean the standard approach of eliminating the vertical $w$ function from the equations by means of the divergence-free condition.
+  
+  In more detail, we have the following regularities for the strong solution of the primitive equations for the case of an $H^1$ initial data:
+  
+  \begin{corollary} \label{StrongSolPE_boundedness}
+  
+    Let $(v,w)$ be the the unique global strong solution to the primitive equations (\ref{HNSC1}) - (\ref{HNSC5}) with an initial data $v_0 \in H^1(\Omega).$ Then we have the following boundedness result:
+    
+    $$ \sup_{0 \leq t < \infty} \norm{v}_{H^1}^2 (t) + \int_0^\infty \norm{\nabla v}_{H^1}^2 \diff t \leq C(\norm{v_0}_{H^1}, \Gamma_G).$$
+  
+  \end{corollary}
+  
+  This is a direct consequence of Theorem \ref{PE3DWellPosedness}, but for completeness we also mention that for the simpler case of a periodic domain it has also been verified in \cite{li2019primitive}, where the proof becomes more straightforward thanks to the structure of the domain.
+  
+  The result of Corollary \ref{StrongSolPE_boundedness} on the strong solutions of the primitive equations will be indispensable later, as we will use these function for testing the scaled Navier-Stokes equations.
   
   The following part of the proof is about verifying the strong convergence of $u_3^\epsilon,$ and is based on the idea of \cite{li2019primitive}, our scenario is different however in that \textit{a)} first of all our domain is bounded, while the domain they consider is periodic, \textit{b)} we do not assume zero-averaged functions, and finally \textit{c)} in our case the Coriolis terms are considered as well.
 
