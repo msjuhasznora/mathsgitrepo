@@ -472,25 +472,62 @@ for any $t \in [0, \infty),$ where $Q_t = \Omega \times (0,t).$
 
 \end{prop}
 
+\begin{proof}
+
+By definition of the weak solutions of the scaled Navier-Stokes equations, we know that the following integral identity is satisfied
+
+\begin{equation}
+  \begin{split}
+    & \int_Q [ - (v_\epsilon \cdot \partial_t \varphi_H + \epsilon^2 w_\epsilon \partial_t \varphi_3) +( (u_\epsilon \cdot \nabla) v_\epsilon \cdot \varphi_H + \epsilon^2 u_\epsilon \cdot \nabla w_\epsilon \varphi_3 ) + \nabla v_\epsilon : \nabla \varphi_H \\
+    & + \epsilon^2 \nabla w_\epsilon \cdot \nabla \varphi_3 ] \diff x \diff y \diff z \diff t = \int_Q (v_0 \cdot \varphi_H (\cdot , 0) + \epsilon^2 w_0 \varphi_3 (\cdot , 0)) \diff x \diff y \diff z \\
+    & + \int_Q  \gamma v_2^\epsilon \varphi_1 - \epsilon \beta w^\epsilon \varphi_1 + \alpha \epsilon w^\epsilon \varphi_2 - \gamma v_1^\epsilon \varphi_2 - \epsilon \alpha v^\epsilon_2 \varphi_3 + \epsilon \beta v^\epsilon_1 \varphi_3
+  \end{split}
+\end{equation}
+
+for any $\varphi = (\varphi_H, \varphi_3) \in H^1 (0,T;\mathbf{V})$ with $\mathbf{\varphi}(T) = 0.$
+
+Now, let's define $\chi \in C_0^\infty ([0, \infty))$ with $0 \leq \chi \leq 1$ and $\chi (0) = 1$ and set $\varphi = (v,w) \chi (t).$ The validity of the the integrals are guaranteed by the regularities of the respective solution functions and using basic inequalities.
+
+It is important to highlight at this point that since we are not restricted to zero-averaged functions and we are not on a periodic domain, we need to pay special attention when verifying boundedness results using the Poincare inequality. Note that as the value of the velocity functions are defined to be zero on the boundary, any first-order estimate of the type $\norm{v_\epsilon} \leq \norm{\nabla v_\epsilon}$ is valid (i.e. to estimate a function by its gradient), using the zero-trace version of the Poincare inequality for functions in $W^{1,2}_0$ ($k=1, p=2$). However, since it is only the value of the functions that vanishes on the boundary, but not their derivatives, higher order estimates such as passing from $\norm{\nabla v_\epsilon}$ to $\norm{\Delta v_\epsilon}$ can not be applied in general.
+
+Which is why, for example, the estimate of the the following term becomes as such:
+
+\begin{equation}
+  \begin{split}
+    & \int_Q \abs{u_\epsilon} \abs{\nabla w_\epsilon} \abs{w} \chi \diff x \diff y \diff z \leq  \int_0 ^ T \int_M \int_{-1}^1 \abs{u^\epsilon} \abs{\nabla w^\epsilon} \diff z \int_{-1}^1 \abs{\nabla_H v} \\
+    & \leq C \int_0^T \norm{u^\epsilon}_2^{1/2} \norm{\nabla u^\epsilon}_2^{1/2} \norm{\nabla w^\epsilon}_2 \norm{\nabla_H v}_2^{1/2} (\norm{\nabla_H v}_2^{1/2} + \norm{\Delta v}_2^{1/2}) \\
+    & \leq C \sup_{0 \leq t \leq T} \norm{u^\epsilon}_2^{1/2} \norm{\nabla v}_2^{1/2} \bigg( \int_0^T \norm{\nabla u^\epsilon}^2_2 \diff t \bigg)^{1/4} \bigg ( \int_0^T \norm{\nabla w^\epsilon}_2^2 \diff t \bigg)^{1/2} \\
+    & \times \bigg ( \int_0^T \norm{\Delta v}_2^2 \bigg )^{1/4} \\
+    & + C \sup_{0 \leq t \leq T} \norm{u^\epsilon}_2^{1/2} \norm{\nabla v}_2 \bigg( \int_0^T \norm{\nabla u^\epsilon}_2 \diff t \bigg)^{1/2} \bigg ( \int_0^T \norm{\nabla w^\epsilon}_2^2 \diff t \bigg)^{1/2}.
+  \end{split}
+\end{equation}
+
+Thus, by taking $\varphi$ as a test function, we get
+
+...
+
+Choosing $\chi = \chi_\delta$ and passing to the limit we arrive to
+
+\begin{equation}
+  \begin{split}
+    & - \frac{\epsilon^2}{2} \norm{w(t)}_2^2 + \bigg ( (v_\epsilon \cdot v + \epsilon^2 w_\epsilon w) \diff x \diff y \diff z  \bigg ) (t_0) \\
+    & + \int_{Q_{t_0}} (-v_\epsilon \cdot \partial_t v + \nabla v_\epsilon : \nabla v + \epsilon^2 \nabla w_\epsilon \cdot \nabla w) \diff x \diff y \diff z \diff s \\
+    & = \frac{\epsilon^2}{2} \norm{w_0}_2^2 + \norm{v_0}_2^2 + \epsilon^2 \int_{Q_{t_0}} \bigg ( \int_0^z \partial_t v \diff z' \bigg ) \cdot \nabla_H W_\epsilon \diff x \diff y \diff z \diff s \\
+    & - \int_{Q_{t_0}} [(u_\epsilon \cdot \nabla) v_\epsilon \cdot v + \epsilon^2 u_\epsilon \cdot w_\epsilon w] \diff x \diff y \diff z \diff s \\
+    & + \int_{Q_{t_0}}  ( \gamma v_2^\epsilon v_1 - \epsilon \beta w^\epsilon v_1 + \alpha \epsilon w^\epsilon v_2 - \gamma v_1^\epsilon v_2 - \epsilon \alpha v^\epsilon_2 w + \epsilon \beta v^\epsilon_1 w)
+  \end{split}
+\end{equation}
+
+for any $t_0 \in [0, \infty),$ which completes the proof.
+
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%% CUT, PRE %%%%%%%%%%%%%%%%%%%%%%%%
 \section{CUT, PRE}
-
-The switch from a periodic domain to the bounded Lipschitz domain effects the proof in the following ways in detail:
-
-\begin{enumerate}[label=\roman*)]
-  \item The applicability of the Poincare inequality
-  \item Integration by parts, possible additional boundary terms in the weak form, etc.
-\end{enumerate}
-
-We will check these points related to the boundary modification, then pass on to examining the Coriolis terms.
 
 \subsection{The applicability of the Poincare inequality}
 
-Concerning the first point, i.e. the applicability of the Poincare inequality in the proof along the altered scenario, we have to check two main types of scenarios:
-
 \subsubsection{First order terms}
-  Estimating the function by its gradient, ie. $\norm{\mathbf{v}}$ by $\norm{\nabla \mathbf{v}}, $ $\norm{\mathbf{v}^\epsilon}$ by $\norm{\nabla \mathbf{v}^\epsilon}, $ $\norm{w}$ by $\norm{\nabla w}, $ and $\norm{w^\epsilon}$ by $\norm{\nabla w^\epsilon}. $
-  
-  These points are automatically verified by using the following version of the Poincare inequality (which is a different variant from the zero spatial average version that is used in the article): for a function in $W^{1,2}_0$ we have that $\norm{u}_2 \leq \norm{\nabla u}_2.$ Here $W^{1,2}_0$ ($k=1, p=2$) stands for $H^1$ functions whose $0, ... , n$-th derivative is zero on the boundary, $n \leq k-1 = 1-1 = 0.$ Since the $\mathbf{u}^\epsilon, \mathbf{u}$ functions are zero in the boundary, this zero-trace version of the Poincare inequality can be applied directly.
   
   This means that $\norm{v}_6 \leq C \norm{\nabla v}_2$ is valid in p21, $\norm{V^\epsilon} \leq C \norm{\nabla V^\epsilon}$ on p22 is correct as well, etc.
  
@@ -499,31 +536,6 @@ Concerning the first point, i.e. the applicability of the Poincare inequality in
 Estimating the gradient by the Laplacian.
 
 \begin{enumerate}
-
-\item p17, updating the inequality which originally had the following form:
-
-$$ \hspace{-1cm} \int_0 ^ T \int_M \int_{-1}^1 \abs{u^\epsilon} \abs{\nabla w^\epsilon} \diff z \int_{-1}^1 \abs{\nabla_H v} \leq C \int_0^T \norm{u^\epsilon}_2^{1/2} \norm{\nabla u^\epsilon}_2^{1/2} \norm{\nabla w^\epsilon}_2 \norm{\nabla_H v}_2^{1/2} \norm{\Delta v}_2^{1/2}.$$
-
-This inequality is a result of Lemma 2.1 ($h= u^\epsilon, g = \nabla w^\epsilon$ and $f = \nabla_H v$) combined with the Poincare inequality.
-
-As we don't have $\nabla v = 0$ on the boundary, we can not use $\norm{f} \leq \norm{\nabla f},$ since we don't have $\norm{\nabla v} \leq \norm{\Delta v}.$ Thus, instead of the original bound we will have
-
-$$C \int_0^T \norm{u^\epsilon}_2^{1/2} \norm{\nabla u^\epsilon}_2^{1/2} \norm{\nabla w^\epsilon}_2 \norm{\nabla_H v}_2^{1/2} (\textcolor{orange}{\norm{\nabla_H v}_2^{1/2}} + \norm{\Delta v}_2^{1/2}).$$
-
-We know from the article that we have a bound for
-
-$$ C \int_0^T \norm{u^\epsilon}_2^{1/2} \norm{\nabla u^\epsilon}_2^{1/2} \norm{\nabla w^\epsilon}_2 \norm{\nabla_H v}_2^{1/2} \norm{\Delta v}_2^{1/2}, $$
-
-on the other hand, for the newly added term we can use
-
-\begin{equation}
-  \begin{split} \nonumber
-    & C \int_0^T \norm{u^\epsilon}_2^{1/2} \norm{\nabla u^\epsilon}_2^{1/2} \norm{\nabla w^\epsilon}_2 \norm{\nabla_H v}_2 \\
-    & \leq C \sup_{0 \leq t \leq T} \norm{u^\epsilon}_2^{1/2} \norm{\nabla v}_2 \bigg( \int_0^T \norm{\nabla u^\epsilon}_2 \diff t \bigg)^{1/2} \bigg ( \int_0^T \norm{\nabla w^\epsilon}_2^2 \diff t \bigg)^{1/2}.
-  \end{split}
-\end{equation}
-
-So the integral is still valid.
 
 \item Updating the bounds I2 and I3, and with those the final steps of the proof as well.
 
@@ -598,8 +610,6 @@ which implies the conclusion.
 
 \begin{itemize}
 
-  \item The weak formulation on p17 --- there are no additional boundary terms in the non-periodic case. In terms of boundary terms there are no additional requirements.
-  
   \item Integration by parts on p18
   
     $$<\partial_t w, w^\epsilon> = - \int_{\partial \Omega} \bigg ( \int_0^z \partial_t v \diff z' \bigg ) w^\epsilon n_H + \int_\Omega \bigg ( \int_0^z \partial_t v \diff z' \bigg) \nabla_H \cdot w^\epsilon,$$
@@ -631,23 +641,13 @@ which implies the conclusion.
 
 \subsection{The Coriolis term}
 
-The global well-posedness was proved for the case including the Coriolis term, but the strong convergence justification has been elaborated for a case that does not include the cross product term representing the Earth's movement. Now we are adding this detail as well.
-
 \begin{enumerate}
-
-  \item Firstly, the weak formulation on p17 will contain the following extra terms on the left: $ \int_Q  - \gamma v_2^\epsilon \varphi_1 + \epsilon \beta w^\epsilon \varphi_1 - \alpha \epsilon w^\epsilon \varphi_2 + \gamma v_1^\epsilon \varphi_2 + \epsilon \alpha v^\epsilon_2 \varphi_3 - \epsilon \beta v^\epsilon_1 \varphi_3.$
-  
-  \item The validity of the additional integral terms follows from the regularities of $\mathbf{u}^\epsilon$ and $(\mathbf{v},w).$
   
   \item The first integral identity on p18 will have these new terms on the left:
   
     $$ \int_Q  ( - \gamma v_2^\epsilon v_1 + \epsilon \beta w^\epsilon v_1 - \alpha \epsilon w^\epsilon v_2 + \gamma v_1^\epsilon v_2 + \epsilon \alpha v^\epsilon_2 w - \epsilon \beta v^\epsilon_1 w) \chi ,$$
     
     and (4.5) on p18 is extended with the same term.
-    
-  \item In the integral identity on the bottom of page 19 (and in (4.4) as well) we have on the left hand side
-  
-   $$ \textcolor{orange}{\int_{Q_{t_0}}  ( - \gamma v_2^\epsilon v_1 + \epsilon \beta w^\epsilon v_1 - \alpha \epsilon w^\epsilon v_2 + \gamma v_1^\epsilon v_2 + \epsilon \alpha v^\epsilon_2 w - \epsilon \beta v^\epsilon_1 w)} ,$$
 
   \item (4.9) and (4.10) on p20 remain the same, as the $\gamma v_2 v_1 - \gamma v_1 v_2$ kind of terms cancel out, so the change does not effect these results. The energy inequalities do not say anything about the Coriolis terms as those fall out.
   
