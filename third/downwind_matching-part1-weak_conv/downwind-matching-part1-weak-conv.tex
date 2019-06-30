@@ -592,7 +592,7 @@ Using the same conditions as in Proposition $\ref{propIdentity}$, the following 
   
   Now, summing ($\ref{bound_by_definition}$) and ($\ref{identity_obtained_by_v}$) and from their result subtracting ($\ref{integralIdentity_prop}$) (taking $t= t_0$) and ($\ref{identity_obtained_by_v_eps}$) we obtain
   
-  \begin{equation}
+  \begin{equation} \label{introduce_I_terms}
     \begin{split}
       & \frac{1}{2} (\norm{V_\epsilon}_2^2 + \epsilon^2 \norm{W_\epsilon}_2^2) (t_0) + \int_0^{t_0} (\norm{\nabla V_\epsilon}_2^2 + \epsilon^2 \norm{\nabla W_\epsilon}_2^2) \diff t  \\
       & \leq - \epsilon^2 \int_{Q_{t_0}} \bigg [ \bigg ( \int_0^z \partial_t v \diff z' \bigg ) \cdot \nabla_H W_\epsilon + \nabla w \cdot \nabla W_\epsilon \bigg ] \diff x \diff y \diff z \diff t \\
@@ -606,18 +606,56 @@ Using the same conditions as in Proposition $\ref{propIdentity}$, the following 
   
   The proof is brought to a closure by providing a bound for each of the $I_1, I_2, I_3, I_4$ terms above, in which the regularity of the strong solutions of the primitive equations (see Corollary $\ref{StrongSolPE_boundedness}$) plays a crucial role.
   
-  \textbf{Bound for $I_1.$}
-  BOUND.
+  \textbf{Bound for $I_1.$} The bound
   
-  \textbf{Bound for $I_2.$}
-  BOUND.
+  $$ I_1 \leq \frac{\epsilon^2}{6} \norm{\nabla W_\epsilon}^2_{L^2(Q_{t_0})} + \epsilon^2 C(\norm{v_0}_{H^1}, \Gamma_G) $$
   
-  \textbf{Bound for $I_3.$}
-  BOUND.
+  for $I_1$ can be verified easily.
   
-  \textbf{Bound for $I_4.$}
+  \textbf{Bound for $I_2.$} Calculating the bound
   
-  We will add $ - \epsilon \beta w v_1 +  \epsilon \beta w v_1 - \epsilon \alpha w v_2 + \epsilon \alpha w v_2 = 0 $ to $I_4$, thus instead of bounding the original version of the term, now we have to bound
+  \begin{equation}\label{I2Bound}I_2 \leq \frac{1}{6} \norm{\nabla V^\epsilon}^2_2 + C \int_0^{t_0} \norm{\nabla v}_2^4 \norm{V^\epsilon}_2^2 \diff t + C \int_0^{t_0} \norm{\nabla v}_2^2  \norm{\Delta v}_2^2 \norm{V^\epsilon}_2^2 \diff t\end{equation}
+  
+  for $I_2$ follows analogous steps as in \cite{li2019primitive} (i.e. using the Young, Holder, Poincare inequalities, the divergence-free condition), but we highlight the presence of the new, additional term $C \int_0^{t_0} \norm{\nabla v}_2^4 \norm{V^\epsilon}_2^2 \diff t$ in the bound.
+  
+  The difference is due to the fact when we need to construct a bound for the term
+  
+  $$ \int_0^{t_0} \int_M \bigg ( \int_{-1}^1 \abs{\nabla_H V^\epsilon} \diff z' \bigg) \bigg ( \int_{-1}^1 \abs{V^\epsilon} \abs{\partial_z v} \bigg )$$
+  
+  appearing in the calculations, we apply Lemma 2.1 in \cite{li2019primitive} using $$f = \nabla_H V^\epsilon, g = V^\epsilon, h = \partial_z v,$$ but as we can not apply the Poincare inequality for $\nabla v,$ and as a consequence, instead of $\norm{h}_2^{1/2} \norm{\nabla h}_2^{1/2}$ we will have the complete $\norm{h}_2^{1/2} (\norm{h}_2^{1/2} + \norm{\nabla h}_2^{1/2}),$  expression, which leads to the appearance of $C \int_0^{t_0} \norm{\nabla v}_2^4 \norm{V^\epsilon}_2^2 \diff t.$
+
+This means that all together in this subsection of the calculations for estimating $I_2$ we arrive to the bound
+
+\begin{equation}
+  \begin{split}
+     & C \int_0^{t_0} \norm{\nabla V^\epsilon}_2^{3/2} \norm{V^\epsilon}_2^{1/2} \norm{\nabla v}_2^{1/2} (\norm{\nabla v}_2^{1/2} + \norm{\Delta v}_2^{1/2})  \\
+     & \leq \frac{1}{18} \norm{\nabla V^\epsilon}^2_2 + C \int_0^{t_0} \norm{\nabla v}_2^2 (\norm{\nabla v}_2^{1/2} + \norm{\Delta v}_2^{1/2})^4 \norm{V^\epsilon}_2^2 \diff t \\
+     & \leq \frac{1}{18} \norm{\nabla V^\epsilon}^2_2 + C \int_0^{t_0} \norm{\nabla v}_2^4 \norm{V^\epsilon}_2^2 \diff t + C \int_0^{t_0} \norm{\nabla v}_2^2  \norm{\Delta v}_2^2 \norm{V^\epsilon}_2^2 \diff t,
+  \end{split}
+\end{equation}
+
+using the Young inequality, and with this we have the originally stated ($\ref{I2Bound}$).
+  
+  \textbf{Bound for $I_3.$} Calculating the 
+  
+  \begin{equation} \label{I3Bound}
+    I_3 \leq C \epsilon^2 [(\norm{v_0}_2^2 + \epsilon^2 \norm{w_0}_2^2)^2 + C(\norm{v_0}_{H^1}, \Gamma_G)] 
+  \end{equation}
+  
+  bound for $I_3$ can be done using the Young and Poincare inequalities and Lemma 2.1 in \cite{li2019primitive}. We highlight the fact that even though we obtain the same bound as in the work of \cite{li2019primitive}, but the details differ at the point where in our case passing from \norm{\nabla v} to \norm{\Delta v} is not allowed.
+  
+  Which is why we have an new term in this following point of the calculations
+
+\begin{equation}
+  \begin{split} \nonumber
+    I3 & \leq C \epsilon^2 \int_0 ^ {t_0} \bigg ( \norm{v^\epsilon}_2^2 \norm{\nabla v^\epsilon}_2^2 + \norm{\nabla v}_2^2 (\norm{\nabla v}_2^{1/2} + \norm{\Delta v}_2^{1/2})^4 \\
+    & + \epsilon^2 \norm{w^\epsilon}_2^2 \norm{\nabla w^\epsilon}_2^2 \bigg ) \diff t + \frac{1}{6} \big ( \norm{\nabla V^\epsilon}_2^2 + \epsilon^2 \norm{\nabla W^\epsilon}_2^2  \big),
+  \end{split}
+\end{equation}
+
+but note that the additional $\norm{\nabla v}_2^2 \cdot \norm{\nabla v}_2^2$ term can be estimated using Corollary $\ref{StrongSolPE_boundedness}$ by the same $C(\norm{v_0}_{H^1}, \Gamma_G)$ term that is used to estimate the Laplacian, which is why we arrive to the same conclusion ($\ref{I3Bound}$) that was calculated for the boundary-free scenario.
+  
+  \textbf{Bound for $I_4.$} We add $ - \epsilon \beta w v_1 +  \epsilon \beta w v_1 - \epsilon \alpha w v_2 + \epsilon \alpha w v_2 = 0 $ to $I_4$, thus instead of bounding the original version of the term, now we need to bound
 
     $$ \int_{Q_{t_0}}  ( \epsilon \beta W^\epsilon v_1 - \alpha \epsilon W^\epsilon v_2 + \epsilon \alpha V^\epsilon_2 w - \epsilon \beta V^\epsilon_1 w).$$
     
@@ -634,7 +672,7 @@ Using the same conditions as in Proposition $\ref{propIdentity}$, the following 
       
       Here the $\int_0^{t_0} \zeta \norm{\nabla V^\epsilon_2}^2_2$  term can be merged into the left hand side, while
       
-      $$\alpha \int_0^{t_0} \frac{1}{\zeta} \epsilon^2 \norm{w}^2_2 \leq \alpha \frac{1}{\zeta} \epsilon^2 \norm{w}^2_{L^2(Q_{t_0})} \leq \alpha \frac{1}{\zeta} \epsilon^2 C(\norm{v_0}_{H^1}, L_1, L_2),$$
+      $$\alpha \int_0^{t_0} \frac{1}{\zeta} \epsilon^2 \norm{w}^2_2 \leq \alpha \frac{1}{\zeta} \epsilon^2 \norm{w}^2_{L^2(Q_{t_0})} \leq \alpha \frac{1}{\zeta} \epsilon^2 C(\norm{v_0}_{H^1}, \Gamma_G),$$
       
       where we used the Corollary $\ref{StrongSolPE_boundedness}$, and the fact that $\norm{w} \leq \norm{\nabla v}.$
       
@@ -651,7 +689,7 @@ Using the same conditions as in Proposition $\ref{propIdentity}$, the following 
       \begin{equation}
         \begin{split}
           & \int_{Q_{t_0}} \epsilon \beta W^\epsilon v_1 \leq \beta \zeta \int_0^t \norm{\nabla V^\epsilon}_2^2 + \frac{1}{\zeta} \epsilon^2 \norm{v_1}_2^2 \\
-          & \leq \beta \zeta \int_0^t \norm{\nabla V^\epsilon}_2^2 + \frac{1}{\zeta} \epsilon^2 C(\norm{v_0}_{H^1}, L_1, L_2),
+          & \leq \beta \zeta \int_0^t \norm{\nabla V^\epsilon}_2^2 + \frac{1}{\zeta} \epsilon^2 C(\norm{v_0}_{H^1}, \Gamma_G),
         \end{split}
       \end{equation}
       
@@ -660,96 +698,45 @@ Using the same conditions as in Proposition $\ref{propIdentity}$, the following 
       \item The estimate of $\alpha \epsilon W^\epsilon v_2$ is structurally analogous.
     
     \end{itemize}
+    
+Using the bounds we now have for the terms $I_1, I_2, I_3, I_4$, we can perform the final step of the proof of this proposition. We will substitute these four results into ($\ref{introduce_I_terms}$) and take advantage of the Gronwall inequality --- in more detail, we obtain
+
+\begin{equation}
+  \begin{split} \nonumber
+  \rho (t):= & (\norm{V^\epsilon}_2^2 + \epsilon^2 \norm{W^\epsilon}_2^2)(t) + \int_0^t (\norm{\nabla V^\epsilon}_2^2 + \epsilon^2 \norm{\nabla W^\epsilon}_2^2) \diff s \\
+  & \leq C \epsilon^2 [(\norm{v_0}_2^2 + \epsilon^2 \norm{w_0}_2^2)^2 + C(\norm{v_0}_{H^1}, \Gamma_G)] \\
+  & + C \int_0^{t} \norm{\nabla v}_2^4 \norm{V^\epsilon}_2^2 \diff s + C \int_0^{t} \norm{\nabla v}_2^2  \norm{\Delta v}_2^2 \norm{V^\epsilon}_2^2 \diff s =: \Psi(t),
+  \end{split}
+\end{equation}
+
+for almost any $t_0 \in [0, \infty).$ With this we have
+
+\begin{equation}
+  \begin{split} \nonumber
+   \Psi'(t) & = C \norm{\nabla v}_2^4 \norm{V^\epsilon}_2^2 + C \norm{\nabla v}_2^2  \norm{\Delta v}_2^2 \norm{V^\epsilon}_2^2 \\
+   & \leq C (\norm{\nabla v}_2^4 + \norm{\nabla v}_2^2  \norm{\Delta v}_2^2) \rho (t) \leq C (\norm{\nabla v}_2^4 + \norm{\nabla v}_2^2  \norm{\Delta v}_2^2)\Psi(t),
+  \end{split}
+\end{equation}
+
+from which, applying the Gronwall inequality and using Corollary $\ref{StrongSolPE_boundedness}$ we deduce
+
+\begin{equation}
+  \begin{split} \nonumber
+    & (\norm{V^\epsilon}_2^2 + \epsilon^2 \norm{W^\epsilon}_2^2)(t) + \int_0^t (\norm{\nabla V^\epsilon}_2^2 + \epsilon^2 \norm{\nabla W^\epsilon}_2^2) \diff s \\
+    & \leq \Psi (t) \leq e^{C \int_0 ^ t (\norm{\nabla v}_2^4 + \norm{\nabla v}_2^2  \norm{\Delta v}_2^2) \diff s} \Psi (0) \leq e^{C(\norm{v_0}_{H^1}, L_1, L_2)} \Psi(0) \\
+    & \leq \epsilon^2 C(\norm{v_0}_{H^1}, \Gamma_G) (\norm{v_0}_2^2 + \epsilon^2 \norm{w_0}_2^2 + 1)^2,
+  \end{split}
+\end{equation}
+
+which concludes the proof.
   
 \end{proof}
 
-%%%%%%%%%%%%%%%%%%% CUT, PRE %%%%%%%%%%%%%%%%%%%%%%%%
-\section{CUT, PRE}
+As a consequence, we arrive to strong convergence of $\nabla v_\epsilon \to \nabla v$ in $L^2_t L^2_x$, and with that we have $\partial_3 w_\epsilon \to \partial_3 w.$ Eventually we deduce $u_3^\epsilon \to u_3$ strongly  in $L^2_t L^2_x,$ which was the last missing part of the proof of the main theorem, since combining the weak convergence of $C^\epsilon$ and the strong convergence of $u_3^\epsilon,$ we are finally able to state
 
-\subsection{The applicability of the Poincare inequality}
+$$ C^\epsilon u_3^\epsilon \rightharpoonup C u_3 \text{ weakly in } L^2 L^2.$$
 
-\subsubsection{First order terms}
-  
-  This means that $\norm{v}_6 \leq C \norm{\nabla v}_2$ is valid in p21, $\norm{V^\epsilon} \leq C \norm{\nabla V^\epsilon}$ on p22 is correct as well, etc.
- 
-\subsubsection{Second order terms}
-
-Estimating the gradient by the Laplacian.
-
-\begin{enumerate}
-
-\item Updating the bounds I2 and I3, and with those the final steps of the proof as well.
-
-Firstly, on p22, we update the bound for $I''_2:$
-
-$$ \int_0^{t_0} \int_M \bigg ( \int_{-1}^1 \abs{\nabla_H V^\epsilon} \diff z' \bigg) \bigg ( \int_{-1}^1 \abs{V^\epsilon} \abs{\partial_z v} \bigg ).$$
-
-Again we will use Lemma 2.1 and the Poincare inequality (for $V^\epsilon$ we can still use it). We choose $f = \nabla_H V^\epsilon, g = V^\epsilon, h = \partial_z v.$
-
-The difference this time is that instead of $\norm{h}_2^{1/2} \norm{\nabla h}_2^{1/2}$ we will have the complete $\norm{h}_2^{1/2} (\norm{h}_2^{1/2} + \norm{\nabla h}_2^{1/2}),$ as we can not apply the Poincare inequality for $\nabla v.$ 
-
-This means that eventually we arrive to the bound
-
-\begin{equation}
-  \begin{split}
-     & C \int_0^{t_0} \norm{\nabla V^\epsilon}_2^{3/2} \norm{V^\epsilon}_2^{1/2} \norm{\nabla v}_2^{1/2} (\textcolor{orange}{\norm{\nabla v}_2^{1/2}} + \norm{\Delta v}_2^{1/2})  \\
-     & \leq \frac{1}{18} \norm{\nabla V^\epsilon}^2_2 + C \int_0^{t_0} \norm{\nabla v}_2^2 (\textcolor{orange}{\norm{\nabla v}_2^{1/2}} + \norm{\Delta v}_2^{1/2})^4 \norm{V^\epsilon}_2^2 \diff t \\
-     & \leq \frac{1}{18} \norm{\nabla V^\epsilon}^2_2 + \textcolor{orange}{C \int_0^{t_0} \norm{\nabla v}_2^4 \norm{V^\epsilon}_2^2 \diff t} + C \int_0^{t_0} \norm{\nabla v}_2^2  \norm{\Delta v}_2^2 \norm{V^\epsilon}_2^2 \diff t,
-  \end{split}
-\end{equation}
-
-using the Young inequality.
-
-With this we obtain the updated version of (4.13) as well:
-
-$$ I_2 \leq \frac{1}{6} \norm{\nabla V^\epsilon}^2_2 + \textcolor{orange}{C \int_0^{t_0} \norm{\nabla v}_2^4 \norm{V^\epsilon}_2^2 \diff t} + C \int_0^{t_0} \norm{\nabla v}_2^2  \norm{\Delta v}_2^2 \norm{V^\epsilon}_2^2 \diff t$$
-
-Similarly, at the bound of I3 on p23 we arrive to this extended version with an additional $\nabla v$ term:
-
-\begin{equation}
-  \begin{split} \nonumber
-    I3 & \leq C \epsilon^2 \int_0 ^ {t_0} ( \norm{v^\epsilon}_2^2 \norm{\nabla v^\epsilon}_2^2 + \norm{\nabla v}_2^2 (\textcolor{orange}{\norm{\nabla v}_2^{1/2}} + \norm{\Delta v}_2^{1/2})^4 + \epsilon^2 \norm{w^\epsilon}_2^2 \norm{\nabla w^\epsilon}_2^2 ) \diff t \\
-    & + \frac{1}{6} \big ( \norm{\nabla V^\epsilon}_2^2 + \epsilon^2 \norm{\nabla W^\epsilon}_2^2  \big)
-  \end{split}
-\end{equation}
-
-After this we arrive back to the original estimate of I3, because the new $\norm{\nabla v}_2^2 \cdot \norm{\nabla v}_2^2$ term can be estimated by the same Corollary 3.1, by the same $C(\norm{v_0}_{H^1}, L_1, L_2)$ term. So even though we had an additional term for some part of the estimate of I3, its estimate melts back into the one we originally had.
-
-Finally, the closure of the proof, following the changes in I2, becomes the following.
-
-\begin{equation}
-  \begin{split} \nonumber
-  f(t):= & (\norm{V^\epsilon}_2^2 + \epsilon^2 \norm{W^\epsilon}_2^2)(t) + \int_0^t (\norm{\nabla V^\epsilon}_2^2 + \epsilon^2 \norm{\nabla W^\epsilon}_2^2) \diff s \\
-  & \leq C \epsilon^2 [(\norm{v_0}_2^2 + \epsilon^2 \norm{w_0}_2^2)^2 + C(\norm{v_0}_{H^1}, L_1, L_2)] \\
-  & + \textcolor{orange}{C \int_0^{t} \norm{\nabla v}_2^4 \norm{V^\epsilon}_2^2 \diff s} + C \int_0^{t} \norm{\nabla v}_2^2  \norm{\Delta v}_2^2 \norm{V^\epsilon}_2^2 \diff s =: F(t),
-  \end{split}
-\end{equation}
-
-With this we have
-
-\begin{equation}
-  \begin{split} \nonumber
-   F'(t) = & \textcolor{orange}{C \norm{\nabla v}_2^4 \norm{V^\epsilon}_2^2} + C \norm{\nabla v}_2^2  \norm{\Delta v}_2^2 \norm{V^\epsilon}_2^2 \\
-   & \leq C (\textcolor{orange}{\norm{\nabla v}_2^4} + \norm{\nabla v}_2^2  \norm{\Delta v}_2^2)f(t) \leq C (\textcolor{orange}{\norm{\nabla v}_2^4} + \norm{\nabla v}_2^2  \norm{\Delta v}_2^2)F(t),
-  \end{split}
-\end{equation}
-
-from which, applying the Gronwall inequality, and using Corollary 3.1 we deduce
-
-\begin{equation}
-  \begin{split} \nonumber
-    f(t) \leq & F(t) \leq e^{C \int_0 ^ t (\textcolor{orange}{\norm{\nabla v}_2^4} + \norm{\nabla v}_2^2  \norm{\Delta v}_2^2) \diff s} F(0) \leq e^{C(\norm{v_0}_{H^1}, L_1, L_2)} F(0)\\
-    & \leq \epsilon^2 C(\norm{v_0}_{H^1}, L_1, L_2) (\norm{v_0}_2^2 + \epsilon^2 \norm{w_0}_2^2 + 1)^2,
-  \end{split}
-\end{equation}
-
-which implies the conclusion.
-
-\end{enumerate}
-
-\subsection{Integration by parts}
-  On p22, the calculation of the I2 term trivially remains correct as $\int_{\partial \Omega} \mathbf{u} \mathbf{v} \mathbf{v}^\epsilon \vec{n} = 0.$ The calculation of $I''_2$ stays valid as well since
-   $\int_{\partial \Omega} W^\epsilon V^\epsilon v n_3 = 0.$
+With this Theorem $\ref{maintheorem}$ has been proved. 
 
 \nocite{*}
 \bibliographystyle{abbrv}
