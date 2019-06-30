@@ -452,6 +452,8 @@ This section is devoted to verify Theorem \ref{maintheorem}. Structurally we fol
   
   The following part of the proof is about verifying the strong convergence of $u_3^\epsilon,$ and is based on the idea of \cite{li2019primitive} --- our scenario is different however in that \textit{a)} first of all our domain is bounded, while the domain they consider is periodic, \textit{b)} we do not assume zero-averaged functions, and finally \textit{c)} in our case the Coriolis terms are considered as well. Our strategy in providing the proof is to give a self-contained result that describes all the steps that build up the verification process, but we elaborate in more detail where the above mentioned \textit{a), b), c)} points have a tangible effect. Some technical details that are identical to those in \cite{li2019primitive} will be skipped.
   
+It is important to highlight at this point that since we are not restricted to zero-averaged functions and we are not on a periodic domain, we need to pay special attention when verifying boundedness results using the Poincare inequality. Note that as the value of the velocity functions are defined to be zero on the boundary, any first-order estimate of the type $\norm{v_\epsilon} \leq \norm{\nabla v_\epsilon}$ is valid (i.e. to estimate a function by its gradient), using the zero-trace version of the Poincare inequality for functions in $W^{1,2}_0$ ($k=1, p=2$). However, since it is only the value of the functions that vanishes on the boundary, but not their derivatives, higher order estimates such as passing from $\norm{\nabla v_\epsilon}$ to $\norm{\Delta v_\epsilon}$ can not be applied in general.
+  
 The next step in order to estimate the difference $$(V_\epsilon, W_\epsilon): = (v_\epsilon - v, w_\epsilon - w)$$ is to practically use the strong solution $(v,w)$ as a test function when writing down the weak formulation integral identity for the scaled equations. Following this method we arrive to
 
 \begin{prop} \label{propIdentity}
@@ -487,8 +489,6 @@ By definition of the weak solutions of the scaled Navier-Stokes equations, we kn
 for any $\varphi = (\varphi_H, \varphi_3) \in H^1 (0,T;\mathbf{V})$ with $\mathbf{\varphi}(T) = 0.$
 
 Now, let's define $\chi \in C_0^\infty ([0, \infty))$ with $0 \leq \chi \leq 1$ and $\chi (0) = 1$ and set $\varphi = (v,w) \chi (t).$ The validity of the the integrals are guaranteed by the regularities of the respective solution functions and using basic inequalities.
-
-It is important to highlight at this point that since we are not restricted to zero-averaged functions and we are not on a periodic domain, we need to pay special attention when verifying boundedness results using the Poincare inequality. Note that as the value of the velocity functions are defined to be zero on the boundary, any first-order estimate of the type $\norm{v_\epsilon} \leq \norm{\nabla v_\epsilon}$ is valid (i.e. to estimate a function by its gradient), using the zero-trace version of the Poincare inequality for functions in $W^{1,2}_0$ ($k=1, p=2$). However, since it is only the value of the functions that vanishes on the boundary, but not their derivatives, higher order estimates such as passing from $\norm{\nabla v_\epsilon}$ to $\norm{\Delta v_\epsilon}$ can not be applied in general.
 
 Which is why, for example, the estimate of the the following term becomes as such:
 
