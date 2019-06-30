@@ -454,11 +454,11 @@ This section is devoted to verify Theorem \ref{maintheorem}. Structurally we fol
   
 The next step in order to estimate the difference $$(V_\epsilon, W_\epsilon): = (v_\epsilon - v, w_\epsilon - w)$$ is to practically use the strong solution $(v,w)$ as a test function when writing down the weak formulation integral identity for the scaled equations. Following this method we arrive to
 
-\begin{prop}
+\begin{prop} \label{propIdentity}
 
 Let $(v_\epsilon, w_\epsilon)$ and $(v,w)$ be the solutions of (\ref{ANSC1}) - (\ref{ANSC5}) and (\ref{HNSC1}) - (\ref{HNSC5}), respectively, with initial data $(v_0, w_0),$ where $v_0 \in H^1(\Omega)$ and $w_0 = - \int_0^z \nabla_H \cdot v_0 \diff z'.$ Then we have the following integral identity:
 
-\begin{equation}
+\begin{equation} \label{integralIdentity_prop}
   \begin{split}
     & - \frac{\epsilon^2}{2} \norm{w(t)}_2^2 + \bigg ( (v_\epsilon \cdot v + \epsilon^2 w_\epsilon w) \diff x \diff y \diff z  \bigg ) (t) \\
     & + \int_{Q_t} (-v_\epsilon \cdot \partial_t v + \nabla v_\epsilon : \nabla v + \epsilon^2 \nabla w_\epsilon \cdot \nabla w) \diff x \diff y \diff z \diff s \\
@@ -543,6 +543,124 @@ After some technical details that we omit here we eventually obtain
 
 for any $t_0 \in [0, \infty),$ which verifies the statement of the proposition.
 
+\end{proof}
+
+With this we are ready to estimate the difference between the solutions of the scaled and hydrostatic equations, which is described by the following
+
+\begin{prop}
+
+Using the same conditions as in Proposition $\ref{propIdentity}$, the following estimate holds for the difference function $(V_\epsilon, W_\epsilon):$
+
+\begin{equation}
+  \begin{split}
+    & \sup_{0 \leq t < \infty} ( \norm{V_\epsilon}_2^2 + \epsilon^2 \norm{W_\epsilon}_2^2)(t) + \int_0 ^ \infty ( \norm{\nabla V_\epsilon}_2^2 + \epsilon^2 \norm{\nabla W_\epsilon}_2^2)\diff s \\
+    & \leq C(\norm{v_0}_{H^1}, \Gamma_G) \epsilon^2 (\norm{v_0}_2^2 + \epsilon^2 \norm{w_0}_2^2 + 1).
+  \end{split}
+\end{equation}
+
+\end{prop}
+
+\begin{proof}
+
+  Multiplying the horizontal part of the hydrostatic equations, i.e. equations ($\ref{HNSC1}$)-($\ref{HNSC2}$) by $v_\epsilon$ and integrating the result over $Q_{t_0},$ then we have
+  
+  \begin{equation} \label{identity_obtained_by_v_eps}
+    \begin{split}
+      & \int_{Q_{t_0}} (\partial_t v \cdot v_\epsilon + \nabla v : \nabla v_\epsilon) \diff x \diff y \diff z \diff t \\
+      & = - \int_{Q_{t_0}} (u \cdot \nabla) v \cdot v_\epsilon + \gamma v_2 v_1^\epsilon - \gamma v_1 v_2^\epsilon \diff x \diff y \diff z \diff t,
+    \end{split}
+  \end{equation}
+  
+  which follows after using integration by parts, utilising the divergence-free condition and the zero velocity boundary conditions.
+  
+  On the other hand, multiplying the same ($\ref{HNSC1}$)-($\ref{HNSC2}$) equations by $v$ instead, and integrating again on $Q_{t_0},$ then using the same above mentioned tools we arrive to
+  
+  \begin{equation} \label{identity_obtained_by_v}
+    \frac{1}{2} \norm{v(t_0)}_2^2 + \int_0^{t_0} \norm{\nabla v}_2^2 \diff t = \frac{1}{2} \norm{v_0}_2^2,
+  \end{equation}
+  
+  for any $t_0 \in [0, \infty).$ At the same time we also know by definition that
+  
+  \begin{equation} \label{bound_by_definition}
+    \begin{split}
+      & \frac{1}{2}( \norm{v_\epsilon (t_0)}_2^2 + \epsilon^2 \norm{w_\epsilon(t_0)}_2^2)+ \int_0^{t_0} (\norm{\nabla v_\epsilon}_2^2 + \epsilon^2 \norm{\nabla w_\epsilon}_2^2) \diff t \\
+      & \leq \frac{1}{2} (\norm{v_0}_2^2 + \epsilon^2 \norm{w_0}_2^2),
+    \end{split}
+  \end{equation}
+  
+  for almost every $t_0 \in [0, \infty).$
+  
+  Now, summing ($\ref{bound_by_definition}$) and ($\ref{identity_obtained_by_v}$) and from their result subtracting ($\ref{integralIdentity_prop}$) (taking $t= t_0$) and ($\ref{identity_obtained_by_v_eps}$) we obtain
+  
+  \begin{equation}
+    \begin{split}
+      & \frac{1}{2} (\norm{V_\epsilon}_2^2 + \epsilon^2 \norm{W_\epsilon}_2^2) (t_0) + \int_0^{t_0} (\norm{\nabla V_\epsilon}_2^2 + \epsilon^2 \norm{\nabla W_\epsilon}_2^2) \diff t  \\
+      & \leq - \epsilon^2 \int_{Q_{t_0}} \bigg [ \bigg ( \int_0^z \partial_t v \diff z' \bigg ) \cdot \nabla_H W_\epsilon + \nabla w \cdot \nabla W_\epsilon \bigg ] \diff x \diff y \diff z \diff t \\
+      & + \int_{Q_{t_0}} [(u_\epsilon \cdot \nabla)v_\epsilon \cdot v + (u \cdot \nabla )v \cdot v_\epsilon] \diff x \diff y \diff z \diff t \\
+      & + \epsilon^2 \int_{Q_{t_0}} u_\epsilon \cdot \nabla w_\epsilon w \diff x \diff y \diff z \diff t \\
+      & + \int_{Q_{t_0}}  \epsilon \beta w^\epsilon v_1 - \alpha \epsilon w^\epsilon v_2 + \epsilon \alpha v^\epsilon_2 w - \epsilon \beta v^\epsilon_1 w \diff x \diff y \diff z \diff t := I_1 + I_2 + I_3 + I_4, \raisetag{80pt}
+    \end{split}
+  \end{equation}
+  
+  for almost every $t_0 \in [0, \infty).$
+  
+  The proof is brought to a closure by providing a bound for each of the $I_1, I_2, I_3, I_4$ terms above, in which the regularity of the strong solutions of the primitive equations (see Corollary $\ref{StrongSolPE_boundedness}$) plays a crucial role.
+  
+  \textbf{Bound for $I_1.$}
+  BOUND.
+  
+  \textbf{Bound for $I_2.$}
+  BOUND.
+  
+  \textbf{Bound for $I_3.$}
+  BOUND.
+  
+  \textbf{Bound for $I_4.$}
+  
+  We will add $ - \epsilon \beta w v_1 +  \epsilon \beta w v_1 - \epsilon \alpha w v_2 + \epsilon \alpha w v_2 = 0 $ to $I_4$, thus instead of bounding the original version of the term, now we have to bound
+
+    $$ \int_{Q_{t_0}}  ( \epsilon \beta W^\epsilon v_1 - \alpha \epsilon W^\epsilon v_2 + \epsilon \alpha V^\epsilon_2 w - \epsilon \beta V^\epsilon_1 w).$$
+    
+    \begin{itemize}
+    
+      \item Firstly, we have
+      
+      \begin{equation}
+        \begin{split}
+          & \int_{Q_{t_0}} \epsilon \alpha V^\epsilon_2 w \leq \alpha \int_0^{t_0} \norm{V^\epsilon_2} \norm{\epsilon w}  \leq \alpha \int_0^{t_0} \zeta \norm{V^\epsilon_2}^2_2 + \alpha \int_0^{t_0} \frac{1}{\zeta} \epsilon^2 \norm{ w}^2_2 \\
+          & \leq \alpha \int_0^{t_0} \zeta \norm{\nabla V^\epsilon_2}^2_2 + \alpha \int_0^{t_0} \frac{1}{\zeta} \epsilon^2 \norm{ w}^2_2.
+        \end{split}
+      \end{equation}
+      
+      Here the $\int_0^{t_0} \zeta \norm{\nabla V^\epsilon_2}^2_2$  term can be merged into the left hand side, while
+      
+      $$\alpha \int_0^{t_0} \frac{1}{\zeta} \epsilon^2 \norm{w}^2_2 \leq \alpha \frac{1}{\zeta} \epsilon^2 \norm{w}^2_{L^2(Q_{t_0})} \leq \alpha \frac{1}{\zeta} \epsilon^2 C(\norm{v_0}_{H^1}, L_1, L_2),$$
+      
+      where we used the Corollary $\ref{StrongSolPE_boundedness}$, and the fact that $\norm{w} \leq \norm{\nabla v}.$
+      
+      Here $\zeta$ is the constant of the Young inequality, and it only has to be small enough to keep the coefficient of $\norm{\nabla V_\epsilon}$ positive.
+      
+      \item The estimate of the $\epsilon \beta V^\epsilon_1 w$ term is analogous.
+      
+      \item For the term $\epsilon \beta W^\epsilon v_1$ we can use the idea that $\norm{W^\epsilon} \leq \norm{\nabla V^\epsilon}.$ As we have $\partial_3 w^\epsilon = \nabla_H v^\epsilon,$ and $\partial_3 w = \nabla_H v,$ we naturally have $\partial_3 W^\epsilon = \nabla_H V^\epsilon,$ and by the vertical Poincare inequality we have $$\norm{W^\epsilon} \leq \norm{\partial_3 W^\epsilon} = \norm{\nabla V^\epsilon}.$$ This way we are able to bound the $W^\epsilon$ term without keeping the $\epsilon^2$ multiplier attached to it when we apply the Young inequality. We have
+      
+      $$ \int_{Q_{t_0}} \epsilon \beta W^\epsilon v_1 \leq \int_0^{t_0} \epsilon \beta \norm{W^\epsilon}_2 \norm{v_1}_2 \leq \int_0^{t_0} \epsilon \beta \norm{\nabla V^\epsilon}_2 \norm{v_1}_2, $$
+      
+      and finally, after applying the Young inequality we arrive to
+      
+      \begin{equation}
+        \begin{split}
+          & \int_{Q_{t_0}} \epsilon \beta W^\epsilon v_1 \leq \beta \zeta \int_0^t \norm{\nabla V^\epsilon}_2^2 + \frac{1}{\zeta} \epsilon^2 \norm{v_1}_2^2 \\
+          & \leq \beta \zeta \int_0^t \norm{\nabla V^\epsilon}_2^2 + \frac{1}{\zeta} \epsilon^2 C(\norm{v_0}_{H^1}, L_1, L_2),
+        \end{split}
+      \end{equation}
+      
+      where the first term can be merged into the left hand side.
+            
+      \item The estimate of $\alpha \epsilon W^\epsilon v_2$ is structurally analogous.
+    
+    \end{itemize}
+  
 \end{proof}
 
 %%%%%%%%%%%%%%%%%%% CUT, PRE %%%%%%%%%%%%%%%%%%%%%%%%
@@ -630,92 +748,8 @@ which implies the conclusion.
 \end{enumerate}
 
 \subsection{Integration by parts}
-
-\begin{itemize}
-   
-   \item Verifying (4.8).
-   
-   Multiplying $\partial_t v + (u \cdot \nabla) v - \Delta v + \nabla_H p = 0$ by $v^\epsilon$ and integrating on $Q_{t_0},$ the boundary term from the Laplacian falls out, as $\int_{\partial \Omega} \nabla v \cdot v^\epsilon = 0$ because  $v^\epsilon = 0$ on the boundary. On the other hand, the pressure terms vanishes since $ \int_\Omega \nabla_H p \cdot v^\epsilon = \int_\Omega (\nabla_H p \cdot v^\epsilon + \partial_z p w^\epsilon),$ using that $\partial_z p = 0,$ and thus
-   
-   $$ \int_\Omega \nabla_H p v^\epsilon = \int_{\partial \Omega} p \cdot \mathbf{u}^\epsilon \vec{n} - \int_\Omega p \cdot ( \nabla \cdot \mathbf{u}^\epsilon) = 0,$$
-   
-   using the divergence-free condition and $\mathbf{u}^\epsilon = 0$ on $\partial \Omega.$
-   
-   \item Verifying (4.9): in terms of boundary conditions the analogous ideas can be applied as in the previous step.
-   
-   \item On p22, the calculation of the I2 term trivially remains correct as $\int_{\partial \Omega} \mathbf{u} \mathbf{v} \mathbf{v}^\epsilon \vec{n} = 0.$ The calculation of $I''_2$ stays valid as well since
+  On p22, the calculation of the I2 term trivially remains correct as $\int_{\partial \Omega} \mathbf{u} \mathbf{v} \mathbf{v}^\epsilon \vec{n} = 0.$ The calculation of $I''_2$ stays valid as well since
    $\int_{\partial \Omega} W^\epsilon V^\epsilon v n_3 = 0.$
-
-\end{itemize}
-
-\subsection{The Coriolis term}
-
-\begin{enumerate}
-
-  \item (4.9) and (4.10) on p20 remain the same, as the $\gamma v_2 v_1 - \gamma v_1 v_2$ kind of terms cancel out, so the change does not effect these results. The energy inequalities do not say anything about the Coriolis terms as those fall out.
-  
-  \item What changes however on page 20 is (4.8), as the (PEs) have the $\gamma u_2, \gamma u_1$ terms. This means that here we have
-  
-  $$ \int_{Q_{t_0}} (\partial_t v \cdot v_\epsilon + \nabla v \nabla v_\epsilon) = - \int_{Q_{t_0}} (u \cdot \nabla) v \cdot v_\epsilon \textcolor{orange}{ + \gamma v_2 v_1^\epsilon - \gamma v_1 v_2^\epsilon}. $$
-  
-  \item Thus, the inequality (4.11) on p20, which is obtained via (4.9) + (4.10) - (4.4) - (4.8), will contain (consider that here we extract 4.4, so the sign changes once because of that, and then it changes a second time because we bring all these terms to the right hand side), on its right hand side
-  
-    $$ I_4 = \int_{Q_{t_0}}  - \gamma v_2^\epsilon v_1 + \epsilon \beta w^\epsilon v_1 - \alpha \epsilon w^\epsilon v_2 + \gamma v_1^\epsilon v_2 + \epsilon \alpha v^\epsilon_2 w - \epsilon \beta v^\epsilon_1 w - \gamma v_2 v_1^\epsilon + \gamma v_1 v_2^\epsilon,$$
-    
-    where the $\gamma$ terms cancel out, and $I_4$ is reduced to
-    
-    $$ I_4 = \int_{Q_{t_0}}  \epsilon \beta w^\epsilon v_1 - \alpha \epsilon w^\epsilon v_2 + \epsilon \alpha v^\epsilon_2 w - \epsilon \beta v^\epsilon_1 w.$$
-    
-    We will add $ - \epsilon \beta w v_1 +  \epsilon \beta w v_1 - \epsilon \alpha w v_2 + \epsilon \alpha w v_2 = 0 $ to the above term, thus instead of bounding the original one, we can bound
-
-    $$ I_4 = \int_{Q_{t_0}}  ( \epsilon \beta W^\epsilon v_1 - \alpha \epsilon W^\epsilon v_2 + \epsilon \alpha V^\epsilon_2 w - \epsilon \beta V^\epsilon_1 w).$$
-    
-    \begin{itemize}
-    
-      \item Firstly, we have
-      
-      \begin{equation}
-        \begin{split}
-          & \int_{Q_{t_0}} \epsilon \alpha V^\epsilon_2 w \leq \alpha \int_0^{t_0} \norm{V^\epsilon_2} \norm{\epsilon w}  \leq \alpha \int_0^{t_0} \zeta \norm{V^\epsilon_2}^2_2 + \alpha \int_0^{t_0} \frac{1}{\zeta} \epsilon^2 \norm{ w}^2_2 \\
-          & \leq \alpha \int_0^{t_0} \zeta \norm{\nabla V^\epsilon_2}^2_2 + \alpha \int_0^{t_0} \frac{1}{\zeta} \epsilon^2 \norm{ w}^2_2.
-        \end{split}
-      \end{equation}
-      
-      Here the $\int_0^{t_0} \zeta \norm{\nabla V^\epsilon_2}^2_2$  term can be "melted" into the left hand side, while
-      
-      $$\alpha \int_0^{t_0} \frac{1}{\zeta} \epsilon^2 \norm{w}^2_2 \leq \alpha \frac{1}{\zeta} \epsilon^2 \norm{w}^2_{L^2(Q_{t_0})} \leq \alpha \frac{1}{\zeta} \epsilon^2 C(\norm{v_0}_{H^1}, L_1, L_2),$$
-      
-      where we used the Corollary from Section3, and the fact that $\norm{w} \leq \norm{\nabla v}.$
-      
-      Thus we still have the $\epsilon^2$ in front of the constant, which is what was needed.
-      
-      Here $\zeta$ is the constant of the Young inequality, and it only has to be small enough to keep the coefficient of $\norm{\nabla V_\epsilon}$ positive.
-      
-      \item The estimate of the $\epsilon \beta V^\epsilon_1 w$ term is analogous.
-      
-      \item For the term $\epsilon \beta W^\epsilon v_1$ we can use the idea that $\norm{W^\epsilon} \leq \norm{\nabla V^\epsilon}.$ As we have $\partial_3 w^\epsilon = \nabla_H v^\epsilon,$ and $\partial_3 w = \nabla_H v,$ we naturally have $\partial_3 W^\epsilon = \nabla_H V^\epsilon,$ and by the vertical Poincare inequality we have $$\norm{W^\epsilon} \leq \norm{\partial_3 W^\epsilon} = \norm{\nabla V^\epsilon}.$$ This way we are able to bound the $W^\epsilon$ term without keeping the $\epsilon^2$ multiplier attached to it when we apply the Young inequality.
-      
-      $$ \int_{Q_{t_0}} \epsilon \beta W^\epsilon v_1 \leq \int_0^{t_0} \epsilon \beta \norm{W^\epsilon}_2 \norm{v_1}_2 \leq \int_0^{t_0} \epsilon \beta \norm{\nabla V^\epsilon}_2 \norm{v_1}_2, $$
-      
-      finally, after applying the Young inequality we arrive to
-      
-      \begin{equation}
-        \begin{split}
-          & \int_{Q_{t_0}} \epsilon \beta W^\epsilon v_1 \leq \beta \zeta \int_0^t \norm{\nabla V^\epsilon}_2^2 + \frac{1}{\zeta} \epsilon^2 \norm{v_1}_2^2 \\
-          & \leq \beta \zeta \int_0^t \norm{\nabla V^\epsilon}_2^2 + \frac{1}{\zeta} \epsilon^2 C(\norm{v_0}_{H^1}, L_1, L_2),
-        \end{split}
-      \end{equation}
-      
-      where the first term can be melted into the left hand side.
-            
-      \item $\alpha \epsilon W^\epsilon v_2$ is structurally analogous.
-      
-    
-    \end{itemize}
-
-\end{enumerate}
-
-With this we have proved our main result --- the weak convergence of the weak solutions of the polluted atmosphere hold also for the scenario of the downwind-matching coordinate system.
 
 \nocite{*}
 \bibliographystyle{abbrv}
