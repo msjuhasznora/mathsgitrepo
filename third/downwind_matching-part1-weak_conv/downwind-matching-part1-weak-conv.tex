@@ -502,11 +502,20 @@ Which is why, for example, the estimate of the the following term becomes as suc
   \end{split}
 \end{equation}
 
-Thus, by taking $\varphi$ as a test function, we get
+Thus, considering the validity of the integral terms and rewriting some of them in a more convenient form, after taking $\varphi$ as a test function we have
 
-...
+\begin{equation}
+  \begin{split}
+    & \int_Q (- v_\epsilon \cdot \partial_t v + \nabla v_\epsilon : \nabla v + \epsilon^2 \nabla w_\epsilon \cdot \nabla w) \chi \diff x \diff y \diff z \diff t \\
+    & - \epsilon^2 \int_0^\infty \langle \partial_t w , w_\epsilon \rangle _{H^{-1} \times H^1} \chi \diff t - \int_Q (v_\epsilon \cdot v + \epsilon^2 w_\epsilon w) \chi' \diff x \diff y \diff z \diff t \\
+    & = - \int_Q [(u_\epsilon \cdot \nabla) v_\epsilon \cdot v + \epsilon^2 u_\epsilon \cdot \nabla w_\epsilon w] \chi \diff x \diff y \diff z \diff t + \norm{v_0}_2^2 + \epsilon^2 \norm{w_0}_2^2 \\
+    & + \int_Q  ( \gamma v_2^\epsilon v_1 - \epsilon \beta w^\epsilon v_1 + \alpha \epsilon w^\epsilon v_2 - \gamma v_1^\epsilon v_2 - \epsilon \alpha v^\epsilon_2 w + \epsilon \beta v^\epsilon_1 w) \chi,
+  \end{split}
+\end{equation}
 
-Choosing $\chi = \chi_\delta$ and passing to the limit we arrive to
+for any $\chi \in C^\infty_0 ([0,\infty)),$ with $0 \leq \chi \leq 1$ and $\chi (0) = 1.$
+
+The idea here is to take an arbitrary $t_0 \in (0, \infty)$ and a sufficiently small positive $\delta \in (0, t_0).$ Choose $\chi_\delta \in C^\infty_0 [0,t_0),$ such that $\chi_\delta \equiv 1$ on $[0, t_0 -\delta], 0 \leq \chi_\delta \leq 1$ on $[t_0 - \delta, t_0 )$ and $\abs{\chi_\delta '} \leq \frac{2}{\delta}$ on $[0, t_0).$ Now, choosing $\chi = \chi_\delta$ in the above identity and taking $\delta \to 0,$ one can arrive to the desired equality after performing the calculations for passing to the limit. It is easy to see that because of the velocities vanishing on the boundaries, the technical details remain the same even though we are not on a periodic domain. With this, we obtain
 
 \begin{equation}
   \begin{split}
@@ -518,7 +527,7 @@ Choosing $\chi = \chi_\delta$ and passing to the limit we arrive to
   \end{split}
 \end{equation}
 
-for any $t_0 \in [0, \infty),$ which completes the proof.
+for any $t_0 \in [0, \infty),$ which verifies the statement of the proposition.
 
 \end{proof}
 
@@ -642,12 +651,6 @@ which implies the conclusion.
 \subsection{The Coriolis term}
 
 \begin{enumerate}
-  
-  \item The first integral identity on p18 will have these new terms on the left:
-  
-    $$ \int_Q  ( - \gamma v_2^\epsilon v_1 + \epsilon \beta w^\epsilon v_1 - \alpha \epsilon w^\epsilon v_2 + \gamma v_1^\epsilon v_2 + \epsilon \alpha v^\epsilon_2 w - \epsilon \beta v^\epsilon_1 w) \chi ,$$
-    
-    and (4.5) on p18 is extended with the same term.
 
   \item (4.9) and (4.10) on p20 remain the same, as the $\gamma v_2 v_1 - \gamma v_1 v_2$ kind of terms cancel out, so the change does not effect these results. The energy inequalities do not say anything about the Coriolis terms as those fall out.
   
