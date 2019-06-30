@@ -515,7 +515,21 @@ Thus, considering the validity of the integral terms and rewriting some of them 
 
 for any $\chi \in C^\infty_0 ([0,\infty)),$ with $0 \leq \chi \leq 1$ and $\chi (0) = 1.$
 
-The idea here is to take an arbitrary $t_0 \in (0, \infty)$ and a sufficiently small positive $\delta \in (0, t_0).$ Choose $\chi_\delta \in C^\infty_0 [0,t_0),$ such that $\chi_\delta \equiv 1$ on $[0, t_0 -\delta], 0 \leq \chi_\delta \leq 1$ on $[t_0 - \delta, t_0 )$ and $\abs{\chi_\delta '} \leq \frac{2}{\delta}$ on $[0, t_0).$ Now, choosing $\chi = \chi_\delta$ in the above identity and taking $\delta \to 0,$ one can arrive to the desired equality after performing the calculations for passing to the limit. It is easy to see that because of the velocities vanishing on the boundaries, the technical details remain the same even though we are not on a periodic domain. With this, we obtain
+The idea here is to take an arbitrary $t_0 \in (0, \infty)$ and a sufficiently small positive $\delta \in (0, t_0).$ Choose $\chi_\delta \in C^\infty_0 [0,t_0),$ such that $\chi_\delta \equiv 1$ on $[0, t_0 -\delta], 0 \leq \chi_\delta \leq 1$ on $[t_0 - \delta, t_0 )$ and $\abs{\chi_\delta '} \leq \frac{2}{\delta}$ on $[0, t_0).$ Now, choosing $\chi = \chi_\delta$ in the above identity and taking $\delta \to 0,$ one can arrive to the desired equality after performing the calculations for passing to the limit. It is easy to see that because of the velocities vanishing on the boundaries, the technical details remain uneffected, even though we are not on a periodic domain.
+
+In more detail, the term $ \langle \partial_t w, w^\epsilon \rangle$ now takes the form 
+
+$$ \langle \partial_t w, w^\epsilon \rangle = - \int_{\partial \Omega} \bigg ( \int_0^z \partial_t v \diff z' \bigg ) w^\epsilon n_H + \int_\Omega \bigg ( \int_0^z \partial_t v \diff z' \bigg) \nabla_H \cdot w^\epsilon,$$
+    
+from where, by using that $w^\epsilon = 0$ on $\partial \Omega$ we arrive easily to the more simple
+    
+$$ \langle \partial_t w, w^\epsilon \rangle  = \int_\Omega \bigg ( \int_0^z \partial_t v \diff z' \bigg) \nabla_H \cdot w^\epsilon,$$
+     
+which is the form one would have on a periodic domain. Similarly, 
+     
+$$ \langle \partial_t w, w^\epsilon - w \rangle = \int_\Omega \bigg ( \int_0^z \partial_t v \diff z' \bigg) \nabla_H \cdot (w^\epsilon - w),$$ as the boundary term $\int_{\partial \Omega} \bigg ( \int_0^z \partial_t v \diff z' \bigg ) (w^\epsilon - w) n_H$ becomes zero, since we have $w = 0, w_\epsilon = 0$ on $\Gamma.$ 
+
+After some technical details that we omit here we obtain
 
 \begin{equation}
   \begin{split}
@@ -618,20 +632,6 @@ which implies the conclusion.
 \subsection{Integration by parts}
 
 \begin{itemize}
-
-  \item Integration by parts on p18
-  
-    $$<\partial_t w, w^\epsilon> = - \int_{\partial \Omega} \bigg ( \int_0^z \partial_t v \diff z' \bigg ) w^\epsilon n_H + \int_\Omega \bigg ( \int_0^z \partial_t v \diff z' \bigg) \nabla_H \cdot w^\epsilon,$$
-    
-    from where we arrive easily to 
-    
-     $$<\partial_t w, w^\epsilon> = \int_\Omega \bigg ( \int_0^z \partial_t v \diff z' \bigg) \nabla_H \cdot w^\epsilon,$$
-     
-     that was required, by using that $w^\epsilon = 0$ on $\partial \Omega.$
-     
-   \item Integration by parts on p19
-   
-   $$<\partial_t w, w^\epsilon - w> = \int_\Omega \bigg ( \int_0^z \partial_t v \diff z' \bigg) \nabla_H \cdot (w^\epsilon - w),$$ as the boundary term $\int_{\partial \Omega} \bigg ( \int_0^z \partial_t v \diff z' \bigg ) (w^\epsilon - w) n_H$ becomes zero, since in this version  - unlike the original one, where we had $u_3 n_3 = 0$ on $\Gamma$ - we also have $w = 0$ on $\Gamma$ (and of course $w^\epsilon = 0$ on the boundary as well). 
    
    \item Verifying (4.8).
    
