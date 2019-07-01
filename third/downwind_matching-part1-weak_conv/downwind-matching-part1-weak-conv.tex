@@ -263,7 +263,7 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
     \end{equation}
     
     \begin{remark}
-    \normalfont Note that in this case we have the more regular $v_0 \in H^1$ condition, so we will use the $u_3 = 0$ equality on the boundary directly, instead of the original $u_3 n_3 = 0$ constraint that we used.
+    \normalfont As we have mentioned it in the introduction, in this case we will work with a more regular $v_0 \in H^1$ initial data, so we will use the $u_3 = 0$ equality on the boundary directly, instead of the original $u_3 n_3 = 0$ constraint that we used.
     \end{remark}
     
     \begin{remark}
@@ -281,13 +281,13 @@ In this section we describe the weak formulation of the merged equations in both
   
   \[ H^k_{\Gamma} (\Omega) = \overline{C_\Gamma ^ \infty (\Omega)} ^ {H^k (\Omega)} = \{ v \in H^k(\Omega); v=0 \text{ on } \Gamma \} \]
   
-  \[ \mathbf{V} = \{ \mathbf{v} \in  H^1_{\Gamma} (\Omega) \times H^1_{\Gamma} (\Omega) \times H^1_0 (\Omega); \nabla \cdot \mathbf{v} = 0 \text{ in } \Omega \} \]
+  \[ \mathbf{V} = \{ \mathbf{v} \in  H^1_{\Gamma} (\Omega) \times H^1_{\Gamma} (\Omega) \times H^1_{\Gamma} (\Omega); \nabla \cdot \mathbf{v} = 0 \text{ in } \Omega \} \]
   
   \[ H (\partial_3, \Omega) = \{ v \in L^2(\Omega); \partial_3 v \in L^2 (\Omega)\} \]
   
-  \[ H_0 (\partial_3, \Omega) = \overline{C_0 ^\infty (\Omega)}^{H (\partial_3, \Omega)} = \{ v \in H(\partial_3, \Omega); v n_3 = 0 \text{ on } \Gamma \} \]
+  \[ H_\Gamma (\partial_3, \Omega) = \overline{C_0 ^\infty (\Omega)}^{H (\partial_3, \Omega)} = \{ v \in H(\partial_3, \Omega); v = 0 \text{ on } \Gamma \} \]
   
-  \[ \mathbf{W} = \{ \mathbf{u} \in  H^1_{\Gamma} (\Omega) \times H^1_{\Gamma} (\Omega) \times H_0 (\partial_3, \Omega); \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \} \]
+  \[ \mathbf{W} = \{ \mathbf{u} \in  H^1_{\Gamma} (\Omega) \times H^1_{\Gamma} (\Omega) \times H_\Gamma (\partial_3, \Omega); \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \} \]
   
   Then the weak formulation of the hydrostatic system (\ref{HNSC1}) - (\ref{HNSC8}) takes the following form.
   
@@ -353,7 +353,6 @@ Now we are ready to state the main theorem.
 \end{theorem}
   
 %%% *** PROOF *** %%%
-
 \section{Proof of the main theorem} \label{proof}
 
 This section is devoted to verify Theorem \ref{maintheorem}. Structurally we follow a similar chain of thought as in our previous paper --- until the point where the proof diverges reaching the weak convergence of the nonlinear term $u_3^\epsilon C^\epsilon$ where in this case we can not benefit from an $H^1$ regular concentration function. In more detail, we begin with calculating the energy inequality and collect the a priori estimates that derive from it, then verify the rather easily obtainable weak convergence results. Finally we elaborate the steps to bring to a closure the convergence of the $u_3^\epsilon C^\epsilon$ term. The main idea here is to temporarily ignore the $C^\epsilon$ function and prove a strong convergence result considering only the velocity functions. Throughout this step we go beyond the weak solutions quality and show that we are working with strong solutions. In this new setting with more favorable regularities we can prove the convergence result we need, and eventually return to the frame of weak solutions where we can merge back together the velocity and concentration functions into a unified solution.
@@ -393,7 +392,7 @@ This section is devoted to verify Theorem \ref{maintheorem}. Structurally we fol
   
   \subsection{A priori estimates. Weak convergence - Part 1.}
   
-  From the final form of the energy inequality (\ref{finalformEIEQ})we obtain uniform a priori estimates that we summarise in the following proposition.
+  From the final form of the energy inequality (\ref{finalformEIEQ}) we obtain uniform a priori estimates that we summarise in the following proposition.
   
   \begin{prop} \label{aprioriprop}
     Let $u^\epsilon_1, u^\epsilon_2, u^\epsilon_3$ and $C^\epsilon$ be the weak solutions of the system (\ref{ANSC1}) - (\ref{ANSC5}) in the sense of Definition \ref{definitionanisotropicWF}. Then it holds,
