@@ -355,7 +355,7 @@ Now we are ready to state the main theorem.
 %%% *** PROOF *** %%%
 \section{Proof of the main theorem} \label{proof}
 
-This section is devoted to verify Theorem \ref{maintheorem}. Structurally we follow a similar chain of thought as in our previous paper --- until the point where the proof diverges reaching the weak convergence of the nonlinear term $u_3^\epsilon C^\epsilon$ where in this case we can not benefit from an $H^1$ regular concentration function. In more detail, we begin with calculating the energy inequality and collect the a priori estimates that derive from it, then verify the rather easily obtainable weak convergence results. Finally we elaborate the steps to bring to a closure the convergence of the $u_3^\epsilon C^\epsilon$ term. The main idea here is to temporarily ignore the $C^\epsilon$ function and prove a strong convergence result considering only the velocity functions. Throughout this step we go beyond the weak solutions quality and show that we are working with strong solutions. In this new setting with more favorable regularities we can prove the convergence result we need, and eventually return to the frame of weak solutions where we can merge back together the velocity and concentration functions into a unified solution.
+This section is devoted to verify Theorem \ref{maintheorem}. Structurally we follow a similar chain of thought as in our previous paper --- until the point where the proof diverges reaching the weak convergence of the nonlinear term $u_3^\epsilon C^\epsilon$ where in this case we can not benefit from an $H^1$ regular concentration function. In more detail, we begin by calculating the energy inequality and collect the a priori estimates that derive from it, then verify the rather easily obtainable weak convergence results. Finally we elaborate the steps that bring the convergence of the $u_3^\epsilon C^\epsilon$ term to a closure. The main idea here is to temporarily ignore the $C^\epsilon$ function and prove a strong convergence result considering only the velocity functions. Throughout this step we go beyond the weak solutions quality and show that we are working with strong solutions. In this new setting with more favorable regularities we can prove the convergence result we need, and eventually return to the frame of weak solutions where we can merge back together the velocity and concentration functions into a unified solution.
 
   \subsection{Energy inequality}
   
@@ -489,7 +489,7 @@ for any $\varphi = (\varphi_H, \varphi_3) \in H^1 (0,T;\mathbf{V})$ with $\mathb
 
 Now, let's define $\chi \in C_0^\infty ([0, \infty))$ with $0 \leq \chi \leq 1$ and $\chi (0) = 1$ and set $\varphi = (v,w) \chi (t).$ The validity of the the integrals are guaranteed by the regularities of the respective solution functions and using basic inequalities.
 
-Which is why, for example, the estimate of the the following term becomes as such:
+As we highlighted before, using higher than first-order estimates of the type such as passing from $\norm{\nabla v_\epsilon}$ to $\norm{\Delta v_\epsilon}$ is in general not valid. Which is why, for example, the estimate of the the following term becomes as such:
 
 \begin{equation}
   \begin{split}
@@ -702,7 +702,7 @@ Using the bounds we now have for the terms $I_1, I_2, I_3, I_4$, we can perform 
 
 \begin{equation}
   \begin{split} \nonumber
-  \rho (t):= & (\norm{V^\epsilon}_2^2 + \epsilon^2 \norm{W^\epsilon}_2^2)(t) + \int_0^t (\norm{\nabla V^\epsilon}_2^2 + \epsilon^2 \norm{\nabla W^\epsilon}_2^2) \diff s \\
+  \Phi (t):= & (\norm{V^\epsilon}_2^2 + \epsilon^2 \norm{W^\epsilon}_2^2)(t) + \int_0^t (\norm{\nabla V^\epsilon}_2^2 + \epsilon^2 \norm{\nabla W^\epsilon}_2^2) \diff s \\
   & \leq C \epsilon^2 [(\norm{v_0}_2^2 + \epsilon^2 \norm{w_0}_2^2)^2 + C(\norm{v_0}_{H^1}, \Gamma_G)] \\
   & + C \int_0^{t} \norm{\nabla v}_2^4 \norm{V^\epsilon}_2^2 \diff s + C \int_0^{t} \norm{\nabla v}_2^2  \norm{\Delta v}_2^2 \norm{V^\epsilon}_2^2 \diff s =: \Psi(t),
   \end{split}
@@ -713,7 +713,7 @@ for almost any $t_0 \in [0, \infty).$ With this we have
 \begin{equation}
   \begin{split} \nonumber
    \Psi'(t) & = C \norm{\nabla v}_2^4 \norm{V^\epsilon}_2^2 + C \norm{\nabla v}_2^2  \norm{\Delta v}_2^2 \norm{V^\epsilon}_2^2 \\
-   & \leq C (\norm{\nabla v}_2^4 + \norm{\nabla v}_2^2  \norm{\Delta v}_2^2) \rho (t) \leq C (\norm{\nabla v}_2^4 + \norm{\nabla v}_2^2  \norm{\Delta v}_2^2)\Psi(t),
+   & \leq C (\norm{\nabla v}_2^4 + \norm{\nabla v}_2^2  \norm{\Delta v}_2^2) \Phi (t) \leq C (\norm{\nabla v}_2^4 + \norm{\nabla v}_2^2  \norm{\Delta v}_2^2)\Psi(t),
   \end{split}
 \end{equation}
 
