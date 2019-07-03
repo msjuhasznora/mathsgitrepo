@@ -60,9 +60,9 @@ A local domain on the surface of the rotating Earth is often described by a Cart
 
 %% Here \todo{write this part} talk a little bit about the original convergence theorem to make the new one more self-contained and for details refer to the first article.
 
-As in this scenario the advection is dominant compared to diffusion effects along the $x$ axis, this approach naturally contributes to an additional $\epsilon$ term in the Laplacian of the concentration equation, the simplification of the limit model, and brings the challenge of proving a weak convergence result for the product of the vertical velocity and the concentration, as in the energy inequality the $\norm{\partial_1 C^\epsilon}$ term is replaced by $\norm{\sqrt{\epsilon} \partial_1 C^\epsilon}.$ This issue is overcome by using a more regular initial horizontal velocity function, namely $\mathbf{v} \in H^1.$ The additional, stronger initial regularity will result in a smoother $\mathbf{u}^\epsilon$ function, and thus will make up for the lost $H^1$ regularity of the concentration function $C.$
+As in this scenario the advection is dominant compared to diffusion effects along the $x$ axis, this approach on the one hand naturally contributes to an additional $\epsilon$ term in the Laplacian of the concentration equation and to the simplification of the limit model. On the other hand it brings the challenge of proving a weak convergence result for the product of the vertical velocity and the concentration, as in the energy inequality the $\norm{\partial_1 C^\epsilon}$ term is replaced by $\| \sqrt{\epsilon} \partial_1 C^\epsilon \|.$ This issue is overcome by using a more regular initial horizontal velocity function, namely ${\mathbf{u}_h}_0 \in H^1.$ The stronger initial regularity will result in a smoother $\mathbf{u}^\epsilon$ function, and thus will make up for the lost $H^1$ regularity of the concentration function $C.$
 
-We will also use slightly different, stricter boundary conditions --- these additional requirements are motivated by \textit{a)} the presence of $\epsilon$ next to the sediment functions, and \textit{b)} the need to eliminate certain boundary terms in the new part of the proof, which is based on a result obtained for a periodic domain (\cite{li2019primitive}).
+We will also use slightly different, stricter boundary conditions for the concentration function --- these additional requirements are motivated by the presence of the new $\epsilon$ term in the energy inequality.
 
 We end up this section with some notations we will use through the paper.
 
@@ -94,7 +94,7 @@ We end up this section with some notations we will use through the paper.
 %%% *** THE POLLUTED ATMOSPHERE MODEL *** %%%
 \section{The polluted atmosphere model} \label{eqsdescribingatmpluspollution}
 
-As we highlighted before, the key point of this new model is to integrate some of the main ideas of a Gaussian plume dispersion model into the system describing the polluted atmosphere. Therefore we begin by fixing the local Cartesian coordinate system to be adjusted to the downwind direction, i.e. $z$ is oriented upwards, while $x$ is the downwind, and $y$ is the crosswind direction. Another assumption the Gaussian dispersion models typically use as well is that advection is more dominant than diffusion along the downwind direction, which leads to the appearance of an additional $\epsilon$ term in the concentration equation's Laplacian. Namely, we have
+The key point of this new model is to integrate some of the main ideas of the Gaussian plume dispersion model into the system describing the polluted atmosphere. Therefore we begin by fixing the local Cartesian coordinate system to be adjusted to the downwind direction, i.e. $z$ is oriented upwards, while $x$ is the downwind, and $y$ is the crosswind direction. Another assumption the Gaussian dispersion models typically use is that advection is more dominant than diffusion along the downwind direction, which leads to the appearance of an extra $\epsilon$ term in the concentration equation's Laplacian. Namely, we have
 
 \begin{equation} \abs{u_1 \partial_{1} C} \gg \abs{ K_x \partial_{11} ^2 C }\end{equation}
 
@@ -103,9 +103,9 @@ which leads us to using this additional scaling equation
 \begin{equation} \label{ksepsk1} K_x = \epsilon K_1.\end{equation}
 
 \begin{remark} \normalfont
-  The inclusion of these two features in a pollution model are legitimate when the following circumstances hold:
+  The inclusion of these features in a pollution model are legitimate when the following circumstances hold:
   \begin{itemize}
-    \item We are considering a time interval which is not too long in the sense that it is reasonable to assume that we have a permanent, relatively stable main wind direction, i.e. fixing the horizontal coordinates is reasonable in the first place,
+    \item We are considering a time interval which is not too long --- meaning that it is reasonable to assume that we have a permanent, relatively stable main wind direction, i.e. fixing the horizontal coordinates makes sense in the first place,
     \item There is an adequate, relatively high wind speed --- low wind speeds in general lead to a situation where three dimensional diffusion dominates, leading to an error caused by the dominant advection assumption. Fast changing wind direction and low windspeed resulting in fast pollutant settling can make it extremely challenging to obtain reliable results from Gaussian models.
   \end{itemize}
 \end{remark}
@@ -123,10 +123,10 @@ In order to obtain the set of equations that describe the phenomena we start wit
 \end{equation}
     
 \begin{equation} \label{diffusive}
-  \partial_t P + \mathbf{v} \cdot \nabla P = \nabla \cdot (\mathbf{K} \nabla P) + Q,
+  \partial_t P + \mathbf{v} \cdot \nabla P = \nabla \cdot (\mathbf{K} \nabla P) + Q \text{ in } \Omega_{\epsilon} \times (0,T).
 \end{equation}
 
-As for the rescaling process, here we perform the same steps, with the addition of $(\ref{ksepsk1}).$
+As for the rescaling process, here we perform the same steps as in \cite{pollatmws2019}, with the addition of $(\ref{ksepsk1}).$
 
 To expand the $2 \mathbf{\omega} \times \mathbf{v}$ Coriolis term, firstly it is necessary to understand the structure of the new rotation vector. Note that the downwind-matching coordinate system and the original east-north-upwards oriented system are different only in a rotation around the $z$ axis. Let $\theta$ denote the angle between the respective $x$ axes, $\phi$ denotes the latitude, then the rotation vector expressed in the downwind matching coordinate system becomes
 
@@ -153,7 +153,7 @@ and using this, the Coriolis force takes the form
 Thus, these are the terms that appear in the three velocity equations; and finally, note that the third component is present in the rescaled version of the vertical velocity equation multiplied by $\epsilon,$ which is obtained from the $\epsilon$ term in the denominator of $\partial_z p.$
 
 \begin{remark} \normalfont
-The intuitive meaning of what we understand by downwind and the velocity in this new coordinate system: the downwind direction is an approximately steady-in-time direction, it can be seen as the direction marked by the wind direction trackers on an airport or meteorological point. When we consider the downwind, we neglect the small perturbations in its orientation, it can be viewed as a time-averaged direction as long as the fluctuation is relatively small. On the other hand, the velocity is a three dimensional, time dependent vector that changes second after second. 
+For clarity, we add a comment here regarding the intuitive meaning of what we understand by downwind and the velocity in this new coordinate system. The downwind direction is an approximately steady-in-time direction, it can be seen as the direction marked by the wind direction trackers on an airport or meteorological point. When we consider the downwind, we neglect the small perturbations in its orientation, it can be viewed as a time-averaged direction as long as the fluctuation is relatively small. On the other hand, the velocity itself is a three-dimensional, time dependent vector that changes second after second. 
 
 \end{remark}
     
@@ -223,7 +223,7 @@ The initial condition for the velocity and the pollution concentration are
     
 We highlight the difference between the boundary conditions of the original, east-north oriented, and the new, downwind-matching model.
 
-The difference in the kind of boundary conditions that we can "afford" to have on the lower boundary for the concentration comes from the energy inequality. In the east-north-upwards oriented coordinate system we do not have an $\epsilon$ in the diffusion matrix, and thus it is not an issue to have any of the $\partial_i C$ terms to be different from 0, not even for an ocean case where $\partial_3 C$ becomes nonzero as well (they are required however to be bounded of course). On the other hand, the downwind-matching coordinate system brings in an $\epsilon$ term in front of the $K_1$ diffusion, which makes the model more sensitive to assigning boundary conditions for $C.$ This means that we can not have the relatively relaxed, boundedness requirement for any $\partial_i C$ except for $i=1.$ All other $\partial_2 C, \partial_3 C$ derivatives must be zero on the lower boundary, otherwise they would result in an $(\epsilon - \text{const.})$ negative term --- for more details see the energy inequality of the system in the section describing the proof. This also means that we will consider exclusively the inland domain scenario.
+The difference in the kind of boundary conditions we can "afford" to have on the lower boundary for the concentration comes from the energy inequality. In the east-north-upwards oriented coordinate system we do not have an $\epsilon$ in the diffusion matrix, and thus, having any of the $\partial_i C$ terms to be different from 0 does not create any problems, not even for an ocean case where $\partial_3 C$ becomes nonzero as well (they are required however to be bounded of course). On the other hand, the downwind-matching coordinate system brings in an $\epsilon$ term in front of the $K_1$ diffusion, which makes the model more sensitive to assigning boundary conditions for $C.$ This means that we can not have anymore the relatively relaxed boundedness requirement for any $\partial_i C$ except for $i=1.$ All other $\partial_2 C, \partial_3 C$ derivatives must be zero on the lower boundary, otherwise they would result in an $(\epsilon - \text{const.})$ negative term appearing in the energy inequality --- for more details see the section describing the proof. This also means that we will consider exclusively the inland domain scenario for the case of this coordinate system.
 
 If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and $\epsilon$ in the anisotropic equations, we formally arrive to the hydrostatic Navier-Stokes equations (i.e., primitive equations) combined with pollution.
 
@@ -263,7 +263,7 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
     \end{equation}
     
     \begin{remark}
-    \normalfont As we have mentioned it in the introduction, in this case we will work with a more regular $v_0 \in H^1$ initial data, so we will use the $u_3 = 0$ equality on the boundary directly, instead of the original $u_3 n_3 = 0$ constraint that we used.
+    \normalfont As we have mentioned it in the introduction, in this case we will work with a more regular ${\mathbf{u}_h}_0 \in H^1$ initial data, so we will use the $u_3 = 0$ equality on the boundary directly, instead of the original $u_3 n_3 = 0$ constraint that we had used.
     \end{remark}
     
     \begin{remark}
@@ -281,7 +281,7 @@ In this section we describe the weak formulation of the merged equations in both
   
   \[ H^k_{\Gamma} (\Omega) = \overline{C_\Gamma ^ \infty (\Omega)} ^ {H^k (\Omega)} = \{ v \in H^k(\Omega); v=0 \text{ on } \Gamma \} \]
   
-  \[ \mathbf{V} = \{ \mathbf{v} \in  H^1_{\Gamma} (\Omega) \times H^1_{\Gamma} (\Omega) \times H^1_{\Gamma} (\Omega); \nabla \cdot \mathbf{v} = 0 \text{ in } \Omega \} \]
+  \[ \mathbf{V} = \{ \mathbf{u} \in  H^1_{\Gamma} (\Omega) \times H^1_{\Gamma} (\Omega) \times H^1_{\Gamma} (\Omega); \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \} \]
   
   \[ H (\partial_3, \Omega) = \{ v \in L^2(\Omega); \partial_3 v \in L^2 (\Omega)\} \]
   
@@ -293,12 +293,12 @@ In this section we describe the weak formulation of the merged equations in both
   
   \begin{definition} \label{definitionhydrostaticWF}
   
-  Find $(\mathbf{u}, C)$ such that $\mathbf{u} = (\mathbf{u}_H, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_H \in L^\infty (0,T; L^2(\Omega)^2),$ and $C \in L_t^\infty L_x^2$ with $\partial_2 C, \partial_3 C \in L^2_t L^2_x$, such that
+  Find $(\mathbf{u}, C)$ such that $\mathbf{u} = (\mathbf{u}_h, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_h \in L^\infty (0,T; L^2(\Omega)^2),$ and $C \in L_t^\infty L_x^2$ with $\partial_2 C, \partial_3 C \in L^2_t L^2_x$, such that
   
   \begin{equation}
     \begin{split}
-      & \int_0^T \bigg[ -(\mathbf{u}_H, \partial_t \mathbf{\tilde{u}}_H) + (\nabla_\nu \mathbf{u}_H, \nabla_\nu \mathbf{\tilde{u}}_H) - (\mathbf{u}_H, (\mathbf{u} \cdot \nabla) \mathbf{\tilde{u}}_H) + (b(\mathbf{u}_H), \mathbf{\tilde{u}}_H) \bigg ] \diff t \\
-      & = - (\mathbf{u}_{0H}, \mathbf{\tilde{u}}_H(0)) \diff t \label{hydrostaticWF}
+      & \int_0^T \bigg[ -(\mathbf{u}_h, \partial_t \mathbf{\tilde{u}}_h) + (\nabla_\nu \mathbf{u}_h, \nabla_\nu \mathbf{\tilde{u}}_h) - (\mathbf{u}_h, (\mathbf{u} \cdot \nabla) \mathbf{\tilde{u}}_h) + (b(\mathbf{u}_h), \mathbf{\tilde{u}}_h) \bigg ] \diff t \\
+      & = - ({\mathbf{u}_h}_0, \mathbf{\tilde{u}}_h(0)) \diff t \label{hydrostaticWF}
     \end{split}
   \end{equation}
   
@@ -311,22 +311,22 @@ In this section we describe the weak formulation of the merged equations in both
     \end{split}
   \end{equation}
   
-  for all $(\mathbf{\tilde{u}}, \tilde{C})$ with $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_H, \tilde{u}_3) \in H^1 (0,T, \mathbf{W})$, with $\mathbf{\tilde{u}}_H (T) = 0$ and $\partial_3 \mathbf{\tilde{u}}_H \in L^\infty (0, T; L^3 (\Omega)^2)$ and $\tilde{C}$ with $\tilde{C} \in L^2 (0,T, H^3_{\Gamma} (\Omega))$, $\tilde{C} \in H^1 (0,T, L^2)$, $\tilde{C} (T) = 0$. 
+  for all $(\mathbf{\tilde{u}}, \tilde{C})$ with $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T, \mathbf{W})$, with $\mathbf{\tilde{u}}_h (T) = 0$ and $\partial_3 \mathbf{\tilde{u}}_h \in L^\infty (0, T; L^3 (\Omega)^2)$ and $\tilde{C}$ with $\tilde{C} \in L^2 (0,T, H^3_{\Gamma} (\Omega))$, $\tilde{C} \in H^1 (0,T, L^2)$, $\tilde{C} (T) = 0$. 
   
   \end{definition}
   
-  Giving definition to the weak formulation of the anisotropic system we underline the importance of the spaces we use here --- they create a sort of in-between point between classical weak solutions and Leray-Hopf weak solutions in the sense that the concentration function does not need to be weakly continuous, but the velocity part of the solution is set to be in $C_w.$ This represents a space construction that is both minimal and corresponds to the requirements of the proof detailed later.
+  Giving definition to the weak formulation of the anisotropic system we underline the importance of the spaces we use here --- they create a sort of in-between point for classical weak solutions and Leray-Hopf weak solutions in the sense that the concentration function does not need to be weakly continuous, but the velocity part of the solution is set to be in $C_w.$ This represents a space construction that is both minimal and corresponds to the requirements of the proof detailed later.
 
  \begin{definition} \label{definitionanisotropicWF}
   
-  Find $\mathbf{u}^\epsilon = (\mathbf{u}_H, u^\epsilon_3) \in L^2 (0,T ; \mathbf{V}) \cap C_w (0, T; L^2 (\Omega)^3)$ and $C^\epsilon \in L^\infty (0,T; L^2(\Omega)) \cap L^2 (0,T; H^1(\Omega))$, such that
+  Find $\mathbf{u}^\epsilon = (\mathbf{u}_h, u^\epsilon_3) \in L^2 (0,T ; \mathbf{V}) \cap C_w (0, T; L^2 (\Omega)^3)$ and $C^\epsilon \in L^\infty (0,T; L^2(\Omega)) \cap L^2 (0,T; H^1(\Omega))$, such that
   
   \begin{equation}
     \begin{split}
-      & \int_0^T \bigg [ -(\mathbf{u}^\epsilon_H, \partial_t \mathbf{\tilde{u}}_H) + (\nabla_\nu \mathbf{u}^\epsilon_H, \nabla_\nu \mathbf{\tilde{u}}_H) - (\mathbf{u}^\epsilon_H, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{\tilde{u}}_H) + (b(\mathbf{u}^\epsilon_H), \mathbf{\tilde{u}}_H) \bigg ] \diff t \\
+      & \int_0^T \bigg [ -(\mathbf{u}^\epsilon_h, \partial_t \mathbf{\tilde{u}}_h) + (\nabla_\nu \mathbf{u}^\epsilon_h, \nabla_\nu \mathbf{\tilde{u}}_h) - (\mathbf{u}^\epsilon_h, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{\tilde{u}}_h) + (b(\mathbf{u}^\epsilon_h), \mathbf{\tilde{u}}_h) \bigg ] \diff t \\
       & + \epsilon \beta \int_0 ^ T \big [ (u_3 ^\epsilon, \tilde{u}_1) - (u_1^\epsilon, \tilde{u}_3) \big ] \diff t\\
       & + \epsilon^2 \int _0 ^ T \big [ -(u_3^\epsilon, \partial_t \tilde{u}_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, \tilde{u}_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu \tilde{u}_3) \big ] \diff t \\
-      & = - (\mathbf{u}^\epsilon_{0H}, \mathbf{\tilde{u}}_H(0)) - \epsilon^2 (u_{03}^\epsilon, \tilde{u}_3 (0)) \diff t \raisetag{20pt} \label{anisotropicWF}
+      & = - ({\mathbf{u}^\epsilon_h}_0, \mathbf{\tilde{u}}_h(0)) - \epsilon^2 ({u^\epsilon_3}_0, \tilde{u}_3 (0)) \diff t \raisetag{20pt} \label{anisotropicWF}
     \end{split}
   \end{equation}
   
@@ -340,16 +340,16 @@ In this section we describe the weak formulation of the merged equations in both
     \end{split}
   \end{equation}
   
-  for all $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_H, \tilde{u}_3) \in H^1 (0,T;\mathbf{V})$ with $\mathbf{\tilde{u}}(T) = 0$ and $\tilde{C}$ such that $\tilde{C} \in H^1 (0,T, H^3_{\Gamma} (\Omega))$ and $\tilde{C} (T) = 0$.
+  for all $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T;\mathbf{V})$ with $\mathbf{\tilde{u}}(T) = 0$ and $\tilde{C}$ such that $\tilde{C} \in H^1 (0,T, H^3_{\Gamma} (\Omega))$ and $\tilde{C} (T) = 0$.
   
   \end{definition}
 
-The main theorem of this paper is analogous to our previous result stated for the case of the geophysical frame, but we highlight the difference that here we use the initial data $\mathbf{v}_0 \in H^1.$ For the case of the geophysical frame an $L^2$ initial velocity was sufficient, here we need a stronger data to balance out the weaker results we can extract from the energy inequality on $C^\epsilon.$
+The main theorem of this paper is analogous to our previous result stated for the case of the geophysical frame, but we highlight the difference that here we use the initial data ${\mathbf{u}_h}_0 \in H^1.$ For the case of the geophysical frame an $L^2$ initial velocity was sufficient, here however we need a stronger data to balance out the weaker results we can extract from the energy inequality on $C^\epsilon.$
 
 Now we are ready to state the main theorem.
 
 \begin{theorem} \label{maintheorem}
-  Let $\mathbf{v}_0$ $\in$ $H^1 (\Omega)$, ${u_3}_0 \in L^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 \cdot \mathbf{n} = 0$ on $\partial \Omega$; let $C_0 \in$ $L^2 (\Omega)$, $C_0 = 0$ on $ \partial \Omega$, and assume that the boundary conditions (\ref{ANSC8}) hold; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, C^\epsilon)$ of the anisotropic equations (\ref{ANSC1}) - (\ref{ANSC5}) converges to a weak solution $(\mathbf{u}, C)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1}) - (\ref{HNSC5}).
+  Let ${\mathbf{u}_h}_0$ $\in$ $H^1 (\Omega)$, ${u_3}_0 \in L^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 = 0$ on $\partial \Omega$; let $C_0 \in$ $L^2 (\Omega)$, $C_0 = 0$ on $ \partial \Omega$, and assume that the boundary conditions (\ref{ANSC8}) hold; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, C^\epsilon)$ of the anisotropic equations (\ref{ANSC1}) - (\ref{ANSC5}) converges to a weak solution $(\mathbf{u}, C)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1}) - (\ref{HNSC5}).
 \end{theorem}
   
 %%% *** PROOF *** %%%
@@ -363,21 +363,21 @@ This section is devoted to verify Theorem \ref{maintheorem}. Structurally we fol
   
   \begin{equation}
     \begin{split}  
-    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \big[ \norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \big] \diff \tau \\
+    & \frac{1}{2} (\norm{\mathbf{u}_h^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \big[ \norm{\nabla_\nu \mathbf{u}_h^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \big] \diff \tau \\
     & + \int_0 ^ t  \big [ \epsilon K_1 \norm{\partial_1 C^\epsilon}_{L^2}^2  + K_2 \norm{\partial_2 C^\epsilon}_{L^2}^2 + K_3 \norm{\partial_3 C^\epsilon}_{L^2}^2 \big ] d \tau \\
-    & \leq \int_0^t (S^\epsilon,C^\epsilon) \diff \tau + \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon_0}_{L^2}^2) \\
+    & \leq \int_0^t (S^\epsilon,C^\epsilon) \diff \tau + \frac{1}{2} (\norm{\mathbf{u}_h^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon_0}_{L^2}^2) \\
     & + \int _ 0 ^ t \epsilon K_1 \langle \partial_1 C^\epsilon, C^\epsilon \rangle_{\Gamma_G} \diff \tau \raisetag{70pt} \label{energyIEQ}
     \end{split}
   \end{equation}
   
-  Using standard techniques, the generalised Young inequality with a $\zeta > 0$ constant, the Holder inequality and the Trace Theorem, (\ref{energyIEQ}) takes the final form
+  Using standard techniques, the generalised Young inequality with a $\zeta > 0$ constant, the H\"older inequality and the Trace Theorem, (\ref{energyIEQ}) takes the final form
 
   \begin{equation}
     \begin{split}  
-    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \big [\norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2 \big ] \diff \tau \\
+    & \frac{1}{2} (\norm{\mathbf{u}_h^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \big [\norm{\nabla_\nu \mathbf{u}_h^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2 \big ] \diff \tau \\
     & + \int_0 ^ t \bigg[ (\epsilon K_1 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_1 C^\epsilon}_{L^2}^2  + (K_2 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_2 C^\epsilon}_{L^2}^2 \\
     & + (K_3 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_3 C^\epsilon}_{L^2}^2 \bigg] \diff \tau \\
-    & \leq \frac{1}{\zeta} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)} + \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) \\
+    & \leq \frac{1}{\zeta} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 C^\epsilon}^2 _{L^2 (\Gamma_G)} + \frac{1}{2} (\norm{\mathbf{u}_h^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) \\
     & + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau, \raisetag{20pt} \label{finalformEIEQ}
     \end{split}
   \end{equation}
@@ -411,7 +411,7 @@ This section is devoted to verify Theorem \ref{maintheorem}. Structurally we fol
   As a consequence of Proposition \ref{aprioriprop}, up to subsequences still denoted by the same way, we have the following weak convergence results.
   
     \begin{align} 
-    &  \mathbf{u}_H^\epsilon \rightharpoonup \mathbf{u}_H &\quad & \text{weakly in $L_t^\infty L_x^2 \cap L_t^2 H_x^1$,} \label{WeakConvUHEps} \\
+    &  \mathbf{u}_h^\epsilon \rightharpoonup \mathbf{u}_h &\quad & \text{weakly in $L_t^\infty L_x^2 \cap L_t^2 H_x^1$,} \label{WeakConvUHEps} \\
     &  \epsilon^2 u_3^\epsilon \to 0 &\quad & \text{strongly in $L_t^\infty L_x^2 \cap L_t^2 H_x^1$,} \label{WeakConvU3Eps} \\ 
     & u_3^\epsilon \rightharpoonup u_3  &\quad & \text{weakly in $L_t^2 L_x^2$,} \label{WeakConvU3NoEps} \\
     & C^\epsilon \rightharpoonup C &\quad & \text{weakly in $L_t^\infty L_x^2$,} \label{WeakConvCEps1} \\
@@ -421,7 +421,7 @@ This section is devoted to verify Theorem \ref{maintheorem}. Structurally we fol
   \end{align} 
   
   In order to conclude the proof of Theorem \ref{maintheorem} we pass to the limit in the weak formulation (\ref{anisotropicWF}). Taking the limit for the linear terms can be done in a standard way using the previously obtained results.
-   Concerning the nonlinear velocity terms, the convergence can be shown applying a generalisation of the classical translation criterium of Riesz-Frechet-Kolmogorov which enables us to get strong convergence for the horizontal velocities. This is achieved by establishing a bound for the perturbation of $\mathbf{u}_H$ of the form $\norm{\tau_h \mathbf{u}_H - \mathbf{u}_H}_{L^p(0,T-h, \mathbf{Y})} \leq \varphi(h) + \psi(\epsilon),$ where $\mathbf{Y}$ is a Banach space, $\varphi$ and $\psi$ are appropriate functions with their limits vanishing at zero, and $\tau_h \mathbf{u}_H = \mathbf{u}_H (t+h) $. After obtaining strong convergence for $\mathbf{u}_H,$ the proof of the convergence for these nonlinear terms can be closed by applying basic interpolation techniques and the generalised Holder inequality. 
+   Concerning the nonlinear velocity terms, the convergence can be shown applying a generalisation of the classical translation criterium of Riesz-Frechet-Kolmogorov which enables us to get strong convergence for the horizontal velocities. This is achieved by establishing a bound for the perturbation of $\mathbf{u}_h$ of the form $\norm{\tau_h \mathbf{u}_h - \mathbf{u}_h}_{L^p(0,T-h, \mathbf{Y})} \leq \varphi(h) + \psi(\epsilon),$ where $\mathbf{Y}$ is a Banach space, $\varphi$ and $\psi$ are appropriate functions with their limits vanishing at zero, and $\tau_h \mathbf{u}_h = \mathbf{u}_h (t+h) $. After obtaining strong convergence for $\mathbf{u}_h,$ the proof of the convergence for these nonlinear terms can be closed by applying basic interpolation techniques and the generalised H\"older inequality. 
   Finally, as for the concentration-including nonlinear terms, we have the convergence of $(u_i C^\epsilon, \partial_i \tilde{C})$ for $i=1,2$ since as we mentioned before, we have the strong convergence of the horizontal velocities --- while in the case of $i=3$ this property does not hold for $u_3$ and from the energy bound we do not have more than the weak convergence of $C^\epsilon$. Because of its complexity we handle this specific term in Part 2.
   
   \subsection{Weak convergence --- Part 2.}
@@ -451,19 +451,19 @@ This section is devoted to verify Theorem \ref{maintheorem}. Structurally we fol
   
   The following part of the proof is about verifying the strong convergence of $u_3^\epsilon,$ and is based on the idea of \cite{li2019primitive} --- our scenario is different however in that \textit{a)} first of all our domain is bounded, while the domain they consider is periodic, \textit{b)} we do not assume zero-averaged functions, and finally \textit{c)} in our case the Coriolis terms are considered as well. Our strategy in providing the proof is to give a self-contained result that describes all the steps that build up the verification process, but we elaborate in more detail where the above mentioned \textit{a), b), c)} points have a tangible effect. Some technical details that are identical to those in \cite{li2019primitive} will be skipped.
   
-It is important to highlight at this point that since we are not restricted to zero-averaged functions and we are not on a periodic domain, we need to pay special attention when verifying boundedness results using the Poincare inequality. Note that as the value of the velocity functions are defined to be zero on the boundary, any first-order estimate of the type $\norm{v_\epsilon} \leq \norm{\nabla v_\epsilon}$ is valid (i.e. to estimate a function by its gradient), using the zero-trace version of the Poincare inequality for functions in $W^{1,2}_0$ ($k=1, p=2$). However, since it is only the value of the functions that vanishes on the boundary, but not their derivatives, higher order estimates such as passing from $\norm{\nabla v_\epsilon}$ to $\norm{\Delta v_\epsilon}$ can not be applied in general.
+It is important to highlight at this point that since we are not restricted to zero-averaged functions and we are not on a periodic domain, we need to pay special attention when verifying boundedness results using the Poincar\'e inequality. Note that as the value of the velocity functions are defined to be zero on the boundary, any first-order estimate of the type $\norm{v_\epsilon} \leq \norm{\nabla v_\epsilon}$ is valid (i.e. to estimate a function by its gradient), using the zero-trace version of the Poincar\'e inequality for functions in $W^{1,2}_0$ ($k=1, p=2$). However, since it is only the value of the functions that vanishes on the boundary, but not their derivatives, higher order estimates such as passing from $\norm{\nabla v_\epsilon}$ to $\norm{\Delta v_\epsilon}$ can not be applied in general.
   
 The next step in order to estimate the difference $$(V_\epsilon, W_\epsilon): = (v_\epsilon - v, w_\epsilon - w)$$ is to practically use the strong solution $(v,w)$ as a test function when writing down the weak formulation integral identity for the scaled equations. Following this method we arrive to
 
 \begin{prop} \label{propIdentity}
 
-Let $(v_\epsilon, w_\epsilon)$ and $(v,w)$ be the solutions of (\ref{ANSC1}) - (\ref{ANSC5}) and (\ref{HNSC1}) - (\ref{HNSC5}), respectively, with initial data $(v_0, w_0),$ where $v_0 \in H^1(\Omega)$ and $w_0 = - \int_0^z \nabla_H \cdot v_0 \diff z'.$ Then we have the following integral identity:
+Let $(v_\epsilon, w_\epsilon)$ and $(v,w)$ be the solutions of (\ref{ANSC1}) - (\ref{ANSC5}) and (\ref{HNSC1}) - (\ref{HNSC5}), respectively, with initial data $(v_0, w_0),$ where $v_0 \in H^1(\Omega)$ and $w_0 = - \int_0^z \nabla_h \cdot v_0 \diff z'.$ Then we have the following integral identity:
 
 \begin{equation} \label{integralIdentity_prop}
   \begin{split}
     & - \frac{\epsilon^2}{2} \norm{w(t)}_2^2 + \bigg ( (v_\epsilon \cdot v + \epsilon^2 w_\epsilon w) \diff x \diff y \diff z  \bigg ) (t) \\
     & + \int_{Q_t} (-v_\epsilon \cdot \partial_t v + \nabla v_\epsilon : \nabla v + \epsilon^2 \nabla w_\epsilon \cdot \nabla w) \diff x \diff y \diff z \diff s \\
-    & = \frac{\epsilon^2}{2} \norm{w_0}_2^2 + \norm{v_0}_2^2 + \epsilon^2 \int_{Q_t} \bigg ( \int_0^z \partial_t v \diff z' \bigg ) \cdot \nabla_H W_\epsilon \diff x \diff y \diff z \diff s \\
+    & = \frac{\epsilon^2}{2} \norm{w_0}_2^2 + \norm{v_0}_2^2 + \epsilon^2 \int_{Q_t} \bigg ( \int_0^z \partial_t v \diff z' \bigg ) \cdot \nabla_h W_\epsilon \diff x \diff y \diff z \diff s \\
     & - \int_{Q_t} [(u_\epsilon \cdot \nabla) v_\epsilon \cdot v + \epsilon^2 u_\epsilon \cdot w_\epsilon w] \diff x \diff y \diff z \diff s \\
     & + \int_{Q_t}  ( \gamma v_2^\epsilon v_1 - \epsilon \beta w^\epsilon v_1 + \alpha \epsilon w^\epsilon v_2 - \gamma v_1^\epsilon v_2 - \epsilon \alpha v^\epsilon_2 w + \epsilon \beta v^\epsilon_1 w)
   \end{split}
@@ -479,13 +479,13 @@ By definition of the weak solutions of the scaled Navier-Stokes equations, we kn
 
 \begin{equation}
   \begin{split}
-    & \int_Q [ - (v_\epsilon \cdot \partial_t \varphi_H + \epsilon^2 w_\epsilon \partial_t \varphi_3) +( (u_\epsilon \cdot \nabla) v_\epsilon \cdot \varphi_H + \epsilon^2 u_\epsilon \cdot \nabla w_\epsilon \varphi_3 ) + \nabla v_\epsilon : \nabla \varphi_H \\
-    & + \epsilon^2 \nabla w_\epsilon \cdot \nabla \varphi_3 ] \diff x \diff y \diff z \diff t = \int_Q (v_0 \cdot \varphi_H (\cdot , 0) + \epsilon^2 w_0 \varphi_3 (\cdot , 0)) \diff x \diff y \diff z \\
+    & \int_Q [ - (v_\epsilon \cdot \partial_t \varphi_h + \epsilon^2 w_\epsilon \partial_t \varphi_3) +( (u_\epsilon \cdot \nabla) v_\epsilon \cdot \varphi_h + \epsilon^2 u_\epsilon \cdot \nabla w_\epsilon \varphi_3 ) + \nabla v_\epsilon : \nabla \varphi_h \\
+    & + \epsilon^2 \nabla w_\epsilon \cdot \nabla \varphi_3 ] \diff x \diff y \diff z \diff t = \int_Q (v_0 \cdot \varphi_h (\cdot , 0) + \epsilon^2 w_0 \varphi_3 (\cdot , 0)) \diff x \diff y \diff z \\
     & + \int_Q  \gamma v_2^\epsilon \varphi_1 - \epsilon \beta w^\epsilon \varphi_1 + \alpha \epsilon w^\epsilon \varphi_2 - \gamma v_1^\epsilon \varphi_2 - \epsilon \alpha v^\epsilon_2 \varphi_3 + \epsilon \beta v^\epsilon_1 \varphi_3
   \end{split}
 \end{equation}
 
-for any $\varphi = (\varphi_H, \varphi_3) \in H^1 (0,T;\mathbf{V})$ with $\mathbf{\varphi}(T) = 0.$
+for any $\varphi = (\varphi_h, \varphi_3) \in H^1 (0,T;\mathbf{V})$ with $\mathbf{\varphi}(T) = 0.$
 
 Now, let's define $\chi \in C_0^\infty ([0, \infty))$ with $0 \leq \chi \leq 1$ and $\chi (0) = 1$ and set $\varphi = (v,w) \chi (t).$ The validity of the the integrals are guaranteed by the regularities of the respective solution functions and using basic inequalities.
 
@@ -493,8 +493,8 @@ As we highlighted before, using higher than first-order estimates of the type su
 
 \begin{equation}
   \begin{split}
-    & \int_Q \abs{u_\epsilon} \abs{\nabla w_\epsilon} \abs{w} \chi \diff x \diff y \diff z \leq  \int_0 ^ T \int_M \int_{-1}^1 \abs{u^\epsilon} \abs{\nabla w^\epsilon} \diff z \int_{-1}^1 \abs{\nabla_H v} \\
-    & \leq C \int_0^T \norm{u^\epsilon}_2^{1/2} \norm{\nabla u^\epsilon}_2^{1/2} \norm{\nabla w^\epsilon}_2 \norm{\nabla_H v}_2^{1/2} (\norm{\nabla_H v}_2^{1/2} + \norm{\Delta v}_2^{1/2}) \\
+    & \int_Q \abs{u_\epsilon} \abs{\nabla w_\epsilon} \abs{w} \chi \diff x \diff y \diff z \leq  \int_0 ^ T \int_M \int_{-1}^1 \abs{u^\epsilon} \abs{\nabla w^\epsilon} \diff z \int_{-1}^1 \abs{\nabla_h v} \\
+    & \leq C \int_0^T \norm{u^\epsilon}_2^{1/2} \norm{\nabla u^\epsilon}_2^{1/2} \norm{\nabla w^\epsilon}_2 \norm{\nabla_h v}_2^{1/2} (\norm{\nabla_h v}_2^{1/2} + \norm{\Delta v}_2^{1/2}) \\
     & \leq C \sup_{0 \leq t \leq T} \norm{u^\epsilon}_2^{1/2} \norm{\nabla v}_2^{1/2} \bigg( \int_0^T \norm{\nabla u^\epsilon}^2_2 \diff t \bigg)^{1/4} \bigg ( \int_0^T \norm{\nabla w^\epsilon}_2^2 \diff t \bigg)^{1/2} \\
     & \times \bigg ( \int_0^T \norm{\Delta v}_2^2 \bigg )^{1/4} \\
     & + C \sup_{0 \leq t \leq T} \norm{u^\epsilon}_2^{1/2} \norm{\nabla v}_2 \bigg( \int_0^T \norm{\nabla u^\epsilon}_2 \diff t \bigg)^{1/2} \bigg ( \int_0^T \norm{\nabla w^\epsilon}_2^2 \diff t \bigg)^{1/2}.
@@ -518,15 +518,15 @@ The idea here is to take an arbitrary $t_0 \in (0, \infty)$ and a sufficiently s
 
 In more detail, the term $ \langle \partial_t w, w^\epsilon \rangle$ now takes the form 
 
-$$ \langle \partial_t w, w^\epsilon \rangle = - \int_{\partial \Omega} \bigg ( \int_0^z \partial_t v \diff z' \bigg ) w^\epsilon n_H + \int_\Omega \bigg ( \int_0^z \partial_t v \diff z' \bigg) \nabla_H \cdot w^\epsilon,$$
+$$ \langle \partial_t w, w^\epsilon \rangle = - \int_{\partial \Omega} \bigg ( \int_0^z \partial_t v \diff z' \bigg ) w^\epsilon n_h + \int_\Omega \bigg ( \int_0^z \partial_t v \diff z' \bigg) \nabla_h \cdot w^\epsilon,$$
     
 from where, by using that $w^\epsilon = 0$ on $\partial \Omega$ we arrive easily to the more simple
     
-$$ \langle \partial_t w, w^\epsilon \rangle  = \int_\Omega \bigg ( \int_0^z \partial_t v \diff z' \bigg) \nabla_H \cdot w^\epsilon,$$
+$$ \langle \partial_t w, w^\epsilon \rangle  = \int_\Omega \bigg ( \int_0^z \partial_t v \diff z' \bigg) \nabla_h \cdot w^\epsilon,$$
      
 which is the form one would have on a periodic domain. Similarly, 
      
-$$ \langle \partial_t w, w^\epsilon - w \rangle = \int_\Omega \bigg ( \int_0^z \partial_t v \diff z' \bigg) \nabla_H \cdot (w^\epsilon - w),$$ as the boundary term $\int_{\partial \Omega} \bigg ( \int_0^z \partial_t v \diff z' \bigg ) (w^\epsilon - w) n_H$ becomes zero, since we have $w = 0, w_\epsilon = 0$ on $\Gamma.$ 
+$$ \langle \partial_t w, w^\epsilon - w \rangle = \int_\Omega \bigg ( \int_0^z \partial_t v \diff z' \bigg) \nabla_h \cdot (w^\epsilon - w),$$ as the boundary term $\int_{\partial \Omega} \bigg ( \int_0^z \partial_t v \diff z' \bigg ) (w^\epsilon - w) n_h$ becomes zero, since we have $w = 0, w_\epsilon = 0$ on $\Gamma.$ 
 
 After some technical details that we omit here we eventually obtain
 
@@ -534,7 +534,7 @@ After some technical details that we omit here we eventually obtain
   \begin{split}
     & - \frac{\epsilon^2}{2} \norm{w(t)}_2^2 + \bigg ( (v_\epsilon \cdot v + \epsilon^2 w_\epsilon w) \diff x \diff y \diff z  \bigg ) (t_0) \\
     & + \int_{Q_{t_0}} (-v_\epsilon \cdot \partial_t v + \nabla v_\epsilon : \nabla v + \epsilon^2 \nabla w_\epsilon \cdot \nabla w) \diff x \diff y \diff z \diff s \\
-    & = \frac{\epsilon^2}{2} \norm{w_0}_2^2 + \norm{v_0}_2^2 + \epsilon^2 \int_{Q_{t_0}} \bigg ( \int_0^z \partial_t v \diff z' \bigg ) \cdot \nabla_H W_\epsilon \diff x \diff y \diff z \diff s \\
+    & = \frac{\epsilon^2}{2} \norm{w_0}_2^2 + \norm{v_0}_2^2 + \epsilon^2 \int_{Q_{t_0}} \bigg ( \int_0^z \partial_t v \diff z' \bigg ) \cdot \nabla_h W_\epsilon \diff x \diff y \diff z \diff s \\
     & - \int_{Q_{t_0}} [(u_\epsilon \cdot \nabla) v_\epsilon \cdot v + \epsilon^2 u_\epsilon \cdot w_\epsilon w] \diff x \diff y \diff z \diff s \\
     & + \int_{Q_{t_0}}  ( \gamma v_2^\epsilon v_1 - \epsilon \beta w^\epsilon v_1 + \alpha \epsilon w^\epsilon v_2 - \gamma v_1^\epsilon v_2 - \epsilon \alpha v^\epsilon_2 w + \epsilon \beta v^\epsilon_1 w)
   \end{split}
@@ -594,7 +594,7 @@ Using the same conditions as in Proposition $\ref{propIdentity}$, the following 
   \begin{equation} \label{introduce_I_terms}
     \begin{split}
       & \frac{1}{2} (\norm{V_\epsilon}_2^2 + \epsilon^2 \norm{W_\epsilon}_2^2) (t_0) + \int_0^{t_0} (\norm{\nabla V_\epsilon}_2^2 + \epsilon^2 \norm{\nabla W_\epsilon}_2^2) \diff t  \\
-      & \leq - \epsilon^2 \int_{Q_{t_0}} \bigg [ \bigg ( \int_0^z \partial_t v \diff z' \bigg ) \cdot \nabla_H W_\epsilon + \nabla w \cdot \nabla W_\epsilon \bigg ] \diff x \diff y \diff z \diff t \\
+      & \leq - \epsilon^2 \int_{Q_{t_0}} \bigg [ \bigg ( \int_0^z \partial_t v \diff z' \bigg ) \cdot \nabla_h W_\epsilon + \nabla w \cdot \nabla W_\epsilon \bigg ] \diff x \diff y \diff z \diff t \\
       & + \int_{Q_{t_0}} [(u_\epsilon \cdot \nabla)v_\epsilon \cdot v + (u \cdot \nabla )v \cdot v_\epsilon] \diff x \diff y \diff z \diff t \\
       & + \epsilon^2 \int_{Q_{t_0}} u_\epsilon \cdot \nabla w_\epsilon w \diff x \diff y \diff z \diff t \\
       & + \int_{Q_{t_0}}  \epsilon \beta w^\epsilon v_1 - \alpha \epsilon w^\epsilon v_2 + \epsilon \alpha v^\epsilon_2 w - \epsilon \beta v^\epsilon_1 w \diff x \diff y \diff z \diff t := I_1 + I_2 + I_3 + I_4, \raisetag{80pt}
@@ -615,13 +615,13 @@ Using the same conditions as in Proposition $\ref{propIdentity}$, the following 
   
   \begin{equation}\label{I2Bound}I_2 \leq \frac{1}{6} \norm{\nabla V^\epsilon}^2_2 + C \int_0^{t_0} \norm{\nabla v}_2^4 \norm{V^\epsilon}_2^2 \diff t + C \int_0^{t_0} \norm{\nabla v}_2^2  \norm{\Delta v}_2^2 \norm{V^\epsilon}_2^2 \diff t\end{equation}
   
-  for $I_2$ follows analogous steps as in \cite{li2019primitive} (i.e. using the Young, Holder, Poincare inequalities, the divergence-free condition), but we highlight the presence of the new, additional term $C \int_0^{t_0} \norm{\nabla v}_2^4 \norm{V^\epsilon}_2^2 \diff t$ in the bound.
+  for $I_2$ follows analogous steps as in \cite{li2019primitive} (i.e. using the Young, H\"older, Poincar\'e inequalities, the divergence-free condition), but we highlight the presence of the new, additional term $C \int_0^{t_0} \norm{\nabla v}_2^4 \norm{V^\epsilon}_2^2 \diff t$ in the bound.
   
   The difference is due to the fact when we need to construct a bound for the term
   
-  $$ \int_0^{t_0} \int_M \bigg ( \int_{-1}^1 \abs{\nabla_H V^\epsilon} \diff z' \bigg) \bigg ( \int_{-1}^1 \abs{V^\epsilon} \abs{\partial_z v} \bigg )$$
+  $$ \int_0^{t_0} \int_M \bigg ( \int_{-1}^1 \abs{\nabla_h V^\epsilon} \diff z' \bigg) \bigg ( \int_{-1}^1 \abs{V^\epsilon} \abs{\partial_z v} \bigg )$$
   
-  appearing in the calculations, we apply Lemma 2.1 in \cite{li2019primitive} using $$f = \nabla_H V^\epsilon, g = V^\epsilon, h = \partial_z v,$$ but as we can not apply the Poincare inequality for $\nabla v,$ and as a consequence, instead of $\norm{h}_2^{1/2} \norm{\nabla h}_2^{1/2}$ we will have the complete $\norm{h}_2^{1/2} (\norm{h}_2^{1/2} + \norm{\nabla h}_2^{1/2}),$  expression, which leads to the appearance of $C \int_0^{t_0} \norm{\nabla v}_2^4 \norm{V^\epsilon}_2^2 \diff t.$
+  appearing in the calculations, we apply Lemma 2.1 in \cite{li2019primitive} using $$f = \nabla_h V^\epsilon, g = V^\epsilon, h = \partial_z v,$$ but as we can not apply the Poincar\'e inequality for $\nabla v,$ and as a consequence, instead of $\norm{h}_2^{1/2} \norm{\nabla h}_2^{1/2}$ we will have the complete $\norm{h}_2^{1/2} (\norm{h}_2^{1/2} + \norm{\nabla h}_2^{1/2}),$  expression, which leads to the appearance of $C \int_0^{t_0} \norm{\nabla v}_2^4 \norm{V^\epsilon}_2^2 \diff t.$
 
 This means that all together in this subsection of the calculations for estimating $I_2$ we arrive to the bound
 
@@ -641,7 +641,7 @@ using the Young inequality, and with this we have the originally stated ($\ref{I
     I_3 \leq C \epsilon^2 [(\norm{v_0}_2^2 + \epsilon^2 \norm{w_0}_2^2)^2 + C(\norm{v_0}_{H^1}, \Gamma_G)] 
   \end{equation}
   
-  bound for $I_3$ can be done using the Young and Poincare inequalities and Lemma 2.1 in \cite{li2019primitive}. We highlight the fact that even though we obtain the same bound as in the work of \cite{li2019primitive}, but the details differ at the point where in our case passing from \norm{\nabla v} to \norm{\Delta v} is not allowed.
+  bound for $I_3$ can be done using the Young and Poincar\'e inequalities and Lemma 2.1 in \cite{li2019primitive}. We highlight the fact that even though we obtain the same bound as in the work of \cite{li2019primitive}, but the details differ at the point where in our case passing from \norm{\nabla v} to \norm{\Delta v} is not allowed.
   
   Which is why we have an new term in this following point of the calculations
 
@@ -679,7 +679,7 @@ but note that the additional $\norm{\nabla v}_2^2 \cdot \norm{\nabla v}_2^2$ ter
       
       \item The estimate of the $\epsilon \beta V^\epsilon_1 w$ term is analogous.
       
-      \item For the term $\epsilon \beta W^\epsilon v_1$ we can use the idea that $\norm{W^\epsilon} \leq \norm{\nabla V^\epsilon}.$ As we have $\partial_3 w^\epsilon = \nabla_H v^\epsilon,$ and $\partial_3 w = \nabla_H v,$ we naturally have $\partial_3 W^\epsilon = \nabla_H V^\epsilon,$ and by the vertical Poincare inequality we have $$\norm{W^\epsilon} \leq \norm{\partial_3 W^\epsilon} = \norm{\nabla V^\epsilon}.$$ This way we are able to bound the $W^\epsilon$ term without keeping the $\epsilon^2$ multiplier attached to it when we apply the Young inequality. We have
+      \item For the term $\epsilon \beta W^\epsilon v_1$ we can use the idea that $\norm{W^\epsilon} \leq \norm{\nabla V^\epsilon}.$ As we have $\partial_3 w^\epsilon = \nabla_h v^\epsilon,$ and $\partial_3 w = \nabla_h v,$ we naturally have $\partial_3 W^\epsilon = \nabla_h V^\epsilon,$ and by the vertical Poincar\'e inequality we have $$\norm{W^\epsilon} \leq \norm{\partial_3 W^\epsilon} = \norm{\nabla V^\epsilon}.$$ This way we are able to bound the $W^\epsilon$ term without keeping the $\epsilon^2$ multiplier attached to it when we apply the Young inequality. We have
       
       $$ \int_{Q_{t_0}} \epsilon \beta W^\epsilon v_1 \leq \int_0^{t_0} \epsilon \beta \norm{W^\epsilon}_2 \norm{v_1}_2 \leq \int_0^{t_0} \epsilon \beta \norm{\nabla V^\epsilon}_2 \norm{v_1}_2, $$
       
@@ -698,7 +698,7 @@ but note that the additional $\norm{\nabla v}_2^2 \cdot \norm{\nabla v}_2^2$ ter
     
     \end{itemize}
     
-Using the bounds we now have for the terms $I_1, I_2, I_3, I_4$, we can perform the final step of the proof of this proposition. We will substitute these four results into ($\ref{introduce_I_terms}$) and take advantage of the Gronwall inequality --- in more detail, we obtain
+Using the bounds we now have for the terms $I_1, I_2, I_3, I_4$, we can perform the final step of the proof of this proposition. We will substitute these four results into ($\ref{introduce_I_terms}$) and take advantage of the Gr\"onwall inequality --- in more detail, we obtain
 
 \begin{equation}
   \begin{split} \nonumber
@@ -717,7 +717,7 @@ for almost any $t_0 \in [0, \infty).$ With this we have
   \end{split}
 \end{equation}
 
-from which, applying the Gronwall inequality and using Corollary $\ref{StrongSolPE_boundedness}$ we deduce
+from which, applying the Gr\"onwall inequality and using Corollary $\ref{StrongSolPE_boundedness}$ we deduce
 
 \begin{equation}
   \begin{split} \nonumber
