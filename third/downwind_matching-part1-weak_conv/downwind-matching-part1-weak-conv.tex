@@ -81,7 +81,7 @@ We end up this section with some notations we will use through the paper.
 \item $\mathbf{\omega}$ represents the Earth rotation angular speed,
 \item $\phi = l(y) = $ latitude, $f = $ the module of the Earth rotation vector
 \item $\alpha = -2 f \sin(\theta)\cos(\phi), \beta = 2 f \cos(\theta) \cos(\phi), \gamma = 2 f \sin(\phi),$
-\item $\mathbf{c}(\mathbf{u}) = (\mathbf{c}_h (\mathbf{u}), c_3 (\mathbf{u}_h)) = ( -\gamma u_2^\epsilon + \epsilon \beta u_3^\epsilon, \alpha \epsilon u^\epsilon_3 - \gamma u_1^\epsilon, \alpha u^\epsilon_2 - \beta u_1^\epsilon),$ the Coriolis force terms 
+% \item $\mathbf{c}(\mathbf{u}) = (\mathbf{c}_h (\mathbf{u}), c_3 (\mathbf{u}_h)) = ( -\gamma u_2^\epsilon + \epsilon \beta u_3^\epsilon, \alpha \epsilon u^\epsilon_3 - \gamma u_1^\epsilon, \alpha u^\epsilon_2 - \beta u_1^\epsilon),$ the Coriolis force terms 
 \item $\mathbf{K}$ represents the diagonal diffusion matrix,
 \item $( \cdot,\cdot) = $ the scalar product in $L^2(\Omega)^d$ or the duality $L^p (\Omega)$, $L^{p'} (\Omega),$
 \item $< \cdot,\cdot>_{\Gamma} = $ the scalar product or duality on the boundary curve $\Gamma$ ($H^{-1/2}(\Gamma)$, $H^{1/2}(\Gamma)$),
@@ -98,12 +98,22 @@ The key point of this new model is to integrate some of the main ideas of the Ga
 
 \begin{equation} \abs{u_1 \partial_{1} C} \gg \abs{ K_x \partial_{11} ^2 C }\end{equation}
 
-which leads us to using this additional scaling equation
+which leads us to using this new scaling equation
 
-\begin{equation} \label{ksepsk1} K_x = \epsilon K_1.\end{equation}
+\begin{equation} \label{ksepsk1} K_x = \epsilon K_1 \end{equation}
+
+in addition to the original set
+
+    \[ x = x_1, \quad y = x_2, \quad z = \epsilon x_3, \]
+    \[ v_1 = u_1^{\epsilon}, \quad v_2 = u_2^{\epsilon}, \quad v_3 = \epsilon u_3^{\epsilon}, \]
+    \[ \nu_x = \nu_1, \quad \nu_y = \nu_2 , \quad \nu_z = \epsilon ^ 2\nu_3, \]
+    \[ K_x = K_1, \quad K_y = K_2 , \quad K_z = \epsilon^2 K_3, \]
+    \[ P = \frac{1}{\epsilon} C^\epsilon, \quad Q = \frac{1}{\epsilon} S^\epsilon, \quad p = p^{\epsilon} \]
+
+of scaling equations. Every element of this latter set is a result of the shallowness of the domain (and they can be heuristically deduced from the typical physical dimension of the quantities, for more details see \cite{besson1992some}, \cite{azerad2001mathematical}, \cite{pollatmws2019}), unlike the previously described equation ($\ref{ksepsk1}$), which is the effect of the coordinate choice itself.
 
 \begin{remark} \normalfont
-  The inclusion of these features in a pollution model are legitimate when the following circumstances hold:
+  The inclusion of these new features related to the downwing-matching coordinate system in a pollution model are legitimate when the following circumstances hold:
   \begin{itemize}
     \item We are considering a time interval which is not too long --- meaning that it is reasonable to assume that we have a permanent, relatively stable main wind direction, i.e. fixing the horizontal coordinates makes sense in the first place,
     \item There is an adequate, relatively high wind speed --- low wind speeds in general lead to a situation where three dimensional diffusion dominates, leading to an error caused by the dominant advection assumption. Fast changing wind direction and low windspeed resulting in fast pollutant settling can make it extremely challenging to obtain reliable results from Gaussian models.
@@ -669,37 +679,37 @@ but note that the additional $\norm{\nabla \mathbf{u}_h}_2^2 \cdot \norm{\nabla 
       
       \begin{equation}
         \begin{split}
-          & \int_{Q_{t_0}} \epsilon \alpha V^\epsilon_2 w \leq \alpha \int_0^{t_0} \norm{V^\epsilon_2} \norm{\epsilon w}  \leq \alpha \int_0^{t_0} \zeta \norm{V^\epsilon_2}^2_2 + \alpha \int_0^{t_0} \frac{1}{\zeta} \epsilon^2 \norm{ w}^2_2 \\
-          & \leq \alpha \int_0^{t_0} \zeta \norm{\nabla V^\epsilon_2}^2_2 + \alpha \int_0^{t_0} \frac{1}{\zeta} \epsilon^2 \norm{ w}^2_2.
+          & \int_{Q_{t_0}} \epsilon \alpha U_2^\epsilon u_3 \leq \alpha \int_0^{t_0} \norm{U_2^\epsilon} \norm{\epsilon u_3}  \leq \alpha \int_0^{t_0} \zeta \norm{U_2^\epsilon}^2_2 + \alpha \int_0^{t_0} \frac{1}{\zeta} \epsilon^2 \norm{u_3}^2_2 \\
+          & \leq \alpha \int_0^{t_0} \zeta \norm{\nabla U_2^\epsilon}^2_2 + \alpha \int_0^{t_0} \frac{1}{\zeta} \epsilon^2 \norm{u_3}^2_2.
         \end{split}
       \end{equation}
       
-      Here the $\int_0^{t_0} \zeta \norm{\nabla V^\epsilon_2}^2_2$  term can be merged into the left hand side, while
+      Here the $\int_0^{t_0} \zeta \norm{\nabla U_2^\epsilon}^2_2$  term can be merged into the left hand side, while
       
-      $$\alpha \int_0^{t_0} \frac{1}{\zeta} \epsilon^2 \norm{w}^2_2 \leq \alpha \frac{1}{\zeta} \epsilon^2 \norm{w}^2_{L^2(Q_{t_0})} \leq \alpha \frac{1}{\zeta} \epsilon^2 C(\norm{v_0}_{H^1}, \Gamma_G),$$
+      $$\alpha \int_0^{t_0} \frac{1}{\zeta} \epsilon^2 \norm{u_3}^2_2 \leq \alpha \frac{1}{\zeta} \epsilon^2 \norm{u_3}^2_{L^2(Q_{t_0})} \leq \alpha \frac{1}{\zeta} \epsilon^2 C(\norm{{\mathbf{u}_h}_0}_{H^1}, \Gamma_G),$$
       
-      where we used the Corollary $\ref{StrongSolPE_boundedness}$, and the fact that $\norm{w} \leq \norm{\nabla v}.$
+      where we used the Corollary $\ref{StrongSolPE_boundedness}$, and the fact that $\norm{u_3} \leq \norm{\nabla \mathbf{u}_h}.$
       
-      Here $\zeta$ is the constant of the Young inequality, and it only has to be small enough to keep the coefficient of $\norm{\nabla V^\epsilon}$ positive.
+      Here $\zeta$ is the constant of the Young inequality, and it only has to be small enough to keep the coefficient of $\norm{\nabla \mathbf{U}_h^\epsilon}$ positive.
       
-      \item The estimate of the $\epsilon \beta V^\epsilon_1 w$ term is analogous.
+      \item The estimate of the $\epsilon \beta U_1^\epsilon u_3$ term is analogous.
       
-      \item For the term $\epsilon \beta W^\epsilon v_1$ we can use the idea that $\norm{W^\epsilon} \leq \norm{\nabla V^\epsilon}.$ As we have $\partial_3 w^\epsilon = \nabla_h v^\epsilon,$ and $\partial_3 w = \nabla_h v,$ we naturally have $\partial_3 W^\epsilon = \nabla_h V^\epsilon,$ and by the vertical Poincar\'e inequality we have $$\norm{W^\epsilon} \leq \norm{\partial_3 W^\epsilon} = \norm{\nabla V^\epsilon}.$$ This way we are able to bound the $W^\epsilon$ term without keeping the $\epsilon^2$ multiplier attached to it when we apply the Young inequality. We have
+      \item For the term $\epsilon \beta U_3^\epsilon u_1$ we can use the idea that $\| U_3^\epsilon \| \leq \| \nabla \mathbf{U}_h^\epsilon \|.$ As we have $\partial_3 u_3^\epsilon = \nabla_h \mathbf{u}_h^\epsilon,$ and $\partial_3 u_3 = \nabla_h \mathbf{u}_h,$ we naturally have $\partial_3 U_3^\epsilon = \nabla_h \mathbf{U}_h^\epsilon,$ and by the vertical Poincar\'e inequality we have $$\norm{U_3^\epsilon} \leq \norm{\partial_3 U_3^\epsilon} = \norm{\nabla \mathbf{U}_h^\epsilon}.$$ This way we are able to bound the $U_3^\epsilon$ term without keeping the $\epsilon^2$ multiplier attached to it when we apply the Young inequality. We have
       
-      $$ \int_{Q_{t_0}} \epsilon \beta W^\epsilon v_1 \leq \int_0^{t_0} \epsilon \beta \norm{W^\epsilon}_2 \norm{v_1}_2 \leq \int_0^{t_0} \epsilon \beta \norm{\nabla V^\epsilon}_2 \norm{v_1}_2, $$
+      $$ \int_{Q_{t_0}} \epsilon \beta U_3^\epsilon u_1 \leq \int_0^{t_0} \epsilon \beta \norm{U_3^\epsilon}_2 \norm{u_1}_2 \leq \int_0^{t_0} \epsilon \beta \| \nabla \mathbf{U}_h^\epsilon \|_2 \norm{u_1}_2, $$
       
       and finally, after applying the Young inequality we arrive to
       
       \begin{equation}
         \begin{split}
-          & \int_{Q_{t_0}} \epsilon \beta W^\epsilon v_1 \leq \beta \zeta \int_0^t \norm{\nabla V^\epsilon}_2^2 + \frac{1}{\zeta} \epsilon^2 \norm{v_1}_2^2 \\
-          & \leq \beta \zeta \int_0^t \norm{\nabla V^\epsilon}_2^2 + \frac{1}{\zeta} \epsilon^2 C(\norm{v_0}_{H^1}, \Gamma_G),
+          & \int_{Q_{t_0}} \epsilon \beta U_3^\epsilon u_1 \leq \beta \zeta \int_0^t \norm{\nabla \mathbf{U}_h^\epsilon}_2^2 + \frac{1}{\zeta} \epsilon^2 \norm{u_1}_2^2 \\
+          & \leq \beta \zeta \int_0^t \norm{\nabla \mathbf{U}_h^\epsilon}_2^2 + \frac{1}{\zeta} \epsilon^2 C(\norm{{\mathbf{u}_h}_0}_{H^1}, \Gamma_G),
         \end{split}
       \end{equation}
       
       where the first term can be merged into the left hand side.
             
-      \item The estimate of $\alpha \epsilon W^\epsilon v_2$ is structurally analogous.
+      \item The estimate of $\alpha \epsilon U_3^\epsilon u_2$ is structurally analogous.
     
     \end{itemize}
     
@@ -707,9 +717,9 @@ Using the bounds we now have for the terms $I_1, I_2, I_3, I_4$, we can perform 
 
 \begin{equation}
   \begin{split} \nonumber
-  \Phi (t):= & (\norm{V^\epsilon}_2^2 + \epsilon^2 \norm{W^\epsilon}_2^2)(t) + \int_0^t (\norm{\nabla V^\epsilon}_2^2 + \epsilon^2 \norm{\nabla W^\epsilon}_2^2) \diff s \\
-  & \leq C \epsilon^2 [(\norm{v_0}_2^2 + \epsilon^2 \norm{w_0}_2^2)^2 + C(\norm{v_0}_{H^1}, \Gamma_G)] \\
-  & + C \int_0^{t} \norm{\nabla v}_2^4 \norm{V^\epsilon}_2^2 \diff s + C \int_0^{t} \norm{\nabla v}_2^2  \norm{\Delta v}_2^2 \norm{V^\epsilon}_2^2 \diff s =: \Psi(t),
+  \Phi (t):= & (\norm{\mathbf{U}_h^\epsilon}_2^2 + \epsilon^2 \norm{U_3^\epsilon}_2^2)(t) + \int_0^t (\norm{\nabla \mathbf{U}_h^\epsilon}_2^2 + \epsilon^2 \norm{\nabla U_3^\epsilon}_2^2) \diff s \\
+  & \leq C \epsilon^2 [(\norm{{\mathbf{u}_h}_0}_2^2 + \epsilon^2 \norm{{u_3}_0}_2^2)^2 + C(\norm{{\mathbf{u}_h}_0}_{H^1}, \Gamma_G)] \\
+  & + C \int_0^{t} \norm{\nabla \mathbf{u}_h}_2^4 \norm{\mathbf{U}_h^\epsilon}_2^2 \diff s + C \int_0^{t} \norm{\nabla \mathbf{u}_h}_2^2  \norm{\Delta \mathbf{u}_h}_2^2 \norm{\mathbf{U}_h^\epsilon}_2^2 \diff s =: \Psi(t),
   \end{split}
 \end{equation}
 
@@ -717,8 +727,8 @@ for almost any $t_0 \in [0, \infty).$ With this we have
 
 \begin{equation}
   \begin{split} \nonumber
-   \Psi'(t) & = C \norm{\nabla v}_2^4 \norm{V^\epsilon}_2^2 + C \norm{\nabla v}_2^2  \norm{\Delta v}_2^2 \norm{V^\epsilon}_2^2 \\
-   & \leq C (\norm{\nabla v}_2^4 + \norm{\nabla v}_2^2  \norm{\Delta v}_2^2) \Phi (t) \leq C (\norm{\nabla v}_2^4 + \norm{\nabla v}_2^2  \norm{\Delta v}_2^2)\Psi(t),
+   \Psi'(t) & = C \norm{\nabla \mathbf{u}_h}_2^4 \norm{\mathbf{U}_h^\epsilon}_2^2 + C \norm{\nabla \mathbf{u}_h}_2^2  \norm{\Delta \mathbf{u}_h}_2^2 \norm{\mathbf{U}_h^\epsilon}_2^2 \\
+   & \leq C (\norm{\nabla \mathbf{u}_h}_2^4 + \norm{\nabla \mathbf{u}_h}_2^2  \norm{\Delta \mathbf{u}_h}_2^2) \Phi (t) \leq C (\norm{\nabla \mathbf{u}_h}_2^4 + \norm{\nabla \mathbf{u}_h}_2^2  \norm{\Delta \mathbf{u}_h}_2^2)\Psi(t),
   \end{split}
 \end{equation}
 
@@ -726,9 +736,9 @@ from which, applying the Gr\"onwall inequality and using Corollary $\ref{StrongS
 
 \begin{equation}
   \begin{split} \nonumber
-    & (\norm{V^\epsilon}_2^2 + \epsilon^2 \norm{W^\epsilon}_2^2)(t) + \int_0^t (\norm{\nabla V^\epsilon}_2^2 + \epsilon^2 \norm{\nabla W^\epsilon}_2^2) \diff s \\
-    & \leq \Psi (t) \leq e^{C \int_0 ^ t (\norm{\nabla v}_2^4 + \norm{\nabla v}_2^2  \norm{\Delta v}_2^2) \diff s} \Psi (0) \leq e^{C(\norm{v_0}_{H^1}, L_1, L_2)} \Psi(0) \\
-    & \leq \epsilon^2 C(\norm{v_0}_{H^1}, \Gamma_G) (\norm{v_0}_2^2 + \epsilon^2 \norm{w_0}_2^2 + 1)^2,
+    & (\norm{\mathbf{U}_h^\epsilon}_2^2 + \epsilon^2 \norm{U_3^\epsilon}_2^2)(t) + \int_0^t (\norm{\nabla \mathbf{U}_h^\epsilon}_2^2 + \epsilon^2 \norm{\nabla U_3^\epsilon}_2^2) \diff s \\
+    & \leq \Psi (t) \leq e^{C \int_0 ^ t (\norm{\nabla \mathbf{u}_h}_2^4 + \norm{\nabla \mathbf{u}_h}_2^2  \norm{\Delta \mathbf{u}_h}_2^2) \diff s} \Psi (0) \leq e^{C(\norm{{\mathbf{u}_h}_0}_{H^1}, L_1, L_2)} \Psi(0) \\
+    & \leq \epsilon^2 C(\norm{{\mathbf{u}_h}_0}_{H^1}, \Gamma_G) (\norm{{\mathbf{u}_h}_0}_2^2 + \epsilon^2 \norm{{u_3}_0}_2^2 + 1)^2,
   \end{split}
 \end{equation}
 
@@ -736,7 +746,7 @@ which concludes the proof.
   
 \end{proof}
 
-As a consequence, we arrive to strong convergence of $\nabla v^\epsilon \to \nabla v$ in $L^2_t L^2_x$, and with that we have $\partial_3 w^\epsilon \to \partial_3 w.$ Eventually we deduce $u_3^\epsilon \to u_3$ strongly  in $L^2_t L^2_x,$ which was the last missing part of the proof of the main theorem, since combining the weak convergence of $C^\epsilon$ and the strong convergence of $u_3^\epsilon,$ we are finally able to state
+As a consequence, we arrive to strong convergence of $\nabla \mathbf{u}_h^\epsilon \to \nabla \mathbf{u}_h$ in $L^2_t L^2_x$, and with that we have $\partial_3 u_3^\epsilon \to \partial_3 u_3.$ Eventually we deduce $u_3^\epsilon \to u_3$ strongly  in $L^2_t L^2_x,$ which was the last missing part of the proof of the main theorem, since combining the weak convergence of $C^\epsilon$ and the strong convergence of $u_3^\epsilon,$ we are finally able to state
 
 $$ C^\epsilon u_3^\epsilon \rightharpoonup C u_3 \text{ weakly in } L^2 L^2.$$
 
