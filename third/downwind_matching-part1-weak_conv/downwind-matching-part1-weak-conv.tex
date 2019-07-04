@@ -622,19 +622,23 @@ Using the same conditions as in Proposition $\ref{propIdentity}$, the following 
   
   $$ \int_0^{t_0} \int_M \bigg ( \int_{-1}^1 \abs{\nabla_h \mathbf{U}_h^\epsilon} \diff z' \bigg) \bigg ( \int_{-1}^1 \abs{\mathbf{U}_h^\epsilon} \abs{\partial_z \mathbf{u}_h} \bigg )$$
   
-  appearing in the calculations, we apply Lemma 2.1 in \cite{li2019primitive} using $$f = \nabla_h \mathbf{U}_h^\epsilon, g = \mathbf{U}_h^\epsilon, h = \partial_z \mathbf{u}_h,$$ but as we can not apply the Poincar\'e inequality for $\nabla \mathbf{u}_h,$ and as a consequence, instead of $\norm{h}_2^{1/2} \norm{\nabla h}_2^{1/2}$ we will have the complete $\norm{h}_2^{1/2} (\norm{h}_2^{1/2} + \norm{\nabla h}_2^{1/2}),$  expression, which leads to the appearance of $C \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^4 \norm{\mathbf{U}_h^\epsilon}_2^2 \diff t.$
+  appearing in the calculations. We apply Lemma 2.1 in \cite{li2019primitive} using
+  
+  $$f = \nabla_h \mathbf{U}_h^\epsilon, g = \mathbf{U}_h^\epsilon, h = \partial_z \mathbf{u}_h,$$
+  
+  but we can not apply the Poincar\'e inequality for $\nabla \mathbf{u}_h,$ and as a consequence, instead of $\norm{h}_2^{1/2} \norm{\nabla h}_2^{1/2}$ we will have the complete $\norm{h}_2^{1/2} (\norm{h}_2^{1/2} + \norm{\nabla h}_2^{1/2})$  expression, which leads to the appearance of $C \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^4 \norm{\mathbf{U}_h^\epsilon}_2^2 \diff t.$
 
-This means that all together in this subsection of the calculations for estimating $I_2$ we arrive to the bound
+This means that all together in this subsection, with the calculations for estimating $I_2$ we have the bound
 
 \begin{equation}
   \begin{split}
      & C \int_0^{t_0} \norm{\nabla \mathbf{U}_h^\epsilon}_2^{3/2} \norm{\mathbf{U}_h^\epsilon}_2^{1/2} \norm{\nabla \mathbf{u}_h}_2^{1/2} (\norm{\nabla \mathbf{u}_h}_2^{1/2} + \norm{\Delta \mathbf{u}_h}_2^{1/2})  \\
      & \leq \frac{1}{18} \norm{\nabla \mathbf{U}_h^\epsilon}^2_2 + C \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^2 (\norm{\nabla \mathbf{u}_h}_2^{1/2} + \norm{\Delta \mathbf{u}_h}_2^{1/2})^4 \norm{\mathbf{U}_h^\epsilon}_2^2 \diff t \\
-     & \leq \frac{1}{18} \norm{\nabla \mathbf{U}_h^\epsilon}^2_2 + C \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^4 \norm{\mathbf{U}_h^\epsilon}_2^2 \diff t + C \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^2  \norm{\Delta \mathbf{u}_h}_2^2 \norm{\mathbf{U}_h^\epsilon}_2^2 \diff t,
+     & \leq \frac{1}{18} \norm{\nabla \mathbf{U}_h^\epsilon}^2_2 + C \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^4 \norm{\mathbf{U}_h^\epsilon}_2^2 \diff t + C \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^2  \norm{\Delta \mathbf{u}_h}_2^2 \norm{\mathbf{U}_h^\epsilon}_2^2 \diff t \raisetag{60pt},
   \end{split}
 \end{equation}
 
-using the Young inequality, and with this we have the originally stated ($\ref{I2Bound}$).
+using the Young inequality. With this we arrive to the originally stated ($\ref{I2Bound}$).
   
   \textbf{Bound for $I_3.$} Calculating the 
   
@@ -642,7 +646,7 @@ using the Young inequality, and with this we have the originally stated ($\ref{I
     I_3 \leq C \epsilon^2 [(\norm{{\mathbf{u}_h}_0}_2^2 + \epsilon^2 \norm{{u_3}_0}_2^2)^2 + C(\norm{{\mathbf{u}_h}_0}_{H^1}, \Gamma_G)] 
   \end{equation}
   
-  bound for $I_3$ can be done using the Young and Poincar\'e inequalities and Lemma 2.1 in \cite{li2019primitive}. We highlight the fact that even though we obtain the same bound as in the work of \cite{li2019primitive}, but the details differ at the point where in our case passing from \norm{\nabla \mathbf{u}_h} to \norm{\Delta \mathbf{u}_h} is not allowed.
+  bound for $I_3$ can be done using the Young and Poincar\'e inequalities and Lemma 2.1 in \cite{li2019primitive}. We highlight the fact that even though we obtain the same bound as in the work of \cite{li2019primitive}, the details differ at the point where in our case passing from \norm{\nabla \mathbf{u}_h} to \norm{\Delta \mathbf{u}_h} is not allowed.
   
   Which is why we have a new term in this following point of the calculations
 
