@@ -370,7 +370,7 @@ Now we are ready to state the main theorem.
 %%% *** PROOF *** %%%
 \section{Proof of the main theorem} \label{proof}
 
-This section is devoted to verify Theorem \ref{maintheorem}. Structurally we follow a similar chain of thought as in our previous paper --- until the point where the proof diverges reaching the weak convergence of the nonlinear term $u_3^\epsilon C^\epsilon$ where in this case we can not benefit from an $H^1$ regular concentration function. In more detail, we begin by calculating the energy inequality and collect the a priori estimates that derive from it, then verify the rather easily obtainable weak convergence results. Finally we elaborate the steps that bring the convergence of the $u_3^\epsilon C^\epsilon$ term to a closure. The main idea here is to temporarily ignore the $C^\epsilon$ function and prove a strong convergence result considering only the velocity functions. Throughout this step we go beyond the weak solutions quality and show that we are working with strong solutions. In this new setting with more favorable regularities we can prove the convergence result we need, and eventually return to the frame of weak solutions where we can merge back together the velocity and concentration functions into a unified solution.
+This section is dedicated to the verification of Theorem \ref{maintheorem}. Structurally we follow a similar chain of thought as in our previous paper --- until the point where the proof diverges reaching the weak convergence of the nonlinear term $u_3^\epsilon C^\epsilon,$ where in this case we can not benefit from an $H^1$-regular concentration function. In more detail, we begin by calculating the energy inequality and collect the a priori estimates that derive from it, then verify the rather easily obtainable weak convergence results. Finally we elaborate the steps that bring the convergence of the $u_3^\epsilon C^\epsilon$ term to a closure. The main idea here is to temporarily ignore the $C^\epsilon$ function and prove a strong convergence result considering only the velocity functions. Throughout this step we go beyond the weak solutions quality and show that we are working with strong solutions. In this new setting with more favorable regularities we can prove the convergence result we need, and eventually return to the frame of weak solutions where we can merge back together the velocity and concentration functions into a unified solution.
 
   \subsection{Energy inequality}
   
@@ -401,9 +401,9 @@ This section is devoted to verify Theorem \ref{maintheorem}. Structurally we fol
     
   The right hand side of the energy inequality is now apparently bounded, and it is easy to see that the coefficients of the pollution terms are positive, since the $\zeta$ constant of the generalised Young inequality can be freely chosen in a way such that the requirements $\epsilon K_1 (1 - \zeta \frac{1}{2} c_T (c_S + 1)) > 0, (K_2 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) > 0, (K_3 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) > 0 $ are all satisfied.
   
-  We note that the most significant difference in this new form of the energy inequality (\ref{finalformEIEQ}) is having $\sqrt{\epsilon} \partial_1 C^\epsilon$ in the place of $\partial_1 C^\epsilon,$ which is what we had for the case of the geophysical coordinate system. It leads to the disappearance of the $H^1$ regularity of $C^\epsilon,$ and thus we don't the strong convergence feature of the concentration function anymore --- which was of key importance in the previous version for proving the weak convergence of a nonlinear term.
+  We note that the most significant difference in this new form of the energy inequality (\ref{finalformEIEQ}) is having $\sqrt{\epsilon} \partial_1 C^\epsilon$ in the place of $\partial_1 C^\epsilon,$ which is what we had for the case of the geophysical coordinate system. It leads to the disappearance of the $H^1$ regularity of $C^\epsilon,$ and thus we don't have the strong convergence feature of the concentration function anymore --- which was of key importance for proving the weak convergence of a nonlinear term in the case of the classical geophysical frame.
   
-  This form of the energy inequality also shows why we need the $\partial_2 C^\epsilon, \partial_3 C^\epsilon$ terms to vanish on the boundary. Otherwise, using the Trace Theorem on these boundary terms would contribute to the appearance of negative $\epsilon$-free terms in the coefficient of $\norm{\partial_1 C^\epsilon}_{L^2}^2,$ which would undermine the structure of the energy inequality.
+  This form of the energy inequality also shows why we need the $\partial_2 C^\epsilon, \partial_3 C^\epsilon$ terms to vanish on the boundary. Otherwise, using the Trace Theorem on these boundary terms would contribute to the appearance of negative, $\epsilon$-free terms in the coefficient of $\norm{\partial_1 C^\epsilon}_{L^2}^2,$ which would undermine the structure of the energy inequality.
   
   \subsection{A priori estimates. Weak convergence - Part 1.}
   
@@ -436,8 +436,8 @@ This section is devoted to verify Theorem \ref{maintheorem}. Structurally we fol
   \end{align} 
   
   In order to conclude the proof of Theorem \ref{maintheorem} we pass to the limit in the weak formulation (\ref{anisotropicWF}). Taking the limit for the linear terms can be done in a standard way using the previously obtained results.
-   Concerning the nonlinear velocity terms, the convergence can be shown applying a generalisation of the classical translation criterium of Riesz-Frechet-Kolmogorov which enables us to get strong convergence for the horizontal velocities. This is achieved by establishing a bound for the perturbation of $\mathbf{u}_h$ of the form $\norm{\tau_\pi \mathbf{u}_h - \mathbf{u}_h}_{L^p(0,T-\pi, \mathbf{Y})} \leq \lambda(\pi) + \mu(\epsilon),$ where $\mathbf{Y}$ is a Banach space, $\lambda$ and $\mu$ are appropriate functions with their limits vanishing at zero, and $\tau_\pi \mathbf{u}_h = \mathbf{u}_h (t+\pi) $. After obtaining strong convergence for $\mathbf{u}_h,$ the proof of the convergence for these nonlinear terms can be closed by applying basic interpolation techniques and the generalised H\"older inequality. 
-  Finally, as for the concentration-including nonlinear terms, we have the convergence of $(u_i C^\epsilon, \partial_i \tilde{C})$ for $i=1,2$ since as we mentioned before, we have the strong convergence of the horizontal velocities --- while in the case of $i=3$ this property does not hold for $u_3$ and from the energy bound we do not have more than the weak convergence of $C^\epsilon$. Because of its complexity we handle this specific term in Part 2.
+   Concerning the nonlinear velocity terms (i.e. nonlinear terms that do not include the concentration function), the convergence can be shown applying a generalisation of the classical translation criterium of Riesz-Frechet-Kolmogorov which enables us to get strong convergence for the horizontal velocities. This is achieved by establishing a bound for the perturbation of $\mathbf{u}_h$ of the form $\norm{\tau_\pi \mathbf{u}_h - \mathbf{u}_h}_{L^p(0,T-\pi, \mathbf{Y})} \leq \lambda(\pi) + \mu(\epsilon),$ where $\mathbf{Y}$ is a Banach space, $\lambda$ and $\mu$ are appropriate functions with their limits vanishing at zero, and $\tau_\pi \mathbf{u}_h = \mathbf{u}_h (t+\pi) $. After obtaining strong convergence for $\mathbf{u}_h,$ the proof of the convergence for these nonlinear terms can be closed by applying basic interpolation techniques and the generalised H\"older inequality. 
+  Finally, as for the concentration-including nonlinear terms, we have the convergence of $(u_i C^\epsilon, \partial_i \tilde{C})$ for $i=1,2,$ since as we mentioned before, we have the strong convergence of the horizontal velocities --- while in the case of $i=3$ this property does not hold for $u_3$ and from the energy bound we do not have more than the weak convergence of $C^\epsilon$. Because of its complexity we handle this specific nonlinear compound product term in Part 2.
   
   \subsection{Weak convergence --- Part 2.}
   
@@ -464,11 +464,11 @@ This section is devoted to verify Theorem \ref{maintheorem}. Structurally we fol
   
   The result of Corollary \ref{StrongSolPE_boundedness} on the strong solutions of the primitive equations will be indispensable later, as we will use these strong solution functions for testing the scaled Navier-Stokes equations.
   
-  The following part of the proof is dedicated to verifying the strong convergence of $u_3^\epsilon,$ and is based on the idea of \cite{li2019primitive} --- our scenario is different however in that \textit{a)} first of all our domain is bounded, while the domain they consider is periodic, \textit{b)} we do not assume zero-averaged functions, and finally \textit{c)} in our case the Coriolis terms are incorporated to the model as well. Our strategy in providing the proof is to give a self-contained result that describes all the steps that build up the verification process, but we elaborate in more detail where the above mentioned \textit{a), b), c)} points have a tangible effect. Some technical details that are identical to those in \cite{li2019primitive} will be skipped.
+  The following part of the proof is dedicated to verifying the strong convergence of $u_3^\epsilon,$ and is based on the idea of \cite{li2019primitive} --- our scenario is different however in that \textit{a)} first of all our domain is bounded, while the domain the authors of \cite{li2019primitive} consider is periodic, \textit{b)} we do not assume zero-averaged functions, and finally \textit{c)} in our case the Coriolis terms are incorporated to the model as well. Our strategy in providing the proof is to give a self-contained result that describes all the steps that build up the verification process, but we elaborate in more detail where the above mentioned \textit{a), b), c)} points have a tangible effect. Some technical details that are identical to those in \cite{li2019primitive} will be skipped.
   
-It is important to highlight at this point that since we are not restricted to zero-averaged functions and we are not on a periodic domain, we need to pay special attention when verifying boundedness results using the Poincar\'e inequality. Note that as the value of the velocity functions are defined to be zero on the boundary, any first-order estimate of the type $\norm{\mathbf{u}_h^\epsilon} \leq \norm{\nabla \mathbf{u}_h^\epsilon}$ is valid (i.e. to estimate a function by its gradient), using the zero-trace version of the Poincar\'e inequality for functions in $W^{1,2}_0.$ However, since it is only the value of the functions that vanishes on the boundary, but not their derivatives, higher order estimates such as passing from $\norm{\nabla \mathbf{u}_h^\epsilon}$ to $\norm{\Delta \mathbf{u}_h^\epsilon}$ can not be applied in general.
+It is important to highlight at this point that since we are not restricted to zero-averaged functions and we are not on a periodic domain, we need to pay special attention when verifying boundedness results using the Poincar\'e inequality. Note that as the value of the velocity functions are defined to be zero on the boundary, any first-order estimate of the type $\norm{\mathbf{u}_h^\epsilon} \leq \norm{\nabla \mathbf{u}_h^\epsilon}$ is valid (i.e. to estimate a function by its gradient), using the zero-trace version of the Poincar\'e inequality for functions in $W^{1,2}_0.$ However, since it is only the value of the functions that vanishes on the boundary, but not their derivatives, higher order estimates such as passing from $\norm{\nabla \mathbf{u}_h^\epsilon}$ to $\norm{\Delta \mathbf{u}_h^\epsilon}$ in the process of constructing an upper bound can not be applied in general.
   
-The next step in order to estimate the difference $$(\mathbf{U}_h^\epsilon, U_3^\epsilon): = (\mathbf{u}_h^\epsilon - \mathbf{u}_h, u_3^\epsilon - u_3)$$ is to practically use the strong solution $(\mathbf{u}_h,u_3)$ as a test function when writing down the weak formulation integral identity for the scaled equations. Following this method we arrive to
+The next step in order to estimate the difference $$(\mathbf{U}_h^\epsilon, U_3^\epsilon): = (\mathbf{u}_h^\epsilon - \mathbf{u}_h, u_3^\epsilon - u_3)$$ is to practically use the strong solution $(\mathbf{u}_h,u_3)$ as a test function when writing down the weak formulation's integral identity for the scaled equations. Following this method we arrive to
 
 \begin{prop} \label{propIdentity}
 
@@ -479,7 +479,7 @@ Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ and $(\mathbf{u}_h,u_3)$ be the solu
     & - \frac{\epsilon^2}{2} \norm{u_3(t)}_2^2 + \bigg ( (\mathbf{u}_h^\epsilon \cdot \mathbf{u}_h + \epsilon^2 u_3^\epsilon u_3) \diff x \diff y \diff z  \bigg ) (t) \\
     & + \int_{Q_t} (-\mathbf{u}_h^\epsilon \cdot \partial_t \mathbf{u}_h + \nabla \mathbf{u}_h^\epsilon : \nabla \mathbf{u}_h + \epsilon^2 \nabla u_3^\epsilon \cdot \nabla u_3) \diff x \diff y \diff z \diff s \\
     & = \frac{\epsilon^2}{2} \norm{{u_3}_0}_2^2 + \norm{{\mathbf{u}_h}_0}_2^2 + \epsilon^2 \int_{Q_t} \bigg ( \int_0^z \partial_t \mathbf{u}_h \diff z' \bigg ) \cdot \nabla_h U_3^\epsilon \diff x \diff y \diff z \diff s \\
-    & - \int_{Q_t} [(\mathbf{u}^\epsilon \cdot \nabla) \mathbf{u}_h^\epsilon \cdot \mathbf{u}_h + \epsilon^2 \mathbf{u}^\epsilon \cdot u_3^\epsilon u_3] \diff x \diff y \diff z \diff s \\
+    & - \int_{Q_t} [(\mathbf{u}^\epsilon \cdot \nabla) \mathbf{u}_h^\epsilon \cdot \mathbf{u}_h + \epsilon^2 \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon u_3] \diff x \diff y \diff z \diff s \\
     & + \int_{Q_t}  ( \gamma u_2^\epsilon u_1 - \epsilon \beta u_3^\epsilon u_1 + \alpha \epsilon u_3^\epsilon u_2 - \gamma u_1^\epsilon u_2 - \epsilon \alpha u^\epsilon_2 u_3 + \epsilon \beta u_1^\epsilon u_3)
   \end{split}
 \end{equation}
@@ -504,7 +504,7 @@ for any $\tilde{\mathbf{u}} = (\tilde{\mathbf{u}}_h, \tilde{u}_3) \in H^1 (0,T;\
 
 Now, let's define $\chi \in C_0^\infty ([0, \infty))$ with $0 \leq \chi \leq 1$ and $\chi (0) = 1$ and set $\tilde{\mathbf{u}}= (\mathbf{u}_h,u_3) \chi (t).$ The validity of the the integrals are guaranteed by the regularities of the respective solution functions and using basic inequalities.
 
-As we highlighted before, using higher than first-order estimates of the type such as passing from $\norm{\nabla \mathbf{u}_h^\epsilon}$ to $\norm{\Delta \mathbf{u}_h^\epsilon}$ is in general not valid. Which is why, for example, the estimate of the the following term becomes as such:
+As we highlighted before, using higher than first-order estimates of the type such as passing from $\norm{\nabla \mathbf{u}_h^\epsilon}$ to $\norm{\Delta \mathbf{u}_h^\epsilon}$ is in general not valid. Which is why, for example, the estimate of the the term below takes the following, slightly altered form:
 
 \begin{equation}
   \begin{split}
@@ -513,7 +513,7 @@ As we highlighted before, using higher than first-order estimates of the type su
     & \leq C \int_0^T \norm{\mathbf{u}^\epsilon}_2^{1/2} \norm{\nabla \mathbf{u}^\epsilon}_2^{1/2} \norm{\nabla u_3^\epsilon}_2 \norm{\nabla_h \mathbf{u}_h}_2^{1/2} (\norm{\nabla_h \mathbf{u}_h}_2^{1/2} + \norm{\Delta \mathbf{u}_h}_2^{1/2}) \diff t \\
     & \leq C \sup_{0 \leq t \leq T} \norm{\mathbf{u}^\epsilon}_2^{1/2} \norm{\nabla \mathbf{u}_h}_2^{1/2} \bigg( \int_0^T \norm{\nabla \mathbf{u}^\epsilon}^2_2 \diff t \bigg)^{1/4} \bigg ( \int_0^T \norm{\nabla u_3^\epsilon}_2^2 \diff t \bigg)^{1/2} \\
     & \times \bigg ( \int_0^T \norm{\Delta \mathbf{u}_h}_2^2 \diff t \bigg )^{1/4} \\
-    & + C \sup_{0 \leq t \leq T} \norm{u^\epsilon}_2^{1/2} \norm{\nabla \mathbf{u}_h}_2 \bigg( \int_0^T \norm{\nabla \mathbf{u}^\epsilon}_2 \diff t \bigg)^{1/2} \bigg ( \int_0^T \norm{\nabla u_3^\epsilon}_2^2 \diff t \bigg)^{1/2}.
+    & + C \sup_{0 \leq t \leq T} \norm{\mathbf{u}^\epsilon}_2^{1/2} \norm{\nabla \mathbf{u}_h}_2 \bigg( \int_0^T \norm{\nabla \mathbf{u}^\epsilon}_2 \diff t \bigg)^{1/2} \bigg ( \int_0^T \norm{\nabla u_3^\epsilon}_2^2 \diff t \bigg)^{1/2}.\raisetag{60pt}
   \end{split}
 \end{equation}
 
@@ -524,7 +524,7 @@ Thus, considering the validity of the integral terms and rewriting some of them 
     & \int_Q (- \mathbf{u}_h^\epsilon \cdot \partial_t \mathbf{u}_h + \nabla \mathbf{u}_h^\epsilon : \nabla \mathbf{u}_h + \epsilon^2 \nabla u_3^\epsilon \cdot \nabla u_3) \chi \diff x \diff y \diff z \diff t \\
     & - \epsilon^2 \int_0^\infty \langle \partial_t u_3 , u_3^\epsilon \rangle _{H^{-1} \times H^1} \chi \diff t - \int_Q (\mathbf{u}_h^\epsilon \cdot \mathbf{u}_h + \epsilon^2 u_3^\epsilon u_3) \chi' \diff x \diff y \diff z \diff t \\
     & = - \int_Q [(\mathbf{u}^\epsilon \cdot \nabla) \mathbf{u}_h^\epsilon \cdot \mathbf{u}_h + \epsilon^2 \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon u_3] \chi \diff x \diff y \diff z \diff t + \norm{{\mathbf{u}_h}_0}_2^2 + \epsilon^2 \norm{{u_3}_0}_2^2 \\
-    & + \int_Q  ( \gamma u_2^\epsilon u_1 - \epsilon \beta u_3^\epsilon u_1 + \alpha \epsilon u_3^\epsilon u_2 - \gamma u_1^\epsilon u_2 - \epsilon \alpha u^\epsilon_2 u_3 + \epsilon \beta u_1^\epsilon u_3) \chi,
+    & + \int_Q  ( \gamma u_2^\epsilon u_1 - \epsilon \beta u_3^\epsilon u_1 + \alpha \epsilon u_3^\epsilon u_2 - \gamma u_1^\epsilon u_2 - \epsilon \alpha u^\epsilon_2 u_3 + \epsilon \beta u_1^\epsilon u_3) \chi,\raisetag{80pt}
   \end{split}
 \end{equation}
 
@@ -534,24 +534,29 @@ The idea here is to take an arbitrary $t_0 \in (0, \infty)$ and a sufficiently s
 
 In more detail, the term $ \langle \partial_t u_3, u_3^\epsilon \rangle$ now takes the form 
 
-$$ \langle \partial_t u_3, u_3^\epsilon \rangle = - \int_{\partial \Omega} \bigg ( \int_0^z \partial_t \mathbf{u}_h \diff z' \bigg ) u_3^\epsilon \mathbf{n}_h + \int_\Omega \bigg ( \int_0^z \partial_t \mathbf{u}_h \diff z' \bigg) \nabla_h \cdot u_3^\epsilon,$$
+\begin{equation}
+  \begin{split}
+    & \langle \partial_t u_3, u_3^\epsilon \rangle = - \bigg \langle \nabla_h \cdot \bigg ( \int_0^z \partial_t \mathbf{u}_h \diff z' \bigg ) , u_3^\epsilon \bigg \rangle \\
+    & = - \int_{\partial \Omega} \bigg ( \int_0^z \partial_t \mathbf{u}_h \diff z' \bigg ) u_3^\epsilon \mathbf{n}_h + \int_\Omega \bigg ( \int_0^z \partial_t \mathbf{u}_h \diff z' \bigg) \cdot \nabla_h u_3^\epsilon \diff x \diff y \diff z,
+  \end{split}
+\end{equation}
     
 from where, by using that $u_3^\epsilon = 0$ on $\partial \Omega$ we arrive easily to the more simple
     
-$$ \langle \partial_t u_3, u_3^\epsilon \rangle  = \int_\Omega \bigg ( \int_0^z \partial_t \mathbf{u}_h \diff z' \bigg) \nabla_h \cdot u_3^\epsilon,$$
+$$ \langle \partial_t u_3, u_3^\epsilon \rangle  = \int_\Omega \bigg ( \int_0^z \partial_t \mathbf{u}_h \diff z' \bigg) \cdot \nabla_h u_3^\epsilon \diff x \diff y \diff z,$$
      
 which is the form one would have on a periodic domain. Similarly, 
      
-$$ \langle \partial_t u_3, u_3^\epsilon - u_3 \rangle = \int_\Omega \bigg ( \int_0^z \partial_t \mathbf{u}_h \diff z' \bigg) \nabla_h \cdot (u_3^\epsilon - u_3),$$ as the boundary term $\int_{\partial \Omega} \bigg ( \int_0^z \partial_t \mathbf{u}_h \diff z' \bigg ) (u_3^\epsilon - u_3) \mathbf{n}_h$ becomes zero, since we have $u_3 = 0, u_3^\epsilon = 0$ on $\Gamma.$ 
+$$ \langle \partial_t u_3, u_3^\epsilon - u_3 \rangle = \int_\Omega \bigg ( \int_0^z \partial_t \mathbf{u}_h \diff z' \bigg) \cdot \nabla_h (u_3^\epsilon - u_3),$$ as the boundary term $\int_{\partial \Omega} \bigg ( \int_0^z \partial_t \mathbf{u}_h \diff z' \bigg ) (u_3^\epsilon - u_3) \mathbf{n}_h$ becomes zero, since we have $u_3 = 0, u_3^\epsilon = 0$ on $\Gamma.$ 
 
 After some technical details that we omit here we eventually obtain
 
 \begin{equation}
   \begin{split}
-    & - \frac{\epsilon^2}{2} \norm{u_3(t)}_2^2 + \bigg ( (\mathbf{u}_h^\epsilon \cdot \mathbf{u}_h + \epsilon^2 u_3^\epsilon u_3) \diff x \diff y \diff z  \bigg ) (t_0) \\
-    & + \int_{Q_{t_0}} (-\mathbf{u}_h^\epsilon \cdot \partial_t \mathbf{u}_h + \nabla \mathbf{u}_h^\epsilon : \nabla \mathbf{u}_h + \epsilon^2 \nabla u_3^\epsilon \cdot \nabla u_3) \diff x \diff y \diff z \diff s \\
-    & = \frac{\epsilon^2}{2} \norm{{u_3}_0}_2^2 + \norm{{\mathbf{u}_h}_0}_2^2 + \epsilon^2 \int_{Q_{t_0}} \bigg ( \int_0^z \partial_t \mathbf{u}_h \diff z' \bigg ) \cdot \nabla_h U_3^\epsilon \diff x \diff y \diff z \diff s \\
-    & - \int_{Q_{t_0}} [(\mathbf{u}^\epsilon \cdot \nabla) \mathbf{u}_h^\epsilon \cdot \mathbf{u}_h + \epsilon^2 \mathbf{u}^\epsilon \cdot u_3^\epsilon u_3] \diff x \diff y \diff z \diff s \\
+    & - \frac{\epsilon^2}{2} \norm{u_3(t_0)}_2^2 + \bigg ( (\mathbf{u}_h^\epsilon \cdot \mathbf{u}_h + \epsilon^2 u_3^\epsilon u_3) \diff x \diff y \diff z  \bigg ) (t_0) \\
+    & + \int_{Q_{t_0}} (-\mathbf{u}_h^\epsilon \cdot \partial_t \mathbf{u}_h + \nabla \mathbf{u}_h^\epsilon : \nabla \mathbf{u}_h + \epsilon^2 \nabla u_3^\epsilon \cdot \nabla u_3) \diff x \diff y \diff z \diff t \\
+    & = \frac{\epsilon^2}{2} \norm{{u_3}_0}_2^2 + \norm{{\mathbf{u}_h}_0}_2^2 + \epsilon^2 \int_{Q_{t_0}} \bigg ( \int_0^z \partial_t \mathbf{u}_h \diff z' \bigg ) \cdot \nabla_h U_3^\epsilon \diff x \diff y \diff z \diff t \\
+    & - \int_{Q_{t_0}} [(\mathbf{u}^\epsilon \cdot \nabla) \mathbf{u}_h^\epsilon \cdot \mathbf{u}_h + \epsilon^2 \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon u_3] \diff x \diff y \diff z \diff t \\
     & + \int_{Q_{t_0}}  ( \gamma u_2^\epsilon u_1 - \epsilon \beta u_3^\epsilon u_1 + \alpha \epsilon u_3^\epsilon u_2 - \gamma u_1^\epsilon u_2 - \epsilon \alpha u_2^\epsilon u_3 + \epsilon \beta u_1^\epsilon u_3)
   \end{split}
 \end{equation}
@@ -598,7 +603,7 @@ Using the same conditions as in Proposition $\ref{propIdentity}$, the following 
   
   \begin{equation} \label{bound_by_definition}
     \begin{split}
-      & \frac{1}{2}( \norm{\mathbf{u}_h^\epsilon (t_0)}_2^2 + \epsilon^2 \norm{u_3^\epsilon(t_0)}_2^2)+ \int_0^{t_0} (\norm{\nabla \mathbf{u}_h^\epsilon}_2^2 + \epsilon^2 \norm{\nabla u_3^\epsilon}_2^2) \diff t \\
+      & \frac{1}{2}( \norm{\mathbf{u}_h^\epsilon (t_0)}_2^2 + \epsilon^2 \norm{u_3^\epsilon(t_0)}_2^2)+ \int_0^{t_0} (\norm{\nabla \mathbf{u}_h^\epsilon}_2^2 + \epsilon^2 \norm{\nabla u_3^\epsilon}_2^2) \diff s \\
       & \leq \frac{1}{2} (\norm{{\mathbf{u}_h}_0}_2^2 + \epsilon^2 \norm{{u_3}_0}_2^2),
     \end{split}
   \end{equation}
@@ -613,13 +618,13 @@ Using the same conditions as in Proposition $\ref{propIdentity}$, the following 
       & \leq - \epsilon^2 \int_{Q_{t_0}} \bigg [ \bigg ( \int_0^z \partial_t \mathbf{u}_h \diff z' \bigg ) \cdot \nabla_h U_3^\epsilon + \nabla u_3 \cdot \nabla U_3^\epsilon \bigg ] \diff x \diff y \diff z \diff t \\
       & + \int_{Q_{t_0}} [(\mathbf{u}^\epsilon \cdot \nabla) \mathbf{u}_h^\epsilon \cdot \mathbf{u}_h + (\mathbf{u} \cdot \nabla )\mathbf{u}_h \cdot \mathbf{u}_h^\epsilon] \diff x \diff y \diff z \diff t \\
       & + \epsilon^2 \int_{Q_{t_0}} \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon u_3 \diff x \diff y \diff z \diff t \\
-      & + \int_{Q_{t_0}}  \epsilon \beta u_3^\epsilon u_1 - \alpha \epsilon u_3^\epsilon u_2 + \epsilon \alpha u_2^\epsilon u_3 - \epsilon \beta u_1^\epsilon u_3 \diff x \diff y \diff z \diff t := I_1 + I_2 + I_3 + I_4, \raisetag{80pt}
+      & + \int_{Q_{t_0}}  \epsilon \beta u_3^\epsilon u_1 - \epsilon \alpha u_3^\epsilon u_2 + \epsilon \alpha u_2^\epsilon u_3 - \epsilon \beta u_1^\epsilon u_3 \diff x \diff y \diff z \diff t := I_1 + I_2 + I_3 + I_4, \raisetag{80pt}
     \end{split}
   \end{equation}
   
   for almost every $t_0 \in [0, \infty).$
   
-  The proof is brought to a closure by providing a bound for each of the $I_1, I_2, I_3, I_4$ terms above, in which the regularity of the strong solutions of the primitive equations (see Corollary $\ref{StrongSolPE_boundedness}$) plays a crucial role.
+  The next step of the proof is to provide a bound for each of the $I_1, I_2, I_3, I_4$ terms above, in which the regularity of the strong solutions of the primitive equations (see Corollary $\ref{StrongSolPE_boundedness}$) plays a crucial role.
   
   \textbf{Bound for $I_1.$} The bound
   
@@ -631,11 +636,11 @@ Using the same conditions as in Proposition $\ref{propIdentity}$, the following 
   
   \begin{equation}\label{I2Bound}I_2 \leq \frac{1}{6} \norm{\nabla \mathbf{U}_h^\epsilon}^2_2 + C \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^4 \norm{\mathbf{U}_h^\epsilon}_2^2 \diff t + C \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^2  \norm{\Delta \mathbf{u}_h}_2^2 \norm{\mathbf{U}_h^\epsilon}_2^2 \diff t\end{equation}
   
-  for $I_2$ follows analogous steps as in \cite{li2019primitive} (i.e. using the Young, H\"older, Poincar\'e inequalities, the divergence-free condition), but we highlight the presence of the new, additional term $C \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^4 \norm{\mathbf{U}_h^\epsilon}_2^2 \diff t$ in the bound.
+  for $I_2$ follows analogous steps as in \cite{li2019primitive} (i.e. using the Young, H\"older, Poincar\'e inequalities, and the divergence-free condition), but we highlight the presence of the new, additional term $C \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^4 \norm{\mathbf{U}_h^\epsilon}_2^2 \diff t$ in the bound.
   
-  The difference is due to the fact when we need to construct a bound for the term
+  The difference is manifested at the point where we need to construct a bound for the term
   
-  $$ \int_0^{t_0} \int_M \bigg ( \int_{-1}^1 \abs{\nabla_h \mathbf{U}_h^\epsilon} \diff z' \bigg) \bigg ( \int_{-1}^1 \abs{\mathbf{U}_h^\epsilon} \abs{\partial_z \mathbf{u}_h} \bigg )$$
+  $$ \int_0^{t_0} \int_M \bigg ( \int_{-1}^1 \abs{\nabla_h \mathbf{U}_h^\epsilon} \diff z \bigg) \bigg ( \int_{-1}^1 \abs{\mathbf{U}_h^\epsilon} \abs{\partial_z \mathbf{u}_h} \diff z \bigg ) \diff x \diff y \diff t $$
   
   appearing in the calculations. We apply Lemma 2.1 in \cite{li2019primitive} using
   
@@ -658,25 +663,28 @@ using the Young inequality. With this we arrive to the originally stated ($\ref{
   \textbf{Bound for $I_3.$} Calculating the 
   
   \begin{equation} \label{I3Bound}
-    I_3 \leq C \epsilon^2 [(\norm{{\mathbf{u}_h}_0}_2^2 + \epsilon^2 \norm{{u_3}_0}_2^2)^2 + C(\norm{{\mathbf{u}_h}_0}_{H^1}, \Gamma_G)] 
+    \begin{split}
+      & I_3 \leq \frac{1}{6} \big (  \norm{\nabla \mathbf{U}_h^\epsilon}_{L^2(Q_{t_0})}^2 + \epsilon^2 \norm{\nabla U_3^\epsilon}_{L^2(Q_{t_0})}^2 \big )\\
+      & + C \epsilon^2 [(\norm{{\mathbf{u}_h}_0}_2^2 + \epsilon^2 \norm{{u_3}_0}_2^2)^2 + C(\norm{{\mathbf{u}_h}_0}_{H^1}, \Gamma_G)]
+    \end{split}
   \end{equation}
   
-  bound for $I_3$ can be done using the Young and Poincar\'e inequalities and Lemma 2.1 in \cite{li2019primitive}. We highlight the fact that even though we obtain the same bound as in the work of \cite{li2019primitive}, the details differ at the point where in our case passing from \norm{\nabla \mathbf{u}_h} to \norm{\Delta \mathbf{u}_h} is not allowed.
+  bound for $I_3$ can be done by using the Young and Poincar\'e inequalities and Lemma 2.1 in \cite{li2019primitive}. We highlight the fact that even though we obtain the same bound as in the work of \cite{li2019primitive}, the details differ at the point where in our case passing from \norm{\nabla \mathbf{u}_h} to \norm{\Delta \mathbf{u}_h} is not allowed.
   
   Which is why we have a new term in this following point of the calculations
 
 \begin{equation}
   \begin{split} \nonumber
     I3 & \leq C \epsilon^2 \int_0 ^ {t_0} \bigg ( \| \mathbf{u}_h^\epsilon \| _2^2 \| \nabla \mathbf{u}_h^\epsilon \|_2^2 + \norm{\nabla \mathbf{u}_h}_2^2 (\norm{\nabla \mathbf{u}_h}_2^{1/2} + \norm{\Delta \mathbf{u}_h}_2^{1/2})^4 \\
-    & + \epsilon^2 \norm{u_3^\epsilon}_2^2 \norm{\nabla u_3^\epsilon}_2^2 \bigg ) \diff t + \frac{1}{6} \big ( \| \nabla \mathbf{U}_h^\epsilon \|_2^2 + \epsilon^2 \norm{\nabla U_3^\epsilon}_2^2  \big),
+    & + \epsilon^2 \norm{u_3^\epsilon}_2^2 \norm{\nabla u_3^\epsilon}_2^2 \bigg ) \diff t + \frac{1}{6} \big ( \| \nabla \mathbf{U}_h^\epsilon \|_{L^2(Q_{t_0})}^2 + \epsilon^2 \norm{\nabla U_3^\epsilon}_{L^2(Q_{t_0})}^2  \big),
   \end{split}
 \end{equation}
 
-but note that the additional $\norm{\nabla \mathbf{u}_h}_2^2 \cdot \norm{\nabla \mathbf{u}_h}_2^2$ term can be estimated using Corollary $\ref{StrongSolPE_boundedness}$ by the same $C(\norm{{\mathbf{u}_h}_0}_{H^1}, \Gamma_G)$ term that is used to estimate the Laplacian, which is why we arrive to the same conclusion ($\ref{I3Bound}$) that was calculated for the boundary-free scenario.
+but note that the additional $\norm{\nabla \mathbf{u}_h}_2^2 \cdot \norm{\nabla \mathbf{u}_h}_2^2$ term can be estimated using Corollary $\ref{StrongSolPE_boundedness}$ by the same $C(\norm{{\mathbf{u}_h}_0}_{H^1}, \Gamma_G)$ term that is used to estimate the Laplacian, which is why we arrive back to the same conclusion ($\ref{I3Bound}$) that was calculated for the boundary-free scenario.
   
   \textbf{Bound for $I_4.$} We add $ - \epsilon \beta u_3 u_1 +  \epsilon \beta u_3 u_1 - \epsilon \alpha u_3 u_2 + \epsilon \alpha u_3 u_2 = 0 $ to $I_4$, thus instead of bounding the original version of the term, now we need to bound
 
-    $$ \int_{Q_{t_0}}  ( \epsilon \beta U_3^\epsilon u_1 - \alpha \epsilon U_3^\epsilon u_2 + \epsilon \alpha U_2^\epsilon u_3 - \epsilon \beta U_1^\epsilon u_3).$$
+    $$ \int_{Q_{t_0}}  ( \epsilon \beta U_3^\epsilon u_1 - \epsilon \alpha U_3^\epsilon u_2 + \epsilon \alpha U_2^\epsilon u_3 - \epsilon \beta U_1^\epsilon u_3) \diff x \diff y \diff z \diff t.$$
     
     \begin{itemize}
     
@@ -684,12 +692,13 @@ but note that the additional $\norm{\nabla \mathbf{u}_h}_2^2 \cdot \norm{\nabla 
       
       \begin{equation}
         \begin{split}
-          & \int_{Q_{t_0}} \epsilon \alpha U_2^\epsilon u_3 \leq \alpha \int_0^{t_0} \norm{U_2^\epsilon} \norm{\epsilon u_3}  \leq \alpha \int_0^{t_0} \zeta \norm{U_2^\epsilon}^2_2 + \alpha \int_0^{t_0} \frac{1}{\zeta} \epsilon^2 \norm{u_3}^2_2 \\
-          & \leq \alpha \int_0^{t_0} \zeta \norm{\nabla U_2^\epsilon}^2_2 + \alpha \int_0^{t_0} \frac{1}{\zeta} \epsilon^2 \norm{u_3}^2_2.
+          & \int_{Q_{t_0}} \epsilon \alpha U_2^\epsilon u_3 \diff x \diff y \diff z \diff t \leq \alpha \int_0^{t_0} \norm{U_2^\epsilon} \norm{\epsilon u_3} \diff t \\
+          & \leq \alpha \int_0^{t_0} \zeta \norm{U_2^\epsilon}^2_2 \diff t + \alpha \int_0^{t_0} \frac{1}{\zeta} \epsilon^2 \norm{u_3}^2_2 \diff t \\
+          & \leq \alpha \int_0^{t_0} \zeta \norm{\nabla U_2^\epsilon}^2_2 \diff t + \alpha \int_0^{t_0} \frac{1}{\zeta} \epsilon^2 \norm{u_3}^2_2 \diff t.
         \end{split}
       \end{equation}
       
-      Here the $\int_0^{t_0} \zeta \norm{\nabla U_2^\epsilon}^2_2$  term can be merged into the left hand side, while
+      Here the $\int_0^{t_0} \zeta \norm{\nabla U_2^\epsilon}^2_2$  term can be merged into the left hand side of ($\ref{introduce_I_terms}$), while
       
       $$\alpha \int_0^{t_0} \frac{1}{\zeta} \epsilon^2 \norm{u_3}^2_2 \leq \alpha \frac{1}{\zeta} \epsilon^2 \norm{u_3}^2_{L^2(Q_{t_0})} \leq \alpha \frac{1}{\zeta} \epsilon^2 C(\norm{{\mathbf{u}_h}_0}_{H^1}, \Gamma_G),$$
       
@@ -701,18 +710,18 @@ but note that the additional $\norm{\nabla \mathbf{u}_h}_2^2 \cdot \norm{\nabla 
       
       \item For the term $\epsilon \beta U_3^\epsilon u_1$ we can use the idea that $\| U_3^\epsilon \| \leq \| \nabla \mathbf{U}_h^\epsilon \|.$ As we have $\partial_3 u_3^\epsilon = \nabla_h \mathbf{u}_h^\epsilon,$ and $\partial_3 u_3 = \nabla_h \mathbf{u}_h,$ we naturally have $\partial_3 U_3^\epsilon = \nabla_h \mathbf{U}_h^\epsilon,$ and by the vertical Poincar\'e inequality we have $$\norm{U_3^\epsilon} \leq \norm{\partial_3 U_3^\epsilon} = \norm{\nabla \mathbf{U}_h^\epsilon}.$$ This way we are able to bound the $U_3^\epsilon$ term without keeping the $\epsilon^2$ multiplier attached to it when we apply the Young inequality. We have
       
-      $$ \int_{Q_{t_0}} \epsilon \beta U_3^\epsilon u_1 \leq \int_0^{t_0} \epsilon \beta \norm{U_3^\epsilon}_2 \norm{u_1}_2 \leq \int_0^{t_0} \epsilon \beta \| \nabla \mathbf{U}_h^\epsilon \|_2 \norm{u_1}_2, $$
+      $$ \hspace{-1em}\int_{Q_{t_0}} \epsilon \beta U_3^\epsilon u_1 \diff x \diff y \diff z \diff t \leq \int_0^{t_0} \epsilon \beta \norm{U_3^\epsilon}_2 \norm{u_1}_2 \diff t \leq \int_0^{t_0} \epsilon \beta \| \nabla \mathbf{U}_h^\epsilon \|_2 \norm{u_1}_2 \diff t, $$
       
       and finally, after applying the Young inequality we arrive to
       
       \begin{equation}
         \begin{split}
-          & \int_{Q_{t_0}} \epsilon \beta U_3^\epsilon u_1 \leq \beta \zeta \int_0^t \norm{\nabla \mathbf{U}_h^\epsilon}_2^2 + \frac{1}{\zeta} \epsilon^2 \norm{u_1}_2^2 \\
-          & \leq \beta \zeta \int_0^t \norm{\nabla \mathbf{U}_h^\epsilon}_2^2 + \frac{1}{\zeta} \epsilon^2 C(\norm{{\mathbf{u}_h}_0}_{H^1}, \Gamma_G),
+          & \int_{Q_{t_0}} \epsilon \beta U_3^\epsilon u_1 \diff x \diff y \diff z \diff t \leq \beta^2 \zeta \int_0^{t_0} \norm{\nabla \mathbf{U}_h^\epsilon}_2^2 \diff s+ \frac{1}{\zeta} \epsilon^2 \int_0^{t_0} \norm{u_1}_2^2 \diff s \\
+          & \leq \beta^2 \zeta \int_0^{t_0} \norm{\nabla \mathbf{U}_h^\epsilon}_2^2 \diff t + \frac{1}{\zeta} \epsilon^2 C(\norm{{\mathbf{u}_h}_0}_{H^1}, \Gamma_G),
         \end{split}
       \end{equation}
       
-      where the first term can be merged into the left hand side.
+      where the first term can be merged into the left hand side of ($\ref{introduce_I_terms}$).
             
       \item The estimate of $\alpha \epsilon U_3^\epsilon u_2$ is structurally analogous.
     
@@ -741,8 +750,7 @@ from which, applying the Gr\"onwall inequality and using Corollary $\ref{StrongS
 
 \begin{equation}
   \begin{split} \nonumber
-    & (\norm{\mathbf{U}_h^\epsilon}_2^2 + \epsilon^2 \norm{U_3^\epsilon}_2^2)(t) + \int_0^t (\norm{\nabla \mathbf{U}_h^\epsilon}_2^2 + \epsilon^2 \norm{\nabla U_3^\epsilon}_2^2) \diff s \\
-    & \leq \Psi (t) \leq e^{C \int_0 ^ t (\norm{\nabla \mathbf{u}_h}_2^4 + \norm{\nabla \mathbf{u}_h}_2^2  \norm{\Delta \mathbf{u}_h}_2^2) \diff s} \Psi (0) \leq e^{C(\norm{{\mathbf{u}_h}_0}_{H^1}, L_1, L_2)} \Psi(0) \\
+    & \Phi (t) \leq \Psi (t) \leq e^{C \int_0 ^ t (\norm{\nabla \mathbf{u}_h}_2^4 + \norm{\nabla \mathbf{u}_h}_2^2  \norm{\Delta \mathbf{u}_h}_2^2) \diff s} \Psi (0) \leq e^{C(\norm{{\mathbf{u}_h}_0}_{H^1}, \Gamma_G)} \Psi(0) \\
     & \leq \epsilon^2 C(\norm{{\mathbf{u}_h}_0}_{H^1}, \Gamma_G) (\norm{{\mathbf{u}_h}_0}_2^2 + \epsilon^2 \norm{{u_3}_0}_2^2 + 1)^2,
   \end{split}
 \end{equation}
@@ -751,11 +759,19 @@ which concludes the proof.
   
 \end{proof}
 
-As a consequence, we arrive to strong convergence of $\nabla \mathbf{u}_h^\epsilon \to \nabla \mathbf{u}_h$ in $L^2_t L^2_x$, and with that we have $\partial_3 u_3^\epsilon \to \partial_3 u_3.$ Eventually we deduce $u_3^\epsilon \to u_3$ strongly  in $L^2_t L^2_x,$ which was the last missing part of the proof of the main theorem, since combining the weak convergence of $C^\epsilon$ and the strong convergence of $u_3^\epsilon,$ we are finally able to state
+Thus, we essentially have
 
-$$ C^\epsilon u_3^\epsilon \rightharpoonup C u_3 \text{ weakly in } L^2 L^2.$$
+$$ (\norm{\mathbf{U}_h^\epsilon}_2^2 + \epsilon^2 \norm{U_3^\epsilon}_2^2)(t) + \int_0^t (\norm{\nabla \mathbf{U}_h^\epsilon}_2^2 + \epsilon^2 \norm{\nabla U_3^\epsilon}_2^2) \diff s \leq \epsilon^2 C,$$
 
-With this Theorem $\ref{maintheorem}$ has been proved. 
+where the $C$ constant only depends on the domain structure and the initial data. With this we arrive to strong convergence result $\nabla \mathbf{U}_h^\epsilon \to 0$ in $L^2_t L^2_x,$ and as a direct consequence, we have $\nabla \mathbf{u}_h^\epsilon \to \nabla \mathbf{u}_h$ in $L^2_t L^2_x$ as well. Using the relation between the horizontal and vertical velocity functions through the divergence-free condition, we immediately have $\partial_3 u_3^\epsilon \to \partial_3 u_3,$ and eventually we deduce that
+
+\begin{equation}\label{strongconvresultu3}u_3^\epsilon \to u_3 \text{ strongly in } L^2_t L^2_x.\end{equation}
+
+This has been the last missing part of the proof of the main theorem, since combining the weak convergence result ($\ref{WeakConvCEps1}$) for $C^\epsilon$ and the strong convergence ($\ref{strongconvresultu3}$) of $u_3^\epsilon,$ we are finally able to state that
+
+\begin{equation}C^\epsilon u_3^\epsilon \rightharpoonup C u_3 \text{ weakly in } L^2 L^2.\end{equation}
+
+With this Theorem $\ref{maintheorem}$ has been proved.
 
 \nocite{*}
 \bibliographystyle{abbrv}
