@@ -210,7 +210,7 @@ The initial condition for the velocity and the pollution concentration are
       \end{split}
     \end{equation}
     
-    where the boundary structure of the domain is identical to what we used in \cite{pollatmws2019}, i.e. the upper boundary of the $\Omega$ domain is denoted by $\Gamma_U$, the lateral boundary is $\Gamma_L$, and the lower boundary of the domain is $\Gamma_G$, while the complete boundary is denoted by $\Gamma$ (see graph later.)
+    where the boundary structure of the domain is identical to what we used in \cite{pollatmws2019}, i.e. the upper boundary of the $\Omega$ domain is denoted by $\Gamma_U$, the lateral boundary is $\Gamma_L$, and the lower boundary of the domain is $\Gamma_G$, while the complete boundary is denoted by $\Gamma$ (see graph later.) For simplicity we assume that the altitude of $\Omega$ is $1$, thus we can also express the full domain as $\Omega =  \Gamma_G \times [0,1],$ which will be useful later for estimating integrals. 
     
     \begin{figure}[!h]
   \centering
@@ -467,6 +467,34 @@ This section is dedicated to the verification of Theorem \ref{maintheorem}. Stru
   The following part of the proof is dedicated to verifying the strong convergence of $u_3^\epsilon,$ and is based on the idea of \cite{li2019primitive} --- our scenario is different however in that \textit{a)} first of all our domain is bounded, while the domain the authors of \cite{li2019primitive} consider is periodic, \textit{b)} we do not assume zero-averaged functions, and finally \textit{c)} in our case the Coriolis terms are incorporated to the model as well. Our strategy in providing the proof is to give a self-contained result that describes all the steps that build up the verification process, but we elaborate in more detail where the above mentioned \textit{a), b), c)} points have a tangible effect. Some technical details that are identical to those in \cite{li2019primitive} will be skipped.
   
 It is important to highlight at this point that since we are not restricted to zero-averaged functions and we are not on a periodic domain, we need to pay special attention when verifying boundedness results using the Poincar\'e inequality. Note that as the value of the velocity functions are defined to be zero on the boundary, any first-order estimate of the type $\norm{\mathbf{u}_h^\epsilon} \leq \norm{\nabla \mathbf{u}_h^\epsilon}$ is valid (i.e. to estimate a function by its gradient), using the zero-trace version of the Poincar\'e inequality for functions in $W^{1,2}_0.$ However, since it is only the value of the functions that vanishes on the boundary, but not their derivatives, higher order estimates such as passing from $\norm{\nabla \mathbf{u}_h^\epsilon}$ to $\norm{\Delta \mathbf{u}_h^\epsilon}$ in the process of constructing an upper bound can not be applied in general.
+
+Another structural difference we need to underline in connection with the proof is that instead of using the $\{-1,1\}$ set to represent the $\epsilon$-free vertical domain (i.e. the $\Gamma_L$ section), we use $\{0,1\},$ without assuming the vertical velocity function $u_3^\epsilon$ to be odd with respect to $z.$ The vertical section is commonly set to $\{-1,1\},$ or equivalently, to $\{-a,a\}$ in works that use the periodical domain scenario, see also \cite{cao2016global}, \cite{cao2017global}. In our case however we use a bounded domain without the assuming a symmetry line in the vertical midpoint --- thus we work with the $\{0,1\}$ set as the vertical domain. As a consequence, the Ladyzhenskaya-type inequality presented in different versions in \cite{cao2003global} and \cite{li2019primitive} will be used here in the following form:
+
+\begin{lemma}\label{LadyzhenskayatypeIEQ}
+
+  The inequalities
+  
+  \begin{equation}\nonumber
+    \begin{split}
+      & \int_{\Gamma_G} \bigg ( \int_0^1 f(x,y,z) \diff z \bigg) \bigg ( \int_0^1 g(x,y,z) h(x,y,z) \diff z \bigg ) \diff x \diff y \\
+      & \leq C \norm{f}_2^{1/2} \big ( \norm{f}_2^{1/2} + \norm{\nabla_h f}_2^{1/2} \big ) \norm{g}_2 \norm{h}_2^{1/2} \big (\norm{h}_2^{1/2} + \norm{\nabla_h h}_2^{1/2} \big ),
+    \end{split}
+  \end{equation}
+  
+  and
+  
+  \begin{equation}\nonumber
+    \begin{split}
+      & \int_{\Gamma_G} \bigg ( \int_0^1 f(x,y,z) \diff z \bigg) \bigg ( \int_0^1 g(x,y,z) h(x,y,z) \diff z \bigg ) \diff x \diff y \\
+      & \leq C \norm{f}_2 \norm{g}_2^{1/2} \big ( \norm{g}_2^{1/2} + \norm{\nabla_h g}_2^{1/2} \big ) \norm{h}_2^{1/2} \big (\norm{h}_2^{1/2} + \norm{\nabla_h h}_2^{1/2} \big ),
+    \end{split}
+  \end{equation}
+  
+  hold true for any $f,g,h$ set of functions such that the right-hand sides make sense and are finite. Here $C$ is a positive constant depending only on $\Gamma_G.$
+
+\end{lemma}
+
+Note that this lemma simply states the inequality for the complete domain even in the version in \cite{li2019primitive}, not assuming an odd $u_3^\epsilon$ function or a $z$-symmetrical vertical structure of $\Omega$.
   
 The next step in order to estimate the difference $$(\mathbf{U}_h^\epsilon, U_3^\epsilon): = (\mathbf{u}_h^\epsilon - \mathbf{u}_h, u_3^\epsilon - u_3)$$ is to practically use the strong solution $(\mathbf{u}_h,u_3)$ as a test function when writing down the weak formulation's integral identity for the scaled equations. Following this method we arrive to
 
@@ -509,7 +537,7 @@ As we highlighted before, using higher than first-order estimates of the type su
 \begin{equation}
   \begin{split}
     & \int_Q \abs{\mathbf{u}^\epsilon} \abs{\nabla u_3^\epsilon} \abs{u_3} \chi \diff x \diff y \diff z \\
-    & \leq  \int_0 ^ T \int_M \bigg ( \int_{-1}^1 \abs{\mathbf{u}^\epsilon} \abs{\nabla u_3^\epsilon} \diff z \int_{-1}^1 \abs{\nabla_h \mathbf{u}_h} \diff z \bigg ) \diff x \diff y \diff t \\
+    & \leq  \int_0 ^ T \int_{\Gamma_G} \bigg ( \int_0^1 \abs{\mathbf{u}^\epsilon} \abs{\nabla u_3^\epsilon} \diff z \int_0^1 \abs{\nabla_h \mathbf{u}_h} \diff z \bigg ) \diff x \diff y \diff t \\
     & \leq C \int_0^T \norm{\mathbf{u}^\epsilon}_2^{1/2} \norm{\nabla \mathbf{u}^\epsilon}_2^{1/2} \norm{\nabla u_3^\epsilon}_2 \norm{\nabla_h \mathbf{u}_h}_2^{1/2} (\norm{\nabla_h \mathbf{u}_h}_2^{1/2} + \norm{\Delta \mathbf{u}_h}_2^{1/2}) \diff t \\
     & \leq C \sup_{0 \leq t \leq T} \norm{\mathbf{u}^\epsilon}_2^{1/2} \norm{\nabla \mathbf{u}_h}_2^{1/2} \bigg( \int_0^T \norm{\nabla \mathbf{u}^\epsilon}^2_2 \diff t \bigg)^{1/4} \bigg ( \int_0^T \norm{\nabla u_3^\epsilon}_2^2 \diff t \bigg)^{1/2} \\
     & \times \bigg ( \int_0^T \norm{\Delta \mathbf{u}_h}_2^2 \diff t \bigg )^{1/4} \\
@@ -640,9 +668,9 @@ Using the same conditions as in Proposition $\ref{propIdentity}$, the following 
   
   The difference is manifested at the point where we need to construct a bound for the term
   
-  $$ \int_0^{t_0} \int_M \bigg ( \int_{-1}^1 \abs{\nabla_h \mathbf{U}_h^\epsilon} \diff z \bigg) \bigg ( \int_{-1}^1 \abs{\mathbf{U}_h^\epsilon} \abs{\partial_z \mathbf{u}_h} \diff z \bigg ) \diff x \diff y \diff t $$
+  $$ \int_0^{t_0} \int_{\Gamma_G} \bigg ( \int_0^1 \abs{\nabla_h \mathbf{U}_h^\epsilon} \diff z \bigg) \bigg ( \int_0^1 \abs{\mathbf{U}_h^\epsilon} \abs{\partial_z \mathbf{u}_h} \diff z \bigg ) \diff x \diff y \diff t $$
   
-  appearing in the calculations. We apply Lemma 2.1 in \cite{li2019primitive} using
+  appearing in the calculations. We apply Lemma $\ref{LadyzhenskayatypeIEQ}$ using
   
   $$f = \nabla_h \mathbf{U}_h^\epsilon, g = \mathbf{U}_h^\epsilon, h = \partial_z \mathbf{u}_h,$$
   
@@ -669,7 +697,7 @@ using the Young inequality. With this we arrive to the originally stated ($\ref{
     \end{split}
   \end{equation}
   
-  bound for $I_3$ can be done by using the Young and Poincar\'e inequalities and Lemma 2.1 in \cite{li2019primitive}. We highlight the fact that even though we obtain the same bound as in the work of \cite{li2019primitive}, the details differ at the point where in our case passing from \norm{\nabla \mathbf{u}_h} to \norm{\Delta \mathbf{u}_h} is not allowed.
+  bound for $I_3$ can be done by using the Young and Poincar\'e inequalities and Lemma \ref{LadyzhenskayatypeIEQ}. We highlight the fact that even though we obtain the same bound as in the work of \cite{li2019primitive}, the details differ at the point where in our case passing from \norm{\nabla \mathbf{u}_h} to \norm{\Delta \mathbf{u}_h} is not allowed.
   
   Which is why we have a new term in this following point of the calculations
 
