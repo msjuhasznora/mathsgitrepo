@@ -104,7 +104,7 @@ which leads us to introducing this new scaling identity
 
 \begin{equation} \label{ksepsk1} K_x = \epsilon K_1. \end{equation}
 
-We use this diffusion rescaling result in addition to the original set of scaling equations seen below. Every element of this latter set is a result of the shallowness of the domain, and they are applied in order to pass from the $\epsilon-$ dependent $\Omega^\epsilon$ original domain to the rescaled, $\epsilon-$free $\Omega$ domain. Each of these following scaling equations can be heuristically deduced from the typical physical dimension of the quantities (for more details see \cite{besson1992some}, \cite{azerad2001mathematical}, \cite{pollatmws2019}), unlike the previously presented equation ($\ref{ksepsk1}$), which is the effect of the coordinate choice itself. In detail, apart from the already introduced equation ($\ref{ksepsk1}$) we use the
+We use this diffusion rescaling result in addition to the original set of scaling equations described below. Every element of this latter set is a result of the shallowness of the domain, and they are applied in order to pass from the $\epsilon-$ dependent $\Omega^\epsilon$ original domain to the rescaled, $\epsilon-$free $\Omega$ domain. Each of these following scaling equations can be heuristically deduced from the typical physical dimension of the quantities (for more details see \cite{besson1992some}, \cite{azerad2001mathematical}, \cite{pollatmws2019}), unlike the previously presented equation ($\ref{ksepsk1}$), which is the effect of the coordinate choice itself. In detail, apart from the already introduced equation ($\ref{ksepsk1}$) we use the
 
 \begin{equation} \label{shallownessscalingeqs}
   \begin{split}
@@ -146,8 +146,6 @@ In order to obtain the set of equations that describe the phenomena we start wit
 For clarity, we add a comment here regarding the intuitive meaning of what we understand by the downwind direction $\mathbf{x}$ (which gives orientation to a coordinate axes), and the velocity $\mathbf{v}$ itself (which is the solution function). The downwind direction is an approximately steady-in-time direction, it can be seen as the direction marked by the wind direction trackers on an airport or meteorological point. When we consider the downwind, we neglect the small perturbations in its orientation, it can be viewed as a time-averaged direction as long as the fluctuation is relatively small. On the other hand, the velocity itself is a three-dimensional, time dependent vector that changes second after second.
 \end{remark}
 
-As for the rescaling process, here we apply the steps described in ($\ref{shallownessscalingeqs}$) with the addition of $(\ref{ksepsk1}).$
-
 To expand the $2 \mathbf{\omega} \times \mathbf{v}$ Coriolis term, firstly it is necessary to understand the structure of the new rotation vector. Note that the downwind matching coordinate system and the original east-north-upwards oriented system are different only in a rotation around the $z$ axis. Let $\theta$ denote the angle between the respective $x$ axes, $\phi$ denotes the latitude, then the rotation vector expressed in the downwind matching coordinate system becomes
 
 \begin{gather}
@@ -171,8 +169,8 @@ then using this, the Coriolis force takes the form
 \end{gather}
 
 Thus, these are the terms that appear in the three velocity equations below; but note that in the rescaled version of the vertical velocity equation the third component of the Coriolis term is present with an $\epsilon$ multiplier, which is obtained from the $\epsilon$ term in the denominator of $\partial_z p.$
-    
-    We arrive to the merged anisotropic equations of the polluted atmosphere above inland surface:
+
+Using the expanded form of the Coriolis terms and applying the scaling process, i.e. the steps described in ($\ref{shallownessscalingeqs}$) combined with $(\ref{ksepsk1}),$ we arrive to the merged anisotropic equations of the polluted atmosphere above inland surface:
   
     \begin{equation} \label{ANSC1}
     \partial_t u^\epsilon _1 + \mathbf{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\gamma u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
