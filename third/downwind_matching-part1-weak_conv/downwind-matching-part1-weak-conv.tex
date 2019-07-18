@@ -60,7 +60,7 @@ A local domain on the surface of the rotating Earth is often described in what i
 
 Migrating convergence results from one of the above described coordinate systems to the other is not trivial: as a result of an additional $\epsilon$ term in the downwind matching scenario, certain boundedness and regularity features that are satisfied for the geophysical rotating frame are at the same time not valid for the downwind matching Cartesian coordinate system.
 
-In \cite{pollatmws2019} we have proved a weak convergence theorem for the case of the classical north-west oriented coordinate system --- the present article is dedicated to show that this result still holds true in the downwind matching coordinate system assuming some medium-level changes in the initial and boundary conditions. The theorem we will migrate between these two coordinate systems is focused on the polluted atmosphere as a shallow domain. Incorporating the shallowness parameter into the model via introducing the $$\epsilon = \frac{\text{characteristic depth}}{\text{characteristic width}}$$ shallowness parameter we have proved the theoretical correctness of the hydrostatic approximation for the combination of a three-dimensional velocity function and a pollution concentration function. In more detail, we have showed that any weak solution of the shallow polluted atmosphere converges weakly to a weak solution of the so-called primitive equations representing the hydrostatic limit model.
+In \cite{pollatmws2019} we have proved a weak convergence theorem for the case of the classical north-west oriented coordinate system --- the present article is dedicated to show that this result still holds true in the downwind matching coordinate system assuming some medium-level changes in the initial and boundary conditions. The theorem we will migrate between these two coordinate systems is focused on the polluted atmosphere as a shallow domain. Incorporating the shallowness into the model via introducing the $$\epsilon = \frac{\text{characteristic depth}}{\text{characteristic width}}$$ shallowness parameter we have proved the theoretical correctness of the hydrostatic approximation for the combination of a three-dimensional velocity function and a pollution concentration function. In more detail, we have showed that any weak solution of the shallow polluted atmosphere converges weakly to a weak solution of the so-called primitive equations representing the hydrostatic limit model.
 
 Our goal here is to verify an analogous version of this convergence theorem for the case of the more considerately chosen downwind matching coordinate system. As in this scenario the advection is dominant compared to diffusion effects along the $x$ axis, this approach on the one hand naturally contributes to the simplification of the limit model. On the other hand it brings an additional $\epsilon$ term in the Laplacian of the concentration equation, and along with this the challenge of proving a weak convergence result for the product of the vertical velocity and the concentration. The difficulty is due to the phenomena of the $\norm{\partial_1 C^\epsilon}$ term being replaced by $\| \sqrt{\epsilon} \partial_1 C^\epsilon \|$ in the energy inequality. As the a priori estimates extracted from the energy inequality serve as fundamental building blocks of the proof, having a weakened, $\epsilon$-including version of one of the estimates has significant consequences for the verification process --- we lose the strong convergence of the concentration function.  This issue is overcome by using a more regular initial horizontal velocity function, namely ${\mathbf{u}_h}_0 \in H^1.$ The stronger initial regularity will naturally result in a $\mathbf{u}^\epsilon$ function with stronger regularities, allowing us to pass to the field of strong solutions for the velocity part of the solution, and thus will compensate the lost $H^1$ regularity of the concentration function $C^\epsilon.$
 
@@ -85,7 +85,7 @@ We end up this section with some notations we will use through the paper.
 \item $\alpha = -2 f \sin(\theta)\cos(\phi), \beta = 2 f \cos(\theta) \cos(\phi), \gamma = 2 f \sin(\phi),$
 % \item $\mathbf{c}(\mathbf{u}) = (\mathbf{c}_h (\mathbf{u}), c_3 (\mathbf{u}_h)) = ( -\gamma u_2^\epsilon + \epsilon \beta u_3^\epsilon, \alpha \epsilon u^\epsilon_3 - \gamma u_1^\epsilon, \alpha u^\epsilon_2 - \beta u_1^\epsilon),$ the Coriolis force terms 
 \item $\mathbf{K}$ represents the diagonal diffusion matrix,
-\item $( \cdot,\cdot) = $ the scalar product in $L^2(\Omega)^d$ or the duality $L^p (\Omega)$, $L^{p'} (\Omega),$
+\item $( \cdot,\cdot) = $ the scalar product in $L^2(\Omega)^d, d \geq 1$ or the duality $L^p (\Omega)$, $L^{p'} (\Omega),$
 \item $< \cdot,\cdot>_{\Gamma} = $ the scalar product or duality on the boundary curve $\Gamma$ ($H^{-1/2}(\Gamma)$, $H^{1/2}(\Gamma)$),
 \item $\mathbf{u}_h$ = the horizontal velocity components $(u_1, u_2),$
 \item $b(\mathbf{u}_h)$ = $- \gamma (u_2 , u_1),$
@@ -93,8 +93,8 @@ We end up this section with some notations we will use through the paper.
 
 \end{enumerate}
 
-%%% *** THE POLLUTED ATMOSPHERE MODEL *** %%%
-\section{The polluted atmosphere model} \label{eqsdescribingatmpluspollution}
+%%% *** THE MODEL FOR THE POLLUTED ATMOSPHERE *** %%%
+\section{The model for the polluted atmosphere} \label{eqsdescribingatmpluspollution}
 
 The key point of this new model is to integrate some of the main ideas of the Gaussian plume dispersion model into the system describing the polluted atmosphere. Therefore we begin by fixing the local Cartesian coordinate system to be adjusted to the downwind direction, i.e. $z$ is oriented upwards, while $x$ is the downwind, and $y$ is the crosswind direction. Another assumption the Gaussian dispersion models typically use is that advection is more dominant than diffusion along the downwind direction, which leads to the appearance of an extra $\epsilon$ term in the concentration equation's Laplacian. Namely, we have
 
@@ -104,7 +104,17 @@ which leads us to introducing this new scaling identity
 
 \begin{equation} \label{ksepsk1} K_x = \epsilon K_1. \end{equation}
 
-We use this diffusion rescaling result in addition to the original set of scaling equations described below. Every element of this latter set is a result of the shallowness of the domain, and they are applied in order to pass from the $\epsilon-$ dependent $\Omega^\epsilon$ original domain to the rescaled, $\epsilon-$free $\Omega$ domain. Each of these following scaling equations can be heuristically deduced from the typical physical dimension of the quantities (for more details see \cite{besson1992some}, \cite{azerad2001mathematical}, \cite{pollatmws2019}), unlike the previously presented equation ($\ref{ksepsk1}$), which is the effect of the coordinate choice itself. In detail, apart from the already introduced equation ($\ref{ksepsk1}$) we use the
+We use this diffusion rescaling result in addition to the original set of scaling equations described below. Every element of this latter set is a result of the shallowness of the domain, and they are applied in order to pass from the $\epsilon-$ dependent $\Omega^\epsilon$ original domain to the rescaled, $\epsilon-$free $\Omega$ domain.
+
+Here the original $\Omega_\epsilon$ domain we consider is a local slice of the atmosphere written in Cartesian coordinates:
+
+\begin{equation}
+  \Omega_{\epsilon} = \{(x,y,z) \in \mathbb{R}^3 ; (x,y) \in \omega, 0 < z < \epsilon h(x,y) \},
+\end{equation}
+
+where $\omega$ is a Lipschitz-domain in $\mathbb{R}^2$, $h$ is a nonnegative Lipschitzian application.
+
+Each of these following scaling equations can be heuristically deduced from the typical physical dimension of the quantities (for more details see \cite{besson1992some}, \cite{azerad2001mathematical}, \cite{pollatmws2019}), unlike the previously presented equation ($\ref{ksepsk1}$), which is the effect of the coordinate choice itself. In detail, apart from the already introduced equation ($\ref{ksepsk1}$) we use the following scaling identities to arrive to the rescaled model.
 
 \begin{equation} \label{shallownessscalingeqs}
   \begin{split}
@@ -116,7 +126,11 @@ We use this diffusion rescaling result in addition to the original set of scalin
   \end{split}
 \end{equation}
 
-scaling identities to arrive to the rescaled model.
+Once we apply the above set of equations, we pass from the original $\Omega_\epsilon$ domain to the $\epsilon-$ independent
+
+\begin{equation} \Omega =  \{(x_1,x_2,x_3) \in \mathbb{R}^3 ; (x_1,x_2) \in \omega, 0 < x_3 < h (x_1 , x_2) \} \end{equation}
+
+set.
 
 \begin{remark} \normalfont
   The inclusion of these new features related to the downwind matching coordinate system in a pollution model are legitimate when the following circumstances hold:
@@ -158,7 +172,7 @@ Now, let
 
 $$\alpha = -2 f \sin(\theta)\cos(\phi), \quad \beta = 2 f \cos(\theta) \cos(\phi), \quad \gamma = 2 f \sin(\phi),$$
 
-then using this, the Coriolis force takes the form
+i.e. $2 \omega = (\alpha, \beta, \gamma),$ then using this, the Coriolis force takes the form
 
 \begin{gather}
 \begin{bmatrix} \alpha \\ \beta \\ \gamma \end{bmatrix}
@@ -170,7 +184,7 @@ then using this, the Coriolis force takes the form
 
 Thus, these are the terms that appear in the three velocity equations below; but note that in the rescaled version of the vertical velocity equation the third component of the Coriolis term is present with an $\epsilon$ multiplier, which is obtained from the $\epsilon$ term in the denominator of $\partial_z p.$
 
-Using the expanded form of the Coriolis terms and applying the scaling process, i.e. the steps described in ($\ref{shallownessscalingeqs}$) combined with $(\ref{ksepsk1}),$ we arrive to the merged anisotropic equations of the polluted atmosphere above inland surface:
+Using the expanded form of the Coriolis terms and applying the scaling process ($\ref{shallownessscalingeqs}$) combined with $(\ref{ksepsk1}),$ we arrive to the merged anisotropic equations of the polluted atmosphere above inland surface:
   
     \begin{equation} \label{ANSC1}
     \partial_t u^\epsilon _1 + \mathbf{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\gamma u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
@@ -189,7 +203,7 @@ Using the expanded form of the Coriolis terms and applying the scaling process, 
     \end{equation}
     
     \begin{equation} \label{ANSC5}
-    \partial_t C^\epsilon + \mathbf{u^\epsilon} \cdot \nabla C^\epsilon = \epsilon K_1 \partial_{11} ^ 2 C^\epsilon + K_2 \partial_{22} ^ 2 C^\epsilon + K_3 \partial_{33} ^ 2 C^\epsilon + S^\epsilon \text{ in } \Omega \times (0,T)
+    \partial_t C^\epsilon + \mathbf{u^\epsilon} \cdot \nabla C^\epsilon = \epsilon K_1 \partial_{11} ^ 2 C^\epsilon + K_2 \partial_{22} ^ 2 C^\epsilon + K_3 \partial_{33} ^ 2 C^\epsilon + S^\epsilon \text{ in } \Omega \times (0,T).
     \end{equation}
 
 The initial condition for the velocity and the pollution concentration are
@@ -204,13 +218,15 @@ The initial condition for the velocity and the pollution concentration are
       \begin{split}
         & \mathbf{u}^\epsilon = 0 \text{ on } \Gamma \times (0,T), \\
         &C^\epsilon = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
-        & \partial_2 C^\epsilon = \partial_3 C^\epsilon = 0 \text{ on } \Gamma_G \times (0,T), \quad \partial_1 C^\epsilon \in L^2 L^2 (0,T; \Gamma_G), \\
+        & \partial_2 C^\epsilon = \partial_3 C^\epsilon = 0 \text{ on } \Gamma_G \times (0,T), \quad \partial_1 C^\epsilon = \sigma \in L^2 (0,T; \Gamma_G), \\
       \end{split}
     \end{equation}
     
-    where the boundary structure of the domain is identical to what we used in \cite{pollatmws2019}, i.e. the upper boundary of the $\Omega$ domain is denoted by $\Gamma_U$, the lateral boundary is $\Gamma_L$, and the lower boundary of the domain is $\Gamma_G$, while the complete boundary is denoted by $\Gamma$ (see graph later.) For simplicity we assume that the altitude of $\Omega$ is $1$, thus we can also express the full domain as $\Omega =  \Gamma_G \times [0,1],$ which will be useful later for estimating integrals. 
+    where the boundary structure of the domain is identical to what we used in \cite{pollatmws2019}, i.e. the upper boundary of the $\Omega$ domain is denoted by $\Gamma_U$, the lateral boundary is $\Gamma_L$, and the lower boundary of the domain is $\Gamma_G$, while the complete boundary is denoted by $\Gamma$ (see Figure $\ref{structdomaingraph1}$). The meaning of $\partial_1 C^\epsilon = \sigma$ above is that we naturally assume $\partial_1 C^\epsilon$ to be equal to some sufficiently regular $\sigma$ function defined on the respective boundary --- this well-known technique is also used for example for the case of modelling wind traction effect on the surface of the ocean.
     
-    \begin{figure}[!h]
+    For simplicity we assume that the altitude of $\Omega$ is $1$, thus we can also express the full domain as $\Omega =  \Gamma_G \times [0,1],$ which will be useful later for estimating integrals.
+    
+  \begin{figure}[!h]
   \centering
   \begin{tikzpicture}
     \fill[color=blue!10] (2,0) -- (2,3) arc (360:180:2cm and 0.5cm) -- (-2,0) arc (180:360:2cm and 0.5cm);
@@ -232,11 +248,13 @@ The initial condition for the velocity and the pollution concentration are
     
     \draw[thick] (2,0) arc (360:180:2cm and 0.5cm);
   \end{tikzpicture}
+  \caption{The structure of the $\Omega$ domain}
+  \label{structdomaingraph1}
 \end{figure}
     
 We highlight the difference between the boundary conditions of the original, east-north oriented, and the new, downwind matching model.
 
-The difference in the kind of boundary conditions we can "afford" to have on the lower boundary for the concentration comes from the energy inequality. In the east-north-upwards oriented coordinate system we do not have an $\epsilon$ in the diffusion matrix, and thus, having any of the $\partial_i C^\epsilon$ terms different from 0 does not create any problems, not even for an ocean case where $\partial_3 C^\epsilon$ becomes nonzero as well (they are required however to be bounded of course). On the other hand, the downwind matching coordinate system brings in an $\epsilon$ term in front of the $K_1$ diffusion coefficient, which makes the model more sensitive to assigning boundary conditions for $C^\epsilon.$ This means that we can not have anymore the relatively relaxed boundedness requirement for any $\partial_i C^\epsilon$ except for $i=1.$ All other $\partial_2 C^\epsilon, \partial_3 C^\epsilon$ derivatives must be zero on the lower boundary, otherwise they would result in an $(\epsilon - \text{const.})$ negative term appearing in the energy inequality --- for more details see the section describing the proof. This also means that we will consider exclusively the inland domain scenario for the case of this coordinate system.
+The difference in the kind of boundary conditions we can "afford" to have on the lower boundary for the concentration comes from the energy inequality. In the east-north-upwards oriented coordinate system we do not have an $\epsilon$ in the diffusion matrix, and thus, having any of the $\partial_i C^\epsilon$ terms different from 0 does not create any problems, not even for an ocean case where $\partial_3 C^\epsilon$ becomes nonzero as well (they are required however to be bounded of course). On the other hand, the downwind matching coordinate system brings in an $\epsilon$ term in front of the $K_1$ diffusion coefficient, which makes the model more sensitive to assigning boundary conditions for $C^\epsilon.$ This means that we can not have anymore the relatively relaxed boundedness requirement for any $\partial_i C^\epsilon$ except for $i=1.$ All other $\partial_2 C^\epsilon, \partial_3 C^\epsilon$ derivatives must be zero on the lower boundary, otherwise they would result in an $(\epsilon - \text{const.})$ negative term appearing in the energy inequality --- for more details see section $\ref{proof}$. This also means that we will consider exclusively the inland domain scenario for the case of this coordinate system.
 
 If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and $\epsilon$ including terms in the anisotropic equations, we formally arrive to the hydrostatic Navier-Stokes equations (i.e. primitive equations) combined with pollution.
 
@@ -320,7 +338,7 @@ In this section we describe the weak formulation of the merged equations in both
   \begin{equation}
     \begin{split} \nonumber
       &+ \int_0^T \bigg[ -(C, \partial_t \tilde{C}) -(\mathbf{u}C, \nabla \tilde{C}) + K_2 (\partial_2 C, \partial_2 \tilde{C}) + K_3 (\partial_3 C, \partial_3 \tilde{C}) \bigg ] \diff t \\
-      & = - (C(0), \tilde{C}(0)) + \int_0^T (S,\tilde{C}) \diff t
+      & = - (C_0, \tilde{C}(0)) + \int_0^T (S,\tilde{C}) \diff t
     \end{split}
   \end{equation}
   
@@ -347,9 +365,9 @@ In this section we describe the weak formulation of the merged equations in both
   
     \begin{equation}
     \begin{split} \nonumber
-      & \int_0^T \bigg [ -(C^\epsilon, \partial_t \tilde{C}) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) + \epsilon K_1 (\partial_1 C^\epsilon, \partial_1 \tilde{C}) - \epsilon K_1 \big[(\partial_1 C^\epsilon) \tilde{C} \big] _{\Gamma_G} \\
+      & \int_0^T \bigg [ -(C^\epsilon, \partial_t \tilde{C}) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) + \epsilon K_1 (\partial_1 C^\epsilon, \partial_1 \tilde{C}) - \epsilon K_1 \big[\sigma \tilde{C} \big] _{\Gamma_G} \\
       & + K_2 (\partial_2 C^\epsilon, \partial_2 \tilde{C}) + K_3 (\partial_3 C^\epsilon, \partial_3 \tilde{C}) \bigg ] \diff t \\
-      & =  - (C^\epsilon (0), \tilde{C} (0)) + \int_0^T (S^\epsilon,\tilde{C}) \diff t
+      & =  - (C_0, \tilde{C} (0)) + \int_0^T (S^\epsilon,\tilde{C}) \diff t
     \end{split}
   \end{equation}
   
@@ -368,9 +386,9 @@ Now we are ready to state the main theorem.
 %%% *** PROOF *** %%%
 \section{Proof of the main theorem} \label{proof}
 
-This section is dedicated to the verification of Theorem \ref{maintheorem}. Structurally we follow a similar chain of thought as in our previous paper --- until the point where the proof diverges reaching the weak convergence of the nonlinear term $u_3^\epsilon C^\epsilon,$ where in this case we can not benefit from an $H^1$-regular concentration function. In more detail, we begin by calculating the energy inequality and collect the a priori estimates that derive from it, then verify the less problematic weak convergence results. Finally we elaborate the steps that bring the convergence of the $u_3^\epsilon C^\epsilon$ term to a closure. The main idea here is to temporarily ignore the $C^\epsilon$ function and prove a strong convergence result considering only the velocity functions. Throughout this step we go beyond the weak solutions quality and show that we are working with strong solutions. In this new setting with more favorable regularities we can prove the convergence result we need, and eventually return to the frame of weak solutions where we can merge back together the velocity and concentration functions into a unified solution.
+This section is dedicated to the verification of Theorem \ref{maintheorem}. Structurally we follow a similar chain of thought as in our previous paper --- until the point where the proof diverges reaching the weak convergence of the nonlinear term $u_3^\epsilon C^\epsilon,$ where in this case we can not benefit from an $H^1$-regular concentration function. In more detail, we begin by calculating the energy inequality and collect the a priori estimates that derive from it, then verify the less problematic weak convergence results. Finally we elaborate the steps that bring the convergence of the $u_3^\epsilon C^\epsilon$ term to a closure. The main idea here is to temporarily ignore the $C^\epsilon$ function and prove a strong convergence result considering only the velocity functions. Throughout this step we go beyond the weak solutions quality and show that we are working with strong solutions. In this new setting with more favourable regularities we can prove the convergence result we need, and eventually return to the frame of weak solutions where we can merge back together the velocity and concentration functions into a unified solution.
 
-  \subsection{Energy inequality}
+  \subsection{Energy inequality and a priori estimates}
   
   Calculating the energy inequality for the anisotropic system, we obtain that for a.e. $t \in [0,T]$ the following holds:
   
@@ -397,13 +415,11 @@ This section is dedicated to the verification of Theorem \ref{maintheorem}. Stru
   
   where $c_T$ and $c_S$ are the constants provided by the Trace Theorem and Sobolev embeddings. The boundary term is bounded because of the a priori assumptions made on the boundary conditions.
     
-  The right hand side of the energy inequality is now apparently bounded, and it is easy to see that the coefficients of the pollution terms are positive, since the $\zeta$ constant of the generalised Young inequality can be freely chosen in a way such that the requirements $\epsilon K_1 (1 - \zeta \frac{1}{2} c_T (c_S + 1)) > 0, (K_2 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) > 0, (K_3 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) > 0 $ are all satisfied.
+  The right-hand side of the energy inequality is now apparently bounded, and it is easy to see that the coefficients of the pollution terms on the left-hand side are positive, since the $\zeta$ constant of the generalised Young inequality can be freely chosen in a way such that the requirements $\epsilon K_1 (1 - \zeta \frac{1}{2} c_T (c_S + 1)) > 0, (K_2 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) > 0, (K_3 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) > 0 $ are all satisfied.
   
   We note that the most significant difference in this new form of the energy inequality (\ref{finalformEIEQ}) is having $\sqrt{\epsilon} \partial_1 C^\epsilon$ in the place of $\partial_1 C^\epsilon,$ which is what we had for the case of the geophysical coordinate system. It leads to the disappearance of the $H^1$ regularity of $C^\epsilon,$ and thus we don't have the strong convergence feature of the concentration function anymore --- which was of key importance for proving the weak convergence of a nonlinear term in the case of the classical geophysical frame.
   
   This form of the energy inequality also shows why we need the $\partial_2 C^\epsilon, \partial_3 C^\epsilon$ terms to vanish on the boundary. Otherwise, using the Trace Theorem on these boundary terms would contribute to the appearance of negative, $\epsilon$-free terms in the coefficient of $\norm{\partial_1 C^\epsilon}_{L^2}^2,$ which would undermine the structure of the energy inequality.
-  
-  \subsection{A priori estimates. Weak convergence - Part 1.}
   
   From the final form of the energy inequality (\ref{finalformEIEQ}) we obtain uniform a priori estimates that we summarise in the following proposition.
   
@@ -419,7 +435,11 @@ This section is dedicated to the verification of Theorem \ref{maintheorem}. Stru
     
   \end{prop}
   
-  The \textit{i)} a priori estimates, \textit{ii)} the convergence of the linear terms and also, \textit{iii)} the convergence of the nonlinear terms with the exception of $u_3^\epsilon C^\epsilon$ can be proved analogously as in our previous paper --- the proofs of these properties are not effected by the changes induced by choosing to use the downwind matching coordinate system. Hence, for completeness we will describe the main steps leading up to obtaining these results, but we will skip the details. For technical or specific issues see \cite{azerad2001mathematical} and \cite{pollatmws2019}.
+  For the details of the proof see \cite{pollatmws2019}.
+  
+    \subsection{Weak convergence - Part 1.}
+  
+  The \textit{i)} a priori estimates, \textit{ii)} the convergence of the linear terms and also, \textit{iii)} the convergence of the nonlinear terms with the exception of $u_3^\epsilon C^\epsilon$ can be proved analogously as in our previous paper --- the proofs of these properties are not affected by the changes induced by choosing to use the downwind matching coordinate system. Hence, for completeness we will describe the main steps leading up to obtaining these results, but we will skip the details. For technical or specific issues see \cite{azerad2001mathematical} and \cite{pollatmws2019}.
   
   As a consequence of Proposition \ref{aprioriprop}, up to subsequences still denoted by the same way, we have the following weak convergence results.
   
@@ -434,19 +454,16 @@ This section is dedicated to the verification of Theorem \ref{maintheorem}. Stru
   \end{align} 
   
   In order to conclude the proof of Theorem \ref{maintheorem} we pass to the limit in the weak formulation (\ref{anisotropicWF}). Taking the limit for the linear terms can be done in a standard way using the previously obtained results.
-   Concerning the nonlinear velocity terms (i.e. nonlinear terms that do not include the concentration function), the convergence can be shown applying a generalisation of the classical translation criterium of Riesz-Frechet-Kolmogorov which enables us to get strong convergence for the horizontal velocities. This is achieved by establishing a bound for the perturbation of $\mathbf{u}_h$ of the form $\norm{\tau_\pi \mathbf{u}_h - \mathbf{u}_h}_{L^p(0,T-\pi, \mathbf{Y})} \leq \lambda(\pi) + \mu(\epsilon),$ where $\mathbf{Y}$ is a Banach space, $\lambda$ and $\mu$ are appropriate functions with their limits vanishing at zero, and $\tau_\pi \mathbf{u}_h = \mathbf{u}_h (t+\pi) $. After obtaining strong convergence for $\mathbf{u}_h,$ the proof of the convergence for these nonlinear terms can be closed by applying basic interpolation techniques and the generalised H\"older inequality. 
-  Finally, as for the concentration-including nonlinear terms, we have the convergence of $(u_i C^\epsilon, \partial_i \tilde{C})$ for $i=1,2,$ since as we mentioned before, we have the strong convergence of the horizontal velocities --- while in the case of $i=3$ this property does not hold for $u_3$ and from the energy bound we do not have more than the weak convergence of $C^\epsilon$. Because of its complexity we handle this specific nonlinear compound product term in Part 2.
+   Concerning the nonlinear velocity terms (i.e. nonlinear terms that do not include the concentration function), the convergence can be shown applying a generalisation of the classical translation criterium of Riesz-Frechet-Kolmogorov which enables us to get strong convergence for the horizontal velocities. This is achieved by establishing a bound for the perturbation of $\mathbf{u}_h$ of the form $\norm{\tau_\pi \mathbf{u}_h - \mathbf{u}_h}_{L^2(0,T-\pi, {H^2}^*)} \leq \lambda(\pi) + \mu(\epsilon),$ where $\lambda$ and $\mu$ are appropriate functions with their limits vanishing at zero, and $\tau_\pi \mathbf{u}_h = \mathbf{u}_h (t+\pi) $. After obtaining strong convergence for $\mathbf{u}_h,$ the proof of the convergence for these nonlinear terms can be closed by applying basic interpolation techniques and the generalised H\"older inequality. 
+  Finally, as for the concentration-including nonlinear terms, we have the convergence of $(u_i C^\epsilon, \partial_i \tilde{C})$ for $i=1,2,$ since as we mentioned before, we have the strong convergence of the horizontal velocities --- while in the case of $i=3$ this property does not hold for $u_3$ and from the energy bound we do not have more than the weak convergence of $C^\epsilon$. Because of its complexity we handle this specific nonlinear compound product term in the next section.
   
   \subsection{Weak convergence --- Part 2.}
   
-  As we mentioned before, the cornerstone idea for obtaining the convergence of the remaining product term $u_3^\epsilon C^\epsilon$ is to exploit the $H^1$ regularity of the initial horizontal velocity and pass to the workframe of strong solutions.
-  In order to do this, the first step is to use the regularities of the strong solution of the primitive equations --- we have the already well-known existence and uniqueness of the strong solution of the primitive equations that include the Coriolis terms as well. Formally, we have Theorem 2 in \cite{cao2007global}, which is a result worked out for the case of the hydrostatic Navier-Stokes equations combined with a confusion-diffusion equation:
+  As we mentioned before, the cornerstone idea for obtaining the convergence of the remaining product term $u_3^\epsilon C^\epsilon$ is to exploit the $H^1$ regularity of the initial horizontal velocity. Indeed, given an $H^1$ initial data for $\mathbf{u}_h,$ according to the theory developed in \cite{cao2007global}, there exists a unique global strong solution for the primitive equations $(\ref{HNSC1})$ - $(\ref{HNSC4}).$ We recall here this result (for more details see \cite{cao2007global}).
   
   \begin{theorem} \label{PE3DWellPosedness}
-    Let $S \in H^1(\Omega), {\mathbf{u}_h}_0 \in V_1, C_0 \in V_2$ and $T >0$ be given. Then there exists a unique strong solution $(\mathbf{u}_h,C)$ of the reformulated Primitive Equations on the interval $[0, T]$ which depends continuously on the initial data.
+    Let ${\mathbf{u}_h}_0 \in H^1(\Omega).$ Then there exists a unique strong solution $\mathbf{u}_h$ of the reformulated Primitive Equations $(\ref{HNSC1})$ - $(\ref{HNSC4})$, $(\ref{HNSC6})$ such that $$\mathbf{u}_h \in C([0, \infty), H^1(\Omega)) \cap L^2_{loc}([0, \infty), H^2(\Omega))$$ and $$\partial_t \mathbf{u}_h \in L^1_{loc} ([0,\infty), L^2(\Omega)).$$
   \end{theorem}
-  
-  Here $S$ is the source term in the convection-diffusion equation, ${\mathbf{u}_h}_0$ and $C_0$ are the initial data for the horizontal velocity equations and the advection-diffusion equation, respectively; while $V_1$ and $V_2$ as usual, stand for the closures of $C^\infty$ spaces in $H^1$ with the adequate boundary conditions. By the reformulated Primitive Equations we mean the standard approach of eliminating the vertical $u_3$ velocity function from the equations by means of the divergence-free condition.
   
   In more detail, we have the following regularities for the strong solution of the primitive equations for the case of an $H^1$ initial data:
   
@@ -463,8 +480,6 @@ This section is dedicated to the verification of Theorem \ref{maintheorem}. Stru
   The result of Corollary \ref{StrongSolPE_boundedness} on the strong solutions of the primitive equations will be indispensable later, as we will use these strong solution functions for testing the scaled Navier-Stokes equations.
   
   The following part of the proof is dedicated to verifying the strong convergence of $u_3^\epsilon,$ and is based on the idea of \cite{li2019primitive} --- our scenario is different however in that \textit{a)} first of all our domain is bounded, while the domain the authors of \cite{li2019primitive} consider is periodic, \textit{b)} we do not assume zero-averaged functions, and finally \textit{c)} in our case the Coriolis terms are incorporated to the model as well. Our strategy in providing the proof is to give a self-contained result that describes all the steps that build up the verification process, but we elaborate in more detail where the above mentioned \textit{a), b), c)} points have a tangible effect. Some technical details that are identical to those in \cite{li2019primitive} will be skipped.
-  
-It is important to highlight at this point that since we are not restricted to zero-averaged functions and we are not on a periodic domain, we need to pay special attention when verifying boundedness results using the Poincar\'e inequality. Note that as the value of the velocity functions are defined to be zero on the boundary, any first-order estimate of the type $\norm{\mathbf{u}_h^\epsilon} \leq \norm{\nabla \mathbf{u}_h^\epsilon}$ is valid (i.e. to estimate a function by its gradient), using the zero-trace version of the Poincar\'e inequality for functions in $W^{1,2}_0.$ However, since it is only the value of the functions that vanishes on the boundary, but not their derivatives, higher order estimates such as passing from $\norm{\nabla \mathbf{u}_h^\epsilon}$ to $\norm{\Delta \mathbf{u}_h^\epsilon}$ in the process of constructing an upper bound can not be applied in general.
 
 Another structural difference we need to underline in connection with the proof is that instead of using the $[-1,1]$ set to represent the $\epsilon$-free vertical domain (i.e. the $\Gamma_L$ section), we use $[0,1],$ without assuming the vertical velocity function $u_3^\epsilon$ to be odd with respect to $z.$ The vertical section is commonly set to $[-1,1],$ or equivalently, to $[-a,a]$ in works that use the periodical domain scenario, see also \cite{cao2016global}, \cite{cao2017global}. In our case however we use a bounded domain without the assuming a symmetry line in the vertical midpoint --- thus we work with the $[0,1]$ set as the vertical domain. As a consequence, the Ladyzhenskaya-type inequality presented in different versions in \cite{cao2003global} and \cite{li2019primitive} will be used here in the following form:
 
@@ -494,7 +509,7 @@ Another structural difference we need to underline in connection with the proof 
 
 Note that this lemma simply states the inequality for the complete domain even in the version in \cite{li2019primitive}, not assuming an odd $u_3^\epsilon$ function or a $z$-symmetrical vertical structure of $\Omega$.
   
-The next step in order to estimate the difference $$(\mathbf{U}_h^\epsilon, U_3^\epsilon): = (\mathbf{u}_h^\epsilon - \mathbf{u}_h, u_3^\epsilon - u_3)$$ is to practically use the strong solution $(\mathbf{u}_h,u_3)$ as a test function when writing down the weak formulation's integral identity for the scaled equations. Following this method we arrive to
+The main idea in order to prove the strong convergence of $u^\epsilon_3$ lies in establishing a bound of $O(\epsilon^a)$ for some $a>0$ for the difference $$(\mathbf{U}_h^\epsilon, U_3^\epsilon): = (\mathbf{u}_h^\epsilon - \mathbf{u}_h, u_3^\epsilon - u_3).$$ This will be achieved by using the strong solution $(\mathbf{u}_h,u_3)$ as a test function in the weak formulation's integral identity $(\ref{anisotropicWF})$. Following this method we arrive to
 
 \begin{prop} \label{propIdentity}
 
@@ -530,7 +545,7 @@ for any $\tilde{\mathbf{u}} = (\tilde{\mathbf{u}}_h, \tilde{u}_3) \in H^1 (0,T;\
 
 Now, let's define $\chi \in C_0^\infty ([0, \infty))$ with $0 \leq \chi \leq 1$ and $\chi (0) = 1$ and set $\tilde{\mathbf{u}}= (\mathbf{u}_h,u_3) \chi (t).$ The validity of the the integrals are guaranteed by the regularities of the respective solution functions and using basic inequalities.
 
-As we highlighted before, using higher than first-order estimates of the type such as passing from $\norm{\nabla \mathbf{u}_h^\epsilon}$ to $\norm{\Delta \mathbf{u}_h^\epsilon}$ is in general not valid. Which is why, for example, the estimate of the the term below takes the following, slightly altered form:
+It is important to highlight at this point that since we are not restricted to zero-averaged functions and we are not on a periodic domain, we need to pay special attention when verifying boundedness results using the Poincar\'e inequality. Note that as the value of the velocity functions are defined to be zero on the boundary, any first-order estimate of the type $\norm{\mathbf{u}_h^\epsilon} \leq \norm{\nabla \mathbf{u}_h^\epsilon}$ is valid (i.e. to estimate a function by its gradient), using the zero-trace version of the Poincar\'e inequality for functions in $W^{1,2}_0.$ However, since it is only the value of the functions that vanishes on the boundary, but not their derivatives, higher order estimates such as passing from $\norm{\nabla \mathbf{u}_h^\epsilon}$ to $\norm{\Delta \mathbf{u}_h^\epsilon}$ in the process of constructing an upper bound can not be applied in general. Which is why, for example, the estimate of the the term below takes the following, slightly altered form:
 
 \begin{equation}
   \begin{split}
@@ -724,7 +739,7 @@ but note that the additional $\norm{\nabla \mathbf{u}_h}_2^2 \cdot \norm{\nabla 
         \end{split}
       \end{equation}
       
-      Here the $\int_0^{t_0} \zeta \norm{\nabla U_2^\epsilon}^2_2$  term can be merged into the left hand side of ($\ref{introduce_I_terms}$), while
+      Here the $\int_0^{t_0} \zeta \norm{\nabla U_2^\epsilon}^2_2$  term can be merged into the left-hand side of ($\ref{introduce_I_terms}$), while
       
       $$\alpha \int_0^{t_0} \frac{1}{\zeta} \epsilon^2 \norm{u_3}^2_2 \leq \alpha \frac{1}{\zeta} \epsilon^2 \norm{u_3}^2_{L^2(Q_{t_0})} \leq \alpha \frac{1}{\zeta} \epsilon^2 C(\norm{{\mathbf{u}_h}_0}_{H^1}, \Gamma_G),$$
       
@@ -747,7 +762,7 @@ but note that the additional $\norm{\nabla \mathbf{u}_h}_2^2 \cdot \norm{\nabla 
         \end{split}
       \end{equation}
       
-      where the first term can be merged into the left hand side of ($\ref{introduce_I_terms}$).
+      where the first term can be merged into the left-hand side of ($\ref{introduce_I_terms}$).
             
       \item The estimate of $\alpha \epsilon U_3^\epsilon u_2$ is structurally analogous.
     
