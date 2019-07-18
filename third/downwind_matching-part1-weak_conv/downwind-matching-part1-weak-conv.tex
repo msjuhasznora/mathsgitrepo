@@ -531,7 +531,7 @@ for any $t \in [0, \infty),$ where $Q_t = \Omega \times (0,t).$
 
 \begin{proof}
 
-By definition of the weak solutions of the scaled Navier-Stokes equations, we know that the following integral identity is satisfied
+We recall the definition of weak solution for the scaled Navier-Stokes equations:
 
 \begin{equation}
   \begin{split}
@@ -558,9 +558,9 @@ It is important to highlight at this point that since we are not restricted to z
   \end{split}
 \end{equation}
 
-Thus, considering the validity of the integral terms and rewriting some of them in a more convenient form, after taking $\tilde{\mathbf{u}}$ as a test function we have
+The validity of the remaining integral terms can be proved in the same fashion. Rewriting some of them in a more convenient form, and after taking $\tilde{\mathbf{u}}$ as a test function, we have
 
-\begin{equation}
+\begin{equation} \label{rewrittenform}
   \begin{split}
     & \int_Q (- \mathbf{u}_h^\epsilon \cdot \partial_t \mathbf{u}_h + \nabla \mathbf{u}_h^\epsilon : \nabla \mathbf{u}_h + \epsilon^2 \nabla u_3^\epsilon \cdot \nabla u_3) \chi \diff x \diff y \diff z \diff t \\
     & - \epsilon^2 \int_0^\infty \langle \partial_t u_3 , u_3^\epsilon \rangle _{H^{-1} \times H^1} \chi \diff t - \int_Q (\mathbf{u}_h^\epsilon \cdot \mathbf{u}_h + \epsilon^2 u_3^\epsilon u_3) \chi' \diff x \diff y \diff z \diff t \\
@@ -571,7 +571,7 @@ Thus, considering the validity of the integral terms and rewriting some of them 
 
 for any $\chi \in C^\infty_0 ([0,\infty)),$ with $0 \leq \chi \leq 1$ and $\chi (0) = 1.$
 
-The idea here is to take an arbitrary $t_0 \in (0, \infty)$ and a sufficiently small positive $\delta \in (0, t_0).$ Choose $\chi_\delta \in C^\infty_0 [0,t_0),$ such that $\chi_\delta \equiv 1$ on $[0, t_0 -\delta], 0 \leq \chi_\delta \leq 1$ on $[t_0 - \delta, t_0 )$ and $\abs{\chi_\delta '} \leq \frac{2}{\delta}$ on $[0, t_0).$ Now, choosing $\chi = \chi_\delta$ in the above identity and taking $\delta \to 0,$ one can arrive to the desired equality after performing the calculations for passing to the limit. It is easy to see that because of the velocities vanishing on the boundaries, the technical details remain uneffected, even though we are not on a periodic domain.
+Since the estimate $(\ref{integralIdentity_prop})$ is localised in time, we take an arbitrary $t_0 \in (0, \infty)$ and a sufficiently small positive $\delta \in (0, t_0).$ Choose a cut-off function with the properties $\chi_\delta \in C^\infty_0 [0,t_0),$ such that $\chi_\delta \equiv 1$ on $[0, t_0 -\delta], 0 \leq \chi_\delta \leq 1$ on $[t_0 - \delta, t_0 )$ and $\abs{\chi_\delta '} \leq \frac{2}{\delta}$ on $[0, t_0).$ Now, taking $\chi = \chi_\delta$ in $(\ref{rewrittenform})$ as $\delta \to 0,$ one can arrive to the desired equality after performing the calculations for passing to the limit. It is easy to see that because of the velocities vanishing on the boundaries, the technical details remain uneffected, even though we are not on a periodic domain.
 
 In more detail, the term $ \langle \partial_t u_3, u_3^\epsilon \rangle$ now takes the form 
 
@@ -581,14 +581,16 @@ In more detail, the term $ \langle \partial_t u_3, u_3^\epsilon \rangle$ now tak
     & = - \int_{\partial \Omega} \bigg ( \int_0^z \partial_t \mathbf{u}_h \diff z' \bigg ) u_3^\epsilon \mathbf{n}_h + \int_\Omega \bigg ( \int_0^z \partial_t \mathbf{u}_h \diff z' \bigg) \cdot \nabla_h u_3^\epsilon \diff x \diff y \diff z,
   \end{split}
 \end{equation}
+
+where $\mathbf{n}_h$ is the horizontal component of the outward surface normal vector.
     
-from where, by using that $u_3^\epsilon = 0$ on $\partial \Omega$ we arrive easily to the more simple
+By using that $u_3^\epsilon = 0$ on $\partial \Omega$ we arrive easily to the more simple
     
 $$ \langle \partial_t u_3, u_3^\epsilon \rangle  = \int_\Omega \bigg ( \int_0^z \partial_t \mathbf{u}_h \diff z' \bigg) \cdot \nabla_h u_3^\epsilon \diff x \diff y \diff z,$$
      
 which is the form one would have on a periodic domain. Similarly, 
      
-$$ \langle \partial_t u_3, u_3^\epsilon - u_3 \rangle = \int_\Omega \bigg ( \int_0^z \partial_t \mathbf{u}_h \diff z' \bigg) \cdot \nabla_h (u_3^\epsilon - u_3),$$ as the boundary term $\int_{\partial \Omega} \bigg ( \int_0^z \partial_t \mathbf{u}_h \diff z' \bigg ) (u_3^\epsilon - u_3) \mathbf{n}_h$ becomes zero, since we have $u_3 = 0, u_3^\epsilon = 0$ on $\Gamma.$ 
+$$ \langle \partial_t u_3, u_3^\epsilon - u_3 \rangle = \int_\Omega \bigg ( \int_0^z \partial_t \mathbf{u}_h \diff z' \bigg) \cdot \nabla_h (u_3^\epsilon - u_3),$$ as the boundary term $$\int_{\partial \Omega} \bigg ( \int_0^z \partial_t \mathbf{u}_h \diff z' \bigg ) (u_3^\epsilon - u_3) \mathbf{n}_h$$ becomes zero, since we have $u_3 = 0, u_3^\epsilon = 0$ on $\Gamma.$ 
 
 After some technical details that we omit here we eventually obtain
 
@@ -606,11 +608,11 @@ for any $t_0 \in [0, \infty),$ which verifies the statement of the proposition.
 
 \end{proof}
 
-With this we are ready to estimate the difference between the solutions of the scaled and hydrostatic equations, which is described by the following
+With this we are ready to estimate the difference between the solutions of the scaled and hydrostatic equations, which is described by the following proposition.
 
 \begin{prop}
 
-Using the same conditions as in Proposition $\ref{propIdentity}$, the following estimate holds for the difference function $(\mathbf{U}_h^\epsilon, U_3^\epsilon):$
+Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ and $(\mathbf{u}_h,u_3)$ be the solutions of (\ref{ANSC1}) - (\ref{ANSC5}) and (\ref{HNSC1}) - (\ref{HNSC5}), respectively, with initial data $({\mathbf{u}_h}_0, {u_3}_0),$ where ${\mathbf{u}_h}_0 \in H^1(\Omega)$ and ${u_3}_0 = - \int_0^z \nabla_h \cdot {\mathbf{u}_h}_0 \diff z'.$ Then the following estimate holds for the difference function $(\mathbf{U}_h^\epsilon, U_3^\epsilon):$
 
 \begin{equation}
   \begin{split}
@@ -623,18 +625,16 @@ Using the same conditions as in Proposition $\ref{propIdentity}$, the following 
 
 \begin{proof}
 
-  Multiplying the horizontal part of the hydrostatic equations, i.e. equations ($\ref{HNSC1}$)-($\ref{HNSC2}$) by $\mathbf{u}_h^\epsilon$ and integrating the result over $Q_{t_0},$ then we have
+  Multiplying the horizontal part of the hydrostatic equations, i.e. equations ($\ref{HNSC1}$)-($\ref{HNSC2}$) by $\mathbf{u}_h^\epsilon$ and integrating the result over $Q_{t_0},$ then by utilising the divergence-free condition and the zero velocity boundary conditions, we have
   
   \begin{equation} \label{identity_obtained_by_v_eps}
     \begin{split}
       & \int_{Q_{t_0}} (\partial_t \mathbf{u}_h \cdot \mathbf{u}_h^\epsilon + \nabla \mathbf{u}_h : \nabla \mathbf{u}_h^\epsilon) \diff x \diff y \diff z \diff t \\
-      & = - \int_{Q_{t_0}} (\mathbf{u} \cdot \nabla) \mathbf{u}_h \cdot \mathbf{u}_h^\epsilon + \gamma u_2 u_1^\epsilon - \gamma u_1 u_2^\epsilon \diff x \diff y \diff z \diff t,
+      & = - \int_{Q_{t_0}} (\mathbf{u} \cdot \nabla) \mathbf{u}_h \cdot \mathbf{u}_h^\epsilon + \gamma u_2 u_1^\epsilon - \gamma u_1 u_2^\epsilon \diff x \diff y \diff z \diff t.
     \end{split}
   \end{equation}
   
-  which follows after using integration by parts, utilising the divergence-free condition and the zero velocity boundary conditions.
-  
-  On the other hand, multiplying the same ($\ref{HNSC1}$)-($\ref{HNSC2}$) equations by $\mathbf{u}_h$ instead, and integrating again on $Q_{t_0},$ then using the same above mentioned tools we arrive to
+  On the other hand, multiplying the same ($\ref{HNSC1}$)-($\ref{HNSC2}$) equations by $\mathbf{u}_h$ instead, and integrating again on $Q_{t_0},$ then we arrive to
   
   \begin{equation} \label{identity_obtained_by_v}
     \frac{1}{2} \norm{\mathbf{u}_h(t_0)}_2^2 + \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^2 \diff t = \frac{1}{2} \norm{{\mathbf{u}_h}_0}_2^2,
@@ -716,16 +716,16 @@ using the Young inequality. With this we arrive to the originally stated ($\ref{
 
 \begin{equation}
   \begin{split} \nonumber
-    I3 & \leq C \epsilon^2 \int_0 ^ {t_0} \bigg ( \| \mathbf{u}_h^\epsilon \| _2^2 \| \nabla \mathbf{u}_h^\epsilon \|_2^2 + \norm{\nabla \mathbf{u}_h}_2^2 (\norm{\nabla \mathbf{u}_h}_2^{1/2} + \norm{\Delta \mathbf{u}_h}_2^{1/2})^4 \\
+    I_3 & \leq C \epsilon^2 \int_0 ^ {t_0} \bigg ( \| \mathbf{u}_h^\epsilon \| _2^2 \| \nabla \mathbf{u}_h^\epsilon \|_2^2 + \norm{\nabla \mathbf{u}_h}_2^2 (\norm{\nabla \mathbf{u}_h}_2^{1/2} + \norm{\Delta \mathbf{u}_h}_2^{1/2})^4 \\
     & + \epsilon^2 \norm{u_3^\epsilon}_2^2 \norm{\nabla u_3^\epsilon}_2^2 \bigg ) \diff t + \frac{1}{6} \big ( \| \nabla \mathbf{U}_h^\epsilon \|_{L^2(Q_{t_0})}^2 + \epsilon^2 \norm{\nabla U_3^\epsilon}_{L^2(Q_{t_0})}^2  \big),
   \end{split}
 \end{equation}
 
 but note that the additional $\norm{\nabla \mathbf{u}_h}_2^2 \cdot \norm{\nabla \mathbf{u}_h}_2^2$ term can be estimated using Corollary $\ref{StrongSolPE_boundedness}$ by the same $C(\norm{{\mathbf{u}_h}_0}_{H^1}, \Gamma_G)$ term that is used to estimate the Laplacian, which is why we arrive back to the same conclusion ($\ref{I3Bound}$) that was calculated for the boundary-free scenario.
   
-  \textbf{Bound for $I_4.$} We add $ - \epsilon \beta u_3 u_1 +  \epsilon \beta u_3 u_1 - \epsilon \alpha u_3 u_2 + \epsilon \alpha u_3 u_2 = 0 $ to $I_4$, thus instead of bounding the original version of the term, now we need to bound
+  \textbf{Bound for $I_4.$} We add $ - \epsilon \beta u_3 u_1 +  \epsilon \beta u_3 u_1 - \epsilon \alpha u_3 u_2 + \epsilon \alpha u_3 u_2 = 0 $ to $I_4$, thus instead of bounding the original version of the term, now we need to bound the equivalent term
 
-    $$ \int_{Q_{t_0}}  ( \epsilon \beta U_3^\epsilon u_1 - \epsilon \alpha U_3^\epsilon u_2 + \epsilon \alpha U_2^\epsilon u_3 - \epsilon \beta U_1^\epsilon u_3) \diff x \diff y \diff z \diff t.$$
+    $$ I_4 = \int_{Q_{t_0}}  ( \epsilon \alpha U_2^\epsilon u_3 - \epsilon \beta U_1^\epsilon u_3 + \epsilon \beta U_3^\epsilon u_1 - \epsilon \alpha U_3^\epsilon u_2 ) \diff x \diff y \diff z \diff t = I_{41} + I_{42} + I_{43} + I_{44}.$$
     
     \begin{itemize}
     
@@ -733,7 +733,7 @@ but note that the additional $\norm{\nabla \mathbf{u}_h}_2^2 \cdot \norm{\nabla 
       
       \begin{equation}
         \begin{split}
-          & \int_{Q_{t_0}} \epsilon \alpha U_2^\epsilon u_3 \diff x \diff y \diff z \diff t \leq \alpha \int_0^{t_0} \norm{U_2^\epsilon} \norm{\epsilon u_3} \diff t \\
+         I_{41} = & \int_{Q_{t_0}} \epsilon \alpha U_2^\epsilon u_3 \diff x \diff y \diff z \diff t \leq \alpha \int_0^{t_0} \norm{U_2^\epsilon} \norm{\epsilon u_3} \diff t \\
           & \leq \alpha \int_0^{t_0} \zeta \norm{U_2^\epsilon}^2_2 \diff t + \alpha \int_0^{t_0} \frac{1}{\zeta} \epsilon^2 \norm{u_3}^2_2 \diff t \\
           & \leq \alpha \int_0^{t_0} \zeta \norm{\nabla U_2^\epsilon}^2_2 \diff t + \alpha \int_0^{t_0} \frac{1}{\zeta} \epsilon^2 \norm{u_3}^2_2 \diff t.
         \end{split}
@@ -747,9 +747,9 @@ but note that the additional $\norm{\nabla \mathbf{u}_h}_2^2 \cdot \norm{\nabla 
       
       Here $\zeta$ is the constant of the Young inequality, and it only has to be small enough to keep the coefficient of $\norm{\nabla \mathbf{U}_h^\epsilon}$ positive.
       
-      \item The estimate of the $\epsilon \beta U_1^\epsilon u_3$ term is analogous.
+      \item The estimate of the $ I_{42} = \epsilon \beta U_1^\epsilon u_3$ term is analogous.
       
-      \item For the term $\epsilon \beta U_3^\epsilon u_1$ we can use the idea that $\| U_3^\epsilon \| \leq \| \nabla \mathbf{U}_h^\epsilon \|.$ As we have $\partial_3 u_3^\epsilon = \nabla_h \mathbf{u}_h^\epsilon,$ and $\partial_3 u_3 = \nabla_h \mathbf{u}_h,$ we naturally have $\partial_3 U_3^\epsilon = \nabla_h \mathbf{U}_h^\epsilon,$ and by the vertical Poincar\'e inequality we have $$\norm{U_3^\epsilon} \leq \norm{\partial_3 U_3^\epsilon} = \norm{\nabla \mathbf{U}_h^\epsilon}.$$ This way we are able to bound the $U_3^\epsilon$ term without keeping the $\epsilon^2$ multiplier attached to it when we apply the Young inequality. We have
+      \item For the term $ I_{43} = \epsilon \beta U_3^\epsilon u_1$ we can use the idea that $\| U_3^\epsilon \| \leq \| \nabla \mathbf{U}_h^\epsilon \|.$ As we have $\partial_3 u_3^\epsilon = \nabla_h \mathbf{u}_h^\epsilon,$ and $\partial_3 u_3 = \nabla_h \mathbf{u}_h,$ we naturally have $\partial_3 U_3^\epsilon = \nabla_h \mathbf{U}_h^\epsilon,$ and by the vertical Poincar\'e inequality we have $$\norm{U_3^\epsilon} \leq \norm{\partial_3 U_3^\epsilon} = \norm{\nabla \mathbf{U}_h^\epsilon}.$$ This way we are able to bound the $U_3^\epsilon$ term without keeping the $\epsilon^2$ multiplier attached to it when we apply the Young inequality. We have
       
       $$ \hspace{-1em}\int_{Q_{t_0}} \epsilon \beta U_3^\epsilon u_1 \diff x \diff y \diff z \diff t \leq \int_0^{t_0} \epsilon \beta \norm{U_3^\epsilon}_2 \norm{u_1}_2 \diff t \leq \int_0^{t_0} \epsilon \beta \| \nabla \mathbf{U}_h^\epsilon \|_2 \norm{u_1}_2 \diff t, $$
       
@@ -757,18 +757,18 @@ but note that the additional $\norm{\nabla \mathbf{u}_h}_2^2 \cdot \norm{\nabla 
       
       \begin{equation}
         \begin{split}
-          & \int_{Q_{t_0}} \epsilon \beta U_3^\epsilon u_1 \diff x \diff y \diff z \diff t \leq \beta^2 \zeta \int_0^{t_0} \norm{\nabla \mathbf{U}_h^\epsilon}_2^2 \diff s+ \frac{1}{\zeta} \epsilon^2 \int_0^{t_0} \norm{u_1}_2^2 \diff s \\
+          I_{43} = & \int_{Q_{t_0}} \epsilon \beta U_3^\epsilon u_1 \diff x \diff y \diff z \diff t \leq \beta^2 \zeta \int_0^{t_0} \norm{\nabla \mathbf{U}_h^\epsilon}_2^2 \diff s+ \frac{1}{\zeta} \epsilon^2 \int_0^{t_0} \norm{u_1}_2^2 \diff s \\
           & \leq \beta^2 \zeta \int_0^{t_0} \norm{\nabla \mathbf{U}_h^\epsilon}_2^2 \diff t + \frac{1}{\zeta} \epsilon^2 C(\norm{{\mathbf{u}_h}_0}_{H^1}, \Gamma_G),
         \end{split}
       \end{equation}
       
       where the first term can be merged into the left-hand side of ($\ref{introduce_I_terms}$).
             
-      \item The estimate of $\alpha \epsilon U_3^\epsilon u_2$ is structurally analogous.
+      \item The estimate of $ I_{44} = \alpha \epsilon U_3^\epsilon u_2$ is structurally analogous.
     
     \end{itemize}
     
-Using the bounds we now have for the terms $I_1, I_2, I_3, I_4$, we can perform the final step of the proof of this proposition. We will substitute these four results into ($\ref{introduce_I_terms}$) and take advantage of the Gr\"onwall inequality --- in more detail, we obtain
+Using the bounds we now have for the terms $I_1, I_2, I_3$ and $I_4$, ($\ref{introduce_I_terms}$) takes the form
 
 \begin{equation}
   \begin{split} \nonumber
@@ -804,7 +804,7 @@ Thus, we now have
 
 $$ (\norm{\mathbf{U}_h^\epsilon}_2^2 + \epsilon^2 \norm{U_3^\epsilon}_2^2)(t) + \int_0^t (\norm{\nabla \mathbf{U}_h^\epsilon}_2^2 + \epsilon^2 \norm{\nabla U_3^\epsilon}_2^2) \diff s \leq \epsilon^2 C,$$
 
-where the $C$ constant only depends on the domain structure and the initial data. With this we arrive to strong convergence result $\nabla \mathbf{U}_h^\epsilon \to 0$ in $L^2_t L^2_x,$ and as a direct consequence, we have $\nabla \mathbf{u}_h^\epsilon \to \nabla \mathbf{u}_h$ in $L^2_t L^2_x$ as well. Using the relation between the horizontal and vertical velocity functions through the divergence-free condition, we immediately obtain $\partial_3 u_3^\epsilon \to \partial_3 u_3,$ and eventually we deduce that
+where the $C$ constant only depends on the domain structure and the initial data. With this we arrive to strong convergence result $\nabla \mathbf{U}_h^\epsilon \to 0$ in $L^2_t L^2_x,$ and as a direct consequence, we have $\nabla \mathbf{u}_h^\epsilon \to \nabla \mathbf{u}_h$ in $L^2_t L^2_x$ as well. Using the relation between the horizontal and vertical velocity functions through the divergence-free condition, we immediately obtain $\partial_3 u_3^\epsilon \to \partial_3 u_3,$ and using the vertical Poincar\'e inequality eventually we deduce that
 
 \begin{equation}\label{strongconvresultu3}u_3^\epsilon \to u_3 \text{ strongly in } L^2_t L^2_x.\end{equation}
 
