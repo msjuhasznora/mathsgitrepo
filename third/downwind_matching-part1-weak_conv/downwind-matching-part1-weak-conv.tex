@@ -533,7 +533,7 @@ for any $t \in [0, \infty),$ where $Q_t = \Omega \times (0,t).$
 
 We recall the definition of weak solution for the scaled Navier-Stokes equations:
 
-\begin{equation}
+\begin{equation} \label{WFreminder}
   \begin{split}
     & \int_Q [ - (\mathbf{u}_h^\epsilon \cdot \partial_t \tilde{\mathbf{u}}_h + \epsilon^2 u_3^\epsilon \partial_t \tilde{u}_3) +( (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{u}_h^\epsilon \cdot \tilde{\mathbf{u}}_h + \epsilon^2 \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon \tilde{u}_3 ) + \nabla \mathbf{u}_h^\epsilon : \nabla \tilde{\mathbf{u}}_h \\
     & + \epsilon^2 \nabla u_3^\epsilon \cdot \nabla \tilde{u}_3 ] \diff x \diff y \diff z \diff t = \int_Q ({\mathbf{u}_h}_0 \cdot \tilde{\mathbf{u}}_h (\cdot , 0) + \epsilon^2 {u_3}_0 \tilde{u}_3 (\cdot , 0)) \diff x \diff y \diff z \\
@@ -543,7 +543,7 @@ We recall the definition of weak solution for the scaled Navier-Stokes equations
 
 for any $\tilde{\mathbf{u}} = (\tilde{\mathbf{u}}_h, \tilde{u}_3) \in H^1 (0,T;\mathbf{V})$ with $\tilde{\mathbf{u}}(T) = 0.$
 
-Now, let's define $\chi \in C_0^\infty ([0, \infty))$ with $0 \leq \chi \leq 1$ and $\chi (0) = 1$ and set $\tilde{\mathbf{u}}= (\mathbf{u}_h,u_3) \chi (t).$ The validity of the the integrals are guaranteed by the regularities of the respective solution functions and using basic inequalities.
+Now, let's define $\chi \in C_0^\infty ([0, \infty))$ with $0 \leq \chi \leq 1$ and $\chi (0) = 1$ and set $\tilde{\mathbf{u}} = (\mathbf{u}_h,u_3) \chi (t).$ By using the density argument it is valid to choose this $\tilde{\mathbf{u}}$ function as a testing function as long as all the integral terms remain well-defined in $(\ref{WFreminder}),$ which we verify in the following.
 
 It is important to highlight at this point that since we are not restricted to zero-averaged functions and we are not on a periodic domain, we need to pay special attention when verifying boundedness results using the Poincar\'e inequality. Note that as the value of the velocity functions are defined to be zero on the boundary, any first-order estimate of the type $\norm{\mathbf{u}_h^\epsilon} \leq \norm{\nabla \mathbf{u}_h^\epsilon}$ is valid (i.e. to estimate a function by its gradient), using the zero-trace version of the Poincar\'e inequality for functions in $W^{1,2}_0.$ However, since it is only the value of the functions that vanishes on the boundary, but not their derivatives, higher order estimates such as passing from $\norm{\nabla \mathbf{u}_h^\epsilon}$ to $\norm{\Delta \mathbf{u}_h^\epsilon}$ in the process of constructing an upper bound can not be applied in general. Which is why, for example, the estimate of the the term below takes the following, slightly altered form:
 
@@ -558,7 +558,15 @@ It is important to highlight at this point that since we are not restricted to z
   \end{split}
 \end{equation}
 
-The validity of the remaining integral terms can be proved in the same fashion. Rewriting some of them in a more convenient form, and after taking $\tilde{\mathbf{u}}$ as a test function, we have
+The validity of the remaining integral terms are not affected by the boundary change and they are guaranteed by the regularities of the respective solution functions and using basic inequalities. For completeness we remark that the more delicate and problematic terms -- i.e. the terms where the testing function is defined via the less regular $u_3$ vertical velocity -- are still well-defined. This can be verified firstly by rewriting the $\int_Q u^\epsilon_3 \partial_t \tilde{u}_3$ term as
+
+$$ \int_Q u^\epsilon_3 \partial_t (u_3 \chi) \diff x \diff y \diff z \diff t = \int_0^\infty \langle \partial_t (u_3 \chi), u^\epsilon_3 \rangle _ {H^{-1} \times H^1} \diff t.$$
+
+The validity of the integral term can be shown using this modified form pointing out that $\partial_t \mathbf{u}_h$ is in $L^2_{loc} ([0,\infty), L^2(\Omega))$ because of Theorem $\ref{PE3DWellPosedness}$, and as a consequence $\partial_t u_3$ has an $H^{-1}$ space regularity (using the divergence-free condition).
+
+On the other hand, the $ \int_Q \nabla u^\epsilon_3 : \nabla (u_3 \chi) $ term is well-defined since $u_3$ as a strong solution has $H^1$ space regularity, and the same holds for the weak solution $u^\epsilon_3.$
+
+Now we are justified to take $\tilde{\mathbf{u}}$ as a test function, and thus, rewriting some of the integral terms in $(\ref{WFreminder})$ in a more convenient form, we have
 
 \begin{equation} \label{rewrittenform}
   \begin{split}
