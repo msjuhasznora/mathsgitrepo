@@ -735,7 +735,7 @@ Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ and $(\mathbf{u}_h,u_3)$ be the solu
   
   Combining the estimates for $I_2', I_{21}''$ and $I_{22}'',$ we can estimate the $I_2$ term by
   
-  $$ \leq \frac{1}{6} \| \nabla \mathbf{U}_h^\epsilon \| ^2_2 + C \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^4 \| \mathbf{U}_h^\epsilon \| _2^2 \diff t + C \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^2  \norm{\Delta \mathbf{u}_h}_2^2 \| \mathbf{U}_h^\epsilon \| _2^2 \diff t. $$
+  $$ I_2 \leq \frac{1}{6} \| \nabla \mathbf{U}_h^\epsilon \| ^2_2 + C \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^4 \| \mathbf{U}_h^\epsilon \| _2^2 \diff t + C \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^2  \norm{\Delta \mathbf{u}_h}_2^2 \| \mathbf{U}_h^\epsilon \| _2^2 \diff t. $$
   
   \textbf{Bound for $I_3.$} Exploiting the incompressibility condition and the zero velocity boundary conditions, we have
   
@@ -750,7 +750,7 @@ Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ and $(\mathbf{u}_h,u_3)$ be the solu
     \end{split}
   \end{equation}
   
-  where we used the Young inequality and Lemma \ref{LadyzhenskayatypeIEQ}, keeping in mind that passing from \norm{\nabla \mathbf{u}_h} to \norm{\Delta \mathbf{u}_h} in the estimating process is not legitimate. Note at the same time that in this case the additional $\norm{\nabla \mathbf{u}_h}_2^2 \cdot \norm{\nabla \mathbf{u}_h}_2^2$ term will not have a permanent role in the bound, as in the following step it will be estimated by the same $C(\norm{{\mathbf{u}_h}_0}_{H^1}, \Gamma_G)$ term that is used to estimate the Laplacian. Specifically, using Corollary $\ref{StrongSolPE_boundedness}$ we arrive back to the same conclusion ($\ref{I3Bound}$) that was calculated for the boundary-free scenario:
+  where we used the Young inequality and Lemma \ref{LadyzhenskayatypeIEQ}, keeping in mind that passing from $\norm{\nabla \mathbf{u}_h}$ to $\norm{\Delta \mathbf{u}_h}$ in the estimating process is not legitimate. Note at the same time that in this case the additional $\norm{\nabla \mathbf{u}_h}_2^2 \cdot \norm{\nabla \mathbf{u}_h}_2^2$ term will not have a permanent role in the bound, as in the following step it will be estimated by the same $C(\norm{{\mathbf{u}_h}_0}_{H^1}, \Gamma_G)$ term that is used to estimate the Laplacian. Specifically, using Corollary $\ref{StrongSolPE_boundedness}$ we arrive back to the same conclusion ($\ref{I3Bound}$) that was calculated for the boundary-free scenario:
 
   \begin{equation} \label{I3Bound}
     \begin{split}
