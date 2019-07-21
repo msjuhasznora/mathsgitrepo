@@ -590,7 +590,7 @@ In more detail, the term $ \langle \partial_t u_3, u_3^\epsilon \rangle$ now tak
   \end{split}
 \end{equation}
 
-where $\mathbf{n}_h$ is the horizontal component of the outward surface normal vector.
+where $\mathbf{n}_h$ is the horizontal component of the outward facing normal vector on the $\partial \Omega$ boundary.
     
 By using that $u_3^\epsilon = 0$ on $\partial \Omega$ we arrive easily to the more simple
     
@@ -681,7 +681,27 @@ Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ and $(\mathbf{u}_h,u_3)$ be the solu
   
   for $I_1$ can be verified easily.
   
-  \textbf{Bound for $I_2.$} Calculating the bound
+  \textbf{Bound for $I_2.$} Calculating the bound for the $I_2$ term we arrive to a different expression compared the one obtained in \cite{li2019primitive} --- again, this is a result of the modified structure of the domain, and the appearance of new terms that had previously been implicitly merged into other higher order terms. Some of the computational details that are independent and unaffected by the boundary change will be omitted since they are analogous to \cite{li2019primitive}. It is important to note however that some of the expressions remain identical in both versions, but they are correct for different reasons, and thus, most of these steps will nevertheless be written out in detail.
+  
+  Firstly, applying integration by parts, the zero boundary condition for the velocity functions, and the divergence-free condition, $I_2$ becomes
+  
+  \begin{equation}
+    \begin{split}
+      & I_2 = \int_{Q_{t_0}} [(\mathbf{u}^\epsilon \cdot \nabla) \mathbf{u}_h^\epsilon \cdot \mathbf{u}_h + (\mathbf{u} \cdot \nabla )\mathbf{u}_h \cdot \mathbf{u}_h^\epsilon] \diff x \diff y \diff z \diff t \\
+      & = \int_{Q_{t_0}} [(\mathbf{u}^\epsilon \cdot \nabla) \mathbf{u}_h^\epsilon \cdot \mathbf{u}_h - (\mathbf{u} \cdot \nabla )\mathbf{u}^\epsilon_h \cdot \mathbf{u}_h] \diff x \diff y \diff z \diff t \\
+      & = \int_{Q_{t_0}} [(\mathbf{u}^\epsilon - \mathbf{u}) \cdot \nabla ] \mathbf{u}_h^\epsilon \cdot \mathbf{u}_h  \diff x \diff y \diff z \diff t \\
+      & = \int_{Q_{t_0}} [(\mathbf{u}^\epsilon - \mathbf{u}) \cdot \nabla ] (\mathbf{u}_h^\epsilon - \mathbf{u}_h) \cdot \mathbf{u}_h  \diff x \diff y \diff z \diff t \\
+      & = \int_{Q_{t_0}} [(\mathbf{U}_h^\epsilon, U^\epsilon_3) \cdot \nabla ] \mathbf{U}_h^\epsilon \cdot \mathbf{u}_h  \diff x \diff y \diff z \diff t := I_2' + I_2''.
+    \end{split}
+  \end{equation}
+  
+  In order to estimate $I_2',$ we will use the zero velocity boundary conditions which enable us to apply $\norm{\mathbf{u}_h}_{L^6} \leq C \norm{\mathbf{u}_h}_{H^1} \leq C \norm{\nabla \mathbf{u}_h}_2.$ Combining this with the Sobolev, Young and Holder inequalities, we arrive to
+  
+  \begin{equation}
+    \begin{split}
+      & I_2'= \int_{Q_{t_0}} (\mathbf{U}^\epsilon_h \cdot \nabla_h) \mathbf{U}^\epsilon_h \cdot \mathbf{u}_h \diff x \diff y \diff z \diff t
+    \end{split}
+  \end{equation}
   
   \begin{equation}\label{I2Bound}I_2 \leq \frac{1}{6} \norm{\nabla \mathbf{U}_h^\epsilon}^2_2 + C \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^4 \norm{\mathbf{U}_h^\epsilon}_2^2 \diff t + C \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^2  \norm{\Delta \mathbf{u}_h}_2^2 \norm{\mathbf{U}_h^\epsilon}_2^2 \diff t\end{equation}
   
