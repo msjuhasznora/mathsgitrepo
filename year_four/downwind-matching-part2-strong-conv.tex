@@ -49,7 +49,85 @@ See the calculations on the paper, it seems that we need a periodic boundary.
 
 \section{The collection of the equations we work with and some definitions, results we have}
 
+Firstly, here we work with the geophysical coordinate system and $K_1, K_2, K_3$ diffusion terms.
+
+(E-SNS): extended scaled Navier-Stokes.
+
+    \begin{equation} \label{ANSC1}
+    \partial_t u^\epsilon _1 + \mathbf{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\gamma u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{ANSC2}
+    \partial_t u_2^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_2^\epsilon -\Delta_\nu u_2^\epsilon + \gamma u_1^\epsilon   + \partial_2 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{ANSC3}
+    \epsilon^2 \{  \partial_t u_3^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon -\Delta_\nu u_3^{\epsilon} \} - \epsilon \beta u_1^\epsilon + \partial_3 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{ANSC4}
+    \nabla \cdot \mathbf{u}^\epsilon= 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{ANSC5}
+    \partial_t C^\epsilon + \mathbf{u^\epsilon} \cdot \nabla C^\epsilon = K_1 \partial_{11} ^ 2 C^\epsilon + K_2 \partial_{22} ^ 2 C^\epsilon + K_3 \partial_{33} ^ 2 C^\epsilon + S^\epsilon \text{ in } \Omega \times (0,T).
+    \end{equation}
+
+(E-PEs): extended Primitive Equations.
+
+    \begin{equation} \label{HNSC1}    
+    \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 - \gamma u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC2}   
+    \partial_t u_2 + \mathbf{u} \cdot \nabla u_2 - \Delta_\nu u_2 + \gamma u_1 + \partial_2 p = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC3}   
+    \partial_3 p = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC4}   
+    \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC5}   
+    \partial_t C + \mathbf{u} \cdot \nabla C = K_1 \partial_{11} ^ 2 C + K_2 \partial_{22} ^ 2 C + K_3 \partial_{33} ^2 C + S \text{ in } \Omega \times (0,T)
+    \end{equation}
+
+The energy inequality for the geophysical coordinate system for a periodic boundary becomes more simple (originally we used the Trace Theorem to handle the boundary term, here we do not need that.) We use $\mathbf{K} = (K_1, K_2, K_3).$
+
+\begin{equation}
+  \begin{split}  
+    & \frac{1}{2} \big (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2 \big ) \\
+    & + \int_0 ^ t \bigg [\norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2 + \norm{ \mathbf{K} \nabla C^\epsilon}_{L^2}^2\bigg ] \diff \tau \\
+    & \leq \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) \\
+    & + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau. \label{WeakSolEnergyInequality}
+  \end{split}
+\end{equation}  
+
 \section{Recreate the $L^2$ bound for the extended system (analogous to Section 4 in Li-Titi)}
+
+Here we need to show that $$ \int_0^t \norm{\nabla C^\epsilon}_2^2 \leq \kappa \epsilon^2,$$ because in the next section we will assume at some point, that this is smaller than some $\delta_0.$ That makes sense only if the expression is arbitrarily small.
+
+The expression we need to bound here comes together from four results.
+
+ONE. an identity, (4.4) in Li-Titi
+
+TWO.
+
+THREE. Multiplying the (E-PEs) by $(v,C)$ and integrating. This gives the extended version of what is (4.9) in Li-Titi:
+
+\begin{equation}
+  \begin{split}
+    & \frac{1}{2} \big ( \norm{v(t_0)}_2^2 + \norm{C(t_0)}_2^2 \big) + \int_0^{t_0} ( \norm{\nabla v}_2^2 + K \norm{\nabla C}_2^2 ) \diff \tau \\
+    & = \frac{1}{2} \big ( \norm{v_0}_2^2 + \norm{C_0}_2^2 \big) + \int_{Q_{t_0}} S \cdot C.
+  \end{split}
+\end{equation}
+
+This comes using integration by parts, using $\partial_3 p = 0,$ the divergence-free condition, and that at the integration by part process the $u \nabla v_1 \cdot v_1$ kind of terms fall out, as they have both the function and its derivative, i.e. $\nabla v_1$ and $v_1$, and $\nabla \cdot u$ is zero, and this we have that something is equals to minus something, thus it is 0.
+
+FOUR. The original energy inequality, required by definition of the weak solution, (\ref{WeakSolEnergyInequality}). (This is (4.10) in Li-Titi)
 
 \section{Recreate the full strong convergence result for the extended system (analogous to Section 5 in Li-Titi)}
 
