@@ -12,6 +12,9 @@
 \usepackage{outlines}
 \usepackage{setspace}
 \usepackage[colorinlistoftodos]{todonotes}
+\definecolor{green}{rgb}{0.4, 0.69, 0.2}
+\definecolor{asparagus}{rgb}{0.53, 0.66, 0.42}
+\definecolor{blue}{rgb}{0.0, 0.53, 0.74}
 \setlist[enumerate,1]{label=\alph*)}
 \setlist[enumerate,2]{label=\roman*)}
 \newtheorem{theorem}{Theorem}
@@ -144,21 +147,34 @@ With initial data $v_0 \in H^2 (\Omega), c_0 \in H^1(\Omega).$ For now we assume
   
 \textbf{Convergence:}  
 Denote $(U^\epsilon, C^\epsilon) = (V^\epsilon, W^\epsilon, C^\epsilon) = (u^\epsilon - u, c^\epsilon - c) = (v^\epsilon - v, w^\epsilon - w, c^\epsilon - c).$
-  
-The equations describing $(U^\epsilon, C^\epsilon)$ are the following.
+
+The equations describing $(U^\epsilon, C^\epsilon)$ are obtained by \textit{a)} extending equations (5.1)-(5.3) in Li-Titi by the Coriolis terms (see in blue below) and \textit{b)} calculating the equation describing the concentration difference (in green).
+
+Calculating the difference between (\ref{ANSC5}) and (\ref{HNSC5}) we have
+
+$$ \partial_t C^\epsilon + u^\epsilon \cdot \nabla c^\epsilon - u \cdot \nabla c = K_1 \partial_{11} C^\epsilon + K_2 \partial_{22} C^\epsilon + K_3 \partial_{33} C^\epsilon + S^\epsilon.$$
+
+Rewriting the term $u^\epsilon \cdot \nabla c^\epsilon - u \cdot \nabla c$ we use
+
+\begin{equation}
+  \begin{split}
+    & u^\epsilon \cdot \nabla c^\epsilon - u \cdot \nabla c + 0 = u^\epsilon \cdot \nabla c^\epsilon - u \cdot \nabla c - u \nabla c^\epsilon + u \nabla c^\epsilon \\
+    & = u^\epsilon \cdot \nabla c^\epsilon - u \nabla c^\epsilon - u \cdot \nabla c + u \nabla c^\epsilon = U^\epsilon \nabla c^\epsilon + u \nabla C^\epsilon \\
+    & = U^\epsilon \nabla (c^\epsilon - c + c) + u \nabla C^\epsilon = U^\epsilon \nabla C^\epsilon  + U^\epsilon \nabla c+ u \nabla C^\epsilon.
+  \end{split}
+\end{equation}
+
+Using this, we arrive to the following set of equation that describes $(U^\epsilon, C^\epsilon)$:
 
 \begin{equation} \label{eq1}
   \begin{gathered}
-    \partial_t V^\epsilon + (U^\epsilon \cdot \nabla) V^\epsilon - \Delta V^\epsilon + \nabla_h P^\epsilon + (u \cdot \nabla) V^\epsilon \\
-     + (U^\epsilon \cdot \nabla) v \textcolor{blue}{- \gamma V^\epsilon + \epsilon \beta u_3^\epsilon} = 0, \\
+    \partial_t V^\epsilon + (U^\epsilon \cdot \nabla) V^\epsilon - \Delta V^\epsilon + \nabla_h P^\epsilon + (u \cdot \nabla) V^\epsilon + (U^\epsilon \cdot \nabla) v \textcolor{blue}{- \gamma V^\epsilon + \epsilon \beta u_3^\epsilon} = 0, \\
     \nabla_h \cdot V^\epsilon + \partial_z W^\epsilon = 0, \\
     \epsilon^2 (\partial_t W^\epsilon + U^\epsilon \cdot \nabla W^\epsilon - \Delta W^\epsilon + U^\epsilon \cdot \nabla w + u \cdot \nabla W^\epsilon) \\
     + \partial_z P^\epsilon \textcolor{blue}{- \epsilon \beta u_1^\epsilon} = - \epsilon^2 (\partial_t w + u \cdot \nabla w - \Delta w), \\
-     \textcolor{blue}{\partial_t C^\epsilon + U^\epsilon \cdot \nabla c^\epsilon + u \nabla C^\epsilon = K_1 \partial_{11} C^\epsilon + K_2 \partial_{22} C^\epsilon + K_3 \partial_{33} C^\epsilon + S^\epsilon}
+     \textcolor{green}{\partial_t C^\epsilon + U^\epsilon \nabla C^\epsilon  + U^\epsilon \nabla c+ u \nabla C^\epsilon = K_1 \partial_{11} C^\epsilon + K_2 \partial_{22} C^\epsilon + K_3 \partial_{33} C^\epsilon + S^\epsilon}
   \end{gathered}
 \end{equation}
-
-Remark: instead of $U^\epsilon \cdot \nabla c^\epsilon + u \nabla C^\epsilon$ we can also have $U^\epsilon \cdot \nabla c + u^\epsilon \nabla C^\epsilon.$
 
 \begin{theorem}
  $H^1$ energy estimates. Can we have an analogous structure when multiplying the above equations by the Laplacians?
@@ -166,7 +182,41 @@ Remark: instead of $U^\epsilon \cdot \nabla c^\epsilon + u \nabla C^\epsilon$ we
 
 \begin{proof}
 We know that the velocity part is ok. Multiply the concentration equation in (\ref{eq1}) by $- \Delta C^\epsilon$ and integrate by parts.
+
+On the left-hand side we have \textit{i)} the contribution from $\partial_t C^\epsilon \cdot \Delta C^\epsilon,$ which is $\frac{1}{2}\frac{\diff}{\diff t} \norm{\nabla C^\epsilon}^2_2$ and \textit{ii)} the contribution from the diffusivity terms.
+
+$$ \frac{1}{2}\frac{\diff}{\diff t} \norm{\nabla C^\epsilon}^2_2 + K \norm{\Delta C^\epsilon}_2^2 \leq \int_\Omega \big ( U^\epsilon \nabla C^\epsilon  + U^\epsilon \nabla c+ u \nabla C^\epsilon \big ) \Delta C^\epsilon - \int_\Omega S^\epsilon \Delta C^\epsilon$$
+
+To estimate $\int_\Omega \big ( U^\epsilon \nabla C^\epsilon  + U^\epsilon \nabla c + u \nabla C^\epsilon \big ) \Delta C^\epsilon$ we use Lemma 2.2. \todo{why does it require zero spatial average even for the case of periodic domain}
+We use the generalised Young inequality with a constant $\zeta$ that is necessary so that later we can bring certain terms to the left-hand side.
+
+Firstly, 
+
+\begin{equation}
+  \begin{split}
+    & \int_\Omega U^\epsilon \nabla C^\epsilon \Delta C^\epsilon \leq \norm{\nabla V^\epsilon}_2^{1/2} \norm{\Delta V^\epsilon}_2^{1/2} \norm{\nabla C^\epsilon}_2^{1/2} \norm{\Delta C^\epsilon}_2^{1/2} \norm{\Delta C^\epsilon}_2 \\
+    & \leq \zeta_1 \norm{\Delta C^\epsilon}_2^2 + \frac{1}{\zeta_1} \norm{\nabla V^\epsilon}_2 \norm{\Delta V^\epsilon}_2 \norm{\nabla C^\epsilon}_2 \norm{\Delta C^\epsilon}_2 \\
+    & \leq \zeta_1 \norm{\Delta C^\epsilon}_2^2 + \frac{1}{\zeta_1} \big ( \frac{1}{2} \norm{\nabla V^\epsilon}^2_2 \norm{\Delta V^\epsilon}^2_2 + \frac{1}{2} \norm{\nabla C^\epsilon}^2_2 \norm{\Delta C^\epsilon}^2_2 \big )
+  \end{split}
+\end{equation}
+
+\begin{equation}
+  \begin{split}
+    \int_\Omega U^\epsilon \nabla c \Delta C^\epsilon \leq \norm{\nabla V^\epsilon}_2^{1/2} \norm{\Delta V^\epsilon}_2^{1/2} \norm{\nabla c}_2^{1/2} \norm{\Delta c}_2^{1/2} \norm{\Delta C^\epsilon}_2
+  \end{split}
+\end{equation}
+
+\begin{equation}
+  \begin{split}
+    \int_\Omega u \nabla C^\epsilon \Delta C^\epsilon \leq \norm{\nabla v}_2^{1/2} \norm{\Delta v}_2^{1/2} \norm{\nabla C^\epsilon}_2^{1/2} \norm{\Delta C^\epsilon}_2^{1/2} \norm{\Delta C^\epsilon}_2
+  \end{split}
+\end{equation}
+
 \end{proof}
+
+\section{Questions and todo}
+
+1
 
 \end{document}
 
