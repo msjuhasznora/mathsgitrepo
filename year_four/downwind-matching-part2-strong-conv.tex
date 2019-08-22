@@ -168,10 +168,10 @@ Using this, we arrive to the following set of equation that describes $(U^\epsil
 
 \begin{equation} \label{eq1}
   \begin{gathered}
-    \partial_t V^\epsilon + (U^\epsilon \cdot \nabla) V^\epsilon - \Delta V^\epsilon + \nabla_h P^\epsilon + (u \cdot \nabla) V^\epsilon + (U^\epsilon \cdot \nabla) v \textcolor{blue}{- \gamma V^\epsilon + \epsilon \beta u_3^\epsilon} = 0, \\
+    \partial_t V^\epsilon + (U^\epsilon \cdot \nabla) V^\epsilon - \Delta V^\epsilon + \nabla_h P^\epsilon + (u \cdot \nabla) V^\epsilon + (U^\epsilon \cdot \nabla) v \textcolor{blue}{- \gamma V^\epsilon + \epsilon \beta W^\epsilon  + \epsilon \beta w} = 0, \\
     \nabla_h \cdot V^\epsilon + \partial_z W^\epsilon = 0, \\
     \epsilon^2 (\partial_t W^\epsilon + U^\epsilon \cdot \nabla W^\epsilon - \Delta W^\epsilon + U^\epsilon \cdot \nabla w + u \cdot \nabla W^\epsilon) \\
-    + \partial_z P^\epsilon \textcolor{blue}{- \epsilon \beta u_1^\epsilon} = - \epsilon^2 (\partial_t w + u \cdot \nabla w - \Delta w), \\
+    + \partial_z P^\epsilon \textcolor{blue}{- \epsilon \beta V_1^\epsilon - \epsilon \beta v_1} = - \epsilon^2 (\partial_t w + u \cdot \nabla w - \Delta w), \\
      \textcolor{green}{\partial_t C^\epsilon + U^\epsilon \nabla C^\epsilon  + U^\epsilon \nabla c+ u \nabla C^\epsilon = K_1 \partial_{11} C^\epsilon + K_2 \partial_{22} C^\epsilon + K_3 \partial_{33} C^\epsilon + S^\epsilon}
   \end{gathered}
 \end{equation}
@@ -190,33 +190,53 @@ $$ \frac{1}{2}\frac{\diff}{\diff t} \norm{\nabla C^\epsilon}^2_2 + K \norm{\Delt
 To estimate $\int_\Omega \big ( U^\epsilon \nabla C^\epsilon  + U^\epsilon \nabla c + u \nabla C^\epsilon \big ) \Delta C^\epsilon$ we use Lemma 2.2. \todo{why does it require zero spatial average even for the case of periodic domain}
 We use the generalised Young inequality with a constant $\zeta$ that is necessary so that later we can bring certain terms to the left-hand side.
 
-Firstly, 
+Firstly, we have
 
 \begin{equation}
   \begin{split}
     & \int_\Omega U^\epsilon \nabla C^\epsilon \Delta C^\epsilon \leq \norm{\nabla V^\epsilon}_2^{1/2} \norm{\Delta V^\epsilon}_2^{1/2} \norm{\nabla C^\epsilon}_2^{1/2} \norm{\Delta C^\epsilon}_2^{1/2} \norm{\Delta C^\epsilon}_2 \\
     & \leq \zeta_1 \norm{\Delta C^\epsilon}_2^2 + \frac{1}{\zeta_1} \norm{\nabla V^\epsilon}_2 \norm{\Delta V^\epsilon}_2 \norm{\nabla C^\epsilon}_2 \norm{\Delta C^\epsilon}_2 \\
-    & \leq \zeta_1 \norm{\Delta C^\epsilon}_2^2 + \frac{1}{\zeta_1} \big ( \frac{1}{2} \norm{\nabla V^\epsilon}^2_2 \norm{\Delta V^\epsilon}^2_2 + \frac{1}{2} \norm{\nabla C^\epsilon}^2_2 \norm{\Delta C^\epsilon}^2_2 \big )
+    & \leq \zeta_1 \norm{\Delta C^\epsilon}_2^2 + \frac{1}{\zeta_1} \big ( \frac{1}{2} \norm{\nabla V^\epsilon}^2_2 \norm{\Delta V^\epsilon}^2_2 + \frac{1}{2} \norm{\nabla C^\epsilon}^2_2 \norm{\Delta C^\epsilon}^2_2 \big ).
   \end{split}
 \end{equation}
 
-\begin{equation}
-  \begin{split}
-    \int_\Omega U^\epsilon \nabla c \Delta C^\epsilon \leq \norm{\nabla V^\epsilon}_2^{1/2} \norm{\Delta V^\epsilon}_2^{1/2} \norm{\nabla c}_2^{1/2} \norm{\Delta c}_2^{1/2} \norm{\Delta C^\epsilon}_2
-  \end{split}
-\end{equation}
+Secondly,
 
 \begin{equation}
   \begin{split}
-    \int_\Omega u \nabla C^\epsilon \Delta C^\epsilon \leq \norm{\nabla v}_2^{1/2} \norm{\Delta v}_2^{1/2} \norm{\nabla C^\epsilon}_2^{1/2} \norm{\Delta C^\epsilon}_2^{1/2} \norm{\Delta C^\epsilon}_2
+    & \int_\Omega U^\epsilon \nabla c \Delta C^\epsilon \leq \norm{\nabla V^\epsilon}_2^{1/2} \norm{\Delta V^\epsilon}_2^{1/2} \norm{\nabla c}_2^{1/2} \norm{\Delta c}_2^{1/2} \norm{\Delta C^\epsilon}_2 \\
+    & \zeta_1 \norm{\Delta C^\epsilon}^2_2 + \frac{1}{\zeta_1} \norm{\nabla V^\epsilon}_2 \norm{\Delta V^\epsilon}_2 \norm{\nabla c}_2 \norm{\Delta c}_2 \\
+    & \zeta_1 \norm{\Delta C^\epsilon}^2_2 + \frac{1}{\zeta_1} \big (\zeta_2 \norm{\Delta V^\epsilon}_2^2 + \frac{1}{\zeta_2}  \norm{\nabla V^\epsilon}^2_2  \norm{\nabla c}^2_2 \norm{\Delta c}^2_2 \big ).
   \end{split}
 \end{equation}
+
+Finally here we use the Young inequality with $\frac{1}{4} + \frac{3}{4},$ since we have $\norm{\Delta C^\epsilon}_2^{1/2} \norm{\Delta C^\epsilon}_2 = \norm{\Delta C^\epsilon}_2^{3/2}.$
+
+\begin{equation}
+  \begin{split}
+    & \int_\Omega u \nabla C^\epsilon \Delta C^\epsilon \leq \norm{\nabla v}_2^{1/2} \norm{\Delta v}_2^{1/2} \norm{\nabla C^\epsilon}_2^{1/2} \norm{\Delta C^\epsilon}_2^{1/2} \norm{\Delta C^\epsilon}_2 \\
+    & \leq \zeta \norm{\Delta C^\epsilon}_2^2 + \frac{1}{\zeta} \norm{\nabla v}^2_2 \norm{\Delta v}^2_2 \norm{\nabla C^\epsilon}^2_2 \\
+    & \leq \zeta \norm{\Delta C^\epsilon}_2^2 + \frac{1}{\zeta} \norm{\Delta v}^2_2 \norm{\nabla \Delta v}^2_2 \norm{\nabla C^\epsilon}^2_2.
+  \end{split}
+\end{equation}
+
+We also need to create bounds for the new Coriolis terms.
+
+Estimates for the Coriolis terms (for the moment on paper)
+
+Comment on the source term.
+
+Connecting all this, we have the updated version of the inequality which was the inequality after (5.7) in Li-Titi.
 
 \end{proof}
 
 \section{Questions and todo}
 
-1
+\begin{itemize}
+
+  \item We need an analogous estimate as Corollary 3.1, for the norms of the concentration function in the extended PEs, namely $\norm{c}^2_2.$
+
+\end{itemize}
 
 \end{document}
 
