@@ -51,6 +51,8 @@ See the calculations on the paper, it seems that we need a periodic boundary.
 
 Firstly, here we work with the geophysical coordinate system and $K_1, K_2, K_3$ diffusion terms.
 
+\textbf{Change of notations:} Since $u^\epsilon$ and $u$ denotes the solution functions and the capital $U^\epsilon$ denotes their difference, we switch to the analogous notation with the concentration function, i.e. $c^\epsilon$ and $c$ here are the solutions in the anisotropic and hydrostatic equations, respectively, while the capital $C^\epsilon$ denotes the $c^\epsilon - c$ difference function.
+
 (E-SNS): extended scaled Navier-Stokes.
 
     \begin{equation} \label{ANSC1}
@@ -70,7 +72,7 @@ Firstly, here we work with the geophysical coordinate system and $K_1, K_2, K_3$
     \end{equation}
     
     \begin{equation} \label{ANSC5}
-    \partial_t C^\epsilon + \mathbf{u^\epsilon} \cdot \nabla C^\epsilon = K_1 \partial_{11} ^ 2 C^\epsilon + K_2 \partial_{22} ^ 2 C^\epsilon + K_3 \partial_{33} ^ 2 C^\epsilon + S^\epsilon \text{ in } \Omega \times (0,T).
+    \partial_t c^\epsilon + \mathbf{u^\epsilon} \cdot \nabla c^\epsilon = K_1 \partial_{11} ^ 2 c^\epsilon + K_2 \partial_{22} ^ 2 c^\epsilon + K_3 \partial_{33} ^ 2 c^\epsilon + s^\epsilon \text{ in } \Omega \times (0,T).
     \end{equation}
 
 (E-PEs): extended Primitive Equations.
@@ -92,23 +94,23 @@ Firstly, here we work with the geophysical coordinate system and $K_1, K_2, K_3$
     \end{equation}
     
     \begin{equation} \label{HNSC5}   
-    \partial_t C + \mathbf{u} \cdot \nabla C = K_1 \partial_{11} ^ 2 C + K_2 \partial_{22} ^ 2 C + K_3 \partial_{33} ^2 C + S \text{ in } \Omega \times (0,T)
+    \partial_t c + \mathbf{u} \cdot \nabla c = K_1 \partial_{11} ^ 2 c + K_2 \partial_{22} ^ 2 c + K_3 \partial_{33} ^2 c + s \text{ in } \Omega \times (0,T)
     \end{equation}
 
 The energy inequality for the geophysical coordinate system for a periodic boundary becomes more simple (originally we used the Trace Theorem to handle the boundary term, here we do not need that.) We use $\mathbf{K} = (K_1, K_2, K_3).$
 
 \begin{equation}
   \begin{split}  
-    & \frac{1}{2} \big (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2 \big ) \\
-    & + \int_0 ^ t \bigg [\norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2 + \norm{ \mathbf{K} \nabla C^\epsilon}_{L^2}^2\bigg ] \diff \tau \\
-    & \leq \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) \\
-    & + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau. \label{WeakSolEnergyInequality}
+    & \frac{1}{2} \big (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{c^\epsilon (t)}_{L^2}^2 \big ) \\
+    & + \int_0 ^ t \bigg [\norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2 + \norm{ \mathbf{K} \nabla c^\epsilon}_{L^2}^2\bigg ] \diff \tau \\
+    & \leq \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{c^\epsilon (0)}_{L^2}^2) \\
+    & + \int_0^t (s^\epsilon,c^\epsilon) \diff \tau. \label{WeakSolEnergyInequality}
   \end{split}
 \end{equation}  
 
 \section{Recreate the $L^2$ bound for the extended system (analogous to Section 4 in Li-Titi)}
 
-Here we need to show that $$ \int_0^t \norm{\nabla C^\epsilon}_2^2 \leq \kappa \epsilon^2,$$ because in the next section we will assume at some point, that this is smaller than some $\delta_0.$ That makes sense only if the expression is arbitrarily small.
+Here we need to show that $$ \int_0^t \norm{\nabla c^\epsilon}_2^2 \leq \kappa \epsilon^2,$$ because in the next section we will assume at some point, that this is smaller than some $\delta_0.$ That makes sense only if the expression is arbitrarily small.
 
 The expression we need to bound here comes together from four results.
 
@@ -116,12 +118,12 @@ ONE. an identity, (4.4) in Li-Titi
 
 TWO.
 
-THREE. Multiplying the (E-PEs) by $(v,C)$ and integrating. This gives the extended version of what is (4.9) in Li-Titi:
+THREE. Multiplying the (E-PEs) by $(v,c)$ and integrating. This gives the extended version of what is (4.9) in Li-Titi:
 
 \begin{equation}
   \begin{split}
-    & \frac{1}{2} \big ( \norm{v(t_0)}_2^2 + \norm{C(t_0)}_2^2 \big) + \int_0^{t_0} ( \norm{\nabla v}_2^2 + K \norm{\nabla C}_2^2 ) \diff \tau \\
-    & = \frac{1}{2} \big ( \norm{v_0}_2^2 + \norm{C_0}_2^2 \big) + \int_{Q_{t_0}} S \cdot C.
+    & \frac{1}{2} \big ( \norm{v(t_0)}_2^2 + \norm{c(t_0)}_2^2 \big) + \int_0^{t_0} ( \norm{\nabla v}_2^2 + K \norm{\nabla c}_2^2 ) \diff \tau \\
+    & = \frac{1}{2} \big ( \norm{v_0}_2^2 + \norm{c_0}_2^2 \big) + \int_{Q_{t_0}} s \cdot c.
   \end{split}
 \end{equation}
 
@@ -130,6 +132,41 @@ This comes using integration by parts, using $\partial_3 p = 0,$ the divergence-
 FOUR. The original energy inequality, required by definition of the weak solution, (\ref{WeakSolEnergyInequality}). (This is (4.10) in Li-Titi)
 
 \section{Recreate the full strong convergence result for the extended system (analogous to Section 5 in Li-Titi)}
+
+With initial data $v_0 \in H^2 (\Omega), c_0 \in H^1(\Omega).$ For now we assume this, and we will see later if it is enough. We have $u_0 \in H^1(\Omega)$ in this case.
+  
+\textbf{Starting point / Existence:}
+
+\begin{enumerate}
+  \item The existence of a local in time strong solution $(u^\epsilon, c^\epsilon)$ to (E-SNS) with maximal existence time $T^\epsilon.$ TODO: details. We know the existence of $u^\epsilon$ for (SNS).
+  \item The existence of the (u,c) strong solution globally of (E-PEs). TODO: details. We have the existence of $u.$
+\end{enumerate}
+  
+\textbf{Convergence:}  
+Denote $(U^\epsilon, C^\epsilon) = (V^\epsilon, W^\epsilon, C^\epsilon) = (u^\epsilon - u, c^\epsilon - c) = (v^\epsilon - v, w^\epsilon - w, c^\epsilon - c).$
+  
+The equations describing $(U^\epsilon, C^\epsilon)$ are the following.
+
+\begin{equation} \label{eq1}
+  \begin{gathered}
+    \partial_t V^\epsilon + (U^\epsilon \cdot \nabla) V^\epsilon - \Delta V^\epsilon + \nabla_h P^\epsilon + (u \cdot \nabla) V^\epsilon \\
+     + (U^\epsilon \cdot \nabla) v \textcolor{blue}{- \gamma V^\epsilon + \epsilon \beta u_3^\epsilon} = 0, \\
+    \nabla_h \cdot V^\epsilon + \partial_z W^\epsilon = 0, \\
+    \epsilon^2 (\partial_t W^\epsilon + U^\epsilon \cdot \nabla W^\epsilon - \Delta W^\epsilon + U^\epsilon \cdot \nabla w + u \cdot \nabla W^\epsilon) \\
+    + \partial_z P^\epsilon \textcolor{blue}{- \epsilon \beta u_1^\epsilon} = - \epsilon^2 (\partial_t w + u \cdot \nabla w - \Delta w), \\
+     \textcolor{blue}{\partial_t C^\epsilon + U^\epsilon \cdot \nabla c^\epsilon + u \nabla C^\epsilon = K_1 \partial_{11} C^\epsilon + K_2 \partial_{22} C^\epsilon + K_3 \partial_{33} C^\epsilon + S^\epsilon}
+  \end{gathered}
+\end{equation}
+
+Remark: instead of $U^\epsilon \cdot \nabla c^\epsilon + u \nabla C^\epsilon$ we can also have $U^\epsilon \cdot \nabla c + u^\epsilon \nabla C^\epsilon.$
+
+\begin{theorem}
+ $H^1$ energy estimates. Can we have an analogous structure when multiplying the above equations by the Laplacians?
+\end{theorem}
+
+\begin{proof}
+We know that the velocity part is ok. Multiply the concentration equation in (\ref{eq1}) by $- \Delta C^\epsilon$ and integrate by parts.
+\end{proof}
 
 \end{document}
 
