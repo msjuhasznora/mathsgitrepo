@@ -113,7 +113,7 @@ The energy inequality for the geophysical coordinate system for a periodic bound
 
 \section{Recreate the $L^2$ bound for the extended system (analogous to Section 4 in Li-Titi)}
 
-Here we need to show that $$ \int_0^t \norm{\nabla c^\epsilon}_2^2 \leq \kappa \epsilon^2,$$ because in the next section we will assume at some point, that this is smaller than some $\delta_0.$ That makes sense only if the expression is arbitrarily small.
+Here we need to show that $$ \int_0^t \norm{\nabla C^\epsilon}_2^2 \leq \kappa \epsilon^2,$$ because in the next section we will assume at some point, that this is smaller than some $\delta_0.$ That makes sense only if the expression is arbitrarily small.
 
 The expression we need to bound here comes together from four results.
 
@@ -329,24 +329,24 @@ This part is really analogous to what is written on p27, \textbf{the main todo p
 
 \begin{itemize}
 
-  \item We need the pollution concentration-including version of Corollary 3.1, namely, the estimates for the term $\norm{\nabla c}^2_2 \norm{\Delta c}^2_2$ in the integral in the above result. Corollary 3.1 gives a constant estimate only for the velocities, e.g. $\norm{\nabla \Delta v}^2_2.$
-  \item We need the $L^2$ estimate (analogous to Proposition 5.1.) to $C^\epsilon,$ while we already know the result for $V^\epsilon, \epsilon W^\epsilon.$
-  \item Analogous existence result for (E-SNS).
-  \item Local well-posedness of (E-SNS).
+  \item POINT A) We need the concentration-including version of Corollary 3.1, namely, an estimate for the term $\int_0^t \norm{\nabla c}^2_2 \norm{\Delta c}^2_2$ in the integral in the above result (\ref{result_theorem1}). Corollary 3.1 gives a constant estimate only for the velocities, e.g. $\int_0^\infty \norm{\nabla v}^2_{H^2}.$
+  \item POINT B) We need the $L^2$ estimate (analogous to Proposition 5.1.) to $C^\epsilon,$ while we already know the result for $V^\epsilon, \epsilon W^\epsilon.$
+  \item POINT C) We need an existence result for (E-SNS) that states the unique local existence of strong solution $(u^\epsilon, c^\epsilon)$.
+  \item POINT D) We need an energy-existence result for (E-SNS) that describes the connection between maximal existence time and the blow-up of the energy of the system. In other words, a result that states that at a certain time $T^*$ the energy is small, then the solution can be continued.
 
 \end{itemize}
 
-When these missing pieces are clear, then from the $L^2$ estimate we have
+When these missing pieces are clear, then from the $L^2$ estimate (POINT B) we have
 
 $$ \sup_{0 \leq t < T^*_\epsilon}{(\norm{V^\epsilon}^2_2 + \norm{\epsilon W^\epsilon}^2_2 + \textcolor{green}{\norm{C^\epsilon}^2_2}) } + \int_0^{T^*_\epsilon} (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\nabla C^\epsilon}^2_2}) \diff t \leq C \epsilon^2, $$
 
-$T^*_\epsilon$ being the maximal existence time.
+$T^*_\epsilon$ being the maximal existence time of $(u^\epsilon, c^\epsilon)$ (POINT C).
 
 From this, using the previously defined $\delta_0,$ we define
 
 $$t^*_\epsilon:= \sup{ \big \{ t \in (0, T^*_\epsilon) \mid \sup_{0 \leq s \leq t}{\big (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\nabla C^\epsilon}^2_2} \big ) \leq \delta_0^2}\} }$$
 
-Using Corollary 3.1 and an analogous result bounding the $c$ norms too, from (\ref{result_theorem1}) we get
+Using POINT A), from (\ref{result_theorem1}) we get
 
 \begin{equation}
   \begin{split}
@@ -379,7 +379,7 @@ From this we have $t^*_\epsilon = T^*_\epsilon,$ and as a consequence,
   \end{split}
 \end{equation}
 
-From this we have $T^*_\epsilon = \infty.$
+From this we have $T^*_\epsilon = \infty$ (using POINT D).
 
 \end{proof}
 
@@ -387,7 +387,7 @@ From this we have $T^*_\epsilon = \infty.$
 
 \begin{itemize}
 
-  \item We need an analogous estimate as Corollary 3.1, for the norms of the concentration function in the extended PEs, namely $\norm{c}^2_2.$
+  \item Initial and boundary conditions, for example p27, they use (1.2)-(1.4). Again, are these symmetries important (the even and odd functions?) Plus, define BC, IC for the $c^\epsilon, c$ functions.
 
 \end{itemize}
 
