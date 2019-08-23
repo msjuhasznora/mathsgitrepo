@@ -177,7 +177,7 @@ Using this, we arrive to the following set of equation that describes $(U^\epsil
 \end{equation}
 
 \begin{theorem}
- $H^1$ energy estimates. Can we have an analogous structure when multiplying the above equations by the Laplacians?
+(updated version of Proposition 5.2) $H^1$ energy estimates. Can we have an analogous structure when multiplying the above equations by the Laplacians?
 \end{theorem}
 
 \begin{proof}
@@ -186,7 +186,7 @@ We know already that the original (coloured black) parts of (\ref{U_eps_C_eps}),
 
 \begin{equation} \label{originalH1}
   \begin{split}
-    & \frac{1}{2} \frac{\diff}{\diff t} (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2) + \frac{3}{5} (\norm{\Delta V}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2) \\
+    & \frac{1}{2} \frac{\diff}{\diff t} (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2) + \frac{3}{5} (\norm{\Delta V^\epsilon}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2) \\
     & \leq C_1 (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2) \big [ (\norm{\Delta V}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2) + (1+ \epsilon^4) \norm{\Delta v}^2_2 \norm{\nabla \Delta v}^2_2 \big ] \\
     & + C_1 \epsilon^2 (1 + \norm{\Delta v}^2_2) (\norm{\nabla \partial_t v}^2_2 + \norm{\nabla \Delta v}^2_2).
   \end{split}
@@ -241,7 +241,7 @@ With this we arrive to first updated version of the inequality (\ref{originalH1}
 
 \begin{equation}
   \begin{split}
-    & \frac{1}{2} \frac{\diff}{\diff t} (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 + \textcolor{green}{\norm{\nabla C^\epsilon}^2_2}) + \frac{3}{5} (\norm{\Delta V}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\Delta C^\epsilon}_2^2}) \\
+    & \frac{1}{2} \frac{\diff}{\diff t} (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 + \textcolor{green}{\norm{\nabla C^\epsilon}^2_2}) + \frac{3}{5} (\norm{\Delta V^\epsilon}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\Delta C^\epsilon}_2^2}) \\
     & \leq C_1 (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 \textcolor{green}{+ \norm{\nabla C^\epsilon}^2_2}) \\
     & \times \big [ (\norm{\Delta V}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\Delta C^\epsilon}_2^2}) + (1+ \epsilon^4) \norm{\Delta v}^2_2 \norm{\nabla \Delta v}^2_2 + \textcolor{green}{\norm{\nabla c}^2_2 \norm{\Delta c}^2_2} \big ] \\
     & + C_1 \epsilon^2 (1 + \norm{\Delta v}^2_2) (\norm{\nabla \partial_t v}^2_2 + \norm{\nabla \Delta v}^2_2),
@@ -278,14 +278,14 @@ Connecting all this, we have the updated version of the inequality which was the
 
 \begin{equation}
   \begin{split}
-    & \frac{1}{2} \frac{\diff}{\diff t} (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 + \textcolor{green}{\norm{\nabla C^\epsilon}^2_2}) + \frac{3}{5} (\norm{\Delta V}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\Delta C^\epsilon}_2^2}) \\
+    & \frac{1}{2} \frac{\diff}{\diff t} (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 + \textcolor{green}{\norm{\nabla C^\epsilon}^2_2}) + \frac{3}{5} (\norm{\Delta V^\epsilon}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\Delta C^\epsilon}_2^2}) \\
     & \leq C_1 (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 \textcolor{green}{+ \norm{\nabla C^\epsilon}^2_2}) \\
     & \times \big [ (\norm{\Delta V}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\Delta C^\epsilon}_2^2}) + \textcolor{blue}{C}+ (1+ \epsilon^4) \norm{\Delta v}^2_2 \norm{\nabla \Delta v}^2_2 + \textcolor{green}{\norm{\nabla c}^2_2 \norm{\Delta c}^2_2} \big ] \\
     & + C_1 \epsilon^2 (1 + \norm{\Delta v}^2_2) (\norm{\nabla \partial_t v}^2_2 + \norm{\nabla \Delta v}^2_2 + \textcolor{blue}{\norm{\nabla v}_2^2}).
   \end{split}
 \end{equation}
 
-As long as $\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 + \textcolor{green}{\norm{\nabla C^\epsilon}^2_2}) \leq \delta_0^2,$ then 
+As long as $\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 + \textcolor{green}{\norm{\nabla C^\epsilon}^2_2}) \leq \delta_0^2,$ with $\delta_0 = \sqrt{\frac{1}{10 C_1}}$ then 
 
 $$ C_1 (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 \textcolor{green}{+ \norm{\nabla C^\epsilon}^2_2})(\norm{\Delta V}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\Delta C^\epsilon}_2^2}) $$
 
@@ -295,7 +295,7 @@ can be "melted into" the left-hand side and we finally have
 
 \begin{equation}
   \begin{split}
-    & \frac{\diff}{\diff t} (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 + \textcolor{green}{\norm{\nabla C^\epsilon}^2_2}) + (\norm{\Delta V}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\Delta C^\epsilon}_2^2}) \\
+    & \frac{\diff}{\diff t} (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 + \textcolor{green}{\norm{\nabla C^\epsilon}^2_2}) + (\norm{\Delta V^\epsilon}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\Delta C^\epsilon}_2^2}) \\
     & \leq C_1 \big [ \textcolor{blue}{C}+ (1+ \epsilon^4) \norm{\Delta v}^2_2 \norm{\nabla \Delta v}^2_2 + \textcolor{green}{\norm{\nabla c}^2_2 \norm{\Delta c}^2_2} \big ] \\
     & \times (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 \textcolor{green}{+ \norm{\nabla C^\epsilon}^2_2}) \\
     & + C_1 \epsilon^2 (1 + \norm{\Delta v}^2_2) (\norm{\nabla \partial_t v}^2_2 + \norm{\nabla \Delta v}^2_2 + \textcolor{blue}{\norm{\nabla v}_2^2}).
@@ -304,13 +304,82 @@ can be "melted into" the left-hand side and we finally have
 
 Using $(V^\epsilon, W^\epsilon, C^\epsilon)(t_0) = 0,$ applying the Gronwall inequality we have 
 
-\begin{equation}
+\begin{equation} \label{result_theorem1}
   \begin{split}
-    & \sup_{0 \leq s \leq t}{(\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 + \textcolor{green}{\norm{\nabla C^\epsilon}^2_2}) } + \int_0^t (\norm{\Delta V}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\Delta C^\epsilon}_2^2}) \diff s \\
+    & \sup_{0 \leq s \leq t}{(\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 + \textcolor{green}{\norm{\nabla C^\epsilon}^2_2}) } + \int_0^t (\norm{\Delta V^\epsilon}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\Delta C^\epsilon}^2_2}) \diff s \\
     & \leq C_1 \epsilon^2 \bigg ( \int_0^t (1 + \norm{\Delta v}^2_2) (\norm{\nabla \partial_t v}^2_2 + \norm{\nabla \Delta v}^2_2 + \textcolor{blue}{\norm{\nabla v}_2^2}) \diff s \bigg ) \\
     & \times \exp{ \int_0^t \textcolor{blue}{C}+ (1+ \epsilon^4) \norm{\Delta v}^2_2 \norm{\nabla \Delta v}^2_2 + \textcolor{green}{\norm{\nabla c}^2_2 \norm{\Delta c}^2_2} \diff s}.
   \end{split}
 \end{equation}
+
+\end{proof}
+
+Now we move on to check if the extended, analogous theorem to Proposition 5.3 works.
+
+\begin{theorem}
+When $\epsilon$ is small enough, i.e. $\epsilon \in (0, \epsilon_0),$ then we have global unique strong solutions for the extended system, and we have
+
+$$ \sup_{0 \leq t < \infty}{(\norm{V^\epsilon}^2_{H^1} + \norm{\epsilon W^\epsilon}^2_{H^1} + \textcolor{green}{\norm{C^\epsilon}^2_{H^1}}) } + \int_0^\infty (\norm{\nabla V^\epsilon}^2_{H^1} + \norm{\epsilon \nabla W^\epsilon}^2_{H^1} \textcolor{green}{+ K \norm{\nabla C^\epsilon}^2_{H^1}}) \diff t \leq C \epsilon^2. $$
+
+\end{theorem}
+
+\begin{proof}
+
+This part is really analogous to what is written on p27, \textbf{the main todo parts are}:
+
+\begin{itemize}
+
+  \item We need the pollution concentration-including version of Corollary 3.1, namely, the estimates for the term $\norm{\nabla c}^2_2 \norm{\Delta c}^2_2$ in the integral in the above result. Corollary 3.1 gives a constant estimate only for the velocities, e.g. $\norm{\nabla \Delta v}^2_2.$
+  \item We need the $L^2$ estimate (analogous to Proposition 5.1.) to $C^\epsilon,$ while we already know the result for $V^\epsilon, \epsilon W^\epsilon.$
+  \item Analogous existence result for (E-SNS).
+  \item Local well-posedness of (E-SNS).
+
+\end{itemize}
+
+When these missing pieces are clear, then from the $L^2$ estimate we have
+
+$$ \sup_{0 \leq t < T^*_\epsilon}{(\norm{V^\epsilon}^2_2 + \norm{\epsilon W^\epsilon}^2_2 + \textcolor{green}{\norm{C^\epsilon}^2_2}) } + \int_0^{T^*_\epsilon} (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\nabla C^\epsilon}^2_2}) \diff t \leq C \epsilon^2, $$
+
+$T^*_\epsilon$ being the maximal existence time.
+
+From this, using the previously defined $\delta_0,$ we define
+
+$$t^*_\epsilon:= \sup{ \big \{ t \in (0, T^*_\epsilon) \mid \sup_{0 \leq s \leq t}{\big (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\nabla C^\epsilon}^2_2} \big ) \leq \delta_0^2}\} }$$
+
+Using Corollary 3.1 and an analogous result bounding the $c$ norms too, from (\ref{result_theorem1}) we get
+
+\begin{equation}
+  \begin{split}
+    & \sup_{0 \leq s \leq t}{(\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 + \textcolor{green}{\norm{\nabla C^\epsilon}^2_2}) } \\
+    & + \int_0^t (\norm{\Delta V^\epsilon}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\Delta C^\epsilon}^2_2}) \diff s \leq C \epsilon^2
+  \end{split}
+\end{equation}
+
+for any $t \in [0, t^*_\epsilon).$
+
+Setting $\epsilon_0 = \frac{\delta_0}{\sqrt{2C}},$ we have
+
+\begin{equation}
+  \begin{split}
+    & \sup_{0 \leq s \leq t}{(\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 + \textcolor{green}{\norm{\nabla C^\epsilon}^2_2}) } \\
+    & + \int_0^t (\norm{\Delta V^\epsilon}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\Delta C^\epsilon}^2_2}) \diff s \leq \frac{\delta_0}{2}
+  \end{split}
+\end{equation}
+
+for any $\epsilon \in (0, \epsilon_0).$ From which we have
+
+$$ \sup_{0 \leq s < t^*_\epsilon}{(\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 + \textcolor{green}{\norm{\nabla C^\epsilon}^2_2}) } \leq \frac{\delta_0}{2}.$$
+
+From this we have $t^*_\epsilon = T^*_\epsilon,$ and as a consequence,
+
+\begin{equation}
+  \begin{split}
+    & \sup_{0 \leq s < T^*_\epsilon}{(\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 + \textcolor{green}{\norm{\nabla C^\epsilon}^2_2}) } \\
+    & + \int_0^{T^*_\epsilon} (\norm{\Delta V^\epsilon}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\Delta C^\epsilon}^2_2}) \diff s \leq C \epsilon^2.
+  \end{split}
+\end{equation}
+
+From this we have $T^*_\epsilon = \infty.$
 
 \end{proof}
 
