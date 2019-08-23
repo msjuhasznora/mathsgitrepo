@@ -15,8 +15,8 @@
 \definecolor{green}{rgb}{0.4, 0.69, 0.2}
 \definecolor{asparagus}{rgb}{0.53, 0.66, 0.42}
 \definecolor{blue}{rgb}{0.0, 0.53, 0.74}
-\setlist[enumerate,1]{label=\alph*)}
-\setlist[enumerate,2]{label=\roman*)}
+\setlist[enumerate,1]{label=\roman*)}
+\setlist[enumerate,2]{label=\alph*)}
 \newtheorem{theorem}{Theorem}
 \newtheorem{corollary}{Corollary}
 \newtheorem{lemma}{Lemma}
@@ -166,7 +166,7 @@ Rewriting the term $u^\epsilon \cdot \nabla c^\epsilon - u \cdot \nabla c$ we us
 
 Using this, we arrive to the following set of equation that describes $(U^\epsilon, C^\epsilon)$:
 
-\begin{equation} \label{eq1}
+\begin{equation} \label{U_eps_C_eps}
   \begin{gathered}
     \partial_t V^\epsilon + (U^\epsilon \cdot \nabla) V^\epsilon - \Delta V^\epsilon + \nabla_h P^\epsilon + (u \cdot \nabla) V^\epsilon + (U^\epsilon \cdot \nabla) v \textcolor{blue}{- \gamma V^\epsilon + \epsilon \beta W^\epsilon  + \epsilon \beta w} = 0, \\
     \nabla_h \cdot V^\epsilon + \partial_z W^\epsilon = 0, \\
@@ -181,7 +181,22 @@ Using this, we arrive to the following set of equation that describes $(U^\epsil
 \end{theorem}
 
 \begin{proof}
-We know that the velocity part is ok. Multiply the concentration equation in (\ref{eq1}) by $- \Delta C^\epsilon$ and integrate by parts.
+
+We know already that the original (coloured black) parts of (\ref{U_eps_C_eps}), multiplied by $\Delta V^\epsilon, \Delta W^\epsilon$ yield
+
+\begin{equation} \label{originalH1}
+  \begin{split}
+    & \frac{1}{2} \frac{\diff}{\diff t} (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2) + \frac{3}{5} (\norm{\Delta V}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2) \\
+    & \leq C_1 (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2) \big [ (\norm{\Delta V}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2) + (1+ \epsilon^4) \norm{\Delta v}^2_2 \norm{\nabla \Delta v}^2_2 \big ] \\
+    & + C_1 \epsilon^2 (1 + \norm{\Delta v}^2_2) (\norm{\nabla \partial_t v}^2_2 + \norm{\nabla \Delta v}^2_2).
+  \end{split}
+\end{equation}
+
+Now we examine the effect of the new contributions from the concentration equation and the additional Coriolis terms.
+
+\textcolor{green}{\textbf{Part one: the concentration function.}}
+
+Multiply the concentration equation in (\ref{U_eps_C_eps}) by $- \Delta C^\epsilon$ and integrate by parts.
 
 On the left-hand side we have \textit{i)} the contribution from $\partial_t C^\epsilon \cdot \Delta C^\epsilon,$ which is $\frac{1}{2}\frac{\diff}{\diff t} \norm{\nabla C^\epsilon}^2_2$ and \textit{ii)} the contribution from the diffusivity terms.
 
@@ -195,8 +210,8 @@ Firstly, we have
 \begin{equation}
   \begin{split}
     & \int_\Omega U^\epsilon \nabla C^\epsilon \Delta C^\epsilon \leq \norm{\nabla V^\epsilon}_2^{1/2} \norm{\Delta V^\epsilon}_2^{1/2} \norm{\nabla C^\epsilon}_2^{1/2} \norm{\Delta C^\epsilon}_2^{1/2} \norm{\Delta C^\epsilon}_2 \\
-    & \leq \zeta_1 \norm{\Delta C^\epsilon}_2^2 + \frac{1}{\zeta_1} \norm{\nabla V^\epsilon}_2 \norm{\Delta V^\epsilon}_2 \norm{\nabla C^\epsilon}_2 \norm{\Delta C^\epsilon}_2 \\
-    & \leq \zeta_1 \norm{\Delta C^\epsilon}_2^2 + \frac{1}{\zeta_1} \big ( \frac{1}{2} \norm{\nabla V^\epsilon}^2_2 \norm{\Delta V^\epsilon}^2_2 + \frac{1}{2} \norm{\nabla C^\epsilon}^2_2 \norm{\Delta C^\epsilon}^2_2 \big ).
+    & \leq \zeta \norm{\Delta C^\epsilon}_2^2 + \frac{1}{\zeta} \norm{\nabla V^\epsilon}_2 \norm{\Delta V^\epsilon}_2 \norm{\nabla C^\epsilon}_2 \norm{\Delta C^\epsilon}_2 \\
+    & \leq \zeta \norm{\Delta C^\epsilon}_2^2 + \frac{1}{\zeta} \big ( \frac{1}{2} \norm{\nabla V^\epsilon}^2_2 \norm{\Delta V^\epsilon}^2_2 + \frac{1}{2} \norm{\nabla C^\epsilon}^2_2 \norm{\Delta C^\epsilon}^2_2 \big ).
   \end{split}
 \end{equation}
 
@@ -220,13 +235,55 @@ Finally here we use the Young inequality with $\frac{1}{4} + \frac{3}{4},$ since
   \end{split}
 \end{equation}
 
-We also need to create bounds for the new Coriolis terms.
+Source \todo{todo} term.
 
-Estimates for the Coriolis terms (for the moment on paper)
+With this we arrive to first updated version of the inequality (\ref{originalH1}), which now becomes
 
-Comment on the source term.
+\begin{equation}
+  \begin{split}
+    & \frac{1}{2} \frac{\diff}{\diff t} (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 + \textcolor{green}{\norm{\nabla C^\epsilon}^2_2}) + \frac{3}{5} (\norm{\Delta V}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\Delta C^\epsilon}_2^2}) \\
+    & \leq C_1 (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 \textcolor{green}{+ \norm{\nabla C^\epsilon}^2_2}) \\
+    & \times \big [ (\norm{\Delta V}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\Delta C^\epsilon}_2^2}) + (1+ \epsilon^4) \norm{\Delta v}^2_2 \norm{\nabla \Delta v}^2_2 + \textcolor{green}{\norm{\nabla c}^2_2 \norm{\Delta c}^2_2} \big ] \\
+    & + C_1 \epsilon^2 (1 + \norm{\Delta v}^2_2) (\norm{\nabla \partial_t v}^2_2 + \norm{\nabla \Delta v}^2_2),
+  \end{split}
+\end{equation}
 
-Connecting all this, we have the updated version of the inequality which was the inequality after (5.7) in Li-Titi.
+after taking the $\zeta \cdot \text{Laplacian}$- type terms such as $\zeta \norm{\Delta C^\epsilon}_2^2, \frac{1}{\zeta_1} \zeta_2 \norm{\Delta V^\epsilon}_2^2$ to the left-hand side.
+
+This is the \todo{todo: $\norm{\Delta c}^2_2$ boundedness} version of the inequality after adding the pollution equation effects, without the source term.
+
+\textcolor{blue}{\textbf{Part two: the Coriolis term.}}
+
+Here we calculate the contributions from the Coriolis terms. In this part we take advantage of the Young inequality and being able to pass from $w, W^\epsilon$ in norms to $\nabla v, \nabla V^\epsilon$ because of the divergence-free condition.
+
+\begin{enumerate}
+
+  \item $$\int_\Omega \gamma V^\epsilon \cdot \Delta V^\epsilon \leq C \norm{\nabla V^\epsilon}^2_2$$
+  
+  \item $$ \int_\Omega \epsilon \beta W^\epsilon \Delta V^\epsilon \leq C \norm{\epsilon \nabla W^\epsilon}_2 \norm{\nabla V^\epsilon}_2 \leq C \norm{\epsilon \nabla W^\epsilon}^2_2 + C \norm{\nabla V^\epsilon}^2_2.$$
+  
+  \item $$ \int_\Omega \epsilon \beta w \Delta V^\epsilon \leq C \epsilon \norm{w}_2 \cdot \norm{\Delta V^\epsilon}_2 \leq C \cdot \epsilon \norm{\nabla v}_2 \norm{\Delta V^\epsilon}_2 $$
+  $$ \leq C \frac{1}{\zeta} \epsilon^2 \norm{\nabla v}_2^2 + \zeta \norm{\Delta V^\epsilon}^2_2.$$
+  
+  \item $$ \int_\Omega \epsilon \beta V^\epsilon_1 \Delta W^\epsilon \leq C \norm{\nabla V^\epsilon_1}_2 \norm{\epsilon \nabla W^\epsilon}_2 \leq C \norm{\nabla V^\epsilon_1}^2_2 + C \norm{\epsilon \nabla W^\epsilon}^2_2.$$
+  
+  \item $$ \int_\Omega \epsilon \beta v_1 \Delta W^\epsilon \leq C \norm{\epsilon \nabla v_1}_2 \norm{\nabla W^\epsilon}_2 \leq C \norm{\epsilon \nabla v_1}_2 \norm{\Delta V^\epsilon}_2 $$
+  $$ \leq C \frac{1}{\zeta} \epsilon^2 \norm{\nabla v}_2^2 + \zeta \norm{\Delta V^\epsilon}^2_2.$$
+  
+\end{enumerate}
+
+Regarding these inequalities and integrating them into the the main one, note that \textit{a)} the standalone Laplacians can go to the left-hand side, \textit{b)}  the $C \cdot \norm{\nabla V^\epsilon}^2_2$ -type terms can be added to the part where $\norm{\nabla V^\epsilon}^2_2$ is already present, and \textit{c)} the $\epsilon^2 \norm{\nabla v}^2_2$ can be added to the second part where $\epsilon^2$ is a multiplier.
+
+Connecting all this, we have the updated version of the inequality which was the inequality after (5.7) in Li-Titi. Now it takes the following form:
+
+\begin{equation}
+  \begin{split}
+    & \frac{1}{2} \frac{\diff}{\diff t} (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 + \textcolor{green}{\norm{\nabla C^\epsilon}^2_2}) + \frac{3}{5} (\norm{\Delta V}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\Delta C^\epsilon}_2^2}) \\
+    & \leq C_1 (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 \textcolor{green}{+ \norm{\nabla C^\epsilon}^2_2}) \\
+    & \times \big [ (\norm{\Delta V}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\Delta C^\epsilon}_2^2}) + \textcolor{blue}{C}+ (1+ \epsilon^4) \norm{\Delta v}^2_2 \norm{\nabla \Delta v}^2_2 + \textcolor{green}{\norm{\nabla c}^2_2 \norm{\Delta c}^2_2} \big ] \\
+    & + C_1 \epsilon^2 (1 + \norm{\Delta v}^2_2) (\norm{\nabla \partial_t v}^2_2 + \norm{\nabla \Delta v}^2_2 + \textcolor{blue}{\norm{\nabla v}_2^2}).
+  \end{split}
+\end{equation}
 
 \end{proof}
 
