@@ -355,7 +355,7 @@ Using POINT A), from (\ref{result_theorem1}) we get
   \end{split}
 \end{equation}
 
-for any $t \in [0, t^*_\epsilon).$
+for any $t \in [0, t^*_\epsilon).$ This is important: in order to apply (\ref{result_theorem1}), we need to make sure that its condition holds, i.e. that we are in $[0, t^*_\epsilon),$ which is the range where it applies.
 
 Setting $\epsilon_0 = \frac{\delta_0}{\sqrt{2C}},$ we have
 
@@ -366,7 +366,7 @@ Setting $\epsilon_0 = \frac{\delta_0}{\sqrt{2C}},$ we have
   \end{split}
 \end{equation}
 
-for any $\epsilon \in (0, \epsilon_0).$ From which we have
+for any $\epsilon \in (0, \epsilon_0)$ and any $t \in [0, t^*_\epsilon).$ From which we have
 
 $$ \sup_{0 \leq s < t^*_\epsilon}{(\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 + \textcolor{green}{\norm{\nabla C^\epsilon}^2_2}) } \leq \frac{\delta_0}{2}.$$
 
@@ -388,6 +388,12 @@ From this we have $T^*_\epsilon = \infty$ (using POINT D).
 \begin{itemize}
 
   \item Initial and boundary conditions, for example p27, they use (1.2)-(1.4). Again, are these symmetries important (the even and odd functions?) Plus, define BC, IC for the $c^\epsilon, c$ functions.
+  
+  \item How exactly do we know that $\big (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\nabla C^\epsilon}^2_2} \big )$ grows continuously? If it didn't, then it would be possible that from $\delta_0 / 2$ it jumps to $\delta_0 +1,$ and with that we wouldn't have $t^*_\epsilon = T^*_\epsilon.$
+  
+  \item In Proposition 5.3 why exactly do we need the $L^2$ result from Proposition 5.1? Is it because for the bound of $\int_0^\infty \norm{\nabla V^\epsilon}^2_{H^1}$ by definition we need $\int_0^\infty \norm{\nabla V^\epsilon}^2_{L^2}$ and $\int_0^\infty \norm{\Delta V^\epsilon}^2_{L^2}$, and the first does not come from the second one by the Poincare inequality?
+  
+  \item on p27 why do we need (5.8), which is essentially Proposition 5.1 in order to have $t^*_\epsilon = T^*_\epsilon?$ If it is only needed towards the end, why is it mentioned in the beginning?
 
 \end{itemize}
 
