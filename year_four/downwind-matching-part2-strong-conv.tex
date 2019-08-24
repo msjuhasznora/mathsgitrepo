@@ -45,12 +45,16 @@ The strong convergence of the strong solutions.
 \end{abstract}
 
 \newpage
+\tableofcontents
+\newpage
 
 \section{The case of non-periodic boundary for the strong solutions}
 
 See the calculations on the paper, it seems that we need a periodic boundary.
 
-\section{The collection of the equations we work with and some definitions, results we have}
+\section{Geophysical coordinates}
+
+\subsection{The collection of the equations we work with and some definitions, results we have}
 
 Firstly, here we work with the geophysical coordinate system and $K_1, K_2, K_3$ diffusion terms.
 
@@ -111,7 +115,7 @@ The energy inequality for the geophysical coordinate system for a periodic bound
   \end{split}
 \end{equation}  
 
-\section{Recreate the $L^2$ bound for the extended system (analogous to Section 4 in Li-Titi)}
+\subsection{Recreate the $L^2$ bound for the extended system (analogous to Section 4 in Li-Titi)}
 
 Here we need to show that $$ \int_0^t \norm{\nabla C^\epsilon}_2^2 \leq \kappa \epsilon^2,$$ because in the next section we will assume at some point, that this is smaller than some $\delta_0.$ That makes sense only if the expression is arbitrarily small.
 
@@ -134,7 +138,7 @@ This comes using integration by parts, using $\partial_3 p = 0,$ the divergence-
 
 FOUR. The original energy inequality, required by definition of the weak solution, (\ref{WeakSolEnergyInequality}). (This is (4.10) in Li-Titi)
 
-\section{Recreate the full strong convergence result for the extended system (analogous to Section 5 in Li-Titi)}
+\subsection{Recreate the full strong convergence result for the extended system (analogous to Section 5 in Li-Titi)}
 
 With initial data $v_0 \in H^2 (\Omega), c_0 \in H^1(\Omega).$ For now we assume this, and we will see later if it is enough. We have $u_0 \in H^1(\Omega)$ in this case.
   
@@ -383,7 +387,7 @@ From this we have $T^*_\epsilon = \infty$ (using POINT D).
 
 \end{proof}
 
-\section{Questions and todo}
+\subsection{Questions and todo}
 
 \begin{itemize}
 
@@ -396,6 +400,60 @@ From this we have $T^*_\epsilon = \infty$ (using POINT D).
   \item on p27 why do we need (5.8), which is essentially Proposition 5.1 in order to have $t^*_\epsilon = T^*_\epsilon?$ If it is only needed towards the end, why is it mentioned in the beginning?
 
 \end{itemize}
+
+\section{Downwind-matching coordinates}
+
+(E-SNS): extended scaled Navier-Stokes.
+
+    \begin{equation} \label{ANSC1}
+    \partial_t u^\epsilon _1 + \mathbf{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\gamma u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{ANSC2}
+    \partial_t u_2^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_2^\epsilon -\Delta_\nu u_2^\epsilon + \gamma u_1^\epsilon  - \alpha \epsilon u^\epsilon_3 + \partial_2 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{ANSC3}
+    \epsilon^2 \{  \partial_t u_3^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon -\Delta_\nu u_3^{\epsilon} \} + \epsilon \alpha u^\epsilon_2 - \epsilon \beta u_1^\epsilon + \partial_3 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{ANSC4}
+    \nabla \cdot \mathbf{u}^\epsilon= 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{ANSC5}
+    \partial_t c^\epsilon + \mathbf{u^\epsilon} \cdot \nabla c^\epsilon = \epsilon K_1 \partial_{11} ^ 2 c^\epsilon + K_2 \partial_{22} ^ 2 c^\epsilon + K_3 \partial_{33} ^ 2 c^\epsilon + s^\epsilon \text{ in } \Omega \times (0,T).
+    \end{equation}
+    
+
+(E-PEs): extended Primitive Equations.
+
+    \begin{equation} \label{HNSC1}    
+    \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 - \gamma u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC2}   
+    \partial_t u_2 + \mathbf{u} \cdot \nabla u_2 - \Delta_\nu u_2 + \gamma u_1 + \partial_2 p = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC3}   
+    \partial_3 p = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC4}   
+    \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC5}   
+    \partial_t c + \mathbf{u} \cdot \nabla c = K_2 \partial_{22} ^ 2 c + K_3 \partial_{33} ^2 c + s \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+The main difference in this case is that in the equations that govern $(U^\epsilon, C^\epsilon),$ we have
+
+$$ \partial_t C^\epsilon + U^\epsilon \nabla C^\epsilon  + U^\epsilon \nabla c+ u \nabla C^\epsilon = \textcolor{orange}{\epsilon K_1 \partial_{11} C^\epsilon + \epsilon K_1 \partial_{11} c} + K_2 \partial_{22} C^\epsilon + K_3 \partial_{33} C^\epsilon + S^\epsilon. $$
+
+This means that we can not follow the same path as before, as multiplying the equation by $- \Delta C^\epsilon$ results only $\epsilon \norm{\partial_{11} C^\epsilon}$ on the left-hand side, while from the estimates of the convective terms, we still have $\zeta \norm{\Delta V^\epsilon}^2_2$ terms on the right-hand side of the estimate, and these can not anymore be "melted" into the left-hand side, as the full, $\epsilon$-free Laplacian is missing.
+
 
 \end{document}
 
