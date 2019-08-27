@@ -1,0 +1,142 @@
+\documentclass[11pt]{article}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{commath}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{float} 
+\usepackage{array}
+\usepackage{outlines}
+\usepackage{setspace}
+\usepackage[colorinlistoftodos]{todonotes}
+\definecolor{green}{rgb}{0.4, 0.69, 0.2}
+\definecolor{asparagus}{rgb}{0.53, 0.66, 0.42}
+\definecolor{blue}{rgb}{0.0, 0.53, 0.74}
+\definecolor{terracotta}{HTML}{e2725b}
+\definecolor{mocassin}{HTML}{FFE4B5}
+\definecolor{coral}{HTML}{FFAA80}
+\setlist[enumerate,1]{label=\roman*)}
+\setlist[enumerate,2]{label=\alph*)}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+\newtheorem{prop}{Proposition}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,trees, calc}
+
+
+%%% *** PREAMBLE *** %%%
+\title{The visualisation task of the convergence result}
+
+\date{}
+
+%%%***  CONTENT *** %%%
+\begin{document}
+
+\maketitle
+
+\newpage
+\tableofcontents
+\newpage
+
+One of the main issues for now is linearity / nonlinearity. The $u \nabla u_1 v_1$ term is nonlinear ($u = (u_1, u_2, u_3)$ being the Function we want to solve for, $v$ is a 3D test function). In the Chorin method, it was replaced by
+
+\texttt{inner(u\_prev, grad(u\_prev2)) * v2 * dx},
+
+where essentially we don't have any unknowns at all anymore. This is a result of the scheme itself, which otherwise works well but in our specific case it leads to a loss of dependence of the scheme on $u_3.$ The idea in the Picard iteration is that we turn a nonlinear term into linear by iterating through $u_1, ... , u_k$ solutions for the same $(x,y,z)$ spatial place, and instead of the nonlinear problem, solving only
+
+\texttt{inner(u, grad(u\_k2)) * v\_2}
+
+for $u$ unknown and $u_k$ known. As we will see, even here the scheme depends on $u_3$ or $u_{k3}$ only through $\epsilon^2,$ it does not fully depend on both of them at the same time.
+
+The key seems to be to keep the nonlinearity of the scheme and use a nonlinear solver. In this case $u$ is not a \textbf{TrialFunction}, but it should be defined as \textbf{Function} in FEniCS. 
+
+\section{Chorin}
+
+The first step of the Chorin method calculates a tentative velocity. The \texttt{u1, u2, u3} functions are the "unknowns", while \texttt{u\_prev} is calculated from the previous time step. It is easy to see that the scheme depends on \texttt{\textcolor{terracotta}{u3}} only through $\epsilon^2.$
+
+\texttt{
+\\
+V = VectorFunctionSpace(mesh, "Lagrange", 2, dim = 3)\\
+u = TrialFunction(V)\\
+v = TestFunction(V)\\
+u1, u2, u3 = split(u)\\
+v1, v2, v3 = split(v)\\
+u\_prev = Function(V)\\
+u\_prev1, u\_prev2, u\_prev3 = split(u\_prev)\\
+u\_next = Function(V)\\
+\\
+}
+\texttt{
+F1\_anisotropic = (1/k)*( (u1 - u\_prev1)*v1 + (u2 - u\_prev2)*v2 + eps*eps*(\textcolor{terracotta}{u3} - u\_prev3)*v3 ) * dx + \\
+        inner(u\_prev, grad(u\_prev1)) * v1 * dx + inner(u\_prev, grad(u\_prev2)) * v2 * dx + \\
+        eps*eps*inner(u\_prev, grad(u\_prev3)) * v3 * dx + \\
+        - alpha * u\_prev2 * v1 * dx + alpha * u\_prev1 * v2 * dx + \\
+        inner(grad(u1),grad(v1)) * dx + inner(grad(u2),grad(v2)) * dx + eps*eps*inner(grad(\textcolor{terracotta}{u3}),grad(v3)) * dx + \\
+        eps * beta * u\_prev3 * v1 * dx - eps * beta * u\_prev1 * v3 * dx + \\
+        - inner(f, v) * dx + \\
+        - inner($\theta$, v) * ds(1)\\
+}
+
+In the Chorin method the originally nonlinear $u \nabla u v$ term ("next time step") is replaced by the \texttt{inner(u\_prev, grad(u\_prev1)) * v1 * dx} ("previous time step, known") terms (i = 1,2,3), the $\epsilon^2$ version for $i=3.$
+
+What we can try to do is (this would probably lead to a different method) to keep the fully nonlinear structure, but that would also mean that from forward-differentiating we would pass to backwards differentiating. Also, the solvers and types change as well - while for a linear problem we use TrialFunctions and assemble matrices, and finally solve an $A x = b$ type of problem, for a nonlinear solver a TrialFunction-type \texttt{u} does not make sense in the $F$ form, and the solver solves for the Function \texttt{u}, and not for a vector.
+
+\section{Picard}
+
+PSEUDO code.
+
+\texttt{
+\\
+mesh = UnitCubeMesh(meshsize, meshsize, meshsize) \\
+V = VectorFunctionSpace(mesh, "Lagrange", 2, dim = 3) \\
+\\
+theta = Constant((wind\_shear\_x, wind\_shear\_y, 0))\\
+\\
+u = TrialFunction(V)\\
+v = TestFunction(V)\\
+u1, u2, u3 = split(u)\\
+v1, v2, v3 = split(v)\\
+u1\_k, u2\_k, u3\_k = interpolate(Constant(0.0), V) \\
+\\
+a = inner(\textcolor{blue}{u}, grad(u\_k1)) * v1 * dx + inner(u, grad(u\_k2)) * v2 * dx + eps*eps*inner(u, grad(\textcolor{green}{u\_k3})) * v3 * dx + \
+    inner(grad(u1),grad(v1)) * dx + inner(grad(u2),grad(v2)) * dx + eps*eps*inner(grad(u3),grad(v3)) * dx + \
+    - inner(theta, v) * ds(1)\\
+f = Constant(0.0)\\
+L = f*v1*dx + f*v2*dx\\
+\\
+u = Function(V)\\
+eps = 1.0 \\
+tol = 1.0E-5 \\
+iter = 0\\
+maxiter = 25\\
+while eps > tol and iter < maxiter:\\
+    iter += 1\\
+    solve(a == L, u, bcs)\\
+    diff = u.vector().get\_local() - u\_k.vector().get\_local()\\
+    eps = numpy.linalg.norm(diff, ord=numpy.Inf)\\
+    u\_k.assign(u)\\
+}
+
+This method creates a linear problem. The form \texttt{a} is defined, then it is solved through a solver. Here, even though we do have a dependence of the full \texttt{\textcolor{blue}{u}} unknown function, i.e. from all three components including the vertical velocity, but on the other hand, we lose dependence on \texttt{\textcolor{green}{u\_k3}}. This means that in each $(x,y,z)$ space point, whatever the calculated full $u$ vector might be, in the next space step iteration its third component will hardly matter.
+
+\section{Newton}
+
+Nonlinear solver for the case where we keep the unknown function in both places in $u \nabla u_1 v_1$
+
+\section{Ideas}
+
+\begin{enumerate}
+  \item The weak formulations used in the beginning  of the visualisation process were "full" weak formulations in the sense that all four (three velocity and the one divergence-free condition) equations were multiplied by test functions, which is why there we didn't have $\nabla \cdot u^\epsilon = 0$ explicitly, only $u^\epsilon \nabla q = 0.$ But actually, what we theoretically proved is a sort of \textbf{"weak-strong" formulation} of the incompressible Navier-Stokes equations. Three of the equations were used in the weak sense, and one in the strong sense, applied directly in the process. So we could try using this reduced problem in practice as well, without the function space for $p, q$ functions.
+  \item The nature of the problem is probably the same in 2D or 3D, but for the speed of calculations it could be an idea. Also, it could be interesting to calculate the rescaled 2D Navier-Stokes and see if it theoretically holds, considering a "full weak formulation", i.e. with a pressure test function as well.
+  \item Stationary Navier-Stokes.
+\end{enumerate}
+
+\end{document}
+
