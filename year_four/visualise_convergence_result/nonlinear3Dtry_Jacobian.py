@@ -1,6 +1,6 @@
 # nonlinear solver
 # gmres solver is used, mumps caused the process to be "killed"
-# the weak form of the divergence-free condition is missing
+# the weak form of the divergence-free condition is missing.
 # the Jacobian is computed in the code
 
 import matplotlib.pyplot as plt

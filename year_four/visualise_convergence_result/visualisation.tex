@@ -130,12 +130,47 @@ This method creates a linear problem. The form \texttt{a} is defined, then it is
 
 Nonlinear solver for the case where we keep the unknown function in both places in $u \nabla u_1 v_1$
 
+It seems that a possible solution could be to formulate a nonlinear problem for the stationary Navier-Stokes, include the divergence-free condition as in the form of the Stokes demo in FEniCS, i.e. using the pressure space and the functions $p,q.$ In other words, use a Taylor-Hood mixed element space, where we have a 3D velocity space and a 1D pressure space. The previous idea of omitting the whole pressure space because of the strong form of the divergence-free condition seems not to work, because in that case how would we make sure that the code respects or knows that we are considering the divergence-free case. See more https://fenicsproject.discourse.group/t/how-to-create-a-divergence-free-vectorfunctionspace/1417/9.
+I have tried to check what happens with the 3D case without the pressure and the direct use of the div-free condition, but it is not acknowledged by the program. We should use the weak form of it, encoded into the program.
+
+\texttt{
+\\
+mesh = UnitCubeMesh(20, 20, 20) \\
+V = VectorElement("Lagrange", mesh.ufl\_cell(), degree = 2, dim = 3) \\
+P = FiniteElement("Lagrange", mesh.ufl\_cell(), degree = 1) \\
+TH = V * P \\
+VP = FunctionSpace(mesh, TH)\\
+\\
+up = TrialFunction(VP)\\
+u,p = split(up)\\
+u1, u2, u3 = split(u)\\
+(v, q) = TestFunctions(VP)\\
+v1, v2, v3 = split(v)\\
+\\
+up\_ = Function(VP)\\
+(u\_, p\_) = split(up\_)\\
+(u1\_, u2\_, u3\_) = split(u\_)\\
+\\
+F = inner(u, grad(u1)) * v1 * dx + inner(u, grad(u2)) * v2 * dx + inner(grad(u1),grad(v1)) * dx + inner(grad(u2),grad(v2)) * dx + inner(u, grad(u3)) * v3 * dx + inner(grad(u3),grad(v3)) * dx - inner(p, div(v))*dx + inner(q, div(u))*dx - inner(theta, v) * ds(1)\\
+\\
+F = action(F, up\_)\\
+J  = derivative(F, up\_, up)\\
+\\
+problem = NonlinearVariationalProblem(F, up\_, bcu, J)\\
+solver  = NonlinearVariationalSolver(problem)\\
+\\
+prm = solver.parameters\\
+solver.solve()\\
+}
+
+Additionally, with a full nonzero $\theta,$ we can improve the dependence of the scheme on $v_3,$ which right now is through \texttt{inner(p, div(v))}.
 \section{Ideas}
 
 \begin{enumerate}
   \item The weak formulations used in the beginning  of the visualisation process were "full" weak formulations in the sense that all four (three velocity and the one divergence-free condition) equations were multiplied by test functions, which is why there we didn't have $\nabla \cdot u^\epsilon = 0$ explicitly, only $u^\epsilon \nabla q = 0.$ But actually, what we theoretically proved is a sort of \textbf{"weak-strong" formulation} of the incompressible Navier-Stokes equations. Three of the equations were used in the weak sense, and one in the strong sense, applied directly in the process. So we could try using this reduced problem in practice as well, without the function space for $p, q$ functions.
   \item The nature of the problem is probably the same in 2D or 3D, but for the speed of calculations it could be an idea. Also, it could be interesting to calculate the rescaled 2D Navier-Stokes and see if it theoretically holds, considering a "full weak formulation", i.e. with a pressure test function as well.
   \item Stationary Navier-Stokes.
+  \item Stationary Navier-Stokes with weak formulation for the three momentum equations and strong formulation for the divergence-free condition, keeping the nonlinearity and using a nonlinear Newton solver.
 \end{enumerate}
 
 \end{document}

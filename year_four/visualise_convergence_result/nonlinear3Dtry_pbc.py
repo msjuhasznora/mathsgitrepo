@@ -1,5 +1,7 @@
 # periodic boundary conditions, no boundary integral term.
 # it converges immediately to the constant (0,0,0) function as that actually is a solution.
+# the solver works but it is "obvious".
+# for epsilon = 0.0 it is problematic though, because v3 from the test space vanishes from the scheme.
 
 import matplotlib.pyplot as plt
 from dolfin import *
@@ -56,5 +58,5 @@ inner(grad(u1),grad(v1)) * dx + inner(grad(u2),grad(v2)) * dx + eps * eps * inne
 # Compute solution
 solve(F == 0, u, solver_parameters = {"newton_solver":{ "linear_solver" : "mumps"}})
 
-file = File("nonlinear_u.pvd")
+file = File("nonlinear_u_pbc.pvd")
 file << u
