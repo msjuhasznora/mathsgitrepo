@@ -1,0 +1,516 @@
+\documentclass[11pt]{article}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{commath}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{float} 
+\usepackage{array}
+\usepackage{outlines}
+\usepackage{setspace}
+\usepackage[colorinlistoftodos]{todonotes}
+\definecolor{green}{rgb}{0.4, 0.69, 0.2}
+\definecolor{asparagus}{rgb}{0.53, 0.66, 0.42}
+\definecolor{blue}{rgb}{0.0, 0.53, 0.74}
+\setlist[enumerate,1]{label=\roman*)}
+\setlist[enumerate,2]{label=\alph*)}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+\newtheorem{prop}{Proposition}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,trees, calc}
+
+
+%%% *** PREAMBLE *** %%%
+\title{Strong solutions}
+
+\date{}
+
+%%%***  CONTENT *** %%%
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+
+The strong convergence of the strong solutions.
+
+\end{abstract}
+
+\newpage
+\tableofcontents
+\newpage
+
+\section{Domain structure}
+
+What we need is a scenario where the $H^2$ norm is equivalent to the $L^2$ norm of the Laplacian. There are two options for this:
+\begin{itemize}
+  \item a periodic domain
+  \item a minimal set of constraints would be for a function $f$ to require that $f, \nabla f$ is zero on the boundary.
+\end{itemize}
+
+\textbf{We choose the local physical boundary for consistency reasons and set that the velocity values and the first derivatives of the velocity are zero.}
+This is important because we need to keep the structure of the inequalities we use in Section 5. These inequalities are obtained by using Lemma 2.2 in Li-Titi, which is formulated for periodic domains.
+
+In case we don't have any of the scenarios above, and we can not benefit from the Poincare inequality, then instead of the original
+
+$$ \abs{\int_\Omega (\varphi \cdot \nabla \Phi) \Psi \diff x \diff y \diff z} \leq C \norm{\nabla \varphi_H}_2^{1/2} \norm{\Delta \varphi_H}_2^{1/2} \norm{\nabla \Phi}_2^{1/2} \norm{\Delta \Phi}_2^{1/2} \norm{\Psi}_2 $$
+
+inequality, we have
+
+\begin{equation}
+  \begin{split}
+    & C \bigg [ \norm{\nabla \varphi_H}_2^{1/2} \big ( \norm{\nabla \varphi_H}_2 + \norm{\nabla_H \varphi_H}_2 + \norm{\Delta_H \varphi_H}_2\big )^{1/2} \\
+    & + \norm{\nabla \varphi_H}_2^{1/2} \big ( \norm{\nabla \varphi_H}_2 + \norm{\partial_z \nabla_H \varphi_H}_2 + \norm{\Delta_H \varphi_H}_2 \big )^{1/2} \bigg ] \\
+    & \times \norm{\nabla \Phi}_2^{1/2}  \big ( \norm{\nabla \Phi}_2 + \norm{\nabla_H \nabla \Phi}_2 \big )^{1/2} \norm{\Psi}_2.
+  \end{split}
+\end{equation}
+
+on the right-hand side. This also means that whenever we apply it in this form, it alters the structure significantly. For example, applying it on (5.4) in Li-Titi, the estimate of the term $\int (U \cdot \nabla) V \cdot \Delta V$ will have terms such as $\norm{\nabla V}_2^2 \norm{\nabla_H \nabla V} \norm{\partial_z \nabla_H V},$ which originally fell into the "box" of $\norm{\nabla V_2^2} \norm{\Delta V}_2^2,$ thanks to the Poincare inequality.
+
+This is a significant change, because while the term $\norm{\nabla V_2^2} \norm{\Delta V}_2^2$ can be handled as $\delta_0 \norm{\Delta V}_2^2,$ and as such it can be brought to the left-hand side when creating the structure for the Gronwall inequality, the $$\norm{\nabla V}_2^2 \norm{\nabla_H \nabla V} \norm{\partial_z \nabla_H V}$$ term is problematic because its second half is not present in the left-hand side. Structurally, $ \norm{\nabla_H \nabla V} \norm{\partial_z \nabla_H V}$ does not belong to the left, neither to the right-hand side.
+
+This is why we choose to define conditions where Lemma 2.2 holds in its original form.
+
+\section{Geophysical coordinates}
+
+\subsection{The collection of the equations we work with and some definitions, results we have}
+
+Firstly, here we work with the geophysical coordinate system and $K_1, K_2, K_3$ diffusion terms.
+
+\textbf{Change of notations:} Since $u^\epsilon$ and $u$ denotes the solution functions and the capital $U^\epsilon$ denotes their difference, we switch to the analogous notation with the concentration function, i.e. $c^\epsilon$ and $c$ here are the solutions in the anisotropic and hydrostatic equations, respectively, while the capital $C^\epsilon$ denotes the $c^\epsilon - c$ difference function.
+
+(E-SNS): extended scaled Navier-Stokes.
+
+    \begin{equation} \label{ANSC1}
+    \partial_t u^\epsilon _1 + \mathbf{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\gamma u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{ANSC2}
+    \partial_t u_2^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_2^\epsilon -\Delta_\nu u_2^\epsilon + \gamma u_1^\epsilon   + \partial_2 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{ANSC3}
+    \epsilon^2 \{  \partial_t u_3^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon -\Delta_\nu u_3^{\epsilon} \} - \epsilon \beta u_1^\epsilon + \partial_3 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{ANSC4}
+    \nabla \cdot \mathbf{u}^\epsilon= 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{ANSC5}
+    \partial_t c^\epsilon + \mathbf{u^\epsilon} \cdot \nabla c^\epsilon = K_1 \partial_{11} ^ 2 c^\epsilon + K_2 \partial_{22} ^ 2 c^\epsilon + K_3 \partial_{33} ^ 2 c^\epsilon + s^\epsilon \text{ in } \Omega \times (0,T).
+    \end{equation}
+
+(E-PEs): extended Primitive Equations.
+
+    \begin{equation} \label{HNSC1}    
+    \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 - \gamma u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC2}   
+    \partial_t u_2 + \mathbf{u} \cdot \nabla u_2 - \Delta_\nu u_2 + \gamma u_1 + \partial_2 p = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC3}   
+    \partial_3 p = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC4}   
+    \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC5}   
+    \partial_t c + \mathbf{u} \cdot \nabla c = K_1 \partial_{11} ^ 2 c + K_2 \partial_{22} ^ 2 c + K_3 \partial_{33} ^2 c + s \text{ in } \Omega \times (0,T)
+    \end{equation}
+
+The energy inequality for the geophysical coordinate system for a boundary that does not contribute to boundary integrals becomes more simple (originally we used the Trace Theorem to handle the boundary term, here we do not need that.) We use $\mathbf{K} = (K_1, K_2, K_3).$
+
+\begin{equation}
+  \begin{split}  
+    & \frac{1}{2} \big (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{c^\epsilon (t)}_{L^2}^2 \big ) \\
+    & + \int_0 ^ t \bigg [\norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2 + \norm{ \mathbf{K} \nabla c^\epsilon}_{L^2}^2\bigg ] \diff \tau \\
+    & \leq \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{c^\epsilon (0)}_{L^2}^2) \\
+    & + \int_0^t (s^\epsilon,c^\epsilon) \diff \tau. \label{WeakSolEnergyInequality}
+  \end{split}
+\end{equation}  
+
+\subsection{Step 1. Recreate the $L^2$ bound for the extended $U^\epsilon, C^\epsilon$ system (analogous to Theorem 5.1 in Li-Titi)}
+
+Considering that we work with strong solutions here, it should be more straightforward than the weak solutions version.
+
+Here we need to show that $$ \int_0^t \norm{\nabla C^\epsilon}_2^2 \leq \kappa \epsilon^2,$$ because in the next section we will assume at some point, that this is smaller than some $\delta_0.$ That makes sense only if the expression is arbitrarily small.
+
+The expression we need to bound here comes together from four results.
+
+ONE. an identity, (4.4) in Li-Titi
+
+TWO.
+
+THREE. Multiplying the (E-PEs) by $(v,c)$ and integrating. This gives the extended version of what is (4.9) in Li-Titi:
+
+\begin{equation}
+  \begin{split}
+    & \frac{1}{2} \big ( \norm{v(t_0)}_2^2 + \norm{c(t_0)}_2^2 \big) + \int_0^{t_0} ( \norm{\nabla v}_2^2 + K \norm{\nabla c}_2^2 ) \diff \tau \\
+    & = \frac{1}{2} \big ( \norm{v_0}_2^2 + \norm{c_0}_2^2 \big) + \int_{Q_{t_0}} s \cdot c.
+  \end{split}
+\end{equation}
+
+This comes using integration by parts, using $\partial_3 p = 0,$ the divergence-free condition, and that at the integration by part process the $u \nabla v_1 \cdot v_1$ kind of terms fall out, as they have both the function and its derivative, i.e. $\nabla v_1$ and $v_1$, and $\nabla \cdot u$ is zero, and this we have that something is equals to minus something, thus it is 0.
+
+FOUR. The original energy inequality, required by definition of the weak solution, (\ref{WeakSolEnergyInequality}). (This is (4.10) in Li-Titi)
+
+\subsection{Step 2. Recreate the conditional $H^1$ result for the extended system (analogous to Theorem 5.2 in Li-Titi)}
+
+With initial data $v_0 \in H^2 (\Omega), c_0 \in H^1(\Omega).$ For now we assume this, and we will see later if it is enough. We have $u_0 \in H^1(\Omega)$ in this case.
+  
+\textbf{Starting point / Existence:}
+
+\begin{enumerate}
+  \item The existence of a local in time strong solution $(u^\epsilon, c^\epsilon)$ to (E-SNS) with maximal existence time $T^\epsilon.$ TODO: details. We know the existence of $u^\epsilon$ for (SNS).
+  \item The existence of the (u,c) strong solution globally of (E-PEs). TODO: details. We have the existence of $u.$
+\end{enumerate}
+  
+\textbf{Convergence:}  
+Denote $(U^\epsilon, C^\epsilon) = (V^\epsilon, W^\epsilon, C^\epsilon) = (u^\epsilon - u, c^\epsilon - c) = (v^\epsilon - v, w^\epsilon - w, c^\epsilon - c).$
+
+The equations describing $(U^\epsilon, C^\epsilon)$ are obtained by \textit{a)} extending equations (5.1)-(5.3) in Li-Titi by the Coriolis terms (see in blue below) and \textit{b)} calculating the equation describing the concentration difference (in green).
+
+Calculating the difference between (\ref{ANSC5}) and (\ref{HNSC5}) we have
+
+$$ \partial_t C^\epsilon + u^\epsilon \cdot \nabla c^\epsilon - u \cdot \nabla c = K_1 \partial_{11} C^\epsilon + K_2 \partial_{22} C^\epsilon + K_3 \partial_{33} C^\epsilon + S^\epsilon.$$
+
+Rewriting the term $u^\epsilon \cdot \nabla c^\epsilon - u \cdot \nabla c$ we use
+
+\begin{equation}
+  \begin{split}
+    & u^\epsilon \cdot \nabla c^\epsilon - u \cdot \nabla c + 0 = u^\epsilon \cdot \nabla c^\epsilon - u \cdot \nabla c - u \nabla c^\epsilon + u \nabla c^\epsilon \\
+    & = u^\epsilon \cdot \nabla c^\epsilon - u \nabla c^\epsilon - u \cdot \nabla c + u \nabla c^\epsilon = U^\epsilon \nabla c^\epsilon + u \nabla C^\epsilon \\
+    & = U^\epsilon \nabla (c^\epsilon - c + c) + u \nabla C^\epsilon = U^\epsilon \nabla C^\epsilon  + U^\epsilon \nabla c+ u \nabla C^\epsilon.
+  \end{split}
+\end{equation}
+
+Using this, we arrive to the following set of equations that describes $(U^\epsilon, C^\epsilon)$:
+
+\begin{equation} \label{U_eps_C_eps}
+  \begin{gathered}
+    \partial_t V^\epsilon + (U^\epsilon \cdot \nabla) V^\epsilon - \Delta V^\epsilon + \nabla_h P^\epsilon + (u \cdot \nabla) V^\epsilon + (U^\epsilon \cdot \nabla) v \textcolor{blue}{- \gamma V^\epsilon + \epsilon \beta W^\epsilon  + \epsilon \beta w} = 0, \\
+    \nabla_h \cdot V^\epsilon + \partial_z W^\epsilon = 0, \\
+    \epsilon^2 (\partial_t W^\epsilon + U^\epsilon \cdot \nabla W^\epsilon - \Delta W^\epsilon + U^\epsilon \cdot \nabla w + u \cdot \nabla W^\epsilon) \\
+    + \partial_z P^\epsilon \textcolor{blue}{- \epsilon \beta V_1^\epsilon - \epsilon \beta v_1} = - \epsilon^2 (\partial_t w + u \cdot \nabla w - \Delta w), \\
+     \textcolor{green}{\partial_t C^\epsilon + U^\epsilon \nabla C^\epsilon  + U^\epsilon \nabla c+ u \nabla C^\epsilon = K_1 \partial_{11} C^\epsilon + K_2 \partial_{22} C^\epsilon + K_3 \partial_{33} C^\epsilon + S^\epsilon}
+  \end{gathered}
+\end{equation}
+
+\begin{theorem}
+(updated version of Proposition 5.2) $H^1$ energy estimates. Can we have an analogous structure when multiplying the above equations by the Laplacians?
+\end{theorem}
+
+\begin{proof}
+
+We know already that the original (coloured black) parts of (\ref{U_eps_C_eps}), multiplied by $\Delta V^\epsilon, \Delta W^\epsilon$ yield
+
+\begin{equation} \label{originalH1}
+  \begin{split}
+    & \frac{1}{2} \frac{\diff}{\diff t} (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2) + \frac{3}{5} (\norm{\Delta V^\epsilon}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2) \\
+    & \leq C_1 (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2) \big [ (\norm{\Delta V}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2) + (1+ \epsilon^4) \norm{\Delta v}^2_2 \norm{\nabla \Delta v}^2_2 \big ] \\
+    & + C_1 \epsilon^2 (1 + \norm{\Delta v}^2_2) (\norm{\nabla \partial_t v}^2_2 + \norm{\nabla \Delta v}^2_2).
+  \end{split}
+\end{equation}
+
+Now we examine the effect of the new contributions from the concentration equation and the additional Coriolis terms.
+
+\textcolor{green}{\textbf{Part one: the concentration function.}}
+
+Multiply the concentration equation in (\ref{U_eps_C_eps}) by $- \Delta C^\epsilon$ and integrate by parts.
+
+On the left-hand side we have \textit{i)} the contribution from $\partial_t C^\epsilon \cdot \Delta C^\epsilon,$ which is $\frac{1}{2}\frac{\diff}{\diff t} \norm{\nabla C^\epsilon}^2_2$ and \textit{ii)} the contribution from the diffusivity terms.
+
+$$ \frac{1}{2}\frac{\diff}{\diff t} \norm{\nabla C^\epsilon}^2_2 + K \norm{\Delta C^\epsilon}_2^2 \leq \int_\Omega \big ( U^\epsilon \nabla C^\epsilon  + U^\epsilon \nabla c+ u \nabla C^\epsilon \big ) \Delta C^\epsilon - \int_\Omega S^\epsilon \Delta C^\epsilon$$
+
+To estimate $\int_\Omega \big ( U^\epsilon \nabla C^\epsilon  + U^\epsilon \nabla c + u \nabla C^\epsilon \big ) \Delta C^\epsilon$ we use Lemma 2.2. \todo{why does it require zero spatial average even for the case of periodic domain}
+We use the generalised Young inequality with a constant $\zeta$ that is necessary so that later we can bring certain terms to the left-hand side.
+
+Firstly, we have
+
+\begin{equation}
+  \begin{split}
+    & \int_\Omega U^\epsilon \nabla C^\epsilon \Delta C^\epsilon \leq \norm{\nabla V^\epsilon}_2^{1/2} \norm{\Delta V^\epsilon}_2^{1/2} \norm{\nabla C^\epsilon}_2^{1/2} \norm{\Delta C^\epsilon}_2^{1/2} \norm{\Delta C^\epsilon}_2 \\
+    & \leq \zeta \norm{\Delta C^\epsilon}_2^2 + \frac{1}{\zeta} \norm{\nabla V^\epsilon}_2 \norm{\Delta V^\epsilon}_2 \norm{\nabla C^\epsilon}_2 \norm{\Delta C^\epsilon}_2 \\
+    & \leq \zeta \norm{\Delta C^\epsilon}_2^2 + \frac{1}{\zeta} \big ( \frac{1}{2} \norm{\nabla V^\epsilon}^2_2 \norm{\Delta V^\epsilon}^2_2 + \frac{1}{2} \norm{\nabla C^\epsilon}^2_2 \norm{\Delta C^\epsilon}^2_2 \big ).
+  \end{split}
+\end{equation}
+
+Secondly,
+
+\begin{equation}
+  \begin{split}
+    & \int_\Omega U^\epsilon \nabla c \Delta C^\epsilon \leq \norm{\nabla V^\epsilon}_2^{1/2} \norm{\Delta V^\epsilon}_2^{1/2} \norm{\nabla c}_2^{1/2} \norm{\Delta c}_2^{1/2} \norm{\Delta C^\epsilon}_2 \\
+    & \zeta_1 \norm{\Delta C^\epsilon}^2_2 + \frac{1}{\zeta_1} \norm{\nabla V^\epsilon}_2 \norm{\Delta V^\epsilon}_2 \norm{\nabla c}_2 \norm{\Delta c}_2 \\
+    & \zeta_1 \norm{\Delta C^\epsilon}^2_2 + \frac{1}{\zeta_1} \big (\zeta_2 \norm{\Delta V^\epsilon}_2^2 + \frac{1}{\zeta_2}  \norm{\nabla V^\epsilon}^2_2  \norm{\nabla c}^2_2 \norm{\Delta c}^2_2 \big ).
+  \end{split}
+\end{equation}
+
+Finally here we use the Young inequality with $\frac{1}{4} + \frac{3}{4},$ since we have $\norm{\Delta C^\epsilon}_2^{1/2} \norm{\Delta C^\epsilon}_2 = \norm{\Delta C^\epsilon}_2^{3/2}.$
+
+\begin{equation}
+  \begin{split}
+    & \int_\Omega u \nabla C^\epsilon \Delta C^\epsilon \leq \norm{\nabla v}_2^{1/2} \norm{\Delta v}_2^{1/2} \norm{\nabla C^\epsilon}_2^{1/2} \norm{\Delta C^\epsilon}_2^{1/2} \norm{\Delta C^\epsilon}_2 \\
+    & \leq \zeta \norm{\Delta C^\epsilon}_2^2 + \frac{1}{\zeta} \norm{\nabla v}^2_2 \norm{\Delta v}^2_2 \norm{\nabla C^\epsilon}^2_2 \\
+    & \leq \zeta \norm{\Delta C^\epsilon}_2^2 + \frac{1}{\zeta} \norm{\Delta v}^2_2 \norm{\nabla \Delta v}^2_2 \norm{\nabla C^\epsilon}^2_2.
+  \end{split}
+\end{equation}
+
+Source \todo{todo} term.
+
+With this we arrive to first updated version of the inequality (\ref{originalH1}), which now becomes
+
+\begin{equation}
+  \begin{split}
+    & \frac{1}{2} \frac{\diff}{\diff t} (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 + \textcolor{green}{\norm{\nabla C^\epsilon}^2_2}) + \frac{3}{5} (\norm{\Delta V^\epsilon}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\Delta C^\epsilon}_2^2}) \\
+    & \leq C_1 (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 \textcolor{green}{+ \norm{\nabla C^\epsilon}^2_2}) \\
+    & \times \big [ (\norm{\Delta V}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\Delta C^\epsilon}_2^2}) + (1+ \epsilon^4) \norm{\Delta v}^2_2 \norm{\nabla \Delta v}^2_2 + \textcolor{green}{\norm{\nabla c}^2_2 \norm{\Delta c}^2_2} \big ] \\
+    & + C_1 \epsilon^2 (1 + \norm{\Delta v}^2_2) (\norm{\nabla \partial_t v}^2_2 + \norm{\nabla \Delta v}^2_2),
+  \end{split}
+\end{equation}
+
+after taking the $\zeta \cdot \text{Laplacian}$- type terms such as $\zeta \norm{\Delta C^\epsilon}_2^2, \frac{1}{\zeta_1} \zeta_2 \norm{\Delta V^\epsilon}_2^2$ to the left-hand side.
+
+This is the \todo{todo: $\norm{\Delta c}^2_2$ boundedness} version of the inequality after adding the pollution equation effects, without the source term.
+
+\textcolor{blue}{\textbf{Part two: the Coriolis term.}}
+
+Here we calculate the contributions from the Coriolis terms. In this part we take advantage of the Young inequality and being able to pass from $w, W^\epsilon$ in norms to $\nabla v, \nabla V^\epsilon$ because of the divergence-free condition.
+
+\begin{enumerate}
+
+  \item $$\int_\Omega \gamma V^\epsilon \cdot \Delta V^\epsilon \leq C \norm{\nabla V^\epsilon}^2_2$$
+  
+  \item $$ \int_\Omega \epsilon \beta W^\epsilon \Delta V^\epsilon \leq C \norm{\epsilon \nabla W^\epsilon}_2 \norm{\nabla V^\epsilon}_2 \leq C \norm{\epsilon \nabla W^\epsilon}^2_2 + C \norm{\nabla V^\epsilon}^2_2.$$
+  
+  \item $$ \int_\Omega \epsilon \beta w \Delta V^\epsilon \leq C \epsilon \norm{w}_2 \cdot \norm{\Delta V^\epsilon}_2 \leq C \cdot \epsilon \norm{\nabla v}_2 \norm{\Delta V^\epsilon}_2 $$
+  $$ \leq C \frac{1}{\zeta} \epsilon^2 \norm{\nabla v}_2^2 + \zeta \norm{\Delta V^\epsilon}^2_2.$$
+  
+  \item $$ \int_\Omega \epsilon \beta V^\epsilon_1 \Delta W^\epsilon \leq C \norm{\nabla V^\epsilon_1}_2 \norm{\epsilon \nabla W^\epsilon}_2 \leq C \norm{\nabla V^\epsilon_1}^2_2 + C \norm{\epsilon \nabla W^\epsilon}^2_2.$$
+  
+  \item $$ \int_\Omega \epsilon \beta v_1 \Delta W^\epsilon \leq C \norm{\epsilon \nabla v_1}_2 \norm{\nabla W^\epsilon}_2 \leq C \norm{\epsilon \nabla v_1}_2 \norm{\Delta V^\epsilon}_2 $$
+  $$ \leq C \frac{1}{\zeta} \epsilon^2 \norm{\nabla v}_2^2 + \zeta \norm{\Delta V^\epsilon}^2_2.$$
+  
+\end{enumerate}
+
+Regarding these inequalities and integrating them into the the main one, note that \textit{a)} the standalone Laplacians can go to the left-hand side, \textit{b)}  the $C \cdot \norm{\nabla V^\epsilon}^2_2$ -type terms can be added to the part where $\norm{\nabla V^\epsilon}^2_2$ is already present, and \textit{c)} the $\epsilon^2 \norm{\nabla v}^2_2$ can be added to the second part where $\epsilon^2$ is a multiplier.
+
+Connecting all this, we have the updated version of the inequality which was the inequality after (5.7) in Li-Titi. Now it takes the following form:
+
+\begin{equation}
+  \begin{split}
+    & \frac{1}{2} \frac{\diff}{\diff t} (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 + \textcolor{green}{\norm{\nabla C^\epsilon}^2_2}) + \frac{3}{5} (\norm{\Delta V^\epsilon}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\Delta C^\epsilon}_2^2}) \\
+    & \leq C_1 (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 \textcolor{green}{+ \norm{\nabla C^\epsilon}^2_2}) \\
+    & \times \big [ (\norm{\Delta V}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\Delta C^\epsilon}_2^2}) + \textcolor{blue}{C}+ (1+ \epsilon^4) \norm{\Delta v}^2_2 \norm{\nabla \Delta v}^2_2 + \textcolor{green}{\norm{\nabla c}^2_2 \norm{\Delta c}^2_2} \big ] \\
+    & + C_1 \epsilon^2 (1 + \norm{\Delta v}^2_2) (\norm{\nabla \partial_t v}^2_2 + \norm{\nabla \Delta v}^2_2 + \textcolor{blue}{\norm{\nabla v}_2^2}).
+  \end{split}
+\end{equation}
+
+As long as $\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 + \textcolor{green}{\norm{\nabla C^\epsilon}^2_2}) \leq \delta_0^2,$ with $\delta_0 = \sqrt{\frac{1}{10 C_1}}$ then 
+
+$$ C_1 (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 \textcolor{green}{+ \norm{\nabla C^\epsilon}^2_2})(\norm{\Delta V}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\Delta C^\epsilon}_2^2}) $$
+
+$$ \leq \delta_0^2 (\norm{\Delta V}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\Delta C^\epsilon}_2^2}) $$
+
+can be "melted into" the left-hand side and we finally have
+
+\begin{equation}
+  \begin{split}
+    & \frac{\diff}{\diff t} (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 + \textcolor{green}{\norm{\nabla C^\epsilon}^2_2}) + (\norm{\Delta V^\epsilon}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\Delta C^\epsilon}_2^2}) \\
+    & \leq C_1 \big [ \textcolor{blue}{C}+ (1+ \epsilon^4) \norm{\Delta v}^2_2 \norm{\nabla \Delta v}^2_2 + \textcolor{green}{\norm{\nabla c}^2_2 \norm{\Delta c}^2_2} \big ] \\
+    & \times (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 \textcolor{green}{+ \norm{\nabla C^\epsilon}^2_2}) \\
+    & + C_1 \epsilon^2 (1 + \norm{\Delta v}^2_2) (\norm{\nabla \partial_t v}^2_2 + \norm{\nabla \Delta v}^2_2 + \textcolor{blue}{\norm{\nabla v}_2^2}).
+  \end{split}
+\end{equation}
+
+Using $(V^\epsilon, W^\epsilon, C^\epsilon)(t_0) = 0,$ applying the Gronwall inequality we have 
+
+\begin{equation} \label{result_theorem1}
+  \begin{split}
+    & \sup_{0 \leq s \leq t}{(\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 + \textcolor{green}{\norm{\nabla C^\epsilon}^2_2}) } + \int_0^t (\norm{\Delta V^\epsilon}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\Delta C^\epsilon}^2_2}) \diff s \\
+    & \leq C_1 \epsilon^2 \bigg ( \int_0^t (1 + \norm{\Delta v}^2_2) (\norm{\nabla \partial_t v}^2_2 + \norm{\nabla \Delta v}^2_2 + \textcolor{blue}{\norm{\nabla v}_2^2}) \diff s \bigg ) \\
+    & \times \exp{ \int_0^t \textcolor{blue}{C}+ (1+ \epsilon^4) \norm{\Delta v}^2_2 \norm{\nabla \Delta v}^2_2 + \textcolor{green}{\norm{\nabla c}^2_2 \norm{\Delta c}^2_2} \diff s}.
+  \end{split}
+\end{equation}
+
+\end{proof}
+
+\subsection{Step 3. Recreate the complete $H^1$ result for the extended system (analogous to Theorem 5.3 in Li-Titi)}
+
+Now we move on to check if the extended, analogous theorem to Proposition 5.3 works.
+
+\begin{theorem}
+When $\epsilon$ is small enough, i.e. $\epsilon \in (0, \epsilon_0),$ then we have global unique strong solutions for the extended system, and we have
+
+$$ \sup_{0 \leq t < \infty}{(\norm{V^\epsilon}^2_{H^1} + \norm{\epsilon W^\epsilon}^2_{H^1} + \textcolor{green}{\norm{C^\epsilon}^2_{H^1}}) } + \int_0^\infty (\norm{\nabla V^\epsilon}^2_{H^1} + \norm{\epsilon \nabla W^\epsilon}^2_{H^1} \textcolor{green}{+ K \norm{\nabla C^\epsilon}^2_{H^1}}) \diff t \leq C \epsilon^2. $$
+
+\end{theorem}
+
+\begin{proof}
+
+This part is really analogous to what is written on p27, \textbf{the main todo parts are}:
+
+\begin{itemize}
+
+  \item POINT A) We need the concentration-including version of Corollary 3.1, namely, an estimate for the term $\int_0^t \norm{\nabla c}^2_2 \norm{\Delta c}^2_2$ in the integral in the above result (\ref{result_theorem1}). Corollary 3.1 gives a constant estimate only for the velocities, e.g. $\int_0^\infty \norm{\nabla v}^2_{H^2}.$
+  \item POINT B) We need the $L^2$ estimate (analogous to Proposition 5.1.) to $C^\epsilon,$ while we already know the result for $V^\epsilon, \epsilon W^\epsilon.$
+  \item POINT C) We need an existence result for (E-SNS) that states the unique local existence of strong solution $(u^\epsilon, c^\epsilon)$.
+  \item POINT D) We need an energy-existence result for (E-SNS) that describes the connection between maximal existence time and the blow-up of the energy of the system. In other words, a result that states that at a certain time $T^*$ the energy is small, then the solution can be continued.
+
+\end{itemize}
+
+When these missing pieces are clear, then from the $L^2$ estimate (POINT B) we have
+
+$$ \sup_{0 \leq t < T^*_\epsilon}{(\norm{V^\epsilon}^2_2 + \norm{\epsilon W^\epsilon}^2_2 + \textcolor{green}{\norm{C^\epsilon}^2_2}) } + \int_0^{T^*_\epsilon} (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\nabla C^\epsilon}^2_2}) \diff t \leq C \epsilon^2, $$
+
+$T^*_\epsilon$ being the maximal existence time of $(u^\epsilon, c^\epsilon)$ (POINT C).
+
+From this, using the previously defined $\delta_0,$ we define
+
+$$t^*_\epsilon:= \sup{ \big \{ t \in (0, T^*_\epsilon) \mid \sup_{0 \leq s \leq t}{\big (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\nabla C^\epsilon}^2_2} \big ) \leq \delta_0^2}\} }$$
+
+Using POINT A), from (\ref{result_theorem1}) we get
+
+\begin{equation}
+  \begin{split}
+    & \sup_{0 \leq s \leq t}{(\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 + \textcolor{green}{\norm{\nabla C^\epsilon}^2_2}) } \\
+    & + \int_0^t (\norm{\Delta V^\epsilon}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\Delta C^\epsilon}^2_2}) \diff s \leq C \epsilon^2
+  \end{split}
+\end{equation}
+
+for any $t \in [0, t^*_\epsilon).$ This is important: in order to apply (\ref{result_theorem1}), we need to make sure that its condition holds, i.e. that we are in $[0, t^*_\epsilon),$ which is the range where it applies.
+
+Setting $\epsilon_0 = \frac{\delta_0}{\sqrt{2C}},$ we have
+
+\begin{equation}
+  \begin{split}
+    & \sup_{0 \leq s \leq t}{(\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 + \textcolor{green}{\norm{\nabla C^\epsilon}^2_2}) } \\
+    & + \int_0^t (\norm{\Delta V^\epsilon}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\Delta C^\epsilon}^2_2}) \diff s \leq \frac{\delta_0}{2}
+  \end{split}
+\end{equation}
+
+for any $\epsilon \in (0, \epsilon_0)$ and any $t \in [0, t^*_\epsilon).$ From which we have
+
+$$ \sup_{0 \leq s < t^*_\epsilon}{(\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 + \textcolor{green}{\norm{\nabla C^\epsilon}^2_2}) } \leq \frac{\delta_0}{2}.$$
+
+From this we have $t^*_\epsilon = T^*_\epsilon,$ and as a consequence,
+
+\begin{equation}
+  \begin{split}
+    & \sup_{0 \leq s < T^*_\epsilon}{(\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 + \textcolor{green}{\norm{\nabla C^\epsilon}^2_2}) } \\
+    & + \int_0^{T^*_\epsilon} (\norm{\Delta V^\epsilon}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\Delta C^\epsilon}^2_2}) \diff s \leq C \epsilon^2.
+  \end{split}
+\end{equation}
+
+From this we have $T^*_\epsilon = \infty$ (using POINT D).
+
+\end{proof}
+
+\section{Downwind-matching coordinates}
+
+  \subsection{The set of equations}
+
+(E-SNS): extended scaled Navier-Stokes.
+
+    \begin{equation} \label{ANSC1}
+    \partial_t u^\epsilon _1 + \mathbf{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\gamma u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{ANSC2}
+    \partial_t u_2^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_2^\epsilon -\Delta_\nu u_2^\epsilon + \gamma u_1^\epsilon  - \alpha \epsilon u^\epsilon_3 + \partial_2 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{ANSC3}
+    \epsilon^2 \{  \partial_t u_3^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon -\Delta_\nu u_3^{\epsilon} \} + \epsilon \alpha u^\epsilon_2 - \epsilon \beta u_1^\epsilon + \partial_3 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{ANSC4}
+    \nabla \cdot \mathbf{u}^\epsilon= 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{ANSC5}
+    \partial_t c^\epsilon + \mathbf{u^\epsilon} \cdot \nabla c^\epsilon = \epsilon K_1 \partial_{11} ^ 2 c^\epsilon + K_2 \partial_{22} ^ 2 c^\epsilon + K_3 \partial_{33} ^ 2 c^\epsilon + s^\epsilon \text{ in } \Omega \times (0,T).
+    \end{equation}
+    
+
+(E-PEs): extended Primitive Equations.
+
+    \begin{equation} \label{HNSC1}    
+    \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 - \gamma u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC2}   
+    \partial_t u_2 + \mathbf{u} \cdot \nabla u_2 - \Delta_\nu u_2 + \gamma u_1 + \partial_2 p = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC3}   
+    \partial_3 p = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC4}   
+    \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC5}   
+    \partial_t c + \mathbf{u} \cdot \nabla c = K_2 \partial_{22} ^ 2 c + K_3 \partial_{33} ^2 c + s \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+  \subsection{Estimates}
+    
+The main difference in this case is that in the equations that govern $(U^\epsilon, C^\epsilon),$ we have
+
+$$ \partial_t C^\epsilon + U^\epsilon \nabla C^\epsilon  + U^\epsilon \nabla c+ u \nabla C^\epsilon = \textcolor{orange}{\epsilon K_1 \partial_{11} C^\epsilon + \epsilon K_1 \partial_{11} c} + K_2 \partial_{22} C^\epsilon + K_3 \partial_{33} C^\epsilon + S^\epsilon. $$
+
+This means that we can not follow the exact same path as before, as multiplying the equation by $- \Delta C^\epsilon$ results only $\epsilon \norm{\partial_{11} C^\epsilon}$ on the left-hand side, while from the estimates of the convective terms, we still have $\zeta \norm{\Delta V^\epsilon}^2_2$ terms on the right-hand side of the estimate, and these can not anymore be "melted" into the left-hand side, as the full, $\epsilon$-free Laplacian is missing.
+
+    \subsubsection{$H^3$ regularity for $V^\epsilon$}
+We will possibly use a different kind of structure here. As we will see, we will need a stronger, $H^3-$ regular $V^\epsilon$ function (in order to have $U^\epsilon$ in $H^2,$ which guarantees that it is in $L^\infty$). Let's see what kind of initial data could provide that.
+
+    \subsubsection{Additional results on the regularity of $c$ (analogous extended result to Corollary 3.1 in Li-Titi)}
+    
+    We probably need something like $\norm{\Delta \Delta c}_2^2 \leq C,$ where $C$ is a constant.
+
+    \subsubsection{$L^\infty H^1$ regularity for $C^\epsilon$}
+Multiply the governing equation
+
+$$ \partial_t C^\epsilon + U^\epsilon \nabla C^\epsilon  + U^\epsilon \nabla c+ u \nabla C^\epsilon = \textcolor{orange}{\epsilon K_1 \partial_{11} C^\epsilon + \epsilon K_1 \partial_{11} c} + K_2 \partial_{22} C^\epsilon + K_3 \partial_{33} C^\epsilon + S^\epsilon $$
+
+by $- \Delta C^\epsilon.$
+
+    \subsubsection{$L^\infty H^2$ regularity for $C^\epsilon$}
+    
+    The $H^2$ space regularity does not naturally come from the $L^\infty H^1$ regularity as seen for the geophysical coordinate system, because in the downwind-matching coordinate system the Laplacian is not complete anymore, and thus, while estimating the $L^\infty H^1$ norm, it does not automatically provide $L^2 H^2$ as well. The $H^2$ space norm estimate can be calculated separately, not from the Laplacian, but from the time derivative term, by multiplying it with a higher order space derivative.
+    Multiply the governing equation for $C^\epsilon$ by $\Delta \Delta C^\epsilon.$ Increase regularity of $c.$
+
+\section{Questions and todo}
+
+\begin{itemize}
+
+  \item Why do we need $\int_\Omega = 0$ in Lemma 2.2 when they have periodic boundaries and thus they can freely use the Poincare inequality?
+  
+  \item Existence of weak solutions of the anisotropic system? We only discuss the existence of the solutions of the extended primitive equations.
+
+  \item Initial and boundary conditions, for example p27, they use (1.2)-(1.4). Again, are these symmetries important (the even and odd functions?) Plus, define BC, IC for the $c^\epsilon, c$ functions.
+  
+  \item How exactly do we know that $\big (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\nabla C^\epsilon}^2_2} \big )$ grows continuously? If it didn't, then it would be possible that from $\delta_0 / 2$ it jumps to $\delta_0 +1,$ and with that we wouldn't have $t^*_\epsilon = T^*_\epsilon.$
+  
+  \item In Proposition 5.3 why exactly do we need the $L^2$ result from Proposition 5.1? Is it because for the bound of $\int_0^\infty \norm{\nabla V^\epsilon}^2_{H^1}$ by definition we need $\int_0^\infty \norm{\nabla V^\epsilon}^2_{L^2}$ and $\int_0^\infty \norm{\Delta V^\epsilon}^2_{L^2}$, and the first does not come from the second one by the Poincare inequality?
+  
+  \item on p27 why do we need (5.8), which is essentially Proposition 5.1 in order to have $t^*_\epsilon = T^*_\epsilon?$ If it is only needed towards the end, why is it mentioned in the beginning?
+
+\end{itemize}
+
+\end{document}
+
