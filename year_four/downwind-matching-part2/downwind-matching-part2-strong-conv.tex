@@ -335,7 +335,7 @@ can be "melted into" the left-hand side and we finally have
   \end{split}
 \end{equation}
 
-Using $(V^\epsilon, W^\epsilon, C^\epsilon)(t_0) = 0,$ applying the Gronwall inequality we have 
+Using $(V^\epsilon, W^\epsilon, C^\epsilon)(t_0) = 0,$ applying the Gronwall inequality we \todo{we have a new $\int_0^t C \diff s$ part, which has to be bounded} have 
 
 \begin{equation} \label{result_theorem1}
   \begin{split}
@@ -477,12 +477,12 @@ $$ \partial_t C^\epsilon + U^\epsilon \nabla C^\epsilon  + U^\epsilon \nabla c+ 
 
 This means that we can not follow the exact same path as before, as multiplying the equation by $- \Delta C^\epsilon$ results only $\epsilon \norm{\partial_{11} C^\epsilon}$ on the left-hand side, while from the estimates of the convective terms, we still have $\zeta \norm{\Delta V^\epsilon}^2_2$ terms on the right-hand side of the estimate, and these can not anymore be "melted" into the left-hand side, as the full, $\epsilon$-free Laplacian is missing.
 
-    \subsubsection{$H^3$ regularity for $V^\epsilon$}
+    \subsubsection{$H^3$ regularity for $V^\epsilon$ in the sense that $\norm{V^\epsilon}_{H^3} \leq \epsilon$} \label{H3eps}
 We will possibly use a different kind of structure here. As we will see, we will need a stronger, $H^3-$ regular $V^\epsilon$ function (in order to have $U^\epsilon$ in $H^2,$ which guarantees that it is in $L^\infty$). Let's see what kind of initial data could provide that.
 
-    \subsubsection{Additional results on the regularity of $c$ (analogous extended result to Corollary 3.1 in Li-Titi)}
+    \subsubsection{Additional results on the regularity of $c$ (analogous extended result to Corollary 3.1 in Li-Titi)} \label{extendedprimitiveeqsolest}
     
-    We need something like $\norm{\Delta c}_2^2 \leq C,$ where $C$ is a constant, for the $L^\infty H^1$ regularity of $C^\epsilon.$
+    For the $L^\infty H^1$ regularity of $C^\epsilon$ we need something like $$\int_0^t \norm{\Delta c}_2^2 \diff s \leq C, \int_0^t \norm{\nabla \Delta c}_2^2 \diff s \leq C$$ where $C$ is a constant.
 
     \subsubsection{$L^\infty H^1$ regularity for $C^\epsilon$}
 Multiply the governing equation
@@ -498,7 +498,9 @@ by $- \Delta C^\epsilon.$ For now let's ignore the source term $S^\epsilon.$
   \end{split}
 \end{equation}
 
-Using the divergence-free condition, we have 
+\begin{enumerate}
+
+  \item Using the divergence-free condition, we have 
 
 $$ \int_\Omega U^\epsilon \nabla C^\epsilon \Delta C^\epsilon = - \int_\Omega U^\epsilon \Delta C^\epsilon \nabla C^\epsilon$$
 
@@ -508,7 +510,7 @@ $$ \int_\Omega u \nabla C^\epsilon \Delta C^\epsilon = - \int_\Omega u \Delta C^
 
 thus these terms are $0.$
 
-To estimate $\int_\Omega U^\epsilon \nabla c \Delta C^\epsilon = - \int_\Omega U^\epsilon \Delta c \nabla C^\epsilon,$ we use the Holder inequality with $\frac{1}{\infty} + \frac{1}{2} + \frac{1}{2} = 1,$ the triangle inequality, the Poincare inequality and the Young inequality, obtaining
+  \item To estimate $\int_\Omega U^\epsilon \nabla c \Delta C^\epsilon = - \int_\Omega U^\epsilon \Delta c \nabla C^\epsilon,$ we use the Holder inequality with $\frac{1}{\infty} + \frac{1}{2} + \frac{1}{2} = 1,$ the triangle inequality, the Poincare inequality and the Young inequality, obtaining
 
 \begin{equation}
   \begin{split}
@@ -520,13 +522,31 @@ To estimate $\int_\Omega U^\epsilon \nabla c \Delta C^\epsilon = - \int_\Omega U
   \end{split}
 \end{equation}
 
-To be aligned with the required structure in order to apply the Gronwall inequality, we need $\norm{\nabla V^\epsilon}_{L^\infty} \leq \epsilon.$
+To be aligned with the required structure in order to apply the Gronwall inequality, we need $\norm{\nabla V^\epsilon}_{L^\infty} \leq \epsilon$ and the norm of $\Delta c$ to be bounded by a constant $C$ (see section \ref{H3eps} and section \ref{extendedprimitiveeqsolest}.)
+
+  \item Finally we estimate $- \int_\Omega \epsilon K_1 \partial_{11} c \Delta C^\epsilon$ by
+
+  $$ - \int_\Omega \epsilon K_1 \partial_{11} c \Delta C^\epsilon = K_1 \int_\Omega \epsilon \nabla \partial_{11} c \nabla C^\epsilon \leq C \epsilon^2 \norm{\nabla \Delta c}^2_2 + C \norm{\nabla C^\epsilon}^2_2. $$
+
+\end{enumerate}
+
+We obtain the following inequality for the $C^\epsilon$ function:
+
+$$ \frac{1}{2} \frac{\diff}{\diff t} \norm{\nabla C^\epsilon}^2_{L^2} \leq C \norm{\nabla C^\epsilon}^2_{L^2} + C \norm{\nabla V^\epsilon}^2_{L^\infty} \norm{\Delta c}^2_{L^2} + C \epsilon^2 \norm{\nabla \Delta c}^2_2.$$
+
+Using the results of section \ref{H3eps} and section \ref{extendedprimitiveeqsolest}, i.e. \textit{a)} $\norm{\nabla V^\epsilon}^2_{L^\infty} \leq \epsilon^2,$ and \textit{b)} the boundedness of $\norm{\nabla \Delta c}^2_{L^2},$ we finally have
+
+$$ \frac{1}{2} \frac{\diff}{\diff t} \norm{\nabla C^\epsilon}^2_{L^2} \leq C_1 \norm{\nabla C^\epsilon}^2_{L^2} + C_2 \epsilon^2 (\norm{\nabla \Delta c}^2_2 + \norm{\Delta c}^2_{L^2}).$$
+
+Applying the Gronwall inequality we \todo{we need $\int_0^t C_1 \leq C$ otherwise it probably won't work} get
+
+$$ \sup_{0 \leq s \leq t}{\norm{\nabla C^\epsilon}^2_{L^2}} \leq C_2 \epsilon^2 \int_0^t (\norm{\nabla \Delta c}^2_2 + \norm{\Delta c}^2_{L^2}) \diff s \times \exp{\int_0^t C_1 \diff s} $$
 
 
     \subsubsection{$L^\infty H^2$ regularity for $C^\epsilon$}
     
     The $H^2$ space regularity does not naturally come from the $L^\infty H^1$ regularity as seen for the geophysical coordinate system, because in the downwind-matching coordinate system the Laplacian is not complete anymore, and thus, while estimating the $L^\infty H^1$ norm, it does not automatically provide $L^2 H^2$ as well. The $H^2$ space norm estimate can be calculated separately, not from the Laplacian, but from the time derivative term, by multiplying it with a higher order space derivative.
-    Multiply the governing equation for $C^\epsilon$ by $\Delta \Delta C^\epsilon.$ Increase regularity of $c.$
+    Multiply the governing equation for $C^\epsilon$ by $\Delta \Delta C^\epsilon$ and increase regularity of $c.$ But do we need this part?
 
 \section{Questions and todo}
 
