@@ -85,7 +85,7 @@ This is why we choose to define conditions where Lemma 2.2 holds in its original
 
 Firstly, here we work with the geophysical coordinate system and $K_1, K_2, K_3$ diffusion terms.
 
-\textbf{Change of notations:} Since $u^\epsilon$ and $u$ denotes the solution functions and the capital $U^\epsilon$ denotes their difference, we switch to the analogous notation with the concentration function, i.e. $c^\epsilon$ and $c$ here are the solutions in the anisotropic and hydrostatic equations, respectively, while the capital $C^\epsilon$ denotes the $c^\epsilon - c$ difference function.
+\textbf{Change of notations:} Since $u^\epsilon$ and $u$ denotes the solution functions and the capital $U^\epsilon$ denotes their difference, we switch to the analogous notation with the concentration function, i.e. $c^\epsilon$ and $c$ here are the solutions in the anisotropic and hydrostatic equations, respectively, while the capital $C^\epsilon$ denotes the $c^\epsilon - c$ difference function. $C$ stands for a generic constant.
 
 (E-SNS): extended scaled Navier-Stokes.
 
@@ -420,6 +420,8 @@ From this we have $T^*_\epsilon = \infty$ (using POINT D).
 
 \section{Downwind-matching coordinates}
 
+Here we examine the effect of the additional $\epsilon$ in the concentration equation. The Coriolis terms have been described in the previous section.
+
   \subsection{The set of equations}
 
 (E-SNS): extended scaled Navier-Stokes.
@@ -480,14 +482,46 @@ We will possibly use a different kind of structure here. As we will see, we will
 
     \subsubsection{Additional results on the regularity of $c$ (analogous extended result to Corollary 3.1 in Li-Titi)}
     
-    We probably need something like $\norm{\Delta \Delta c}_2^2 \leq C,$ where $C$ is a constant.
+    We need something like $\norm{\Delta c}_2^2 \leq C,$ where $C$ is a constant, for the $L^\infty H^1$ regularity of $C^\epsilon.$
 
     \subsubsection{$L^\infty H^1$ regularity for $C^\epsilon$}
 Multiply the governing equation
 
 $$ \partial_t C^\epsilon + U^\epsilon \nabla C^\epsilon  + U^\epsilon \nabla c+ u \nabla C^\epsilon = \textcolor{orange}{\epsilon K_1 \partial_{11} C^\epsilon + \epsilon K_1 \partial_{11} c} + K_2 \partial_{22} C^\epsilon + K_3 \partial_{33} C^\epsilon + S^\epsilon $$
 
-by $- \Delta C^\epsilon.$
+by $- \Delta C^\epsilon.$ For now let's ignore the source term $S^\epsilon.$
+
+\begin{equation}
+  \begin{split}
+    & \frac{1}{2} \frac{\diff}{\diff t} \norm{\nabla C^\epsilon}_2^2 + \epsilon K_1 \norm{\partial_{11} C^\epsilon}_2^2 + K_2 \norm{\partial_{22} C^\epsilon}_2^2 + K_3 \norm{\partial_{33} C^\epsilon}_2^2 \\
+    & \leq - \int_\Omega \epsilon K_1 \partial_{11} c \Delta C^\epsilon + \int_\Omega U^\epsilon \nabla C^\epsilon \Delta C^\epsilon + \int_\Omega U^\epsilon \nabla c \Delta C^\epsilon + \int_\Omega u \nabla C^\epsilon \Delta C^\epsilon.
+  \end{split}
+\end{equation}
+
+Using the divergence-free condition, we have 
+
+$$ \int_\Omega U^\epsilon \nabla C^\epsilon \Delta C^\epsilon = - \int_\Omega U^\epsilon \Delta C^\epsilon \nabla C^\epsilon$$
+
+and
+
+$$ \int_\Omega u \nabla C^\epsilon \Delta C^\epsilon = - \int_\Omega u \Delta C^\epsilon \nabla C^\epsilon,$$
+
+thus these terms are $0.$
+
+To estimate $\int_\Omega U^\epsilon \nabla c \Delta C^\epsilon = - \int_\Omega U^\epsilon \Delta c \nabla C^\epsilon,$ we use the Holder inequality with $\frac{1}{\infty} + \frac{1}{2} + \frac{1}{2} = 1,$ the triangle inequality, the Poincare inequality and the Young inequality, obtaining
+
+\begin{equation}
+  \begin{split}
+    & \int_\Omega U^\epsilon \Delta c \nabla C^\epsilon \leq \norm{U^\epsilon}_{L^\infty} \norm{\Delta c}_{L^2} \norm{\nabla C^\epsilon}_{L^2} \\
+    & \leq (\norm{V^\epsilon}_{L^\infty} + \norm{W^\epsilon}_{L^\infty})\norm{\Delta c}_{L^2} \norm{\nabla C^\epsilon}_{L^2} \\
+    & \leq (\norm{V^\epsilon}_{L^\infty} + \norm{\nabla V^\epsilon}_{L^\infty})\norm{\Delta c}_{L^2} \norm{\nabla C^\epsilon}_{L^2} \\
+    & \leq \norm{\nabla V^\epsilon}_{L^\infty} \norm{\Delta c}_{L^2} \norm{\nabla C^\epsilon}_{L^2} \\
+    & \leq C \norm{\nabla V^\epsilon}^2_{L^\infty} \norm{\Delta c}^2_{L^2} + \norm{\nabla C^\epsilon}^2_{L^2}.
+  \end{split}
+\end{equation}
+
+To be aligned with the required structure in order to apply the Gronwall inequality, we need $\norm{\nabla V^\epsilon}_{L^\infty} \leq \epsilon.$
+
 
     \subsubsection{$L^\infty H^2$ regularity for $C^\epsilon$}
     
@@ -509,6 +543,10 @@ by $- \Delta C^\epsilon.$
   \item In Proposition 5.3 why exactly do we need the $L^2$ result from Proposition 5.1? Is it because for the bound of $\int_0^\infty \norm{\nabla V^\epsilon}^2_{H^1}$ by definition we need $\int_0^\infty \norm{\nabla V^\epsilon}^2_{L^2}$ and $\int_0^\infty \norm{\Delta V^\epsilon}^2_{L^2}$, and the first does not come from the second one by the Poincare inequality?
   
   \item on p27 why do we need (5.8), which is essentially Proposition 5.1 in order to have $t^*_\epsilon = T^*_\epsilon?$ If it is only needed towards the end, why is it mentioned in the beginning?
+  
+  \item The zero-trace (zero boundary) version of Poincare inequality (see p280 in Evans) states that for all $1 \leq p \leq \infty,$ we have $\norm{u}_{L^p(U)} \leq C \norm{D u}_{L^p (U)}.$ So, using this, when we have $L^\infty L^2 \cap L^2 H^1$ estimate for $\nabla v,$ we automatically have it for $v$ as well, right? For the adequate boundaries.
+  
+  \item Do we even need the analogous version of Section4 when we can directly have higher order estimates and use the Poincare inequality which also holds for $L^\infty$?
 
 \end{itemize}
 
