@@ -201,7 +201,7 @@ Using this, we arrive to the following set of equations that describes $(U^\epsi
 
 \begin{equation} \label{U_eps_C_eps}
   \begin{gathered}
-    \partial_t V^\epsilon + (U^\epsilon \cdot \nabla) V^\epsilon - \Delta V^\epsilon + \nabla_h P^\epsilon + (u \cdot \nabla) V^\epsilon + (U^\epsilon \cdot \nabla) v \textcolor{blue}{- \gamma V^\epsilon + \epsilon \beta W^\epsilon  + \epsilon \beta w} = 0, \\
+    \partial_t V^\epsilon + (U^\epsilon \cdot \nabla) V^\epsilon - \Delta V^\epsilon + \nabla_h P^\epsilon + (u \cdot \nabla) V^\epsilon + (U^\epsilon \cdot \nabla) v \textcolor{blue}{- \gamma V_2^\epsilon + \gamma V_1^\epsilon + \epsilon \beta W^\epsilon  + \epsilon \beta w} = 0, \\
     \nabla_h \cdot V^\epsilon + \partial_z W^\epsilon = 0, \\
     \epsilon^2 (\partial_t W^\epsilon + U^\epsilon \cdot \nabla W^\epsilon - \Delta W^\epsilon + U^\epsilon \cdot \nabla w + u \cdot \nabla W^\epsilon) \\
     + \partial_z P^\epsilon \textcolor{blue}{- \epsilon \beta V_1^\epsilon - \epsilon \beta v_1} = - \epsilon^2 (\partial_t w + u \cdot \nabla w - \Delta w), \\
@@ -291,21 +291,21 @@ Here we calculate the contributions from the Coriolis terms. In this part we tak
 
 \begin{enumerate}
 
-  \item $$\int_\Omega \gamma V^\epsilon \cdot \Delta V^\epsilon \leq C \norm{\nabla V^\epsilon}^2_2$$
+  \item $$\int_\Omega - \gamma V_2^\epsilon \cdot \Delta V_1^\epsilon + \int_\Omega  \gamma V_1^\epsilon \cdot \Delta V_2^\epsilon = 0$$
   
-  \item $$ \int_\Omega \epsilon \beta W^\epsilon \Delta V^\epsilon \leq C \norm{\epsilon \nabla W^\epsilon}_2 \norm{\nabla V^\epsilon}_2 \leq C \norm{\epsilon \nabla W^\epsilon}^2_2 + C \norm{\nabla V^\epsilon}^2_2.$$
+  \item $$ \int_\Omega \epsilon \beta W^\epsilon \Delta V^\epsilon \leq C \norm{\sqrt{\epsilon} \nabla W^\epsilon}_2 \norm{\sqrt{\epsilon} \nabla V^\epsilon}_2 \leq C \norm{\sqrt{\epsilon} \nabla W^\epsilon}^2_2 + C \norm{\sqrt{\epsilon}\nabla V^\epsilon}^2_2 \leq \epsilon C \norm{\Delta V^\epsilon}^2_2.$$
   
   \item $$ \int_\Omega \epsilon \beta w \Delta V^\epsilon \leq C \epsilon \norm{w}_2 \cdot \norm{\Delta V^\epsilon}_2 \leq C \cdot \epsilon \norm{\nabla v}_2 \norm{\Delta V^\epsilon}_2 $$
   $$ \leq C \frac{1}{\zeta} \epsilon^2 \norm{\nabla v}_2^2 + \zeta \norm{\Delta V^\epsilon}^2_2.$$
   
-  \item $$ \int_\Omega \epsilon \beta V^\epsilon_1 \Delta W^\epsilon \leq C \norm{\nabla V^\epsilon_1}_2 \norm{\epsilon \nabla W^\epsilon}_2 \leq C \norm{\nabla V^\epsilon_1}^2_2 + C \norm{\epsilon \nabla W^\epsilon}^2_2.$$
+  \item $$ \int_\Omega \epsilon \beta V^\epsilon_1 \Delta W^\epsilon \leq C \norm{\sqrt{\epsilon} \nabla V^\epsilon_1}_2 \norm{\sqrt{\epsilon} \nabla W^\epsilon}_2 \leq C \norm{\sqrt{\epsilon} \nabla V^\epsilon_1}^2_2 + C \norm{ \sqrt{\epsilon} \nabla W^\epsilon}^2_2 \leq \epsilon C \norm{\Delta V^\epsilon}^2_2.$$
   
   \item $$ \int_\Omega \epsilon \beta v_1 \Delta W^\epsilon \leq C \norm{\epsilon \nabla v_1}_2 \norm{\nabla W^\epsilon}_2 \leq C \norm{\epsilon \nabla v_1}_2 \norm{\Delta V^\epsilon}_2 $$
   $$ \leq C \frac{1}{\zeta} \epsilon^2 \norm{\nabla v}_2^2 + \zeta \norm{\Delta V^\epsilon}^2_2.$$
   
 \end{enumerate}
 
-Regarding these inequalities and integrating them into the the main one, note that \textit{a)} the standalone Laplacians can go to the left-hand side, \textit{b)}  the $C \cdot \norm{\nabla V^\epsilon}^2_2$ -type terms can be added to the part where $\norm{\nabla V^\epsilon}^2_2$ is already present, and \textit{c)} the $\epsilon^2 \norm{\nabla v}^2_2$ can be added to the second part where $\epsilon^2$ is a multiplier.
+Regarding these inequalities and integrating them into the the main one, note that \textit{a)} the standalone Laplacians ($\epsilon \norm{\Delta V^\epsilon}^2_2, \zeta \norm{\Delta V^\epsilon}^2_2$) can go to the left-hand side, and \textit{b)} the $\epsilon^2 \norm{\nabla v}^2_2$ can be added to the second part where $\epsilon^2$ is a multiplier.
 
 Connecting all this, we have the updated version of the inequality which was the inequality after (5.7) in Li-Titi. Now it takes the following form:
 
@@ -313,7 +313,7 @@ Connecting all this, we have the updated version of the inequality which was the
   \begin{split}
     & \frac{1}{2} \frac{\diff}{\diff t} (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 + \textcolor{green}{\norm{\nabla C^\epsilon}^2_2}) + \frac{3}{5} (\norm{\Delta V^\epsilon}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\Delta C^\epsilon}_2^2}) \\
     & \leq C_1 (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 \textcolor{green}{+ \norm{\nabla C^\epsilon}^2_2}) \\
-    & \times \big [ (\norm{\Delta V}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\Delta C^\epsilon}_2^2}) + \textcolor{blue}{C}+ (1+ \epsilon^4) \norm{\Delta v}^2_2 \norm{\nabla \Delta v}^2_2 + \textcolor{green}{\norm{\nabla c}^2_2 \norm{\Delta c}^2_2} \big ] \\
+    & \times \big [ (\norm{\Delta V}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\Delta C^\epsilon}_2^2}) + (1+ \epsilon^4) \norm{\Delta v}^2_2 \norm{\nabla \Delta v}^2_2 + \textcolor{green}{\norm{\nabla c}^2_2 \norm{\Delta c}^2_2} \big ] \\
     & + C_1 \epsilon^2 (1 + \norm{\Delta v}^2_2) (\norm{\nabla \partial_t v}^2_2 + \norm{\nabla \Delta v}^2_2 + \textcolor{blue}{\norm{\nabla v}_2^2}).
   \end{split}
 \end{equation}
@@ -329,25 +329,44 @@ can be "melted into" the left-hand side and we finally have
 \begin{equation}
   \begin{split}
     & \frac{\diff}{\diff t} (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 + \textcolor{green}{\norm{\nabla C^\epsilon}^2_2}) + (\norm{\Delta V^\epsilon}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\Delta C^\epsilon}_2^2}) \\
-    & \leq C_1 \big [ \textcolor{blue}{C}+ (1+ \epsilon^4) \norm{\Delta v}^2_2 \norm{\nabla \Delta v}^2_2 + \textcolor{green}{\norm{\nabla c}^2_2 \norm{\Delta c}^2_2} \big ] \\
+    & \leq C_1 \big [ (1+ \epsilon^4) \norm{\Delta v}^2_2 \norm{\nabla \Delta v}^2_2 + \textcolor{green}{\norm{\nabla c}^2_2 \norm{\Delta c}^2_2} \big ] \\
     & \times (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 \textcolor{green}{+ \norm{\nabla C^\epsilon}^2_2}) \\
     & + C_1 \epsilon^2 (1 + \norm{\Delta v}^2_2) (\norm{\nabla \partial_t v}^2_2 + \norm{\nabla \Delta v}^2_2 + \textcolor{blue}{\norm{\nabla v}_2^2}).
   \end{split}
 \end{equation}
 
-Using $(V^\epsilon, W^\epsilon, C^\epsilon)(t_0) = 0,$ applying the Gronwall inequality we \todo{we have a new $\int_0^t C \diff s$ part, which has to be bounded} have 
+Using $(V^\epsilon, W^\epsilon, C^\epsilon)(t_0) = 0,$ applying the Gronwall inequality we have 
 
 \begin{equation} \label{result_theorem1}
   \begin{split}
     & \sup_{0 \leq s \leq t}{(\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 + \textcolor{green}{\norm{\nabla C^\epsilon}^2_2}) } + \int_0^t (\norm{\Delta V^\epsilon}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\Delta C^\epsilon}^2_2}) \diff s \\
     & \leq C_1 \epsilon^2 \bigg ( \int_0^t (1 + \norm{\Delta v}^2_2) (\norm{\nabla \partial_t v}^2_2 + \norm{\nabla \Delta v}^2_2 + \textcolor{blue}{\norm{\nabla v}_2^2}) \diff s \bigg ) \\
-    & \times \exp{ \bigg (\int_0^t \textcolor{blue}{C}+ (1+ \epsilon^4) \norm{\Delta v}^2_2 \norm{\nabla \Delta v}^2_2 + \textcolor{green}{\norm{\nabla c}^2_2 \norm{\Delta c}^2_2} \diff s \bigg ) }.
+    & \times \exp{ \bigg (\int_0^t (1+ \epsilon^4) \norm{\Delta v}^2_2 \norm{\nabla \Delta v}^2_2 + \textcolor{green}{\norm{\nabla c}^2_2 \norm{\Delta c}^2_2} \diff s \bigg ) }.
   \end{split}
 \end{equation}
 
 \end{proof}
 
-Problem \todo{problem}: the $\int_0^t \textcolor{blue}{C} \diff s$ new term is different. For the other terms appearing on the right-hand side of the estimate, we know a bound of the form $\int_0^\infty \norm{\nabla v} \diff s \leq C.$ On this new standalone $\int_0^t \textcolor{blue}{C} \diff s$ term we don't have something like that. These new terms come from the i), ii), and iv) points of estimating the Coriolis terms.
+\begin{remark}
+
+Note that the \textit{ii)}, \textit{iv)} bounds at the Coriolis terms work only if $\epsilon$ is small, i.e. for example for $\epsilon = 1$ they do not necessarily work, because in the bounding process these standalone Laplacians have to be brought to the left-hand side. However, bounding these terms differently and keeping the gradients with constant multipliers create another problem: in that case the inequality would take the form below --- note the extra $\textcolor{red}{C}$ constant term. In more detail, if we use
+
+$$ \int_\Omega \epsilon \beta W^\epsilon \Delta V^\epsilon \leq C \norm{\epsilon \nabla W^\epsilon}_2 \norm{\nabla V^\epsilon}_2 \leq C \norm{\epsilon \nabla W^\epsilon}^2_2 + C \norm{\nabla V^\epsilon}^2_2,$$
+
+then we have
+
+\begin{equation}
+  \begin{split}
+    & \frac{1}{2} \frac{\diff}{\diff t} (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 + \textcolor{green}{\norm{\nabla C^\epsilon}^2_2}) + \frac{3}{5} (\norm{\Delta V^\epsilon}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\Delta C^\epsilon}_2^2}) \\
+    & \leq C_1 (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 \textcolor{green}{+ \norm{\nabla C^\epsilon}^2_2}) \\
+    & \times \big [ (\norm{\Delta V}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\Delta C^\epsilon}_2^2}) + \textcolor{red}{C}+ (1+ \epsilon^4) \norm{\Delta v}^2_2 \norm{\nabla \Delta v}^2_2 + \textcolor{green}{\norm{\nabla c}^2_2 \norm{\Delta c}^2_2} \big ] \\
+    & + C_1 \epsilon^2 (1 + \norm{\Delta v}^2_2) (\norm{\nabla \partial_t v}^2_2 + \norm{\nabla \Delta v}^2_2 + \textcolor{blue}{\norm{\nabla v}_2^2}).
+  \end{split}
+\end{equation}
+
+Problem in this case after applying the Gronwall inequality: the $\int_0^t \textcolor{red}{C} \diff s$ new term is different. For the other terms appearing on the right-hand side of the estimate, we know a bound of the form $\int_0^\infty \norm{\nabla v} \diff s \leq C.$ On this new standalone $\int_0^t \textcolor{red}{C} \diff s$ term we don't have something like that. Which is why probably creating the Laplacians with a small coefficient is better for \textit{ii)}, and \textit{iv)}.
+
+\end{remark}
 
 \subsection{Step 3. Recreate the complete $H^1$ result for the extended system (analogous to Theorem 5.3 in Li-Titi)}
 
