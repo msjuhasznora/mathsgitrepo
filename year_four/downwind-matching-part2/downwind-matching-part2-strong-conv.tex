@@ -174,8 +174,8 @@ With initial data $v_0 \in H^2 (\Omega), c_0 \in H^1(\Omega).$ For now we assume
 \textbf{Starting point / Existence:}
 
 \begin{enumerate}
-  \item The existence of a local in time strong solution $(u^\epsilon, c^\epsilon)$ to (E-SNS) with maximal existence time $T^\epsilon.$ TODO: details. We know the existence of $u^\epsilon$ for (SNS).
-  \item The existence of the (u,c) strong solution globally of (E-PEs). TODO: details. We have the existence of $u.$
+  \item The existence of a local in time strong solution $(u^\epsilon, c^\epsilon)$ to (E-SNS) with maximal existence time $T^\epsilon.$ \todo{details} We know the existence of $u^\epsilon$ for (SNS).
+  \item The existence of the (u,c) strong solution globally of (E-PEs). \todo{details}  We have the existence of $u.$
 \end{enumerate}
   
 \textbf{Convergence:}  
@@ -283,7 +283,7 @@ With this we arrive to first updated version of the inequality (\ref{originalH1}
 
 after taking the $\zeta \cdot \text{Laplacian}$- type terms such as $\zeta \norm{\Delta C^\epsilon}_2^2, \frac{1}{\zeta_1} \zeta_2 \norm{\Delta V^\epsilon}_2^2$ to the left-hand side.
 
-This is the \todo{todo: $\norm{\Delta c}^2_2$ boundedness} version of the inequality after adding the pollution equation effects, without the source term.
+This is the \todo{todo: $\int_0^\infty \norm{\Delta c}^2_2 \diff s$ boundedness, analogous to Corollary 3.1 to $c.$} version of the inequality after adding the pollution equation effects, without the source term.
 
 \textcolor{blue}{\textbf{Part two: the Coriolis term.}}
 
@@ -341,11 +341,13 @@ Using $(V^\epsilon, W^\epsilon, C^\epsilon)(t_0) = 0,$ applying the Gronwall ine
   \begin{split}
     & \sup_{0 \leq s \leq t}{(\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 + \textcolor{green}{\norm{\nabla C^\epsilon}^2_2}) } + \int_0^t (\norm{\Delta V^\epsilon}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\Delta C^\epsilon}^2_2}) \diff s \\
     & \leq C_1 \epsilon^2 \bigg ( \int_0^t (1 + \norm{\Delta v}^2_2) (\norm{\nabla \partial_t v}^2_2 + \norm{\nabla \Delta v}^2_2 + \textcolor{blue}{\norm{\nabla v}_2^2}) \diff s \bigg ) \\
-    & \times \exp{ \int_0^t \textcolor{blue}{C}+ (1+ \epsilon^4) \norm{\Delta v}^2_2 \norm{\nabla \Delta v}^2_2 + \textcolor{green}{\norm{\nabla c}^2_2 \norm{\Delta c}^2_2} \diff s}.
+    & \times \exp{ \bigg (\int_0^t \textcolor{blue}{C}+ (1+ \epsilon^4) \norm{\Delta v}^2_2 \norm{\nabla \Delta v}^2_2 + \textcolor{green}{\norm{\nabla c}^2_2 \norm{\Delta c}^2_2} \diff s \bigg ) }.
   \end{split}
 \end{equation}
 
 \end{proof}
+
+Problem \todo{problem}: the $\int_0^t \textcolor{blue}{C} \diff s$ new term is different. For the other terms appearing on the right-hand side of the estimate, we know a bound of the form $\int_0^\infty \norm{\nabla v} \diff s \leq C.$ On this new standalone $\int_0^t \textcolor{blue}{C} \diff s$ term we don't have something like that. These new terms come from the i), ii), and iv) points of estimating the Coriolis terms.
 
 \subsection{Step 3. Recreate the complete $H^1$ result for the extended system (analogous to Theorem 5.3 in Li-Titi)}
 
@@ -421,6 +423,10 @@ From this we have $T^*_\epsilon = \infty$ (using POINT D).
 \section{Downwind-matching coordinates}
 
 Here we examine the effect of the additional $\epsilon$ in the concentration equation. The Coriolis terms have been described in the previous section.
+
+This method structurally goes differently: it first requires much stronger results on the velocity functions, then estimates $C^\epsilon$ in a separate step.
+
+For now it seems that this works only for a local time interval, see later a term at the estimate of $C^\epsilon.$
 
   \subsection{The set of equations}
 
@@ -518,7 +524,7 @@ thus these terms are $0.$
     & \leq (\norm{V^\epsilon}_{L^\infty} + \norm{W^\epsilon}_{L^\infty})\norm{\Delta c}_{L^2} \norm{\nabla C^\epsilon}_{L^2} \\
     & \leq (\norm{V^\epsilon}_{L^\infty} + \norm{\nabla V^\epsilon}_{L^\infty})\norm{\Delta c}_{L^2} \norm{\nabla C^\epsilon}_{L^2} \\
     & \leq \norm{\nabla V^\epsilon}_{L^\infty} \norm{\Delta c}_{L^2} \norm{\nabla C^\epsilon}_{L^2} \\
-    & \leq C \norm{\nabla V^\epsilon}^2_{L^\infty} \norm{\Delta c}^2_{L^2} + \norm{\nabla C^\epsilon}^2_{L^2}.
+    & \leq C \frac{1}{\zeta} \norm{\nabla V^\epsilon}^2_{L^\infty} \norm{\Delta c}^2_{L^2} + C \zeta \norm{\nabla C^\epsilon}^2_{L^2}.
   \end{split}
 \end{equation}
 
@@ -526,21 +532,24 @@ To be aligned with the required structure in order to apply the Gronwall inequal
 
   \item Finally we estimate $- \int_\Omega \epsilon K_1 \partial_{11} c \Delta C^\epsilon$ by
 
-  $$ - \int_\Omega \epsilon K_1 \partial_{11} c \Delta C^\epsilon = K_1 \int_\Omega \epsilon \nabla \partial_{11} c \nabla C^\epsilon \leq C \epsilon^2 \norm{\nabla \Delta c}^2_2 + C \norm{\nabla C^\epsilon}^2_2. $$
+  $$ - \int_\Omega \epsilon K_1 \partial_{11} c \Delta C^\epsilon = K_1 \int_\Omega \epsilon \nabla \partial_{11} c \nabla C^\epsilon \leq C \frac{1}{\zeta} \epsilon^2 \norm{\nabla \Delta c}^2_2 + C \zeta \norm{\nabla C^\epsilon}^2_2. $$
 
 \end{enumerate}
 
 We obtain the following inequality for the $C^\epsilon$ function:
 
-$$ \frac{1}{2} \frac{\diff}{\diff t} \norm{\nabla C^\epsilon}^2_{L^2} \leq C \norm{\nabla C^\epsilon}^2_{L^2} + C \norm{\nabla V^\epsilon}^2_{L^\infty} \norm{\Delta c}^2_{L^2} + C \epsilon^2 \norm{\nabla \Delta c}^2_2.$$
+$$ \frac{1}{2} \frac{\diff}{\diff t} \norm{\nabla C^\epsilon}^2_{L^2} \leq C \zeta \norm{\nabla C^\epsilon}^2_{L^2} + C \frac{1}{\zeta} \norm{\nabla V^\epsilon}^2_{L^\infty} \norm{\Delta c}^2_{L^2} + C \frac{1}{\zeta} \epsilon^2 \norm{\nabla \Delta c}^2_2.$$
 
 Using the results of section \ref{H3eps} and section \ref{extendedprimitiveeqsolest}, i.e. \textit{a)} $\norm{\nabla V^\epsilon}^2_{L^\infty} \leq \epsilon^2,$ and \textit{b)} the boundedness of $\norm{\nabla \Delta c}^2_{L^2},$ we finally have
 
-$$ \frac{1}{2} \frac{\diff}{\diff t} \norm{\nabla C^\epsilon}^2_{L^2} \leq C_1 \norm{\nabla C^\epsilon}^2_{L^2} + C_2 \epsilon^2 (\norm{\nabla \Delta c}^2_2 + \norm{\Delta c}^2_{L^2}).$$
+$$ \frac{1}{2} \frac{\diff}{\diff t} \norm{\nabla C^\epsilon}^2_{L^2} \leq C_1 \zeta \norm{\nabla C^\epsilon}^2_{L^2} + C_2 \frac{1}{\zeta}\epsilon^2 (\norm{\nabla \Delta c}^2_2 + \norm{\Delta c}^2_{L^2}).$$
 
-Applying the Gronwall inequality we \todo{we need $\int_0^t C_1 \leq C$ otherwise it probably won't work} get
+The problem \todo{problem} here is that on the left-hand side now we don not have nor a gradient, nor a full Laplacian that the $\zeta C_1$ term could be melted into.
+Applying the Gronwall inequality we only \todo{$\int_0^t \zeta C_1 \leq \zeta C_1 t,$ which becomes infinite} get
 
-$$ \sup_{0 \leq s \leq t}{\norm{\nabla C^\epsilon}^2_{L^2}} \leq C_2 \epsilon^2 \int_0^t (\norm{\nabla \Delta c}^2_2 + \norm{\Delta c}^2_{L^2}) \diff s \times \exp{\int_0^t C_1 \diff s} $$
+$$ \sup_{0 \leq s \leq T}{\norm{\nabla C^\epsilon}^2_{L^2}} \leq C_2 \frac{1}{\zeta} \epsilon^2 \int_0^T (\norm{\nabla \Delta c}^2_2 + \norm{\Delta c}^2_{L^2}) \diff s \times \exp{\int_0^T \zeta C_1 \diff s} $$
+
+Here we only have boundedness for a bounded, local time interval, but for $t = \infty$ the Gronwall inequality's right-hand side becomes infinite.
 
 
     \subsubsection{$L^\infty H^2$ regularity for $C^\epsilon$}
