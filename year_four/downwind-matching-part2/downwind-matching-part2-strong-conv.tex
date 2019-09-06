@@ -198,13 +198,83 @@ Using this, we arrive to the following set of equations that describes $(U^\epsi
 
 Considering that we work with strong solutions here, it should be more straightforward than the weak solutions version, i.e. we can do it in a more simple way compared to Section 4.
 
-Firstly, we already have Proposition 5.1 in Li-Titi, i.e. the $L^2$ boundedness of the velocities.
+Firstly, we already have Proposition 5.1 in Li-Titi, i.e. the $L^2$ boundedness of the velocity functions.
 
-Secondly, the $L^2$ boundedness of the $(U^\epsilon, C^\epsilon)$ system follows from the Poincare inequality and the $H^1$ regularity that is shown in the following sections.
+Secondly, the $L^2$ boundedness of the $(U^\epsilon, C^\epsilon)$ system follows (should follow ?) from the Poincare inequality and the $H^1$ regularity that is shown in the following sections.
 
 However, for completeness, we describe the proof of the $L^2$ boundedness for the concentration function.
 
-Multiply \todo{add, write} the governing equation for $C^\epsilon$ by $C^\epsilon,$ integrate and estimate.
+For this, we use the following result from Li-Titi:
+
+\begin{theorem}
+\textbf{Proposition 5.1} (Basic $L^2$ estimate). The following basic energy estimate holds
+
+  $$ \sup_{0 \leq s \leq t}{\big ( \norm{V_\epsilon}_2^2 + \epsilon^2 \norm{W_\epsilon}_2^2 \big ) } + \int_0^t ( \norm{\nabla V_\epsilon}_2^2 + \epsilon^2 \norm{\nabla W_\epsilon}_2^2) \diff s $$
+  $$ \leq C \epsilon^2 (1 + \norm{v_0}_2^2 + \epsilon^2 \norm{w_0}^2_2)^2,$$
+
+for any $t \in [0, T^*_\epsilon),$ where $C$ is a constant depending only on $\norm{v_0}_{H^1}, L_1$ and $L_2.$
+
+\end{theorem}
+
+Multiply the governing equation.
+
+$$ \partial_t C^\epsilon + U^\epsilon \nabla C^\epsilon  + U^\epsilon \nabla c+ u \nabla C^\epsilon = K_1 \partial_{11} C^\epsilon + K_2 \partial_{22} C^\epsilon + K_3 \partial_{33} C^\epsilon + S^\epsilon $$
+
+by $C^\epsilon$ and integrate the result to obtain
+ 
+\begin{equation} \nonumber
+  \frac{1}{2}\frac{\diff}{\diff t} \norm{C^\epsilon}_2^2 + K \norm{\nabla C^\epsilon}_2^2 \leq \int_\Omega U^\epsilon \nabla C^\epsilon C^\epsilon  + \int_\Omega U^\epsilon \nabla c C^\epsilon + \int_\Omega u \nabla C^\epsilon C^\epsilon + \int_\Omega S^\epsilon C^\epsilon.
+\end{equation}
+
+Note that the integrals $\int_\Omega U^\epsilon \nabla C^\epsilon C^\epsilon$ and $\int_\Omega u \nabla C^\epsilon C^\epsilon$ are zero thanks to the divergence-free condition.
+
+In order to estimate $\int_\Omega U^\epsilon \nabla c C^\epsilon$ we write
+
+$$ \int_\Omega U^\epsilon \nabla c C^\epsilon = \int_\Omega V^\epsilon \nabla_h c C^\epsilon + \int_\Omega W^\epsilon \partial_z c C^\epsilon = I_1 + I_2.$$
+
+\begin{equation}
+  \begin{split}
+    & I_1 = \int_\Omega V^\epsilon \nabla_h c C^\epsilon \leq \norm{V^\epsilon}_3 \norm{\nabla_h c}_2 \norm{C^\epsilon}_6 \\
+    & \leq \norm{V^\epsilon}_2^{1/2} \norm{\nabla V^\epsilon}_2^{1/2} \norm{\nabla_h c}_2 \norm{\nabla C^\epsilon}_2 \\
+    & \leq \zeta \norm{\nabla C^\epsilon}_2^2 + \frac{1}{\zeta} \norm{V^\epsilon}_2 \norm{\nabla V^\epsilon}_2 \norm{\nabla_h c}_2^2 \\
+    & \leq \zeta \norm{\nabla C^\epsilon}_2^2 + \frac{1}{2} \frac{1}{\zeta} \norm{\nabla V^\epsilon}_2^2 + \frac{1}{\zeta} \frac{1}{2} \norm{\nabla_h c}_2^4 \norm{V^\epsilon}_2^2.
+  \end{split}
+\end{equation}
+
+Using Lemma 2.1 in Li-Titi we obtain
+
+\begin{equation}
+  \begin{split}
+    & I_2 = \int_\Omega W^\epsilon \cdot \partial_z c \cdot C^\epsilon = \int_\Omega \bigg ( \int_0^z \nabla_h \cdot V^\epsilon \diff z' \bigg ) \partial_z c \cdot C^\epsilon \diff \omega\\
+    & \leq \int_M \bigg ( \int_{-1}^1 \abs{ \nabla_h V^\epsilon } \diff z \bigg ) \bigg ( \int_{-1}^1 \abs{C^\epsilon} \cdot \abs{\partial_z c} \bigg ) \\
+    & \leq C \norm{\nabla_h V^\epsilon}_2 \norm{C^\epsilon}_2^{1/2} \norm{ \nabla C^\epsilon}_2^{1/2} \norm{\partial_z c}_2^{1/2} \norm{\nabla \partial_z c}_2^{1/2} \\
+    & \leq \frac{1}{2} \norm{\nabla_h V^\epsilon}_2^2 + \frac{1}{2} \norm{C^\epsilon}_2 \norm{ \nabla C^\epsilon}_2 \norm{\nabla c}_2 \norm{\Delta c}_2 \\
+    & \leq \frac{1}{2} \norm{\nabla_h V^\epsilon}_2^2 + \zeta \frac{1}{2} \norm{ \nabla C^\epsilon}_2^2 + \frac{1}{\zeta} \frac{1}{2} \norm{\nabla c}_2^2 \norm{\Delta c}_2^2 \norm{C^\epsilon}_2^2.
+  \end{split}
+\end{equation}
+
+Source term: \todo{source term todo} todo.
+
+We arrive to
+
+\begin{equation} \nonumber
+  \begin{split}
+    & \frac{1}{2}\frac{\diff}{\diff t} \norm{C^\epsilon}_2^2 + K \norm{\nabla C^\epsilon}_2^2 \\
+    & \leq C \norm{\nabla c}_2^2 \norm{\Delta c}_2^2 \norm{C^\epsilon}_2^2 + C \norm{\nabla V^\epsilon}_2^2 + C \norm{\nabla_h c}_2^4 \norm{V^\epsilon}_2^2
+   \end{split}
+\end{equation}
+
+From the Gronwall inequality we get
+
+\begin{equation} \nonumber
+  \begin{split}
+    & \sup_{0 \leq s \leq t}{\norm{C^\epsilon}_2^2 } + \int_0^t K \norm{\nabla C^\epsilon}_2^2 \diff t\\
+    & \leq \int_0^t \bigg (C \norm{\nabla V^\epsilon}_2^2 + C \norm{\nabla_h c}_2^4 \norm{V^\epsilon}_2^2 \bigg ) \\
+    & \times \exp{ \int_0^t \big ( C \norm{\nabla c}_2^2 \norm{\Delta c}_2^2 \big ) } \leq C \epsilon^2,
+   \end{split}
+\end{equation}
+
+using the already known results on $V^\epsilon$ and $\nabla V^\epsilon.$
 
 \subsection{Step 2. Recreate the conditional $H^1$ result for the extended system (analogous to Theorem 5.2 in Li-Titi)}
 
