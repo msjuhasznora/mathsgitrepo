@@ -13,6 +13,7 @@
 \usepackage{setspace}
 \usepackage[colorinlistoftodos]{todonotes}
 \definecolor{green}{rgb}{0.4, 0.69, 0.2}
+\definecolor{lavender(floral)}{rgb}{0.71, 0.49, 0.86}
 \definecolor{asparagus}{rgb}{0.53, 0.66, 0.42}
 \definecolor{blue}{rgb}{0.0, 0.53, 0.74}
 \setlist[enumerate,1]{label=\roman*)}
@@ -56,7 +57,7 @@ What we need is a scenario where the $H^2$ norm is equivalent to the $L^2$ norm 
   \item a minimal set of constraints would be for a function $f$ to require that $f, \nabla f$ is zero on the boundary.
 \end{itemize}
 
-\textbf{We choose the local physical boundary for consistency reasons and set that the velocity values and the first derivatives of the velocity are zero.}
+\textbf{We choose the local physical boundary for consistency reasons and set that the velocity and concentration values and the first derivatives of the velocity and concentration are zero.}
 This is important because we need to keep the structure of the inequalities we use in Section 5. These inequalities are obtained by using Lemma 2.2 in Li-Titi, which is formulated for periodic domains.
 
 In case we don't have any of the scenarios above, and we can not benefit from the Poincare inequality, then instead of the original
@@ -140,21 +141,9 @@ The energy inequality for the geophysical coordinate system for a boundary that 
     & \leq \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{c^\epsilon (0)}_{L^2}^2) \\
     & + \int_0^t (s^\epsilon,c^\epsilon) \diff \tau. \label{WeakSolEnergyInequality}
   \end{split}
-\end{equation}  
+\end{equation}
 
-\subsection{Step 1. Recreate the $L^2$ bound for the extended $U^\epsilon, C^\epsilon$ system (analogous to Theorem 5.1 in Li-Titi)}
-
-Considering that we work with strong solutions here, it should be more straightforward than the weak solutions version.
-
-Here we need to show that $$ \int_0^t \norm{\nabla C^\epsilon}_2^2 \leq \kappa \epsilon^2,$$ because in the next section we will assume at some point, that this is smaller than some $\delta_0.$ That makes sense only if the expression is arbitrarily small.
-
-The expression we need to bound here comes together from four results.
-
-ONE. an identity, (4.4) in Li-Titi
-
-TWO.
-
-THREE. Multiplying the (E-PEs) by $(v,c)$ and integrating. This gives the extended version of what is (4.9) in Li-Titi:
+On the other hand, multiplying (E-PEs) by $(v,c)$ we get
 
 \begin{equation}
   \begin{split}
@@ -163,11 +152,7 @@ THREE. Multiplying the (E-PEs) by $(v,c)$ and integrating. This gives the extend
   \end{split}
 \end{equation}
 
-This comes using integration by parts, using $\partial_3 p = 0,$ the divergence-free condition, and that at the integration by part process the $u \nabla v_1 \cdot v_1$ kind of terms fall out, as they have both the function and its derivative, i.e. $\nabla v_1$ and $v_1$, and $\nabla \cdot u$ is zero, and this we have that something is equals to minus something, thus it is 0.
-
-FOUR. The original energy inequality, required by definition of the weak solution, (\ref{WeakSolEnergyInequality}). (This is (4.10) in Li-Titi)
-
-\subsection{Step 2. Recreate the conditional $H^1$ result for the extended system (analogous to Theorem 5.2 in Li-Titi)}
+\subsection{Governing equations for $(V^\epsilon, W^\epsilon, C^\epsilon)$}
 
 With initial data $v_0 \in H^2 (\Omega), c_0 \in H^1(\Omega).$ For now we assume this, and we will see later if it is enough. We have $u_0 \in H^1(\Omega)$ in this case.
   
@@ -175,7 +160,7 @@ With initial data $v_0 \in H^2 (\Omega), c_0 \in H^1(\Omega).$ For now we assume
 
 \begin{enumerate}
   \item The existence of a local in time strong solution $(u^\epsilon, c^\epsilon)$ to (E-SNS) with maximal existence time $T^\epsilon.$ \todo{details} We know the existence of $u^\epsilon$ for (SNS).
-  \item The existence of the (u,c) strong solution globally of (E-PEs). \todo{details}  We have the existence of $u.$
+  \item The existence and regularities of the (u,c) strong solution globally of (E-PEs). \todo{details}  We have the existence of $u.$
 \end{enumerate}
   
 \textbf{Convergence:}  
@@ -208,6 +193,20 @@ Using this, we arrive to the following set of equations that describes $(U^\epsi
      \textcolor{green}{\partial_t C^\epsilon + U^\epsilon \nabla C^\epsilon  + U^\epsilon \nabla c+ u \nabla C^\epsilon = K_1 \partial_{11} C^\epsilon + K_2 \partial_{22} C^\epsilon + K_3 \partial_{33} C^\epsilon + S^\epsilon}
   \end{gathered}
 \end{equation}
+
+\subsection{Step 1. Recreate the $L^2$ bound for the extended $U^\epsilon, C^\epsilon$ system (analogous to Theorem 5.1 in Li-Titi)}
+
+Considering that we work with strong solutions here, it should be more straightforward than the weak solutions version, i.e. we can do it in a more simple way compared to Section 4.
+
+Firstly, we already have Proposition 5.1 in Li-Titi, i.e. the $L^2$ boundedness of the velocities.
+
+Secondly, the $L^2$ boundedness of the $(U^\epsilon, C^\epsilon)$ system follows from the Poincare inequality and the $H^1$ regularity that is shown in the following sections.
+
+However, for completeness, we describe the proof of the $L^2$ boundedness for the concentration function.
+
+Multiply \todo{add, write} the governing equation for $C^\epsilon$ by $C^\epsilon,$ integrate and estimate.
+
+\subsection{Step 2. Recreate the conditional $H^1$ result for the extended system (analogous to Theorem 5.2 in Li-Titi)}
 
 \begin{theorem}
 (updated version of Proposition 5.2) $H^1$ energy estimates. Can we have an analogous structure when multiplying the above equations by the Laplacians?
@@ -349,7 +348,7 @@ Using $(V^\epsilon, W^\epsilon, C^\epsilon)(t_0) = 0,$ applying the Gronwall ine
 
 \begin{remark}
 
-Note that the \textit{ii)}, \textit{iv)} bounds at the Coriolis terms work only if $\epsilon$ is small, i.e. for example for $\epsilon = 1$ they do not necessarily work, because in the bounding process these standalone Laplacians have to be brought to the left-hand side. However, bounding these terms differently and keeping the gradients with constant multipliers create another problem: in that case the inequality would take the form below --- note the extra $\textcolor{red}{C}$ constant term. In more detail, if we use
+Note that the \textit{ii)}, \textit{iv)} bounds at the Coriolis terms work only if $\epsilon$ is small, i.e. for example for $\epsilon = 1$ they do not necessarily work, because in the bounding process these standalone Laplacians have to be brought to the left-hand side. However, bounding these terms differently and keeping the gradients with constant multipliers create another problem: in that case the inequality would take the form below --- note the extra $\textcolor{lavender(floral)}{C}$ constant term. In more detail, if we use
 
 $$ \int_\Omega \epsilon \beta W^\epsilon \Delta V^\epsilon \leq C \norm{\epsilon \nabla W^\epsilon}_2 \norm{\nabla V^\epsilon}_2 \leq C \norm{\epsilon \nabla W^\epsilon}^2_2 + C \norm{\nabla V^\epsilon}^2_2,$$
 
@@ -359,12 +358,12 @@ then we have
   \begin{split}
     & \frac{1}{2} \frac{\diff}{\diff t} (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 + \textcolor{green}{\norm{\nabla C^\epsilon}^2_2}) + \frac{3}{5} (\norm{\Delta V^\epsilon}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\Delta C^\epsilon}_2^2}) \\
     & \leq C_1 (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 \textcolor{green}{+ \norm{\nabla C^\epsilon}^2_2}) \\
-    & \times \big [ (\norm{\Delta V}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\Delta C^\epsilon}_2^2}) + \textcolor{red}{C}+ (1+ \epsilon^4) \norm{\Delta v}^2_2 \norm{\nabla \Delta v}^2_2 + \textcolor{green}{\norm{\nabla c}^2_2 \norm{\Delta c}^2_2} \big ] \\
+    & \times \big [ (\norm{\Delta V}^2_2 + \norm{\epsilon \Delta W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\Delta C^\epsilon}_2^2}) + \textcolor{lavender(floral)}{C}+ (1+ \epsilon^4) \norm{\Delta v}^2_2 \norm{\nabla \Delta v}^2_2 + \textcolor{green}{\norm{\nabla c}^2_2 \norm{\Delta c}^2_2} \big ] \\
     & + C_1 \epsilon^2 (1 + \norm{\Delta v}^2_2) (\norm{\nabla \partial_t v}^2_2 + \norm{\nabla \Delta v}^2_2 + \textcolor{blue}{\norm{\nabla v}_2^2}).
   \end{split}
 \end{equation}
 
-Problem in this case after applying the Gronwall inequality: the $\int_0^t \textcolor{red}{C} \diff s$ new term is different. For the other terms appearing on the right-hand side of the estimate, we know a bound of the form $\int_0^\infty \norm{\nabla v} \diff s \leq C.$ On this new standalone $\int_0^t \textcolor{red}{C} \diff s$ term we don't have something like that. Which is why probably creating the Laplacians with a small coefficient is better for \textit{ii)}, and \textit{iv)}.
+Problem in this case after applying the Gronwall inequality: the $\int_0^t \textcolor{lavender(floral)}{C} \diff s$ new term is different. For the other terms appearing on the right-hand side of the estimate, we know a bound of the form $\int_0^\infty \norm{\nabla v} \diff s \leq C.$ On this new standalone $\int_0^t \textcolor{lavender(floral)}{C} \diff s$ term we don't have something like that. Which is why probably creating the Laplacians with a small coefficient is better for \textit{ii)}, and \textit{iv)}.
 
 \end{remark}
 
@@ -451,46 +450,46 @@ For now it seems that this works only for a local time interval, see later a ter
 
 (E-SNS): extended scaled Navier-Stokes.
 
-    \begin{equation} \label{ANSC1}
+    \begin{equation} \label{ANSC1-dw}
     \partial_t u^\epsilon _1 + \mathbf{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\gamma u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
     \end{equation}
     
-    \begin{equation} \label{ANSC2}
+    \begin{equation} \label{ANSC2-dw}
     \partial_t u_2^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_2^\epsilon -\Delta_\nu u_2^\epsilon + \gamma u_1^\epsilon  - \alpha \epsilon u^\epsilon_3 + \partial_2 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
     \end{equation}
     
-    \begin{equation} \label{ANSC3}
+    \begin{equation} \label{ANSC3-dw}
     \epsilon^2 \{  \partial_t u_3^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon -\Delta_\nu u_3^{\epsilon} \} + \epsilon \alpha u^\epsilon_2 - \epsilon \beta u_1^\epsilon + \partial_3 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
     \end{equation}
     
-    \begin{equation} \label{ANSC4}
+    \begin{equation} \label{ANSC4-dw}
     \nabla \cdot \mathbf{u}^\epsilon= 0 \text{ in } \Omega \times (0,T)
     \end{equation}
     
-    \begin{equation} \label{ANSC5}
+    \begin{equation} \label{ANSC5-dw}
     \partial_t c^\epsilon + \mathbf{u^\epsilon} \cdot \nabla c^\epsilon = \epsilon K_1 \partial_{11} ^ 2 c^\epsilon + K_2 \partial_{22} ^ 2 c^\epsilon + K_3 \partial_{33} ^ 2 c^\epsilon + s^\epsilon \text{ in } \Omega \times (0,T).
     \end{equation}
     
 
 (E-PEs): extended Primitive Equations.
 
-    \begin{equation} \label{HNSC1}    
+    \begin{equation} \label{HNSC1-dw}    
     \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 - \gamma u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T)
     \end{equation}
     
-    \begin{equation} \label{HNSC2}   
+    \begin{equation} \label{HNSC2-dw}   
     \partial_t u_2 + \mathbf{u} \cdot \nabla u_2 - \Delta_\nu u_2 + \gamma u_1 + \partial_2 p = 0 \text{ in } \Omega \times (0,T)
     \end{equation}
     
-    \begin{equation} \label{HNSC3}   
+    \begin{equation} \label{HNSC3-dw}   
     \partial_3 p = 0 \text{ in } \Omega \times (0,T)
     \end{equation}
     
-    \begin{equation} \label{HNSC4}   
+    \begin{equation} \label{HNSC4-dw}   
     \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \times (0,T)
     \end{equation}
     
-    \begin{equation} \label{HNSC5}   
+    \begin{equation} \label{HNSC5-dw}   
     \partial_t c + \mathbf{u} \cdot \nabla c = K_2 \partial_{22} ^ 2 c + K_3 \partial_{33} ^2 c + s \text{ in } \Omega \times (0,T)
     \end{equation}
     
@@ -579,18 +578,17 @@ Here we only have boundedness for a bounded, local time interval, but for $t = \
 \section{Questions and todo}
 
 \begin{itemize}
+    \item How exactly do we know that $\big (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\nabla C^\epsilon}^2_2} \big )$ grows continuously? If it didn't, then it would be possible that from $\delta_0^2 / 2$ it jumps to $\delta_0^2 +1,$ and with that we wouldn't have $t^*_\epsilon = T^*_\epsilon.$
+  
+  \item In Proposition 5.3 why exactly do we need the $L^2$ result from Proposition 5.1? Is it because for the bound of $\int_0^\infty \norm{\nabla V^\epsilon}^2_{H^1}$ by definition we need $\int_0^\infty \norm{\nabla V^\epsilon}^2_{L^2}$ and $\int_0^\infty \norm{\Delta V^\epsilon}^2_{L^2}$, and the first does not come from the second one by the Poincare inequality?
+  
+  \item on p27 why do we need (5.8), which is essentially Proposition 5.1 in order to have $t^*_\epsilon = T^*_\epsilon?$ If it is only needed towards the end, why is it mentioned in the beginning?
 
   \item Why do we need $\int_\Omega = 0$ in Lemma 2.2 when they have periodic boundaries and thus they can freely use the Poincare inequality?
   
   \item Existence of weak solutions of the anisotropic system? We only discuss the existence of the solutions of the extended primitive equations.
 
   \item Initial and boundary conditions, for example p27, they use (1.2)-(1.4). Again, are these symmetries important (the even and odd functions?) Plus, define BC, IC for the $c^\epsilon, c$ functions.
-  
-  \item How exactly do we know that $\big (\norm{\nabla V^\epsilon}^2_2 + \norm{\epsilon \nabla W^\epsilon}^2_2 \textcolor{green}{+ K \norm{\nabla C^\epsilon}^2_2} \big )$ grows continuously? If it didn't, then it would be possible that from $\delta_0 / 2$ it jumps to $\delta_0 +1,$ and with that we wouldn't have $t^*_\epsilon = T^*_\epsilon.$
-  
-  \item In Proposition 5.3 why exactly do we need the $L^2$ result from Proposition 5.1? Is it because for the bound of $\int_0^\infty \norm{\nabla V^\epsilon}^2_{H^1}$ by definition we need $\int_0^\infty \norm{\nabla V^\epsilon}^2_{L^2}$ and $\int_0^\infty \norm{\Delta V^\epsilon}^2_{L^2}$, and the first does not come from the second one by the Poincare inequality?
-  
-  \item on p27 why do we need (5.8), which is essentially Proposition 5.1 in order to have $t^*_\epsilon = T^*_\epsilon?$ If it is only needed towards the end, why is it mentioned in the beginning?
   
   \item The zero-trace (zero boundary) version of Poincare inequality (see p280 in Evans) states that for all $1 \leq p \leq \infty,$ we have $\norm{u}_{L^p(U)} \leq C \norm{D u}_{L^p (U)}.$ So, using this, when we have $L^\infty L^2 \cap L^2 H^1$ estimate for $\nabla v,$ we automatically have it for $v$ as well, right? For the adequate boundaries.
   
