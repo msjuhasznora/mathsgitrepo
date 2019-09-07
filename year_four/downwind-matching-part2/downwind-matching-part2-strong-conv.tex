@@ -264,6 +264,8 @@ We arrive to
    \end{split}
 \end{equation}
 
+Note that since here we already know the results on $V^\epsilon$ and we work only on $C^\epsilon,$ the multiplier of the function is $C \norm{\nabla c}_2^2 \norm{\Delta c}_2^2,$ and the additive term is the whole $C \norm{\nabla V^\epsilon}_2^2 + C \norm{\nabla_h c}_2^4 \norm{V^\epsilon}_2^2.$ If we worked simultaneously on $V^\epsilon, \epsilon W^\epsilon, C^\epsilon,$ then the $\norm{\nabla V^\epsilon}$ term would need a small $\zeta_2$ multiplier from the Young inequality, and it would need to go to the left-hand side.
+
 From the Gronwall inequality we get
 
 \begin{equation} \nonumber
@@ -275,6 +277,10 @@ From the Gronwall inequality we get
 \end{equation}
 
 using the already known results on $V^\epsilon$ and $\nabla V^\epsilon.$
+
+\begin{remark}
+  One of the significant differences between proving the $L^2$ and $H^1$ regularities is the difference between the terms $U^\epsilon \nabla C^\epsilon C^\epsilon$ and $U^\epsilon \nabla C^\epsilon \Delta C^\epsilon.$ While the first one is zero for a $U^\epsilon$ function with zero divergence, the second one isn't, and thus, has to be estimated.
+\end{remark}
 
 \subsection{Step 2. Recreate the conditional $H^1$ result for the extended system (analogous to Theorem 5.2 in Li-Titi)}
 
@@ -577,6 +583,67 @@ We will possibly use a different kind of structure here. As we will see, we will
     \subsubsection{Additional results on the regularity of $c$ (analogous extended result to Corollary 3.1 in Li-Titi)} \label{extendedprimitiveeqsolest}
     
     For the $L^\infty H^1$ regularity of $C^\epsilon$ we need something like $$\int_0^t \norm{\Delta c}_2^2 \diff s \leq C, \int_0^t \norm{\nabla \Delta c}_2^2 \diff s \leq C$$ where $C$ is a constant.
+    
+    \subsubsection{$L_t^\infty L_x^2$ regularity for $C^\epsilon$}
+    
+    We already know the $L^2$ regularity for the velocity. Here we show the $L^2$ regularity of the concentration part.
+    It seems that whatever regularity we can show for $C^\epsilon$ here in this coordinate system, it will be based on the $\partial_t C^\epsilon$ term, because from the Laplacians we won't have a complete term as the $\epsilon$ multiplier is there.
+    
+    Multiply the governing equation
+
+$$ \partial_t C^\epsilon + U^\epsilon \nabla C^\epsilon  + U^\epsilon \nabla c+ u \nabla C^\epsilon = \textcolor{orange}{\epsilon K_1 \partial_{11} C^\epsilon + \epsilon K_1 \partial_{11} c} + K_2 \partial_{22} C^\epsilon + K_3 \partial_{33} C^\epsilon + S^\epsilon $$
+
+by $C^\epsilon.$ For now let's ignore the source term \todo{source term todo} $S^\epsilon.$
+
+\begin{equation}
+  \begin{split}
+      & \frac{1}{2}\frac{\diff}{\diff t} \norm{C^\epsilon}_2^2 + \epsilon K_1 \norm{\partial_1 C^\epsilon}_2^2 + K_2 \norm{\partial_2 C^\epsilon}_2^2 + K_3 \norm{\partial_3 C^\epsilon}_2^2 \\
+      & = - \int_\Omega U^\epsilon \nabla C^\epsilon C^\epsilon - \int_\Omega U^\epsilon \nabla c C^\epsilon - \int_\Omega u \nabla C^\epsilon C^\epsilon + \int_\Omega \epsilon K_1 \partial_{11} C^\epsilon
+  \end{split}
+\end{equation}
+
+\begin{itemize}
+
+  \item $\int_\Omega U^\epsilon \nabla C^\epsilon C^\epsilon = 0$ because of the divergence-free condition.
+  
+  \item Using section \ref{H3eps} we have
+  
+\begin{equation}
+  \begin{split}
+    & \int_\Omega U^\epsilon \nabla c C^\epsilon \leq \norm{U^\epsilon}_{L^\infty} \int_\Omega \nabla c C^\epsilon \leq \norm{U^\epsilon}_{L^\infty} \norm{\nabla c}_2 \norm{C^\epsilon}_2 \\
+    & \leq C \norm{U^\epsilon}_{L^\infty}^2 + C \norm{\nabla c}_2^2 \norm{C^\epsilon}_2^2 \\
+    & \leq C \epsilon^2 + C \norm{\nabla c}_2^2 \norm{C^\epsilon}_2^2.
+  \end{split}
+\end{equation}
+
+  \item $\int_\Omega u \nabla C^\epsilon C^\epsilon = 0$ because of the divergence-free condition.
+  
+  \item 
+\begin{equation}
+    \int_\Omega \epsilon K_1 \partial_{11} c C^\epsilon \leq \epsilon K_1 \norm{\Delta c}_2 \norm{C^\epsilon}_2 \leq C \epsilon^2 + C \norm{\Delta c}_2^2 \norm{C^\epsilon}_2^2.
+\end{equation}
+
+\end{itemize}
+
+Putting together the previous points, we get
+
+\begin{equation}
+  \begin{split}
+      & \frac{1}{2}\frac{\diff}{\diff t} \norm{C^\epsilon}_2^2 + \epsilon K_1 \norm{\partial_1 C^\epsilon}_2^2 + K_2 \norm{\partial_2 C^\epsilon}_2^2 + K_3 \norm{\partial_3 C^\epsilon}_2^2 \\
+      & \leq C \epsilon^2 + C (\norm{\nabla c}_2^2 + \norm{\Delta c}_2^2) \norm{C^\epsilon}_2^2.
+  \end{split}
+\end{equation}
+
+Applying the Gronwall inequality we have
+
+\begin{equation}
+  \begin{split}
+      & \sup_{0 \leq \tau \leq t}{\frac{1}{2}\frac{\diff}{\diff t} \norm{C^\epsilon}_2^2} \\
+      & \leq \epsilon^2 \int_0^t C \diff \tau \times \exp{ \int_0^t C (\norm{\nabla c}_2^2 + \norm{\Delta c}_2^2) \diff \tau}.
+  \end{split}
+\end{equation}
+
+The problem is the term $ \int_0^t C \diff \tau,$ which, when $t = \infty,$ is not bounded.
 
     \subsubsection{$L^\infty H^1$ regularity for $C^\epsilon$}
 Multiply the governing equation
@@ -584,6 +651,8 @@ Multiply the governing equation
 $$ \partial_t C^\epsilon + U^\epsilon \nabla C^\epsilon  + U^\epsilon \nabla c+ u \nabla C^\epsilon = \textcolor{orange}{\epsilon K_1 \partial_{11} C^\epsilon + \epsilon K_1 \partial_{11} c} + K_2 \partial_{22} C^\epsilon + K_3 \partial_{33} C^\epsilon + S^\epsilon $$
 
 by $- \Delta C^\epsilon.$ For now let's ignore the source term $S^\epsilon.$
+
+\textbf{Multiply by $\partial_{ii} C^\epsilon$ and use the idea in the vertical diffusivity article.}
 
 \begin{equation}
   \begin{split}
@@ -594,17 +663,13 @@ by $- \Delta C^\epsilon.$ For now let's ignore the source term $S^\epsilon.$
 
 \begin{enumerate}
 
-  \item Using the divergence-free condition, we have 
+  \item $\int_\Omega U^\epsilon \nabla C^\epsilon \Delta C^\epsilon,$ which is not zero.
 
-$$ \int_\Omega U^\epsilon \nabla C^\epsilon \Delta C^\epsilon = - \int_\Omega U^\epsilon \Delta C^\epsilon \nabla C^\epsilon$$
+  \item $\int_\Omega u \nabla C^\epsilon \Delta C^\epsilon,$ which is not zero.
 
-and
-
-$$ \int_\Omega u \nabla C^\epsilon \Delta C^\epsilon = - \int_\Omega u \Delta C^\epsilon \nabla C^\epsilon,$$
-
-thus these terms are $0.$
-
-  \item To estimate $\int_\Omega U^\epsilon \nabla c \Delta C^\epsilon = - \int_\Omega U^\epsilon \Delta c \nabla C^\epsilon,$ we use the Holder inequality with $\frac{1}{\infty} + \frac{1}{2} + \frac{1}{2} = 1,$ the triangle inequality, the Poincare inequality and the Young inequality, obtaining
+  \item To estimate $\int_\Omega U^\epsilon \nabla c \Delta C^\epsilon,$ which is probably not $\int_\Omega U^\epsilon \Delta c \nabla C^\epsilon.$
+  
+  OVERVIEW: we use the Holder inequality with $\frac{1}{\infty} + \frac{1}{2} + \frac{1}{2} = 1,$ the triangle inequality, the Poincare inequality and the Young inequality, obtaining
 
 \begin{equation}
   \begin{split}
