@@ -638,12 +638,12 @@ Applying the Gronwall inequality we have
 
 \begin{equation}
   \begin{split}
-      & \sup_{0 \leq \tau \leq t}{\frac{1}{2}\frac{\diff}{\diff t} \norm{C^\epsilon}_2^2} \\
-      & \leq \epsilon^2 \int_0^t C \diff \tau \times \exp{ \int_0^t C (\norm{\nabla c}_2^2 + \norm{\Delta c}_2^2) \diff \tau}.
+      & \sup_{0 \leq \tau \leq {T^*}}{\frac{1}{2}\frac{\diff}{\diff t} \norm{C^\epsilon}_2^2} \\
+      & \leq \epsilon^2 \int_0^{T^*} C \diff \tau \times \exp{ \int_0^{T^*} C (\norm{\nabla c}_2^2 + \norm{\Delta c}_2^2) \diff \tau}.
   \end{split}
 \end{equation}
 
-The problem is the term $ \int_0^t C \diff \tau,$ which, when $t = \infty,$ is not bounded.
+The difference is the term $ \int_0^{T^*} C \diff \tau,$ which, when ${T^*} = \infty,$ is not bounded. However, for a finite $T^*$ time it is ok, $ \int_0^{T^*} C \diff \tau$ is finite.
 
     \subsubsection{$L^\infty H^1$ regularity for $C^\epsilon$}
 Multiply the governing equation
@@ -652,7 +652,7 @@ $$ \partial_t C^\epsilon + U^\epsilon \nabla C^\epsilon  + U^\epsilon \nabla c+ 
 
 by $- \Delta C^\epsilon.$ For now let's ignore the source term $S^\epsilon.$
 
-\textbf{Multiply by $\partial_{ii} C^\epsilon$ and use the idea in the vertical diffusivity article.}
+\textbf{Multiply by $\partial_{ii} C^\epsilon$ and use the idea in the vertical diffusivity article?}
 
 \begin{equation}
   \begin{split}
@@ -668,42 +668,8 @@ by $- \Delta C^\epsilon.$ For now let's ignore the source term $S^\epsilon.$
   \item $\int_\Omega u \nabla C^\epsilon \Delta C^\epsilon,$ which is not zero.
 
   \item To estimate $\int_\Omega U^\epsilon \nabla c \Delta C^\epsilon,$ which is probably not $\int_\Omega U^\epsilon \Delta c \nabla C^\epsilon.$
-  
-  OVERVIEW: we use the Holder inequality with $\frac{1}{\infty} + \frac{1}{2} + \frac{1}{2} = 1,$ the triangle inequality, the Poincare inequality and the Young inequality, obtaining
-
-\begin{equation}
-  \begin{split}
-    & \int_\Omega U^\epsilon \Delta c \nabla C^\epsilon \leq \norm{U^\epsilon}_{L^\infty} \norm{\Delta c}_{L^2} \norm{\nabla C^\epsilon}_{L^2} \\
-    & \leq (\norm{V^\epsilon}_{L^\infty} + \norm{W^\epsilon}_{L^\infty})\norm{\Delta c}_{L^2} \norm{\nabla C^\epsilon}_{L^2} \\
-    & \leq (\norm{V^\epsilon}_{L^\infty} + \norm{\nabla V^\epsilon}_{L^\infty})\norm{\Delta c}_{L^2} \norm{\nabla C^\epsilon}_{L^2} \\
-    & \leq \norm{\nabla V^\epsilon}_{L^\infty} \norm{\Delta c}_{L^2} \norm{\nabla C^\epsilon}_{L^2} \\
-    & \leq C \frac{1}{\zeta} \norm{\nabla V^\epsilon}^2_{L^\infty} \norm{\Delta c}^2_{L^2} + C \zeta \norm{\nabla C^\epsilon}^2_{L^2}.
-  \end{split}
-\end{equation}
-
-To be aligned with the required structure in order to apply the Gronwall inequality, we need $\norm{\nabla V^\epsilon}_{L^\infty} \leq \epsilon$ and the norm of $\Delta c$ to be bounded by a constant $C$ (see section \ref{H3eps} and section \ref{extendedprimitiveeqsolest}.)
-
-  \item Finally we estimate $- \int_\Omega \epsilon K_1 \partial_{11} c \Delta C^\epsilon$ by
-
-  $$ - \int_\Omega \epsilon K_1 \partial_{11} c \Delta C^\epsilon = K_1 \int_\Omega \epsilon \nabla \partial_{11} c \nabla C^\epsilon \leq C \frac{1}{\zeta} \epsilon^2 \norm{\nabla \Delta c}^2_2 + C \zeta \norm{\nabla C^\epsilon}^2_2. $$
 
 \end{enumerate}
-
-We obtain the following inequality for the $C^\epsilon$ function:
-
-$$ \frac{1}{2} \frac{\diff}{\diff t} \norm{\nabla C^\epsilon}^2_{L^2} \leq C \zeta \norm{\nabla C^\epsilon}^2_{L^2} + C \frac{1}{\zeta} \norm{\nabla V^\epsilon}^2_{L^\infty} \norm{\Delta c}^2_{L^2} + C \frac{1}{\zeta} \epsilon^2 \norm{\nabla \Delta c}^2_2.$$
-
-Using the results of section \ref{H3eps} and section \ref{extendedprimitiveeqsolest}, i.e. \textit{a)} $\norm{\nabla V^\epsilon}^2_{L^\infty} \leq \epsilon^2,$ and \textit{b)} the boundedness of $\norm{\nabla \Delta c}^2_{L^2},$ we finally have
-
-$$ \frac{1}{2} \frac{\diff}{\diff t} \norm{\nabla C^\epsilon}^2_{L^2} \leq C_1 \zeta \norm{\nabla C^\epsilon}^2_{L^2} + C_2 \frac{1}{\zeta}\epsilon^2 (\norm{\nabla \Delta c}^2_2 + \norm{\Delta c}^2_{L^2}).$$
-
-The problem \todo{problem} here is that on the left-hand side now we don not have nor a gradient, nor a full Laplacian that the $\zeta C_1$ term could be melted into.
-Applying the Gronwall inequality we only \todo{$\int_0^t \zeta C_1 \leq \zeta C_1 t,$ which becomes infinite} get
-
-$$ \sup_{0 \leq s \leq T}{\norm{\nabla C^\epsilon}^2_{L^2}} \leq C_2 \frac{1}{\zeta} \epsilon^2 \int_0^T (\norm{\nabla \Delta c}^2_2 + \norm{\Delta c}^2_{L^2}) \diff s \times \exp{\int_0^T \zeta C_1 \diff s} $$
-
-Here we only have boundedness for a bounded, local time interval, but for $t = \infty$ the Gronwall inequality's right-hand side becomes infinite.
-
 
     \subsubsection{$L^\infty H^2$ regularity for $C^\epsilon$}
     
