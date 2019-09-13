@@ -1,3 +1,6 @@
+# improvement ideas: i) make it time dependent
+# ii) periodic in the x direction
+
 import matplotlib.pyplot as plt
 from dolfin import *
 import numpy as np
@@ -41,7 +44,7 @@ up_ = Function(VP)
 (u_, p_) = split(up_)
 (u1_, u3_) = split(u_)
 
-eps = 0.0000001
+eps = 1.0
 
 F = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx + eps*eps*inner(u, grad(u3)) * v3 * dx + eps*eps*inner(grad(u3),grad(v3)) * dx -p*div(v)*dx + q*div(u)*dx - inner(theta, v) * ds(1)
 
