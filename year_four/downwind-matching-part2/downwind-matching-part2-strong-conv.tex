@@ -623,6 +623,18 @@ Thus the main difference from Section 5 in Li-Titi is that while in their case t
 With this we get
 
 \[ \norm{C^\epsilon}_{L^\infty(0,T; H^1(\Omega))} \leq \epsilon C \exp{(C \sqrt{T})}.\]
+
+\textbf{Points:}
+\begin{enumerate}
+  \item The main question is if we can get $L_1$ estimates in time, which right now I don't know of we can, because applying a square root on the inequality before integrating in time I think might not work because the time derivative is negative. The space norm in itself would contain a square root over it, applying that on the LHS is problematic because of the presence of the time derivative. If we can not get $L_1$ estimates, we will have the $\sqrt{T}$ multiplier term in the Gronwall inequality.
+  \item From Proposition 5.3 we know already that the strong solutions $v^\epsilon, w^\epsilon$ of the anisotropic system exist \textbf{globally}. We also know that most likely (still to be checked though) $(v,w,c)$ exist globally, too.
+  \item We also do not have the $\delta_0$ part, which they need to deal with. We have a different structure and a higher regularity and we don't arrive to that split structure in that sense. We do not have this $\delta_0$ step. We either have a bounded $C^\epsilon$ norm immediately for any $T$ (if the $L^1$ norm in time turns out to be bounded for the term where the square is missing), then we are fine until infinity, otherwise we don't have a $T$-free estimate, in that case the convergence gets weaker in time.
+  \item Which is why, it seems like that the estimate for $c^\epsilon - c$ could work in one piece, taking $T$ which is the maximum existence for $c^\epsilon,$ but if the energy bound works, then $T$ naturally becomes infinite.
+  \item With these we can estimate $C^\epsilon$, which is bounded for any finite time and does not blow up at any finite point in time. Thus, I think $c^\epsilon$ also exists for any $T$ smaller than infinity.
+  \item Difference: at Li-Titi they have $C,$ we have $C(T)$ unless we can bound the $L_1$ norm in time by a $C$ constant.
+  \item We can not use $T=\infty$ in the $C^\epsilon$ bound itself, but the estimate holds for any finite point in time --- the convergence gets slower as time evolves.
+  \item If the $L^1$ norm in time is not bounded, then it seems that not just the convergence rate weakens (from $\epsilon^2$ to $\epsilon$), but also the uniformity in time is lost.
+\end{enumerate}
      
 \section{Rumble, might be useful for later}
 
