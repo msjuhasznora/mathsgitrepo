@@ -164,6 +164,57 @@ solver.solve()\\
 }
 
 Additionally, with a full nonzero $\theta,$ we can improve the dependence of the scheme on $v_3,$ which right now is through \texttt{inner(p, div(v))}.
+
+\section{2D stationary, Newton}
+
+\textbf{\texttt{nonlinear\_reduced2D\_idea.py}}
+
+The idea here is to make the two horizontal dimensions fall into one, or another way of interpreting it is just to have one horizontal dimension. The main reason behind this is that the point and the meaning of the result remains even for this scenario and the computation potentially becomes better, which at this phase of the development is important.
+
+The scaling process remains the same as the vertical quantities are unchanged.
+
+Thus we have the spaces
+
+\texttt{
+\\
+mesh = UnitSquareMesh(30, 30)\\
+V = VectorElement("Lagrange", mesh.ufl\_cell(), degree = 2, dim = 2)\\
+P = FiniteElement("Lagrange", mesh.ufl\_cell(), degree = 1)\\
+TH = V * P\\
+VP = FunctionSpace(mesh, TH)\\
+}
+
+and use a nonlinear solver and a nonlinear scheme in order to keep the dependence of the complete $u$ function.
+
+\texttt{
+\\
+bcu = [noslipbasin, zerotop\_u]\\
+\\
+up = TrialFunction(VP)\\
+u,p = split(up)\\
+u1, u3 = split(u)\\
+(v, q) = TestFunctions(VP)\\
+v1, v3 = split(v)\\
+\\
+up\_ = Function(VP)\\
+(u\_, p\_) = split(up\_)\\
+(u1\_, u3\_) = split(u\_)\\
+\\
+eps = 1.0 \\
+\\
+F = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx + eps*eps*inner(u, grad(u3)) * v3 * dx\\
++ eps*eps*inner(grad(u3),grad(v3)) * dx - p * div(v) * dx + q * div(u) * dx - inner(theta, v) * ds(1)\\
+\\
+F = action(F, up\_)\\
+J  = derivative(F, up\_, up)\\
+\\
+problem = NonlinearVariationalProblem(F, up\_, bcu, J)\\
+solver  = NonlinearVariationalSolver(problem) \\
+solver.solve()\\
+}
+
+The results in the "results2D" folder show a hopeful tendency, but the scheme does not work for epsilon smaller than order $10^{-7}.$
+
 \section{Ideas}
 
 \begin{enumerate}
