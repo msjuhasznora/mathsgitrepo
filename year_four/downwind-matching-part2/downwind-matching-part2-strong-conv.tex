@@ -160,7 +160,7 @@ With initial data $v_0 \in H^2 (\Omega), c_0 \in H^1(\Omega).$ For now we assume
 
 \begin{enumerate}
   \item The existence of a local in time strong solution $(u^\epsilon, c^\epsilon)$ to (E-SNS) with maximal existence time $T^\epsilon.$ \todo{details} We know the existence of $u^\epsilon$ for (SNS).
-  \item The existence and regularities of the (u,c) strong solution globally of (E-PEs). \todo{details}  We have the existence of $u.$
+  \item The existence and regularities of the (u,c) strong solution globally of (E-PEs). \todo{details}  We have the existence of both $(u, T)$ from the Cao-Titi 3D wellposedness article with the difference that there they have $\partial_z p + T = 0,$ while for the concentration function we do not have this relation.
 \end{enumerate}
   
 \textbf{Convergence:}  
@@ -577,7 +577,56 @@ $$ \partial_t C^\epsilon + U^\epsilon \nabla C^\epsilon  + U^\epsilon \nabla c+ 
 
 This means that we can not follow the exact same path as before, as multiplying the equation by $- \Delta C^\epsilon$ results only $\epsilon \norm{\partial_{11} C^\epsilon}$ on the left-hand side, while from the estimates of the convective terms, we still have $\zeta \norm{\Delta V^\epsilon}^2_2$ terms on the right-hand side of the estimate, and these can not anymore be "melted" into the left-hand side, as the full, $\epsilon$-free Laplacian is missing.
 
-    \subsubsection{$H^3$ regularity for $V^\epsilon$ in the sense that $\norm{V^\epsilon}_{H^3} \leq \epsilon$} \label{H3eps}
+\subsection{The time-dependent estimate for the system}
+
+Revising the calculations (12sept2019) on the paper, we have 
+
+\begin{equation}
+  \begin{split}
+    & \frac{1}{2} \frac{\diff}{\diff t} \norm{\nabla C^\epsilon}_2^2 + \epsilon K_1 \norm{\partial_{11} C^\epsilon}_2^2 + K_2 \norm{\partial_{22} C^\epsilon}_2^2 + K_3 \norm{\partial_{33} C^\epsilon}_2^2 + C \norm{\partial_{ij} C^\epsilon}_2^2 \\
+    & \leq C \textcolor{blue}{\norm{U_H^\epsilon}_{H^3}} \norm{\nabla C^\epsilon}_2^2 + C \norm{U_H^\epsilon}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2 \\
+    & + C \textcolor{blue}{\norm{u_H^\epsilon}_{H^3}} \norm{\nabla C^\epsilon}_2^2 + C \norm{u_H^\epsilon}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2 \\
+    & + \textcolor{green}{C \norm{U_H^\epsilon}_{H^3}^2} + (\norm{\partial_{ij} c}_2^2 + \norm{\nabla \partial_i c}_2^2)\norm{\nabla C^\epsilon}_2^2 \\
+    & + \textcolor{green}{C \norm{U_H^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2} \\
+    & + \textcolor{green}{\epsilon K_1 \norm{\partial_{11} c}_2^2},
+  \end{split}
+\end{equation}
+
+where $i \neq j,$ and the appropriate terms have been merged into the left-hand side.
+
+The terms with "the missing square" are due to the $u_1 \partial_1 C^\epsilon \partial_{11} C^\epsilon, U_1^\epsilon \partial_1 C^\epsilon \partial_{11} C^\epsilon$ terms.
+
+The \textcolor{green}{additive terms} will contribute
+
+\[ \int_0^T \epsilon C \norm{\partial_{11} c}_2^2 + C \norm{U_H^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2 + C \norm{U_H^\epsilon}_{H^3}^2  \diff \tau \leq \epsilon C + \epsilon^2 C \]
+
+to the estimate obtained after applying the Gronwall inequality, which is independent from $T$, and the estimate holds even for $T= \infty.$
+
+The multiplicative terms contribute
+
+\[ \int_0^T \textcolor{blue}{\norm{U_H^\epsilon}_{H^3}} + \textcolor{blue}{\norm{u_H^\epsilon}_{H^3}} + \norm{U_H^\epsilon}_{H^3}^2 + C \norm{u_H^\epsilon}_{H^3}^2 + (\norm{\partial_{ij} c}_2^2 + \norm{\nabla \partial_i c}_2^2) \diff \tau,\]
+
+which can be estimated with
+
+\begin{equation}
+  \begin{split}
+    & \int_0^T \norm{U_H^\epsilon}_{H^3} + \norm{u_H^\epsilon}_{H^3} \diff \tau + C \\
+    & \leq \int_0^T \norm{1 \cdot U_H^\epsilon}_{H^3} + \norm{1 \cdot u_H^\epsilon}_{H^3} \diff \tau + C \\
+    & \leq T^{1/2} \bigg (\int_0^T \norm{U_H^\epsilon}_{H^3}^2 \bigg )^{1/2} \diff \tau + T^{1/2} \bigg (\int_0^T \norm{u_H^\epsilon}_{H^3}^2 \bigg )^{1/2} \diff \tau + C \\
+    & \leq T^{1/2} C + C \\
+    & \leq C \sqrt{T}.
+  \end{split}
+\end{equation}
+
+Thus the main difference from Section 5 in Li-Titi is that while in their case they had an $\epsilon^2 C$ bound where $C=C(L_1, L_2, \norm{v_0}_{H_1}),$ \textbf{we have a $C$ that depends also on $T.$}
+
+With this we get
+
+\[ \norm{C^\epsilon}_{L^\infty(0,T; H^1(\Omega))} \leq \epsilon C \exp{(C \sqrt{T})}.\]
+     
+\section{Rumble, might be useful for later}
+
+   \subsubsection{$H^3$ regularity for $V^\epsilon$ in the sense that $\norm{V^\epsilon}_{H^3} \leq \epsilon$} \label{H3eps}
 We will possibly use a different kind of structure here. As we will see, we will need a stronger, $H^3-$ regular $V^\epsilon$ function (in order to have $U^\epsilon$ in $H^2,$ which guarantees that it is in $L^\infty$). Let's see what kind of initial data could provide that.
 
     \subsubsection{Additional results on the regularity of $c$ (analogous extended result to Corollary 3.1 in Li-Titi)} \label{extendedprimitiveeqsolest}
@@ -675,6 +724,7 @@ by $- \Delta C^\epsilon.$ For now let's ignore the source term $S^\epsilon.$
     
     The $H^2$ space regularity does not naturally come from the $L^\infty H^1$ regularity as seen for the geophysical coordinate system, because in the downwind-matching coordinate system the Laplacian is not complete anymore, and thus, while estimating the $L^\infty H^1$ norm, it does not automatically provide $L^2 H^2$ as well. The $H^2$ space norm estimate can be calculated separately, not from the Laplacian, but from the time derivative term, by multiplying it with a higher order space derivative.
     Multiply the governing equation for $C^\epsilon$ by $\Delta \Delta C^\epsilon$ and increase regularity of $c.$ But do we need this part?
+
 
 \section{Questions and todo}
 
