@@ -30,7 +30,7 @@
 
 
 %%% *** PREAMBLE *** %%%
-\title{Strong solutions}
+\title{Strong convergence of strong solutions for the case of $H^3$ initial data ${\mathbf{u}_h}_0$ and downwind-matching coordinate system}
 
 \date{}
 
@@ -41,13 +41,152 @@
 
 \begin{abstract}
 
-The strong convergence of the strong solutions.
+We propose the strong convergence of $(\mathbf{u}_h^\epsilon, u_3^\epsilon, c^\epsilon)$ over the unbounded $[0, \infty)$ domain, with $\epsilon$ convergence rate and a non-uniform bound in time.
 
 \end{abstract}
 
 \newpage
 \tableofcontents
 \newpage
+
+\section{Downwind-matching coordinates}
+
+Let's have ${\mathbf{u}_h}_0 \in H^3$ and $\epsilon < \epsilon_0,$ where $\epsilon_0$ is the limit specified by Proposition 5.3 in the Li-Titi article.
+Starting from this, we have
+
+\begin{enumerate}
+
+  \item Global unique existence of $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ with the following uniform bound for the difference:
+  
+  \[ \leq C \epsilon^2\]
+  
+  \item Based on the previous point, the existence of the extended $(\mathbf{u}_h^\epsilon, u_3^\epsilon, c^\epsilon)$ solution follows from identical steps as the existence of the velocity part.
+
+\end{enumerate}
+
+What still needs to be checked, but probably holds:
+
+\begin{enumerate}
+
+  \item Existence of the $(\mathbf{u}_h, u_3, c)$ strong solutions of the PEs expressed in downwind-matching coordinates.
+
+\end{enumerate}
+
+  \subsection{The set of equations}
+
+(E-SNS): extended scaled Navier-Stokes.
+
+    \begin{equation} \label{ANSC1-dw}
+    \partial_t u^\epsilon _1 + \mathbf{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\gamma u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{ANSC2-dw}
+    \partial_t u_2^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_2^\epsilon -\Delta_\nu u_2^\epsilon + \gamma u_1^\epsilon  - \alpha \epsilon u^\epsilon_3 + \partial_2 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{ANSC3-dw}
+    \epsilon^2 \{  \partial_t u_3^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon -\Delta_\nu u_3^{\epsilon} \} + \epsilon \alpha u^\epsilon_2 - \epsilon \beta u_1^\epsilon + \partial_3 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{ANSC4-dw}
+    \nabla \cdot \mathbf{u}^\epsilon= 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{ANSC5-dw}
+    \partial_t c^\epsilon + \mathbf{u^\epsilon} \cdot \nabla c^\epsilon = \epsilon K_1 \partial_{11} ^ 2 c^\epsilon + K_2 \partial_{22} ^ 2 c^\epsilon + K_3 \partial_{33} ^ 2 c^\epsilon + s^\epsilon \text{ in } \Omega \times (0,T).
+    \end{equation}
+    
+
+(E-PEs): extended Primitive Equations.
+
+    \begin{equation} \label{HNSC1-dw}    
+    \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 - \gamma u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC2-dw}   
+    \partial_t u_2 + \mathbf{u} \cdot \nabla u_2 - \Delta_\nu u_2 + \gamma u_1 + \partial_2 p = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC3-dw}   
+    \partial_3 p = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC4-dw}   
+    \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC5-dw}   
+    \partial_t c + \mathbf{u} \cdot \nabla c = K_2 \partial_{22} ^ 2 c + K_3 \partial_{33} ^2 c + s \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+  \subsection{Estimates}
+    
+The main difference in this case is that in the equations that govern $(U^\epsilon, C^\epsilon),$ we have
+
+$$ \partial_t C^\epsilon + U^\epsilon \nabla C^\epsilon  + U^\epsilon \nabla c+ u \nabla C^\epsilon = \textcolor{orange}{\epsilon K_1 \partial_{11} C^\epsilon + \epsilon K_1 \partial_{11} c} + K_2 \partial_{22} C^\epsilon + K_3 \partial_{33} C^\epsilon + S^\epsilon. $$
+
+This means that we can not follow the exact same path as before, as multiplying the equation by $- \Delta C^\epsilon$ results only $\epsilon \norm{\partial_{11} C^\epsilon}$ on the left-hand side, while from the estimates of the convective terms, we still have $\zeta \norm{\Delta V^\epsilon}^2_2$ terms on the right-hand side of the estimate, and these can not anymore be "melted" into the left-hand side, as the full, $\epsilon$-free Laplacian is missing.
+
+\subsection{The time-dependent estimate for the system}
+
+Revising the calculations (12sept2019) on the paper, we have 
+
+\begin{equation}
+  \begin{split}
+    & \frac{1}{2} \frac{\diff}{\diff t} \norm{\nabla C^\epsilon}_2^2 + \epsilon K_1 \norm{\partial_{11} C^\epsilon}_2^2 + K_2 \norm{\partial_{22} C^\epsilon}_2^2 + K_3 \norm{\partial_{33} C^\epsilon}_2^2 + C \norm{\partial_{ij} C^\epsilon}_2^2 \\
+    & \leq C \textcolor{blue}{\norm{U_H^\epsilon}_{H^3}} \norm{\nabla C^\epsilon}_2^2 + C \norm{U_H^\epsilon}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2 \\
+    & + C \textcolor{blue}{\norm{u_H^\epsilon}_{H^3}} \norm{\nabla C^\epsilon}_2^2 + C \norm{u_H^\epsilon}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2 \\
+    & + \textcolor{green}{C \norm{U_H^\epsilon}_{H^3}^2} + (\norm{\partial_{ij} c}_2^2 + \norm{\nabla \partial_i c}_2^2)\norm{\nabla C^\epsilon}_2^2 \\
+    & + \textcolor{green}{C \norm{U_H^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2} \\
+    & + \textcolor{green}{\epsilon K_1 \norm{\partial_{11} c}_2^2},
+  \end{split}
+\end{equation}
+
+where $i \neq j,$ and the appropriate terms have been merged into the left-hand side.
+
+The terms with "the missing square" are due to the $u_1 \partial_1 C^\epsilon \partial_{11} C^\epsilon, U_1^\epsilon \partial_1 C^\epsilon \partial_{11} C^\epsilon$ terms.
+
+The \textcolor{green}{additive terms} will contribute
+
+\[ \int_0^T \epsilon C \norm{\partial_{11} c}_2^2 + C \norm{U_H^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2 + C \norm{U_H^\epsilon}_{H^3}^2  \diff \tau \leq \epsilon C + \epsilon^2 C \]
+
+to the estimate obtained after applying the Gronwall inequality, which is independent from $T$, and the estimate holds even for $T= \infty.$
+
+The multiplicative terms contribute
+
+\[ \int_0^T \textcolor{blue}{\norm{U_H^\epsilon}_{H^3}} + \textcolor{blue}{\norm{u_H^\epsilon}_{H^3}} + \norm{U_H^\epsilon}_{H^3}^2 + C \norm{u_H^\epsilon}_{H^3}^2 + (\norm{\partial_{ij} c}_2^2 + \norm{\nabla \partial_i c}_2^2) \diff \tau,\]
+
+which can be estimated with
+
+\begin{equation}
+  \begin{split}
+    & \int_0^T \norm{U_H^\epsilon}_{H^3} + \norm{u_H^\epsilon}_{H^3} \diff \tau + C \\
+    & \leq \int_0^T \norm{1 \cdot U_H^\epsilon}_{H^3} + \norm{1 \cdot u_H^\epsilon}_{H^3} \diff \tau + C \\
+    & \leq T^{1/2} \bigg (\int_0^T \norm{U_H^\epsilon}_{H^3}^2 \bigg )^{1/2} \diff \tau + T^{1/2} \bigg (\int_0^T \norm{u_H^\epsilon}_{H^3}^2 \bigg )^{1/2} \diff \tau + C \\
+    & \leq T^{1/2} C + C \\
+    & \leq C \sqrt{T}.
+  \end{split}
+\end{equation}
+
+The issue here is that there is no known available estimate for $L^1$ estimate in time for the Navier-Stokes equations for infinite time interval, only for the case of a bounded domain, where $L^2$ boundedness implies $L^1$ boundedness directly.
+
+Thus the main difference from Section 5 in Li-Titi is that while in their case they had an $\epsilon^2 C$ bound where $C=C(L_1, L_2, \norm{v_0}_{H_1}),$ \textbf{we have a $C$ that depends also on $T.$}
+
+With this we get
+
+\[ \norm{C^\epsilon}_{L^\infty(0,T; H^1(\Omega))} \leq \epsilon C \exp{(C \sqrt{T})}.\]
+
+\textbf{Points:}
+\begin{enumerate}
+  \item The main question is if we can get $L_1$ estimates in time, which right now I don't know of we can, because applying a square root on the inequality before integrating in time I think might not work because the time derivative is negative. The space norm in itself would contain a square root over it, applying that on the LHS is problematic because of the presence of the time derivative. If we can not get $L_1$ estimates, we will have the $\sqrt{T}$ multiplier term in the Gronwall inequality.
+  \item From Proposition 5.3 we know already that the strong solutions $v^\epsilon, w^\epsilon$ of the anisotropic system exist \textbf{globally}. We also know that most likely (still to be checked though) $(v,w,c)$ exist globally, too.
+  \item We also do not have the $\delta_0$ part, which they need to deal with. We have a different structure and a higher regularity and we don't arrive to that split structure in that sense. We do not have this $\delta_0$ step. We either have a bounded $C^\epsilon$ norm immediately for any $T$ (if the $L^1$ norm in time turns out to be bounded for the term where the square is missing), then we are fine until infinity, otherwise we don't have a $T$-free estimate, in that case the convergence gets weaker in time.
+  \item Which is why, it seems like that the estimate for $c^\epsilon - c$ could work in one piece, taking $T$ which is the maximum existence for $c^\epsilon,$ but if the energy bound works, then $T$ naturally becomes infinite.
+  \item With these we can estimate $C^\epsilon$, which is bounded for any finite time and does not blow up at any finite point in time. Thus, I think $c^\epsilon$ also exists for any $T$ smaller than infinity.
+  \item Difference: at Li-Titi they have $C,$ we have $C(T)$ unless we can bound the $L_1$ norm in time by a $C$ constant.
+  \item We can not use $T=\infty$ in the $C^\epsilon$ bound itself, but the estimate holds for any finite point in time --- the convergence gets slower as time evolves.
+  \item If the $L^1$ norm in time is not bounded, then it seems that not just the convergence rate weakens (from $\epsilon^2$ to $\epsilon$), but also the uniformity in time is lost.
+\end{enumerate}
 
 \section{Domain structure}
 
@@ -513,128 +652,6 @@ From this we have $t^*_\epsilon = T^*_\epsilon,$ and as a consequence,
 From this we have $T^*_\epsilon = \infty$ (using POINT D).
 
 \end{proof}
-
-\section{Downwind-matching coordinates}
-
-Here we examine the effect of the additional $\epsilon$ in the concentration equation. The Coriolis terms have been described in the previous section.
-
-This method structurally goes differently: it first requires much stronger results on the velocity functions, then estimates $C^\epsilon$ in a separate step.
-
-For now it seems that this works only for a local time interval, see later a term at the estimate of $C^\epsilon.$
-
-  \subsection{The set of equations}
-
-(E-SNS): extended scaled Navier-Stokes.
-
-    \begin{equation} \label{ANSC1-dw}
-    \partial_t u^\epsilon _1 + \mathbf{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\gamma u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
-    \end{equation}
-    
-    \begin{equation} \label{ANSC2-dw}
-    \partial_t u_2^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_2^\epsilon -\Delta_\nu u_2^\epsilon + \gamma u_1^\epsilon  - \alpha \epsilon u^\epsilon_3 + \partial_2 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
-    \end{equation}
-    
-    \begin{equation} \label{ANSC3-dw}
-    \epsilon^2 \{  \partial_t u_3^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon -\Delta_\nu u_3^{\epsilon} \} + \epsilon \alpha u^\epsilon_2 - \epsilon \beta u_1^\epsilon + \partial_3 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
-    \end{equation}
-    
-    \begin{equation} \label{ANSC4-dw}
-    \nabla \cdot \mathbf{u}^\epsilon= 0 \text{ in } \Omega \times (0,T)
-    \end{equation}
-    
-    \begin{equation} \label{ANSC5-dw}
-    \partial_t c^\epsilon + \mathbf{u^\epsilon} \cdot \nabla c^\epsilon = \epsilon K_1 \partial_{11} ^ 2 c^\epsilon + K_2 \partial_{22} ^ 2 c^\epsilon + K_3 \partial_{33} ^ 2 c^\epsilon + s^\epsilon \text{ in } \Omega \times (0,T).
-    \end{equation}
-    
-
-(E-PEs): extended Primitive Equations.
-
-    \begin{equation} \label{HNSC1-dw}    
-    \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 - \gamma u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T)
-    \end{equation}
-    
-    \begin{equation} \label{HNSC2-dw}   
-    \partial_t u_2 + \mathbf{u} \cdot \nabla u_2 - \Delta_\nu u_2 + \gamma u_1 + \partial_2 p = 0 \text{ in } \Omega \times (0,T)
-    \end{equation}
-    
-    \begin{equation} \label{HNSC3-dw}   
-    \partial_3 p = 0 \text{ in } \Omega \times (0,T)
-    \end{equation}
-    
-    \begin{equation} \label{HNSC4-dw}   
-    \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \times (0,T)
-    \end{equation}
-    
-    \begin{equation} \label{HNSC5-dw}   
-    \partial_t c + \mathbf{u} \cdot \nabla c = K_2 \partial_{22} ^ 2 c + K_3 \partial_{33} ^2 c + s \text{ in } \Omega \times (0,T)
-    \end{equation}
-    
-  \subsection{Estimates}
-    
-The main difference in this case is that in the equations that govern $(U^\epsilon, C^\epsilon),$ we have
-
-$$ \partial_t C^\epsilon + U^\epsilon \nabla C^\epsilon  + U^\epsilon \nabla c+ u \nabla C^\epsilon = \textcolor{orange}{\epsilon K_1 \partial_{11} C^\epsilon + \epsilon K_1 \partial_{11} c} + K_2 \partial_{22} C^\epsilon + K_3 \partial_{33} C^\epsilon + S^\epsilon. $$
-
-This means that we can not follow the exact same path as before, as multiplying the equation by $- \Delta C^\epsilon$ results only $\epsilon \norm{\partial_{11} C^\epsilon}$ on the left-hand side, while from the estimates of the convective terms, we still have $\zeta \norm{\Delta V^\epsilon}^2_2$ terms on the right-hand side of the estimate, and these can not anymore be "melted" into the left-hand side, as the full, $\epsilon$-free Laplacian is missing.
-
-\subsection{The time-dependent estimate for the system}
-
-Revising the calculations (12sept2019) on the paper, we have 
-
-\begin{equation}
-  \begin{split}
-    & \frac{1}{2} \frac{\diff}{\diff t} \norm{\nabla C^\epsilon}_2^2 + \epsilon K_1 \norm{\partial_{11} C^\epsilon}_2^2 + K_2 \norm{\partial_{22} C^\epsilon}_2^2 + K_3 \norm{\partial_{33} C^\epsilon}_2^2 + C \norm{\partial_{ij} C^\epsilon}_2^2 \\
-    & \leq C \textcolor{blue}{\norm{U_H^\epsilon}_{H^3}} \norm{\nabla C^\epsilon}_2^2 + C \norm{U_H^\epsilon}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2 \\
-    & + C \textcolor{blue}{\norm{u_H^\epsilon}_{H^3}} \norm{\nabla C^\epsilon}_2^2 + C \norm{u_H^\epsilon}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2 \\
-    & + \textcolor{green}{C \norm{U_H^\epsilon}_{H^3}^2} + (\norm{\partial_{ij} c}_2^2 + \norm{\nabla \partial_i c}_2^2)\norm{\nabla C^\epsilon}_2^2 \\
-    & + \textcolor{green}{C \norm{U_H^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2} \\
-    & + \textcolor{green}{\epsilon K_1 \norm{\partial_{11} c}_2^2},
-  \end{split}
-\end{equation}
-
-where $i \neq j,$ and the appropriate terms have been merged into the left-hand side.
-
-The terms with "the missing square" are due to the $u_1 \partial_1 C^\epsilon \partial_{11} C^\epsilon, U_1^\epsilon \partial_1 C^\epsilon \partial_{11} C^\epsilon$ terms.
-
-The \textcolor{green}{additive terms} will contribute
-
-\[ \int_0^T \epsilon C \norm{\partial_{11} c}_2^2 + C \norm{U_H^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2 + C \norm{U_H^\epsilon}_{H^3}^2  \diff \tau \leq \epsilon C + \epsilon^2 C \]
-
-to the estimate obtained after applying the Gronwall inequality, which is independent from $T$, and the estimate holds even for $T= \infty.$
-
-The multiplicative terms contribute
-
-\[ \int_0^T \textcolor{blue}{\norm{U_H^\epsilon}_{H^3}} + \textcolor{blue}{\norm{u_H^\epsilon}_{H^3}} + \norm{U_H^\epsilon}_{H^3}^2 + C \norm{u_H^\epsilon}_{H^3}^2 + (\norm{\partial_{ij} c}_2^2 + \norm{\nabla \partial_i c}_2^2) \diff \tau,\]
-
-which can be estimated with
-
-\begin{equation}
-  \begin{split}
-    & \int_0^T \norm{U_H^\epsilon}_{H^3} + \norm{u_H^\epsilon}_{H^3} \diff \tau + C \\
-    & \leq \int_0^T \norm{1 \cdot U_H^\epsilon}_{H^3} + \norm{1 \cdot u_H^\epsilon}_{H^3} \diff \tau + C \\
-    & \leq T^{1/2} \bigg (\int_0^T \norm{U_H^\epsilon}_{H^3}^2 \bigg )^{1/2} \diff \tau + T^{1/2} \bigg (\int_0^T \norm{u_H^\epsilon}_{H^3}^2 \bigg )^{1/2} \diff \tau + C \\
-    & \leq T^{1/2} C + C \\
-    & \leq C \sqrt{T}.
-  \end{split}
-\end{equation}
-
-Thus the main difference from Section 5 in Li-Titi is that while in their case they had an $\epsilon^2 C$ bound where $C=C(L_1, L_2, \norm{v_0}_{H_1}),$ \textbf{we have a $C$ that depends also on $T.$}
-
-With this we get
-
-\[ \norm{C^\epsilon}_{L^\infty(0,T; H^1(\Omega))} \leq \epsilon C \exp{(C \sqrt{T})}.\]
-
-\textbf{Points:}
-\begin{enumerate}
-  \item The main question is if we can get $L_1$ estimates in time, which right now I don't know of we can, because applying a square root on the inequality before integrating in time I think might not work because the time derivative is negative. The space norm in itself would contain a square root over it, applying that on the LHS is problematic because of the presence of the time derivative. If we can not get $L_1$ estimates, we will have the $\sqrt{T}$ multiplier term in the Gronwall inequality.
-  \item From Proposition 5.3 we know already that the strong solutions $v^\epsilon, w^\epsilon$ of the anisotropic system exist \textbf{globally}. We also know that most likely (still to be checked though) $(v,w,c)$ exist globally, too.
-  \item We also do not have the $\delta_0$ part, which they need to deal with. We have a different structure and a higher regularity and we don't arrive to that split structure in that sense. We do not have this $\delta_0$ step. We either have a bounded $C^\epsilon$ norm immediately for any $T$ (if the $L^1$ norm in time turns out to be bounded for the term where the square is missing), then we are fine until infinity, otherwise we don't have a $T$-free estimate, in that case the convergence gets weaker in time.
-  \item Which is why, it seems like that the estimate for $c^\epsilon - c$ could work in one piece, taking $T$ which is the maximum existence for $c^\epsilon,$ but if the energy bound works, then $T$ naturally becomes infinite.
-  \item With these we can estimate $C^\epsilon$, which is bounded for any finite time and does not blow up at any finite point in time. Thus, I think $c^\epsilon$ also exists for any $T$ smaller than infinity.
-  \item Difference: at Li-Titi they have $C,$ we have $C(T)$ unless we can bound the $L_1$ norm in time by a $C$ constant.
-  \item We can not use $T=\infty$ in the $C^\epsilon$ bound itself, but the estimate holds for any finite point in time --- the convergence gets slower as time evolves.
-  \item If the $L^1$ norm in time is not bounded, then it seems that not just the convergence rate weakens (from $\epsilon^2$ to $\epsilon$), but also the uniformity in time is lost.
-\end{enumerate}
      
 \section{Rumble, might be useful for later}
 
