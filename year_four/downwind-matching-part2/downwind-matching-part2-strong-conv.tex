@@ -188,6 +188,8 @@ where $i \neq j$ and for now we skip the $S^\epsilon$ function.
 
 Now we estimate the terms on the right-hand side one by one.
 
+\textbf{Step 1: estimate for $I_1(i), i = 1,2,3.$}
+
 \begin{equation}
   \begin{split}
     & I_1(1) = \int_\Omega U^\epsilon \nabla C^\epsilon \partial_{11} C^\epsilon \\
@@ -246,6 +248,15 @@ All together for $j = 2,3$ we have
   \begin{split}
     & I_1(1)(b), I_1(1)(c) = \int_\Omega U_j^\epsilon \partial_j C^\epsilon \partial_{11} C^\epsilon \\
     & \leq \zeta \norm{\nabla \partial_j C^\epsilon}_2^2 + \frac{1}{\zeta} \norm{U_h}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2.
+  \end{split}
+\end{equation}
+
+Now we estimate $I_1(j)$ for $j = 2,3.$ Here we can simply use
+
+\begin{equation}
+  \begin{split}
+    & I_1(2), I_1(3) \leq \norm{U_i^\epsilon}_{L^\infty} \norm{\partial_i C^\epsilon}_2 \norm{\partial_{jj}C^\epsilon}_2 \\
+    & \leq \zeta \norm{\partial_{jj} C^\epsilon}_2^2 + \frac{1}{\zeta} \| U_h^\epsilon \| _ {H^3} ^ 2 \norm{\nabla C^\epsilon}_2^2.
   \end{split}
 \end{equation}
     
