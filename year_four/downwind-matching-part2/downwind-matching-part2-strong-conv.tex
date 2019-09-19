@@ -259,6 +259,68 @@ Now we estimate $I_1(j)$ for $j = 2,3.$ Here we can simply use
     & \leq \zeta \norm{\partial_{jj} C^\epsilon}_2^2 + \frac{1}{\zeta} \| U_h^\epsilon \| _ {H^3} ^ 2 \norm{\nabla C^\epsilon}_2^2.
   \end{split}
 \end{equation}
+
+\textbf{Step 2: estimate for $I_2(i), i=1,2,3.$}
+
+\begin{equation}
+  \begin{split}
+    & I_2(1) = \int_\Omega U^\epsilon \nabla c \partial_{11} C^\epsilon = -\int_\Omega \partial_1 U^\epsilon \nabla c \partial_1 C^\epsilon - \int_\Omega U^\epsilon \nabla \partial_1 c \partial_1 C^\epsilon \\
+    & \leq C \| \partial_1 U^\epsilon \|_3 \norm{\nabla c}_6 \norm{\partial_1 C^\epsilon}_2 + C \| U^\epsilon \|_{L^\infty} \norm{\nabla \partial_1 c}_2 \norm{\partial_1 C^\epsilon}_2 \\
+    & \leq C \| \partial_1 U^\epsilon \|_2^{1/2} \| \nabla \partial_1 U^\epsilon \|_2^{1/2} \norm{c}_{H^2} \norm{\partial_1 C^\epsilon}_2 + C \| U^\epsilon \|_{H^2} \norm{c}_{H^2} \norm{\partial_1 C^\epsilon}_2 \\
+    & \leq C \|  U_h^\epsilon \|_{H^3} \norm{c}_{H^2} \norm{\partial_1 C^\epsilon}_2 \\
+    & \leq C \|  U_h^\epsilon \|_{H^3}^2 + C \norm{c}_{H^2}^2 \norm{\nabla C^\epsilon}_2^2
+  \end{split}
+\end{equation}
+
+\begin{equation}
+  \begin{split}
+  & I_2(2), I_2(3) = \int_\Omega U^\epsilon \nabla c \partial_{jj} C^\epsilon \leq \norm{U^\epsilon}_{L^\infty} \norm{\nabla c}_2 \norm{\partial_{jj} C^\epsilon}_2 \\
+  & \leq \zeta \norm{\partial_{jj} C^\epsilon}_2^2 + \frac{1}{\zeta} \norm{U_h^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2,
+  \end{split}
+\end{equation}
+
+where $j = 2,3.$
+
+As we will show later, $\norm{c}_{H^2}$ is finite for the case of an $H^3$-regular initial horizontal velocity ${u_h}_0,$ which we assumed.
+
+\textbf{Step 3: estimate for $I_3(i), i=1,2,3.$}
+
+Due to their structure, computations for $\int_\Omega u \nabla C^\epsilon \partial_{ii} C^\epsilon$ are analogous to those seen in \textbf{Step 1.}
+
+Using the same tools, i.e. the Holder, Ladyzhenskaya and Young inequalities, and the result that
+
+$$ \int_\Omega u_1 \partial_1 C^\epsilon \partial_{11} C^\epsilon = - \frac{1}{2} \int_\Omega \partial_1 u_1 (\partial_1 C^\epsilon)^2, $$
+
+we arrive to
+
+\begin{equation}
+    I_3(1) \leq C \norm{u_1}_{H^3} \norm{\partial_1 C^\epsilon}_2^2 + \zeta \norm{\nabla \partial_j C^\epsilon}_2^2 + \frac{1}{\zeta} \norm{u_h}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2,
+\end{equation}
+
+where j = 2,3.
+
+On the other hand, for $i = 2,3$ we have
+
+\begin{equation}
+  I_3(2), I_3(3) \leq \norm{u_i}_{L^\infty} \norm{\partial_i C^\epsilon}_2 \norm{\partial_{jj}C^\epsilon}_2 \leq \zeta \norm{\partial_{jj} C^\epsilon}_2^2 + \frac{1}{\zeta} \| u_h \| _ {H^3} ^ 2 \norm{\nabla C^\epsilon}_2^2.
+\end{equation}
+
+\textbf{Step 4: estimate for $I_4(i), i = 1,2,3$}
+
+\begin{equation}
+  \begin{split}
+    & I_4(i) = \epsilon K_1 \int_\Omega \partial_{11} c \partial_{ii} C^\epsilon \leq \epsilon K_1 \norm{\partial_{11} c}_2 \norm{\partial_{ii} C^\epsilon}_2 \\
+    & \leq \epsilon \zeta K_1 C \norm{\partial_{ii} C^\epsilon}_2^2 + \frac{1}{\zeta}\epsilon K_1 C \norm{\partial_{11} c}_2^2.
+  \end{split}
+\end{equation}
+
+Since here we do have an $\epsilon$ in front of the Laplacian $ \norm{\partial_{ii} C^\epsilon}_2^2,$ it can be merged into the left-hand side later even for $i = 1.$
+
+\begin{remark}
+Note that the $\epsilon$ in $\epsilon K_1 C \norm{\partial_{11} c}_2^2$ will be the convergence rate. If we wanted to have $\epsilon^2$ instead, it would mean that we need to take off one derivative off of $\partial_11 C^\epsilon,$ which would result to the appearance of $\norm{c}_{H^3}.$ Since from the $H^3$ initial data ${u_h}_0$ we can only arrive to an $H^4$-regular solution function $u_h,$ that is sufficient only to guarantee the $H^2$ regularity of $c,$ but not $H^3.$ Increasing the initial velocity's regularity would thus achieve an $\epsilon^2$ convergence rate, but we are interested in proving a convergence result assuming the minimal needed regularity for the initial horizontal velocity.
+\end{remark}
+
+\subsection{Estimate for $c$.}
     
 \subsection{The time-dependent estimate for the system}
 
