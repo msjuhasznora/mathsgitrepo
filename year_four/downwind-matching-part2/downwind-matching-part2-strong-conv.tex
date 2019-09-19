@@ -374,11 +374,11 @@ With this we get
 
 By this, it seems that not just the convergence rate weakens from $\epsilon^2$ to $\epsilon$, but also the uniformity in time is lost. We can not use $T=\infty$ in this $C^\epsilon$ bound itself, but the estimate holds for any finite point in time --- the convergence gets slower as time evolves.
 
-Assuming that the global existence for $c$ works, then this above estimate suggests that $c^\epsilon$ exists globally, too. Otherwise, if there is a finite $T^\epsilon_*$ existence time, then the norm of the $c^\epsilon - c$ difference at $T^\epsilon_*$ is bounded by
+Assuming that the global existence for $c$ works, then this above estimate suggests that $c^\epsilon$ exists globally, too. Otherwise, if there is a finite maximal $T^\epsilon_*$ existence time, then the norm of the $c^\epsilon - c$ difference at $T^\epsilon_*$ is bounded by
 
 \[ \norm{C^\epsilon}_{L^\infty(0,T^\epsilon_*; H^1(\Omega))} \leq \epsilon C \exp{(C \sqrt{T^\epsilon_*} + C)} < \infty,\]
 
-using that $T^\epsilon_* < \infty.$
+using that $T^\epsilon_* < \infty,$ and then because of the finite energy it could be continued after $T^\epsilon_*,$ which is a contradiction.
 
 In other words, the bound does not blow up at any finite time, only at infinity.
 
@@ -386,7 +386,7 @@ In other words, the bound does not blow up at any finite time, only at infinity.
 \begin{enumerate}
   \item it seems that both $c^\epsilon$ and $c$ exist globally,
   \item for any given fix point in time $T$ we have that $c^\epsilon \to c$ in $L^\infty H^1$ with a rate of $\epsilon,$
-  \item considering a fix $\epsilon$ value and the corresponding $c^\epsilon$ anisotropic solution, $c^\epsilon$ and $c$ get further away from each other in norm as time passes by.
+  \item considering a fix $\epsilon$ value and the corresponding $c^\epsilon$ anisotropic solution in time, the $c^\epsilon$ and $c$ get further away from each other in norm as time passes by.
 \end{enumerate}
 
 \section{Domain structure}
