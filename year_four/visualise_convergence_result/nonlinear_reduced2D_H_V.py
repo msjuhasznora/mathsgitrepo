@@ -1,7 +1,8 @@
 # improvement ideas:
 # i) it depends epsilon-freely on the complete u - what is the matter with the scheme as epsilon tends to zero? it is true that the TestFunction space is two-dimensional and with epsilon going to zero v3 only remains through div(v), but is that really the problem? or is it that it only contains u3, but not grad(u3), and it is a 2-degree space.
-# ii) periodic in the x direction
-# iii) consider making it time dependent
+# ii) consider making it time dependent
+
+# iii) periodicity in the x direction would make the domain into a tube with upper wind traction and fully x-directional circulation. Having a 0 y-directional velocity would be ok in itself, but with that there is not much to visualise as the scheme then does not depend on epsilon. so I think it is better to have the classical domain in order to make a point with the visualisation.
 
 import matplotlib.pyplot as plt
 from dolfin import *
@@ -50,7 +51,10 @@ up_ = Function(VP)
 
 eps = 0.0
 
-# + eps*eps*inner(u, grad(u3)) * v3 * dx + eps*eps*inner(grad(u3),grad(v3)) * dx
+# run with V_V being of degree 2, as with degree 1 in the anisotropic case we have a strange layered unnatural pressure. also, the TH elements use this structure (check)
+#F_A = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx + eps*eps*inner(u, grad(u3)) * v3 * dx + eps*eps*inner(grad(u3),grad(v3)) * dx - p * div(v) * dx + q * div(u) * dx - inner(theta, v) * ds(1)
+
+# run with V_V being of degree 1 and the additional constraint p.dx(1) * q.dx(1) * dx representing that we have a hydrostatic pressure.
 F = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx - p * div(v) * dx + q * div(u) * dx + p.dx(1) * q.dx(1) * dx - inner(theta, v) * ds(1)
 
 F = action(F, up_)
