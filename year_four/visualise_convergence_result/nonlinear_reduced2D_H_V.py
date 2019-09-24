@@ -11,7 +11,7 @@ from numpy.random import rand
 from dolfin import *
 import numpy
 
-mesh = UnitSquareMesh(30, 30)
+mesh = UnitSquareMesh(100, 100)
 V_hor = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 2)
 V_vert_hydr = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 1)
 V_vert_anis = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 2)
@@ -81,70 +81,89 @@ print("Hydrostatic. Norm of pressure coefficient vector: %.15g" % p_sol_hydr.vec
 
 (u,p) = up_.split(True)
 
-ufile_pvd = File("velocity_hydr.pvd")
-ufile_pvd << u
-pfile_pvd = File("pressure_hydr.pvd")
-pfile_pvd << p
+ufile_pvd_hydr = File("results2D_H_V/velocity_hydr.pvd")
+ufile_pvd_hydr << u
+pfile_pvd_hydr = File("results2D_H_V/pressure_hydr.pvd")
+pfile_pvd_hydr << p
 
 # **********************************************
 # *** Define anisotropic variational problem ***
 # **********************************************
 
-up = TrialFunction(VP_anis)
-u,p = split(up)
-u1, u3 = split(u)
-(v, q) = TestFunctions(VP_anis)
-v1, v3 = split(v)
+eps = 1.0
+change = True
+norm_prev = 0.0
+norm_new = 1.0
 
-up_ = Function(VP_anis)
-(u_, p_) = split(up_)
-(u1_, u3_) = split(u_)
+while change:
 
-eps = 0.0000001
-# create a while cycle that uses eps = eps /2 until the norms of two consequtive solutions are really close.
+    up = TrialFunction(VP_anis)
+    u,p = split(up)
+    u1, u3 = split(u)
+    (v, q) = TestFunctions(VP_anis)
+    v1, v3 = split(v)
 
-# the anisotropic weak formulation is created using the Taylor-Hood elements, the vertical velocity is from a quadratic space. Using a degree 1 vertical velocity space in the anisotropic case we have a strange layered unnatural pressure.
-F_anis = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx + eps*eps*inner(u, grad(u3)) * v3 * dx + eps*eps*inner(grad(u3),grad(v3)) * dx - p * div(v) * dx + q * div(u) * dx - inner(theta, v) * ds(1)
+    up_ = Function(VP_anis)
+    (u_, p_) = split(up_)
+    (u1_, u3_) = split(u_)
 
-F_anis = action(F_anis, up_)
-J_anis  = derivative(F_anis, up_, up)
+    # the anisotropic weak formulation is created using the Taylor-Hood elements, the vertical velocity is from a quadratic space. Using a degree 1 vertical velocity space in the anisotropic case we have a strange layered unnatural pressure.
+    F_anis = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx + eps*eps*inner(u, grad(u3)) * v3 * dx + eps*eps*inner(grad(u3),grad(v3)) * dx - p * div(v) * dx + q * div(u) * dx - inner(theta, v) * ds(1)
 
-problem_anis = NonlinearVariationalProblem(F_anis, up_, bcu_anis, J_anis)
-solver  = NonlinearVariationalSolver(problem_anis)
-#prm = solver.parameters
-#prm['newton_solver']['absolute_tolerance'] = 1E-8
-#prm['newton_solver']['relative_tolerance'] = 1E-6
-#prm['newton_solver']['maximum_iterations'] = 100
-solver.solve()
+    F_anis = action(F_anis, up_)
+    J_anis  = derivative(F_anis, up_, up)
 
-(u,p) = up_.split(True)
-(u1, u3) = u.split(True)
+    problem_anis = NonlinearVariationalProblem(F_anis, up_, bcu_anis, J_anis)
+    solver  = NonlinearVariationalSolver(problem_anis)
+    solver.solve()
 
-up_project_hydr = Function(VP_hydr)
-up_interpolate_hydr = Function(VP_hydr)
-up_project_hydr = project(up_,VP_hydr)
-up_interpolate_hydr = interpolate(up_,VP_hydr)
+    (u,p) = up_.split(True)
+    (u1, u3) = u.split(True)
 
-(u_project_hydr, p_project_hydr) = up_project_hydr.split(True)
-(u1_project_hydr, u3_project_hydr) = u_project_hydr.split(True)
+    up_project_hydr = Function(VP_hydr)
+    up_interpolate_hydr = Function(VP_hydr)
+    up_project_hydr = project(up_,VP_hydr)
+    up_interpolate_hydr = interpolate(up_,VP_hydr)
+    (u_project_hydr, p_project_hydr) = up_project_hydr.split(True)
+    (u1_project_hydr, u3_project_hydr) = u_project_hydr.split(True)
+    
+    print("Epsilon: " + str(eps))
+    
+    print("Hydrostatic. u: %.15g" % u_sol_hydr.vector().norm("l2"))
+    print("Hydrostatic. u1: %.15g" % u1_sol_hydr.vector().norm("l2"))
+    print("Hydrostatic. u3: %.15g" % u3_sol_hydr.vector().norm("l2"))
+    print("Hydrostatic. p: %.15g" % p_sol_hydr.vector().norm("l2"))
 
-print("Anistropic Projected. Norm of velocity coefficient vector: %.15g" % u_project_hydr.vector().norm("l2"))
-print("Anistropic Projected. Norm of horizontal velocity coefficient vector: %.15g" % u1_project_hydr.vector().norm("l2"))
-print("Anistropic Projected. Norm of vertical velocity coefficient vector: %.15g" % u3_project_hydr.vector().norm("l2"))
-print("Anistropic Projected. Norm of pressure coefficient vector: %.15g" % p_project_hydr.vector().norm("l2"))
+    print("Anistropic Projected. u: %.15g" % u_project_hydr.vector().norm("l2"))
+    print("Anistropic Projected. u1: %.15g" % u1_project_hydr.vector().norm("l2"))
+    print("Anistropic Projected. u3: %.15g" % u3_project_hydr.vector().norm("l2"))
+    print("Anistropic Projected. p: %.15g" % p_project_hydr.vector().norm("l2"))
 
-print("Anistropic. Norm of velocity coefficient vector: %.15g" % u.vector().norm("l2"))
-print("Anistropic. Norm of horizontal velocity coefficient vector: %.15g" % u1.vector().norm("l2"))
-print("Anistropic. Norm of vertical velocity coefficient vector: %.15g" % u3.vector().norm("l2"))
-print("Anistropic. Norm of pressure coefficient vector: %.15g" % p.vector().norm("l2"))
+    print("Anistropic. u: %.15g" % u.vector().norm("l2"))
+    print("Anistropic. u1: %.15g" % u1.vector().norm("l2"))
+    print("Anistropic. u3: %.15g" % u3.vector().norm("l2"))
+    print("Anistropic. p: %.15g" % p.vector().norm("l2"))
+    
+    print("Anistropic Projected - Hydrostatic. u: %.15g" % (u_project_hydr.vector() - u_sol_hydr.vector()).norm("l2"))
+    print("Anistropic Projected - Hydrostatic. u1: %.15g" % (u1_project_hydr.vector() - u1_sol_hydr.vector()).norm("l2"))
+    print("Anistropic Projected - Hydrostatic. u3: %.15g" % (u3_project_hydr.vector() - u3_sol_hydr.vector()).norm("l2"))
+    print("Anistropic Projected - Hydrostatic. p: %.15g" % (p_project_hydr.vector() - p_sol_hydr.vector()).norm("l2"))
 
-(u,p) = up_.split(True)
+    (u,p) = up_.split(True)
 
-ufile_pvd = File("velocity_anis" + str(eps) + ".pvd")
-ufile_pvd << u
-pfile_pvd = File("pressure_anis" + str(eps) + ".pvd")
-pfile_pvd << p
+    ufile_pvd_anis = File("results2D_H_V/velocity_anis" + str(eps) + ".pvd")
+    pfile_pvd_anis = File("results2D_H_V/pressure_anis" + str(eps) + ".pvd")
+    ufile_pvd_anis << u
+    pfile_pvd_anis << p
+    
+    norm_new = u.vector().norm("l2") + p.vector().norm("l2")
+    
+    if abs(norm_new - norm_prev) < 0.005:
+        change = False
+    else:
+        norm_prev = u.vector().norm("l2") + p.vector().norm("l2")
 
+    eps = eps / 2.0
 
 # *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- #
 
