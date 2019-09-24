@@ -1,3 +1,7 @@
+# The anisotropic model works nicely with the (2,2) degree scenario, the hydrostatic scheme works for (2,1).
+# The former does not work for (2,1) as it develops strange unnatural layers in the pressure.
+# The latter does not work for (2,2) as the Newton iterations do not converge --- probably because we do not have the first derivative of u3 in the scheme and u3 is second order in that case.
+
 import matplotlib.pyplot as plt
 from dolfin import *
 import numpy as np
@@ -96,7 +100,7 @@ up_ = Function(VP_anis)
 (u_, p_) = split(up_)
 (u1_, u3_) = split(u_)
 
-eps = 1.0
+eps = 0.0000001
 # create a while cycle that uses eps = eps /2 until the norms of two consequtive solutions are really close.
 
 # the anisotropic weak formulation is created using the Taylor-Hood elements, the vertical velocity is from a quadratic space. Using a degree 1 vertical velocity space in the anisotropic case we have a strange layered unnatural pressure.
@@ -116,7 +120,18 @@ solver.solve()
 (u,p) = up_.split(True)
 (u1, u3) = u.split(True)
 
-# project u3 to the 1-degree vertical velocity space?
+up_project_hydr = Function(VP_hydr)
+up_interpolate_hydr = Function(VP_hydr)
+up_project_hydr = project(up_,VP_hydr)
+up_interpolate_hydr = interpolate(up_,VP_hydr)
+
+(u_project_hydr, p_project_hydr) = up_project_hydr.split(True)
+(u1_project_hydr, u3_project_hydr) = u_project_hydr.split(True)
+
+print("Anistropic Projected. Norm of velocity coefficient vector: %.15g" % u_project_hydr.vector().norm("l2"))
+print("Anistropic Projected. Norm of horizontal velocity coefficient vector: %.15g" % u1_project_hydr.vector().norm("l2"))
+print("Anistropic Projected. Norm of vertical velocity coefficient vector: %.15g" % u3_project_hydr.vector().norm("l2"))
+print("Anistropic Projected. Norm of pressure coefficient vector: %.15g" % p_project_hydr.vector().norm("l2"))
 
 print("Anistropic. Norm of velocity coefficient vector: %.15g" % u.vector().norm("l2"))
 print("Anistropic. Norm of horizontal velocity coefficient vector: %.15g" % u1.vector().norm("l2"))
