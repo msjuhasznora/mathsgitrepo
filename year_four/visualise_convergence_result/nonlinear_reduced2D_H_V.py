@@ -11,10 +11,12 @@ from numpy.random import rand
 from dolfin import *
 import numpy
 
-mesh = UnitSquareMesh(100, 100)
+degree_vertical_anis = 2
+
+mesh = UnitSquareMesh(30, 30)
 V_hor = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 2)
 V_vert_hydr = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 1)
-V_vert_anis = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 2)
+V_vert_anis = FiniteElement("Lagrange", mesh.ufl_cell(), degree = degree_vertical_anis)
 V_hydr = V_hor * V_vert_hydr
 V_anis = V_hor * V_vert_anis
 P = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 1)
@@ -91,12 +93,9 @@ pfile_pvd_hydr << p
 # **********************************************
 
 eps = 1.0
-change = True
-norm_prev = 0.0
-norm_new = 1.0
 
-while change:
-
+while eps > 2.9802322387695312e-08:
+    
     up = TrialFunction(VP_anis)
     u,p = split(up)
     u1, u3 = split(u)
@@ -121,11 +120,14 @@ while change:
     (u1, u3) = u.split(True)
 
     up_project_hydr = Function(VP_hydr)
-    up_interpolate_hydr = Function(VP_hydr)
     up_project_hydr = project(up_,VP_hydr)
-    up_interpolate_hydr = interpolate(up_,VP_hydr)
     (u_project_hydr, p_project_hydr) = up_project_hydr.split(True)
     (u1_project_hydr, u3_project_hydr) = u_project_hydr.split(True)
+    
+    up_interpolate_hydr = Function(VP_hydr)
+    up_interpolate_hydr = interpolate(up_,VP_hydr)
+    (u_interpolate_hydr, p_interpolate_hydr) = up_interpolate_hydr.split(True)
+    (u1_interpolate_hydr, u3_interpolate_hydr) = u_interpolate_hydr.split(True)
     
     print("Epsilon: " + str(eps))
     
@@ -138,11 +140,21 @@ while change:
     print("Anistropic Projected. u1: %.15g" % u1_project_hydr.vector().norm("l2"))
     print("Anistropic Projected. u3: %.15g" % u3_project_hydr.vector().norm("l2"))
     print("Anistropic Projected. p: %.15g" % p_project_hydr.vector().norm("l2"))
+    
+    print("Anistropic Interpolated. u: %.15g" % u_interpolate_hydr.vector().norm("l2"))
+    print("Anistropic Interpolated. u1: %.15g" % u1_interpolate_hydr.vector().norm("l2"))
+    print("Anistropic Interpolated. u3: %.15g" % u3_interpolate_hydr.vector().norm("l2"))
+    print("Anistropic Interpolated. p: %.15g" % p_interpolate_hydr.vector().norm("l2"))
 
     print("Anistropic. u: %.15g" % u.vector().norm("l2"))
     print("Anistropic. u1: %.15g" % u1.vector().norm("l2"))
     print("Anistropic. u3: %.15g" % u3.vector().norm("l2"))
     print("Anistropic. p: %.15g" % p.vector().norm("l2"))
+    
+    print("Anistropic Interpolated - Hydrostatic. u: %.15g" % (u_interpolate_hydr.vector() - u_sol_hydr.vector()).norm("l2"))
+    print("Anistropic Interpolated - Hydrostatic. u1: %.15g" % (u1_interpolate_hydr.vector() - u1_sol_hydr.vector()).norm("l2"))
+    print("Anistropic Interpolated - Hydrostatic. u3: %.15g" % (u3_interpolate_hydr.vector() - u3_sol_hydr.vector()).norm("l2"))
+    print("Anistropic Interpolated - Hydrostatic. p: %.15g" % (p_interpolate_hydr.vector() - p_sol_hydr.vector()).norm("l2"))
     
     print("Anistropic Projected - Hydrostatic. u: %.15g" % (u_project_hydr.vector() - u_sol_hydr.vector()).norm("l2"))
     print("Anistropic Projected - Hydrostatic. u1: %.15g" % (u1_project_hydr.vector() - u1_sol_hydr.vector()).norm("l2"))
@@ -155,15 +167,53 @@ while change:
     pfile_pvd_anis = File("results2D_H_V/pressure_anis" + str(eps) + ".pvd")
     ufile_pvd_anis << u
     pfile_pvd_anis << p
-    
-    norm_new = u.vector().norm("l2") + p.vector().norm("l2")
-    
-    if abs(norm_new - norm_prev) < 0.005:
-        change = False
-    else:
-        norm_prev = u.vector().norm("l2") + p.vector().norm("l2")
 
     eps = eps / 2.0
+
+# **********************************************
+# *** degree 2 for the hydrostatic weak form ***
+# **********************************************
+
+#print("experiment")
+
+#up_sol_anis_eps = Function(VP_anis)
+#(u_sol_anis_eps,p_sol_anis_eps) = split(up_sol_anis_eps)
+#(u_sol_anis_eps,p_sol_anis_eps) = up_.split(True)
+#(u1_sol_anis_eps, u3_sol_anis_eps) = u_sol_anis_eps.split(True)
+
+#print("u anis: %.15g" % u_sol_anis_eps.vector().norm("l2"))
+
+#up = TrialFunction(VP_anis)
+#u,p = split(up)
+#u1, u3 = split(u)
+#(v, q) = TestFunctions(VP_anis)
+#v1, v3 = split(v)
+
+#u1 = u1_sol_anis_eps
+#u3 = u3_sol_anis_eps
+#u = u_sol_anis_eps
+#p = p_sol_anis_eps
+
+#up_ = Function(VP_anis)
+#(u_, p_) = split(up_)
+#(u1_, u3_) = split(u_)
+
+#F = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx - p * div(v) * dx + q * div(u) * dx + p.dx(1) * q.dx(1) * dx - inner(theta, v) * ds(1)
+
+#F = action(F, up_)
+#J  = derivative(F, up_, up)
+
+#problem = NonlinearVariationalProblem(F, up_, bcu_anis, J)
+#solver  = NonlinearVariationalSolver(problem)
+#prm = solver.parameters
+#prm['newton_solver']['absolute_tolerance'] = 1E-8
+#prm['newton_solver']['relative_tolerance'] = 1E-7
+#prm['newton_solver']['maximum_iterations'] = 25
+#prm['newton_solver']['relaxation_parameter'] = 1.0
+#solver.solve()
+
+#(u,p) = up_.split(True)
+#(u1, u3) = u.split(True)
 
 # *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- #
 
