@@ -279,6 +279,8 @@ The results in the "results2D" folder show a hopeful tendency, but the scheme do
 
 \section{Results for 2D stationary nonlinear formulation. Anisotropic and hydrostatic model.}
 
+In the following $(i,j)$ stands for degree of horizontal velocity space, and degree of vertical velocity space, respectively.
+
 Main themes:
 \begin{enumerate}
   \item In the anisotropic model with "not too small" $\epsilon$ we have the information about the gradient of $u_3$
@@ -558,6 +560,19 @@ we obtain the following results.
   \captionof{figure}{Hydrostatic model.}
 \end{minipage}
 \end{figure}
+
+\section{Summarise for the moment being}
+
+In the following $(i,j)$ stands for degree of horizontal velocity space, and degree of vertical velocity space, respectively.
+
+\begin{itemize}
+  \item (2,2) for the anisotropic and (2,1) for the hydrostatic schemes work, the tendency / closeness is visible, however they numerically do not get overly close as the structures of the schemes are different (we use different degrees for the vertical velocities)
+  \item (2,2) for the hydrostatic scheme in itself does not converge, the Newton iterations of the nonlinear solver do not go anywhere (NaN)
+  \item (2,2) for the hydrostatic scheme works "instantly" when the anisotropic solution for small $\epsilon$ is given as an initial guess.
+  \item In this way, the convergence of the (2,2) schemes is verified by a Newton solver that takes 0 steps and exits with verified convergence for the hydrostatic scheme with the anisotropic solution as an initial guess.
+  \item (2,1) for the anisotropic scheme results in non-natural pressure structure, but is surprisingly close for the velocities.
+  \item for the (2,2) scheme in the anisotropic model we can get as far as $\exp{-7},$ but then the scheme becomes unstable as we lose the dependence on the gradient of the vertical velocity.
+\end{itemize}
 
 
 \section{Ideas}
