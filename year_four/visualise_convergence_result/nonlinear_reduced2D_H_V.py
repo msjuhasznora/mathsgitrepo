@@ -12,6 +12,9 @@ from dolfin import *
 import numpy
 
 degree_vertical_anis = 2
+epsilon_lower_limit = 1.0e-04 #1.0e-07
+
+resultsfolder = "results_2D_H_V_degree_" + str(degree_vertical_anis) + "/"
 
 mesh = UnitSquareMesh(30, 30)
 V_hor = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 2)
@@ -83,9 +86,9 @@ print("Hydrostatic. Norm of pressure coefficient vector: %.15g" % p_sol_hydr.vec
 
 (u,p) = up_.split(True)
 
-ufile_pvd_hydr = File("results2D_H_V/velocity_hydr.pvd")
+ufile_pvd_hydr = File(resultsfolder + "velocity_hydr.pvd")
 ufile_pvd_hydr << u
-pfile_pvd_hydr = File("results2D_H_V/pressure_hydr.pvd")
+pfile_pvd_hydr = File(resultsfolder + "pressure_hydr.pvd")
 pfile_pvd_hydr << p
 
 # **********************************************
@@ -94,7 +97,7 @@ pfile_pvd_hydr << p
 
 eps = 1.0
 
-while eps > 2.9802322387695312e-08:
+while eps > epsilon_lower_limit:
     
     up = TrialFunction(VP_anis)
     u,p = split(up)
@@ -163,8 +166,8 @@ while eps > 2.9802322387695312e-08:
 
     (u,p) = up_.split(True)
 
-    ufile_pvd_anis = File("results2D_H_V/velocity_anis" + str(eps) + ".pvd")
-    pfile_pvd_anis = File("results2D_H_V/pressure_anis" + str(eps) + ".pvd")
+    ufile_pvd_anis = File(resultsfolder + "velocity_anis" + str(eps) + ".pvd")
+    pfile_pvd_anis = File(resultsfolder + "pressure_anis" + str(eps) + ".pvd")
     ufile_pvd_anis << u
     pfile_pvd_anis << p
 
