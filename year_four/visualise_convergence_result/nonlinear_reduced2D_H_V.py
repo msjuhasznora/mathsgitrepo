@@ -11,23 +11,26 @@ from numpy.random import rand
 from dolfin import *
 import numpy
 
+epsilon_lower_limit = 1.0e-07 #1.0e-07
+
 degree_vertical_anis = 2
 degree_vertical_hydr = 1
-epsilon_lower_limit = 0.00001 #1.0e-07
+
+# setting V_vert_degree2 = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 1) can provide the results on how it looks like to have a degree 1 anisotropical model.
 
 resultsfolder = "results_2D_H_V_degree_anis" + str(degree_vertical_anis) + "_degree_hydr" + str(degree_vertical_hydr) + "/"
 
 mesh = UnitSquareMesh(30, 30)
 V_hor = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 2)
-V_vert_hydr = FiniteElement("Lagrange", mesh.ufl_cell(), degree = degree_vertical_hydr)
-V_vert_anis = FiniteElement("Lagrange", mesh.ufl_cell(), degree = degree_vertical_anis)
-V_hydr = V_hor * V_vert_hydr
-V_anis = V_hor * V_vert_anis
+V_vert_degree1 = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 1)
+V_vert_degree2 = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 2)
+V_degree_2_1 = V_hor * V_vert_degree1
+V_degree_2_2 = V_hor * V_vert_degree2
 P = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 1)
-VP_hydr_element = V_hydr * P # linear in the vertical velocity space
-VP_anis_element = V_anis * P # Taylor - Hood
-VP_hydr = FunctionSpace(mesh, VP_hydr_element)
-VP_anis = FunctionSpace(mesh, VP_anis_element)
+VP_degree_2_1_1_element = V_degree_2_1 * P # linear in the vertical velocity space
+VP_degree_2_2_1_element = V_degree_2_2 * P # Taylor - Hood
+VP_1 = FunctionSpace(mesh, VP_degree_2_1_1_element)
+VP_2 = FunctionSpace(mesh, VP_degree_2_2_1_element)
 
 class UpperBoundary(SubDomain):
     def inside(self, x, on_boundary):
@@ -41,25 +44,25 @@ ds = Measure('ds')[boundaries]
 wind_shear_x = 10.0
 theta = Constant((wind_shear_x, 0.0))
 
-noslipbasin_hydr = DirichletBC(VP_hydr.sub(0), Constant((0, 0)), "on_boundary && x[1] < 1.0 - DOLFIN_EPS")
-noslipbasin_anis = DirichletBC(VP_anis.sub(0), Constant((0, 0)), "on_boundary && x[1] < 1.0 - DOLFIN_EPS")
-zerotopvertical_hydr = DirichletBC(VP_hydr.sub(0).sub(1), 0, "on_boundary && x[1] > 1.0 - DOLFIN_EPS")
-zerotopvertical_anis = DirichletBC(VP_anis.sub(0).sub(1), 0, "on_boundary && x[1] > 1.0 - DOLFIN_EPS")
+noslipbasin_1 = DirichletBC(VP_1.sub(0), Constant((0, 0)), "on_boundary && x[1] < 1.0 - DOLFIN_EPS")
+noslipbasin_2 = DirichletBC(VP_2.sub(0), Constant((0, 0)), "on_boundary && x[1] < 1.0 - DOLFIN_EPS")
+zerotopvertical_1 = DirichletBC(VP_1.sub(0).sub(1), 0, "on_boundary && x[1] > 1.0 - DOLFIN_EPS")
+zerotopvertical_2 = DirichletBC(VP_2.sub(0).sub(1), 0, "on_boundary && x[1] > 1.0 - DOLFIN_EPS")
 
-bcu_hydr = [noslipbasin_hydr, zerotopvertical_hydr]
-bcu_anis = [noslipbasin_anis, zerotopvertical_anis]
+bcu_1 = [noslipbasin_1, zerotopvertical_1]
+bcu_2 = [noslipbasin_2, zerotopvertical_2]
 
 # **********************************************
 # *** Define hydrostatic variational problem ***
 # **********************************************
 
-up = TrialFunction(VP_hydr)
+up = TrialFunction(VP_1)
 u,p = split(up)
 u1, u3 = split(u)
-(v, q) = TestFunctions(VP_hydr)
+(v, q) = TestFunctions(VP_1)
 v1, v3 = split(v)
 
-up_ = Function(VP_hydr)
+up_ = Function(VP_1)
 (u_, p_) = split(up_)
 (u1_, u3_) = split(u_)
 
@@ -69,11 +72,11 @@ F_hydr = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx - p * div(
 F_hydr = action(F_hydr, up_)
 J_hydr  = derivative(F_hydr, up_, up)
 
-problem_hydr = NonlinearVariationalProblem(F_hydr, up_, bcu_hydr, J_hydr)
+problem_hydr = NonlinearVariationalProblem(F_hydr, up_, bcu_1, J_hydr)
 solver  = NonlinearVariationalSolver(problem_hydr)
 solver.solve()
 
-up_sol_hydr = Function(VP_hydr)
+up_sol_hydr = Function(VP_1)
 (u_sol_hydr, p_sol_hydr) = split(up_sol_hydr)
 (u1_sol_hydr, u3_sol_hydr) = split(u_sol_hydr)
 
@@ -97,16 +100,17 @@ pfile_pvd_hydr << p
 # **********************************************
 
 eps = 1.0
+up_sol_anis_eps = Function(VP_2)
 
 while eps > epsilon_lower_limit:
     
-    up = TrialFunction(VP_anis)
+    up = TrialFunction(VP_2)
     u,p = split(up)
     u1, u3 = split(u)
-    (v, q) = TestFunctions(VP_anis)
+    (v, q) = TestFunctions(VP_2)
     v1, v3 = split(v)
 
-    up_ = Function(VP_anis)
+    up_ = Function(VP_2)
     (u_, p_) = split(up_)
     (u1_, u3_) = split(u_)
 
@@ -116,20 +120,20 @@ while eps > epsilon_lower_limit:
     F_anis = action(F_anis, up_)
     J_anis  = derivative(F_anis, up_, up)
 
-    problem_anis = NonlinearVariationalProblem(F_anis, up_, bcu_anis, J_anis)
+    problem_anis = NonlinearVariationalProblem(F_anis, up_, bcu_2, J_anis)
     solver  = NonlinearVariationalSolver(problem_anis)
     solver.solve()
 
     (u,p) = up_.split(True)
     (u1, u3) = u.split(True)
 
-    up_project_hydr = Function(VP_hydr)
-    up_project_hydr = project(up_,VP_hydr)
+    up_project_hydr = Function(VP_1)
+    up_project_hydr = project(up_,VP_1)
     (u_project_hydr, p_project_hydr) = up_project_hydr.split(True)
     (u1_project_hydr, u3_project_hydr) = u_project_hydr.split(True)
     
-    up_interpolate_hydr = Function(VP_hydr)
-    up_interpolate_hydr = interpolate(up_,VP_hydr)
+    up_interpolate_hydr = Function(VP_1)
+    up_interpolate_hydr = interpolate(up_,VP_1)
     (u_interpolate_hydr, p_interpolate_hydr) = up_interpolate_hydr.split(True)
     (u1_interpolate_hydr, u3_interpolate_hydr) = u_interpolate_hydr.split(True)
     
@@ -171,10 +175,47 @@ while eps > epsilon_lower_limit:
     pfile_pvd_anis = File(resultsfolder + "pressure_anis" + str(eps) + ".pvd")
     ufile_pvd_anis << u
     pfile_pvd_anis << p
+    
+    up_sol_anis_eps = up_
 
     eps = eps / 2.0
 
 # *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- #
+
+
+# **********************************************
+# *** degree 2 for the hydrostatic weak form ***
+# **********************************************
+
+up = TrialFunction(VP_2)
+u,p = split(up)
+u1, u3 = split(u)
+(v, q) = TestFunctions(VP_2)
+v1, v3 = split(v)
+
+up_ = Function(VP_2)
+#setting the anisotropic solution as an initial guess to the hydrostatic scheme.
+up_ = up_sol_anis_eps
+(u_, p_) = split(up_)
+(u1_, u3_) = split(u_)
+
+F = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx - p * div(v) * dx + q * div(u) * dx + p.dx(1) * q.dx(1) * dx - inner(theta, v) * ds(1)
+
+F = action(F, up_)
+J  = derivative(F, up_, up)
+
+problem = NonlinearVariationalProblem(F, up_, bcu_2, J)
+solver  = NonlinearVariationalSolver(problem)
+prm = solver.parameters
+prm['newton_solver']['absolute_tolerance'] = 1E-8
+prm['newton_solver']['relative_tolerance'] = 1E-6
+solver.solve()
+
+(u,p) = up_.split(True)
+(u1, u3) = u.split(True)
+
+
+
 
 # improvement ideas:
 
