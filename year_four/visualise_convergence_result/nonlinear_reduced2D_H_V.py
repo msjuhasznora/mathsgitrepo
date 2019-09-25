@@ -12,13 +12,14 @@ from dolfin import *
 import numpy
 
 degree_vertical_anis = 2
-epsilon_lower_limit = 1.0e-04 #1.0e-07
+degree_vertical_hydr = 1
+epsilon_lower_limit = 0.00001 #1.0e-07
 
-resultsfolder = "results_2D_H_V_degree_" + str(degree_vertical_anis) + "/"
+resultsfolder = "results_2D_H_V_degree_anis" + str(degree_vertical_anis) + "_degree_hydr" + str(degree_vertical_hydr) + "/"
 
 mesh = UnitSquareMesh(30, 30)
 V_hor = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 2)
-V_vert_hydr = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 1)
+V_vert_hydr = FiniteElement("Lagrange", mesh.ufl_cell(), degree = degree_vertical_hydr)
 V_vert_anis = FiniteElement("Lagrange", mesh.ufl_cell(), degree = degree_vertical_anis)
 V_hydr = V_hor * V_vert_hydr
 V_anis = V_hor * V_vert_anis
@@ -172,51 +173,6 @@ while eps > epsilon_lower_limit:
     pfile_pvd_anis << p
 
     eps = eps / 2.0
-
-# **********************************************
-# *** degree 2 for the hydrostatic weak form ***
-# **********************************************
-
-#print("experiment")
-
-#up_sol_anis_eps = Function(VP_anis)
-#(u_sol_anis_eps,p_sol_anis_eps) = split(up_sol_anis_eps)
-#(u_sol_anis_eps,p_sol_anis_eps) = up_.split(True)
-#(u1_sol_anis_eps, u3_sol_anis_eps) = u_sol_anis_eps.split(True)
-
-#print("u anis: %.15g" % u_sol_anis_eps.vector().norm("l2"))
-
-#up = TrialFunction(VP_anis)
-#u,p = split(up)
-#u1, u3 = split(u)
-#(v, q) = TestFunctions(VP_anis)
-#v1, v3 = split(v)
-
-#u1 = u1_sol_anis_eps
-#u3 = u3_sol_anis_eps
-#u = u_sol_anis_eps
-#p = p_sol_anis_eps
-
-#up_ = Function(VP_anis)
-#(u_, p_) = split(up_)
-#(u1_, u3_) = split(u_)
-
-#F = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx - p * div(v) * dx + q * div(u) * dx + p.dx(1) * q.dx(1) * dx - inner(theta, v) * ds(1)
-
-#F = action(F, up_)
-#J  = derivative(F, up_, up)
-
-#problem = NonlinearVariationalProblem(F, up_, bcu_anis, J)
-#solver  = NonlinearVariationalSolver(problem)
-#prm = solver.parameters
-#prm['newton_solver']['absolute_tolerance'] = 1E-8
-#prm['newton_solver']['relative_tolerance'] = 1E-7
-#prm['newton_solver']['maximum_iterations'] = 25
-#prm['newton_solver']['relaxation_parameter'] = 1.0
-#solver.solve()
-
-#(u,p) = up_.split(True)
-#(u1, u3) = u.split(True)
 
 # *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- #
 
