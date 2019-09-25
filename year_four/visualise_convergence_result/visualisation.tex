@@ -34,7 +34,7 @@
 
 
 %%% *** PREAMBLE *** %%%
-\title{The visualisation task of the convergence result}
+\title{Visualisation of the convergence result}
 
 \date{}
 
@@ -49,21 +49,75 @@
 
 \section{The anisotropic Navier-Stokes equations and the hydrostatic limit model}
 
+\textbf{Anisotropic equations:}
+
+    \begin{equation} \label{ANSC1}
+    \partial_t u^\epsilon _1 + \mathbf{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\alpha u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{ANSC2}
+    \partial_t u_2^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_2^\epsilon -\Delta_\nu u_2^\epsilon + \alpha u_1^\epsilon + \partial_2 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{ANSC3}
+    \epsilon^2 \{  \partial_t u_3^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon -\Delta_\nu u_3^{\epsilon} \} - \epsilon \beta u_1^\epsilon + \partial_3 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{ANSC4}
+    \nabla \cdot \mathbf{u}^\epsilon= 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{ANSC5}
+    \partial_t C^\epsilon + \mathbf{u^\epsilon} \cdot \nabla C^\epsilon = \nabla \cdot (\mathbf{M} \nabla C^\epsilon) + S^\epsilon \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+\textbf{Hydrostatic equations:}
+
+    \begin{equation} \label{HNSC1}    
+    \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\alpha u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC2}   
+    \partial_t u_2 + \mathbf{u} \cdot \nabla u_2 - \Delta_\nu u_2 -\alpha u_1 + \partial_2 p = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC3}   
+    \partial_3 p = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC4}   
+    \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC5}   
+    \partial_t C + \mathbf{u} \cdot \nabla C = \nabla \cdot (\mathbf{M} \nabla C) + S \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+\section{A simplification of the problem}
+
+In order to identify and tackle the core problem --- the disappearing dependence on certain terms --- in visualising the convergence, we consider a simplified model that still contains the main issue in space. As a first step, we consider
+
+\begin{enumerate}
+  \item a stationary case,
+  \item without the Coriolis term, and
+  \item we make the two horizontal dimensions fall into one. It is easy to see that in a theoretical point of view, and also in terms of proving regularities, the two horizontal dimensions are not different. The problem consists of having $n-1$ dimensions with $\mathcal{O}(1)$ scale, and $1$ dimension with $\mathcal{O}(\epsilon)$ scale. Instead of the $n-1$ dimensions we can use 1 for quicker computations and easier visualisation.
+\end{enumerate}
+
 \section{The importance of keeping the nonlinearity of the scheme}
 
-One of the main issues for now is linearity / nonlinearity. The $u \nabla u_1 v_1$ term is nonlinear ($u = (u_1, u_2, u_3)$ being the Function we want to solve for, $v$ is a 3D test function). In the Chorin method, it was replaced by
+One of the main issues for now is linearity / nonlinearity. The $u \nabla u_1 v_1$ term is nonlinear ($u = (u_1, u_3)$ being the Function we want to solve for, $v$ is a 2D TestFunction). In the Chorin method, it was replaced by
 
 \texttt{inner(u\_prev, grad(u\_prev2)) * v2 * dx},
 
-where essentially we don't have any unknowns at all anymore. This is a result of the scheme itself, which otherwise works well but in our specific case it leads to a loss of dependence of the scheme on $u_3.$ The idea in the Picard iteration is that we turn a nonlinear term into linear by iterating through $u_1, ... , u_k$ solutions for the same $(x,y,z)$ spatial place, and instead of the nonlinear problem, solving only
+where essentially we don't have any unknowns at all anymore. This is a result of the scheme itself, which otherwise works well but in our specific case it leads to a loss of dependence of the scheme on $u_3.$ The idea in the Picard iteration is that we turn a nonlinear term into linear by iterating through $u_1, ... , u_k$ solutions for the same $(x,z)$ spatial place, and instead of the nonlinear problem, solving only
 
-\texttt{inner(u, grad(u\_k2)) * v\_2}
+\texttt{inner(u, grad(u\_k3)) * v\_3}
 
 for $u$ unknown and $u_k$ known. As we will see, even here the scheme depends on $u_3$ or $u_{k3}$ only through $\epsilon^2,$ it does not fully depend on both of them at the same time.
 
 The key seems to be to keep the nonlinearity of the scheme and use a nonlinear solver. In this case $u$ is not a \textbf{TrialFunction}, but it should be defined as \textbf{Function} in FEniCS. 
 
-\section{Chorin}
+\section{Chorin (3D originally)}
 
 The first step of the Chorin method calculates a tentative velocity. The \texttt{u1, u2, u3} functions are the "unknowns", while \texttt{u\_prev} is calculated from the previous time step. It is easy to see that the scheme depends on \texttt{\textcolor{terracotta}{u3}} only through $\epsilon^2.$
 
@@ -133,6 +187,8 @@ while eps > tol and iter < maxiter:\\
 This method creates a linear problem. The form \texttt{a} is defined, then it is solved through a solver. Here, even though we do have a dependence of the full \texttt{\textcolor{blue}{u}} unknown function, i.e. from all three components including the vertical velocity, but on the other hand, we lose dependence on \texttt{\textcolor{green}{u\_k3}}. This means that in each $(x,y,z)$ space point, whatever the calculated full $u$ vector might be, in the next space step iteration its third component will hardly matter.
 
 \section{Newton}
+
+The key point here is at least we have a theoretical change that it could work for even very small $\epsilon$ values, as the scheme keeps its dependence on the whole $u$ function.
 
 Nonlinear solver for the case where we keep the unknown function in both places in $u \nabla u_1 v_1$
 
@@ -223,7 +279,40 @@ The results in the "results2D" folder show a hopeful tendency, but the scheme do
 
 \section{Results for 2D stationary nonlinear formulation. Anisotropic and hydrostatic model.}
 
+Main themes:
+\begin{enumerate}
+  \item In the anisotropic model with "not too small" $\epsilon$ we have the information about the gradient of $u_3$
+  \item In the hydrostatic limit model we know explicitly that the pressure is essentially a function of fewer variables.
+  \item In between: the point where $\epsilon$ is non-zero small, then we can benefit from neither of the above advantages: we still have a pressure function that depends on all variables, but at the same time the scheme is already losing dependence on the gradient of $u_3.$
+  \item degrees (2,2) work well for the anisotropic scheme - is it because there we still have not just $u_3$ but also its derivative?
+  \item degrees (2,1) work well for the hydrostatic scheme combined with an explicit knowledge of the hydrostatic pressure.
+\end{enumerate}
+
 \subsection{The hydrostatic numerical scheme}
+
+We define the spaces
+
+\texttt{
+\\
+degree\_vertical\_hydr = 1 \\
+V\_hor = FiniteElement("Lagrange", mesh.ufl\_cell(), degree = 2) \\
+V\_vert\_hydr = FiniteElement("Lagrange", mesh.ufl\_cell(), degree = degree\_vertical\_hydr) \\
+V\_hydr = V\_hor * V\_vert\_hydr\\
+P = FiniteElement("Lagrange", mesh.ufl\_cell(), degree = 1)\\
+}
+
+as seen above.
+
+We use degree 1 vertical velocity space, otherwise we end up with a non-converging NonlinearVariationalProbelm where the Newton iterations do not lead anywhere.
+
+Using
+
+\texttt{
+\\
+F\_hydr = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx - p * div(v) * dx + q * div(u) * dx + p.dx(1) * q.dx(1) * dx - inner(theta, v) * ds(1)\\
+}
+
+we get the solutions seen in the nest subsection.
 
 \subsection{Solutions of the hydrostatic model}
 
@@ -251,7 +340,49 @@ The results in the "results2D" folder show a hopeful tendency, but the scheme do
 
 \subsection{The anisotropical numerical scheme}
 
+Here we use a degree 2 vertical velocity space:
+
+\texttt{
+\\
+degree\_vertical\_anis = 2 \\
+V\_hor = FiniteElement("Lagrange", mesh.ufl\_cell(), degree = 2)\\
+V\_vert\_anis = FiniteElement("Lagrange", mesh.ufl\_cell(), degree = degree\_vertical\_anis)\\
+}
+
+Otherwise, if we use a degree 1 vertical velocity model for the anisotropic scheme, we end up with the following non-natural pressure. It is interesting to note that even though the pressure shows this layered, nonrealistic structure, the velocity solutions do seem accurate, and they are analogous to those calculated for a degree 2 case (see later).
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=3in]{results_2D_H_V_degree_anis1_degree_hydr1/images/pressure_anis_1_0000000}
+  \caption{Hydrostatic pressure solution.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results_2D_H_V_degree_anis1_degree_hydr1/images/velocity_h_anis_1_0000000}
+  \caption{Horizontal velocity}
+  \label{hydr_v_h}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results_2D_H_V_degree_anis1_degree_hydr1/images/velocity_v_anis_1_0000000}
+  \caption{Vertical velocity}
+  \label{hydr_v_v}
+\end{minipage}
+\end{figure}
+
 \subsection{Visualisation of the convergence result as $\epsilon$ becomes "small"}
+
+Using the degree 2 vertical velocity scheme, solving for
+
+\texttt{
+\\
+F\_anis = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx + eps*eps*inner(u, grad(u3)) * v3 * dx + eps*eps*inner(grad(u3),grad(v3)) * dx - p * div(v) * dx + q * div(u) * dx - inner(theta, v) * ds(1)\\
+}
+
+we obtain the following results.
 
 \subsubsection{The tendency of the pressure solution}
 
@@ -327,77 +458,34 @@ The results in the "results2D" folder show a hopeful tendency, but the scheme do
 \end{minipage}
 \end{figure}
 
+\newpage
+
 \subsubsection{The tendency of the horizontal velocity solution}
 
 \begin{figure}[H]
-\centering
-\begin{minipage}{0.5\textwidth}
   \centering
-  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_h_anis_1_0000000}
-  \captionof{figure}{$\epsilon = 1.0000000.$}
-\end{minipage}%
-\begin{minipage}{0.5\textwidth}
-  \centering
-  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_h_anis_0_5000000}
-  \captionof{figure}{$\epsilon = 0.5000000.$}
-\end{minipage}
+  \includegraphics[width=3in]{results2D_H_V/images/velocity_h_anis_1_0000000}
+  \caption{$\epsilon = 1.0000000.$}
 \end{figure}
 
 \begin{figure}[H]
-\centering
-\begin{minipage}{0.5\textwidth}
   \centering
-  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_h_anis_0_2500000}
-  \captionof{figure}{$\epsilon = 0.2500000.$}
-\end{minipage}%
-\begin{minipage}{0.5\textwidth}
-  \centering
-  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_h_anis_0_1250000}
-  \captionof{figure}{$\epsilon = 0.1250000.$}
-\end{minipage}
+  \includegraphics[width=3in]{results2D_H_V/images/velocity_h_anis_0_1250000}
+  \caption{$\epsilon = 0.1250000.$}
 \end{figure}
 
 \begin{figure}[H]
-\centering
-\begin{minipage}{0.5\textwidth}
   \centering
-  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_h_anis_0_0625000}
-  \captionof{figure}{$\epsilon = 0.0625000.$}
-\end{minipage}%
-\begin{minipage}{0.5\textwidth}
-  \centering
-  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_h_anis_0_0312500}
-  \captionof{figure}{$\epsilon = 0.0312500.$}
-\end{minipage}
+  \includegraphics[width=3in]{results2D_H_V/images/velocity_h_anis_0_0078125}
+  \caption{$\epsilon = 0.0078125.$}
 \end{figure}
 
 \begin{figure}[H]
-\centering
-\begin{minipage}{0.5\textwidth}
   \centering
-  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_h_anis_0_015625}
-  \captionof{figure}{$\epsilon = 0.0156250.$}
-\end{minipage}%
-\begin{minipage}{0.5\textwidth}
-  \centering
-  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_h_anis_0_0078125}
-  \captionof{figure}{$\epsilon = 0.0078125.$}
-\end{minipage}
+  \includegraphics[width=3in]{results2D_H_V/images/velocity_h_hydr}
+  \caption{Hydrostatic model.}
 \end{figure}
 
-\begin{figure}[H]
-\centering
-\begin{minipage}{0.5\textwidth}
-  \centering
-  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_h_anis_0_00390625}
-  \captionof{figure}{$\epsilon = 0.00390625.$}
-\end{minipage}%
-\begin{minipage}{0.5\textwidth}
-  \centering
-  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_h_hydr}
-  \captionof{figure}{Hydrostatic model.}
-\end{minipage}
-\end{figure}
 
 \subsubsection{The tendency of the vertical velocity solution}
 
@@ -461,8 +549,8 @@ The results in the "results2D" folder show a hopeful tendency, but the scheme do
 \centering
 \begin{minipage}{0.5\textwidth}
   \centering
-  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_v_anis_0_00390625}
-  \captionof{figure}{$\epsilon = 0.00390625.$}
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_v_anis_1_19e-07}
+  \captionof{figure}{$\epsilon = 1.19 \exp{(-7)}.$}
 \end{minipage}%
 \begin{minipage}{0.5\textwidth}
   \centering
