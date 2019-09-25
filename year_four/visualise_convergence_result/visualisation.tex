@@ -29,6 +29,8 @@
 \newcommand*\diff{\mathop{}\!\mathrm{d}}
 \usepackage{tikz}
 \usetikzlibrary{arrows,shapes,trees, calc}
+\usepackage{graphicx}
+\usepackage{subfig}
 
 
 %%% *** PREAMBLE *** %%%
@@ -44,6 +46,10 @@
 \newpage
 \tableofcontents
 \newpage
+
+\section{The anisotropic Navier-Stokes equations and the hydrostatic limit model}
+
+\section{The importance of keeping the nonlinearity of the scheme}
 
 One of the main issues for now is linearity / nonlinearity. The $u \nabla u_1 v_1$ term is nonlinear ($u = (u_1, u_2, u_3)$ being the Function we want to solve for, $v$ is a 3D test function). In the Chorin method, it was replaced by
 
@@ -214,6 +220,257 @@ solver.solve()\\
 }
 
 The results in the "results2D" folder show a hopeful tendency, but the scheme does not work for epsilon smaller than order $10^{-7}.$
+
+\section{Results for 2D stationary nonlinear formulation. Anisotropic and hydrostatic model.}
+
+\subsection{The hydrostatic numerical scheme}
+
+\subsection{Solutions of the hydrostatic model}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=3in]{results2D_H_V/images/pressure_hydr}
+  \caption{Hydrostatic pressure solution.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_h_hydr}
+  \caption{Horizontal velocity}
+  \label{hydr_v_h}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_v_hydr}
+  \caption{Vertical velocity}
+  \label{hydr_v_v}
+\end{minipage}
+\end{figure}
+
+\subsection{The anisotropical numerical scheme}
+
+\subsection{Visualisation of the convergence result as $\epsilon$ becomes "small"}
+
+\subsubsection{The tendency of the pressure solution}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/pressure_anis_1_0000000}
+  \captionof{figure}{$\epsilon = 1.0000000.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/pressure_anis_0_5000000}
+  \captionof{figure}{$\epsilon = 0.5000000.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/pressure_anis_0_2500000}
+  \captionof{figure}{$\epsilon = 0.2500000.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/pressure_anis_0_1250000}
+  \captionof{figure}{$\epsilon = 0.1250000.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/pressure_anis_0_0625000}
+  \captionof{figure}{$\epsilon = 0.0625000.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/pressure_anis_0_0312500}
+  \captionof{figure}{$\epsilon = 0.0312500.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/pressure_anis_0_0156250}
+  \captionof{figure}{$\epsilon = 0.0156250.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/pressure_anis_0_0078125}
+  \captionof{figure}{$\epsilon = 0.0078125.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/pressure_anis_0_00390625}
+  \captionof{figure}{$\epsilon = 0.00390625.$}
+  \label{fig:test1}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/pressure_hydr}
+  \captionof{figure}{Hydrostatic model.}
+  \label{fig:test2}
+\end{minipage}
+\end{figure}
+
+\subsubsection{The tendency of the horizontal velocity solution}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_h_anis_1_0000000}
+  \captionof{figure}{$\epsilon = 1.0000000.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_h_anis_0_5000000}
+  \captionof{figure}{$\epsilon = 0.5000000.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_h_anis_0_2500000}
+  \captionof{figure}{$\epsilon = 0.2500000.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_h_anis_0_1250000}
+  \captionof{figure}{$\epsilon = 0.1250000.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_h_anis_0_0625000}
+  \captionof{figure}{$\epsilon = 0.0625000.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_h_anis_0_0312500}
+  \captionof{figure}{$\epsilon = 0.0312500.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_h_anis_0_015625}
+  \captionof{figure}{$\epsilon = 0.0156250.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_h_anis_0_0078125}
+  \captionof{figure}{$\epsilon = 0.0078125.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_h_anis_0_00390625}
+  \captionof{figure}{$\epsilon = 0.00390625.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_h_hydr}
+  \captionof{figure}{Hydrostatic model.}
+\end{minipage}
+\end{figure}
+
+\subsubsection{The tendency of the vertical velocity solution}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_v_anis_1_0000000}
+  \captionof{figure}{$\epsilon = 1.0000000.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_v_anis_0_5000000}
+  \captionof{figure}{$\epsilon = 0.5000000.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_v_anis_0_2500000}
+  \captionof{figure}{$\epsilon = 0.2500000.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_v_anis_0_1250000}
+  \captionof{figure}{$\epsilon = 0.1250000.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_v_anis_0_0625000}
+  \captionof{figure}{$\epsilon = 0.0625000.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_v_anis_0_0312500}
+  \captionof{figure}{$\epsilon = 0.0312500.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_v_anis_0_015625}
+  \captionof{figure}{$\epsilon = 0.0156250.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_v_anis_0_0078125}
+  \captionof{figure}{$\epsilon = 0.0078125.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_v_anis_0_00390625}
+  \captionof{figure}{$\epsilon = 0.00390625.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_v_hydr}
+  \captionof{figure}{Hydrostatic model.}
+\end{minipage}
+\end{figure}
+
 
 \section{Ideas}
 
