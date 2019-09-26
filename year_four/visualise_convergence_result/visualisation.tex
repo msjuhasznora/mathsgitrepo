@@ -572,8 +572,76 @@ In the following $(i,j)$ stands for degree of horizontal velocity space, and deg
   \item In this way, the convergence of the (2,2) schemes is verified by a Newton solver that takes 0 steps and exits with verified convergence for the hydrostatic scheme with the anisotropic solution as an initial guess.
   \item (2,1) for the anisotropic scheme results in non-natural pressure structure, but is surprisingly close for the velocities.
   \item for the (2,2) scheme in the anisotropic model we can get as far as $\exp{-7},$ but then the scheme becomes unstable as we lose the dependence on the gradient of the vertical velocity.
+  \item Three cases for the hydrostatic model, two cases for the anisotropic model:
+  \begin{itemize}
+    \item Anisotropic with (2,2): works nicely until $\exp{-7},$
+    \item Anisotropic with (2,1): works well for velocity, non-natural pressure
+    \item Hydrostatic with (2,1) with no particular initial guess: works well
+    \item Hydrostatic with (2,2) with the anisotropic solution as an initial guess: converges immediately
+    \item Hydrostatic with (2,2) with no particular initial guess: does not converge, the Jacobian seems to be not invertible.
+  \end{itemize}
 \end{itemize}
 
+\section{The difference between (2,2) and (2,1) for the hydrostatic case}
+
+The Newton method converges for degree 1 vertical velocity, but does not converge for degree 2, results immediately in "NaN" results.
+
+In general, the Newton method for several variables $v$ works using
+
+$$ v_1 = v_0 - \mathcal{J}^{-1}_{v_0} f(v_0).$$
+
+What we have for the degree 1 case:
+
+\begin{equation}
+  \begin{split}
+    &p = \alpha_1 + \alpha_2 x + \alpha_3 z \\
+    &u_1 = \alpha_4 + \alpha_5 x + \alpha_6 z + \alpha_7 x^2 + \alpha_8 z^2 + \alpha_9 xz \\
+    &u_3 = \alpha_{10} + \alpha_{11} x + \alpha_{12} z,
+  \end{split}
+\end{equation}
+
+while for the test functions
+
+\begin{equation}
+  \begin{split}
+    &q = \beta_1 + \beta_2 x + \beta_3 z \\
+    &v_1 = \beta_4 + \beta_5 x + \beta_6 z + \beta_7 x^2 + \beta_8 z^2 + \beta_9 xz \\
+    &v_3 = \beta_{10} + \beta_{11} x + \beta_{12} z.
+  \end{split}
+\end{equation}
+
+
+On the other hand, what we have for the degree 2 case the trial functions are:
+
+\begin{equation}
+  \begin{split}
+    & p = \alpha_1 + \alpha_2 x + \alpha_3 z \\
+    & u_1 = \alpha_4 + \alpha_5 x + \alpha_6 z + \alpha_7 x^2 + \alpha_8 z^2 + \alpha_9 xz \\
+    & u_3 = \alpha_{10} + \alpha_{11} x + \alpha_{12} z + \alpha_{13} x^2 + \alpha_{14} z^2 + \alpha_{15} xz,
+  \end{split}
+\end{equation}
+
+the test functions take the form of
+
+\begin{equation}
+  \begin{split}
+    & q = \beta_1 + \beta_2 x + \beta_3 z \\
+    & v_1 = \beta_4 + \beta_5 x + \beta_6 z + \beta_7 x^2 + \beta_8 z^2 + \beta_9 xz \\
+    & v_3 = \beta_{10} + \beta_{11} x + \beta_{12} z + \beta_{13} x^2 + \beta_{14} z^2 + \beta_{15} xz.
+  \end{split}
+\end{equation}
+
+The degree 1 vertical velocity matrix is a $12 \times 12$ matrix, the degree 2 is $15 \times 15.$
+
+The numerical scheme for the hydrostatic model is (except for boundary terms)
+
+$$ u_1 \partial_1 u_1 v_1 + u_3 \partial_3 u_1 v_1 + \nabla u_1 \nabla v_1 + q\cdot (\partial_1 u_1 + \partial_3 u_3) - p \cdot (\partial_1 v_1 + \partial_3 v_3) + \partial_3 q \cdot \partial_3 p = 0$$
+
+After substituting the approximative expressions for the functions, in one given $(x,z)$ point then we have results like
+
+$(\alpha_4 + \alpha_5 x + \alpha_6 z + \alpha_7 x^2 + \alpha_8 z^2 + \alpha_9 xz) (\alpha_5 + 2 \alpha_7 x + \alpha_9 z) (\beta_4 + \beta_5 x + \beta_6 z + \beta_7 x^2 + \beta_8 z^2 + \beta_9 xz) + ... $
+
+The issue is that the scheme depends on $v_3$ only through $p \partial_3 v_3$ --- when the scheme changes from degree 1 to degree 2, it brings in 3 new variables from which the scheme hardly depends on. Probably this is why the Jacobian becomes singular. 
 
 \section{Ideas}
 
