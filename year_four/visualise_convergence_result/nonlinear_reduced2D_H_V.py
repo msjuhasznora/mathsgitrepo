@@ -70,7 +70,8 @@ up_ = Function(VP_1)
 F_hydr = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx - p * div(v) * dx + q * div(u) * dx + p.dx(1) * q.dx(1) * dx - inner(theta, v) * ds(1)
 
 F_hydr = action(F_hydr, up_)
-J_hydr  = derivative(F_hydr, up_, up)
+# J_hydr  = derivative(F_hydr, up_, up)
+J_hydr  = derivative(F_hydr, up_)
 
 problem_hydr = NonlinearVariationalProblem(F_hydr, up_, bcu_1, J_hydr)
 solver  = NonlinearVariationalSolver(problem_hydr)
@@ -118,7 +119,7 @@ while eps > epsilon_lower_limit:
     F_anis = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx + eps*eps*inner(u, grad(u3)) * v3 * dx + eps*eps*inner(grad(u3),grad(v3)) * dx - p * div(v) * dx + q * div(u) * dx - inner(theta, v) * ds(1)
 
     F_anis = action(F_anis, up_)
-    J_anis  = derivative(F_anis, up_, up)
+    J_anis  = derivative(F_anis, up_)
 
     problem_anis = NonlinearVariationalProblem(F_anis, up_, bcu_2, J_anis)
     solver  = NonlinearVariationalSolver(problem_anis)
@@ -202,7 +203,7 @@ up_ = up_sol_anis_eps
 F = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx - p * div(v) * dx + q * div(u) * dx + p.dx(1) * q.dx(1) * dx - inner(theta, v) * ds(1)
 
 F = action(F, up_)
-J  = derivative(F, up_, up)
+J  = derivative(F, up_)
 
 problem = NonlinearVariationalProblem(F, up_, bcu_2, J)
 solver  = NonlinearVariationalSolver(problem)
