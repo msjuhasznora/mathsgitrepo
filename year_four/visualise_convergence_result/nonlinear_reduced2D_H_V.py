@@ -11,22 +11,14 @@ from dolfin import *
 import argparse
 import numpy
 
-degree_vertical_anis = 2
-degree_vertical_hydr = 1
-epsilon_lower_limit = 1.0e-07 #1.0e-07
-wind_shear_x = 10.0
-theta = Constant((wind_shear_x, 0.0))
-mu_1 = Constant(1.0)
-mu_2 = Constant(1.0)
-
-mesh = UnitSquareMesh(30, 30)
-
 timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-r", "--resultfolder", default="current_results_H_V", help="default: results, custom: name of results folder")
 xargs = parser.parse_args(None)
-resultsfolder = str(timestamp) + xargs.resultfolder + "_degree_anis" + str(degree_vertical_anis) + "_degree_hydr" + str(degree_vertical_hydr) + "/"
+resultsfolder = str(timestamp) + xargs.resultfolder + "/"
+
+mesh = UnitSquareMesh(30, 30)
 
 # create a functionspace ((V_h, V_v), P) with given degree of V_v
 def VP_functionspace(mesh, v_vert_deg):
@@ -46,8 +38,6 @@ boundaries = MeshFunction("size_t", mesh, mesh.topology().dim() - 1)
 boundaries.set_all(0)
 upperboundary.mark(boundaries, 1)
 ds = Measure('ds')[boundaries]
-
-# setting V_vert_degree2 = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 1) can provide the results on how it looks like to have a degree 1 anisotropical model.
 
 def boundaryconditions(VP):
     noslipbasin = DirichletBC(VP.sub(0), Constant((0, 0)), "on_boundary && x[1] < 1.0 - DOLFIN_EPS")
@@ -82,14 +72,6 @@ def hydrostatic_solver(VP, up_):
     prm['newton_solver']['maximum_iterations'] = 5
     solver.solve()
 
-    (u_sol_hydr, p_sol_hydr) = up_.split(True)
-    (u1_sol_hydr, u3_sol_hydr) = u_sol_hydr.split(True)
-    
-    print("From function. Hydrostatic. Norm of velocity coefficient vector: %.15g" % u_sol_hydr.vector().norm("l2"))
-    print("From function. Hydrostatic. Norm of horizontal velocity coefficient vector: %.15g" % u1_sol_hydr.vector().norm("l2"))
-    print("From function. Hydrostatic. Norm of vertical velocity coefficient vector: %.15g" % u3_sol_hydr.vector().norm("l2"))
-    print("From function. Hydrostatic. Norm of pressure coefficient vector: %.15g" % p_sol_hydr.vector().norm("l2"))
-
     (u,p) = up_.split(True)
 
     ufile_pvd_hydr = File(resultsfolder + "velocity_hydr.pvd")
@@ -100,17 +82,14 @@ def hydrostatic_solver(VP, up_):
     # concentration
     C = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 2)
     C = FunctionSpace(mesh, C)
-    
     zerotop_concentration = DirichletBC(C, 0, "on_boundary && x[1] > 1 - DOLFIN_EPS")
     bcc = [zerotop_concentration]
-    
     c = TrialFunction(C)
     d = TestFunction(C)
     c_sol = Function(C)
-    F_c = inner(u_sol_hydr, grad(c)) * d * dx + (mu_1 * c.dx(0) * d.dx(0) + mu_2 * c.dx(1) * d.dx(1))  * dx - inner(Constant(10.0),d) * dx - inner(c.dx(1), d.dx(1)) * ds(1)
-    
+    F = inner(u, grad(c)) * d * dx + (mu_1 * c.dx(0) * d.dx(0) + mu_2 * c.dx(1) * d.dx(1))  * dx - inner(Constant(10.0),d) * dx - inner(c.dx(1), d.dx(1)) * ds(1)
     # linear solver for the concentration
-    a, L = system(F_c)
+    a, L = system(F)
     A, b = assemble_system(a, L, bcc)
     solver = KrylovSolver('gmres', 'ilu')
     solver.solve(A, c_sol.vector(), b)
@@ -218,12 +197,19 @@ def difference_info(eps, up_sol_anis_eps, VPA, up_sol_hydr, VPH):
     print("Anistropic Projected - Hydrostatic. u3: %.15g" % (u3_project_hydr.vector() - u3_sol_hydr.vector()).norm("l2"))
     print("Anistropic Projected - Hydrostatic. p: %.15g" % (p_project_hydr.vector() - p_sol_hydr.vector()).norm("l2"))
 
-    return 0
+# Define constants
+
+epsilon_lower_limit = 1.0e-07 #1.0e-07
+wind_shear_x = 10.0
+theta = Constant((wind_shear_x, 0.0))
+mu_1 = Constant(1.0)
+mu_2 = Constant(1.0)
 
 # **********************************************
 # *** Define hydrostatic variational problem ***
 # **********************************************
 
+# hydrostatic model solved without initial guess for degree 1 vertical velocity space
 VPH = VP_functionspace(mesh, 1)
 up_ = Function(VPH) #initial guess for the Newton solver if filled, otherwise blank and start by default
 up_sol_hydr = hydrostatic_solver(VPH, up_)
@@ -246,7 +232,10 @@ while eps > epsilon_lower_limit:
 # *** degree 2 for the hydrostatic weak form ***
 # **********************************************
 
+# hydrostatic model solved with initial guess for degree 2 vertical velocity space
 up_sol_hydr = hydrostatic_solver(VP, up_sol_anis_eps)
+
+# setting FiniteElement("Lagrange", mesh.ufl_cell(), degree = 1) can provide the results on how it looks like to have a degree 1 anisotropical model.
 
 
 # *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- #
