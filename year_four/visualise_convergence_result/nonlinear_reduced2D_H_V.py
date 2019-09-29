@@ -16,6 +16,9 @@ epsilon_lower_limit = 1.0e-07 #1.0e-07
 degree_vertical_anis = 2
 degree_vertical_hydr = 1
 
+mu_1 = Constant(1.0)
+mu_2 = Constant(1.0)
+
 # setting V_vert_degree2 = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 1) can provide the results on how it looks like to have a degree 1 anisotropical model.
 
 resultsfolder = "results_2D_H_V_degree_anis" + str(degree_vertical_anis) + "_degree_hydr" + str(degree_vertical_hydr) + "/"
@@ -27,10 +30,12 @@ V_vert_degree2 = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 2)
 V_degree_2_1 = V_hor * V_vert_degree1
 V_degree_2_2 = V_hor * V_vert_degree2
 P = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 1)
+C_e = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 2)
 VP_degree_2_1_1_element = V_degree_2_1 * P # linear in the vertical velocity space
 VP_degree_2_2_1_element = V_degree_2_2 * P # Taylor - Hood
 VP_1 = FunctionSpace(mesh, VP_degree_2_1_1_element)
 VP_2 = FunctionSpace(mesh, VP_degree_2_2_1_element)
+C = FunctionSpace(mesh, C_e)
 
 class UpperBoundary(SubDomain):
     def inside(self, x, on_boundary):
@@ -48,9 +53,11 @@ noslipbasin_1 = DirichletBC(VP_1.sub(0), Constant((0, 0)), "on_boundary && x[1] 
 noslipbasin_2 = DirichletBC(VP_2.sub(0), Constant((0, 0)), "on_boundary && x[1] < 1.0 - DOLFIN_EPS")
 zerotopvertical_1 = DirichletBC(VP_1.sub(0).sub(1), 0, "on_boundary && x[1] > 1.0 - DOLFIN_EPS")
 zerotopvertical_2 = DirichletBC(VP_2.sub(0).sub(1), 0, "on_boundary && x[1] > 1.0 - DOLFIN_EPS")
+zerotop_concentration = DirichletBC(C, 0, "on_boundary && x[1] > 1 - DOLFIN_EPS")
 
 bcu_1 = [noslipbasin_1, zerotopvertical_1]
 bcu_2 = [noslipbasin_2, zerotopvertical_2]
+bcc_1 = [zerotop_concentration]
 
 # **********************************************
 # *** Define hydrostatic variational problem ***
@@ -71,7 +78,7 @@ F_hydr = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx - p * div(
 
 F_hydr = action(F_hydr, up_)
 # J_hydr  = derivative(F_hydr, up_, up)
-J_hydr  = derivative(F_hydr, up_)
+J_hydr  = derivative(F_hydr, up_, up)
 
 problem_hydr = NonlinearVariationalProblem(F_hydr, up_, bcu_1, J_hydr)
 solver  = NonlinearVariationalSolver(problem_hydr)
@@ -84,6 +91,18 @@ up_sol_hydr = Function(VP_1)
 (u_sol_hydr, p_sol_hydr) = up_.split(True)
 (u1_sol_hydr, u3_sol_hydr) = u_sol_hydr.split(True)
 
+c = TrialFunction(C)
+d = TestFunction(C)
+c_sol = Function(C)
+
+F_c = inner(u_sol_hydr, grad(c)) * d * dx + (mu_1 * c.dx(0) * d.dx(0) + mu_2 * c.dx(1) * d.dx(1))  * dx - inner(Constant(10.0),d) * dx - inner(c.dx(1), d.dx(1)) * ds(1)
+a_c, L_c = system(F_c)
+
+A_c, b_c = assemble_system(a_c, L_c, bcc_1)
+
+solver_c = KrylovSolver('gmres', 'ilu')
+solver_c.solve(A_c, c_sol.vector(), b_c)
+
 print("Hydrostatic. Norm of velocity coefficient vector: %.15g" % u_sol_hydr.vector().norm("l2"))
 print("Hydrostatic. Norm of horizontal velocity coefficient vector: %.15g" % u1_sol_hydr.vector().norm("l2"))
 print("Hydrostatic. Norm of vertical velocity coefficient vector: %.15g" % u3_sol_hydr.vector().norm("l2"))
@@ -95,6 +114,10 @@ ufile_pvd_hydr = File(resultsfolder + "velocity_hydr.pvd")
 ufile_pvd_hydr << u
 pfile_pvd_hydr = File(resultsfolder + "pressure_hydr.pvd")
 pfile_pvd_hydr << p
+cfile_pvd_hydr = File(resultsfolder + "concentration_hydr.pvd")
+cfile_pvd_hydr << c_sol
+
+print("HYDR. c: %.15g" % c_sol.vector().norm("l2"))
 
 # **********************************************
 # *** Define anisotropic variational problem ***
@@ -178,6 +201,23 @@ while eps > epsilon_lower_limit:
     pfile_pvd_anis << p
     
     up_sol_anis_eps = up_
+    
+    c = TrialFunction(C)
+    d = TestFunction(C)
+    c_sol = Function(C)
+
+    F_c = inner(u, grad(c)) * d * dx + (mu_1 * c.dx(0) * d.dx(0) + mu_2 * c.dx(1) * d.dx(1)) * dx - inner(Constant(10.0),d) * dx - inner(c.dx(1), d.dx(1)) * ds(1)
+    a_c, L_c = system(F_c)
+
+    A_c, b_c = assemble_system(a_c, L_c, bcc_1)
+
+    solver_c = KrylovSolver('gmres', 'ilu')
+    solver_c.solve(A_c, c_sol.vector(), b_c)
+    
+    cfile_pvd_anis = File(resultsfolder + "concentration_anis" + str(eps) + ".pvd")
+    cfile_pvd_anis << c_sol
+    
+    print("ANIS. c: %.15g" % c_sol.vector().norm("l2"))
 
     eps = eps / 2.0
 
@@ -203,13 +243,14 @@ up_ = up_sol_anis_eps
 F = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx - p * div(v) * dx + q * div(u) * dx + p.dx(1) * q.dx(1) * dx - inner(theta, v) * ds(1)
 
 F = action(F, up_)
-J  = derivative(F, up_)
+J  = derivative(F, up_, up)
 
 problem = NonlinearVariationalProblem(F, up_, bcu_2, J)
 solver  = NonlinearVariationalSolver(problem)
 prm = solver.parameters
-prm['newton_solver']['absolute_tolerance'] = 1E-8
-prm['newton_solver']['relative_tolerance'] = 1E-6
+prm['newton_solver']['absolute_tolerance'] = 1e-8
+prm['newton_solver']['relative_tolerance'] = 1e-6
+prm['newton_solver']['maximum_iterations'] = 5
 solver.solve()
 
 (u,p) = up_.split(True)
@@ -234,10 +275,11 @@ solver.solve()
 
 # vi) the dimension and determinant of the stiffness matrix:
 
-#a = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx + eps*eps*inner(u, grad(u3)) * v3 * dx + eps*eps*inner(grad(u3),grad(v3)) * dx
-#A = assemble(a)
-#J_mat = assemble(a)
+#J_mat = assemble(J)
 #J_array = J_mat.array()
+#np.savetxt("Jacobianmatrix_h2.txt", J_array)
 #detJ = numpy.linalg.det(J_array)
+#print("det Jacobian h 2:")
 #print(detJ)
-#np.savetxt("stiffnessmatrix.txt", A.array())
+
+
