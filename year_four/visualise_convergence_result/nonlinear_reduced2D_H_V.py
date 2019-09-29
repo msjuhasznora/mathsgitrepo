@@ -7,34 +7,40 @@ from dolfin import *
 import numpy as np
 import datetime
 from numpy.random import rand
-#from ufl import div
 from dolfin import *
+import argparse
 import numpy
-
-epsilon_lower_limit = 1.0e-07 #1.0e-07
 
 degree_vertical_anis = 2
 degree_vertical_hydr = 1
+epsilon_lower_limit = 1.0e-07 #1.0e-07
+
+mesh = UnitSquareMesh(30, 30)
 
 mu_1 = Constant(1.0)
 mu_2 = Constant(1.0)
 
+timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-r", "--resultfolder", default="current_results_H_V", help="default: results, custom: name of results folder")
+xargs = parser.parse_args(None)
+resultsfolder = str(timestamp) + xargs.resultfolder + "_degree_anis" + str(degree_vertical_anis) + "_degree_hydr" + str(degree_vertical_hydr) + "/"
+
+# create a functionspace ((V_h, V_v), P) with given degree of V_v
+def VP_functionspace(mesh, v_vert_deg):
+    V_h = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 2) #horizontal velocity
+    V_v = FiniteElement("Lagrange", mesh.ufl_cell(), degree = v_vert_deg) #vertical velocity
+    V = V_h * V_v
+    P = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 1) #pressure
+    VP = FunctionSpace(mesh, V * P)
+    return VP
+
 # setting V_vert_degree2 = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 1) can provide the results on how it looks like to have a degree 1 anisotropical model.
 
-resultsfolder = "results_2D_H_V_degree_anis" + str(degree_vertical_anis) + "_degree_hydr" + str(degree_vertical_hydr) + "/"
-
-mesh = UnitSquareMesh(30, 30)
-V_hor = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 2)
-V_vert_degree1 = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 1)
-V_vert_degree2 = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 2)
-V_degree_2_1 = V_hor * V_vert_degree1
-V_degree_2_2 = V_hor * V_vert_degree2
-P = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 1)
+VP_1 = VP_functionspace(mesh, 1)
+VP_2 = VP_functionspace(mesh, 2)
 C_e = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 2)
-VP_degree_2_1_1_element = V_degree_2_1 * P # linear in the vertical velocity space
-VP_degree_2_2_1_element = V_degree_2_2 * P # Taylor - Hood
-VP_1 = FunctionSpace(mesh, VP_degree_2_1_1_element)
-VP_2 = FunctionSpace(mesh, VP_degree_2_2_1_element)
 C = FunctionSpace(mesh, C_e)
 
 class UpperBoundary(SubDomain):
