@@ -14,11 +14,12 @@ import numpy
 degree_vertical_anis = 2
 degree_vertical_hydr = 1
 epsilon_lower_limit = 1.0e-07 #1.0e-07
-
-mesh = UnitSquareMesh(30, 30)
-
+wind_shear_x = 10.0
+theta = Constant((wind_shear_x, 0.0))
 mu_1 = Constant(1.0)
 mu_2 = Constant(1.0)
+
+mesh = UnitSquareMesh(30, 30)
 
 timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
 
@@ -36,13 +37,7 @@ def VP_functionspace(mesh, v_vert_deg):
     VP = FunctionSpace(mesh, V * P)
     return VP
 
-# setting V_vert_degree2 = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 1) can provide the results on how it looks like to have a degree 1 anisotropical model.
-
-VP_1 = VP_functionspace(mesh, 1)
-VP_2 = VP_functionspace(mesh, 2)
-C_e = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 2)
-C = FunctionSpace(mesh, C_e)
-
+# set boundary domains
 class UpperBoundary(SubDomain):
     def inside(self, x, on_boundary):
         return near(x[1], 1.0)
@@ -52,50 +47,79 @@ boundaries.set_all(0)
 upperboundary.mark(boundaries, 1)
 ds = Measure('ds')[boundaries]
 
-wind_shear_x = 10.0
-theta = Constant((wind_shear_x, 0.0))
+# setting V_vert_degree2 = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 1) can provide the results on how it looks like to have a degree 1 anisotropical model.
 
-noslipbasin_1 = DirichletBC(VP_1.sub(0), Constant((0, 0)), "on_boundary && x[1] < 1.0 - DOLFIN_EPS")
-noslipbasin_2 = DirichletBC(VP_2.sub(0), Constant((0, 0)), "on_boundary && x[1] < 1.0 - DOLFIN_EPS")
-zerotopvertical_1 = DirichletBC(VP_1.sub(0).sub(1), 0, "on_boundary && x[1] > 1.0 - DOLFIN_EPS")
-zerotopvertical_2 = DirichletBC(VP_2.sub(0).sub(1), 0, "on_boundary && x[1] > 1.0 - DOLFIN_EPS")
+VP_1 = VP_functionspace(mesh, 1)
+VP_2 = VP_functionspace(mesh, 2)
+C_e = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 2)
+C = FunctionSpace(mesh, C_e)
+
+def boundaryconditions(VP):
+    noslipbasin = DirichletBC(VP.sub(0), Constant((0, 0)), "on_boundary && x[1] < 1.0 - DOLFIN_EPS")
+    zerotopvertical = DirichletBC(VP.sub(0).sub(1), 0, "on_boundary && x[1] > 1.0 - DOLFIN_EPS")
+    bcu = [noslipbasin, zerotopvertical]
+    return bcu
+
 zerotop_concentration = DirichletBC(C, 0, "on_boundary && x[1] > 1 - DOLFIN_EPS")
 
-bcu_1 = [noslipbasin_1, zerotopvertical_1]
-bcu_2 = [noslipbasin_2, zerotopvertical_2]
+bcu_1 = boundaryconditions(VP_1)
+bcu_2 = boundaryconditions(VP_2)
 bcc_1 = [zerotop_concentration]
+
+def hydrostatic_solver(VP, up_):
+    
+    up = TrialFunction(VP)
+    u,p = split(up)
+    u1, u3 = split(u)
+    (v, q) = TestFunctions(VP)
+    v1, v3 = split(v)
+
+    (u_, p_) = up_.split(True)
+    (u1_, u3_) = u_.split(True)
+    
+    # the hydrostatic weak formulation is constructed with the vertical velocity space being of degree 1 and the additional constraint p.dx(1) * q.dx(1) * dx representing that we have a hydrostatic pressure. using a lower degree for the vertical velocities for the case of the primitive equations come from the article of Danilov, Gennady, Schroter, 2002 (even though they use elementwise constant representations)
+    F = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx - p * div(v) * dx + q * div(u) * dx + p.dx(1) * q.dx(1) * dx - inner(theta, v) * ds(1)
+    
+    F = action(F, up_)
+    J  = derivative(F, up_, up)
+    
+    bcu = boundaryconditions(VP)
+    problem = NonlinearVariationalProblem(F, up_, bcu, J)
+    solver  = NonlinearVariationalSolver(problem)
+    prm = solver.parameters
+    prm['newton_solver']['absolute_tolerance'] = 1e-8
+    prm['newton_solver']['relative_tolerance'] = 1e-6
+    prm['newton_solver']['maximum_iterations'] = 5
+    solver.solve()
+
+    (u_sol_hydr, p_sol_hydr) = up_.split(True)
+    (u1_sol_hydr, u3_sol_hydr) = u_sol_hydr.split(True)
+    
+    print("From function. Hydrostatic. Norm of velocity coefficient vector: %.15g" % u_sol_hydr.vector().norm("l2"))
+    print("From function. Hydrostatic. Norm of horizontal velocity coefficient vector: %.15g" % u1_sol_hydr.vector().norm("l2"))
+    print("From function. Hydrostatic. Norm of vertical velocity coefficient vector: %.15g" % u3_sol_hydr.vector().norm("l2"))
+    print("From function. Hydrostatic. Norm of pressure coefficient vector: %.15g" % p_sol_hydr.vector().norm("l2"))
+
+    (u,p) = up_.split(True)
+
+    ufile_pvd_hydr = File(resultsfolder + "velocity_hydr.pvd")
+    ufile_pvd_hydr << u
+    pfile_pvd_hydr = File(resultsfolder + "pressure_hydr.pvd")
+    pfile_pvd_hydr << p
+    
+    return up_
+    
 
 # **********************************************
 # *** Define hydrostatic variational problem ***
 # **********************************************
 
-up = TrialFunction(VP_1)
-u,p = split(up)
-u1, u3 = split(u)
-(v, q) = TestFunctions(VP_1)
-v1, v3 = split(v)
+VP = VP_functionspace(mesh, 1)
+up_ = Function(VP) #initial guess for the Newton solver if filled, otherwise blank and start by default
 
-up_ = Function(VP_1)
-(u_, p_) = split(up_)
-(u1_, u3_) = split(u_)
-
-# the hydrostatic weak formulation is constructed with the vertical velocity space being of degree 1 and the additional constraint p.dx(1) * q.dx(1) * dx representing that we have a hydrostatic pressure. using a lower degree for the vertical velocities for the case of the primitive equations come from the article of Danilov, Gennady, Schroter, 2002 (even though they use elementwise constant representations)
-F_hydr = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx - p * div(v) * dx + q * div(u) * dx + p.dx(1) * q.dx(1) * dx - inner(theta, v) * ds(1)
-
-F_hydr = action(F_hydr, up_)
-# J_hydr  = derivative(F_hydr, up_, up)
-J_hydr  = derivative(F_hydr, up_, up)
-
-problem_hydr = NonlinearVariationalProblem(F_hydr, up_, bcu_1, J_hydr)
-solver  = NonlinearVariationalSolver(problem_hydr)
-solver.solve()
-
-up_sol_hydr = Function(VP_1)
-(u_sol_hydr, p_sol_hydr) = split(up_sol_hydr)
-(u1_sol_hydr, u3_sol_hydr) = split(u_sol_hydr)
-
-(u_sol_hydr, p_sol_hydr) = up_.split(True)
-(u1_sol_hydr, u3_sol_hydr) = u_sol_hydr.split(True)
+up_sol_hydr = hydrostatic_solver(VP, up_)
+(u_sol_hydr, p_sol_hydr) = up_sol_hydr.split(True) #needed for calculating differences later
+(u1_sol_hydr, u3_sol_hydr) = u_sol_hydr.split(True) #needed for calculating differences later
 
 c = TrialFunction(C)
 d = TestFunction(C)
@@ -109,17 +133,6 @@ A_c, b_c = assemble_system(a_c, L_c, bcc_1)
 solver_c = KrylovSolver('gmres', 'ilu')
 solver_c.solve(A_c, c_sol.vector(), b_c)
 
-print("Hydrostatic. Norm of velocity coefficient vector: %.15g" % u_sol_hydr.vector().norm("l2"))
-print("Hydrostatic. Norm of horizontal velocity coefficient vector: %.15g" % u1_sol_hydr.vector().norm("l2"))
-print("Hydrostatic. Norm of vertical velocity coefficient vector: %.15g" % u3_sol_hydr.vector().norm("l2"))
-print("Hydrostatic. Norm of pressure coefficient vector: %.15g" % p_sol_hydr.vector().norm("l2"))
-
-(u,p) = up_.split(True)
-
-ufile_pvd_hydr = File(resultsfolder + "velocity_hydr.pvd")
-ufile_pvd_hydr << u
-pfile_pvd_hydr = File(resultsfolder + "pressure_hydr.pvd")
-pfile_pvd_hydr << p
 cfile_pvd_hydr = File(resultsfolder + "concentration_hydr.pvd")
 cfile_pvd_hydr << c_sol
 
@@ -234,33 +247,8 @@ while eps > epsilon_lower_limit:
 # *** degree 2 for the hydrostatic weak form ***
 # **********************************************
 
-up = TrialFunction(VP_2)
-u,p = split(up)
-u1, u3 = split(u)
-(v, q) = TestFunctions(VP_2)
-v1, v3 = split(v)
-
-up_ = Function(VP_2)
-#setting the anisotropic solution as an initial guess to the hydrostatic scheme.
-up_ = up_sol_anis_eps
-(u_, p_) = split(up_)
-(u1_, u3_) = split(u_)
-
-F = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx - p * div(v) * dx + q * div(u) * dx + p.dx(1) * q.dx(1) * dx - inner(theta, v) * ds(1)
-
-F = action(F, up_)
-J  = derivative(F, up_, up)
-
-problem = NonlinearVariationalProblem(F, up_, bcu_2, J)
-solver  = NonlinearVariationalSolver(problem)
-prm = solver.parameters
-prm['newton_solver']['absolute_tolerance'] = 1e-8
-prm['newton_solver']['relative_tolerance'] = 1e-6
-prm['newton_solver']['maximum_iterations'] = 5
-solver.solve()
-
-(u,p) = up_.split(True)
-(u1, u3) = u.split(True)
+VP = VP_2
+up_sol_hydr = hydrostatic_solver(VP, up_sol_anis_eps)
 
 
 
