@@ -49,22 +49,11 @@ ds = Measure('ds')[boundaries]
 
 # setting V_vert_degree2 = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 1) can provide the results on how it looks like to have a degree 1 anisotropical model.
 
-VP_1 = VP_functionspace(mesh, 1)
-VP_2 = VP_functionspace(mesh, 2)
-C_e = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 2)
-C = FunctionSpace(mesh, C_e)
-
 def boundaryconditions(VP):
     noslipbasin = DirichletBC(VP.sub(0), Constant((0, 0)), "on_boundary && x[1] < 1.0 - DOLFIN_EPS")
     zerotopvertical = DirichletBC(VP.sub(0).sub(1), 0, "on_boundary && x[1] > 1.0 - DOLFIN_EPS")
     bcu = [noslipbasin, zerotopvertical]
     return bcu
-
-zerotop_concentration = DirichletBC(C, 0, "on_boundary && x[1] > 1 - DOLFIN_EPS")
-
-bcu_1 = boundaryconditions(VP_1)
-bcu_2 = boundaryconditions(VP_2)
-bcc_1 = [zerotop_concentration]
 
 def hydrostatic_solver(VP, up_):
     
@@ -83,6 +72,7 @@ def hydrostatic_solver(VP, up_):
     F = action(F, up_)
     J  = derivative(F, up_, up)
     
+    # nonlinear solver for the velocity and pressure
     bcu = boundaryconditions(VP)
     problem = NonlinearVariationalProblem(F, up_, bcu, J)
     solver  = NonlinearVariationalSolver(problem)
@@ -107,68 +97,56 @@ def hydrostatic_solver(VP, up_):
     pfile_pvd_hydr = File(resultsfolder + "pressure_hydr.pvd")
     pfile_pvd_hydr << p
     
+    # concentration
+    C = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 2)
+    C = FunctionSpace(mesh, C)
+    
+    zerotop_concentration = DirichletBC(C, 0, "on_boundary && x[1] > 1 - DOLFIN_EPS")
+    bcc = [zerotop_concentration]
+    
+    c = TrialFunction(C)
+    d = TestFunction(C)
+    c_sol = Function(C)
+    F_c = inner(u_sol_hydr, grad(c)) * d * dx + (mu_1 * c.dx(0) * d.dx(0) + mu_2 * c.dx(1) * d.dx(1))  * dx - inner(Constant(10.0),d) * dx - inner(c.dx(1), d.dx(1)) * ds(1)
+    
+    # linear solver for the concentration
+    a, L = system(F_c)
+    A, b = assemble_system(a, L, bcc)
+    solver = KrylovSolver('gmres', 'ilu')
+    solver.solve(A, c_sol.vector(), b)
+    cfile_pvd_hydr = File(resultsfolder + "concentration_hydr.pvd")
+    cfile_pvd_hydr << c_sol
+    print("HYDR. c: %.15g" % c_sol.vector().norm("l2"))
+    
     return up_
     
+def anisotropic_solver(VP, eps, up_sol_hydr):
 
-# **********************************************
-# *** Define hydrostatic variational problem ***
-# **********************************************
-
-VP = VP_functionspace(mesh, 1)
-up_ = Function(VP) #initial guess for the Newton solver if filled, otherwise blank and start by default
-
-up_sol_hydr = hydrostatic_solver(VP, up_)
-(u_sol_hydr, p_sol_hydr) = up_sol_hydr.split(True) #needed for calculating differences later
-(u1_sol_hydr, u3_sol_hydr) = u_sol_hydr.split(True) #needed for calculating differences later
-
-c = TrialFunction(C)
-d = TestFunction(C)
-c_sol = Function(C)
-
-F_c = inner(u_sol_hydr, grad(c)) * d * dx + (mu_1 * c.dx(0) * d.dx(0) + mu_2 * c.dx(1) * d.dx(1))  * dx - inner(Constant(10.0),d) * dx - inner(c.dx(1), d.dx(1)) * ds(1)
-a_c, L_c = system(F_c)
-
-A_c, b_c = assemble_system(a_c, L_c, bcc_1)
-
-solver_c = KrylovSolver('gmres', 'ilu')
-solver_c.solve(A_c, c_sol.vector(), b_c)
-
-cfile_pvd_hydr = File(resultsfolder + "concentration_hydr.pvd")
-cfile_pvd_hydr << c_sol
-
-print("HYDR. c: %.15g" % c_sol.vector().norm("l2"))
-
-# **********************************************
-# *** Define anisotropic variational problem ***
-# **********************************************
-
-eps = 1.0
-up_sol_anis_eps = Function(VP_2)
-
-while eps > epsilon_lower_limit:
-    
-    up = TrialFunction(VP_2)
+    up = TrialFunction(VP)
     u,p = split(up)
     u1, u3 = split(u)
-    (v, q) = TestFunctions(VP_2)
+    (v, q) = TestFunctions(VP)
     v1, v3 = split(v)
 
-    up_ = Function(VP_2)
+    up_ = Function(VP)
     (u_, p_) = split(up_)
     (u1_, u3_) = split(u_)
 
     # the anisotropic weak formulation is created using the Taylor-Hood elements, the vertical velocity is from a quadratic space. Using a degree 1 vertical velocity space in the anisotropic case we have a strange layered unnatural pressure.
-    F_anis = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx + eps*eps*inner(u, grad(u3)) * v3 * dx + eps*eps*inner(grad(u3),grad(v3)) * dx - p * div(v) * dx + q * div(u) * dx - inner(theta, v) * ds(1)
+    F = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx + eps*eps*inner(u, grad(u3)) * v3 * dx + eps*eps*inner(grad(u3),grad(v3)) * dx - p * div(v) * dx + q * div(u) * dx - inner(theta, v) * ds(1)
 
-    F_anis = action(F_anis, up_)
-    J_anis  = derivative(F_anis, up_)
+    F = action(F, up_)
+    J = derivative(F, up_)
 
-    problem_anis = NonlinearVariationalProblem(F_anis, up_, bcu_2, J_anis)
-    solver  = NonlinearVariationalSolver(problem_anis)
+    bcu = boundaryconditions(VP)
+    problem = NonlinearVariationalProblem(F, up_, bcu, J)
+    solver  = NonlinearVariationalSolver(problem)
     solver.solve()
 
     (u,p) = up_.split(True)
     (u1, u3) = u.split(True)
+    
+    VP_1 = VP_functionspace(mesh, 1)
 
     up_project_hydr = Function(VP_1)
     up_project_hydr = project(up_,VP_1)
@@ -181,6 +159,9 @@ while eps > epsilon_lower_limit:
     (u1_interpolate_hydr, u3_interpolate_hydr) = u_interpolate_hydr.split(True)
     
     print("Epsilon: " + str(eps))
+    
+    (u_sol_hydr, p_sol_hydr) = up_sol_hydr.split(True)
+    (u1_sol_hydr, u3_sol_hydr) = u_sol_hydr.split(True)
     
     print("Hydrostatic. u: %.15g" % u_sol_hydr.vector().norm("l2"))
     print("Hydrostatic. u1: %.15g" % u1_sol_hydr.vector().norm("l2"))
@@ -221,37 +202,60 @@ while eps > epsilon_lower_limit:
     
     up_sol_anis_eps = up_
     
+    C = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 2)
+    C = FunctionSpace(mesh, C)
+    zerotop_concentration = DirichletBC(C, 0, "on_boundary && x[1] > 1 - DOLFIN_EPS")
+    bcc = [zerotop_concentration]
+    
     c = TrialFunction(C)
     d = TestFunction(C)
     c_sol = Function(C)
 
-    F_c = inner(u, grad(c)) * d * dx + (mu_1 * c.dx(0) * d.dx(0) + mu_2 * c.dx(1) * d.dx(1)) * dx - inner(Constant(10.0),d) * dx - inner(c.dx(1), d.dx(1)) * ds(1)
-    a_c, L_c = system(F_c)
+    F = inner(u, grad(c)) * d * dx + (mu_1 * c.dx(0) * d.dx(0) + mu_2 * c.dx(1) * d.dx(1)) * dx - inner(Constant(10.0),d) * dx - inner(c.dx(1), d.dx(1)) * ds(1)
+    a, L = system(F)
 
-    A_c, b_c = assemble_system(a_c, L_c, bcc_1)
+    A, b = assemble_system(a, L, bcc)
 
-    solver_c = KrylovSolver('gmres', 'ilu')
-    solver_c.solve(A_c, c_sol.vector(), b_c)
+    solver = KrylovSolver('gmres', 'ilu')
+    solver.solve(A, c_sol.vector(), b)
     
     cfile_pvd_anis = File(resultsfolder + "concentration_anis" + str(eps) + ".pvd")
     cfile_pvd_anis << c_sol
     
     print("ANIS. c: %.15g" % c_sol.vector().norm("l2"))
+    
+    return up_sol_anis_eps
 
+# **********************************************
+# *** Define hydrostatic variational problem ***
+# **********************************************
+
+VP = VP_functionspace(mesh, 1)
+up_ = Function(VP) #initial guess for the Newton solver if filled, otherwise blank and start by default
+up_sol_hydr = hydrostatic_solver(VP, up_)
+
+# **********************************************
+# *** Define anisotropic variational problem ***
+# **********************************************
+
+eps = 1.0
+VP = VP_functionspace(mesh, 2)
+up_sol_anis_eps = Function(VP)
+
+while eps > epsilon_lower_limit:
+    
+    up_sol_anis_eps = anisotropic_solver(VP, eps, up_sol_hydr)
     eps = eps / 2.0
-
-# *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- #
 
 
 # **********************************************
 # *** degree 2 for the hydrostatic weak form ***
 # **********************************************
 
-VP = VP_2
 up_sol_hydr = hydrostatic_solver(VP, up_sol_anis_eps)
 
 
-
+# *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- #
 
 # improvement ideas:
 
