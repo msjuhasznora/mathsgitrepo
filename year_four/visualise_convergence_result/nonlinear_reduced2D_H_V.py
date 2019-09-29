@@ -273,7 +273,7 @@ solver.solve()
 
 # v) make the output nicer, append into one file for better visibility
 
-# vi) the dimension and determinant of the stiffness matrix:
+# vi) print the Jacobian, makes sense for small mesh:
 
 #J_mat = assemble(J)
 #J_array = J_mat.array()
