@@ -1,5 +1,5 @@
 # The anisotropic model works nicely with the (2,2) degree scenario, the hydrostatic scheme works for (2,1).
-# The former does not work for (2,1) as it develops strange unnatural layers in the pressure.
+# The former does not really work for (2,1) as it develops strange unnatural layers in the pressure.
 # The latter does not work for (2,2) as the Newton iterations do not converge --- probably because we do not have the first derivative of u3 in the scheme and u3 is second order in that case.
 
 import matplotlib.pyplot as plt
@@ -68,15 +68,15 @@ def boundaryconditions(VP):
     return bcu
 
 def writedifference(degree_anis, degree_hydr):
-    np.savetxt("anisotropic_norm_u1_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", anisotropic_norm_u1_values)
-    np.savetxt("anisotropic_norm_u3_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", anisotropic_norm_u3_values)
-    np.savetxt("anisotropic_norm_p_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", anisotropic_norm_p_values)
-    np.savetxt("anisotropic_interpolated_norm_u1_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", anisotropic_interpolated_norm_u1_values)
-    np.savetxt("anisotropic_interpolated_norm_u3_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", anisotropic_interpolated_norm_u3_values)
-    np.savetxt("anisotropic_interpolated_norm_p_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", anisotropic_interpolated_norm_p_values)
-    np.savetxt("interpolated_and_hydr_difference_norm_u1_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", interpolated_and_hydr_difference_norm_u1_values)
-    np.savetxt("interpolated_and_hydr_difference_norm_u3_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", interpolated_and_hydr_difference_norm_u3_values)
-    np.savetxt("interpolated_and_hydr_difference_norm_p_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", interpolated_and_hydr_difference_norm_p_values)
+    np.savetxt(resultsfolder + "anisotropic_norm_u1_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", anisotropic_norm_u1_values)
+    np.savetxt(resultsfolder + "anisotropic_norm_u3_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", anisotropic_norm_u3_values)
+    np.savetxt(resultsfolder + "anisotropic_norm_p_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", anisotropic_norm_p_values)
+    np.savetxt(resultsfolder + "anisotropic_interpolated_norm_u1_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", anisotropic_interpolated_norm_u1_values)
+    np.savetxt(resultsfolder + "anisotropic_interpolated_norm_u3_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", anisotropic_interpolated_norm_u3_values)
+    np.savetxt(resultsfolder + "anisotropic_interpolated_norm_p_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", anisotropic_interpolated_norm_p_values)
+    np.savetxt(resultsfolder + "interpolated_and_hydr_difference_norm_u1_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", interpolated_and_hydr_difference_norm_u1_values)
+    np.savetxt(resultsfolder + "interpolated_and_hydr_difference_norm_u3_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", interpolated_and_hydr_difference_norm_u3_values)
+    np.savetxt(resultsfolder + "interpolated_and_hydr_difference_norm_p_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", interpolated_and_hydr_difference_norm_p_values)
 
 def hydrostatic_solver(VP, up_, vertical_velocity_degree):
     
@@ -108,16 +108,16 @@ def hydrostatic_solver(VP, up_, vertical_velocity_degree):
     (u,p) = up_.split(True)
     (u1, u3) = u.split(True)
     
+    ufile_pvd_hydr = File(resultsfolder + "velocity/velocity_hydr_degree" + str(vertical_velocity_degree) + ".pvd")
+    ufile_pvd_hydr << u
+    pfile_pvd_hydr = File(resultsfolder + "pressure/pressure_hydr_degree" + str(vertical_velocity_degree) + ".pvd")
+    pfile_pvd_hydr << p
+    
     hydrostatic_values = []
     hydrostatic_values.append(u1.vector().norm("l2"))
     hydrostatic_values.append(u3.vector().norm("l2"))
     hydrostatic_values.append(p.vector().norm("l2"))
-    np.savetxt("hydrostatic_values_degree_" + str(vertical_velocity_degree)+ ".txt", hydrostatic_values)
-
-    ufile_pvd_hydr = File(resultsfolder + "velocity_hydr_degree" + str(vertical_velocity_degree) + ".pvd")
-    ufile_pvd_hydr << u
-    pfile_pvd_hydr = File(resultsfolder + "pressure_hydr_degree" + str(vertical_velocity_degree) + ".pvd")
-    pfile_pvd_hydr << p
+    np.savetxt(resultsfolder + "hydrostatic_values_degree_" + str(vertical_velocity_degree)+ ".txt", hydrostatic_values)
     
     # concentration
     C = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 2)
@@ -133,7 +133,7 @@ def hydrostatic_solver(VP, up_, vertical_velocity_degree):
     A, b = assemble_system(a, L, bcc)
     solver = KrylovSolver('gmres', 'ilu')
     solver.solve(A, c_sol.vector(), b)
-    cfile_pvd_hydr = File(resultsfolder + "concentration_hydr_degree" + str(vertical_velocity_degree) + ".pvd")
+    cfile_pvd_hydr = File(resultsfolder + "concentration/concentration_hydr_degree" + str(vertical_velocity_degree) + ".pvd")
     cfile_pvd_hydr << c_sol
     print("HYDR. c: %.15g" % c_sol.vector().norm("l2"))
     
@@ -164,8 +164,8 @@ def anisotropic_solver(VP, eps, vertical_velocity_degree):
 
     (u,p) = up_.split(True)
 
-    ufile_pvd_anis = File(resultsfolder + "velocity_anis_degree" + str(vertical_velocity_degree) + "_eps_" + str(eps) + ".pvd")
-    pfile_pvd_anis = File(resultsfolder + "pressure_anis_degree" + str(vertical_velocity_degree) + "_eps_" + str(eps) + ".pvd")
+    ufile_pvd_anis = File(resultsfolder + "velocity/velocity_anis_degree" + str(vertical_velocity_degree) + "_eps_" + str(eps) + ".pvd")
+    pfile_pvd_anis = File(resultsfolder + "pressure/pressure_anis_degree" + str(vertical_velocity_degree) + "_eps_" + str(eps) + ".pvd")
     ufile_pvd_anis << u
     pfile_pvd_anis << p
     
@@ -181,7 +181,7 @@ def anisotropic_solver(VP, eps, vertical_velocity_degree):
     A, b = assemble_system(a, L, bcc)
     solver = KrylovSolver('gmres', 'ilu')
     solver.solve(A, c_sol.vector(), b)
-    cfile_pvd_anis = File(resultsfolder + "concentration_anis_degree" + str(vertical_velocity_degree) + "_eps_" + str(eps) + ".pvd")
+    cfile_pvd_anis = File(resultsfolder + "concentration/concentration_anis_degree" + str(vertical_velocity_degree) + "_eps_" + str(eps) + ".pvd")
     cfile_pvd_anis << c_sol
     print("ANIS. c: %.15g" % c_sol.vector().norm("l2"))
     
