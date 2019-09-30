@@ -11,12 +11,34 @@ from dolfin import *
 import argparse
 import numpy
 
+# Define constants
+
+epsilon_lower_limit = 1.0e-07 #1.0e-07
+wind_shear_x = 10.0
+theta = Constant((wind_shear_x, 0.0))
+mu_1 = Constant(1.0)
+mu_2 = Constant(1.0)
+
+anisotropic_norm_u1_values = []
+anisotropic_norm_u3_values = []
+anisotropic_norm_p_values = []
+
+anisotropic_interpolated_norm_u1_values = []
+anisotropic_interpolated_norm_u3_values = []
+anisotropic_interpolated_norm_p_values = []
+
+interpolated_and_hydr_difference_norm_u1_values = []
+interpolated_and_hydr_difference_norm_u3_values = []
+interpolated_and_hydr_difference_norm_p_values = []
+
 timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-r", "--resultfolder", default="current_results_H_V", help="default: results, custom: name of results folder")
 xargs = parser.parse_args(None)
 resultsfolder = str(timestamp) + xargs.resultfolder + "/"
+
+verbose = True
 
 mesh = UnitSquareMesh(30, 30)
 
@@ -44,6 +66,17 @@ def boundaryconditions(VP):
     zerotopvertical = DirichletBC(VP.sub(0).sub(1), 0, "on_boundary && x[1] > 1.0 - DOLFIN_EPS")
     bcu = [noslipbasin, zerotopvertical]
     return bcu
+
+def writedifference(degree_anis, degree_hydr):
+    np.savetxt("anisotropic_norm_u1_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", anisotropic_norm_u1_values)
+    np.savetxt("anisotropic_norm_u3_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", anisotropic_norm_u3_values)
+    np.savetxt("anisotropic_norm_p_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", anisotropic_norm_p_values)
+    np.savetxt("anisotropic_interpolated_norm_u1_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", anisotropic_interpolated_norm_u1_values)
+    np.savetxt("anisotropic_interpolated_norm_u3_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", anisotropic_interpolated_norm_u3_values)
+    np.savetxt("anisotropic_interpolated_norm_p_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", anisotropic_interpolated_norm_p_values)
+    np.savetxt("interpolated_and_hydr_difference_norm_u1_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", interpolated_and_hydr_difference_norm_u1_values)
+    np.savetxt("interpolated_and_hydr_difference_norm_u3_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", interpolated_and_hydr_difference_norm_u3_values)
+    np.savetxt("interpolated_and_hydr_difference_norm_p_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", interpolated_and_hydr_difference_norm_p_values)
 
 def hydrostatic_solver(VP, up_, vertical_velocity_degree):
     
@@ -73,6 +106,13 @@ def hydrostatic_solver(VP, up_, vertical_velocity_degree):
     solver.solve()
 
     (u,p) = up_.split(True)
+    (u1, u3) = u.split(True)
+    
+    hydrostatic_values = []
+    hydrostatic_values.append(u1.vector().norm("l2"))
+    hydrostatic_values.append(u3.vector().norm("l2"))
+    hydrostatic_values.append(p.vector().norm("l2"))
+    np.savetxt("hydrostatic_values_degree_" + str(vertical_velocity_degree)+ ".txt", hydrostatic_values)
 
     ufile_pvd_hydr = File(resultsfolder + "velocity_hydr_degree" + str(vertical_velocity_degree) + ".pvd")
     ufile_pvd_hydr << u
@@ -149,97 +189,93 @@ def anisotropic_solver(VP, eps, vertical_velocity_degree):
 
 def difference_info(eps, up_sol_anis_eps, VPA, up_sol_hydr, VPH):
 
-    (u,p) = up_sol_anis_eps.split(True)
+    (u, p) = up_sol_anis_eps.split(True)
     (u1, u3) = u.split(True)
-
-    up_project_hydr = Function(VPH)
-    up_project_hydr = project(up_sol_anis_eps,VPH)
-    (u_project_hydr, p_project_hydr) = up_project_hydr.split(True)
-    (u1_project_hydr, u3_project_hydr) = u_project_hydr.split(True)
+    
+    anisotropic_norm_u1_values.append(u1.vector().norm("l2"))
+    anisotropic_norm_u3_values.append(u3.vector().norm("l2"))
+    anisotropic_norm_p_values.append(p.vector().norm("l2"))
     
     up_interpolate_hydr = Function(VPH)
-    up_interpolate_hydr = interpolate(up_sol_anis_eps,VPH)
+    up_interpolate_hydr = interpolate(up_sol_anis_eps, VPH)
     (u_interpolate_hydr, p_interpolate_hydr) = up_interpolate_hydr.split(True)
     (u1_interpolate_hydr, u3_interpolate_hydr) = u_interpolate_hydr.split(True)
     
-    print("Epsilon: " + str(eps))
+    anisotropic_interpolated_norm_u1_values.append(u1_interpolate_hydr.vector().norm("l2"))
+    anisotropic_interpolated_norm_u3_values.append(u3_interpolate_hydr.vector().norm("l2"))
+    anisotropic_interpolated_norm_p_values.append(p_interpolate_hydr.vector().norm("l2"))
     
     (u_sol_hydr, p_sol_hydr) = up_sol_hydr.split(True)
     (u1_sol_hydr, u3_sol_hydr) = u_sol_hydr.split(True)
     
-    print("Hydrostatic. u: %.15g" % u_sol_hydr.vector().norm("l2"))
-    print("Hydrostatic. u1: %.15g" % u1_sol_hydr.vector().norm("l2"))
-    print("Hydrostatic. u3: %.15g" % u3_sol_hydr.vector().norm("l2"))
-    print("Hydrostatic. p: %.15g" % p_sol_hydr.vector().norm("l2"))
-
-    print("Anistropic Projected. u: %.15g" % u_project_hydr.vector().norm("l2"))
-    print("Anistropic Projected. u1: %.15g" % u1_project_hydr.vector().norm("l2"))
-    print("Anistropic Projected. u3: %.15g" % u3_project_hydr.vector().norm("l2"))
-    print("Anistropic Projected. p: %.15g" % p_project_hydr.vector().norm("l2"))
+    interpolated_and_hydr_difference_norm_u1_values.append((u1_interpolate_hydr.vector() - u1_sol_hydr.vector()).norm("l2"))
+    interpolated_and_hydr_difference_norm_u3_values.append((u3_interpolate_hydr.vector() - u3_sol_hydr.vector()).norm("l2"))
+    interpolated_and_hydr_difference_norm_p_values.append((p_interpolate_hydr.vector() - p_sol_hydr.vector()).norm("l2"))
     
-    print("Anistropic Interpolated. u: %.15g" % u_interpolate_hydr.vector().norm("l2"))
-    print("Anistropic Interpolated. u1: %.15g" % u1_interpolate_hydr.vector().norm("l2"))
-    print("Anistropic Interpolated. u3: %.15g" % u3_interpolate_hydr.vector().norm("l2"))
-    print("Anistropic Interpolated. p: %.15g" % p_interpolate_hydr.vector().norm("l2"))
-
-    print("Anistropic. u: %.15g" % u.vector().norm("l2"))
-    print("Anistropic. u1: %.15g" % u1.vector().norm("l2"))
-    print("Anistropic. u3: %.15g" % u3.vector().norm("l2"))
-    print("Anistropic. p: %.15g" % p.vector().norm("l2"))
+    if (verbose):
+        print(eps)
+        print("Anistropic. u: %.15g" % u.vector().norm("l2"))
+        print("Anistropic. u1: %.15g" % u1.vector().norm("l2"))
+        print("Anistropic. u3: %.15g" % u3.vector().norm("l2"))
+        print("Anistropic. p: %.15g" % p.vector().norm("l2"))
+        print("Anistropic Interpolated. u: %.15g" % u_interpolate_hydr.vector().norm("l2"))
+        print("Anistropic Interpolated. u1: %.15g" % u1_interpolate_hydr.vector().norm("l2"))
+        print("Anistropic Interpolated. u3: %.15g" % u3_interpolate_hydr.vector().norm("l2"))
+        print("Anistropic Interpolated. p: %.15g" % p_interpolate_hydr.vector().norm("l2"))
+        print("Anistropic Interpolated - Hydrostatic. u: %.15g" % (u_interpolate_hydr.vector() - u_sol_hydr.vector()).norm("l2"))
+        print("Anistropic Interpolated - Hydrostatic. u1: %.15g" % (u1_interpolate_hydr.vector() - u1_sol_hydr.vector()).norm("l2"))
+        print("Anistropic Interpolated - Hydrostatic. u3: %.15g" % (u3_interpolate_hydr.vector() - u3_sol_hydr.vector()).norm("l2"))
+        print("Anistropic Interpolated - Hydrostatic. p: %.15g" % (p_interpolate_hydr.vector() - p_sol_hydr.vector()).norm("l2"))
     
-    print("Anistropic Interpolated - Hydrostatic. u: %.15g" % (u_interpolate_hydr.vector() - u_sol_hydr.vector()).norm("l2"))
-    print("Anistropic Interpolated - Hydrostatic. u1: %.15g" % (u1_interpolate_hydr.vector() - u1_sol_hydr.vector()).norm("l2"))
-    print("Anistropic Interpolated - Hydrostatic. u3: %.15g" % (u3_interpolate_hydr.vector() - u3_sol_hydr.vector()).norm("l2"))
-    print("Anistropic Interpolated - Hydrostatic. p: %.15g" % (p_interpolate_hydr.vector() - p_sol_hydr.vector()).norm("l2"))
-    
-    print("Anistropic Projected - Hydrostatic. u: %.15g" % (u_project_hydr.vector() - u_sol_hydr.vector()).norm("l2"))
-    print("Anistropic Projected - Hydrostatic. u1: %.15g" % (u1_project_hydr.vector() - u1_sol_hydr.vector()).norm("l2"))
-    print("Anistropic Projected - Hydrostatic. u3: %.15g" % (u3_project_hydr.vector() - u3_sol_hydr.vector()).norm("l2"))
-    print("Anistropic Projected - Hydrostatic. p: %.15g" % (p_project_hydr.vector() - p_sol_hydr.vector()).norm("l2"))
-
-# Define constants
-
-epsilon_lower_limit = 1.0e-07 #1.0e-07
-wind_shear_x = 10.0
-theta = Constant((wind_shear_x, 0.0))
-mu_1 = Constant(1.0)
-mu_2 = Constant(1.0)
 
 # **********************************************
 # *** Define hydrostatic variational problem ***
 # **********************************************
 
 # hydrostatic model solved without initial guess for degree 1 vertical velocity space
-vertical_velocity_degree = 1
-VPH = VP_functionspace(mesh, vertical_velocity_degree)
+vertical_velocity_degree_hydr = 1
+VPH = VP_functionspace(mesh, vertical_velocity_degree_hydr)
 up_ = Function(VPH) #initial guess for the Newton solver if filled, otherwise blank and start by default
-up_sol_hydr = hydrostatic_solver(VPH, up_, vertical_velocity_degree)
+up_sol_hydr = hydrostatic_solver(VPH, up_, vertical_velocity_degree_hydr)
 
 # **********************************************
 # *** Define anisotropic variational problem ***
 # **********************************************
 
 eps = 1.0
-vertical_velocity_degree = 2
-VP = VP_functionspace(mesh, vertical_velocity_degree)
+vertical_velocity_degree_anis = 2
+VP = VP_functionspace(mesh, vertical_velocity_degree_anis)
 up_sol_anis_eps = Function(VP)
 
 while eps > epsilon_lower_limit:
     
-    up_sol_anis_eps = anisotropic_solver(VP, eps, vertical_velocity_degree)
+    up_sol_anis_eps = anisotropic_solver(VP, eps, vertical_velocity_degree_anis)
     difference_info(eps, up_sol_anis_eps, VP, up_sol_hydr, VPH)
     eps = eps / 2.0
+    
+writedifference(vertical_velocity_degree_anis, vertical_velocity_degree_hydr)
 
 # **********************************************
 # *** degree 2 for the hydrostatic weak form ***
 # **********************************************
 
 # hydrostatic model solved with initial guess for degree 2 vertical velocity space
-up_sol_hydr = hydrostatic_solver(VP, up_sol_anis_eps, vertical_velocity_degree)
+vertical_velocity_degree_hydr = 2
+up_sol_hydr = hydrostatic_solver(VP, up_sol_anis_eps, vertical_velocity_degree_hydr)
 
-# setting FiniteElement("Lagrange", mesh.ufl_cell(), degree = 1) can provide the results on how it looks like to have a degree 1 anisotropical model.
+# **************************************************************
+# *** Define anisotropic variational problem  with degree = 1 **
+# **************************************************************
 
+eps = 1.0
+vertical_velocity_degree_anis = 1
+VP = VP_functionspace(mesh, vertical_velocity_degree_anis)
 
+while eps > epsilon_lower_limit:
+    
+    anisotropic_solver(VP, eps, vertical_velocity_degree_anis)
+    eps = eps / 2.0
+    
 # *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- #
 
 # improvement ideas:
