@@ -316,7 +316,7 @@ F\_hydr = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx - p * div
 
 we get the solutions seen in the nest subsection.
 
-\subsection{Solutions of the hydrostatic model}
+\subsection{Solutions of the hydrostatic model - degree 1}
 
 \begin{figure}[H]
   \centering
@@ -723,13 +723,13 @@ $(\alpha_4 + \alpha_5 x + \alpha_6 z + \alpha_7 x^2 + \alpha_8 z^2 + \alpha_9 xz
 
 The issue is that the scheme depends on $v_3$ only through $p \partial_3 v_3$ --- when the scheme changes from degree 1 to degree 2, it brings in 3 new variables from which the scheme hardly depends on. Probably this is why the Jacobian becomes singular? But this needs further investigation.
 
+It is probably not fundamentally or theoretically wrong to use a degree 2 scheme for the vertical velocity for the hydrostatic case, as for mesh(1,1) the method converges without initial data, and for mesh(2,2) the first few iterations provide numbers (not "Nan".) The degree 2 method gives "Nan"-s for mesh(30,30) without initial data.
+
 \section{Ideas}
 
 \begin{enumerate}
-  \item The weak formulations used in the beginning  of the visualisation process were "full" weak formulations in the sense that all four (three velocity and the one divergence-free condition) equations were multiplied by test functions, which is why there we didn't have $\nabla \cdot u^\epsilon = 0$ explicitly, only $u^\epsilon \nabla q = 0.$ But actually, what we theoretically proved is a sort of \textbf{"weak-strong" formulation} of the incompressible Navier-Stokes equations. Three of the equations were used in the weak sense, and one in the strong sense, applied directly in the process. So we could try using this reduced problem in practice as well, without the function space for $p, q$ functions.
-  \item The nature of the problem is probably the same in 2D or 3D, but for the speed of calculations it could be an idea. Also, it could be interesting to calculate the rescaled 2D Navier-Stokes and see if it theoretically holds, considering a "full weak formulation", i.e. with a pressure test function as well.
-  \item Stationary Navier-Stokes.
-  \item Stationary Navier-Stokes with weak formulation for the three momentum equations and strong formulation for the divergence-free condition, keeping the nonlinearity and using a nonlinear Newton solver.
+  \item The weak formulations used in the beginning  of the visualisation process were "full" weak formulations in the sense that all four (three velocity and the one divergence-free condition) equations were multiplied by test functions, which is why there we didn't have $\nabla \cdot u^\epsilon = 0$ explicitly, only $u^\epsilon \nabla q = 0.$ But actually, what we theoretically proved is a sort of \textbf{"weak-strong" formulation} of the incompressible Navier-Stokes equations. Three of the equations were used in the weak sense, and one in the strong sense, applied directly in the process. However, here $p, q$ play an important role for stability and expressing the divergence-free condition, so we probably can't do without them.
+  \item Changing from augmented pressure to pressure and gravity separately.
 \end{enumerate}
 
 \end{document}
