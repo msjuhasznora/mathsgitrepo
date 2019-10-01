@@ -31,6 +31,9 @@ interpolated_and_hydr_difference_norm_u1_values = []
 interpolated_and_hydr_difference_norm_u3_values = []
 interpolated_and_hydr_difference_norm_p_values = []
 
+anis_and_hydr_difference_norm_u1_values = []
+anis_and_hydr_difference_norm_p_values = []
+
 timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
 
 parser = argparse.ArgumentParser()
@@ -77,6 +80,8 @@ def writedifference(degree_anis, degree_hydr):
     np.savetxt(resultsfolder + "interpolated_and_hydr_difference_norm_u1_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", interpolated_and_hydr_difference_norm_u1_values)
     np.savetxt(resultsfolder + "interpolated_and_hydr_difference_norm_u3_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", interpolated_and_hydr_difference_norm_u3_values)
     np.savetxt(resultsfolder + "interpolated_and_hydr_difference_norm_p_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", interpolated_and_hydr_difference_norm_p_values)
+    np.savetxt(resultsfolder + "anis_and_hydr_difference_norm_u1_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", anis_and_hydr_difference_norm_u1_values)
+    np.savetxt(resultsfolder + "anis_and_hydr_difference_norm_p_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", anis_and_hydr_difference_norm_p_values)
 
 def hydrostatic_solver(VP, up_, vertical_velocity_degree):
     
@@ -211,6 +216,11 @@ def difference_info(eps, up_sol_anis_eps, VPA, up_sol_hydr, VPH):
     interpolated_and_hydr_difference_norm_u1_values.append((u1_interpolate_hydr.vector() - u1_sol_hydr.vector()).norm("l2"))
     interpolated_and_hydr_difference_norm_u3_values.append((u3_interpolate_hydr.vector() - u3_sol_hydr.vector()).norm("l2"))
     interpolated_and_hydr_difference_norm_p_values.append((p_interpolate_hydr.vector() - p_sol_hydr.vector()).norm("l2"))
+    
+    anis_and_hydr_difference_norm_u1_values.append((u1.vector() - u1_sol_hydr.vector()).norm("l2"))
+    # this does not make sense for different degree spaces
+    #anis_and_hydr_difference_norm_u3_values.append((u3.vector() - u3_sol_hydr.vector()).norm("l2"))
+    anis_and_hydr_difference_norm_p_values.append((p.vector() - p_sol_hydr.vector()).norm("l2"))
     
     if (verbose):
         print(eps)
