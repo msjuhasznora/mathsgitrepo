@@ -582,6 +582,86 @@ In the following $(i,j)$ stands for degree of horizontal velocity space, and deg
   \end{itemize}
 \end{itemize}
 
+\begin{table}[H]
+\caption{Hydrostatic result norms, vertical velocity degree = 1}
+\begin{center}
+\begin{tabular}{ccc}
+    \hline
+    norm($u_1$) & norm($u_3$) & norm($p$) \\
+    \hline
+    36.731 & 15.107 & 126.224 \\
+    \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[H]
+\caption{Hydrostatic result norms, vertical velocity degree = 2}
+\begin{center}
+\begin{tabular}{ccc}
+    \hline
+    norm($u_1$) & norm($u_3$) & norm($p$) \\
+    \hline
+     36.756 & 29.176 & 126.228 \\
+    \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[H]
+\caption{Norm differences, $u_1$}
+\begin{center}
+\begin{tabular}{ccc}
+    \hline
+    $\epsilon$ & norm anis. $u_1$ &  norm($u_1$ anis - $u_1$ hydr)\\
+    \hline
+    1.000 & 18.109 & 21.030 \\
+    0.5 & 26.044 & 12.428 \\
+    0.25 & 31.536 & 6.630 \\   
+    0. 125 & 34.251& 3.471 \\
+    ... & ... & ... \\
+    1.19 $\exp(-7)$ &36.756 & 0.042 \\       
+    \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[H]
+\caption{Norm differences, $u_3$}
+\begin{center}
+\begin{tabular}{cccc}
+    \hline
+    $\epsilon$ & norm anis. $u_3$ & norm anis interp $u_3$ & norm difference($u_3$ anis interp, $u_3$ hydr)\\
+    \hline
+    1.000 & 9.837 & 4.916 & 12.142 \\
+    0.5 & 17.784 & 8.889 & 10.144 \\
+    0.25 & 22.924 & 11.456 & 8.465 \\    
+    0. 125 & 25.462 & 12.709 & 6.717 \\
+    ... & ... & ... & ... \\    
+    1.19 $\exp(-7)$ & 29.176 & 13.199 & 4.474 \\        
+    \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[H]
+\caption{Norm differences, $p$}
+\begin{center}
+\begin{tabular}{ccc}
+    \hline
+    $\epsilon$ & norm anis. $p$ &  norm difference($p$ anis interp, $p$ hydr)\\
+    \hline
+    1.000 & 161.766 & 138.317 \\
+    0.5 & 134.327 & 83.035 \\
+    0.25 &128.400 & 52.245 \\   
+    0. 125 & 127.652 & 36.910 \\
+    ... & ... & ...  \\       
+    1.19 $\exp(-7)$ & 126.228 & 1.248 \\       
+    \hline
+\end{tabular}
+\end{center}
+\end{table}
+
 \section{The difference between (2,2) and (2,1) for the hydrostatic case}
 
 The Newton method converges for degree 1 vertical velocity, but does not converge for degree 2, results immediately in "NaN" results.
@@ -631,7 +711,7 @@ the test functions take the form of
   \end{split}
 \end{equation}
 
-The degree 1 vertical velocity matrix is a $12 \times 12$ matrix, the degree 2 is $15 \times 15.$
+The degree 1 vertical velocity Jacobian matrix is a $17 \times 17$ matrix, the degree 2 Jacobian is $22 \times 22,$ printed for mesh(1,1), which has 4 vertices and 2 triangle cells.
 
 The numerical scheme for the hydrostatic model is (except for boundary terms)
 
@@ -641,7 +721,7 @@ After substituting the approximative expressions for the functions, in one given
 
 $(\alpha_4 + \alpha_5 x + \alpha_6 z + \alpha_7 x^2 + \alpha_8 z^2 + \alpha_9 xz) (\alpha_5 + 2 \alpha_7 x + \alpha_9 z) (\beta_4 + \beta_5 x + \beta_6 z + \beta_7 x^2 + \beta_8 z^2 + \beta_9 xz) + ... $
 
-The issue is that the scheme depends on $v_3$ only through $p \partial_3 v_3$ --- when the scheme changes from degree 1 to degree 2, it brings in 3 new variables from which the scheme hardly depends on. Probably this is why the Jacobian becomes singular. 
+The issue is that the scheme depends on $v_3$ only through $p \partial_3 v_3$ --- when the scheme changes from degree 1 to degree 2, it brings in 3 new variables from which the scheme hardly depends on. Probably this is why the Jacobian becomes singular? But this needs further investigation.
 
 \section{Ideas}
 
