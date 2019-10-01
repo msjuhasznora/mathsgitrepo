@@ -292,17 +292,15 @@ while eps > epsilon_lower_limit:
 
 # 0) add C
 
-# i) the scheme depends epsilon-freely on the complete u. why do the Newton iterations not converge for the case when we have degree=2 for the vertical velocity? is it that the scheme contains only u3, but not grad(u3), and it is a 2-degree space?
+# i) the scheme depends epsilon-freely on the complete u. why do the Newton iterations not converge for the case when we have degree=2 for the vertical velocity? is it that the scheme contains only u3, but not grad(u3), and it is a 2-degree space? probably not in general, as for mesh(1,1) the method actually does converge.
 
-# ii) consider making it time dependent
+# ii) is it possible to make it time-dependent?
 
 # iii) 3D in space
 
 # iv) periodicity in the x direction would make the domain into a tube with upper wind traction and fully x-directional circulation. Having a 0 y-directional velocity would be ok in itself, but with that there is not much to visualise as the scheme then does not depend on epsilon. so I think it is better to have the classical domain in order to make a point with the visualisation.
 
-# v) make the output nicer, append into one file for better visibility
-
-# vi) print the Jacobian, makes sense for small mesh:
+# v) print the Jacobian, makes sense for small mesh:
 
 #J_mat = assemble(J)
 #J_array = J_mat.array()
