@@ -103,22 +103,22 @@ $$ \nabla_H \bigg (\int_{-h}^z T (x,z,\xi,t ) \diff \xi \bigg) $$
 
 appears in the horizontal momentum equation. $\nabla_H T$ is exactly the part that otherwise the convection-diffusion equation does not have information about directly. We need to check if this causes a change.
 
-It does in the application process of $\theta,$ where $u$ denotes $u = \partial_z v,$ and $ \theta = \nabla_H \cdot u + R_1 T.$ In their case this turns out to be a function definition that has full $H^2$ regularities, because when the $L_1 = - \frac{1}{R_1} \Delta_H - \frac{1}{R_2} \partial_z^2$ full Laplacian and a time derivative are applied to the function, then the horizontal temperature Laplacians from $\nabla_H \cdot u$ and $R_1 T$ cancel each other.
-In more detail, $\partial_t \theta + L_1 \theta$ will contribute,
+It does in the application process of $\theta,$ where $u$ denotes $u = \partial_z v,$ and $ \theta = \nabla_H \cdot u + R_1 T.$ In their case this turns out to be a function definition that has full $H^2$ regularities in the sense of Proposition 5.3 and 5.4, because when the $L_1 = - \frac{1}{R_1} \Delta_H - \frac{1}{R_2} \partial_z^2$ full Laplacian and a time derivative are applied to the function $\theta$, then the horizontal temperature Laplacians from $\nabla_H \cdot u$ and $R_1 T$ cancel each other.
+In more detail, $\partial_t \theta + L_1 \theta$ will contribute:
 
 \begin{itemize}
 
-  \item From $\partial_t \nabla_H \cdot u,$ we will have
+  \item from $\partial_t \nabla_H \cdot u,$ we will have
   $$\nabla_H \cdot \nabla_H \partial_z \bigg (\int_{-h}^z T (x,z,\xi,t ) \diff \xi \bigg), $$
   
-  \item From $L_1 R_1 T$ we will have
+  \item from $L_1 R_1 T$ we will have
   $$ - R_1 \frac{1}{R_1} \Delta_H T,$$
   
 \end{itemize}
 
 which cancel out perfectly. This cancellation makes it possible that on p71- p72 they only arrive to have $\norm{\partial_z T}_{H^2}^2$ in the estimates, but not a full $H^3$ norm of $T$ ($\int_0^t \norm{\partial_z T}_{H^2}^2 \diff s$ is bounded, but we do not have an analogous result for the complete $H^3$ norm.)
 
-Thus, in our case we can not keep $\theta$'s definition including the $T$ function --- on the other hand, splitting $T$ off of $\theta$ also alters the proof significantly. The structure described on p58-p60 works in a simultaneous way for $T$ and $v.$ The general result $(4.10)$ is used later also for $T.$ If (4.10) does not include $T$ anymore, then for $T$ we need to create a solution on its own.
+Thus, in our case we can not keep $\theta$'s definition including the $T$ function (for their case it made sense to create $\theta$ as it would have the necessary regularities, and the momentum equation contained $T$) --- on the other hand, splitting $T$ off of $\theta$ also alters the proof significantly. The structure described on p58-p60 works in a simultaneous way for $T$ and $v.$ The general result $(4.10)$ is used later also for $T.$ If (4.10) does not include $T$ anymore, then for $T$ we need to create a solution on its own.
 
 This suggests the following idea:
 
