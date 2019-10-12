@@ -135,11 +135,69 @@ This suggests the following idea:
 
 \end{enumerate}
 
-\section{Step 1. The regularised system}
+\section{Step 1. The Regularised System with Full Diffusion}
+
+Let's consider
+
+$$ \partial_t v + L_1 v + (v \cdot \nabla_H) v - \bigg ( \int_{-h}^z \nabla_H \cdot v \bigg ) \partial_z v+ f_0 k \times v + \nabla_H p_s(x,y,t) = 0$$
+
+$$ \nabla_H \cdot \bar{v} = 0 $$
+
+$$ \partial_t C + L_2 C - \epsilon \Delta_H C + v \cdot \nabla_H C - \bigg ( \int_{-h}^z \nabla_H \cdot v \bigg ) \bigg ( \partial_z C + \frac{1}{h} \bigg).$$
+
+The system is formally analogous to (2.1)-(2.3):
+
+$$ \partial_t v + L_1 v + (v \cdot \nabla_H) v - \bigg ( \int_{-h}^z \nabla_H \cdot v \bigg ) \partial_z v+ f_0 k \times v + \nabla_H \bigg ( p_s(x,y,t) -  \int_{-h}^z T \diff \xi \bigg )= 0$$
+
+$$ \nabla_H \cdot \bar{v} = 0 $$
+
+$$ \partial_t T + L_2 T - \epsilon \Delta_H T + v \cdot \nabla_H T - \bigg ( \int_{-h}^z \nabla_H \cdot v \bigg ) \bigg ( \partial_z T + \frac{1}{h} \bigg),$$
+
+except we do not have the concentration term in the momentum equation. In some way it is similar to taking $T_1$ and $T_2$ in (2.1)-(2.3) instead of taking one common $T.$ In (2.1) we use $T_1 = 0,$ in (2.3) we use $T_2=C.$
+
+The $\mathcal{F}$ map remains the same, with the modification of the left-hand side functions $A(v,T)$ and $B(v,T).$ These become $A(v), B(v)$ respectively, by leaving out the $T-$ including terms from (2.16) and (2.17). The periodicity and parity remains, and their regularities remain.
+
+Because of the unchanged regularities and properties, the right-hand side of (2.8)-(2.11) stays $L^2_t H^2_x$ regular and we can still use the standard $L^2$ theory \todo{what does it say exactly?} of linear Stokes equations and parabolic equations and have a $(U,V,\mathcal{T})$ solution. (check (2.19))
+
+Analogously, $D(v,T)$ will become $D(T),$ keeping only the $v$-dependent terms. The properties connecting $A(v), B(v)$ and $D(v)$ still hold.
+
+\textbf{Proposition 2.2}
+
+Estimating the functions $D(v)$ and $E(v,T)$ we arrive eventually to the same estimate for $I(t)$ on p45. Note that the calculations for $E(v,T)$ are identical, while for $D(v)$ we can leave out some non-negative terms from the right-hand side of the estimate, namely do not have the $\norm{T_1 - T_2}_{H^2}^2$ term in (2.20) --- however this does not lead to any change in $I(t),$ since $E(v,T)$ does contain $C \norm{T_1 - T_2}_{H^2}^2$.
+
+The rest of the proof holds the same, keeping in mind that we have $D(v_i)$ where they use $D(v_i, T_i).$
+
+\textbf{Proposition 2.3} and \textbf{Proposition 2.1} are general in nature and hold without modification.
 
 \section{Step 2. Local existence and uniqueness}
 
 \section{Step 3. Global existence}
+
+\section{Questions}
+
+\begin{itemize}
+
+  \item As for the odd / even structure. It seems that this is used because for passing from $(-h, 0)$ to $(-h, h)$ we need to extend the function in a way to a domain where it did not exist before. In order to define it somehow in a way that afterwards the restriction will work as well when going backwards to $(-h, 0)$ it simply is a natural way to extend. It is natural because the odd and even properties are invariant for the system, and using symmetries we can extend the function in a way that afterwards the restriction will work for the original one. The question is, what is the benefit from passing from $(-h, 0)$ to $(-h, h).$
+
+  \item If the (\ref{HNSC1-dw}) - (\ref{HNSC5-dw}) equations do have a unique strong solution $(v, C)$ with $(v_0, C_0)$ then taking this $v$, and combining it with the same $v_0$, and $Q = 0, T_0 = 0, T \equiv 0,$ then the resulting $(v,T) = (v,0)$ will be a solution for (\ref{HNSC1-T}) - (\ref{HNSC5-T}) with $(v_0, T_0),$ simply because by definition they satisfy the equations. Then, using the uniqueness of the solution of (\ref{HNSC1-T}) - (\ref{HNSC5-T}), it means that the only solution for this system with $T_0 = 0, Q = 0$ is $T \equiv 0.$ This is a bit surprising, because even though the source and the initial data is zero, through the velocity fluctuations the pressure changes, and with that the pressure should change too, shouldn't it?
+  
+  \item After all, why $p$ isn't a part of a solution as $T$ and $v$? The $T$-free hydrostatic scenario $p$ fell out due to the divergence-free condition in many places, but here it is even present in the reformulated version.
+
+  \item We have
+  
+    $$\partial_z w + \nabla_H \cdot v = 0,$$
+    
+    $$ \partial_z p + T = 0.$$
+  
+  These lead to
+  
+    $$ w = - \int_{-h}^z \nabla_H \cdot v, $$
+    
+    $$ p = p_s(x,y,t) - \int_{-h}^z T .$$
+
+Why the difference? They are structurally the same, in terms of containing information about a function through its $\partial_z.$ Why does $p$ have a $p_s(x,y)$ part, and $w$ does not?
+
+\end{itemize}
 
 \end{document}
 
