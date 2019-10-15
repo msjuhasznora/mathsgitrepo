@@ -1,0 +1,109 @@
+\documentclass[11pt]{article}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{commath}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{float} 
+\usepackage{array}
+\usepackage{outlines}
+\usepackage{setspace}
+\usepackage{xcolor}
+%%% use as \textcolor{ao}{Thoughts.}
+\definecolor{ao}{rgb}{0.0, 0.5, 0.0}
+\definecolor{trueblue}{rgb}{0.0, 0.45, 0.81}
+\definecolor{cadmiumorange}{rgb}{0.93, 0.53, 0.18}
+\usepackage[colorinlistoftodos]{todonotes}
+\setlist[enumerate,1]{label=\roman*)}
+\setlist[enumerate,2]{label=\alph*)}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+\newtheorem{prop}{Proposition}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,trees, calc}
+
+\title{Checking for $w = u_3 \in H^1 (\Omega)$ }
+
+\begin{document}
+
+\date{}
+\maketitle
+
+\section{$v = u_H \in H^2$}
+
+We have obtained $L^2_t H^2_x$ regularity for the horizontal velocity $v.$ Using the Gronwall inequality we arrive to:
+
+$$ \int_0^t \norm{\Delta v}_2^2, \int_0^t \norm{\partial_{33}v}_2^2 \leq K_v(t).$$
+
+\section{Estimate $\nabla w$ by $\Delta v$}
+
+We need $w$ to be in $H^1(\Omega)$ in space (with that we have the complete $\mathbf{u}$ in $H^1_x$), so we need the \textbf{full} gradient of the vertical velocity to be in $L^2_x.$
+
+We use the $$ w(x,y,z,t) = - \int_0^z \nabla_H \cdot v(x,y,\xi, t) \diff \xi$$ equation, or, in the case of $\partial_z w,$ we can use directly the divergence-free condition.
+
+\begin{enumerate}
+
+\item $\text{div}(\mathbf{u}) = \nabla_H \cdot v + \partial_z w = 0,$ thus we have $\partial_z w = - \nabla_H \cdot v.$ As $v$ is in $L^2 H^2,$ we have that $\partial_z w = - \nabla_H \cdot v \in L^2 H^1.$
+
+\item For $i = 1,2$
+
+$$ \partial_i w(x,y,z,t) = - \partial_i \int_0^z \nabla_H \cdot v(x,y,\xi, t) \diff \xi = - \int_0^z \partial_1 \partial_i v_1 + \partial_2 \partial_i v_2$$
+
+$$ \int_\Omega \abs{\partial_i w(x,y,z,t)} \leq \int_\Omega \int_0^h \abs{\partial_1 \partial_i v_1} + \abs{\partial_2 \partial_i v_2}$$
+
+$$ \int_\Omega \abs{\partial_i w(x,y,z,t)}^2 \leq C \cdot h \int_\Omega \abs{\partial_1 \partial_i v_1}^2 + \abs{\partial_2 \partial_i v_2}^2 \leq C \norm{\Delta_H v}^2_2$$
+
+As a consequence we have a bound for the horizontal derivatives of $w$ as well:
+
+$$\int_0^t \norm{\nabla_H w}_2^2 \leq C \int_0^t \norm{\Delta_H v}_2^2.$$
+
+With $\partial_z w$ in $L^2 H^1$ and $\nabla_H w$ in $L^2 L^2$ we obtain that $w$ is in $L^2_t H^1_x.$
+
+\end{enumerate}
+
+\section{Obtaining the weak convergence of $C u_3$ by $u_3 \to u_3$ strongly in $L^2_t L^2_x$}
+
+We have the weak convergence of $C^\epsilon$ to $C$ in $L^2_t L^2_x.$ We need $u_3 \to u_3$ strongly in $L^2_t L^2_x$ in order to obtain the weak convergence of the product.
+
+How to obtain the strong convergence of $u_3^\epsilon$?
+
+\begin{itemize}
+
+\item Is it \textcolor{ao}{through a similar way as in the original, Azerad-Guillen article}? The perturbation theorem or something similar to the Aubin-Lions lemma I think / it seems / does not work,
+ because we need $\norm{\tau u_3^\epsilon - u_3^\epsilon}_{L^2(0, T-h, (H^2)^*)},$ but the equation for $\partial_t u^\epsilon_3$ contains an $\epsilon^2,$ with which we would have to divide.
+ 
+ $$ \epsilon^2 \int_0^{T-h} \abs{\tau_h u_3 - u_3} \leq \int_0^{T-h} \epsilon^2 (\norm{\tau_h u_3}_2 + \norm{u_3}_2)\norm{v_3}_2 \leq \epsilon^2 \int_0 ^{T-h} C \norm{v_3}_2,$$
+ 
+ which gives an $\epsilon$-independent
+ 
+  $$ \int_0^{T-h} \abs{\tau_h u_3 - u_3} \leq \int_0 ^{T-h} C \norm{v_3}_2,$$ however it should go to zero as $\epsilon \to 0.$
+  
+  Similarly, the Aubin-Lions lemma requires the time derivative $\partial_t u_3$ to be in $L^2 {H^2}^*,$ but we have a division by $\epsilon^2.$
+  
+  $$ \bigg ( \frac{\partial u_3}{\partial t}, \tilde{u}_3 \bigg) = ... + \frac{1}{\epsilon} \bigg ( \beta u_1, \tilde{u}_3 \bigg) - \frac{1}{\epsilon^2} \bigg ( \partial_3 p, \tilde{u}_3 \bigg)$$
+ 
+\item Is it \textcolor{cadmiumorange}{like from around the proof that is on page25 (where the $\norm{\nabla w}$ idea was used)}? That is for strong solutions and $H^2$ initial data.
+
+\item Is it \textcolor{trueblue}{as for the case of $H^1$ initial velocity}? This also uses $v_0 \in H^1.$
+
+\end{itemize}
+
+At this point, the strong convergence of the vertical velocity could either be obtained
+\begin{enumerate}
+\item through assuming the original $L^2$ regularity of $v_0$ and using the additionally obtained $L^2 H^2$ regularity for $v,$ or,
+\item if that (and $w$ being in $H^1_x$)  does not result to be sufficient, use a minimal increase, to $H^1$ from $L^2$ in the regularity of the initial data $v_0,$ combined with some additional Neumann boundary conditions, to be able to apply the analogous version of the first theorem in the Strong Convergence Justification article, which is still for weak solutions (the second one is for strong solutions). This option still seems to be less demanding compared to proving $H^1$ regularity for $C,$ which requires an $H^3$ regularity for the horizontal velocity.
+\end{enumerate}
+
+\appendix
+
+\section{Additionally, the $H^1$ regularity of C}
+
+The strong convergence of the concentration $C$ can be obtained through an $H^3$ horizontal velocity $v$ following the idea on p34 in the non matching horizontal vertical viscosity and diffusivity article. 
+
+\end{document}

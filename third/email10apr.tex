@@ -1,0 +1,73 @@
+\documentclass[11pt]{article}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{commath}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{float} 
+\usepackage{array}
+\usepackage{outlines}
+\usepackage{setspace}
+\usepackage[colorinlistoftodos]{todonotes}
+\setlist[enumerate,1]{label=\alph*)}
+\setlist[enumerate,2]{label=\roman*)}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+\newtheorem{prop}{Proposition}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,trees, calc}
+
+%%% *** PREAMBLE *** %%%
+\title{The abstract and the $v_0 \in H^1$ case}
+
+\date{}
+
+%%%***  CONTENT *** %%%
+\begin{document}
+
+\maketitle
+
+\section{The abstract and the contributed talk}
+
+This proposed version of the abstract file describes the scenario for the case that is described in the 2nd submitted version of the paper and it does not contain explicit reference to $\epsilon$-including version that we have been working on. I think we could use this as an abstract, and if by the time of the talk we are a hundred percent confident that also that $\epsilon$ case works, we can include that in the talk.
+
+\section{$v_0 \in H^1$}
+
+For now there are two ways / things that I would like to mention.
+
+  \subsection{The path $v_0 \in H^1 \implies v \in L^2 H^2 \implies w \in L^2 H^1 \implies$ strong convergence of $u_3$}
+  
+  In the meanwhile there is a point on which I further have to work on to be clear (or we can consider the path described in the next subsection.) It is the boundedness of the terms appearing in the integral from $0$ to $t$ on the right hand side of the Gronwall inequality. For example on page5 in the photocopies proving the $L^2$ space regularity for $\Delta_H v$, the last term in the sum is
+  
+  $$ C \norm{\epsilon w}_{L^6}^2 \norm{\nabla_H v}_{L^2}^2.$$
+  
+So in the right hand side of the Gronwall inequality it brings in $\int_0 ^ t \norm{\epsilon w}_{L^6}^2$ in the exponent, which would be ok, since $\epsilon w$ is in $L^2 H^1$, so the $L^2 L^6$ norm is bounded.
+And I think also probably that is why we thought that the boundedness part was fine? But actually this square turned out to be a 4 later, because of the correction we agreed on later (with the $L^3$ norm appearing in the Holder inequality), fixing it with the Ladyzhenskaya inequality.
+
+Because
+
+\begin{equation}
+\begin{split} \nonumber
+& \int_\Omega \epsilon^2 w \frac{\partial w}{\partial z} \Delta_H w = \int_\Omega \epsilon w \nabla_H v \epsilon \Delta_H w \leq \norm{\epsilon \Delta_H w}_2 \norm{\epsilon w}_6 \norm{\nabla_H v}_3 \\
+& \norm{\epsilon \Delta_H w}_2 \norm{\epsilon w}_6 \norm{\nabla_H v}^{1/2}_2 \norm{\Delta v}^{1/2}_2 \leq \delta_3 \norm{\epsilon \Delta_H w}_2^2 + C(\delta_3) \norm{\epsilon w}^2_6 \norm{\nabla_H v}_2 \norm{\Delta v}_2 \\
+& \leq  \delta_3 \norm{\epsilon \Delta_H w}_2^2 + C(\delta_3) \delta_{32 } \norm{\Delta v}^2_2 + C(\delta_3) C(\delta_{32}) \norm{\epsilon w}^4_6 \norm{\nabla_H v}^2_2.
+\end{split}
+\end{equation}
+
+The first two terms with $\delta$-s go to the left hand side, while on the right hand side we will have the time integral of $\norm{\epsilon w}^4_6$ in the Gronwall inequality.
+So we would actually need for this specific term an $L^4 L^6$, or $L^4 H^1$ estimate. The same is true for $v$. I will look into the 3D PE well-posedness paper to see if analogously to their way we can obtain the boundedness results for the time integral on the right hand side.
+  
+  \subsection{The path $v_0 \in H^1 \implies$ strong convergence of $u_3$ using the Strong Convergence Justification article that has proved a similar result}
+  
+  The key for the uniformity part of equicontinuity estimate to work is eventually the strong convergence of $u_3$ in $L^2$. So at least for this case, all the regularities regarding $v$ in $L^2 H^2$, $w$ in $L^2 H^1$ are used only to obtain the strong convergence of $u_3$. But the strong convergence of $u_3$ for the case of an $H^1$ regular $v_0$ has already been proved by the Strong Convergence Justification article --- with the difference that it is for periodic $v$. However, we are already at the point of using both Dirichlet and Neumann boundary conditions that provide a boundary where these $0$th and $1$st order velocity terms vanish. So in some sense we are already "almost" / "close to" being periodic with respect to the velocity at least. So possibly a plan could be to see if their same proof works for our case. We could use as part of the main proof or as a remark containing an alternative proof.
+
+\end{document}
+
+%%% add http://elte.prompt.hu/sites/default/files/tananyagok/AtmosphericChemistry/ch10s03.html
+%%% http://twister.caps.ou.edu/PM2000/Chapter7.pdf

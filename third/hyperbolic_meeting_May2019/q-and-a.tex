@@ -1,0 +1,69 @@
+\documentclass[11pt]{article}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{commath}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{float} 
+\usepackage{array}
+\usepackage{outlines}
+\usepackage{setspace}
+\usepackage[colorinlistoftodos]{todonotes}
+\setlist[enumerate,1]{label=\alph*)}
+\setlist[enumerate,2]{label=\roman*)}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+\newtheorem{prop}{Proposition}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,trees, calc}
+
+%%% *** PREAMBLE *** %%%
+\title{Q and A.}
+
+%%%***  CONTENT *** %%%
+\begin{document}
+
+\maketitle
+
+\begin{itemize}
+
+\item \textbf{How to interpret the "3D"-ness of the limit model with $\epsilon = 0:$} it represents that the vertical dimension is much smaller, compared to the horizontal dimensions. It is a relative thing.
+
+\item \textbf{The divergence-free condition and the Aubin-Lions lemma.} In the A-G article it is mentioned that the Aubin-Lions lemma can not be used because the velocity including $\epsilon$ is not divergence-free. Actually, being divergence-free is not a requirement, it is simply easier when we have it, and without it the conditions of the original A-L lemma can not be verified. This is why they use another version of it, but not because being divergence-free is a condition in itself.
+
+\item \textbf{Why do we have $\epsilon^3$ in the Gaussian:} Because it is a $3D$ Gaussian. The number of dimensions appears there.
+
+\item \textbf{Weak formulation of $\mathbf{u}^\epsilon$}: $\mathbf{u}^\epsilon$ is defined to be in $L^2 H^1$ because at this point we do all this for a fix $\epsilon,$ which is as if we simply had a constant. On the other hand, it makes sense to define it like this, because in this case the system we have is essentially the complete Navier-Stokes, for which we have the results that verify the existence of such a weak solution.
+
+\item \textbf{The structure of stating Proposition 1.:} Let $\mathbf{u}^\epsilon$ be a weak solution of the anisotropic system, then we state results such as for example $\mathbf{u}^\epsilon \in L^2 L^2.$ In this case we have switched from a fix $\epsilon$ to an $\epsilon$ tending to zero, so this is already a different scenario, that is why it is not a contradiction to use the definition of WS (which, for a fix epsilon, had $H^1$ regularity), and then state $L^2 L^2.$
+
+\item \textbf{Weak solutions and Leray-Hopf Weak Solutions:} both have the energy inequality and the equality that states that they are a weak solution. The difference is that the L-H weak solutions have a bit stronger regularity, they are in $C_w$ for example. We work with weak solutions because we wanted to see this sort of "minimal" case.
+
+\item \textbf{hyperbolic, elliptic, parabolic:} these are types of PDEs, and Navier-Stokes belongs to none of these, however it is CLOSE to the hyperbolic category. Conservation laws are hyperbolic, the compressible Euler equations (Navier-Stokes without the viscosity Laplace term) are hyperbolic. The small-viscosity limit of Navier-Stokes is the Euler, so fluid dynamics is close to hyperbolic equations.
+
+\item \textbf{Example.} A form of Navier-Stokes where there is some sort of physical charge, is an example of equations where taking the formal limit of the equations does not give the actual, correct idea of how the solutions behave in the limit. When the limit is actually calculated, it gives rise to terms that weren't seen before. So the case of the polluted atmosphere is in some sense a "lucky case" where taking the formal limit actually gives the correct idea.
+
+\item \textbf{Calculating the norm in ${H^2}^*$:} Firstly, $H^2$ is reflexive, so ${H^2}^* = H^2.$ Secondly, taking the norm of $C$ in ${H^2}^*,$ the $\tilde{C}$ function has to have a norm less or equal than 1, by definition of norm in a dual space.
+
+\item \textbf{Defining boundary values for $\mathbf{u}^\epsilon$ and $\mathbf{u}$}: The whole idea of using direct ($\mathbf{u} = 0 $) and non-direct ($\mathbf{u} \cdot \mathbf{n} = 0 $) conditions is that while for an $H^1$ $\mathbf{u}^\epsilon$ function the trace has an $H^{1/2}$ regularity, for the limit model we only have $u^3$ in $L^2(\Omega),$ thus for this case the boundary values are in $H^{-1/2}$ only. For the functions with weaker trace, we use weaker conditions on the boundary, and only those that we need. For example $u_3 n_3 = 0$ says anything at all only on the horizontal surfaces, otherwise it is "empty".
+
+ONE. The boundary conditions for the anisotropic system. Here for a fix $\epsilon$ the velocity is in $H^1,$ so the boundary values are defined directly.
+
+TWO. The boundary conditions for the hydrostatic model. On $\Gamma_s$ they use $u_3 = 0$ directly, while on $\Gamma_b$ they use $u_3 n_3 = 0.$ Actually, it seems that this is not a misprint. The point is that also $u_3 n_3 = 0$ becomes direct on horizontal surfaces, as there we have $n_3 = 1,$ and with that $u_3 n_3 = 0$ reduces to $u_3 = 0.$ The whole idea of using the normal vector is not saving any regularity, it is a tool for requiring less, for example $u_3 n_3 = 0$ is a requirement only on horizontal surfaces. The $u_3 = 0$ requirement still makes sense in the space where $u_3$ is: in $H^{-1/2},$ in the weak sense. As the dual of $H^{-1/2}$ is $H^{1/2}$, the direct $u_3 = 0$ means $$ \int_\Gamma u_3 \cdot \varphi = 0 \quad \forall \varphi \in H^{1/2}.$$
+
+\item \textbf{The condition in the main theorem:}  $\mathbf{u_0} \cdot \mathbf{n} = 0$ is weaker than $\mathbf{u_0} = 0,$ as on every surface it only requires one function out of the three to be zero.
+
+\item \textbf{Reprise:} The meaning of $\epsilon = 0,$ and while the limit model is still 3D. Imagine something similar to what the Earth looked like for people a more or less thousand years ago: a flat, infinite 2D surface, and of course we combine this with above it some layer of air. For this case, not just "epsilon tends to, or is close to zero" makes sense, but here $\epsilon = 0$ also makes sense. It is zero not because the vertical dimension disappears, but because in the aspect ratio we have an infinite denominator against a finite nominator.
+ 
+\end{itemize}
+
+\end{document}
+
+%%% add http://elte.prompt.hu/sites/default/files/tananyagok/AtmosphericChemistry/ch10s03.html
+%%% http://twister.caps.ou.edu/PM2000/Chapter7.pdf

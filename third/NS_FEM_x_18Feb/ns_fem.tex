@@ -1,0 +1,383 @@
+\documentclass{beamer}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{commath}
+\usepackage{amsthm}
+\usepackage{lmodern}
+\usepackage{scrextend}
+\usepackage{listings}
+\usepackage{xcolor}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\usetheme{Luebeck}
+\useoutertheme[subsection=false, footline=authortitle]{miniframes}
+\usecolortheme{crane}
+
+\lstdefinestyle{base}{
+  language=Python,
+  emptylines=1,
+  breaklines=true,
+  basicstyle=\ttfamily\color{black},
+  moredelim=**[is][\color{orange}]{@}{@},
+}
+
+\title{Visualising weak convergence in a mathematical model in shallow geophysical domains}
+\subtitle{A problem}
+\author{N\'ora Juh\'asz}
+
+\date{18th February, 2019}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\section{Modeling and weak convergence}
+
+\begin{frame}{The main ideas of the model}
+  \begin{itemize}
+    \item Geophysical fluid $\to$ shallow domain characteristics --- the domain is greater horizontally than in the vertical dimension.
+    
+    $$ \Omega_{\epsilon} = \{(x,y,z) \in \mathbb{R}^3 ; (x,y) \in \omega, 0 < z < \epsilon h(x,y) \} $$
+    
+    \item Classical / general concepts as foundation:
+    \begin{itemize}
+      \item The wind flow being modelled by the incompressible Navier-Stokes equations
+      \item Using a convection - diffusion equation to describe the pollution effect
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+%% coordinate system - axes are independent from the wind.
+%% density is one,
+%% different viscosities depending H/V
+\begin{frame}{The governing equations}
+  \begin{itemize}
+    \item Fluid velocity equations --- incompressible Navier-Stokes equations with the density taken to be identically equal to one.
+      
+      $$\partial_t \mathbf{v} + (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + \nabla q + 2 \mathbf{w} \times \mathbf{v}= \mathbf{g} \text{ in } \Omega_{\epsilon} \times (0,T)$$
+    
+      $$\nabla \cdot \mathbf{v} = 0 \text{ in } \Omega_{\epsilon} \times (0,T)$$
+
+    \item A convection-diffusion equation representing pollutants in the atmosphere:
+    
+      $$ \partial_t C + \mathbf{v} \cdot \nabla C = \nabla \cdot (\mathbf{K} \nabla C) + S $$
+
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Scaling}
+%% largely different horizontal and vertical scales
+%% epsilon incorporates the shallowness of the domain
+%% viscosity rescaling - deduced heuristically from the dimensions
+One of the main tools to exploit the "almost" 2D structure of the atmosphere $\to$ introduce the aspect ratio $$\epsilon = \frac{\text{characteristic depth}}{\text{characteristic width}},$$ which incorporates the shallowness in a mathematical way. Natural scaling process:
+
+  \begin{enumerate}
+    \item $x=x_1, y=x_2, z=\epsilon x_3$
+    \item $v_1 = u_1^{\epsilon}, v_2 = u_2^{\epsilon}, v_3 = \epsilon u_3^{\epsilon}, p = p^{\epsilon},$
+    \item $\nu_x = \nu_1, \nu_y = \nu_2 , \nu_z = \epsilon ^ 2\nu_3,$
+    \item 
+    
+    \begin{gather}
+ \begin{bmatrix} K_{xx} & K_{xy} & K_{xz} \\ K_{yx} & K_{yy} & K_{yz} \\ K_{zx} & K_{zy} & K_{zz} \end{bmatrix}
+ =
+  \begin{bmatrix}
+    M_{11} & M_{12} & \epsilon M_{13} \\ M_{21} & M_{22} & \epsilon M_{23} \\ \epsilon M_{31} & \epsilon M_{32} & \epsilon^2 M_{33}
+  \end{bmatrix}
+\end{gather}
+    
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Local domain and boundary conditions}
+  We use a local cartesian coordinate system so that we can neglect the curvature of the Earth.
+  \begin{figure}
+    \includegraphics[width=\linewidth]{domain.jpg}
+    \caption{A local slice of the atmosphere}
+    \label{fig:atmosphere}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Anisotropic equations}
+
+  In $\Omega \times (0,T)$ we have the following system.
+
+    \[ \partial_t u^\epsilon _1 + \mathbf{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\alpha u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \]
+    
+    \[ \partial_t u_2^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_2^\epsilon -\Delta_\nu u_2^\epsilon + \alpha u_1^\epsilon + \partial_2 p^\epsilon = 0 \]
+    
+    \[\epsilon^2 \{  \partial_t u_3^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon -\Delta_\nu u_3^{\epsilon} \} - \epsilon \beta u_1^\epsilon + \partial_3 p^\epsilon = 0 \]
+    
+    \[ \nabla \cdot \mathbf{u}^\epsilon= 0  \]
+    
+    \[ \partial_t C^\epsilon + \mathbf{u^\epsilon} \cdot \nabla C^\epsilon = \nabla \cdot (\mathbf{M} \nabla C^\epsilon) + S^\epsilon \]
+    
+\end{frame}
+
+%% note that the limit model is 3D - this is a different approach compared to the shallow water depth-integrated model which is 2D
+%% in the vertical direction we have the hydrostatic pressure instead of the wind momentum equation
+\begin{frame}{Anisotropic equations - Part 2}
+
+  The initial and boundary conditions are chosen to be
+
+    \[ \mathbf{u}^\epsilon = 0 \text{ on } \Gamma \times (0,T), \]
+    
+    \[ \mathbf{u}^\epsilon (\cdot, t = 0) = \mathbf{u}_0, C^\epsilon (\cdot, t=0) = C^\epsilon_0  \text{ in } \Omega, \]
+
+    $$C^\epsilon = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T),  \partial_3 C^\epsilon = 0 \text{ on } \Gamma_G \times (0,T),$$
+    
+    $$\partial_1 C^\epsilon, \partial_2 C^\epsilon \in L^2 L^2 (0,T; \Gamma_G). $$
+
+\end{frame}
+
+\begin{frame}{Hydrostatic equations}
+  
+      \[ \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\alpha u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T) \]
+    
+    \[ \partial_t u_2 + \mathbf{u} \cdot \nabla u_2 - \Delta_\nu u_2 -\alpha u_1 + \partial_2 p = 0 \text{ in } \Omega \times (0,T) \]
+    
+    \[ \partial_3 p = 0 \text{ in } \Omega \times (0,T) \]
+    
+    \[ \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \times (0,T) \]
+    
+    \[ \partial_t C + \mathbf{u} \cdot \nabla C = \nabla \cdot (\mathbf{M} \nabla C) + S \]
+
+\end{frame}
+    
+\begin{frame}{Hydrostatic equations - Part 2}
+    \[ u_1 = u_2 = u_3 n_3 = 0 \text{ on } \Gamma \times (0,T) \]
+    
+    \[ u_i (\cdot, t=0) = u_{0 i}, C (\cdot, t=0) = C_0 \text{ in } \Omega, \text{$i$ = 1,2} \]
+    
+    $$C = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T),  \partial_3 C = 0 \text{ on } \Gamma_G \times (0,T),$$
+    
+    $$ \partial_1 C, \partial_2 C \in L^2 L^2 (0,T; \Gamma_G) $$
+  
+\end{frame}
+
+\begin{frame}{Main theorem}
+
+  We show a rigorous connection between the two sets --- taking the limit in the solutions we arrive to a justification of the hydrostatic model for the case of the polluted atmosphere.
+
+  \begin{theorem}
+
+  Let $\mathbf{u}_0$ $\in$ $L^2 (\Omega)^3$, with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 \cdot \mathbf{n} = 0$ on $\partial \Omega$; and let $C(0)\in$ $L^2 (\Omega)^3$, $C(0) = 0$ on $ \partial \Omega$; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, C^\epsilon)$ of the anisotropic equations converges to a weak solution ($\mathbf{u}$, C) of the hydrostatic equations of the polluted atmosphere.
+
+  \end{theorem}
+
+\end{frame}
+
+\begin{frame}{Weak formulation of the anisotropic equations}
+\changefontsizes{10pt}
+  \begin{equation}
+    \begin{split}
+      & \int_0^T \bigg [ -(\mathbf{u}^\epsilon_H, \partial_t \mathbf{\tilde{u}}_H) + (\nabla_\nu \mathbf{u}^\epsilon_H, \nabla_\nu \mathbf{\tilde{u}}_H) - (\mathbf{u}^\epsilon_H, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{\tilde{u}}_H) + (b(\mathbf{u}^\epsilon_H), \mathbf{\tilde{u}}_H) \bigg ] \diff t \\
+      & + \epsilon \beta \int_0 ^ T \big [ (u_3 ^\epsilon, \tilde{u}_1) - (u_1^\epsilon, \tilde{u}_3) \big ] \diff t\\
+      & + \epsilon^2 \int _0 ^ T \big [ -(u_3^\epsilon, \partial_t \tilde{u}_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, \tilde{u}_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu \tilde{u}_3) \big ] \diff t \\
+      & = (\mathbf{u}^\epsilon_{0H}, \mathbf{\tilde{u}}_H(0)) + \epsilon^2 (u_{03}^\epsilon, \tilde{u}_3 (0)) \diff t
+    \end{split}
+  \end{equation}
+  
+    \begin{equation}
+    \begin{split}
+      & \int_0^T \bigg [ -(C^\epsilon, \partial_t \tilde{C}) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) + (\mathbf{M} \nabla C^\epsilon, \nabla \tilde{C}) - \int_{\Gamma_G} \boldsymbol{\sigma} \mathbf{M} \tilde{C} \vec{\boldsymbol{n}}_{\Gamma_G} \bigg ] \diff t \\
+      & =  (C^\epsilon (0), \tilde{C} (0)) + \int_0^T (S^\epsilon,\tilde{C}) \diff t
+    \end{split}
+  \end{equation}
+
+\end{frame}
+
+\begin{frame}{Weak formulation of the hydrostatic equations}
+\changefontsizes{10pt}
+  \begin{equation}
+    \begin{split}
+      & \int_0^T \bigg[ -(\mathbf{u}_H, \partial_t \mathbf{\tilde{u}}_H) + (\nabla_\nu \mathbf{u}_H, \nabla_\nu \mathbf{\tilde{u}}_H) - (\mathbf{u}_H, (\mathbf{u} \cdot \nabla) \mathbf{\tilde{u}}_H) + (b(\mathbf{u}_H), \mathbf{\tilde{u}}_H) \bigg ] \diff t \\
+      & = (\mathbf{u}_{0H}, \mathbf{\tilde{u}}_H(0)) \diff t \raisetag{15pt}\label{hydrostaticWF_U}
+    \end{split}
+  \end{equation}
+  
+    \begin{equation}
+    \begin{split}
+      & \int_0^T \bigg[ -(C, \partial_t \tilde{C}) -(\mathbf{u}C, \nabla \tilde{C}) +  (\mathbf{M} \nabla C, \nabla \tilde{C}) - \int_{\Gamma_G} \boldsymbol{\sigma} \mathbf{M} \tilde{C} \vec{\boldsymbol{n}}_{\Gamma_G} \bigg ] \diff t \\
+      & = (C(0), \tilde{C}(0)) + \int_0^T (S,\tilde{C}) \diff t \raisetag{20pt} \label{hydrostaticWF_C}
+    \end{split}
+  \end{equation}
+  
+\end{frame}
+
+\begin{frame}{Energy inequality}
+    \changefontsizes{10pt}
+  \begin{equation}
+    \begin{split}  
+    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \big [\norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2 \big ] \diff \tau \\
+    & + \int_0 ^ t \bigg[ (\lambda - \sum_{i,j = 1}^3 \zeta \frac{1}{2} M_{ij} c_T) \norm{\nabla C^\epsilon}_{L^2}^2  \bigg] \diff \tau \\
+    & \leq \sum_{i,j = 1}^3 \frac{1}{\zeta} M_{ij} \frac{1}{2} \int_0 ^ t \norm{\sigma_i}^2 _{L^2 (\Gamma_G)} \diff \tau + \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) \\
+    & + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau + \sum_{i,j = 1}^3 \zeta \frac{1}{2} M_{ij} c_T  \int_0 ^ t \norm{C^\epsilon}^2 _{L^2 (\Omega) } \diff \tau \raisetag{90pt} \label{finalformEIEQ}
+    \end{split}
+  \end{equation} 
+\end{frame}
+
+\begin{frame}{Proof steps - Part 1}
+  \begin{enumerate}
+    \item The beginning step of the proof is to obtain the energy inequality that yields a priori estimates such as $L_t^\infty L_x^2 \cap L_t^2 H_x^1$ boundedness for $C^\epsilon;$ 
+  
+    \item Once we have boundedness, we have the weak convergence of the linear terms, while the weak convergence of the nonlinear terms not including the pollution term had been shown previously by Az\'erad and Guill\'en (SIAM Journal on Mathematical Analysis, 2001).
+    
+    \item We prove the convergence of the term $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C})$ by using a compactness result. It can be proved that $u_i^\epsilon C^\epsilon \rightharpoonup  u_i C$ using the following compactness theorem:
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Proof steps - Part 2}
+
+    \begin{theorem}
+Let $T>0,$ and let the Banach spaces $\mathbf{X} \hookrightarrow \mathbf{B} \hookrightarrow \mathbf{Y},$ where $\mathbf{X}$ is compactly embedded in $\mathbf{B},$ and $\mathbf{B}$ is continuously embedded in $\mathbf{Y}.$ Let $(f_\epsilon)_{\epsilon>0}$ be a family of functions of $L^p (0,T; \mathbf{X}), 1 \leq p \leq \infty,$ with the extra condition $(f_\epsilon)_{\epsilon>0} \subset C (0,T; \mathbf{Y})$ if $p = \infty,$ such that
+\begin{enumerate}
+  \item $(f_\epsilon)_{\epsilon>0}$ is bounded in $L^p (0,T; \mathbf{X}),$
+  \item $\norm{\tau_h f_\epsilon - f_\epsilon}_{L^p(0,T-h; \mathbf{Y})} \leq \varphi(h) + \psi(\epsilon)$ with
+  $$
+    \begin{cases}
+      \lim_{h \to 0} \varphi(h) = 0,\\
+      \lim_{\epsilon \to 0} \psi(\epsilon) = 0.
+    \end{cases}
+  $$
+  \end{enumerate}
+  
+Then the family $(f_\epsilon)_{\epsilon>0}$ possesses a cluster point in $L^p (0,T; \mathbf{B})$ and also in $\mathcal{C}(0,T; \mathbf{B})$ if $p = \infty$ as $\epsilon \to 0.$
+\end{theorem}
+    
+\end{frame}
+
+\section{Visualisation - FEM}
+
+\begin{frame}{OCEAN}
+
+    As a beginning step to start the visualisation process we consider a slightly different scenario:
+    \begin{itemize}
+      \item The case of the ocean including wind traction on top
+      \item Why to do this:
+        \begin{itemize}
+          \item The Navier-Stokes equations describing the ocean as a shallow fluid are the same, we neglect the pollution concentration effect, which makes the FEM spaces more simple
+          \item The wind traction on the ocean might make the solutions easier to study in the beginning
+        \end{itemize}
+    \end{itemize}
+    
+\end{frame}
+
+\begin{frame}{Some basic concepts - Part 1}
+
+IPCS - Incremental pressure correction scheme. How to update $(\mathbf{u}^n, p^n)$ to arrive to $(\mathbf{u}^{n+1}, p^{n+1})$ without increasing both quantities at the same time.
+
+\begin{enumerate}[i)]
+  \item Starting with $\mathbf{u}^n,$ calculate the so-called $\mathbf{u}^*$ tentative velocity using only the $p^n$ pressure value from the previous time step.
+  \item Updating the pressure, step from $p^n$ to $p^{n+1}$ based on $\mathbf{u}^*.$ (N-S@($\mathbf{u}^*,$ $p^n$) - N-S@($\mathbf{u}^{n+1},$ $p^{n+1}$))
+  \item Calculating the definitive $\mathbf{u}^{n+1}$ velocity based on $p^{n+1}$ and $\mathbf{u}^*.$
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}{Some basic concepts - Part 2}
+
+Note that in the original weak formulation the $p$ pressure function is vanished as a consequence of the divergence-free condition. In this discretised scenario we don't exactly have that constraint fulfilled, so we also use the pressure function in the weak formulation $\to$ we define a mixed function space composed of
+\begin{enumerate}
+  \item a VectorFunctionSpace of continuous piecewise quadratics
+  \item and a FunctionSpace of continuous piecewise linear functions.
+\end{enumerate}
+This mixed finite element space is known as the \textbf{Taylor-Hood} elements and is a stable, standard element pair for this kind of problem.
+
+\end{frame}
+
+\begin{frame}{Some basic concepts - Part 3}
+
+Choice of element structure: the Taylor-Hood elements satisfy the BBL condition (coercivity plus an inf-sup condition on the functions $a$ and $b,$ respectively) that guarantees the well-posedness of the saddle point problem that we have:
+
+$$ a(u,v) + b(v,\lambda) = <f,v>$$
+$$ b(u, \mu) = <g, \mu> $$
+
+We have this structure thanks to the remaining $\nabla p \cdot \mathbf{v}$ term in the Navier-Stokes equation and the $(\nabla \cdot \mathbf{u}) q = 0$ weak version of the divergence-free condition.
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Definitions}
+\scriptsize
+\begin{lstlisting}[frame=single,style=base]
+mesh = UnitCubeMesh(meshsize, meshsize, meshsize) 
+
+V = VectorFunctionSpace(mesh, "Lagrange", 2, dim = 3)
+Q = FunctionSpace(mesh, "Lagrange", 1)
+
+u = TrialFunction(V)
+p = TrialFunction(Q)
+v = TestFunction(V)
+q = TestFunction(Q)
+\end{lstlisting}    
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The anisotropic scheme}
+\scriptsize
+\begin{lstlisting}[frame=single,style=base]
+F1_anisotropic =
+(1/k)*( (@u1@ - u_prev1)*v1 + (@u2@ - u_prev2)*v2 + 
+eps*eps*(@u3@ - u_prev3)*v3 ) * dx +
+inner(u_prev, grad(u_prev1)) * v1 * dx +
+inner(u_prev, grad(u_prev2)) * v2 * dx +
+eps*eps*inner(u_prev, grad(u_prev3)) * v3 * dx +
+- alpha * u_prev2 * v1 * dx + alpha * u_prev1 * v2 * dx +
+inner(grad(@u1@),grad(v1)) * dx +
+inner(grad(@u2@),grad(v2)) * dx +
+eps*eps*inner(grad(@u3@),grad(v3)) * dx +
+eps * beta * u_prev3 * v1 * dx - eps * beta * u_prev1 * v3 * dx
+- inner(f, v) * dx +
+- inner(theta, v) * ds(1)
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Assemble}
+\scriptsize
+\begin{lstlisting}[frame=single,style=base]
+    a1 = lhs(F1_anisotropic)
+    L1 = rhs(F1_anisotropic)
+
+    a2 = inner(grad(@p@), grad(q))*dx
+    L2 = - (1/k)*div(u_next)*q*dx
+
+    a3 = inner(@u@, v)*dx
+    L3 = inner(u_next, v)*dx - k*inner(grad(p_next), v)*dx
+
+    # Assemble matrices
+    A1 = assemble(a1)
+    A2 = assemble(a2)
+    A3 = assemble(a3)
+\end{lstlisting}
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Solving}
+\scriptsize
+\begin{lstlisting}[frame=single,style=base]
+while t < T + DOLFIN_EPS:
+
+  # Compute tentative velocity step
+  b1 = assemble(L1)
+  [bc.apply(A1, b1) for bc in bcu]
+  solve(A1, u_next.vector(), b1, "bicgstab", "default")
+
+  # Pressure correction
+  b2 = assemble(L2)
+  [bc.apply(A2, b2) for bc in bcp]
+  [bc.apply(p_next.vector()) for bc in bcp]
+  solve(A2, p_next.vector(), b2, "bicgstab", prec)
+
+  # Velocity correction
+  b3 = assemble(L3)
+  [bc.apply(A3, b3) for bc in bcu]
+  solve(A3, u_next.vector(), b3, "bicgstab", "default")
+\end{lstlisting}
+\end{frame}
+
+
+\end{document}

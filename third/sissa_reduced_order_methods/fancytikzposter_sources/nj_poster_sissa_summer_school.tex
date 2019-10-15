@@ -1,0 +1,299 @@
+% fancytikzposter.tex, version 2.1
+% Original template created by Elena Botoeva [botoeva@inf.unibz.it], June 2012
+% 
+% This file is distributed under the Creative Commons Attribution-NonCommercial 2.0
+% Generic (CC BY-NC 2.0) license
+% http://creativecommons.org/licenses/by-nc/2.0/ 
+
+% change sizes: \tiny 12pt \scriptsize 14.4pt \footnotesize 17.28pt \small 20.74pt \normalsize 24.88pt
+% http://ctan.mirror.garr.it/mirrors/CTAN/macros/latex/contrib/a0poster/a0_eng.pdf
+
+\documentclass{a0poster}
+
+\usepackage{fancytikzposter} 
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\setcolumnnumber{2}
+
+\definecolor{terracotta}{HTML}{e2725b}
+\definecolor{mocassin}{HTML}{FFE4B5}
+\definecolor{coral}{HTML}{FFAA80}
+\setfirstcolor{mocassin}
+\setsecondcolor{coral}
+\setthirdcolor{terracotta}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{commath}
+\usepackage{amsthm}
+\usepackage{lmodern}
+\usepackage{scrextend}
+\usepackage{listings}
+\usepackage{xcolor}
+\lstdefinestyle{base}{
+  language=Python,
+  emptylines=1,
+  breaklines=true,
+  basicstyle=\ttfamily\color{black},
+  moredelim=**[is][\color{orange}]{@}{@},
+}
+
+%%% size of the document and the margins
+%% A0
+% \usepackage[margin=\margin cm, paperwidth=118.9cm, paperheight=84.1cm]{geometry} 
+\usepackage[margin=\margin cm, paperwidth=84.1cm, paperheight=118.9cm]{geometry}
+
+\usepackage{cmbright}
+\usepackage{amsmath}
+\usepackage{commath}
+\usepackage{amsthm}
+\usepackage[math]{kurier}
+\usepackage[T1]{fontenc}
+
+\title{The polluted atmosphere as a shallow domain}
+\author{Nora Juhasz\\
+  DISIM, University of L'Aquila, Italy\\
+  \texttt{ms.juhasz.nora@gmail.com}\\
+  joint work with D. Donatelli, University of L'Aquila and \\ O. Lakkis, University of Sussex
+}
+
+\begin{document}
+
+\ClearShipoutPicture
+\AddToShipoutPicture{\BackgroundPicture}
+
+\noindent % to have the picture right in the center
+\begin{tikzpicture}
+  \initializesizeandshifts
+
+  \ifthenelse{\equal{\template}{1}}{ 
+    \titleblock{47}{1}
+  }{
+    \titleblock{47}{1.5}
+  }
+
+  \addlogo[south west]{(1,1)}{7cm}{ModCompShock.jpg}
+  \addlogo[south east]{(-1,1)}{4.5cm}{LogoDisim.png}
+
+  %% a block node, with the specified position (optional), title and the content
+  %% #1 - where (optional), #2 - title, #3 - text
+  %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
+  \blocknode{\textcolor{gray}{The shallow domain concept}}
+  {
+  \begin{itemize}
+    \item Natural, large-scale geophysical fluids share the shallow domain characteristics
+    \item "almost" two-dimensional set $\to$ we can significantly simplify the model in the vertical direction
+    \item a domain that is excessively greater horizontally than in the vertical dimension $\to$ leading to the classic hydrostatic approximation of the Navier-Stokes equations
+  \end{itemize}
+  
+  \vspace{0.5cm}
+  
+  The main ideas and tools in this scenario:
+  \begin{itemize}
+    \item introduce the aspect ratio $\epsilon = \frac{\text{characteristic depth}}{\text{characteristic width}},$
+    \item anisotropic viscosity hypothesis,
+    \item rescaling, $x=x_1, y=x_2, z=\epsilon x_3.$
+  \end{itemize}
+  
+  }
+
+  %% a callout block
+  %% #1 - rotate angle (optional), #2 - from, #3 - where, #4 - width, #5 - text
+  %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
+  \calloutblock
+  {($(box.center)+(-2,-7)$)} %% the point of the arrow part of the block
+  {($(box.center)+(12,-3.6)$)} %% the center of the body of the block
+  {15cm} %% the width of the block
+  {\small
+  Correspondingly, we rescale
+  
+  \begin{itemize}
+    \item the kinematic terms: $v_3 = \epsilon u_3^{\epsilon},$
+    \item the viscosity terms: $\nu_z = \epsilon ^ 2\nu_3,$
+    \item the diffusivity terms: $K_x =  K_1, K_y = K_2, K_z = \epsilon ^ 2 K_3.$
+  \end{itemize}
+  }
+  
+  %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
+  \blocknode[($(currenty)-(0,1.6)$)]{\textcolor{gray}{Modelling choices}}
+  {
+  \begin{itemize}
+    \item Coordinate system $\to$ we use a classical geophysical coordinate choice: north -- east -- upwards directions.
+     
+    \item Domain $\to$ we use locally acceptable Cartesian coordinates --- this allows us to ignore large-scale effects such as the curvature of the Earth.
+     
+      \begin{tikzfigure}[A local slice of the atmosphere]
+        \begin{tikzpicture}
+      
+          \node[inner sep=0pt] (domain) at (0,0) {\includegraphics[width=.3\textwidth]{domain.jpg}};
+      
+        \end{tikzpicture}
+      \end{tikzfigure}
+  
+    Challenges: local area model $\to$ open boundary conditions on the lateral boundary. Periodicity in this case is quite unrealistic. We use a fix zero approach --- the concentration being set to zero actually stands for a constant concentration with the background flow being removed.
+    
+  \end{itemize}
+  }
+
+  %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
+  \blocknode{\textcolor{gray}{The anisotropic equations}}
+  { 
+    \coloredbox{colorthree!50!}{
+      
+    \[ \partial_t u^\epsilon _1 + \bold{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\alpha u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T) \]
+    
+    \[ \partial_t u_2^\epsilon + \bold{u}^\epsilon \cdot \nabla u_2^\epsilon -\Delta_\nu u_2^\epsilon + \alpha u_1^\epsilon + \partial_2 p^\epsilon = 0 \text{ in } \Omega \times (0,T) \]
+    
+    \[\epsilon^2 \{  \partial_t u_3^\epsilon + \bold{u}^\epsilon \cdot \nabla u_3^\epsilon -\Delta_\nu u_3^{\epsilon} \} - \epsilon \beta u_1^\epsilon + \partial_3 p^\epsilon = 0 \text{ in } \Omega \times (0,T) \]
+    
+    \[ \nabla \cdot \bold{u}^\epsilon= 0 \text{ in } \Omega \times (0,T) \]
+    
+    \[ \partial_t C^\epsilon + \bold{u}^\epsilon \cdot \nabla C^\epsilon = K_1 \frac{\partial ^2 C^\epsilon}{\partial x_1 ^ 2} + K_2 \frac{\partial ^2 C^\epsilon}{\partial x_2 ^ 2} + K_3 \frac{\partial ^2 C^\epsilon}{\partial x_3 ^ 2} + S_\epsilon \text{ in } \Omega \times (0,T) \]
+    
+    \[ \bold{u}^\epsilon (\cdot, t = 0) = \bold{u}_0, C^\epsilon (\cdot, t=0) = C^\epsilon_0  \text{ in } \Omega \]
+        
+    }
+  }
+  
+  \plainblock[5]{($(currenty)+(1,3)$)}{25}{The original equations} 
+  {
+    \vspace{0.3cm}
+    We use the
+    
+    incompressible Navier-Stokes equations in all three space dimensions for the fluid velocity.
+  }
+
+  \blocknode[($(currenty)-(0,4.8)$)]{\textcolor{gray}{The limit model}}
+  { \small In the vertical dimension we arrive to the hydrostatic approximation.
+    \vspace{0.5cm}
+    \coloredbox{colorthree!50!}{
+    
+    \[ \partial_t u_1 + \bold{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\alpha u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T) \]
+    
+    \[ \partial_t u_2 + \bold{u} \cdot \nabla u_2 - \Delta_\nu u_2 -\alpha u_1 + \partial_2 p = 0 \text{ in } \Omega \times (0,T) \]
+    
+    \[ \partial_3 p = 0 \text{ in } \Omega \times (0,T) \]
+    
+    \[ \nabla \cdot \bold{u} = 0 \text{ in } \Omega \times (0,T) \]
+    
+    \[ \partial_t C + \bold{u} \cdot \nabla C = K_1 \frac{\partial ^2 C}{\partial x_1 ^ 2} + K_2 \frac{\partial ^2 C}{\partial x_2 ^ 2} + K_3 \frac{\partial ^2 C}{\partial x_3 ^ 2} + S \text{ in } \Omega \times (0,T) \]
+    
+    \[ u_i (\cdot, t=0) = u_{0 i}, C (\cdot, t=0) = C_0 \text{ in } \Omega, \text{$i$ = 1,2} \]
+   
+    }
+  }
+  
+  %%%%%%%%%%%%% NEW COLUMN %%%%%%%%%%%%%%%
+  \startsecondcolumn 
+  %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
+    
+  
+  %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
+  \blocknode{\textcolor{gray}{The main theorem}}%
+  {
+      
+    \begin{tabular}[t]{ll}
+      \begin{minipage}{1.0\linewidth}
+        \innerblock{Theorem} {Let $\bold{u}_0$ $\in$ $L^2 (\Omega)^3$, with $\nabla \cdot \bold{u}_0 = 0, \bold{u}_0 \cdot \bold{n} = 0$ on $\partial \Omega$; and let $C(0)\in$ $L^2 (\Omega)^3$, $C(0) = 0$ on $ \partial \Omega$; there exists a weak solution ($\mathbf{u}$, C) of the hydrostatic equations of the polluted atmosphere, obtained as a limit of weak solutions $(\mathbf{u}^\epsilon, C^\epsilon)$ of the anisotropic equations as the aspect ratio $\epsilon$ tends to $0$.}
+      \end{minipage}
+    \end{tabular}
+    
+    For details see \textit{D. Donatelli, N. Juhasz, Weak solution of the merged mathematical equations of the polluted atmosphere, Preprint 2019, arXiv:1906.09914 [math.AP].}
+ 
+  }
+  
+  \blocknode{\textcolor{gray}{Visualization of the convergence result: \textbf{a challenge}}}
+  {
+    \begin{itemize}
+    
+      \item In order to visualise the convergence result for now we use the finite element method, and the FEniCS platform.
+      \item Space function choices for the velocity and the pressure --- this mixed finite element space is known as the \textbf{Taylor-Hood} elements and is a standard element pair for this kind of problem. In the original weak formulation the $p$ pressure function vanishes as a consequence of the divergence-free condition. In this discretised scenario we don't exactly have that constraint fulfilled, so we also use the pressure function in the weak formulation:
+      
+     \coloredbox{colorthree!50!}{
+      
+        \texttt{V = VectorFunctionSpace(mesh, "Lagrange", 2, dim = 3)} --- continuous piecewise quadratics
+        
+        \texttt{Q = FunctionSpace(mesh, "Lagrange", 1)} --- continuous piecewise linear functions
+     }
+      
+      \item Challenge: \textbf{the FEM matrix is becoming badly conditioned} as the weight $\epsilon^2 $ of $u^\epsilon_3$ is disappearing from the momentum equation.
+      
+      \item To obtain a discrete scheme in space and time we use the incremental pressure correction scheme --- \textbf{Chorin's 3-step method}
+      
+      \end{itemize}
+      
+    }
+  
+        %%%%%%%%%% ------------------------------------------ %%%%%%%%%%
+  \calloutblock
+  {($(box.center)+(-8,-11.5)$)} %% the point of the arrow part of the block
+  {($(box.center)+(2,-13.3)$)} %% the center of the body of the block
+  {33cm}
+  {
+IPCS - Incremental pressure correction scheme. How to update $(\mathbf{u}^n, p^n)$
+
+to arrive to $(\mathbf{u}^{n+1}, p^{n+1})$ without increasing both quantities at the same time.
+
+\begin{enumerate}
+  \item Starting with $\mathbf{u}^n,$ calculate the so-called $\mathbf{u}^*$ tentative velocity using only the $p^n$ pressure value from the previous time step.
+  \item Updating the pressure, step from $p^n$ to $p^{n+1}$ based on $\mathbf{u}^*.$ (N-S@($\mathbf{u}^*,$ $p^n$) - N-S@($\mathbf{u}^{n+1},$ $p^{n+1}$))
+  \item Calculating the definitive $\mathbf{u}^{n+1}$ velocity based on $p^{n+1}$ and $\mathbf{u}^*.$
+\end{enumerate}
+  }
+  
+    \getcurrentrow{note}
+    \coordinate (currenty) at ($(currentrow)+(xshift)-(yshift)$);
+    
+    \blocknode{\textcolor{gray}{FEniCS code}}{
+    
+      \begin{itemize}
+      
+      \item STEP1 --- tentative velocity calculation ignoring the pressure change
+      
+        \coloredbox{colorthree!50!}{
+       
+      
+        \texttt{ F1\_anisotropic =  }
+      
+        \texttt{ (1/k)*\big( (u1 - u\_prev1)*v1 + (u2 - u\_prev2)*v2 + $\epsilon^2*$\textbf{(u3 - u\_prev3)*v3} \big) * dx + inner(u\_prev, grad(u\_prev1)) * v1 * dx  }
+      
+         \texttt{ + inner(u\_prev, grad(u\_prev2)) * v2 * dx + $\epsilon^2*$inner(u\_prev, grad(u\_prev3)) * v3 * dx $ - \alpha$ * u\_prev2 * v1 * dx + $\alpha$ * u\_prev1 * v2 * dx + inner(grad(u1),grad(v1)) * dx + inner(grad(u2),grad(v2)) * dx }
+        
+         \texttt{ + $\epsilon^2$*\textbf{inner(grad(u3),grad(v3))} * dx + $\epsilon * \beta$ * u\_prev3 * v1 * dx - $\epsilon * \beta$ * u\_prev1 * v3 * dx  }
+       
+          \texttt{ a1 = lhs(F1\_anisotropic), L1 = rhs(F1\_anisotropic) }
+         
+       }
+    
+      \item STEP2 --- updating the pressure in a separate step
+      
+        \coloredbox{colorthree!50!}{
+      
+          \texttt{ a2 = inner(grad(p), grad(q))*dx, L2 = - (1/k)*\text{div}(u\_next)*q*dx  }
+        
+        }
+    
+      \item STEP3 --- updating the velocity knowing the new pressure value
+      
+        \coloredbox{colorthree!50!}{
+
+          \texttt{ a3 = inner(u, v)*dx, L3 = inner(u\_next, v)*dx - k*inner(grad(p\_next), v)*dx  }
+        
+        }
+      
+    \end{itemize}
+  }
+  
+    \blocknode{\textcolor{gray}{Future work}}%
+  {
+    \begin{itemize}
+      \item We plan to visualise the behaviour of the limit model in itself, without the convergence phenomena attached to it.
+      \item Investigate further in order to see if it is possible to construct a stable method to visualise the convergence of the solutions.
+    \end{itemize}
+  
+  }
+
+\end{tikzpicture}
+
+%\nocite{*}
+%\bibliographystyle{apalike}
+%\bibliography{nj_poster_vertical}
+\end{document}

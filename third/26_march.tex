@@ -1,0 +1,78 @@
+\documentclass[11pt]{article}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{commath}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{float} 
+\usepackage{array}
+\usepackage{outlines}
+\usepackage{setspace}
+\usepackage{xcolor}
+\definecolor{ao}{rgb}{0.0, 0.5, 0.0}
+\usepackage[colorinlistoftodos]{todonotes}
+\setlist[enumerate,1]{label=\roman*)}
+\setlist[enumerate,2]{label=\alph*)}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+\newtheorem{prop}{Proposition}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,trees, calc}
+
+
+\title{The idea of the Cao-Li-Titi article for $H^1$ regularity of $T$}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+
+\item The main difference is that while they have $T$ in two different places: $T$ in the advection-diffusion equation, and $T$ in the momentum equation (from the hydrostatic equation) --- $T$ is 'what is on the opposite side of $p_s.$' These two things are the same for them, so they can use the $\norm{T}_\infty \leq \norm{T_0}_\infty$ coming from the diffusion equation and apply it for the $T$ present in the momentum equation. We have a $C$ in the diffusion equation, but have $\Delta u_3$ etc terms on 'what is on the opposite side of $p_s$' - without $L^\infty$ bounds.
+
+\item
+
+$\Phi = \int_{-h}^z \epsilon (\beta u_1 - \epsilon (\partial_t u_3 + \mathbf{u} \nabla u_3 - \Delta u_3)) - \frac{1}{2h} \int_{-h}^h \int_{-h}^z \epsilon (\beta u_1 - \epsilon (\partial_t u_3 + \mathbf{u} \nabla u_3 - \Delta u_3))$
+
+\item The calculation on page 34. For the first block of calculation they multiply by $-\partial^2_z T,$ and the result is ok, since the appearing second order term $\sigma \norm{\partial^2_z T}_2^2$ in the last row can be brought to the left hand side "as usual".
+
+Since the horizontal diffusion is missing, the analogous second order term in the second block of calculation could not be melted into the left hand side term because that has an $\epsilon$ --- we have $\epsilon \norm{\Delta_H T}_2^2.$ Considering this, one derivative has to be taken off of $T,$ which leads to the appearance of the "worst term" $\int_\Omega \abs{\nabla _H v} \abs{\nabla_H T}^2.$
+
+\textcolor{ao}{If we somehow had $H^3$ for the horizontal velocity, all this would be ok:} $\int_\Omega \abs{\nabla _H v} \abs{\nabla_H T}^2 \leq \norm{\nabla _H v}_\infty \norm{\nabla_H T}_2 \leq \norm{\nabla _H v}_\infty^2 + \norm{\nabla_H T}_2^2.$
+
+If $v$ is in $H^3,$ then $\nabla_H v$ is in $H^2$ and thus in $L^\infty.$ One way could be to check what additional conditions we need to assume on the velocity to obtain $v \in H^3.$ (?)
+
+\item As a consequence of the absence of the horizontal diffusivity in the temperature equation, it becomes necessary to handle the $L^\infty$ estimate of $\nabla_H v$ to deal with the $\int_\Omega \abs{\nabla _H v} \abs{\nabla_H T}^2$ integral. The idea of the article for this issue is to decompose the velocity into $T$-dependent and $T$-independent parts based on the presence of $T$ in the momentum equation, and deal with them separately. For them this is an option in the first place because they have $T$ present in the momentum equation due to the doubled coupling. This is why they introduce $\bar{\omega}$ and $\zeta$ on page 31, Chapter 3.4, and through these, on p37 they estimate the $J_1$ term. Eventually, as seen on page 38, for estimating $J_1,$ we still use the Laplacians of $\eta$ and $\theta,$ which are already first order derivatives of $v,$ so we are still on level 3, but the point is that for these Laplacians there is an estimate provided in Proposition 3.8 (p27). On the right hand side we have the norm of these Laplacians, and they are estimated with only first order derivatives of $\eta,$ $\theta$ and $T$ (and some other terms).
+
+\item The thing is that the result in Proposition 3.8 comes from the fact (calculated in Appendix A) that the structure of the equations is as it is for the case of this article: they can use that the vertical integral of $p_s$ is $p_s$ itself multiplied by a constant, they can get rid or the $p(x,y,z)$ pressure term by $p_s - \int T$, where $T$ is what is on the other side of $p_s,$ as opposed to what we have: $\Delta w,$ etc, and for $T$ they have and they use $\norm{T}_\infty \leq \norm{T_0}_\infty$ (for example on p32), for creating a bound for the $\bar{\omega}$ part of the estimate of $\nabla_H v.$
+
+\item \textcolor{orange}{The key thing about Proposition 3.8 is that this is what is used to pass from level 3 derivatives of $v$ ($\Delta \eta, \Delta \theta$)to just second order ones}. We either have P3.8., or we need $H^3$ regularity. But the bound they create here has $\nabla_H T$ on the right hand side --- where $T$ comes from 'what is present in the momentum equation next to $p_s$', which in our case is minus the whole third momentum equation including $\epsilon^2 \Delta u_3.$ Not only do we not have a bound for that, but when we plug it back to the final inequalities, see on p39, then the $T$ in the $\norm{\nabla_H (\eta, \theta, T)}_2^2$ term (3rd line in equation mode in the proof on p39) becomes this $\nabla \epsilon^2 \Delta u_3$ term, but we should have something like $l_3 \times A_3,$ but in $A_3$ we have $\nabla_H T.$ In the estimate for the Laplacians of $\eta, \theta$, we have the terms appear that are on the other side of $p_s,$ which is not the same as $T$ in our case.
+
+The terms
+
+$$\frac{d}{dt} \norm{\nabla_H(\eta, \theta)}_2^2, \frac{d}{dt} \bigg ( \frac{\norm{\nabla T}_2^2}{2} + \frac{\norm{\nabla T}_q^q}{2}\bigg)$$
+
+define $\frac{d}{dt} A_3.$
+
+In order for the inequalities to work, in the first inequality we have $l_3 \times A_3,$ which is all right as there we have
+
+$$ C(\norm{v}_\infty^2 + ... + 1) \times \norm{\nabla_H (\eta, \theta, T)}_2^2.$$
+
+When the other side of the equation $\partial_z p = ...$ changes, then the term $ C(\norm{v}_\infty^2 + ... + 1) \times \norm{\nabla_H (\eta, \theta, \textcolor{orange}{\text{new}})}_2^2$ changes, but $A_3$ doesn't.
+
+\item In other words, they use the idea: estimate $\Delta \nabla_H v$ by something like 'some terms, plus $\nabla$ of what is on the other side of $\partial_z p$', which in their case is $T,$ for which they have $\norm{T}_\infty \leq \norm{T_0}_\infty$ coming from the diffusion equation. For us the same idea leads to 'estimate $\Delta \nabla_H v$ by $\nabla$ of what is on the other side of $\partial_z p$', which are the terms like $\Delta u_3$ from the equation for $u_3.$
+
+\item The whole idea of splitting $v$ into dependent and independent parts of the term of what is on the opposite side of $\partial_z p$ could be used in the following way: we assume that '$p$ is regular,' from that point on we don't need to eliminate $p$, or bring in the term ($p$ - (the terms on the other side)), and we could just follow the part of the proof for the part of $v$ which is independent.
+
+\end{enumerate}
+
+\textcolor{ao}{Thoughts:} \textcolor{ao}{1.) Can we have an $H^3$ horizontal velocity?} \textcolor{ao}{2.) Can we say that the $p = p(x,y,z)$ pressure is very regular, and we don't need to get rid of it?}
+
+
+\end{document}

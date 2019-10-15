@@ -1,0 +1,135 @@
+\documentclass[11pt]{article}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{commath}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{float} 
+\usepackage{array}
+\usepackage{outlines}
+\usepackage{setspace}
+\usepackage{xcolor}
+%%% use as \textcolor{ao}{Thoughts.}
+\definecolor{ao}{rgb}{0.0, 0.5, 0.0}
+\definecolor{trueblue}{rgb}{0.0, 0.45, 0.81}
+\definecolor{cadmiumorange}{rgb}{0.93, 0.53, 0.18}
+\usepackage[colorinlistoftodos]{todonotes}
+\setlist[enumerate,1]{label=\roman*)}
+\setlist[enumerate,2]{label=\alph*)}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+\newtheorem{prop}{Proposition}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,trees, calc}
+
+
+\title{Three options.}
+
+\begin{document}
+
+\date{}
+\maketitle
+
+\begin{enumerate}
+
+\item \textbf{One.}
+
+\textbf{One of the main points} of this article is that they have to deal with the same issue as us: they can not close the $H^1$ regularity of $T$ just using the Young inequality as the term $\sigma \norm{\Delta_H \mathbf{v}}_2^2$ can not be melted into the left hand side because there we have $\epsilon \norm{\Delta_H \mathbf{v}}_2^2.$ As the level 2 horizontal derivatives of $T$ can not be dealt with through the Young inequality because of the absence of the horizontal diffusivity, they take one derivative off of $T,$ apply it onto the velocity --- and deal with the increased derivative level of $\mathbf{v}$ instead of dealing with the double derivative on $T.$ How is this done: as the $L^\infty$ norm of $\nabla_H \mathbf{v}$ takes the regularity requirements to level 3, estimates for $\Delta \eta, \Delta \theta$ are created (level 2+1), using the idea to separate the velocity into two parts: one is the $T$-dependent part, the other is the sum of the velocity and this explicitly $T$-dependent part. Estimate these two parts separately.
+
+The equations they have:
+
+$$ \partial_t v + (v \cdot \nabla_H) v + w \partial_z v - \Delta_H v + f_0 k \times v + \nabla_H p = 0, $$
+
+$$ \partial_z p + \textcolor{trueblue}{T} = 0, $$
+
+$$ \nabla_H \cdot v + \partial_z w = 0, $$
+
+$$ \partial_t \textcolor{trueblue}{T}  + v \cdot \nabla_H \textcolor{trueblue}{T}  + w \partial_z \textcolor{trueblue}{T}  - \partial_z ^ 2 \textcolor{trueblue}{T}  = 0. $$
+
+Now simply considering that the pressure can be expressed as the sum of a surface pressure and a $z$-dependent part, i.e. $p(x,y,z) = p_s (x,y) - \int_{-h}^z \textcolor{trueblue}{T},$ the set of equations takes the form
+
+$$ \partial_t v + (v \cdot \nabla_H) v + w \partial_z v - \Delta_H v + f_0 k \times v + \nabla_H \bigg ( p_s (x,y) - \int_{-h}^z \textcolor{trueblue}{T} \bigg) = 0, $$
+
+$$ \nabla_H \cdot v + \partial_z w = 0, $$
+
+$$ \partial_t \textcolor{trueblue}{T}  + v \cdot \nabla_H \textcolor{trueblue}{T}  + w \partial_z \textcolor{trueblue}{T}  - \partial_z ^ 2 \textcolor{trueblue}{T}  = 0. $$
+
+On the other hand, our set of equations is structurally the following:
+
+$$ \partial_t v + (v \cdot \nabla_H) v + w \partial_z v - \Delta_H v + f_0 k \times v + \nabla_H p = 0, $$
+
+$$ \partial_z p + \textcolor{ao}{ \epsilon^2 (\partial_t u^\epsilon_3 + \mathbf{u}^\epsilon \nabla u^\epsilon_3 - \Delta u^\epsilon_3) + \epsilon \beta u^\epsilon_1} = 0, $$
+
+$$ \nabla_H \cdot v + \partial_z w = 0, $$
+
+$$ \partial_t \textcolor{cadmiumorange}{C}  + v \cdot \nabla_H \textcolor{cadmiumorange}{C}  + w \partial_z \textcolor{cadmiumorange}{C}  - \partial_z ^ 2 \textcolor{cadmiumorange}{C}  = 0. $$
+
+Let's take formally the following notations.
+
+$\textcolor{ao}{T_1} :=-  \epsilon^2 (\partial_t u^\epsilon_3 + \mathbf{u}^\epsilon \nabla u^\epsilon_3 - \Delta u^\epsilon_3) + \epsilon \beta u^\epsilon_1,$ ("$T$ as what is on the other side of $\partial_z p$")
+
+and
+
+$\textcolor{cadmiumorange}{T_2}:= C$ ("$T$ as the variable in the diffusion-advection equation").
+
+Taking these notations let's see what happens formally.
+
+$$ \partial_t v + (v \cdot \nabla_H) v + w \partial_z v - \Delta_H v + f_0 k \times v + \nabla_H p = 0, $$
+
+$$ \partial_z p + \textcolor{ao}{T_1} = 0, $$
+
+$$ \nabla_H \cdot v + \partial_z w = 0, $$
+
+$$ \partial_t \textcolor{cadmiumorange}{T_2}  + v \cdot \nabla_H \textcolor{cadmiumorange}{T_2}  + w \partial_z \textcolor{cadmiumorange}{T_2}  - \partial_z ^ 2 \textcolor{cadmiumorange}{T_2}  = 0. $$
+
+Thus we arrive to
+
+$$ \partial_t v + (v \cdot \nabla_H) v + w \partial_z v - \Delta_H v + f_0 k \times v + \nabla_H \big ( p_s (x,y) - \int_{-h}^z \textcolor{ao}{T_1} \big) = 0, $$
+
+$$ \nabla_H \cdot v + \partial_z w = 0, $$
+
+$$ \partial_t \textcolor{cadmiumorange}{T_2}  + v \cdot \nabla_H \textcolor{cadmiumorange}{T_2}  + w \partial_z \textcolor{cadmiumorange}{T_2}  - \partial_z ^ 2 \textcolor{cadmiumorange}{T_2}  = 0. $$
+
+When they write, let's define $\eta, \theta, \Phi$ through $v$ and $T,$ what they mean is $\textcolor{trueblue}{T}$ as \textcolor{ao}{$T_1$}, or in other words, what is present on the opposite side of $\partial_z p$ (see the calculation in Appendix A.)
+
+So we have $\Phi = \int_{-h}^z \epsilon (\beta u_1 - \epsilon (\partial_t u_3 + \mathbf{u} \nabla u_3 - \Delta u_3)) - \frac{1}{2h} \int_{-h}^h \int_{-h}^z \epsilon (\beta u_1 - \epsilon (\partial_t u_3 + \mathbf{u} \nabla u_3 - \Delta u_3)), $ i.e.
+
+$\Phi = \int_{-h}^z  \textcolor{ao}{T_1} - \frac{1}{2h} \int_{-h}^h \int_{-h}^z \textcolor{ao}{T_1}.$
+
+The original doubled coupling being split, it leads to definitions like this, let's see where it goes. In this case we split $\mathbf{v}$ into $T_1$-dependent and $T_1$ independent parts.
+
+The idea of identifying the other side of the vertical momentum equation formally as a $\textcolor{ao}{T_1}$ term comes from the fact that all the way through until page 33 and Proposition 3.9 the expression $T$ that is present in their calculations, this $T$ is just there as "what is on the other side of $\partial_z p$ " --- the only exception for this is that they use the $\norm{T_2}_\infty \leq \norm{({T_2})_0}_\infty$ regularity coming from the advection-diffusion equation. If we have something like this for $T_1$ (just theoretically, just to see where it goes), then we can follow through all the estimates until page 33, just using $T_1$ instead of $T.$
+
+\begin{itemize}
+
+\item Following this idea until the main inequalities on page 39, we find that some of the homogeneously present $T$ expressions on the right hand side are coming as a $\textcolor{ao}{T_1}$ considering their origin, and some come as $\textcolor{cadmiumorange}{T_2}.$ For example, the $\norm{\nabla_H \textcolor{trueblue}{T}}_q$ term inside the logarithm on the right hand side has a $\textcolor{ao}{T_1}$ origin (as it comes from the estimate in Proposition 3.9). For this we would need something like
+
+$\epsilon^2 (\partial_t u^\epsilon_3 + \mathbf{u}^\epsilon \nabla u^\epsilon_3 - \Delta u^\epsilon_3) + \epsilon \beta u^\epsilon_1$ to be in $H^1,$ and having $\epsilon^2 \Delta u^\epsilon_3$ in $H^1$ means a level 3 space for the vertical velocity. In this case it is probably better if we investigate the $H^3$ regularity of the horizontal velocity $v$, option three.
+
+$\nabla_H T_1$ could be estimated with $\nabla_H \partial_z \eta,$ but we don't have a full Laplacian estimate, or a vertical partial derivative estimate for $\eta.$ Creating one would bring in the part-task of estimating the $\Phi$ part of $\eta,$ which leaves us with needing to create a bound of $\epsilon^2 \Delta u_3.$
+
+\item As pointed out before, $\textcolor{ao}{T_1}$ would need to have the $\norm{T_2}_\infty \leq \norm{({T_2})_0}_\infty$ property of $\textcolor{cadmiumorange}{T_2}.$
+
+\end{itemize}
+
+This approach would lead to need to have an $H^3$ regularity of $\epsilon u^\epsilon_3.$
+
+\item \textbf{Two.} The assumption of a smooth $p(x,y,z)$ pressure function: this is probably too general and too demanding --- it would simultaneously ask for the horizontal and vertical momentum equations to be generally smooth as well. 
+
+\item \textbf{Three.} The case of an $H^3$ horizontal velocity, which provides $\norm{\nabla_H \mathbf{v}}_\infty$. This will probably require something like $\mathbf{v}_0 \in H^2$ --- ideas for minimal requirements maybe in later parts of the Cao-Li-Titi article. For now it seems to be an option that could work.
+
+We need to estimate the term $\int_\Omega \abs{\nabla_h \mathbf{v}} \abs{\nabla_H T}^2.$ In this case it could be done as
+
+$\int_\Omega \abs{\nabla_h \mathbf{v}} \abs{\nabla_H T}^2 \leq \norm{\nabla_H \mathbf{v}}_{L^\infty} \norm{\nabla_H T}_2^2.$
+
+\end{enumerate}
+
+Additionally, the $\partial_{33} \mathbf{v}$ part seems ok, but in the end it provides $$\int_0^t \norm{\Delta_{\text{full}} \mathbf{v}}_2 \leq K(t)$$ regularity, and based on the above points we need a stronger regularity.
+
+\end{document}
