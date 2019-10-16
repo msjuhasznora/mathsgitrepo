@@ -126,10 +126,10 @@ This suggests the following idea:
 
   \item Follow the local existence result without any particular alterations (except for leaving out the $T$ function from the third equation) and verify that it is still valid.
   
-  \item As for the global existence, split $T$ from $\theta,$ and follow a sequential method instead of a simultaneous one:
+  \item As for the global existence, follow a sequential method instead of a simultaneous one:
   
   \begin{itemize}
-    \item verify the global existence for the velocity part only (the available results on the existence of the strong solutions of the Primitive Equations are for the temperature-including version)
+    \item verify the global existence for the velocity part only (the global existence of the velocity function of the PEs without a temperature function has been done in Section 3 of the Strong Convergence Justification Hydrostatic article.)
     \item using the already proven $v$ and its regularities, show a uniform estimate for the energy of $T.$
   \end{itemize}
 
@@ -175,6 +175,8 @@ I think this part works as well with very small and natural changes, leaving out
 
 \textbf{Proposition 3.1}
 
+Q: Since (1.26) states that we have a periodic domain. Why do they not simplify terms like the result of (3.5) for example?
+
 On p49, p50, until reaching (3.2), the $T$-including terms will be gone for the estimate for the velocity function. On the other hand, from (3.3) the calculations will be the same as the equation is identical. In the combined estimate on 51 we still have $\norm{T_\epsilon}_{H^2}^2,$ as it is present in the estimate of the temperature function.
 
 The changes in this Section are the "A"-signed absent $T$-including terms.
@@ -188,6 +190,197 @@ The changes in this Section are the "A"-signed absent $T$-including terms.
 \end{itemize}
 
 \section{Step 3. Global existence}
+
+The global existence of the velocity function solutions of the "basic" Primitive Equations has been shown (for "nice" boundary conditions) for example in the Strong Convergence Justification article, section 3.
+Since for the case of the downwind-matching coordinate system the velocity equations are unchanged, the continuation of the unique local solution into a global one is given.
+
+The continuation of the $C$ local solution into a global one can be done using the already given boundedness properties of $v.$
+
+Since we have an $H^3$ initial data for $v_0,$ we have $L^\infty H^3$ and $L^2 H^4$ regularities for $v.$
+
+For the $C$ function we can use the following estimates.
+
+\subsection{$\norm{\Delta C}_2 + \norm{\nabla_H C_z}_2$ estimates}
+
+We can follow the estimate on p17 in the second article as we have the same equation formally to start with. We can use their estimates until they reach the point where they start using $\theta, \eta,$ and $\zeta.$
+
+Let's take the following result from p18:
+
+\begin{equation}
+  \begin{split}
+    & \frac{1}{2} \frac{\norm{\Delta_H C}_2^2 + \norm{\nabla_H C_z}_2^2}{\diff t} + \frac{1}{R_3} (\norm{\Delta_H C_z}_2^2 + \norm{\nabla_H C_{zz}} ) \\
+    & \leq \text{the sum of the terms below}
+  \end{split}
+\end{equation}
+
+and from this point we bring it to a closure in a way that matches our set of equations.
+
+We estimate the terms on the right-hand side one by one.
+
+\begin{enumerate}
+
+\item We have
+
+\begin{equation}
+  \begin{split}
+    & \int_\Omega \abs{\nabla_H v} \vert \nabla_H^2 C \vert \abs{\Delta_H C} \\
+    & \leq \norm{\nabla_H v}_{\infty} \norm{\Delta_H C}_2^2 \leq \norm{v}_{H^3} \norm{\Delta_H C}_2^2.
+  \end{split}
+\end{equation}
+
+\item Using (45) in the second article, we have
+
+\begin{equation}
+  \begin{split}
+    & \int_\Omega \abs{\Delta_H v} \abs{\nabla_H C} \abs{\Delta_H C} \\
+    & \leq \int_\Omega \bigg ( \int_{-h}^z \abs{\Delta_H \partial_z v} \diff \xi \bigg ) \abs{\nabla_H C} \abs{\Delta_H C} \\
+    & \leq \int_M \bigg ( \int_{-h}^0 \abs{\Delta_H \partial_z v} \diff \xi \bigg ) \bigg ( \int_{-h}^0 \abs{\nabla_H C} \abs{\Delta_H C} \diff \xi \bigg ) \\
+    & \leq \norm{\Delta_H \partial_z v}_2^{1/2} \norm{\nabla_H \Delta_H \partial_z v}_2^{1/2} \norm{C}_\infty^{1/2} \norm{\nabla_H \nabla_H C}_2^{1/2} \norm{\Delta_H C}_2 + \norm{\Delta_H \partial_z v}_2 \norm{C}_2 \norm{\Delta_H C}_2 \\
+    & \leq \norm{v}_{H^3}^{1/2} \norm{\nabla_H v}_{H^3}^{1/2} \norm{C}_\infty^{1/2} \norm{\Delta_H C}_2^{3/2} + \norm{v}_{H^3} \norm{C}_2 \norm{\Delta_H C}_2 \\
+    & \leq \norm{v}_{H^3}^2 \norm{\nabla_H v}_{H^3}^2 \norm{C}_\infty^2 + \norm{\Delta_H C}_2^2 + \norm{v}_{H^3}^2 \norm{C}_2^2 + \norm{\Delta_H C}_2^2 \\
+    & \leq \norm{v}_{H^3}^2 \norm{\nabla_H v}_{H^3}^2 \norm{C}_\infty^2 + (1 + \norm{v}_{H^3}^2) \norm{\Delta_H C}_2^2.
+  \end{split}
+\end{equation}
+
+For this, 2 things. One, the estimate and the way they apply Young. \todo{HOW did they achieve their estimate of correct exponents but not multiplying each other?} Two, in the Appendix of the "Strong Solutions to the 3D Primitive Equations", we have Proposition 5.3, which gives 
+
+$$ \int_0^t s^2 (\norm{\eta}_{H^3}^2 + \norm{\theta}_{H^3}^2) \diff s \leq K_3(t),$$
+
+where $K_3(t)$ is a bounded increasing function on $(0, t_0),$ $0< t_0 < \infty.$
+
+I think we could apply this using a $T-$ free definition of $\theta, \eta.$
+
+Because we have, on the other hand, (69) from the second article:
+
+$$ \norm{C(t)}_\infty \leq K_2 = 1 + \norm{C_0}_\infty + \norm{S}_\infty t. $$
+
+\item
+
+\begin{equation}
+  \begin{split}
+    & \int_\Omega \overline{\abs{\Delta_H (\nabla_H \cdot v)}} \abs{\Delta_H C} \\
+    & = \int_\Omega \bigg ( \int_{-h}^0 \abs{\Delta_H (\nabla_H \cdot v)} \bigg) \abs{\Delta_H C} \\
+    & \leq \int_M \bigg ( \int_{-h}^0 \abs{\Delta_H (\nabla_H \cdot v)} \bigg) \bigg ( \int_{-h}^0 \abs{\Delta_H C} \bigg) \\
+    & \leq \bigg ( \int_M \bigg ( \int_{-h}^0 \abs{\Delta_H (\nabla_H \cdot v)} \bigg)^2 \bigg)^{1/2} \bigg ( \int_M \bigg ( \int_{-h}^0 \abs{\Delta_H C} \bigg)^2 \bigg)^{1/2} \\
+    & \leq \bigg ( \int_M \bigg ( \int_{-h}^0 \abs{\Delta_H (\nabla_H \cdot v)}^2 \bigg)^{2*\frac{1}{2}} \bigg)^{1/2} \bigg ( \int_M \bigg ( \int_{-h}^0 \abs{\Delta_H C}^2 \bigg)^{2*\frac{1}{2}} \bigg)^{1/2} \\
+    & = \norm{\Delta_H (\nabla_H \cdot v)}_2 \norm{\Delta_H C} \leq \norm{v}_{H^3} \norm{\Delta_H C}.
+  \end{split}
+\end{equation}
+
+\item
+
+\begin{equation}
+  \begin{split}
+    & \int_\Omega \vert \nabla_H^2 (\nabla_H \cdot v) \vert \abs{C} \abs{\Delta_H C} \\
+    & \leq \norm{C}_\infty \| \nabla_H^2 (\nabla_H \cdot v) \|_2 \norm{\Delta_H C}_2 \leq \norm{C}_\infty \norm{v}_{H^3} \norm{\Delta_H C}_2 \\
+    & \leq \norm{C}_\infty^2 \norm{v}_{H^3}^2 + \norm{\Delta_H C}_2^2.
+  \end{split}
+\end{equation}
+
+\item
+
+\begin{equation}
+  \begin{split}
+    & \int_\Omega \vert \nabla_H (\nabla_H \cdot v) \vert \abs{\nabla_H C} \abs{\Delta_H C} \\
+    & = \int_\Omega \abs{ \int_{-h}^z \nabla_H (\nabla_H \cdot \partial_z v) \diff \xi} \abs{\nabla_H C} \abs{\Delta_H C} \\
+    & \leq \int_\Omega \bigg ( \int_{-h}^0 \vert \nabla_H (\nabla_H \cdot \partial_z v)\vert \diff \xi \bigg )  \abs{\nabla_H C} \abs{\Delta_H C} \\
+    & \leq \int_M \int_{-h}^0 \vert \nabla_H (\nabla_H \cdot \partial_z v)\vert \int_{-h}^0 \abs{\nabla_H C} \abs{\Delta_H C} \\
+    & \leq \norm{\nabla_H (\nabla_H \cdot \partial_z v)}_2^{1/2} \| \nabla_H^2 (\nabla_H \cdot \partial_z v) \| _2^{1/2} \norm{C}_\infty^{1/2} \| \nabla_H^2 C \| _2^{1/2} \norm{\Delta_H C}_2 \\
+    & + \norm{\nabla_H (\nabla_H \cdot \partial_z v)}_2 \norm{C}_2 \norm{\Delta_H C}_2 \\
+    & \leq \norm{\nabla_H (\nabla_H \cdot \partial_z v)}_2^{1/2} \| \nabla_H^2 (\nabla_H \cdot \partial_z v) \| _2^{1/2} \norm{C}_\infty^{1/2} \| \nabla_H^2 C \| _2^{3/2} + \norm{\nabla_H (\nabla_H \cdot \partial_z v)}_2 \norm{C}_2 \norm{\Delta_H C}_2 \\
+    & \leq \norm{v}_{H^3}^{1/2} \norm{\nabla_H v}_{H^3}^{1/2} \norm{C}_\infty^{1/2} \| \nabla_H^2 C \| _2^{3/2} +  \norm{v}_{H^3} \norm{C}_2 \norm{\Delta_H C}_2 \\
+    & \leq \norm{v}_{H^3}^2 \norm{\nabla_H v}_{H^3}^2 \norm{C}_\infty^2 + \| \nabla_H^2 C \| _2^2 +  \norm{v}_{H^3}^2 \norm{C}_2^2 + \norm{\Delta_H C}_2^2 \\
+    & \leq \norm{v}_{H^3}^2 \norm{\nabla_H v}_{H^3}^2 \norm{C}_\infty^2 + (1 + \norm{v}_{H^3}^2) \norm{\Delta C}_2^2.
+  \end{split}
+\end{equation}
+
+\item
+
+\begin{equation}
+  \begin{split}
+    & \int_\Omega \bigg ( \int_{-h}^0 \abs{\Delta_H (\nabla_H \cdot v)} \diff z \bigg ) \abs{C} \abs{\Delta_H C_z} \\
+    & \leq \norm{C}_\infty \norm{\Delta_H (\nabla_H \cdot v)}_2 \norm{\Delta_H C_z}_2 \\
+    & \leq \norm{C}_\infty^2 \norm{\Delta_H (\nabla_H \cdot v)}_2^2 + c(\text{LHS}) \norm{\Delta_H C_z}_2^2.
+  \end{split}
+\end{equation}  
+
+\item
+
+Using (45) we have
+
+\begin{equation}
+  \begin{split}
+    & \int_\Omega \bigg ( \int_{-h}^0 \abs{\nabla_H (\nabla_H \cdot v)} \diff z \bigg ) \abs{\nabla_H C} \abs{\Delta_H C_z} \\
+    & \leq \int_M \bigg ( \int_{-h}^0 \abs{\nabla_H (\nabla_H \cdot v)} \diff z \bigg ) \bigg ( \int_{-h}^0 \abs{\nabla_H C} \abs{\Delta_H C_z} \bigg ) \\
+    & \leq \norm{\nabla_H (\nabla_H \cdot v)}_2^{1/2} \norm{\nabla_H \nabla_H (\nabla_H \cdot v)}_2^{1/2} \norm{C}_\infty^{1/2} \norm{\nabla_H \nabla_H C}_2^{1/2} \norm{\Delta_H C_z}_2 \\
+    & + \norm{\nabla_H (\nabla_H \cdot v)}_2 \norm{C}_2 \norm{\Delta_H C_z}_2 \\
+    & \leq \norm{v}_{H^2}^{1/2} \norm{v}_{H^3}^{1/2} \norm{C}_\infty^{1/2} \norm{\Delta_H C}_2^{1/2} \norm{\Delta_H C_z}_2 \\
+    & + \norm{v}_{H^2} \norm{C}_2 \norm{\Delta_H C_z}_2 \\
+    & \leq \norm{v}_{H^2} \norm{v}_{H^3} \norm{C}_\infty \norm{\Delta_H C}_2 + c(\text{LHS}) \norm{\Delta_H C_z}_2^2 \\
+    & + \norm{v}_{H^2}^2 \norm{C}_2^2 + c(\text{LHS}) \norm{\Delta_H C_z}_2^2 \\
+    & \leq \norm{v}_{H^2}^2 \norm{v}_{H^3}^2 \norm{C}_\infty^2 + \norm{\Delta_H C}_2^2 + \norm{v}_{H^2}^2 \norm{\Delta C}_2^2.
+  \end{split}
+\end{equation}
+
+\item
+
+\begin{equation}
+  \begin{split}
+    & \int_\Omega \abs{\nabla_H v}\abs{\nabla_H C_z} \abs{\nabla_H C_z} \\
+    & \leq
+  \end{split}
+\end{equation}
+
+\item
+
+\begin{equation}
+  \begin{split}
+    & \int_\Omega \abs{\nabla_H (\nabla_H \cdot v)}\abs{C_z} \abs{\nabla_H C_z} \\
+    & \leq
+  \end{split}
+\end{equation}
+
+\item
+
+\begin{equation}
+  \begin{split}
+    & \int_\Omega \abs{\nabla_H \partial_z v}\abs{\nabla_H C} \abs{\nabla_H C_z} \\
+    & \leq
+  \end{split}
+\end{equation}
+
+\item
+
+\begin{equation}
+  \begin{split}
+    & \int_\Omega \abs{\partial_z v}\abs{\nabla_H^2 C} \abs{\nabla_H C_z} \\
+    & \leq
+  \end{split}
+\end{equation}
+
+\item
+
+\begin{equation}
+  \begin{split}
+    & \int_\Omega \abs{\nabla_H (\nabla_H \cdot v)} \abs{\nabla_H C_z} \\
+    & \leq
+  \end{split}
+\end{equation}
+
+\item
+
+\begin{equation}
+  \begin{split}
+    & \int_\Omega \abs{\nabla_H (\nabla_H \cdot \partial_z v)} \abs{C} \abs{\nabla_H C_z} \\
+    & \leq
+  \end{split}
+\end{equation}
+
+\subsection{Estimate for $\sup \norm{\partial_z^2 T}_2^2$ and $\int_0^{T*} \norm{\partial_z^3 T}_2^2$}
+
+By using the results from the previous subsection and the calculations on p61, we can obtain the required estimates.
+
+\end{enumerate}
 
 \section{Questions}
 
