@@ -1,0 +1,133 @@
+\documentclass[11pt]{article}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{commath}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{float} 
+\usepackage{array}
+\usepackage{outlines}
+\usepackage{setspace}
+\usepackage[colorinlistoftodos]{todonotes}
+\definecolor{green}{rgb}{0.4, 0.69, 0.2}
+\definecolor{lavender(floral)}{rgb}{0.71, 0.49, 0.86}
+\definecolor{asparagus}{rgb}{0.53, 0.66, 0.42}
+\definecolor{blue}{rgb}{0.0, 0.53, 0.74}
+\setlist[enumerate,1]{label=\roman*)}
+\setlist[enumerate,2]{label=\alph*)}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+\newtheorem{prop}{Proposition}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,trees, calc}
+
+% \usepackage[a4paper, left=2cm, right=2cm]{geometry} % A4 paper size and thin margins
+
+\usepackage{xcolor} % Required for specifying custom colours
+\definecolor{grey}{rgb}{0.9,0.9,0.9} % Colour of the box surrounding the title
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\begin{titlepage} % Suppresses displaying the page number on the title page and the subsequent page counts as page 1
+	
+	%------------------------------------------------
+	%	Grey title box
+	%------------------------------------------------
+	
+	\colorbox{grey}{
+		\parbox[t]{0.93\textwidth}{ % Outer full width box
+			\parbox[t]{0.91\textwidth}{ % Inner box for inner right text margin
+				\raggedleft % Right align the text
+				\fontsize{50pt}{80pt}\selectfont % Title font size, the first argument is the font size and the second is the line spacing, adjust depending on title length
+				\vspace{0.7cm} % Space between the start of the title and the top of the grey box
+				
+				{\fontfamily{qhv}\selectfont PhD final report} \\
+
+				\vspace{0.7cm} % Space between the end of the title and the bottom of the grey box
+			}
+		}
+	}
+	
+	\vfill % Space between the title box and author information
+	
+	%------------------------------------------------
+	%	Author name and information
+	%------------------------------------------------
+	
+	\parbox[t]{0.93\textwidth}{ % Box to inset this section slightly
+		\raggedleft % Right align the text
+		\large % Increase the font size
+		{\Large N\'{o}ra Juh\'{a}sz}\\[4pt] % Extra space after name
+		DISIM\\
+		University of L'Aquila\\[4pt] % Extra space before URL
+		\texttt{\Large Supervisor: Prof. D. Donatelli}\\
+		
+		\hfill\rule{0.2\linewidth}{1pt}% Horizontal line, first argument width, second thickness
+	}
+	
+\end{titlepage}
+
+\newpage
+\tableofcontents
+\newpage
+
+\section{Research activity: Mathematical modelling of the polluted atmosphere}
+
+Mathematical modelling of the polluted atmosphere
+
+\subsection{Weak convergence in geophysical coordinates}
+
+\subsubsection{Theoretical justification of the hydrostatic model}
+
+Theoretical justification of the hydrostatic model
+
+\subsubsection{Visualisation using the finite element method}
+
+Visualisation using the finite element method
+
+\subsection{Weak convergence in downwind-matching coordinates}
+
+Weak convergence in downwind-matching coordinates
+
+\subsection{Strong convergence in downwind-matching coordinates}
+
+Strong convergence
+
+\newpage
+
+\nocite{*}
+\bibliographystyle{abbrv}
+\bibliography{bibliography-report}
+
+\newpage
+
+\section{Attended courses}
+
+\newpage
+
+\section{Conferences and summer schools}
+
+\newpage
+
+\section{Contributed talks and poster presentations}
+
+\newpage
+
+\section{Participation to research projects}
+
+\newpage
+
+\section{Publications and preprints}
+
+\end{document}
