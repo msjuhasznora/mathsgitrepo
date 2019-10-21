@@ -196,7 +196,7 @@ Since we have an $H^3$ initial data for $v_0,$ we have $L^\infty H^3$ and $L^2 H
 
 For the $c$ function we can use the following estimates.
 
-\subsection{$\norm{\Delta c}_2$ and $\norm{\Delta_H \nabla_d c}_2$ estimates}
+\subsection{$\norm{\Delta c}_2$ and $\norm{\Delta \nabla_d c}_2$ estimates}
 
 Let's take an arbitrary positive finite $T$ time.
 
@@ -309,7 +309,7 @@ Merging the estimates \textit{i), ii), iii)/a), iii)/b), iii)/c)}, we arrive to
   \begin{split}
     & \frac{1}{2} \frac{\diff}{\diff t} \norm{\Delta c}_2^2 + K \norm{\Delta \nabla_d c}_2^2 \\
     & \leq  C (1 + \norm{v}_{H^3} + \norm{v}_{H^3}^2 + \norm{v}_{H^4} + \norm{c}_{L^\infty})\norm{\Delta c}_2^2 \\
-    & + \norm{\Delta s}_2^2 + \norm{c}_{L^\infty} \norm{v}_{H^3}^2 + \norm{c}_{L^\infty}^2 \norm{v}_{H^3}^2.
+    & + \norm{\Delta s}_2^2 + \norm{c}_{L^\infty} \norm{v}_{H^3}^2 + \norm{c}_{L^\infty}^2 \norm{v}_{H^3}^2 + \norm{v}_{H^3}.
   \end{split}
 \end{equation}
 
@@ -332,8 +332,8 @@ Applying this, we have
 
 \begin{equation}
   \begin{split}
-    & \int_0^T \norm{\Delta s}_2^2 + \norm{c}_{L^\infty} \norm{v}_{H^3}^2 + \norm{c}_{L^\infty}^2 \norm{v}_{H^3}^2 \diff t\\
-    & \leq C (\norm{s}_{L^2 H^2} + \norm{v}_{L^\infty_t H^3_x}^2 T^2 + \norm{v}_{L^\infty_t H^3_x}^2 T^3) := G_2.
+    & \int_0^T \norm{\Delta s}_2^2 + \norm{c}_{L^\infty} \norm{v}_{H^3}^2 + \norm{c}_{L^\infty}^2 \norm{v}_{H^3}^2 + \norm{v}_{H^3} \diff t\\
+    & \leq C (\norm{s}_{L^2 H^2} + \norm{v}_{L^\infty_t H^3_x}^2 T^2 + \norm{v}_{L^\infty_t H^3_x}^2 T^3 + \norm{v}_{L^\infty_t H^3_x} T) := G_2.
   \end{split}
 \end{equation}
 
@@ -341,6 +341,45 @@ Finally we have
 
 $$\frac{1}{2} \frac{\diff}{\diff t} \norm{\Delta c}_2^2 + K \norm{\Delta \nabla_d c}_2^2 \leq C (\norm{c_0}_{H^2} + G_2) \exp{G_1}. $$
 
+\subsection{$L^2 H^1$ estimate for $\partial_t c$}
+
+Analogous to the calculations on p52. We have
+
+$$ \partial_t c + L_d c + v \nabla_H c - \bigg ( \int_{-h}^z \nabla_H \diff \xi \bigg ) \bigg ( \partial_z c + \frac{1}{h}\bigg) = s,$$
+
+and thus
+
+$$\int_0^t \norm{ \partial_t c}_{H^1}^2 \diff \tau \leq C \int_0^t \bigg ( \norm{L_d c}_{H^1}^2 + \norm{v \nabla_H c}_{H^1}^2 + \norm{\bigg ( \int_{-h}^z \nabla_H \diff \xi \bigg ) \bigg ( \partial_z c + \frac{1}{h}\bigg)}_{H^1}^2 + \norm{s}_{H^1}^2 \bigg ) \diff \tau.$$
+
+This yields
+
+\begin{equation}
+  \begin{split}
+    & \int_0^t \norm{ \partial_t c}_{H^1}^2 \diff \tau \leq \\
+    & C \int_0^t \bigg ( \norm{\nabla_d c}_{H^2}^2 + \norm{v}_{W^{1,\infty}}^2 (\norm{\nabla_H c}_{H^1}^2 + 1) + \norm{s}_{H^2}^2 \bigg ) \diff \tau \\
+    & + C \int_0^t \norm{\bigg ( \int_{-h}^z \nabla_H v \diff \xi \bigg ) \bigg ( \partial_z c + \frac{1}{h}\bigg)}_{H^1}^2 \diff \tau.
+  \end{split}
+\end{equation}
+
+The first three terms are bounded, we estimate the fourth term by
+
+\begin{equation}
+  \begin{split}
+    & \norm{\bigg ( \int_{-h}^z \nabla_H v \diff \xi \bigg ) \bigg ( \partial_z c + \frac{1}{h}\bigg)}_{H^1}^2 \\
+    & \leq \norm{\bigg ( \nabla \int_{-h}^z \nabla_H v \diff \xi \bigg ) \bigg ( \partial_z c + \frac{1}{h}\bigg)}_{L_2}^2 + \norm{\bigg ( \int_{-h}^z \nabla_H v \diff \xi \bigg ) \nabla c_z }_{L^2}^2 \\
+    & \leq (\norm{\partial_z c}_{L^\infty}^2 +1) \norm{v}_{H^2}^2 + C \norm{v}_{W^{1, \infty}}^2 \norm{\nabla \partial_z c}_{L^2}^2.
+  \end{split}
+\end{equation}
+
+Eventually
+
+\begin{equation}
+  \begin{split}
+    & \int_0^t \norm{ \partial_t c}_{H^1}^2 \diff \tau \leq \\
+    & C \norm{\nabla_d c}_{L^2_t H^2_x} + \norm{v}_{L^\infty_t H^3_x}^2 t + \norm{v}_{L^\infty_t H^3_x}^2 \norm{c}_{L^2_t H^1_x} + \norm{s}_{L^2_t H^2_x}  \\
+    & + C \norm{v}_{L^\infty_t H^3_x}^2 \norm{\partial_z c}_{L^2_t H^2_x}  + C \norm{v}_{L^\infty_t H^3_x}^2 \norm{c}_{L^2_t H^2_x}.
+  \end{split}
+\end{equation}
 \section{Questions}
 
 \begin{itemize}
