@@ -28,22 +28,12 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows,shapes,trees, calc}
 
-% \usepackage[a4paper, left=2cm, right=2cm]{geometry} % A4 paper size and thin margins
-
 \usepackage{xcolor} % Required for specifying custom colours
 \definecolor{grey}{rgb}{0.9,0.9,0.9} % Colour of the box surrounding the title
 
 \begin{document}
 
-%----------------------------------------------------------------------------------------
-%	TITLE PAGE
-%----------------------------------------------------------------------------------------
-
-\begin{titlepage} % Suppresses displaying the page number on the title page and the subsequent page counts as page 1
-	
-	%------------------------------------------------
-	%	Grey title box
-	%------------------------------------------------
+\begin{titlepage}
 	
 	\colorbox{grey}{
 		\parbox[t]{0.93\textwidth}{ % Outer full width box
@@ -60,10 +50,6 @@
 	}
 	
 	\vfill % Space between the title box and author information
-	
-	%------------------------------------------------
-	%	Author name and information
-	%------------------------------------------------
 	
 	\parbox[t]{0.93\textwidth}{ % Box to inset this section slightly
 		\raggedleft % Right align the text
@@ -92,7 +78,7 @@ Mathematical modelling of the polluted atmosphere
 
 Theoretical justification of the hydrostatic model
 
-\subsubsection{Visualisation using the finite element method}
+\subsubsection{Visualisation using \textbf{FEniCS}}
 
 Visualisation using the finite element method
 
