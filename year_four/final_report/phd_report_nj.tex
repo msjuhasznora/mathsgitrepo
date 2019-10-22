@@ -13,9 +13,11 @@
 \usepackage{setspace}
 \usepackage[colorinlistoftodos]{todonotes}
 \definecolor{green}{rgb}{0.4, 0.69, 0.2}
-\definecolor{lavender(floral)}{rgb}{0.71, 0.49, 0.86}
 \definecolor{asparagus}{rgb}{0.53, 0.66, 0.42}
 \definecolor{blue}{rgb}{0.0, 0.53, 0.74}
+\definecolor{terracotta}{HTML}{e2725b}
+\definecolor{mocassin}{HTML}{FFE4B5}
+\definecolor{coral}{HTML}{FFAA80}
 \setlist[enumerate,1]{label=\roman*)}
 \setlist[enumerate,2]{label=\alph*)}
 \newtheorem{theorem}{Theorem}
@@ -27,41 +29,37 @@
 \newcommand*\diff{\mathop{}\!\mathrm{d}}
 \usepackage{tikz}
 \usetikzlibrary{arrows,shapes,trees, calc}
+\usepackage{graphicx}
+\usepackage{subfig}
 
-\usepackage{xcolor} % Required for specifying custom colours
-\definecolor{grey}{rgb}{0.9,0.9,0.9} % Colour of the box surrounding the title
+\usepackage{xcolor}
+\definecolor{grey}{rgb}{0.9,0.9,0.9}
 
 \begin{document}
 
 \begin{titlepage}
-	
 	\colorbox{grey}{
-		\parbox[t]{0.93\textwidth}{ % Outer full width box
-			\parbox[t]{0.91\textwidth}{ % Inner box for inner right text margin
-				\raggedleft % Right align the text
-				\fontsize{50pt}{80pt}\selectfont % Title font size, the first argument is the font size and the second is the line spacing, adjust depending on title length
-				\vspace{0.7cm} % Space between the start of the title and the top of the grey box
-				
+		\parbox[t]{0.93\textwidth}{
+			\parbox[t]{0.91\textwidth}{
+				\raggedleft
+				\fontsize{50pt}{80pt}\selectfont
+				\vspace{0.7cm}
 				{\fontfamily{qhv}\selectfont PhD final report} \\
-
-				\vspace{0.7cm} % Space between the end of the title and the bottom of the grey box
+				\vspace{0.7cm}
 			}
 		}
 	}
-	
-	\vfill % Space between the title box and author information
-	
-	\parbox[t]{0.93\textwidth}{ % Box to inset this section slightly
-		\raggedleft % Right align the text
-		\large % Increase the font size
-		{\Large N\'{o}ra Juh\'{a}sz}\\[4pt] % Extra space after name
+	\vfill
+	\parbox[t]{0.93\textwidth}{
+		\raggedleft
+		\large
+		{\Large N\'{o}ra Juh\'{a}sz}\\[4pt]
 		DISIM\\
-		University of L'Aquila\\[4pt] % Extra space before URL
+		University of L'Aquila\\[4pt]
 		\texttt{\Large Supervisor: Prof. D. Donatelli}\\
 		
-		\hfill\rule{0.2\linewidth}{1pt}% Horizontal line, first argument width, second thickness
+		\hfill\rule{0.2\linewidth}{1pt}
 	}
-	
 \end{titlepage}
 
 \newpage
@@ -80,7 +78,217 @@ Theoretical justification of the hydrostatic model
 
 \subsubsection{Visualisation using \textbf{FEniCS}}
 
-Visualisation using the finite element method
+We visualise the weak convergence result with \textbf{FEniCS} --- a software with the finite element method at its core.
+
+The major challenge in numerically approaching the tendency of the solutions as $\epsilon$ goes to zero is the disappearing dependence of the scheme on certain terms. Picard iterations and the Chorin method for example are widely used methods in the field of the (complete) Navier-Stokes equations, but once we introduce an $\epsilon$ into the equations, these schemes "collapse" rather quickly as this parameter becomes zero.
+
+In the \textbf{Chorin method} the $u \nabla u_1 v_1$ nonlinear term is replaced by
+
+\texttt{inner(u\_prev, grad(u\_prev1)) * v1 * dx},
+
+where essentially we don't have any unknowns at all anymore. The first step of the Chorin method calculates a tentative velocity. The \texttt{u1, u2, u3} functions are the unknowns, while \texttt{u\_prev} is calculated from the previous time step. It is easy to see in the following pseudo code that the scheme depends on \texttt{\textcolor{terracotta}{u3}} only through $\epsilon^2.$
+
+\texttt{
+\\
+F = (1/dt)((u\_H - u\_prev\_H)*v\_H + eps*eps*(\textcolor{terracotta}{u3} - u\_prev3)*v3 ) + \\
+inner(u\_prev, grad(u\_prev\_H)) * v\_H\\
+ + eps*eps*inner(u\_prev, grad(u\_prev3)) * v3 + \\
+ inner(grad(u\_H),grad(v\_H)) + eps*eps*inner(grad(\textcolor{terracotta}{u3}),grad(v3)) \\
+}
+
+Similarly, the linearisation technique of \textbf{Picard iterations} also lead to a problematic scheme:
+
+\texttt{
+\\
+a = inner(\textcolor{blue}{u}, grad(u\_k\_H)) * v\_H + eps*eps*inner(u, grad(\textcolor{green}{u\_k3})) * v3 + \\
+inner(grad(u\_H),grad(v\_H)) + eps*eps*inner(grad(u3),grad(v3)),\\
+}
+
+where the dependence on \texttt{u\_k3} decreases with $\epsilon^2.$ This suggests in our case to avoid linearisation techniques and conserve the nonlinear nature of the problem, which can improve the dependence of the scheme on its variables.
+
+We consider a simplified model that still contains this fundamental phenomena (the decreasing dependence as $\epsilon \to 0$) in space. Thus, we consider
+
+\begin{enumerate}
+  \item a stationary case,
+  \item without the Coriolis term,
+  \item we make the two horizontal dimensions fall into one. It is easy to see that in a theoretical point of view, and also in terms of proving regularities, the two horizontal dimensions are not different. The problem consists of having $n-1$ dimensions with $\mathcal{O}(1)$ scale, and $1$ dimension with $\mathcal{O}(\epsilon)$ scale. Instead of the $n-1$ dimensions we can use 1 for quicker computations and easier visualisation, and
+  \item in order to obtain better results, we take the same equations, but we use them as equations describing water flow. The convergence result is the same, the boundary conditions are slightly different, and using wind traction over the water surface helps to highlight the point of our result.
+\end{enumerate}
+
+Taking these ideas into account, we will use the Newton solver in the following way:
+
+\texttt{
+\\
+F = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx + eps*eps*inner(u, grad(u3)) * v3 * dx\\
++ eps*eps*inner(grad(u3),grad(v3)) * dx - p * div(v) * dx + q * div(u) * dx - inner(theta, v) * ds(1),\\
+}
+
+and we apply
+
+\texttt{
+\\
+problem = NonlinearVariationalProblem(F, up\_, bcu, J)\\
+solver  = NonlinearVariationalSolver(problem), \\
+}
+
+to the \texttt{F} scheme. Note that here, instead of $\texttt{u\_H}$ we denote the horizontal velocity by $\texttt{u1}$ to express that we use the dimension reduction idea for the horizontal velocity during the computations.
+
+Similarly, for the hydrostatic model we use an analogous scheme where the $\epsilon$- including terms are missing.
+
+The most important difference is that while for the anisotropic model we use a finite element space of degree $2$ for the vertical velocity, for the case of the hydrostatic scheme we use a degree $1$ space for the same variable. This phenomena is yet to be investigated further, but we have observed that the hydrostatic scheme, which contains significantly less information about the vertical velocity, does not converge for the case of a degree $2$ vertical space (unless the hydrostatic Newton solver is initialised with the anisotropic solution obtained for very small $\epsilon$, with slightly less strict error tolerance values).
+
+To summarise, we have been able to visualise the convergence of the weak solutions for the following cases:
+
+\begin{itemize}
+  \item Anisotropic scheme with degree $2$ horizontal velocity space and degree $2$ vertical velocity space: works until $\epsilon = \exp{-7},$ and visibly approaches the solution of the hydrostatic scheme obtained for degree $2$ horizontal space and degree $1$ vertical space.
+  \item The hydrostatic scheme with (2,2) space degrees initialised with the anisotropic solution obtained with the $\exp{-7} $ $\epsilon$ value as an initial guess: converges immediately. In this case the Newton solver verifies in a single step that the initial guess, i.e. the solution for the anisotropic model for a very small $\epsilon$ value is in fact a solution for the hydrostatic model.
+  \item Remark: The anisotropic scheme with degrees (2,1) is theoretically unadvisable to use as the so called lim-sup stability condition is not satisfied.
+\end{itemize}
+
+In the following we include some of the visual results obtained with \textbf{FEniCS}.
+
+\newpage
+
+\subsubsection{The tendency of the pressure solution}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/pressure_anis_1_0000000}
+  \captionof{figure}{$\epsilon = 1.0000000.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/pressure_anis_0_5000000}
+  \captionof{figure}{$\epsilon = 0.5000000.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/pressure_anis_0_0625000}
+  \captionof{figure}{$\epsilon = 0.0625000.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/pressure_anis_0_0312500}
+  \captionof{figure}{$\epsilon = 0.0312500.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/pressure_anis_0_0156250}
+  \captionof{figure}{$\epsilon = 0.0156250.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/pressure_hydr}
+  \captionof{figure}{Hydrostatic model.}
+  \label{fig:test2}
+\end{minipage}
+\end{figure}
+
+\newpage
+
+\subsubsection{The tendency of the horizontal velocity solution}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=3in]{results2D_H_V/images/velocity_h_anis_1_0000000}
+  \caption{$\epsilon = 1.0000000.$}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=3in]{results2D_H_V/images/velocity_h_anis_0_0078125}
+  \caption{$\epsilon = 0.0078125.$}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=3in]{results2D_H_V/images/velocity_h_hydr}
+  \caption{Hydrostatic model.}
+\end{figure}
+
+\newpage
+
+\subsubsection{The tendency of the vertical velocity solution}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_v_anis_1_0000000}
+  \captionof{figure}{$\epsilon = 1.0000000.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_v_anis_0_5000000}
+  \captionof{figure}{$\epsilon = 0.5000000.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_v_anis_0_2500000}
+  \captionof{figure}{$\epsilon = 0.2500000.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_v_anis_0_1250000}
+  \captionof{figure}{$\epsilon = 0.1250000.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_v_anis_0_0625000}
+  \captionof{figure}{$\epsilon = 0.0625000.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_v_anis_0_0312500}
+  \captionof{figure}{$\epsilon = 0.0312500.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_v_anis_0_015625}
+  \captionof{figure}{$\epsilon = 0.0156250.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_v_anis_0_0078125}
+  \captionof{figure}{$\epsilon = 0.0078125.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_v_anis_1_19e-07}
+  \captionof{figure}{$\epsilon = 1.19 \exp{(-7)}.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_v_hydr}
+  \captionof{figure}{Hydrostatic model.}
+\end{minipage}
+\end{figure}
 
 \subsection{Weak convergence in downwind-matching coordinates}
 
