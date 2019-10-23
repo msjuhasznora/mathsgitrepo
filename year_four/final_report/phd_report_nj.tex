@@ -69,22 +69,19 @@
 
 \section{Research activity: Mathematical modelling of the polluted atmosphere}
 
-The key aspects of capturing the dynamics of either water flow in oceanography or atmospheric changes in meteorology are the following two fundamental concepts that underlie many modern asymptotic models aiming to describe them. The first one is that both above mentioned phenomena can be viewed as a fluid dynamics process, and as such, they are best described by the Navier-Stokes equations. The second is the notion of the so-called shallow domains. This latter is a widely used concept in the field of large-scale geophysical fluids and its main idea is to take advantage of their approximately flat structure when modelling them with the Navier-Stokes equations, leading to the classic hydrostatic approximation of the Navier-Stokes equations. Essentially, the basic principle is to exploit the fact that when we are working on domains such as the ocean or the atmosphere, we are working on an "almost" two-dimensional set, and thus we can significantly simplify the model in the vertical direction, or even eliminate the third dimension and arrive to a limit model in two dimensions.
-A common practice for example is to depth-integrate the Navier-Stokes equations for big lakes and seas and obtain the shallow water equations.
-Our approach is different, we keep the vertical velocity and will arrive to a three dimensional limit model.
-We use the
+\subsection{The scope of this project in a nutshell}
+
+The key aspects of capturing the dynamics of either water flow in oceanography or atmospheric changes in meteorology are the following two fundamental concepts that underlie many modern asymptotic models aiming to describe them. The first one is that both above mentioned phenomena can be viewed as a fluid dynamics process, and as such, they are best described by the Navier-Stokes equations. The second is the notion of the so-called shallow domains. This latter is a widely used concept in the field of large-scale geophysical fluids and its main idea is to take advantage of their approximately flat structure when modelling them with the Navier-Stokes equations, leading to the classic hydrostatic approximation of the Navier-Stokes equations. We use the
 
 \[ \epsilon = \frac{\text{characteristic depth}}{\text{characteristic width}} \]
 
 aspect ratio and the fact that, as the above described general ideas suggest, it is natural to consider asymptotic models and to take the limit model as $\epsilon$ goes to zero.
 
-The authors of the \cite{azerad2001mathematical} and \cite{li2019primitive} articles have proved both weak and strong convergence theorems showing that the solutions of the complete Navier-Stokes equations considered in a shallow domain are "close" to the solutions of the hydrostatic system. More formally, they showed that as the shallowness parameter $\epsilon$ goes to zero, the solutions of the full Navier-Stokes system in fact converge to the solutions of the hydrostatic system (this latter is heavily used in applications, and thus with this convergence result a mathematical validation is provided). These results do not consider pollution effects, and they are elaborated in the classical geophysical Cartesian coordinate system. The main novelties of our present work are \textit{a)} to provide a generalisation of these previously mentioned results translated to the atmosphere, extending the fluid velocity equations with an additional convection-diffusion equation representing pollutants in the atmosphere and \textit{b)} to verify these results in a mathematically more challenging coordinate system.
+In this work we couple the Navier-Stokes equations representing fluid velocity with a convection-diffusion equation describing air pollutant concentration, and show that the solutions of the complete coupled system (anisotropic equations) on a shallow domain are in fact "close" to the solutions of the hydrostatic model. In more detail, we verify a rigorous connection between two fundamental models, namely the anisotropic and hydrostatic models, and show that they are interwoven on the level of both weak and strong solutions --- providing with this a generalised verification of meteorological models based on the hydrostatic approximation. The main novelty of this work is the elaboration of the convergence results in two different coordinate systems, in particular in the mathematically more challenging, so-called downwind-matching coordinate system, and the addition of the concentration function to the model --- important convergence results for the velocity functions in geophysical coordinates had been available previously, see \cite{azerad2001mathematical} and \cite{li2019primitive}. We also perform numerical simulations in order to have a visual affirmation of the fact of the convergence.
 
 \subsection{Weak convergence in geophysical coordinates}
 
-\subsubsection{Theoretical justification of the hydrostatic model on the level of weak solutions}
-
-Firstly, we describe a self-contained model representing the atmospheric flow combined with the pollution effects and we investigate the asymptotic behaviour of the weak solutions of this model. The model itself, new to our knowledge, utilises classical concepts as its foundation and it merges them with relatively new or more specific ideas. On the one hand, we use general and well-known approaches such as the wind flow being modelled by the incompressible anisotropic Navier-Stokes equations, and using a convection-diffusion equation to describe the pollution effect. On the other hand, the model also incorporates notions like using a Gaussian pulse as a source term (\cite{zhuk2016source}), and rescaling the diffusivity parameters according to the largely different horizontal and vertical scales (similarly to the way the viscosity terms are scaled in \cite{azerad2001mathematical}).
+Firstly, we describe a self-contained model representing the atmospheric flow combined with the pollution effects and we investigate the asymptotic behaviour of the weak solutions of this model. The model utilises classical concepts as its foundation and it merges them with relatively new or more specific ideas. On the one hand, we use general and well-known approaches such as the wind flow being modelled by the incompressible anisotropic Navier-Stokes equations, and using a convection-diffusion equation to describe the pollution effect. On the other hand, the model also incorporates notions like using a Gaussian pulse as a source term (\cite{zhuk2016source}) for the case of weak solutions, and rescaling the diffusivity parameters according to the largely different horizontal and vertical scales (similarly to the way the viscosity terms are scaled in \cite{azerad2001mathematical}).
 
 We begin by choosing a coordinate system, set the domain and an appropriate set of equations describing both atmosphere motions and the effect of pollution. We ignore large scale effects such as the curvature of the Earth. For describing the effect of pollution we use a continuity equation written in Cartesian coordinates for the concentration: we fix a local Cartesian coordinate system where the axes are independent from the wind ($x, y$ and $z$ are oriented towards east, north, and upwards, respectively). A different choice of coordinates is described in detail later.
 
@@ -142,8 +139,10 @@ Here we emphasise that the diffusivity matrix $\mathbf{M}$ is assumed to have th
 Finally we obtain the rescaling equations for the pollution concentration and the source term:
 
     \[ P = \frac{1}{\epsilon} C^\epsilon, \quad Q = \frac{1}{\epsilon} S^\epsilon. \]
+    
+As for the source term, we enable requirements of different strength depending on whether we consider the case of weak or strong solutions.
 
-In this model we will use localised point sources as suggested in \cite{zhuk2016source} and we use what is called a parametrised nascent delta function (a Gaussian impulse, specifically) to describe the source term $S^\epsilon$:
+In this case, investigating weak convergence, we will use localised point sources as suggested in \cite{zhuk2016source} and we use what is called a parametrised nascent delta function (a Gaussian impulse, specifically) to describe the source term $S^\epsilon$:
 
 \begin{equation} \label{sourcedefinition}
   S^\epsilon = I H(t-t_s) \gamma \epsilon^{-3} e ^ {\frac{-(\mathbf{x}-\mathbf{x_s})^2}{\epsilon^2}},
@@ -242,6 +241,10 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
         & \partial_1 C = \sigma_1, \partial_2 C = \sigma_2, \partial_3  C = 0, \boldsymbol{\sigma} = (\sigma_1, \sigma_2, 0) \in L^2(0,T; \Gamma_G)\\
       \end{split}
     \end{equation}
+
+\subsubsection{Theoretical justification of the hydrostatic model on the level of weak solutions}
+
+In this subsection we write down the weak formulations of the two different systems in geophysical coordinates, and provide the main steps of the proof that shows that any weak solution of the anisotropic system converges to a weak solution of the hydrostatic system as $\epsilon$ goes to zero.
 
 \subsubsection{Visualisation of the weak convergence result using \textbf{FEniCS}}
 
