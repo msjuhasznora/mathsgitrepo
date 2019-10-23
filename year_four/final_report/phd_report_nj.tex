@@ -64,19 +64,186 @@
 
 \newpage
 \tableofcontents
+
 \newpage
 
 \section{Research activity: Mathematical modelling of the polluted atmosphere}
 
-Mathematical modelling of the polluted atmosphere
+The key aspects of capturing the dynamics of either water flow in oceanography or atmospheric changes in meteorology are the following two fundamental concepts that underlie many modern asymptotic models aiming to describe them. The first one is that both above mentioned phenomena can be viewed as a fluid dynamics process, and as such, they are best described by the Navier-Stokes equations. The second is the notion of the so-called shallow domains. This latter is a widely used concept in the field of large-scale geophysical fluids and its main idea is to take advantage of their approximately flat structure when modelling them with the Navier-Stokes equations, leading to the classic hydrostatic approximation of the Navier-Stokes equations. Essentially, the basic principle is to exploit the fact that when we are working on domains such as the ocean or the atmosphere, we are working on an "almost" two-dimensional set, and thus we can significantly simplify the model in the vertical direction, or even eliminate the third dimension and arrive to a limit model in two dimensions.
+A common practice for example is to depth-integrate the Navier-Stokes equations for big lakes and seas and obtain the shallow water equations.
+Our approach is different, we keep the vertical velocity and will arrive to a three dimensional limit model.
+We use the
+
+\[ \epsilon = \frac{\text{characteristic depth}}{\text{characteristic width}} \]
+
+aspect ratio and the fact that, as the above described general ideas suggest, it is natural to consider asymptotic models and to take the limit model as $\epsilon$ goes to zero.
+
+The authors of the \cite{azerad2001mathematical} and \cite{li2019primitive} articles have proved both weak and strong convergence theorems showing that the solutions of the complete Navier-Stokes equations considered in a shallow domain are "close" to the solutions of the hydrostatic system. More formally, they showed that as the shallowness parameter $\epsilon$ goes to zero, the solutions of the full Navier-Stokes system in fact converge to the solutions of the hydrostatic system (this latter is heavily used in applications, and thus with this convergence result a mathematical validation is provided). These results do not consider pollution effects, and they are elaborated in the classical geophysical Cartesian coordinate system. The main novelties of our present work are \textit{a)} to provide a generalisation of these previously mentioned results translated to the atmosphere, extending the fluid velocity equations with an additional convection-diffusion equation representing pollutants in the atmosphere and \textit{b)} to verify these results in a mathematically more challenging coordinate system.
 
 \subsection{Weak convergence in geophysical coordinates}
 
-\subsubsection{Theoretical justification of the hydrostatic model}
+\subsubsection{Theoretical justification of the hydrostatic model on the level of weak solutions}
 
-Theoretical justification of the hydrostatic model
+Firstly, we describe a self-contained model representing the atmospheric flow combined with the pollution effects and we investigate the asymptotic behaviour of the weak solutions of this model. The model itself, new to our knowledge, utilises classical concepts as its foundation and it merges them with relatively new or more specific ideas. On the one hand, we use general and well-known approaches such as the wind flow being modelled by the incompressible anisotropic Navier-Stokes equations, and using a convection-diffusion equation to describe the pollution effect. On the other hand, the model also incorporates notions like using a Gaussian pulse as a source term (\cite{zhuk2016source}), and rescaling the diffusivity parameters according to the largely different horizontal and vertical scales (similarly to the way the viscosity terms are scaled in \cite{azerad2001mathematical}).
 
-\subsubsection{Visualisation using \textbf{FEniCS}}
+We begin by choosing a coordinate system, set the domain and an appropriate set of equations describing both atmosphere motions and the effect of pollution. We ignore large scale effects such as the curvature of the Earth. For describing the effect of pollution we use a continuity equation written in Cartesian coordinates for the concentration: we fix a local Cartesian coordinate system where the axes are independent from the wind ($x, y$ and $z$ are oriented towards east, north, and upwards, respectively). A different choice of coordinates is described in detail later.
+
+The domain we consider is a local slice of the atmosphere filled with homogeneous incompressible air and a pollutant, and it is defined by the set
+
+\begin{equation}
+  \Omega_{\epsilon} = \{(x,y,z) \in \mathbb{R}^3 ; (x,y) \in \omega, 0 < z < \epsilon h(x,y) \},
+\end{equation}
+
+where $\epsilon$ incorporates the shallowness of the domain.
+
+The equations governing the air velocity $\mathbf{v}, $ the pressure $q$ and the pollution concentration $P$ in the atmosphere are the incompressible Navier-Stokes equations combined with an advection-diffusion equation. We use different viscosities according to vertical or horizontal directions, and the density is taken to be identically equal to one:
+
+\begin{equation} \label{originalEQ-V}
+  \partial_t \mathbf{v} + (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + \nabla q + 2 \mathbf{w} \times \mathbf{v}= \mathbf{g} \text{ in } \Omega_{\epsilon} \times (0,T)
+\end{equation}
+    
+\begin{equation} \label{originalEQ-I}
+  \nabla \cdot \mathbf{v} = 0 \text{ in } \Omega_{\epsilon} \times (0,T)
+\end{equation}
+    
+\begin{equation} \label{diffusive}
+  \partial_t P + \mathbf{v} \cdot \nabla P = \nabla \cdot (\mathbf{K} \nabla P) + Q,
+\end{equation}
+
+where $P$ is the pollution concentration and $\mathbf{K}$ is the $3 \times 3$ diffusion matrix.
+
+Now, we perform a vertical scaling to make the domain independent of $\epsilon.$
+
+    \[x=x_1, \quad y=x_2, \quad z=\epsilon x_3. \]
+    
+We have the following new, $\epsilon$ - independent domain
+    
+    \[ \Omega =  \{(x_1,x_2,x_3) \in \mathbb{R}^3 ; (x_1,x_2) \in \omega, 0 < x_3 < h (x_1 , x_2) \}.\]
+    
+The corresponding scaling regarding the kinematic, pressure and viscosity terms are
+     
+    \[v_1 = u_1^{\epsilon}, \quad v_2 = u_2^{\epsilon}, \quad v_3 = \epsilon u_3^{\epsilon}, \quad p = p^{\epsilon}, \]
+    \[\nu_x = \nu_1, \quad \nu_y = \nu_2 , \quad \nu_z = \epsilon ^ 2\nu_3. \]
+    
+Note that from this point we have $\nabla = (\partial_1, \partial_2, \partial_3) $ and $ \Delta_\nu = \nu_1 \partial^2_{11} + \nu_2 \partial^2_{22}  + \nu_3 \partial^2_{33} $. 
+    
+We use an analogous rescaling methodology for the diffusivity constants in (\ref{diffusive}),
+    
+\begin{gather}
+ \begin{bmatrix} K_{xx} & K_{xy} & K_{xz} \\ K_{yx} & K_{yy} & K_{yz} \\ K_{zx} & K_{zy} & K_{zz} \end{bmatrix}
+ =
+  \begin{bmatrix}
+    M_{11} & M_{12} & \epsilon M_{13} \\ M_{21} & M_{22} & \epsilon M_{23} \\ \epsilon M_{31} & \epsilon M_{32} & \epsilon^2 M_{33}
+  \end{bmatrix}
+\end{gather}
+
+Here we emphasise that the diffusivity matrix $\mathbf{M}$ is assumed to have the coercivity property.
+
+Finally we obtain the rescaling equations for the pollution concentration and the source term:
+
+    \[ P = \frac{1}{\epsilon} C^\epsilon, \quad Q = \frac{1}{\epsilon} S^\epsilon. \]
+
+In this model we will use localised point sources as suggested in \cite{zhuk2016source} and we use what is called a parametrised nascent delta function (a Gaussian impulse, specifically) to describe the source term $S^\epsilon$:
+
+\begin{equation} \label{sourcedefinition}
+  S^\epsilon = I H(t-t_s) \gamma \epsilon^{-3} e ^ {\frac{-(\mathbf{x}-\mathbf{x_s})^2}{\epsilon^2}},
+\end{equation}
+
+while in the limit model the source term $S$ naturally stands for the $\delta$ distribution.
+    
+Putting the previously described rescaling terms together to the original equations (\ref{originalEQ-V})-(\ref{diffusive}), we arrive to the merged anisotropic equations of the polluted atmosphere above inland surface:
+  
+    \begin{equation} \label{ANSC1}
+    \partial_t u^\epsilon _1 + \mathbf{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\alpha u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{ANSC2}
+    \partial_t u_2^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_2^\epsilon -\Delta_\nu u_2^\epsilon + \alpha u_1^\epsilon + \partial_2 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{ANSC3}
+    \epsilon^2 \{  \partial_t u_3^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon -\Delta_\nu u_3^{\epsilon} \} - \epsilon \beta u_1^\epsilon + \partial_3 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{ANSC4}
+    \nabla \cdot \mathbf{u}^\epsilon= 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{ANSC5}
+    \partial_t C^\epsilon + \mathbf{u^\epsilon} \cdot \nabla C^\epsilon = \nabla \cdot (\mathbf{M} \nabla C^\epsilon) + S^\epsilon \text{ in } \Omega \times (0,T)
+    \end{equation}
+
+The initial condition for the velocity and the pollution concentration are
+    
+    \begin{equation} \label{ANSC7}
+    \mathbf{u}^\epsilon (\cdot, t = 0) = \mathbf{u}_0, \quad C^\epsilon (\cdot, t=0) = C_0  \quad \text{ in } \Omega.
+    \end{equation}
+    
+To make the above set of equations complete, we need to assign the boundary conditions, which we set as shown by the graph below.
+
+\begin{figure}[!h]
+  \centering
+  \begin{tikzpicture}
+  
+    \draw[blue] (0,0) -- (2,0) -- (4,0) -- (4,2) -- (4,4) -- (2,4) -- (0,4) -- (0,2) -- (0,0);
+    \draw[green, thick] (0,0) -- (4,0);
+    
+    \draw (2,2)node{$\Omega$};
+    \draw (2,0)node[below] {$\mathbf{u^\epsilon} = 0,$ $ \partial_1 C^\epsilon$ and $ \partial_2 C^\epsilon$ are bounded, $\partial_3 C^\epsilon = 0$};
+    \draw (4,2)node[right] {$\mathbf{u^\epsilon} = 0, C^\epsilon=0 $};
+    \draw (2,4)node[above] {$\mathbf{u^\epsilon} = 0, C^\epsilon=0 $};
+    \draw (0,2)node[left] {$\mathbf{u^\epsilon} = 0, C^\epsilon=0 $};
+    
+  \end{tikzpicture}
+\end{figure}
+  
+    \begin{equation} \label{ANSC8}
+      \begin{split}
+        & \mathbf{u}^\epsilon = 0 \text{ on } \Gamma \times (0,T), \\
+        &C^\epsilon = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
+        & \partial_1 C^\epsilon = \sigma_1, \partial_2 C^\epsilon = \sigma_2,\ \partial_3 C^\epsilon= 0 \text{ on } \Gamma_G \times (0,T), \\
+        & \boldsymbol{\sigma} = (\sigma_1, \sigma_2, 0) \in L^2(0,T; \Gamma_G)\\
+      \end{split} \raisetag{40pt}
+    \end{equation}
+
+If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and $\epsilon$ in the anisotropic equations, we formally arrive to the hydrostatic Navier-Stokes equations (i.e., primitive equations) combined with pollution.
+
+    \begin{equation} \label{HNSC1}    
+    \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\alpha u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC2}   
+    \partial_t u_2 + \mathbf{u} \cdot \nabla u_2 - \Delta_\nu u_2 -\alpha u_1 + \partial_2 p = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC3}   
+    \partial_3 p = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC4}   
+    \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC5}   
+    \partial_t C + \mathbf{u} \cdot \nabla C = \nabla \cdot (\mathbf{M} \nabla C) + S \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC6}   
+    u_1 = u_2 = u_3 n_3 = 0 \text{ on } \Gamma \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC7}   
+    u_i (\cdot, t=0) = u_{0 i}, C (\cdot, t=0) = C_0 \text{ in } \Omega, \text{$i$ = 1,2}
+    \end{equation}
+    
+    \begin{equation} \label{HNSC8}
+      \begin{split}
+        &C = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
+        & \partial_1 C = \sigma_1, \partial_2 C = \sigma_2, \partial_3  C = 0, \boldsymbol{\sigma} = (\sigma_1, \sigma_2, 0) \in L^2(0,T; \Gamma_G)\\
+      \end{split}
+    \end{equation}
+
+\subsubsection{Visualisation of the weak convergence result using \textbf{FEniCS}}
 
 We visualise the weak convergence result with \textbf{FEniCS} --- a software with the finite element method at its core.
 
