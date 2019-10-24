@@ -79,7 +79,7 @@ aspect ratio and the fact that, as the above described general ideas suggest, it
 
 In this work we couple the Navier-Stokes equations representing fluid velocity with a convection-diffusion equation describing air pollutant concentration, and show that the solutions of the complete coupled system (anisotropic equations) on a shallow domain are in fact "close" to the solutions of the hydrostatic model. In more detail, we verify a rigorous connection between two fundamental models, namely the anisotropic and hydrostatic models, and show that they are interwoven on the level of both weak and strong solutions --- providing with this a generalised verification of meteorological models based on the hydrostatic approximation. The main novelty of this work is the elaboration of the convergence results in two different coordinate systems, in particular in the mathematically more challenging, so-called downwind-matching coordinate system, and the addition of the concentration function to the model --- important convergence results for the velocity functions in geophysical coordinates had been available previously, see \cite{azerad2001mathematical} and \cite{li2019primitive}. We also perform numerical simulations in order to have a visual affirmation of the fact of the convergence.
 
-\subsection{The asymptotic behaviour of the anisotropic weak solutions in geophysical coordinates}
+\subsection{The asymptotic behaviour of the anisotropic weak solutions in geophysical coordinates with $L^2$ initial data}
 
 We begin by choosing a coordinate system, set the domain and an appropriate set of equations describing both atmosphere motions and the effect of pollution. We ignore large scale effects such as the curvature of the Earth. For describing the effect of pollution we use a continuity equation written in Cartesian coordinates for the concentration: we fix a local Cartesian coordinate system where the axes are independent from the wind ($x, y$ and $z$ are oriented towards east, north, and upwards, respectively). A different choice of coordinates is described in detail later.
 
@@ -363,6 +363,8 @@ The steps following below describe an outline of the main ideas of the proof.
 
 \end{enumerate}
 
+For more details see our article \cite{pollatmws2019}.
+
 \subsubsection{Visualisation of the weak convergence result using \textbf{FEniCS}}
 
 We visualise the weak convergence result with \textbf{FEniCS} --- a software with the finite element method at its core.
@@ -577,7 +579,7 @@ In the following we include some of the visual results obtained with \textbf{FEn
 \end{minipage}
 \end{figure}
 
-\subsection{Weak convergence in downwind-matching coordinates}
+\subsection{Weak convergence in downwind-matching coordinates with $H^1$ initial data for the horizontal velocity}
 
 We have already described the justification of the generalised hydrostatic limit model including the pollution effect described for the case of a classical, east-north-upwards oriented local Cartesian coordinates. Here we give an improvement of this statement: we consider a meteorologically more meaningful coordinate system, incorporate the analytical consequences of this coordinate change into the governing equations, and verify that the weak convergence still holds for this altered system. The main challenge in the proof is caused by the appearance of an additional $\epsilon$ term --- it is resolved by taking advantage of a more regular, $H^1$ initial data for the horizontal velocity and passing temporarily to the field of strong solutions.
 The first step is the introduction of the notions of downwind and crosswind, and to match the horizontal axes according to these meteorological parameters (see \cite{goyal2011mathematical}). As in this scenario the advection is dominant compared to diffusion effects along the $x$ axis, this approach on the one hand naturally contributes to the simplification of the limit model. On the other hand it brings an additional $\epsilon$ term in the Laplacian of the concentration equation, and along with this the challenge of proving a weak convergence result for the product of the vertical velocity and the concentration. The difficulty is due to the phenomena of the $\norm{\partial_1 C^\epsilon}$ term being replaced by $\| \sqrt{\epsilon} \partial_1 C^\epsilon \|$ in the energy inequality. The loss of the strong convergence of the concentration function is overcome by using a more regular initial horizontal velocity function, namely ${\mathbf{u}_h}_0 \in H^1.$ We mention that we also use slightly different, stricter boundary conditions for the concentration function --- these additional requirements too are motivated by the presence of the new $\epsilon$ term in the energy inequality. The assumption that advection is more dominant than diffusion along the downwind direction leads to the appearance of an extra $\epsilon$ term in the concentration equation's Laplacian, namely, we have
@@ -614,15 +616,25 @@ With the initial and boundary conditions defined as
   \end{split}
 \end{equation}
     
-The hydrostatic equations are modified analogously.
+The hydrostatic equations are modified analogously:
+
+\begin{equation} \label{HNSC1-5}
+  \begin{split}
+    \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\gamma u_2 + \partial_1 p = & 0 \text{ in } \Omega \times (0,T) \\
+    \partial_t u_2 + \mathbf{u} \cdot \nabla u_2 - \Delta_\nu u_2 + \gamma u_1 + \partial_2 p = & 0 \text{ in } \Omega \times (0,T) \\
+    \partial_3 p = & 0 \text{ in } \Omega \times (0,T) \\
+    \nabla \cdot \mathbf{u} = & 0 \text{ in } \Omega \times (0,T) \\
+    \partial_t C + \mathbf{u} \cdot \nabla C = K_2 \partial_{22} ^ 2 C + K_3 \partial_{33} ^2 C + & S \text{ in } \Omega \times (0,T)
+  \end{split}  
+\end{equation}
 
 The main theorem of this subsection is analogous to our previous result stated for the case of the geophysical frame, but we highlight the difference that here we use the initial data ${\mathbf{u}_h}_0 \in H^1,$ while for the case of the geophysical frame an $L^2$ initial velocity was sufficient.
 
 \begin{theorem} \label{maintheorem}
-  Let ${\mathbf{u}_h}_0$ $\in$ $H^1 (\Omega)$, ${u_3}_0 \in L^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 = 0$ on $\partial \Omega$; let $C_0 \in$ $L^2 (\Omega)$, $C_0 = 0$ on $ \partial \Omega$, and assume that the boundary conditions (\ref{ANSC8}) hold; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, C^\epsilon)$ of the anisotropic equations (\ref{ANSC1-5}) converges to a weak solution $(\mathbf{u}, C)$ of the hydrostatic equations of the polluted atmosphere.
+  Let ${\mathbf{u}_h}_0$ $\in$ $H^1 (\Omega)$, ${u_3}_0 \in L^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 = 0$ on $\partial \Omega$; let $C_0 \in$ $L^2 (\Omega)$, $C_0 = 0$ on $ \partial \Omega$, and assume that the boundary conditions (\ref{ANSC8}) hold; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, C^\epsilon)$ of the anisotropic equations (\ref{ANSC1-5}) converges to a weak solution $(\mathbf{u}, C)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1-5}).
 \end{theorem}
 
-The main challenge in this part is the convergence of the $u_3^\epsilon C^\epsilon$ term, thus we will elaborate only regarding this product. The main idea here is to temporarily ignore the $C^\epsilon$ function and prove a strong convergence result considering only the velocity functions. For the difference functions $\norm{\mathbf{U}^\epsilon}$ of the anisotropic solution $\norm{\mathbf{u}^\epsilon}$ and the hydrostatic solution $\norm{\mathbf{u}}$ we are able to show
+The main challenge in this part is the convergence of the $u_3^\epsilon C^\epsilon$ term, thus we will elaborate only regarding this product. The main idea here is to temporarily ignore the $C^\epsilon$ function and prove a strong convergence result considering only the velocity functions. For the difference functions ($\mathbf{U}_h^\epsilon, U_3^\epsilon) = (\mathbf{u}_h^\epsilon - \mathbf{u}_h, u_3^\epsilon - u_3)$ between the anisotropic solution $\mathbf{u}^\epsilon$ and the hydrostatic solution $\mathbf{u}$ we are able to show
 
   \begin{equation} \label{introduce_I_terms}
     \begin{split}
@@ -676,9 +688,87 @@ Combining the weak convergence result ($\ref{WeakConvCEps1}$) for $C^\epsilon$ a
 
 With this Theorem $\ref{maintheorem}$ has been proved.
 
-\subsection{Strong convergence in downwind-matching coordinates}
+\subsection{Strong convergence in downwind-matching coordinates with $H^3$ initial data ${\mathbf{u}_h}_0$}
 
-Strong convergence
+Here we show a strong convergence result, and enable some technical changes regarding the boundary conditions: we use the minimal additional set of restrictions that allow us to benefit from a simpler structure that resembles periodic domains, keeping a classical non-periodic domain however. Another important detail to highlight here is that in order to be able to bring the proof to a closure, we use an $H^3$ initial data for the horizontal velocity.
+
+The set of equations are identical as in the previous subsection.
+
+Denote $(U^\epsilon, C^\epsilon) = (V^\epsilon, W^\epsilon, C^\epsilon) = (u^\epsilon - u, c^\epsilon - c) = (v^\epsilon - v, w^\epsilon - w, c^\epsilon - c).$
+
+For the dynamics describing $C^\epsilon$ we have
+
+$$ \partial_t C^\epsilon + u^\epsilon \cdot \nabla c^\epsilon - u \cdot \nabla c = \epsilon K_1 \partial_{11} c^\epsilon + K_2 \partial_{22} C^\epsilon + K_3 \partial_{33} C^\epsilon + S^\epsilon,$$
+
+which can be rewritten as
+
+$$ \partial_t C^\epsilon + U^\epsilon \nabla C^\epsilon  + U^\epsilon \nabla c+ u \nabla C^\epsilon = \epsilon K_1 \partial_{11} C^\epsilon + \epsilon K_1 \partial_{11} c + K_2 \partial_{22} C^\epsilon + K_3 \partial_{33} C^\epsilon + S^\epsilon. $$
+
+Let's have ${\mathbf{u}_h}_0 \in H^3(\Omega)$ (and as a consequence $\mathbf{u}_0 \in H^2(\Omega)$) and $\epsilon < \epsilon_0,$ where $\epsilon_0$ is the limit specified in \cite{li2019primitive}. We need the following important ingredients needed for estimating the difference function $C^\epsilon.$
+
+\textbf{Cornerstone existence results and regularities:}
+
+\begin{enumerate}
+
+  \item \textbf{Existence result for the extended primitive equations.} Global unique existence of the $(\mathbf{u}_h, u_3, c)$ strong solution: we have been able to verify the existence result for $H^2_x$ regular $s$ source functions following the ideas of \cite{cao2014local} and \cite{cao2012global}.
+
+  \item \textbf{Existence result for the extended anisotropic equations.} From \cite{li2019primitive} we have the global (considering that we are at the case of $\epsilon < \epsilon_0$ as previously specified) unique existence of the $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ strong solution without considering concentration with the following uniform bound for the difference:
+  
+  \[ \sup_{0 \leq t < \infty} (\norm{U_h^\epsilon}_{H^2} + \epsilon^2 \norm{U_3^\epsilon}_{H^2}^2) + \int_0^\infty \big( \norm{\nabla U_h^\epsilon}_{H^2}^2 + \epsilon^2 \norm{\nabla U_3^\epsilon}_{H^2}^2 \big) \diff t \leq C \epsilon^2,\]
+  
+  where C depends only on the domain size and $\norm{{u_h}_0}_{H^3}.$
+  
+Based on the proof of existence of $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$, the existence of the extended $(\mathbf{u}_h^\epsilon, u_3^\epsilon, c^\epsilon)$ strong solution follows from identical steps as the existence of the velocity part for the scaled Navier-Stokes equations with fix $\epsilon$ (however this is only a local existence result until we show the global result later.)
+  
+  \item \textbf{$H^3$ space estimate for $U_h^\epsilon.$} We have for ${u_h}_0 \in H^k, k \geq 2$ the following general result:
+  
+  \begin{equation}
+    \sup_{0 \leq t < \infty}{\norm{(U_h^\epsilon, \epsilon U_3^\epsilon)}_{H^{k-1}}^2} + \int_0^\infty \norm{\nabla (U_h^\epsilon, U_3^\epsilon)}_{H^{k-1}}^2 \leq C \epsilon^2.
+  \end{equation}
+  
+  With $k=3$ this provides that the $L^2 H^3$ norm of $U_h^\epsilon$ is bounded by $C \epsilon^2:$
+  
+  \begin{equation} \label{H3_Uh}
+    \int_0^\infty \norm{U_h^\epsilon}_{H^3}^2 \leq C \epsilon^2.
+  \end{equation}
+
+\end{enumerate}
+
+The main result of this section is the theorem below.
+
+\begin{theorem}
+Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ $\epsilon < \epsilon_0,$ and $C_0 \in H^2.$ Then the strong solution $(\mathbf{u}_h^\epsilon, u_3^\epsilon, c^\epsilon)$ of the anisotropic system converges to the strong solution $(\mathbf{u}_h, u_3 c)$ of the hydrostatic system in downwind-matching coordinates; formally, we have
+$$(\mathbf{u}_h^\epsilon, u_3^\epsilon, c^\epsilon) \to (\mathbf{u}_h, u_3, c) \text{ in } L^\infty H^1.$$
+\end{theorem}
+
+Since the convergence result of the velocity part has already been proved, we focus on verifying $c^\epsilon \to c$ in $L^\infty H^1.$
+
+Multiplying the governing equation by $- \partial_{ii} C^\epsilon, i=1,2,3$ we obtain
+
+\begin{equation}
+  \begin{split}
+      & \frac{1}{2}\frac{\diff}{\diff t} \norm{\nabla C^\epsilon}_2^2 + \epsilon K_1 \norm{\partial_{11} C^\epsilon}_2^2 + K_2 \norm{\partial_{22} C^\epsilon}_2^2 + K_3 \norm{\partial_{33} C^\epsilon}_2^2 + C \norm{\partial_{ij} C^\epsilon}_2^2 \\
+      & = \sum_{i = 1,2,3} \int_\Omega U^\epsilon \nabla C^\epsilon \partial_{ii} C^\epsilon + \int_\Omega U^\epsilon \nabla c \partial_{ii} C^\epsilon + \int_\Omega u \nabla C^\epsilon \partial_{ii} C^\epsilon - \int_\Omega \epsilon K_1 \partial_{11} c \partial_{ii} C^\epsilon \\
+      & = \sum_{i = 1,2,3} I_1(i)  + I_2(i) + I_3(i) + I_4(i).
+  \end{split}
+\end{equation}
+
+We have been able to construct bounds for each term on the right-hand side using the Holder, Ladyzhenskaya and Young inequalities. These eventually yield
+
+\begin{equation}
+  \begin{split}
+    & \frac{1}{2} \frac{\diff}{\diff t} \norm{\nabla C^\epsilon}_2^2 + \epsilon K_1 \norm{\partial_{11} C^\epsilon}_2^2 + K_2 \norm{\partial_{22} C^\epsilon}_2^2 + K_3 \norm{\partial_{33} C^\epsilon}_2^2 + C \norm{\partial_{ij} C^\epsilon}_2^2 \\
+    & \leq C \norm{U_H^\epsilon}_{H^3} \norm{\nabla C^\epsilon}_2^2 + C \norm{U_H^\epsilon}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2 \\
+    & + C \norm{u_H^\epsilon}_{H^3} \norm{\nabla C^\epsilon}_2^2 + C \norm{u_H^\epsilon}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2 \\
+    & + C \norm{U_H^\epsilon}_{H^3}^2 + \norm{c}_{H^2}^2 \norm{\nabla C^\epsilon}_2^2 \\
+    & + C \norm{U_H^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2 \\
+    & + \epsilon K_1 \norm{\partial_{11} c}_2^2,
+  \end{split}
+\end{equation}
+
+where $i \neq j.$ Applying the Gronwall inequality, we finally arrive to
+
+\[ \norm{C^\epsilon}_{L^\infty(0,T; H^1(\Omega))} \leq \epsilon C \exp{(C \sqrt{T} + C)}.\]
 
 \newpage
 
@@ -741,9 +831,17 @@ Strong convergence
 \section{Participation to research projects}
 
 \begin{itemize}
-  \item Secondment: University of Sussex, February 4 - 23, 2019. Collaborator: Prof. Omar Lakkis
-  \item Secondment: University of Sussex, June 16 - July 31, 2018. Collaborator: Prof. Omar Lakkis
+  \item 2016 - 2019: ModCompShock fellow
   \item 2017: \textbf{GNAMPA miniproject}, \textit{Analisi dei modelli matematici della fisica della biologia e delle scienze sociali}, (P.I. Stefano Spirito)
+\end{itemize}
+
+\newpage
+
+\section{Visiting at universities}
+
+\begin{itemize}
+  \item University of Sussex, February 4 - 23, 2019. Collaborator: Prof. Omar Lakkis
+  \item University of Sussex, June 16 - July 31, 2018. Collaborator: Prof. Omar Lakkis
 \end{itemize}
 
 \newpage
