@@ -579,7 +579,102 @@ In the following we include some of the visual results obtained with \textbf{FEn
 
 \subsection{Weak convergence in downwind-matching coordinates}
 
-Weak convergence in downwind-matching coordinates
+We have already described the justification of the generalised hydrostatic limit model including the pollution effect described for the case of a classical, east-north-upwards oriented local Cartesian coordinates. Here we give an improvement of this statement: we consider a meteorologically more meaningful coordinate system, incorporate the analytical consequences of this coordinate change into the governing equations, and verify that the weak convergence still holds for this altered system. The main challenge in the proof is caused by the appearance of an additional $\epsilon$ term --- it is resolved by taking advantage of a more regular, $H^1$ initial data for the horizontal velocity and passing temporarily to the field of strong solutions.
+The first step is the introduction of the notions of downwind and crosswind, and to match the horizontal axes according to these meteorological parameters (see \cite{goyal2011mathematical}). As in this scenario the advection is dominant compared to diffusion effects along the $x$ axis, this approach on the one hand naturally contributes to the simplification of the limit model. On the other hand it brings an additional $\epsilon$ term in the Laplacian of the concentration equation, and along with this the challenge of proving a weak convergence result for the product of the vertical velocity and the concentration. The difficulty is due to the phenomena of the $\norm{\partial_1 C^\epsilon}$ term being replaced by $\| \sqrt{\epsilon} \partial_1 C^\epsilon \|$ in the energy inequality. The loss of the strong convergence of the concentration function is overcome by using a more regular initial horizontal velocity function, namely ${\mathbf{u}_h}_0 \in H^1.$ We mention that we also use slightly different, stricter boundary conditions for the concentration function --- these additional requirements too are motivated by the presence of the new $\epsilon$ term in the energy inequality. The assumption that advection is more dominant than diffusion along the downwind direction leads to the appearance of an extra $\epsilon$ term in the concentration equation's Laplacian, namely, we have
+
+\begin{equation} \abs{u_1 \partial_{1} C} \gg \abs{ K_x \partial_{11} ^2 C },\end{equation}
+
+which leads us to introducing this new scaling identity
+
+\begin{equation} \label{ksepsk1} K_x = \epsilon K_1. \end{equation}
+
+The new version of the anisotropic equations now takes the form, where the three main changes are \textit{a)} the additional $\epsilon$ in the concentration equation, \textit{b)} the slightly stricter boundary conditions, and \textit{c)} the new Coriolis terms due to the coordinate system change:
+
+\begin{equation} \label{ANSC1-5}
+  \begin{split}
+    \partial_t u^\epsilon _1 + \mathbf{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\gamma u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = & 0 \text{ in } \Omega \times (0,T) \\
+    \partial_t u_2^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_2^\epsilon -\Delta_\nu u_2^\epsilon + \gamma u_1^\epsilon - \alpha \epsilon u^\epsilon_3  + \partial_2 p^\epsilon = & 0 \text{ in } \Omega \times (0,T) \\
+    \epsilon^2 \{  \partial_t u_3^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon -\Delta_\nu u_3^{\epsilon} \} + \epsilon \alpha u^\epsilon_2 - \epsilon \beta u_1^\epsilon + \partial_3 p^\epsilon = & 0 \text{ in } \Omega \times (0,T) \\
+    \nabla \cdot \mathbf{u}^\epsilon = & 0 \text{ in } \Omega \times (0,T) \\
+    \partial_t C^\epsilon + \mathbf{u^\epsilon} \cdot \nabla C^\epsilon = \epsilon K_1 \partial_{11} ^ 2 C^\epsilon + K_2 \partial_{22} ^ 2 C^\epsilon + K_3 \partial_{33} ^ 2 C^\epsilon + & S^\epsilon \text{ in } \Omega \times (0,T).
+  \end{split}
+\end{equation}
+  
+With the initial and boundary conditions defined as
+    
+\begin{equation} \label{ANSC7}
+  \mathbf{u}^\epsilon (\cdot, t = 0) = \mathbf{u}_0, \quad C^\epsilon (\cdot, t=0) = C_0  \quad \text{ in } \Omega.
+\end{equation}
+  
+\begin{equation} \label{ANSC8}
+  \begin{split}
+    & \mathbf{u}^\epsilon = 0 \text{ on } \Gamma \times (0,T), \\
+    &C^\epsilon = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
+    & \partial_2 C^\epsilon = \partial_3 C^\epsilon = 0 \text{ on } \Gamma_G \times (0,T), \quad \partial_1 C^\epsilon = \sigma \in L^2 (0,T; \Gamma_G). \\
+  \end{split}
+\end{equation}
+    
+The hydrostatic equations are modified analogously.
+
+The main theorem of this subsection is analogous to our previous result stated for the case of the geophysical frame, but we highlight the difference that here we use the initial data ${\mathbf{u}_h}_0 \in H^1,$ while for the case of the geophysical frame an $L^2$ initial velocity was sufficient.
+
+\begin{theorem} \label{maintheorem}
+  Let ${\mathbf{u}_h}_0$ $\in$ $H^1 (\Omega)$, ${u_3}_0 \in L^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 = 0$ on $\partial \Omega$; let $C_0 \in$ $L^2 (\Omega)$, $C_0 = 0$ on $ \partial \Omega$, and assume that the boundary conditions (\ref{ANSC8}) hold; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, C^\epsilon)$ of the anisotropic equations (\ref{ANSC1-5}) converges to a weak solution $(\mathbf{u}, C)$ of the hydrostatic equations of the polluted atmosphere.
+\end{theorem}
+
+The main challenge in this part is the convergence of the $u_3^\epsilon C^\epsilon$ term, thus we will elaborate only regarding this product. The main idea here is to temporarily ignore the $C^\epsilon$ function and prove a strong convergence result considering only the velocity functions. For the difference functions $\norm{\mathbf{U}^\epsilon}$ of the anisotropic solution $\norm{\mathbf{u}^\epsilon}$ and the hydrostatic solution $\norm{\mathbf{u}}$ we are able to show
+
+  \begin{equation} \label{introduce_I_terms}
+    \begin{split}
+      & \frac{1}{2} (\norm{\mathbf{U}_h^\epsilon}_2^2 + \epsilon^2 \norm{U_3^\epsilon}_2^2) (t_0) + \int_0^{t_0} (\norm{\nabla \mathbf{U}_h^\epsilon}_2^2 + \epsilon^2 \norm{\nabla U_3^\epsilon}_2^2) \diff t  \\
+      & \leq - \epsilon^2 \int_{Q_{t_0}} \bigg [ \bigg ( \int_0^z \partial_t \mathbf{u}_h \diff z' \bigg ) \cdot \nabla_h U_3^\epsilon + \nabla u_3 \cdot \nabla U_3^\epsilon \bigg ] \diff x \diff y \diff z \diff t \\
+      & + \int_{Q_{t_0}} [(\mathbf{u}^\epsilon \cdot \nabla) \mathbf{u}_h^\epsilon \cdot \mathbf{u}_h + (\mathbf{u} \cdot \nabla )\mathbf{u}_h \cdot \mathbf{u}_h^\epsilon] \diff x \diff y \diff z \diff t \\
+      & + \epsilon^2 \int_{Q_{t_0}} \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon u_3 \diff x \diff y \diff z \diff t \\
+      & + \int_{Q_{t_0}}  \epsilon \beta u_3^\epsilon u_1 - \epsilon \alpha u_3^\epsilon u_2 + \epsilon \alpha u_2^\epsilon u_3 - \epsilon \beta u_1^\epsilon u_3 \diff x \diff y \diff z \diff t := I_1 + I_2 + I_3 + I_4, \raisetag{80pt}
+    \end{split}
+  \end{equation}
+  
+where we calculate bounds for each $I_i$ term. Using the bounds we now have for the terms $I_1, I_2, I_3$ and $I_4$, ($\ref{introduce_I_terms}$) takes the form
+
+\begin{equation}
+  \begin{split} \nonumber
+  \Phi (t):= & (\norm{\mathbf{U}_h^\epsilon}_2^2 + \epsilon^2 \norm{U_3^\epsilon}_2^2)(t) + \int_0^t (\norm{\nabla \mathbf{U}_h^\epsilon}_2^2 + \epsilon^2 \norm{\nabla U_3^\epsilon}_2^2) \diff s \\
+  & \leq C \epsilon^2 [(\norm{{\mathbf{u}_h}_0}_2^2 + \epsilon^2 \norm{{u_3}_0}_2^2)^2 + C(\norm{{\mathbf{u}_h}_0}_{H^1}, \Gamma_G)] \\
+  & + C \int_0^{t} \norm{\nabla \mathbf{u}_h}_2^4 \norm{\mathbf{U}_h^\epsilon}_2^2 \diff s + C \int_0^{t} \norm{\nabla \mathbf{u}_h}_2^2  \norm{\Delta \mathbf{u}_h}_2^2 \norm{\mathbf{U}_h^\epsilon}_2^2 \diff s =: \Psi(t),
+  \end{split}
+\end{equation}
+
+for almost any $t_0 \in [0, \infty).$ With this we have
+
+\begin{equation}
+  \begin{split} \nonumber
+   \Psi'(t) & = C \norm{\nabla \mathbf{u}_h}_2^4 \norm{\mathbf{U}_h^\epsilon}_2^2 + C \norm{\nabla \mathbf{u}_h}_2^2  \norm{\Delta \mathbf{u}_h}_2^2 \norm{\mathbf{U}_h^\epsilon}_2^2 \\
+   & \leq C (\norm{\nabla \mathbf{u}_h}_2^4 + \norm{\nabla \mathbf{u}_h}_2^2  \norm{\Delta \mathbf{u}_h}_2^2) \Phi (t) \leq C (\norm{\nabla \mathbf{u}_h}_2^4 + \norm{\nabla \mathbf{u}_h}_2^2  \norm{\Delta \mathbf{u}_h}_2^2)\Psi(t),
+  \end{split}
+\end{equation}
+
+from which, applying the Gr\"onwall inequality and using the boundedness result on the solution of the primitive equations, we deduce
+
+\begin{equation}
+  \begin{split} \nonumber
+    & \Phi (t) \leq \Psi (t) \leq e^{C \int_0 ^ t (\norm{\nabla \mathbf{u}_h}_2^4 + \norm{\nabla \mathbf{u}_h}_2^2  \norm{\Delta \mathbf{u}_h}_2^2) \diff s} \Psi (0) \leq e^{C(\norm{{\mathbf{u}_h}_0}_{H^1}, \Gamma_G)} \Psi(0) \\
+    & \leq \epsilon^2 C(\norm{{\mathbf{u}_h}_0}_{H^1}, \Gamma_G) (\norm{{\mathbf{u}_h}_0}_2^2 + \epsilon^2 \norm{{u_3}_0}_2^2 + 1)^2.
+  \end{split}
+\end{equation}
+
+Thus, we now have
+
+$$ (\norm{\mathbf{U}_h^\epsilon}_2^2 + \epsilon^2 \norm{U_3^\epsilon}_2^2)(t) + \int_0^t (\norm{\nabla \mathbf{U}_h^\epsilon}_2^2 + \epsilon^2 \norm{\nabla U_3^\epsilon}_2^2) \diff s \leq \epsilon^2 C,$$
+
+where the $C$ constant only depends on the domain structure and the initial data. With this we arrive to strong convergence result $\nabla \mathbf{U}_h^\epsilon \to 0$ in $L^2_t L^2_x,$ and as a direct consequence, we have $\nabla \mathbf{u}_h^\epsilon \to \nabla \mathbf{u}_h$ in $L^2_t L^2_x$ as well. Using the relation between the horizontal and vertical velocity functions through the divergence-free condition, we immediately obtain $\partial_3 u_3^\epsilon \to \partial_3 u_3,$ and using the vertical Poincar\'e inequality eventually we deduce that
+
+\begin{equation}\label{strongconvresultu3}u_3^\epsilon \to u_3 \text{ strongly in } L^2_t L^2_x.\end{equation}
+
+Combining the weak convergence result ($\ref{WeakConvCEps1}$) for $C^\epsilon$ and the strong convergence ($\ref{strongconvresultu3}$) of $u_3^\epsilon,$ we are finally able to state that
+
+\begin{equation}C^\epsilon u_3^\epsilon \rightharpoonup C u_3 \text{ weakly in } L^2 L^2.\end{equation}
+
+With this Theorem $\ref{maintheorem}$ has been proved.
 
 \subsection{Strong convergence in downwind-matching coordinates}
 
