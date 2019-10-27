@@ -170,7 +170,7 @@ Let's have ${\mathbf{u}_h}_0 \in H^3(\Omega)$ (and as a consequence $\mathbf{u}_
 
 The $H^2$ regularity of $c$ is the consequence of the existence of the global $(u_h, u_3, c)$ strong solution, as described by Cao, Li and Titi for a slightly different system --- i.e. it comes from the definition of $c$ and the existence result. (However it is probably possible to show directly that the $H^2(\Omega)$ norm of $c$ is bounded using the $H^4$ regularity (\ref{H4_uh}) of the $u_h$ solution function.)
 
-\subsection{$c^\epsilon \to c$ in $L^\infty H^1$ (estimating $\nabla C^\epsilon$)}
+\subsection{$c^\epsilon \to c$ in $L^\infty H^1$ and $\nabla_d c^\epsilon \to \nabla_d c$ in $L^2 H^1$ (estimating $\nabla C^\epsilon$ and $\nabla \nabla_d C^\epsilon$)}
 
  It seems that whatever regularity we might need for $C^\epsilon$ here in this coordinate system, it will be based and built on the $\partial_t C^\epsilon$ term, because from the Laplacians we won't have a complete term as the $\epsilon$ multiplier is there.
     
@@ -370,13 +370,13 @@ Thus the main difference from Section 5 in Li-Titi is that while in their case t
 
 With this we get
 
-\[ \norm{C^\epsilon}_{L^\infty(0,T; H^1(\Omega))} \leq \epsilon C \exp{(C \sqrt{T} + C)}.\]
+\[ \norm{C^\epsilon}_{L^\infty(0,T; H^1(\Omega))} + \norm{\nabla_d C^\epsilon}_{L^2(0,T; H^1(\Omega))} \leq \epsilon C \exp{(C \sqrt{T} + C)}.\]
 
 By this, it seems that not just the convergence rate weakens from $\epsilon^2$ to $\epsilon$, but also the uniformity in time is lost. We can not use $T=\infty$ in this $C^\epsilon$ bound itself, but the estimate holds for any finite point in time --- the convergence gets slower as time evolves.
 
 Assuming that the global existence for $c$ works, then this above estimate suggests that $c^\epsilon$ exists globally, too. Otherwise, if there is a finite maximal $T^\epsilon_*$ existence time, then the norm of the $c^\epsilon - c$ difference at $T^\epsilon_*$ is bounded by
 
-\[ \norm{C^\epsilon}_{L^\infty(0,T^\epsilon_*; H^1(\Omega))} \leq \epsilon C \exp{(C \sqrt{T^\epsilon_*} + C)} < \infty,\]
+\[ \norm{C^\epsilon}_{L^\infty(0,T^\epsilon_*; H^1(\Omega))} + \norm{\nabla_d C^\epsilon}_{L^2(0,T^\epsilon_*; H^1(\Omega))} \leq \epsilon C \exp{(C \sqrt{T^\epsilon_*} + C)} < \infty,\]
 
 using that $T^\epsilon_* < \infty,$ and then because of the finite energy it could be continued after $T^\epsilon_*,$ which is a contradiction.
 
@@ -385,7 +385,7 @@ In other words, the bound does not blow up at any finite time, only at infinity.
 \textbf{To summarise},
 \begin{enumerate}
   \item it seems that both $c^\epsilon$ and $c$ exist globally,
-  \item for any given fix point in time $T$ we have that $c^\epsilon \to c$ in $L^\infty H^1$ with a rate of $\epsilon,$
+  \item for any given fix point in time $T$ we have that $c^\epsilon \to c$ in $L^\infty H^1$ and $\nabla_d c^\epsilon \to \nabla_d c$ in $L^2 H^1$ with a rate of $\epsilon,$
   \item considering a fix $\epsilon$ value and the corresponding $c^\epsilon$ anisotropic solution in time, the $c^\epsilon$ and $c$ get further away from each other in norm as time passes by.
 \end{enumerate}
 
