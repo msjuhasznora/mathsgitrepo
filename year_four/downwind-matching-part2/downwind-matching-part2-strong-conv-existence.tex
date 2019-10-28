@@ -270,9 +270,9 @@ Firstly, point \textit{a)},
     & + \norm{c}_{L^\infty} \int_\Omega  \abs{\Delta \nabla_H \cdot v} \abs{\Delta c} + \norm{c}_{L^\infty} \int_\Omega \bigg ( \int_{-h}^z \abs{ \Delta \nabla_H \cdot v} \diff \xi \bigg) \abs{\Delta c_z} \\
     & \leq C \int_M \bigg ( \int_{-h}^0 \abs{\Delta \nabla_H \cdot v} \diff \xi \bigg) \bigg ( \int_{-h}^0 \abs{\Delta c} \bigg ) \\
     & + \norm{c}_{L^\infty}   \norm{\Delta \nabla_H \cdot v}_2 \norm{\Delta c}_2 + \norm{c}_{L^\infty} \int_\Omega \bigg ( \int_{-h}^0 \abs{ \Delta \nabla_H \cdot v} \diff \xi \bigg) \abs{\Delta c_z} \\
-    & \leq C \bigg ( \int_M \bigg ( \int_{-h}^0 \abs{\Delta \nabla_H \cdot v} \diff \xi \bigg)^2 \bigg )^{1/2} \bigg ( \int_M \bigg ( \int_{-h}^0 \abs{\Delta c} \bigg )^2 \bigg )^{1/2} \\
+    & \leq C \int_M \bigg ( \int_{-h}^0 \abs{\Delta \nabla_H \cdot v}^2 \diff \xi \bigg)^{1/2}  \bigg ( \int_{-h}^0 \abs{\Delta c}^2 \bigg )^{1/2} \\
     & + \norm{c}_{L^\infty} (\norm{\Delta \nabla_H \cdot v}_2^2 + \norm{\Delta c}_2^2) + \norm{c}_{L^\infty} \int_M \bigg ( \int_{-h}^0 \abs{ \Delta \nabla_H \cdot v} \diff \xi \bigg) \bigg ( \int_{-h}^0 \abs{\Delta c_z} \bigg) \\
-    & \leq C \bigg ( \int_M \bigg ( \int_{-h}^0 \abs{\Delta \nabla_H \cdot v}^2 \diff \xi \bigg)^{2*(1/2)} \bigg )^{1/2} \bigg ( \int_M \bigg ( \int_{-h}^0 \abs{\Delta c}^2 \bigg )^{2*(1/2)} \bigg )^{1/2} \\
+    & \leq C \bigg ( \int_M \bigg ( \int_{-h}^0 \abs{\Delta \nabla_H \cdot v}^2 \diff \xi \bigg) \bigg )^{1/2} \bigg ( \int_M \bigg ( \int_{-h}^0 \abs{\Delta c}^2 \bigg ) \bigg )^{1/2} \\
     & + \norm{c}_{L^\infty} (\norm{v}_{H^3}^2 + \norm{\Delta c}_2^2) + \norm{c}_{L^\infty} \norm{v}_{H^3} \norm{\Delta c_z}_2 \\
     & \leq C \norm{v}_{H^3} \norm{\Delta c}_2 + \norm{c}_{L^\infty} \norm{v}_{H^3}^2 + \norm{c}_{L^\infty} \norm{\Delta c}_2^2 + C(\zeta) \norm{c}_{L^\infty}^2 \norm{v}_{H^3}^2 + \zeta \norm{\Delta c_z}_2^2, \\
   \end{split}
