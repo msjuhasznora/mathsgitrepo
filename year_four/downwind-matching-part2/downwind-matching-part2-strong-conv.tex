@@ -51,7 +51,7 @@ The strong convergence of $(\mathbf{u}_h^\epsilon, u_3^\epsilon, c^\epsilon)$ is
 
 \section{Downwind-matching coordinates}
 
-Boundary conditions: we use the minimal additional set of restrictions that allow us to benefit from a simpler structure that resembles periodic domains, keeping a classical non-periodic domain however. (details in the next section)
+\textbf{Domain structure:} for the case of the strong convergence we use periodic boundary conditions. Remark: the periodic boundary conditions can be substituted by $\nabla^k u = 0, \nabla^k c = 0$ - type boundary conditions on a non-periodic, standard domain.
 
 \textbf{Change of notations:} Since $u^\epsilon$ and $u$ denotes the solution functions and the capital $U^\epsilon$ denotes their difference, we switch to the analogous notation with the concentration function, i.e. $c^\epsilon$ and $c$ here are the solutions in the anisotropic and hydrostatic equations, respectively, while the capital $C^\epsilon$ denotes the $c^\epsilon - c$ difference function. $C$ stands for a generic constant.
 
@@ -389,7 +389,7 @@ In other words, the bound does not blow up at any finite time, only at infinity.
   \item considering a fix $\epsilon$ value and the corresponding $c^\epsilon$ anisotropic solution in time, the $c^\epsilon$ and $c$ get further away from each other in norm as time passes by.
 \end{enumerate}
 
-\section{Domain structure}
+\section{Explanation of the domain structure}
 
 What we need is a scenario where the $H^2$ norm is equivalent to the $L^2$ norm of the Laplacian. There are two options for this:
 \begin{itemize}
@@ -397,7 +397,7 @@ What we need is a scenario where the $H^2$ norm is equivalent to the $L^2$ norm 
   \item a minimal set of constraints would be for a function $f$ to require that $f, \nabla f$ is zero on the boundary.
 \end{itemize}
 
-\textbf{We choose the local physical boundary for consistency reasons and set that the velocity and concentration values and the first derivatives of the velocity and concentration are zero.}
+\textbf{Since the zero Dirichlet boundary conditions are not sufficient in this case, but we also need the derivatives of functions to be zero on the boundary, we opt for using the more simple and convenient / transparent PBC solution for the boundary conditions }
 This is important because we need to keep the structure of the inequalities we use in Section 5. These inequalities are obtained by using Lemma 2.2 in Li-Titi, which is formulated for periodic domains.
 
 In case we don't have any of the scenarios above, and we can not benefit from the Poincare inequality, then instead of the original
