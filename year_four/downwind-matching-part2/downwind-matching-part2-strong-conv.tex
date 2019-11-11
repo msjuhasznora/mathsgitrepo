@@ -53,9 +53,9 @@ The strong convergence of $(\mathbf{u}_h^\epsilon, u_3^\epsilon, c^\epsilon)$ is
 
 \textbf{Domain structure:} for the case of the strong convergence we use periodic boundary conditions. Remark: the periodic boundary conditions can be substituted by $\nabla^k u = 0, \nabla^k c = 0$ - type boundary conditions on a non-periodic, standard domain.
 
-\textbf{Change of notations:} Since $u^\epsilon$ and $u$ denotes the solution functions and the capital $U^\epsilon$ denotes their difference, we switch to the analogous notation with the concentration function, i.e. $c^\epsilon$ and $c$ here are the solutions in the anisotropic and hydrostatic equations, respectively, while the capital $C^\epsilon$ denotes the $c^\epsilon - c$ difference function. $C$ stands for a generic constant.
+\textbf{Change of notations:} Since $u^\epsilon$ and $u$ denotes the solution functions and the capital $U^\epsilon$ denotes their difference, we switch to the analogous notation with the concentration function, i.e. $c^\epsilon$ and $c$ here are the solutions in the anisotropic and hydrostatic equations, respectively, while the capital $C^\epsilon$ denotes the $c^\epsilon - c$ difference function. $C$ stands for a generic constant. Analogously, $s^\epsilon$ and $s$ are the anisotropic and hydrostatic source terms.
 
-  \subsection{The set of equations}
+\subsection{The set of equations}
 
 (E-SNS): extended scaled Navier-Stokes.
 
@@ -101,6 +101,18 @@ The strong convergence of $(\mathbf{u}_h^\epsilon, u_3^\epsilon, c^\epsilon)$ is
     \begin{equation} \label{HNSC5-dw}   
     \partial_t c + \mathbf{u} \cdot \nabla c = K_2 \partial_{22} ^ 2 c + K_3 \partial_{33} ^2 c + s \text{ in } \Omega \times (0,T)
     \end{equation}
+    
+\subsection{The source term}
+
+For this case of strong convergence, we use the following versions of source functions detailed below. We use mollified sources in order to fit the strong solution scheme.
+
+\[   
+\delta_\epsilon = 
+  \begin{cases}
+       \frac{1}{\epsilon^3} \exp{\bigg ( \frac{1}{\abs{{\frac{x}{\epsilon}}^2}-1} \bigg ) } &\quad \abs{x} < \epsilon \\
+       0 &\quad \abs{x} \geq \epsilon \\
+  \end{cases}
+\]    
     
 \subsection{Governing equation for $C^\epsilon$}
 
@@ -184,7 +196,8 @@ by $- \partial_{ii} C^\epsilon, i=1,2,3$ we obtain
   \begin{split}
       & \frac{1}{2}\frac{\diff}{\diff t} \norm{\nabla C^\epsilon}_2^2 + \epsilon K_1 \norm{\partial_{11} C^\epsilon}_2^2 + K_2 \norm{\partial_{22} C^\epsilon}_2^2 + K_3 \norm{\partial_{33} C^\epsilon}_2^2 + C \norm{\partial_{ij} C^\epsilon}_2^2 \\
       & = \sum_{i = 1,2,3} \int_\Omega U^\epsilon \nabla C^\epsilon \partial_{ii} C^\epsilon + \int_\Omega U^\epsilon \nabla c \partial_{ii} C^\epsilon + \int_\Omega u \nabla C^\epsilon \partial_{ii} C^\epsilon - \int_\Omega \epsilon K_1 \partial_{11} c \partial_{ii} C^\epsilon \\
-      & = \sum_{i = 1,2,3} I_1(i)  + I_2(i) + I_3(i) + I_4(i),
+      & - \int_\Omega S^\epsilon \Delta C^\epsilon \\
+      & = \sum_{i = 1,2,3} I_1(i)  + I_2(i) + I_3(i) + I_4(i) + I_5(i),
   \end{split}
 \end{equation}
 
@@ -323,6 +336,8 @@ Since here we do have an $\epsilon$ in front of the Laplacian $ \norm{\partial_{
 \begin{remark}
 Note that the $\epsilon$ in $\epsilon K_1 C \norm{\partial_{11} c}_2^2$ will be the convergence rate. If we wanted to have $\epsilon^2$ instead, it would mean that we need to take the $\epsilon$ off of $\partial_{11} C^\epsilon$ (to put it on $\norm{\partial_{11} c}_2^2$) and thus, also take off one derivative off of $\partial_{11} C^\epsilon,$ which would result to the appearance of $\norm{c}_{H^3}.$ Since from the $H^3$ initial data ${u_h}_0$ we can only arrive to an $H^4$-regular solution function $u_h,$ that is sufficient only to guarantee the $H^2$ regularity of $c,$ but not $H^3.$ Increasing the initial velocity's regularity could achieve an $\epsilon^2$ convergence rate, but we are interested in proving a convergence result assuming the minimal needed regularity for the initial horizontal velocity.
 \end{remark}
+
+\textbf{Step 5: estimate for $I_5(i).$}
     
 \subsection{The time-dependent estimate for the system}
 
