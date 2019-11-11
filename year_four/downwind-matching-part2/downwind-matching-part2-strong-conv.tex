@@ -106,13 +106,19 @@ The strong convergence of $(\mathbf{u}_h^\epsilon, u_3^\epsilon, c^\epsilon)$ is
 
 For this case of strong convergence, we use the following versions of source functions detailed below. We use mollified sources in order to fit the strong solution scheme.
 
+Let $\delta_\epsilon$ be the following approximation of the $\delta$ distribution,
+
 \[   
 \delta_\epsilon = 
   \begin{cases}
        \frac{1}{\epsilon^3} \exp{\bigg ( \frac{1}{\abs{{\frac{x}{\epsilon}}^2}-1} \bigg ) } &\quad \abs{x} < \epsilon \\
-       0 &\quad \abs{x} \geq \epsilon \\
+       0 &\quad \abs{x} \geq \epsilon, \\
   \end{cases}
-\]    
+\]
+
+and let $\varphi$ be a $C^\infty_0$ smooth function. We define the anisotropic and hydrostatic source terms respectively as the following convolutions:
+
+$$ s^\epsilon = \delta^\epsilon \star \varphi, \quad s = \delta \star \varphi, \quad \text{and} \quad S^\epsilon = s^\epsilon - s.$$
     
 \subsection{Governing equation for $C^\epsilon$}
 
@@ -196,12 +202,12 @@ by $- \partial_{ii} C^\epsilon, i=1,2,3$ we obtain
   \begin{split}
       & \frac{1}{2}\frac{\diff}{\diff t} \norm{\nabla C^\epsilon}_2^2 + \epsilon K_1 \norm{\partial_{11} C^\epsilon}_2^2 + K_2 \norm{\partial_{22} C^\epsilon}_2^2 + K_3 \norm{\partial_{33} C^\epsilon}_2^2 + C \norm{\partial_{ij} C^\epsilon}_2^2 \\
       & = \sum_{i = 1,2,3} \int_\Omega U^\epsilon \nabla C^\epsilon \partial_{ii} C^\epsilon + \int_\Omega U^\epsilon \nabla c \partial_{ii} C^\epsilon + \int_\Omega u \nabla C^\epsilon \partial_{ii} C^\epsilon - \int_\Omega \epsilon K_1 \partial_{11} c \partial_{ii} C^\epsilon \\
-      & - \int_\Omega S^\epsilon \Delta C^\epsilon \\
+      & - \sum_{i = 1,2,3} \int_\Omega S^\epsilon \partial_{ii} C^\epsilon \\
       & = \sum_{i = 1,2,3} I_1(i)  + I_2(i) + I_3(i) + I_4(i) + I_5(i),
   \end{split}
 \end{equation}
 
-where $i \neq j$ and for now we skip the $S^\epsilon$ function.
+where $i \neq j.$
 
 Now we estimate the terms on the right-hand side one by one.
 
@@ -337,7 +343,21 @@ Since here we do have an $\epsilon$ in front of the Laplacian $ \norm{\partial_{
 Note that the $\epsilon$ in $\epsilon K_1 C \norm{\partial_{11} c}_2^2$ will be the convergence rate. If we wanted to have $\epsilon^2$ instead, it would mean that we need to take the $\epsilon$ off of $\partial_{11} C^\epsilon$ (to put it on $\norm{\partial_{11} c}_2^2$) and thus, also take off one derivative off of $\partial_{11} C^\epsilon,$ which would result to the appearance of $\norm{c}_{H^3}.$ Since from the $H^3$ initial data ${u_h}_0$ we can only arrive to an $H^4$-regular solution function $u_h,$ that is sufficient only to guarantee the $H^2$ regularity of $c,$ but not $H^3.$ Increasing the initial velocity's regularity could achieve an $\epsilon^2$ convergence rate, but we are interested in proving a convergence result assuming the minimal needed regularity for the initial horizontal velocity.
 \end{remark}
 
-\textbf{Step 5: estimate for $I_5(i).$}
+\textbf{Step 5: estimate for $I_5 (i).$}
+
+\begin{equation}
+  \begin{split}
+    & - \int_\Omega S^\epsilon \partial_{ii} C^\epsilon = - \int_\Omega (s^\epsilon - s) \partial_{ii} C^\epsilon \\
+    & = - \int_\Omega (\delta^\epsilon - \delta ) \star \varphi \cdot \partial_{ii} C^\epsilon \\
+    & = \int_\Omega \partial_i \big ( (\delta^\epsilon - \delta ) \star \varphi \big ) \cdot \partial_i C^\epsilon \diff x \\
+    & \leq \int_\Omega \bigg( \partial_i \big ( (\delta^\epsilon - \delta ) \star \varphi \big ) \bigg ) ^2 \diff x + \int_\Omega (\partial_i C^\epsilon)^2 \diff x \\
+    & \leq \int_\Omega \bigg ( (\delta^\epsilon - \delta ) \star \partial_i \varphi \bigg ) ^2 \diff x + \norm{\nabla C^\epsilon}_2^2.
+  \end{split}
+\end{equation}
+
+The $\norm{\nabla C^\epsilon}_2^2$ term is fine, the next step is to estimate
+
+$$\int_\Omega \bigg ( \int_\Omega (\delta^\epsilon - \delta )(x-y) \partial_i \varphi (y) \diff y \bigg )^2 \diff x.$$
     
 \subsection{The time-dependent estimate for the system}
 
