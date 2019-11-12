@@ -349,12 +349,12 @@ Note that the $\epsilon$ in $\epsilon K_1 C \norm{\partial_{11} c}_2^2$ will be 
   \begin{split}
     & - \int_\Omega S^\epsilon \partial_{ii} C^\epsilon = - \int_\Omega (s^\epsilon - s) \partial_{ii} C^\epsilon  = - \int_\Omega \big ( (\delta^\epsilon - \delta ) \star \varphi \big ) \cdot \partial_{ii} C^\epsilon \\
     & = \int_\Omega \partial_i \big ( (\delta^\epsilon - \delta ) \star \varphi \big ) \cdot \partial_i C^\epsilon \diff x \\
-    & \leq \int_\Omega \bigg( \partial_i \big ( (\delta^\epsilon - \delta ) \star \varphi \big ) \bigg ) ^2 \diff x + \int_\Omega (\partial_i C^\epsilon)^2 \diff x \\
-    & \leq \int_\Omega \bigg ( (\delta^\epsilon - \delta ) \star \partial_i \varphi \bigg ) ^2 \diff x + \textcolor{orange}{\norm{\nabla C^\epsilon}_2^2}.
+    & \leq C \int_\Omega \bigg( \partial_i \big ( (\delta^\epsilon - \delta ) \star \varphi \big ) \bigg ) ^2 \diff x + C \int_\Omega (\partial_i C^\epsilon)^2 \diff x \\
+    & \leq C \int_\Omega \bigg ( (\delta^\epsilon - \delta ) \star \partial_i \varphi \bigg ) ^2 \diff x + \textcolor{orange}{C \norm{\nabla C^\epsilon}_2^2}.
   \end{split}
 \end{equation}
 
-The $\norm{\nabla C^\epsilon}_2^2$ term is fine, the next step is to estimate the first term. We denote $\Phi = \partial_i \varphi \in C^\infty_0.$ 
+The $\norm{\nabla C^\epsilon}_2^2$ norm can be left unchanged, the next step is to estimate the first term. We denote $\Phi = \partial_i \varphi \in C^\infty_0.$ 
 
 \begin{equation}
   \begin{split}
@@ -378,7 +378,7 @@ Using the results from the previous subsection, after merging the $\zeta \cdot$ 
   \begin{split}
     & \frac{1}{2} \frac{\diff}{\diff t} \norm{\nabla C^\epsilon}_2^2 + \epsilon K_1 \norm{\partial_{11} C^\epsilon}_2^2 + K_2 \norm{\partial_{22} C^\epsilon}_2^2 + K_3 \norm{\partial_{33} C^\epsilon}_2^2 + C \norm{\partial_{ij} C^\epsilon}_2^2 \\
     & \leq C \textcolor{blue}{\norm{U_H^\epsilon}_{H^3}} \norm{\nabla C^\epsilon}_2^2 + C \norm{U_H^\epsilon}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2 \\
-    & + C \textcolor{blue}{\norm{u_H^\epsilon}_{H^3}} \norm{\nabla C^\epsilon}_2^2 + C \norm{u_H^\epsilon}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2 + \textcolor{orange}{\norm{\nabla C^\epsilon}_2^2} \\
+    & + C \textcolor{blue}{\norm{u_H^\epsilon}_{H^3}} \norm{\nabla C^\epsilon}_2^2 + C \norm{u_H^\epsilon}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2 + \textcolor{orange}{C \norm{\nabla C^\epsilon}_2^2} \\
     & + \textcolor{green}{C \norm{U_H^\epsilon}_{H^3}^2} + \norm{c}_{H^2}^2 \norm{\nabla C^\epsilon}_2^2 \\
     & + \textcolor{green}{C \norm{U_H^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2} \\
     & + \textcolor{green}{\epsilon K_1 \norm{\partial_{11} c}_2^2} + \textcolor{orange}{C \epsilon^2},
@@ -397,16 +397,16 @@ to the estimate obtained after applying the Gronwall inequality.
 
 The multiplicative terms contribute
 
-\[ \int_0^T \textcolor{blue}{\norm{U_H^\epsilon}_{H^3}} + \textcolor{blue}{\norm{u_H^\epsilon}_{H^3}} + \norm{U_H^\epsilon}_{H^3}^2 + C \norm{u_H^\epsilon}_{H^3}^2 + \norm{c}_{H^2}^2 + \textcolor{orange}{1} \diff \tau,\]
+\[ \int_0^T \textcolor{blue}{\norm{U_H^\epsilon}_{H^3}} + \textcolor{blue}{\norm{u_H^\epsilon}_{H^3}} + \norm{U_H^\epsilon}_{H^3}^2 + C \norm{u_H^\epsilon}_{H^3}^2 + \norm{c}_{H^2}^2 + \textcolor{orange}{C} \diff \tau,\]
 
 which can be estimated with
 
 \begin{equation}
   \begin{split}
-    & \int_0^T \norm{U_H^\epsilon}_{H^3} + \norm{u_H^\epsilon}_{H^3} \diff \tau + C + \textcolor{orange}{T} \\
-    & \leq \int_0^T \norm{1 \cdot U_H^\epsilon}_{H^3} + \norm{1 \cdot u_H^\epsilon}_{H^3} \diff \tau + C + \textcolor{orange}{T}\\
-    & \leq T^{1/2} \bigg (\int_0^T \norm{U_H^\epsilon}_{H^3}^2 \bigg )^{1/2} \diff \tau + T^{1/2} \bigg (\int_0^T \norm{u_H^\epsilon}_{H^3}^2 \bigg )^{1/2} \diff \tau + C + \textcolor{orange}{T}\\
-    & \leq \sqrt{T} C + C + \textcolor{orange}{T}.
+    & \int_0^T \norm{U_H^\epsilon}_{H^3} + \norm{u_H^\epsilon}_{H^3} \diff \tau + C + \textcolor{orange}{C \cdot T} \\
+    & \leq \int_0^T \norm{1 \cdot U_H^\epsilon}_{H^3} + \norm{1 \cdot u_H^\epsilon}_{H^3} \diff \tau + C + \textcolor{orange}{C \cdot T}\\
+    & \leq T^{1/2} \bigg (\int_0^T \norm{U_H^\epsilon}_{H^3}^2 \bigg )^{1/2} \diff \tau + T^{1/2} \bigg (\int_0^T \norm{u_H^\epsilon}_{H^3}^2 \bigg )^{1/2} \diff \tau + C + \textcolor{orange}{C \cdot T}\\
+    & \leq \sqrt{T} C + C + \textcolor{orange}{ C \cdot T}.
   \end{split}
 \end{equation}
 
@@ -419,7 +419,7 @@ With this we get
 \begin{equation}
   \begin{split}
     & \norm{C^\epsilon}_{L^\infty(0,T; H^1(\Omega))} + \norm{\nabla_d C^\epsilon}_{L^2(0,T; H^1(\Omega))} \\
-    & \leq (\epsilon C + \textcolor{orange}{C \epsilon^2 \cdot T}) \exp{(C \sqrt{T} + C + \textcolor{orange}{T})}.
+    & \leq (\epsilon C + \textcolor{orange}{C \epsilon^2 \cdot T}) \exp{(C \sqrt{T} + C + \textcolor{orange}{C \cdot T})}.
   \end{split}
 \end{equation}
 
@@ -430,7 +430,7 @@ Assuming that the global existence for $c$ works, then this above estimate sugge
 \begin{equation}
   \begin{split}
   & \norm{C^\epsilon}_{L^\infty(0,T^\epsilon_*; H^1(\Omega))} + \norm{\nabla_d C^\epsilon}_{L^2(0,T^\epsilon_*; H^1(\Omega))} \\
-  & \leq (\epsilon C + \textcolor{orange}{C \epsilon^2 \cdot T^\epsilon_*}) \exp{(C \sqrt{T^\epsilon_*} + C + \textcolor{orange}{T^\epsilon_*})} < \infty,
+  & \leq (\epsilon C + \textcolor{orange}{C \epsilon^2 \cdot T^\epsilon_*}) \exp{(C \sqrt{T^\epsilon_*} + C + \textcolor{orange}{C \cdot T^\epsilon_*})} < \infty,
   \end{split}
 \end{equation}
 
