@@ -102,7 +102,7 @@ The strong convergence of $(\mathbf{u}_h^\epsilon, u_3^\epsilon, c^\epsilon)$ is
     \partial_t c + \mathbf{u} \cdot \nabla c = K_2 \partial_{22} ^ 2 c + K_3 \partial_{33} ^2 c + s \text{ in } \Omega \times (0,T)
     \end{equation}
     
-\subsection{The source term}
+\subsection{\textcolor{orange}{The source term}}
 
 For this case of strong convergence, we use the following versions of source functions detailed below. We use mollified sources in order to fit the strong solution scheme.
 
@@ -111,7 +111,7 @@ Let $\delta_\epsilon$ be the following approximation of the $\delta$ distributio
 \[   
 \delta_\epsilon = 
   \begin{cases}
-       \frac{1}{\epsilon^3} \exp{\bigg ( \frac{1}{\abs{{\frac{x}{\epsilon}}^2}-1} \bigg ) } &\quad \abs{x} < \epsilon \\
+       \frac{1}{\epsilon^3} \exp{\bigg ( \frac{1}{\abs{{\frac{x}{\epsilon}}}^2-1} \bigg ) } &\quad \abs{x} < \epsilon \\
        0 &\quad \abs{x} \geq \epsilon, \\
   \end{cases}
 \]
@@ -343,21 +343,32 @@ Since here we do have an $\epsilon$ in front of the Laplacian $ \norm{\partial_{
 Note that the $\epsilon$ in $\epsilon K_1 C \norm{\partial_{11} c}_2^2$ will be the convergence rate. If we wanted to have $\epsilon^2$ instead, it would mean that we need to take the $\epsilon$ off of $\partial_{11} C^\epsilon$ (to put it on $\norm{\partial_{11} c}_2^2$) and thus, also take off one derivative off of $\partial_{11} C^\epsilon,$ which would result to the appearance of $\norm{c}_{H^3}.$ Since from the $H^3$ initial data ${u_h}_0$ we can only arrive to an $H^4$-regular solution function $u_h,$ that is sufficient only to guarantee the $H^2$ regularity of $c,$ but not $H^3.$ Increasing the initial velocity's regularity could achieve an $\epsilon^2$ convergence rate, but we are interested in proving a convergence result assuming the minimal needed regularity for the initial horizontal velocity.
 \end{remark}
 
-\textbf{Step 5: estimate for $I_5 (i).$}
+\textbf{\textcolor{orange}{Step 5: estimate for $I_5 (i).$}}
 
 \begin{equation}
   \begin{split}
-    & - \int_\Omega S^\epsilon \partial_{ii} C^\epsilon = - \int_\Omega (s^\epsilon - s) \partial_{ii} C^\epsilon \\
-    & = - \int_\Omega (\delta^\epsilon - \delta ) \star \varphi \cdot \partial_{ii} C^\epsilon \\
+    & - \int_\Omega S^\epsilon \partial_{ii} C^\epsilon = - \int_\Omega (s^\epsilon - s) \partial_{ii} C^\epsilon  = - \int_\Omega \big ( (\delta^\epsilon - \delta ) \star \varphi \big ) \cdot \partial_{ii} C^\epsilon \\
     & = \int_\Omega \partial_i \big ( (\delta^\epsilon - \delta ) \star \varphi \big ) \cdot \partial_i C^\epsilon \diff x \\
     & \leq \int_\Omega \bigg( \partial_i \big ( (\delta^\epsilon - \delta ) \star \varphi \big ) \bigg ) ^2 \diff x + \int_\Omega (\partial_i C^\epsilon)^2 \diff x \\
-    & \leq \int_\Omega \bigg ( (\delta^\epsilon - \delta ) \star \partial_i \varphi \bigg ) ^2 \diff x + \norm{\nabla C^\epsilon}_2^2.
+    & \leq \int_\Omega \bigg ( (\delta^\epsilon - \delta ) \star \partial_i \varphi \bigg ) ^2 \diff x + \textcolor{orange}{\norm{\nabla C^\epsilon}_2^2}.
   \end{split}
 \end{equation}
 
-The $\norm{\nabla C^\epsilon}_2^2$ term is fine, the next step is to estimate
+The $\norm{\nabla C^\epsilon}_2^2$ term is fine, the next step is to estimate the first term. We denote $\Phi = \partial_i \varphi \in C^\infty_0.$ 
 
-$$\int_\Omega \bigg ( \int_\Omega (\delta^\epsilon - \delta )(x-y) \partial_i \varphi (y) \diff y \bigg )^2 \diff x.$$
+\begin{equation}
+  \begin{split}
+    & \int_\Omega \bigg ( (\delta^\epsilon - \delta ) \star \partial_i \varphi \bigg ) ^2 \diff x \\
+    & = \int_\Omega \bigg ( \int_\Omega (\delta^\epsilon - \delta )(x-y) \Phi (y) \diff y \bigg )^2 \diff x \\
+    & = \int_\Omega \bigg ( \int_\Omega \delta^\epsilon(x-y) \Phi (y) \diff y - \Phi (x) \bigg )^2 \diff x \\
+    & = \int_\Omega \bigg ( \int_{\mathcal{B}(x, \epsilon)} \delta^\epsilon(x-y) \Phi (y) \diff y - 1 \cdot \Phi (x) \bigg )^2 \diff x \\
+    & = \int_\Omega \bigg ( \int_{\mathcal{B}(x, \epsilon)} \delta^\epsilon(x-y) \big ( \Phi (y) - \Phi (x) \big ) \diff y \bigg )^2 \diff x \\
+    & \leq \int_\Omega \bigg ( \int_{\mathcal{B}(x, \epsilon)} \delta^\epsilon(x-y) \abs{\nabla \Phi  (\eta)} \abs{y - x}  \diff y \bigg )^2 \diff x \\
+    & \leq \epsilon^2 \int_\Omega \bigg ( \int_{\mathcal{B}(x, \epsilon)} \delta^\epsilon(x-y) \abs{\nabla \Phi  (\eta)} \diff y \bigg )^2 \diff x \\
+    & \leq C \epsilon^2 \norm{\nabla \Phi}_{L^\infty}^2 \leq \textcolor{orange}{C \epsilon^2}.
+  \end{split}
+\end{equation}
+
     
 \subsection{The time-dependent estimate for the system}
 
@@ -367,10 +378,10 @@ Using the results from the previous subsection, after merging the $\zeta \cdot$ 
   \begin{split}
     & \frac{1}{2} \frac{\diff}{\diff t} \norm{\nabla C^\epsilon}_2^2 + \epsilon K_1 \norm{\partial_{11} C^\epsilon}_2^2 + K_2 \norm{\partial_{22} C^\epsilon}_2^2 + K_3 \norm{\partial_{33} C^\epsilon}_2^2 + C \norm{\partial_{ij} C^\epsilon}_2^2 \\
     & \leq C \textcolor{blue}{\norm{U_H^\epsilon}_{H^3}} \norm{\nabla C^\epsilon}_2^2 + C \norm{U_H^\epsilon}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2 \\
-    & + C \textcolor{blue}{\norm{u_H^\epsilon}_{H^3}} \norm{\nabla C^\epsilon}_2^2 + C \norm{u_H^\epsilon}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2 \\
+    & + C \textcolor{blue}{\norm{u_H^\epsilon}_{H^3}} \norm{\nabla C^\epsilon}_2^2 + C \norm{u_H^\epsilon}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2 + \textcolor{orange}{\norm{\nabla C^\epsilon}_2^2} \\
     & + \textcolor{green}{C \norm{U_H^\epsilon}_{H^3}^2} + \norm{c}_{H^2}^2 \norm{\nabla C^\epsilon}_2^2 \\
     & + \textcolor{green}{C \norm{U_H^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2} \\
-    & + \textcolor{green}{\epsilon K_1 \norm{\partial_{11} c}_2^2},
+    & + \textcolor{green}{\epsilon K_1 \norm{\partial_{11} c}_2^2} + \textcolor{orange}{C \epsilon^2},
   \end{split}
 \end{equation}
 
@@ -380,38 +391,48 @@ The terms with "the missing square" are due to the $u_1 \partial_1 C^\epsilon \p
 
 The \textcolor{green}{additive terms} will contribute
 
-\[ \int_0^T \epsilon C \norm{\partial_{11} c}_2^2 + C \norm{U_H^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2 + C \norm{U_H^\epsilon}_{H^3}^2  \diff \tau \leq \epsilon C + \epsilon^2 C \]
+\[ \int_0^T \epsilon C \norm{\partial_{11} c}_2^2 + C \norm{U_H^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2 + C \norm{U_H^\epsilon}_{H^3}^2 + \textcolor{orange}{C \epsilon^2} \diff \tau \leq \epsilon C + \epsilon^2 C + \textcolor{orange}{C \epsilon^2 \cdot T}\]
 
-to the estimate obtained after applying the Gronwall inequality, which is independent from $T$, and the estimate holds even for $T= \infty.$
+to the estimate obtained after applying the Gronwall inequality.
 
 The multiplicative terms contribute
 
-\[ \int_0^T \textcolor{blue}{\norm{U_H^\epsilon}_{H^3}} + \textcolor{blue}{\norm{u_H^\epsilon}_{H^3}} + \norm{U_H^\epsilon}_{H^3}^2 + C \norm{u_H^\epsilon}_{H^3}^2 + \norm{c}_{H^2}^2 \diff \tau,\]
+\[ \int_0^T \textcolor{blue}{\norm{U_H^\epsilon}_{H^3}} + \textcolor{blue}{\norm{u_H^\epsilon}_{H^3}} + \norm{U_H^\epsilon}_{H^3}^2 + C \norm{u_H^\epsilon}_{H^3}^2 + \norm{c}_{H^2}^2 + \textcolor{orange}{1} \diff \tau,\]
 
 which can be estimated with
 
 \begin{equation}
   \begin{split}
-    & \int_0^T \norm{U_H^\epsilon}_{H^3} + \norm{u_H^\epsilon}_{H^3} \diff \tau + C \\
-    & \leq \int_0^T \norm{1 \cdot U_H^\epsilon}_{H^3} + \norm{1 \cdot u_H^\epsilon}_{H^3} \diff \tau + C \\
-    & \leq T^{1/2} \bigg (\int_0^T \norm{U_H^\epsilon}_{H^3}^2 \bigg )^{1/2} \diff \tau + T^{1/2} \bigg (\int_0^T \norm{u_H^\epsilon}_{H^3}^2 \bigg )^{1/2} \diff \tau + C \\
-    & \leq \sqrt{T} C + C.
+    & \int_0^T \norm{U_H^\epsilon}_{H^3} + \norm{u_H^\epsilon}_{H^3} \diff \tau + C + \textcolor{orange}{T} \\
+    & \leq \int_0^T \norm{1 \cdot U_H^\epsilon}_{H^3} + \norm{1 \cdot u_H^\epsilon}_{H^3} \diff \tau + C + \textcolor{orange}{T}\\
+    & \leq T^{1/2} \bigg (\int_0^T \norm{U_H^\epsilon}_{H^3}^2 \bigg )^{1/2} \diff \tau + T^{1/2} \bigg (\int_0^T \norm{u_H^\epsilon}_{H^3}^2 \bigg )^{1/2} \diff \tau + C + \textcolor{orange}{T}\\
+    & \leq \sqrt{T} C + C + \textcolor{orange}{T}.
   \end{split}
 \end{equation}
 
 The issue here is that there is no known available estimate for $L^1$ estimate in time for the Navier-Stokes equations for infinite time interval, only for the case of a bounded domain, where $L^2$ boundedness implies $L^1$ boundedness directly. Using $\norm{U_H^\epsilon}_{H^3} \leq 1 + \norm{U_H^\epsilon}_{H^3}^2$ does not help in terms of obtaining a uniform estimate, as it leads to $\int_0^T 1 + \norm{U_H^\epsilon}_{H^3}^2 \diff \tau,$ which contains a $T.$
 
-Thus the main difference from Section 5 in Li-Titi is that while in their case they had an $\epsilon^2 C$ bound where $C=C(L_1, L_2, \norm{v_0}_{H_1}),$ \textbf{we have a $C$ that depends also on $T.$}
+Thus the main difference from Section 5 in Li-Titi is that while in their case they had an $\epsilon^2 C$ bound where $C=C(L_1, L_2, \norm{v_0}_{H_1}),$ \textbf{we have a $C$ that depends also on $T,$} due to the source term as well.
 
 With this we get
 
-\[ \norm{C^\epsilon}_{L^\infty(0,T; H^1(\Omega))} + \norm{\nabla_d C^\epsilon}_{L^2(0,T; H^1(\Omega))} \leq \epsilon C \exp{(C \sqrt{T} + C)}.\]
+\begin{equation}
+  \begin{split}
+    & \norm{C^\epsilon}_{L^\infty(0,T; H^1(\Omega))} + \norm{\nabla_d C^\epsilon}_{L^2(0,T; H^1(\Omega))} \\
+    & \leq (\epsilon C + \textcolor{orange}{C \epsilon^2 \cdot T}) \exp{(C \sqrt{T} + C + \textcolor{orange}{T})}.
+  \end{split}
+\end{equation}
 
 By this, it seems that not just the convergence rate weakens from $\epsilon^2$ to $\epsilon$, but also the uniformity in time is lost. We can not use $T=\infty$ in this $C^\epsilon$ bound itself, but the estimate holds for any finite point in time --- the convergence gets slower as time evolves.
 
 Assuming that the global existence for $c$ works, then this above estimate suggests that $c^\epsilon$ exists globally, too. Otherwise, if there is a finite maximal $T^\epsilon_*$ existence time, then the norm of the $c^\epsilon - c$ difference at $T^\epsilon_*$ is bounded by
 
-\[ \norm{C^\epsilon}_{L^\infty(0,T^\epsilon_*; H^1(\Omega))} + \norm{\nabla_d C^\epsilon}_{L^2(0,T^\epsilon_*; H^1(\Omega))} \leq \epsilon C \exp{(C \sqrt{T^\epsilon_*} + C)} < \infty,\]
+\begin{equation}
+  \begin{split}
+  & \norm{C^\epsilon}_{L^\infty(0,T^\epsilon_*; H^1(\Omega))} + \norm{\nabla_d C^\epsilon}_{L^2(0,T^\epsilon_*; H^1(\Omega))} \\
+  & \leq (\epsilon C + \textcolor{orange}{C \epsilon^2 \cdot T^\epsilon_*}) \exp{(C \sqrt{T^\epsilon_*} + C + \textcolor{orange}{T^\epsilon_*})} < \infty,
+  \end{split}
+\end{equation}
 
 using that $T^\epsilon_* < \infty,$ and then because of the finite energy it could be continued after $T^\epsilon_*,$ which is a contradiction.
 
