@@ -152,7 +152,7 @@ Let's have ${\mathbf{u}_h}_0 \in H^3(\Omega)$ (and as a consequence $\mathbf{u}_
 
 \begin{enumerate}
 
-  \item \textbf{Existence for (E-PEs).} Global unique existence of the $(\mathbf{u}_h, u_3, c)$ strong solution of the (E-PEs) expressed in downwind-matching coordinates: in Cao-Li-Titi's paper \todo{remains to be checked} it has been proved, a difference is that we do not have the $c$-analogous version of the $\partial_z p$---$T$ relationship.
+  \item \textbf{Existence for (E-PEs).} Global unique existence of the $(\mathbf{u}_h, u_3, c)$ strong solution of the (E-PEs) expressed in downwind-matching coordinates: in Cao-Li-Titi's paper it has been proved, a difference is that we do not have the $c$-analogous version of the $\partial_z p$---$T$ relationship. The file regarding existence shows the details and necessary modifications.
 
   \item \textbf{Existence for (E-SNS).} From the Li-Titi article we have the global (considering that we are at the case of $\epsilon < \epsilon_0$ as previously specified) unique existence of the $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ strong solution of (SNS) without concentration with the following uniform bound for the difference:
   
@@ -378,7 +378,7 @@ Using the results from the previous subsection, after merging the $\zeta \cdot$ 
   \begin{split}
     & \frac{1}{2} \frac{\diff}{\diff t} \norm{\nabla C^\epsilon}_2^2 + \epsilon K_1 \norm{\partial_{11} C^\epsilon}_2^2 + K_2 \norm{\partial_{22} C^\epsilon}_2^2 + K_3 \norm{\partial_{33} C^\epsilon}_2^2 + C \norm{\partial_{ij} C^\epsilon}_2^2 \\
     & \leq C \textcolor{blue}{\norm{U_H^\epsilon}_{H^3}} \norm{\nabla C^\epsilon}_2^2 + C \norm{U_H^\epsilon}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2 \\
-    & + C \textcolor{blue}{\norm{u_H^\epsilon}_{H^3}} \norm{\nabla C^\epsilon}_2^2 + C \norm{u_H^\epsilon}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2 + \textcolor{orange}{C \norm{\nabla C^\epsilon}_2^2} \\
+    & + C \textcolor{blue}{\norm{u_H}_{H^3}} \norm{\nabla C^\epsilon}_2^2 + C \norm{u_H}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2 + \textcolor{orange}{C \norm{\nabla C^\epsilon}_2^2} \\
     & + \textcolor{green}{C \norm{U_H^\epsilon}_{H^3}^2} + \norm{c}_{H^2}^2 \norm{\nabla C^\epsilon}_2^2 \\
     & + \textcolor{green}{C \norm{U_H^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2} \\
     & + \textcolor{green}{\epsilon K_1 \norm{\partial_{11} c}_2^2} + \textcolor{orange}{C \epsilon^2},
@@ -397,15 +397,15 @@ to the estimate obtained after applying the Gronwall inequality.
 
 The multiplicative terms contribute
 
-\[ \int_0^T \textcolor{blue}{\norm{U_H^\epsilon}_{H^3}} + \textcolor{blue}{\norm{u_H^\epsilon}_{H^3}} + \norm{U_H^\epsilon}_{H^3}^2 + C \norm{u_H^\epsilon}_{H^3}^2 + \norm{c}_{H^2}^2 + \textcolor{orange}{C} \diff \tau,\]
+\[ \int_0^T \textcolor{blue}{\norm{U_H^\epsilon}_{H^3}} + \textcolor{blue}{\norm{u_H}_{H^3}} + \norm{U_H^\epsilon}_{H^3}^2 + C \norm{u_H}_{H^3}^2 + \norm{c}_{H^2}^2 + \textcolor{orange}{C} \diff \tau,\]
 
 which can be estimated with
 
 \begin{equation}
   \begin{split}
-    & \int_0^T \norm{U_H^\epsilon}_{H^3} + \norm{u_H^\epsilon}_{H^3} \diff \tau + C + \textcolor{orange}{C \cdot T} \\
-    & \leq \int_0^T \norm{1 \cdot U_H^\epsilon}_{H^3} + \norm{1 \cdot u_H^\epsilon}_{H^3} \diff \tau + C + \textcolor{orange}{C \cdot T}\\
-    & \leq T^{1/2} \bigg (\int_0^T \norm{U_H^\epsilon}_{H^3}^2 \bigg )^{1/2} \diff \tau + T^{1/2} \bigg (\int_0^T \norm{u_H^\epsilon}_{H^3}^2 \bigg )^{1/2} \diff \tau + C + \textcolor{orange}{C \cdot T}\\
+    & \int_0^T \norm{U_H^\epsilon}_{H^3} + \norm{u_H}_{H^3} \diff \tau + C + \textcolor{orange}{C \cdot T} \\
+    & \leq \int_0^T \norm{1 \cdot U_H^\epsilon}_{H^3} + \norm{1 \cdot u_H}_{H^3} \diff \tau + C + \textcolor{orange}{C \cdot T}\\
+    & \leq T^{1/2} \bigg (\int_0^T \norm{U_H^\epsilon}_{H^3}^2 \bigg )^{1/2} \diff \tau + T^{1/2} \bigg (\int_0^T \norm{u_H}_{H^3}^2 \bigg )^{1/2} \diff \tau + C + \textcolor{orange}{C \cdot T}\\
     & \leq \sqrt{T} C + C + \textcolor{orange}{ C \cdot T}.
   \end{split}
 \end{equation}
