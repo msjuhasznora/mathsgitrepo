@@ -102,7 +102,7 @@ def writedifference(degree_anis, degree_hydr):
 def hydrostatic_solver(VP, up_, vertical_velocity_degree):
     
     up = TrialFunction(VP)
-    u,p = split(up)
+    u,p = split(up) # u,p are "trial function" type (special to FEniCS)
     u1, u3 = split(u)
     (v, q) = TestFunctions(VP)
     v1, v3 = split(v)
@@ -126,6 +126,7 @@ def hydrostatic_solver(VP, up_, vertical_velocity_degree):
     prm['newton_solver']['maximum_iterations'] = 5
     solver.solve()
 
+    # from now on we process the data (note the usage of u,p as auxilliary variables of "function" type
     (u,p) = up_.split(True)
     (u1, u3) = u.split(True)
     
