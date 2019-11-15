@@ -1,0 +1,850 @@
+\documentclass[11pt]{article}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{commath}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{float} 
+\usepackage{array}
+\usepackage{outlines}
+\usepackage{setspace}
+\usepackage[colorinlistoftodos]{todonotes}
+\definecolor{green}{rgb}{0.4, 0.69, 0.2}
+\definecolor{asparagus}{rgb}{0.53, 0.66, 0.42}
+\definecolor{blue}{rgb}{0.0, 0.53, 0.74}
+\definecolor{terracotta}{HTML}{e2725b}
+\definecolor{mocassin}{HTML}{FFE4B5}
+\definecolor{coral}{HTML}{FFAA80}
+\setlist[enumerate,1]{label=\roman*)}
+\setlist[enumerate,2]{label=\alph*)}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+\newtheorem{prop}{Proposition}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,trees, calc}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage[british]{babel}
+\usepackage{xcolor}
+\definecolor{grey}{rgb}{0.9,0.9,0.9}
+
+\begin{document}
+
+\begin{titlepage}
+	\colorbox{grey}{
+		\parbox[t]{0.93\textwidth}{
+			\parbox[t]{0.91\textwidth}{
+				\raggedleft
+				\fontsize{50pt}{80pt}\selectfont
+				\vspace{0.7cm}
+				{\fontfamily{qhv}\selectfont PhD final report} \\
+				\vspace{0.7cm}
+			}
+		}
+	}
+	\vfill
+	\parbox[t]{0.93\textwidth}{
+		\raggedleft
+		\large
+		{\Large N\'{o}ra Juh\'{a}sz}\\[4pt]
+		DISIM\\
+		University of L'Aquila\\[4pt]
+		\texttt{\Large Supervisor: Prof. D. Donatelli}\\
+		
+		\hfill\rule{0.2\linewidth}{1pt}
+	}
+\end{titlepage}
+
+\newpage
+\tableofcontents
+
+\newpage
+
+\section{Research activity: Mathematical modelling of the polluted atmosphere}
+
+\subsection{The scope of this project in a nutshell}
+
+The key aspects of capturing the dynamics of either water flow in oceanography or atmospheric changes in meteorology are the following two fundamental concepts that underlie many modern asymptotic models aiming to describe them. The first one is that both above mentioned phenomena can be viewed as a fluid dynamics process, and as such, they are best described by the Navier-Stokes equations. The second is the notion of the so-called shallow domains. This latter is a widely used concept in the field of large-scale geophysical fluids and its main idea is to take advantage of their approximately flat structure when modelling them with the Navier-Stokes equations, leading to the classic hydrostatic approximation. We use the
+
+\[ \epsilon = \frac{\text{characteristic depth}}{\text{characteristic width}} \]
+
+aspect ratio and the fact that, as the above described general ideas suggest, it is natural to consider asymptotic models and to take the limit model as $\epsilon$ goes to zero.
+
+In this work we couple the Navier-Stokes equations representing fluid velocity with a convection-diffusion equation describing air pollutant concentration, and show that the solutions of the complete coupled system (anisotropic equations) on a shallow domain are in fact "close" to the solutions of the hydrostatic model. In more detail, we verify a rigorous connection between two fundamental models, namely the anisotropic and hydrostatic models, and show that they are interwoven on the level of both weak and strong solutions as $\epsilon$ goes to zero --- providing with this a generalised verification of meteorological models based on the hydrostatic approximation. The main novelty of this work is the elaboration of the convergence results in two different coordinate systems, in particular in the mathematically more challenging, so-called downwind-matching coordinate system, and the addition of the concentration function to the model --- important convergence results for the velocity functions in geophysical coordinates had been available previously, see \cite{azerad2001mathematical} and \cite{li2019primitive}. We also perform numerical simulations in order to have a visual affirmation of the fact of the convergence.
+
+\subsection{The asymptotic behaviour of the anisotropic weak solutions in geophysical coordinates with $L^2$ initial data}
+
+We begin by choosing a coordinate system, set the domain and an appropriate set of equations describing both atmosphere motions and the effect of pollution. We ignore large scale effects such as the curvature of the Earth. For describing the effect of pollution we use a continuity equation written in Cartesian coordinates for the concentration: we fix a local Cartesian coordinate system where the axes are independent from the wind ($x, y$ and $z$ are oriented towards east, north, and upwards, respectively). A different choice of coordinates is described in detail later.
+
+The domain we consider is a local slice of the atmosphere filled with homogeneous incompressible air and a pollutant, and it is defined by the set
+
+\begin{equation}
+  \Omega_{\epsilon} = \{(x,y,z) \in \mathbb{R}^3 ; (x,y) \in \omega, 0 < z < \epsilon h(x,y) \},
+\end{equation}
+
+where $\epsilon$ incorporates the shallowness of the domain.
+
+The equations governing the air velocity $\mathbf{v}, $ the pressure $q$ and the pollution concentration $P$ in the atmosphere are the incompressible Navier-Stokes equations combined with an advection-diffusion equation. We use different viscosities according to vertical or horizontal directions, and the density is taken to be identically equal to one:
+
+\begin{equation} \label{originalEQ-V}
+  \partial_t \mathbf{v} + (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + \nabla q + 2 \mathbf{w} \times \mathbf{v}= \mathbf{g} \text{ in } \Omega_{\epsilon} \times (0,T)
+\end{equation}
+    
+\begin{equation} \label{originalEQ-I}
+  \nabla \cdot \mathbf{v} = 0 \text{ in } \Omega_{\epsilon} \times (0,T)
+\end{equation}
+    
+\begin{equation} \label{diffusive}
+  \partial_t P + \mathbf{v} \cdot \nabla P = \nabla \cdot (\mathbf{K} \nabla P) + Q,
+\end{equation}
+
+where $P$ is the pollution concentration and $\mathbf{K}$ is the $3 \times 3$ diffusion matrix.
+
+Now, we perform a vertical scaling to make the domain independent of $\epsilon.$
+
+    \[x=x_1, \quad y=x_2, \quad z=\epsilon x_3. \]
+    
+We have the following new, $\epsilon$ - independent domain
+    
+    \[ \Omega =  \{(x_1,x_2,x_3) \in \mathbb{R}^3 ; (x_1,x_2) \in \omega, 0 < x_3 < h (x_1 , x_2) \}.\]
+    
+The corresponding scaling regarding the kinematic, pressure and viscosity terms are
+     
+    \[v_1 = u_1^{\epsilon}, \quad v_2 = u_2^{\epsilon}, \quad v_3 = \epsilon u_3^{\epsilon}, \quad p = p^{\epsilon}, \]
+    \[\nu_x = \nu_1, \quad \nu_y = \nu_2 , \quad \nu_z = \epsilon ^ 2\nu_3. \]
+    
+Note that from this point we have $\nabla = (\partial_1, \partial_2, \partial_3) $ and $ \Delta_\nu = \nu_1 \partial^2_{11} + \nu_2 \partial^2_{22}  + \nu_3 \partial^2_{33} $. 
+    
+We use an analogous rescaling methodology for the diffusivity constants in (\ref{diffusive}),
+    
+\begin{gather}
+ \begin{bmatrix} K_{xx} & K_{xy} & K_{xz} \\ K_{yx} & K_{yy} & K_{yz} \\ K_{zx} & K_{zy} & K_{zz} \end{bmatrix}
+ =
+  \begin{bmatrix}
+    M_{11} & M_{12} & \epsilon M_{13} \\ M_{21} & M_{22} & \epsilon M_{23} \\ \epsilon M_{31} & \epsilon M_{32} & \epsilon^2 M_{33}
+  \end{bmatrix}
+\end{gather}
+
+Here we emphasise that the diffusivity matrix $\mathbf{M}$ is assumed to have the coercivity property.
+
+Finally we obtain the rescaling equations for the pollution concentration and the source term:
+
+    \[ P = \frac{1}{\epsilon} c^\epsilon, \quad Q = \frac{1}{\epsilon} s^\epsilon. \]
+    
+As for the source term, we enable requirements of different strength depending on whether we consider the case of weak or strong solutions. In this case, investigating weak convergence, we will use localised point sources as suggested in \cite{zhuk2016source} and we use what is called a parametrised nascent delta function (a Gaussian impulse, specifically) to describe the source term $s^\epsilon$:
+
+\begin{equation} \label{sourcedefinition}
+  s^\epsilon = I H(t-t_s) \gamma \epsilon^{-3} e ^ {\frac{-(\mathbf{x}-\mathbf{x_s})^2}{\epsilon^2}},
+\end{equation}
+
+while in the limit model the source term $S$ naturally stands for the $\delta$ distribution.
+    
+Putting the previously described rescaling terms together to the original equations (\ref{originalEQ-V})-(\ref{diffusive}), we arrive to the merged anisotropic equations of the polluted atmosphere above inland surface:
+  
+    \begin{equation} \label{ANSC1}
+    \partial_t u^\epsilon _1 + \mathbf{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\alpha u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{ANSC2}
+    \partial_t u_2^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_2^\epsilon -\Delta_\nu u_2^\epsilon + \alpha u_1^\epsilon + \partial_2 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{ANSC3}
+    \epsilon^2 \{  \partial_t u_3^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon -\Delta_\nu u_3^{\epsilon} \} - \epsilon \beta u_1^\epsilon + \partial_3 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{ANSC4}
+    \nabla \cdot \mathbf{u}^\epsilon= 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{ANSC5}
+    \partial_t c^\epsilon + \mathbf{u^\epsilon} \cdot \nabla c^\epsilon = \nabla \cdot (\mathbf{M} \nabla c^\epsilon) + s^\epsilon \text{ in } \Omega \times (0,T)
+    \end{equation}
+
+The initial condition for the velocity and the pollution concentration are
+    
+    \begin{equation} \label{ANSC7}
+    \mathbf{u}^\epsilon (\cdot, t = 0) = \mathbf{u}_0, \quad c^\epsilon (\cdot, t=0) = c_0  \quad \text{ in } \Omega.
+    \end{equation}
+    
+To make the above set of equations complete, we need to assign the boundary conditions, which we set as shown by the graph below.
+
+\begin{figure}[!h]
+  \centering
+  \begin{tikzpicture}
+  
+    \draw[blue] (0,0) -- (2,0) -- (4,0) -- (4,2) -- (4,4) -- (2,4) -- (0,4) -- (0,2) -- (0,0);
+    \draw[green, thick] (0,0) -- (4,0);
+    
+    \draw (2,2)node{$\Omega$};
+    \draw (2,0)node[below] {$\mathbf{u^\epsilon} = 0,$ $ \partial_1 c^\epsilon$ and $ \partial_2 c^\epsilon$ are bounded, $\partial_3 c^\epsilon = 0$};
+    \draw (4,2)node[right] {$\mathbf{u^\epsilon} = 0, c^\epsilon=0 $};
+    \draw (2,4)node[above] {$\mathbf{u^\epsilon} = 0, c^\epsilon=0 $};
+    \draw (0,2)node[left] {$\mathbf{u^\epsilon} = 0, c^\epsilon=0 $};
+    
+  \end{tikzpicture}
+\end{figure}
+  
+    \begin{equation} \label{ANSC8}
+      \begin{split}
+        & \mathbf{u}^\epsilon = 0 \text{ on } \Gamma \times (0,T), \\
+        &c^\epsilon = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
+        & \partial_1 c^\epsilon = \sigma_1, \partial_2 c^\epsilon = \sigma_2,\ \partial_3 c^\epsilon= 0 \text{ on } \Gamma_G \times (0,T), \\
+        & \boldsymbol{\sigma} = (\sigma_1, \sigma_2, 0) \in L^2(0,T; \Gamma_G)\\
+      \end{split} \raisetag{40pt}
+    \end{equation}
+
+If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and $\epsilon$ in the anisotropic equations, we formally arrive to the hydrostatic Navier-Stokes equations (i.e., primitive equations) combined with pollution.
+
+    \begin{equation} \label{HNSC1}    
+    \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\alpha u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC2}   
+    \partial_t u_2 + \mathbf{u} \cdot \nabla u_2 - \Delta_\nu u_2 -\alpha u_1 + \partial_2 p = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC3}   
+    \partial_3 p = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC4}   
+    \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC5}   
+    \partial_t c + \mathbf{u} \cdot \nabla c = \nabla \cdot (\mathbf{M} \nabla c) + s \text{ in } \Omega \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC6}   
+    u_1 = u_2 = u_3 n_3 = 0 \text{ on } \Gamma \times (0,T)
+    \end{equation}
+    
+    \begin{equation} \label{HNSC7}   
+    u_i (\cdot, t=0) = u_{0 i}, \text{ } c (\cdot, t=0) = c_0 \text{ in } \Omega, \text{ $i$ = 1,2}
+    \end{equation}
+    
+    \begin{equation} \label{HNSC8}
+      \begin{split}
+        &c = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
+        & \partial_1 c = \sigma_1, \partial_2 c = \sigma_2, \partial_3  c = 0, \boldsymbol{\sigma} = (\sigma_1, \sigma_2, 0) \in L^2(0,T; \Gamma_G)\\
+      \end{split}
+    \end{equation}
+
+\subsubsection{Theoretical justification of the hydrostatic model on the level of weak solutions}
+
+In this subsection we write down the weak formulations of the two diffe\-rent systems in geophysical coordinates, and provide the main steps of the proof that shows that any weak solution of the anisotropic merged velocity -- pollution system converges to a weak solution of the hydrostatic system as $\epsilon$ goes to zero. In order to state the respective weak forms, we define the spaces these functions will be defined in.
+
+ \[ C^{\infty}_{\Gamma_A} (\Omega) = \{ \varphi \in C^\infty (\bar{\Omega}); \varphi = 0 \text{ on some neighbourhood of } \Gamma_A \} \]
+  
+  \[ H^k_{\Gamma_A} (\Omega) = \overline{C_\Gamma ^ \infty (\Omega)} ^ {H^k (\Omega)} = \{ v \in H^k(\Omega); v=0 \text{ on } \Gamma_A \} \]
+  
+  \[ \mathbf{V} = \{ \mathbf{v} \in  H^1_{\Gamma_A} (\Omega) \times H^1_{\Gamma_A} (\Omega) \times H^1_0 (\Omega); \nabla \cdot \mathbf{v} = 0 \text{ in } \Omega \} \]
+  
+  \[ H (\partial_3, \Omega) = \{ v \in L^2(\Omega); \partial_3 v \in L^2 (\Omega)\} \]
+  
+  \[ H_0 (\partial_3, \Omega) = \overline{C_0 ^\infty (\Omega)}^{H (\partial_3, \Omega)} = \{ v \in H(\partial_3, \Omega); v n_3 = 0 \text{ on } \Gamma \} \]
+  
+  \[ \mathbf{W} = \{ \mathbf{u} \in  H^1_{\Gamma_A} (\Omega) \times H^1_{\Gamma_A} (\Omega) \times H_0 (\partial_3, \Omega); \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \} \]
+  
+Then the weak formulation of the hydrostatic system (\ref{HNSC1}) - (\ref{HNSC8}) takes the following form.
+  
+  \begin{definition} \label{definitionhydrostaticWF}
+  
+Find $(\mathbf{u}, c)$ such that $\mathbf{u} = (\mathbf{u}_H, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_H \in L^\infty (0,T; L^2(\Omega)^2),$ and $c \in L^\infty(0,T; L^2(\Omega))$ with $c \in L^2(0,T; H^1(\Omega))$, such that
+  
+  \begin{equation}
+    \begin{split}
+      & \int_0^T \bigg[ -(\mathbf{u}_H, \partial_t \mathbf{\tilde{u}}_H) + (\nabla_\nu \mathbf{u}_H, \nabla_\nu \mathbf{\tilde{u}}_H) - (\mathbf{u}_H, (\mathbf{u} \cdot \nabla) \mathbf{\tilde{u}}_H) + (b(\mathbf{u}_H), \mathbf{\tilde{u}}_H) \bigg ] \diff t \\
+      & = (\mathbf{u}_{0H}, \mathbf{\tilde{u}}_H(0)) \diff t \raisetag{15pt}\label{hydrostaticWF_U}
+    \end{split}
+  \end{equation}
+  
+  and
+  
+    \begin{equation}
+    \begin{split}
+      & \int_0^T \bigg[ - (c, \partial_t \tilde{c}) -(\mathbf{u}c, \nabla \tilde{c}) +  (\mathbf{M} \nabla c, \nabla \tilde{c}) - \int_{\Gamma_G} \boldsymbol{\sigma} \mathbf{M} \tilde{c} \vec{\boldsymbol{n}}_{\Gamma_G} \bigg ] \diff t \\
+      & = (c(0), \tilde{c}(0)) + \int_0^T (s,\tilde{c}) \diff t \raisetag{20pt} \label{hydrostaticWF_C}
+    \end{split}
+  \end{equation}
+  
+  for all $(\mathbf{\tilde{u}}, \tilde{c})$ with $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_H, \tilde{u}_3) \in H^1 (0,T, \mathbf{W})$, $\mathbf{\tilde{u}}_H (T) = 0$ and $\partial_3 \mathbf{\tilde{u}}_H \in L^\infty (0, T; L^3 (\Omega)^2)$ and  $\tilde{c} \in L^2 (0,T, H^2_{\Gamma_A} (\Omega)) \cap H^1 (0,T, L^2)$, $\tilde{c} (T) = 0$. 
+  
+  \end{definition}
+  
+On the other hand, the weak form of the anisotropic system is as follows.
+  
+\begin{definition} \label{definitionanisotropicWF}
+  
+Find $\mathbf{u}^\epsilon = (\mathbf{u}^\epsilon_H, u^\epsilon_3) \in L^2 (0,T ; \mathbf{V}) \cap L^\infty (0, T; L^2 (\Omega)^3)$ and $c^\epsilon \in L^\infty (0,T; L^2(\Omega)) \cap L^2 (0,T; H^1(\Omega))$, such that
+  
+  \begin{equation}
+    \begin{split}
+      & \int_0^T \bigg [ -(\mathbf{u}^\epsilon_H, \partial_t \mathbf{\tilde{u}}_H) + (\nabla_\nu \mathbf{u}^\epsilon_H, \nabla_\nu \mathbf{\tilde{u}}_H) - (\mathbf{u}^\epsilon_H, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{\tilde{u}}_H) + (b(\mathbf{u}^\epsilon_H), \mathbf{\tilde{u}}_H) \bigg ] \diff t \\
+      & + \epsilon \beta \int_0 ^ T \big [ (u_3 ^\epsilon, \tilde{u}_1) - (u_1^\epsilon, \tilde{u}_3) \big ] \diff t\\
+      & + \epsilon^2 \int _0 ^ T \big [ -(u_3^\epsilon, \partial_t \tilde{u}_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, \tilde{u}_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu \tilde{u}_3) \big ] \diff t \\
+      & = (\mathbf{u}^\epsilon_{0H}, \mathbf{\tilde{u}}_H(0)) + \epsilon^2 (u_{03}^\epsilon, \tilde{u}_3 (0)) \diff t \raisetag{20pt} \label{anisotropicWF_U}
+    \end{split}
+  \end{equation}
+  
+  and
+  
+  \begin{equation}
+    \begin{split}
+      & \int_0^T \bigg [ - (c^\epsilon, \partial_t \tilde{c}) -(\mathbf{u}^\epsilon c^\epsilon, \nabla \tilde{c}) + (\mathbf{M} \nabla c^\epsilon, \nabla \tilde{c}) - \int_{\Gamma_G} \boldsymbol{\sigma} \mathbf{M} \tilde{C} \vec{\boldsymbol{n}}_{\Gamma_G} \bigg ] \diff t \\
+      & =  (c^\epsilon (0), \tilde{c} (0)) + \int_0^T (s^\epsilon,\tilde{c}) \diff t \raisetag{20pt} \label{anisotropicWF_C}
+    \end{split}
+  \end{equation}
+  
+  for all $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_H, \tilde{u}_3) \in H^1 (0,T;\mathbf{V})$ with $\mathbf{\tilde{u}}(T) = 0$ and $\tilde{c}$ such that $\tilde{c} \in H^1 (0,T, H^2_{\Gamma_A} (\Omega))$ and $\tilde{c} (T) = 0$.
+  
+\end{definition}
+
+Now we are ready to state the following theorem regarding the convergence of weak solutions in geophysical coordinates.
+  
+\begin{theorem} \label{maintheorem}
+  Let $\mathbf{u}_0$ $\in$ $L^2 (\Omega)^3$, with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 \cdot \mathbf{n} = 0$ on $\partial \Omega$; let $c_0 \in$ $L^2 (\Omega)$, $c_0 = 0$ on $ \partial \Omega$, and assume that the boundary conditions (\ref{ANSC8}) hold; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1}) - (\ref{ANSC5}) converges to a weak solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1}) - (\ref{HNSC5}).
+\end{theorem}
+
+The steps following below describe an outline of the main ideas of the proof.
+
+\begin{enumerate}
+
+  \item The foundation of this proof is to calculate the energy inequality:
+  
+  \begin{equation}
+    \begin{split}  
+    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{c^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \big [\norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2 \big ] \diff \tau \\
+    & + \int_0 ^ t \bigg[ (\lambda - \sum_{i,j = 1}^3 \zeta \frac{1}{2} M_{ij} c_T) \norm{\nabla c^\epsilon}_{L^2}^2  \bigg] \diff \tau \\
+    & \leq \sum_{i,j = 1}^3 \frac{1}{\zeta} M_{ij} \frac{1}{2} \int_0 ^ t \norm{\sigma_i}^2 _{L^2 (\Gamma_G)} \diff \tau + \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{c^\epsilon (0)}_{L^2}^2) \\
+    & + \int_0^t (s^\epsilon,c^\epsilon) \diff \tau + \sum_{i,j = 1}^3 \zeta \frac{1}{2} M_{ij} c_T  \int_0 ^ t \norm{c^\epsilon}^2 _{L^2 (\Omega) } \diff \tau. \raisetag{90pt} \label{finalformEIEQ}
+    \end{split}
+  \end{equation}
+  
+  \item From the final form of the energy inequality we obtain uniform a priori estimates that we summarise in the following proposition.
+  
+\begin{prop}
+  Let $u^\epsilon_1, u^\epsilon_2, u^\epsilon_3$ and $c^\epsilon$ be the weak solutions of the system (\ref{ANSC1}) - (\ref{ANSC5}) in the sense of Definition \ref{definitionanisotropicWF}. Then it holds,
+    
+  \begin{align}
+    & u^\epsilon_1, u^\epsilon_2, \epsilon u^\epsilon_3, c^\epsilon & \quad & \text{are bounded in $L^\infty (0,T; L^2(\Omega)),$} \label{proposition1} \\
+    & u^\epsilon_3 & \quad & \text{is bounded in $L^2 (0,T; L^2(\Omega)),$} \label{propositionExtra} \\
+    & u^\epsilon_1, u^\epsilon_2, \epsilon u^\epsilon_3 & \quad & \text{are bounded in $L^2(0,T; H^1(\Omega)),$} \label{proposition2} \\
+    & c^\epsilon & \quad & \text{is bounded in $L^2(0,T;H^1(\Omega)).$} \label{proposition3}
+  \end{align}
+\end{prop}
+  
+  \item As a consequence, we have the following weak convergence results:
+  
+  \begin{align} 
+    &  \mathbf{u}_H^\epsilon \rightharpoonup \mathbf{u}_H &\quad & \text{weakly in $L_t^\infty L_x^2 \cap L_t^2 H_x^1$,} \label{WeakConvUHEps} \\
+    &  \epsilon^2 u_3^\epsilon \to 0 &\quad & \text{strongly in $L_t^\infty L_x^2 \cap L_t^2 H_x^1$,} \label{WeakConvU3Eps} \\ 
+    & u_3^\epsilon \rightharpoonup u_3  &\quad & \text{weakly in $L_t^2 L_x^2$,} \label{WeakConvU3NoEps} \\
+    & c^\epsilon \rightharpoonup c &\quad & \text{weakly in $L_t^\infty L_x^2 \cap L_t^2 H_x^1.$} \label{WeakConvCEps1}
+  \end{align}
+
+  \item As for the nonlinear terms not including the concentration function, the convergence can be shown using a time compactness theorem that is based on a result by Simon \cite{simon1986compact}.
+  
+  \item Finally we have to deal with the nonlinear term $(\mathbf{u}^\epsilon c^\epsilon, \nabla \tilde{c}).$ By analysing this nonlinear term in a more precise way we see that $u^\epsilon_i c^\epsilon$ for $i=1,2$ is weakly convergent since as we mentioned before, we have the strong convergence of the horizontal velocities, while in the case of $i=3$ this property does not hold. We overcome this difficulty by proving a compactness property for the pollution concentration $c^\epsilon.$ The key tool is a compactness criterion (for the proof see Theorem 5.1 in \cite{azerad2001mathematical}).
+  \textbf{In particular, we have shown that}:
+   \begin{itemize}
+      \item $c^\epsilon$ is bounded in $L^2(0,T, H^1(\Omega)),$ and
+      \item $\norm{\tau_h c^\epsilon - c^\epsilon}_{L^2(0,T-h, {H^2}^*)} \leq \varphi(h) + \psi(\epsilon).$
+   \end{itemize}
+   We conclude $$c^\epsilon \to c \text{ strongly in } L^2_t L^2_x,$$ and $$u^\epsilon_3 c^\epsilon \rightharpoonup u_3 c \text{ weakly.}$$
+
+\end{enumerate}
+
+For more details see our article \cite{pollatmws2019}.
+
+\subsubsection{Visualisation of the weak convergence result using \textbf{FEniCS}}
+
+We visualise the weak convergence result with \textbf{FEniCS} --- a software with the finite element method at its core.
+
+The major challenge in numerically approaching the tendency of the solutions as $\epsilon$ goes to zero is the disappearing dependence of the scheme on certain terms. Picard iterations and the Chorin method for example are widely used methods in the field of the (complete) Navier-Stokes equations, but once we introduce an $\epsilon$ into the equations, these schemes "collapse" rather quickly as this parameter becomes zero.
+
+In the \textbf{Chorin method} the $u \nabla u_1 v_1$ nonlinear term is replaced by
+
+\texttt{inner(u\_prev, grad(u\_prev1)) * v1 * dx},
+
+where essentially we don't have any unknowns at all anymore. The first step of the Chorin method calculates a tentative velocity. The \texttt{u1, u2, u3} functions are the unknowns, while \texttt{u\_prev} is calculated from the previous time step. It is easy to see in the following pseudo code that the scheme depends on \texttt{\textcolor{terracotta}{u3}} only through $\epsilon^2.$
+
+\texttt{
+\\
+F = (1/dt)((u\_H - u\_prev\_H)*v\_H + $\epsilon^2$*(\textcolor{terracotta}{u3} - u\_prev3)*v3 ) + \\
+inner(u\_prev, grad(u\_prev\_H)) * v\_H\\
+ + $\epsilon^2$*inner(u\_prev, grad(u\_prev3)) * v3 + \\
+ inner(grad(u\_H),grad(v\_H)) + $\epsilon^2$*inner(grad(\textcolor{terracotta}{u3}),grad(v3)) \\
+}
+
+Similarly, the linearisation technique of \textbf{Picard iterations} also lead to a problematic scheme:
+
+\texttt{
+\\
+a = inner(\textcolor{blue}{u}, grad(u\_k\_H)) * v\_H + $\epsilon^2$*inner(u, grad(\textcolor{green}{u\_k3})) * v3 + \\
+inner(grad(u\_H),grad(v\_H)) + $\epsilon^2$*inner(grad(u3),grad(v3)),\\
+}
+
+where the dependence on \texttt{u\_k3} decreases with $\epsilon^2.$ This suggests in our case to avoid linearisation techniques and conserve the nonlinear nature of the problem, which can improve the dependence of the scheme on its variables.
+
+We consider a simplified model that still contains this fundamental phenomena (the decreasing dependence as $\epsilon \to 0$) in space. Thus, we consider
+
+\begin{enumerate}
+  \item the stationary case
+  \item without the Coriolis term,
+  \item moreover we make the two horizontal dimensions fall into one. It is easy to see that in a theoretical point of view, and also in terms of proving regularities, the two horizontal dimensions are not different. The problem consists of having $n-1$ dimensions with $\mathcal{O}(1)$ scale, and $1$ dimension with $\mathcal{O}(\epsilon)$ scale. Instead of the $n-1$ dimensions we can use 1 for quicker computations and easier visualisation.
+  \item Finally, in order to obtain better results, we take the same equations, but we use them as equations describing water flow. The convergence result is the same, the boundary conditions are slightly different, and using wind traction over the water surface helps to highlight the point of our result.
+\end{enumerate}
+
+Taking these ideas into account, we will use the Newton solver as the pseudo code below suggests:
+
+\texttt{
+\\
+F = inner(u, grad(u1)) * v1 + inner(grad(u1),grad(v1)) \\
++ $\epsilon^2$*inner(u, grad(u3)) * v3 + $\epsilon^2$*inner(grad(u3),grad(v3)) \\
+ - p * div(v)  + q * div(u)  - inner(theta, v) * ds(1), \\
+}
+
+and we apply
+
+\texttt{
+\\
+problem = NonlinearVariationalProblem(F, up\_, bcu, J)\\
+solver  = NonlinearVariationalSolver(problem), \\
+}
+
+to the \texttt{F} scheme. Note that here, instead of $\texttt{u\_H}$ we denote the horizontal velocity by $\texttt{u1}$ to express that we use the dimension reduction idea for the horizontal velocity during the computations. We highlight the fact that in the definition above, \texttt{F} has an $\mathcal{O}(1)$ dependence on each coordinate function of the $\texttt{u}$ unknown solution.
+
+Similarly, for the hydrostatic model we use an analogous scheme where the $\epsilon$- including terms are missing.
+
+The most important difference is that while for the anisotropic model we use a finite element space of degree $2$ for the vertical velocity, for the case of the hydrostatic scheme we use a degree $1$ space for the same variable, following the idea of \cite{danilov2004finite}. This phenomena is yet to be investigated further, but we have observed that the hydrostatic scheme, which contains significantly less information about the vertical velocity, does not converge for the case of a degree $2$ vertical space (unless the hydrostatic Newton solver is initialised with the anisotropic solution obtained for very small $\epsilon$, with slightly less strict error tolerance values).
+
+To summarise, we have been able to visualise the convergence of the weak solutions for the following cases:
+
+\begin{itemize}
+  \item Anisotropic scheme with degree $2$ horizontal velocity space and degree $2$ vertical velocity space: works until $\epsilon = \exp{-7},$ and visibly approaches the solution of the hydrostatic scheme obtained for degree $2$ horizontal space and degree $1$ vertical space. The following three sections of graphs were obtained for this case.
+  \item The hydrostatic scheme with (2,2) space degrees initialised with the anisotropic solution obtained with the $\exp{-7} $ $\epsilon$ value as an initial guess: converges immediately. In this case the Newton solver verifies in a single step that the initial guess, i.e. the solution for the anisotropic model for a very small $\epsilon$ value is in fact a solution for the hydrostatic model.
+  \item Remark: The anisotropic scheme with degrees (2,1) is theoretically unadvisable to use as the so called lim-sup stability condition is not satisfied.
+\end{itemize}
+
+In the following we include some of the visual results obtained with \textbf{FEniCS}.
+
+\newpage
+
+\subsubsection{The tendency of the pressure solution}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/pressure_anis_1_0000000}
+  \captionof{figure}{$\epsilon = 1.0000000.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/pressure_anis_0_5000000}
+  \captionof{figure}{$\epsilon = 0.5000000.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/pressure_anis_0_0625000}
+  \captionof{figure}{$\epsilon = 0.0625000.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/pressure_anis_0_0312500}
+  \captionof{figure}{$\epsilon = 0.0312500.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/pressure_anis_0_0156250}
+  \captionof{figure}{$\epsilon = 0.0156250.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/pressure_hydr}
+  \captionof{figure}{Hydrostatic model.}
+  \label{fig:test2}
+\end{minipage}
+\end{figure}
+
+\newpage
+
+\subsubsection{The tendency of the horizontal velocity solution}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=3in]{results2D_H_V/images/velocity_h_anis_1_0000000}
+  \caption{$\epsilon = 1.0000000.$}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=3in]{results2D_H_V/images/velocity_h_anis_0_0078125}
+  \caption{$\epsilon = 0.0078125.$}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=3in]{results2D_H_V/images/velocity_h_hydr}
+  \caption{Hydrostatic model.}
+\end{figure}
+
+\newpage
+
+\subsubsection{The tendency of the vertical velocity solution}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_v_anis_1_0000000}
+  \captionof{figure}{$\epsilon = 1.0000000.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_v_anis_0_5000000}
+  \captionof{figure}{$\epsilon = 0.5000000.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_v_anis_0_2500000}
+  \captionof{figure}{$\epsilon = 0.2500000.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_v_anis_0_1250000}
+  \captionof{figure}{$\epsilon = 0.1250000.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_v_anis_0_0625000}
+  \captionof{figure}{$\epsilon = 0.0625000.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_v_anis_0_0312500}
+  \captionof{figure}{$\epsilon = 0.0312500.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_v_anis_0_015625}
+  \captionof{figure}{$\epsilon = 0.0156250.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_v_anis_0_0078125}
+  \captionof{figure}{$\epsilon = 0.0078125.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_v_anis_1_19e-07}
+  \captionof{figure}{$\epsilon = 1.19 \exp{(-7)}.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/velocity_v_hydr}
+  \captionof{figure}{Hydrostatic model.}
+\end{minipage}
+\end{figure}
+
+\subsection{Weak convergence in downwind-matching coordinates with $H^1$ initial data for the horizontal velocity}
+
+We have already described the justification of the generalised hydrostatic limit model including the pollution effect described for the case of a classical, east-north-upwards oriented local Cartesian coordinates. Here we give an improvement of this statement: we consider a meteorologically more meaningful coordinate system, incorporate the analytical consequences of this coordinate change into the governing equations, and verify that the weak convergence still holds for this altered system. The main challenge in the proof is caused by the appearance of an additional $\epsilon$ term --- it is resolved by taking advantage of a more regular initial data for the horizontal velocity and passing temporarily to the field of strong solutions.
+The first step is the introduction of the notions of downwind and crosswind, and to match the horizontal axes according to these meteorological parameters (see \cite{goyal2011mathematical}). For simplicity, in this case we use a diagonal diffusion matrix, i.e. coefficients $K_x, K_y, K_z.$ As in this scenario the advection is dominant compared to diffusion effects along the $x$ axis, this approach on the one hand naturally contributes to the simplification of the limit model. On the other hand it brings an additional $\epsilon$ term in the Laplacian of the concentration equation, and along with this the challenge of proving a weak convergence result for the product of the vertical velocity and the concentration. The difficulty is due to the phenomena of the $\norm{\partial_1 c^\epsilon}$ term being replaced by $\| \sqrt{\epsilon} \partial_1 c^\epsilon \|$ in the energy inequality. The loss of the strong convergence of the concentration function is overcome by using a more regular initial horizontal velocity function, namely ${\mathbf{u}_h}_0 \in H^1.$ We mention that we also use slightly different, stricter boundary conditions for the concentration function --- these additional requirements too are motivated by the presence of the new $\epsilon$ term in the energy inequality. The assumption that advection is more dominant than diffusion along the downwind direction leads to the appearance of an extra $\epsilon$ term in the concentration equation's Laplacian, specifically, we have
+
+\begin{equation} \abs{u_1 \partial_{1} c} \gg \abs{ K_x \partial_{11} ^2 c },\end{equation}
+
+which leads us to introducing this new scaling identity
+
+\begin{equation} \label{ksepsk1} K_x = \epsilon K_1. \end{equation}
+
+The new version of the anisotropic equations now takes the form below, where the three main changes are \textit{a)} the additional $\epsilon$ in the concentration equation, \textit{b)} the slightly stricter boundary conditions, and \textit{c)} the new Coriolis terms due to the coordinate system change:
+
+\begin{equation} \label{ANSC1-5}
+  \begin{split}
+    \partial_t u^\epsilon _1 + \mathbf{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\gamma u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = & 0 \text{ in } \Omega \times (0,T) \\
+    \partial_t u_2^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_2^\epsilon -\Delta_\nu u_2^\epsilon + \gamma u_1^\epsilon - \alpha \epsilon u^\epsilon_3  + \partial_2 p^\epsilon = & 0 \text{ in } \Omega \times (0,T) \\
+    \epsilon^2 \{  \partial_t u_3^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon -\Delta_\nu u_3^{\epsilon} \} + \epsilon \alpha u^\epsilon_2 - \epsilon \beta u_1^\epsilon + \partial_3 p^\epsilon = & 0 \text{ in } \Omega \times (0,T) \\
+    \nabla \cdot \mathbf{u}^\epsilon = & 0 \text{ in } \Omega \times (0,T) \\
+    \partial_t c^\epsilon + \mathbf{u^\epsilon} \cdot \nabla c^\epsilon = \epsilon K_1 \partial_{11} ^ 2 c^\epsilon + K_2 \partial_{22} ^ 2 c^\epsilon + K_3 \partial_{33} ^ 2 c^\epsilon + & s^\epsilon \text{ in } \Omega \times (0,T).
+  \end{split}
+\end{equation}
+  
+With the initial and boundary conditions defined as
+    
+\begin{equation} \label{ANSC7}
+  \mathbf{u}^\epsilon (\cdot, t = 0) = \mathbf{u}_0, \quad c^\epsilon (\cdot, t=0) = c_0  \quad \text{ in } \Omega,
+\end{equation}
+  
+\begin{equation} \label{ANSC8}
+  \begin{split}
+    & \mathbf{u}^\epsilon = 0 \text{ on } \Gamma \times (0,T), \\
+    &c^\epsilon = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
+    & \partial_2 c^\epsilon = \partial_3 c^\epsilon = 0 \text{ on } \Gamma_G \times (0,T), \quad \partial_1 c^\epsilon = \sigma \in L^2 (0,T; \Gamma_G). \\
+  \end{split}
+\end{equation}
+    
+The hydrostatic equations are modified analogously:
+
+\begin{equation} \label{HNSC1-5}
+  \begin{split}
+    \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\gamma u_2 + \partial_1 p = & 0 \text{ in } \Omega \times (0,T) \\
+    \partial_t u_2 + \mathbf{u} \cdot \nabla u_2 - \Delta_\nu u_2 + \gamma u_1 + \partial_2 p = & 0 \text{ in } \Omega \times (0,T) \\
+    \partial_3 p = & 0 \text{ in } \Omega \times (0,T) \\
+    \nabla \cdot \mathbf{u} = & 0 \text{ in } \Omega \times (0,T) \\
+    \partial_t c + \mathbf{u} \cdot \nabla c = K_2 \partial_{22} ^ 2 c + K_3 \partial_{33} ^2 c + & s \text{ in } \Omega \times (0,T)
+  \end{split}  
+\end{equation}
+
+The main theorem of this subsection is analogous to our previous result stated for the case of the geophysical frame, but we highlight the difference that here we use the initial data ${\mathbf{u}_h}_0 \in H^1,$ while for the case of the geophysical frame an $L^2$ initial velocity was sufficient.
+
+\begin{theorem} \label{maintheorem}
+  Let ${\mathbf{u}_h}_0$ $\in$ $H^1 (\Omega)$, ${u_3}_0 \in L^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 = 0$ on $\partial \Omega$; let $c_0 \in$ $L^2 (\Omega)$, $c_0 = 0$ on $ \partial \Omega$, and assume that the boundary conditions (\ref{ANSC8}) hold; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1-5}) converges to a weak solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1-5}).
+\end{theorem}
+
+The main challenge in this part is the convergence of the $u_3^\epsilon c^\epsilon$ term, thus here we will elaborate only regarding this product. The main idea here is to temporarily ignore the $c^\epsilon$ function and prove a strong convergence result considering only the velocity functions. For the difference functions ($\mathbf{U}_h^\epsilon, U_3^\epsilon) = (\mathbf{u}_h^\epsilon - \mathbf{u}_h, u_3^\epsilon - u_3)$ between the anisotropic solution $\mathbf{u}^\epsilon$ and the hydrostatic solution $\mathbf{u}$ we are able to show
+
+  \begin{equation} \label{introduce_I_terms}
+    \begin{split}
+      & \frac{1}{2} (\norm{\mathbf{U}_h^\epsilon}_2^2 + \epsilon^2 \norm{U_3^\epsilon}_2^2) (t) + \int_0^{t} (\norm{\nabla \mathbf{U}_h^\epsilon}_2^2 + \epsilon^2 \norm{\nabla U_3^\epsilon}_2^2) \diff \tau  \\
+      & \leq - \epsilon^2 \int_{Q_t} \bigg [ \bigg ( \int_0^z \partial_t \mathbf{u}_h \diff z' \bigg ) \cdot \nabla_h U_3^\epsilon + \nabla u_3 \cdot \nabla U_3^\epsilon \bigg ] \diff x \diff y \diff z \diff \tau \\
+      & + \int_{Q_t} [(\mathbf{u}^\epsilon \cdot \nabla) \mathbf{u}_h^\epsilon \cdot \mathbf{u}_h + (\mathbf{u} \cdot \nabla )\mathbf{u}_h \cdot \mathbf{u}_h^\epsilon] \diff x \diff y \diff z \diff \tau \\
+      & + \epsilon^2 \int_{Q_t} \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon u_3 \diff x \diff y \diff z \diff \tau \\
+      & + \int_{Q_t}  \epsilon \beta u_3^\epsilon u_1 - \epsilon \alpha u_3^\epsilon u_2 + \epsilon \alpha u_2^\epsilon u_3 - \epsilon \beta u_1^\epsilon u_3 \diff x \diff y \diff z \diff \tau := I_1 + I_2 + I_3 + I_4, \raisetag{80pt}
+    \end{split}
+  \end{equation}
+  
+where we calculate bounds for each $I_i$ term. Using the bounds we now have for the terms $I_1, I_2, I_3$ and $I_4$, ($\ref{introduce_I_terms}$) takes the form
+
+\begin{equation}
+  \begin{split} \nonumber
+  \Phi (t):= & (\norm{\mathbf{U}_h^\epsilon}_2^2 + \epsilon^2 \norm{U_3^\epsilon}_2^2)(t) + \int_0^t (\norm{\nabla \mathbf{U}_h^\epsilon}_2^2 + \epsilon^2 \norm{\nabla U_3^\epsilon}_2^2) \diff s \\
+  & \leq C \epsilon^2 [(\norm{{\mathbf{u}_h}_0}_2^2 + \epsilon^2 \norm{{u_3}_0}_2^2)^2 + C(\norm{{\mathbf{u}_h}_0}_{H^1}, \Gamma_G)] \\
+  & + C \int_0^{t} \norm{\nabla \mathbf{u}_h}_2^4 \norm{\mathbf{U}_h^\epsilon}_2^2 \diff s + C \int_0^{t} \norm{\nabla \mathbf{u}_h}_2^2  \norm{\Delta \mathbf{u}_h}_2^2 \norm{\mathbf{U}_h^\epsilon}_2^2 \diff s =: \Psi(t),
+  \end{split}
+\end{equation}
+
+for almost any $t_0 \in [0, \infty).$ With this we have
+
+\begin{equation}
+  \begin{split} \nonumber
+   \Psi'(t) & = C \norm{\nabla \mathbf{u}_h}_2^4 \norm{\mathbf{U}_h^\epsilon}_2^2 + C \norm{\nabla \mathbf{u}_h}_2^2  \norm{\Delta \mathbf{u}_h}_2^2 \norm{\mathbf{U}_h^\epsilon}_2^2 \\
+   & \leq C (\norm{\nabla \mathbf{u}_h}_2^4 + \norm{\nabla \mathbf{u}_h}_2^2  \norm{\Delta \mathbf{u}_h}_2^2) \Phi (t) \leq C (\norm{\nabla \mathbf{u}_h}_2^4 + \norm{\nabla \mathbf{u}_h}_2^2  \norm{\Delta \mathbf{u}_h}_2^2)\Psi(t),
+  \end{split}
+\end{equation}
+
+from which, applying the Gr\"onwall inequality and using the boundedness result on the solution of the primitive equations, we deduce
+
+\begin{equation}
+  \begin{split} \nonumber
+    & \Phi (t) \leq \Psi (t) \leq e^{C \int_0 ^ t (\norm{\nabla \mathbf{u}_h}_2^4 + \norm{\nabla \mathbf{u}_h}_2^2  \norm{\Delta \mathbf{u}_h}_2^2) \diff s} \Psi (0) \leq e^{C(\norm{{\mathbf{u}_h}_0}_{H^1}, \Gamma_G)} \Psi(0) \\
+    & \leq \epsilon^2 C(\norm{{\mathbf{u}_h}_0}_{H^1}, \Gamma_G) (\norm{{\mathbf{u}_h}_0}_2^2 + \epsilon^2 \norm{{u_3}_0}_2^2 + 1)^2.
+  \end{split}
+\end{equation}
+
+Thus, we now have
+
+$$ (\norm{\mathbf{U}_h^\epsilon}_2^2 + \epsilon^2 \norm{U_3^\epsilon}_2^2)(t) + \int_0^t (\norm{\nabla \mathbf{U}_h^\epsilon}_2^2 + \epsilon^2 \norm{\nabla U_3^\epsilon}_2^2) \diff s \leq \epsilon^2 C,$$
+
+where the $C$ constant only depends on the domain structure and the initial data. With this we arrive to strong convergence result $\nabla \mathbf{U}_h^\epsilon \to 0$ in $L^2_t L^2_x,$ and as a direct consequence, we have $\nabla \mathbf{u}_h^\epsilon \to \nabla \mathbf{u}_h$ in $L^2_t L^2_x$ as well. Using the relation between the horizontal and vertical velocity functions through the divergence-free condition, we immediately obtain $\partial_3 u_3^\epsilon \to \partial_3 u_3,$ and using the vertical Poincar\'e inequality eventually we deduce that
+
+\begin{equation}\label{strongconvresultu3}u_3^\epsilon \to u_3 \text{ strongly in } L^2_t L^2_x.\end{equation}
+
+Combining the weak convergence result ($\ref{WeakConvCEps1}$) for $c^\epsilon$ and the strong convergence ($\ref{strongconvresultu3}$) of $u_3^\epsilon,$ we are finally able to state that
+
+\begin{equation}c^\epsilon u_3^\epsilon \rightharpoonup c u_3 \text{ weakly in } L^2 L^2.\end{equation}
+
+With this Theorem $\ref{maintheorem}$ has been proved.
+
+\subsection{Strong convergence in downwind-matching coordinates with $H^3$ initial data ${\mathbf{u}_h}_0$}
+
+Here we show a strong convergence result, and enable some technical changes regarding the boundary conditions: we use a small additional set of restrictions (the derivatives of the solutions are set to zero until degree 2) that allow us to benefit from a simpler structure that effectively simulates periodic domains in terms of lack of boundary integrals, keeping a classical non-periodic domain however. Another important detail to highlight here is that in order to be able to bring the proof to a closure, we use an $H^3$ initial data for the horizontal velocity.
+
+The set of equations are identical as in the previous subsection, except for simplicity here we use $\epsilon-$ independent source terms in the anisotropic equations, i.e. $s^\epsilon = s \text{ } \forall \epsilon \geq 0.$
+
+Denote $(U^\epsilon, C^\epsilon) = (V^\epsilon, W^\epsilon, C^\epsilon) = (u^\epsilon - u, c^\epsilon - c) = (v^\epsilon - v, w^\epsilon - w, c^\epsilon - c).$
+
+For the dynamics describing $C^\epsilon$ we have
+
+$$ \partial_t C^\epsilon + u^\epsilon \cdot \nabla c^\epsilon - u \cdot \nabla c = \epsilon K_1 \partial_{11} c^\epsilon + K_2 \partial_{22} C^\epsilon + K_3 \partial_{33} C^\epsilon,$$
+
+which can be rewritten as
+
+$$ \partial_t C^\epsilon + U^\epsilon \nabla C^\epsilon  + U^\epsilon \nabla c+ u \nabla C^\epsilon = \epsilon K_1 \partial_{11} C^\epsilon + \epsilon K_1 \partial_{11} c + K_2 \partial_{22} C^\epsilon + K_3 \partial_{33} C^\epsilon. $$
+
+We take ${\mathbf{u}_h}_0 \in H^3(\Omega)$ (and as a consequence $\mathbf{u}_0 \in H^2(\Omega)$) and $\epsilon < \epsilon_0,$ where $\epsilon_0$ is the limit specified in \cite{li2019primitive}. We need the following important ingredients needed for estimating the difference function $C^\epsilon.$
+
+\textbf{Cornerstone existence results and regularities:}
+
+\begin{enumerate}
+
+  \item \textbf{Existence result for the extended primitive equations.} Global unique existence of the $(\mathbf{u}_h, u_3, c)$ strong solution: we have been able to verify the existence result for $H^2_x$ regular $s$ source functions following the ideas of \cite{cao2014local} and \cite{cao2012global}.
+
+  \item \textbf{Existence result for the extended anisotropic equations.} From \cite{li2019primitive} we have the global (considering that we are at the case of $\epsilon < \epsilon_0$ as previously specified) unique existence of the $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ strong solution without considering concentration with the following uniform bound for the difference:
+  
+  \[ \sup_{0 \leq t < \infty} (\norm{U_h^\epsilon}_{H^2} + \epsilon^2 \norm{U_3^\epsilon}_{H^2}^2) + \int_0^\infty \big( \norm{\nabla U_h^\epsilon}_{H^2}^2 + \epsilon^2 \norm{\nabla U_3^\epsilon}_{H^2}^2 \big) \diff t \leq C \epsilon^2,\]
+  
+  where C depends only on the domain size and $\norm{{u_h}_0}_{H^3}.$
+  
+Based on the proof of existence of $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$, the existence of the extended $(\mathbf{u}_h^\epsilon, u_3^\epsilon, c^\epsilon)$ strong solution follows from identical steps as the existence of the velocity part for the scaled Navier-Stokes equations with fix $\epsilon$ (however this is only a local existence result for $c^\epsilon$ until we show the global result later.)
+
+\end{enumerate}
+
+The main result of this section is the theorem below.
+
+\begin{theorem}
+Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ with $\nabla \cdot \mathbf{u}_0 = 0$; $\epsilon < \epsilon_0,$ and $C_0 \in H^2;$ moreover $\mathbf{u}_0 = 0$ on $\partial \Omega$, $c_0 = 0$ on $\partial \Omega.$ Let $\nabla^k \mathbf{u} = 0 \text{ on } \Gamma, \nabla^k c = 0  \text{ on } \Gamma$ for $k= 0,1,2;$ and let the source terms $s^\epsilon = s \in L^2_t H^2_x$ for all $\epsilon \geq 0.$ Then the strong solution $(\mathbf{u}_h^\epsilon, u_3^\epsilon, c^\epsilon)$ of the anisotropic system (\ref{ANSC1-5}) converges to the strong solution $(\mathbf{u}_h, u_3, c)$ of the hydrostatic system (\ref{HNSC1-5}) in downwind-matching coordinates; formally, we have
+$$(\mathbf{u}_h^\epsilon, u_3^\epsilon, c^\epsilon) \to (\mathbf{u}_h, u_3, c) \text{ in } L^\infty H^1.$$
+\end{theorem}
+
+Since the convergence result of the velocity part had already been proved, we focus on verifying $c^\epsilon \to c$ in $L^\infty H^1.$
+
+Multiplying the governing equation by $- \partial_{ii} C^\epsilon, i=1,2,3$ we obtain
+
+\begin{equation}
+  \begin{split}
+      & \frac{1}{2}\frac{\diff}{\diff t} \norm{\nabla C^\epsilon}_2^2 + \epsilon K_1 \norm{\partial_{11} C^\epsilon}_2^2 + K_2 \norm{\partial_{22} C^\epsilon}_2^2 + K_3 \norm{\partial_{33} C^\epsilon}_2^2 + C \norm{\partial_{ij} C^\epsilon}_2^2 \\
+      & = \sum_{i = 1,2,3} \int_\Omega U^\epsilon \nabla C^\epsilon \partial_{ii} C^\epsilon + \int_\Omega U^\epsilon \nabla c \partial_{ii} C^\epsilon + \int_\Omega u \nabla C^\epsilon \partial_{ii} C^\epsilon - \int_\Omega \epsilon K_1 \partial_{11} c \partial_{ii} C^\epsilon \\
+      & = \sum_{i = 1,2,3} I_1(i)  + I_2(i) + I_3(i) + I_4(i).
+  \end{split}
+\end{equation}
+
+We have been able to construct bounds for each term on the right-hand side using the H\"older, Ladyzhenskaya and Young inequalities. These eventually yield
+
+\begin{equation}
+  \begin{split}
+    & \frac{1}{2} \frac{\diff}{\diff t} \norm{\nabla C^\epsilon}_2^2 + \epsilon K_1 \norm{\partial_{11} C^\epsilon}_2^2 + K_2 \norm{\partial_{22} C^\epsilon}_2^2 + K_3 \norm{\partial_{33} C^\epsilon}_2^2 + C \norm{\partial_{ij} C^\epsilon}_2^2 \\
+    & \leq C \norm{U_H^\epsilon}_{H^3} \norm{\nabla C^\epsilon}_2^2 + C \norm{U_H^\epsilon}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2 \\
+    & + C \norm{u_H^\epsilon}_{H^3} \norm{\nabla C^\epsilon}_2^2 + C \norm{u_H^\epsilon}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2 \\
+    & + C \norm{U_H^\epsilon}_{H^3}^2 + \norm{c}_{H^2}^2 \norm{\nabla C^\epsilon}_2^2 \\
+    & + C \norm{U_H^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2 \\
+    & + \epsilon K_1 \norm{\partial_{11} c}_2^2,
+  \end{split}
+\end{equation}
+
+where $i \neq j.$ Applying the Gr\"onwall inequality, we finally arrive to
+
+\[ \norm{C^\epsilon}_{L^\infty(0,T; H^1(\Omega))} \leq \epsilon C \exp{(C \sqrt{T} + C)},\]
+
+which concludes the proof.
+
+\newpage
+
+\nocite{*}
+\bibliographystyle{abbrv}
+\bibliography{bibliography-report}
+
+\newpage
+
+\section{Attended courses}
+
+\subsection{Academic year 2016 / 2017}
+
+\begin{itemize}
+
+  \item Numerical Analysis 2 --- Prof. Guglielmi (University of L'Aquila)
+  \item High Performance Parallel Computing --- Prof. Shcherbatyy, Prof. Protasov, Prof. Khapko, Prof. Pera (University of L'Aquila)
+  \item Introduction to Finite Elements Method --- Prof. Boffi (GSSI)
+  \item Decay property for hyperbolic systems with dissipation --- Prof. Kawashima (GSSI)
+  \item Advanced Topics on Numerical Methods --- Prof. Guglielmi (GSSI)
+  \item Introduction to the Incompressible Navier-Stokes equation --- Prof. Marcati (GSSI)
+
+\end{itemize}
+
+\subsection{Academic year 2017 / 2018}
+
+\begin{itemize}
+
+  \item Physics of the atmosphere --- Prof. G. Curci, Prof. G. Redaelli (University of L'Aquila)
+  \item Numerical methods for hyperbolic problems --- Prof. G. Russo (GSSI)
+  
+\end{itemize}
+
+\newpage
+
+\section{Conferences and summer schools}
+
+\begin{itemize}
+  \item Summer School on Reduced Order Methods in Computational Fluid Dynamics, SISSA, Trieste, July 8 - 12, 2019
+  \item The XVIII Italian Meeting on Hyperbolic Equations, University of Palermo, Palermo, May 15 - 17, 2019
+  \item The Finite Element Method Using deal.II, SISSA and ICTP, Trieste, February 25 - March 1, 2019
+  \item Waves in Flows, Prague-Sum, Prague, August 27 - 31, 2018
+  \item Intensive Program on Fluids and Waves, Gran Sasso Science Institute, L'Aquila, May 21 - June 15, 2018
+  \item Women in applied and computational Mathematics, Gran Sasso Science Institute, L'Aquila, May 9 - 11, 2018
+  \item Mathematical Analysis of the Navier - Stokes equations: Foundations and Overview of Basic Open Problems, CIME, Cetraro, September 4 - 8, 2017
+\end{itemize}
+
+\newpage
+
+\section{Contributed talks and poster presentations}
+
+\begin{itemize}
+  \item "The polluted atmosphere as a shallow domain", Summer School on Reduced Order Methods in Computational Fluid Dynamics, SISSA, Trieste, July 8 - 12, 2019 (Poster presentation)
+  \item "The polluted atmosphere as a shallow domain", The XVIII Italian Meeting on Hyperbolic Equations, University of Palermo, Palermo, May 15 - 17, 2019 (Contributed talk)
+  \item "The polluted atmosphere as a shallow domain", Women in applied and computational Mathematics, Gran Sasso Science Institute, L'Aquila, May 9 - 11, 2018 (Poster presentation)
+\end{itemize}
+
+\newpage
+
+\section{Participation to research projects}
+
+\begin{itemize}
+  \item 2016 - 2019: ModCompShock "Marie Curie ESR" fellow (European Union's Horizon 2020 Research and Innovation Programme under the Marie Sklodowska-Curie Grant Agreement No 642768)
+  \item 2017: \textbf{GNAMPA miniproject}, \textit{Analisi dei modelli matematici della fisica della biologia e delle scienze sociali}, (P.I. Stefano Spirito)
+\end{itemize}
+
+\newpage
+
+\section{Visiting at universities}
+
+\begin{itemize}
+  \item University of Sussex, February 4 - 23, 2019. Collaborator: Prof. Omar Lakkis
+  \item University of Sussex, June 16 - July 31, 2018. Collaborator: Prof. Omar Lakkis
+\end{itemize}
+
+\newpage
+
+\section{Publications and preprints}
+
+\begin{itemize}
+
+  \item D. Donatelli, N. Juh\'{a}sz, Weak solution of the merged mathematical equations of the polluted atmosphere, Submitted Preprint 2019, arXiv:1906.09914 [math.AP]
+  
+  \item In preparation: D. Donatelli, N. Juh\'{a}sz, Weak and strong solution of the merged mathematical equations of the polluted atmosphere in downwind-matching coordinates
+
+\end{itemize}
+
+\end{document}

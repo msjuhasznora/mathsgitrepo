@@ -45,6 +45,21 @@ verbose = True
 
 mesh = UnitSquareMesh(30, 30)
 
+class nascent_delta(UserExpression):
+    def __init__(self,eps,**kwargs):
+        # Call superclass constructor with keyword arguments to properly
+        # set up the instance:
+        super().__init__(**kwargs)
+        # Perform custom setup tasks for the subclass after that:
+        self.eps = eps
+    
+    def eval(self, values, x):
+        eps = self.eps
+        values[0] = eps**2 /pi/((x[0] - 0.5)**2 + (x[1] - 0.5)**2 + eps**2)
+
+    def value_shape(self):
+        return ()
+
 # create a functionspace ((V_h, V_v), P) with given degree of V_v
 def VP_functionspace(mesh, v_vert_deg):
     V_h = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 2) #horizontal velocity
@@ -133,10 +148,16 @@ def hydrostatic_solver(VP, up_, vertical_velocity_degree):
     c = TrialFunction(C)
     d = TestFunction(C)
     c_sol = Function(C)
-    F = inner(u, grad(c)) * d * dx + (mu_1 * c.dx(0) * d.dx(0) + mu_2 * c.dx(1) * d.dx(1))  * dx - inner(Constant(10.0),d) * dx - inner(c.dx(1), d.dx(1)) * ds(1)
+    
+    a = inner(u, grad(c)) * d * dx + (mu_1 * c.dx(0) * d.dx(0) + mu_2 * c.dx(1) * d.dx(1))  * dx - inner(c.dx(1), d.dx(1)) * ds(1)
     # linear solver for the concentration
-    a, L = system(F)
+    L = Constant(0) * d * dx
+    
     A, b = assemble_system(a, L, bcc)
+    
+    delta = PointSource(C, Point(0.5, 0.5), 1)
+    delta.apply(b)
+    
     solver = KrylovSolver('gmres', 'ilu')
     solver.solve(A, c_sol.vector(), b)
     cfile_pvd_hydr = File(resultsfolder + "concentration/concentration_hydr_degree" + str(vertical_velocity_degree) + ".pvd")
@@ -182,11 +203,17 @@ def anisotropic_solver(VP, eps, vertical_velocity_degree):
     c = TrialFunction(C)
     d = TestFunction(C)
     c_sol = Function(C)
-    F = inner(u, grad(c)) * d * dx + (mu_1 * c.dx(0) * d.dx(0) + mu_2 * c.dx(1) * d.dx(1)) * dx - inner(Constant(10.0),d) * dx - inner(c.dx(1), d.dx(1)) * ds(1)
-    a, L = system(F)
+    
+    a = inner(u, grad(c)) * d * dx + (mu_1 * c.dx(0) * d.dx(0) + mu_2 * c.dx(1) * d.dx(1))  * dx - inner(c.dx(1), d.dx(1)) * ds(1)
+    
+    nascent_delta_instance = nascent_delta(eps, degree=2)
+    L = inner(nascent_delta_instance, d) * dx
+    
     A, b = assemble_system(a, L, bcc)
+    
     solver = KrylovSolver('gmres', 'ilu')
     solver.solve(A, c_sol.vector(), b)
+    
     cfile_pvd_anis = File(resultsfolder + "concentration/concentration_anis_degree" + str(vertical_velocity_degree) + "_eps_" + str(eps) + ".pvd")
     cfile_pvd_anis << c_sol
     print("ANIS. c: %.15g" % c_sol.vector().norm("l2"))

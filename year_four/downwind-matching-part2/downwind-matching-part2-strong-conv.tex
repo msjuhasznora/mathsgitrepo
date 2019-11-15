@@ -51,11 +51,11 @@ The strong convergence of $(\mathbf{u}_h^\epsilon, u_3^\epsilon, c^\epsilon)$ is
 
 \section{Downwind-matching coordinates}
 
-Boundary conditions: we use the minimal additional set of restrictions that allow us to benefit from a simpler structure that resembles periodic domains, keeping a classical non-periodic domain however. (details in the next section)
+\textbf{Domain structure:} for the case of the strong convergence we use periodic boundary conditions. Remark: the periodic boundary conditions can be substituted by $\nabla^k u = 0, \nabla^k c = 0$ - type boundary conditions on a non-periodic, standard domain.
 
-\textbf{Change of notations:} Since $u^\epsilon$ and $u$ denotes the solution functions and the capital $U^\epsilon$ denotes their difference, we switch to the analogous notation with the concentration function, i.e. $c^\epsilon$ and $c$ here are the solutions in the anisotropic and hydrostatic equations, respectively, while the capital $C^\epsilon$ denotes the $c^\epsilon - c$ difference function. $C$ stands for a generic constant.
+\textbf{Change of notations:} Since $u^\epsilon$ and $u$ denotes the solution functions and the capital $U^\epsilon$ denotes their difference, we switch to the analogous notation with the concentration function, i.e. $c^\epsilon$ and $c$ here are the solutions in the anisotropic and hydrostatic equations, respectively, while the capital $C^\epsilon$ denotes the $c^\epsilon - c$ difference function. $C$ stands for a generic constant. Analogously, $s^\epsilon$ and $s$ are the anisotropic and hydrostatic source terms.
 
-  \subsection{The set of equations}
+\subsection{The set of equations}
 
 (E-SNS): extended scaled Navier-Stokes.
 
@@ -102,6 +102,24 @@ Boundary conditions: we use the minimal additional set of restrictions that allo
     \partial_t c + \mathbf{u} \cdot \nabla c = K_2 \partial_{22} ^ 2 c + K_3 \partial_{33} ^2 c + s \text{ in } \Omega \times (0,T)
     \end{equation}
     
+\subsection{\textcolor{orange}{The source term}}
+
+For this case of strong convergence, we use the following versions of source functions detailed below. We use mollified sources in order to fit the strong solution scheme.
+
+Let $\delta_\epsilon$ be the following approximation of the $\delta$ distribution,
+
+\[   
+\delta_\epsilon = 
+  \begin{cases}
+       \frac{1}{\epsilon^3} \exp{\bigg ( \frac{1}{\abs{{\frac{x}{\epsilon}}}^2-1} \bigg ) } &\quad \abs{x} < \epsilon \\
+       0 &\quad \abs{x} \geq \epsilon, \\
+  \end{cases}
+\]
+
+and let $\varphi$ be a $C^\infty_0$ smooth function. We define the anisotropic and hydrostatic source terms respectively as the following convolutions:
+
+$$ s^\epsilon = \delta^\epsilon \star \varphi, \quad s = \delta \star \varphi, \quad \text{and} \quad S^\epsilon = s^\epsilon - s.$$
+    
 \subsection{Governing equation for $C^\epsilon$}
 
 Denote $(U^\epsilon, C^\epsilon) = (V^\epsilon, W^\epsilon, C^\epsilon) = (u^\epsilon - u, c^\epsilon - c) = (v^\epsilon - v, w^\epsilon - w, c^\epsilon - c).$
@@ -134,7 +152,7 @@ Let's have ${\mathbf{u}_h}_0 \in H^3(\Omega)$ (and as a consequence $\mathbf{u}_
 
 \begin{enumerate}
 
-  \item \textbf{Existence for (E-PEs).} Global unique existence of the $(\mathbf{u}_h, u_3, c)$ strong solution of the (E-PEs) expressed in downwind-matching coordinates: in Cao-Li-Titi's paper \todo{remains to be checked} it has been proved, a difference is that we do not have the $c$-analogous version of the $\partial_z p$---$T$ relationship.
+  \item \textbf{Existence for (E-PEs).} Global unique existence of the $(\mathbf{u}_h, u_3, c)$ strong solution of the (E-PEs) expressed in downwind-matching coordinates: in Cao-Li-Titi's paper it has been proved, a difference is that we do not have the $c$-analogous version of the $\partial_z p$---$T$ relationship. The file regarding existence shows the details and necessary modifications.
 
   \item \textbf{Existence for (E-SNS).} From the Li-Titi article we have the global (considering that we are at the case of $\epsilon < \epsilon_0$ as previously specified) unique existence of the $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ strong solution of (SNS) without concentration with the following uniform bound for the difference:
   
@@ -170,7 +188,7 @@ Let's have ${\mathbf{u}_h}_0 \in H^3(\Omega)$ (and as a consequence $\mathbf{u}_
 
 The $H^2$ regularity of $c$ is the consequence of the existence of the global $(u_h, u_3, c)$ strong solution, as described by Cao, Li and Titi for a slightly different system --- i.e. it comes from the definition of $c$ and the existence result. (However it is probably possible to show directly that the $H^2(\Omega)$ norm of $c$ is bounded using the $H^4$ regularity (\ref{H4_uh}) of the $u_h$ solution function.)
 
-\subsection{$c^\epsilon \to c$ in $L^\infty H^1$ (estimating $\nabla C^\epsilon$)}
+\subsection{$c^\epsilon \to c$ in $L^\infty H^1$ and $\nabla_d c^\epsilon \to \nabla_d c$ in $L^2 H^1$ (estimating $\nabla C^\epsilon$ and $\nabla \nabla_d C^\epsilon$)}
 
  It seems that whatever regularity we might need for $C^\epsilon$ here in this coordinate system, it will be based and built on the $\partial_t C^\epsilon$ term, because from the Laplacians we won't have a complete term as the $\epsilon$ multiplier is there.
     
@@ -184,11 +202,12 @@ by $- \partial_{ii} C^\epsilon, i=1,2,3$ we obtain
   \begin{split}
       & \frac{1}{2}\frac{\diff}{\diff t} \norm{\nabla C^\epsilon}_2^2 + \epsilon K_1 \norm{\partial_{11} C^\epsilon}_2^2 + K_2 \norm{\partial_{22} C^\epsilon}_2^2 + K_3 \norm{\partial_{33} C^\epsilon}_2^2 + C \norm{\partial_{ij} C^\epsilon}_2^2 \\
       & = \sum_{i = 1,2,3} \int_\Omega U^\epsilon \nabla C^\epsilon \partial_{ii} C^\epsilon + \int_\Omega U^\epsilon \nabla c \partial_{ii} C^\epsilon + \int_\Omega u \nabla C^\epsilon \partial_{ii} C^\epsilon - \int_\Omega \epsilon K_1 \partial_{11} c \partial_{ii} C^\epsilon \\
-      & = \sum_{i = 1,2,3} I_1(i)  + I_2(i) + I_3(i) + I_4(i),
+      & - \sum_{i = 1,2,3} \int_\Omega S^\epsilon \partial_{ii} C^\epsilon \\
+      & = \sum_{i = 1,2,3} I_1(i)  + I_2(i) + I_3(i) + I_4(i) + I_5(i),
   \end{split}
 \end{equation}
 
-where $i \neq j$ and for now we skip the $S^\epsilon$ function.
+where $i \neq j.$
 
 Now we estimate the terms on the right-hand side one by one.
 
@@ -323,6 +342,33 @@ Since here we do have an $\epsilon$ in front of the Laplacian $ \norm{\partial_{
 \begin{remark}
 Note that the $\epsilon$ in $\epsilon K_1 C \norm{\partial_{11} c}_2^2$ will be the convergence rate. If we wanted to have $\epsilon^2$ instead, it would mean that we need to take the $\epsilon$ off of $\partial_{11} C^\epsilon$ (to put it on $\norm{\partial_{11} c}_2^2$) and thus, also take off one derivative off of $\partial_{11} C^\epsilon,$ which would result to the appearance of $\norm{c}_{H^3}.$ Since from the $H^3$ initial data ${u_h}_0$ we can only arrive to an $H^4$-regular solution function $u_h,$ that is sufficient only to guarantee the $H^2$ regularity of $c,$ but not $H^3.$ Increasing the initial velocity's regularity could achieve an $\epsilon^2$ convergence rate, but we are interested in proving a convergence result assuming the minimal needed regularity for the initial horizontal velocity.
 \end{remark}
+
+\textbf{\textcolor{orange}{Step 5: estimate for $I_5 (i).$}}
+
+\begin{equation}
+  \begin{split}
+    & - \int_\Omega S^\epsilon \partial_{ii} C^\epsilon = - \int_\Omega (s^\epsilon - s) \partial_{ii} C^\epsilon  = - \int_\Omega \big ( (\delta^\epsilon - \delta ) \star \varphi \big ) \cdot \partial_{ii} C^\epsilon \\
+    & = \int_\Omega \partial_i \big ( (\delta^\epsilon - \delta ) \star \varphi \big ) \cdot \partial_i C^\epsilon \diff x \\
+    & \leq C \int_\Omega \bigg( \partial_i \big ( (\delta^\epsilon - \delta ) \star \varphi \big ) \bigg ) ^2 \diff x + C \int_\Omega (\partial_i C^\epsilon)^2 \diff x \\
+    & \leq C \int_\Omega \bigg ( (\delta^\epsilon - \delta ) \star \partial_i \varphi \bigg ) ^2 \diff x + \textcolor{orange}{C \norm{\nabla C^\epsilon}_2^2}.
+  \end{split}
+\end{equation}
+
+The $\norm{\nabla C^\epsilon}_2^2$ norm can be left unchanged, the next step is to estimate the first term. We denote $\Phi = \partial_i \varphi \in C^\infty_0.$ 
+
+\begin{equation}
+  \begin{split}
+    & \int_\Omega \bigg ( (\delta^\epsilon - \delta ) \star \partial_i \varphi \bigg ) ^2 \diff x \\
+    & = \int_\Omega \bigg ( \int_\Omega (\delta^\epsilon - \delta )(x-y) \Phi (y) \diff y \bigg )^2 \diff x \\
+    & = \int_\Omega \bigg ( \int_\Omega \delta^\epsilon(x-y) \Phi (y) \diff y - \Phi (x) \bigg )^2 \diff x \\
+    & = \int_\Omega \bigg ( \int_{\mathcal{B}(x, \epsilon)} \delta^\epsilon(x-y) \Phi (y) \diff y - 1 \cdot \Phi (x) \bigg )^2 \diff x \\
+    & = \int_\Omega \bigg ( \int_{\mathcal{B}(x, \epsilon)} \delta^\epsilon(x-y) \big ( \Phi (y) - \Phi (x) \big ) \diff y \bigg )^2 \diff x \\
+    & \leq \int_\Omega \bigg ( \int_{\mathcal{B}(x, \epsilon)} \delta^\epsilon(x-y) \abs{\nabla \Phi  (\eta)} \abs{y - x}  \diff y \bigg )^2 \diff x \\
+    & \leq \epsilon^2 \int_\Omega \bigg ( \int_{\mathcal{B}(x, \epsilon)} \delta^\epsilon(x-y) \abs{\nabla \Phi  (\eta)} \diff y \bigg )^2 \diff x \\
+    & \leq C \epsilon^2 \norm{\nabla \Phi}_{L^\infty}^2 \leq \textcolor{orange}{C \epsilon^2}.
+  \end{split}
+\end{equation}
+
     
 \subsection{The time-dependent estimate for the system}
 
@@ -332,10 +378,10 @@ Using the results from the previous subsection, after merging the $\zeta \cdot$ 
   \begin{split}
     & \frac{1}{2} \frac{\diff}{\diff t} \norm{\nabla C^\epsilon}_2^2 + \epsilon K_1 \norm{\partial_{11} C^\epsilon}_2^2 + K_2 \norm{\partial_{22} C^\epsilon}_2^2 + K_3 \norm{\partial_{33} C^\epsilon}_2^2 + C \norm{\partial_{ij} C^\epsilon}_2^2 \\
     & \leq C \textcolor{blue}{\norm{U_H^\epsilon}_{H^3}} \norm{\nabla C^\epsilon}_2^2 + C \norm{U_H^\epsilon}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2 \\
-    & + C \textcolor{blue}{\norm{u_H^\epsilon}_{H^3}} \norm{\nabla C^\epsilon}_2^2 + C \norm{u_H^\epsilon}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2 \\
+    & + C \textcolor{blue}{\norm{u_H}_{H^3}} \norm{\nabla C^\epsilon}_2^2 + C \norm{u_H}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2 + \textcolor{orange}{C \norm{\nabla C^\epsilon}_2^2} \\
     & + \textcolor{green}{C \norm{U_H^\epsilon}_{H^3}^2} + \norm{c}_{H^2}^2 \norm{\nabla C^\epsilon}_2^2 \\
     & + \textcolor{green}{C \norm{U_H^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2} \\
-    & + \textcolor{green}{\epsilon K_1 \norm{\partial_{11} c}_2^2},
+    & + \textcolor{green}{\epsilon K_1 \norm{\partial_{11} c}_2^2} + \textcolor{orange}{C \epsilon^2},
   \end{split}
 \end{equation}
 
@@ -345,38 +391,48 @@ The terms with "the missing square" are due to the $u_1 \partial_1 C^\epsilon \p
 
 The \textcolor{green}{additive terms} will contribute
 
-\[ \int_0^T \epsilon C \norm{\partial_{11} c}_2^2 + C \norm{U_H^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2 + C \norm{U_H^\epsilon}_{H^3}^2  \diff \tau \leq \epsilon C + \epsilon^2 C \]
+\[ \int_0^T \epsilon C \norm{\partial_{11} c}_2^2 + C \norm{U_H^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2 + C \norm{U_H^\epsilon}_{H^3}^2 + \textcolor{orange}{C \epsilon^2} \diff \tau \leq \epsilon C + \epsilon^2 C + \textcolor{orange}{C \epsilon^2 \cdot T}\]
 
-to the estimate obtained after applying the Gronwall inequality, which is independent from $T$, and the estimate holds even for $T= \infty.$
+to the estimate obtained after applying the Gronwall inequality.
 
 The multiplicative terms contribute
 
-\[ \int_0^T \textcolor{blue}{\norm{U_H^\epsilon}_{H^3}} + \textcolor{blue}{\norm{u_H^\epsilon}_{H^3}} + \norm{U_H^\epsilon}_{H^3}^2 + C \norm{u_H^\epsilon}_{H^3}^2 + \norm{c}_{H^2}^2 \diff \tau,\]
+\[ \int_0^T \textcolor{blue}{\norm{U_H^\epsilon}_{H^3}} + \textcolor{blue}{\norm{u_H}_{H^3}} + \norm{U_H^\epsilon}_{H^3}^2 + C \norm{u_H}_{H^3}^2 + \norm{c}_{H^2}^2 + \textcolor{orange}{C} \diff \tau,\]
 
 which can be estimated with
 
 \begin{equation}
   \begin{split}
-    & \int_0^T \norm{U_H^\epsilon}_{H^3} + \norm{u_H^\epsilon}_{H^3} \diff \tau + C \\
-    & \leq \int_0^T \norm{1 \cdot U_H^\epsilon}_{H^3} + \norm{1 \cdot u_H^\epsilon}_{H^3} \diff \tau + C \\
-    & \leq T^{1/2} \bigg (\int_0^T \norm{U_H^\epsilon}_{H^3}^2 \bigg )^{1/2} \diff \tau + T^{1/2} \bigg (\int_0^T \norm{u_H^\epsilon}_{H^3}^2 \bigg )^{1/2} \diff \tau + C \\
-    & \leq \sqrt{T} C + C.
+    & \int_0^T \norm{U_H^\epsilon}_{H^3} + \norm{u_H}_{H^3} \diff \tau + C + \textcolor{orange}{C \cdot T} \\
+    & \leq \int_0^T \norm{1 \cdot U_H^\epsilon}_{H^3} + \norm{1 \cdot u_H}_{H^3} \diff \tau + C + \textcolor{orange}{C \cdot T}\\
+    & \leq T^{1/2} \bigg (\int_0^T \norm{U_H^\epsilon}_{H^3}^2 \bigg )^{1/2} \diff \tau + T^{1/2} \bigg (\int_0^T \norm{u_H}_{H^3}^2 \bigg )^{1/2} \diff \tau + C + \textcolor{orange}{C \cdot T}\\
+    & \leq \sqrt{T} C + C + \textcolor{orange}{ C \cdot T}.
   \end{split}
 \end{equation}
 
-The issue here is that there is no known available estimate for $L^1$ estimate in time for the Navier-Stokes equations for infinite time interval, only for the case of a bounded domain, where $L^2$ boundedness implies $L^1$ boundedness directly.
+The issue here is that there is no known available estimate for $L^1$ estimate in time for the Navier-Stokes equations for infinite time interval, only for the case of a bounded domain, where $L^2$ boundedness implies $L^1$ boundedness directly. Using $\norm{U_H^\epsilon}_{H^3} \leq 1 + \norm{U_H^\epsilon}_{H^3}^2$ does not help in terms of obtaining a uniform estimate, as it leads to $\int_0^T 1 + \norm{U_H^\epsilon}_{H^3}^2 \diff \tau,$ which contains a $T.$
 
-Thus the main difference from Section 5 in Li-Titi is that while in their case they had an $\epsilon^2 C$ bound where $C=C(L_1, L_2, \norm{v_0}_{H_1}),$ \textbf{we have a $C$ that depends also on $T.$}
+Thus the main difference from Section 5 in Li-Titi is that while in their case they had an $\epsilon^2 C$ bound where $C=C(L_1, L_2, \norm{v_0}_{H_1}),$ \textbf{we have a $C$ that depends also on $T,$} due to the source term as well.
 
 With this we get
 
-\[ \norm{C^\epsilon}_{L^\infty(0,T; H^1(\Omega))} \leq \epsilon C \exp{(C \sqrt{T} + C)}.\]
+\begin{equation}
+  \begin{split}
+    & \norm{C^\epsilon}_{L^\infty(0,T; H^1(\Omega))} + \norm{\nabla_d C^\epsilon}_{L^2(0,T; H^1(\Omega))} \\
+    & \leq (\epsilon C + \textcolor{orange}{C \epsilon^2 \cdot T}) \exp{(C \sqrt{T} + C + \textcolor{orange}{C \cdot T})}.
+  \end{split}
+\end{equation}
 
 By this, it seems that not just the convergence rate weakens from $\epsilon^2$ to $\epsilon$, but also the uniformity in time is lost. We can not use $T=\infty$ in this $C^\epsilon$ bound itself, but the estimate holds for any finite point in time --- the convergence gets slower as time evolves.
 
 Assuming that the global existence for $c$ works, then this above estimate suggests that $c^\epsilon$ exists globally, too. Otherwise, if there is a finite maximal $T^\epsilon_*$ existence time, then the norm of the $c^\epsilon - c$ difference at $T^\epsilon_*$ is bounded by
 
-\[ \norm{C^\epsilon}_{L^\infty(0,T^\epsilon_*; H^1(\Omega))} \leq \epsilon C \exp{(C \sqrt{T^\epsilon_*} + C)} < \infty,\]
+\begin{equation}
+  \begin{split}
+  & \norm{C^\epsilon}_{L^\infty(0,T^\epsilon_*; H^1(\Omega))} + \norm{\nabla_d C^\epsilon}_{L^2(0,T^\epsilon_*; H^1(\Omega))} \\
+  & \leq (\epsilon C + \textcolor{orange}{C \epsilon^2 \cdot T^\epsilon_*}) \exp{(C \sqrt{T^\epsilon_*} + C + \textcolor{orange}{C \cdot T^\epsilon_*})} < \infty,
+  \end{split}
+\end{equation}
 
 using that $T^\epsilon_* < \infty,$ and then because of the finite energy it could be continued after $T^\epsilon_*,$ which is a contradiction.
 
@@ -385,11 +441,11 @@ In other words, the bound does not blow up at any finite time, only at infinity.
 \textbf{To summarise},
 \begin{enumerate}
   \item it seems that both $c^\epsilon$ and $c$ exist globally,
-  \item for any given fix point in time $T$ we have that $c^\epsilon \to c$ in $L^\infty H^1$ with a rate of $\epsilon,$
+  \item for any given fix point in time $T$ we have that $c^\epsilon \to c$ in $L^\infty H^1$ and $\nabla_d c^\epsilon \to \nabla_d c$ in $L^2 H^1$ with a rate of $\epsilon,$
   \item considering a fix $\epsilon$ value and the corresponding $c^\epsilon$ anisotropic solution in time, the $c^\epsilon$ and $c$ get further away from each other in norm as time passes by.
 \end{enumerate}
 
-\section{Domain structure}
+\section{Explanation of the domain structure}
 
 What we need is a scenario where the $H^2$ norm is equivalent to the $L^2$ norm of the Laplacian. There are two options for this:
 \begin{itemize}
@@ -397,7 +453,7 @@ What we need is a scenario where the $H^2$ norm is equivalent to the $L^2$ norm 
   \item a minimal set of constraints would be for a function $f$ to require that $f, \nabla f$ is zero on the boundary.
 \end{itemize}
 
-\textbf{We choose the local physical boundary for consistency reasons and set that the velocity and concentration values and the first derivatives of the velocity and concentration are zero.}
+\textbf{Since the zero Dirichlet boundary conditions are not sufficient in this case, but we also need the derivatives of functions to be zero on the boundary, we opt for using the more simple and convenient / transparent PBC solution for the boundary conditions }
 This is important because we need to keep the structure of the inequalities we use in Section 5. These inequalities are obtained by using Lemma 2.2 in Li-Titi, which is formulated for periodic domains.
 
 In case we don't have any of the scenarios above, and we can not benefit from the Poincare inequality, then instead of the original
