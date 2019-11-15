@@ -55,7 +55,8 @@ class nascent_delta(UserExpression):
     
     def eval(self, values, x):
         eps = self.eps
-        values[0] = eps**2 /pi/((x[0] - 0.5)**2 + (x[1] - 0.5)**2 + eps**2)
+        values[0] = (1/(2 * pi)) * (eps / ( (x[0] - 0.5)**2 + (x[1] - 0.5)**2 + eps**2 )**(1.5) )
+        #values[0] = eps**2 /pi/((x[0] - 0.5)**2 + (x[1] - 0.5)**2 + eps**2)
 
     def value_shape(self):
         return ()
@@ -205,7 +206,7 @@ def anisotropic_solver(VP, eps, vertical_velocity_degree):
     
     a = inner(u, grad(c)) * d * dx + (mu_1 * c.dx(0) * d.dx(0) + mu_2 * c.dx(1) * d.dx(1))  * dx - inner(c.dx(1), d.dx(1)) * ds(1)
     
-    nascent_delta_instance = nascent_delta(eps, degree=2)
+    nascent_delta_instance = nascent_delta(eps, degree=10)
     L = inner(nascent_delta_instance, d) * dx
     
     A, b = assemble_system(a, L, bcc)
@@ -215,6 +216,7 @@ def anisotropic_solver(VP, eps, vertical_velocity_degree):
     
     cfile_pvd_anis = File(resultsfolder + "concentration/concentration_anis_degree" + str(vertical_velocity_degree) + "_eps_" + str(eps) + ".pvd")
     cfile_pvd_anis << c_sol
+    print(eps)
     print("ANIS. c: %.15g" % c_sol.vector().norm("l2"))
     
     return up_
