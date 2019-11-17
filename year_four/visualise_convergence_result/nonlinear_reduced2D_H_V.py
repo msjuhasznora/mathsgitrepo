@@ -55,6 +55,8 @@ class nascent_delta(UserExpression):
     
     def eval(self, values, x):
         eps = self.eps
+        # https://en.wikipedia.org/wiki/Cauchy_distribution#Multivariate_Cauchy_distribution
+        # An example of a bivariate Cauchy distribution can be given by:
         values[0] = (1/(2 * pi)) * (eps / ( (x[0] - 0.5)**2 + (x[1] - 0.5)**2 + eps**2 )**(1.5) )
         #values[0] = eps**2 /pi/((x[0] - 0.5)**2 + (x[1] - 0.5)**2 + eps**2)
 
