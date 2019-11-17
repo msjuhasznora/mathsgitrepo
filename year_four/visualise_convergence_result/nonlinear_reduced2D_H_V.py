@@ -13,7 +13,7 @@ import numpy
 
 # Define constants
 
-epsilon_lower_limit = 1.0e-07 #1.0e-07
+epsilon_lower_limit = 1.0e-07 #up 1.0e-07 c 5e-04
 wind_shear_x = 10.0
 theta = Constant((wind_shear_x, 0.0))
 mu_1 = Constant(1.0)
@@ -121,8 +121,8 @@ def hydrostatic_solver(VP, up_, vertical_velocity_degree):
     problem = NonlinearVariationalProblem(F, up_, bcu, J)
     solver  = NonlinearVariationalSolver(problem)
     prm = solver.parameters
-    prm['newton_solver']['absolute_tolerance'] = 1e-8
-    prm['newton_solver']['relative_tolerance'] = 1e-6
+    prm['newton_solver']['absolute_tolerance'] = 1e-3
+    prm['newton_solver']['relative_tolerance'] = 1e-2
     prm['newton_solver']['maximum_iterations'] = 5
     solver.solve()
 
@@ -181,7 +181,7 @@ def anisotropic_solver(VP, eps, vertical_velocity_degree):
 
     # the anisotropic weak formulation is created using the Taylor-Hood elements, the vertical velocity is from a quadratic space. Using a degree 1 vertical velocity space in the anisotropic case we have a strange layered unnatural pressure.
     F = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx + eps*eps*inner(u, grad(u3)) * v3 * dx + eps*eps*inner(grad(u3),grad(v3)) * dx - p * div(v) * dx + q * div(u) * dx - inner(theta, v) * ds(1)
-
+    
     F = action(F, up_)
     J = derivative(F, up_)
 
