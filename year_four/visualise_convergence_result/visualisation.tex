@@ -305,7 +305,7 @@ P = FiniteElement("Lagrange", mesh.ufl\_cell(), degree = 1)\\
 
 as seen above.
 
-We use degree 1 vertical velocity space, otherwise we end up with a non-converging NonlinearVariationalProbelm where the Newton iterations do not lead anywhere.
+We use degree 1 vertical velocity space, otherwise we end up with a non-converging NonlinearVariationalProblem where the Newton iterations do not lead anywhere.
 
 Using
 
@@ -560,6 +560,81 @@ we obtain the following results.
   \captionof{figure}{Hydrostatic model.}
 \end{minipage}
 \end{figure}
+
+
+
+\subsubsection{The tendency of the concentration solution}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/concentration_anis_1_00000}
+  \captionof{figure}{$\epsilon = 1.0000000.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/concentration_anis_0_50000}
+  \captionof{figure}{$\epsilon = 0.5000000.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/concentration_anis_0_25000}
+  \captionof{figure}{$\epsilon = 0.2500000.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/concentration_anis_0_12500}
+  \captionof{figure}{$\epsilon = 0.1250000.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/concentration_anis_0_06250}
+  \captionof{figure}{$\epsilon = 0.0625000.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/concentration_anis_0_01562}
+  \captionof{figure}{$\epsilon = 0.015625.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/concentration_anis_0_00781}
+  \captionof{figure}{$\epsilon = 0.0078125.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/concentration_anis_0_00390}
+  \captionof{figure}{$\epsilon = 0.00390.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/concentration_anis_0_00195}
+  \captionof{figure}{$\epsilon = 0.00195.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{results2D_H_V/images/concentration_hydr}
+  \captionof{figure}{Hydrostatic model.}
+\end{minipage}
+\end{figure}
+
 
 \section{Summarise for the moment being}
 
