@@ -60,11 +60,9 @@ A local domain on the surface of the rotating Earth is often described in what i
 
 Migrating convergence results from one of the above described coordinate systems to the other is not trivial: as a result of an additional $\epsilon$ term in the downwind matching scenario, certain boundedness and regularity features that are satisfied for the geophysical rotating frame are at the same time not valid for the downwind matching Cartesian coordinate system.
 
-In \cite{pollatmws2019} we have proved a weak convergence theorem for the case of the classical north-west oriented coordinate system --- the present article is dedicated to show that this result still holds true in the downwind matching coordinate system assuming some medium-level changes in the initial and boundary conditions. The theorem we will migrate between these two coordinate systems is focused on the polluted atmosphere as a shallow domain. Incorporating the shallowness into the model via introducing the $$\epsilon = \frac{\text{characteristic depth}}{\text{characteristic width}}$$ shallowness parameter we have proved the theoretical correctness of the hydrostatic approximation for the combination of a three-dimensional velocity function and a pollution concentration function. In more detail, we have showed that any weak solution of the shallow polluted atmosphere converges weakly to a weak solution of the so-called primitive equations representing the hydrostatic limit model.
+In \cite{pollatmws2019} we have proved a weak convergence theorem for the case of the classical north-west oriented coordinate system --- the first main part of the present article is dedicated to show that this result still holds true in the downwind matching coordinate system assuming some medium-level changes in the initial and boundary conditions. The theorem we will migrate between these two coordinate systems is focused on the polluted atmosphere as a shallow domain. Incorporating the shallowness into the model via introducing the $$\epsilon = \frac{\text{characteristic depth}}{\text{characteristic width}}$$ shallowness parameter we have proved the theoretical correctness of the hydrostatic approximation for the combination of a three-dimensional velocity function and a pollution concentration function. In more detail, we have showed that any weak solution of the shallow polluted atmosphere converges weakly to a weak solution of the so-called primitive equations representing the hydrostatic limit model. In the first part of this article our goal is to verify an analogous version of this convergence theorem for the case of the more considerately chosen downwind matching coordinate system. As in this scenario the advection is dominant compared to diffusion effects along the $x$ axis, this approach on the one hand naturally contributes to the simplification of the limit model. On the other hand it brings an additional $\epsilon$ term in the Laplacian of the concentration equation, and along with this the challenge of proving a weak convergence result for the product of the vertical velocity and the concentration. The difficulty is due to the phenomena of the $\norm{\partial_1 C^\epsilon}$ term being replaced by $\| \sqrt{\epsilon} \partial_1 C^\epsilon \|$ in the energy inequality. As the a priori estimates extracted from the energy inequality serve as fundamental building blocks of the proof, having a weakened, $\epsilon$-including version of one of the estimates has significant consequences for the verification process --- we lose the strong convergence of the concentration function.  This issue is overcome by using a more regular initial horizontal velocity function, namely ${\mathbf{u}_h}_0 \in H^1.$ The stronger initial regularity will naturally result in a $\mathbf{u}^\epsilon$ function with stronger regularities, allowing us to pass to the field of strong solutions for the velocity part of the solution, and thus will compensate the lost $H^1$ regularity of the concentration function $C^\epsilon.$ We mention that we will also use slightly different, stricter boundary conditions for the concentration function --- these additional requirements too are motivated by the presence of the new $\epsilon$ term in the energy inequality.
 
-Our goal here is to verify an analogous version of this convergence theorem for the case of the more considerately chosen downwind matching coordinate system. As in this scenario the advection is dominant compared to diffusion effects along the $x$ axis, this approach on the one hand naturally contributes to the simplification of the limit model. On the other hand it brings an additional $\epsilon$ term in the Laplacian of the concentration equation, and along with this the challenge of proving a weak convergence result for the product of the vertical velocity and the concentration. The difficulty is due to the phenomena of the $\norm{\partial_1 C^\epsilon}$ term being replaced by $\| \sqrt{\epsilon} \partial_1 C^\epsilon \|$ in the energy inequality. As the a priori estimates extracted from the energy inequality serve as fundamental building blocks of the proof, having a weakened, $\epsilon$-including version of one of the estimates has significant consequences for the verification process --- we lose the strong convergence of the concentration function.  This issue is overcome by using a more regular initial horizontal velocity function, namely ${\mathbf{u}_h}_0 \in H^1.$ The stronger initial regularity will naturally result in a $\mathbf{u}^\epsilon$ function with stronger regularities, allowing us to pass to the field of strong solutions for the velocity part of the solution, and thus will compensate the lost $H^1$ regularity of the concentration function $C^\epsilon.$
-
-We mention that we will also use slightly different, stricter boundary conditions for the concentration function --- these additional requirements too are motivated by the presence of the new $\epsilon$ term in the energy inequality.
+The second part of this article is dedicated to the strong convergence result.
 
 We end up this section with some notations we will use through the paper.
 
@@ -140,7 +138,7 @@ set.
   \end{itemize}
 \end{remark}
 
-Choosing the coordinate system in this particular way results in changes in three main points of the system with respect to the case of the rotating geophysical frame. One of these is the Coriolis term, since now the $x$ axis is not necessarily perpendicular to the rotation vector. We need to revisit the boundary conditions as well, and as discussed above, a modification in the pollution concentration equation also has to be taken into account. We will describe these changes and their consequences in detail --- the main challenge in proving this paper's convergence result is in fact to handle the effect of this latter change on the energy inequality.
+Choosing the coordinate system in this particular way results in changes in three main points of the system with respect to the case of the rotating geophysical frame. One of these is the Coriolis term, since now the $x$ axis is not necessarily perpendicular to the rotation vector. We need to revisit the boundary conditions as well, and as discussed above, a modification in the pollution concentration equation also has to be taken into account. We will describe these changes and their consequences in detail --- the main challenge in proving this paper's convergence results is in fact to handle the effect of this latter change in the inequalities that provide boundedness for the required quantities.
 
 In order to obtain the set of equations that describe the phenomena we start with the original set of equations
 
@@ -212,49 +210,7 @@ The initial condition for the velocity and the pollution concentration are
     \mathbf{u}^\epsilon (\cdot, t = 0) = \mathbf{u}_0, \quad C^\epsilon (\cdot, t=0) = C_0  \quad \text{ in } \Omega.
     \end{equation}
   
-  Finally, the boundary conditions to describe the anisotropic system can be summarised as follows:
-  
-    \begin{equation} \label{ANSC8}
-      \begin{split}
-        & \mathbf{u}^\epsilon = 0 \text{ on } \Gamma \times (0,T), \\
-        &C^\epsilon = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
-        & \partial_2 C^\epsilon = \partial_3 C^\epsilon = 0 \text{ on } \Gamma_G \times (0,T), \quad \partial_1 C^\epsilon = \sigma \in L^2 (0,T; \Gamma_G), \\
-      \end{split}
-    \end{equation}
-    
-    where the boundary structure of the domain is identical to what we used in \cite{pollatmws2019}, i.e. the upper boundary of the $\Omega$ domain is denoted by $\Gamma_U$, the lateral boundary is $\Gamma_L$, and the lower boundary of the domain is $\Gamma_G$, while the complete boundary is denoted by $\Gamma$ (see Figure $\ref{structdomaingraph1}$). The meaning of $\partial_1 C^\epsilon = \sigma$ above is that we naturally assume $\partial_1 C^\epsilon$ to be equal to some sufficiently regular $\sigma$ function defined on the respective boundary --- this well-known technique is also used for example for the case of modelling wind traction effect on the surface of the ocean.
-    
-    For simplicity we assume that the altitude of $\Omega$ is $1$, thus we can also express the full domain as $\Omega =  \Gamma_G \times [0,1],$ which will be useful later for estimating integrals.
-    
-  \begin{figure}[!h]
-  \centering
-  \begin{tikzpicture}
-    \fill[color=blue!10] (2,0) -- (2,3) arc (360:180:2cm and 0.5cm) -- (-2,0) arc (180:360:2cm and 0.5cm);
-    \fill[color=blue!5] (0,3) circle (2cm and 0.5cm);
-    
-    \draw[thick] (-2,3) -- (-2,0) arc (180:360:2cm and 0.5cm) -- (2,3) ++ (-2,0) circle (2cm and 0.5cm);
-    \draw[densely dashed, thick] (-2,0) arc (180:0:2cm and 0.5cm);
-    \draw (-2,1) -- (-3,1) --(-5,-1) -- (3,-1) -- (5,1) -- (2,1);
-    \draw[dashed] (-2,1) -- (2,1);
-    
-    \fill[green!10,opacity=0.5] (-2,0) -- (-2,1) -- (-3,1) -- (-5,-1) -- (3,-1) -- (5,1) -- (2,1) -- (2,0) arc (0:180:2cm and -0.5cm);
-    \fill[color=green!5] (0,0) circle (2cm and 0.5cm);
-    
-    \draw (0,1.5) node {$\Omega$};
-    \draw (0,3) node {$\Gamma_U$};
-    \draw (0,0) node {$\Gamma_G$};
-    \draw (-2.3,1.5) node {$\Gamma_L$};
-    \draw (2.3,1.5) node {$\Gamma_L$};
-    
-    \draw[thick] (2,0) arc (360:180:2cm and 0.5cm);
-  \end{tikzpicture}
-  \caption{The structure of the $\Omega$ domain}
-  \label{structdomaingraph1}
-\end{figure}
-    
-We highlight the difference between the boundary conditions of the original, east-north oriented, and the new, downwind matching model.
-
-The difference in the kind of boundary conditions we can "afford" to have on the lower boundary for the concentration comes from the energy inequality. In the east-north-upwards oriented coordinate system we do not have an $\epsilon$ in the diffusion matrix, and thus, having any of the $\partial_i C^\epsilon$ terms different from 0 does not create any problems, not even for an ocean case where $\partial_3 C^\epsilon$ becomes nonzero as well (they are required however to be bounded of course). On the other hand, the downwind matching coordinate system brings in an $\epsilon$ term in front of the $K_1$ diffusion coefficient, which makes the model more sensitive to assigning boundary conditions for $C^\epsilon.$ This means that we can not have anymore the relatively relaxed boundedness requirement for any $\partial_i C^\epsilon$ except for $i=1.$ All other $\partial_2 C^\epsilon, \partial_3 C^\epsilon$ derivatives must be zero on the lower boundary, otherwise they would result in an $(\epsilon - \text{const.})$ negative term appearing in the energy inequality --- for more details see section $\ref{proof}$. This also means that we will consider exclusively the inland domain scenario for the case of this coordinate system.
+This system will become complete when we define the boundary conditions --- we describe these in detail in the respective sections as they are chosen with different considerations depending on the quality of the solutions.
 
 If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and $\epsilon$ including terms in the anisotropic equations, we formally arrive to the hydrostatic Navier-Stokes equations (i.e. primitive equations) combined with pollution.
 
@@ -286,22 +242,69 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
     u_i (\cdot, t=0) = u_{0 i}, C (\cdot, t=0) = C_0 \text{ in } \Omega, \text{$i$ = 1,2}
     \end{equation}
     
+The specific definitions of the $S^\epsilon$ and $S$ source terms also depend on whether we consider weak or strong solutions. In both cases they are fundamentally based on the notion of the nascent delta function with parameter $\epsilon$ and the delta distribution, but their exact definitions will be given in the subsections according to the quality of the solutions.
+
+%%% WEAK SOLUTIONS %%%
+\section{Weak solutions}
+
+This section is dedicated to present the weak convergence result of \cite{pollatmws2019} migrated to the downwind-matching coordinate system. We begin by making the modelling equations complete by defining the boundary conditions. In the scenario of weak solutions we aim to be as close as possible to the original domain, thus we consider a classical non-periodic local domain on the surface of the Earth with minimal modifications due to the new $\epsilon$ term.
+
+Here the boundary structure of the domain is identical to what we used in \cite{pollatmws2019}, i.e. the upper boundary of the $\Omega$ domain is denoted by $\Gamma_U$, the lateral boundary is $\Gamma_L$, and the lower boundary of the domain is $\Gamma_G$, while the complete boundary is denoted by $\Gamma$ (see Figure $\ref{structdomaingraphboundaries_weak}$). For simplicity we assume that the altitude of $\Omega$ is $1$, thus we can also express the full domain as $\Omega =  \Gamma_G \times [0,1],$ which will be useful later for estimating integrals.
+
+  \begin{figure}[!h]
+  \centering
+  \begin{tikzpicture}
+    \fill[color=blue!10] (2,0) -- (2,3) arc (360:180:2cm and 0.5cm) -- (-2,0) arc (180:360:2cm and 0.5cm);
+    \fill[color=blue!5] (0,3) circle (2cm and 0.5cm);
+    
+    \draw[thick] (-2,3) -- (-2,0) arc (180:360:2cm and 0.5cm) -- (2,3) ++ (-2,0) circle (2cm and 0.5cm);
+    \draw[densely dashed, thick] (-2,0) arc (180:0:2cm and 0.5cm);
+    \draw (-2,1) -- (-3,1) --(-5,-1) -- (3,-1) -- (5,1) -- (2,1);
+    \draw[dashed] (-2,1) -- (2,1);
+    
+    \fill[green!10,opacity=0.5] (-2,0) -- (-2,1) -- (-3,1) -- (-5,-1) -- (3,-1) -- (5,1) -- (2,1) -- (2,0) arc (0:180:2cm and -0.5cm);
+    \fill[color=green!5] (0,0) circle (2cm and 0.5cm);
+    
+    \draw (0,1.5) node {$\Omega$};
+    \draw (0,3) node {$\Gamma_U$};
+    \draw (0,0) node {$\Gamma_G$};
+    \draw (-2.3,1.5) node {$\Gamma_L$};
+    \draw (2.3,1.5) node {$\Gamma_L$};
+    
+    \draw[thick] (2,0) arc (360:180:2cm and 0.5cm);
+  \end{tikzpicture}
+  \caption{The boundary structure of $\Omega$ for the case of weak solutions}
+  \label{structdomaingraphboundaries_weak}
+\end{figure}
+
+The boundary conditions to describe the anisotropic system can be summarised as
+  
+    \begin{equation} \label{ANSC8}
+      \begin{split}
+        & \mathbf{u}^\epsilon = 0 \text{ on } \Gamma \times (0,T), \\
+        &C^\epsilon = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
+        & \partial_2 C^\epsilon = \partial_3 C^\epsilon = 0 \text{ on } \Gamma_G \times (0,T), \quad \partial_1 C^\epsilon = \sigma \in L^2 (0,T; \Gamma_G), \\
+      \end{split}
+    \end{equation}
+
+while for the hydrostatic case we use
+    
     \begin{equation} \label{HNSC8}
       \begin{split}
         & C = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
-        & \partial_2 C = \partial_3 C = 0 \text{ on } \Gamma_G \times (0,T), \partial_1 C \in L^2 L^2 (0,T; \Gamma_G) \\
+        & \partial_2 C = \partial_3 C = 0 \text{ on } \Gamma_G \times (0,T), \partial_1 C \in L^2 L^2 (0,T; \Gamma_G). \\
       \end{split}
     \end{equation}
     
-    \begin{remark}
-    \normalfont As we have mentioned it in the introduction, in this case we will work with a more regular ${\mathbf{u}_h}_0 \in H^1$ initial data, so we will directly use the $u_3 = 0$ equality on the boundary instead of the original $u_3 n_3 = 0$ constraint that we had used.
-    \end{remark}
-    
-    \begin{remark}
-    \normalfont The $S^\epsilon$ and $S$ source terms are defined to be the nascent delta function with parameter $\epsilon$ and the delta distribution, respectively; both centred at $\mathbf{x_s}$, with an activation multiplier set to start at time $t_s$. For more details see \cite{pollatmws2019}.
-    \end{remark}
+The meaning of $\partial_1 C^\epsilon = \sigma$ above is that we naturally assume $\partial_1 C^\epsilon$ to be equal to some sufficiently regular $\sigma$ function defined on the respective boundary --- this well-known technique is also used for example for the case of modelling wind traction effect on the surface of the ocean.
 
-\section{Weak solutions}
+As we have mentioned it in the introduction, in this case we will work with a more regular ${\mathbf{u}_h}_0 \in H^1$ initial data, so we will directly use the $u_3 = 0$ equality on the boundary instead of the original $u_3 n_3 = 0$ constraint that we had used.
+    
+We highlight the difference between the boundary conditions of the original, east-north oriented, and the new, downwind matching model for the case of weak solutions.
+
+The difference in the kind of boundary conditions we can "afford" to have on the lower boundary for the concentration comes from the energy inequality. In the east-north-upwards oriented coordinate system we do not have an $\epsilon$ in the diffusion matrix, and thus, having any of the $\partial_i C^\epsilon$ terms different from 0 does not create any problems, not even for an ocean case where $\partial_3 C^\epsilon$ becomes nonzero as well (they are required however to be bounded of course). On the other hand, the downwind matching coordinate system brings in an $\epsilon$ term in front of the $K_1$ diffusion coefficient, which makes the model more sensitive to assigning boundary conditions for $C^\epsilon.$ This means that we can not have anymore the relatively relaxed boundedness requirement for any $\partial_i C^\epsilon$ except for $i=1.$ All other $\partial_2 C^\epsilon, \partial_3 C^\epsilon$ derivatives must be zero on the lower boundary, otherwise they would result in an $(\epsilon - \text{const.})$ negative term appearing in the energy inequality --- for more details see section $\ref{proof}$. This also means that we will consider exclusively the inland domain scenario for the case of this coordinate system.
+
+Finally, the $S^\epsilon$ and $S$ source terms both centred at $\mathbf{x_s}$, with an activation multiplier set to start at time $t_s$. For more details see \cite{pollatmws2019}.
 
 %%% *** WEAK FORMULATION AND MAIN RESULT*** %%%
 \subsection{Weak Formulation and Main Result} \label{weakformulationmainresult}
@@ -855,6 +858,14 @@ This has been the last missing part of the proof of the main theorem, since comb
 With this Theorem $\ref{maintheorem}$ has been proved.
 
 \section{Strong solutions}
+
+Boundary conditions.
+
+Source term definition.
+
+Existence.
+
+Convergence.
 
 \nocite{*}
 \bibliographystyle{abbrv}
