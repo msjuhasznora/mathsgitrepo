@@ -382,9 +382,9 @@ In this section we describe the weak formulation of the merged equations in both
 
 The main theorem of this paper is analogous to our previous result stated for the case of the geophysical frame, but we highlight the difference that here we use the initial data ${\mathbf{u}_h}_0 \in H^1,$ while for the case of the geophysical frame an $L^2$ initial velocity was sufficient.
 
-Now we are ready to state the main theorem.
+Now we are ready to state the main theorem of this section.
 
-\begin{theorem} \label{maintheorem}
+\begin{theorem} \label{maintheoremWEAK}
   Let ${\mathbf{u}_h}_0$ $\in$ $H^1 (\Omega)$, ${u_3}_0 \in L^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 = 0$ on $\partial \Omega$; let $c_0 \in$ $L^2 (\Omega)$, $c_0 = 0$ on $ \partial \Omega$, and assume that the boundary conditions (\ref{ANSC8}) hold; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1}) - (\ref{ANSC5}) converges to a weak solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1}) - (\ref{HNSC5}).
 \end{theorem}
   
@@ -893,7 +893,15 @@ and let $\varphi$ be a $C^\infty_0$ smooth function. We define the anisotropic a
 
 $$ s^\epsilon = \delta^\epsilon \star \varphi, \quad s = \delta \star \varphi.$$
 
-Convergence.
+\subsection{The main strong convergence theorem}
+
+The main theorem of this section concerning the strong solutions is analogous to Theorem \ref{maintheoremWEAK}; we highlight that the two major differences are \textit{a)} we are working on a periodic domain, and \textit{b)} we use $H^3$ and $H^2$ initial data for the horizontal velocity and the concentration, respectively.
+
+\begin{theorem} \label{maintheoremSTRONG}
+Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0, and let $c_0 \in$ $H^2 (\Omega),$ and assume that the (\ref{ANSC8-strong}) boundary conditions hold. Moreover let $\epsilon < \epsilon_0.$ Then as the aspect ratio $\epsilon$ tends to zero, the unique strong solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1}) - (\ref{ANSC5}) converges to the unique strong solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1}) - (\ref{HNSC5})
+\end{theorem}
+
+Before we present the proof we collect some already well-known, fundamental results that serve as cornerstones in the verification process.
 
 \appendix
 
