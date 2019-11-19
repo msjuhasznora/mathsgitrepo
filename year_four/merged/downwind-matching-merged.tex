@@ -12,8 +12,8 @@
 \usepackage{outlines}
 \usepackage{setspace}
 \usepackage[colorinlistoftodos]{todonotes}
-\setlist[enumerate,1]{label=\alph*)}
-\setlist[enumerate,2]{label=\roman*)}
+\setlist[enumerate,1]{label=\roman*)}
+\setlist[enumerate,2]{label=\alph*)}
 \newtheorem{theorem}{Theorem}
 \newtheorem{corollary}{Corollary}
 \newtheorem{lemma}{Lemma}
@@ -391,7 +391,7 @@ Now we are ready to state the main theorem of this section.
 %%% *** PROOF *** %%%
 \subsection{Proof of the main theorem} \label{proof}
 
-This section is dedicated to the verification of Theorem \ref{maintheorem}. Structurally we follow a similar chain of thought as in our previous paper --- until the point where the proof diverges reaching the weak convergence of the nonlinear term $u_3^\epsilon C^\epsilon,$ where in this case we can not benefit from an $H^1$-regular concentration function. In more detail, we begin by calculating the energy inequality and collect the a priori estimates that derive from it, then verify the less problematic weak convergence results. Finally we elaborate the steps that bring the convergence of the $u_3^\epsilon C^\epsilon$ term to a closure. The main idea here is to temporarily ignore the $C^\epsilon$ function and prove a strong convergence result considering only the velocity functions. Throughout this step we go beyond the weak solutions quality and show that we are working with strong solutions. In this new setting with more favourable regularities we can prove the convergence result we need, and eventually return to the frame of weak solutions where we can merge back together the velocity and concentration functions into a unified solution.
+This section is dedicated to the verification of Theorem \ref{maintheoremWEAK}. Structurally we follow a similar chain of thought as in our previous paper --- until the point where the proof diverges reaching the weak convergence of the nonlinear term $u_3^\epsilon C^\epsilon,$ where in this case we can not benefit from an $H^1$-regular concentration function. In more detail, we begin by calculating the energy inequality and collect the a priori estimates that derive from it, then verify the less problematic weak convergence results. Finally we elaborate the steps that bring the convergence of the $u_3^\epsilon C^\epsilon$ term to a closure. The main idea here is to temporarily ignore the $C^\epsilon$ function and prove a strong convergence result considering only the velocity functions. Throughout this step we go beyond the weak solutions quality and show that we are working with strong solutions. In this new setting with more favourable regularities we can prove the convergence result we need, and eventually return to the frame of weak solutions where we can merge back together the velocity and concentration functions into a unified solution.
 
   \subsubsection{Energy inequality and a priori estimates}
   
@@ -895,13 +895,55 @@ $$ s^\epsilon = \delta^\epsilon \star \varphi, \quad s = \delta \star \varphi.$$
 
 \subsection{The main strong convergence theorem}
 
-The main theorem of this section concerning the strong solutions is analogous to Theorem \ref{maintheoremWEAK}; we highlight that the two major differences are \textit{a)} we are working on a periodic domain, and \textit{b)} we use $H^3$ and $H^2$ initial data for the horizontal velocity and the concentration, respectively.
+The main theorem of this section concerning the strong solutions is analogous to Theorem \ref{maintheoremWEAK}; with the two major differences being the change to a periodic domain, and the assumption of an $H^3$ and $H^2$ initial data for the horizontal velocity and the concentration, respectively.
 
 \begin{theorem} \label{maintheoremSTRONG}
-Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0, and let $c_0 \in$ $H^2 (\Omega),$ and assume that the (\ref{ANSC8-strong}) boundary conditions hold. Moreover let $\epsilon < \epsilon_0.$ Then as the aspect ratio $\epsilon$ tends to zero, the unique strong solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1}) - (\ref{ANSC5}) converges to the unique strong solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1}) - (\ref{HNSC5})
+Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0$, let $c_0 \in H^2 (\Omega),$ and assume that the (\ref{ANSC8-strong}) boundary conditions hold. Moreover let $\epsilon < \epsilon_0.$ Then as the aspect ratio $\epsilon$ tends to zero, the unique strong solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1}) - (\ref{ANSC5}) converges to the unique strong solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1}) - (\ref{HNSC5}).
 \end{theorem}
 
-Before we present the proof we collect some already well-known, fundamental results that serve as cornerstones in the verification process.
+Before we present the proof we collect some fundamental results that serve as cornerstones in the verification process of this convergence result. The first three points are exclusively focused on the velocity function and were achieved in \cite{li2019primitive}, while point iv) regarding the concentration is new to our knowledge.
+
+\begin{enumerate}
+
+  \item The local unique existence of the $(\mathbf{u}^\epsilon, c^\epsilon)$ unique strong solution of the anisotropic equations follows from \cite{li2019primitive} using their results directly on the velocity function and applying analogous ideas for the concentration part. Additionally, we have the global existence of the $\mathbf{u}^\epsilon$ function, provided that $\epsilon < \epsilon_0.$
+
+  \item For ${\mathbf{u}_h}_0 \in H^3(\Omega)$ the global unique existence of $\mathbf{u}$ follows from \cite{li2019primitive} and \cite{petcu2005sobolev}, specifically we have
+    
+    \begin{equation}
+      \mathbf{u}_h \in L^\infty([0, \infty), H^3(\Omega)) \cap L^2_{loc}([0, \infty), H^4(\Omega))
+    \end{equation}
+    
+    and
+    
+    \begin{equation}
+      \partial_t \mathbf{u}_h \in L^2_{loc}([0, \infty), H^2(\Omega)).
+    \end{equation}
+  
+  \item After the previously described existence results we will also need the following estimate on the velocity difference functions. For an ${\mathbf{u}_h}_0 \in H^3(\Omega)$ initial data we have
+  
+  \begin{equation}
+    \sup_{0 \leq t < \infty}{\norm{(U_h^\epsilon, \epsilon U_3^\epsilon)}_{H^2}^2} + \int_0^\infty \norm{\nabla (U_h^\epsilon, U_3^\epsilon)}_{H^2}^2 \leq C \epsilon^2,
+  \end{equation}
+  
+  for details see \cite{li2019primitive}.
+  
+  \item On the other hand, for the concentration function $c$ we have the global unique existence of $c$ for which it holds that
+    
+    \begin{equation}
+      c \in L^\infty([0, \infty), H^2(\Omega)) \text{ and } \nabla_d c \in L^2_{loc}([0, \infty), H^2(\Omega)),
+    \end{equation}
+    
+    and
+    
+    \begin{equation}
+      \partial_t c \in L^2_{loc}([0, \infty), H^1(\Omega)),
+    \end{equation}
+    
+    assuming ${\mathbf{u}_h}_0 \in H^3(\Omega)$ and $c_0 \in H^2(\Omega).$ We provide the verification of this statement in the appendix.
+
+\end{enumerate}
+
+Now we are ready to present to proof of Theorem \ref{maintheoremSTRONG}.
 
 \appendix
 
