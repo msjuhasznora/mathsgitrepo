@@ -60,7 +60,7 @@ A local domain on the surface of the rotating Earth is often described in what i
 
 Migrating convergence results from one of the above described coordinate systems to the other is not trivial: as a result of an additional $\epsilon$ term in the downwind matching scenario, certain boundedness and regularity features that are satisfied for the geophysical rotating frame are at the same time not valid for the downwind matching Cartesian coordinate system.
 
-In \cite{pollatmws2019} we have proved a weak convergence theorem for the case of the classical north-west oriented coordinate system --- the first main part of the present article is dedicated to show that this result still holds true in the downwind matching coordinate system assuming some medium-level changes in the initial and boundary conditions. The theorem we will migrate between these two coordinate systems is focused on the polluted atmosphere as a shallow domain. Incorporating the shallowness into the model via introducing the $$\epsilon = \frac{\text{characteristic depth}}{\text{characteristic width}}$$ shallowness parameter we have proved the theoretical correctness of the hydrostatic approximation for the combination of a three-dimensional velocity function and a pollution concentration function. In more detail, we have showed that any weak solution of the shallow polluted atmosphere converges weakly to a weak solution of the so-called primitive equations representing the hydrostatic limit model. In the first part of this article our goal is to verify an analogous version of this convergence theorem for the case of the more considerately chosen downwind matching coordinate system. As in this scenario the advection is dominant compared to diffusion effects along the $x$ axis, this approach on the one hand naturally contributes to the simplification of the limit model. On the other hand it brings an additional $\epsilon$ term in the Laplacian of the concentration equation, and along with this the challenge of proving a weak convergence result for the product of the vertical velocity and the concentration. The difficulty is due to the phenomena of the $\norm{\partial_1 C^\epsilon}$ term being replaced by $\| \sqrt{\epsilon} \partial_1 C^\epsilon \|$ in the energy inequality. As the a priori estimates extracted from the energy inequality serve as fundamental building blocks of the proof, having a weakened, $\epsilon$-including version of one of the estimates has significant consequences for the verification process --- we lose the strong convergence of the concentration function.  This issue is overcome by using a more regular initial horizontal velocity function, namely ${\mathbf{u}_h}_0 \in H^1.$ The stronger initial regularity will naturally result in a $\mathbf{u}^\epsilon$ function with stronger regularities, allowing us to pass to the field of strong solutions for the velocity part of the solution, and thus will compensate the lost $H^1$ regularity of the concentration function $C^\epsilon.$ We mention that we will also use slightly different, stricter boundary conditions for the concentration function --- these additional requirements too are motivated by the presence of the new $\epsilon$ term in the energy inequality.
+In \cite{pollatmws2019} we have proved a weak convergence theorem for the case of the classical north-west oriented coordinate system --- the first main part of the present article is dedicated to show that this result still holds true in the downwind matching coordinate system assuming some medium-level changes in the initial and boundary conditions. The theorem we will migrate between these two coordinate systems is focused on the polluted atmosphere as a shallow domain. Incorporating the shallowness into the model via introducing the $$\epsilon = \frac{\text{characteristic depth}}{\text{characteristic width}}$$ shallowness parameter we have proved the theoretical correctness of the hydrostatic approximation for the combination of a three-dimensional velocity function and a pollution concentration function. In more detail, we have showed that any weak solution of the shallow polluted atmosphere converges weakly to a weak solution of the so-called primitive equations representing the hydrostatic limit model. In the first part of this article our goal is to verify an analogous version of this convergence theorem for the case of the more considerately chosen downwind matching coordinate system. As in this scenario the advection is dominant compared to diffusion effects along the $x$ axis, this approach on the one hand naturally contributes to the simplification of the limit model. On the other hand it brings an additional $\epsilon$ term in the Laplacian of the concentration equation, and along with this the challenge of proving a weak convergence result for the product of the vertical velocity and the concentration. The difficulty is due to the phenomena of the $\norm{\partial_1 c^\epsilon}$ term being replaced by $\| \sqrt{\epsilon} \partial_1 c^\epsilon \|$ in the energy inequality. As the a priori estimates extracted from the energy inequality serve as fundamental building blocks of the proof, having a weakened, $\epsilon$-including version of one of the estimates has significant consequences for the verification process --- we lose the strong convergence of the concentration function.  This issue is overcome by using a more regular initial horizontal velocity function, namely ${\mathbf{u}_h}_0 \in H^1.$ The stronger initial regularity will naturally result in a $\mathbf{u}^\epsilon$ function with stronger regularities, allowing us to pass to the field of strong solutions for the velocity part of the solution, and thus will compensate the lost $H^1$ regularity of the concentration function $c^\epsilon.$ We mention that we will also use slightly different, stricter boundary conditions for the concentration function --- these additional requirements too are motivated by the presence of the new $\epsilon$ term in the energy inequality.
 
 The second part of this article is dedicated to the strong convergence result.
 
@@ -96,7 +96,7 @@ We end up this section with some notations we will use through the paper.
 
 The key point of this new model is to integrate some of the main ideas of the Gaussian plume dispersion model into the system describing the polluted atmosphere. Therefore we begin by fixing the local Cartesian coordinate system to be adjusted to the downwind direction, i.e. $z$ is oriented upwards, while $x$ is the downwind, and $y$ is the crosswind direction. Another assumption the Gaussian dispersion models typically use is that advection is more dominant than diffusion along the downwind direction, which leads to the appearance of an extra $\epsilon$ term in the concentration equation's Laplacian. Namely, we have
 
-\begin{equation} \abs{u_1 \partial_{1} C} \gg \abs{ K_x \partial_{11} ^2 C },\end{equation}
+\begin{equation} \abs{u_1 \partial_{1} c} \gg \abs{ K_x \partial_{11} ^2 c },\end{equation}
 
 which leads us to introducing this new scaling identity
 
@@ -120,7 +120,7 @@ Each of these following scaling equations can be heuristically deduced from the 
     & v_1 = u_1^{\epsilon}, \quad v_2 = u_2^{\epsilon}, \quad v_3 = \epsilon u_3^{\epsilon}, \\
     & \nu_x = \nu_1, \quad \nu_y = \nu_2 , \quad \nu_z = \epsilon ^ 2\nu_3, \\
     & K_x = K_1, \quad K_y = K_2 , \quad K_z = \epsilon^2 K_3, \\
-    & P = \frac{1}{\epsilon} C^\epsilon, \quad Q = \frac{1}{\epsilon} S^\epsilon, \quad p = p^{\epsilon}
+    & P = \frac{1}{\epsilon} c^\epsilon, \quad Q = \frac{1}{\epsilon} s^\epsilon, \quad p = p^{\epsilon}
   \end{split}
 \end{equation}
 
@@ -201,13 +201,13 @@ Using the expanded form of the Coriolis terms and applying the scaling process (
     \end{equation}
     
     \begin{equation} \label{ANSC5}
-    \partial_t C^\epsilon + \mathbf{u^\epsilon} \cdot \nabla C^\epsilon = \epsilon K_1 \partial_{11} ^ 2 C^\epsilon + K_2 \partial_{22} ^ 2 C^\epsilon + K_3 \partial_{33} ^ 2 C^\epsilon + S^\epsilon \text{ in } \Omega \times (0,T).
+    \partial_t c^\epsilon + \mathbf{u^\epsilon} \cdot \nabla c^\epsilon = \epsilon K_1 \partial_{11} ^ 2 c^\epsilon + K_2 \partial_{22} ^ 2 c^\epsilon + K_3 \partial_{33} ^ 2 c^\epsilon + s^\epsilon \text{ in } \Omega \times (0,T).
     \end{equation}
 
 The initial condition for the velocity and the pollution concentration are
     
     \begin{equation} \label{ANSC7}
-    \mathbf{u}^\epsilon (\cdot, t = 0) = \mathbf{u}_0, \quad C^\epsilon (\cdot, t=0) = C_0  \quad \text{ in } \Omega.
+    \mathbf{u}^\epsilon (\cdot, t = 0) = \mathbf{u}_0, \quad c^\epsilon (\cdot, t=0) = c_0  \quad \text{ in } \Omega.
     \end{equation}
   
 This system will become complete when we define the boundary conditions --- we describe these in detail in the respective sections as they are chosen with different considerations depending on the quality of the solutions.
@@ -231,7 +231,7 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
     \end{equation}
     
     \begin{equation} \label{HNSC5}   
-    \partial_t C + \mathbf{u} \cdot \nabla C = K_2 \partial_{22} ^ 2 C + K_3 \partial_{33} ^2 C + S \text{ in } \Omega \times (0,T)
+    \partial_t c + \mathbf{u} \cdot \nabla c = K_2 \partial_{22} ^ 2 c + K_3 \partial_{33} ^2 c + s \text{ in } \Omega \times (0,T)
     \end{equation}
     
     \begin{equation} \label{HNSC6}   
@@ -239,10 +239,10 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
     \end{equation}
     
     \begin{equation} \label{HNSC7}   
-    u_i (\cdot, t=0) = u_{0 i}, C (\cdot, t=0) = C_0 \text{ in } \Omega, \text{$i$ = 1,2}
+    u_i (\cdot, t=0) = u_{0 i}, c (\cdot, t=0) = c_0 \text{ in } \Omega, \text{$i$ = 1,2}
     \end{equation}
     
-The specific definitions of the $S^\epsilon$ and $S$ source terms also depend on whether we consider weak or strong solutions. In both cases they are fundamentally based on the notion of the nascent delta function with parameter $\epsilon$ and the delta distribution, but their exact definitions will be given in the subsections according to the quality of the solutions.
+The specific definitions of the $s^\epsilon$ and $s$ source terms also depend on whether we consider weak or strong solutions. In both cases they are fundamentally based on the notion of the nascent delta function with parameter $\epsilon$ and the delta distribution, but their exact definitions will be given in the subsections according to the quality of the solutions.
 
 %%% WEAK SOLUTIONS %%%
 \section{Weak solutions}
@@ -282,8 +282,8 @@ The boundary conditions to describe the anisotropic system can be summarised as
     \begin{equation} \label{ANSC8}
       \begin{split}
         & \mathbf{u}^\epsilon = 0 \text{ on } \Gamma \times (0,T), \\
-        &C^\epsilon = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
-        & \partial_2 C^\epsilon = \partial_3 C^\epsilon = 0 \text{ on } \Gamma_G \times (0,T), \quad \partial_1 C^\epsilon = \sigma \in L^2 (0,T; \Gamma_G), \\
+        & c^\epsilon = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
+        & \partial_2 c^\epsilon = \partial_3 c^\epsilon = 0 \text{ on } \Gamma_G \times (0,T), \quad \partial_1 c^\epsilon = \sigma \in L^2 (0,T; \Gamma_G), \\
       \end{split}
     \end{equation}
 
@@ -291,20 +291,20 @@ while for the hydrostatic case we use
     
     \begin{equation} \label{HNSC8}
       \begin{split}
-        & C = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
-        & \partial_2 C = \partial_3 C = 0 \text{ on } \Gamma_G \times (0,T), \partial_1 C \in L^2 L^2 (0,T; \Gamma_G). \\
+        & c = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
+        & \partial_2 c = \partial_3 c = 0 \text{ on } \Gamma_G \times (0,T), \partial_1 c \in L^2 L^2 (0,T; \Gamma_G). \\
       \end{split}
     \end{equation}
     
-The meaning of $\partial_1 C^\epsilon = \sigma$ above is that we naturally assume $\partial_1 C^\epsilon$ to be equal to some sufficiently regular $\sigma$ function defined on the respective boundary --- this well-known technique is also used for example for the case of modelling wind traction effect on the surface of the ocean.
+The meaning of $\partial_1 c^\epsilon = \sigma$ above is that we naturally assume $\partial_1 c^\epsilon$ to be equal to some sufficiently regular $\sigma$ function defined on the respective boundary --- this well-known technique is also used for example for the case of modelling wind traction effect on the surface of the ocean.
 
 As we have mentioned it in the introduction, in this case we will work with a more regular ${\mathbf{u}_h}_0 \in H^1$ initial data, so we will directly use the $u_3 = 0$ equality on the boundary instead of the original $u_3 n_3 = 0$ constraint that we had used.
     
 We highlight the difference between the boundary conditions of the original, east-north oriented, and the new, downwind matching model for the case of weak solutions.
 
-The difference in the kind of boundary conditions we can "afford" to have on the lower boundary for the concentration comes from the energy inequality. In the east-north-upwards oriented coordinate system we do not have an $\epsilon$ in the diffusion matrix, and thus, having any of the $\partial_i C^\epsilon$ terms different from 0 does not create any problems, not even for an ocean case where $\partial_3 C^\epsilon$ becomes nonzero as well (they are required however to be bounded of course). On the other hand, the downwind matching coordinate system brings in an $\epsilon$ term in front of the $K_1$ diffusion coefficient, which makes the model more sensitive to assigning boundary conditions for $C^\epsilon.$ This means that we can not have anymore the relatively relaxed boundedness requirement for any $\partial_i C^\epsilon$ except for $i=1.$ All other $\partial_2 C^\epsilon, \partial_3 C^\epsilon$ derivatives must be zero on the lower boundary, otherwise they would result in an $(\epsilon - \text{const.})$ negative term appearing in the energy inequality --- for more details see section $\ref{proof}$. This also means that we will consider exclusively the inland domain scenario for the case of this coordinate system.
+The difference in the kind of boundary conditions we can "afford" to have on the lower boundary for the concentration comes from the energy inequality. In the east-north-upwards oriented coordinate system we do not have an $\epsilon$ in the diffusion matrix, and thus, having any of the $\partial_i c^\epsilon$ terms different from 0 does not create any problems, not even for an ocean case where $\partial_3 c^\epsilon$ becomes nonzero as well (they are required however to be bounded of course). On the other hand, the downwind matching coordinate system brings in an $\epsilon$ term in front of the $K_1$ diffusion coefficient, which makes the model more sensitive to assigning boundary conditions for $c^\epsilon.$ This means that we can not have anymore the relatively relaxed boundedness requirement for any $\partial_i c^\epsilon$ except for $i=1.$ All other $\partial_2 c^\epsilon, \partial_3 c^\epsilon$ derivatives must be zero on the lower boundary, otherwise they would result in an $(\epsilon - \text{const.})$ negative term appearing in the energy inequality --- for more details see section $\ref{proof}$. This also means that we will consider exclusively the inland domain scenario for the case of this coordinate system.
 
-Finally, the $S^\epsilon$ and $S$ source terms both centred at $\mathbf{x_s}$, with an activation multiplier set to start at time $t_s$. For more details see \cite{pollatmws2019}.
+Finally, the $s^\epsilon$ and $s$ source terms both centred at $\mathbf{x_s}$, with an activation multiplier set to start at time $t_s$. For more details see \cite{pollatmws2019}.
 
 %%% *** WEAK FORMULATION AND MAIN RESULT*** %%%
 \subsection{Weak Formulation and Main Result} \label{weakformulationmainresult}
@@ -329,7 +329,7 @@ In this section we describe the weak formulation of the merged equations in both
   
   \begin{definition} \label{definitionhydrostaticWF}
   
-  Find $(\mathbf{u}, C)$ such that $\mathbf{u} = (\mathbf{u}_h, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_h \in L^\infty (0,T; L^2(\Omega)^2),$ and $C \in L_t^\infty L_x^2$ with $\partial_2 C, \partial_3 C \in L^2_t L^2_x$, such that
+  Find $(\mathbf{u}, c)$ such that $\mathbf{u} = (\mathbf{u}_h, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_h \in L^\infty (0,T; L^2(\Omega)^2),$ and $c \in L_t^\infty L_x^2$ with $\partial_2 c, \partial_3 c \in L^2_t L^2_x$, such that
   
   \begin{equation}
     \begin{split}
@@ -342,12 +342,12 @@ In this section we describe the weak formulation of the merged equations in both
   
   \begin{equation}
     \begin{split} \nonumber
-      &+ \int_0^T \bigg[ -(C, \partial_t \tilde{C}) -(\mathbf{u}C, \nabla \tilde{C}) + K_2 (\partial_2 C, \partial_2 \tilde{C}) + K_3 (\partial_3 C, \partial_3 \tilde{C}) \bigg ] \diff t \\
-      & = - (C_0, \tilde{C}(0)) + \int_0^T (S,\tilde{C}) \diff t
+      &+ \int_0^T \bigg[ -(c, \partial_t \tilde{c}) -(\mathbf{u}c, \nabla \tilde{c}) + K_2 (\partial_2 c, \partial_2 \tilde{c}) + K_3 (\partial_3 c, \partial_3 \tilde{c}) \bigg ] \diff t \\
+      & = - (c_0, \tilde{c}(0)) + \int_0^T (s,\tilde{c}) \diff t
     \end{split}
   \end{equation}
   
-  for all $(\mathbf{\tilde{u}}, \tilde{C})$ with $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T, \mathbf{W})$, with $\mathbf{\tilde{u}}_h (T) = 0$ and $\partial_3 \mathbf{\tilde{u}}_h \in L^\infty (0, T; L^3 (\Omega)^2)$ and $\tilde{C}$ with $\tilde{C} \in L^2 (0,T, H^3_{\Gamma} (\Omega))$, $\tilde{C} \in H^1 (0,T, L^2)$, $\tilde{C} (T) = 0$. 
+  for all $(\mathbf{\tilde{u}}, \tilde{c})$ with $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T, \mathbf{W})$, with $\mathbf{\tilde{u}}_h (T) = 0$ and $\partial_3 \mathbf{\tilde{u}}_h \in L^\infty (0, T; L^3 (\Omega)^2)$ and $\tilde{c}$ with $\tilde{c} \in L^2 (0,T, H^3_{\Gamma} (\Omega))$, $\tilde{c} \in H^1 (0,T, L^2)$, $\tilde{c} (T) = 0$. 
   
   \end{definition}
   
@@ -355,7 +355,7 @@ In this section we describe the weak formulation of the merged equations in both
 
  \begin{definition} \label{definitionanisotropicWF}
   
-  Find $\mathbf{u}^\epsilon = (\mathbf{u}_h, u^\epsilon_3) \in L^2 (0,T ; \mathbf{V}) \cap C_w (0, T; L^2 (\Omega)^3)$ and $C^\epsilon \in L^\infty (0,T; L^2(\Omega)) \cap L^2 (0,T; H^1(\Omega))$, such that
+  Find $\mathbf{u}^\epsilon = (\mathbf{u}_h, u^\epsilon_3) \in L^2 (0,T ; \mathbf{V}) \cap C_w (0, T; L^2 (\Omega)^3)$ and $c^\epsilon \in L^\infty (0,T; L^2(\Omega)) \cap L^2 (0,T; H^1(\Omega))$, such that
   
   \begin{equation}
     \begin{split}
@@ -370,13 +370,13 @@ In this section we describe the weak formulation of the merged equations in both
   
     \begin{equation}
     \begin{split} \nonumber
-      & \int_0^T \bigg [ -(C^\epsilon, \partial_t \tilde{C}) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) + \epsilon K_1 (\partial_1 C^\epsilon, \partial_1 \tilde{C}) - \epsilon K_1 \sigma \big[\tilde{C} \big] _{\Gamma_G} \\
-      & + K_2 (\partial_2 C^\epsilon, \partial_2 \tilde{C}) + K_3 (\partial_3 C^\epsilon, \partial_3 \tilde{C}) \bigg ] \diff t \\
-      & =  - (C_0, \tilde{C} (0)) + \int_0^T (S^\epsilon,\tilde{C}) \diff t
+      & \int_0^T \bigg [ -(c^\epsilon, \partial_t \tilde{c}) -(\mathbf{u}^\epsilon c^\epsilon, \nabla \tilde{c}) + \epsilon K_1 (\partial_1 c^\epsilon, \partial_1 \tilde{c}) - \epsilon K_1 \sigma \big[\tilde{c} \big] _{\Gamma_G} \\
+      & + K_2 (\partial_2 c^\epsilon, \partial_2 \tilde{c}) + K_3 (\partial_3 c^\epsilon, \partial_3 \tilde{c}) \bigg ] \diff t \\
+      & =  - (c_0, \tilde{c} (0)) + \int_0^T (s^\epsilon,\tilde{c}) \diff t
     \end{split}
   \end{equation}
   
-  for all $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T;\mathbf{V})$ with $\mathbf{\tilde{u}}(T) = 0$ and $\tilde{C}$ such that $\tilde{C} \in H^1 (0,T, H^3_{\Gamma} (\Omega))$ and $\tilde{C} (T) = 0$.
+  for all $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T;\mathbf{V})$ with $\mathbf{\tilde{u}}(T) = 0$ and $\tilde{c}$ such that $\tilde{c} \in H^1 (0,T, H^3_{\Gamma} (\Omega))$ and $\tilde{c} (T) = 0$.
   
   \end{definition}
 
@@ -385,7 +385,7 @@ The main theorem of this paper is analogous to our previous result stated for th
 Now we are ready to state the main theorem.
 
 \begin{theorem} \label{maintheorem}
-  Let ${\mathbf{u}_h}_0$ $\in$ $H^1 (\Omega)$, ${u_3}_0 \in L^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 = 0$ on $\partial \Omega$; let $C_0 \in$ $L^2 (\Omega)$, $C_0 = 0$ on $ \partial \Omega$, and assume that the boundary conditions (\ref{ANSC8}) hold; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, C^\epsilon)$ of the anisotropic equations (\ref{ANSC1}) - (\ref{ANSC5}) converges to a weak solution $(\mathbf{u}, C)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1}) - (\ref{HNSC5}).
+  Let ${\mathbf{u}_h}_0$ $\in$ $H^1 (\Omega)$, ${u_3}_0 \in L^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 = 0$ on $\partial \Omega$; let $c_0 \in$ $L^2 (\Omega)$, $c_0 = 0$ on $ \partial \Omega$, and assume that the boundary conditions (\ref{ANSC8}) hold; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1}) - (\ref{ANSC5}) converges to a weak solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1}) - (\ref{HNSC5}).
 \end{theorem}
   
 %%% *** PROOF *** %%%
@@ -859,9 +859,13 @@ With this Theorem $\ref{maintheorem}$ has been proved.
 
 \section{Strong solutions}
 
-Boundary conditions.
+In this section we verify that the previously shown connection between the anisotropic and hydrostatic equations has an analogous version for strong solutions as well. In order to describe this result we firstly need to set the domain and the boundary conditions. Concerning the latter we follow the approach of \cite{li2019primitive} and \cite{cao2014local} and switch to a periodic boundary for the case of strong solutions.
 
-Source term definition.
+\begin{remark}
+\normalfont The periodic boundary conditions can be substituted by $\nabla^k u = 0, \nabla^k c = 0$ - type boundary conditions on a non-periodic, standard domain. Applying these it is possible to switch back to a classical domain and still benefit from the disappearing boundary integrals.
+\end{remark}
+
+Source term.
 
 Existence.
 
