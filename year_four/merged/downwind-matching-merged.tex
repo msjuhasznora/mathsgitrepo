@@ -859,17 +859,47 @@ With this Theorem $\ref{maintheorem}$ has been proved.
 
 \section{Strong solutions}
 
-In this section we verify that the previously shown connection between the anisotropic and hydrostatic equations has an analogous version for strong solutions as well. In order to describe this result we firstly need to set the domain and the boundary conditions. Concerning the latter we follow the approach of \cite{li2019primitive} and \cite{cao2014local} and switch to a periodic boundary for the case of strong solutions.
+In this section we verify that the previously shown connection between the anisotropic and hydrostatic equations has an analogous version that holds for strong solutions as well. In order to describe this result we firstly need to set the domain and the boundary conditions. Concerning the latter we follow the approach of \cite{li2019primitive} and \cite{cao2014local} and complement the modelling equations with a periodic boundary for the case of strong solutions. Specifically, we apply the
+
+\begin{equation} \label{ANSC8-strong}
+  \mathbf{u}^\epsilon, p^\epsilon \text{ and } c^\epsilon \text{ are periodic in } x,y,z,
+\end{equation}
+
+and
+
+\begin{equation} \label{HNSC8-strong}
+  \mathbf{u}, p \text{ and } c \text{ are periodic in } x,y,z
+\end{equation}
+
+boundary conditions to the anisotropic and hydrostatic system, respectively.
 
 \begin{remark}
-\normalfont The periodic boundary conditions can be substituted by $\nabla^k u = 0, \nabla^k c = 0$ - type boundary conditions on a non-periodic, standard domain. Applying these it is possible to switch back to a classical domain and still benefit from the disappearing boundary integrals.
+\normalfont The periodic boundary conditions can be substituted by boundary conditions of type $\nabla^k u = 0, \nabla^k c = 0$ defined on a non-periodic, standard domain. Applying these it is possible to switch back to a classical domain and still benefit from the disappearing boundary integrals.
 \end{remark}
 
-Source term.
+Our next step is the specification of the source terms, which in this case involves a convolution with a smooth function in order to have a mollified source fitting the strong solution scheme.
 
-Existence.
+Let $\delta_\epsilon$ be the following approximation of the $\delta$ distribution,
+
+\[   
+\delta_\epsilon = 
+  \begin{cases}
+       \frac{1}{\epsilon^3} \exp{\bigg ( \frac{1}{\abs{{\frac{x}{\epsilon}}}^2-1} \bigg ) } &\quad \abs{x} < \epsilon \\
+       0 &\quad \abs{x} \geq \epsilon, \\
+  \end{cases}
+\]
+
+and let $\varphi$ be a $C^\infty_0$ smooth function. We define the anisotropic and hydrostatic source terms respectively as the following convolutions:
+
+$$ s^\epsilon = \delta^\epsilon \star \varphi, \quad s = \delta \star \varphi.$$
 
 Convergence.
+
+\appendix
+
+\section{Existence of the strong solutions of the hydrostatic equations of the polluted atmosphere}
+
+Existence
 
 \nocite{*}
 \bibliographystyle{abbrv}
