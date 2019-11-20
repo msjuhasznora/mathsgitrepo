@@ -206,7 +206,7 @@ Using the expanded form of the Coriolis terms and applying the scaling process (
 
 The initial condition for the velocity and the pollution concentration are
     
-    \begin{equation} \label{ANSC7}
+    \begin{equation} \label{ANSC6}
     \mathbf{u}^\epsilon (\cdot, t = 0) = \mathbf{u}_0, \quad c^\epsilon (\cdot, t=0) = c_0  \quad \text{ in } \Omega.
     \end{equation}
   
@@ -235,10 +235,6 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
     \end{equation}
     
     \begin{equation} \label{HNSC6}   
-    u_1 = u_2 = u_3 = 0 \text{ on } \Gamma \times (0,T)
-    \end{equation}
-    
-    \begin{equation} \label{HNSC7}   
     u_i (\cdot, t=0) = u_{0 i}, c (\cdot, t=0) = c_0 \text{ in } \Omega, \text{$i$ = 1,2}
     \end{equation}
     
@@ -279,7 +275,7 @@ Here the boundary structure of the domain is identical to what we used in \cite{
 
 The boundary conditions to describe the anisotropic system can be summarised as
   
-    \begin{equation} \label{ANSC8}
+    \begin{equation} \label{ANSC7}
       \begin{split}
         & \mathbf{u}^\epsilon = 0 \text{ on } \Gamma \times (0,T), \\
         & c^\epsilon = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
@@ -289,8 +285,9 @@ The boundary conditions to describe the anisotropic system can be summarised as
 
 while for the hydrostatic case we use
     
-    \begin{equation} \label{HNSC8}
-      \begin{split}
+    \begin{equation} \label{HNSC7}
+      \begin{split} 
+        & u_1 = u_2 = u_3 = 0 \text{ on } \Gamma \times (0,T) \\
         & c = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
         & \partial_2 c = \partial_3 c = 0 \text{ on } \Gamma_G \times (0,T), \partial_1 c \in L^2 L^2 (0,T; \Gamma_G). \\
       \end{split}
@@ -325,7 +322,7 @@ In this section we describe the weak formulation of the merged equations in both
   
   \[ \mathbf{W} = \{ \mathbf{u} \in  H^1_{\Gamma} (\Omega) \times H^1_{\Gamma} (\Omega) \times H_\Gamma (\partial_3, \Omega); \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \} \]
   
-  Then the weak formulation of the hydrostatic system (\ref{HNSC1}) - (\ref{HNSC8}) takes the following form.
+  Then the weak formulation of the hydrostatic system (\ref{HNSC1}) - (\ref{HNSC6}), (\ref{HNSC7}) takes the following form.
   
   \begin{definition} \label{definitionhydrostaticWF}
   
@@ -385,7 +382,7 @@ The main theorem of this paper is analogous to our previous result stated for th
 Now we are ready to state the main theorem of this section.
 
 \begin{theorem} \label{maintheoremWEAK}
-  Let ${\mathbf{u}_h}_0$ $\in$ $H^1 (\Omega)$, ${u_3}_0 \in L^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 = 0$ on $\partial \Omega$; let $c_0 \in$ $L^2 (\Omega)$, $c_0 = 0$ on $ \partial \Omega$, and assume that the boundary conditions (\ref{ANSC8}) hold; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1}) - (\ref{ANSC5}) converges to a weak solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1}) - (\ref{HNSC5}).
+  Let ${\mathbf{u}_h}_0$ $\in$ $H^1 (\Omega)$, ${u_3}_0 \in L^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 = 0$ on $\partial \Omega$; let $c_0 \in$ $L^2 (\Omega)$, $c_0 = 0$ on $ \partial \Omega$, and assume that the boundary conditions (\ref{ANSC7}) hold; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1}) - (\ref{ANSC6}) converges to a weak solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1}) - (\ref{HNSC6}).
 \end{theorem}
   
 %%% *** PROOF *** %%%
@@ -474,7 +471,7 @@ This section is dedicated to the verification of Theorem \ref{maintheoremWEAK}. 
   
   \begin{corollary} \label{StrongSolPE_boundedness}
   
-    Let $(\mathbf{u}_h,u_3)$ be the the unique global strong solution to the primitive equations (\ref{HNSC1}) - (\ref{HNSC5}) with an initial data ${\mathbf{u}_h}_0 \in H^1(\Omega).$ Then we have the following boundedness result:
+    Let $(\mathbf{u}_h,u_3)$ be the the unique global strong solution to the primitive equations (\ref{HNSC1}) - (\ref{HNSC4}) with an initial data ${\mathbf{u}_h}_0 \in H^1(\Omega).$ Then we have the following boundedness result:
     
     $$ \sup_{0 \leq t < \infty} \norm{\mathbf{u}_h}_{H^1}^2 (t) + \int_0^\infty \norm{\nabla \mathbf{u}_h}_{H^1}^2 \diff t \leq C(\norm{{\mathbf{u}_h}_0}_{H^1}, \Gamma_G).$$
   
@@ -518,7 +515,7 @@ The main idea in order to prove the strong convergence of $u^\epsilon_3$ lies in
 
 \begin{prop} \label{propIdentity}
 
-Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ and $(\mathbf{u}_h,u_3)$ be the solutions of (\ref{ANSC1}) - (\ref{ANSC5}) and (\ref{HNSC1}) - (\ref{HNSC5}), respectively, with initial data $({\mathbf{u}_h}_0, {u_3}_0),$ where ${\mathbf{u}_h}_0 \in H^1(\Omega)$ and ${u_3}_0 = - \int_0^z \nabla_h \cdot {\mathbf{u}_h}_0 \diff z'.$ Then we have the following integral identity:
+Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ and $(\mathbf{u}_h,u_3)$ be the solutions of (\ref{ANSC1}) - (\ref{ANSC4}) and (\ref{HNSC1}) - (\ref{HNSC4}), respectively, with initial data $({\mathbf{u}_h}_0, {u_3}_0),$ where ${\mathbf{u}_h}_0 \in H^1(\Omega)$ and ${u_3}_0 = - \int_0^z \nabla_h \cdot {\mathbf{u}_h}_0 \diff z'.$ Then we have the following integral identity:
 
 \begin{equation} \label{integralIdentity_prop}
   \begin{split}
@@ -625,7 +622,7 @@ With this we are ready to estimate the difference between the solutions of the s
 
 \begin{prop}
 
-Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ and $(\mathbf{u}_h,u_3)$ be the solutions of (\ref{ANSC1}) - (\ref{ANSC5}) and (\ref{HNSC1}) - (\ref{HNSC5}), respectively, with initial data $({\mathbf{u}_h}_0, {u_3}_0),$ where ${\mathbf{u}_h}_0 \in H^1(\Omega)$ and ${u_3}_0 = - \int_0^z \nabla_h \cdot {\mathbf{u}_h}_0 \diff z'.$ Then the following estimate holds for the difference function $(\mathbf{U}_h^\epsilon, U_3^\epsilon):$
+Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ and $(\mathbf{u}_h,u_3)$ be the solutions of (\ref{ANSC1}) - (\ref{ANSC4}) and (\ref{HNSC1}) - (\ref{HNSC4}), respectively, with initial data $({\mathbf{u}_h}_0, {u_3}_0),$ where ${\mathbf{u}_h}_0 \in H^1(\Omega)$ and ${u_3}_0 = - \int_0^z \nabla_h \cdot {\mathbf{u}_h}_0 \diff z'.$ Then the following estimate holds for the difference function $(\mathbf{U}_h^\epsilon, U_3^\epsilon):$
 
 \begin{equation}
   \begin{split}
@@ -855,23 +852,23 @@ This has been the last missing part of the proof of the main theorem, since comb
 
 \begin{equation}C^\epsilon u_3^\epsilon \rightharpoonup C u_3 \text{ weakly in } L^2 L^2.\end{equation}
 
-With this Theorem $\ref{maintheorem}$ has been proved.
+With this Theorem $\ref{maintheoremWEAK}$ has been proved.
 
 \section{Strong solutions}
 
 In this section we verify that the previously shown connection between the anisotropic and hydrostatic equations has an analogous version that holds for strong solutions as well. In order to describe this result we firstly need to set the domain and the boundary conditions. Concerning the latter we follow the approach of \cite{li2019primitive} and \cite{cao2014local} and complement the modelling equations with a periodic boundary for the case of strong solutions. Specifically, we apply the
 
-\begin{equation} \label{ANSC8-strong}
+\begin{equation} \label{ANSC7-strong}
   \mathbf{u}^\epsilon, p^\epsilon \text{ and } c^\epsilon \text{ are periodic in } x,y,z,
 \end{equation}
 
 and
 
-\begin{equation} \label{HNSC8-strong}
+\begin{equation} \label{HNSC7-strong}
   \mathbf{u}, p \text{ and } c \text{ are periodic in } x,y,z
 \end{equation}
 
-boundary conditions to the anisotropic and hydrostatic system, respectively.
+boundary conditions to the anisotropic and hydrostatic systems ((\ref{ANSC1})-(\ref{ANSC6}) and (\ref{HNSC1})-(\ref{HNSC6})) respectively.
 
 \begin{remark}
 \normalfont The periodic boundary conditions can be substituted by boundary conditions of type $\nabla^k u = 0, \nabla^k c = 0$ defined on a non-periodic, standard domain. Applying these it is possible to switch back to a classical domain and still benefit from the disappearing boundary integrals.
@@ -895,10 +892,10 @@ $$ s^\epsilon = \delta^\epsilon \star \varphi, \quad s = \delta \star \varphi.$$
 
 \subsection{The main strong convergence theorem}
 
-The main theorem of this section concerning the strong solutions is analogous to Theorem \ref{maintheoremWEAK}; with the two major differences being the change to a periodic domain, and the assumption of an $H^3$ and $H^2$ initial data for the horizontal velocity and the concentration, respectively. Before stating the main convergence theorem of this section, we describe a hydrostatic existence theorem on which the fact of the convergence heavily depends on.
+The main convergence theorem of this section concerning the strong solutions is analogous to Theorem \ref{maintheoremWEAK}; with the two major differences being the change to a periodic domain, and the assumption of an $H^3$ and $H^2$ initial data for the horizontal velocity and the concentration, respectively. Before stating the main convergence result of this section, we describe a hydrostatic existence theorem that is essential for the fact of the convergence.
 
 \begin{theorem} \label{existenceconcentrationSTRONG}
-Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0$, let $c_0 \in H^2 (\Omega),$ and assume that the (\ref{ANSC8-strong}) boundary conditions hold. Then there exists a unique strong solution $c$ of the hydrostatic polluted atmosphere limit model that satisfies
+Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0$, let $c_0 \in H^2 (\Omega),$ and assume that the (\ref{ANSC7-strong}) boundary conditions hold. Then there exists a unique strong solution $(\mathbf{u}, c)$ of the hydrostatic polluted atmosphere limit model, and specifically, the limit concentration function $c$ satisfies
 
 \begin{equation}
       c \in L^\infty([0, \infty), H^2(\Omega)) \text{ and } \nabla_d c \in L^2_{loc}([0, \infty), H^2(\Omega)),
@@ -907,7 +904,7 @@ Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\nabla \
     and
     
     \begin{equation}
-      \partial_t c \in L^2_{loc}([0, \infty), H^1(\Omega)),
+      \partial_t c \in L^2_{loc}([0, \infty), H^1(\Omega)).
     \end{equation}
     
 \end{theorem}
@@ -915,18 +912,18 @@ Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\nabla \
 We provide the proof of Theorem \ref{existenceconcentrationSTRONG} in the appendix of this article. Now we are ready to describe the strong convergence theorem connecting the anisotropic and the hydrostatic models of the polluted atmosphere.
 
 \begin{theorem} \label{maintheoremSTRONG}
-Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0$, let $c_0 \in H^2 (\Omega),$ and assume that the (\ref{ANSC8-strong}) boundary conditions hold. There is a positive $\epsilon_0$ threshold such that for any $\epsilon < \epsilon_0,$ as the aspect ratio $\epsilon$ tends to zero, the unique strong solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1}) - (\ref{ANSC5}) converges to the unique strong solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1}) - (\ref{HNSC5}).
+Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0$, and let $c_0 \in H^2 (\Omega).$ There is a positive $\epsilon_0$ threshold such that for any $\epsilon < \epsilon_0$ as the aspect ratio $\epsilon$ tends to zero, the unique strong solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1}) - (\ref{ANSC6}), (\ref{ANSC7-strong}) converges to the unique strong solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1}) - (\ref{HNSC6}), (\ref{HNSC7-strong}).
 \end{theorem}
 
 \begin{proof}
 
-The first part of the proof, which concerns exclusively the velocity functions, follows easily from the achievements of \cite{li2019primitive} and \cite{petcu2005sobolev}. For completeness we collect here the most important cornerstones of the calculations regarding $\mathbf{u}^\epsilon$ and $\mathbf{u}$, for specific details we refer to the above mentioned sources.
+We begin by stating that from now on we always assume $\epsilon < \epsilon_0$ where $\epsilon_0$ is a constant defined in \cite{li2019primitive} depending only on $\norm{\mathbf{u}_h}_{H^3}$ and the domain.
 
-From now on we always assume that $\epsilon < \epsilon_0$ where $\epsilon_0$ is a constant defined in \cite{li2019primitive} depending only on $\norm{\mathbf{u}_h}_{H^3}$ and the domain.
+The first part of the proof concerns exclusively the velocity functions, and it follows easily from the achievements of \cite{li2019primitive} and \cite{petcu2005sobolev}. Regarding specific details we refer to these sources; here we collect the most important cornerstones of the calculations regarding $\mathbf{u}^\epsilon$ and $\mathbf{u}$ for completeness.
 
 \begin{enumerate}
 
-  \item The anisotropic and hydrostatic systems have $\mathbf{u}^\epsilon$ and $\mathbf{u}$ unique global strong solutions, respectively, assuming $\epsilon < \epsilon_0$ and ${\mathbf{u}_h}_0 \in H^3(\Omega).$
+  \item The anisotropic and hydrostatic systems have $\mathbf{u}^\epsilon$ and $\mathbf{u}$ unique global strong solutions respectively, assuming $\epsilon < \epsilon_0$ and ${\mathbf{u}_h}_0 \in H^3(\Omega).$
   
   \item Specifically, for ${\mathbf{u}_h}_0 \in H^3(\Omega),$ the horizontal velocity strong solution $\mathbf{u}_h$ satisfies
     
@@ -940,7 +937,7 @@ From now on we always assume that $\epsilon < \epsilon_0$ where $\epsilon_0$ is 
       \partial_t \mathbf{u}_h \in L^2_{loc}([0, \infty), H^2(\Omega)).
     \end{equation}
     
-  \item We also mention the following estimate on the velocity difference functions. For an ${\mathbf{u}_h}_0 \in H^3(\Omega)$ initial data we have
+  \item We also mention this important estimate obtained for an ${\mathbf{u}_h}_0 \in H^3(\Omega)$ initial data: the velocity difference functions satisfy
   
   \begin{equation}
     \sup_{0 \leq t < \infty}{\norm{(U_h^\epsilon, \epsilon U_3^\epsilon)}_{H^2}^2} + \int_0^\infty \norm{\nabla (U_h^\epsilon, U_3^\epsilon)}_{H^2}^2 \leq C \epsilon^2.
@@ -948,16 +945,34 @@ From now on we always assume that $\epsilon < \epsilon_0$ where $\epsilon_0$ is 
 
 \end{enumerate}
 
-Following these main steps, as a consequence the following strong convergences hold for an ${\mathbf{u}_h}_0 \in H^3(\Omega)$ initial data:
+As a consequence of these main steps, the following strong convergences hold for an ${\mathbf{u}_h}_0 \in H^3(\Omega)$ initial data:
 
   \begin{align} 
     &  (\mathbf{u}_h^\epsilon, \epsilon u_3^\epsilon) \to (\mathbf{u}_h, 0) &\quad & \text{strongly in $L_t^\infty H_x^2$,} \label{StrongConvVelocity1} \\
     &  (\nabla \mathbf{u}_h^\epsilon, \epsilon \nabla u_3^\epsilon, u_3^\epsilon) \to (\nabla \mathbf{u}_h, 0, u_3) &\quad & \text{strongly in $L_t^2 H_x^2$,} \label{StrongConvVelocity2} \\ 
-    &  u_3^\epsilon \to u_3 &\quad & \text{strongly in $L_t^\infty H_x^1$,} \label{StrongConvVelocity3}
+    &  u_3^\epsilon \to u_3 &\quad & \text{strongly in $L_t^\infty H_x^1.$} \label{StrongConvVelocity3}
   \end{align}
 
-In the second part of the proof we present the computations verifying the strong convergence of the concentration function $c^\epsilon.$ The structure of these calculations heavily depends on the existence of both the anisotropic concentration $c^\epsilon$ and the limit solution $c.$ The existence of the pre-limit solution function $c^\epsilon$ follows from analogous arguments to those guaranteeing the existence of $\mathbf{u}^\epsilon.$ On the other hand, the existence result concerning the hydrostatic downwind-matching solution $c$ is not at all trivial --- the main difference that causes a challenge in this matter is the missing $\partial_{11} c$ term in the concentration equation. Here we will describe the hydrostatic existence result itself, while the proof is given in detail in the appendix of this article.
+With the above result Theorem \ref{maintheoremSTRONG}'s statement on the strong convergence of the velocity functions is obvious. In the second part of the proof we present the computations verifying the strong convergence of the concentration function $c^\epsilon.$ The structure of these calculations heavily depends on the existence of both the anisotropic concentration $c^\epsilon$ and the limit solution $c.$ The existence of the pre-limit solution function $c^\epsilon$ follows from analogous arguments to those guaranteeing the existence of $\mathbf{u}^\epsilon.$ On the other hand, the existence result concerning the hydrostatic downwind-matching solution $c$ is given by Theorem \ref{existenceconcentrationSTRONG}.
 
+The focus of the proof's next step is to construct an estimate for the difference functions.
+
+Analogously to the $\mathbf{U}^\epsilon, U^\epsilon$ notation we will use $C^\epsilon = c^\epsilon-c$ and $S^\epsilon = s^\epsilon-s$ to denote the difference functions. Subtracting (\ref{HNSC5}) from (\ref{ANSC5}) we obtain the equation describing the dynamics of $C^\epsilon:$ 
+
+\begin{equation}
+  \partial_t C^\epsilon + u^\epsilon \cdot \nabla c^\epsilon - u \cdot \nabla c = \epsilon K_1 \partial_{11} c^\epsilon + K_2 \partial_{22} C^\epsilon + K_3 \partial_{33} C^\epsilon + S^\epsilon.
+\end{equation}
+
+We reformulate $u^\epsilon \cdot \nabla c^\epsilon - u \cdot \nabla c$ as $U^\epsilon \nabla C^\epsilon  + U^\epsilon \nabla c+ u \nabla C^\epsilon,$ which yields
+
+\begin{equation}
+  \begin{split}
+   & \partial_t C^\epsilon + U^\epsilon \nabla C^\epsilon  + U^\epsilon \nabla c+ u \nabla C^\epsilon \\
+   & = \epsilon K_1 \partial_{11} C^\epsilon + \epsilon K_1 \partial_{11} c + K_2 \partial_{22} C^\epsilon + K_3 \partial_{33} C^\epsilon + S^\epsilon.
+   \end{split}
+\end{equation}
+
+Note that by multiplying the equation by $- \Delta C^\epsilon$ we obtain only $\epsilon \norm{\partial_{11} C^\epsilon}$ on the equation's left-hand side, in other words the full, $\epsilon$-free Laplacian is missing. This means that the usual strategy of bringing high-order terms multiplied by a Young inequality coefficient to the left-hand side will not work in the case of using a downwind-matching coordinate system. We overcome this issue by using the following different approach and by exploiting the increased $H^3$ regularity of ${\mathbf{u}_h}_0.$
 
 \end{proof}
 
