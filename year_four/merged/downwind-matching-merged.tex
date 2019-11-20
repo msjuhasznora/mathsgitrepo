@@ -939,7 +939,7 @@ The first part of the proof concerns exclusively the velocity functions, and it 
     
   \item We also mention this important estimate obtained for an ${\mathbf{u}_h}_0 \in H^3(\Omega)$ initial data: the velocity difference functions satisfy
   
-  \begin{equation}
+  \begin{equation} \label{UdifferenceEstimate}
     \sup_{0 \leq t < \infty}{\norm{(U_h^\epsilon, \epsilon U_3^\epsilon)}_{H^2}^2} + \int_0^\infty \norm{\nabla (U_h^\epsilon, U_3^\epsilon)}_{H^2}^2 \leq C \epsilon^2.
   \end{equation}
 
@@ -1003,15 +1003,11 @@ In the following we estimate the terms on the right-hand side one by one.
   \end{split}
 \end{equation}
 
-Firstly we estimate $I_1(1)(a).$ We have
+Firstly we estimate $I_1(1)(a).$ Integration by parts gives
 
-$$ \int_\Omega U_1^\epsilon \partial_1 C^\epsilon \partial_{11} C^\epsilon = - \int_\Omega \partial_1 U_1^\epsilon (\partial_1 C^\epsilon)^2 - \int_\Omega U_1^\epsilon \partial_{11} C^\epsilon \partial_1 C^\epsilon,$$
+$$\int_\Omega U_1^\epsilon \partial_1 C^\epsilon \partial_{11} C^\epsilon = - \frac{1}{2} \int_\Omega \partial_1 U_1^\epsilon (\partial_1 C^\epsilon)^2,$$
 
-and thus
-
-$$\int_\Omega U_1^\epsilon \partial_1 C^\epsilon \partial_{11} C^\epsilon = - \frac{1}{2} \int_\Omega \partial_1 U_1^\epsilon (\partial_1 C^\epsilon)^2.$$
-
-Using the Holder inequality and $\norm{\cdot}_{L^\infty} \leq \norm{\cdot}_{H^2},$ we have
+thus using the H\"older inequality we obtain
 
 \begin{equation}
   \begin{split}
@@ -1021,24 +1017,23 @@ Using the Holder inequality and $\norm{\cdot}_{L^\infty} \leq \norm{\cdot}_{H^2}
   \end{split}
 \end{equation}
 
-The above calculation is one of the points throughout the proof where the $H^3$ regularity is required sharply, otherwise the closure is not possible. 
+The above calculation is one of the points throughout the proof where the $H^3$ regularity is required sharply, otherwise the closure is not possible (note that this required regularity is guaranteed by (\ref{UdifferenceEstimate})).
 
 We can estimate $I_1(1)(b), I_1(1)(c)$ in one common step. For $j = 2,3$ we have
 
 $$ \int_\Omega U_j^\epsilon \partial_j C^\epsilon \partial_{11} C^\epsilon = - \int_\Omega \partial_1 U_j^\epsilon \partial_j C^\epsilon \partial_1 C^\epsilon - \int_\Omega U_j^\epsilon \partial_{j1} C^\epsilon \partial_1 C^\epsilon.$$
 
-Firstly, by the Holder, Ladyzhenskaya and Young inequalities we have
+Firstly, by the H\"older, Ladyzhenskaya and Young inequalities we have
 \begin{equation}
   \begin{split}
     & \int_\Omega \partial_1 U_j^\epsilon \partial_j C^\epsilon \partial_1 C^\epsilon \leq \| \partial_1 U_j^\epsilon \| _3 \norm{\partial_j C^\epsilon}_6 \norm{\partial_1 C^\epsilon}_2 \\
     & \leq \| \partial_1 U_j^\epsilon \|_2^{1/2} \|\nabla \partial_1 U_j^\epsilon \|_2^{1/2} \norm{\nabla \partial_j C^\epsilon}_2 \norm{\partial_1 C^\epsilon}_2 \\
     & \leq \zeta \norm{\nabla \partial_j C^\epsilon}_2^2 + \frac{1}{\zeta} \| \partial_1 U_j^\epsilon \|_2 \|\nabla \partial_1 U_j^\epsilon \|_2 \norm{\partial_1 C^\epsilon}_2^2 \\
-    & \leq \zeta \norm{\nabla \partial_j C^\epsilon}_2^2 + \frac{1}{\zeta} \|\nabla \partial_1 U_j^\epsilon \|_2^2 \norm{\nabla C^\epsilon}_2^2 \\
-    & \leq \zeta \norm{\nabla \partial_j C^\epsilon}_2^2 + \frac{1}{\zeta} \norm{U_h}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2.
+    & \leq \zeta \norm{\nabla \partial_j C^\epsilon}_2^2 + \frac{1}{\zeta} \norm{U_h^\epsilon}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2.
   \end{split}
 \end{equation}
 
-Note that for $j=3$ this approach -- which is different from what we applied for $I_1(1)(a)$ -- is necessary, as for $\| \partial_1 U_3^\epsilon \| _ {L^\infty} \leq \norm{U_3^\epsilon}_{H^3} \leq \| U_h^\epsilon \| _{H^4}$ we do not have a bound. Since in the $\int_\Omega U_j^\epsilon \partial_{j1} C^\epsilon \partial_1 C^\epsilon$ second term we do not have a derivative on the velocity function, we can simply use
+Note that for $j=3$ this approach --- which is different from what we applied for $I_1(1)(a)$ --- is necessary, since using the analogous estimate $\| \partial_1 U_3^\epsilon \| _ {L^\infty} \leq \norm{U_3^\epsilon}_{H^3} \leq \| U_h^\epsilon \| _{H^4}$ arrives to a too high level of $H^k$ space for which we do not have an estimate anymore, considering we only have an $H^3$ initial data. Since in the $\int_\Omega U_j^\epsilon \partial_{j1} C^\epsilon \partial_1 C^\epsilon$ second term we do not have a derivative on the velocity function, we can simply use
 
 \begin{equation} \nonumber
   \begin{split}
@@ -1047,7 +1042,7 @@ Note that for $j=3$ this approach -- which is different from what we applied for
   \end{split}
 \end{equation}
 
-All together for $j = 2,3$ we have
+Altogether for $j = 2,3$ we have
 
 \begin{equation}
   \begin{split}
@@ -1056,7 +1051,7 @@ All together for $j = 2,3$ we have
   \end{split}
 \end{equation}
 
-Now we estimate $I_1(j)$ for $j = 2,3.$ Here we can simply use
+Finally to estimate $I_1(j)$ for $j = 2,3$ we can simply use
 
 \begin{equation}
   \begin{split}
@@ -1067,26 +1062,28 @@ Now we estimate $I_1(j)$ for $j = 2,3.$ Here we can simply use
 
 \textbf{Estimate for $I_2(i), i=1,2,3.$}
 
-\begin{equation}
+By using the H\"older and Young inequalities, for $I_2(1)$ we obtain
+
+\begin{equation} \label{cH2normappears}
   \begin{split}
     & I_2(1) = \int_\Omega U^\epsilon \nabla c \partial_{11} C^\epsilon = -\int_\Omega \partial_1 U^\epsilon \nabla c \partial_1 C^\epsilon - \int_\Omega U^\epsilon \nabla \partial_1 c \partial_1 C^\epsilon \\
     & \leq C \| \partial_1 U^\epsilon \|_3 \norm{\nabla c}_6 \norm{\partial_1 C^\epsilon}_2 + C \| U^\epsilon \|_{L^\infty} \norm{\nabla \partial_1 c}_2 \norm{\partial_1 C^\epsilon}_2 \\
     & \leq C \| \nabla \partial_1 U^\epsilon \|_2 \norm{c}_{H^2} \norm{\partial_1 C^\epsilon}_2 + C \| U^\epsilon \|_{H^2} \norm{c}_{H^2} \norm{\partial_1 C^\epsilon}_2 \\
     & \leq C \|  U_h^\epsilon \|_{H^3} \norm{c}_{H^2} \norm{\partial_1 C^\epsilon}_2 \\
-    & \leq C \|  U_h^\epsilon \|_{H^3}^2 + C \norm{c}_{H^2}^2 \norm{\nabla C^\epsilon}_2^2
+    & \leq C \|  U_h^\epsilon \|_{H^3}^2 + C \norm{c}_{H^2}^2 \norm{\nabla C^\epsilon}_2^2,
   \end{split}
 \end{equation}
+
+while $I_2(j), j = 2,3$ can be estimated by
 
 \begin{equation}
   \begin{split}
   & I_2(2), I_2(3) = \int_\Omega U^\epsilon \nabla c \partial_{jj} C^\epsilon \leq \norm{U^\epsilon}_{L^\infty} \norm{\nabla c}_2 \norm{\partial_{jj} C^\epsilon}_2 \\
-  & \leq \zeta \norm{\partial_{jj} C^\epsilon}_2^2 + \frac{1}{\zeta} \norm{U_h^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2,
+  & \leq \zeta \norm{\partial_{jj} C^\epsilon}_2^2 + \frac{1}{\zeta} \norm{U_h^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2.
   \end{split}
 \end{equation}
 
-where $j = 2,3.$
-
-As described in subsection \ref{estimateforc}, the $\norm{c}_{H^2}$ norm is finite for the case of an $H^3$-regular initial horizontal velocity ${u_h}_0,$ which we assumed.
+Note that Theorem \ref{existenceconcentrationSTRONG} guarantees that the appearance of $\norm{c}_{H^2}^2$ in (\ref{cH2normappears}) is non-problematic concerning further estimates.
 
 \textbf{Estimate for $I_3(i), i=1,2,3.$}
 
