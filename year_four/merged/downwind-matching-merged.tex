@@ -895,19 +895,40 @@ $$ s^\epsilon = \delta^\epsilon \star \varphi, \quad s = \delta \star \varphi.$$
 
 \subsection{The main strong convergence theorem}
 
-The main theorem of this section concerning the strong solutions is analogous to Theorem \ref{maintheoremWEAK}; with the two major differences being the change to a periodic domain, and the assumption of an $H^3$ and $H^2$ initial data for the horizontal velocity and the concentration, respectively.
+The main theorem of this section concerning the strong solutions is analogous to Theorem \ref{maintheoremWEAK}; with the two major differences being the change to a periodic domain, and the assumption of an $H^3$ and $H^2$ initial data for the horizontal velocity and the concentration, respectively. Before stating the main convergence theorem of this section, we describe a hydrostatic existence theorem on which the fact of the convergence heavily depends on.
 
-\begin{theorem} \label{maintheoremSTRONG}
-Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0$, let $c_0 \in H^2 (\Omega),$ and assume that the (\ref{ANSC8-strong}) boundary conditions hold. Moreover let $\epsilon < \epsilon_0.$ Then as the aspect ratio $\epsilon$ tends to zero, the unique strong solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1}) - (\ref{ANSC5}) converges to the unique strong solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1}) - (\ref{HNSC5}).
+\begin{theorem} \label{existenceconcentrationSTRONG}
+Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0$, let $c_0 \in H^2 (\Omega),$ and assume that the (\ref{ANSC8-strong}) boundary conditions hold. Then there exists a unique strong solution $c$ of the hydrostatic polluted atmosphere limit model that satisfies
+
+\begin{equation}
+      c \in L^\infty([0, \infty), H^2(\Omega)) \text{ and } \nabla_d c \in L^2_{loc}([0, \infty), H^2(\Omega)),
+    \end{equation}
+    
+    and
+    
+    \begin{equation}
+      \partial_t c \in L^2_{loc}([0, \infty), H^1(\Omega)),
+    \end{equation}
+    
 \end{theorem}
 
-Before we present the proof we collect some fundamental results that serve as cornerstones in the verification process of this convergence result. The first three points are exclusively focused on the velocity function and were achieved in \cite{li2019primitive}, while point iv) regarding the concentration is new to our knowledge.
+We provide the proof of Theorem \ref{existenceconcentrationSTRONG} in the appendix of this article. Now we are ready to describe the strong convergence theorem connecting the anisotropic and the hydrostatic models of the polluted atmosphere.
+
+\begin{theorem} \label{maintheoremSTRONG}
+Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0$, let $c_0 \in H^2 (\Omega),$ and assume that the (\ref{ANSC8-strong}) boundary conditions hold. There is a positive $\epsilon_0$ threshold such that for any $\epsilon < \epsilon_0,$ as the aspect ratio $\epsilon$ tends to zero, the unique strong solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1}) - (\ref{ANSC5}) converges to the unique strong solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1}) - (\ref{HNSC5}).
+\end{theorem}
+
+\begin{proof}
+
+The first part of the proof, which concerns exclusively the velocity functions, follows easily from the achievements of \cite{li2019primitive} and \cite{petcu2005sobolev}. For completeness we collect here the most important cornerstones of the calculations regarding $\mathbf{u}^\epsilon$ and $\mathbf{u}$, for specific details we refer to the above mentioned sources.
+
+From now on we always assume that $\epsilon < \epsilon_0$ where $\epsilon_0$ is a constant defined in \cite{li2019primitive} depending only on $\norm{\mathbf{u}_h}_{H^3}$ and the domain.
 
 \begin{enumerate}
 
-  \item The local unique existence of the $(\mathbf{u}^\epsilon, c^\epsilon)$ unique strong solution of the anisotropic equations follows from \cite{li2019primitive} using their results directly on the velocity function and applying analogous ideas for the concentration part. Additionally, we have the global existence of the $\mathbf{u}^\epsilon$ function, provided that $\epsilon < \epsilon_0.$
-
-  \item For ${\mathbf{u}_h}_0 \in H^3(\Omega)$ the global unique existence of $\mathbf{u}$ follows from \cite{li2019primitive} and \cite{petcu2005sobolev}, specifically we have
+  \item The anisotropic and hydrostatic systems have $\mathbf{u}^\epsilon$ and $\mathbf{u}$ unique global strong solutions, respectively, assuming $\epsilon < \epsilon_0$ and ${\mathbf{u}_h}_0 \in H^3(\Omega).$
+  
+  \item Specifically, for ${\mathbf{u}_h}_0 \in H^3(\Omega),$ the horizontal velocity strong solution $\mathbf{u}_h$ satisfies
     
     \begin{equation}
       \mathbf{u}_h \in L^\infty([0, \infty), H^3(\Omega)) \cap L^2_{loc}([0, \infty), H^4(\Omega))
@@ -918,32 +939,29 @@ Before we present the proof we collect some fundamental results that serve as co
     \begin{equation}
       \partial_t \mathbf{u}_h \in L^2_{loc}([0, \infty), H^2(\Omega)).
     \end{equation}
-  
-  \item After the previously described existence results we will also need the following estimate on the velocity difference functions. For an ${\mathbf{u}_h}_0 \in H^3(\Omega)$ initial data we have
+    
+  \item We also mention the following estimate on the velocity difference functions. For an ${\mathbf{u}_h}_0 \in H^3(\Omega)$ initial data we have
   
   \begin{equation}
-    \sup_{0 \leq t < \infty}{\norm{(U_h^\epsilon, \epsilon U_3^\epsilon)}_{H^2}^2} + \int_0^\infty \norm{\nabla (U_h^\epsilon, U_3^\epsilon)}_{H^2}^2 \leq C \epsilon^2,
+    \sup_{0 \leq t < \infty}{\norm{(U_h^\epsilon, \epsilon U_3^\epsilon)}_{H^2}^2} + \int_0^\infty \norm{\nabla (U_h^\epsilon, U_3^\epsilon)}_{H^2}^2 \leq C \epsilon^2.
   \end{equation}
-  
-  for details see \cite{li2019primitive}.
-  
-  \item On the other hand, for the concentration function $c$ we have the global unique existence of $c$ for which it holds that
-    
-    \begin{equation}
-      c \in L^\infty([0, \infty), H^2(\Omega)) \text{ and } \nabla_d c \in L^2_{loc}([0, \infty), H^2(\Omega)),
-    \end{equation}
-    
-    and
-    
-    \begin{equation}
-      \partial_t c \in L^2_{loc}([0, \infty), H^1(\Omega)),
-    \end{equation}
-    
-    assuming ${\mathbf{u}_h}_0 \in H^3(\Omega)$ and $c_0 \in H^2(\Omega).$ We provide the verification of this statement in the appendix.
 
 \end{enumerate}
 
-Now we are ready to present to proof of Theorem \ref{maintheoremSTRONG}.
+Following these main steps, as a consequence the following strong convergences hold for an ${\mathbf{u}_h}_0 \in H^3(\Omega)$ initial data:
+
+  \begin{align} 
+    &  (\mathbf{u}_h^\epsilon, \epsilon u_3^\epsilon) \to (\mathbf{u}_h, 0) &\quad & \text{strongly in $L_t^\infty H_x^2$,} \label{StrongConvVelocity1} \\
+    &  (\nabla \mathbf{u}_h^\epsilon, \epsilon \nabla u_3^\epsilon, u_3^\epsilon) \to (\nabla \mathbf{u}_h, 0, u_3) &\quad & \text{strongly in $L_t^2 H_x^2$,} \label{StrongConvVelocity2} \\ 
+    &  u_3^\epsilon \to u_3 &\quad & \text{strongly in $L_t^\infty H_x^1$,} \label{StrongConvVelocity3}
+  \end{align}
+
+In the second part of the proof we present the computations verifying the strong convergence of the concentration function $c^\epsilon.$ The structure of these calculations heavily depends on the existence of both the anisotropic concentration $c^\epsilon$ and the limit solution $c.$ The existence of the pre-limit solution function $c^\epsilon$ follows from analogous arguments to those guaranteeing the existence of $\mathbf{u}^\epsilon.$ On the other hand, the existence result concerning the hydrostatic downwind-matching solution $c$ is not at all trivial --- the main difference that causes a challenge in this matter is the missing $\partial_{11} c$ term in the concentration equation. Here we will describe the hydrostatic existence result itself, while the proof is given in detail in the appendix of this article.
+
+
+\end{proof}
+
+
 
 \appendix
 
