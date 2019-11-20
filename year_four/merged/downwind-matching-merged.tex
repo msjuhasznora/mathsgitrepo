@@ -955,7 +955,11 @@ As a consequence of these main steps, the following strong convergences hold for
 
 With the above result Theorem \ref{maintheoremSTRONG}'s statement on the strong convergence of the velocity functions is obvious. In the second part of the proof we present the computations verifying the strong convergence of the concentration function $c^\epsilon.$ The structure of these calculations heavily depends on the existence of both the anisotropic concentration $c^\epsilon$ and the limit solution $c.$ The existence of the pre-limit solution function $c^\epsilon$ follows from analogous arguments to those guaranteeing the existence of $\mathbf{u}^\epsilon.$ On the other hand, the existence result concerning the hydrostatic downwind-matching solution $c$ is given by Theorem \ref{existenceconcentrationSTRONG}.
 
-The focus of the proof's next step is to construct an estimate for the difference functions.
+The focus of the proof's next step is to construct an estimate for the difference functions and show that
+
+\begin{equation}
+  c^\epsilon \to c \text{ in } L^\infty H^1 \text{ and } \nabla_d c^\epsilon \to \nabla_d c \text{ in } L^2 H^1.
+\end{equation}
 
 Analogously to the $\mathbf{U}^\epsilon, U^\epsilon$ notation we will use $C^\epsilon = c^\epsilon-c$ and $S^\epsilon = s^\epsilon-s$ to denote the difference functions. Subtracting (\ref{HNSC5}) from (\ref{ANSC5}) we obtain the equation describing the dynamics of $C^\epsilon:$ 
 
@@ -965,7 +969,7 @@ Analogously to the $\mathbf{U}^\epsilon, U^\epsilon$ notation we will use $C^\ep
 
 We reformulate $u^\epsilon \cdot \nabla c^\epsilon - u \cdot \nabla c$ as $U^\epsilon \nabla C^\epsilon  + U^\epsilon \nabla c+ u \nabla C^\epsilon,$ which yields
 
-\begin{equation}
+\begin{equation} \label{governCepsilon}
   \begin{split}
    & \partial_t C^\epsilon + U^\epsilon \nabla C^\epsilon  + U^\epsilon \nabla c+ u \nabla C^\epsilon \\
    & = \epsilon K_1 \partial_{11} C^\epsilon + \epsilon K_1 \partial_{11} c + K_2 \partial_{22} C^\epsilon + K_3 \partial_{33} C^\epsilon + S^\epsilon.
@@ -974,9 +978,180 @@ We reformulate $u^\epsilon \cdot \nabla c^\epsilon - u \cdot \nabla c$ as $U^\ep
 
 Note that by multiplying the equation by $- \Delta C^\epsilon$ we obtain only $\epsilon \norm{\partial_{11} C^\epsilon}$ on the equation's left-hand side, in other words the full, $\epsilon$-free Laplacian is missing. This means that the usual strategy of bringing high-order terms multiplied by a Young inequality coefficient to the left-hand side will not work in the case of using a downwind-matching coordinate system. We overcome this issue by using the following different approach and by exploiting the increased $H^3$ regularity of ${\mathbf{u}_h}_0.$
 
+Multiplying (\ref{governCepsilon}) by $- \partial_{ii} C^\epsilon, i=1,2,3$ we obtain
+
+\begin{equation}
+  \begin{split}
+      & \frac{1}{2}\frac{\diff}{\diff t} \norm{\nabla C^\epsilon}_2^2 + \epsilon K_1 \norm{\partial_{11} C^\epsilon}_2^2 + K_2 \norm{\partial_{22} C^\epsilon}_2^2 + K_3 \norm{\partial_{33} C^\epsilon}_2^2 + C \norm{\partial_{ij} C^\epsilon}_2^2 \\
+      & = \sum_{i = 1,2,3} \int_\Omega U^\epsilon \nabla C^\epsilon \partial_{ii} C^\epsilon + \int_\Omega U^\epsilon \nabla c \partial_{ii} C^\epsilon + \int_\Omega u \nabla C^\epsilon \partial_{ii} C^\epsilon - \int_\Omega \epsilon K_1 \partial_{11} c \partial_{ii} C^\epsilon \\
+      & - \sum_{i = 1,2,3} \int_\Omega S^\epsilon \partial_{ii} C^\epsilon \\
+      & = \sum_{i = 1,2,3} I_1(i)  + I_2(i) + I_3(i) + I_4(i) + I_5(i),
+  \end{split}
+\end{equation}
+
+where $i \neq j.$
+
+In the following we estimate the terms on the right-hand side one by one.
+
+\textbf{Estimate for $I_1(i), i = 1,2,3.$}
+
+\begin{equation}
+  \begin{split}
+    & I_1(1) = \int_\Omega U^\epsilon \nabla C^\epsilon \partial_{11} C^\epsilon \\
+    & = \int_\Omega U_1^\epsilon \partial_1 C^\epsilon \partial_{11} C^\epsilon + \int_\Omega U_2^\epsilon \partial_2 C^\epsilon \partial_{11} C^\epsilon + \int_\Omega U_3^\epsilon \partial_3 C^\epsilon \partial_{11} C^\epsilon \\
+    & = I_1(1)(a) + I_1(1)(b) + I_1(1)(c).
+  \end{split}
+\end{equation}
+
+Firstly we estimate $I_1(1)(a).$ We have
+
+$$ \int_\Omega U_1^\epsilon \partial_1 C^\epsilon \partial_{11} C^\epsilon = - \int_\Omega \partial_1 U_1^\epsilon (\partial_1 C^\epsilon)^2 - \int_\Omega U_1^\epsilon \partial_{11} C^\epsilon \partial_1 C^\epsilon,$$
+
+and thus
+
+$$\int_\Omega U_1^\epsilon \partial_1 C^\epsilon \partial_{11} C^\epsilon = - \frac{1}{2} \int_\Omega \partial_1 U_1^\epsilon (\partial_1 C^\epsilon)^2.$$
+
+Using the Holder inequality and $\norm{\cdot}_{L^\infty} \leq \norm{\cdot}_{H^2},$ we have
+
+\begin{equation}
+  \begin{split}
+    & I_1(1)(a) = \int_\Omega U_1^\epsilon \partial_1 C^\epsilon \partial_{11} C^\epsilon \\
+    & \leq C \norm{\partial_1 U_1^\epsilon}_{L^\infty} \cdot \norm{\partial_1 C^\epsilon}_2^2 \leq C \norm{\partial_1 U_1^\epsilon}_{H^2} \cdot \norm{\nabla C^\epsilon}_2^2 \\
+    & \leq C \norm{U_1^\epsilon}_{H^3} \cdot \norm{\nabla C^\epsilon}_2^2.
+  \end{split}
+\end{equation}
+
+The above calculation is one of the points throughout the proof where the $H^3$ regularity is required sharply, otherwise the closure is not possible. 
+
+We can estimate $I_1(1)(b), I_1(1)(c)$ in one common step. For $j = 2,3$ we have
+
+$$ \int_\Omega U_j^\epsilon \partial_j C^\epsilon \partial_{11} C^\epsilon = - \int_\Omega \partial_1 U_j^\epsilon \partial_j C^\epsilon \partial_1 C^\epsilon - \int_\Omega U_j^\epsilon \partial_{j1} C^\epsilon \partial_1 C^\epsilon.$$
+
+Firstly, by the Holder, Ladyzhenskaya and Young inequalities we have
+\begin{equation}
+  \begin{split}
+    & \int_\Omega \partial_1 U_j^\epsilon \partial_j C^\epsilon \partial_1 C^\epsilon \leq \| \partial_1 U_j^\epsilon \| _3 \norm{\partial_j C^\epsilon}_6 \norm{\partial_1 C^\epsilon}_2 \\
+    & \leq \| \partial_1 U_j^\epsilon \|_2^{1/2} \|\nabla \partial_1 U_j^\epsilon \|_2^{1/2} \norm{\nabla \partial_j C^\epsilon}_2 \norm{\partial_1 C^\epsilon}_2 \\
+    & \leq \zeta \norm{\nabla \partial_j C^\epsilon}_2^2 + \frac{1}{\zeta} \| \partial_1 U_j^\epsilon \|_2 \|\nabla \partial_1 U_j^\epsilon \|_2 \norm{\partial_1 C^\epsilon}_2^2 \\
+    & \leq \zeta \norm{\nabla \partial_j C^\epsilon}_2^2 + \frac{1}{\zeta} \|\nabla \partial_1 U_j^\epsilon \|_2^2 \norm{\nabla C^\epsilon}_2^2 \\
+    & \leq \zeta \norm{\nabla \partial_j C^\epsilon}_2^2 + \frac{1}{\zeta} \norm{U_h}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2.
+  \end{split}
+\end{equation}
+
+Note that for $j=3$ this approach -- which is different from what we applied for $I_1(1)(a)$ -- is necessary, as for $\| \partial_1 U_3^\epsilon \| _ {L^\infty} \leq \norm{U_3^\epsilon}_{H^3} \leq \| U_h^\epsilon \| _{H^4}$ we do not have a bound. Since in the $\int_\Omega U_j^\epsilon \partial_{j1} C^\epsilon \partial_1 C^\epsilon$ second term we do not have a derivative on the velocity function, we can simply use
+
+\begin{equation} \nonumber
+  \begin{split}
+    & \int_\Omega U_j^\epsilon \partial_{j1} C^\epsilon \partial_1 C^\epsilon \leq \| U_j^\epsilon \| _{L^\infty} \norm{\partial_{j1} C^\epsilon}_2 \norm{\partial_1 C^\epsilon}_2 \\
+    &  \leq \zeta \norm{\partial_{j1} C^\epsilon}_2^2 +  \frac{1}{\zeta} \| U_j^\epsilon \| _{L^\infty}^2 \norm{\nabla C^\epsilon}_2^2 \leq \zeta \norm{\partial_{j1} C^\epsilon}_2^2 +  \frac{1}{\zeta} \| U_h^\epsilon \| _{H^3}^2 \norm{\nabla C^\epsilon}_2^2. 
+  \end{split}
+\end{equation}
+
+All together for $j = 2,3$ we have
+
+\begin{equation}
+  \begin{split}
+    & I_1(1)(b), I_1(1)(c) = \int_\Omega U_j^\epsilon \partial_j C^\epsilon \partial_{11} C^\epsilon \\
+    & \leq \zeta \norm{\nabla \partial_j C^\epsilon}_2^2 + \frac{1}{\zeta} \norm{U_h}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2.
+  \end{split}
+\end{equation}
+
+Now we estimate $I_1(j)$ for $j = 2,3.$ Here we can simply use
+
+\begin{equation}
+  \begin{split}
+    & I_1(2), I_1(3) \leq \norm{U_i^\epsilon}_{L^\infty} \norm{\partial_i C^\epsilon}_2 \norm{\partial_{jj}C^\epsilon}_2 \\
+    & \leq \zeta \norm{\partial_{jj} C^\epsilon}_2^2 + \frac{1}{\zeta} \| U_h^\epsilon \| _ {H^3} ^ 2 \norm{\nabla C^\epsilon}_2^2.
+  \end{split}
+\end{equation}
+
+\textbf{Estimate for $I_2(i), i=1,2,3.$}
+
+\begin{equation}
+  \begin{split}
+    & I_2(1) = \int_\Omega U^\epsilon \nabla c \partial_{11} C^\epsilon = -\int_\Omega \partial_1 U^\epsilon \nabla c \partial_1 C^\epsilon - \int_\Omega U^\epsilon \nabla \partial_1 c \partial_1 C^\epsilon \\
+    & \leq C \| \partial_1 U^\epsilon \|_3 \norm{\nabla c}_6 \norm{\partial_1 C^\epsilon}_2 + C \| U^\epsilon \|_{L^\infty} \norm{\nabla \partial_1 c}_2 \norm{\partial_1 C^\epsilon}_2 \\
+    & \leq C \| \nabla \partial_1 U^\epsilon \|_2 \norm{c}_{H^2} \norm{\partial_1 C^\epsilon}_2 + C \| U^\epsilon \|_{H^2} \norm{c}_{H^2} \norm{\partial_1 C^\epsilon}_2 \\
+    & \leq C \|  U_h^\epsilon \|_{H^3} \norm{c}_{H^2} \norm{\partial_1 C^\epsilon}_2 \\
+    & \leq C \|  U_h^\epsilon \|_{H^3}^2 + C \norm{c}_{H^2}^2 \norm{\nabla C^\epsilon}_2^2
+  \end{split}
+\end{equation}
+
+\begin{equation}
+  \begin{split}
+  & I_2(2), I_2(3) = \int_\Omega U^\epsilon \nabla c \partial_{jj} C^\epsilon \leq \norm{U^\epsilon}_{L^\infty} \norm{\nabla c}_2 \norm{\partial_{jj} C^\epsilon}_2 \\
+  & \leq \zeta \norm{\partial_{jj} C^\epsilon}_2^2 + \frac{1}{\zeta} \norm{U_h^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2,
+  \end{split}
+\end{equation}
+
+where $j = 2,3.$
+
+As described in subsection \ref{estimateforc}, the $\norm{c}_{H^2}$ norm is finite for the case of an $H^3$-regular initial horizontal velocity ${u_h}_0,$ which we assumed.
+
+\textbf{Estimate for $I_3(i), i=1,2,3.$}
+
+Due to their structure, computations for $\int_\Omega u \nabla C^\epsilon \partial_{ii} C^\epsilon$ are analogous to those seen in \textbf{Step 1} for $ \int_\Omega U^\epsilon \nabla C^\epsilon \partial_{ii} C^\epsilon.$
+
+Using the same tools, i.e. the Holder, Ladyzhenskaya and Young inequalities, and the result that
+
+$$ \int_\Omega u_1 \partial_1 C^\epsilon \partial_{11} C^\epsilon = - \frac{1}{2} \int_\Omega \partial_1 u_1 (\partial_1 C^\epsilon)^2, $$
+
+we arrive to
+
+\begin{equation}
+    I_3(1) \leq C \norm{u_1}_{H^3} \norm{\partial_1 C^\epsilon}_2^2 + \zeta \norm{\nabla \partial_j C^\epsilon}_2^2 + \frac{1}{\zeta} \norm{u_h}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2,
+\end{equation}
+
+where j = 2,3.
+
+On the other hand, for $i = 2,3$ we have
+
+\begin{equation}
+  I_3(2), I_3(3) \leq \norm{u_i}_{L^\infty} \norm{\partial_i C^\epsilon}_2 \norm{\partial_{jj}C^\epsilon}_2 \leq \zeta \norm{\partial_{jj} C^\epsilon}_2^2 + \frac{1}{\zeta} \| u_h \| _ {H^3} ^ 2 \norm{\nabla C^\epsilon}_2^2.
+\end{equation}
+
+\textbf{Estimate for $I_4(i), i = 1,2,3$}
+
+\begin{equation}
+  \begin{split}
+    & I_4(i) = \epsilon K_1 \int_\Omega \partial_{11} c \partial_{ii} C^\epsilon \leq \epsilon K_1 \norm{\partial_{11} c}_2 \norm{\partial_{ii} C^\epsilon}_2 \\
+    & \leq \epsilon \zeta K_1 C \norm{\partial_{ii} C^\epsilon}_2^2 + \frac{1}{\zeta}\epsilon K_1 C \norm{\partial_{11} c}_2^2.
+  \end{split}
+\end{equation}
+
+Since here we do have an $\epsilon$ in front of the Laplacian $ \norm{\partial_{ii} C^\epsilon}_2^2,$ it can be merged into the left-hand side later even for $i = 1.$
+
+\begin{remark}
+Note that the $\epsilon$ in $\epsilon K_1 C \norm{\partial_{11} c}_2^2$ will be the convergence rate. If we wanted to have $\epsilon^2$ instead, it would mean that we need to take the $\epsilon$ off of $\partial_{11} C^\epsilon$ (to put it on $\norm{\partial_{11} c}_2^2$) and thus, also take off one derivative off of $\partial_{11} C^\epsilon,$ which would result to the appearance of $\norm{c}_{H^3}.$ Since from the $H^3$ initial data ${u_h}_0$ we can only arrive to an $H^4$-regular solution function $u_h,$ that is sufficient only to guarantee the $H^2$ regularity of $c,$ but not $H^3.$ Increasing the initial velocity's regularity could achieve an $\epsilon^2$ convergence rate, but we are interested in proving a convergence result assuming the minimal needed regularity for the initial horizontal velocity.
+\end{remark}
+
+\textbf{Estimate for $I_5 (i).$}
+
+\begin{equation}
+  \begin{split}
+    & - \int_\Omega S^\epsilon \partial_{ii} C^\epsilon = - \int_\Omega (s^\epsilon - s) \partial_{ii} C^\epsilon  = - \int_\Omega \big ( (\delta^\epsilon - \delta ) \star \varphi \big ) \cdot \partial_{ii} C^\epsilon \\
+    & = \int_\Omega \partial_i \big ( (\delta^\epsilon - \delta ) \star \varphi \big ) \cdot \partial_i C^\epsilon \diff x \\
+    & \leq C \int_\Omega \bigg( \partial_i \big ( (\delta^\epsilon - \delta ) \star \varphi \big ) \bigg ) ^2 \diff x + C \int_\Omega (\partial_i C^\epsilon)^2 \diff x \\
+    & \leq C \int_\Omega \bigg ( (\delta^\epsilon - \delta ) \star \partial_i \varphi \bigg ) ^2 \diff x + \textcolor{orange}{C \norm{\nabla C^\epsilon}_2^2}.
+  \end{split}
+\end{equation}
+
+The $\norm{\nabla C^\epsilon}_2^2$ norm can be left unchanged, the next step is to estimate the first term. We denote $\Phi = \partial_i \varphi \in C^\infty_0.$ 
+
+\begin{equation}
+  \begin{split}
+    & \int_\Omega \bigg ( (\delta^\epsilon - \delta ) \star \partial_i \varphi \bigg ) ^2 \diff x \\
+    & = \int_\Omega \bigg ( \int_\Omega (\delta^\epsilon - \delta )(x-y) \Phi (y) \diff y \bigg )^2 \diff x \\
+    & = \int_\Omega \bigg ( \int_\Omega \delta^\epsilon(x-y) \Phi (y) \diff y - \Phi (x) \bigg )^2 \diff x \\
+    & = \int_\Omega \bigg ( \int_{\mathcal{B}(x, \epsilon)} \delta^\epsilon(x-y) \Phi (y) \diff y - 1 \cdot \Phi (x) \bigg )^2 \diff x \\
+    & = \int_\Omega \bigg ( \int_{\mathcal{B}(x, \epsilon)} \delta^\epsilon(x-y) \big ( \Phi (y) - \Phi (x) \big ) \diff y \bigg )^2 \diff x \\
+    & \leq \int_\Omega \bigg ( \int_{\mathcal{B}(x, \epsilon)} \delta^\epsilon(x-y) \abs{\nabla \Phi  (\eta)} \abs{y - x}  \diff y \bigg )^2 \diff x \\
+    & \leq \epsilon^2 \int_\Omega \bigg ( \int_{\mathcal{B}(x, \epsilon)} \delta^\epsilon(x-y) \abs{\nabla \Phi  (\eta)} \diff y \bigg )^2 \diff x \\
+    & \leq C \epsilon^2 \norm{\nabla \Phi}_{L^\infty}^2 \leq \textcolor{orange}{C \epsilon^2}.
+  \end{split}
+\end{equation}
+
 \end{proof}
-
-
 
 \appendix
 
