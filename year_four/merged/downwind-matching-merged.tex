@@ -1159,6 +1159,63 @@ We still need to refine the estimate of the first term on the right-hand side. L
   \end{split}
 \end{equation}
 
+\bigskip
+
+Summarising the previously obtained five estimates and merging the second order concentration terms into the left-hand side, we eventually have
+
+\begin{equation}
+  \begin{split}
+    & \frac{1}{2} \frac{\diff}{\diff t} \norm{\nabla C^\epsilon}_2^2 + \epsilon K_1 \norm{\partial_{11} C^\epsilon}_2^2 + K_2 \norm{\partial_{22} C^\epsilon}_2^2 + K_3 \norm{\partial_{33} C^\epsilon}_2^2 + C \sum_{i \neq j} \norm{\partial_{ij} C^\epsilon}_2^2 \\
+    & \leq C\norm{U_H^\epsilon}_{H^3} \norm{\nabla C^\epsilon}_2^2 + C \norm{U_H^\epsilon}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2 \\
+    & + C \norm{u_H}_{H^3} \norm{\nabla C^\epsilon}_2^2 + C \norm{u_H}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2 + C \norm{\nabla C^\epsilon}_2^2 \\
+    & + C \norm{U_H^\epsilon}_{H^3}^2 + \norm{c}_{H^2}^2 \norm{\nabla C^\epsilon}_2^2 \\
+    & + C \norm{U_H^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2 \\
+    & + \epsilon K_1 \norm{\partial_{11} c}_2^2 + C \epsilon^2, \raisetag{30pt}
+  \end{split}
+\end{equation}
+
+where $1 \leq j \leq 3.$
+
+After applying the Gr\"{o}nwall inequality, the contribution of the additive terms is
+
+\[ \int_0^T \epsilon C \norm{\partial_{11} c}_2^2 + C \norm{U_H^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2 + C \norm{U_H^\epsilon}_{H^3}^2 + C \epsilon^2 \diff \tau \leq \epsilon C + \epsilon^2 C + C \epsilon^2 \cdot T.\]
+
+On the other hand, the multiplicative terms provide
+
+\[ \int_0^T \norm{U_H^\epsilon}_{H^3} + \norm{u_H}_{H^3} + \norm{U_H^\epsilon}_{H^3}^2 + C \norm{u_H}_{H^3}^2 + \norm{c}_{H^2}^2 + C \diff \tau,\]
+
+which can be estimated by
+
+\begin{equation}
+  \begin{split}
+    & \int_0^T \norm{U_H^\epsilon}_{H^3} + \norm{u_H}_{H^3} \diff \tau + C + C \cdot T \\
+    & \leq \int_0^T \norm{1 \cdot U_H^\epsilon}_{H^3} + \norm{1 \cdot u_H}_{H^3} \diff \tau + C + C \cdot T\\
+    & \leq T^{1/2} \bigg (\int_0^T \norm{U_H^\epsilon}_{H^3}^2 \bigg )^{1/2} \diff \tau + T^{1/2} \bigg (\int_0^T \norm{u_H}_{H^3}^2 \bigg )^{1/2} \diff \tau + C + C \cdot T\\
+    & \leq \sqrt{T} C + C + C \cdot T.
+  \end{split}
+\end{equation}
+
+Eventually we obtain
+
+\begin{equation} \label{finalboundforCepsilon}
+  \begin{split}
+    & \norm{C^\epsilon}_{L^\infty(0,T; H^1(\Omega))} + \norm{\nabla_d C^\epsilon}_{L^2(0,T; H^1(\Omega))} \\
+    & \leq (\epsilon C + C \epsilon^2 \cdot T) \exp{(C \sqrt{T} + C + C \cdot T)}.
+  \end{split}
+\end{equation}
+
+We highlight here an important structural difference in the final estimate compared to that in \cite{li2019primitive}: the time uniformity of the bound is not preserved for our version of the modelling equations. The estimate provides a meaningful bound for any arbitrarily big finite point in time, but the bound's time-dependence also means that the convergence gets slower as time evolves. Note that (\ref{finalboundforCepsilon}) also implies the global existence of $c^\epsilon.$
+
+Finally we conclude that for any given fix point in time $T > 0$ we have the strong convergence results
+
+\begin{equation} \label{finalstrongconvresultC}
+c^\epsilon \to c \text{ in } L^\infty H^1 \text{ and } \nabla_d c^\epsilon \to \nabla_d c \text{ in } L^2 H^1,
+\end{equation}
+
+and the rate of convergence is $\epsilon.$
+
+Combining the velocity convergence results (\ref{StrongConvVelocity1})-(\ref{StrongConvVelocity3}) with the concentration convergence (\ref{finalstrongconvresultC}) obtained above completes the proof.
+
 \end{proof}
 
 \appendix
