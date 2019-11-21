@@ -857,7 +857,7 @@ With this Theorem $\ref{maintheoremWEAK}$ has been proved.
 %%% STRONG SOLUTIONS %%%
 \section{Strong solutions}
 
-In this section we verify that the previously shown connection between the anisotropic and hydrostatic equations has an analogous version that holds for strong solutions. In order to describe this result we firstly need to set the domain and the boundary conditions. Concerning the latter we follow the approach of \cite{li2019primitive} and \cite{cao2014local} and complement the modelling equations with a periodic boundary for the case of strong solutions. Specifically, we apply the
+In this section we verify that the previously shown connection between the anisotropic and hydrostatic equations has an analogous version that holds for strong solutions. In order to describe this result we firstly need to set the domain's boundary conditions. Here we follow the approach of \cite{cao2014local} and \cite{li2019primitive} and complement the modelling equations with a periodic boundary. Specifically, we apply the
 
 \begin{equation} \label{ANSC7-strong}
   \mathbf{u}^\epsilon, p^\epsilon \text{ and } c^\epsilon \text{ are periodic in } x,y,z,
@@ -869,15 +869,15 @@ and
   \mathbf{u}, p \text{ and } c \text{ are periodic in } x,y,z
 \end{equation}
 
-boundary conditions to the anisotropic and hydrostatic systems ((\ref{ANSC1})-(\ref{ANSC6}) and (\ref{HNSC1})-(\ref{HNSC6})) respectively.
+boundary conditions to the (\ref{ANSC1})-(\ref{ANSC6}) anisotropic and (\ref{HNSC1})-(\ref{HNSC6}) hydrostatic systems, respectively.
 
 \begin{remark}
-\normalfont The periodic boundary conditions can be substituted by boundary conditions of type $\nabla^k u = 0, \nabla^k c = 0$ defined on a non-periodic, standard domain. Applying these it is possible to switch back to a classical domain and still benefit from the disappearing boundary integrals.
+\normalfont The periodic boundary conditions can be substituted by boundary conditions of type $\nabla^k u = 0, \nabla^k c = 0$ defined on a non-periodic, standard domain. Applying these alternative boundary conditions it is possible to switch back to a classical domain and still benefit from the disappearing boundary integrals.
 \end{remark}
 
 Our next step is the specification of the source terms, which in this case involves a convolution with a smooth function in order to have a mollified source fitting the strong solution scheme.
 
-Let $\delta_\epsilon$ be the following approximation of the $\delta$ distribution,
+Let $\delta_\epsilon$ be the approximation of the $\delta$ distribution given below:
 
 \[   
 \delta_\epsilon = 
@@ -893,12 +893,12 @@ $$ s^\epsilon = \delta^\epsilon \star \varphi, \quad s = \delta \star \varphi.$$
 
 \subsection{The main strong convergence theorem}
 
-The main convergence theorem of this section concerning the strong solutions is analogous to Theorem \ref{maintheoremWEAK}; with the two major differences being the change to a periodic domain, and the assumption of an $H^3$ and $H^2$ initial data for the horizontal velocity and the concentration, respectively. Before stating the main convergence result of this section, we describe a hydrostatic existence theorem that is essential for the fact of the convergence.
+The main result of this section describing the strong solutions is analogous to Theorem \ref{maintheoremWEAK}; with the two major differences being --- apart from the quality of the solutions themselves --- the change to a periodic domain, and the assumption of an $H^3$ and $H^2$ initial data for the horizontal velocity and the concentration, respectively. Before stating the main convergence theorem of this section, we first describe a hydrostatic existence result that is essential for the fact of the convergence.
 
 \begin{theorem} \label{existenceconcentrationSTRONG}
-Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0$, let $c_0 \in H^2 (\Omega),$ and assume that the (\ref{ANSC7-strong}) boundary conditions hold. Then there exists a unique strong solution $(\mathbf{u}, c)$ of the hydrostatic polluted atmosphere limit model, and specifically, the limit concentration function $c$ satisfies
+Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0$, let $c_0 \in H^2 (\Omega),$ and let's assume that the (\ref{HNSC7-strong}) boundary conditions hold. Then there exists a unique global strong solution $(\mathbf{u}, c)$ of the downwind-matching hydrostatic polluted atmosphere limit model (\ref{HNSC1})-(\ref{HNSC6}), and specifically, the limit concentration function $c$ satisfies
 
-\begin{equation}
+    \begin{equation} \label{regularity_c_first}
       c \in L^\infty([0, \infty), H^2(\Omega)) \text{ and } \nabla_d c \in L^2_{loc}([0, \infty), H^2(\Omega)),
     \end{equation}
     
@@ -910,25 +910,27 @@ Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\nabla \
     
 \end{theorem}
 
-We provide the proof of Theorem \ref{existenceconcentrationSTRONG} in the appendix of this article. Now we are ready to describe the strong convergence theorem connecting the anisotropic and the hydrostatic models of the polluted atmosphere.
+We provide the proof of Theorem \ref{existenceconcentrationSTRONG} in the appendix of this article.
+
+Now we are ready to describe this section's main theorem.
 
 \begin{theorem} \label{maintheoremSTRONG}
-Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0$, and let $c_0 \in H^2 (\Omega).$ There is a positive $\epsilon_0$ threshold such that for any $\epsilon < \epsilon_0$ as the aspect ratio $\epsilon$ tends to zero, the unique strong solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1}) - (\ref{ANSC6}), (\ref{ANSC7-strong}) converges to the unique strong solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1}) - (\ref{HNSC6}), (\ref{HNSC7-strong}).
+Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0$, and let $c_0 \in H^2 (\Omega).$ There is a positive $\epsilon_0$ threshold such that for any $\epsilon < \epsilon_0$ as the aspect ratio $\epsilon$ tends to zero, the unique global strong solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1}) - (\ref{ANSC6}), (\ref{ANSC7-strong}) converges to the unique global strong solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1}) - (\ref{HNSC6}), (\ref{HNSC7-strong}).
 \end{theorem}
 
 \begin{proof}
 
-We begin by stating that from now on we always assume $\epsilon < \epsilon_0$ where $\epsilon_0$ is a constant defined in \cite{li2019primitive} depending only on $\norm{\mathbf{u}_h}_{H^3}$ and the domain.
+We begin by stating that from now on we always assume $\epsilon < \epsilon_0$ where $\epsilon_0$ is a constant defined in \cite{li2019primitive} depending only on $\norm{\mathbf{u}_h}_{H^3}$ and the domain itself.
 
-The first part of the proof concerns exclusively the velocity functions, and it follows easily from the achievements of \cite{li2019primitive} and \cite{petcu2005sobolev}. Regarding specific details we refer to these sources; here we collect the most important cornerstones of the calculations regarding $\mathbf{u}^\epsilon$ and $\mathbf{u}$ for completeness.
+The first part of the proof concerns exclusively the velocity functions, and it follows easily from the achievements of \cite{li2019primitive} and \cite{petcu2005sobolev}. Regarding specific details we refer to these above mentioned sources; here we collect only the most important cornerstones of the calculations regarding $\mathbf{u}^\epsilon$ and $\mathbf{u}$ for completeness.
 
 \begin{enumerate}
 
-  \item The anisotropic and hydrostatic systems have $\mathbf{u}^\epsilon$ and $\mathbf{u}$ unique global strong solutions respectively, assuming $\epsilon < \epsilon_0$ and ${\mathbf{u}_h}_0 \in H^3(\Omega).$
+  \item There exist $\mathbf{u}^\epsilon$ and $\mathbf{u}$ unique global strong solutions for the anisotropic and hydrostatic velocity systems respectively, assuming $\epsilon < \epsilon_0$ and ${\mathbf{u}_h}_0 \in H^3(\Omega).$
   
-  \item Specifically, for ${\mathbf{u}_h}_0 \in H^3(\Omega),$ the horizontal velocity strong solution $\mathbf{u}_h$ satisfies
+  Specifically, for ${\mathbf{u}_h}_0 \in H^3(\Omega),$ the horizontal velocity strong solution $\mathbf{u}_h$ satisfies
     
-    \begin{equation}
+    \begin{equation} \label{u_regularities_first}
       \mathbf{u}_h \in L^\infty([0, \infty), H^3(\Omega)) \cap L^2_{loc}([0, \infty), H^4(\Omega))
     \end{equation}
     
@@ -938,7 +940,7 @@ The first part of the proof concerns exclusively the velocity functions, and it 
       \partial_t \mathbf{u}_h \in L^2_{loc}([0, \infty), H^2(\Omega)).
     \end{equation}
     
-  \item We also mention this important estimate obtained for an ${\mathbf{u}_h}_0 \in H^3(\Omega)$ initial data: the velocity difference functions satisfy
+  \item We also mention that for an ${\mathbf{u}_h}_0 \in H^3(\Omega)$ initial data the velocity difference functions satisfy
   
   \begin{equation} \label{UdifferenceEstimate}
     \sup_{0 \leq t < \infty}{\norm{(U_h^\epsilon, \epsilon U_3^\epsilon)}_{H^2}^2} + \int_0^\infty \norm{\nabla (U_h^\epsilon, U_3^\epsilon)}_{H^2}^2 \leq C \epsilon^2.
@@ -946,7 +948,7 @@ The first part of the proof concerns exclusively the velocity functions, and it 
 
 \end{enumerate}
 
-As a consequence of these main steps, the following strong convergences hold for an ${\mathbf{u}_h}_0 \in H^3(\Omega)$ initial data:
+As a consequence, the following strong convergences hold for an ${\mathbf{u}_h}_0 \in H^3(\Omega)$ initial data:
 
   \begin{align} 
     &  (\mathbf{u}_h^\epsilon, \epsilon u_3^\epsilon) \to (\mathbf{u}_h, 0) &\quad & \text{strongly in $L_t^\infty H_x^2$,} \label{StrongConvVelocity1} \\
@@ -954,15 +956,17 @@ As a consequence of these main steps, the following strong convergences hold for
     &  u_3^\epsilon \to u_3 &\quad & \text{strongly in $L_t^\infty H_x^1.$} \label{StrongConvVelocity3}
   \end{align}
 
-With the above result Theorem \ref{maintheoremSTRONG}'s statement on the strong convergence of the velocity functions is obvious. In the second part of the proof we present the computations verifying the strong convergence of the concentration function $c^\epsilon.$ The structure of these calculations heavily depends on the existence of both the anisotropic concentration $c^\epsilon$ and the limit solution $c.$ The existence of the pre-limit solution function $c^\epsilon$ follows from analogous arguments to those guaranteeing the existence of $\mathbf{u}^\epsilon.$ On the other hand, the existence result concerning the hydrostatic downwind-matching solution $c$ is given by Theorem \ref{existenceconcentrationSTRONG}.
+Theorem \ref{maintheoremSTRONG}'s statement on the strong convergence of the velocity functions is obvious with the above result.
 
-The focus of the proof's next step is to construct an estimate for the difference functions and show that
+In the second part of the proof we present the computations verifying the strong convergence of the concentration function $c^\epsilon.$ The structure of these calculations heavily depends on the existence of both the anisotropic concentration $c^\epsilon$ and the limit solution $c.$ The existence of the pre-limit solution function $c^\epsilon$ follows from analogous arguments to those guaranteeing the existence of $\mathbf{u}^\epsilon.$ On the other hand, the existence result concerning the hydrostatic downwind-matching solution $c$ is given by Theorem \ref{existenceconcentrationSTRONG}.
+
+The focus of the proof's remaining part is to construct an estimate for the concentration difference functions and show that
 
 \begin{equation}
   c^\epsilon \to c \text{ in } L^\infty H^1 \text{ and } \nabla_d c^\epsilon \to \nabla_d c \text{ in } L^2 H^1.
 \end{equation}
 
-Analogously to the $\mathbf{U}^\epsilon, U^\epsilon$ notation we will use $C^\epsilon = c^\epsilon-c$ and $S^\epsilon = s^\epsilon-s$ to denote the difference functions. Subtracting (\ref{HNSC5}) from (\ref{ANSC5}) we obtain the equation describing the dynamics of $C^\epsilon:$ 
+Analogously to the $\mathbf{U}_h^\epsilon, U_3^\epsilon$ notation we will use $C^\epsilon = c^\epsilon-c$ and $S^\epsilon = s^\epsilon-s$ to denote the difference between anisotropic and hydrostatic functions. Subtracting (\ref{HNSC5}) from (\ref{ANSC5}) we obtain the governing equation for $C^\epsilon:$
 
 \begin{equation}
   \partial_t C^\epsilon + u^\epsilon \cdot \nabla c^\epsilon - u \cdot \nabla c = \epsilon K_1 \partial_{11} c^\epsilon + K_2 \partial_{22} C^\epsilon + K_3 \partial_{33} C^\epsilon + S^\epsilon.
@@ -977,13 +981,13 @@ We reformulate $u^\epsilon \cdot \nabla c^\epsilon - u \cdot \nabla c$ as $U^\ep
    \end{split}
 \end{equation}
 
-Note that by multiplying the equation by $- \Delta C^\epsilon$ we obtain only $\epsilon \norm{\partial_{11} C^\epsilon}$ on the equation's left-hand side, in other words the full, $\epsilon$-free Laplacian is missing. This means that the usual strategy of bringing high-order terms multiplied by a Young inequality coefficient to the left-hand side will not work in the case of using a downwind-matching coordinate system. We overcome this issue by using the following different approach and by exploiting the increased $H^3$ regularity of ${\mathbf{u}_h}_0.$
+Note that by multiplying the equation with $- \Delta C^\epsilon$ we obtain only $\epsilon \norm{\partial_{11} C^\epsilon}$ on the equation's left-hand side --- in other words, the full, $\epsilon$-free Laplacian is missing. This means that the usual strategy of bringing high-order terms multiplied by a Young inequality coefficient to the left-hand side will not work in the case of the downwind-matching coordinate system. We overcome this issue by using the following different approach and by exploiting the increased $H^3$ regularity of ${\mathbf{u}_h}_0.$
 
 Multiplying (\ref{governCepsilon}) by $- \partial_{ii} C^\epsilon, i=1,2,3$ we obtain
 
 \begin{equation}
   \begin{split}
-      & \frac{1}{2}\frac{\diff}{\diff t} \norm{\nabla C^\epsilon}_2^2 + \epsilon K_1 \norm{\partial_{11} C^\epsilon}_2^2 + K_2 \norm{\partial_{22} C^\epsilon}_2^2 + K_3 \norm{\partial_{33} C^\epsilon}_2^2 + C \sum_{i \neq j} \norm{\partial_{ij} C^\epsilon}_2^2 \\
+      & \frac{1}{2}\frac{\diff}{\diff t} \norm{\nabla C^\epsilon}_2^2 + \epsilon K_1 \norm{\partial_{11} C^\epsilon}_2^2 + K_2 \norm{\partial_{22} C^\epsilon}_2^2 + K_3 \norm{\partial_{33} C^\epsilon}_2^2 + \sum_{i \neq j} C_{ij} \norm{\partial_{ij} C^\epsilon}_2^2 \\
       & = \sum_{i = 1,2,3} \int_\Omega U^\epsilon \nabla C^\epsilon \partial_{ii} C^\epsilon + \int_\Omega U^\epsilon \nabla c \partial_{ii} C^\epsilon + \int_\Omega u \nabla C^\epsilon \partial_{ii} C^\epsilon - \int_\Omega \epsilon K_1 \partial_{11} c \partial_{ii} C^\epsilon \\
       & - \sum_{i = 1,2,3} \int_\Omega S^\epsilon \partial_{ii} C^\epsilon \\
       & = \sum_{i = 1,2,3} I_1(i)  + I_2(i) + I_3(i) + I_4(i) + I_5(i),
@@ -1038,7 +1042,7 @@ Firstly, by the H\"older, Ladyzhenskaya and Young inequalities we have
   \end{split}
 \end{equation}
 
-Note that for $j=3$ this approach --- which is different from what we applied for $I_1(1)(a)$ --- is necessary, since using the analogous estimate $\| \partial_1 U_3^\epsilon \| _ {L^\infty} \leq \norm{U_3^\epsilon}_{H^3} \leq \| U_h^\epsilon \| _{H^4}$ arrives to a too high level of $H^k$ space for which we do not have an estimate anymore, considering we only have an $H^3$ initial data. Since in the $\int_\Omega U_j^\epsilon \partial_{j1} C^\epsilon \partial_1 C^\epsilon$ second term we do not have a derivative on the velocity function, we can simply use
+Note that for $j=3$ this approach --- which is different from what we applied for $I_1(1)(a)$ --- is necessary, since using the analogous estimate $\| \partial_1 U_3^\epsilon \| _ {L^\infty} \leq \norm{U_3^\epsilon}_{H^3} \leq \| U_h^\epsilon \| _{H^4}$ arrives to an excessively high level of $H^k$ space for which we do not have an estimate anymore, considering we only have an $H^3$ initial data. Since in the $\int_\Omega U_j^\epsilon \partial_{j1} C^\epsilon \partial_1 C^\epsilon$ second term we do not have a derivative on the velocity function, we can simply use
 
 \begin{equation} \nonumber
   \begin{split}
@@ -1070,7 +1074,7 @@ Finally to estimate $I_1(i)$ for $i = 2,3$ we can simply use
 
 \textbf{Estimate for $I_2(i), i=1,2,3.$}
 
-By using the H\"older and Young inequalities, for $I_2(1)$ we obtain
+By using the H\"older and Young inequalities, for $i = 1$ we obtain
 
 \begin{equation} \label{cH2normappears}
   \begin{split}
@@ -1091,7 +1095,7 @@ while $I_2(i), i = 2,3$ can be estimated by
   \end{split}
 \end{equation}
 
-Note that Theorem \ref{existenceconcentrationSTRONG} guarantees that the appearance of $\norm{c}_{H^2}^2$ in (\ref{cH2normappears}) is not problematic concerning further estimates.
+Note that the regularities (\ref{regularity_c_first}) listed in Theorem \ref{existenceconcentrationSTRONG} guarantee that the appearance of $\norm{c}_{H^2}^2$ in (\ref{cH2normappears}) is not problematic concerning further estimates.
 
 \bigskip
 
@@ -1106,7 +1110,7 @@ $$ \int_\Omega u_1 \partial_1 C^\epsilon \partial_{11} C^\epsilon = - \frac{1}{2
 for $i=1$ we obtain
 
 \begin{equation}
-    I_3(1) \leq C \norm{u_1}_{H^3} \norm{\partial_1 C^\epsilon}_2^2 + C \sum_{j=2,3} \zeta \norm{\nabla \partial_j C^\epsilon}_2^2 + C \frac{1}{\zeta} \norm{u_h}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2.
+    I_3(1) \leq C \norm{u_1}_{H^3} \norm{\nabla C^\epsilon}_2^2 + C \sum_{j=2,3} \zeta \norm{\nabla \partial_j C^\epsilon}_2^2 + C \frac{1}{\zeta} \norm{u_h}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2.
 \end{equation}
 
 On the other hand, for $i = 2,3$ we have
@@ -1114,6 +1118,8 @@ On the other hand, for $i = 2,3$ we have
 \begin{equation}
   I_3(2) + I_3(3) \leq C \zeta \sum_{i=2,3} \norm{\partial_{ii} C^\epsilon}_2^2 + C \frac{1}{\zeta} \| u_h \| _ {H^3} ^ 2 \norm{\nabla C^\epsilon}_2^2.
 \end{equation}
+
+Note that thanks to (\ref{u_regularities_first}) the $\norm{\nabla C^\epsilon}_2^2$ term is multiplied by a quantity that we can estimate well.
 
 \bigskip
 
@@ -1132,7 +1138,7 @@ for all $i =1,2,3.$ Since here we do have an $\epsilon$ in front of the Laplacia
 
 \bigskip
 
-\textbf{Estimate for $I_5 (i), , i = 1,2,3.$}
+\textbf{Estimate for $I_5 (i), i = 1,2,3.$}
 
 For all $i = 1,2,3$ values we have
 
@@ -1162,11 +1168,11 @@ We still need to refine the estimate of the first term on the right-hand side. L
 
 \bigskip
 
-Summarising the previously obtained five estimates and merging the second order concentration terms into the left-hand side, we eventually have
+Summarising the previously obtained five estimates for $I_1$ - $I_5$ and merging the second order concentration terms into the left-hand side (note that it is indeed possible to do so as we constructed the bounds in a way that $\partial_{11} C^\epsilon$ is only present with an $\epsilon$ multiplier), we eventually have
 
 \begin{equation}
   \begin{split}
-    & \frac{1}{2} \frac{\diff}{\diff t} \norm{\nabla C^\epsilon}_2^2 + \epsilon K_1 \norm{\partial_{11} C^\epsilon}_2^2 + K_2 \norm{\partial_{22} C^\epsilon}_2^2 + K_3 \norm{\partial_{33} C^\epsilon}_2^2 + C \sum_{i \neq j} \norm{\partial_{ij} C^\epsilon}_2^2 \\
+    & \frac{1}{2} \frac{\diff}{\diff t} \norm{\nabla C^\epsilon}_2^2 + \epsilon K_1 \norm{\partial_{11} C^\epsilon}_2^2 + K_2 \norm{\partial_{22} C^\epsilon}_2^2 + K_3 \norm{\partial_{33} C^\epsilon}_2^2 + \sum_{i \neq j} C_{ij} \norm{\partial_{ij} C^\epsilon}_2^2 \\
     & \leq C\norm{U_H^\epsilon}_{H^3} \norm{\nabla C^\epsilon}_2^2 + C \norm{U_H^\epsilon}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2 \\
     & + C \norm{u_H}_{H^3} \norm{\nabla C^\epsilon}_2^2 + C \norm{u_H}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2 + C \norm{\nabla C^\epsilon}_2^2 \\
     & + C \norm{U_H^\epsilon}_{H^3}^2 + \norm{c}_{H^2}^2 \norm{\nabla C^\epsilon}_2^2 \\
@@ -1177,11 +1183,13 @@ Summarising the previously obtained five estimates and merging the second order 
 
 where $1 \leq j \leq 3.$
 
-After applying the Gr\"{o}nwall inequality, the contribution of the additive terms is
+Now we are ready to apply the Gr\"{o}nwall inequality.
+
+The contribution of the additive terms will be
 
 \[ \int_0^T \epsilon C \norm{\partial_{11} c}_2^2 + C \norm{U_H^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2 + C \norm{U_H^\epsilon}_{H^3}^2 + C \epsilon^2 \diff \tau \leq \epsilon C + \epsilon^2 C + C \epsilon^2 \cdot T.\]
 
-On the other hand, the multiplicative terms provide
+On the other hand, the multiplicative terms will provide
 
 \[ \int_0^T \norm{U_H^\epsilon}_{H^3} + \norm{u_H}_{H^3} + \norm{U_H^\epsilon}_{H^3}^2 + C \norm{u_H}_{H^3}^2 + \norm{c}_{H^2}^2 + C \diff \tau,\]
 
@@ -1192,30 +1200,34 @@ which can be estimated by
     & \int_0^T \norm{U_H^\epsilon}_{H^3} + \norm{u_H}_{H^3} \diff \tau + C + C \cdot T \\
     & \leq \int_0^T \norm{1 \cdot U_H^\epsilon}_{H^3} + \norm{1 \cdot u_H}_{H^3} \diff \tau + C + C \cdot T\\
     & \leq T^{1/2} \bigg (\int_0^T \norm{U_H^\epsilon}_{H^3}^2 \bigg )^{1/2} \diff \tau + T^{1/2} \bigg (\int_0^T \norm{u_H}_{H^3}^2 \bigg )^{1/2} \diff \tau + C + C \cdot T\\
-    & \leq \sqrt{T} C + C + C \cdot T.
+    & \leq \sqrt{T} C + C + C \cdot T,
   \end{split}
 \end{equation}
 
-Eventually we obtain
+using (\ref{regularity_c_first}), (\ref{u_regularities_first}) and (\ref{UdifferenceEstimate}).
+
+Eventually the Gr\"onwall inequality yields
 
 \begin{equation} \label{finalboundforCepsilon}
   \begin{split}
     & \norm{C^\epsilon}_{L^\infty(0,T; H^1(\Omega))} + \norm{\nabla_d C^\epsilon}_{L^2(0,T; H^1(\Omega))} \\
-    & \leq (\epsilon C + C \epsilon^2 \cdot T) \exp{(C \sqrt{T} + C + C \cdot T)}.
+    & \leq (\epsilon C + C \epsilon^2 \cdot T) \exp{(C \sqrt{T} + C + C \cdot T)},
   \end{split}
 \end{equation}
 
-We highlight here an important structural difference in the final estimate compared to that in \cite{li2019primitive}: the time uniformity of the bound is not preserved for our version of the modelling equations. The estimate provides a meaningful bound for any arbitrarily big finite point in time, but the bound's time-dependence also means that the convergence gets slower as time evolves. Note that (\ref{finalboundforCepsilon}) also implies the global existence of $c^\epsilon.$
+keeping in mind that $C^\epsilon(0) = 0.$
 
-Finally we conclude that for any given fix point in time $T > 0$ we have the strong convergence results
+Here we highlight an important structural difference in the (\ref{finalboundforCepsilon}) final estimate compared to that in \cite{li2019primitive} (for example Proposition 5.3): the time uniformity of the bound is not preserved for our extended, concentration-including version of the modelling equations. The estimate provides a meaningful bound for any arbitrarily big finite point in time, but the estimate's time-dependence also means that the convergence gets slower as time evolves. Note also that (\ref{finalboundforCepsilon}) implies the global existence of $c^\epsilon,$ as it suggests that $C^\epsilon$ can be continued from any arbitrary finite $T^* > 0$ time.
+
+Finally we conclude that for any given fix point in time $T > 0$ we have the global strong convergence results
 
 \begin{equation} \label{finalstrongconvresultC}
 c^\epsilon \to c \text{ in } L^\infty H^1 \text{ and } \nabla_d c^\epsilon \to \nabla_d c \text{ in } L^2 H^1,
 \end{equation}
 
-and the rate of convergence is $\epsilon.$
+moreover the rate of convergence is $\epsilon.$
 
-Combining the velocity convergence results (\ref{StrongConvVelocity1})-(\ref{StrongConvVelocity3}) with the concentration convergence (\ref{finalstrongconvresultC}) obtained above completes the proof.
+Combining the velocity convergence results (\ref{StrongConvVelocity1})-(\ref{StrongConvVelocity3}) with the (\ref{finalstrongconvresultC}) concentration convergence obtained above completes the proof.
 
 \end{proof}
 
