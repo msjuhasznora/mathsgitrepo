@@ -982,18 +982,22 @@ Multiplying (\ref{governCepsilon}) by $- \partial_{ii} C^\epsilon, i=1,2,3$ we o
 
 \begin{equation}
   \begin{split}
-      & \frac{1}{2}\frac{\diff}{\diff t} \norm{\nabla C^\epsilon}_2^2 + \epsilon K_1 \norm{\partial_{11} C^\epsilon}_2^2 + K_2 \norm{\partial_{22} C^\epsilon}_2^2 + K_3 \norm{\partial_{33} C^\epsilon}_2^2 + C \norm{\partial_{ij} C^\epsilon}_2^2 \\
+      & \frac{1}{2}\frac{\diff}{\diff t} \norm{\nabla C^\epsilon}_2^2 + \epsilon K_1 \norm{\partial_{11} C^\epsilon}_2^2 + K_2 \norm{\partial_{22} C^\epsilon}_2^2 + K_3 \norm{\partial_{33} C^\epsilon}_2^2 + C \sum_{i \neq j} \norm{\partial_{ij} C^\epsilon}_2^2 \\
       & = \sum_{i = 1,2,3} \int_\Omega U^\epsilon \nabla C^\epsilon \partial_{ii} C^\epsilon + \int_\Omega U^\epsilon \nabla c \partial_{ii} C^\epsilon + \int_\Omega u \nabla C^\epsilon \partial_{ii} C^\epsilon - \int_\Omega \epsilon K_1 \partial_{11} c \partial_{ii} C^\epsilon \\
       & - \sum_{i = 1,2,3} \int_\Omega S^\epsilon \partial_{ii} C^\epsilon \\
       & = \sum_{i = 1,2,3} I_1(i)  + I_2(i) + I_3(i) + I_4(i) + I_5(i),
   \end{split}
 \end{equation}
 
-where $i \neq j.$
+where $1 \leq j \leq 3.$
 
 In the following we estimate the terms on the right-hand side one by one.
 
+\bigskip
+
 \textbf{Estimate for $I_1(i), i = 1,2,3.$}
+
+We begin by taking $i=1.$
 
 \begin{equation}
   \begin{split}
@@ -1046,19 +1050,22 @@ Altogether for $j = 2,3$ we have
 
 \begin{equation}
   \begin{split}
-    & I_1(1)(b), I_1(1)(c) = \int_\Omega U_j^\epsilon \partial_j C^\epsilon \partial_{11} C^\epsilon \\
-    & \leq \zeta \norm{\nabla \partial_j C^\epsilon}_2^2 + \frac{1}{\zeta} \norm{U_h}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2.
+    & I_1(1)(b) + I_1(1)(c) = \sum_{j=2}^3 \int_\Omega U_j^\epsilon \partial_j C^\epsilon \partial_{11} C^\epsilon \\
+    & \leq C \sum_{j=2}^3 \zeta \norm{\nabla \partial_j C^\epsilon}_2^2 + C \frac{1}{\zeta} \norm{U_h}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2.
   \end{split}
 \end{equation}
 
-Finally to estimate $I_1(j)$ for $j = 2,3$ we can simply use
+Finally to estimate $I_1(i)$ for $i = 2,3$ we can simply use
 
 \begin{equation}
   \begin{split}
-    & I_1(2), I_1(3) \leq \norm{U_i^\epsilon}_{L^\infty} \norm{\partial_i C^\epsilon}_2 \norm{\partial_{jj}C^\epsilon}_2 \\
-    & \leq \zeta \norm{\partial_{jj} C^\epsilon}_2^2 + \frac{1}{\zeta} \| U_h^\epsilon \| _ {H^3} ^ 2 \norm{\nabla C^\epsilon}_2^2.
+    & I_1(2) + I_1(3) = \sum_{i = 2,3} \int_\Omega U^\epsilon \nabla C^\epsilon \partial_{ii} C^\epsilon \\
+    & \leq \sum_{i = 2,3} \| U^\epsilon \| _{L^\infty} \norm{\nabla C^\epsilon}_2 \norm{\partial_{ii}C^\epsilon}_2 \\
+    & \leq C \sum_{i = 2,3} \zeta \norm{\partial_{ii} C^\epsilon}_2^2 + C \frac{1}{\zeta} \| U_h^\epsilon \| _ {H^3} ^ 2 \norm{\nabla C^\epsilon}_2^2.
   \end{split}
 \end{equation}
+
+\bigskip
 
 \textbf{Estimate for $I_2(i), i=1,2,3.$}
 
@@ -1074,66 +1081,70 @@ By using the H\"older and Young inequalities, for $I_2(1)$ we obtain
   \end{split}
 \end{equation}
 
-while $I_2(j), j = 2,3$ can be estimated by
+while $I_2(i), i = 2,3$ can be estimated by
 
 \begin{equation}
   \begin{split}
-  & I_2(2), I_2(3) = \int_\Omega U^\epsilon \nabla c \partial_{jj} C^\epsilon \leq \norm{U^\epsilon}_{L^\infty} \norm{\nabla c}_2 \norm{\partial_{jj} C^\epsilon}_2 \\
-  & \leq \zeta \norm{\partial_{jj} C^\epsilon}_2^2 + \frac{1}{\zeta} \norm{U_h^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2.
+  & I_2(2) + I_2(3) = \sum_{i=2,3} \int_\Omega U^\epsilon \nabla c \partial_{ii} C^\epsilon \leq \sum_{i=2,3} \norm{U^\epsilon}_{L^\infty} \norm{\nabla c}_2 \norm{\partial_{ii} C^\epsilon}_2 \\
+  & \leq \sum_{i=2,3} \zeta \norm{\partial_{ii} C^\epsilon}_2^2 + C \frac{1}{\zeta} \norm{U_h^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2.
   \end{split}
 \end{equation}
 
-Note that Theorem \ref{existenceconcentrationSTRONG} guarantees that the appearance of $\norm{c}_{H^2}^2$ in (\ref{cH2normappears}) is non-problematic concerning further estimates.
+Note that Theorem \ref{existenceconcentrationSTRONG} guarantees that the appearance of $\norm{c}_{H^2}^2$ in (\ref{cH2normappears}) is not problematic concerning further estimates.
+
+\bigskip
 
 \textbf{Estimate for $I_3(i), i=1,2,3.$}
 
-Due to their structure, computations for $\int_\Omega u \nabla C^\epsilon \partial_{ii} C^\epsilon$ are analogous to those seen in \textbf{Step 1} for $ \int_\Omega U^\epsilon \nabla C^\epsilon \partial_{ii} C^\epsilon.$
+Due to their structure, computations for $\int_\Omega u \nabla C^\epsilon \partial_{ii} C^\epsilon$ are analogous to those used to estimate $ \int_\Omega U^\epsilon \nabla C^\epsilon \partial_{ii} C^\epsilon.$
 
-Using the same tools, i.e. the Holder, Ladyzhenskaya and Young inequalities, and the result that
+Using the same tools, i.e. the H\"older, Ladyzhenskaya and Young inequalities, and the equality
 
 $$ \int_\Omega u_1 \partial_1 C^\epsilon \partial_{11} C^\epsilon = - \frac{1}{2} \int_\Omega \partial_1 u_1 (\partial_1 C^\epsilon)^2, $$
 
-we arrive to
+for $i=1$ we obtain
 
 \begin{equation}
-    I_3(1) \leq C \norm{u_1}_{H^3} \norm{\partial_1 C^\epsilon}_2^2 + \zeta \norm{\nabla \partial_j C^\epsilon}_2^2 + \frac{1}{\zeta} \norm{u_h}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2,
+    I_3(1) \leq C \norm{u_1}_{H^3} \norm{\partial_1 C^\epsilon}_2^2 + C \sum_{j=2,3} \zeta \norm{\nabla \partial_j C^\epsilon}_2^2 + C \frac{1}{\zeta} \norm{u_h}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2.
 \end{equation}
-
-where j = 2,3.
 
 On the other hand, for $i = 2,3$ we have
 
 \begin{equation}
-  I_3(2), I_3(3) \leq \norm{u_i}_{L^\infty} \norm{\partial_i C^\epsilon}_2 \norm{\partial_{jj}C^\epsilon}_2 \leq \zeta \norm{\partial_{jj} C^\epsilon}_2^2 + \frac{1}{\zeta} \| u_h \| _ {H^3} ^ 2 \norm{\nabla C^\epsilon}_2^2.
+  I_3(2) + I_3(3) \leq C \zeta \sum_{i=2,3} \norm{\partial_{ii} C^\epsilon}_2^2 + C \frac{1}{\zeta} \| u_h \| _ {H^3} ^ 2 \norm{\nabla C^\epsilon}_2^2.
 \end{equation}
 
-\textbf{Estimate for $I_4(i), i = 1,2,3$}
+\bigskip
+
+\textbf{Estimate for $I_4(i), i = 1,2,3.$}
+
+In this case we do not need to separate the case $i=1$ from $i=2,3,$ and we can use the general estimate
 
 \begin{equation}
   \begin{split}
     & I_4(i) = \epsilon K_1 \int_\Omega \partial_{11} c \partial_{ii} C^\epsilon \leq \epsilon K_1 \norm{\partial_{11} c}_2 \norm{\partial_{ii} C^\epsilon}_2 \\
-    & \leq \epsilon \zeta K_1 C \norm{\partial_{ii} C^\epsilon}_2^2 + \frac{1}{\zeta}\epsilon K_1 C \norm{\partial_{11} c}_2^2.
+    & \leq \epsilon \zeta K_1 C \norm{\partial_{ii} C^\epsilon}_2^2 + \frac{1}{\zeta}\epsilon K_1 C \norm{\partial_{11} c}_2^2
   \end{split}
 \end{equation}
 
-Since here we do have an $\epsilon$ in front of the Laplacian $ \norm{\partial_{ii} C^\epsilon}_2^2,$ it can be merged into the left-hand side later even for $i = 1.$
+for all $i =1,2,3.$ Since here we do have an $\epsilon$ in front of the Laplacian $ \norm{\partial_{ii} C^\epsilon}_2^2,$ it can be merged into the left-hand side later even for $i = 1.$
 
-\begin{remark}
-Note that the $\epsilon$ in $\epsilon K_1 C \norm{\partial_{11} c}_2^2$ will be the convergence rate. If we wanted to have $\epsilon^2$ instead, it would mean that we need to take the $\epsilon$ off of $\partial_{11} C^\epsilon$ (to put it on $\norm{\partial_{11} c}_2^2$) and thus, also take off one derivative off of $\partial_{11} C^\epsilon,$ which would result to the appearance of $\norm{c}_{H^3}.$ Since from the $H^3$ initial data ${u_h}_0$ we can only arrive to an $H^4$-regular solution function $u_h,$ that is sufficient only to guarantee the $H^2$ regularity of $c,$ but not $H^3.$ Increasing the initial velocity's regularity could achieve an $\epsilon^2$ convergence rate, but we are interested in proving a convergence result assuming the minimal needed regularity for the initial horizontal velocity.
-\end{remark}
+\bigskip
 
-\textbf{Estimate for $I_5 (i).$}
+\textbf{Estimate for $I_5 (i), , i = 1,2,3.$}
+
+For all $i = 1,2,3$ values we have
 
 \begin{equation}
   \begin{split}
     & - \int_\Omega S^\epsilon \partial_{ii} C^\epsilon = - \int_\Omega (s^\epsilon - s) \partial_{ii} C^\epsilon  = - \int_\Omega \big ( (\delta^\epsilon - \delta ) \star \varphi \big ) \cdot \partial_{ii} C^\epsilon \\
     & = \int_\Omega \partial_i \big ( (\delta^\epsilon - \delta ) \star \varphi \big ) \cdot \partial_i C^\epsilon \diff x \\
     & \leq C \int_\Omega \bigg( \partial_i \big ( (\delta^\epsilon - \delta ) \star \varphi \big ) \bigg ) ^2 \diff x + C \int_\Omega (\partial_i C^\epsilon)^2 \diff x \\
-    & \leq C \int_\Omega \bigg ( (\delta^\epsilon - \delta ) \star \partial_i \varphi \bigg ) ^2 \diff x + \textcolor{orange}{C \norm{\nabla C^\epsilon}_2^2}.
+    & \leq C \int_\Omega \bigg ( (\delta^\epsilon - \delta ) \star \partial_i \varphi \bigg ) ^2 \diff x + C \norm{\nabla C^\epsilon}_2^2.
   \end{split}
 \end{equation}
 
-The $\norm{\nabla C^\epsilon}_2^2$ norm can be left unchanged, the next step is to estimate the first term. We denote $\Phi = \partial_i \varphi \in C^\infty_0.$ 
+We still need to refine the estimate of the first term on the right-hand side. Let's denote $\Phi = \partial_i \varphi \in C^\infty_0,$ then we arrive to
 
 \begin{equation}
   \begin{split}
@@ -1144,7 +1155,7 @@ The $\norm{\nabla C^\epsilon}_2^2$ norm can be left unchanged, the next step is 
     & = \int_\Omega \bigg ( \int_{\mathcal{B}(x, \epsilon)} \delta^\epsilon(x-y) \big ( \Phi (y) - \Phi (x) \big ) \diff y \bigg )^2 \diff x \\
     & \leq \int_\Omega \bigg ( \int_{\mathcal{B}(x, \epsilon)} \delta^\epsilon(x-y) \abs{\nabla \Phi  (\eta)} \abs{y - x}  \diff y \bigg )^2 \diff x \\
     & \leq \epsilon^2 \int_\Omega \bigg ( \int_{\mathcal{B}(x, \epsilon)} \delta^\epsilon(x-y) \abs{\nabla \Phi  (\eta)} \diff y \bigg )^2 \diff x \\
-    & \leq C \epsilon^2 \norm{\nabla \Phi}_{L^\infty}^2 \leq \textcolor{orange}{C \epsilon^2}.
+    & \leq C \epsilon^2 \norm{\nabla \Phi}_{L^\infty}^2 \leq C \epsilon^2.
   \end{split}
 \end{equation}
 
