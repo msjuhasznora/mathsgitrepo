@@ -936,7 +936,7 @@ The first part of the proof concerns exclusively the velocity functions, and it 
     
     and
     
-    \begin{equation}
+    \begin{equation} \label{u_regularities_second}
       \partial_t \mathbf{u}_h \in L^2_{loc}([0, \infty), H^2(\Omega)).
     \end{equation}
     
@@ -1235,7 +1235,25 @@ Combining the velocity convergence results (\ref{StrongConvVelocity1})-(\ref{Str
 
 \section{Existence of the strong solutions of the hydrostatic equations of the polluted atmosphere}
 
-Existence
+The appendix is dedicated to showing the existence of the unique global strong solution $\mathbf{u}_h, u_3, c$ of the hydrostatic limit system (\ref{HNSC1})-(\ref{HNSC6}), (\ref{HNSC7-strong}).
+
+\begin{proof}[Proof of Theorem \ref{existenceconcentrationSTRONG}]
+
+Here we focus exclusively on verifying the existence of the concentration function $c,$ since the existence of the limit velocity functions $\mathbf{u}_h, u_3$ follows from \cite{li2019primitive} (we remind the reader of the (\ref{u_regularities_first}), (\ref{u_regularities_second}) regularities described previously.)
+
+\bigskip
+
+%%% LOCAL EXISTENCE %%%
+\textbf{Part 1: Local existence}
+
+The local existence of the concentration function $c$ is based on \cite{cao2014local}.
+
+\bigskip
+
+%%% GLOBAL EXISTENCE %%%
+\textbf{Part 2: Global existence}
+
+\end{proof}
 
 \nocite{*}
 \bibliographystyle{abbrv}
