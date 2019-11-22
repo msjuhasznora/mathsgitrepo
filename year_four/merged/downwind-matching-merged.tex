@@ -1241,11 +1241,11 @@ Combining the velocity convergence results (\ref{StrongConvVelocity1})-(\ref{Str
 
 \section{Existence of the strong solutions of the hydrostatic equations of the polluted atmosphere}
 
-The appendix is dedicated to showing the existence of the unique global strong solution $\mathbf{u}_h, u_3, c$ of the hydrostatic limit system (\ref{HNSC1})-(\ref{HNSC6}), (\ref{HNSC7-strong}).
+The appendix is dedicated to showing the existence of the unique global strong solution $\mathbf{u}_h, u_3, c$ of the hydrostatic limit system (\ref{HNSC1})-(\ref{HNSC6}), (\ref{HNSC7-strong}) --- in other words we verify Theorem \ref{existenceconcentrationSTRONG}]. The proof's first part strongly uses the existence result achieved by \cite{cao2014local}. In fact, in this article the authors work with a very similar system including an incomplete Laplacian in the convection-diffusion equation, but while they work with a temperature function $T,$ in our case the additional function to the velocity-pressure pair is the concentration $c.$ Even though there is a strong analogy between the equations describing the dynamics of concentration and temperature, yet the difference between $$ \partial_3 p + T = 0$$ and $$ \partial_3 p = 0$$ turns out to be a cardinal one concerning global existence. The method of \cite{cao2014local} is easily applicable with minor changes to our system until reaching the verification of local existence, the transplantation of their proof of the global existence on the other hand becomes very problematic. The presence of $T$ in the hydrostatic equation makes certain cancellations possible in their case which eventually guarantee the ability to close estimates that otherwise would not lead to meaningful implications. Since our hydrostatic equation does not include on $c,$ we will work out a set of rather independent estimates to show the continuability of $c.$ Thus, the proof is built up by two main steps: firstly we show the local existence of the limit solutions following closely the ideas of \cite{cao2014local}, and finally we show their global existence using a sequential method (instead of a simultaneous one), exploiting the already known regularities of the velocity functions.
 
 \begin{proof}[Proof of Theorem \ref{existenceconcentrationSTRONG}]
 
-Here we focus exclusively on verifying the existence of the concentration function $c,$ since the existence of the limit velocity functions $\mathbf{u}_h, u_3$ follows from \cite{li2019primitive} (we remind the reader of the (\ref{u_regularities_first}), (\ref{u_regularities_second}) regularities described previously.)
+Three-step boundary change from $(x,y)$- periodicity to a fully periodic domain and the $c + \frac{z}{h}$ change.
 
 \bigskip
 
@@ -1258,6 +1258,8 @@ The local existence of the concentration function $c$ is based on \cite{cao2014l
 
 %%% GLOBAL EXISTENCE %%%
 \textbf{Part 2: Global existence}
+
+Here we focus exclusively on verifying the existence of the concentration function $c,$ since the existence of the limit velocity functions $\mathbf{u}_h, u_3$ follows from \cite{li2019primitive} (we remind the reader of the (\ref{u_regularities_first}), (\ref{u_regularities_second}) regularities described previously.)
 
 \end{proof}
 
