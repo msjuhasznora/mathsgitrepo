@@ -1252,14 +1252,50 @@ Three-step boundary change from $(x,y)$- periodicity to a fully periodic domain 
 %%% LOCAL EXISTENCE %%%
 \textbf{Part 1: Local existence}
 
-The local existence of the concentration function $c$ is based on \cite{cao2014local}.
+As far as local existence is concerned, the proof given in sections 2 and 3 in \cite{cao2014local} can be easily customised to fit our system. The necessary modifications are small-scale and rather obvious, therefore we do not unfold the entire proof here, however we do outline the main ideas of the verification process for completeness.
+
+Let us consider the following system:
+
+  \begin{equation} \label{T_1_T_2_1}   
+    \partial_t \mathbf{u}_h + \mathbf{u}_h \cdot \nabla \mathbf{u}_h + u_3 \partial_3 \mathbf{u}_h + \partial_h p + L_1 \mathbf{u}_h + f_0 k \times \mathbf{u}_h= 0
+  \end{equation}
+    
+  \begin{equation} \label{T_1_T_2_2}  
+    \partial_3 p + T_1 = 0
+  \end{equation}
+    
+  \begin{equation} \label{T_1_T_2_3}  
+    \nabla \cdot \mathbf{u}_h + \partial_3 u_3 = 0
+  \end{equation}
+    
+  \begin{equation} \label{T_1_T_2_4} 
+    \partial_t T_2+ \mathbf{u}_h \cdot \nabla_h T_2 + u_3 \cdot \bigg (\partial_3 T_2 + \frac{1}{h} \bigg ) + L_2 T_2 = 0,
+  \end{equation}
+     
+where it is easy to see that by formally taking $T_1 = T_2 = T,$ we arrive to the equations considered in \cite{cao2014local}, on the other hand, the choice $T_1 = 0, T_2 = c$ provides our system, (\ref{HNSC1})-(\ref{HNSC5}). In order to transplant the proof to the case of the polluted atmosphere, we need to check the robustness of its structure with respect to the definition of $T_1$ and $T_2.$ The main steps are the following:
+
+\begin{enumerate}
+
+  \item We fix the definitions $T_1 = 0$ and $T_2 = c$ in (\ref{T_1_T_2_1}) - (\ref{T_1_T_2_4}).
+  
+  \item We define a mollified version of this system where have a complete Laplacian thanks to the new small parameter $\mu$; specifically, the convection-diffusion equation takes the form
+  
+  \begin{equation} 
+    \partial_t c+ \mathbf{u}_h \cdot \nabla_h c + u_3 \cdot \bigg (\partial_3 c + \frac{1}{h} \bigg ) - \frac{1}{R_3} \partial_{33} c - \mu \Delta_h c= 0.
+  \end{equation}
+  
+  \item Using the contractive mapping principle, we can prove that for for any fix positive $\mu$ value there exist strong solutions $\mathbf{u}_h^\mu$ and $c^\mu$ to the mollified system.
+  
+  \item By means of a version the Aubin-Lions lemma we pass to the limit and derive the local existence of $\mathbf{u}_h, c$ as the strong limits of the sequences $\mathbf{u}_h^\mu, c^\mu.$
+
+\end{enumerate}
 
 \bigskip
 
 %%% GLOBAL EXISTENCE %%%
 \textbf{Part 2: Global existence}
 
-Here we focus exclusively on verifying the existence of the concentration function $c,$ since the existence of the limit velocity functions $\mathbf{u}_h, u_3$ follows from \cite{li2019primitive} (we remind the reader of the (\ref{u_regularities_first}), (\ref{u_regularities_second}) regularities described previously.)
+As we mentioned in the introductory part of this proof, here we only need to provide estimates verifying the continuability of $c,$ as the global existence of the velocity function immediately follows from (\ref{u_regularities_first}) and (\ref{u_regularities_second}).
 
 \end{proof}
 
