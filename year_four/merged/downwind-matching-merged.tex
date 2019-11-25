@@ -1331,6 +1331,191 @@ where it is easy to see that by formally taking $T_1 = T_2 = T,$ we arrive to th
 
 As we mentioned in the introductory part of this proof, here we only need to provide estimates verifying the continuability of $c,$ as the global existence of the velocity function immediately follows from (\ref{u_regularities_first}) and (\ref{u_regularities_second}).
 
+\bigskip
+
+\textbf{$\norm{\Delta c}_2$ and $\norm{\Delta \nabla_d c}_2$ estimates}
+
+Let's take an arbitrary positive finite $T$ time.
+
+Here we show that
+
+$$ \sup_{0 \leq t < T} \norm{c}_{H^2}^2 + \int_0^T \norm{\nabla_d c}_{H^2}^2 \diff t \leq B,$$
+
+where $B=B(T)$ is a bounded $T$-dependent quantity.
+
+We apply $\Delta$ on
+
+\begin{equation}   
+    \partial_t c + v \cdot \nabla_H c - \bigg ( \int_{-h}^z \nabla_H \cdot v \diff \xi \bigg) \bigg ( \frac{\partial c}{\partial z} + \frac{1}{h}\bigg) - \Delta_d c = s,
+\end{equation}
+
+and multiply it by $\Delta c$ and integrate on $\Omega.$
+
+This gives
+
+\begin{equation} \label{firstformboundc}
+  \begin{split}
+    & \frac{1}{2} \frac{\diff}{\diff t} \norm{\Delta c}_2^2 + K \norm{\Delta \nabla_d c}_2^2 \\
+    & \leq \int_\Omega \Delta s \Delta c - \Delta ( v \cdot \nabla_H c) \cdot \Delta c + \Delta \bigg ( \bigg ( \int_{-h}^z \nabla_H \cdot v \diff \xi \bigg) \bigg ( \frac{\partial c}{\partial z} + \frac{1}{h}\bigg) \bigg ) \cdot \Delta c
+  \end{split}
+\end{equation}
+
+\begin{enumerate}
+
+  \item $\int_\Omega \Delta s \Delta c \leq \norm{\Delta s}_2^2 + \norm{\Delta c}_2^2.$
+  
+  \item Estimate for $\int_\Omega \Delta ( v \cdot \nabla_H c) \cdot \Delta c.$
+  
+\begin{equation}
+  \begin{split}
+    & \int_\Omega \Delta ( v \cdot \nabla_H c) \cdot \Delta c \\
+    & = \int_\Omega (\Delta v \cdot \nabla_H c + 2 \nabla v \cdot \nabla \nabla_H c + v \cdot \Delta \nabla_H c) \Delta c \\
+    & \leq C \int_\Omega \abs{\Delta v} \abs{\nabla_H c} \abs{\Delta c} + C \int_\Omega \abs{\nabla v} \abs{\nabla \nabla_H c} \abs{\Delta c} + \abs{C \int_\Omega v \cdot \Delta \nabla_H c \Delta c}
+  \end{split}
+\end{equation}
+
+Using $$\int_\Omega v \cdot \Delta \nabla_H c \Delta c = - \int_\Omega \nabla_H v \cdot \Delta c \Delta c - \int_\Omega v \cdot \Delta c \nabla_H \Delta c,$$ and thus
+
+$$2 \int_\Omega v \cdot \Delta \nabla_H c \Delta c = - \int_\Omega \nabla_H v \cdot \Delta c \Delta c,$$ we have
+
+\begin{equation}
+  \begin{split}
+    & \int_\Omega \Delta ( v \cdot \nabla_H c) \cdot \Delta c \\
+    & \leq C \int_\Omega \abs{\Delta v} \abs{\nabla_H c} \abs{\Delta c} + C \int_\Omega \abs{\nabla v} \abs{\nabla \nabla_H c} \abs{\Delta c} + C \int_\Omega \abs{\nabla_H v} \abs{\Delta c}^2 \\
+    & \leq C \norm{v}_{H^4} \norm{\Delta c}_2^2,
+  \end{split}
+\end{equation}
+
+using that $\sup \abs{\nabla v}, \sup \abs{\Delta v} \leq \abs{\Delta v}_{H^2} \leq \norm{v}_{H^4}.$
+  
+  \item Estimate for $\int_\Omega \Delta \bigg ( \bigg ( \int_{-h}^z \nabla_H \cdot v \diff \xi \bigg) \bigg ( \frac{\partial c}{\partial z}+ \frac{1}{h}\bigg) \bigg ) \cdot \Delta c.$
+
+We can construct a bound by using the following three estimates.
+
+Firstly, point \textit{a)},
+
+\begin{equation}
+  \begin{split}
+    &  \int_\Omega \bigg ( \int_{-h}^z \Delta \nabla_H \cdot v \diff \xi \bigg) \bigg ( \frac{\partial c}{\partial z} + \frac{1}{h}\bigg)  \cdot \Delta c \\
+    & = \frac{1}{h} \int_\Omega \bigg ( \int_{-h}^z \Delta \nabla_H \cdot v \diff \xi \bigg) \cdot \Delta c + \int_\Omega \bigg ( \int_{-h}^z \Delta \nabla_H \cdot v \diff \xi \bigg) c_z \cdot \Delta c \\
+    & = \frac{1}{h} \int_\Omega \bigg ( \int_{-h}^z \Delta \nabla_H \cdot v \diff \xi \bigg) \cdot \Delta c - \int_\Omega  (\Delta \nabla_H \cdot v) c \cdot \Delta c - \int_\Omega \bigg ( \int_{-h}^z \Delta \nabla_H \cdot v \diff \xi \bigg) c \cdot \Delta c_z \\
+    & \leq C \int_\Omega \bigg ( \int_{-h}^0 \abs{\Delta \nabla_H \cdot v} \diff \xi \bigg) \abs{\Delta c} \\
+    & + \norm{c}_{L^\infty} \int_\Omega  \abs{\Delta \nabla_H \cdot v} \abs{\Delta c} + \norm{c}_{L^\infty} \int_\Omega \bigg ( \int_{-h}^z \abs{ \Delta \nabla_H \cdot v} \diff \xi \bigg) \abs{\Delta c_z} \\
+    & \leq C \int_M \bigg ( \int_{-h}^0 \abs{\Delta \nabla_H \cdot v} \diff \xi \bigg) \bigg ( \int_{-h}^0 \abs{\Delta c} \bigg ) \\
+    & + \norm{c}_{L^\infty}   \norm{\Delta \nabla_H \cdot v}_2 \norm{\Delta c}_2 + \norm{c}_{L^\infty} \int_\Omega \bigg ( \int_{-h}^0 \abs{ \Delta \nabla_H \cdot v} \diff \xi \bigg) \abs{\Delta c_z} \\
+    & \leq C \int_M \bigg ( \int_{-h}^0 \abs{\Delta \nabla_H \cdot v}^2 \diff \xi \bigg)^{1/2}  \bigg ( \int_{-h}^0 \abs{\Delta c}^2 \bigg )^{1/2} \\
+    & + \norm{c}_{L^\infty} (\norm{\Delta \nabla_H \cdot v}_2^2 + \norm{\Delta c}_2^2) + \norm{c}_{L^\infty} \int_M \bigg ( \int_{-h}^0 \abs{ \Delta \nabla_H \cdot v} \diff \xi \bigg) \bigg ( \int_{-h}^0 \abs{\Delta c_z} \bigg) \\
+    & \leq C \bigg ( \int_M \bigg ( \int_{-h}^0 \abs{\Delta \nabla_H \cdot v}^2 \diff \xi \bigg) \bigg )^{1/2} \bigg ( \int_M \bigg ( \int_{-h}^0 \abs{\Delta c}^2 \bigg ) \bigg )^{1/2} \\
+    & + \norm{c}_{L^\infty} (\norm{v}_{H^3}^2 + \norm{\Delta c}_2^2) + \norm{c}_{L^\infty} \norm{v}_{H^3} \norm{\Delta c_z}_2 \\
+    & \leq C \norm{v}_{H^3} \norm{\Delta c}_2 + \norm{c}_{L^\infty} \norm{v}_{H^3}^2 + \norm{c}_{L^\infty} \norm{\Delta c}_2^2 + C(\zeta) \norm{c}_{L^\infty}^2 \norm{v}_{H^3}^2 + \zeta \norm{\Delta c_z}_2^2, \\
+  \end{split}
+\end{equation}
+
+where $ \zeta \norm{\Delta c_z}_2^2$ is merged into the left-hand side of (\ref{firstformboundc}). Secondly, point \textit{b)},
+
+\begin{equation}
+  \begin{split}
+    & \int_\Omega \bigg ( \int_{-h}^z \nabla \nabla_H \cdot v \diff \xi \bigg)  \nabla c_z \cdot \Delta c \\
+    & \leq C \int_\Omega \bigg ( \int_{-h}^0 \abs{\nabla \nabla_H \cdot v} \diff \xi \bigg)  \abs{\nabla c_z} \abs{\Delta c} \\
+    & \leq C \int_\Omega h \sup \abs{\nabla \nabla_H \cdot v} \abs{\nabla c_z} \abs{\Delta c} \leq C \norm{v}_{H^4} \norm{\Delta c}_2^2,
+  \end{split}
+\end{equation}
+
+and finally, point \textit{c)},
+
+\begin{equation}
+  \begin{split}
+    & \int_\Omega \bigg ( \int_{-h}^z \nabla_H \cdot v \diff \xi \bigg) \Delta c_z  \cdot \Delta c \leq \int_\Omega \bigg ( \int_{-h}^0 \abs{\nabla_H \cdot v} \diff \xi \bigg)  \abs{\Delta c_z} \abs{\Delta c}\\
+    & \leq C \int_\Omega h \sup{\abs{\nabla_H \cdot v}} \abs{\Delta c_z} \abs{\Delta c} \leq C \norm{v}_{H^3} (\zeta \norm{\Delta c_z}_2^2 + C(\zeta)\norm{\Delta c}_2^2 ),
+  \end{split}
+\end{equation}
+
+where the $\zeta \norm{v}_{H^3} \norm{\Delta c_z}_2^2$ term can be merged into the left-hand side of (\ref{firstformboundc}), as $d$ contains the direction $z,$ and $\norm{v}_{H^3}$ is finite.
+
+$\int_\Omega \Delta \bigg ( \bigg ( \int_{-h}^z \nabla_H \cdot v \diff \xi \bigg) \bigg ( \frac{\partial c}{\partial z}+ \frac{1}{h}\bigg) \bigg ) \cdot \Delta c$ is bounded by the right-hand sides of points \textit{a-c}.
+
+\end{enumerate}
+
+Merging the estimates \textit{i), ii), iii)/a), iii)/b), iii)/c)}, we arrive to
+
+\begin{equation}
+  \begin{split}
+    & \frac{1}{2} \frac{\diff}{\diff t} \norm{\Delta c}_2^2 + K \norm{\Delta \nabla_d c}_2^2 \\
+    & \leq  C (1 + \norm{v}_{H^3} + \norm{v}_{H^3}^2 + \norm{v}_{H^4} + \norm{c}_{L^\infty})\norm{\Delta c}_2^2 \\
+    & + \norm{\Delta s}_2^2 + \norm{c}_{L^\infty} \norm{v}_{H^3}^2 + \norm{c}_{L^\infty}^2 \norm{v}_{H^3}^2 + \norm{v}_{H^3}.
+  \end{split}
+\end{equation}
+
+In order to use the Gr\"onwall inequality, we apply the estimate
+
+$\norm{c}_\infty (t) \leq 1 + \norm{c_0}_\infty + \norm{s}_\infty t,$
+
+which can be verified analogously to (69) in the "Global Well-posedness of the 3D PEs With Partial Vertical Turbulence Mixing Heat Diffusion" article.
+
+Applying this, we have
+
+\begin{equation}
+  \begin{split}
+    & \int_0^T 1 + \norm{v}_{H^3} + \norm{v}_{H^3}^2 + \norm{v}_{H^4} + \norm{c}_{L^\infty} \diff t \\
+    & \leq C (T + T\norm{v}_{L^\infty_t H^3_x} + T \norm{v}_{L^\infty_t H^3_x}^2 + \int_0^T (1 + \norm{v}_{H^4}^2) \diff t  +  \int_0^T \norm{c}_{L^\infty} \diff t )\\
+    & \leq C (T + T\norm{v}_{L^\infty_t H^3_x} + T \norm{v}_{L^\infty_t H^3_x}^2 + \norm{v}_{L^2_t H^4_x}  +  \int_0^T t \diff t )\\
+    & \leq C (T + T\norm{v}_{L^\infty_t H^3_x} + T \norm{v}_{L^\infty_t H^3_x}^2 + \norm{v}_{L^2_t H^4_x}  +  T^2) : = G_1.
+  \end{split}
+\end{equation}
+
+\begin{equation}
+  \begin{split}
+    & \int_0^T \norm{\Delta s}_2^2 + \norm{c}_{L^\infty} \norm{v}_{H^3}^2 + \norm{c}_{L^\infty}^2 \norm{v}_{H^3}^2 + \norm{v}_{H^3} \diff t\\
+    & \leq C (\norm{s}_{L^2 H^2} + \norm{v}_{L^\infty_t H^3_x}^2 T^2 + \norm{v}_{L^\infty_t H^3_x}^2 T^3 + \norm{v}_{L^\infty_t H^3_x} T) := G_2.
+  \end{split}
+\end{equation}
+
+Finally we have
+
+$$\frac{1}{2} \frac{\diff}{\diff t} \norm{\Delta c}_2^2 + K \norm{\Delta \nabla_d c}_2^2 \leq C (\norm{c_0}_{H^2} + G_2) \exp{G_1}. $$
+
+\bigskip
+
+\textbf{$L^2 H^1$ estimate for $\partial_t c$}
+
+Analogous to the calculations on p52. We have
+
+$$ \partial_t c - \Delta_d c + v \nabla_H c - \bigg ( \int_{-h}^z \nabla_H \diff \xi \bigg ) \bigg ( \partial_z c + \frac{1}{h}\bigg) = s,$$
+
+and thus
+
+$$\int_0^t \norm{ \partial_t c}_{H^1}^2 \diff \tau \leq C \int_0^t \bigg ( \norm{\Delta_d c}_{H^1}^2 + \norm{v \nabla_H c}_{H^1}^2 + \norm{\bigg ( \int_{-h}^z \nabla_H \diff \xi \bigg ) \bigg ( \partial_z c + \frac{1}{h}\bigg)}_{H^1}^2 + \norm{s}_{H^1}^2 \bigg ) \diff \tau.$$
+
+This yields
+
+\begin{equation}
+  \begin{split}
+    & \int_0^t \norm{ \partial_t c}_{H^1}^2 \diff \tau \leq \\
+    & C \int_0^t \bigg ( \norm{\nabla_d c}_{H^2}^2 + \norm{v}_{W^{1,\infty}}^2 (\norm{\nabla_H c}_{H^1}^2 + 1) + \norm{s}_{H^2}^2 \bigg ) \diff \tau \\
+    & + C \int_0^t \norm{\bigg ( \int_{-h}^z \nabla_H v \diff \xi \bigg ) \bigg ( \partial_z c + \frac{1}{h}\bigg)}_{H^1}^2 \diff \tau.
+  \end{split}
+\end{equation}
+
+The first three terms are bounded, we estimate the fourth term by
+
+\begin{equation}
+  \begin{split}
+    & \norm{\bigg ( \int_{-h}^z \nabla_H v \diff \xi \bigg ) \bigg ( \partial_z c + \frac{1}{h}\bigg)}_{H^1}^2 \\
+    & \leq \norm{\bigg ( \nabla \int_{-h}^z \nabla_H v \diff \xi \bigg ) \bigg ( \partial_z c + \frac{1}{h}\bigg)}_{L_2}^2 + \norm{\bigg ( \int_{-h}^z \nabla_H v \diff \xi \bigg ) \nabla c_z }_{L^2}^2 \\
+    & \leq (\norm{\partial_z c}_{L^\infty}^2 +1) \norm{v}_{H^2}^2 + C \norm{v}_{W^{1, \infty}}^2 \norm{\nabla \partial_z c}_{L^2}^2.
+  \end{split}
+\end{equation}
+
+Eventually
+
+\begin{equation}
+  \begin{split}
+    & \int_0^t \norm{ \partial_t c}_{H^1}^2 \diff \tau \leq \\
+    & C \norm{\nabla_d c}_{L^2_t H^2_x} + \norm{v}_{L^\infty_t H^3_x}^2 t + \norm{v}_{L^\infty_t H^3_x}^2 \norm{c}_{L^2_t H^1_x} + \norm{s}_{L^2_t H^2_x}  \\
+    & + C \norm{v}_{L^\infty_t H^3_x}^2 \norm{\partial_z c}_{L^2_t H^2_x}  + C \norm{v}_{L^\infty_t H^3_x}^2 \norm{c}_{L^2_t H^2_x}.
+  \end{split}
+\end{equation}
+
 \end{proof}
 
 \nocite{*}
