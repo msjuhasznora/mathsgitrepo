@@ -87,6 +87,8 @@ We end up this section with some notations we will use through the paper.
 \item $< \cdot,\cdot>_{\Gamma} = $ the scalar product or duality on the boundary curve $\Gamma$ ($H^{-1/2}(\Gamma)$, $H^{1/2}(\Gamma)$),
 \item $\mathbf{u}_h$ = the horizontal velocity components $(u_1, u_2),$
 \item $b(\mathbf{u}_h)$ = $- \gamma (u_2 , u_1),$
+\item $\Delta_d = K_2 \partial_{22}^2 + K_3 \partial_{33}^2$
+\item $\nabla_d = (\partial_2, \partial_3) $ (d stands for directions in which we have diffusion)
 \item $L^p_t L^q_x$ is the abbreviated notation for $L^p (0, T; L^q(\Omega)).$
 
 \end{enumerate}
@@ -1241,7 +1243,7 @@ Combining the velocity convergence results (\ref{StrongConvVelocity1})-(\ref{Str
 
 \section{Existence of the strong solutions of the hydrostatic equations of the polluted atmosphere}
 
-The appendix is dedicated to showing the existence of the unique global strong solution $(\mathbf{u}_h, u_3, c)$ of the hydrostatic limit system (\ref{HNSC1})-(\ref{HNSC6}), (\ref{HNSC7-strong}) --- in other words we verify Theorem \ref{existenceconcentrationSTRONG}. The proof's first part strongly uses the existence result achieved in \cite{cao2014local}. In fact, in this article the authors focus on a very similar system including an incomplete Laplacian in the convection-diffusion equation. However, while they work with a temperature function $T,$ in our case the additional function to the velocity-pressure pair is the concentration $c.$ Even though there is a strong analogy between the equations describing the dynamics of concentration and temperature, yet the variant nature of how each of these functions are coupled with the velocity equations overall contributes to a very significant structural divergence. Specifically, the difference between the equations $$ \partial_3 p + T = 0$$ and $$ \partial_3 p = 0$$ turns out to be a cardinal one concerning global existence. The method of \cite{cao2014local} is easily applicable with minor changes to our system until reaching the verification of local existence; the transplantation of their global existence proof on the other hand becomes very problematic. The presence of $T$ in the hydrostatic equation makes certain cancellations possible in their case which eventually guarantee the ability to close estimates that otherwise would not lead to meaningful implications. Since our hydrostatic equation does not include $c,$ we will work out a set of rather independent estimates to show the continuability of the concentration function. Thus, the proof is built up by two main steps: firstly we verify the local existence of the limit solutions following the ideas of \cite{cao2014local}, while in the second part we show their global existence exploiting the already known (see (\ref{u_regularities_first}), (\ref{u_regularities_second})) regularities of the velocity functions: this means that we do not need to provide bounds simultaneously for the velocity and concentration functions, and in this part we can focus exclusively on estimating $c.$
+The appendix is dedicated to showing the existence of the unique global strong solution $(\mathbf{u}_h, u_3, c)$ of the hydrostatic limit system (\ref{HNSC1})-(\ref{HNSC6}), (\ref{HNSC7-strong}) --- in other words we verify Theorem \ref{existenceconcentrationSTRONG}. The proof's first part strongly uses the existence result achieved in \cite{cao2014local}: here the authors focus on a system that is very similar to ours, including an incomplete Laplacian in the convection-diffusion equation. However, while they work with a temperature function $T,$ in our case the additional function to the velocity-pressure pair is the concentration $c.$ Even though there is a strong analogy between the equations describing the dynamics of concentration and temperature, yet the variant nature of how each of these functions are coupled with the velocity equations overall contributes to a very significant structural divergence. Specifically, the difference between the equations $$ \partial_3 p + T = 0$$ and $$ \partial_3 p = 0$$ turns out to be a cardinal one concerning global existence. The method of \cite{cao2014local} is easily applicable with minor changes to our system until reaching the verification of local existence; the transplantation of their global existence proof on the other hand becomes very problematic. The presence of $T$ in the hydrostatic equation makes certain cancellations possible in their case which eventually guarantee the ability to close estimates that otherwise would not lead to meaningful implications. Since our hydrostatic equation does not include $c,$ we will work out a set of rather independent estimates to show the continuability of the concentration function. Thus, the proof is built up by two main steps. We first verify the local existence of the limit solutions following the ideas of \cite{cao2014local}, while in the second step we show their global existence exploiting the already known (see (\ref{u_regularities_first}), (\ref{u_regularities_second})) regularities of the velocity functions: this means that we do not need to provide bounds simultaneously for the velocity and concentration functions, and in this part we can focus exclusively on estimating $c.$
 
 \begin{proof}[Proof of Theorem \ref{existenceconcentrationSTRONG}]
 
@@ -1252,7 +1254,7 @@ Three-step boundary change from $(x,y)$- periodicity to a fully periodic domain 
 %%% LOCAL EXISTENCE %%%
 \textbf{Part 1: Local existence}
 
-As far as local existence is concerned, the proof given in sections 2 and 3 in \cite{cao2014local} can be easily customised to fit our system. The necessary modifications are small-scale and rather obvious, therefore we do not unfold the entire proof here, however we do outline the main ideas of the verification process for completeness.
+As far as local existence is concerned, the proof given in sections 2 and 3 in \cite{cao2014local} can be easily customised to fit our system. The necessary modifications are small-scale and rather obvious, therefore we do not unfold the entire proof here, however we do outline the main ideas of the verification process.
 
 Let us consider the following system:
 
@@ -1278,15 +1280,47 @@ where it is easy to see that by formally taking $T_1 = T_2 = T,$ we arrive to th
 
   \item We fix the definitions $T_1 = 0$ and $T_2 = c$ in (\ref{T_1_T_2_1}) - (\ref{T_1_T_2_4}).
   
-  \item We define a mollified version of this system where have a complete Laplacian thanks to the new small parameter $\mu$; specifically, the convection-diffusion equation takes the form
+  \item We apply a commonly used idea regarding the formal elimination of the vertical velocity by expressing it through the divergence-free condition: $u_3 = - \int_{-h}^z \nabla_h \cdot \mathbf{u}_h (x, y, \xi, t) \diff \xi.$ On the other hand, we define a mollified version of the convection-diffusion equation where now have a complete Laplacian thanks to the new small parameter $\mu$ (here we denote the mollifier with $\mu$ as $\epsilon$ in this article stands for the aspect ratio); specifically, the set of  equations takes the form
   
-  \begin{equation} 
-    \partial_t c+ \mathbf{u}_h \cdot \nabla_h c + u_3 \cdot \bigg (\partial_3 c + \frac{1}{h} \bigg ) - \frac{1}{R_3} \partial_{33} c - \mu \Delta_h c= 0.
+  \begin{equation}
+    \begin{split}
+    \partial_t \mathbf{u}_h + \Delta_\nu \mathbf{u}_h + & (\mathbf{u}_h \cdot \nabla_h) \mathbf{u}_h - \bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h (x, y, \xi, t) \diff \xi \bigg ) \partial_3 \mathbf{u}_h \\
+    & + f_0 k \times \mathbf{u}_h + \nabla_h p_s (x,y,t) = 0
+    \end{split}
   \end{equation}
   
-  \item Using the contractive mapping principle, we can prove that for for any fix positive $\mu$ value there exist strong solutions $\mathbf{u}_h^\mu$ and $c^\mu$ to the mollified system.
+  \begin{equation}
+    \nabla_h \cdot \bar{\mathbf{u}}_h = 0
+  \end{equation}
   
-  \item By means of a version the Aubin-Lions lemma we pass to the limit and derive the local existence of $\mathbf{u}_h, c$ as the strong limits of the sequences $\mathbf{u}_h^\mu, c^\mu.$
+  \begin{equation}
+    \begin{split}
+      \partial_t c+ \mathbf{u}_h \cdot \nabla_h c + \bigg ( - & \int_{-h}^z \nabla_h \cdot \mathbf{u}_h (x, y, \xi, t) \diff \xi \bigg ) \cdot \bigg (\partial_3 c + \frac{1}{h} \bigg ) \\
+      & - \Delta_{d} c - \mu \partial_{11} c = 0.
+    \end{split}
+  \end{equation}
+  
+  Here $\bar{\mathbf{u}}_h$ is the vertically averaged version of the function, i.e. $$\frac{1}{2h} \int_{-h}^h \mathbf{u}_h (x,y,z) \diff z,$$ and $p_s$ is the classical notation for a pressure function depending on only the horizontal variables. Fore more details of this standard reformulation process see for example \cite{cao2007global} or \cite{cao2014local}.
+  
+  \item Using the contractive mapping principle, we can prove that for any fix positive $\mu$ value there exist local strong solutions $\mathbf{u}_h^\mu$ and $c^\mu$ to the mollified system on $\Omega \times (0, t_\mu)$ such that
+  
+  \[ (\mathbf{u}_h^\mu, c^\mu) \in L^2 (0, t^\mu; H^3(\Omega)), \quad (\partial_t \mathbf{u}_h^\mu, \partial_t c^\mu) \in L^2 (0, t^\mu; H^1 (\Omega)), \]
+  
+  where $t^\mu$ depends only on $\Omega, \mu, $ the initial data, and the viscosity and diffusivity constants.
+  
+  \item We derive the existence of the unique local strong solution $\mathbf{u}_h, c$ of the limit system as the strong limit of the sequences $\mathbf{u}_h^\mu, c^\mu$ while the mollifier parameter $\mu$ tends to zero. In more detail, we establish uniform in $\mu$ estimates for $\mathbf{u}_h^\mu, c^\mu$ and we construct $\mu-$ independent lower bounds on the existence time $t_0$. These estimates combined with a version of the Aubin-Lions lemma yield
+  
+  \begin{equation}
+    (\mathbf{u}_h^{\mu_j}, c^{\mu_j}) \to (\mathbf{u}_h, c) \text{ in } C(0, t_0; H^1(\Omega)),
+  \end{equation}
+  
+  and
+  
+  \begin{equation}
+    \mathbf{u}_h^{\mu_j} \to \mathbf{u}_h \text{ in } L^2(0, t_0; H^2(\Omega)), \quad \nabla_d c^{\mu_j} \to \nabla_d c \text{ in } L^2(0, t_0; H^1(\Omega)).
+  \end{equation}
+  
+  The uniqueness follows from standard steps estimating the difference functions using the Gr\"onwall inequality.
 
 \end{enumerate}
 
