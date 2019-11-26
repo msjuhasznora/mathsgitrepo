@@ -1354,7 +1354,7 @@ This gives
   \end{split}
 \end{equation}
 
-In the following we estimate these terms one by one.
+In the following we construct an estimate for each term on the right-hand side.
 
 \begin{enumerate}
 
@@ -1364,19 +1364,11 @@ In the following we estimate these terms one by one.
     
   Note here that the $\norm{\Delta s}_2^2$ term on the right-hand is bounded because of (\ref{s_boundedness}).
   
-  \item Estimate for $\int_\Omega \Delta ( \mathbf{u}_h \cdot \nabla_h c) \cdot \Delta c.$
+  \item In order to estimate the second term $\int_\Omega \Delta ( \mathbf{u}_h \cdot \nabla_h c) \cdot \Delta c,$ we rewrite the integral $\int_\Omega \mathbf{u}_h \cdot \Delta \nabla_h c \Delta c$ using integration by parts, which yields
   
-\begin{equation}
-  \begin{split}
-    & \int_\Omega \Delta ( \mathbf{u}_h \cdot \nabla_h c) \cdot \Delta c \\
-    & = \int_\Omega (\Delta \mathbf{u}_h \cdot \nabla_h c + 2 \nabla \mathbf{u}_h \cdot \nabla \nabla_h c + \mathbf{u}_h \cdot \Delta \nabla_h c) \Delta c \\
-    & \leq C \int_\Omega \abs{\Delta \mathbf{u}_h} \abs{\nabla_h c} \abs{\Delta c} + C \int_\Omega \abs{\nabla \mathbf{u}_h} \abs{\nabla \nabla_h c} \abs{\Delta c} + \abs{C \int_\Omega \mathbf{u}_h \cdot \Delta \nabla_h c \Delta c}
-  \end{split}
-\end{equation}
+$$2 \int_\Omega \mathbf{u}_h \cdot \Delta \nabla_h c \Delta c = - \int_\Omega \nabla_h \mathbf{u}_h \cdot \Delta c \Delta c.$$
 
-Using $$\int_\Omega \mathbf{u}_h \cdot \Delta \nabla_h c \Delta c = - \int_\Omega \nabla_h \mathbf{u}_h \cdot \Delta c \Delta c - \int_\Omega \mathbf{u}_h \cdot \Delta c \nabla_h \Delta c,$$ and thus
-
-$$2 \int_\Omega \mathbf{u}_h \cdot \Delta \nabla_h c \Delta c = - \int_\Omega \nabla_h \mathbf{u}_h \cdot \Delta c \Delta c,$$ we have
+Applying the above identity we arrive to
 
 \begin{equation}
   \begin{split}
@@ -1386,13 +1378,15 @@ $$2 \int_\Omega \mathbf{u}_h \cdot \Delta \nabla_h c \Delta c = - \int_\Omega \n
   \end{split}
 \end{equation}
 
-using that $\sup \abs{\nabla \mathbf{u}_h}, \sup \abs{\Delta \mathbf{u}_h} \leq \abs{\Delta \mathbf{u}_h}_{H^2} \leq \norm{\mathbf{u}_h}_{H^4}.$
+using that $\norm{\Delta \mathbf{u}_h}_{L^\infty} \leq \norm{\Delta \mathbf{u}_h}_{H^2} \leq \norm{\mathbf{u}_h}_{H^4}.$
   
-  \item Estimate for $\int_\Omega \Delta \bigg ( \bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \bigg ( \frac{\partial c}{\partial z}+ \frac{1}{h}\bigg) \bigg ) \cdot \Delta c.$
+  \item The calculation of the bound for the integral
+  
+  $$\int_\Omega \Delta \bigg ( \bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \bigg ( \partial_3 c+ \frac{1}{h}\bigg) \bigg ) \cdot \Delta c$$
+  
+  can naturally be separated to three inequalities that will make up the final estimate for this term.
 
-We can construct a bound by using the following three estimates.
-
-Firstly, point \textit{a)},
+Firstly, using the H\"older and Young inequalities we have
 
 \begin{equation}
   \begin{split}
@@ -1411,7 +1405,9 @@ Firstly, point \textit{a)},
   \end{split}
 \end{equation}
 
-where $ \zeta \norm{\Delta c_z}_2^2$ is merged into the left-hand side of (\ref{firstformboundc}). Secondly, point \textit{b)},
+where $ \zeta \norm{\Delta c_z}_2^2$ is merged into the left-hand side of (\ref{firstformboundc}).
+
+For the second part we obtain
 
 \begin{equation}
   \begin{split}
@@ -1421,22 +1417,22 @@ where $ \zeta \norm{\Delta c_z}_2^2$ is merged into the left-hand side of (\ref{
   \end{split}
 \end{equation}
 
-and finally, point \textit{c)},
+while for the third we compute
 
 \begin{equation}
   \begin{split}
     & \int_\Omega \bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \Delta c_z  \cdot \Delta c \leq \int_\Omega \bigg ( \int_{-h}^0 \abs{\nabla_h \cdot \mathbf{u}_h} \diff \xi \bigg)  \abs{\Delta c_z} \abs{\Delta c}\\
-    & \leq C \int_\Omega h \sup{\abs{\nabla_h \cdot \mathbf{u}_h}} \abs{\Delta c_z} \abs{\Delta c} \leq C \norm{\mathbf{u}_h}_{H^3} (\zeta \norm{\Delta c_z}_2^2 + C(\zeta)\norm{\Delta c}_2^2 ),
+    & \leq C \int_\Omega h \sup{\abs{\nabla_h \cdot \mathbf{u}_h}} \abs{\Delta c_z} \abs{\Delta c} \leq C \norm{\mathbf{u}_h}_{H^3} (\zeta \norm{\Delta c_z}_2^2 + C(\zeta)\norm{\Delta c}_2^2 ).
   \end{split}
 \end{equation}
 
-where the $\zeta \norm{\mathbf{u}_h}_{H^3} \norm{\Delta c_z}_2^2$ term can be merged into the left-hand side of (\ref{firstformboundc}), as $d$ contains the direction $z,$ and $\norm{\mathbf{u}_h}_{H^3}$ is finite.
+Here the $\zeta \norm{\mathbf{u}_h}_{H^3} \norm{\Delta c_z}_2^2$ term can be merged into the left-hand side of (\ref{firstformboundc}), as $d$ contains the direction $z,$ and $\norm{\mathbf{u}_h}_{H^3}$ is finite.
 
-$\int_\Omega \Delta \bigg ( \bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \bigg ( \frac{\partial c}{\partial z}+ \frac{1}{h}\bigg) \bigg ) \cdot \Delta c$ is bounded by the right-hand sides of points \textit{a-c}.
+It is easy to see that summing the three bounds we have constructed here yield an overall estimate for the integral term in iii).
 
 \end{enumerate}
 
-Merging the estimates \textit{i), ii), iii)/a), iii)/b), iii)/c)}, we arrive to
+Now, merging the results obtained under sections \textit{i), ii)} and \textit{iii)} we eventually arrive to
 
 \begin{equation}
   \begin{split}
@@ -1446,57 +1442,64 @@ Merging the estimates \textit{i), ii), iii)/a), iii)/b), iii)/c)}, we arrive to
   \end{split}
 \end{equation}
 
-In order to use the Gr\"onwall inequality, we apply the estimate
+Before we can apply the Gr\"onwall inequality, we bound the $\norm{c}_{L^\infty} (t)$ term by an idea detailed in \cite{cao2012global} (see their estimate (69), the verification process in our case is analogous), which allows us to use
 
-$\norm{c}_\infty (t) \leq 1 + \norm{c_0}_\infty + \norm{s}_\infty t,$
+$$\norm{c}_{L^\infty} (t) \leq 1 + \norm{c_0}_{L^\infty} + \norm{s}_{L^\infty} t.$$
 
-which can be verified analogously to (69) in the "Global Well-posedness of the 3D PEs With Partial Vertical Turbulence Mixing Heat Diffusion" article.
+Now we are ready to utilise the Gr\"onwall inequality, where the multiplicative term can be bounded by
 
-Applying this, we have
-
-\begin{equation}
+\begin{equation} \label{gronwall_mult}
   \begin{split}
     & \int_0^T 1 + \norm{\mathbf{u}_h}_{H^3} + \norm{\mathbf{u}_h}_{H^3}^2 + \norm{\mathbf{u}_h}_{H^4} + \norm{c}_{L^\infty} \diff t \\
     & \leq C (T + T\norm{\mathbf{u}_h}_{L^\infty_t H^3_x} + T \norm{\mathbf{u}_h}_{L^\infty_t H^3_x}^2 + \int_0^T (1 + \norm{\mathbf{u}_h}_{H^4}^2) \diff t  +  \int_0^T \norm{c}_{L^\infty} \diff t )\\
     & \leq C (T + T\norm{\mathbf{u}_h}_{L^\infty_t H^3_x} + T \norm{\mathbf{u}_h}_{L^\infty_t H^3_x}^2 + \norm{\mathbf{u}_h}_{L^2_t H^4_x}  +  \int_0^T t \diff t )\\
-    & \leq C (T + T\norm{\mathbf{u}_h}_{L^\infty_t H^3_x} + T \norm{\mathbf{u}_h}_{L^\infty_t H^3_x}^2 + \norm{\mathbf{u}_h}_{L^2_t H^4_x}  +  T^2) : = G_1.
+    & \leq C (T + T\norm{\mathbf{u}_h}_{L^\infty_t H^3_x} + T \norm{\mathbf{u}_h}_{L^\infty_t H^3_x}^2 + \norm{\mathbf{u}_h}_{L^2_t H^4_x}  +  T^2) : = G_1,
   \end{split}
 \end{equation}
 
-\begin{equation}
+while for the additive term we calculate
+
+\begin{equation} \label{gronwall_add}
   \begin{split}
     & \int_0^T \norm{\Delta s}_2^2 + \norm{c}_{L^\infty} \norm{\mathbf{u}_h}_{H^3}^2 + \norm{c}_{L^\infty}^2 \norm{\mathbf{u}_h}_{H^3}^2 + \norm{\mathbf{u}_h}_{H^3} \diff t\\
     & \leq C (\norm{s}_{L^2 H^2} + \norm{\mathbf{u}_h}_{L^\infty_t H^3_x}^2 T^2 + \norm{\mathbf{u}_h}_{L^\infty_t H^3_x}^2 T^3 + \norm{\mathbf{u}_h}_{L^\infty_t H^3_x} T) := G_2.
   \end{split}
 \end{equation}
 
-Finally we have
+Finally, from (\ref{gronwall_mult}) and (\ref{gronwall_add}) we conclude
 
-$$\frac{1}{2} \frac{\diff}{\diff t} \norm{\Delta c}_2^2 + K \norm{\Delta \nabla_d c}_2^2 \leq C (\norm{c_0}_{H^2} + G_2) \exp{G_1}. $$
+\begin{equation} \label{finalgronwallforc_part1}
+\frac{1}{2} \frac{\diff}{\diff t} \norm{\Delta c}_2^2 + K \norm{\Delta \nabla_d c}_2^2 \leq C (\norm{c_0}_{H^2} + G_2) \exp{G_1}.
+\end{equation}
 
 \bigskip
 
-\textbf{$L^2 H^1$ estimate for $\partial_t c$}
+\textbf{Estimate for $\norm{ \partial_t c}_{H^1}^2$}
 
-Analogous to the calculations on p52. We have
+From
 
-$$ \partial_t c - \Delta_d c + \mathbf{u}_h \nabla_h c - \bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg ) \bigg ( \partial_3 c + \frac{1}{h}\bigg) = s,$$
+$$ \partial_t c - \Delta_d c + \mathbf{u}_h \nabla_h c - \bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg ) \bigg ( \partial_3 c + \frac{1}{h}\bigg) = s$$
 
-and thus
+we directly have
 
-$$\int_0^t \norm{ \partial_t c}_{H^1}^2 \diff \tau \leq C \int_0^t \bigg ( \norm{\Delta_d c}_{H^1}^2 + \norm{\mathbf{u}_h \nabla_h c}_{H^1}^2 + \norm{\bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg ) \bigg ( \partial_3 c + \frac{1}{h}\bigg)}_{H^1}^2 + \norm{s}_{H^1}^2 \bigg ) \diff \tau.$$
+\begin{equation}
+  \begin{split}
+    & \int_0^t \norm{ \partial_t c}_{H^1}^2 \diff \tau \leq C \int_0^t \bigg ( \norm{\Delta_d c}_{H^1}^2 + \norm{\mathbf{u}_h \nabla_h c}_{H^1}^2 \\
+    & + \norm{\bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg ) \bigg ( \partial_3 c + \frac{1}{h}\bigg)}_{H^1}^2 + \norm{s}_{H^1}^2 \bigg ) \diff \tau.
+  \end{split}
+\end{equation}
 
-This yields
+This yields the bound
 
 \begin{equation}
   \begin{split}
     & \int_0^t \norm{ \partial_t c}_{H^1}^2 \diff \tau \leq \\
     & C \int_0^t \bigg ( \norm{\nabla_d c}_{H^2}^2 + \norm{\mathbf{u}_h}_{W^{1,\infty}}^2 (\norm{\nabla_h c}_{H^1}^2 + 1) + \norm{s}_{H^2}^2 \bigg ) \diff \tau \\
-    & + C \int_0^t \norm{\bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg ) \bigg ( \partial_3 c + \frac{1}{h}\bigg)}_{H^1}^2 \diff \tau.
+    & + C \int_0^t \norm{\bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg ) \bigg ( \partial_3 c + \frac{1}{h}\bigg)}_{H^1}^2 \diff \tau,
   \end{split}
 \end{equation}
 
-The first three terms are bounded, we estimate the fourth term by
+where the first three terms are immediately bounded. We estimate the fourth term by
 
 \begin{equation}
   \begin{split}
@@ -1506,15 +1509,17 @@ The first three terms are bounded, we estimate the fourth term by
   \end{split}
 \end{equation}
 
-Eventually
+We eventually arrive to
 
-\begin{equation}
+\begin{equation} \label{finalgronwallforc_part2}
   \begin{split}
     & \int_0^t \norm{ \partial_t c}_{H^1}^2 \diff \tau \leq \\
     & C \norm{\nabla_d c}_{L^2_t H^2_x} + \norm{\mathbf{u}_h}_{L^\infty_t H^3_x}^2 t + \norm{\mathbf{u}_h}_{L^\infty_t H^3_x}^2 \norm{c}_{L^2_t H^1_x} + \norm{s}_{L^2_t H^2_x}  \\
     & + C \norm{\mathbf{u}_h}_{L^\infty_t H^3_x}^2 \norm{\partial_3 c}_{L^2_t H^2_x}  + C \norm{\mathbf{u}_h}_{L^\infty_t H^3_x}^2 \norm{c}_{L^2_t H^2_x}.
   \end{split}
 \end{equation}
+
+Combining the estimates (\ref{finalgronwallforc_part1}) and (\ref{finalgronwallforc_part2}) shows the overall continuability of the concentration function beyond any given finite $T$ time: considering the already well-known continuability of the velocity functions this means that our proof is concluded.
 
 \end{proof}
 
