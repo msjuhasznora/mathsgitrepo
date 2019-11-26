@@ -891,12 +891,12 @@ Let $\delta_\epsilon$ be the approximation of the $\delta$ distribution given be
 
 and let $\varphi$ be a $C^\infty_0$ smooth function. We define the anisotropic and hydrostatic source terms respectively as the following convolutions:
 
-$$ s^\epsilon = \delta^\epsilon \star \varphi, \quad s = \delta \star \varphi.$$
+$$ s^\epsilon = \delta^\epsilon \ast \varphi, \quad s = \delta \ast \varphi.$$
 
 Because of its importance later, we point out here that thanks to the convolution's smoothing effect, we have
 
 \begin{equation} \label{s_boundedness}
-  \Delta s = \Delta (\delta \star \varphi) = (\delta \star \Delta \varphi) \in C_0^\infty,
+  \Delta s = \Delta (\delta \ast \varphi) = (\delta \ast \Delta \varphi) \in C_0^\infty,
 \end{equation}
 
 thus $\norm{\Delta s}_2^2$ is bounded.
@@ -1154,10 +1154,10 @@ For all $i = 1,2,3$ values we have
 
 \begin{equation}
   \begin{split}
-    & - \int_\Omega S^\epsilon \partial_{ii} C^\epsilon = - \int_\Omega (s^\epsilon - s) \partial_{ii} C^\epsilon  = - \int_\Omega \big ( (\delta^\epsilon - \delta ) \star \varphi \big ) \cdot \partial_{ii} C^\epsilon \\
-    & = \int_\Omega \partial_i \big ( (\delta^\epsilon - \delta ) \star \varphi \big ) \cdot \partial_i C^\epsilon \diff x \\
-    & \leq C \int_\Omega \bigg( \partial_i \big ( (\delta^\epsilon - \delta ) \star \varphi \big ) \bigg ) ^2 \diff x + C \int_\Omega (\partial_i C^\epsilon)^2 \diff x \\
-    & \leq C \int_\Omega \bigg ( (\delta^\epsilon - \delta ) \star \partial_i \varphi \bigg ) ^2 \diff x + C \norm{\nabla C^\epsilon}_2^2.
+    & - \int_\Omega S^\epsilon \partial_{ii} C^\epsilon = - \int_\Omega (s^\epsilon - s) \partial_{ii} C^\epsilon  = - \int_\Omega \big ( (\delta^\epsilon - \delta ) \ast \varphi \big ) \cdot \partial_{ii} C^\epsilon \\
+    & = \int_\Omega \partial_i \big ( (\delta^\epsilon - \delta ) \ast \varphi \big ) \cdot \partial_i C^\epsilon \diff x \\
+    & \leq C \int_\Omega \bigg( \partial_i \big ( (\delta^\epsilon - \delta ) \ast \varphi \big ) \bigg ) ^2 \diff x + C \int_\Omega (\partial_i C^\epsilon)^2 \diff x \\
+    & \leq C \int_\Omega \bigg ( (\delta^\epsilon - \delta ) \ast \partial_i \varphi \bigg ) ^2 \diff x + C \norm{\nabla C^\epsilon}_2^2.
   \end{split}
 \end{equation}
 
@@ -1165,7 +1165,7 @@ We still need to refine the estimate of the first term on the right-hand side. L
 
 \begin{equation}
   \begin{split}
-    & \int_\Omega \bigg ( (\delta^\epsilon - \delta ) \star \partial_i \varphi \bigg ) ^2 \diff x \\
+    & \int_\Omega \bigg ( (\delta^\epsilon - \delta ) \ast \partial_i \varphi \bigg ) ^2 \diff x \\
     & = \int_\Omega \bigg ( \int_\Omega (\delta^\epsilon - \delta )(x-y) \Phi (y) \diff y \bigg )^2 \diff x \\
     & = \int_\Omega \bigg ( \int_\Omega \delta^\epsilon(x-y) \Phi (y) \diff y - \Phi (x) \bigg )^2 \diff x \\
     & = \int_\Omega \bigg ( \int_{\mathcal{B}(x, \epsilon)} \delta^\epsilon(x-y) \Phi (y) \diff y - 1 \cdot \Phi (x) \bigg )^2 \diff x \\
