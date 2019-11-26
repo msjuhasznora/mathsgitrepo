@@ -859,7 +859,7 @@ With this Theorem $\ref{maintheoremWEAK}$ has been proved.
 %%% STRONG SOLUTIONS %%%
 \section{Strong solutions}
 
-In this section we verify that the previously shown connection between the anisotropic and hydrostatic equations has an analogous version that holds for strong solutions. In order to describe this result we firstly need to give exact definition to the domain and set the boundary conditions. Here we follow the main ideas of \cite{cao2014local} and create a domain $\Omega$ with periodic boundary in three steps as described below. The concept detailed below is a general approach, and we apply it both in the hydrostatic and anisotropic cases.
+In this section we verify that the previously shown connection between the anisotropic and hydrostatic equations has an analogous version that holds for strong solutions. In order to describe this result we firstly need to give exact definition to the domain and set the boundary conditions. Here we follow the main ideas of \cite{cao2014local} and create a periodic domain $\Omega$ in three steps as described below. The concept detailed below is a general approach, and we apply it both in the hydrostatic and anisotropic cases.
 
 Let's consider $\Omega_0 = M \times (-h, 0)$ with $M = (0,1) \times (0,1).$ We define the boundary conditions
 
@@ -910,6 +910,8 @@ and
 boundary conditions, respectively.
 
 It is easy to check that the restriction of a solution to (\ref{ANSC1})-(\ref{ANSC4}), (\ref{ANSC6}), (\ref{ANSC5_strong_cshift}), (\ref{ANSC7-strong}) from $\Omega$ to $\Omega_0$ is a solution to the original system, and the analogous statement holds for the hydrostatic equations, hence here we exclusively focus on the study of these new versions of the two main systems.
+
+We highlight here that the steps detailed above constructing a fully periodic domain is indeed necessary since, generally speaking, it is physically meaningful to consider the Earth's atmosphere as a domain that is periodic in the horizontal dimensions, however it is highly unnatural to immediately assume vertical periodicity as well. This strategy of adjusting the boundary value of the concentration function and extending the functions according to certain symmetries shows that the choice of a fully periodic domain can actually be a well-grounded choice for the atmosphere, given that the required symmetries hold.
 
 \begin{remark}
 \normalfont The periodic boundary conditions can be substituted by boundary conditions of type $\nabla^k u = 0, \nabla^k c = 0$ defined on a non-periodic, standard domain. Applying these alternative boundary conditions it is possible to switch back to a classical domain and still benefit from the disappearing boundary integrals.
