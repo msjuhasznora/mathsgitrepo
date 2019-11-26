@@ -859,19 +859,57 @@ With this Theorem $\ref{maintheoremWEAK}$ has been proved.
 %%% STRONG SOLUTIONS %%%
 \section{Strong solutions}
 
-In this section we verify that the previously shown connection between the anisotropic and hydrostatic equations has an analogous version that holds for strong solutions. In order to describe this result we firstly need to set the domain's boundary conditions. Here we follow the approach of \cite{cao2014local} and \cite{li2019primitive} and complement the modelling equations with a periodic boundary. Specifically, we apply the
+In this section we verify that the previously shown connection between the anisotropic and hydrostatic equations has an analogous version that holds for strong solutions. In order to describe this result we firstly need to give exact definition to the domain and set the boundary conditions. Here we follow the main ideas of \cite{cao2014local} and create a domain $\Omega$ with periodic boundary in three steps as described below. The concept detailed below is a general approach, and we apply it both in the hydrostatic and anisotropic cases.
+
+Let's consider $\Omega_0 = M \times (-h, 0)$ with $M = (0,1) \times (0,1).$ We define the boundary conditions
+
+\begin{equation}
+  \begin{split}
+    & \mathbf{u}_h, u_3 \text{ and } c \text{ are periodic in } x \text{ and} y, \\
+    & (\partial_3 \mathbf{u}_h, u_3) \vline _{z = -h, 0} = 0, \\
+    & c \vline_{z = -h} = 1, c \vline_{z = 0} = 0.
+  \end{split}
+\end{equation}
+
+Defining a new concentration function $c^*$ by setting $c^* = c + \frac{1}{h},$ we obtain a function that is zero on both the upper and lower boundary of the domain. This enables us to consider the standard extensions (see also \cite{li2019primitive}) of the horizontal velocity, vertical velocity, pressure and concentration functions to the new $\Omega = M \times (-h, h)$ domain by requiring these functions to be even, odd, even and odd in $z$, respectively, and set the domain to be periodic in all three dimensions.
+
+Applying these ideas to the original concentration dynamics equations (\ref{ANSC5}) and (\ref{HNSC5}), we obtain that
+
+\begin{equation} \label{HNSC5_strong_cshift}
+  \begin{split}
+    \partial_t c + \mathbf{u}_h \cdot \nabla_h c + u_3 \bigg ( \partial_3 c - \frac{1}{h} \bigg ) = \Delta_d c + s \text{ in } \Omega \times (0,T)
+  \end{split}
+\end{equation}
+
+is the new form of the hydrostatic concentration equation, while the governing equation for the anisotropic case becomes
+    
+\begin{equation} \label{ANSC5_strong_cshift}
+    \partial_t c^\epsilon + \mathbf{u}_h^\epsilon \cdot \nabla_h c^\epsilon + u_3^\epsilon \bigg ( \partial_3 c^\epsilon - \frac{1}{h} \bigg )= \epsilon K_1 \partial_{11} ^ 2 c^\epsilon + \Delta_d c^\epsilon + s^\epsilon \text{ in } \Omega \times (0,T),
+\end{equation}
+    
+where after using $c = c^* - \frac{1}{h}, c^\epsilon = {c^\epsilon}^* - \frac{1}{h} $ we returned to the original $c$ and $c^\epsilon$ notations for simplicity.
+
+In terms of boundary conditions now the (\ref{ANSC1})-(\ref{ANSC4}), (\ref{ANSC6}), (\ref{ANSC5_strong_cshift}) anisotropic system the and (\ref{HNSC1})-(\ref{HNSC4}), (\ref{HNSC6}), (\ref{HNSC5_strong_cshift}) hydrostatic system are combined with the
 
 \begin{equation} \label{ANSC7-strong}
-  \mathbf{u}^\epsilon, p^\epsilon \text{ and } c^\epsilon \text{ are periodic in } x,y,z,
+  \begin{split}
+    & \mathbf{u}^\epsilon, p^\epsilon \text{ and } c^\epsilon \text{ are periodic in } x,y,z, \\
+    & \mathbf{u}_h^\epsilon \text{ and } p^\epsilon \text{ are even in z}, \text{ and } u_3^\epsilon \text{ and } c^\epsilon \text{ are odd in z}
+  \end{split}
 \end{equation}
 
 and
 
 \begin{equation} \label{HNSC7-strong}
-  \mathbf{u}, p \text{ and } c \text{ are periodic in } x,y,z
+  \begin{split}
+    & \mathbf{u}, p \text{ and } c \text{ are periodic in } x,y,z \\
+    & \mathbf{u}_h \text{ and } p \text{ are even in z}, \text{ and } u_3 \text{ and } c \text{ are odd in z}
+  \end{split}
 \end{equation}
 
-boundary conditions to the (\ref{ANSC1})-(\ref{ANSC6}) anisotropic and (\ref{HNSC1})-(\ref{HNSC6}) hydrostatic systems, respectively.
+boundary conditions, respectively.
+
+It is easy to check that the restriction of a solution to (\ref{ANSC1})-(\ref{ANSC4}), (\ref{ANSC6}), (\ref{ANSC5_strong_cshift}), (\ref{ANSC7-strong}) from $\Omega$ to $\Omega_0$ is a solution to the original system, and the analogous statement holds for the hydrostatic equations, hence here we exclusively focus on the study of these new versions of the two main systems.
 
 \begin{remark}
 \normalfont The periodic boundary conditions can be substituted by boundary conditions of type $\nabla^k u = 0, \nabla^k c = 0$ defined on a non-periodic, standard domain. Applying these alternative boundary conditions it is possible to switch back to a classical domain and still benefit from the disappearing boundary integrals.
@@ -1245,44 +1283,22 @@ Combining the velocity convergence results (\ref{StrongConvVelocity1})-(\ref{Str
 
 \section{Existence of the strong solutions of the hydrostatic equations of the polluted atmosphere}
 
-The appendix is dedicated to showing the existence of the unique global strong solution $(\mathbf{u}_h, u_3, c)$ of the hydrostatic limit system (\ref{HNSC1})-(\ref{HNSC6}), (\ref{HNSC7-strong}) --- in other words we verify Theorem \ref{existenceconcentrationSTRONG}. The proof's first part strongly uses the existence result achieved in \cite{cao2014local}: here the authors focus on a system that is very similar to ours, including an incomplete Laplacian in the convection-diffusion equation. However, while they work with a temperature function $T,$ in our case the additional function to the velocity-pressure pair is the concentration $c.$ Even though there is a strong analogy between the equations describing the dynamics of concentration and temperature, yet the variant nature of how each of these functions are coupled with the velocity equations overall contributes to a very significant structural divergence. Specifically, the difference between the equations $$ \partial_3 p + T = 0$$ and $$ \partial_3 p = 0$$ turns out to be a cardinal one concerning global existence. The method of \cite{cao2014local} is easily applicable with minor changes to our system until reaching the verification of local existence; the transplantation of their global existence proof on the other hand becomes very problematic. The presence of $T$ in the hydrostatic equation makes certain cancellations possible in their case which eventually guarantee the ability to close estimates that otherwise would not lead to meaningful implications. Since our hydrostatic equation does not include $c,$ we will work out a set of rather independent estimates to show the continuability of the concentration function. Thus, the proof is built up by two main steps. We first verify the local existence of the limit solutions following the ideas of \cite{cao2014local}, while in the second step we show their global existence exploiting the already known (see (\ref{u_regularities_first}), (\ref{u_regularities_second})) regularities of the velocity functions: this means that we do not need to provide bounds simultaneously for the velocity and concentration functions, and in this part we can focus exclusively on estimating $c.$
+The appendix is dedicated to showing the existence of the unique global strong solution $(\mathbf{u}_h, u_3, c)$ of the hydrostatic limit system (\ref{HNSC1})-(\ref{HNSC6}), (\ref{HNSC7-strong}) --- in other words we verify Theorem \ref{existenceconcentrationSTRONG}. The proof's first part strongly uses the existence result achieved in \cite{cao2014local}: here the authors focus on a system that is very similar to ours, including an incomplete Laplacian in the convection-diffusion equation. However, while they work with a temperature function $T,$ in our case the additional function to the velocity-pressure pair is the concentration $c.$ Even though there is a strong analogy between the equations describing the dynamics of concentration and temperature, yet the variant nature of how each of these functions are coupled with the velocity equations overall contributes to a very significant structural divergence. Specifically, the difference between the equations $$ \partial_3 p + T = 0$$ and $$ \partial_3 p = 0$$ turns out to be a cardinal one concerning global existence. The method of \cite{cao2014local} is easily applicable with minor changes to our system until reaching the verification of local existence; the transplantation of their global existence proof on the other hand becomes very problematic. The presence of $T$ in the hydrostatic equation makes certain cancellations possible in their case which eventually guarantee the ability to close estimates that otherwise would not lead to meaningful implications. Since our hydrostatic equation does not include $c,$ we will work out a set of rather independent estimates to show the continuability of the concentration function.
 
 \begin{proof}[Proof of Theorem \ref{existenceconcentrationSTRONG}]
 
-Three-step boundary change from $(x,y)$- periodicity to a fully periodic domain and the $c + \frac{z}{h}$ change.
+The proof is built up by two main steps. We first verify the local existence of the limit solutions following the ideas of \cite{cao2014local}, while in the second step we show their global existence exploiting the already known (see (\ref{u_regularities_first}), (\ref{u_regularities_second})) regularities of the velocity functions: this means that we do not need to provide bounds simultaneously for the velocity and concentration functions, and in this part we can focus exclusively on estimating $c.$
 
 \bigskip
 
 %%% LOCAL EXISTENCE %%%
 \textbf{Part 1: Local existence}
 
-As far as local existence is concerned, the proof given in sections 2 and 3 in \cite{cao2014local} can be easily customised to fit our system. The necessary modifications are small-scale and rather obvious, therefore we do not unfold the entire proof here, however we do outline the main ideas of the verification process.
-
-Let us consider the following system:
-
-  \begin{equation} \label{T_1_T_2_1}   
-    \partial_t \mathbf{u}_h + \mathbf{u}_h \cdot \nabla \mathbf{u}_h + u_3 \partial_3 \mathbf{u}_h + \partial_h p + L_1 \mathbf{u}_h + f_0 k \times \mathbf{u}_h= 0
-  \end{equation}
-    
-  \begin{equation} \label{T_1_T_2_2}  
-    \partial_3 p + T_1 = 0
-  \end{equation}
-    
-  \begin{equation} \label{T_1_T_2_3}  
-    \nabla \cdot \mathbf{u}_h + \partial_3 u_3 = 0
-  \end{equation}
-    
-  \begin{equation} \label{T_1_T_2_4} 
-    \partial_t T_2+ \mathbf{u}_h \cdot \nabla_h T_2 + u_3 \cdot \bigg (\partial_3 T_2 + \frac{1}{h} \bigg ) + L_2 T_2 = 0,
-  \end{equation}
-     
-where it is easy to see that by formally taking $T_1 = T_2 = T,$ we arrive to the equations considered in \cite{cao2014local}, on the other hand, the choice $T_1 = 0, T_2 = c$ provides our system, (\ref{HNSC1})-(\ref{HNSC5}). In order to transplant the proof to the case of the polluted atmosphere, we need to check the robustness of its structure with respect to the definition of $T_1$ and $T_2.$ The main steps are the following:
+As far as local existence is concerned, the proof given in sections 2 and 3 in \cite{cao2014local} can be easily customised to fit our system. In order to transplant the proof to the case of the polluted atmosphere, we need to check the robustness of its structure with respect to the given form of the hydrostatic equation. The necessary modifications are small-scale and rather obvious, therefore we do not unfold the entire proof here, however we do outline the main steps of the verification process:
 
 \begin{enumerate}
-
-  \item We fix the definitions $T_1 = 0$ and $T_2 = c$ in (\ref{T_1_T_2_1}) - (\ref{T_1_T_2_4}).
   
-  \item We apply a commonly used idea regarding the formal elimination of the vertical velocity by expressing it through the divergence-free condition: $u_3 = - \int_{-h}^z \nabla_h \cdot \mathbf{u}_h (x, y, \xi, t) \diff \xi.$ On the other hand, we define a mollified version of the convection-diffusion equation where now have a complete Laplacian thanks to the new small parameter $\mu$ (here we denote the mollifier with $\mu$ as $\epsilon$ in this article stands for the aspect ratio); specifically, the set of  equations takes the form
+  \item We apply a commonly used idea regarding the formal elimination of the vertical velocity by expressing it through the divergence-free condition: $u_3 = - \int_{-h}^z \nabla_h \cdot \mathbf{u}_h (x, y, \xi, t) \diff \xi.$ On the other hand, we define a mollified version of the convection-diffusion equation where now have a complete Laplacian thanks to the new small parameter $\mu$ (here we denote the mollifier with $\mu$ since $\epsilon$ in this article stands for the aspect ratio); specifically, the set of  equations takes the form
   
   \begin{equation}
     \begin{split}
@@ -1297,7 +1313,7 @@ where it is easy to see that by formally taking $T_1 = T_2 = T,$ we arrive to th
   
   \begin{equation}
     \begin{split}
-      \partial_t c+ \mathbf{u}_h \cdot \nabla_h c + \bigg ( - & \int_{-h}^z \nabla_h \cdot \mathbf{u}_h (x, y, \xi, t) \diff \xi \bigg ) \cdot \bigg (\partial_3 c + \frac{1}{h} \bigg ) \\
+      \partial_t c+ \mathbf{u}_h \cdot \nabla_h c + \bigg ( - & \int_{-h}^z \nabla_h \cdot \mathbf{u}_h (x, y, \xi, t) \diff \xi \bigg ) \cdot \bigg (\partial_3 c - \frac{1}{h} \bigg ) \\
       & - \Delta_{d} c - \mu \partial_{11} c = 0.
     \end{split}
   \end{equation}
@@ -1340,7 +1356,7 @@ As we mentioned in the introductory part of this proof, here we only need to pro
 Let's take an arbitrary positive finite $T$ time, multiply the convection-diffusion equation
 
 \begin{equation}   
-    \partial_t c + \mathbf{u}_h \cdot \nabla_h c - \bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \bigg ( \partial_3 c+ \frac{1}{h}\bigg) - \Delta_d c = s
+    \partial_t c + \mathbf{u}_h \cdot \nabla_h c - \bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \bigg ( \partial_3 c - \frac{1}{h} \bigg) - \Delta_d c = s
 \end{equation}
 
 by $\Delta^2 c$ and integrate on $\Omega.$
@@ -1350,7 +1366,7 @@ This gives
 \begin{equation} \label{firstformboundc}
   \begin{split}
     & \frac{1}{2} \frac{\diff}{\diff t} \norm{\Delta c}_2^2 + K \norm{\Delta \nabla_d c}_2^2 \\
-    & \leq \int_\Omega \Delta s \Delta c - \Delta ( \mathbf{u}_h \cdot \nabla_h c) \cdot \Delta c + \Delta \bigg ( \bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \bigg ( \partial_3 c + \frac{1}{h}\bigg) \bigg ) \cdot \Delta c.
+    & \leq \int_\Omega \Delta s \Delta c - \Delta ( \mathbf{u}_h \cdot \nabla_h c) \cdot \Delta c + \Delta \bigg ( \bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \bigg ( \partial_3 c - \frac{1}{h} \bigg) \bigg ) \cdot \Delta c.
   \end{split}
 \end{equation}
 
@@ -1382,7 +1398,7 @@ using that $\norm{\Delta \mathbf{u}_h}_{L^\infty} \leq \norm{\Delta \mathbf{u}_h
   
   \item The calculation of the bound for the integral
   
-  $$\int_\Omega \Delta \bigg ( \bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \bigg ( \partial_3 c+ \frac{1}{h}\bigg) \bigg ) \cdot \Delta c$$
+  $$\int_\Omega \Delta \bigg ( \bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \bigg ( \partial_3 c - \frac{1}{h}\bigg) \bigg ) \cdot \Delta c$$
   
   can naturally be separated to three inequalities that will make up the final estimate for this term.
 
@@ -1390,30 +1406,30 @@ Firstly, using the H\"older and Young inequalities we have
 
 \begin{equation}
   \begin{split}
-    &  \int_\Omega \bigg ( \int_{-h}^z \Delta \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \bigg ( \frac{\partial c}{\partial z} + \frac{1}{h}\bigg)  \cdot \Delta c \\
-    & = \frac{1}{h} \int_\Omega \bigg ( \int_{-h}^z \Delta \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \cdot \Delta c + \int_\Omega \bigg ( \int_{-h}^z \Delta \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) c_z \cdot \Delta c \\
-    & = \frac{1}{h} \int_\Omega \bigg ( \int_{-h}^z \Delta \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \cdot \Delta c - \int_\Omega  (\Delta \nabla_h \cdot \mathbf{u}_h) c \cdot \Delta c - \int_\Omega \bigg ( \int_{-h}^z \Delta \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) c \cdot \Delta c_z \\
+    &  \int_\Omega \bigg ( \int_{-h}^z \Delta \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \bigg ( \partial_3 c - \frac{1}{h}\bigg)  \cdot \Delta c \\
+    & = \frac{1}{h} \int_\Omega \bigg ( \int_{-h}^z \Delta \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \cdot \Delta c + \int_\Omega \bigg ( \int_{-h}^z \Delta \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \partial_3 c \cdot \Delta c \\
+    & = \frac{1}{h} \int_\Omega \bigg ( \int_{-h}^z \Delta \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \cdot \Delta c - \int_\Omega  (\Delta \nabla_h \cdot \mathbf{u}_h) c \cdot \Delta c - \int_\Omega \bigg ( \int_{-h}^z \Delta \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) c \cdot \Delta \partial_3 c \\
     & \leq C \int_\Omega \bigg ( \int_{-h}^0 \abs{\Delta \nabla_h \cdot \mathbf{u}_h} \diff \xi \bigg) \abs{\Delta c} \\
-    & + \norm{c}_{L^\infty} \int_\Omega  \abs{\Delta \nabla_h \cdot \mathbf{u}_h} \abs{\Delta c} + \norm{c}_{L^\infty} \int_\Omega \bigg ( \int_{-h}^z \abs{ \Delta \nabla_h \cdot \mathbf{u}_h} \diff \xi \bigg) \abs{\Delta c_z} \\
+    & + \norm{c}_{L^\infty} \int_\Omega  \abs{\Delta \nabla_h \cdot \mathbf{u}_h} \abs{\Delta c} + \norm{c}_{L^\infty} \int_\Omega \bigg ( \int_{-h}^z \abs{ \Delta \nabla_h \cdot \mathbf{u}_h} \diff \xi \bigg) \abs{\Delta \partial_3 c} \\
     & \leq C \int_M \bigg ( \int_{-h}^0 \abs{\Delta \nabla_h \cdot \mathbf{u}_h} \diff \xi \bigg) \bigg ( \int_{-h}^0 \abs{\Delta c} \bigg ) \\
-    & + \norm{c}_{L^\infty}   \norm{\Delta \nabla_h \cdot \mathbf{u}_h}_2 \norm{\Delta c}_2 + \norm{c}_{L^\infty} \int_\Omega \bigg ( \int_{-h}^0 \abs{ \Delta \nabla_h \cdot \mathbf{u}_h} \diff \xi \bigg) \abs{\Delta c_z} \\
+    & + \norm{c}_{L^\infty}   \norm{\Delta \nabla_h \cdot \mathbf{u}_h}_2 \norm{\Delta c}_2 + \norm{c}_{L^\infty} \int_\Omega \bigg ( \int_{-h}^0 \abs{ \Delta \nabla_h \cdot \mathbf{u}_h} \diff \xi \bigg) \abs{\Delta \partial_3 c} \\
     & \leq C \int_M \bigg ( \int_{-h}^0 \abs{\Delta \nabla_h \cdot \mathbf{u}_h}^2 \diff \xi \bigg)^{1/2}  \bigg ( \int_{-h}^0 \abs{\Delta c}^2 \bigg )^{1/2} \\
-    & + \norm{c}_{L^\infty} (\norm{\Delta \nabla_h \cdot \mathbf{u}_h}_2^2 + \norm{\Delta c}_2^2) + \norm{c}_{L^\infty} \int_M \bigg ( \int_{-h}^0 \abs{ \Delta \nabla_h \cdot \mathbf{u}_h} \diff \xi \bigg) \bigg ( \int_{-h}^0 \abs{\Delta c_z} \bigg) \\
+    & + \norm{c}_{L^\infty} (\norm{\Delta \nabla_h \cdot \mathbf{u}_h}_2^2 + \norm{\Delta c}_2^2) + \norm{c}_{L^\infty} \int_M \bigg ( \int_{-h}^0 \abs{ \Delta \nabla_h \cdot \mathbf{u}_h} \diff \xi \bigg) \bigg ( \int_{-h}^0 \abs{\Delta \partial_3 c} \bigg) \\
     & \leq C \bigg ( \int_M \bigg ( \int_{-h}^0 \abs{\Delta \nabla_h \cdot \mathbf{u}_h}^2 \diff \xi \bigg) \bigg )^{1/2} \bigg ( \int_M \bigg ( \int_{-h}^0 \abs{\Delta c}^2 \bigg ) \bigg )^{1/2} \\
-    & + \norm{c}_{L^\infty} (\norm{\mathbf{u}_h}_{H^3}^2 + \norm{\Delta c}_2^2) + \norm{c}_{L^\infty} \norm{\mathbf{u}_h}_{H^3} \norm{\Delta c_z}_2 \\
-    & \leq C \norm{\mathbf{u}_h}_{H^3} \norm{\Delta c}_2 + \norm{c}_{L^\infty} \norm{\mathbf{u}_h}_{H^3}^2 + \norm{c}_{L^\infty} \norm{\Delta c}_2^2 + C(\zeta) \norm{c}_{L^\infty}^2 \norm{\mathbf{u}_h}_{H^3}^2 + \zeta \norm{\Delta c_z}_2^2, \\
+    & + \norm{c}_{L^\infty} (\norm{\mathbf{u}_h}_{H^3}^2 + \norm{\Delta c}_2^2) + \norm{c}_{L^\infty} \norm{\mathbf{u}_h}_{H^3} \norm{\Delta \partial_3 c}_2 \\
+    & \leq C \norm{\mathbf{u}_h}_{H^3} \norm{\Delta c}_2 + \norm{c}_{L^\infty} \norm{\mathbf{u}_h}_{H^3}^2 + \norm{c}_{L^\infty} \norm{\Delta c}_2^2 + C(\zeta) \norm{c}_{L^\infty}^2 \norm{\mathbf{u}_h}_{H^3}^2 + \zeta \norm{\Delta \partial_3 c}_2^2, \\
   \end{split}
 \end{equation}
 
-where $ \zeta \norm{\Delta c_z}_2^2$ is merged into the left-hand side of (\ref{firstformboundc}).
+where $ \zeta \norm{\Delta \partial_3 c}_2^2$ is merged into the left-hand side of (\ref{firstformboundc}).
 
 For the second part we obtain
 
 \begin{equation}
   \begin{split}
-    & \int_\Omega \bigg ( \int_{-h}^z \nabla \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg)  \nabla c_z \cdot \Delta c \\
-    & \leq C \int_\Omega \bigg ( \int_{-h}^0 \abs{\nabla \nabla_h \cdot \mathbf{u}_h} \diff \xi \bigg)  \abs{\nabla c_z} \abs{\Delta c} \\
-    & \leq C \int_\Omega h \sup \abs{\nabla \nabla_h \cdot \mathbf{u}_h} \abs{\nabla c_z} \abs{\Delta c} \leq C \norm{\mathbf{u}_h}_{H^4} \norm{\Delta c}_2^2,
+    & \int_\Omega \bigg ( \int_{-h}^z \nabla \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg)  \nabla \partial_3 c \cdot \Delta c \\
+    & \leq C \int_\Omega \bigg ( \int_{-h}^0 \abs{\nabla \nabla_h \cdot \mathbf{u}_h} \diff \xi \bigg)  \abs{\nabla \partial_3 c} \abs{\Delta c} \\
+    & \leq C \int_\Omega h \sup \abs{\nabla \nabla_h \cdot \mathbf{u}_h} \abs{\nabla \partial_3 c} \abs{\Delta c} \leq C \norm{\mathbf{u}_h}_{H^4} \norm{\Delta c}_2^2,
   \end{split}
 \end{equation}
 
@@ -1422,11 +1438,11 @@ while for the third we compute
 \begin{equation}
   \begin{split}
     & \int_\Omega \bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \Delta c_z  \cdot \Delta c \leq \int_\Omega \bigg ( \int_{-h}^0 \abs{\nabla_h \cdot \mathbf{u}_h} \diff \xi \bigg)  \abs{\Delta c_z} \abs{\Delta c}\\
-    & \leq C \int_\Omega h \sup{\abs{\nabla_h \cdot \mathbf{u}_h}} \abs{\Delta c_z} \abs{\Delta c} \leq C \norm{\mathbf{u}_h}_{H^3} (\zeta \norm{\Delta c_z}_2^2 + C(\zeta)\norm{\Delta c}_2^2 ).
+    & \leq C \int_\Omega h \sup{\abs{\nabla_h \cdot \mathbf{u}_h}} \abs{\Delta \partial_3 c} \abs{\Delta c} \leq C \norm{\mathbf{u}_h}_{H^3} (\zeta \norm{\Delta c_z}_2^2 + C(\zeta)\norm{\Delta c}_2^2 ).
   \end{split}
 \end{equation}
 
-Here the $\zeta \norm{\mathbf{u}_h}_{H^3} \norm{\Delta c_z}_2^2$ term can be merged into the left-hand side of (\ref{firstformboundc}), as $d$ contains the direction $z,$ and $\norm{\mathbf{u}_h}_{H^3}$ is finite.
+Here the $\zeta \norm{\mathbf{u}_h}_{H^3} \norm{\Delta \partial_3 c}_2^2$ term can be merged into the left-hand side of (\ref{firstformboundc}), as $d$ contains the direction $z,$ and $\norm{\mathbf{u}_h}_{H^3}$ is finite.
 
 It is easy to see that summing the three bounds we have constructed here yield an overall estimate for the integral term in iii).
 
@@ -1478,14 +1494,14 @@ Finally, from (\ref{gronwall_mult}) and (\ref{gronwall_add}) we conclude
 
 From
 
-$$ \partial_t c - \Delta_d c + \mathbf{u}_h \nabla_h c - \bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg ) \bigg ( \partial_3 c + \frac{1}{h}\bigg) = s$$
+$$ \partial_t c - \Delta_d c + \mathbf{u}_h \nabla_h c - \bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg ) \bigg ( \partial_3 c - \frac{1}{h}\bigg) = s$$
 
 we directly have
 
 \begin{equation}
   \begin{split}
     & \int_0^t \norm{ \partial_t c}_{H^1}^2 \diff \tau \leq C \int_0^t \bigg ( \norm{\Delta_d c}_{H^1}^2 + \norm{\mathbf{u}_h \nabla_h c}_{H^1}^2 \\
-    & + \norm{\bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg ) \bigg ( \partial_3 c + \frac{1}{h}\bigg)}_{H^1}^2 + \norm{s}_{H^1}^2 \bigg ) \diff \tau.
+    & + \norm{\bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg ) \bigg ( \partial_3 c - \frac{1}{h}\bigg)}_{H^1}^2 + \norm{s}_{H^1}^2 \bigg ) \diff \tau.
   \end{split}
 \end{equation}
 
@@ -1495,7 +1511,7 @@ This yields the bound
   \begin{split}
     & \int_0^t \norm{ \partial_t c}_{H^1}^2 \diff \tau \leq \\
     & C \int_0^t \bigg ( \norm{\nabla_d c}_{H^2}^2 + \norm{\mathbf{u}_h}_{W^{1,\infty}}^2 (\norm{\nabla_h c}_{H^1}^2 + 1) + \norm{s}_{H^2}^2 \bigg ) \diff \tau \\
-    & + C \int_0^t \norm{\bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg ) \bigg ( \partial_3 c + \frac{1}{h}\bigg)}_{H^1}^2 \diff \tau,
+    & + C \int_0^t \norm{\bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg ) \bigg ( \partial_3 c - \frac{1}{h}\bigg)}_{H^1}^2 \diff \tau,
   \end{split}
 \end{equation}
 
@@ -1503,8 +1519,8 @@ where the first three terms are immediately bounded. We estimate the fourth term
 
 \begin{equation}
   \begin{split}
-    & \norm{\bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg ) \bigg ( \partial_3 c + \frac{1}{h}\bigg)}_{H^1}^2 \\
-    & \leq \norm{\bigg ( \nabla \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg ) \bigg ( \partial_3 c + \frac{1}{h}\bigg)}_{L_2}^2 + \norm{\bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg ) \nabla c_z }_{L^2}^2 \\
+    & \norm{\bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg ) \bigg ( \partial_3 c - \frac{1}{h}\bigg)}_{H^1}^2 \\
+    & \leq \norm{\bigg ( \nabla \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg ) \bigg ( \partial_3 c - \frac{1}{h}\bigg)}_{L_2}^2 + \norm{\bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg ) \nabla \partial_3 c }_{L^2}^2 \\
     & \leq (\norm{\partial_3 c}_{L^\infty}^2 +1) \norm{\mathbf{u}_h}_{H^2}^2 + C \norm{\mathbf{u}_h}_{W^{1, \infty}}^2 \norm{\nabla \partial_3 c}_{L^2}^2.
   \end{split}
 \end{equation}
