@@ -121,7 +121,7 @@ Each of these following scaling equations can be heuristically deduced from the 
     & x = x_1, \quad y = x_2, \quad z = \epsilon x_3, \\
     & v_1 = u_1^{\epsilon}, \quad v_2 = u_2^{\epsilon}, \quad v_3 = \epsilon u_3^{\epsilon}, \\
     & \nu_x = \nu_1, \quad \nu_y = \nu_2 , \quad \nu_z = \epsilon ^ 2\nu_3, \\
-    & K_x = K_1, \quad K_y = K_2 , \quad K_z = \epsilon^2 K_3, \\
+    & K_y = K_2 , \quad K_z = \epsilon^2 K_3, \\
     & P = \frac{1}{\epsilon} c^\epsilon, \quad Q = \frac{1}{\epsilon} s^\epsilon, \quad p = p^{\epsilon}
   \end{split}
 \end{equation}
@@ -241,6 +241,8 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
     \end{equation}
     
 The specific definitions of the $s^\epsilon$ and $s$ source terms also depend on whether we consider weak or strong solutions. In both cases they are fundamentally based on the notion of the nascent delta function with parameter $\epsilon$ and the delta distribution, but their exact definitions will be given in the subsections according to the quality of the solutions.
+
+To conclude this section we highlight an important feature of the system that is suggested by the structure of (\ref{HNSC5}) and (\ref{ANSC5}). With respect to pollution diffusion, directions $y$ and $z$ have a particular and shared importance compared to the $x$ direction, namely that we have $\mathcal{O}(1)$ diffusion taking place in the former ones. This suggests the introduction of the direction $d$ which includes directions $y$ and $z$ (similarly to the more standard concept of $h$ standing for the horizontal directions $x$ and $y$). Furthermore, we accordingly introduce the notations $\Delta_d = K_2 \partial_{22}^2 + K_3 \partial_{33}^2$ and $\nabla_d = (\partial_2, \partial_3).$ 
 
 %%% WEAK SOLUTIONS %%%
 \section{Weak solutions}
