@@ -865,9 +865,9 @@ Let's consider $\Omega_0 = M \times (-h, 0)$ with $M = (0,1) \times (0,1).$ We d
 
 \begin{equation}
   \begin{split}
-    & \mathbf{u}_h, u_3 \text{ and } c \text{ are periodic in } x \text{ and} y, \\
-    & (\partial_3 \mathbf{u}_h, u_3) \vline _{z = -h, 0} = 0, \\
-    & c \vline_{z = -h} = 1, c \vline_{z = 0} = 0.
+    & \mathbf{u}_h, u_3 \text{ and } c \text{ are periodic in } x \text{ and } y, \\
+    & (\partial_3 \mathbf{u}_h, u_3) | _{z = -h, 0} = 0, \\
+    & c |_{z = -h} = 1, c |_{z = 0} = 0.
   \end{split}
 \end{equation}
 
@@ -911,7 +911,7 @@ boundary conditions, respectively.
 
 It is easy to check that the restriction of a solution to (\ref{ANSC1})-(\ref{ANSC4}), (\ref{ANSC6}), (\ref{ANSC5_strong_cshift}), (\ref{ANSC7-strong}) from $\Omega$ to $\Omega_0$ is a solution to the original system, and the analogous statement holds for the hydrostatic equations, hence here we exclusively focus on the study of these new versions of the two main systems.
 
-We highlight here that the steps detailed above constructing a fully periodic domain is indeed necessary since, generally speaking, it is physically meaningful to consider the Earth's atmosphere as a domain that is periodic in the horizontal dimensions, however it is highly unnatural to immediately assume vertical periodicity as well. This strategy of adjusting the boundary value of the concentration function and extending the functions according to certain symmetries shows that the choice of a fully periodic domain can actually be a well-grounded choice for the atmosphere, given that the required symmetries hold.
+We highlight here that the steps detailed above constructing a fully periodic domain are indeed necessary since, generally speaking, it is physically meaningful to consider the Earth's atmosphere as a domain that is periodic in the horizontal dimensions, however it is highly unnatural to immediately assume vertical periodicity as well. This strategy of adjusting the boundary value of the concentration function and extending the functions according to certain symmetries shows that the choice of a fully periodic domain can actually be a well-grounded choice for the atmosphere, given that the required symmetries hold.
 
 \begin{remark}
 \normalfont The periodic boundary conditions can be substituted by boundary conditions of type $\nabla^k u = 0, \nabla^k c = 0$ defined on a non-periodic, standard domain. Applying these alternative boundary conditions it is possible to switch back to a classical domain and still benefit from the disappearing boundary integrals.
@@ -946,7 +946,7 @@ thus $\norm{\Delta s}_2^2$ is bounded.
 The main result of this section describing the strong solutions is analogous to Theorem \ref{maintheoremWEAK}; with the two major differences being --- apart from the quality of the solutions themselves --- the change to a periodic domain, and the assumption of an $H^3$ and $H^2$ initial data for the horizontal velocity and the concentration, respectively. Before stating the main convergence theorem of this section, we first describe a hydrostatic existence result that is essential for the fact of the convergence.
 
 \begin{theorem} \label{existenceconcentrationSTRONG}
-Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0$, let $c_0 \in H^2 (\Omega),$ and let's assume that the (\ref{HNSC7-strong}) boundary conditions hold. Then there exists a unique global strong solution $(\mathbf{u}, c)$ of the downwind-matching hydrostatic polluted atmosphere limit model (\ref{HNSC1})-(\ref{HNSC6}), and specifically, the limit concentration function $c$ satisfies
+Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0$, let $c_0 \in H^2 (\Omega),$ and let's assume that the (\ref{HNSC7-strong}) boundary conditions hold. Then there exists a unique global strong solution $(\mathbf{u}, c)$ of the downwind-matching hydrostatic polluted atmosphere limit model (\ref{HNSC1})-(\ref{HNSC4}), (\ref{HNSC6}), (\ref{HNSC5_strong_cshift}), and specifically, the limit concentration function $c$ satisfies
 
     \begin{equation} \label{regularity_c_first}
       c \in L^\infty([0, \infty), H^2(\Omega)) \text{ and } \nabla_d c \in L^2_{loc}([0, \infty), H^2(\Omega)),
@@ -965,7 +965,7 @@ We provide the proof of Theorem \ref{existenceconcentrationSTRONG} in the append
 Now we are ready to describe this section's main theorem.
 
 \begin{theorem} \label{maintheoremSTRONG}
-Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0$, and let $c_0 \in H^2 (\Omega).$ There is a positive $\epsilon_0$ threshold such that for any $\epsilon < \epsilon_0$ as the aspect ratio $\epsilon$ tends to zero, the unique global strong solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1}) - (\ref{ANSC6}), (\ref{ANSC7-strong}) converges to the unique global strong solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1}) - (\ref{HNSC6}), (\ref{HNSC7-strong}).
+Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0$, and let $c_0 \in H^2 (\Omega).$ There is a positive $\epsilon_0$ threshold such that for any $\epsilon < \epsilon_0$ as the aspect ratio $\epsilon$ tends to zero, the unique global strong solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1})-(\ref{ANSC4}), (\ref{ANSC6}), (\ref{ANSC5_strong_cshift}), (\ref{ANSC7-strong}) converges to the unique global strong solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1})-(\ref{HNSC4}), (\ref{HNSC6}), (\ref{HNSC5_strong_cshift}), (\ref{HNSC7-strong}).
 \end{theorem}
 
 \begin{proof}
@@ -1016,10 +1016,10 @@ The focus of the proof's remaining part is to construct an estimate for the conc
   c^\epsilon \to c \text{ in } L^\infty H^1 \text{ and } \nabla_d c^\epsilon \to \nabla_d c \text{ in } L^2 H^1.
 \end{equation}
 
-Analogously to the $\mathbf{U}_h^\epsilon, U_3^\epsilon$ notation we will use $C^\epsilon = c^\epsilon-c$ and $S^\epsilon = s^\epsilon-s$ to denote the difference between anisotropic and hydrostatic functions. Subtracting (\ref{HNSC5}) from (\ref{ANSC5}) we obtain the governing equation for $C^\epsilon:$
+Analogously to the $\mathbf{U}_h^\epsilon, U_3^\epsilon$ notation we will use $C^\epsilon = c^\epsilon-c$ and $S^\epsilon = s^\epsilon-s$ to denote the difference between anisotropic and hydrostatic functions. Subtracting (\ref{HNSC5_strong_cshift}) from (\ref{ANSC5_strong_cshift}) we obtain the governing equation for $C^\epsilon:$
 
 \begin{equation}
-  \partial_t C^\epsilon + u^\epsilon \cdot \nabla c^\epsilon - u \cdot \nabla c = \epsilon K_1 \partial_{11} c^\epsilon + K_2 \partial_{22} C^\epsilon + K_3 \partial_{33} C^\epsilon + S^\epsilon.
+  \partial_t C^\epsilon + u^\epsilon \cdot \nabla c^\epsilon - u \cdot \nabla c = \frac{1}{h} U_3^\epsilon + \epsilon K_1 \partial_{11} c^\epsilon + \Delta_d C^\epsilon + S^\epsilon.
 \end{equation}
 
 We reformulate $u^\epsilon \cdot \nabla c^\epsilon - u \cdot \nabla c$ as $U^\epsilon \nabla C^\epsilon  + U^\epsilon \nabla c+ u \nabla C^\epsilon,$ which yields
@@ -1027,7 +1027,7 @@ We reformulate $u^\epsilon \cdot \nabla c^\epsilon - u \cdot \nabla c$ as $U^\ep
 \begin{equation} \label{governCepsilon}
   \begin{split}
    & \partial_t C^\epsilon + U^\epsilon \nabla C^\epsilon  + U^\epsilon \nabla c+ u \nabla C^\epsilon \\
-   & = \epsilon K_1 \partial_{11} C^\epsilon + \epsilon K_1 \partial_{11} c + K_2 \partial_{22} C^\epsilon + K_3 \partial_{33} C^\epsilon + S^\epsilon.
+   & = \frac{1}{h} U_3^\epsilon + \epsilon K_1 \partial_{11} C^\epsilon + \epsilon K_1 \partial_{11} c + \Delta_d C^\epsilon + S^\epsilon.
    \end{split}
 \end{equation}
 
@@ -1039,8 +1039,8 @@ Multiplying (\ref{governCepsilon}) by $- \partial_{ii} C^\epsilon, i=1,2,3$ we o
   \begin{split}
       & \frac{1}{2}\frac{\diff}{\diff t} \norm{\nabla C^\epsilon}_2^2 + \epsilon K_1 \norm{\partial_{11} C^\epsilon}_2^2 + K_2 \norm{\partial_{22} C^\epsilon}_2^2 + K_3 \norm{\partial_{33} C^\epsilon}_2^2 + \sum_{i \neq j} C_{ij} \norm{\partial_{ij} C^\epsilon}_2^2 \\
       & = \sum_{i = 1,2,3} \int_\Omega U^\epsilon \nabla C^\epsilon \partial_{ii} C^\epsilon + \int_\Omega U^\epsilon \nabla c \partial_{ii} C^\epsilon + \int_\Omega u \nabla C^\epsilon \partial_{ii} C^\epsilon - \int_\Omega \epsilon K_1 \partial_{11} c \partial_{ii} C^\epsilon \\
-      & - \sum_{i = 1,2,3} \int_\Omega S^\epsilon \partial_{ii} C^\epsilon \\
-      & = \sum_{i = 1,2,3} I_1(i)  + I_2(i) + I_3(i) + I_4(i) + I_5(i),
+      & - \sum_{i = 1,2,3} \int_\Omega S^\epsilon \partial_{ii} C^\epsilon - \frac{1}{h} \int_\Omega U_3^\epsilon \partial_{ii} C^\epsilon \\
+      & = \sum_{i = 1,2,3} I_1(i)  + I_2(i) + I_3(i) + I_4(i) + I_5(i) + I_6(i),
   \end{split}
 \end{equation}
 
@@ -1218,7 +1218,20 @@ We still need to refine the estimate of the first term on the right-hand side. L
 
 \bigskip
 
-Summarising the previously obtained five estimates for $I_1$ -- $I_5$ and merging the second order concentration terms into the left-hand side (note that it is indeed possible to do so as we have constructed the bounds in a way that $\partial_{11} C^\epsilon$ is only present with an $\epsilon$ multiplier), we eventually have
+\textbf{Estimate for $I_6 (i), i = 1,2,3.$}
+
+Integration by parts combined with the H\"older and Young inequalities easily gives
+
+\begin{equation}
+  \begin{split}
+    & - \frac{1}{h} \int_\Omega U_3^\epsilon \partial_{ii} C^\epsilon \leq C \norm{\nabla U_3^\epsilon}_2 \norm{\nabla C^\epsilon}_2 \leq C \norm{\nabla U_3^\epsilon}_2^2 + C \norm{\nabla C^\epsilon}_2^2 \\
+    & \leq C \norm{U_h^\epsilon}_{H^2}^2 + C \norm{\nabla C^\epsilon}_2^2.
+  \end{split}
+\end{equation}
+
+\bigskip
+
+Summarising the previously obtained six estimates for $I_1$ -- $I_6$ and merging the second order concentration terms into the left-hand side (note that it is indeed possible to do so as we have constructed the bounds in a way that $\partial_{11} C^\epsilon$ is only present with an $\epsilon$ multiplier), we eventually have
 
 \begin{equation}
   \begin{split}
@@ -1285,7 +1298,7 @@ Combining the velocity convergence results (\ref{StrongConvVelocity1})-(\ref{Str
 
 \section{Existence of the strong solutions of the hydrostatic equations of the polluted atmosphere}
 
-The appendix is dedicated to showing the existence of the unique global strong solution $(\mathbf{u}_h, u_3, c)$ of the hydrostatic limit system (\ref{HNSC1})-(\ref{HNSC6}), (\ref{HNSC7-strong}) --- in other words we verify Theorem \ref{existenceconcentrationSTRONG}. The proof's first part strongly uses the existence result achieved in \cite{cao2014local}: here the authors focus on a system that is very similar to ours, including an incomplete Laplacian in the convection-diffusion equation. However, while they work with a temperature function $T,$ in our case the additional function to the velocity-pressure pair is the concentration $c.$ Even though there is a strong analogy between the equations describing the dynamics of concentration and temperature, yet the variant nature of how each of these functions are coupled with the velocity equations overall contributes to a very significant structural divergence. Specifically, the difference between the equations $$ \partial_3 p + T = 0$$ and $$ \partial_3 p = 0$$ turns out to be a cardinal one concerning global existence. The method of \cite{cao2014local} is easily applicable with minor changes to our system until reaching the verification of local existence; the transplantation of their global existence proof on the other hand becomes very problematic. The presence of $T$ in the hydrostatic equation makes certain cancellations possible in their case which eventually guarantee the ability to close estimates that otherwise would not lead to meaningful implications. Since our hydrostatic equation does not include $c,$ we will work out a set of rather independent estimates to show the continuability of the concentration function.
+The appendix is dedicated to showing the existence of the unique global strong solution $(\mathbf{u}_h, u_3, c)$ of the hydrostatic limit system (\ref{HNSC1})-(\ref{HNSC4}), (\ref{HNSC6}), (\ref{HNSC5_strong_cshift}), (\ref{HNSC7-strong}) --- in other words we verify Theorem \ref{existenceconcentrationSTRONG}. The proof's first part strongly uses the existence result achieved in \cite{cao2014local}: here the authors focus on a system that is very similar to ours, including an incomplete Laplacian in the convection-diffusion equation. However, while they work with a temperature function $T,$ in our case the additional function to the velocity-pressure pair is the concentration $c.$ Even though there is a strong analogy between the equations describing the dynamics of concentration and temperature, yet the variant nature of how each of these functions are coupled with the velocity equations overall contributes to a very significant structural divergence. Specifically, the difference between the equations $$ \partial_3 p + T = 0$$ and $$ \partial_3 p = 0$$ turns out to be a cardinal one concerning global existence. The method of \cite{cao2014local} is easily applicable with minor changes to our system until reaching the verification of local existence; the transplantation of their global existence proof on the other hand becomes very problematic. The presence of $T$ in the hydrostatic equation makes certain cancellations possible in their case which eventually guarantee the ability to close estimates that otherwise would not lead to meaningful implications. Since our hydrostatic equation does not include $c,$ we will work out a set of rather independent estimates to show the continuability of the concentration function.
 
 \begin{proof}[Proof of Theorem \ref{existenceconcentrationSTRONG}]
 
@@ -1355,19 +1368,11 @@ As we mentioned in the introductory part of this proof, here we only need to pro
 
 \textbf{$\norm{\Delta c}_2$ and $\norm{\Delta \nabla_d c}_2$ estimates}
 
-Let's take an arbitrary positive finite $T$ time, multiply the convection-diffusion equation
-
-\begin{equation}   
-    \partial_t c + \mathbf{u}_h \cdot \nabla_h c - \bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \bigg ( \partial_3 c - \frac{1}{h} \bigg) - \Delta_d c = s
-\end{equation}
-
-by $\Delta^2 c$ and integrate on $\Omega.$
-
-This gives
+Let's take an arbitrary positive finite $T$ time. Plugging the identity $ u_3 = - \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi$ into the convection-diffusion equation (\ref{HNSC5_strong_cshift}), multiplying it by $\Delta^2 c,$ and integrating the result on $\Omega$ gives
 
 \begin{equation} \label{firstformboundc}
   \begin{split}
-    & \frac{1}{2} \frac{\diff}{\diff t} \norm{\Delta c}_2^2 + K \norm{\Delta \nabla_d c}_2^2 \\
+    & \frac{1}{2} \frac{\diff}{\diff t} \norm{\Delta c}_2^2 + C \norm{\Delta \nabla_d c}_2^2 \\
     & \leq \int_\Omega \Delta s \Delta c - \Delta ( \mathbf{u}_h \cdot \nabla_h c) \cdot \Delta c + \Delta \bigg ( \bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \bigg ( \partial_3 c - \frac{1}{h} \bigg) \bigg ) \cdot \Delta c.
   \end{split}
 \end{equation}
