@@ -90,6 +90,7 @@ We end up this section with some notations we will use through the paper.
 \item $\Delta_d = K_2 \partial_{22}^2 + K_3 \partial_{33}^2$
 \item $\nabla_d = (\partial_2, \partial_3) $ (d stands for directions in which we have diffusion)
 \item $L^p_t L^q_x$ is the abbreviated notation for $L^p (0, T; L^q(\Omega)).$
+\item $C$ stands for a generic constant that can vary from line to line
 
 \end{enumerate}
 
@@ -305,7 +306,23 @@ We highlight the difference between the boundary conditions of the original, eas
 
 The difference in the kind of boundary conditions we can "afford" to have on the lower boundary for the concentration comes from the energy inequality. In the east-north-upwards oriented coordinate system we do not have an $\epsilon$ in the diffusion matrix, and thus, having any of the $\partial_i c^\epsilon$ terms different from 0 does not create any problems, not even for the case of the ocean where $\partial_3 c^\epsilon$ becomes nonzero as well (they are required however to be bounded of course). On the other hand, the downwind-matching coordinate system brings in an $\epsilon$ term in front of the $K_1$ diffusion coefficient, which makes the model more sensitive to assigning boundary conditions for $c^\epsilon.$ This means that we can not anymore have the relatively relaxed boundedness requirement for any $\partial_i c^\epsilon$ except for $i=1.$ All other $\partial_2 c^\epsilon, \partial_3 c^\epsilon$ derivatives must be zero on the lower boundary, otherwise they would result in an $(\epsilon - \text{const.})$ negative term appearing in the energy inequality --- for more details see section $\ref{proof}$. This also means that we will consider exclusively the inland domain scenario for the case of this coordinate system.
 
-Finally, the $s^\epsilon$ and $s$ source terms both centred at $\mathbf{x_s}$, with an activation multiplier set to start at time $t_s$. For more details see \cite{pollatmws2019}.
+Finally, the $s^\epsilon$ and $s$ source terms are formulated in the spirit of our previous result \cite{pollatmws2019}: the hydrostatic $s$ function is defined as a point source, while the anisotropic source function $s^\epsilon$ is modelled with parametrised nascent delta functions. For simplicity we assume here that the pollution process begins at $t = 0,$ thus we omit the multiplication by a Heaviside function representing the activation of the source, furthermore we assume the intensity constant $I$ to be $1.$
+
+Let $\delta_\epsilon$ be the approximation of the $\delta$ distribution given below:
+
+\begin{equation} \label{delta_eps_source_def}
+\delta_\epsilon = 
+  \begin{cases}
+       \frac{1}{\epsilon^3} \exp{\bigg ( \frac{1}{\abs{{\frac{x}{\epsilon}}}^2-1} \bigg ) } &\quad \abs{x} < \epsilon \\
+       0 &\quad \abs{x} \geq \epsilon. \\
+  \end{cases}
+\end{equation}
+
+Following the main ideas described above, we set
+
+\begin{equation}
+  s^\epsilon = \delta_\epsilon, \quad s = \delta.
+\end{equation}
 
 %%% *** WEAK FORMULATION AND MAIN RESULT*** %%%
 \subsection{Weak Formulation and Main Result} \label{weakformulationmainresult}
@@ -925,17 +942,7 @@ We highlight here that the steps detailed above constructing a fully periodic do
 
 Our next step is the specification of the source terms, which in this case involves a convolution with a smooth function in order to have a mollified source fitting the strong solution scheme.
 
-Let $\delta_\epsilon$ be the approximation of the $\delta$ distribution given below:
-
-\[   
-\delta_\epsilon = 
-  \begin{cases}
-       \frac{1}{\epsilon^3} \exp{\bigg ( \frac{1}{\abs{{\frac{x}{\epsilon}}}^2-1} \bigg ) } &\quad \abs{x} < \epsilon \\
-       0 &\quad \abs{x} \geq \epsilon, \\
-  \end{cases}
-\]
-
-and let $\varphi$ be a $C^\infty_0$ smooth function. We define the anisotropic and hydrostatic source terms respectively as the following convolutions:
+Let $\delta_\epsilon$ be as specified in (\ref{delta_eps_source_def}) and let $\varphi$ be a $C^\infty_0$ smooth function. We define the anisotropic and hydrostatic source terms respectively as the following convolutions:
 
 $$ s^\epsilon = \delta^\epsilon \ast \varphi, \quad s = \delta \ast \varphi.$$
 
