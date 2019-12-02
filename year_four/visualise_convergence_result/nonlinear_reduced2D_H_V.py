@@ -13,7 +13,7 @@ import numpy
 
 # Define constants
 
-epsilon_lower_limit = 1.0e-07 #up 1.0e-07 c 5e-04
+epsilon_lower_limit = 5e-04 #up 1.0e-07 c 5e-04
 wind_shear_x = 10.0
 theta = Constant((wind_shear_x, 0.0))
 mu_1 = Constant(1.0)
@@ -42,6 +42,11 @@ xargs = parser.parse_args(None)
 resultsfolder = str(timestamp) + xargs.resultfolder + "/"
 
 verbose = True
+
+doHydrostatic = True
+doAnisotropicLoop = True
+doInitGuessHydro = True
+doDegree1Anisopic = True
 
 mesh = UnitSquareMesh(30, 30)
 
@@ -77,10 +82,6 @@ class UpperBoundary(SubDomain):
     def inside(self, x, on_boundary):
         return near(x[1], 1.0)
 upperboundary = UpperBoundary()
-boundaries = MeshFunction("size_t", mesh, mesh.topology().dim() - 1)
-boundaries.set_all(0)
-upperboundary.mark(boundaries, 1)
-ds = Measure('ds')[boundaries]
 
 def boundaryconditions(VP):
     noslipbasin = DirichletBC(VP.sub(0), Constant((0, 0)), "on_boundary && x[1] < 1.0 - DOLFIN_EPS")
@@ -101,7 +102,14 @@ def writedifference(degree_anis, degree_hydr):
     np.savetxt(resultsfolder + "anis_and_hydr_difference_norm_u1_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", anis_and_hydr_difference_norm_u1_values)
     np.savetxt(resultsfolder + "anis_and_hydr_difference_norm_p_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", anis_and_hydr_difference_norm_p_values)
 
-def hydrostatic_solver(VP, up_, vertical_velocity_degree):
+def hydrostatic_solver(VP, up_, vertical_velocity_degree, mesh_h):
+
+    cells_division = mesh_h.num_cells()
+
+    boundaries = MeshFunction("size_t", mesh_h, mesh_h.topology().dim() - 1)
+    boundaries.set_all(0)
+    upperboundary.mark(boundaries, 1)
+    ds = Measure('ds')[boundaries]
     
     up = TrialFunction(VP)
     u,p = split(up) # u,p are "trial function" type (special to FEniCS)
@@ -132,9 +140,9 @@ def hydrostatic_solver(VP, up_, vertical_velocity_degree):
     (u,p) = up_.split(True)
     (u1, u3) = u.split(True)
     
-    ufile_pvd_hydr = File(resultsfolder + "velocity/velocity_hydr_degree" + str(vertical_velocity_degree) + ".pvd")
+    ufile_pvd_hydr = File(resultsfolder + "velocity/velocity_hydr_degree" + str(vertical_velocity_degree) + "_celldivision_" + str(cells_division) + ".pvd")
     ufile_pvd_hydr << u
-    pfile_pvd_hydr = File(resultsfolder + "pressure/pressure_hydr_degree" + str(vertical_velocity_degree) + ".pvd")
+    pfile_pvd_hydr = File(resultsfolder + "pressure/pressure_hydr_degree" + str(vertical_velocity_degree) + "_celldivision_" + str(cells_division) + ".pvd")
     pfile_pvd_hydr << p
     
     hydrostatic_values = []
@@ -144,8 +152,8 @@ def hydrostatic_solver(VP, up_, vertical_velocity_degree):
     np.savetxt(resultsfolder + "hydrostatic_values_degree_" + str(vertical_velocity_degree)+ ".txt", hydrostatic_values)
     
     # concentration
-    C = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 2)
-    C = FunctionSpace(mesh, C)
+    C = FiniteElement("Lagrange", mesh_h.ufl_cell(), degree = 2)
+    C = FunctionSpace(mesh_h, C)
     zerotop_concentration = DirichletBC(C, 0, "on_boundary && x[1] > 1 - DOLFIN_EPS")
     bcc = [zerotop_concentration]
     c = TrialFunction(C)
@@ -163,13 +171,20 @@ def hydrostatic_solver(VP, up_, vertical_velocity_degree):
     
     solver = KrylovSolver('gmres', 'ilu')
     solver.solve(A, c_sol.vector(), b)
-    cfile_pvd_hydr = File(resultsfolder + "concentration/concentration_hydr_degree" + str(vertical_velocity_degree) + ".pvd")
+    cfile_pvd_hydr = File(resultsfolder + "concentration/concentration_hydr_degree" + str(vertical_velocity_degree) + "_celldivision_" + str(cells_division) + ".pvd")
     cfile_pvd_hydr << c_sol
     print("HYDR. c: %.15g" % c_sol.vector().norm("l2"))
     
     return up_
     
-def anisotropic_solver(VP, eps, vertical_velocity_degree):
+def anisotropic_solver(VP, eps, vertical_velocity_degree, mesh_h):
+
+    cells_division = mesh_h.num_cells()
+
+    boundaries = MeshFunction("size_t", mesh_h, mesh_h.topology().dim() - 1)
+    boundaries.set_all(0)
+    upperboundary.mark(boundaries, 1)
+    ds = Measure('ds')[boundaries]
 
     up = TrialFunction(VP)
     u,p = split(up)
@@ -194,13 +209,13 @@ def anisotropic_solver(VP, eps, vertical_velocity_degree):
 
     (u,p) = up_.split(True)
 
-    ufile_pvd_anis = File(resultsfolder + "velocity/velocity_anis_degree" + str(vertical_velocity_degree) + "_eps_" + str(eps) + ".pvd")
-    pfile_pvd_anis = File(resultsfolder + "pressure/pressure_anis_degree" + str(vertical_velocity_degree) + "_eps_" + str(eps) + ".pvd")
+    ufile_pvd_anis = File(resultsfolder + "velocity/velocity_anis_degree" + str(vertical_velocity_degree) + "_eps_" + str(eps) + "_celldivision_" + str(cells_division) + ".pvd")
+    pfile_pvd_anis = File(resultsfolder + "pressure/pressure_anis_degree" + str(vertical_velocity_degree) + "_eps_" + str(eps) + "_celldivision_" + str(cells_division) + ".pvd")
     ufile_pvd_anis << u
     pfile_pvd_anis << p
     
-    C = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 2)
-    C = FunctionSpace(mesh, C)
+    C = FiniteElement("Lagrange", mesh_h.ufl_cell(), degree = 2)
+    C = FunctionSpace(mesh_h, C)
     zerotop_concentration = DirichletBC(C, 0, "on_boundary && x[1] > 1 - DOLFIN_EPS")
     bcc = [zerotop_concentration]
     c = TrialFunction(C)
@@ -209,6 +224,11 @@ def anisotropic_solver(VP, eps, vertical_velocity_degree):
     
     a = inner(u, grad(c)) * d * dx + (mu_1 * c.dx(0) * d.dx(0) + mu_2 * c.dx(1) * d.dx(1))  * dx - inner(c.dx(1), d.dx(1)) * ds(1)
     
+    # explanation of the degree parameter: https://fenicsproject.discourse.group/t/how-to-define-source-term-function/1893, Scan_29_Nov_2019.pdf.
+    # the main idea is that "degree" is a built-in parameter in this class, we do not need to "create" it. it gets defined through the call,
+    # and it probably has an effect on the degree of approximation in terms of what degree is used in the \int s * phi dx integral
+    # where phi is the test function, s is the source, and in the background (probably) some sort of quadrature is used to approximate this integral.
+    # the degree of the quadrature is this degree, probably, or something similar.
     nascent_delta_instance = nascent_delta(eps, degree=10)
     L = inner(nascent_delta_instance, d) * dx
     
@@ -217,7 +237,7 @@ def anisotropic_solver(VP, eps, vertical_velocity_degree):
     solver = KrylovSolver('gmres', 'ilu')
     solver.solve(A, c_sol.vector(), b)
     
-    cfile_pvd_anis = File(resultsfolder + "concentration/concentration_anis_degree" + str(vertical_velocity_degree) + "_eps_" + str(eps) + ".pvd")
+    cfile_pvd_anis = File(resultsfolder + "concentration/concentration_anis_degree" + str(vertical_velocity_degree) + "_eps_" + str(eps) + "_celldivision_" + str(cells_division) + ".pvd")
     cfile_pvd_anis << c_sol
     print(eps)
     print("ANIS. c: %.15g" % c_sol.vector().norm("l2"))
@@ -270,54 +290,78 @@ def difference_info(eps, up_sol_anis_eps, VPA, up_sol_hydr, VPH):
         print("Anistropic Interpolated - Hydrostatic. p: %.15g" % (p_interpolate_hydr.vector() - p_sol_hydr.vector()).norm("l2"))
     
 
+def refine_domain(cells_division, eps):
+
+    mesh_h = UnitSquareMesh(cells_division, cells_division)
+    print("h: %.15g" % cells_division)
+    
+    vertical_velocity_degree_anis = 2
+    VP = VP_functionspace(mesh_h, vertical_velocity_degree_anis)
+    up_sol_anis_eps = Function(VP)
+    up_sol_anis_eps = anisotropic_solver(VP, eps, vertical_velocity_degree_anis, mesh_h)
+
 # **********************************************
 # *** Define hydrostatic variational problem ***
 # **********************************************
 
-# hydrostatic model solved without initial guess for degree 1 vertical velocity space
-vertical_velocity_degree_hydr = 1
-VPH = VP_functionspace(mesh, vertical_velocity_degree_hydr)
-up_ = Function(VPH) #initial guess for the Newton solver if filled, otherwise blank and start by default
-up_sol_hydr = hydrostatic_solver(VPH, up_, vertical_velocity_degree_hydr)
+if (doHydrostatic):
+    # hydrostatic model solved without initial guess for degree 1 vertical velocity space
+    vertical_velocity_degree_hydr = 1
+    VPH = VP_functionspace(mesh, vertical_velocity_degree_hydr)
+    up_ = Function(VPH) #initial guess for the Newton solver if filled, otherwise blank and start by default
+    up_sol_hydr = hydrostatic_solver(VPH, up_, vertical_velocity_degree_hydr, mesh)
 
 # **********************************************
 # *** Define anisotropic variational problem ***
 # **********************************************
+if (doAnisotropicLoop):
+    eps = 1.0
+    vertical_velocity_degree_anis = 2
+    VP = VP_functionspace(mesh, vertical_velocity_degree_anis)
+    up_sol_anis_eps = Function(VP)
 
-eps = 1.0
-vertical_velocity_degree_anis = 2
-VP = VP_functionspace(mesh, vertical_velocity_degree_anis)
-up_sol_anis_eps = Function(VP)
-
-while eps > epsilon_lower_limit:
+    while eps > epsilon_lower_limit:
     
-    up_sol_anis_eps = anisotropic_solver(VP, eps, vertical_velocity_degree_anis)
-    difference_info(eps, up_sol_anis_eps, VP, up_sol_hydr, VPH)
-    eps = eps / 2.0
+        up_sol_anis_eps = anisotropic_solver(VP, eps, vertical_velocity_degree_anis, mesh)
+        difference_info(eps, up_sol_anis_eps, VP, up_sol_hydr, VPH)
+        eps = eps / 2.0
     
-writedifference(vertical_velocity_degree_anis, vertical_velocity_degree_hydr)
+    writedifference(vertical_velocity_degree_anis, vertical_velocity_degree_hydr)
 
 # **********************************************
 # *** degree 2 for the hydrostatic weak form ***
 # **********************************************
-
-# hydrostatic model solved with initial guess for degree 2 vertical velocity space
-vertical_velocity_degree_hydr = 2
-up_sol_hydr = hydrostatic_solver(VP, up_sol_anis_eps, vertical_velocity_degree_hydr)
+if (doAnisotropicLoop and doInitGuessHydro):
+    # hydrostatic model solved with initial guess for degree 2 vertical velocity space
+    vertical_velocity_degree_hydr = 2
+    up_sol_hydr = hydrostatic_solver(VP, up_sol_anis_eps, vertical_velocity_degree_hydr, mesh)
 
 # **************************************************************
 # *** Define anisotropic variational problem  with degree = 1 **
 # **************************************************************
+if (doDegree1Anisopic):
+    eps = 1.0
+    vertical_velocity_degree_anis = 1
+    VP = VP_functionspace(mesh, vertical_velocity_degree_anis)
+
+    while eps > epsilon_lower_limit:
+    
+        anisotropic_solver(VP, eps, vertical_velocity_degree_anis, mesh)
+        eps = eps / 2.0
+
+# **************************************************************
+# ************************** Loop in h *************************
+# **************************************************************
+
+print("Loop in h.")
 
 eps = 1.0
-vertical_velocity_degree_anis = 1
-VP = VP_functionspace(mesh, vertical_velocity_degree_anis)
+cells_exp = 4
+cells_division = 2 ** cells_exp # to control the number of cells, UnitSquareMesh(nx, nx)
+while cells_division < 2 ** 8:
+    refine_domain(cells_division, eps)
+    cells_division = 2 * cells_division
 
-while eps > epsilon_lower_limit:
-    
-    anisotropic_solver(VP, eps, vertical_velocity_degree_anis)
-    eps = eps / 2.0
-    
 # *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- #
 
 # improvement ideas:
