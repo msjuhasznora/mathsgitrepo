@@ -43,10 +43,11 @@ resultsfolder = str(timestamp) + xargs.resultfolder + "/"
 
 verbose = True
 
-doHydrostatic = True
-doAnisotropicLoop = True
-doInitGuessHydro = True
-doDegree1Anisopic = True
+doHydrostatic = False
+doAnisotropicLoop = False
+doInitGuessHydro = False
+doDegree1Anisopic = False
+doRefineDomain = True
 
 mesh = UnitSquareMesh(30, 30)
 
@@ -104,7 +105,7 @@ def writedifference(degree_anis, degree_hydr):
 
 def hydrostatic_solver(VP, up_, vertical_velocity_degree, mesh_h):
 
-    cells_division = mesh_h.num_cells()
+    nr_cells = mesh_h.num_cells()
 
     boundaries = MeshFunction("size_t", mesh_h, mesh_h.topology().dim() - 1)
     boundaries.set_all(0)
@@ -140,9 +141,9 @@ def hydrostatic_solver(VP, up_, vertical_velocity_degree, mesh_h):
     (u,p) = up_.split(True)
     (u1, u3) = u.split(True)
     
-    ufile_pvd_hydr = File(resultsfolder + "velocity/velocity_hydr_degree" + str(vertical_velocity_degree) + "_celldivision_" + str(cells_division) + ".pvd")
+    ufile_pvd_hydr = File(resultsfolder + "velocity/velocity_hydr_degree" + str(vertical_velocity_degree) + "_nr_cells_" + str(nr_cells) + ".pvd")
     ufile_pvd_hydr << u
-    pfile_pvd_hydr = File(resultsfolder + "pressure/pressure_hydr_degree" + str(vertical_velocity_degree) + "_celldivision_" + str(cells_division) + ".pvd")
+    pfile_pvd_hydr = File(resultsfolder + "pressure/pressure_hydr_degree" + str(vertical_velocity_degree) + "_nr_cells_" + str(nr_cells) + ".pvd")
     pfile_pvd_hydr << p
     
     hydrostatic_values = []
@@ -171,7 +172,7 @@ def hydrostatic_solver(VP, up_, vertical_velocity_degree, mesh_h):
     
     solver = KrylovSolver('gmres', 'ilu')
     solver.solve(A, c_sol.vector(), b)
-    cfile_pvd_hydr = File(resultsfolder + "concentration/concentration_hydr_degree" + str(vertical_velocity_degree) + "_celldivision_" + str(cells_division) + ".pvd")
+    cfile_pvd_hydr = File(resultsfolder + "concentration/concentration_hydr_degree" + str(vertical_velocity_degree) + "_nr_cells_" + str(nr_cells) + ".pvd")
     cfile_pvd_hydr << c_sol
     print("HYDR. c: %.15g" % c_sol.vector().norm("l2"))
     
@@ -179,7 +180,7 @@ def hydrostatic_solver(VP, up_, vertical_velocity_degree, mesh_h):
     
 def anisotropic_solver(VP, eps, vertical_velocity_degree, mesh_h):
 
-    cells_division = mesh_h.num_cells()
+    nr_cells = mesh_h.num_cells()
 
     boundaries = MeshFunction("size_t", mesh_h, mesh_h.topology().dim() - 1)
     boundaries.set_all(0)
@@ -209,8 +210,8 @@ def anisotropic_solver(VP, eps, vertical_velocity_degree, mesh_h):
 
     (u,p) = up_.split(True)
 
-    ufile_pvd_anis = File(resultsfolder + "velocity/velocity_anis_degree" + str(vertical_velocity_degree) + "_eps_" + str(eps) + "_celldivision_" + str(cells_division) + ".pvd")
-    pfile_pvd_anis = File(resultsfolder + "pressure/pressure_anis_degree" + str(vertical_velocity_degree) + "_eps_" + str(eps) + "_celldivision_" + str(cells_division) + ".pvd")
+    ufile_pvd_anis = File(resultsfolder + "velocity/velocity_anis_degree" + str(vertical_velocity_degree) + "_eps_" + str(eps) + "_nr_cells_" + str(nr_cells) + ".pvd")
+    pfile_pvd_anis = File(resultsfolder + "pressure/pressure_anis_degree" + str(vertical_velocity_degree) + "_eps_" + str(eps) + "_nr_cells_" + str(nr_cells) + ".pvd")
     ufile_pvd_anis << u
     pfile_pvd_anis << p
     
@@ -229,7 +230,10 @@ def anisotropic_solver(VP, eps, vertical_velocity_degree, mesh_h):
     # and it probably has an effect on the degree of approximation in terms of what degree is used in the \int s * phi dx integral
     # where phi is the test function, s is the source, and in the background (probably) some sort of quadrature is used to approximate this integral.
     # the degree of the quadrature is this degree, probably, or something similar.
-    nascent_delta_instance = nascent_delta(eps, degree=10)
+    # Also: if degree is set to a high value, e.g. degree = 20, a warning message comes from fenics:
+    # "WARNING: The number of integration points for each cell will be: 144"
+    # i.e. this degree variable is responsable for the number of integration points
+    nascent_delta_instance = nascent_delta(eps, degree = 10)
     L = inner(nascent_delta_instance, d) * dx
     
     A, b = assemble_system(a, L, bcc)
@@ -237,7 +241,7 @@ def anisotropic_solver(VP, eps, vertical_velocity_degree, mesh_h):
     solver = KrylovSolver('gmres', 'ilu')
     solver.solve(A, c_sol.vector(), b)
     
-    cfile_pvd_anis = File(resultsfolder + "concentration/concentration_anis_degree" + str(vertical_velocity_degree) + "_eps_" + str(eps) + "_celldivision_" + str(cells_division) + ".pvd")
+    cfile_pvd_anis = File(resultsfolder + "concentration/concentration_anis_degree" + str(vertical_velocity_degree) + "_eps_" + str(eps) + "_nr_cells_" + str(nr_cells) + ".pvd")
     cfile_pvd_anis << c_sol
     print(eps)
     print("ANIS. c: %.15g" % c_sol.vector().norm("l2"))
@@ -299,6 +303,11 @@ def refine_domain(cells_division, eps):
     VP = VP_functionspace(mesh_h, vertical_velocity_degree_anis)
     up_sol_anis_eps = Function(VP)
     up_sol_anis_eps = anisotropic_solver(VP, eps, vertical_velocity_degree_anis, mesh_h)
+    
+    vertical_velocity_degree_hydr = 1
+    VPH = VP_functionspace(mesh_h, vertical_velocity_degree_hydr)
+    up_ = Function(VPH)
+    up_sol_hydr = hydrostatic_solver(VPH, up_, vertical_velocity_degree_hydr, mesh_h)
 
 # **********************************************
 # *** Define hydrostatic variational problem ***
@@ -353,14 +362,15 @@ if (doDegree1Anisopic):
 # ************************** Loop in h *************************
 # **************************************************************
 
-print("Loop in h.")
+if (doRefineDomain):
+    print("Loop in h.")
 
-eps = 1.0
-cells_exp = 4
-cells_division = 2 ** cells_exp # to control the number of cells, UnitSquareMesh(nx, nx)
-while cells_division < 2 ** 8:
-    refine_domain(cells_division, eps)
-    cells_division = 2 * cells_division
+    eps = 5e-04
+    nx_exp = 4
+    nx = 2 ** nx_exp # to control the number of cells, UnitSquareMesh(nx, nx)
+    while nx < 2 ** 8:
+        refine_domain(nx, eps)
+        nx = 2 * nx
 
 # *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- #
 
