@@ -392,9 +392,6 @@ if (doErrorPlay):
     # step3: define an alternative set of boundary conditions, set them as arguments so they can be chosen when calling a function.
     
 
-
-# firstly, let's use u = sin(x)sin(z)
-
 # *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- #
 
 # improvement ideas:
