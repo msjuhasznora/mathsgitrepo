@@ -48,6 +48,7 @@ doAnisotropicLoop = False
 doInitGuessHydro = False
 doDegree1Anisopic = False
 doRefineDomain = True
+doErrorPlay = True
 
 mesh = UnitSquareMesh(30, 30)
 
@@ -371,6 +372,28 @@ if (doRefineDomain):
     while nx < 2 ** 8:
         refine_domain(nx, eps)
         nx = 2 * nx
+
+if (doErrorPlay):
+
+    # the following setup provides a function that is divergence-free and works with periodic BCs.
+    # in other words, solving for periodic BCs with this particular f, this is the solution.
+    
+    # the following works for eps being 1.
+    u_exact1 = Expression('sin(2*pi*x[0])*cos(2*pi*x[1])', degree = 3)
+    u_exact2 = Expression('-cos(2*pi*x[0])*sin(2*pi*x[1])', degree = 3)
+    p_exact = Expression('(1-x[1]))+x[0]', degree = 3)
+    
+    # substituting these three functions into the strong form, for the right-hand side we get:
+    f_1 = Expression('cos(2*pi*x[1])*(sin(2*pi*x[0]) + 2*pi*cos(2*pi*x[0])) + sin(2*pi*x[1])*(cos(2*pi*x[0]) + 2*pi*sin(2*pi*x[0])) + 4*pi*pi*2*sin(2*pi*x[0])*cos(2*pi*x[1]) + 1', degree = 3)
+    f_2 = Expression('sin(2*pi*x[0])*(cos(2*pi*x[1]) + 2*pi*sin(2*pi*x[1])) + cos(2*pi*x[0])*(sin(2*pi*x[1]) + 2*pi*cos(2*pi*x[1])) - 4*pi*pi*2*cos(2*pi*x[0])*sin(2*pi*x[1]) - 1', degree = 3)
+    
+    # step2: prepare the solvers to have a forcing term
+    
+    # step3: define an alternative set of boundary conditions, set them as arguments so they can be chosen when calling a function.
+    
+
+
+# firstly, let's use u = sin(x)sin(z)
 
 # *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- #
 
