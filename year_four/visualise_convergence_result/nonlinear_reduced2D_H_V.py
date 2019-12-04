@@ -13,7 +13,7 @@ import numpy
 
 # Define constants
 
-epsilon_lower_limit = 5e-04 #up 1.0e-07 c 5e-04
+epsilon_lower_limit = 1.0e-07 #up 1.0e-07 c 5e-04
 mu_1 = Constant(1.0)
 mu_2 = Constant(1.0)
 
@@ -41,10 +41,10 @@ resultsfolder = str(timestamp) + xargs.resultfolder + "/"
 
 verbose = True
 
-doHydrostatic = True
-doAnisotropicLoop = True
-doInitGuessHydro = True
-doDegree1Anisopic = True
+doHydrostatic = False
+doAnisotropicLoop = False
+doInitGuessHydro = False
+doDegree1Anisopic = False
 doErrorPlay = True
 
 mesh = UnitSquareMesh(30, 30)
@@ -111,7 +111,7 @@ def boundaryconditionserrorestimate(VP):
     zerolateralu1 = DirichletBC(VP.sub(0).sub(0), 0, lateral_boundary)
     zerotopbottomu3 = DirichletBC(VP.sub(0).sub(1), 0, upper_bottom_boundary)
     pressureBCtop = DirichletBC(VP.sub(1), 0, upper_boundary)
-    pressureBClower = DirichletBC(VP.sub(1), 1, lower_boundary)
+    pressureBClower = DirichletBC(VP.sub(1), 0, lower_boundary)
     bcuerrest = [zerolateralu1, zerotopbottomu3, pressureBCtop, pressureBClower]
     return bcuerrest
 
@@ -203,7 +203,7 @@ def hydrostatic_solver(VP, up_, vertical_velocity_degree, mesh_h, f1, f3, theta,
     
     return up_
     
-def anisotropic_solver(VP, eps, vertical_velocity_degree, mesh_h, f1, f3, theta, bcu):
+def anisotropic_solver(VP, eps, vertical_velocity_degree, mesh_h, f1, f3, theta, bcu, foldermarker):
 
     nr_cells = mesh_h.num_cells()
 
@@ -235,8 +235,8 @@ def anisotropic_solver(VP, eps, vertical_velocity_degree, mesh_h, f1, f3, theta,
 
     (u,p) = up_.split(True)
 
-    ufile_pvd_anis = File(resultsfolder + "velocity/velocity_anis_degree" + str(vertical_velocity_degree) + "_eps_" + str(eps) + "_nr_cells_" + str(nr_cells) + ".pvd")
-    pfile_pvd_anis = File(resultsfolder + "pressure/pressure_anis_degree" + str(vertical_velocity_degree) + "_eps_" + str(eps) + "_nr_cells_" + str(nr_cells) + ".pvd")
+    ufile_pvd_anis = File(resultsfolder + "velocity" + foldermarker + "/velocity_anis_degree" + str(vertical_velocity_degree) + "_eps_" + str(eps) + "_nr_cells_" + str(nr_cells) + ".pvd")
+    pfile_pvd_anis = File(resultsfolder + "pressure" + foldermarker + "/pressure_anis_degree" + str(vertical_velocity_degree) + "_eps_" + str(eps) + "_nr_cells_" + str(nr_cells) + ".pvd")
     ufile_pvd_anis << u
     pfile_pvd_anis << p
     
@@ -266,7 +266,7 @@ def anisotropic_solver(VP, eps, vertical_velocity_degree, mesh_h, f1, f3, theta,
     solver = KrylovSolver('gmres', 'ilu')
     solver.solve(A, c_sol.vector(), b)
     
-    cfile_pvd_anis = File(resultsfolder + "concentration/concentration_anis_degree" + str(vertical_velocity_degree) + "_eps_" + str(eps) + "_nr_cells_" + str(nr_cells) + ".pvd")
+    cfile_pvd_anis = File(resultsfolder + "concentration" + foldermarker + "/concentration_anis_degree" + str(vertical_velocity_degree) + "_eps_" + str(eps) + "_nr_cells_" + str(nr_cells) + ".pvd")
     cfile_pvd_anis << c_sol
     print(eps)
     print("ANIS. c: %.15g" % c_sol.vector().norm("l2"))
@@ -327,13 +327,14 @@ def solve_on_refined_domain(nx, eps):
     vertical_velocity_degree_anis = 2
     VP = VP_functionspace(mesh_h, vertical_velocity_degree_anis)
     up_sol_anis_eps = Function(VP)
-    f1 = Expression('cos(2*pi*x[1])*(sin(2*pi*x[0]) + 2*pi*cos(2*pi*x[0])) + sin(2*pi*x[1])*(cos(2*pi*x[0]) + 2*pi*sin(2*pi*x[0])) + 4*pi*pi*2*sin(2*pi*x[0])*cos(2*pi*x[1])', degree = 5)
-    f3 = Expression('sin(2*pi*x[0])*(cos(2*pi*x[1]) + 2*pi*sin(2*pi*x[1])) + cos(2*pi*x[0])*(sin(2*pi*x[1]) + 2*pi*cos(2*pi*x[1])) - 4*pi*pi*2*cos(2*pi*x[0])*sin(2*pi*x[1])', degree = 5)
+    f1 = Expression('cos(2*pi*x[1])*(sin(2*pi*x[0]) + 2*pi*cos(2*pi*x[0])) + sin(2*pi*x[1])*(cos(2*pi*x[0]) + 2*pi*sin(2*pi*x[0])) + 4*pi*pi*2*sin(2*pi*x[0])*cos(2*pi*x[1])', degree = 3)
+    f3 = Expression('sin(2*pi*x[0])*(cos(2*pi*x[1]) + 2*pi*sin(2*pi*x[1])) + cos(2*pi*x[0])*(sin(2*pi*x[1]) + 2*pi*cos(2*pi*x[1])) - 4*pi*pi*2*cos(2*pi*x[0])*sin(2*pi*x[1])', degree = 3)
     
     wind_shear_x = 0.0
     theta = Constant((wind_shear_x, 0.0))
     bcu = boundaryconditionserrorestimate(VP)
-    up_sol_anis_eps = anisotropic_solver(VP, eps, vertical_velocity_degree_anis, mesh_h, f1, f3, theta, bcu)
+    foldermarker = "_error_estimate"
+    up_sol_anis_eps = anisotropic_solver(VP, eps, vertical_velocity_degree_anis, mesh_h, f1, f3, theta, bcu, foldermarker)
 
 # **********************************************
 # *** Define hydrostatic variational problem ***
@@ -364,10 +365,11 @@ if (doAnisotropicLoop):
     f1 = Expression('0', degree = 2)
     f3 = Expression('0', degree = 2)
     bcu = boundaryconditions(VP)
+    foldermarker = "_eps_conv"
 
     while eps > epsilon_lower_limit:
     
-        up_sol_anis_eps = anisotropic_solver(VP, eps, vertical_velocity_degree_anis, mesh, f1, f3, theta, bcu)
+        up_sol_anis_eps = anisotropic_solver(VP, eps, vertical_velocity_degree_anis, mesh, f1, f3, theta, bcu, foldermarker)
         difference_info(eps, up_sol_anis_eps, VP, up_sol_hydr, VPH)
         eps = eps / 2.0
     
@@ -393,10 +395,11 @@ if (doDegree1Anisopic):
     f1 = Expression('0', degree = 2)
     f3 = Expression('0', degree = 2)
     bcu = boundaryconditions(VP)
+    foldermarker = "_eps_conv"
 
     while eps > epsilon_lower_limit:
     
-        anisotropic_solver(VP, eps, vertical_velocity_degree_anis, mesh, f1, f3, theta, bcu)
+        anisotropic_solver(VP, eps, vertical_velocity_degree_anis, mesh, f1, f3, theta, bcu, foldermarker)
         eps = eps / 2.0
 
 # **************************************************************
