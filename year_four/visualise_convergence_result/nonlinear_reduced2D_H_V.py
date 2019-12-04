@@ -17,6 +17,8 @@ epsilon_lower_limit = 1.0e-07 #up 1.0e-07 c 5e-04
 mu_1 = Constant(1.0)
 mu_2 = Constant(1.0)
 
+errorvalues = []
+
 anisotropic_norm_u1_values = []
 anisotropic_norm_u3_values = []
 anisotropic_norm_p_values = []
@@ -318,27 +320,13 @@ def difference_info(eps, up_sol_anis_eps, VPA, up_sol_hydr, VPH):
         print("Anistropic Interpolated - Hydrostatic. u3: %.15g" % (u3_interpolate_hydr.vector() - u3_sol_hydr.vector()).norm("l2"))
         print("Anistropic Interpolated - Hydrostatic. p: %.15g" % (p_interpolate_hydr.vector() - p_sol_hydr.vector()).norm("l2"))
     
-
-def solve_on_refined_domain(nx, eps):
-
+def solve_on_refined_domain(nx, eps, vertical_velocity_degree_anis, f1, f3, theta, foldermarker):
     mesh_h = UnitSquareMesh(nx, nx)
-    print("h: %.15g" % nx)
-    
-    vertical_velocity_degree_anis = 2
     VP = VP_functionspace(mesh_h, vertical_velocity_degree_anis)
-    up_sol_anis_eps = Function(VP)
-    f1 = Expression('cos(2*pi*x[1])*(sin(2*pi*x[0]) + 2*pi*cos(2*pi*x[0])) + sin(2*pi*x[1])*(cos(2*pi*x[0]) + 2*pi*sin(2*pi*x[0])) + 4*pi*pi*2*sin(2*pi*x[0])*cos(2*pi*x[1])', degree = 5)
-    f3 = Expression('sin(2*pi*x[0])*(cos(2*pi*x[1]) + 2*pi*sin(2*pi*x[1])) + cos(2*pi*x[0])*(sin(2*pi*x[1]) + 2*pi*cos(2*pi*x[1])) - 4*pi*pi*2*cos(2*pi*x[0])*sin(2*pi*x[1]) - 1', degree = 5)
-    
-    #f1 = Expression('0', degree = 3)
-    #f3 = Expression('0', degree = 3)
-    wind_shear_x = 0.0
-    theta = Constant((wind_shear_x, 0.0))
     #bcu = boundaryconditions(VP)
     bcu = boundaryconditionserrorestimate(VP)
-    
-    foldermarker = "_error_estimate"
     up_sol_anis_eps = anisotropic_solver(VP, eps, vertical_velocity_degree_anis, mesh_h, f1, f3, theta, bcu, foldermarker)
+    return up_sol_anis_eps
 
 # **********************************************
 # *** Define hydrostatic variational problem ***
@@ -411,19 +399,38 @@ if (doDegree1Anisopic):
 # **************************************************************
 
 if (doErrorPlay):
-    print("Loop in h.")
+
+    vertical_velocity_degree_anis = 2
+    foldermarker = "_error_estimate"
     eps = 1.0
+    
+    #f1 = Expression('0', degree = 3)
+    #f3 = Expression('0', degree = 3)
     # the following setup provides a function that is divergence-free and works with the errorEstimateBC set.
-    u_exact1 = Expression('sin(2*pi*x[0])*cos(2*pi*x[1])', degree = 2)
-    u_exact3 = Expression('-cos(2*pi*x[0])*sin(2*pi*x[1])', degree = 2)
+    wind_shear_x = 0.0
+    theta = Constant((wind_shear_x, 0.0))
+    u_exact1 = Expression('sin(2*pi*x[0])*cos(2*pi*x[1])', degree = 10)
+    u_exact3 = Expression('-cos(2*pi*x[0])*sin(2*pi*x[1])', degree = 10)
+    p_exact = Expression('1 - x[1]', degree = 10)
     # substituting these functions into the strong form, for the right-hand side we get f1, f3.
+    
+    f1 = Expression('cos(2*pi*x[1])*(sin(2*pi*x[0]) + 2*pi*cos(2*pi*x[0])) + sin(2*pi*x[1])*(cos(2*pi*x[0]) + 2*pi*sin(2*pi*x[0])) + 4*pi*pi*2*sin(2*pi*x[0])*cos(2*pi*x[1])', degree = 3)
+    f3 = Expression('sin(2*pi*x[0])*(cos(2*pi*x[1]) + 2*pi*sin(2*pi*x[1])) + cos(2*pi*x[0])*(sin(2*pi*x[1]) + 2*pi*cos(2*pi*x[1])) - 4*pi*pi*2*cos(2*pi*x[0])*sin(2*pi*x[1]) - 1', degree = 3)
 
     nx_exp = 4
     nx = 2 ** nx_exp # to control the number of cells, UnitSquareMesh(nx, nx)
     while nx < 2 ** 8:
-        solve_on_refined_domain(nx, eps)
-        # calculate norm(u_sol - u_exact)
+        up_sol_anis_eps = solve_on_refined_domain(nx, eps, vertical_velocity_degree_anis, f1, f3, theta, foldermarker)
+        (u, p) = up_sol_anis_eps.split(True)
+        (u1, u3) = u.split(True)
+        Eu1 = errornorm(u_exact1, u1, norm_type='L2')
+        Eu3 = errornorm(u_exact3, u3, norm_type='L2')
+        errorvalues.append(nx)
+        errorvalues.append(Eu1)
+        errorvalues.append(Eu3)
         nx = 2 * nx
+        
+    np.savetxt(resultsfolder + "errorvalues.txt", errorvalues)
 
 
 # *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- #
