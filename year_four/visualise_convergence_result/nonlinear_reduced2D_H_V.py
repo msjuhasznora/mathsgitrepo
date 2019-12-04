@@ -330,9 +330,13 @@ def solve_on_refined_domain(nx, eps):
     f1 = Expression('cos(2*pi*x[1])*(sin(2*pi*x[0]) + 2*pi*cos(2*pi*x[0])) + sin(2*pi*x[1])*(cos(2*pi*x[0]) + 2*pi*sin(2*pi*x[0])) + 4*pi*pi*2*sin(2*pi*x[0])*cos(2*pi*x[1])', degree = 3)
     f3 = Expression('sin(2*pi*x[0])*(cos(2*pi*x[1]) + 2*pi*sin(2*pi*x[1])) + cos(2*pi*x[0])*(sin(2*pi*x[1]) + 2*pi*cos(2*pi*x[1])) - 4*pi*pi*2*cos(2*pi*x[0])*sin(2*pi*x[1])', degree = 3)
     
+    #f1 = Expression('0', degree = 3)
+    #f3 = Expression('0', degree = 3)
     wind_shear_x = 0.0
     theta = Constant((wind_shear_x, 0.0))
+    #bcu = boundaryconditions(VP)
     bcu = boundaryconditionserrorestimate(VP)
+    
     foldermarker = "_error_estimate"
     up_sol_anis_eps = anisotropic_solver(VP, eps, vertical_velocity_degree_anis, mesh_h, f1, f3, theta, bcu, foldermarker)
 
