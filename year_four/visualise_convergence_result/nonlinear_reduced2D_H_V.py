@@ -113,8 +113,9 @@ def boundaryconditionserrorestimate(VP):
     zerolateralu1 = DirichletBC(VP.sub(0).sub(0), 0.0, lateral_boundary)
     zerotopbottomu3 = DirichletBC(VP.sub(0).sub(1), 0.0, upper_bottom_boundary)
     pressureBCtop = DirichletBC(VP.sub(1), 0.0, upper_boundary)
-    pressureBClower = DirichletBC(VP.sub(1), 1.0, lower_boundary)
-    bcuerrest = [zerolateralu1, zerotopbottomu3, pressureBCtop, pressureBClower]
+    pressureBClower = DirichletBC(VP.sub(1), 0.0, lower_boundary)
+    pressureBClateral = DirichletBC(VP.sub(1), 0.0, lateral_boundary)
+    bcuerrest = [zerolateralu1, zerotopbottomu3, pressureBCtop, pressureBClower, pressureBClateral]
     return bcuerrest
 
 def writedifference(degree_anis, degree_hydr):
@@ -409,13 +410,13 @@ if (doErrorPlay):
     # the following setup provides a function that is divergence-free and works with the errorEstimateBC set.
     wind_shear_x = 0.0
     theta = Constant((wind_shear_x, 0.0))
-    u_exact1 = Expression('sin(2*pi*x[0])*cos(2*pi*x[1])', degree = 10)
-    u_exact3 = Expression('-cos(2*pi*x[0])*sin(2*pi*x[1])', degree = 10)
-    p_exact = Expression('1 - x[1]', degree = 10)
+    u_exact1 = Expression('sin(2*pi*x[0])*cos(2*pi*x[1])', degree = 5)
+    u_exact3 = Expression('-cos(2*pi*x[0])*sin(2*pi*x[1])', degree = 5)
+    p_exact = Expression('sin(2*pi*x[0])*sin(2*pi*x[1])', degree = 5)
     # substituting these functions into the strong form, for the right-hand side we get f1, f3.
     
-    f1 = Expression('cos(2*pi*x[1])*(sin(2*pi*x[0]) + 2*pi*cos(2*pi*x[0])) + sin(2*pi*x[1])*(cos(2*pi*x[0]) + 2*pi*sin(2*pi*x[0])) + 4*pi*pi*2*sin(2*pi*x[0])*cos(2*pi*x[1])', degree = 3)
-    f3 = Expression('sin(2*pi*x[0])*(cos(2*pi*x[1]) + 2*pi*sin(2*pi*x[1])) + cos(2*pi*x[0])*(sin(2*pi*x[1]) + 2*pi*cos(2*pi*x[1])) - 4*pi*pi*2*cos(2*pi*x[0])*sin(2*pi*x[1]) - 1', degree = 3)
+    f1 = Expression('cos(2*pi*x[1])*(sin(2*pi*x[0]) + 2*pi*cos(2*pi*x[0])) + sin(2*pi*x[1])*(cos(2*pi*x[0]) + 2*pi*sin(2*pi*x[0])) + 4*pi*pi*2*sin(2*pi*x[0])*cos(2*pi*x[1]) + 2*pi*cos(2*pi*x[0])*sin(2*pi*x[1])', degree = 5)
+    f3 = Expression('sin(2*pi*x[0])*(cos(2*pi*x[1]) + 2*pi*sin(2*pi*x[1])) + cos(2*pi*x[0])*(sin(2*pi*x[1]) + 2*pi*cos(2*pi*x[1])) - 4*pi*pi*2*cos(2*pi*x[0])*sin(2*pi*x[1]) + 2*pi*sin(2*pi*x[0])*cos(2*pi*x[1])', degree = 5)
 
     nx_exp = 2
     nx = 2 ** nx_exp # to control the number of cells, UnitSquareMesh(nx, nx)
@@ -434,13 +435,16 @@ if (doErrorPlay):
     
     mesh_h = UnitSquareMesh(nx, nx)
     W = FunctionSpace(mesh_h, 'Lagrange', 2)
+    P = FunctionSpace(mesh_h, 'Lagrange', 1)
     u1_W = interpolate(u_exact1, W)
     u3_W = interpolate(u_exact3, W)
+    p_P = interpolate(p_exact, P)
     u_exact1_plot = File(resultsfolder + "velocity" + foldermarker + "/u_exact1_nx_" + str(nx) + ".pvd")
     u_exact1_plot << u1_W
     u_exact3_plot = File(resultsfolder + "velocity" + foldermarker + "/u_exact3_nx_" + str(nx) + ".pvd")
     u_exact3_plot << u3_W
-
+    p_exact_plot = File(resultsfolder + "pressure" + foldermarker + "/p_exact_nx_" + str(nx) + ".pvd")
+    p_exact_plot << p_P
 
 # *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- #
 
