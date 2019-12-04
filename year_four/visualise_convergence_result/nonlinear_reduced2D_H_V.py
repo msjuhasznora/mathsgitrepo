@@ -108,10 +108,10 @@ def boundaryconditionserrorestimate(VP):
     upper_bottom_boundary = UpperBottomBoundary()
     upper_boundary = UpperBoundary()
     lower_boundary = LowerBoundary()
-    zerolateralu1 = DirichletBC(VP.sub(0).sub(0), 0, lateral_boundary)
-    zerotopbottomu3 = DirichletBC(VP.sub(0).sub(1), 0, upper_bottom_boundary)
-    pressureBCtop = DirichletBC(VP.sub(1), 0, upper_boundary)
-    pressureBClower = DirichletBC(VP.sub(1), 0, lower_boundary)
+    zerolateralu1 = DirichletBC(VP.sub(0).sub(0), 0.0, lateral_boundary)
+    zerotopbottomu3 = DirichletBC(VP.sub(0).sub(1), 0.0, upper_bottom_boundary)
+    pressureBCtop = DirichletBC(VP.sub(1), 0.0, upper_boundary)
+    pressureBClower = DirichletBC(VP.sub(1), 1.0, lower_boundary)
     bcuerrest = [zerolateralu1, zerotopbottomu3, pressureBCtop, pressureBClower]
     return bcuerrest
 
@@ -327,8 +327,8 @@ def solve_on_refined_domain(nx, eps):
     vertical_velocity_degree_anis = 2
     VP = VP_functionspace(mesh_h, vertical_velocity_degree_anis)
     up_sol_anis_eps = Function(VP)
-    f1 = Expression('cos(2*pi*x[1])*(sin(2*pi*x[0]) + 2*pi*cos(2*pi*x[0])) + sin(2*pi*x[1])*(cos(2*pi*x[0]) + 2*pi*sin(2*pi*x[0])) + 4*pi*pi*2*sin(2*pi*x[0])*cos(2*pi*x[1])', degree = 3)
-    f3 = Expression('sin(2*pi*x[0])*(cos(2*pi*x[1]) + 2*pi*sin(2*pi*x[1])) + cos(2*pi*x[0])*(sin(2*pi*x[1]) + 2*pi*cos(2*pi*x[1])) - 4*pi*pi*2*cos(2*pi*x[0])*sin(2*pi*x[1])', degree = 3)
+    f1 = Expression('cos(2*pi*x[1])*(sin(2*pi*x[0]) + 2*pi*cos(2*pi*x[0])) + sin(2*pi*x[1])*(cos(2*pi*x[0]) + 2*pi*sin(2*pi*x[0])) + 4*pi*pi*2*sin(2*pi*x[0])*cos(2*pi*x[1])', degree = 5)
+    f3 = Expression('sin(2*pi*x[0])*(cos(2*pi*x[1]) + 2*pi*sin(2*pi*x[1])) + cos(2*pi*x[0])*(sin(2*pi*x[1]) + 2*pi*cos(2*pi*x[1])) - 4*pi*pi*2*cos(2*pi*x[0])*sin(2*pi*x[1]) - 1', degree = 5)
     
     #f1 = Expression('0', degree = 3)
     #f3 = Expression('0', degree = 3)
