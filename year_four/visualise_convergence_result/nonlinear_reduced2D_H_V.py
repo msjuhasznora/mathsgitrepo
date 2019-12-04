@@ -417,7 +417,7 @@ if (doErrorPlay):
     f1 = Expression('cos(2*pi*x[1])*(sin(2*pi*x[0]) + 2*pi*cos(2*pi*x[0])) + sin(2*pi*x[1])*(cos(2*pi*x[0]) + 2*pi*sin(2*pi*x[0])) + 4*pi*pi*2*sin(2*pi*x[0])*cos(2*pi*x[1])', degree = 3)
     f3 = Expression('sin(2*pi*x[0])*(cos(2*pi*x[1]) + 2*pi*sin(2*pi*x[1])) + cos(2*pi*x[0])*(sin(2*pi*x[1]) + 2*pi*cos(2*pi*x[1])) - 4*pi*pi*2*cos(2*pi*x[0])*sin(2*pi*x[1]) - 1', degree = 3)
 
-    nx_exp = 4
+    nx_exp = 2
     nx = 2 ** nx_exp # to control the number of cells, UnitSquareMesh(nx, nx)
     while nx < 2 ** 8:
         up_sol_anis_eps = solve_on_refined_domain(nx, eps, vertical_velocity_degree_anis, f1, f3, theta, foldermarker)
@@ -431,6 +431,15 @@ if (doErrorPlay):
         nx = 2 * nx
         
     np.savetxt(resultsfolder + "errorvalues.txt", errorvalues)
+    
+    mesh_h = UnitSquareMesh(nx, nx)
+    W = FunctionSpace(mesh_h, 'Lagrange', 2)
+    u1_W = interpolate(u_exact1, W)
+    u3_W = interpolate(u_exact3, W)
+    u_exact1_plot = File(resultsfolder + "velocity" + foldermarker + "/u_exact1_nx_" + str(nx) + ".pvd")
+    u_exact1_plot << u1_W
+    u_exact3_plot = File(resultsfolder + "velocity" + foldermarker + "/u_exact3_nx_" + str(nx) + ".pvd")
+    u_exact3_plot << u3_W
 
 
 # *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- #
