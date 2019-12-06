@@ -98,7 +98,17 @@ class LowerBoundary(SubDomain):
     def inside(self, x, on_boundary):
         tol = 1E-14
         return on_boundary and near(x[1], 0.0, tol)
-
+        
+class LeftBoundary(SubDomain):
+    def inside(self, x, on_boundary):
+        tol = 1E-14
+        return on_boundary and near(x[0], 0.0, tol)
+ 
+class RightBoundary(SubDomain):
+    def inside(self, x, on_boundary):
+        tol = 1E-14
+        return on_boundary and near(x[0], 1.0, tol)
+     
 class CornerBoundery(SubDomain):
     def inside(self, x, on_boundary):
         tol = 1E-14
@@ -114,19 +124,23 @@ def boundaryconditionserrorestimate(VP):
 
     lateral_boundary = LateralBoundary()
     upper_bottom_boundary = UpperBottomBoundary()
-    #upper_boundary = UpperBoundary()
-    #lower_boundary = LowerBoundary()
+    upper_boundary = UpperBoundary()
+    lower_boundary = LowerBoundary()
+    left_boundary = LeftBoundary()
+    right_boundary = RightBoundary()
     
-    zerolateralu1 = DirichletBC(VP.sub(0).sub(0), 0.0, lateral_boundary)
-    zerotopbottomu3 = DirichletBC(VP.sub(0).sub(1), 0.0, upper_bottom_boundary)
+    zeroleftu1 = DirichletBC(VP.sub(0).sub(0), 0.0, left_boundary)
+    onerightu1 = DirichletBC(VP.sub(0).sub(0), 1.0, right_boundary)
+    zeroloweru3 = DirichletBC(VP.sub(0).sub(1), 0.0, lower_boundary)
+    minusoneupperu3 = DirichletBC(VP.sub(0).sub(1), -1.0, upper_boundary)
     
-    p_lateral = Expression('sin(2*pi*x[1])', degree = 3)
-    p_upperbottom = Expression('-sin(2*pi*x[0])', degree = 3)
+    p_lateral = Expression('0', degree = 3)
+    p_upperbottom = Expression('0', degree = 3)
     pressureBClateral = DirichletBC(VP.sub(1), p_lateral, lateral_boundary)
     pressureBCupperbottom = DirichletBC(VP.sub(1), p_upperbottom, upper_bottom_boundary)
     
-    #bcuerrest = [zerolateralu1, zerotopbottomu3, pressureBClateral, pressureBCupperbottom]
-    bcuerrest = [zerolateralu1, zerotopbottomu3]
+    bcuerrest = [zeroleftu1, onerightu1, zeroloweru3, minusoneupperu3, pressureBClateral, pressureBCupperbottom]
+
     return bcuerrest
 
 def writedifference(degree_anis, degree_hydr):
@@ -421,13 +435,13 @@ if (doErrorPlay):
     # the following setup provides a function that is divergence-free and works with the errorEstimateBC set.
     wind_shear_x = 0.0
     theta = Constant((wind_shear_x, 0.0))
-    u_exact1 = Expression('sin(2*pi*x[0])*cos(2*pi*x[1])', degree = 10)
-    u_exact3 = Expression('-cos(2*pi*x[0])*sin(2*pi*x[1])', degree = 10)
-    p_exact = Expression('-sin(2*pi*x[0])*cos(2*pi*x[1]) + cos(2*pi*x[0])*sin(2*pi*x[1])', degree = 10)
+    u_exact1 = Expression('x[0]', degree = 5)
+    u_exact3 = Expression('-x[1]', degree = 5)
+    p_exact = Expression('0', degree = 5)
     # substituting these functions into the strong form, for the right-hand side we get f1, f3.
     
-    f1 = Expression('cos(2*pi*x[1])*(sin(2*pi*x[0]) + 2*pi*cos(2*pi*x[0])) + sin(2*pi*x[1])*(cos(2*pi*x[0]) + 2*pi*sin(2*pi*x[0])) + 4*pi*pi*2*sin(2*pi*x[0])*cos(2*pi*x[1]) - 2*pi*cos(2*pi*x[0])*cos(2*pi*x[1]) - 2*pi*sin(2*pi*x[0])*sin(2*pi*x[1])', degree = 3)
-    f3 = Expression('sin(2*pi*x[0])*(cos(2*pi*x[1]) + 2*pi*sin(2*pi*x[1])) + cos(2*pi*x[0])*(sin(2*pi*x[1]) + 2*pi*cos(2*pi*x[1])) - 4*pi*pi*2*cos(2*pi*x[0])*sin(2*pi*x[1]) + 2*pi*sin(2*pi*x[0])*sin(2*pi*x[1]) + 2*pi*cos(2*pi*x[0])*cos(2*pi*x[1])', degree = 3)
+    f1 = Expression('x[0]', degree = 5)
+    f3 = Expression('x[1]', degree = 5)
 
     nx_exp = 2
     nx = 2 ** nx_exp # to control the number of cells, UnitSquareMesh(nx, nx)
