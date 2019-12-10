@@ -43,10 +43,10 @@ resultsfolder = str(timestamp) + xargs.resultfolder + "/"
 
 verbose = True
 
-doHydrostatic = False
-doAnisotropicLoop = False
-doInitGuessHydro = False
-doDegree1Anisopic = False
+doHydrostatic = True
+doAnisotropicLoop = True
+doInitGuessHydro = True
+doDegree1Anisopic = True
 doErrorPlay = True
 
 mesh = UnitSquareMesh(30, 30)
@@ -108,11 +108,6 @@ class RightBoundary(SubDomain):
     def inside(self, x, on_boundary):
         tol = 1E-14
         return on_boundary and near(x[0], 1.0, tol)
-     
-class CornerBoundery(SubDomain):
-    def inside(self, x, on_boundary):
-        tol = 1E-14
-        return on_boundary and ((near(x[0], 0.0, tol) and near(x[1], 0.0, tol)) or (near(x[0], 1.0, tol) and near(x[1], 1.0, tol)))
 
 def boundaryconditions(VP):
     noslipbasin = DirichletBC(VP.sub(0), Constant((0, 0)), "on_boundary && x[1] < 1.0 - DOLFIN_EPS")
@@ -129,17 +124,21 @@ def boundaryconditionserrorestimate(VP):
     left_boundary = LeftBoundary()
     right_boundary = RightBoundary()
     
-    zeroleftu1 = DirichletBC(VP.sub(0).sub(0), 0.0, left_boundary)
-    onerightu1 = DirichletBC(VP.sub(0).sub(0), 1.0, right_boundary)
-    zeroloweru3 = DirichletBC(VP.sub(0).sub(1), 0.0, lower_boundary)
-    minusoneupperu3 = DirichletBC(VP.sub(0).sub(1), -1.0, upper_boundary)
+    #zeroleftu1 = DirichletBC(VP.sub(0).sub(0), 0.0, left_boundary)
+    #onerightu1 = DirichletBC(VP.sub(0).sub(0), 1.0, right_boundary)
+    #zeroloweru3 = DirichletBC(VP.sub(0).sub(1), 0.0, lower_boundary)
+    #minusoneupperu3 = DirichletBC(VP.sub(0).sub(1), -1.0, upper_boundary)
+    
+    zerolateralu1 = DirichletBC(VP.sub(0).sub(0), 0.0, lateral_boundary)
+    zerotopbottomu3 = DirichletBC(VP.sub(0).sub(1), 0.0, upper_bottom_boundary)
     
     p_lateral = Expression('0', degree = 3)
     p_upperbottom = Expression('0', degree = 3)
     pressureBClateral = DirichletBC(VP.sub(1), p_lateral, lateral_boundary)
     pressureBCupperbottom = DirichletBC(VP.sub(1), p_upperbottom, upper_bottom_boundary)
     
-    bcuerrest = [zeroleftu1, onerightu1, zeroloweru3, minusoneupperu3, pressureBClateral, pressureBCupperbottom]
+    #bcuerrest = [zeroleftu1, onerightu1, zeroloweru3, minusoneupperu3, pressureBClateral, pressureBCupperbottom]
+    bcuerrest = [zerolateralu1, zerotopbottomu3, pressureBClateral, pressureBCupperbottom]
 
     return bcuerrest
 
@@ -435,13 +434,20 @@ if (doErrorPlay):
     # the following setup provides a function that is divergence-free and works with the errorEstimateBC set.
     wind_shear_x = 0.0
     theta = Constant((wind_shear_x, 0.0))
-    u_exact1 = Expression('x[0]', degree = 5)
-    u_exact3 = Expression('-x[1]', degree = 5)
+    #u_exact1 = Expression('x[0]', degree = 5)
+    #u_exact3 = Expression('-x[1]', degree = 5)
+    
+    u_exact1 = Expression('sin(2*pi*x[0])*cos(2*pi*x[1])', degree = 5)
+    u_exact3 = Expression('-cos(2*pi*x[0])*sin(2*pi*x[1])', degree = 5)
+    
     p_exact = Expression('0', degree = 5)
     # substituting these functions into the strong form, for the right-hand side we get f1, f3.
     
-    f1 = Expression('x[0]', degree = 5)
-    f3 = Expression('x[1]', degree = 5)
+    #f1 = Expression('x[0]', degree = 5)
+    #f3 = Expression('x[1]', degree = 5)
+    
+    f1 = Expression('2*pi*sin(2*pi*x[0])*sin(2*pi*x[1])*sin(2*pi*x[1])*cos(2*pi*x[0]) + 2*pi*sin(2*pi*x[0])*cos(2*pi*x[0])*cos(2*pi*x[1])*cos(2*pi*x[1]) + 8*pi*pi*sin(2*pi*x[0])*cos(2*pi*x[1])', degree = 5)
+    f3 = Expression('2*pi*sin(2*pi*x[0])*sin(2*pi*x[0])*sin(2*pi*x[1])*cos(2*pi*x[1]) + 2*pi*sin(2*pi*x[1])*cos(2*pi*x[0])*cos(2*pi*x[0])*cos(2*pi*x[1]) - 8*pi*pi*sin(2*pi*x[1])*cos(2*pi*x[0])', degree = 5)
 
     nx_exp = 2
     nx = 2 ** nx_exp # to control the number of cells, UnitSquareMesh(nx, nx)
@@ -451,9 +457,17 @@ if (doErrorPlay):
         (u1, u3) = u.split(True)
         Eu1 = errornorm(u_exact1, u1, norm_type='L2')
         Eu3 = errornorm(u_exact3, u3, norm_type='L2')
+        Ep = errornorm(p_exact, p, norm_type='L2')
+        Eu1_H = errornorm(u_exact1, u1, norm_type='H1')
+        Eu3_H = errornorm(u_exact3, u3, norm_type='H1')
+        Ep_H = errornorm(p_exact, p, norm_type='H1')
         errorvalues.append(nx)
         errorvalues.append(Eu1)
         errorvalues.append(Eu3)
+        errorvalues.append(Ep)
+        errorvalues.append(Eu1_H)
+        errorvalues.append(Eu3_H)
+        errorvalues.append(Ep_H)
         nx = 2 * nx
         
     np.savetxt(resultsfolder + "errorvalues.txt", errorvalues)
