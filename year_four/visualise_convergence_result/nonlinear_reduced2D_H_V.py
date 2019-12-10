@@ -43,13 +43,119 @@ resultsfolder = str(timestamp) + xargs.resultfolder + "/"
 
 verbose = True
 
-doHydrostatic = True
-doAnisotropicLoop = True
-doInitGuessHydro = True
-doDegree1Anisopic = True
+doHydrostatic = False
+doAnisotropicLoop = False
+doInitGuessHydro = False
+doDegree1Anisopic = False
 doErrorPlay = True
 
 mesh = UnitSquareMesh(30, 30)
+
+# set boundary domains
+
+class LateralBoundary(SubDomain):
+    def inside(self, x, on_boundary):
+        tol = 1E-14
+        return on_boundary and (near(x[0], 0.0, tol) or near(x[0], 1.0, tol))
+
+class UpperBottomBoundary(SubDomain):
+    def inside(self, x, on_boundary):
+        tol = 1E-14
+        return on_boundary and (near(x[1], 0.0, tol) or near(x[1], 1.0, tol))
+
+class UpperBoundary(SubDomain):
+    def inside(self, x, on_boundary):
+        tol = 1E-14
+        return on_boundary and near(x[1], 1.0)
+    
+class LowerBoundary(SubDomain):
+    def inside(self, x, on_boundary):
+        tol = 1E-14
+        return on_boundary and near(x[1], 0.0, tol)
+        
+class LeftBoundary(SubDomain):
+    def inside(self, x, on_boundary):
+        tol = 1E-14
+        return on_boundary and near(x[0], 0.0, tol)
+ 
+class RightBoundary(SubDomain):
+    def inside(self, x, on_boundary):
+        tol = 1E-14
+        return on_boundary and near(x[0], 1.0, tol)
+
+def boundaryconditions_pd(id, VP):
+
+    lateral_boundary = LateralBoundary()
+    upper_bottom_boundary = UpperBottomBoundary()
+    upper_boundary = UpperBoundary()
+    lower_boundary = LowerBoundary()
+    left_boundary = LeftBoundary()
+    right_boundary = RightBoundary()
+
+    if id == 0:
+    
+        noslipbasin = DirichletBC(VP.sub(0), Constant((0, 0)), "on_boundary && x[1] < 1.0 - DOLFIN_EPS")
+        zerotopvertical = DirichletBC(VP.sub(0).sub(1), 0, "on_boundary && x[1] > 1.0 - DOLFIN_EPS")
+        bcu = [noslipbasin, zerotopvertical]
+        return bcu
+
+    elif id == 1 :
+    
+        zerolateralu1 = DirichletBC(VP.sub(0).sub(0), 0.0, lateral_boundary)
+        zerotopbottomu3 = DirichletBC(VP.sub(0).sub(1), 0.0, upper_bottom_boundary)
+        p_lateral = Expression('0', degree = 3)
+        p_upperbottom = Expression('0', degree = 3)
+        pressureBClateral = DirichletBC(VP.sub(1), p_lateral, lateral_boundary)
+        pressureBCupperbottom = DirichletBC(VP.sub(1), p_upperbottom, upper_bottom_boundary)
+        bcuerrest = [zerolateralu1, zerotopbottomu3, pressureBClateral, pressureBCupperbottom]
+        return bcuerrest
+        
+    elif id == 2:
+
+        zeroleftu1 = DirichletBC(VP.sub(0).sub(0), 0.0, left_boundary)
+        onerightu1 = DirichletBC(VP.sub(0).sub(0), 1.0, right_boundary)
+        zeroloweru3 = DirichletBC(VP.sub(0).sub(1), 0.0, lower_boundary)
+        minusoneupperu3 = DirichletBC(VP.sub(0).sub(1), -1.0, upper_boundary)
+
+        p_lateral = Expression('0', degree = 3)
+        p_upperbottom = Expression('0', degree = 3)
+        pressureBClateral = DirichletBC(VP.sub(1), p_lateral, lateral_boundary)
+        pressureBCupperbottom = DirichletBC(VP.sub(1), p_upperbottom, upper_bottom_boundary)
+
+        bcuerrest = [zeroleftu1, onerightu1, zeroloweru3, minusoneupperu3, pressureBClateral, pressureBCupperbottom]
+
+        return bcuerrest
+    
+    else:
+        return []
+
+class ProblemData(UserExpression):
+    def __init__(self, id, u1_exact, u3_exact, p_exact, f1, f3, bcs = []):
+        self.id = id
+        self.u1_exact = u1_exact
+        self.u3_exact = u3_exact
+        self.p_exact = p_exact
+        self.f1 = f1
+        self.f3 = f3
+        self.bcs = bcs
+
+# PROBLEM 2
+id = 2
+u1_exact = Expression('x[0]', degree = 5)
+u3_exact = Expression('-x[1]', degree = 5)
+p_exact = Expression('0', degree = 5)
+f1 = Expression('x[0]', degree = 5)
+f3 = Expression('x[1]', degree = 5)
+problem_data2 = ProblemData(id, u1_exact, u3_exact, p_exact, f1, f3, [])
+
+# PROBLEM 1
+id = 1
+u1_exact = Expression('sin(2*pi*x[0])*cos(2*pi*x[1])', degree = 5)
+u3_exact = Expression('-cos(2*pi*x[0])*sin(2*pi*x[1])', degree = 5)
+p_exact = Expression('0', degree = 5)
+f1 = Expression('2*pi*sin(2*pi*x[0])*sin(2*pi*x[1])*sin(2*pi*x[1])*cos(2*pi*x[0]) + 2*pi*sin(2*pi*x[0])*cos(2*pi*x[0])*cos(2*pi*x[1])*cos(2*pi*x[1]) + 8*pi*pi*sin(2*pi*x[0])*cos(2*pi*x[1])', degree = 5)
+f3 = Expression('2*pi*sin(2*pi*x[0])*sin(2*pi*x[0])*sin(2*pi*x[1])*cos(2*pi*x[1]) + 2*pi*sin(2*pi*x[1])*cos(2*pi*x[0])*cos(2*pi*x[0])*cos(2*pi*x[1]) - 8*pi*pi*sin(2*pi*x[1])*cos(2*pi*x[0])', degree = 5)
+problem_data1 = ProblemData(id, u1_exact, u3_exact, p_exact, f1, f3, [])
 
 class nascent_delta(UserExpression):
     def __init__(self,eps,**kwargs):
@@ -77,70 +183,6 @@ def VP_functionspace(mesh, v_vert_deg):
     P = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 1) #pressure
     VP = FunctionSpace(mesh, V * P)
     return VP
-
-# set boundary domains
-class UpperBoundary(SubDomain):
-    def inside(self, x, on_boundary):
-        tol = 1E-14
-        return on_boundary and near(x[1], 1.0)
-
-class LateralBoundary(SubDomain):
-    def inside(self, x, on_boundary):
-        tol = 1E-14
-        return on_boundary and (near(x[0], 0.0, tol) or near(x[0], 1.0, tol))
-
-class UpperBottomBoundary(SubDomain):
-    def inside(self, x, on_boundary):
-        tol = 1E-14
-        return on_boundary and (near(x[1], 0.0, tol) or near(x[1], 1.0, tol))
-
-class LowerBoundary(SubDomain):
-    def inside(self, x, on_boundary):
-        tol = 1E-14
-        return on_boundary and near(x[1], 0.0, tol)
-        
-class LeftBoundary(SubDomain):
-    def inside(self, x, on_boundary):
-        tol = 1E-14
-        return on_boundary and near(x[0], 0.0, tol)
- 
-class RightBoundary(SubDomain):
-    def inside(self, x, on_boundary):
-        tol = 1E-14
-        return on_boundary and near(x[0], 1.0, tol)
-
-def boundaryconditions(VP):
-    noslipbasin = DirichletBC(VP.sub(0), Constant((0, 0)), "on_boundary && x[1] < 1.0 - DOLFIN_EPS")
-    zerotopvertical = DirichletBC(VP.sub(0).sub(1), 0, "on_boundary && x[1] > 1.0 - DOLFIN_EPS")
-    bcu = [noslipbasin, zerotopvertical]
-    return bcu
-
-def boundaryconditionserrorestimate(VP):
-
-    lateral_boundary = LateralBoundary()
-    upper_bottom_boundary = UpperBottomBoundary()
-    upper_boundary = UpperBoundary()
-    lower_boundary = LowerBoundary()
-    left_boundary = LeftBoundary()
-    right_boundary = RightBoundary()
-    
-    #zeroleftu1 = DirichletBC(VP.sub(0).sub(0), 0.0, left_boundary)
-    #onerightu1 = DirichletBC(VP.sub(0).sub(0), 1.0, right_boundary)
-    #zeroloweru3 = DirichletBC(VP.sub(0).sub(1), 0.0, lower_boundary)
-    #minusoneupperu3 = DirichletBC(VP.sub(0).sub(1), -1.0, upper_boundary)
-    
-    zerolateralu1 = DirichletBC(VP.sub(0).sub(0), 0.0, lateral_boundary)
-    zerotopbottomu3 = DirichletBC(VP.sub(0).sub(1), 0.0, upper_bottom_boundary)
-    
-    p_lateral = Expression('0', degree = 3)
-    p_upperbottom = Expression('0', degree = 3)
-    pressureBClateral = DirichletBC(VP.sub(1), p_lateral, lateral_boundary)
-    pressureBCupperbottom = DirichletBC(VP.sub(1), p_upperbottom, upper_bottom_boundary)
-    
-    #bcuerrest = [zeroleftu1, onerightu1, zeroloweru3, minusoneupperu3, pressureBClateral, pressureBCupperbottom]
-    bcuerrest = [zerolateralu1, zerotopbottomu3, pressureBClateral, pressureBCupperbottom]
-
-    return bcuerrest
 
 def writedifference(degree_anis, degree_hydr):
     np.savetxt(resultsfolder + "anisotropic_norm_u1_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", anisotropic_norm_u1_values)
@@ -345,12 +387,12 @@ def difference_info(eps, up_sol_anis_eps, VPA, up_sol_hydr, VPH):
         print("Anistropic Interpolated - Hydrostatic. u3: %.15g" % (u3_interpolate_hydr.vector() - u3_sol_hydr.vector()).norm("l2"))
         print("Anistropic Interpolated - Hydrostatic. p: %.15g" % (p_interpolate_hydr.vector() - p_sol_hydr.vector()).norm("l2"))
     
-def solve_on_refined_domain(nx, eps, vertical_velocity_degree_anis, f1, f3, theta, foldermarker):
+def solve_on_refined_domain(problem_data, nx, eps, vertical_velocity_degree_anis, theta, foldermarker):
     mesh_h = UnitSquareMesh(nx, nx)
     VP = VP_functionspace(mesh_h, vertical_velocity_degree_anis)
-    #bcu = boundaryconditions(VP)
-    bcu = boundaryconditionserrorestimate(VP)
-    up_sol_anis_eps = anisotropic_solver(VP, eps, vertical_velocity_degree_anis, mesh_h, f1, f3, theta, bcu, foldermarker)
+    #bcu = boundaryconditionserrorestimate(VP)
+    bcu = boundaryconditions_pd(problem_data.id, VP)
+    up_sol_anis_eps = anisotropic_solver(VP, eps, vertical_velocity_degree_anis, mesh_h, problem_data.f1, problem_data.f3, theta, bcu, foldermarker)
     return up_sol_anis_eps
 
 # **********************************************
@@ -366,7 +408,7 @@ if (doHydrostatic):
     vertical_velocity_degree_hydr = 1
     VPH = VP_functionspace(mesh, vertical_velocity_degree_hydr)
     up_ = Function(VPH) #initial guess for the Newton solver if filled, otherwise blank and start by default
-    bcu = boundaryconditions(VPH)
+    bcu = boundaryconditions_pd(0, VPH)
     up_sol_hydr = hydrostatic_solver(VPH, up_, vertical_velocity_degree_hydr, mesh, f1, f3, theta, bcu)
 
 # **********************************************
@@ -381,7 +423,7 @@ if (doAnisotropicLoop):
     theta = Constant((wind_shear_x, 0.0))
     f1 = Expression('0', degree = 2)
     f3 = Expression('0', degree = 2)
-    bcu = boundaryconditions(VP)
+    bcu = boundaryconditions_pd(0, VP)
     foldermarker = "_eps_conv"
 
     while eps > epsilon_lower_limit:
@@ -411,7 +453,7 @@ if (doDegree1Anisopic):
     theta = Constant((wind_shear_x, 0.0))
     f1 = Expression('0', degree = 2)
     f3 = Expression('0', degree = 2)
-    bcu = boundaryconditions(VP)
+    bcu = boundaryconditions_pd(0, VP)
     foldermarker = "_eps_conv"
 
     while eps > epsilon_lower_limit:
@@ -429,38 +471,26 @@ if (doErrorPlay):
     foldermarker = "_error_estimate"
     eps = 1.0
     
-    #f1 = Expression('0', degree = 3)
-    #f3 = Expression('0', degree = 3)
     # the following setup provides a function that is divergence-free and works with the errorEstimateBC set.
     wind_shear_x = 0.0
     theta = Constant((wind_shear_x, 0.0))
-    #u_exact1 = Expression('x[0]', degree = 5)
-    #u_exact3 = Expression('-x[1]', degree = 5)
     
-    u_exact1 = Expression('sin(2*pi*x[0])*cos(2*pi*x[1])', degree = 5)
-    u_exact3 = Expression('-cos(2*pi*x[0])*sin(2*pi*x[1])', degree = 5)
-    
-    p_exact = Expression('0', degree = 5)
-    # substituting these functions into the strong form, for the right-hand side we get f1, f3.
-    
-    #f1 = Expression('x[0]', degree = 5)
-    #f3 = Expression('x[1]', degree = 5)
-    
-    f1 = Expression('2*pi*sin(2*pi*x[0])*sin(2*pi*x[1])*sin(2*pi*x[1])*cos(2*pi*x[0]) + 2*pi*sin(2*pi*x[0])*cos(2*pi*x[0])*cos(2*pi*x[1])*cos(2*pi*x[1]) + 8*pi*pi*sin(2*pi*x[0])*cos(2*pi*x[1])', degree = 5)
-    f3 = Expression('2*pi*sin(2*pi*x[0])*sin(2*pi*x[0])*sin(2*pi*x[1])*cos(2*pi*x[1]) + 2*pi*sin(2*pi*x[1])*cos(2*pi*x[0])*cos(2*pi*x[0])*cos(2*pi*x[1]) - 8*pi*pi*sin(2*pi*x[1])*cos(2*pi*x[0])', degree = 5)
+    problem_data = problem_data1
 
     nx_exp = 2
     nx = 2 ** nx_exp # to control the number of cells, UnitSquareMesh(nx, nx)
     while nx < 2 ** 8:
-        up_sol_anis_eps = solve_on_refined_domain(nx, eps, vertical_velocity_degree_anis, f1, f3, theta, foldermarker)
+    
+        up_sol_anis_eps = solve_on_refined_domain(problem_data, nx, eps, vertical_velocity_degree_anis, theta, foldermarker)
+
         (u, p) = up_sol_anis_eps.split(True)
         (u1, u3) = u.split(True)
-        Eu1 = errornorm(u_exact1, u1, norm_type='L2')
-        Eu3 = errornorm(u_exact3, u3, norm_type='L2')
-        Ep = errornorm(p_exact, p, norm_type='L2')
-        Eu1_H = errornorm(u_exact1, u1, norm_type='H1')
-        Eu3_H = errornorm(u_exact3, u3, norm_type='H1')
-        Ep_H = errornorm(p_exact, p, norm_type='H1')
+        Eu1 = errornorm(problem_data.u1_exact, u1, norm_type='L2')
+        Eu3 = errornorm(problem_data.u3_exact, u3, norm_type='L2')
+        Ep = errornorm(problem_data.p_exact, p, norm_type='L2')
+        Eu1_H = errornorm(problem_data.u1_exact, u1, norm_type='H1')
+        Eu3_H = errornorm(problem_data.u3_exact, u3, norm_type='H1')
+        Ep_H = errornorm(problem_data.p_exact, p, norm_type='H1')
         errorvalues.append(nx)
         errorvalues.append(Eu1)
         errorvalues.append(Eu3)
@@ -470,18 +500,18 @@ if (doErrorPlay):
         errorvalues.append(Ep_H)
         nx = 2 * nx
         
-    np.savetxt(resultsfolder + "errorvalues.txt", errorvalues)
+    np.savetxt(resultsfolder + "errorvalues_problemdata_" + str(problem_data.id) + ".txt", errorvalues)
     
     mesh_h = UnitSquareMesh(nx, nx)
     W = FunctionSpace(mesh_h, 'Lagrange', 2)
     P = FunctionSpace(mesh_h, 'Lagrange', 1)
-    u1_W = interpolate(u_exact1, W)
-    u3_W = interpolate(u_exact3, W)
-    p_P = interpolate(p_exact, P)
-    u_exact1_plot = File(resultsfolder + "velocity" + foldermarker + "/u_exact1_nx_" + str(nx) + ".pvd")
-    u_exact1_plot << u1_W
-    u_exact3_plot = File(resultsfolder + "velocity" + foldermarker + "/u_exact3_nx_" + str(nx) + ".pvd")
-    u_exact3_plot << u3_W
+    u1_W = interpolate(problem_data.u1_exact, W)
+    u3_W = interpolate(problem_data.u3_exact, W)
+    p_P = interpolate(problem_data.p_exact, P)
+    u1_exact_plot = File(resultsfolder + "velocity" + foldermarker + "/u1_exact_nx_" + str(nx) + ".pvd")
+    u1_exact_plot << u1_W
+    u3_exact_plot = File(resultsfolder + "velocity" + foldermarker + "/u3_exact_nx_" + str(nx) + ".pvd")
+    u3_exact_plot << u3_W
     p_exact_plot = File(resultsfolder + "pressure" + foldermarker + "/p_exact_nx_" + str(nx) + ".pvd")
     p_exact_plot << p_P
 
