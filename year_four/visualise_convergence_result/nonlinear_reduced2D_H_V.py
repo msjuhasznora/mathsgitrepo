@@ -45,10 +45,10 @@ resultsfolder = str(timestamp) + xargs.resultfolder + "/"
 
 verbose = True
 
-doHydrostatic = True
-doAnisotropicLoop = True
-doInitGuessHydro = True
-doDegree1Anisopic = True
+doHydrostatic = False
+doAnisotropicLoop = False
+doInitGuessHydro = False
+doDegree1Anisopic = False
 doErrorPlay = True
 
 mesh = UnitSquareMesh(30, 30)
