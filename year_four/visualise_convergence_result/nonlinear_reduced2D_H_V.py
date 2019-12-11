@@ -10,6 +10,7 @@ from numpy.random import rand
 from dolfin import *
 import argparse
 import numpy
+from math import log
 
 # Define constants
 
@@ -18,6 +19,7 @@ mu_1 = Constant(1.0)
 mu_2 = Constant(1.0)
 
 errorvalues = []
+eocvalues = []
 
 anisotropic_norm_u1_values = []
 anisotropic_norm_u3_values = []
@@ -43,10 +45,10 @@ resultsfolder = str(timestamp) + xargs.resultfolder + "/"
 
 verbose = True
 
-doHydrostatic = False
-doAnisotropicLoop = False
-doInitGuessHydro = False
-doDegree1Anisopic = False
+doHydrostatic = True
+doAnisotropicLoop = True
+doInitGuessHydro = True
+doDegree1Anisopic = True
 doErrorPlay = True
 
 mesh = UnitSquareMesh(30, 30)
@@ -186,7 +188,7 @@ def VP_functionspace(mesh, v_vert_deg):
     VP = FunctionSpace(mesh, V * P)
     return VP
 
-def calculate_errorvalues(problem_data, up_sol_anis_eps):
+def calculate_errorvalues(problem_data, up_sol_anis_eps, nx):
 
     (u, p) = up_sol_anis_eps.split(True)
     (u1, u3) = u.split(True)
@@ -203,6 +205,10 @@ def calculate_errorvalues(problem_data, up_sol_anis_eps):
     errorvalues.append(Eu1_H)
     errorvalues.append(Eu3_H)
     errorvalues.append(Ep_H)
+    
+    error_L2 = [Eu1, Eu3, Ep]
+    
+    return error_L2
 
 def plot_exact_solutions(resultsfolder, nx, problem_data, foldermarker):
 
@@ -508,16 +514,37 @@ if (doErrorPlay):
     
     for problem_data in problem_data_list:
     
+        errorvalues = []
+        eocvalues = []
         foldermarker = "_error_estimate_pd_" + str(problem_data.id)
 
         nx_exp = 2
         nx = 2 ** nx_exp # to control the number of cells, UnitSquareMesh(nx, nx)
+        
+        h_prev = 1.0
+        error_prev = [1.0, 1.0, 1.0]
+        
         while nx < 2 ** 8:
     
             up_sol_anis_eps = solve_on_refined_domain(problem_data, nx, eps, vertical_velocity_degree_anis, theta, foldermarker)
-            calculate_errorvalues(problem_data, up_sol_anis_eps)
+            error_next = calculate_errorvalues(problem_data, up_sol_anis_eps, nx)
+            h_next = (1/nx)*sqrt(2)
+            eocvalues.append(nx)
+            
+            for i in [0, 1, 2]:
+                eoc_i = log(error_next[i]/error_prev[i])/log(h_next/h_prev)
+                eocvalues.append(error_next[i])
+                eocvalues.append(error_prev[i])
+                eocvalues.append(h_next)
+                eocvalues.append(h_prev)
+                eocvalues.append(eoc_i)
+            
+            h_prev = h_next
+            error_prev = error_next
+            
             nx = 2 * nx
         
+        np.savetxt(resultsfolder + "eocvalues_problemdata_" + str(problem_data.id) + ".txt", eocvalues)
         np.savetxt(resultsfolder + "errorvalues_problemdata_" + str(problem_data.id) + ".txt", errorvalues)
         plot_exact_solutions(resultsfolder, nx, problem_data, foldermarker)
     
