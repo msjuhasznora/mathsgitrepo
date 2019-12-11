@@ -139,6 +139,15 @@ class ProblemData(UserExpression):
         self.f3 = f3
         self.bcs = bcs
 
+# PROBLEM 1
+id = 1
+u1_exact = Expression('sin(2*pi*x[0])*cos(2*pi*x[1])', degree = 5)
+u3_exact = Expression('-cos(2*pi*x[0])*sin(2*pi*x[1])', degree = 5)
+p_exact = Expression('0', degree = 5)
+f1 = Expression('2*pi*sin(2*pi*x[0])*sin(2*pi*x[1])*sin(2*pi*x[1])*cos(2*pi*x[0]) + 2*pi*sin(2*pi*x[0])*cos(2*pi*x[0])*cos(2*pi*x[1])*cos(2*pi*x[1]) + 8*pi*pi*sin(2*pi*x[0])*cos(2*pi*x[1])', degree = 5)
+f3 = Expression('2*pi*sin(2*pi*x[0])*sin(2*pi*x[0])*sin(2*pi*x[1])*cos(2*pi*x[1]) + 2*pi*sin(2*pi*x[1])*cos(2*pi*x[0])*cos(2*pi*x[0])*cos(2*pi*x[1]) - 8*pi*pi*sin(2*pi*x[1])*cos(2*pi*x[0])', degree = 5)
+problem_data1 = ProblemData(id, u1_exact, u3_exact, p_exact, f1, f3, [])
+
 # PROBLEM 2
 id = 2
 u1_exact = Expression('x[0]', degree = 5)
@@ -148,14 +157,7 @@ f1 = Expression('x[0]', degree = 5)
 f3 = Expression('x[1]', degree = 5)
 problem_data2 = ProblemData(id, u1_exact, u3_exact, p_exact, f1, f3, [])
 
-# PROBLEM 1
-id = 1
-u1_exact = Expression('sin(2*pi*x[0])*cos(2*pi*x[1])', degree = 5)
-u3_exact = Expression('-cos(2*pi*x[0])*sin(2*pi*x[1])', degree = 5)
-p_exact = Expression('0', degree = 5)
-f1 = Expression('2*pi*sin(2*pi*x[0])*sin(2*pi*x[1])*sin(2*pi*x[1])*cos(2*pi*x[0]) + 2*pi*sin(2*pi*x[0])*cos(2*pi*x[0])*cos(2*pi*x[1])*cos(2*pi*x[1]) + 8*pi*pi*sin(2*pi*x[0])*cos(2*pi*x[1])', degree = 5)
-f3 = Expression('2*pi*sin(2*pi*x[0])*sin(2*pi*x[0])*sin(2*pi*x[1])*cos(2*pi*x[1]) + 2*pi*sin(2*pi*x[1])*cos(2*pi*x[0])*cos(2*pi*x[0])*cos(2*pi*x[1]) - 8*pi*pi*sin(2*pi*x[1])*cos(2*pi*x[0])', degree = 5)
-problem_data1 = ProblemData(id, u1_exact, u3_exact, p_exact, f1, f3, [])
+problem_data_list = [problem_data1, problem_data2]
 
 class nascent_delta(UserExpression):
     def __init__(self,eps,**kwargs):
@@ -183,6 +185,39 @@ def VP_functionspace(mesh, v_vert_deg):
     P = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 1) #pressure
     VP = FunctionSpace(mesh, V * P)
     return VP
+
+def calculate_errorvalues(problem_data, up_sol_anis_eps):
+
+    (u, p) = up_sol_anis_eps.split(True)
+    (u1, u3) = u.split(True)
+    Eu1 = errornorm(problem_data.u1_exact, u1, norm_type='L2')
+    Eu3 = errornorm(problem_data.u3_exact, u3, norm_type='L2')
+    Ep = errornorm(problem_data.p_exact, p, norm_type='L2')
+    Eu1_H = errornorm(problem_data.u1_exact, u1, norm_type='H1')
+    Eu3_H = errornorm(problem_data.u3_exact, u3, norm_type='H1')
+    Ep_H = errornorm(problem_data.p_exact, p, norm_type='H1')
+    errorvalues.append(nx)
+    errorvalues.append(Eu1)
+    errorvalues.append(Eu3)
+    errorvalues.append(Ep)
+    errorvalues.append(Eu1_H)
+    errorvalues.append(Eu3_H)
+    errorvalues.append(Ep_H)
+
+def plot_exact_solutions(resultsfolder, nx, problem_data, foldermarker):
+
+    mesh_h = UnitSquareMesh(nx, nx)
+    W = FunctionSpace(mesh_h, 'Lagrange', 2)
+    P = FunctionSpace(mesh_h, 'Lagrange', 1)
+    u1_W = interpolate(problem_data.u1_exact, W)
+    u3_W = interpolate(problem_data.u3_exact, W)
+    p_P = interpolate(problem_data.p_exact, P)
+    u1_exact_plot = File(resultsfolder + "velocity" + foldermarker + "/u1_exact_nx_" + str(nx) + ".pvd")
+    u1_exact_plot << u1_W
+    u3_exact_plot = File(resultsfolder + "velocity" + foldermarker + "/u3_exact_nx_" + str(nx) + ".pvd")
+    u3_exact_plot << u3_W
+    p_exact_plot = File(resultsfolder + "pressure" + foldermarker + "/p_exact_nx_" + str(nx) + ".pvd")
+    p_exact_plot << p_P
 
 def writedifference(degree_anis, degree_hydr):
     np.savetxt(resultsfolder + "anisotropic_norm_u1_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", anisotropic_norm_u1_values)
@@ -390,7 +425,6 @@ def difference_info(eps, up_sol_anis_eps, VPA, up_sol_hydr, VPH):
 def solve_on_refined_domain(problem_data, nx, eps, vertical_velocity_degree_anis, theta, foldermarker):
     mesh_h = UnitSquareMesh(nx, nx)
     VP = VP_functionspace(mesh_h, vertical_velocity_degree_anis)
-    #bcu = boundaryconditionserrorestimate(VP)
     bcu = boundaryconditions_pd(problem_data.id, VP)
     up_sol_anis_eps = anisotropic_solver(VP, eps, vertical_velocity_degree_anis, mesh_h, problem_data.f1, problem_data.f3, theta, bcu, foldermarker)
     return up_sol_anis_eps
@@ -468,52 +502,25 @@ if (doDegree1Anisopic):
 if (doErrorPlay):
 
     vertical_velocity_degree_anis = 2
-    foldermarker = "_error_estimate"
     eps = 1.0
-    
-    # the following setup provides a function that is divergence-free and works with the errorEstimateBC set.
     wind_shear_x = 0.0
     theta = Constant((wind_shear_x, 0.0))
     
-    problem_data = problem_data1
-
-    nx_exp = 2
-    nx = 2 ** nx_exp # to control the number of cells, UnitSquareMesh(nx, nx)
-    while nx < 2 ** 8:
+    for problem_data in problem_data_list:
     
-        up_sol_anis_eps = solve_on_refined_domain(problem_data, nx, eps, vertical_velocity_degree_anis, theta, foldermarker)
+        foldermarker = "_error_estimate_pd_" + str(problem_data.id)
 
-        (u, p) = up_sol_anis_eps.split(True)
-        (u1, u3) = u.split(True)
-        Eu1 = errornorm(problem_data.u1_exact, u1, norm_type='L2')
-        Eu3 = errornorm(problem_data.u3_exact, u3, norm_type='L2')
-        Ep = errornorm(problem_data.p_exact, p, norm_type='L2')
-        Eu1_H = errornorm(problem_data.u1_exact, u1, norm_type='H1')
-        Eu3_H = errornorm(problem_data.u3_exact, u3, norm_type='H1')
-        Ep_H = errornorm(problem_data.p_exact, p, norm_type='H1')
-        errorvalues.append(nx)
-        errorvalues.append(Eu1)
-        errorvalues.append(Eu3)
-        errorvalues.append(Ep)
-        errorvalues.append(Eu1_H)
-        errorvalues.append(Eu3_H)
-        errorvalues.append(Ep_H)
-        nx = 2 * nx
+        nx_exp = 2
+        nx = 2 ** nx_exp # to control the number of cells, UnitSquareMesh(nx, nx)
+        while nx < 2 ** 8:
+    
+            up_sol_anis_eps = solve_on_refined_domain(problem_data, nx, eps, vertical_velocity_degree_anis, theta, foldermarker)
+            calculate_errorvalues(problem_data, up_sol_anis_eps)
+            nx = 2 * nx
         
-    np.savetxt(resultsfolder + "errorvalues_problemdata_" + str(problem_data.id) + ".txt", errorvalues)
+        np.savetxt(resultsfolder + "errorvalues_problemdata_" + str(problem_data.id) + ".txt", errorvalues)
+        plot_exact_solutions(resultsfolder, nx, problem_data, foldermarker)
     
-    mesh_h = UnitSquareMesh(nx, nx)
-    W = FunctionSpace(mesh_h, 'Lagrange', 2)
-    P = FunctionSpace(mesh_h, 'Lagrange', 1)
-    u1_W = interpolate(problem_data.u1_exact, W)
-    u3_W = interpolate(problem_data.u3_exact, W)
-    p_P = interpolate(problem_data.p_exact, P)
-    u1_exact_plot = File(resultsfolder + "velocity" + foldermarker + "/u1_exact_nx_" + str(nx) + ".pvd")
-    u1_exact_plot << u1_W
-    u3_exact_plot = File(resultsfolder + "velocity" + foldermarker + "/u3_exact_nx_" + str(nx) + ".pvd")
-    u3_exact_plot << u3_W
-    p_exact_plot = File(resultsfolder + "pressure" + foldermarker + "/p_exact_nx_" + str(nx) + ".pvd")
-    p_exact_plot << p_P
 
 # *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- #
 
