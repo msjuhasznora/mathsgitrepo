@@ -49,7 +49,7 @@ doHydrostatic = False
 doAnisotropicLoop = False
 doInitGuessHydro = False
 doDegree1Anisopic = False
-doErrorPlay = True
+doErrorCalc = True
 
 mesh = UnitSquareMesh(30, 30)
 
@@ -141,6 +141,7 @@ class ProblemData(UserExpression):
         self.f3 = f3
         self.bcs = bcs
 
+# for the symbolic computations providing the forcing terms using the exact solutions we use sympy-1.4: Documents/sympy-1.4/examples/beginner/differentiation.py
 # PROBLEM 1
 id = 1
 u1_exact = Expression('sin(2*pi*x[0])*cos(2*pi*x[1])', degree = 5)
@@ -505,7 +506,7 @@ if (doDegree1Anisopic):
 # ************************** Loop in h *************************
 # **************************************************************
 
-if (doErrorPlay):
+if (doErrorCalc):
 
     vertical_velocity_degree_anis = 2
     eps = 1.0
@@ -516,7 +517,7 @@ if (doErrorPlay):
     
         errorvalues = []
         eocvalues = []
-        foldermarker = "_error_estimate_pd_" + str(problem_data.id)
+        foldermarker = "_empirical_error_calc_pd_" + str(problem_data.id)
 
         nx_exp = 2
         nx = 2 ** nx_exp # to control the number of cells, UnitSquareMesh(nx, nx)
