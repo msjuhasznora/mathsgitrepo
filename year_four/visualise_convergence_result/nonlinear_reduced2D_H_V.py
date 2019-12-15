@@ -45,10 +45,10 @@ resultsfolder = str(timestamp) + xargs.resultfolder + "/"
 
 verbose = True
 
-doHydrostatic = False
-doAnisotropicLoop = False
-doInitGuessHydro = False
-doDegree1Anisopic = False
+doHydrostatic = True
+doAnisotropicLoop = True
+doInitGuessHydro = True
+doDegree1Anisopic = True
 doErrorCalc = True
 
 mesh = UnitSquareMesh(30, 30)
@@ -84,6 +84,23 @@ class RightBoundary(SubDomain):
     def inside(self, x, on_boundary):
         tol = 1E-14
         return on_boundary and near(x[0], 1.0, tol)
+        
+def concentration_BCs_pd(id, C):
+
+    zerotop_concentration = DirichletBC(C, 0.0, "on_boundary && x[1] > 1 - DOLFIN_EPS")
+    onelowercondition = DirichletBC(C, 1.0, "on_boundary && x[1] < DOLFIN_EPS")
+    
+    oneleft_concentration = DirichletBC(C, 1.0, "on_boundary && x[0] < DOLFIN_EPS")
+    zerorightcondition = DirichletBC(C, 0.0, "on_boundary && x[0] > 1 - DOLFIN_EPS")
+
+    if id == 0:
+        return [zerotop_concentration]
+    elif id == 1 :
+        return [oneleft_concentration, zerorightcondition]
+    elif id == 2:
+        return [zerotop_concentration, onelowercondition]
+    else:
+        return []
 
 def boundaryconditions_pd(id, VP):
 
@@ -132,14 +149,14 @@ def boundaryconditions_pd(id, VP):
         return []
 
 class ProblemData(UserExpression):
-    def __init__(self, id, u1_exact, u3_exact, p_exact, f1, f3, bcs = []):
+    def __init__(self, id, u1_exact, u3_exact, p_exact, f1, f3, c_exact):
         self.id = id
         self.u1_exact = u1_exact
         self.u3_exact = u3_exact
         self.p_exact = p_exact
         self.f1 = f1
         self.f3 = f3
-        self.bcs = bcs
+        self.c_exact = c_exact
 
 # for the symbolic computations providing the forcing terms using the exact solutions we use sympy-1.4: Documents/sympy-1.4/examples/beginner/differentiation.py
 # PROBLEM 1
@@ -149,7 +166,8 @@ u3_exact = Expression('-cos(2*pi*x[0])*sin(2*pi*x[1])', degree = 5)
 p_exact = Expression('0', degree = 5)
 f1 = Expression('2*pi*sin(2*pi*x[0])*sin(2*pi*x[1])*sin(2*pi*x[1])*cos(2*pi*x[0]) + 2*pi*sin(2*pi*x[0])*cos(2*pi*x[0])*cos(2*pi*x[1])*cos(2*pi*x[1]) + 8*pi*pi*sin(2*pi*x[0])*cos(2*pi*x[1])', degree = 5)
 f3 = Expression('2*pi*sin(2*pi*x[0])*sin(2*pi*x[0])*sin(2*pi*x[1])*cos(2*pi*x[1]) + 2*pi*sin(2*pi*x[1])*cos(2*pi*x[0])*cos(2*pi*x[0])*cos(2*pi*x[1]) - 8*pi*pi*sin(2*pi*x[1])*cos(2*pi*x[0])', degree = 5)
-problem_data1 = ProblemData(id, u1_exact, u3_exact, p_exact, f1, f3, [])
+c_exact = Expression('1-x[0]*x[0]', degree = 5)
+problem_data1 = ProblemData(id, u1_exact, u3_exact, p_exact, f1, f3, c_exact)
 
 # PROBLEM 2
 id = 2
@@ -158,24 +176,38 @@ u3_exact = Expression('-x[1]', degree = 5)
 p_exact = Expression('0', degree = 5)
 f1 = Expression('x[0]', degree = 5)
 f3 = Expression('x[1]', degree = 5)
-problem_data2 = ProblemData(id, u1_exact, u3_exact, p_exact, f1, f3, [])
+c_exact = Expression('1-x[1]', degree = 5)
+problem_data2 = ProblemData(id, u1_exact, u3_exact, p_exact, f1, f3, c_exact)
 
 problem_data_list = [problem_data1, problem_data2]
 
-class nascent_delta(UserExpression):
-    def __init__(self,eps,**kwargs):
+class anis_c_source(UserExpression):
+    def __init__(self,eps,id,**kwargs):
         # Call superclass constructor with keyword arguments to properly
         # set up the instance:
         super().__init__(**kwargs)
         # Perform custom setup tasks for the subclass after that:
         self.eps = eps
-    
+        self.id = id
+
     def eval(self, values, x):
         eps = self.eps
-        # https://en.wikipedia.org/wiki/Cauchy_distribution#Multivariate_Cauchy_distribution
-        # An example of a bivariate Cauchy distribution can be given by:
-        values[0] = (1/(2 * pi)) * (eps / ( (x[0] - 0.5)**2 + (x[1] - 0.5)**2 + eps**2 )**(1.5) )
-        #values[0] = eps**2 /pi/((x[0] - 0.5)**2 + (x[1] - 0.5)**2 + eps**2)
+        id = self.id
+        
+        if id == 1:
+            # test case 1
+            values[0] = -2*x[0]*sin(2*pi*x[0])*cos(2*pi*x[1]) + 2
+        elif id == 2:
+            #test case 2
+            values[0] = x[1]
+        elif id == 0:
+            # id = 0, original case
+            # https://en.wikipedia.org/wiki/Cauchy_distribution#Multivariate_Cauchy_distribution
+            # An example of a bivariate Cauchy distribution can be given by:
+            values[0] = (1/(2 * pi)) * (eps / ( (x[0] - 0.5)**2 + (x[1] - 0.5)**2 + eps**2 )**(1.5) )
+        else:
+            values[0] = 0
+
 
     def value_shape(self):
         return ()
@@ -189,25 +221,31 @@ def VP_functionspace(mesh, v_vert_deg):
     VP = FunctionSpace(mesh, V * P)
     return VP
 
-def calculate_errorvalues(problem_data, up_sol_anis_eps, nx):
+def calculate_errorvalues(problem_data, upc_sol_anis_eps, nx):
 
+    up_sol_anis_eps = upc_sol_anis_eps[0]
+    c_sol_anis_eps = upc_sol_anis_eps[1]
     (u, p) = up_sol_anis_eps.split(True)
     (u1, u3) = u.split(True)
     Eu1 = errornorm(problem_data.u1_exact, u1, norm_type='L2')
     Eu3 = errornorm(problem_data.u3_exact, u3, norm_type='L2')
     Ep = errornorm(problem_data.p_exact, p, norm_type='L2')
+    Ec = errornorm(problem_data.c_exact, c_sol_anis_eps, norm_type='L2')
     Eu1_H = errornorm(problem_data.u1_exact, u1, norm_type='H1')
     Eu3_H = errornorm(problem_data.u3_exact, u3, norm_type='H1')
     Ep_H = errornorm(problem_data.p_exact, p, norm_type='H1')
+    Ec_H = errornorm(problem_data.c_exact, c_sol_anis_eps, norm_type='H1')
     errorvalues.append(nx)
     errorvalues.append(Eu1)
     errorvalues.append(Eu3)
     errorvalues.append(Ep)
+    errorvalues.append(Ec)
     errorvalues.append(Eu1_H)
     errorvalues.append(Eu3_H)
     errorvalues.append(Ep_H)
+    errorvalues.append(Ec_H)
     
-    error_L2 = [Eu1, Eu3, Ep]
+    error_L2 = [Eu1, Eu3, Ep, Ec]
     
     return error_L2
 
@@ -216,15 +254,19 @@ def plot_exact_solutions(resultsfolder, nx, problem_data, foldermarker):
     mesh_h = UnitSquareMesh(nx, nx)
     W = FunctionSpace(mesh_h, 'Lagrange', 2)
     P = FunctionSpace(mesh_h, 'Lagrange', 1)
+    C = FunctionSpace(mesh_h, 'Lagrange', 2)
     u1_W = interpolate(problem_data.u1_exact, W)
     u3_W = interpolate(problem_data.u3_exact, W)
     p_P = interpolate(problem_data.p_exact, P)
+    c_C = interpolate(problem_data.c_exact, C)
     u1_exact_plot = File(resultsfolder + "velocity" + foldermarker + "/u1_exact_nx_" + str(nx) + ".pvd")
     u1_exact_plot << u1_W
     u3_exact_plot = File(resultsfolder + "velocity" + foldermarker + "/u3_exact_nx_" + str(nx) + ".pvd")
     u3_exact_plot << u3_W
     p_exact_plot = File(resultsfolder + "pressure" + foldermarker + "/p_exact_nx_" + str(nx) + ".pvd")
     p_exact_plot << p_P
+    c_exact_plot = File(resultsfolder + "concentration" + foldermarker + "/c_exact_nx_" + str(nx) + ".pvd")
+    c_exact_plot << c_C
 
 def writedifference(degree_anis, degree_hydr):
     np.savetxt(resultsfolder + "anisotropic_norm_u1_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", anisotropic_norm_u1_values)
@@ -314,7 +356,7 @@ def hydrostatic_solver(VP, up_, vertical_velocity_degree, mesh_h, f1, f3, theta,
     
     return up_
     
-def anisotropic_solver(VP, eps, vertical_velocity_degree, mesh_h, f1, f3, theta, bcu, foldermarker):
+def anisotropic_solver(VP, eps, vertical_velocity_degree, mesh_h, f1, f3, theta, bcu, foldermarker, id):
 
     nr_cells = mesh_h.num_cells()
 
@@ -333,7 +375,7 @@ def anisotropic_solver(VP, eps, vertical_velocity_degree, mesh_h, f1, f3, theta,
     up_ = Function(VP)
     (u_, p_) = split(up_)
     (u1_, u3_) = split(u_)
-
+    
     # the anisotropic weak formulation is created using the Taylor-Hood elements, the vertical velocity is from a quadratic space. Using a degree 1 vertical velocity space in the anisotropic case we have a strange layered unnatural pressure.
     F = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx + eps*eps*inner(u, grad(u3)) * v3 * dx + eps*eps*inner(grad(u3),grad(v3)) * dx - p * div(v) * dx + q * div(u) * dx - f1 * v1 * dx - f3 * v3 * dx - inner(theta, v) * ds(1)
     
@@ -353,8 +395,7 @@ def anisotropic_solver(VP, eps, vertical_velocity_degree, mesh_h, f1, f3, theta,
     
     C = FiniteElement("Lagrange", mesh_h.ufl_cell(), degree = 2)
     C = FunctionSpace(mesh_h, C)
-    zerotop_concentration = DirichletBC(C, 0, "on_boundary && x[1] > 1 - DOLFIN_EPS")
-    bcc = [zerotop_concentration]
+    bcc = concentration_BCs_pd(id, C)
     c = TrialFunction(C)
     d = TestFunction(C)
     c_sol = Function(C)
@@ -369,8 +410,8 @@ def anisotropic_solver(VP, eps, vertical_velocity_degree, mesh_h, f1, f3, theta,
     # Also: if degree is set to a high value, e.g. degree = 20, a warning message comes from fenics:
     # "WARNING: The number of integration points for each cell will be: 144"
     # i.e. this degree variable is responsable for the number of integration points
-    nascent_delta_instance = nascent_delta(eps, degree = 10)
-    L = inner(nascent_delta_instance, d) * dx
+    anis_c_source_instance = anis_c_source(eps, id, degree = 10)
+    L = inner(anis_c_source_instance, d) * dx
     
     A, b = assemble_system(a, L, bcc)
     
@@ -382,10 +423,12 @@ def anisotropic_solver(VP, eps, vertical_velocity_degree, mesh_h, f1, f3, theta,
     print(eps)
     print("ANIS. c: %.15g" % c_sol.vector().norm("l2"))
     
-    return up_
+    return [up_, c_sol]
 
-def difference_info(eps, up_sol_anis_eps, VPA, up_sol_hydr, VPH):
+def difference_info(eps, upc_sol_anis_eps, VPA, up_sol_hydr, VPH):
 
+    up_sol_anis_eps = upc_sol_anis_eps[0]
+    c_sol_anis_eps = upc_sol_anis_eps[1]
     (u, p) = up_sol_anis_eps.split(True)
     (u1, u3) = u.split(True)
     
@@ -433,8 +476,8 @@ def solve_on_refined_domain(problem_data, nx, eps, vertical_velocity_degree_anis
     mesh_h = UnitSquareMesh(nx, nx)
     VP = VP_functionspace(mesh_h, vertical_velocity_degree_anis)
     bcu = boundaryconditions_pd(problem_data.id, VP)
-    up_sol_anis_eps = anisotropic_solver(VP, eps, vertical_velocity_degree_anis, mesh_h, problem_data.f1, problem_data.f3, theta, bcu, foldermarker)
-    return up_sol_anis_eps
+    upc_sol_anis_eps = anisotropic_solver(VP, eps, vertical_velocity_degree_anis, mesh_h, problem_data.f1, problem_data.f3, theta, bcu, foldermarker, problem_data.id)
+    return upc_sol_anis_eps
 
 # **********************************************
 # *** Define hydrostatic variational problem ***
@@ -469,8 +512,9 @@ if (doAnisotropicLoop):
 
     while eps > epsilon_lower_limit:
     
-        up_sol_anis_eps = anisotropic_solver(VP, eps, vertical_velocity_degree_anis, mesh, f1, f3, theta, bcu, foldermarker)
-        difference_info(eps, up_sol_anis_eps, VP, up_sol_hydr, VPH)
+        upc_sol_anis_eps = anisotropic_solver(VP, eps, vertical_velocity_degree_anis, mesh, f1, f3, theta, bcu, foldermarker, 0)
+        up_sol_anis_eps = upc_sol_anis_eps[0]
+        difference_info(eps, upc_sol_anis_eps, VP, up_sol_hydr, VPH)
         eps = eps / 2.0
     
     writedifference(vertical_velocity_degree_anis, vertical_velocity_degree_hydr)
@@ -499,7 +543,7 @@ if (doDegree1Anisopic):
 
     while eps > epsilon_lower_limit:
     
-        anisotropic_solver(VP, eps, vertical_velocity_degree_anis, mesh, f1, f3, theta, bcu, foldermarker)
+        anisotropic_solver(VP, eps, vertical_velocity_degree_anis, mesh, f1, f3, theta, bcu, foldermarker, 0)
         eps = eps / 2.0
 
 # **************************************************************
@@ -523,17 +567,20 @@ if (doErrorCalc):
         nx = 2 ** nx_exp # to control the number of cells, UnitSquareMesh(nx, nx)
         
         h_prev = 1.0
-        error_prev = [1.0, 1.0, 1.0]
+        error_prev = [1.0, 1.0, 1.0, 1.0]
         
         while nx < 2 ** 8:
     
-            up_sol_anis_eps = solve_on_refined_domain(problem_data, nx, eps, vertical_velocity_degree_anis, theta, foldermarker)
-            error_next = calculate_errorvalues(problem_data, up_sol_anis_eps, nx)
+            upc_sol_anis_eps = solve_on_refined_domain(problem_data, nx, eps, vertical_velocity_degree_anis, theta, foldermarker)
+            error_next = calculate_errorvalues(problem_data, upc_sol_anis_eps, nx)
             h_next = (1/nx)*sqrt(2)
             eocvalues.append(nx)
             
-            for i in [0, 1, 2]:
-                eoc_i = log(error_next[i]/error_prev[i])/log(h_next/h_prev)
+            for i in [0, 1, 2, 3]:
+                if error_prev[i] > DOLFIN_EPS and error_next[i] > DOLFIN_EPS:
+                    eoc_i = log(error_next[i]/error_prev[i])/log(h_next/h_prev)
+                else:
+                    eoc_i = -1.0
                 eocvalues.append(error_next[i])
                 eocvalues.append(error_prev[i])
                 eocvalues.append(h_next)
