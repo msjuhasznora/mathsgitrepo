@@ -224,17 +224,24 @@ def VP_functionspace(mesh, v_vert_deg):
 def calculate_errorvalues(problem_data, upc_sol_anis_eps, nx):
 
     up_sol_anis_eps = upc_sol_anis_eps[0]
-    c_sol_anis_eps = upc_sol_anis_eps[1]
+    c = upc_sol_anis_eps[1]
     (u, p) = up_sol_anis_eps.split(True)
     (u1, u3) = u.split(True)
     Eu1 = errornorm(problem_data.u1_exact, u1, norm_type='L2')
     Eu3 = errornorm(problem_data.u3_exact, u3, norm_type='L2')
     Ep = errornorm(problem_data.p_exact, p, norm_type='L2')
-    Ec = errornorm(problem_data.c_exact, c_sol_anis_eps, norm_type='L2')
+    Ec = errornorm(problem_data.c_exact, c, norm_type='L2', mesh = UnitSquareMesh(nx, nx))
+    
+    c_exact_plot = File(resultsfolder + "concentration_WIH" + "/c_exact_nx_" + str(nx) + "_" + str(problem_data.id) + ".pvd")
+    c_exact_plot << interpolate(problem_data.c_exact, FunctionSpace(UnitSquareMesh(nx, nx), 'Lagrange', 1))
+    
+    c_sol_plot = File(resultsfolder + "concentration_WIH" + "/c_sol_nx_" + str(nx) + "_" + str(problem_data.id) + ".pvd")
+    c_sol_plot << c
+    
     Eu1_H = errornorm(problem_data.u1_exact, u1, norm_type='H1')
     Eu3_H = errornorm(problem_data.u3_exact, u3, norm_type='H1')
     Ep_H = errornorm(problem_data.p_exact, p, norm_type='H1')
-    Ec_H = errornorm(problem_data.c_exact, c_sol_anis_eps, norm_type='H1')
+    Ec_H = errornorm(problem_data.c_exact, c, norm_type='H1', mesh = UnitSquareMesh(nx, nx))
     errorvalues.append(nx)
     errorvalues.append(Eu1)
     errorvalues.append(Eu3)
@@ -254,7 +261,7 @@ def plot_exact_solutions(resultsfolder, nx, problem_data, foldermarker):
     mesh_h = UnitSquareMesh(nx, nx)
     W = FunctionSpace(mesh_h, 'Lagrange', 2)
     P = FunctionSpace(mesh_h, 'Lagrange', 1)
-    C = FunctionSpace(mesh_h, 'Lagrange', 2)
+    C = FunctionSpace(mesh_h, 'Lagrange', 1)
     u1_W = interpolate(problem_data.u1_exact, W)
     u3_W = interpolate(problem_data.u3_exact, W)
     p_P = interpolate(problem_data.p_exact, P)
@@ -331,7 +338,7 @@ def hydrostatic_solver(VP, up_, vertical_velocity_degree, mesh_h, f1, f3, theta,
     np.savetxt(resultsfolder + "hydrostatic_values_degree_" + str(vertical_velocity_degree)+ ".txt", hydrostatic_values)
     
     # concentration
-    C = FiniteElement("Lagrange", mesh_h.ufl_cell(), degree = 2)
+    C = FiniteElement("Lagrange", mesh_h.ufl_cell(), degree = 1)
     C = FunctionSpace(mesh_h, C)
     zerotop_concentration = DirichletBC(C, 0, "on_boundary && x[1] > 1 - DOLFIN_EPS")
     bcc = [zerotop_concentration]
@@ -393,7 +400,7 @@ def anisotropic_solver(VP, eps, vertical_velocity_degree, mesh_h, f1, f3, theta,
     ufile_pvd_anis << u
     pfile_pvd_anis << p
     
-    C = FiniteElement("Lagrange", mesh_h.ufl_cell(), degree = 2)
+    C = FiniteElement("Lagrange", mesh_h.ufl_cell(), degree = 1)
     C = FunctionSpace(mesh_h, C)
     bcc = concentration_BCs_pd(id, C)
     c = TrialFunction(C)
