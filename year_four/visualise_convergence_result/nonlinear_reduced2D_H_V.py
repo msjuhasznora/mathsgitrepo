@@ -319,9 +319,9 @@ def hydrostatic_solver(VP, up_, vertical_velocity_degree, mesh_h, f1, f3, theta,
     (u,p) = up_.split(True)
     (u1, u3) = u.split(True)
     
-    ufile_pvd_hydr = File(resultsfolder + "velocity/velocity_hydr_degree" + str(vertical_velocity_degree) + "_nr_cells_" + str(nr_cells) + ".pvd")
+    ufile_pvd_hydr = File(resultsfolder + "velocity_hydr/velocity_hydr_degree" + str(vertical_velocity_degree) + "_nr_cells_" + str(nr_cells) + ".pvd")
     ufile_pvd_hydr << u
-    pfile_pvd_hydr = File(resultsfolder + "pressure/pressure_hydr_degree" + str(vertical_velocity_degree) + "_nr_cells_" + str(nr_cells) + ".pvd")
+    pfile_pvd_hydr = File(resultsfolder + "pressure_hydr/pressure_hydr_degree" + str(vertical_velocity_degree) + "_nr_cells_" + str(nr_cells) + ".pvd")
     pfile_pvd_hydr << p
     
     hydrostatic_values = []
@@ -350,7 +350,7 @@ def hydrostatic_solver(VP, up_, vertical_velocity_degree, mesh_h, f1, f3, theta,
     
     solver = KrylovSolver('gmres', 'ilu')
     solver.solve(A, c_sol.vector(), b)
-    cfile_pvd_hydr = File(resultsfolder + "concentration/concentration_hydr_degree" + str(vertical_velocity_degree) + "_nr_cells_" + str(nr_cells) + ".pvd")
+    cfile_pvd_hydr = File(resultsfolder + "concentration_hydr/concentration_hydr_degree" + str(vertical_velocity_degree) + "_nr_cells_" + str(nr_cells) + ".pvd")
     cfile_pvd_hydr << c_sol
     print("HYDR. c: %.15g" % c_sol.vector().norm("l2"))
     
@@ -400,7 +400,7 @@ def anisotropic_solver(VP, eps, vertical_velocity_degree, mesh_h, f1, f3, theta,
     d = TestFunction(C)
     c_sol = Function(C)
     
-    a = inner(u, grad(c)) * d * dx + (mu_1 * c.dx(0) * d.dx(0) + mu_2 * c.dx(1) * d.dx(1))  * dx - inner(c.dx(1), d.dx(1)) * ds(1)
+    a = inner(u, grad(c)) * d * dx + (mu_1 * c.dx(0) * d.dx(0) + mu_2 * c.dx(1) * d.dx(1)) * dx - inner(c.dx(1), d.dx(1)) * ds(1)
     
     # explanation of the degree parameter: https://fenicsproject.discourse.group/t/how-to-define-source-term-function/1893, Scan_29_Nov_2019.pdf.
     # the main idea is that "degree" is a built-in parameter in this class, we do not need to "create" it. it gets defined through the call,
