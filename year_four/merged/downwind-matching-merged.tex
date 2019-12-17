@@ -101,7 +101,8 @@ We end up this section with some notations we will use through the paper.
 \item $\Delta_d = K_2 \partial_{22}^2 + K_3 \partial_{33}^2$
 \item $\nabla_d = (\partial_2, \partial_3)$ ($d$ stands for directions in which we have diffusion),
 \item $L^p_t L^q_x$ is the abbreviated notation for $L^p (0, T; L^q(\Omega)),$
-\item $\kappa$ stands for a generic constant that can vary from line to line.
+\item $\kappa$ stands for a generic constant that can vary from line to line,
+\item $a \lesssim b \Leftrightarrow a \leq \kappa b$ for some constant $\kappa$
 
 \end{enumerate}
 
@@ -323,7 +324,7 @@ We highlight the difference between the boundary conditions of the original, eas
 
 The difference in the kind of boundary conditions we can "afford" to have on the lower boundary for the concentration comes from the energy inequality. In the east-north-upwards oriented coordinate system we do not have an $\epsilon$ in the diffusion matrix, and thus, having any of the $\partial_i c^\epsilon$ terms different from 0 does not create any problems, not even for the case of the ocean where $\partial_3 c^\epsilon$ becomes nonzero as well (they are required however to be bounded of course). On the other hand, the downwind-matching coordinate system brings in an $\epsilon$ term in front of the $K_1$ diffusion coefficient, which makes the model more sensitive to assigning boundary conditions for $c^\epsilon.$ This means that we can not anymore have the relatively relaxed boundedness requirement for any $\partial_i c^\epsilon$ except for $i=1.$ All other $\partial_2 c^\epsilon, \partial_3 c^\epsilon$ derivatives must be zero on the lower boundary, otherwise they would result in an $(\epsilon - \text{const.})$ negative term appearing in the energy inequality --- for more details see Section $\ref{proof}$. This also means that we will consider exclusively the inland domain scenario for the case of this coordinate system.
 
-Concerning the initial data, we set ${\mathbf{u}_h}_0$ $\in$ $H^1 (\Omega)$, ${u_3}_0 \in L^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0,$ and $c_0 \in$ $L^2 (\Omega).$ Note that here we use a relatively strong, $H^1(\Omega)$ regularity assumption on ${\mathbf{u}_h}_0$: a more standard choice for the case of weak solutions is to assume only $L^2$ space regularity on the velocity functions (\cite{azerad2001mathematical}, \cite{pollatmws2019}). We highlight that we are still working in classical Leray framework of weak solutions, the reason we need this stronger regularity is to counterbalance the decreased control we have on the concentration function due to the coordinate choice.
+Concerning the initial data, we set ${\mathbf{u}_h}_0$ $\in$ $H^1 (\Omega)$, ${u_3}_0 \in L^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0,$ and $c_0 \in$ $L^2 (\Omega).$ We highlight here that we are still working in classical Leray framework of weak solutions, even though we use an $H^1(\Omega)$ regularity assumption on ${\mathbf{u}_h}_0,$ which is stronger than the more usual $L^2$ space regularity requirement for weak solutions (\cite{azerad2001mathematical}, \cite{pollatmws2019}). The reason we need this stronger regularity is to counterbalance the decreased control we have on the concentration function due to the coordinate choice, but overall this does not lead us out of the field of weak solutions.
 
 Finally, the $s^\epsilon$ and $s$ source terms are formulated in the spirit of our previous result \cite{pollatmws2019}: the hydrostatic $s$ function is defined as a point source, while the anisotropic source function $s^\epsilon$ is modelled with a parametrised nascent delta function. For simplicity we assume here that the pollution process begins at $t = 0,$ thus we omit the multiplication by a Heaviside function representing the activation of the source, furthermore we assume that the source is centred in $x=0$ and we set the intensity constant $I$ to be $1.$
 
@@ -529,7 +530,7 @@ Another structural difference we need to underline in connection with the proof 
 
   The inequalities
   
-  \begin{equation}\nonumber
+  \begin{equation}
     \begin{split}
       & \int_{\Gamma_G} \bigg ( \int_0^1 f(x,y,z) \diff z \bigg) \bigg ( \int_0^1 g(x,y,z) h(x,y,z) \diff z \bigg ) \diff x \diff y \\
       & \lesssim \norm{f}_2^{1/2} \big ( \norm{f}_2^{1/2} + \norm{\nabla_h f}_2^{1/2} \big ) \norm{g}_2 \norm{h}_2^{1/2} \big (\norm{h}_2^{1/2} + \norm{\nabla_h h}_2^{1/2} \big ),
@@ -538,14 +539,14 @@ Another structural difference we need to underline in connection with the proof 
   
   and
   
-  \begin{equation}\nonumber
+  \begin{equation}
     \begin{split}
       & \int_{\Gamma_G} \bigg ( \int_0^1 f(x,y,z) \diff z \bigg) \bigg ( \int_0^1 g(x,y,z) h(x,y,z) \diff z \bigg ) \diff x \diff y \\
       & \lesssim \norm{f}_2 \norm{g}_2^{1/2} \big ( \norm{g}_2^{1/2} + \norm{\nabla_h g}_2^{1/2} \big ) \norm{h}_2^{1/2} \big (\norm{h}_2^{1/2} + \norm{\nabla_h h}_2^{1/2} \big )
     \end{split}
   \end{equation}
   
-  hold true for any $f,g,h$ set of functions such that the right-hand sides make sense and are finite. Here $C$ is a positive constant depending only on $\Gamma_G.$
+  hold true for any $f,g,h$ set of functions such that the right-hand sides make sense and are finite.
 
 \end{lemma}
 
@@ -741,7 +742,7 @@ Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ and $(\mathbf{u}_h,u_3)$ be the solu
     \begin{split}
       & I_2'= \int_{Q_{t_0}} (\mathbf{U}^\epsilon_h \cdot \nabla_h) \mathbf{U}^\epsilon_h \cdot \mathbf{u}_h \diff x \diff y \diff z \diff t \\
       & \leq \int_0^{t_0} \| \mathbf{U}^\epsilon_h \| _3 \| \nabla \mathbf{U}^\epsilon_h \| _2 \norm{\mathbf{u}_h}_6 \diff t \lesssim \int_0^{t_0} \| \mathbf{U}^\epsilon_h \| _2^{1/2} \| \nabla \mathbf{U}^\epsilon_h \|_2^{3/2} \norm{\nabla \mathbf{u}_h}_2 \diff t \\
-      & \leq \frac{1}{18} \| \nabla \mathbf{U}^\epsilon_h \| ^2_{L^2(Q_{t_0})} + \kappa \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^4 \| \mathbf{U}^\epsilon_h \| _2^2 \diff t.
+      & \lesssim \zeta \| \nabla \mathbf{U}^\epsilon_h \| ^2_{L^2(Q_{t_0})} + \kappa(\zeta) \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^4 \| \mathbf{U}^\epsilon_h \| _2^2 \diff t.
     \end{split}
   \end{equation}
   
@@ -762,8 +763,8 @@ Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ and $(\mathbf{u}_h,u_3)$ be the solu
       & \leq \int_0^{t_0} \int_\Omega \bigg ( \int_0^z \nabla_h \cdot \mathbf{U}_h^\epsilon \diff z' \bigg ) (\mathbf{U}_h^\epsilon \cdot \partial_z \mathbf{u}_h) \diff x \diff y \diff z \diff t \\
       & \lesssim \int_0^{t_0} \int_{\Gamma_G} \bigg ( \int_0^1 \abs{\nabla_h \mathbf{U}_h^\epsilon} \diff z \bigg) \bigg ( \int_0^1 \abs{\mathbf{U}_h^\epsilon} \abs{\partial_z \mathbf{u}_h} \diff z \bigg ) \diff x \diff y \diff t \\
       & \lesssim \int_0^{t_0} \| \nabla \mathbf{U}_h^\epsilon \| _2^{3/2} \| \mathbf{U}_h^\epsilon \| _2^{1/2} \norm{\nabla \mathbf{u}_h}_2^{1/2} (\norm{\nabla \mathbf{u}_h}_2^{1/2} + \norm{\Delta \mathbf{u}_h}_2^{1/2}) \diff t \\
-      & \leq \frac{1}{18} \| \nabla \mathbf{U}_h^\epsilon \| ^2_2 + \kappa \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^2 (\norm{\nabla \mathbf{u}_h}_2^{1/2} + \norm{\Delta \mathbf{u}_h}_2^{1/2})^4 \| \mathbf{U}_h^\epsilon \|_2^2 \diff t \\
-      & \leq \frac{1}{18} \| \nabla \mathbf{U}_h^\epsilon \| ^2_2 + \kappa \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^4 \| \mathbf{U}_h^\epsilon \|_2^2 \diff t + \kappa \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^2  \norm{\Delta \mathbf{u}_h}_2^2 \| \mathbf{U}_h^\epsilon \| _2^2 \diff t,
+      & \lesssim \zeta \| \nabla \mathbf{U}_h^\epsilon \| ^2_2 + \kappa(\zeta) \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^2 (\norm{\nabla \mathbf{u}_h}_2^{1/2} + \norm{\Delta \mathbf{u}_h}_2^{1/2})^4 \| \mathbf{U}_h^\epsilon \|_2^2 \diff t \\
+      & \lesssim \zeta \| \nabla \mathbf{U}_h^\epsilon \| ^2_2 + \kappa(\zeta) \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^4 \| \mathbf{U}_h^\epsilon \|_2^2 \diff t + \kappa(\zeta) \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^2  \norm{\Delta \mathbf{u}_h}_2^2 \| \mathbf{U}_h^\epsilon \| _2^2 \diff t,
     \end{split}
   \end{equation}
   
@@ -771,11 +772,11 @@ Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ and $(\mathbf{u}_h,u_3)$ be the solu
   
   $$f = \nabla_h \mathbf{U}_h^\epsilon, g = \mathbf{U}_h^\epsilon, h = \partial_z \mathbf{u}_h.$$
    
-  We highlight the presence of the new, additional term $C \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^4 \| \mathbf{U}_h^\epsilon \| _2^2 \diff t$ in the bound compared to the estimate obtained in \cite{li2019primitive}. The difference is manifested at the point when we apply Lemma $\ref{LadyzhenskayatypeIEQ}$, since we can not apply the Poincar\'e inequality for $\nabla \mathbf{u}_h,$ and as a consequence, instead of $\norm{h}_2^{1/2} \norm{\nabla h}_2^{1/2}$ we will have the complete $\norm{h}_2^{1/2} (\norm{h}_2^{1/2} + \norm{\nabla h}_2^{1/2})$  expression, which leads to the appearance of $\kappa \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^4 \| \mathbf{U}_h^\epsilon \|_2^2 \diff t.$
+  We highlight the presence of the new, additional term $\int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^4 \| \mathbf{U}_h^\epsilon \| _2^2 \diff t$ in the bound compared to the estimate obtained in \cite{li2019primitive}. The difference is manifested at the point when we apply Lemma $\ref{LadyzhenskayatypeIEQ}$, since we can not apply the Poincar\'e inequality for $\nabla \mathbf{u}_h,$ and as a consequence, instead of $\norm{h}_2^{1/2} \norm{\nabla h}_2^{1/2}$ we will have the complete $\norm{h}_2^{1/2} (\norm{h}_2^{1/2} + \norm{\nabla h}_2^{1/2})$  expression, which leads to the appearance of $\kappa(\zeta) \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^4 \| \mathbf{U}_h^\epsilon \|_2^2 \diff t.$
   
   Combining the estimates for $I_2', I_{21}''$ and $I_{22}'',$ we can estimate the $I_2$ term by
   
-  $$ I_2 \leq \frac{1}{6} \| \nabla \mathbf{U}_h^\epsilon \| ^2_2 + \kappa \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^4 \| \mathbf{U}_h^\epsilon \| _2^2 \diff t + \kappa \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^2  \norm{\Delta \mathbf{u}_h}_2^2 \| \mathbf{U}_h^\epsilon \| _2^2 \diff t. $$
+  $$ I_2 \lesssim \zeta \| \nabla \mathbf{U}_h^\epsilon \| ^2_2 + \kappa(\zeta) \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^4 \| \mathbf{U}_h^\epsilon \| _2^2 \diff t + \kappa(\zeta) \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^2  \norm{\Delta \mathbf{u}_h}_2^2 \| \mathbf{U}_h^\epsilon \| _2^2 \diff t. $$
   
   \textbf{Bound for $I_3.$} Exploiting the incompressibility condition and the zero velocity boundary conditions, we have
   
@@ -783,10 +784,10 @@ Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ and $(\mathbf{u}_h,u_3)$ be the solu
     \begin{split}
       & I_3 = \epsilon^2 \int_{Q_{t_0}} \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon u_3 \diff x \diff y \diff z \diff t \\
       & \leq \epsilon^2 \int_0^{t_0} \int_{\Gamma_G} \bigg ( \int_0^1 \abs{\mathbf{u}_h^\epsilon} \abs{\nabla_h U_3^\epsilon} + \abs{u_3^\epsilon} \abs{\nabla_h \mathbf{U}_h^\epsilon}\diff z \bigg) \bigg ( \int_0^1 \abs{\nabla_h \mathbf{u}_h}  \diff z \bigg ) \diff x \diff y \diff t \\
-      & \leq \kappa \epsilon^2 \int_0^{t_0} ( \| \mathbf{u}_h^\epsilon \| _2^{1/2} \| \nabla\mathbf{u}_h^\epsilon \| _2^{1/2} \norm{\nabla U_3^\epsilon}_2 \\
+      & \lesssim \epsilon^2 \int_0^{t_0} ( \| \mathbf{u}_h^\epsilon \| _2^{1/2} \| \nabla\mathbf{u}_h^\epsilon \| _2^{1/2} \norm{\nabla U_3^\epsilon}_2 \\
       & + \norm{u_3^\epsilon}_2^{1/2} \norm{\nabla u_3^\epsilon}_2^{1/2} \| \nabla_h \mathbf{U}_h^\epsilon \|_2) \norm{\nabla \mathbf{u}_h }_2^{1/2} (\norm{\nabla \mathbf{u}_h}_2^{1/2} + \norm{\Delta \mathbf{u}_h}_2^{1/2}) \diff t \\
-      & \leq \kappa \epsilon^2 \int_0 ^ {t_0} \bigg ( \| \mathbf{u}_h^\epsilon \| _2^2 \| \nabla \mathbf{u}_h^\epsilon \|_2^2 + \norm{\nabla \mathbf{u}_h}_2^2 (\norm{\nabla \mathbf{u}_h}_2^{1/2} + \norm{\Delta \mathbf{u}_h}_2^{1/2})^4 \\
-      & + \epsilon^2 \norm{u_3^\epsilon}_2^2 \norm{\nabla u_3^\epsilon}_2^2 \bigg ) \diff t + \frac{1}{6} \big ( \| \nabla \mathbf{U}_h^\epsilon \|_{L^2(Q_{t_0})}^2 + \epsilon^2 \norm{\nabla U_3^\epsilon}_{L^2(Q_{t_0})}^2  \big),
+      & \lesssim \kappa(\zeta) \epsilon^2 \int_0 ^ {t_0} \bigg ( \| \mathbf{u}_h^\epsilon \| _2^2 \| \nabla \mathbf{u}_h^\epsilon \|_2^2 + \norm{\nabla \mathbf{u}_h}_2^2 (\norm{\nabla \mathbf{u}_h}_2^{1/2} + \norm{\Delta \mathbf{u}_h}_2^{1/2})^4 \\
+      & + \epsilon^2 \norm{u_3^\epsilon}_2^2 \norm{\nabla u_3^\epsilon}_2^2 \bigg ) \diff t + \zeta \big ( \| \nabla \mathbf{U}_h^\epsilon \|_{L^2(Q_{t_0})}^2 + \epsilon^2 \norm{\nabla U_3^\epsilon}_{L^2(Q_{t_0})}^2  \big),
     \end{split}
   \end{equation}
   
@@ -794,7 +795,7 @@ Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ and $(\mathbf{u}_h,u_3)$ be the solu
 
   \begin{equation} \label{I3Bound}
     \begin{split}
-      & I_3 \leq \frac{1}{6} \big (  \| \nabla \mathbf{U}_h^\epsilon \| _{L^2(Q_{t_0})}^2 + \epsilon^2 \norm{\nabla U_3^\epsilon}_{L^2(Q_{t_0})}^2 \big )\\
+      & I_3 \leq \zeta \big (  \| \nabla \mathbf{U}_h^\epsilon \| _{L^2(Q_{t_0})}^2 + \epsilon^2 \norm{\nabla U_3^\epsilon}_{L^2(Q_{t_0})}^2 \big )\\
       & + \kappa \epsilon^2 [(\norm{{\mathbf{u}_h}_0}_2^2 + \epsilon^2 \norm{{u_3}_0}_2^2)^2 + \kappa( \| {\mathbf{u}_h}_0 \| _{H^1}, \Gamma_G)],
     \end{split}
   \end{equation}
@@ -819,7 +820,7 @@ Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ and $(\mathbf{u}_h,u_3)$ be the solu
       
       Here the $\int_0^{t_0} \zeta \norm{\nabla U_2^\epsilon}^2_2$  term can be merged into the left-hand side of ($\ref{introduce_I_terms}$), while
       
-      $$\alpha \int_0^{t_0} \frac{1}{\zeta} \epsilon^2 \norm{u_3}^2_2 \leq \alpha \frac{1}{\zeta} \epsilon^2 \norm{u_3}^2_{L^2(Q_{t_0})} \leq \alpha \frac{1}{\zeta} \epsilon^2 C(\norm{{\mathbf{u}_h}_0}_{H^1}, \Gamma_G),$$
+      $$\alpha \int_0^{t_0} \frac{1}{\zeta} \epsilon^2 \norm{u_3}^2_2 \leq \alpha \frac{1}{\zeta} \epsilon^2 \norm{u_3}^2_{L^2(Q_{t_0})} \leq \alpha \frac{1}{\zeta} \epsilon^2 \kappa (\norm{{\mathbf{u}_h}_0}_{H^1}, \Gamma_G),$$
       
       where we used the Corollary $\ref{StrongSolPE_boundedness}$, and the fact that $\norm{u_3} \leq \norm{\nabla \mathbf{u}_h}.$
       
@@ -836,7 +837,7 @@ Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ and $(\mathbf{u}_h,u_3)$ be the solu
       \begin{equation}
         \begin{split}
           I_{43} = & \int_{Q_{t_0}} \epsilon \beta U_3^\epsilon u_1 \diff x \diff y \diff z \diff t \leq \beta^2 \zeta \int_0^{t_0} \norm{\nabla \mathbf{U}_h^\epsilon}_2^2 \diff s+ \frac{1}{\zeta} \epsilon^2 \int_0^{t_0} \norm{u_1}_2^2 \diff s \\
-          & \leq \beta^2 \zeta \int_0^{t_0} \norm{\nabla \mathbf{U}_h^\epsilon}_2^2 \diff t + \frac{1}{\zeta} \epsilon^2 C(\norm{{\mathbf{u}_h}_0}_{H^1}, \Gamma_G),
+          & \leq \beta^2 \zeta \int_0^{t_0} \norm{\nabla \mathbf{U}_h^\epsilon}_2^2 \diff t + \frac{1}{\zeta} \epsilon^2 \kappa (\norm{{\mathbf{u}_h}_0}_{H^1}, \Gamma_G),
         \end{split}
       \end{equation}
       
@@ -895,10 +896,10 @@ and we can conclude the proof of $\ref{maintheoremWEAK}$.
 %%% STRONG SOLUTIONS %%%
 \section{Strong solutions framework} \label{sectionSTRONGsol}
 
-In this section we increase the regularity of the initial data --- specifically, we assume ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0$, and $c_0 \in H^2 (\Omega),$ ---  therefore we can work in the framework of strong solutions. We verify that the previously shown connection between the anisotropic and hydrostatic equations has an analogous version that holds in this scenario as well. In order to describe our result we firstly need to give exact definition to the domain and set the boundary conditions. Here we follow the main ideas of \cite{cao2014local} and create a periodic domain $\Omega$ in three steps as described below.
+In this section we increase the regularity of the initial data --- specifically, we assume ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0$, and $c_0 \in H^2 (\Omega),$ ---  therefore we can work in the framework of strong solutions. We verify that the previously shown connection between the anisotropic and hydrostatic equations has an analogous version that holds in the scenario of strong solutions as well. In order to describe our result we firstly need to give exact definition to the domain and set the boundary conditions. Here we follow the main ideas of \cite{cao2014local} and create a periodic domain $\Omega$ in three steps as described below.
 
 \begin{remark}
-\normalfont In the weak solutions framework we worked on a local domain with classical closed boundaries. The reason why we change the domain structure and define periodic boundaries in the strong solutions framework is that --- naturally because of the type of the solutions we are dealing with here --- in this case there are higher order terms that are required to be zero on the boundaries (otherwise the computations can not be brought to a closure, consider for example Lemma 2.2 in \cite{li2019primitive} in a non-periodic case). A technically more clear choice where the $H^2$ norm is equivalent to the $L^2$ norm of the Laplacian is the assumption of a periodic structure, and for simplicity this is what we use in this section. We also point out that the periodic boundary conditions can be substituted by boundary conditions of type $\nabla^k u = 0, \nabla^k c = 0$ defined on a non-periodic, standard domain. Applying these alternative boundary conditions it is possible to switch back to a classical domain and still benefit from the disappearing boundary integrals.
+\normalfont In the weak solutions framework we defined a local domain with classical closed boundaries. Preserving this non-periodic domain in the case of strong solutions would naturally require higher order terms to be zero on the boundaries (otherwise the computations can not be brought to a closure, consider for example Lemma 2.2 in \cite{li2019primitive} in a non-periodic case). Since in this framework we essentially need a domain structure where the $H^2$ norm is equivalent to the $L^2$ norm of the Laplacian, thus for simplicity we use the technically more clear choice of assuming periodic boundaries. At the same time we point out that the periodic boundary conditions can be substituted by boundary conditions of type $\nabla^k u = 0, \nabla^k c = 0$ defined on a non-periodic, standard domain. Applying these alternative boundary conditions it is possible to switch back to a classical domain and still benefit from the disappearing boundary integrals.
 \end{remark}
 
 The concept detailed here is a general approach, and we apply it both in the hydrostatic and anisotropic cases.
