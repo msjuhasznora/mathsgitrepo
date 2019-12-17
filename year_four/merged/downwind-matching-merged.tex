@@ -963,7 +963,7 @@ Our next step is the specification of the source terms, which in this case invol
 
 Let $\delta_\epsilon$ be as specified in (\ref{delta_eps_source_def}) and let $\varphi$ be a $C^\infty_0 (\Omega)$ smooth function. We define the anisotropic and hydrostatic source terms respectively as the following convolutions:
 
-\begin{equation} s^\epsilon = \delta^\epsilon \ast \varphi, \quad s = \delta \ast \varphi.\end{equation}
+\begin{equation} \label{sourcetermdefinitionstrong} s^\epsilon = \delta^\epsilon \ast \varphi, \quad s = \delta \ast \varphi.\end{equation}
 
 \subsection{Main strong convergence theorem}
 
@@ -1247,8 +1247,7 @@ Integration by parts combined with the H\"older and Young inequalities easily gi
 
 \begin{equation}
   \begin{split}
-    & - \frac{1}{h} \int_\Omega U_3^\epsilon \partial_{ii} C^\epsilon \leq C \norm{\nabla U_3^\epsilon}_2 \norm{\nabla C^\epsilon}_2 \leq C \norm{\nabla U_3^\epsilon}_2^2 + C \norm{\nabla C^\epsilon}_2^2 \\
-    & \leq C \norm{U_h^\epsilon}_{H^2}^2 + C \norm{\nabla C^\epsilon}_2^2.
+    & - \frac{1}{h} \int_\Omega U_3^\epsilon \partial_{ii} C^\epsilon \lesssim \norm{\nabla U_3^\epsilon}_2 \norm{\nabla C^\epsilon}_2 \lesssim \norm{U_h^\epsilon}_{H^2}^2 + \norm{\nabla C^\epsilon}_2^2.
   \end{split}
 \end{equation}
 
@@ -1259,56 +1258,42 @@ Summarising the previously obtained six estimates for $I_1$ -- $I_6$ and merging
 \begin{equation}
   \begin{split}
     & \frac{1}{2} \frac{\diff}{\diff t} \norm{\nabla C^\epsilon}_2^2 + \epsilon K_1 \norm{\partial_{11} C^\epsilon}_2^2 + K_2 \norm{\partial_{22} C^\epsilon}_2^2 + K_3 \norm{\partial_{33} C^\epsilon}_2^2 + \sum_{i \neq j} C_{ij} \norm{\partial_{ij} C^\epsilon}_2^2 \\
-    & \leq C\norm{U_H^\epsilon}_{H^3} \norm{\nabla C^\epsilon}_2^2 + C \norm{U_H^\epsilon}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2 \\
-    & + C \norm{u_H}_{H^3} \norm{\nabla C^\epsilon}_2^2 + C \norm{u_H}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2 + C \norm{\nabla C^\epsilon}_2^2 \\
-    & + C \norm{U_H^\epsilon}_{H^3}^2 + \norm{c}_{H^2}^2 \norm{\nabla C^\epsilon}_2^2 \\
-    & + C \norm{U_H^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2 \\
-    & + \epsilon K_1 \norm{\partial_{11} c}_2^2 + C \epsilon^2, \raisetag{30pt}
+    & \lesssim (\norm{u_H}_{H^3} + \norm{u_H}_{H^3}^2 + \norm{U_H^\epsilon}_{H^3} + \norm{U_H^\epsilon}_{H^3}^2 + 1 + \norm{c}_{H^2}^2) \norm{\nabla C^\epsilon}_2^2 \\
+    & + \norm{U_H^\epsilon}_{H^3}^2 + \norm{U_H^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2 + \epsilon K_1 \norm{\partial_{11} c}_2^2 + \epsilon^2 \\
+    & = A(t)  \norm{\nabla C^\epsilon}_2^2 + B(t) \raisetag{40pt}
   \end{split}
 \end{equation}
 
-where $1 \leq j \leq 3.$
+for any $1 \leq j \leq 3.$
 
-Now we are ready to apply the Gr\"{o}nwall inequality.
+Now taking into account (\ref{regularity_c_first}), (\ref{u_regularities_first}) and (\ref{UdifferenceEstimate}), we have that
 
-The contribution of the additive terms will be
+\[ \int_0^T B(t) \diff \tau = \kappa \int_0^T \epsilon \norm{\partial_{11} c}_2^2 + \norm{U_H^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2 + \norm{U_H^\epsilon}_{H^3}^2 + \epsilon^2 \diff \tau \lesssim \epsilon + \epsilon^2 + \epsilon^2 T,\]
 
-\[ \int_0^T \epsilon C \norm{\partial_{11} c}_2^2 + C \norm{U_H^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2 + C \norm{U_H^\epsilon}_{H^3}^2 + C \epsilon^2 \diff \tau \leq \epsilon C + \epsilon^2 C + C \epsilon^2 T.\]
-
-On the other hand, the multiplicative terms will provide
-
-\[ \int_0^T \norm{U_H^\epsilon}_{H^3} + \norm{u_H}_{H^3} + \norm{U_H^\epsilon}_{H^3}^2 + C \norm{u_H}_{H^3}^2 + \norm{c}_{H^2}^2 + C \diff \tau,\]
-
-which can be estimated by
+and
 
 \begin{equation}
   \begin{split}
-    & \int_0^T \norm{U_H^\epsilon}_{H^3} + \norm{u_H}_{H^3} \diff \tau + C + C \cdot T \\
-    & \leq \int_0^T \norm{1 \cdot U_H^\epsilon}_{H^3} + \norm{1 \cdot u_H}_{H^3} \diff \tau + C + C \cdot T\\
-    & \leq T^{1/2} \bigg (\int_0^T \norm{U_H^\epsilon}_{H^3}^2 \bigg )^{1/2} \diff \tau + T^{1/2} \bigg (\int_0^T \norm{u_H}_{H^3}^2 \bigg )^{1/2} \diff \tau + C + C \cdot T\\
-    & \leq \sqrt{T} C + C + C \cdot T,
+    & \int_0^T A(t) \diff \tau = \kappa \int_0^T \norm{U_H^\epsilon}_{H^3} + \norm{u_H}_{H^3} + \norm{U_H^\epsilon}_{H^3}^2 + \norm{u_H}_{H^3}^2 + \norm{c}_{H^2}^2 + 1 \diff \tau \\
+    & \lesssim \sqrt{T} + 1 + T.
   \end{split}
 \end{equation}
 
-using (\ref{regularity_c_first}), (\ref{u_regularities_first}) and (\ref{UdifferenceEstimate}).
-
-Eventually the Gr\"onwall inequality yields
+Keeping in mind that $C^\epsilon(0) = 0,$ eventually the Gr\"onwall inequality yields
 
 \begin{equation} \label{finalboundforCepsilon}
   \begin{split}
     & \norm{C^\epsilon}_{L^\infty(0,T; H^1(\Omega))} + \norm{\nabla_d C^\epsilon}_{L^2(0,T; H^1(\Omega))} \\
-    & \leq (\epsilon C + C \epsilon^2 \cdot T) \exp{(C \sqrt{T} + C + C \cdot T)},
+    & \lesssim (\epsilon + \epsilon^2 \cdot T) \exp{\kappa (\sqrt{T} + 1 + T)}.
   \end{split}
 \end{equation}
 
-keeping in mind that $C^\epsilon(0) = 0.$
-
 Here we highlight an important structural difference in the (\ref{finalboundforCepsilon}) final estimate compared to that in \cite{li2019primitive} (for example Proposition 5.3): the time uniformity of the bound is not preserved for our extended, concentration-including version of the modelling equations. The estimate provides a meaningful bound for any arbitrarily big finite point in time, but the estimate's time-dependence also means that the convergence gets slower as time evolves. Note also that (\ref{finalboundforCepsilon}) implies the global existence of $c^\epsilon,$ as it suggests that $C^\epsilon$ can be continued from any arbitrary finite $T^* > 0$ time.
 
-Finally we conclude that for any given fix point in time $T > 0$ we have the global strong convergence results
+Finally we conclude that for any given time $T > 0$ we have the global strong convergence results
 
 \begin{equation} \label{finalstrongconvresultC}
-c^\epsilon \to c \text{ in } L^\infty H^1 \text{ and } \nabla_d c^\epsilon \to \nabla_d c \text{ in } L^2 H^1,
+c^\epsilon \to c \text{ in } L_t^\infty H_x^1 \text{ and } \nabla_d c^\epsilon \to \nabla_d c \text{ in } L_t^2 H_x^1,
 \end{equation}
 
 moreover the rate of convergence is $\epsilon.$
@@ -1321,7 +1306,7 @@ Combining the velocity convergence results (\ref{StrongConvVelocity1})--(\ref{St
 
 \section{Existence of the strong solutions of the hydrostatic equations of the polluted atmosphere}
 
-The appendix is dedicated to showing the existence of the unique global strong solution $(\mathbf{u}_h, u_3, c)$ of the hydrostatic limit system (\ref{HNSC1})--(\ref{HNSC4}), (\ref{HNSC6}), (\ref{HNSC5_strong_cshift}), (\ref{HNSC7-strong}) --- in other words we verify Theorem \ref{existenceconcentrationSTRONG}. The proof's first part strongly uses the existence result achieved in \cite{cao2014local}: here the authors focus on a system that is very similar to ours, including an incomplete Laplacian in the convection-diffusion equation. However, while they work with a temperature function $T,$ in our case the additional function to the velocity-pressure pair is the concentration $c.$ Even though there is a strong analogy between the equations describing the dynamics of concentration and temperature, yet the variant nature of how each of these functions are coupled with the velocity equations overall contributes to a very significant structural divergence. Specifically, the difference between the equations $$ \partial_3 p + T = 0$$ and $$ \partial_3 p = 0$$ turns out to be a cardinal one concerning global existence. Observe in these equations that for the case of the temperature there is a reciprocal coupling between the momentum equations and the convection-diffusion equation, on the other hand the coupling for the pollution concentration is one-sided, the hydrostatic equation does not depend on the function $c.$
+The appendix is dedicated to showing the existence of the unique global strong solution $(\mathbf{u}_h, u_3, c)$ of the hydrostatic limit system (\ref{HNSC1})--(\ref{HNSC4}), (\ref{HNSC5_strong_cshift}), (\ref{HNSC6}), (\ref{HNSC7-strong}) --- in other words we prove Theorem \ref{existenceconcentrationSTRONG}. The proof's first part strongly uses the existence result achieved in \cite{cao2014local}: here the authors focus on a system that is very similar to ours, including an incomplete Laplacian in the convection-diffusion equation. However, while they work with a temperature function $T,$ in our case the additional function to the velocity-pressure pair is the concentration $c.$ Even though there is a strong analogy between the equations describing the dynamics of concentration and temperature, yet the variant nature of how each of these functions are coupled with the velocity equations overall contributes to a very significant structural divergence. Specifically, the difference between the equations $$ \partial_3 p + T = 0$$ and $$ \partial_3 p = 0$$ turns out to be a cardinal one concerning global existence. Observe in these equations that for the case of the temperature there is a reciprocal coupling between the momentum equations and the convection-diffusion equation, on the other hand the coupling for the pollution concentration is one-sided, the hydrostatic equation does not depend on the function $c.$
 
 The method of \cite{cao2014local} is easily applicable with minor changes to our system until reaching the verification of local existence; the transplantation of their global existence proof on the other hand becomes very problematic. The presence of $T$ in the hydrostatic equation makes certain cancellations possible in their case which eventually guarantee the ability to close estimates that otherwise would not lead to meaningful implications. Since our hydrostatic equation does not include $c,$ we will work out a set of rather independent estimates to show the continuability of the concentration function.
 
@@ -1344,7 +1329,7 @@ As far as local existence is concerned, the proof given in sections 2 and 3 in \
   u_3 = - \int_{-h}^z \nabla_h \cdot \mathbf{u}_h (x, y, \xi, t) \diff \xi.
   \end{equation}
   
-  On the other hand, we define a mollified version of the convection-diffusion equation where now have a complete Laplacian thanks to the new small parameter $\mu$ (here we denote the mollifier with $\mu$ since $\epsilon$ in this article stands for the aspect ratio); specifically, the set of  equations takes the form
+  On the other hand, we define a modified version of the convection-diffusion equation (\ref{HNSC5_strong_cshift}) by completing the missing term in the Laplacian adding the term $\mu \partial_{11} c$ with $\mu > 0$; specifically, the set of  equations takes the form
   
   \begin{equation} \label{existenceeqs1}
     \begin{split}
@@ -1366,13 +1351,13 @@ As far as local existence is concerned, the proof given in sections 2 and 3 in \
   
   Here $\bar{\mathbf{u}}_h$ is the vertically averaged version of the function, i.e. $$\frac{1}{2h} \int_{-h}^h \mathbf{u}_h (x,y,z) \diff z,$$ and $p_s$ is the classical notation for a pressure function depending on only the horizontal variables. Fore more details of this standard reformulation process see for example \cite{cao2014local} and \cite{cao2007global}.
   
-  \item Using the contractive mapping principle, we can prove that for any fix positive $\mu$ value there exist local strong solutions $\mathbf{u}_h^\mu$ and $c^\mu$ to the mollified system (\ref{existenceeqs1}) -- (\ref{existenceeqs3}) on $\Omega \times (0, t_\mu)$ such that
+  \item Using the contractive mapping principle, we can prove that for any fix positive $\mu$ value there exist local strong solutions $\mathbf{u}_h^\mu$ and $c^\mu$ to the modified system (\ref{existenceeqs1}) -- (\ref{existenceeqs3}) on $\Omega \times (0, t_\mu)$ such that
   
   \[ (\mathbf{u}_h^\mu, c^\mu) \in L^2 (0, t^\mu; H^3(\Omega)), \quad (\partial_t \mathbf{u}_h^\mu, \partial_t c^\mu) \in L^2 (0, t^\mu; H^1 (\Omega)), \]
   
   where $t^\mu$ depends only on $\Omega, \mu, $ the initial data, and the viscosity and diffusivity constants.
   
-  \item We derive the existence of the unique local strong solution $\mathbf{u}_h, c$ of the limit system as the strong limit of the sequences $\mathbf{u}_h^\mu, c^\mu,$ having the mollifier parameter $\mu$ tend to zero. In more detail, we establish uniform in $\mu$ estimates for $\mathbf{u}_h^\mu, c^\mu$ and we construct $\mu-$ independent lower bounds for the existence time $t_0$. These estimates combined with a version of the Aubin-Lions lemma yield
+  \item We derive the existence of the unique local strong solution $\mathbf{u}_h, c$ of the limit system as the strong limit of the sequences $\mathbf{u}_h^\mu, c^\mu,$ having the parameter $\mu$ tend to zero. In more detail, we establish uniform in $\mu$ estimates for $\mathbf{u}_h^\mu, c^\mu$ and we construct $\mu-$ independent lower bounds for the existence time $t_0$. These estimates combined with a version of the Aubin-Lions lemma yield
   
   \begin{equation}
     (\mathbf{u}_h^{\mu_j}, c^{\mu_j}) \to (\mathbf{u}_h, c) \text{ in } C(0, t_0; H^1(\Omega)),
@@ -1393,7 +1378,7 @@ As far as local existence is concerned, the proof given in sections 2 and 3 in \
 %%% GLOBAL EXISTENCE %%%
 \textbf{Part 2: Global existence}
 
-As we mentioned in the introductory part of this proof, here we only need to provide estimates verifying the continuability of $c,$ as the global existence of the velocity function immediately follows from (\ref{u_regularities_first}) and (\ref{u_regularities_second}).
+As we mentioned in the introductory part of this proof, here we only need to provide estimates verifying the continuability of $c,$ as the global existence of the velocity function immediately follows from the results of \cite{li2019primitive} and \cite{petcu2005sobolev}.
 
 \bigskip
 
@@ -1410,52 +1395,42 @@ Let's take an arbitrary positive finite $T$ time. Plugging the identity (\ref{u_
 
 In the following we construct an estimate for each term on the right-hand side.
 
-\begin{enumerate}
-
-  \item Firstly, we have
+  Firstly, we have
   
-    $$\int_\Omega \Delta s \Delta c \leq \norm{\Delta s}_2^2 + \norm{\Delta c}_2^2.$$
+  \begin{equation} \label{term1estimateGE}
+    \int_\Omega \Delta s \Delta c \leq \norm{\Delta s}_2^2 + \norm{\Delta c}_2^2.
+  \end{equation}
     
-  Note here that the $\norm{\Delta s}_2^2$ term on the right-hand is bounded because of (\ref{s_boundedness}).
+  Note here that the $\norm{\Delta s}_2^2$ term on the right-hand is bounded because of (\ref{sourcetermdefinitionstrong}).
   
-  \item In order to estimate the second term $\int_\Omega \Delta ( \mathbf{u}_h \cdot \nabla_h c) \cdot \Delta c,$ we rewrite the integral $\int_\Omega \mathbf{u}_h \cdot \Delta \nabla_h c \Delta c$ using integration by parts, which yields
-  
-$$2 \int_\Omega \mathbf{u}_h \cdot \Delta \nabla_h c \Delta c = - \int_\Omega \nabla_h \mathbf{u}_h \cdot \Delta c \Delta c.$$
+  The second term can be estimated as follows.
 
-Applying the above identity we arrive to
-
-\begin{equation}
+\begin{equation} \label{term2estimateGE}
   \begin{split}
     & \int_\Omega \Delta ( \mathbf{u}_h \cdot \nabla_h c) \cdot \Delta c \\
     & \leq C \int_\Omega \abs{\Delta \mathbf{u}_h} \abs{\nabla_h c} \abs{\Delta c} + C \int_\Omega \abs{\nabla \mathbf{u}_h} \abs{\nabla \nabla_h c} \abs{\Delta c} + C \int_\Omega \abs{\nabla_h \mathbf{u}_h} \abs{\Delta c}^2 \\
-    & \leq C \norm{\mathbf{u}_h}_{H^4} \norm{\Delta c}_2^2,
+    & \leq C \norm{\mathbf{u}_h}_{H^4} \norm{\Delta c}_2^2.
   \end{split}
 \end{equation}
-
-using that $\norm{\Delta \mathbf{u}_h}_{L^\infty} \leq \norm{\Delta \mathbf{u}_h}_{H^2} \leq \norm{\mathbf{u}_h}_{H^4}.$
   
-  \item The calculation of the bound for the integral
+  Finally the third term in the right-hand side of (\ref{firstformboundc}) can be separated as
   
-  $$\int_\Omega \Delta \bigg ( \bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \bigg ( \partial_3 c - \frac{1}{h}\bigg) \bigg ) \cdot \Delta c$$
+  $$\int_\Omega \Delta \bigg ( \bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \bigg ( \partial_3 c - \frac{1}{h}\bigg) \bigg ) \cdot \Delta c = I_1 + I_2 + I_3,$$
   
-  can naturally be separated to three inequalities that will make up the final estimate for this term.
+  and by the H\"older and Young inequalities we have
 
-Firstly, using the H\"older and Young inequalities we have
-
-\begin{equation} \nonumber
+\begin{equation} \label{term3estimateGE_1}
   \begin{split}
-    &  \int_\Omega \bigg ( \int_{-h}^z \Delta \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \bigg ( \partial_3 c - \frac{1}{h}\bigg)  \cdot \Delta c \\
+    &  I_1 = \int_\Omega \bigg ( \int_{-h}^z \Delta \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \bigg ( \partial_3 c - \frac{1}{h}\bigg)  \cdot \Delta c \\
     & = - \frac{1}{h} \int_\Omega \bigg ( \int_{-h}^z \Delta \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \cdot \Delta c + \int_\Omega \bigg ( \int_{-h}^z \Delta \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \partial_3 c \cdot \Delta c \\
     & = - \frac{1}{h} \int_\Omega \bigg ( \int_{-h}^z \Delta \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \cdot \Delta c - \int_\Omega  (\Delta \nabla_h \cdot \mathbf{u}_h) c \cdot \Delta c - \int_\Omega \bigg ( \int_{-h}^z \Delta \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) c \cdot \Delta \partial_3 c \\
-    & \leq C \int_\Omega \bigg ( \int_{-h}^0 \abs{\Delta \nabla_h \cdot \mathbf{u}_h} \diff \xi \bigg) \abs{\Delta c} \\
+    & \lesssim \int_\Omega \bigg ( \int_{-h}^0 \abs{\Delta \nabla_h \cdot \mathbf{u}_h} \diff \xi \bigg) \abs{\Delta c} \\
     & + \norm{c}_{L^\infty} \int_\Omega  \abs{\Delta \nabla_h \cdot \mathbf{u}_h} \abs{\Delta c} + \norm{c}_{L^\infty} \int_\Omega \bigg ( \int_{-h}^z \abs{ \Delta \nabla_h \cdot \mathbf{u}_h} \diff \xi \bigg) \abs{\Delta \partial_3 c} \\
-    & \leq C \int_M \bigg ( \int_{-h}^0 \abs{\Delta \nabla_h \cdot \mathbf{u}_h} \diff \xi \bigg) \bigg ( \int_{-h}^0 \abs{\Delta c} \diff z \bigg ) \\
+    & \lesssim \int_M \bigg ( \int_{-h}^0 \abs{\Delta \nabla_h \cdot \mathbf{u}_h} \diff \xi \bigg) \bigg ( \int_{-h}^0 \abs{\Delta c} \diff z \bigg ) \\
     & + \norm{c}_{L^\infty}   \norm{\Delta \nabla_h \cdot \mathbf{u}_h}_2 \norm{\Delta c}_2 + \norm{c}_{L^\infty} \int_\Omega \bigg ( \int_{-h}^0 \abs{ \Delta \nabla_h \cdot \mathbf{u}_h} \diff \xi \bigg) \abs{\Delta \partial_3 c} \\
-    & \leq C \int_M \bigg ( \int_{-h}^0 \abs{\Delta \nabla_h \cdot \mathbf{u}_h}^2 \diff \xi \bigg)^{1/2}  \bigg ( \int_{-h}^0 \abs{\Delta c}^2 \diff z \bigg )^{1/2} \\
-    & + \norm{c}_{L^\infty} (\norm{\Delta \nabla_h \cdot \mathbf{u}_h}_2^2 + \norm{\Delta c}_2^2) + \norm{c}_{L^\infty} \int_M \bigg ( \int_{-h}^0 \abs{ \Delta \nabla_h \cdot \mathbf{u}_h} \diff \xi \bigg) \bigg ( \int_{-h}^0 \abs{\Delta \partial_3 c} \diff z \bigg) \\
-    & \leq C \bigg ( \int_M \bigg ( \int_{-h}^0 \abs{\Delta \nabla_h \cdot \mathbf{u}_h}^2 \diff \xi \bigg) \bigg )^{1/2} \bigg ( \int_M \bigg ( \int_{-h}^0 \abs{\Delta c}^2 \diff z \bigg ) \bigg )^{1/2} \\
+    & \lesssim \bigg ( \int_M \bigg ( \int_{-h}^0 \abs{\Delta \nabla_h \cdot \mathbf{u}_h}^2 \diff \xi \bigg) \bigg )^{1/2} \bigg ( \int_M \bigg ( \int_{-h}^0 \abs{\Delta c}^2 \diff z \bigg ) \bigg )^{1/2} \\
     & + \norm{c}_{L^\infty} (\norm{\mathbf{u}_h}_{H^3}^2 + \norm{\Delta c}_2^2) + \norm{c}_{L^\infty} \norm{\mathbf{u}_h}_{H^3} \norm{\Delta \partial_3 c}_2 \\
-    & \leq C \norm{\mathbf{u}_h}_{H^3} \norm{\Delta c}_2 + \norm{c}_{L^\infty} \norm{\mathbf{u}_h}_{H^3}^2 + \norm{c}_{L^\infty} \norm{\Delta c}_2^2 + C(\zeta) \norm{c}_{L^\infty}^2 \norm{\mathbf{u}_h}_{H^3}^2 + \zeta \norm{\Delta \partial_3 c}_2^2, \\
+    & \leq \kappa \norm{\mathbf{u}_h}_{H^3} \norm{\Delta c}_2 + \norm{c}_{L^\infty} \norm{\mathbf{u}_h}_{H^3}^2 + \norm{c}_{L^\infty} \norm{\Delta c}_2^2 + \kappa(\zeta) \norm{c}_{L^\infty}^2 \norm{\mathbf{u}_h}_{H^3}^2 + \zeta \norm{\Delta \partial_3 c}_2^2, \raisetag{60pt} \\
   \end{split}
 \end{equation}
 
@@ -1463,44 +1438,40 @@ where $ \zeta \norm{\Delta \partial_3 c}_2^2$ is merged into the left-hand side 
 
 For the second part we obtain
 
-\begin{equation}
+\begin{equation} \label{term3estimateGE_2}
   \begin{split}
-    & \int_\Omega \bigg ( \int_{-h}^z \nabla \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg)  \nabla \partial_3 c \cdot \Delta c \\
-    & \leq C \int_\Omega \bigg ( \int_{-h}^0 \abs{\nabla \nabla_h \cdot \mathbf{u}_h} \diff \xi \bigg)  \abs{\nabla \partial_3 c} \abs{\Delta c} \\
-    & \leq C \int_\Omega h \sup \abs{\nabla \nabla_h \cdot \mathbf{u}_h} \abs{\nabla \partial_3 c} \abs{\Delta c} \leq C \norm{\mathbf{u}_h}_{H^4} \norm{\Delta c}_2^2,
+    & I_2 = \int_\Omega \bigg ( \int_{-h}^z \nabla \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg)  \nabla \partial_3 c \cdot \Delta c \\
+    & \lesssim \int_\Omega \bigg ( \int_{-h}^0 \abs{\nabla \nabla_h \cdot \mathbf{u}_h} \diff \xi \bigg)  \abs{\nabla \partial_3 c} \abs{\Delta c} \\
+    & \lesssim \int_\Omega h \sup \abs{\nabla \nabla_h \cdot \mathbf{u}_h} \abs{\nabla \partial_3 c} \abs{\Delta c} \lesssim \norm{\mathbf{u}_h}_{H^4} \norm{\Delta c}_2^2,
   \end{split}
 \end{equation}
 
 while for the third term we compute
 
-\begin{equation}
+\begin{equation} \label{term3estimateGE_3}
   \begin{split}
-    & \int_\Omega \bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \Delta \partial_3 c  \cdot \Delta c \leq \int_\Omega \bigg ( \int_{-h}^0 \abs{\nabla_h \cdot \mathbf{u}_h} \diff \xi \bigg)  \abs{\Delta \partial_3 c} \abs{\Delta c}\\
-    & \leq C \int_\Omega h \sup{\abs{\nabla_h \cdot \mathbf{u}_h}} \abs{\Delta \partial_3 c} \abs{\Delta c} \leq C \norm{\mathbf{u}_h}_{H^3} (\zeta \norm{\Delta \partial_3 c}_2^2 + C(\zeta)\norm{\Delta c}_2^2 ).
+    & I_3 = \int_\Omega \bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \Delta \partial_3 c  \cdot \Delta c \leq \int_\Omega \bigg ( \int_{-h}^0 \abs{\nabla_h \cdot \mathbf{u}_h} \diff \xi \bigg)  \abs{\Delta \partial_3 c} \abs{\Delta c}\\
+    & \lesssim \int_\Omega h \sup{\abs{\nabla_h \cdot \mathbf{u}_h}} \abs{\Delta \partial_3 c} \abs{\Delta c} \lesssim \norm{\mathbf{u}_h}_{H^3} (\zeta \norm{\Delta \partial_3 c}_2^2 + \kappa(\zeta)\norm{\Delta c}_2^2 ).
   \end{split}
 \end{equation}
 
 Here the $\zeta \norm{\mathbf{u}_h}_{H^3} \norm{\Delta \partial_3 c}_2^2$ term can be merged into the left-hand side of (\ref{firstformboundc}), as $d$ contains the direction $z,$ and $\norm{\mathbf{u}_h}_{H^3}$ is finite.
 
-It is easy to see that summing the three bounds we have constructed here yield an overall estimate for the integral term in iii).
+Now, merging estimates (\ref{term1estimateGE}), (\ref{term2estimateGE}), (\ref{term3estimateGE_1}),(\ref{term3estimateGE_2}), (\ref{term3estimateGE_3}) in (\ref{firstformboundc}) we eventually arrive to
 
-\end{enumerate}
-
-Now, merging the results obtained under sections \textit{i), ii)} and \textit{iii)} we eventually arrive to
-
-\begin{equation}
+\begin{equation} \label{Gronwallstructureready}
   \begin{split}
-    & \frac{1}{2} \frac{\diff}{\diff t} \norm{\Delta c}_2^2 + C \norm{\Delta \nabla_d c}_2^2 \\
-    & \leq  C (1 + \norm{\mathbf{u}_h}_{H^3} + \norm{\mathbf{u}_h}_{H^3}^2 + \norm{\mathbf{u}_h}_{H^4} + \norm{c}_{L^\infty})\norm{\Delta c}_2^2 \\
+    & \frac{1}{2} \frac{\diff}{\diff t} \norm{\Delta c}_2^2 + \kappa \norm{\Delta \nabla_d c}_2^2 \\
+    & \lesssim (1 + \norm{\mathbf{u}_h}_{H^3} + \norm{\mathbf{u}_h}_{H^3}^2 + \norm{\mathbf{u}_h}_{H^4} + \norm{c}_{L^\infty})\norm{\Delta c}_2^2 \\
     & + \norm{\Delta s}_2^2 + \norm{c}_{L^\infty} \norm{\mathbf{u}_h}_{H^3}^2 + \norm{c}_{L^\infty}^2 \norm{\mathbf{u}_h}_{H^3}^2 + \norm{\mathbf{u}_h}_{H^3}.
   \end{split}
 \end{equation}
 
-Before we can apply the Gr\"onwall inequality, we bound the $\norm{c}_{L^\infty} (t)$ term by an idea detailed in \cite{cao2012global} (see their estimate (69), the verification process in our case is analogous), which allows us to use
+In order to bound the $\norm{c}_{L^\infty} (t)$ term, we follow Stampaccia's idea for proving the Maximum Principle. The approach is detailed in \cite{cao2012global} (see their estimate (69), the verification process in our case is analogous), which allows us to use
 
 $$\norm{c}_{L^\infty} (t) \leq 1 + \norm{c_0}_{L^\infty} + \norm{s}_{L^\infty} t.$$
 
-Now we are ready to utilise the Gr\"onwall inequality, where the multiplicative term can be bounded by
+Now we are ready to utilise the Gr\"onwall inequality, where the multiplicative term on the right-hand side of (\ref{Gronwallstructureready}) can be bounded in time as
 
 \begin{equation} \label{gronwall_mult}
   \begin{split}
@@ -1511,65 +1482,22 @@ Now we are ready to utilise the Gr\"onwall inequality, where the multiplicative 
   \end{split}
 \end{equation}
 
-while for the additive term we calculate
+moreover we calculate
 
 \begin{equation} \label{gronwall_add}
   \begin{split}
     & \int_0^T \norm{\Delta s}_2^2 + \norm{c}_{L^\infty} \norm{\mathbf{u}_h}_{H^3}^2 + \norm{c}_{L^\infty}^2 \norm{\mathbf{u}_h}_{H^3}^2 + \norm{\mathbf{u}_h}_{H^3} \diff t\\
-    & \leq C (\norm{s}_{L^2 H^2} + \norm{\mathbf{u}_h}_{L^\infty_t H^3_x}^2 T^2 + \norm{\mathbf{u}_h}_{L^\infty_t H^3_x}^2 T^3 + \norm{\mathbf{u}_h}_{L^\infty_t H^3_x} T) := G_2.
+    & \lesssim T \norm{s}_{H^2} + \norm{\mathbf{u}_h}_{L^\infty_t H^3_x}^2 T^2 + \norm{\mathbf{u}_h}_{L^\infty_t H^3_x}^2 T^3 + \norm{\mathbf{u}_h}_{L^\infty_t H^3_x} T := G_2.
   \end{split}
 \end{equation}
 
-Finally, from (\ref{gronwall_mult}) and (\ref{gronwall_add}) we conclude
+Finally, from (\ref{Gronwallstructureready}), (\ref{gronwall_mult}) and (\ref{gronwall_add}) we conclude
 
 \begin{equation} \label{finalgronwallforc_part1}
-\frac{1}{2} \frac{\diff}{\diff t} \norm{\Delta c}_2^2 + C \norm{\Delta \nabla_d c}_2^2 \leq C (\norm{c_0}_{H^2} + G_2) \exp{G_1}.
+\sup_{0 \leq t \leq T}\norm{\Delta c}_2^2 + \kappa \int_0^T \norm{\Delta \nabla_d c}_2^2 \leq \kappa (\norm{c_0}_{H^2} + G_2) \exp{G_1}.
 \end{equation}
 
-\bigskip
-
-\textbf{Estimate for $\norm{ \partial_t c}_{H^1}^2.$}
-
-From (\ref{HNSC5_strong_cshift}) and (\ref{u_3_expressed_div_free}) we directly have
-
-\begin{equation}
-  \begin{split}
-    & \int_0^t \norm{ \partial_t c}_{H^1}^2 \diff \tau \leq C \int_0^t \bigg ( \norm{\Delta_d c}_{H^1}^2 + \norm{\mathbf{u}_h \nabla_h c}_{H^1}^2 \\
-    & + \norm{\bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg ) \bigg ( \partial_3 c - \frac{1}{h}\bigg)}_{H^1}^2 + \norm{s}_{H^1}^2 \bigg ) \diff \tau.
-  \end{split}
-\end{equation}
-
-This yields the estimate
-
-\begin{equation}
-  \begin{split}
-    & \int_0^t \norm{ \partial_t c}_{H^1}^2 \diff \tau \leq \\
-    & C \int_0^t \bigg ( \norm{\nabla_d c}_{H^2}^2 + \norm{\mathbf{u}_h}_{W^{1,\infty}}^2 (\norm{\nabla_h c}_{H^1}^2 + 1) + \norm{s}_{H^2}^2 \bigg ) \diff \tau \\
-    & + C \int_0^t \norm{\bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg ) \bigg ( \partial_3 c - \frac{1}{h}\bigg)}_{H^1}^2 \diff \tau,
-  \end{split}
-\end{equation}
-
-where the first three terms are immediately bounded. We estimate the fourth term by
-
-\begin{equation}
-  \begin{split}
-    & \norm{\bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg ) \bigg ( \partial_3 c - \frac{1}{h}\bigg)}_{H^1}^2 \\
-    & \leq \norm{\bigg ( \nabla \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg ) \bigg ( \partial_3 c - \frac{1}{h}\bigg)}_{L_2}^2 + \norm{\bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg ) \nabla \partial_3 c }_{L^2}^2 \\
-    & \leq (\norm{\partial_3 c}_{L^\infty}^2 +1) \norm{\mathbf{u}_h}_{H^2}^2 + C \norm{\mathbf{u}_h}_{W^{1, \infty}}^2 \norm{\nabla \partial_3 c}_{L^2}^2.
-  \end{split}
-\end{equation}
-
-We eventually arrive to
-
-\begin{equation} \label{finalgronwallforc_part2}
-  \begin{split}
-    & \int_0^t \norm{ \partial_t c}_{H^1}^2 \diff \tau \leq \\
-    & C \norm{\nabla_d c}_{L^2_t H^2_x} + \norm{\mathbf{u}_h}_{L^\infty_t H^3_x}^2 t + \norm{\mathbf{u}_h}_{L^\infty_t H^3_x}^2 \norm{c}_{L^2_t H^1_x} + \norm{s}_{L^2_t H^2_x}  \\
-    & + C \norm{\mathbf{u}_h}_{L^\infty_t H^3_x}^2 \norm{\partial_3 c}_{L^2_t H^2_x}  + C \norm{\mathbf{u}_h}_{L^\infty_t H^3_x}^2 \norm{c}_{L^2_t H^2_x}.
-  \end{split}
-\end{equation}
-
-Combining the estimates (\ref{finalgronwallforc_part1}) and (\ref{finalgronwallforc_part2}) shows the overall continuability of the concentration function beyond any given finite $T$ time: considering the already well-known continuability of the velocity functions, our proof with this is concluded.
+The estimate (\ref{finalgronwallforc_part1}) shows the overall continuability of the concentration function beyond any given finite $T$ time: considering the already well-known continuability of the velocity functions, our proof with this is concluded.
 
 \end{proof}
 
