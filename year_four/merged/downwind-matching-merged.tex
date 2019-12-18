@@ -721,7 +721,7 @@ Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ and $(\mathbf{u}_h,u_3)$ be the solu
   
   \textbf{Bound for $I_1.$} It can be verified easily that for $I_1$ the following bound holds:
   
-  $$ I_1 \leq \frac{\epsilon^2}{6} \norm{\nabla U_3^\epsilon}^2_{L^2(Q_{t_0})} + \epsilon^2 \kappa (\norm{{\mathbf{u}_h}_0}_{H^1}, \Gamma_G). $$
+  $$ I_1 \lesssim \zeta \epsilon^2 \norm{\nabla U_3^\epsilon}^2_{L^2(Q_{t_0})} + \epsilon^2 \kappa (\norm{{\mathbf{u}_h}_0}_{H^1}, \Gamma_G). $$
   
   \textbf{Bound for $I_2.$} Calculating the bound for the $I_2$ term we arrive to a different expression compared the one obtained in \cite{li2019primitive} --- again, this is a result of the modified structure of the domain, and the appearance of new terms that had previously been implicitly merged into other higher order terms. Some of the computational details that are independent and unaffected by the boundary change will be omitted since they are analogous to \cite{li2019primitive}. It is important to note however that some of the expressions remain identical in both versions, but they are correct for different reasons, and thus, most of these steps will nevertheless be written out in detail.
   
@@ -1177,7 +1177,7 @@ By using the H\"older and Young inequalities, for $i = 1$ we obtain
   \begin{split}
     & I_2(1) = \int_\Omega \mathbf{U}^\epsilon \nabla c \partial_{11} C^\epsilon = -\int_\Omega \partial_1 \mathbf{U}^\epsilon \nabla c \partial_1 C^\epsilon - \int_\Omega \mathbf{U}^\epsilon \nabla \partial_1 c \partial_1 C^\epsilon \\
     & \lesssim \| \partial_1 \mathbf{U}^\epsilon \|_3 \norm{\nabla c}_6 \norm{\partial_1 C^\epsilon}_2 + \| \mathbf{U}^\epsilon \|_{L^\infty} \norm{\nabla \partial_1 c}_2 \norm{\partial_1 C^\epsilon}_2 \\
-    & \lesssim \| \nabla \partial_1 U^\epsilon \|_2 \norm{c}_{H^2} \norm{\partial_1 C^\epsilon}_2 + \| \mathbf{U}^\epsilon \|_{H^2} \norm{c}_{H^2} \norm{\partial_1 C^\epsilon}_2 \\
+    & \lesssim \| \nabla \partial_1 \mathbf{U}^\epsilon \|_2 \norm{c}_{H^2} \norm{\partial_1 C^\epsilon}_2 + \| \mathbf{U}^\epsilon \|_{H^2} \norm{c}_{H^2} \norm{\partial_1 C^\epsilon}_2 \\
     & \lesssim \|  \mathbf{U}_h^\epsilon \|_{H^3} \norm{c}_{H^2} \norm{\partial_1 C^\epsilon}_2 \lesssim \|  \mathbf{U}_h^\epsilon \|_{H^3}^2 + \norm{c}_{H^2}^2 \norm{\nabla C^\epsilon}_2^2,
   \end{split}
 \end{equation}
@@ -1414,8 +1414,8 @@ In the following we construct an estimate for each term on the right-hand side.
 \begin{equation} \label{term2estimateGE}
   \begin{split}
     & \int_\Omega \Delta ( \mathbf{u}_h \cdot \nabla_h c) \cdot \Delta c \\
-    & \leq C \int_\Omega \abs{\Delta \mathbf{u}_h} \abs{\nabla_h c} \abs{\Delta c} + C \int_\Omega \abs{\nabla \mathbf{u}_h} \abs{\nabla \nabla_h c} \abs{\Delta c} + C \int_\Omega \abs{\nabla_h \mathbf{u}_h} \abs{\Delta c}^2 \\
-    & \leq C \norm{\mathbf{u}_h}_{H^4} \norm{\Delta c}_2^2.
+    & \lesssim \int_\Omega \abs{\Delta \mathbf{u}_h} \abs{\nabla_h c} \abs{\Delta c} + \int_\Omega \abs{\nabla \mathbf{u}_h} \abs{\nabla \nabla_h c} \abs{\Delta c} + \int_\Omega \abs{\nabla_h \mathbf{u}_h} \abs{\Delta c}^2 \\
+    & \lesssim \norm{\mathbf{u}_h}_{H^4} \norm{\Delta c}_2^2.
   \end{split}
 \end{equation}
   
