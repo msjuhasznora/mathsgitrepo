@@ -102,6 +102,7 @@ We end up this section with some notations we will use through the paper.
 \item $\nabla_d = (\partial_2, \partial_3)$ ($d$ stands for directions in which we have diffusion),
 \item $L^p_t L^q_x$ is the abbreviated notation for $L^p (0, T; L^q(\Omega)),$
 \item $\kappa$ stands for a generic constant that can vary from line to line,
+\item $\zeta$ is the constant of the generalised Young inequality (may vary from line to line, it is chosen to be as small as necessary in the given case)
 \item $a \lesssim b \Leftrightarrow a \leq \kappa b$ for some constant $\kappa$
 
 \end{enumerate}
@@ -746,6 +747,10 @@ Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ and $(\mathbf{u}_h,u_3)$ be the solu
     \end{split}
   \end{equation}
   
+  \begin{remark}
+  \normalfont For clarity we point out that the "up to a constant" concept of inequalities preserves the correctness of the calculations even for cases as given above, where the smallness of the $\zeta$ constant is important. In detail, according to the given constant multiplier $\kappa$ in the previous line, we can always choose the $\zeta$ constant of the generalised Young inequality in a way that $\zeta \cdot \kappa$ will be as small as needed, and these terms can be subtracted later from the left-hand side of the inequality. From now on we will always keep this in mind without explicitly mentioning it.
+  \end{remark}
+  
   On the other hand, estimating $I_2'',$ we obtain
   
   \begin{equation}
@@ -1140,7 +1145,7 @@ Note that for $j=3$ this approach --- which is different from what we applied fo
 \begin{equation} \nonumber
   \begin{split}
     & \int_\Omega U_j^\epsilon \partial_{j1} C^\epsilon \partial_1 C^\epsilon \leq \| U_j^\epsilon \| _{L^\infty} \norm{\partial_{j1} C^\epsilon}_2 \norm{\partial_1 C^\epsilon}_2 \\
-    &  \leq \zeta \norm{\partial_{j1} C^\epsilon}_2^2 +  \frac{1}{\zeta} \| U_j^\epsilon \| _{L^\infty}^2 \norm{\nabla C^\epsilon}_2^2 \leq \zeta \norm{\partial_{j1} C^\epsilon}_2^2 +  \frac{1}{\zeta} \| U_h^\epsilon \| _{H^3}^2 \norm{\nabla C^\epsilon}_2^2. 
+    &  \leq \zeta \norm{\partial_{j1} C^\epsilon}_2^2 +  \frac{1}{\zeta} \| U_j^\epsilon \| _{L^\infty}^2 \norm{\nabla C^\epsilon}_2^2 \leq \zeta \norm{\partial_{j1} C^\epsilon}_2^2 +  \frac{1}{\zeta} \| \mathbf{U}_h^\epsilon \| _{H^3}^2 \norm{\nabla C^\epsilon}_2^2. 
   \end{split}
 \end{equation}
 
@@ -1157,8 +1162,8 @@ Finally to estimate $I_1(i)$ for $i = 2,3$ we can simply use
 
 \begin{equation}
   \begin{split}
-    & I_1(2) + I_1(3) = \sum_{i = 2,3} \int_\Omega U^\epsilon \nabla C^\epsilon \partial_{ii} C^\epsilon \\
-    & \leq \sum_{i = 2,3} \| U^\epsilon \| _{L^\infty} \norm{\nabla C^\epsilon}_2 \norm{\partial_{ii}C^\epsilon}_2 \lesssim \sum_{i = 2,3} \zeta \norm{\partial_{ii} C^\epsilon}_2^2 + \frac{1}{\zeta} \| U_h^\epsilon \| _ {H^3} ^ 2 \norm{\nabla C^\epsilon}_2^2. \raisetag{50pt}
+    & I_1(2) + I_1(3) = \sum_{i = 2,3} \int_\Omega \mathbf{U}^\epsilon \nabla C^\epsilon \partial_{ii} C^\epsilon \\
+    & \leq \sum_{i = 2,3} \| \mathbf{U}^\epsilon \| _{L^\infty} \norm{\nabla C^\epsilon}_2 \norm{\partial_{ii}C^\epsilon}_2 \lesssim \sum_{i = 2,3} \zeta \norm{\partial_{ii} C^\epsilon}_2^2 + \frac{1}{\zeta} \| \mathbf{U}_h^\epsilon \| _ {H^3} ^ 2 \norm{\nabla C^\epsilon}_2^2. \raisetag{50pt}
   \end{split}
 \end{equation}
 
@@ -1170,10 +1175,10 @@ By using the H\"older and Young inequalities, for $i = 1$ we obtain
 
 \begin{equation} \label{cH2normappears}
   \begin{split}
-    & I_2(1) = \int_\Omega U^\epsilon \nabla c \partial_{11} C^\epsilon = -\int_\Omega \partial_1 U^\epsilon \nabla c \partial_1 C^\epsilon - \int_\Omega U^\epsilon \nabla \partial_1 c \partial_1 C^\epsilon \\
-    & \lesssim \| \partial_1 U^\epsilon \|_3 \norm{\nabla c}_6 \norm{\partial_1 C^\epsilon}_2 + \| U^\epsilon \|_{L^\infty} \norm{\nabla \partial_1 c}_2 \norm{\partial_1 C^\epsilon}_2 \\
-    & \lesssim \| \nabla \partial_1 U^\epsilon \|_2 \norm{c}_{H^2} \norm{\partial_1 C^\epsilon}_2 + \| U^\epsilon \|_{H^2} \norm{c}_{H^2} \norm{\partial_1 C^\epsilon}_2 \\
-    & \lesssim \|  U_h^\epsilon \|_{H^3} \norm{c}_{H^2} \norm{\partial_1 C^\epsilon}_2 \lesssim \|  U_h^\epsilon \|_{H^3}^2 + \norm{c}_{H^2}^2 \norm{\nabla C^\epsilon}_2^2,
+    & I_2(1) = \int_\Omega \mathbf{U}^\epsilon \nabla c \partial_{11} C^\epsilon = -\int_\Omega \partial_1 \mathbf{U}^\epsilon \nabla c \partial_1 C^\epsilon - \int_\Omega \mathbf{U}^\epsilon \nabla \partial_1 c \partial_1 C^\epsilon \\
+    & \lesssim \| \partial_1 \mathbf{U}^\epsilon \|_3 \norm{\nabla c}_6 \norm{\partial_1 C^\epsilon}_2 + \| \mathbf{U}^\epsilon \|_{L^\infty} \norm{\nabla \partial_1 c}_2 \norm{\partial_1 C^\epsilon}_2 \\
+    & \lesssim \| \nabla \partial_1 U^\epsilon \|_2 \norm{c}_{H^2} \norm{\partial_1 C^\epsilon}_2 + \| \mathbf{U}^\epsilon \|_{H^2} \norm{c}_{H^2} \norm{\partial_1 C^\epsilon}_2 \\
+    & \lesssim \|  \mathbf{U}_h^\epsilon \|_{H^3} \norm{c}_{H^2} \norm{\partial_1 C^\epsilon}_2 \lesssim \|  \mathbf{U}_h^\epsilon \|_{H^3}^2 + \norm{c}_{H^2}^2 \norm{\nabla C^\epsilon}_2^2,
   \end{split}
 \end{equation}
 
@@ -1181,8 +1186,8 @@ while $I_2(i), i = 2,3$ can be estimated by
 
 \begin{equation}
   \begin{split}
-  & I_2(2) + I_2(3) = \sum_{i=2,3} \int_\Omega U^\epsilon \nabla c \partial_{ii} C^\epsilon \leq \sum_{i=2,3} \norm{U^\epsilon}_{L^\infty} \norm{\nabla c}_2 \norm{\partial_{ii} C^\epsilon}_2 \\
-  & \leq \sum_{i=2,3} \zeta \norm{\partial_{ii} C^\epsilon}_2^2 + \kappa \frac{1}{\zeta} \norm{U_h^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2.
+  & I_2(2) + I_2(3) = \sum_{i=2,3} \int_\Omega \mathbf{U}^\epsilon \nabla c \partial_{ii} C^\epsilon \leq \sum_{i=2,3} \norm{\mathbf{U}^\epsilon}_{L^\infty} \norm{\nabla c}_2 \norm{\partial_{ii} C^\epsilon}_2 \\
+  & \leq \sum_{i=2,3} \zeta \norm{\partial_{ii} C^\epsilon}_2^2 + \kappa \frac{1}{\zeta} \norm{\mathbf{U}_h^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2.
   \end{split}
 \end{equation}
 
@@ -1197,13 +1202,13 @@ Due to their structure, computations for $\int_\Omega u \nabla C^\epsilon \parti
 Using the same tools, i.e. the H\"older, Ladyzhenskaya and Young inequalities, for $i=1$ we obtain
 
 \begin{equation}
-    I_3(1) \lesssim \norm{u_1}_{H^3} \norm{\nabla C^\epsilon}_2^2 + \sum_{j=2,3} \zeta \norm{\nabla \partial_j C^\epsilon}_2^2 + \frac{1}{\zeta} \norm{u_h}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2.
+    I_3(1) \lesssim \norm{u_1}_{H^3} \norm{\nabla C^\epsilon}_2^2 + \sum_{j=2,3} \zeta \norm{\nabla \partial_j C^\epsilon}_2^2 + \frac{1}{\zeta} \norm{\mathbf{u}_h}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2.
 \end{equation}
 
 On the other hand, for $i = 2,3$ we have
 
 \begin{equation}
-  I_3(2) + I_3(3) \lesssim \zeta \sum_{i=2,3} \norm{\partial_{ii} C^\epsilon}_2^2 + \frac{1}{\zeta} \| u_h \| _ {H^3} ^ 2 \norm{\nabla C^\epsilon}_2^2.
+  I_3(2) + I_3(3) \lesssim \zeta \sum_{i=2,3} \norm{\partial_{ii} C^\epsilon}_2^2 + \frac{1}{\zeta} \| \mathbf{u}_h \| _ {H^3} ^ 2 \norm{\nabla C^\epsilon}_2^2.
 \end{equation}
 
 Note that thanks to (\ref{u_regularities_first}) the $\norm{\nabla C^\epsilon}_2^2$ term is multiplied by a quantity that we can estimate well.
@@ -1248,7 +1253,7 @@ Integration by parts combined with the H\"older and Young inequalities easily gi
 
 \begin{equation}
   \begin{split}
-    & - \frac{1}{h} \int_\Omega U_3^\epsilon \partial_{ii} C^\epsilon \lesssim \norm{\nabla U_3^\epsilon}_2 \norm{\nabla C^\epsilon}_2 \lesssim \norm{U_h^\epsilon}_{H^2}^2 + \norm{\nabla C^\epsilon}_2^2.
+    & - \frac{1}{h} \int_\Omega U_3^\epsilon \partial_{ii} C^\epsilon \lesssim \norm{\nabla U_3^\epsilon}_2 \norm{\nabla C^\epsilon}_2 \lesssim \norm{\mathbf{U}_h^\epsilon}_{H^2}^2 + \norm{\nabla C^\epsilon}_2^2.
   \end{split}
 \end{equation}
 
@@ -1259,8 +1264,8 @@ Summarising the previously obtained six estimates for $I_1$ -- $I_6$ and merging
 \begin{equation}
   \begin{split}
     & \frac{1}{2} \frac{\diff}{\diff t} \norm{\nabla C^\epsilon}_2^2 + \epsilon K_1 \norm{\partial_{11} C^\epsilon}_2^2 + K_2 \norm{\partial_{22} C^\epsilon}_2^2 + K_3 \norm{\partial_{33} C^\epsilon}_2^2 + \sum_{i \neq j} C_{ij} \norm{\partial_{ij} C^\epsilon}_2^2 \\
-    & \lesssim (\norm{u_H}_{H^3} + \norm{u_H}_{H^3}^2 + \norm{U_H^\epsilon}_{H^3} + \norm{U_H^\epsilon}_{H^3}^2 + 1 + \norm{c}_{H^2}^2) \norm{\nabla C^\epsilon}_2^2 \\
-    & + \norm{U_H^\epsilon}_{H^3}^2 + \norm{U_H^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2 + \epsilon K_1 \norm{\partial_{11} c}_2^2 + \epsilon^2 \\
+    & \lesssim (\norm{\mathbf{u}_h}_{H^3} + \norm{\mathbf{u}_h}_{H^3}^2 + \norm{\mathbf{U}_h^\epsilon}_{H^3} + \norm{\mathbf{U}_h^\epsilon}_{H^3}^2 + 1 + \norm{c}_{H^2}^2) \norm{\nabla C^\epsilon}_2^2 \\
+    & + \norm{\mathbf{U}_h^\epsilon}_{H^3}^2 + \norm{\mathbf{U}_h^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2 + \epsilon K_1 \norm{\partial_{11} c}_2^2 + \epsilon^2 \\
     & = A(t)  \norm{\nabla C^\epsilon}_2^2 + B(t) \raisetag{40pt}
   \end{split}
 \end{equation}
@@ -1269,13 +1274,13 @@ for any $1 \leq j \leq 3.$
 
 Now taking into account (\ref{regularity_c_first}), (\ref{u_regularities_first}) and (\ref{UdifferenceEstimate}), we have that
 
-\[ \int_0^T B(t) \diff \tau = \kappa \int_0^T \epsilon \norm{\partial_{11} c}_2^2 + \norm{U_H^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2 + \norm{U_H^\epsilon}_{H^3}^2 + \epsilon^2 \diff \tau \lesssim \epsilon + \epsilon^2 + \epsilon^2 T,\]
+\[ \int_0^T B(t) \diff \tau = \kappa \int_0^T \epsilon \norm{\partial_{11} c}_2^2 + \norm{\mathbf{U}_h^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2 + \norm{\mathbf{U}_h^\epsilon}_{H^3}^2 + \epsilon^2 \diff \tau \lesssim \epsilon + \epsilon^2 + \epsilon^2 T,\]
 
 and
 
 \begin{equation}
   \begin{split}
-    & \int_0^T A(t) \diff \tau = \kappa \int_0^T \norm{U_H^\epsilon}_{H^3} + \norm{u_H}_{H^3} + \norm{U_H^\epsilon}_{H^3}^2 + \norm{u_H}_{H^3}^2 + \norm{c}_{H^2}^2 + 1 \diff \tau \\
+    & \int_0^T A(t) \diff \tau = \kappa \int_0^T \norm{\mathbf{U}_h^\epsilon}_{H^3} + \norm{\mathbf{u}_h}_{H^3} + \norm{\mathbf{U}_h^\epsilon}_{H^3}^2 + \norm{\mathbf{u}_h}_{H^3}^2 + \norm{c}_{H^2}^2 + 1 \diff \tau \\
     & \lesssim \sqrt{T} + 1 + T.
   \end{split}
 \end{equation}
@@ -1431,7 +1436,7 @@ In the following we construct an estimate for each term on the right-hand side.
     & + \norm{c}_{L^\infty}   \norm{\Delta \nabla_h \cdot \mathbf{u}_h}_2 \norm{\Delta c}_2 + \norm{c}_{L^\infty} \int_\Omega \bigg ( \int_{-h}^0 \abs{ \Delta \nabla_h \cdot \mathbf{u}_h} \diff \xi \bigg) \abs{\Delta \partial_3 c} \\
     & \lesssim \bigg ( \int_M \bigg ( \int_{-h}^0 \abs{\Delta \nabla_h \cdot \mathbf{u}_h}^2 \diff \xi \bigg) \bigg )^{1/2} \bigg ( \int_M \bigg ( \int_{-h}^0 \abs{\Delta c}^2 \diff z \bigg ) \bigg )^{1/2} \\
     & + \norm{c}_{L^\infty} (\norm{\mathbf{u}_h}_{H^3}^2 + \norm{\Delta c}_2^2) + \norm{c}_{L^\infty} \norm{\mathbf{u}_h}_{H^3} \norm{\Delta \partial_3 c}_2 \\
-    & \leq \kappa \norm{\mathbf{u}_h}_{H^3} \norm{\Delta c}_2 + \norm{c}_{L^\infty} \norm{\mathbf{u}_h}_{H^3}^2 + \norm{c}_{L^\infty} \norm{\Delta c}_2^2 + \kappa(\zeta) \norm{c}_{L^\infty}^2 \norm{\mathbf{u}_h}_{H^3}^2 + \zeta \norm{\Delta \partial_3 c}_2^2, \raisetag{60pt} \\
+    & \lesssim \norm{\mathbf{u}_h}_{H^3} \norm{\Delta c}_2 + \norm{c}_{L^\infty} \norm{\mathbf{u}_h}_{H^3}^2 + \norm{c}_{L^\infty} \norm{\Delta c}_2^2 + \kappa(\zeta) \norm{c}_{L^\infty}^2 \norm{\mathbf{u}_h}_{H^3}^2 + \zeta \norm{\Delta \partial_3 c}_2^2, \raisetag{60pt} \\
   \end{split}
 \end{equation}
 
@@ -1477,9 +1482,9 @@ Now we are ready to utilise the Gr\"onwall inequality, where the multiplicative 
 \begin{equation} \label{gronwall_mult}
   \begin{split}
     & \int_0^T 1 + \norm{\mathbf{u}_h}_{H^3} + \norm{\mathbf{u}_h}_{H^3}^2 + \norm{\mathbf{u}_h}_{H^4} + \norm{c}_{L^\infty} \diff t \\
-    & \leq C (T + T\norm{\mathbf{u}_h}_{L^\infty_t H^3_x} + T \norm{\mathbf{u}_h}_{L^\infty_t H^3_x}^2 + \int_0^T (1 + \norm{\mathbf{u}_h}_{H^4}^2) \diff t  +  \int_0^T \norm{c}_{L^\infty} \diff t )\\
-    & \leq C (T + T\norm{\mathbf{u}_h}_{L^\infty_t H^3_x} + T \norm{\mathbf{u}_h}_{L^\infty_t H^3_x}^2 + \norm{\mathbf{u}_h}_{L^2_t H^4_x}  +  \int_0^T t \diff t )\\
-    & \leq C (T + T\norm{\mathbf{u}_h}_{L^\infty_t H^3_x} + T \norm{\mathbf{u}_h}_{L^\infty_t H^3_x}^2 + \norm{\mathbf{u}_h}_{L^2_t H^4_x}  +  T^2) : = G_1,
+    & \lesssim (T + T\norm{\mathbf{u}_h}_{L^\infty_t H^3_x} + T \norm{\mathbf{u}_h}_{L^\infty_t H^3_x}^2 + \int_0^T (1 + \norm{\mathbf{u}_h}_{H^4}^2) \diff t  +  \int_0^T \norm{c}_{L^\infty} \diff t )\\
+    & \lesssim (T + T\norm{\mathbf{u}_h}_{L^\infty_t H^3_x} + T \norm{\mathbf{u}_h}_{L^\infty_t H^3_x}^2 + \norm{\mathbf{u}_h}_{L^2_t H^4_x}  +  \int_0^T t \diff t )\\
+    & \lesssim (T + T\norm{\mathbf{u}_h}_{L^\infty_t H^3_x} + T \norm{\mathbf{u}_h}_{L^\infty_t H^3_x}^2 + \norm{\mathbf{u}_h}_{L^2_t H^4_x}  +  T^2) : = G_1,
   \end{split}
 \end{equation}
 
