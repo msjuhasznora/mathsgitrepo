@@ -15,8 +15,6 @@ from math import log
 # Define constants
 
 epsilon_lower_limit = 1.0e-07 #up 1.0e-07 c 5e-04
-mu_1 = Constant(1.0)
-mu_2 = Constant(1.0)
 
 errorvalues = []
 eocvalues = []
@@ -92,13 +90,25 @@ def concentration_BCs_pd(id, C):
     
     oneleft_concentration = DirichletBC(C, 1.0, "on_boundary && x[0] < DOLFIN_EPS")
     zerorightcondition = DirichletBC(C, 0.0, "on_boundary && x[0] > 1 - DOLFIN_EPS")
+    
+    zeroleftcondition = DirichletBC(C, 0.0, "on_boundary && x[0] < DOLFIN_EPS")
+    zerobottomcondition = DirichletBC(C, 0.0, "on_boundary && x[1] < DOLFIN_EPS")
+    
+    xsquaretop = Expression('x[0]*x[0]', degree = 3)
+    xsquaretopbc = DirichletBC(C, xsquaretop, "on_boundary && x[1] > 1 - DOLFIN_EPS")
+    ysquareright = Expression('x[1]*x[1]', degree = 3)
+    ysquarerightbc = DirichletBC(C, ysquareright, "on_boundary && x[0] > 1 - DOLFIN_EPS")
+    
+    zerobc = DirichletBC(C, 0.0, "on_boundary")
 
     if id == 0:
         return [zerotop_concentration]
     elif id == 1 :
-        return [oneleft_concentration, zerorightcondition]
+        return [zerobc]
     elif id == 2:
-        return [zerotop_concentration, onelowercondition]
+        return [zerobc]
+    elif id == 3:
+        return [zerobc]
     else:
         return []
 
@@ -145,6 +155,13 @@ def boundaryconditions_pd(id, VP):
 
         return bcuerrest
     
+    elif id == 3:
+    
+        zeroboundaryu = DirichletBC(VP.sub(0), Constant((0, 0)), "on_boundary")
+        #zeroboundarypressure = DirichletBC(VP.sub(1), 0, "on_boundary")
+        bcuerrest = [zeroboundaryu]
+        return bcuerrest
+    
     else:
         return []
 
@@ -166,7 +183,7 @@ u3_exact = Expression('-cos(2*pi*x[0])*sin(2*pi*x[1])', degree = 5)
 p_exact = Expression('0', degree = 5)
 f1 = Expression('2*pi*sin(2*pi*x[0])*sin(2*pi*x[1])*sin(2*pi*x[1])*cos(2*pi*x[0]) + 2*pi*sin(2*pi*x[0])*cos(2*pi*x[0])*cos(2*pi*x[1])*cos(2*pi*x[1]) + 8*pi*pi*sin(2*pi*x[0])*cos(2*pi*x[1])', degree = 5)
 f3 = Expression('2*pi*sin(2*pi*x[0])*sin(2*pi*x[0])*sin(2*pi*x[1])*cos(2*pi*x[1]) + 2*pi*sin(2*pi*x[1])*cos(2*pi*x[0])*cos(2*pi*x[0])*cos(2*pi*x[1]) - 8*pi*pi*sin(2*pi*x[1])*cos(2*pi*x[0])', degree = 5)
-c_exact = Expression('1-x[0]*x[0]', degree = 5)
+c_exact = Expression('(1-x[0])*(1-x[1])*sin(2*pi*x[1])*sin(2*pi*x[0])', degree = 5)
 problem_data1 = ProblemData(id, u1_exact, u3_exact, p_exact, f1, f3, c_exact)
 
 # PROBLEM 2
@@ -176,10 +193,20 @@ u3_exact = Expression('-x[1]', degree = 5)
 p_exact = Expression('0', degree = 5)
 f1 = Expression('x[0]', degree = 5)
 f3 = Expression('x[1]', degree = 5)
-c_exact = Expression('1-x[1]', degree = 5)
+c_exact = Expression('x[0]*(1-x[0])*x[1]*(1-x[1])', degree = 5)
 problem_data2 = ProblemData(id, u1_exact, u3_exact, p_exact, f1, f3, c_exact)
 
-problem_data_list = [problem_data1, problem_data2]
+# PROBLEM 3
+id = 3
+u1_exact = Expression('0', degree = 5)
+u3_exact = Expression('0', degree = 5)
+p_exact = Expression('0', degree = 5)
+f1 = Expression('0.0', degree = 5)
+f3 = Expression('0.0', degree = 5)
+c_exact = Expression('x[0]*(1-x[0])*x[1]*(1-x[1])', degree = 5)
+problem_data3 = ProblemData(id, u1_exact, u3_exact, p_exact, f1, f3, c_exact)
+
+problem_data_list = [problem_data1, problem_data2, problem_data3]
 
 class anis_c_source(UserExpression):
     def __init__(self,eps,id,**kwargs):
@@ -196,15 +223,17 @@ class anis_c_source(UserExpression):
         
         if id == 1:
             # test case 1
-            values[0] = -2*x[0]*sin(2*pi*x[0])*cos(2*pi*x[1]) + 2
+            values[0] = 8*pi**2*(-x[0] + 1)*(-x[1] + 1)*sin(2*pi*x[0])*sin(2*pi*x[1]) + 4*pi*(-x[0] + 1)*sin(2*pi*x[0])*cos(2*pi*x[1]) + 4*pi*(-x[1] + 1)*sin(2*pi*x[1])*cos(2*pi*x[0]) - (2*pi*(-x[0] + 1)*(-x[1] + 1)*sin(2*pi*x[0])*cos(2*pi*x[1]) - (-x[0] + 1)*sin(2*pi*x[0])*sin(2*pi*x[1]))*sin(2*pi*x[1])*cos(2*pi*x[0]) + (2*pi*(-x[0] + 1)*(-x[1] + 1)*sin(2*pi*x[1])*cos(2*pi*x[0]) - (-x[1] + 1)*sin(2*pi*x[0])*sin(2*pi*x[1]))*sin(2*pi*x[0])*cos(2*pi*x[1])
         elif id == 2:
             #test case 2
-            values[0] = x[1]
+            values[0] = 2*x[0]*(-x[0] + 1) + x[0]*(-x[0]*x[1]*(-x[1] + 1) + x[1]*(-x[0] + 1)*(-x[1] + 1)) + 2*x[1]*(-x[1] + 1) - x[1]*(-x[0]*x[1]*(-x[0] + 1) + x[0]*(-x[0] + 1)*(-x[1] + 1))
         elif id == 0:
             # id = 0, original case
             # https://en.wikipedia.org/wiki/Cauchy_distribution#Multivariate_Cauchy_distribution
             # An example of a bivariate Cauchy distribution can be given by:
             values[0] = (1/(2 * pi)) * (eps / ( (x[0] - 0.5)**2 + (x[1] - 0.5)**2 + eps**2 )**(1.5) )
+        elif id == 3:
+            values[0] = 2*x[0]*(1-x[0]) + 2*x[1]*(1-x[1])
         else:
             values[0] = 0
 
@@ -346,7 +375,9 @@ def hydrostatic_solver(VP, up_, vertical_velocity_degree, mesh_h, f1, f3, theta,
     d = TestFunction(C)
     c_sol = Function(C)
     
-    a = inner(u, grad(c)) * d * dx + (mu_1 * c.dx(0) * d.dx(0) + mu_2 * c.dx(1) * d.dx(1))  * dx - inner(c.dx(1), d.dx(1)) * ds(1)
+    # works for 0 BC concentation. otherwise, -c.dx(0)*d*ds(0)-c.dx(1)*d*ds(0) should be added, but for some reason the concentration error convergence values are not great for those cases, even if the velocity is very close
+    a = inner(u, grad(c)) * d * dx + (c.dx(0) * d.dx(0) + c.dx(1) * d.dx(1)) * dx
+    
     # linear solver for the concentration
     L = Constant(0) * d * dx
     
@@ -407,7 +438,8 @@ def anisotropic_solver(VP, eps, vertical_velocity_degree, mesh_h, f1, f3, theta,
     d = TestFunction(C)
     c_sol = Function(C)
     
-    a = inner(u, grad(c)) * d * dx + (mu_1 * c.dx(0) * d.dx(0) + mu_2 * c.dx(1) * d.dx(1)) * dx - inner(c.dx(1), d.dx(1)) * ds(1)
+    # works for 0 BC concentation. otherwise, -c.dx(0)*d*ds(0)-c.dx(1)*d*ds(0) should be added, but for some reason the concentration error convergence values are not great for those cases, even if the velocity is very close
+    a = inner(u, grad(c)) * d * dx + c.dx(0) * d.dx(0) * dx + c.dx(1) * d.dx(1) * dx
     
     # explanation of the degree parameter: https://fenicsproject.discourse.group/t/how-to-define-source-term-function/1893, Scan_29_Nov_2019.pdf.
     # the main idea is that "degree" is a built-in parameter in this class, we do not need to "create" it. it gets defined through the call,
@@ -417,7 +449,7 @@ def anisotropic_solver(VP, eps, vertical_velocity_degree, mesh_h, f1, f3, theta,
     # Also: if degree is set to a high value, e.g. degree = 20, a warning message comes from fenics:
     # "WARNING: The number of integration points for each cell will be: 144"
     # i.e. this degree variable is responsable for the number of integration points
-    anis_c_source_instance = anis_c_source(eps, id, degree = 10)
+    anis_c_source_instance = anis_c_source(eps, id, degree = 5)
     L = inner(anis_c_source_instance, d) * dx
     
     A, b = assemble_system(a, L, bcc)
@@ -570,7 +602,7 @@ if (doErrorCalc):
         eocvalues = []
         foldermarker = "_empirical_error_calc_pd_" + str(problem_data.id)
 
-        nx_exp = 2
+        nx_exp = 3
         nx = 2 ** nx_exp # to control the number of cells, UnitSquareMesh(nx, nx)
         
         h_prev = 1.0
