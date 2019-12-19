@@ -325,9 +325,9 @@ We highlight the difference between the boundary conditions of the original, eas
 
 The difference in the kind of boundary conditions we can "afford" to have on the lower boundary for the concentration comes from the energy inequality. In the east-north-upwards oriented coordinate system we do not have an $\epsilon$ in the diffusion matrix, and thus, having any of the $\partial_i c^\epsilon$ terms different from 0 does not create any problems, not even for the case of the ocean where $\partial_3 c^\epsilon$ becomes nonzero as well (they are required however to be bounded of course). On the other hand, the downwind-matching coordinate system brings in an $\epsilon$ term in front of the $K_1$ diffusion coefficient, which makes the model more sensitive to assigning boundary conditions for $c^\epsilon.$ This means that we can not anymore have the relatively relaxed boundedness requirement for any $\partial_i c^\epsilon$ except for $i=1.$ All other $\partial_2 c^\epsilon, \partial_3 c^\epsilon$ derivatives must be zero on the lower boundary, otherwise they would result in an $(\epsilon - \text{const.})$ negative term appearing in the energy inequality --- for more details see Section $\ref{proof}$. This also means that we will consider exclusively the inland domain scenario for the case of this coordinate system.
 
-Concerning the initial data, we set ${\mathbf{u}_h}_0$ $\in$ $H^1 (\Omega)$, ${u_3}_0 \in L^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0,$ and $c_0 \in$ $L^2 (\Omega).$ We highlight here that we are still working in classical Leray framework of weak solutions, even though we use an $H^1(\Omega)$ regularity assumption on ${\mathbf{u}_h}_0,$ which is stronger than the more usual $L^2$ space regularity requirement for weak solutions (\cite{azerad2001mathematical}, \cite{pollatmws2019}). The reason we need this stronger regularity is to counterbalance the decreased control we have on the concentration function due to the coordinate choice, but overall this does not lead us out of the field of weak solutions.
+Concerning the initial data, we set $${\mathbf{u}_h}_0 \in H^1 (\Omega), {u_3}_0 \in L^2(\Omega) \text{ with } \nabla \cdot \mathbf{u}_0 = 0, \text{ and } c_0 \in L^2 (\Omega).$$ We highlight here that we are still working in classical Leray framework of weak solutions, even though we use an $H^1(\Omega)$ regularity assumption on ${\mathbf{u}_h}_0,$ which is stronger than the more usual $L^2$ space regularity requirement for weak solutions (\cite{azerad2001mathematical}, \cite{pollatmws2019}). The reason we need this stronger regularity is to counterbalance the decreased control we have on the concentration function due to the coordinate choice, but overall this does not lead us out of the field of weak solutions.
 
-Finally, the $s^\epsilon$ and $s$ source terms are formulated in the spirit of our previous result \cite{pollatmws2019}: the hydrostatic $s$ function is defined as a point source, while the anisotropic source function $s^\epsilon$ is modelled with a parametrised nascent delta function. For simplicity we assume here that the pollution process begins at $t = 0,$ thus we omit the multiplication by a Heaviside function representing the activation of the source, furthermore we assume that the source is centred in $x=0$ and we set the intensity constant $I$ to be $1.$
+Finally, the $s^\epsilon$ and $s$ source terms are formulated in the spirit of our previous result \cite{pollatmws2019}: the hydrostatic $s$ function is defined as a point source, while the anisotropic source function $s^\epsilon$ is modelled with a parametrised nascent delta function. For simplicity we assume here that the pollution process begins at $t = 0,$ thus we omit the multiplication by a Heaviside function representing the activation of the source, furthermore without loss of generality we assume that the source is centred in $x=0$ and we set the intensity constant $I$ to be $1.$
 
 Let $\delta_\epsilon$ be the approximation of the $\delta$ distribution given below:
 
@@ -747,10 +747,6 @@ Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ and $(\mathbf{u}_h,u_3)$ be the solu
     \end{split}
   \end{equation}
   
-  \begin{remark}
-  \normalfont For clarity we point out that the "up to a constant" concept of inequalities preserves the correctness of the calculations even for cases as given above, where the smallness of the $\zeta$ constant is important. In detail, according to the given constant multiplier $\kappa$ in the previous line, we can always choose the $\zeta$ constant of the generalised Young inequality in a way that $\zeta \cdot \kappa$ will be as small as needed, and these terms can be subtracted later from the left-hand side of the inequality. From now on we will always keep this in mind without explicitly mentioning it.
-  \end{remark}
-  
   On the other hand, estimating $I_2'',$ we obtain
   
   \begin{equation}
@@ -896,12 +892,14 @@ This has been the last missing part of the proof of the main theorem, since comb
 
 \begin{equation}c^\epsilon u_3^\epsilon \rightharpoonup c u_3 \text{ weakly in } L_t^2 L_x^2,\end{equation}
 
-and we can conclude the proof of $\ref{maintheoremWEAK}$.
+and we can conclude the proof of Theorem $\ref{maintheoremWEAK}$.
 
 %%% STRONG SOLUTIONS %%%
 \section{Strong solutions framework} \label{sectionSTRONGsol}
 
-In this section we increase the regularity of the initial data --- specifically, we assume ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0$, and $c_0 \in H^2 (\Omega),$ ---  therefore we can work in the framework of strong solutions. We verify that the previously shown connection between the anisotropic and hydrostatic equations has an analogous version that holds in the scenario of strong solutions as well. In order to describe our result we firstly need to give exact definition to the domain and set the boundary conditions. Here we follow the main ideas of \cite{cao2014local} and create a periodic domain $\Omega$ in three steps as described below.
+In this section we increase the regularity of the initial data: specifically, we assume \begin{equation}\label{stronginitdataregularities}{\mathbf{u}_h}_0 \in H^3(\Omega), {u_3}_0 \in H^2(\Omega) \text{ with } \nabla \cdot \mathbf{u}_0 = 0, \text{ and } c_0 \in H^2 (\Omega).\end{equation} This is of key importance, because using classical results of the framework of strong solutions, (\ref{stronginitdataregularities}) guarantees the existence of the pre-limit strong solutions $\mathbf{u}^\epsilon$ and $c^\epsilon,$ which is fundamental for our results.
+
+We verify that the previously shown connection between the anisotropic and hydrostatic equations has an analogous version that holds in the scenario of strong solutions as well. In order to describe our result we firstly need to give exact definition to the domain and set the boundary conditions. Here we follow the main ideas of \cite{cao2014local} and create a periodic domain $\Omega$ in three steps as described below.
 
 \begin{remark}
 \normalfont In the weak solutions framework we defined a local domain with classical closed boundaries. Preserving this non-periodic domain in the case of strong solutions would naturally require higher order terms to be zero on the boundaries (otherwise the computations can not be brought to a closure, consider for example Lemma 2.2 in \cite{li2019primitive} in a non-periodic case). Since in this framework we essentially need a domain structure where the $H^2$ norm is equivalent to the $L^2$ norm of the Laplacian, thus for simplicity we use the technically more clear choice of assuming periodic boundaries. At the same time we point out that the periodic boundary conditions can be substituted by boundary conditions of type $\nabla^k u = 0, \nabla^k c = 0$ defined on a non-periodic, standard domain. Applying these alternative boundary conditions it is possible to switch back to a classical domain and still benefit from the disappearing boundary integrals.
@@ -1058,7 +1056,7 @@ As a consequence, the following strong convergences hold for an ${\mathbf{u}_h}_
 
 Theorem \ref{maintheoremSTRONG}'s statement on the strong convergence of the velocity functions is obvious with the above result.
 
-In the second part of the proof we present the computations verifying the strong convergence of the concentration function $c^\epsilon.$ The structure of these calculations heavily depends on the existence of both the anisotropic concentration $c^\epsilon$ and the limit solution $c.$ The existence of the pre-limit solution function $c^\epsilon$ follows from analogous arguments to those guaranteeing the existence of $\mathbf{u}^\epsilon.$ On the other hand, the existence result concerning the hydrostatic downwind-matching solution $c$ is given by Theorem \ref{existenceconcentrationSTRONG}.
+In the second part of the proof we present the computations verifying the strong convergence of the concentration function $c^\epsilon.$ The structure of these calculations heavily depends on the existence of both the anisotropic concentration $c^\epsilon$ and the limit solution $c.$ The existence of the pre-limit solution function $c^\epsilon$ follows from analogous arguments to those guaranteeing the existence of $\mathbf{u}^\epsilon$ using the initial regularities (\ref{stronginitdataregularities}). On the other hand, the existence result concerning the hydrostatic downwind-matching solution $c$ is given by Theorem \ref{existenceconcentrationSTRONG}.
 
 The focus of the proof's remaining part is to construct an estimate for the concentration difference function and show that
 
@@ -1477,7 +1475,7 @@ In order to bound the $\norm{c}_{L^\infty} (t)$ term, we follow Stampaccia's ide
 
 $$\norm{c}_{L^\infty} (t) \leq 1 + \norm{c_0}_{L^\infty} + \norm{s}_{L^\infty} t.$$
 
-Now we are ready to utilise the Gr\"onwall inequality, where the multiplicative term on the right-hand side of (\ref{Gronwallstructureready}) can be bounded in time as
+Now we are ready to utilise the Gr\"onwall inequality, provided the multiplicative term on the right-hand side of (\ref{Gronwallstructureready}) can be bounded in time as
 
 \begin{equation} \label{gronwall_mult}
   \begin{split}
