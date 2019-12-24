@@ -165,28 +165,33 @@ The complete set of equations (\ref{originalEQ-V})-(\ref{originalEQ-I}) is extre
 
 \begin{equation} \label{PE_orignal_3} \nabla \cdot \mathbf{v} = 0 \end{equation}
 
-Note that the difference between \ref{originalEQ-V}-\ref{originalEQ-I} and \ref{PE_orignal_1}-\ref{PE_orignal_3} lies in the richness of information we have in the vertical momentum equation in the full 3D Navier-Stokes equation compared to the much simpler \ref{PE_orignal_2} equation. In particular, this latter states nothing else but a global scale equilibrium suggested by empirical observations and historical data in meteorology: the hydrostatic balance. For this reason the primitive equations are often referred to as the hydrostatic system as well. 
+Note that the difference between (\ref{originalEQ-V})--(\ref{originalEQ-I}) and (\ref{PE_orignal_1})--(\ref{PE_orignal_3}) lies in the richness of information we have in the vertical momentum equation in the full 3D Navier-Stokes equation compared to the much simpler (\ref{PE_orignal_2}) equation. In particular, this latter states nothing else but a global scale equilibrium suggested by empirical observations and historical data in meteorology: the hydrostatic balance. For this reason the primitive equations are often referred to as the hydrostatic system as well. 
 
-As far as we know, the primitive equations were proposed by L. F. Richardson (\cite{lions1992new}) in 1922. Based on their high accuracy, the primitive equations are the central component for describing the dynamics of large-scale water bodies such as big lakes and oceans, they are widespread accepted as the fundamental equations for studying complicated atmospheric phenomena.
+As far as we know, the primitive equations were proposed by L. F. Richardson (\cite{lions1992new}) in 1922. Based on their high accuracy, the hydrostatic equations are the central component for describing the dynamics of large-scale water bodies such as big lakes and oceans, the equation describing hydrostatic equilibrium has widespread acceptance as the fundamental component for studying complicated atmospheric phenomena.
 
-The intensive mathematical research on the hydrostatic equations was initiated by J. L. Lions, R. Temam, and S. Wang, and they obtained the existence for all time of weak solutions, see their original works \cite{lions1992new}, \cite{lions1992equations}, and \cite{lions1995mathematical} from the 1990s. Further study and results in this field has practically brought the mathematical theory of the primitive equations to a level where we are able to say more on the topic of these reduced equations than the complete Navier-Stokes system (the global existence of strong solutions has been proved for the primitive equations). This seems trivial, but on the contrary, it is not at all true that the hydrostatic equations are more simple in every sense. From a physical point of they are definitely more favourable, but an added complexity comes into the system where the
+The intensive mathematical research on the primitive equations was initiated by J. L. Lions, R. Temam, and S. Wang, and they obtained the existence for all time of weak solutions, see their original works \cite{lions1992new}, \cite{lions1992equations}, and \cite{lions1995mathematical} from the 1990s. Further study and results in this field has practically brought the mathematical theory of the primitive equations to a level where we are able to state more on the topic of these reduced equations than the complete Navier-Stokes system (the global existence of strong solutions has been proved for the primitive equations). This seems trivial, but on the contrary, it is not at all true that the hydrostatic equations are more simple in every sense. From a physical point of they are definitely more favourable, but an added complexity becomes part of the system where the
 
-$$ \text{velocity} \times \text{first order derivatives of velocity}$$
+\begin{equation} \text{velocity} \times \text{first order derivatives of velocity}\end{equation}
 
 nonlinear term in the Navier-Stokes equations is replaced by the
 
-$$ \text{first order derivatives of horizontal velocity} \times \text{first order derivatives of horizontal velocity}$$
+\begin{equation}
+  \begin{split}
+    & \text{first order derivatives of horizontal velocity} \\
+    & \times \text{first order derivatives of horizontal velocity}
+  \end{split}
+\end{equation}
 
-nonlinear term in the hydrostatic system (\cite{temam2005some}). This is due to the standard technique of replacing the vertical velocity with a function of first order derivatives of horizontal velocity via the divergence-free condition (see later in more detail).
+nonlinear term in the hydrostatic system (\cite{temam2005some}). This is due to the standard technique of replacing the vertical velocity with a function of first order derivatives of horizontal velocity via the divergence-free condition when working with the primitive equations (see later in more detail).
 
 We conclude this subsection with the most important results currently available on the topic of primitive equations.
 
 \bigskip
 
-\textbf{State of art of the primitive equations} (see \cite{temam2005some}, \cite{cao2007global}, \cite{li2019primitive}):
+\textbf{State of art of the primitive equations} (see \cite{cao2007global}, \cite{li2019primitive}, \cite{temam2005some}):
 \begin{enumerate}[label=\arabic*)]
-  \item Weak solutions exist for all time (in both 2D and 3D).
-  \item The uniqueness of weak solutions has been shown in space dimension two, the 3D uniqueness is unresolved.
+  \item Weak solutions exist for all time (in both 2D and 3D), see \cite{temam2005some}.
+  \item The uniqueness of weak solutions has been shown in space dimension two (\cite{temam2005some}), the 3D uniqueness is unresolved.
   \item In both space dimensions two and three we have the global existence and uniqueness of strong solutions. The global existence in 3D is a relatively new result of \cite{cao2007global}.
 \end{enumerate}
 
