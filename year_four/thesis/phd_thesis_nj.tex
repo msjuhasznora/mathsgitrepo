@@ -114,19 +114,35 @@ We begin by presenting the basic ideas, approaches, and well-known results in th
 
 \subsection{The 3D Navier-Stokes equations}
 
-The general equations governing the motion of the atmosphere are the hydrodynamic equations equations with Coriolis force. The equations of geophysical fluid dynamics are the equations governing the motion of the atmosphere and the ocean, and are derived from the conservation equations from physics, namely conservation of mass, momentum, energy, and some other components such as salt for the ocean, humidity (or chemical pollutants) for the atmosphere.
+The mathematical equations describing the motions of geophysical fluids such as the ocean and the atmosphere are derived from the conservation laws of physics. Specifically, it is the conservation of mass, momentum and energy (and in some cases these are complemented with some additional components such as humidity, salt or chemical pollutants) that serve as a basis for the fundamental equations of fluid dynamics, the Navier-Stokes equations:
 
-The equations governing the air velocity $\mathbf{v}$ and pressure $q$ in the atmosphere are the incompressible Navier-Stokes equations. Here we use the so-called Boussinesq approximation (i.e. the we assume that $\rho$ is constant), more specifically the density is taken to be identically equal to one, thus we have:
+\begin{equation} \label{original_general_NS}
+  \partial_t \rho \mathbf{v} + \rho (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + \nabla q = \rho \mathbf{g},
+\end{equation}
+
+where $\mathbf{v}$ is the velocity function, $\rho$ is the density and $q$ denotes the pressure.
+
+We combine the hydrodynamic equation (\ref{original_general_NS}) with three other important concepts: the so-called Boussinesq approximation, the Coriolis force and the incompressibility condition.
+
+\begin{enumerate}
+
+\item The Boussinesq approximation is a simplification of the model, it assume a $\rho = \rho_0$ constant density. Specifically, for simplicity we take a density function identically equal to one.
+
+\item The Coriolis force needs to be taken into account since we are describing a large-scale phenomena on the surface of the rotating Earth. It is definitely an important force to reckon with from a modelling point of view, however, its contribution to the level of theoretical complexity is rather small, as it results in linear velocity terms.
+
+\item The third feature we add to the Navier-Stokes equations is the assumption that the volume of any fluid element is constant in time. This is equivalent to (see for example \cite{boyer2012mathematical}) stating that the velocity field $\mathbf{v}$ is solenoidal, i.e. $\text{div}(\mathbf{v})(t,x) = 0.$ The incompressibility condition is reasonable to assume for gases in standard conditions and for low-speed fluid flows where the so-called Mach number is small. Note in particular that since we add a new equation to the original system that the velocity function now has to satisfy, the pressure is related differently to the other thermodynamical variables for the case of incompressible flows, and in some sense it becomes independent. In other words, as we will see in our computations later, the divergence-free velocity function can be obtained separately, while the pressure can be obtained afterwards. We also highlight here that the pressure function is defined only up to a constant, or in other words, it is only the pressure gradient (pressure fluctuation) that has a physical meaning, and not the absolute pressure value itself.
+
+\end{enumerate}
+
+Combining the aforementioned ideas, the equations governing the air velocity $\mathbf{v}$ and pressure $q$ in the atmosphere are the incompressible Navier-Stokes equations including the Coriolis term with constant density $\rho \equiv 1$, thus we have:
 
 \begin{equation} \label{originalEQ-V}
-  \partial_t \mathbf{v} + (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + \nabla q + 2 \mathbf{w} \times \mathbf{v}= \mathbf{g} \text{ in } \Omega_{\epsilon} \times (0,T)
+  \partial_t \mathbf{v} + (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + \nabla q + 2 \mathbf{w} \times \mathbf{v}= \mathbf{g} \text{ in } \Omega_{\epsilon} \times (0,T),
 \end{equation}
     
 \begin{equation} \label{originalEQ-I}
   \nabla \cdot \mathbf{v} = 0 \text{ in } \Omega_{\epsilon} \times (0,T).
 \end{equation}
-
-Incompressibility: \cite{boyer2012mathematical}, relevant for fluids in standard conditions and for gases for low-speed flows. In particular, since essentially a new equation is added to the flow that the velocity has to satisfy, for incompressible flows the pressure is related differently to the other thermodynamical variables. The velocity function can be solved independently in this case, finally the pressure can be defined using the known velocity. In particular, observe that the pressure function is defined only up to a constant, in other words, it is only the pressure gradient that has a physical meaning. (it is more of a pressure fluctuation and not an absolute pressure) div-free, low Mac number
 
 In the following we collect some of the main results currently available on the solutions of the Navier-Stokes equations. Here we use a standard terminology: the weak solutions are those with finite kinematic energy ($L^\infty L^2 \cap L^2 H^1$ boundedness), and the strong solutions are those with finite enstrophy ($L^\infty H^1 \cap L^2 H^2$ regularity). The more precise definitions and regularities of solutions will be given later.
 
