@@ -110,9 +110,11 @@ The aim of this chapter is to provide a comprehensive, general overview of the m
 
 \section{The fundamental concepts and the state of art in mathematical meteorology} \label{state_of_art_foundations_section}
 
-We begin by presenting the basic ideas, approaches, and well-known results in this field regarding fluid velocity.
+We begin by presenting the basic ideas, approaches, and well-known results in this field regarding fluid velocity. We give a brief overview two significant models used in atmosphere modelling: in subsection \ref{3DNSgeneraldescription} we provide a brief overview on the 3D Navier-Stokes equations, while in subsection \ref{PEsgeneraldescription} we introduce the concept of primitive equations. The connection between these two models will be described in the following Section \ref{anis-hydr-connection}.
 
-\subsection{The 3D Navier-Stokes equations}
+For the moment being, we simply assume an open, bounded Lipschitzian domain $\Omega$ in $\mathbb{R}^3$ and for a given time $T$ a time interval $[0,T).$
+
+\subsection{The 3D Navier-Stokes equations}\label{3DNSgeneraldescription}
 
 The mathematical equations describing the motion of geophysical fluids such as oceans and the atmosphere are derived from the conservation laws of physics. Specifically, it is the conservation of mass, momentum and energy (and in some cases these are complemented with some additional components such as humidity, salt or chemical pollutants) that serve as a basis for the fundamental equations of fluid dynamics, the Navier-Stokes equations:
 
@@ -155,7 +157,7 @@ In the following we collect some of the main results currently available on the 
   \item The existence of global strong solutions in three dimensions is an open problem (except for some specific cases, see for example \cite{li2019primitive}).
 \end{enumerate}
 
-\subsection{The primitive equations}
+\subsection{The primitive equations}\label{PEsgeneraldescription}
 
 The complete set of equations (\ref{originalEQ-V})-(\ref{originalEQ-I}) is extremely complex and due to its (for the moment being) unreasonable computational demands it is seldom used in real-world applications. At the core of many flood prediction systems, weather forecast softwares, global circulation models or ocean global circulation models we find the following different system called the primitive equations.
 
@@ -195,49 +197,42 @@ We conclude this subsection with the most important results currently available 
   \item In both space dimensions two and three we have the global existence and uniqueness of strong solutions. The global existence in 3D is a relatively new result of \cite{cao2007global}.
 \end{enumerate}
 
-\subsection{The anisotropic Navier-Stokes equation}
 
-Owing to the difference of sizes of the vertical and horizontal dimensions, both in the atmosphere and in the ocean (10 to 20 kms versus several thousands of kilometres), the most natural simplification
+\section{The anisotropic and hydrostatic models of the polluted atmosphere}\label{anis-hydr-connection}
 
-In many cases it is undesirable to solve the complete Navier-Stokes system because some physical phenomena can be neglected.
+In Section \ref{3DNSgeneraldescription} we have described the theoretically correct model describing phenomena in geophysical fluid dynamics, while in Section \ref{PEsgeneraldescription} we introduced the primitive equations: a system that is significantly different from the general 3D incompressible Navier-Stokes equations, however results to be highly accurate in modelling atmospheric motions. An important step to understand what connects these two models is to keep in mind under what circumstances they are "close" to each other. The primitive equations can not be used instead of the complete Navier-Stokes equations in any given situation: the empirical observation in meteorology is that the hydrostatic approximation works well for large-scale fluids.
 
-In order to create connection we need to use the shallowness characteristic of the domain.
+The key characteristics the atmosphere naturally shares with seas and oceans turns out to be shallowness. This means that its domain is excessively greater horizontally than in the vertical dimension (several thousand kilometres versus 1-20 kms). Thanks to this feature it is reasonable to neglect some of the occurring physical phenomena. Hence, the idea is to incorporate this important characteristics into the original fluid dynamical model (\ref{originalEQ-V})--(\ref{originalEQ-I}) with the explicit inclusion with the shallowness parameter
 
-The relationship. Two fundamental properties of the atmosphere, the hydrostatic pressure and shallowness are inseparable: the hydrostatic pressure is a direct result of the shallowness, as we show.
+$$\epsilon = \frac{\text{characteristic depth}}{\text{characteristic width}}$$
 
-corresponding to the so-called $\beta$-plane approximation -- we concentrate our efforts on the corresponding $\beta$-plane case (in Cartesian coordinates)
+representing the small aspect ratio of the physical domain.
 
-other coordinate choices: spherical, p-coordinates where z becomes p: $(\theta, \varphi, p).$
+An important simplification we make at this point is to apply the so-called $\beta$-plane approximation. This means that we concentrate our efforts on a local domain on the surface of the rotating Earth, or, more accurately, on the corresponding $\beta$-plane case. As a consequence, we can neglect the curvature of the Earth and we can use Cartesian coordinates.
 
-\section{The anisotropic and hydrostatic models of the polluted atmosphere}
-
-A local domain on the surface of the rotating Earth. Common concepts shared by the two models.
-
-\subsection{The polluted atmosphere model in geophysical coordinates} \label{eqsdescribingatmpluspollution_gfc}
-
-We begin by choosing a coordinate system, set the domain we start with and an appropriate set of equations describing both atmosphere motions and the effect of pollution. We ignore large scale effects such as the curvature of the Earth. For describing the effect of pollution we use a continuity equation written in Cartesian coordinates for the concentration.
-
-We fix a local Cartesian coordinate system where the axes are independent from the wind ($x, y$ and $z$ are oriented towards east, north, and upwards, respectively). Other possibilities and considerations regarding choosing the coordinate system are described briefly in the concluding remarks.
-
-The domain we consider is a local slice of the atmosphere filled with homogeneous air that we assume to be incompressible, and a pollutant of concentration $C,$ therefore it is defined by the set
+We define the domain we consider by the set
 
 \begin{equation}
   \Omega_{\epsilon} = \{(x,y,z) \in \mathbb{R}^3 ; (x,y) \in \omega, 0 < z < \epsilon h(x,y) \},
 \end{equation}
 
-where $\omega$ is a Lipschitz-domain in $\mathbb{R}^2$, $h$ is a nonnegative Lipschitzian application, and $\epsilon$ incorporates the shallowness of the domain.
+where $\omega$ is a Lipschitz-domain in $\mathbb{R}^2$, $h$ is a nonnegative Lipschitzian application.
 
-The equations governing the air velocity $\mathbf{v}$ and pressure $q$ in the atmosphere are (\ref{originalEQ-V}) - (\ref{originalEQ-I})
+Before we describe the details of including the shallowness into the model, we extend the velocity equations (\ref{originalEQ-V})--(\ref{originalEQ-I}) with an additional equation governing the trajectories of a pollutant present in the atmosphere in concentration $p.$
 
-Contaminants emitted into the atmosphere are transported by the wind, mixed and dispersed by turbulent behaviour, and deposited onto the ground by gravity. The dispersion of pollutants is commonly modelled by a diffusive equation of the form
+Contaminants emitted into the atmosphere are transported by the wind, mixed and dispersed by turbulent behaviour, and deposited onto the ground by gravity. The dispersion of pollutants is commonly modelled by a continuity equation of the form
     
 \begin{equation} \label{diffusive}
-  \partial_t P + \mathbf{v} \cdot \nabla P = \nabla \cdot (\mathbf{K} \nabla P) + Q,
+  \partial_t p + \mathbf{v} \cdot \nabla p = \nabla \cdot (\mathbf{K} \nabla p) + q \text{ in } \Omega_{\epsilon} \times (0,T),
 \end{equation}
 
-where $P$ is the pollution concentration and $\mathbf{K}$ is the $3 \times 3$ diffusion matrix --- the diagonal terms represent the strength of the diffusion in the $x, y, z$ directions, while the non-diagonal terms reflect the correlation of random motions between each pair of principal directions.
+where $p$ is the pollution concentration and $\mathbf{K}$ is the $3 \times 3$ diffusion matrix --- the diagonal terms represent the strength of the diffusion in the $x, y, z$ directions, while the non-diagonal terms reflect the correlation of random motions between each pair of principal directions. Here $q$ represents the sources of the pollutant in the atmosphere i.e. its emission, removal from the atmosphere by dry and wet deposition, and chemical reactions.
 
-Here $Q$ represents the sources of the pollutant in the atmosphere i.e. its emission, removal from the atmosphere by dry and wet deposition, and chemical reactions.
+In the following two subsections we construct atmosphere models in two different coordinate systems: in Section \ref{eqsdescribingatmpluspollution_gfc} we work in the classical geophysical coordinates, while in Section \ref{eqsdescribingatmpluspollution_dwmc} we define a more considerately chosen coordinate system, the so-called downwind-matching coordinates. In the development process we also show that the two fundamental properties of the atmosphere --- shallowness and hydrostatic balance --- are in fact inseparable on the level of the models themselves.
+
+\subsection{The polluted atmosphere model in geophysical coordinates} \label{eqsdescribingatmpluspollution_gfc}
+
+We fix a local Cartesian coordinate system where the axes are independent from the wind ($x, y$ and $z$ are oriented towards east, north, and upwards, respectively).
     
 Now, we perform a vertical scaling to make the domain independent of $\epsilon.$
 
@@ -492,21 +487,7 @@ which leads us to introducing the new scaling identity
 
 We use this diffusion rescaling result in addition to the original set of scaling equations described below. Every element of this latter set is a result of the shallowness of the domain, and they are applied in order to pass from the $\epsilon-$ dependent $\Omega^\epsilon$ original domain to the rescaled, $\epsilon-$free $\Omega$ domain.
 
-Here the original $\Omega_\epsilon$ domain we consider is a local slice of the atmosphere written in Cartesian coordinates:
-
-\begin{equation}
-  \Omega_{\epsilon} = \{(x,y,z) \in \mathbb{R}^3 ; (x,y) \in \omega, 0 < z < \epsilon h(x,y) \},
-\end{equation}
-
-where $\omega$ is a Lipschitz-domain in $\mathbb{R}^2$, $h$ is a nonnegative Lipschitzian application.
-
-In order to obtain the set of equations that describe the pollution phenomena in the atmosphere, we start with the original set of equations, (\ref{originalEQ-V}) - (\ref{originalEQ-I}) combined with
-    
-\begin{equation} \label{diffusive}
-  \partial_t P + \mathbf{v} \cdot \nabla P = \nabla \cdot (\mathbf{K} \nabla P) + Q \text{ in } \Omega_{\epsilon} \times (0,T),
-\end{equation}
-
-where the fluid velocity is denoted by $\mathbf{v}$ and the function $P$ represents the pollutant concentration. 
+Set of starting eqs.
 
 Each of these following scaling equations can be heuristically deduced from the typical physical dimension of the quantities (for more details see \cite{besson1992some}, \cite{azerad2001mathematical}, \cite{pollatmws2019}), unlike the previously presented equation ($\ref{ksepsk1}$), which is the effect of the coordinate choice itself. In detail, apart from the already introduced equation ($\ref{ksepsk1}$) we use the following scaling identities to arrive to the rescaled model.
 
