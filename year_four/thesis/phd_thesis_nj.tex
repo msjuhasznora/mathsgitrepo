@@ -209,7 +209,7 @@ As a first step of this section, we extend the velocity equations (\ref{original
 Contaminants emitted into the atmosphere are transported by the wind, mixed and dispersed by turbulent behaviour, and deposited onto the ground by gravity. The dispersion of pollutants is commonly modelled by a continuity equation of the form
     
 \begin{equation} \label{diffusive}
-  \partial_t p_c + \mathbf{v} \cdot \nabla p_c = \nabla \cdot (\mathbf{K} \nabla p_c) + q \text{ in } \Omega_0 \times (0,T),
+  \partial_t p_c + \mathbf{v} \cdot \nabla p_c = \nabla \cdot (\mathbf{K} \nabla p_c) + q \quad \text{ in } \Omega_0 \times (0,T),
 \end{equation}
 
 where $p_c$ is the pollution concentration and $\mathbf{K}$ is the $3 \times 3$ diffusion matrix --- the diagonal terms represent the strength of the diffusion in the $x, y, z$ directions, while the non-diagonal terms reflect the correlation of random motions between each pair of principal directions. Here $q$ represents the sources of the pollutant in the atmosphere i.e. its emission, removal from the atmosphere by dry and wet deposition, and chemical reactions.
@@ -262,7 +262,7 @@ Finally we obtain the rescaling equations for the pollution concentration and th
     
 Note that from this point we have $\nabla = (\partial_1, \partial_2, \partial_3) $ and $ \Delta_\nu = \nu_1 \partial^2_{11} + \nu_2 \partial^2_{22}  + \nu_3 \partial^2_{33} $. 
 
-We will build in the scaling equations (\ref{scaling_eq_x}), (\ref{scaling_eq_vpnu}), (\ref{scaling_eq_c}) into the original, 3D Navier-Stokes equations (\ref{originalEQ-V})--(\ref{originalEQ-I}) considered for two different coordinate choices in the following two sections, respectively.
+We will build in the scaling equations (\ref{scaling_eq_x}), (\ref{scaling_eq_vpnu}), (\ref{scaling_eq_c}) into the original, 3D Navier-Stokes equations (\ref{originalEQ-V})--(\ref{originalEQ-I}) combined with the convection-diffusion equation (\ref{diffusive}), considered for two different coordinate choices in the following two sections, respectively.
 
 %%% GEOPHYSICAL COORDINATES %%%
 \subsection{The polluted atmosphere model in geophysical coordinates} \label{eqsdescribingatmpluspollution_gfc}
