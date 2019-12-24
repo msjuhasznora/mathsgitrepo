@@ -112,7 +112,7 @@ The aim of this chapter is to provide a comprehensive, general overview of the m
 
 We begin by presenting the basic ideas, approaches, and well-known results in this field regarding fluid velocity. We give a brief overview two significant models used in atmosphere modelling: in subsection \ref{3DNSgeneraldescription} we provide a brief overview on the 3D Navier-Stokes equations, while in subsection \ref{PEsgeneraldescription} we introduce the concept of primitive equations. The connection between these two models will be described in the following Section \ref{anis-hydr-connection}.
 
-For the moment being, we simply assume an open, bounded Lipschitzian domain $\Omega$ in $\mathbb{R}^3$ and for a given time $T$ a time interval $[0,T).$
+For the moment being, we simply assume an open, bounded Lipschitzian domain $\Omega_0$ in $\mathbb{R}^3$ and for a given time $T$ a time interval $[0,T).$
 
 \subsection{The 3D Navier-Stokes equations}\label{3DNSgeneraldescription}
 
@@ -139,11 +139,11 @@ We combine equation (\ref{original_general_NS}) with three other important conce
 Combining the aforementioned ideas, the equations governing the air velocity $\mathbf{v}$ and pressure $q$ in the atmosphere are the incompressible Navier-Stokes equations including the Coriolis term with constant density $\rho \equiv 1$, thus we have:
 
 \begin{equation} \label{originalEQ-V}
-  \partial_t \mathbf{v} + (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + \nabla q + 2 \mathbf{w} \times \mathbf{v}= \mathbf{g} \text{ in } \Omega_{\epsilon} \times (0,T),
+  \partial_t \mathbf{v} + (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + \nabla q + 2 \mathbf{w} \times \mathbf{v}= \mathbf{g} \text{ in } \Omega_0 \times (0,T),
 \end{equation}
     
 \begin{equation} \label{originalEQ-I}
-  \nabla \cdot \mathbf{v} = 0 \text{ in } \Omega_{\epsilon} \times (0,T).
+  \nabla \cdot \mathbf{v} = 0 \text{ in } \Omega_0 \times (0,T).
 \end{equation}
 
 In the following we collect some of the main results currently available on the solutions of the Navier-Stokes equations. Here we use a standard terminology: the weak solutions are those with finite kinematic energy ($L^\infty L^2 \cap L^2 H^1$ boundedness), and the strong solutions are those with finite enstrophy ($L^\infty H^1 \cap L^2 H^2$ regularity). The more precise definitions and regularities of solutions will be given in the following chapters.
@@ -197,22 +197,22 @@ We conclude this subsection with the most important results currently available 
   \item In both space dimensions two and three we have the global existence and uniqueness of strong solutions. The global existence in 3D is a relatively new result of \cite{cao2007global}.
 \end{enumerate}
 
-
+%%% ANISOTROPIC AND HYDROSTATIC MODELS %%%
 \section{The anisotropic and hydrostatic models of the polluted atmosphere}\label{anis-hydr-connection}
 
 In this section we aim to create atmosphere models in two different coordinate systems: in Section \ref{eqsdescribingatmpluspollution_gfc} we work in the classical geophysical coordinates, while in Section \ref{eqsdescribingatmpluspollution_dwmc} we define a more considerately chosen coordinate system, the so-called downwind-matching coordinates. Before we start the development process, in Section \ref{modellingfoundations} we collect some fundamental features shared by both of the models we will construct in the following, and we extend the velocity system we considered until now with a pollution concentration function.
 
 \subsection{Modelling foundations}\label{modellingfoundations}
 
-As a first step of this section, we extend the velocity equations (\ref{originalEQ-V})--(\ref{originalEQ-I}) with an additional equation governing the trajectories of a pollutant present in the atmosphere in concentration $p.$
+As a first step of this section, we extend the velocity equations (\ref{originalEQ-V})--(\ref{originalEQ-I}) with an additional equation governing the trajectories of a pollutant present in the atmosphere in concentration $p_c.$
 
 Contaminants emitted into the atmosphere are transported by the wind, mixed and dispersed by turbulent behaviour, and deposited onto the ground by gravity. The dispersion of pollutants is commonly modelled by a continuity equation of the form
     
 \begin{equation} \label{diffusive}
-  \partial_t p + \mathbf{v} \cdot \nabla p = \nabla \cdot (\mathbf{K} \nabla p) + q,
+  \partial_t p_c + \mathbf{v} \cdot \nabla p_c = \nabla \cdot (\mathbf{K} \nabla p_c) + q \text{ in } \Omega_0 \times (0,T),
 \end{equation}
 
-where $p$ is the pollution concentration and $\mathbf{K}$ is the $3 \times 3$ diffusion matrix --- the diagonal terms represent the strength of the diffusion in the $x, y, z$ directions, while the non-diagonal terms reflect the correlation of random motions between each pair of principal directions. Here $q$ represents the sources of the pollutant in the atmosphere i.e. its emission, removal from the atmosphere by dry and wet deposition, and chemical reactions.
+where $p_c$ is the pollution concentration and $\mathbf{K}$ is the $3 \times 3$ diffusion matrix --- the diagonal terms represent the strength of the diffusion in the $x, y, z$ directions, while the non-diagonal terms reflect the correlation of random motions between each pair of principal directions. Here $q$ represents the sources of the pollutant in the atmosphere i.e. its emission, removal from the atmosphere by dry and wet deposition, and chemical reactions.
 
 Now we are ready to introduce a concept which will be indispensable throughout the thesis. To motivate this, we remind that in Section \ref{3DNSgeneraldescription} we have defined a theoretically correct model describing phenomena in geophysical fluid dynamics, while in Section \ref{PEsgeneraldescription} we introduced the primitive equations. This latter system is significantly different from the general 3D incompressible Navier-Stokes equations, however it results to be highly accurate in modelling atmospheric motions. An important step in order to understand what connects these two models is to consider under what circumstances they are "close" to each other. It is not in any given fluid dynamics problem acceptable to use the primitive equations  instead of the complete Navier-Stokes equations: according to empirical observations in meteorology the hydrostatic approximation works well principally for large-scale fluids.
 
@@ -248,32 +248,38 @@ The corresponding scaling regarding the kinematic, pressure and viscosity terms 
  \begin{equation}\label{scaling_eq_vpnu}
    \begin{split}
       &v_1 = u_1^{\epsilon}, \quad v_2 = u_2^{\epsilon}, \quad v_3 = \epsilon u_3^{\epsilon}, \quad p = p^{\epsilon},\\
-      &\nu_x = \nu_1, \quad \nu_y = \nu_2 , \quad \nu_z = \epsilon ^ 2\nu_3,
+      &\nu_x = \nu_1, \quad \nu_y = \nu_2, \quad \nu_z = \epsilon^2 \nu_3,
   \end{split}
  \end{equation}
  
 where the later embodies the different eddy viscosity hypothesis that we mentioned earlier, and $p$ is the pressure term including the gravity potential $\varphi,$ i.e., $p = q - \varphi$. Basically the scaling of the viscosity parameters can be heuristically deduced from the viscosity dimensions: $\text{typical length}^2 / \text{typical time}$, more details on the subject can be found in \cite{besson1992some}, \cite{azerad2001mathematical}.
+
+Finally we obtain the rescaling equations for the pollution concentration and the source term by considering their physical dimensions, namely: $\text{typical molar density} / \text{typical volume},$ from which we deduce
+
+\begin{equation}\label{scaling_eq_c}
+  p_c = \frac{1}{\epsilon} c^\epsilon, \quad q = \frac{1}{\epsilon} s^\epsilon.
+\end{equation}
     
 Note that from this point we have $\nabla = (\partial_1, \partial_2, \partial_3) $ and $ \Delta_\nu = \nu_1 \partial^2_{11} + \nu_2 \partial^2_{22}  + \nu_3 \partial^2_{33} $. 
 
-We will build in the scaling equations (\ref{scaling_eq_x}), (\ref{scaling_eq_vpnu}) into the original, 3D Navier-Stokes equations (\ref{originalEQ-V})--(\ref{originalEQ-I}) considered for two different coordinate choices in the following two sections, respectively.
+We will build in the scaling equations (\ref{scaling_eq_x}), (\ref{scaling_eq_vpnu}), (\ref{scaling_eq_c}) into the original, 3D Navier-Stokes equations (\ref{originalEQ-V})--(\ref{originalEQ-I}) considered for two different coordinate choices in the following two sections, respectively.
 
-
+%%% GEOPHYSICAL COORDINATES %%%
 \subsection{The polluted atmosphere model in geophysical coordinates} \label{eqsdescribingatmpluspollution_gfc}
 
-Our first step is the orientation of the coordinate system. Here we set the axes to be independent from the wind: $x, y$ and $z$ are oriented towards east, north, and upwards, respectively.
+Our first step is the orientation of the coordinate system. Here we set the axes to be independent from the wind: $x, y$ and $z$ are oriented towards east, north, and upwards, respectively. The coordinate system we obtain this way is the so-called geophysical coordinate system. This is a widely used coordinate system choice because in this specific system the rotation vector, and as a consequence, the Coriolis force takes a simpler form.
     
-
-    
-    We use an analogous rescaling methodology for the diffusivity constants in (\ref{diffusive}),
+To complete the scaling process, we combine equations (\ref{scaling_eq_x}), (\ref{scaling_eq_vpnu}), (\ref{scaling_eq_c}) with an analogous rescaling methodology for the diffusivity constants in (\ref{diffusive}):
     
 \begin{gather}
  \begin{bmatrix} K_{xx} & K_{xy} & K_{xz} \\ K_{yx} & K_{yy} & K_{yz} \\ K_{zx} & K_{zy} & K_{zz} \end{bmatrix}
  =
   \begin{bmatrix}
-    M_{11} & M_{12} & \epsilon M_{13} \\ M_{21} & M_{22} & \epsilon M_{23} \\ \epsilon M_{31} & \epsilon M_{32} & \epsilon^2 M_{33}
+    M_{11} & M_{12} & \epsilon M_{13} \\ M_{21} & M_{22} & \epsilon M_{23} \\ \epsilon M_{31} & \epsilon M_{32} & \epsilon^2 M_{33}.
   \end{bmatrix}
 \end{gather}
+
+All together these scaling equations are applied in order to pass from the $\epsilon-$ dependent $\Omega^\epsilon$ original domain to the rescaled, $\epsilon-$free $\Omega$ domain.
 
 Here we emphasise that the diffusivity matrix $\mathbf{M}$ is assumed to have the coercivity property
 
@@ -283,22 +289,18 @@ Here we emphasise that the diffusivity matrix $\mathbf{M}$ is assumed to have th
 
 for all $x \in \mathbb{R}^3$ with the coercivity constant $\lambda > 0.$ In other words we require that $\lambda = \min {\lambda_i} > 0$ where $\lambda_i$ are the eigenvalues of $\mathbf{M}.$
 
-Finally we obtain the rescaling equations for the pollution concentration and the source term by considering their physical dimensions, namely: $\text{typical molar density} / \text{typical volume},$ from which we deduce
-
-    \[ P = \frac{1}{\epsilon} C^\epsilon, \quad Q = \frac{1}{\epsilon} S^\epsilon. \]
-
-In this model we will use localised point sources as suggested in \cite{zhuk2016source} and we use what is called a parametrised nascent delta function (a Gaussian impulse, specifically) to describe the source term $S^\epsilon$.
+In this model we will use localised point sources as suggested in \cite{zhuk2016source} and we use what is called a parametrised nascent delta function (a Gaussian impulse, specifically) to describe the source term $s^\epsilon$.
 
 Let us consider a gas plume with intensity $I$ originating at emission coordinates $\mathbf{x}_s$ beginning at time $t_s$. At the beginning we assume zero concentration.
-An abrupt gas emission is modelled by a source term represented as a product of an approximated delta function $\delta_\kappa (\mathbf{x} - \mathbf{x}_s)$ (centered at $\mathbf{x}_s$ with a constant parameter $\kappa$) and a Heaviside function $s$ (switching from 0 to $I$ at time $t_s.$)
+An abrupt gas emission is modelled by a source term represented as a product of an approximated delta function $\delta_\kappa (\mathbf{x} - \mathbf{x}_s)$ (centered at $\mathbf{x}_s$ with a constant parameter $\kappa$) and a Heaviside function $a$ (switching from 0 to $I$ at time $t_s.$)
 In fact, this source term models the continuous emission of the gas at constant rate and fixed location.
-Basically $s(t;t_s)$ is a function which activates the source, namely $s(t;t_s) := IH(t - t_s)$ where $H(\cdot)$ is the Heaviside step function and $0 \leq t_s \leq T.$ We arrive to the complete source term model of the form
+Basically $a(t;t_s)$ is a function which activates the source, namely $a(t;t_s) := IH(t - t_s)$ where $H(\cdot)$ is the Heaviside step function and $0 \leq t_s \leq T.$ We arrive to the complete source term model of the form
 
 \begin{equation} \label{approxsourceterm}
-  S_\kappa (t, t_s, x, x_s) = s(t; t_s) \delta_\kappa (\mathbf{x} - \mathbf{x_s}),
+  s_\kappa (t, t_s, x, x_s) = a(t; t_s) \delta_\kappa (\mathbf{x} - \mathbf{x_s}),
 \end{equation}
 
-while in the limit model the source term $S$ naturally stands for the $\delta$ distribution.
+while in the limit model the source term $s$ naturally stands for the $\delta$ distribution.
     
 Eventually, as we mentioned before, we use a Gaussian approximated delta function to represent the source, so it is convenient to reformulate (\ref{approxsourceterm}) in terms of $\epsilon$, which is the standard deviation parameter of the distribution describing the source. Thus, we choose $\kappa$ to be $\epsilon$ and the following function will give shape to the source term:
 
@@ -307,42 +309,38 @@ Eventually, as we mentioned before, we use a Gaussian approximated delta functio
 and finally
 
 \begin{equation} \label{sourcedefinition}
-  S^\epsilon = I H(t-t_s) \gamma \epsilon^{-3} e ^ {\frac{-(\mathbf{x}-\mathbf{x_s})^2}{\epsilon^2}},
+  s^\epsilon = I H(t-t_s) \gamma \epsilon^{-3} e ^ {\frac{-(\mathbf{x}-\mathbf{x_s})^2}{\epsilon^2}},
 \end{equation}
 
 where $\gamma$ is a normalising constant. Later we will take the limit as $\epsilon$ goes to zero, and the above setting will result in having the $\delta$ distribution representing the hydrostatic source term, which is a physically natural choice.
     
-    Putting this condition and the previously described rescaling terms together to the original equations (\ref{originalEQ-V})-(\ref{diffusive}), we arrive to the merged anisotropic equations of the polluted atmosphere above inland surface:
+Putting this condition and the previously described rescaling terms together to the original equations (\ref{originalEQ-V}), (\ref{originalEQ-I}), (\ref{diffusive}) considered on the $\Omega$ domain, we arrive to the merged anisotropic equations of the polluted atmosphere above inland surface:
   
-    \begin{equation} \label{ANSC1_coordinates_GFC}
-    \partial_t u^\epsilon _1 + \mathbf{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\alpha u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
-    \end{equation}
+\begin{equation} \label{ANSC1_coordinates_GFC}
+  \partial_t u^\epsilon _1 + \mathbf{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\alpha u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+\end{equation}
     
-    \begin{equation} \label{ANSC2_coordinates_GFC}
-    \partial_t u_2^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_2^\epsilon -\Delta_\nu u_2^\epsilon + \alpha u_1^\epsilon + \partial_2 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
-    \end{equation}
+\begin{equation} \label{ANSC2_coordinates_GFC}
+  \partial_t u_2^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_2^\epsilon -\Delta_\nu u_2^\epsilon + \alpha u_1^\epsilon + \partial_2 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+\end{equation}
     
-    \begin{equation} \label{ANSC3_coordinates_GFC}
-    \epsilon^2 \{  \partial_t u_3^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon -\Delta_\nu u_3^{\epsilon} \} - \epsilon \beta u_1^\epsilon + \partial_3 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
-    \end{equation}
+\begin{equation} \label{ANSC3_coordinates_GFC}
+  \epsilon^2 \{  \partial_t u_3^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon -\Delta_\nu u_3^{\epsilon} \} - \epsilon \beta u_1^\epsilon + \partial_3 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+\end{equation}
     
-    \begin{equation} \label{ANSC4_coordinates_GFC}
-    \nabla \cdot \mathbf{u}^\epsilon= 0 \text{ in } \Omega \times (0,T)
-    \end{equation}
+\begin{equation} \label{ANSC4_coordinates_GFC}
+  \nabla \cdot \mathbf{u}^\epsilon= 0 \text{ in } \Omega \times (0,T)
+\end{equation}
     
-    \begin{equation} \label{ANSC5_coordinates_GFC}
-    \partial_t C^\epsilon + \mathbf{u^\epsilon} \cdot \nabla C^\epsilon = \nabla \cdot (\mathbf{M} \nabla C^\epsilon) + S^\epsilon \text{ in } \Omega \times (0,T)
-    \end{equation}
-    
-%    \begin{equation} \label{ANSC6}
-%    \mathbf{u}^\epsilon = 0 \text{ on } \Gamma \times (0,T)
-%    \end{equation} 
+\begin{equation} \label{ANSC5_coordinates_GFC}
+  \partial_t c^\epsilon + \mathbf{u^\epsilon} \cdot \nabla c^\epsilon = \nabla \cdot (\mathbf{M} \nabla c^\epsilon) + s^\epsilon \text{ in } \Omega \times (0,T)
+\end{equation}
 
 The initial condition for the velocity and the pollution concentration are
     
-    \begin{equation} \label{ANSC7_coordinates_GFC}
-    \mathbf{u}^\epsilon (\cdot, t = 0) = \mathbf{u}_0, \quad C^\epsilon (\cdot, t=0) = C_0  \quad \text{ in } \Omega.
-    \end{equation}
+\begin{equation} \label{ANSC7_coordinates_GFC}
+  \mathbf{u}^\epsilon (\cdot, t = 0) = \mathbf{u}_0, \quad c^\epsilon (\cdot, t=0) = C_0  \quad \text{ in } \Omega.
+\end{equation}
     
 To make the above set of equations complete, we need to assign the boundary conditions.
 
@@ -383,33 +381,33 @@ As we mentioned before, the case we are investigating is that of inland domains 
     \draw[green, thick] (0,0) -- (4,0);
     
     \draw (2,2)node{$\Omega$};
-    \draw (2,0)node[below] {$\mathbf{u^\epsilon} = 0,$ $ \partial_1 C^\epsilon$ and $ \partial_2 C^\epsilon$ are bounded, $\partial_3 C^\epsilon = 0$};
-    \draw (4,2)node[right] {$\mathbf{u^\epsilon} = 0, C^\epsilon=0 $};
-    \draw (2,4)node[above] {$\mathbf{u^\epsilon} = 0, C^\epsilon=0 $};
-    \draw (0,2)node[left] {$\mathbf{u^\epsilon} = 0, C^\epsilon=0 $};
+    \draw (2,0)node[below] {$\mathbf{u^\epsilon} = 0,$ $ \partial_1 c^\epsilon$ and $ \partial_2 c^\epsilon$ are bounded, $\partial_3 c^\epsilon = 0$};
+    \draw (4,2)node[right] {$\mathbf{u^\epsilon} = 0, c^\epsilon=0 $};
+    \draw (2,4)node[above] {$\mathbf{u^\epsilon} = 0, c^\epsilon=0 $};
+    \draw (0,2)node[left] {$\mathbf{u^\epsilon} = 0, c^\epsilon=0 $};
     
   \end{tikzpicture}
 \end{figure}
 
-  \begin{itemize}
+\begin{itemize}
   
-    \item The upper boundary $\Gamma_U$ of the domain we are considering is chosen to be at the isobar $z=h$ representing the planetary boundary layer (see \cite{arya2001introduction}), therefore we assume
+  \item The upper boundary $\Gamma_U$ of the domain we are considering is chosen to be at the isobar $z=h$ representing the planetary boundary layer (see \cite{arya2001introduction}), therefore we assume
     
     \begin{equation}
-      \mathbf{u}^\epsilon_H = 0, \quad u^\epsilon_3 = 0, \quad C^\epsilon = 0 \quad \text{ on } \Gamma_U \times (0,T)
+      \mathbf{u}^\epsilon_H = 0, \quad u^\epsilon_3 = 0, \quad c^\epsilon = 0 \quad \text{ on } \Gamma_U \times (0,T)
     \end{equation}
       
-    \item On $\Gamma_L$ we use the same boundary conditions as on the upper level, i.e. we have
+  \item On $\Gamma_L$ we use the same boundary conditions as on the upper level, i.e. we have
     
     \begin{equation}
-      \mathbf{u}^\epsilon_H = 0, \quad u^\epsilon_3 = 0, \quad C^\epsilon = 0  \quad \text{ on } \Gamma_L \times (0,T).
+      \mathbf{u}^\epsilon_H = 0, \quad u^\epsilon_3 = 0, \quad c^\epsilon = 0  \quad \text{ on } \Gamma_L \times (0,T).
     \end{equation}
     
     
     \begin{remark}
-    If we wanted to use $C^\epsilon(x,y,z) = c$ with some $c$ constant value, we could make a change of variables distracting that background flow and arrive back to the same mathematical problem with $C$ being zero.
+    If we wanted to use $c^\epsilon(x,y,z) = \kappa$ with some $\kappa$ constant value, we could make a change of variables distracting that background flow and arrive back to the same mathematical problem with $c^\epsilon$ being zero.
     \end{remark}
-    \item In this model we neglect topological variations, and the $z=0$ plane represents the lower boundary. On the ground level we have
+  \item In this model we neglect topological variations, and the $z=0$ plane represents the lower boundary. On the ground level we have
     
     \begin{equation}
       \mathbf{u}^\epsilon_H = 0, \quad u^\epsilon_3 = 0 \quad \text{ on } \Gamma_G \times (0,T) .
@@ -417,77 +415,75 @@ As we mentioned before, the case we are investigating is that of inland domains 
     
     This is the mathematical way of expressing no-slip boundary conditions for the horizontal wind speed and the impervious nature of the ground with respect to the wind. As for the concentration, the way we can choose ground level boundary conditions is the following. Firstly, we assume that the pollution is not absorbed by the ground, so we use
     
-    $$\partial_3 C^\epsilon = 0 \text{ on } \Gamma_G$$
+    $$\partial_3 c^\epsilon = 0 \text{ on } \Gamma_G$$
     
     (see also for example \cite{yeh1975three}). As we will see later in the case of the coastal domain, this condition can be relaxed without significantly effecting the proof. For the horizontal partial derivatives of the pollution, we require finiteness in the boundary norm, i.e. we have
     
-    $$\partial_1 C^\epsilon, \partial_2 C^\epsilon \text{ are finite in } L^2 (0,T; \Gamma_G).$$
+    $$\partial_1 c^\epsilon, \partial_2 c^\epsilon \text{ are finite in } L^2 (0,T; \Gamma_G).$$
   
-  \end{itemize}
-  Specifically, for the pollution concentration reaching the ground level we use a similar approach as the one classically used for the wind traction reaching the top of the ocean (see for example \cite{azerad2001mathematical}, \cite{temam2005some}). We assume that the functions $\partial_1 C^\epsilon, \partial_2 C^\epsilon, \partial_3 C^\epsilon$ are equal to some sufficiently regular functions defined on the respective boundary. More accurately, we assume that we have $\nabla C^\epsilon = \boldsymbol{\sigma}$ on the lower boundary, where $\boldsymbol{\sigma} \in L^2(0,T;L^2(\Gamma_G))$, and the $\sigma_i$ terms denote the components of $\boldsymbol{\sigma}$. In particular in this inland case $\sigma_3$ is equal to zero on the $\Gamma_G$.
+\end{itemize}
+
+Specifically, for the pollution concentration reaching the ground level we use a similar approach as the one classically used for the wind traction reaching the top of the ocean (see for example \cite{azerad2001mathematical}, \cite{temam2005some}). We assume that the functions $\partial_1 c^\epsilon, \partial_2 c^\epsilon, \partial_3 c^\epsilon$ are equal to some sufficiently regular functions defined on the respective boundary. More accurately, we assume that we have $\nabla c^\epsilon = \boldsymbol{\sigma}$ on the lower boundary, where $\boldsymbol{\sigma} \in L^2(0,T;L^2(\Gamma_G))$, and the $\sigma_i$ terms denote the components of $\boldsymbol{\sigma}$. In particular in this inland case $\sigma_3$ is equal to zero on the $\Gamma_G$.
   
-  Finally, the boundary conditions to describe the anisotropic system can be summarised as follows:
+Finally, the boundary conditions to describe the anisotropic system can be summarised as follows:
   
-    \begin{equation} \label{ANSC8_coordinates_GFC}
-      \begin{split}
-        & \mathbf{u}^\epsilon = 0 \text{ on } \Gamma \times (0,T), \\
-        &C^\epsilon = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
-        & \partial_1 C^\epsilon = \sigma_1, \partial_2 C^\epsilon = \sigma_2,\ \partial_3 C^\epsilon= 0 \text{ on } \Gamma_G \times (0,T), \\
-        & \boldsymbol{\sigma} = (\sigma_1, \sigma_2, 0) \in L^2(0,T; \Gamma_G)\\
-      \end{split} \raisetag{40pt}
-    \end{equation}
+\begin{equation} \label{ANSC8_coordinates_GFC}
+  \begin{split}
+    & \mathbf{u}^\epsilon = 0 \text{ on } \Gamma \times (0,T), \\
+    & c^\epsilon = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
+    & \partial_1 c^\epsilon = \sigma_1, \partial_2 c^\epsilon = \sigma_2,\ \partial_3 c^\epsilon= 0 \text{ on } \Gamma_G \times (0,T), \\
+    & \boldsymbol{\sigma} = (\sigma_1, \sigma_2, 0) \in L^2(0,T; \Gamma_G)\\
+   \end{split} \raisetag{40pt}
+\end{equation}
 
 Note that we have a domain where the lower and upper boundaries represent a physically existent layer (i.e. the ground and the planetary boundary layer), but outside the lateral boundary the physical world continues without influence and without any particular external condition. On boundaries of such nature we have to apply OBCs (open boundary conditions), which is not a trivial task, see for example \cite{wang2014ocean}. We need to avoid any spurious reflection or constraint which is unnatural, but at the same time we want the model to remain mathematically manageable.
 
 If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and $\epsilon$ in the anisotropic equations, we formally arrive to the hydrostatic Navier-Stokes equations (i.e., primitive equations) combined with pollution.
 
-    \begin{equation} \label{HNSC1_coordinates_GFC}    
-    \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\alpha u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T)
-    \end{equation}
+\begin{equation} \label{HNSC1_coordinates_GFC}    
+  \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\alpha u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T)
+\end{equation}
     
-    \begin{equation} \label{HNSC2_coordinates_GFC}   
-    \partial_t u_2 + \mathbf{u} \cdot \nabla u_2 - \Delta_\nu u_2 -\alpha u_1 + \partial_2 p = 0 \text{ in } \Omega \times (0,T)
-    \end{equation}
+\begin{equation} \label{HNSC2_coordinates_GFC}   
+  \partial_t u_2 + \mathbf{u} \cdot \nabla u_2 - \Delta_\nu u_2 -\alpha u_1 + \partial_2 p = 0 \text{ in } \Omega \times (0,T)
+\end{equation}
     
-    \begin{equation} \label{HNSC3_coordinates_GFC}   
-    \partial_3 p = 0 \text{ in } \Omega \times (0,T)
-    \end{equation}
+\begin{equation} \label{HNSC3_coordinates_GFC}   
+  \partial_3 p = 0 \text{ in } \Omega \times (0,T)
+\end{equation}
     
-    \begin{equation} \label{HNSC4_coordinates_GFC}   
-    \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \times (0,T)
-    \end{equation}
+\begin{equation} \label{HNSC4_coordinates_GFC}   
+  \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \times (0,T)
+\end{equation}
     
-    \begin{equation} \label{HNSC5_coordinates_GFC}   
-    \partial_t C + \mathbf{u} \cdot \nabla C = \nabla \cdot (\mathbf{M} \nabla C) + S \text{ in } \Omega \times (0,T)
-    \end{equation}
+\begin{equation} \label{HNSC5_coordinates_GFC}   
+  \partial_t c + \mathbf{u} \cdot \nabla c = \nabla \cdot (\mathbf{M} \nabla c) + s \text{ in } \Omega \times (0,T)
+\end{equation}
     
-    \begin{equation} \label{HNSC6_coordinates_GFC}   
-    u_1 = u_2 = u_3 n_3 = 0 \text{ on } \Gamma \times (0,T)
-    \end{equation}
+\begin{equation} \label{HNSC6_coordinates_GFC}   
+  u_1 = u_2 = u_3 n_3 = 0 \text{ on } \Gamma \times (0,T)
+\end{equation}
     
-    \begin{equation} \label{HNSC7_coordinates_GFC}   
-    u_i (\cdot, t=0) = u_{0 i}, C (\cdot, t=0) = C_0 \text{ in } \Omega, \text{$i$ = 1,2}
-    \end{equation}
+\begin{equation} \label{HNSC7_coordinates_GFC}   
+  u_i (\cdot, t=0) = u_{0 i}, c (\cdot, t=0) = c_0 \text{ in } \Omega, \text{$i$ = 1,2}
+\end{equation}
     
-    \begin{equation} \label{HNSC8_coordinates_GFC}
-      \begin{split}
-        &C = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
-        & \partial_1 C = \sigma_1, \partial_2 C = \sigma_2, \partial_3  C = 0, \boldsymbol{\sigma} = (\sigma_1, \sigma_2, 0) \in L^2(0,T; \Gamma_G)\\
-      \end{split}
-    \end{equation}
+\begin{equation} \label{HNSC8_coordinates_GFC}
+  \begin{split}
+    & c = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
+    & \partial_1 c = \sigma_1, \partial_2 c = \sigma_2, \partial_3 c = 0, \boldsymbol{\sigma} = (\sigma_1, \sigma_2, 0) \in L^2(0,T; \Gamma_G)\\
+  \end{split}
+\end{equation}
     
-  \begin{remark} \label{sourceregularityremark}
-    Here $S$ stands for the $\delta$ limit distribution. We keep the notation $S$ for generality, since as we will see later, instead of the approximated delta functions and the delta distribution, it is possible to use any sort of "sufficiently smooth" source term (which can be independent from $\epsilon$ in the anisotropic case as well) that is bounded in $L^2_t L^2_x.$
-  \end{remark}
+\begin{remark} \label{sourceregularityremark}
+Here $s$ stands for the $\delta$ limit distribution. We keep the notation $s$ for generality, since as we will see later, instead of the approximated delta functions and the delta distribution, it is possible to use any sort of "sufficiently smooth" source term (which can be independent from $\epsilon$ in the anisotropic case as well) that is bounded in $L^2_t L^2_x.$
+\end{remark} 
 
-TODO where, instead of the originally used wind momentum equation, the hydrostatic air pressure assumption is used to describe the process in the vertical dimension. 
 
-TODO This is a widely used coordinate system choice because in this specific system the rotation vector, and as a consequence, the Coriolis force takes a simpler form.
-
-TODO We begin this part of this thesis by examining in detail what modifications and changes are necessary in the model so that we can prove a convergence theorem analogous to that formulated for weak solutions, but stated for the case of strong solutions this time.
-
-%%% *** THE MODEL FOR THE POLLUTED ATMOSPHERE *** %%%
+%%% *** DOWNWIND-MATCHING COORDINATES *** %%%
 \subsection{The polluted atmosphere model in downwind-matching coordinates} \label{eqsdescribingatmpluspollution_dwmc}
+
+We start out this section by a simplicity requirement. We assume the $\mathbf{K}$ diffusion matrix to be diagonal, thus we are essentially working with $K_x, K_y, K_z$ diffusion coefficients.
 
 The key point of this new model is to integrate some of the main ideas of the Gaussian plume dispersion model into the system describing the polluted atmosphere. Therefore we begin by fixing the local Cartesian coordinate system to be adjusted to the downwind direction, i.e. $z$ is oriented upwards, while $x$ is the downwind, and $y$ is the crosswind direction. Another assumption the Gaussian dispersion models typically use is that advection is more dominant than diffusion along the downwind direction, which leads to the appearance of an extra $\epsilon$ term in the concentration equation's Laplacian. Namely, we have
 
@@ -495,29 +491,19 @@ The key point of this new model is to integrate some of the main ideas of the Ga
 
 which leads us to introducing the new scaling identity
 
-\begin{equation} \label{ksepsk1} K_x = \epsilon K_1. \end{equation}
+\begin{equation} \label{ksepsk1} K_x = \epsilon K_1, \end{equation}
 
-We use this diffusion rescaling result in addition to the original set of scaling equations described below. Every element of this latter set is a result of the shallowness of the domain, and they are applied in order to pass from the $\epsilon-$ dependent $\Omega^\epsilon$ original domain to the rescaled, $\epsilon-$free $\Omega$ domain.
+which is different in nature from the previous ones: while the original scaling equations were motivated by the shallowness of the domain, this latter one is the effect of the coordinate choice itself.
 
-Set of starting eqs.
-
-Each of these following scaling equations can be heuristically deduced from the typical physical dimension of the quantities (for more details see \cite{besson1992some}, \cite{azerad2001mathematical}, \cite{pollatmws2019}), unlike the previously presented equation ($\ref{ksepsk1}$), which is the effect of the coordinate choice itself. In detail, apart from the already introduced equation ($\ref{ksepsk1}$) we use the following scaling identities to arrive to the rescaled model.
+In addition to \ref{ksepsk1} and the original scaling equations (\ref{scaling_eq_x}), (\ref{scaling_eq_vpnu}), (\ref{scaling_eq_c}) we use the
 
 \begin{equation} \label{shallownessscalingeqs}
-  \begin{split}
-    & x = x_1, \quad y = x_2, \quad z = \epsilon x_3, \\
-    & v_1 = u_1^{\epsilon}, \quad v_2 = u_2^{\epsilon}, \quad v_3 = \epsilon u_3^{\epsilon}, \\
-    & \nu_x = \nu_1, \quad \nu_y = \nu_2 , \quad \nu_z = \epsilon ^ 2\nu_3, \\
-    & K_y = K_2 , \quad K_z = \epsilon^2 K_3, \\
-    & P = \frac{1}{\epsilon} c^\epsilon, \quad Q = \frac{1}{\epsilon} s^\epsilon, \quad p = p^{\epsilon}
-  \end{split}
+  K_y = K_2 , \quad K_z = \epsilon^2 K_3, \\
 \end{equation}
 
-Once we apply the above scaling, we pass from the original $\Omega_\epsilon$ domain to the $\epsilon-$ independent
+scaling equations for the remaining diffusivity terms, which is naturally an analogous approach to that applied to the viscosity constants.
 
-\begin{equation} \Omega =  \{(x_1,x_2,x_3) \in \mathbb{R}^3 ; (x_1,x_2) \in \omega, 0 < x_3 < h (x_1 , x_2) \} \end{equation}
-
-set.
+Once we apply the scaling process, we pass from the original $\Omega_\epsilon$ domain to the $\epsilon-$ independent $\Omega$ set.
 
 \begin{remark} \normalfont
   The inclusion of these new features related to the downwind-matching coordinate system in a pollution model are legitimate when the following circumstances hold:
@@ -559,31 +545,31 @@ Thus, these are the terms that appear in the three velocity equations below; but
 
 Using the expanded form of the Coriolis terms and applying the scaling process ($\ref{shallownessscalingeqs}$) combined with $(\ref{ksepsk1}),$ we arrive to the merged anisotropic equations of the polluted atmosphere above inland surface:
   
-    \begin{equation} \label{ANSC1_coordinates_DWMC}
-    \partial_t u^\epsilon _1 + \mathbf{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\gamma u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+\begin{equation} \label{ANSC1_coordinates_DWMC}
+  \partial_t u^\epsilon _1 + \mathbf{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\gamma u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+\end{equation}
+    
+\begin{equation} \label{ANSC2_coordinates_DWMC}
+  \partial_t u_2^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_2^\epsilon -\Delta_\nu u_2^\epsilon + \gamma u_1^\epsilon - \alpha \epsilon u^\epsilon_3  + \partial_2 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+\end{equation}
+    
+\begin{equation} \label{ANSC3_coordinates_DWMC}
+  \epsilon^2 \{  \partial_t u_3^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon -\Delta_\nu u_3^{\epsilon} \} + \epsilon \alpha u^\epsilon_2 - \epsilon \beta u_1^\epsilon + \partial_3 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
     \end{equation}
     
-    \begin{equation} \label{ANSC2_coordinates_DWMC}
-    \partial_t u_2^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_2^\epsilon -\Delta_\nu u_2^\epsilon + \gamma u_1^\epsilon - \alpha \epsilon u^\epsilon_3  + \partial_2 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
-    \end{equation}
+\begin{equation} \label{ANSC4_coordinates_DWMC}
+  \nabla \cdot \mathbf{u}^\epsilon= 0 \text{ in } \Omega \times (0,T)
+\end{equation}
     
-    \begin{equation} \label{ANSC3_coordinates_DWMC}
-    \epsilon^2 \{  \partial_t u_3^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon -\Delta_\nu u_3^{\epsilon} \} + \epsilon \alpha u^\epsilon_2 - \epsilon \beta u_1^\epsilon + \partial_3 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
-    \end{equation}
-    
-    \begin{equation} \label{ANSC4_coordinates_DWMC}
-    \nabla \cdot \mathbf{u}^\epsilon= 0 \text{ in } \Omega \times (0,T)
-    \end{equation}
-    
-    \begin{equation} \label{ANSC5_coordinates_DWMC}
-    \partial_t c^\epsilon + \mathbf{u^\epsilon} \cdot \nabla c^\epsilon = \epsilon K_1 \partial_{11} ^ 2 c^\epsilon + K_2 \partial_{22} ^ 2 c^\epsilon + K_3 \partial_{33} ^ 2 c^\epsilon + s^\epsilon \text{ in } \Omega \times (0,T).
-    \end{equation}
+\begin{equation} \label{ANSC5_coordinates_DWMC}
+   \partial_t c^\epsilon + \mathbf{u^\epsilon} \cdot \nabla c^\epsilon = \epsilon K_1 \partial_{11} ^ 2 c^\epsilon + K_2 \partial_{22} ^ 2 c^\epsilon + K_3 \partial_{33} ^ 2 c^\epsilon + s^\epsilon \text{ in } \Omega \times (0,T).
+\end{equation}
 
 The initial condition for the velocity and the pollution concentration are
     
-    \begin{equation} \label{ANSC6_coordinates_DWMC}
-    \mathbf{u}^\epsilon (\cdot, t = 0) = \mathbf{u}_0, \quad c^\epsilon (\cdot, t=0) = c_0  \quad \text{ in } \Omega.
-    \end{equation}
+\begin{equation} \label{ANSC6_coordinates_DWMC}
+  \mathbf{u}^\epsilon (\cdot, t = 0) = \mathbf{u}_0, \quad c^\epsilon (\cdot, t=0) = c_0  \quad \text{ in } \Omega.
+\end{equation}
   
 We will specify the regularity of the initial data in Sections \ref{sectionWS} and \ref{sectionSTRONGsol} according to the fact whether we are dealing with weak or strong solutions.
 
@@ -591,40 +577,35 @@ This system will become complete when we define the boundary conditions --- we d
 
 If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and $\epsilon$ including terms in the anisotropic equations, we formally arrive to the hydrostatic Navier-Stokes equations (i.e. primitive equations) combined with pollution.
 
-    \begin{equation} \label{HNSC1_coordinates_DWMC}    
-    \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\gamma u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T)
-    \end{equation}
+\begin{equation} \label{HNSC1_coordinates_DWMC}    
+  \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\gamma u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T)
+\end{equation}
     
-    \begin{equation} \label{HNSC2_coordinates_DWMC}   
-    \partial_t u_2 + \mathbf{u} \cdot \nabla u_2 - \Delta_\nu u_2 + \gamma u_1 + \partial_2 p = 0 \text{ in } \Omega \times (0,T)
-    \end{equation}
+\begin{equation} \label{HNSC2_coordinates_DWMC}   
+  \partial_t u_2 + \mathbf{u} \cdot \nabla u_2 - \Delta_\nu u_2 + \gamma u_1 + \partial_2 p = 0 \text{ in } \Omega \times (0,T)
+\end{equation}
     
-    \begin{equation} \label{HNSC3_coordinates_DWMC}   
-    \partial_3 p = 0 \text{ in } \Omega \times (0,T)
-    \end{equation}
+\begin{equation} \label{HNSC3_coordinates_DWMC}   
+  \partial_3 p = 0 \text{ in } \Omega \times (0,T)
+\end{equation}
     
-    \begin{equation} \label{HNSC4_coordinates_DWMC}   
-    \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \times (0,T)
-    \end{equation}
+\begin{equation} \label{HNSC4_coordinates_DWMC}   
+  \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \times (0,T)
+\end{equation}
     
-    \begin{equation} \label{HNSC5_coordinates_DWMC}   
-    \partial_t c + \mathbf{u} \cdot \nabla c = K_2 \partial_{22} ^ 2 c + K_3 \partial_{33} ^2 c + s \text{ in } \Omega \times (0,T)
-    \end{equation}
+\begin{equation} \label{HNSC5_coordinates_DWMC}   
+  \partial_t c + \mathbf{u} \cdot \nabla c = K_2 \partial_{22} ^ 2 c + K_3 \partial_{33} ^2 c + s \text{ in } \Omega \times (0,T)
+\end{equation}
     
-    \begin{equation} \label{HNSC6_coordinates_DWMC}   
-    u_i (\cdot, t=0) = u_{0 i}, \quad c (\cdot, t=0) = c_0 \text{ in } \Omega, \text{$i$ = 1,2}
-    \end{equation}
+\begin{equation} \label{HNSC6_coordinates_DWMC}   
+  u_i (\cdot, t=0) = u_{0 i}, \quad c (\cdot, t=0) = c_0 \text{ in } \Omega, \text{$i$ = 1,2}
+\end{equation}
     
 The specific definitions of the $s^\epsilon$ and $s$ source terms also depend on whether we consider weak or strong solutions. In both cases they are fundamentally based on the notion of the nascent delta function with parameter $\epsilon$ and the delta distribution, but their exact definitions will be given in the subsections according to the regularity of the solutions.
 
 To conclude the description of the model we highlight an important feature of the system that is suggested also by the structure of the governing equations (\ref{ANSC5_coordinates_DWMC}) and (\ref{HNSC5_coordinates_DWMC}). With respect to pollution diffusion, directions $y$ and $z$ have a particular and shared importance compared to the $x$ direction, namely that we have diffusion taking place on $\mathcal{O}(1)$ scale in the former ones. This suggests the introduction of the generalised direction $d$ which includes directions $y$ and $z$ (similarly to the more standard concept of $h$ standing for the horizontal directions $x$ and $y$). Furthermore, we accordingly introduce the notations $\Delta_d = K_2 \partial_{22}^2 + K_3 \partial_{33}^2$ and $\nabla_d = (\partial_2, \partial_3).$
 
-The following two sections are dedicated to state and prove a rigorous connection on the level of solutions between the anisotropic and hydrostatic models described above. Section \ref{sectionWS} focuses on the verification of a convergence result between the models (\ref{ANSC1_coordinates_DWMC})-(\ref{ANSC6_coordinates_DWMC}) and (\ref{HNSC1_coordinates_DWMC})-(\ref{HNSC6_coordinates_DWMC}) in the framework of weak solutions. In Section \ref{sectionSTRONGsol} we apply stronger initial regularities and -- from the computations' point of view -- a more favourable boundary structure: here we describe an analogous result to that in Section \ref{sectionWS}, but the statement holds for strong solutions.
-
-TODO The theorem we will migrate between these two coordinate systems is focused on the polluted atmosphere as a shallow domain. Incorporating the shallowness into the model via introducing the $$\epsilon = \frac{\text{characteristic depth}}{\text{characteristic width}}$$ shallowness parameter we have proved the theoretical correctness of the hydrostatic approximation for the combination of a three-dimensional velocity function and a pollution concentration function. Specifically, we have showed that any weak solution of the shallow polluted atmosphere converges weakly to a weak solution of the so-called primitive equations representing the hydrostatic limit model. In the first part of this chapter our goal is to verify an analogous version of this convergence theorem for the case of the more considerately chosen downwind-matching coordinate system. 
-
-TODO The downwind-matching coordinate system and the set of modelling equations we work with are essentially identical to those defined in part one --- what separates the two main sections is the quality of the convergence we are able to state.
-
+ 
 \chapter{The asymptotic behaviour of the anisotropic solutions in geophysical coordinates}\label{geophysicalchapter}
 
 %%% *** WEAK FORMULATION AND MAIN RESULT*** %%%
@@ -1181,6 +1162,8 @@ Given $T > 0$, $U_0 \in H,$ and a source term $S = \delta$ or $S \in L^2(\Omega)
 The numerical simulations were obtained in collaboration with Professor Omar Lakkis from the University of Sussex.
 
 \chapter{The primitive equations as a weak and strong limit model in downwind-matching coordinates}\label{DWMCchapter}
+
+The following two sections are dedicated to state and prove a rigorous connection on the level of solutions between the anisotropic and hydrostatic models described above. Section \ref{sectionWS} focuses on the verification of a convergence result between the models (\ref{ANSC1_coordinates_DWMC})-(\ref{ANSC6_coordinates_DWMC}) and (\ref{HNSC1_coordinates_DWMC})-(\ref{HNSC6_coordinates_DWMC}) in the framework of weak solutions. In Section \ref{sectionSTRONGsol} we apply stronger initial regularities and -- from the computations' point of view -- a more favourable boundary structure: here we describe an analogous result to that in Section \ref{sectionWS}, but the statement holds for strong solutions. Finally we prove an existence result.
 
 %%% WEAK SOLUTIONS %%%
 \section{Weak solutions framework} \label{sectionWS}
