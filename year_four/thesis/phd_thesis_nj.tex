@@ -106,31 +106,31 @@ The research of DD and NJ leading to these results has received funding from the
 
 \chapter{The mathematical models of the polluted atmosphere} \label{state_of_art_and_models}
 
-The aim of this chapter is to provide a comprehensive, general overview of the most significant concepts, modelling equations and challenging aspects in the mathematics of atmosphere modelling, and at the same time, more specifically, to describe in detail the process of obtaining the systems we are analysing in the thesis.
+The aim of this chapter is to provide a comprehensive, general overview of the most significant concepts, modelling equations and challenging aspects in the mathematics of atmosphere modelling, and at the same time, more specifically, to describe in detail the process of obtaining the systems we are investigating in the thesis.
 
-\section{The fundamental concepts and state of art in the mathematics of meteorology} \label{state_of_art_foundations_section}
+\section{The fundamental concepts and the state of art in mathematical meteorology} \label{state_of_art_foundations_section}
 
-We begin by presenting the basic ideas, approaches, and well-known results in this field regarding the fluid velocity.
+We begin by presenting the basic ideas, approaches, and well-known results in this field regarding fluid velocity.
 
 \subsection{The 3D Navier-Stokes equations}
 
-The mathematical equations describing the motions of geophysical fluids such as the ocean and the atmosphere are derived from the conservation laws of physics. Specifically, it is the conservation of mass, momentum and energy (and in some cases these are complemented with some additional components such as humidity, salt or chemical pollutants) that serve as a basis for the fundamental equations of fluid dynamics, the Navier-Stokes equations:
+The mathematical equations describing the motion of geophysical fluids such as oceans and the atmosphere are derived from the conservation laws of physics. Specifically, it is the conservation of mass, momentum and energy (and in some cases these are complemented with some additional components such as humidity, salt or chemical pollutants) that serve as a basis for the fundamental equations of fluid dynamics, the Navier-Stokes equations:
 
 \begin{equation} \label{original_general_NS}
-  \partial_t \rho \mathbf{v} + \rho (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + \nabla q = \rho \mathbf{g},
+  \partial_t (\rho \mathbf{v}) + \rho (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + \nabla q = \rho \mathbf{g},
 \end{equation}
 
 where $\mathbf{v}$ is the velocity function, $\rho$ is the density and $q$ denotes the pressure.
 
-We combine the hydrodynamic equation (\ref{original_general_NS}) with three other important concepts: the so-called Boussinesq approximation, the Coriolis force and the incompressibility condition.
+We combine equation (\ref{original_general_NS}) with three other important concepts: the so-called Boussinesq approximation, the Coriolis force and the incompressibility condition.
 
 \begin{enumerate}
 
-\item The Boussinesq approximation is a simplification of the model, it assume a $\rho = \rho_0$ constant density. Specifically, for simplicity we take a density function identically equal to one.
+\item The Boussinesq approximation is a simplification of the model, it assumes a $\rho = \rho_0$ constant density. For simplicity we take a density function identically equal to one.
 
 \item The Coriolis force needs to be taken into account since we are describing a large-scale phenomena on the surface of the rotating Earth. It is definitely an important force to reckon with from a modelling point of view, however, its contribution to the level of theoretical complexity is rather small, as it results in linear velocity terms.
 
-\item The third feature we add to the Navier-Stokes equations is the assumption that the volume of any fluid element is constant in time. This is equivalent to (see for example \cite{boyer2012mathematical}) stating that the velocity field $\mathbf{v}$ is solenoidal, i.e. $\text{div}(\mathbf{v})(t,x) = 0.$ The incompressibility condition is reasonable to assume for gases in standard conditions and for low-speed fluid flows where the so-called Mach number is small. Note in particular that since we add a new equation to the original system that the velocity function now has to satisfy, the pressure is related differently to the other thermodynamical variables for the case of incompressible flows, and in some sense it becomes independent. In other words, as we will see in our computations later, the divergence-free velocity function can be obtained separately, while the pressure can be obtained afterwards. We also highlight here that the pressure function is defined only up to a constant, or in other words, it is only the pressure gradient (pressure fluctuation) that has a physical meaning, and not the absolute pressure value itself.
+\item The third feature we integrate into the Navier-Stokes equations is the assumption that the volume of any fluid element is constant in time. An equivalent condition (see for example \cite{boyer2012mathematical}) is requiring the velocity field $\mathbf{v}$ to be solenoidal, i.e. $\text{div}(\mathbf{v})(t,x) = 0.$ This incompressibility condition is reasonable to assume for gases in standard conditions and for low-speed fluid flows where the so-called Mach number is small. Note in particular that the divergence-free condition is nothing less than a new equation that the velocity function now has to satisfy, and as a consequence the pressure is related differently to the other thermodynamical variables for the case of incompressible flows. In more detail, as we will see in our computations later, results and estimates on the divergence-free velocity function can be obtained separately from the pressure. We also highlight here that the pressure function is defined only up to a constant, or in other words, it is only the pressure gradient (pressure fluctuation) that has a physical meaning, and not the absolute pressure value itself.
 
 \end{enumerate}
 
@@ -144,30 +144,44 @@ Combining the aforementioned ideas, the equations governing the air velocity $\m
   \nabla \cdot \mathbf{v} = 0 \text{ in } \Omega_{\epsilon} \times (0,T).
 \end{equation}
 
-In the following we collect some of the main results currently available on the solutions of the Navier-Stokes equations. Here we use a standard terminology: the weak solutions are those with finite kinematic energy ($L^\infty L^2 \cap L^2 H^1$ boundedness), and the strong solutions are those with finite enstrophy ($L^\infty H^1 \cap L^2 H^2$ regularity). The more precise definitions and regularities of solutions will be given later.
+In the following we collect some of the main results currently available on the solutions of the Navier-Stokes equations. Here we use a standard terminology: the weak solutions are those with finite kinematic energy ($L^\infty L^2 \cap L^2 H^1$ boundedness), and the strong solutions are those with finite enstrophy ($L^\infty H^1 \cap L^2 H^2$ regularity). The more precise definitions and regularities of solutions will be given in the following chapters.
+
+\bigskip
 
 \textbf{State of art of the Navier-Stokes equations} (see \cite{temam2001navier}, \cite{constantin1988navier}):
 \begin{enumerate}[label=\arabic*)]
-  \item Since Leray's fundamental work \cite{leray1934mouvement} in 1934 the existence of weak solutions is well-known.
+  \item The existence of weak solutions is well-known since Leray's fundamental work \cite{leray1934mouvement} in 1934. More general proofs has been given more recently for the global existence of weak solutions, see \cite{temam2001navier} for example.
   \item For an initial velocity $\mathbf{v}_0 \in H^1_x$ in 3D the Navier-Stokes equations have a unique local in time strong solution.
   \item The existence of global strong solutions in three dimensions is an open problem (except for some specific cases, see for example \cite{li2019primitive}).
 \end{enumerate}
 
 \subsection{The primitive equations}
 
-The complete resulting flow is extremely complex, the full system is not used in applications. Meteorological observations and historical data show that on a global scale the atmosphere satisfies an equilibrium equation well known as the hydrostatic balance. This important relationship between altitude and pressure is the foundation of the so-called primitive equations which is a reduced system, used instead of the original ones. Based on its good accuracy, the PEs are well accepted as a fundamental equations of the atmosphere, and it is considered as a good starting point for studying complicated atmospheric phenomena, weather prediction, and climate change. These equations were proposed by Richardson in 1922. \cite{lions1992new}
+The complete set of equations (\ref{originalEQ-V})-(\ref{originalEQ-I}) is extremely complex and due to its (for the moment being) unreasonable computational demands it is seldom used in real-world applications. At the core of many flood prediction systems, weather forecast softwares, global circulation models or ocean global circulation models we find the following different system called the primitive equations.
 
-In many cases it is undesirable to solve the complete Navier-Stokes system because some physical phenomena can be neglected.
+\begin{equation} \label{PE_orignal_1} \partial_t \mathbf{v}_h + \mathbf{v}_h \cdot \nabla_h \mathbf{v}_h + v_3 \partial_z \mathbf{v}_h - \Delta_{\nu} \mathbf{v}_h + \nabla_h q + 2 (\mathbf{w} \times \mathbf{v})_h = 0 \end{equation}
 
-REPHRASE-C The basic equations of conservation of mass and momentum, that is the three-dimensional compressible Navier?Stokes equations contain however too much information and we can not hope to numerically solve these equations with enough accuracy in a foreseeable future. Owing to the difference of sizes of the vertical and horizontal dimensions, both in the atmosphere and in the ocean (10 to 20 kms versus several thousands of kilometres), the most natural simplification leads to the so-called Primitive Equations (PEs) which we study in this article.
-The primitive equations are based on the so-called hydrostatic approximation, in which the conservation of momentum in the vertical direction is replaced by the simpler, hydrostatic equation (see e.g. equation (2.25)).
-As far as we know, the primitive equations were essentially introduced by L. F. Richardson (1922)
-the PEs, which are now the core of many Global Circulation Models (GCM) or Ocean Global Circulation Models (OGCM)
-the PEs are the central component for the dynamics of the air or the water.
-In this hierarchy of models for geophysical fluid dynamics, let us add also the Shallow Water equation corresponding essentially to a vertically integrated form of the Navier?Stokes equations;
-As we indicate hereafter, the primitive equations although physically simpler are, in fact, slightly more complicated than the incompressible Navier?Stokes equations. ????
-The mathematical study of the primitive equations was initiated by J. L. Lions, R. Temam, and S. Wang in the early 1990s. They produced a mathematical for- mulation of the PEs which resembles that of the Navier?Stokes due to J. Leray, and obtained the existence for all time of weak solutions; see Section 2, and the original articles \cite{lions1992new}, \cite{lions1992equations}, \cite{lions1995mathematical}, in the list of references. Further works, conducted during the 1990s and more especially during the past few years, have improved and supplemented the early results of \cite{lions1992new}, \cite{lions1992equations}, \cite{lions1995mathematical} by a set of results which, essentially, brings the mathematical theory of the PEs to that of the 3D incompressible Navier?Stokes equations, despite the added complexity mentioned above; this added complexity is overcome by a non-isotropic treatment of the equations (of certain nonlinear terms), in which the horizontal and vertical directions are treated differently.
-In summary the following results are now available.
+\begin{equation} \label{PE_orignal_2} \frac{\partial q}{\partial z} = - \mathbf{g} \end{equation}
+
+\begin{equation} \label{PE_orignal_3} \nabla \cdot \mathbf{v} = 0 \end{equation}
+
+Note that the difference between \ref{originalEQ-V}-\ref{originalEQ-I} and \ref{PE_orignal_1}-\ref{PE_orignal_3} lies in the richness of information we have in the vertical momentum equation in the full 3D Navier-Stokes equation compared to the much simpler \ref{PE_orignal_2} equation. In particular, this latter states nothing else but a global scale equilibrium suggested by empirical observations and historical data in meteorology: the hydrostatic balance. For this reason the primitive equations are often referred to as the hydrostatic system as well. 
+
+As far as we know, the primitive equations were proposed by L. F. Richardson (\cite{lions1992new}) in 1922. Based on their high accuracy, the primitive equations are the central component for describing the dynamics of large-scale water bodies such as big lakes and oceans, they are widespread accepted as the fundamental equations for studying complicated atmospheric phenomena.
+
+The intensive mathematical research on the hydrostatic equations was initiated by J. L. Lions, R. Temam, and S. Wang, and they obtained the existence for all time of weak solutions, see their original works \cite{lions1992new}, \cite{lions1992equations}, and \cite{lions1995mathematical} from the 1990s. Further study and results in this field has practically brought the mathematical theory of the primitive equations to a level where we are able to say more on the topic of these reduced equations than the complete Navier-Stokes system (the global existence of strong solutions has been proved for the primitive equations). This seems trivial, but on the contrary, it is not at all true that the hydrostatic equations are more simple in every sense. From a physical point of they are definitely more favourable, but an added complexity comes into the system where the
+
+$$ \text{velocity} \times \text{first order derivatives of velocity}$$
+
+nonlinear term in the Navier-Stokes equations is replaced by the
+
+$$ \text{first order derivatives of horizontal velocity} \times \text{first order derivatives of horizontal velocity}$$
+
+nonlinear term in the hydrostatic system (\cite{temam2005some}). This is due to the standard technique of replacing the vertical velocity with a function of first order derivatives of horizontal velocity via the divergence-free condition (see later in more detail).
+
+We conclude this subsection with the most important results currently available on the topic of primitive equations.
+
+\bigskip
 
 \textbf{State of art of the primitive equations} (see \cite{temam2005some}, \cite{cao2007global}, \cite{li2019primitive}):
 \begin{enumerate}[label=\arabic*)]
@@ -176,17 +190,19 @@ In summary the following results are now available.
   \item In both space dimensions two and three we have the global existence and uniqueness of strong solutions. The global existence in 3D is a relatively new result of \cite{cao2007global}.
 \end{enumerate}
 
-corresponding to the so-called $\beta$-plane approximation -- we concentrate our efforts on the corresponding $\beta$-plane case (in Cartesian coordinates)
-
-other coordinate choices: spherical, p-coordinates where z becomes p: $(\theta, \varphi, p).$
-
-The approximate relation is highly accurate for the large-scale ocean and it is considered as a fundamental equation in oceanography.
-
 \subsection{The anisotropic Navier-Stokes equation}
+
+Owing to the difference of sizes of the vertical and horizontal dimensions, both in the atmosphere and in the ocean (10 to 20 kms versus several thousands of kilometres), the most natural simplification
+
+In many cases it is undesirable to solve the complete Navier-Stokes system because some physical phenomena can be neglected.
 
 In order to create connection we need to use the shallowness characteristic of the domain.
 
 The relationship. Two fundamental properties of the atmosphere, the hydrostatic pressure and shallowness are inseparable: the hydrostatic pressure is a direct result of the shallowness, as we show.
+
+corresponding to the so-called $\beta$-plane approximation -- we concentrate our efforts on the corresponding $\beta$-plane case (in Cartesian coordinates)
+
+other coordinate choices: spherical, p-coordinates where z becomes p: $(\theta, \varphi, p).$
 
 \section{The anisotropic and hydrostatic models of the polluted atmosphere}
 
@@ -206,15 +222,7 @@ The domain we consider is a local slice of the atmosphere filled with homogeneou
 
 where $\omega$ is a Lipschitz-domain in $\mathbb{R}^2$, $h$ is a nonnegative Lipschitzian application, and $\epsilon$ incorporates the shallowness of the domain.
 
-The equations governing the air velocity $\mathbf{v}$ and pressure $q$ in the atmosphere are the incompressible Navier-Stokes equations, in which we use different viscosities according to vertical or horizontal directions, and the density is taken to be identically equal to one:
-
-\begin{equation} \label{originalEQ-V}
-  \partial_t \mathbf{v} + (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + \nabla q + 2 \mathbf{w} \times \mathbf{v}= \mathbf{g} \text{ in } \Omega_{\epsilon} \times (0,T)
-\end{equation}
-    
-\begin{equation} \label{originalEQ-I}
-  \nabla \cdot \mathbf{v} = 0 \text{ in } \Omega_{\epsilon} \times (0,T)
-\end{equation}
+The equations governing the air velocity $\mathbf{v}$ and pressure $q$ in the atmosphere are (\ref{originalEQ-V}) - (\ref{originalEQ-I})
 
 Contaminants emitted into the atmosphere are transported by the wind, mixed and dispersed by turbulent behaviour, and deposited onto the ground by gravity. The dispersion of pollutants is commonly modelled by a diffusive equation of the form
     
@@ -487,15 +495,7 @@ Here the original $\Omega_\epsilon$ domain we consider is a local slice of the a
 
 where $\omega$ is a Lipschitz-domain in $\mathbb{R}^2$, $h$ is a nonnegative Lipschitzian application.
 
-In order to obtain the set of equations that describe the pollution phenomena in the atmosphere, we start with the original set of equations
-
-\begin{equation} \label{originalEQ-V}
-  \partial_t \mathbf{v} + (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + \nabla q + 2 \mathbf{\omega} \times \mathbf{v}= \mathbf{g} \text{ in } \Omega_{\epsilon} \times (0,T)
-\end{equation}
-    
-\begin{equation} \label{originalEQ-I}
-  \nabla \cdot \mathbf{v} = 0 \text{ in } \Omega_{\epsilon} \times (0,T)
-\end{equation}
+In order to obtain the set of equations that describe the pollution phenomena in the atmosphere, we start with the original set of equations, (\ref{originalEQ-V}) - (\ref{originalEQ-I}) combined with
     
 \begin{equation} \label{diffusive}
   \partial_t P + \mathbf{v} \cdot \nabla P = \nabla \cdot (\mathbf{K} \nabla P) + Q \text{ in } \Omega_{\epsilon} \times (0,T),
