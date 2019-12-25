@@ -182,7 +182,7 @@ nonlinear term in the Navier-Stokes equations is replaced by the
   \end{split}
 \end{equation}
 
-nonlinear term in the hydrostatic system (\cite{temam2005some}). This is due to a standard technique often applied in the primitive equations framework: using the divergence-free condition we can replace the vertical velocity by
+nonlinear term in the hydrostatic system (\cite{temam2005some}). This is due to a standard technique often applied in the primitive equations framework: using the divergence-free condition the vertical velocity can be replaced by
 
 \begin{equation}
   v_3 = - \int_0^z \nabla_h \cdot \mathbf{v}_h (x, y, \xi, t) \diff \xi,
@@ -275,7 +275,7 @@ Our first step is the orientation of the coordinate system. Here we set the axes
     
 To complete the scaling process, we combine equations (\ref{scaling_eq_x}), (\ref{scaling_eq_vpnu}), (\ref{scaling_eq_c}) with an equation for the diffusivity constants in (\ref{diffusive}):
     
-\begin{gather}
+\begin{gather}\label{scaling_eq_diffusion_gfc}
  \begin{bmatrix} K_{xx} & K_{xy} & K_{xz} \\ K_{yx} & K_{yy} & K_{yz} \\ K_{zx} & K_{zy} & K_{zz} \end{bmatrix}
  =
   \begin{bmatrix}
