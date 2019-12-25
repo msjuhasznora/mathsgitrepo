@@ -271,19 +271,21 @@ In the next two sections we consider two different coordinate choices, and withi
 %%% GEOPHYSICAL COORDINATES %%%
 \subsection{The polluted atmosphere model in geophysical coordinates} \label{eqsdescribingatmpluspollution_gfc}
 
-Our first step is the orientation of the coordinate system. Here we set the axes to be independent from the wind: $x, y$ and $z$ are oriented towards east, north, and upwards, respectively. The coordinate system we obtain this way is the so-called geophysical coordinate system. This is a widely used coordinate system choice because in this specific system the rotation vector, and as a consequence, the Coriolis force takes a simpler form.
+Our first step is the orientation of the coordinate system. Here we set the axes to be independent from the wind direction: $x, y$ and $z$ are oriented towards east, north, and upwards, respectively. The coordinate system we obtain this way is the so-called geophysical coordinate system. This is a widely used coordinate system choice because in this specific system the rotation vector, and as a consequence, the Coriolis force takes a simpler form.
     
-To complete the scaling process, we combine equations (\ref{scaling_eq_x}), (\ref{scaling_eq_vpnu}), (\ref{scaling_eq_c}) with an analogous rescaling methodology for the diffusivity constants in (\ref{diffusive}):
+To complete the scaling process, we combine equations (\ref{scaling_eq_x}), (\ref{scaling_eq_vpnu}), (\ref{scaling_eq_c}) with an equation for the diffusivity constants in (\ref{diffusive}):
     
 \begin{gather}
  \begin{bmatrix} K_{xx} & K_{xy} & K_{xz} \\ K_{yx} & K_{yy} & K_{yz} \\ K_{zx} & K_{zy} & K_{zz} \end{bmatrix}
  =
   \begin{bmatrix}
-    M_{11} & M_{12} & \epsilon M_{13} \\ M_{21} & M_{22} & \epsilon M_{23} \\ \epsilon M_{31} & \epsilon M_{32} & \epsilon^2 M_{33}.
-  \end{bmatrix}
+    M_{11} & M_{12} & \epsilon M_{13} \\ M_{21} & M_{22} & \epsilon M_{23} \\ \epsilon M_{31} & \epsilon M_{32} & \epsilon^2 M_{33}
+  \end{bmatrix},
 \end{gather}
 
-All together these scaling equations are applied in order to pass from the $\epsilon-$ dependent $\Omega^\epsilon$ original domain to the rescaled, $\epsilon-$free $\Omega$ domain.
+where we used a rescaling methodology analogous to that applied to the viscosity terms.
+
+Altogether these scaling equations are applied in order to pass from the $\epsilon-$ dependent $\Omega^\epsilon$ original domain to the rescaled, $\epsilon-$free $\Omega$ domain.
 
 Here we emphasise that the diffusivity matrix $\mathbf{M}$ is assumed to have the coercivity property
 
@@ -296,17 +298,17 @@ for all $x \in \mathbb{R}^3$ with the coercivity constant $\lambda > 0.$ In othe
 In this model we will use localised point sources as suggested in \cite{zhuk2016source} and we use what is called a parametrised nascent delta function (a Gaussian impulse, specifically) to describe the source term $s^\epsilon$.
 
 Let us consider a gas plume with intensity $I$ originating at emission coordinates $\mathbf{x}_s$ beginning at time $t_s$. At the beginning we assume zero concentration.
-An abrupt gas emission is modelled by a source term represented as a product of an approximated delta function $\delta_\kappa (\mathbf{x} - \mathbf{x}_s)$ (centered at $\mathbf{x}_s$ with a constant parameter $\kappa$) and a Heaviside function $a$ (switching from 0 to $I$ at time $t_s.$)
+An abrupt gas emission is modelled by a source term represented as a product of an approximated delta function $\delta_\eta (\mathbf{x} - \mathbf{x}_s)$ (centered at $\mathbf{x}_s$ with a constant parameter $\eta$) and a Heaviside function $a$ (switching from 0 to $I$ at time $t_s.$)
 In fact, this source term models the continuous emission of the gas at constant rate and fixed location.
 Basically $a(t;t_s)$ is a function which activates the source, namely $a(t;t_s) := IH(t - t_s)$ where $H(\cdot)$ is the Heaviside step function and $0 \leq t_s \leq T.$ We arrive to the complete source term model of the form
 
 \begin{equation} \label{approxsourceterm}
-  s_\kappa (t, t_s, x, x_s) = a(t; t_s) \delta_\kappa (\mathbf{x} - \mathbf{x_s}),
+  s_\eta (t, t_s, x, x_s) = a(t; t_s) \delta_\eta (\mathbf{x} - \mathbf{x_s}),
 \end{equation}
 
 while in the limit model the source term $s$ naturally stands for the $\delta$ distribution.
     
-Eventually, as we mentioned before, we use a Gaussian approximated delta function to represent the source, so it is convenient to reformulate (\ref{approxsourceterm}) in terms of $\epsilon$, which is the standard deviation parameter of the distribution describing the source. Thus, we choose $\kappa$ to be $\epsilon$ and the following function will give shape to the source term:
+Eventually, note that it is convenient to reformulate (\ref{approxsourceterm}) in terms of $\epsilon$, which then will be the standard deviation parameter of the distribution describing the source. In other words, we choose $\eta$ to be $\epsilon$ and the following function will give shape to the source term:
 
 \[\delta_\epsilon (\mathbf{x}-\mathbf{x_s}) = \gamma \epsilon^{-3} e ^ {\frac{-(\mathbf{x}-\mathbf{x_s})^2}{\epsilon^2}};\]
 
@@ -318,7 +320,7 @@ and finally
 
 where $\gamma$ is a normalising constant. Later we will take the limit as $\epsilon$ goes to zero, and the above setting will result in having the $\delta$ distribution representing the hydrostatic source term, which is a physically natural choice.
     
-Putting this condition and the previously described rescaling terms together to the original equations (\ref{originalEQ-V}), (\ref{originalEQ-I}), (\ref{diffusive}) considered on the $\Omega$ domain, we arrive to the merged anisotropic equations of the polluted atmosphere above inland surface:
+Putting this condition and the previously described rescaling terms together with the original equations (\ref{originalEQ-V}), (\ref{originalEQ-I}), (\ref{diffusive}) considered on the $\Omega$ domain, we arrive to the merged anisotropic equations of the polluted atmosphere above inland surface:
   
 \begin{equation} \label{ANSC1_coordinates_GFC}
   \partial_t u^\epsilon _1 + \mathbf{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\alpha u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
@@ -343,7 +345,7 @@ Putting this condition and the previously described rescaling terms together to 
 The initial condition for the velocity and the pollution concentration are
     
 \begin{equation} \label{ANSC7_coordinates_GFC}
-  \mathbf{u}^\epsilon (\cdot, t = 0) = \mathbf{u}_0, \quad c^\epsilon (\cdot, t=0) = C_0  \quad \text{ in } \Omega.
+  \mathbf{u}^\epsilon (\cdot, t = 0) = \mathbf{u}_0, \quad c^\epsilon (\cdot, t=0) = c_0  \quad \text{ in } \Omega.
 \end{equation}
     
 To make the above set of equations complete, we need to assign the boundary conditions.
@@ -398,13 +400,13 @@ As we mentioned before, the case we are investigating is that of inland domains 
   \item The upper boundary $\Gamma_U$ of the domain we are considering is chosen to be at the isobar $z=h$ representing the planetary boundary layer (see \cite{arya2001introduction}), therefore we assume
     
     \begin{equation}
-      \mathbf{u}^\epsilon_H = 0, \quad u^\epsilon_3 = 0, \quad c^\epsilon = 0 \quad \text{ on } \Gamma_U \times (0,T)
+      \mathbf{u}^\epsilon_h = 0, \quad u^\epsilon_3 = 0, \quad c^\epsilon = 0 \quad \text{ on } \Gamma_U \times (0,T).
     \end{equation}
       
   \item On $\Gamma_L$ we use the same boundary conditions as on the upper level, i.e. we have
     
     \begin{equation}
-      \mathbf{u}^\epsilon_H = 0, \quad u^\epsilon_3 = 0, \quad c^\epsilon = 0  \quad \text{ on } \Gamma_L \times (0,T).
+      \mathbf{u}^\epsilon_h = 0, \quad u^\epsilon_3 = 0, \quad c^\epsilon = 0  \quad \text{ on } \Gamma_L \times (0,T).
     \end{equation}
     
     
@@ -414,7 +416,7 @@ As we mentioned before, the case we are investigating is that of inland domains 
   \item In this model we neglect topological variations, and the $z=0$ plane represents the lower boundary. On the ground level we have
     
     \begin{equation}
-      \mathbf{u}^\epsilon_H = 0, \quad u^\epsilon_3 = 0 \quad \text{ on } \Gamma_G \times (0,T) .
+      \mathbf{u}^\epsilon_h = 0, \quad u^\epsilon_3 = 0 \quad \text{ on } \Gamma_G \times (0,T) .
     \end{equation}
     
     This is the mathematical way of expressing no-slip boundary conditions for the horizontal wind speed and the impervious nature of the ground with respect to the wind. As for the concentration, the way we can choose ground level boundary conditions is the following. Firstly, we assume that the pollution is not absorbed by the ground, so we use
@@ -487,7 +489,7 @@ Here $s$ stands for the $\delta$ limit distribution. We keep the notation $s$ fo
 %%% *** DOWNWIND-MATCHING COORDINATES *** %%%
 \subsection{The polluted atmosphere model in downwind-matching coordinates} \label{eqsdescribingatmpluspollution_dwmc}
 
-We start out this section by a simplicity requirement. We assume the $\mathbf{K}$ diffusion matrix to be diagonal, thus we are essentially working with $K_x, K_y, K_z$ diffusion coefficients.
+We start out this section by a simplicity requirement. We assume the $\mathbf{K}$ diffusion matrix to be diagonal, thus we are working only with the $K_x, K_y, K_z$ diffusion coefficients here.
 
 The key point of this new model is to integrate some of the main ideas of the Gaussian plume dispersion model into the system describing the polluted atmosphere. Therefore we begin by fixing the local Cartesian coordinate system to be adjusted to the downwind direction, i.e. $z$ is oriented upwards, while $x$ is the downwind, and $y$ is the crosswind direction. Another assumption the Gaussian dispersion models typically use is that advection is more dominant than diffusion along the downwind direction, which leads to the appearance of an extra $\epsilon$ term in the concentration equation's Laplacian. Namely, we have
 
@@ -495,17 +497,15 @@ The key point of this new model is to integrate some of the main ideas of the Ga
 
 which leads us to introducing the new scaling identity
 
-\begin{equation} \label{ksepsk1} K_x = \epsilon K_1, \end{equation}
+\begin{equation} \label{ksepsk1} K_x = \epsilon K_1. \end{equation}
 
-which is different in nature from the previous ones: while the original scaling equations were motivated by the shallowness of the domain, this latter one is the effect of the coordinate choice itself.
+Note that this latter equation is different in nature from the previous scaling equations: (\ref{ksepsk1})  is the effect of the coordinate choice itself, while the original scaling identities were motivated by the shallowness of the domain.
 
-In addition to \ref{ksepsk1} and the original scaling equations (\ref{scaling_eq_x}), (\ref{scaling_eq_vpnu}), (\ref{scaling_eq_c}) we use the
+In addition to (\ref{ksepsk1}) and the original scaling equations (\ref{scaling_eq_x}), (\ref{scaling_eq_vpnu}), (\ref{scaling_eq_c}) we finally define the following equation for the remaining diffusivity terms:
 
-\begin{equation} \label{shallownessscalingeqs}
-  K_y = K_2 , \quad K_z = \epsilon^2 K_3, \\
+\begin{equation} \label{scaling_eq_diffusion_dwmc}
+  K_y = K_2 , \quad K_z = \epsilon^2 K_3. \\
 \end{equation}
-
-scaling equations for the remaining diffusivity terms, which is naturally an analogous approach to that applied to the viscosity constants.
 
 Once we apply the scaling process, we pass from the original $\Omega_\epsilon$ domain to the $\epsilon-$ independent $\Omega$ set.
 
@@ -513,15 +513,17 @@ Once we apply the scaling process, we pass from the original $\Omega_\epsilon$ d
   The inclusion of these new features related to the downwind-matching coordinate system in a pollution model are legitimate when the following circumstances hold:
   \begin{itemize}
     \item We are considering a time interval which is not "too long" --- meaning that it is reasonable to assume that we have a permanent, relatively stable main wind direction, i.e. fixing the horizontal coordinates makes sense in the first place.
-    \item There is an adequate, relatively high wind speed --- low wind speeds in general lead to a situation where three dimensional diffusion dominates, leading to an error caused by the dominant advection assumption. Fast changing wind direction and low windspeed resulting in fast pollutant settling can make it extremely challenging to obtain reliable results from Gaussian models.
+    \item There is an adequate, relatively high wind speed --- low wind speeds in general lead to a situation where three dimensional diffusion dominates, leading to an error caused by the dominant advection assumption. Quickly changing wind direction and low windspeed resulting in fast pollutant settling can make it extremely challenging to obtain reliable results from Gaussian models.
   \end{itemize}
 \end{remark}
-
-Choosing the coordinate system in this particular way results in changes in three main points of the system with respect to the case of the rotating geophysical frame. One of these is the Coriolis term, since now the $x$ axis is not necessarily perpendicular to the rotation vector. We need to revisit the boundary conditions as well, and as discussed above, a modification in the pollution concentration equation also has to be taken into account. We will describe these changes and their consequences in detail --- the main challenge in proving this section's convergence results is in fact to handle the effect of this latter change in the inequalities that provide boundedness for the required quantities.
 
 \begin{remark} \normalfont
 For clarity, we add a comment here regarding the intuitive meaning of what we understand by the downwind direction $\mathbf{x}$ (which gives orientation to a coordinate axes), and the velocity $\mathbf{v}$ itself (which is the solution function). The downwind direction is an approximately steady-in-time direction, it can be seen as the direction marked by the wind direction trackers on an airport or meteorological point. When we consider the downwind, we neglect the small perturbations in its orientation, it can be viewed as a time-averaged direction as long as the fluctuation is relatively small. On the other hand, the velocity itself is a three-dimensional, time dependent vector that changes second after second.
 \end{remark}
+
+Choosing the coordinate system in this particular way results in changes in three main points of the system with respect to the case of the geophysical frame. One of these is the Coriolis term, since now the $x$ axis is not necessarily perpendicular to the rotation vector. We need to revisit the boundary conditions as well, and as discussed above, a modification in the pollution concentration equation also has to be taken into account. We will describe these changes and their consequences in detail in Chapter \ref{DWMCchapter} --- as we will see, the main challenge in proving convergence results in the downwind-matching coordinate system is to handle the presence of the additional $\epsilon$ multiplier due to (\ref{ksepsk1}).
+
+Before we can apply the scaling identities to the conservation equations, we need examine what happens with the Coriolis terms in this coordinate system.
 
 To expand the $2 \mathbf{\omega} \times \mathbf{v}$ Coriolis term, firstly it is necessary to understand the structure of the new rotation vector. Note that the downwind-matching coordinate system and the original east-north-upwards oriented system are different only in a rotation around the $z$ axis. Let $\theta$ denote the angle between the respective $x$ axes, $\phi$ denotes the latitude, then the rotation vector expressed in the downwind-matching coordinate system becomes
 
@@ -547,7 +549,7 @@ i.e. $2 \omega = (\alpha, \beta, \gamma),$ then using this, the Coriolis force t
 
 Thus, these are the terms that appear in the three velocity equations below; but note that in the rescaled version of the vertical velocity equation the third component of the Coriolis term is present with an $\epsilon$ multiplier, which is obtained from the $\epsilon$ term in the denominator of $\partial_z p.$
 
-Using the expanded form of the Coriolis terms and applying the scaling process ($\ref{shallownessscalingeqs}$) combined with $(\ref{ksepsk1}),$ we arrive to the merged anisotropic equations of the polluted atmosphere above inland surface:
+Using the expanded form of the Coriolis terms and applying the scaling identities (\ref{scaling_eq_x}), (\ref{scaling_eq_vpnu}), (\ref{scaling_eq_c}), ($\ref{scaling_eq_diffusion_dwmc}$) combined with $(\ref{ksepsk1}),$ we arrive to the merged anisotropic equations of the polluted atmosphere above inland surface:
   
 \begin{equation} \label{ANSC1_coordinates_DWMC}
   \partial_t u^\epsilon _1 + \mathbf{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\gamma u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
