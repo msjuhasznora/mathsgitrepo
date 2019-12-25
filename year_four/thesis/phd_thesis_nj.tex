@@ -62,9 +62,9 @@ We investigate the connection between the anisotropic and hydrostatic downwind-m
 
 \begin{itemize}
 
-  \item Chapter \ref{state_of_art_and_models}, on the one hand, aims to give an overview of the state of art regarding the two main systems we use in atmosphere modelling --- in Section \ref{state_of_art_foundations_section} we collect the most significant existence and uniqueness results known in the field of the primitive equations and the anisotropic Navier-Stokes system. On the other hand, this chapter also focuses on providing a detailed description of the specific modelling choices we made and the importance of the coordinate systems we are working with. Specifically, we define the notion of the geophysical and downwind-matching coordinate systems, the physical model of the polluted atmosphere and the scaling process leading to the anisotropic and hydrostatic equations. Sections \ref{eqsdescribingatmpluspollution_gfc} and \ref{eqsdescribingatmpluspollution_dwmc} contain the development of the geophysical and downwind-matching atmosphere models, respectively.
+  \item Chapter \ref{state_of_art_and_models}, on the one hand, aims to give an overview of the state of art regarding the two main systems we use in atmosphere modelling --- in Section \ref{state_of_art_foundations_section} we collect the most significant existence and uniqueness results known in the field of the complete Navier-Stokes system and the primitive equations. On the other hand, this chapter also focuses on providing a detailed description of the specific modelling choices we made and the importance of the coordinate systems we are working with. Specifically, we define the notion of the geophysical and downwind-matching coordinate systems, the physical model of the polluted atmosphere and the scaling process leading to the anisotropic and hydrostatic equations. Sections \ref{eqsdescribingatmpluspollution_gfc} and \ref{eqsdescribingatmpluspollution_dwmc} contain the development of the geophysical and downwind-matching atmosphere models, respectively; while Section \ref{modellingfoundations} contains a common foundation for both of these models.
 
-  \item In Chapter \ref{geophysicalchapter} we describe a convergence result connecting the hydrostatic and anisotropic models in the geophysical coordinate system. In Section \ref{weakformulationmainresult} we introduce the function spaces we work in, and we present the weak formulation and the main theorem. The main theorem's proof is described in Section \ref{proof}, while in Section \ref{existenceweakhydrostatic} we present an existence result for the hydrostatic equations of the polluted atmosphere. Finally, we examine the phenomena from a different viewpoint, and by means of an open-source computing platform -- FEniCS, a collection of software components providing tools for working with finite-element variational formulations -- we visualise the convergence results. The numerical simulations were obtained in collaboration with Professor Omar Lakkis from the University of Sussex, the results are found in Section \ref{visualizationFEM}.
+  \item In Chapter \ref{geophysicalchapter} we describe a convergence result connecting the hydrostatic and anisotropic models in the geophysical coordinate system. In Section \ref{weakformulationmainresult_gfc} we introduce the function spaces we work in, and we present the weak formulation and the main theorem. The main theorem's proof is described in Section \ref{proof_weak_gfc}, while in Section \ref{existenceweakhydrostatic} we present an existence result for the hydrostatic equations of the polluted atmosphere. Finally, we examine the phenomena from a different viewpoint, and by means of an open-source computing platform -- FEniCS, a collection of software components providing tools for working with finite-element variational formulations -- we visualise the convergence results. The numerical simulations were obtained in collaboration with Professor Omar Lakkis from the University of Sussex, the results are found in Section \ref{visualizationFEM}.
   
   \item Chapter \ref{DWMCchapter} is dedicated to state and prove convergence results in the downwind-matching coordinate system. In Section \ref{sectionWS} we describe the main convergence result regarding weak solutions, while in Section \ref{sectionSTRONGsol_convergence} we elaborate the analogous result for strong solutions. Eventually, in order to make the strong convergence result of the latter section complete, in Section \ref{strongexistencesection} we prove an existence theorem on strong solutions regarding the hydrostatic system in the section.
 
@@ -110,29 +110,27 @@ The aim of this chapter is to provide a comprehensive, general overview of the m
 
 \section{The fundamental concepts and the state of art in mathematical meteorology} \label{state_of_art_foundations_section}
 
-We begin by presenting the basic ideas, approaches, and well-known results in this field regarding fluid velocity. We give a brief overview two significant models used in atmosphere modelling: in subsection \ref{3DNSgeneraldescription} we provide a brief overview on the 3D Navier-Stokes equations, while in subsection \ref{PEsgeneraldescription} we introduce the concept of primitive equations. The connection between these two models will be described in the following Section \ref{anis-hydr-connection}.
-
-For the moment being, we simply assume an open, bounded Lipschitzian domain $\Omega_0$ in $\mathbb{R}^3$ and for a given time $T$ a time interval $[0,T).$
+We begin by presenting the basic ideas, approaches, and well-known results in this field regarding fluid velocity. Specifically, we focus on two significant models used in atmosphere modelling: in Section \ref{3DNSgeneraldescription} we provide a brief overview on the 3D Navier-Stokes equations, while in Section \ref{PEsgeneraldescription} we introduce the concept of primitive equations. The connection between these two models will be described in the following Section \ref{anis-hydr-connection}.
 
 \subsection{The 3D Navier-Stokes equations}\label{3DNSgeneraldescription}
 
 The mathematical equations describing the motion of geophysical fluids such as oceans and the atmosphere are derived from the conservation laws of physics. Specifically, it is the conservation of mass, momentum and energy (and in some cases these are complemented with some additional components such as humidity, salt or chemical pollutants) that serve as a basis for the fundamental equations of fluid dynamics, the Navier-Stokes equations:
 
 \begin{equation} \label{original_general_NS}
-  \partial_t (\rho \mathbf{v}) + \rho (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + \nabla q = \rho \mathbf{g},
+  \partial_t (\rho \mathbf{v}) + \rho (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + \nabla q = \rho \mathbf{g} \quad \text{ in } \Omega_0 \times (0,T),
 \end{equation}
 
-where $\mathbf{v}$ is the velocity function, $\rho$ is the density and $q$ denotes the pressure.
+where $\mathbf{v}$ is the velocity function, $\rho$ is the density, $\nu = (\nu_1, \nu_2, \nu_3)$ represents the viscosity constants, and $q$ denotes the pressure. For the moment being, we simply consider an open, bounded Lipschitzian domain $\Omega_0$ in $\mathbb{R}^3$ and for a given time $T$ a time interval $[0,T).$
 
 We combine equation (\ref{original_general_NS}) with three other important concepts: the so-called Boussinesq approximation, the Coriolis force and the incompressibility condition.
 
 \begin{enumerate}
 
-\item The Boussinesq approximation is a simplification of the model, it assumes a $\rho = \rho_0$ constant density. For simplicity we take a density function identically equal to one.
+\item The Boussinesq approximation is a simplification of the model, it assumes a $\rho = \rho_0$ constant density. Without the loss of generality we take a density function identically equal to one.
 
 \item The Coriolis force needs to be taken into account since we are describing a large-scale phenomena on the surface of the rotating Earth. It is definitely an important force to reckon with from a modelling point of view, however, its contribution to the level of theoretical complexity is rather small, as it results in linear velocity terms.
 
-\item The third feature we integrate into the Navier-Stokes equations is the assumption that the volume of any fluid element is constant in time. An equivalent condition (see for example \cite{boyer2012mathematical}) is requiring the velocity field $\mathbf{v}$ to be solenoidal, i.e. $\text{div}(\mathbf{v})(t,x) = 0.$ This incompressibility condition is reasonable to assume for gases in standard conditions and for low-speed fluid flows where the so-called Mach number is small. Note in particular that the divergence-free condition is nothing less than a new equation that the velocity function now has to satisfy, and as a consequence the pressure is related differently to the other thermodynamical variables for the case of incompressible flows. In more detail, as we will see in our computations later, results and estimates on the divergence-free velocity function can be obtained separately from the pressure. We also highlight here that the pressure function is defined only up to a constant, or in other words, it is only the pressure gradient (pressure fluctuation) that has a physical meaning, and not the absolute pressure value itself.
+\item The third feature we integrate into the Navier-Stokes equations is the assumption that the volume of any fluid element is constant in time. An equivalent condition (see for example \cite{boyer2012mathematical}) is requiring the velocity field $\mathbf{v}$ to be solenoidal, i.e. $\text{div}(\mathbf{v})(t,x) = 0.$ This incompressibility condition is reasonable to assume for gases in standard conditions and for low-speed fluid flows where the Mach number is small. Note in particular that the divergence-free condition is nothing less than a new equation that the velocity function now has to satisfy, and as a consequence the pressure is related differently to the other thermodynamical variables for the case of incompressible flows. In more detail, as we will see in our computations later, results and estimates on the divergence-free velocity function can be obtained separately from the pressure. We also highlight here that the pressure function is defined only up to a constant, or in other words, it is only the pressure gradient i.e. the fluctuation of the pressure that has a physical meaning, and not the absolute pressure value itself.
 
 \end{enumerate}
 
@@ -146,32 +144,32 @@ Combining the aforementioned ideas, the equations governing the air velocity $\m
   \nabla \cdot \mathbf{v} = 0 \text{ in } \Omega_0 \times (0,T).
 \end{equation}
 
-In the following we collect some of the main results currently available on the solutions of the Navier-Stokes equations. Here we use a standard terminology: the weak solutions are those with finite kinematic energy ($L^\infty L^2 \cap L^2 H^1$ boundedness), and the strong solutions are those with finite enstrophy ($L^\infty H^1 \cap L^2 H^2$ regularity). The more precise definitions and regularities of solutions will be given in the following chapters.
+In the following we collect some of the main results currently available on the solutions of the Navier-Stokes equations. Here we use a standard terminology: the weak solutions are those with finite kinematic energy ($L_t^\infty L_x^2 \cap L_t^2 H_x^1$ boundedness), and the strong solutions are those with finite enstrophy ($L_t^\infty H_x^1 \cap L_t^2 H_x^2$ regularity). The more precise definitions and regularities of solutions will be given in the following chapters.
 
 \bigskip
 
-\textbf{State of art of the Navier-Stokes equations} (see \cite{temam2001navier}, \cite{constantin1988navier}):
+\textbf{State of art of the Navier-Stokes equations} (see \cite{constantin1988navier}, \cite{temam2001navier}):
 \begin{enumerate}[label=\arabic*)]
-  \item The existence of weak solutions is well-known since Leray's fundamental work \cite{leray1934mouvement} in 1934. More general proofs has been given more recently for the global existence of weak solutions, see \cite{temam2001navier} for example.
-  \item For an initial velocity $\mathbf{v}_0 \in H^1_x$ in 3D the Navier-Stokes equations have a unique local in time strong solution.
+  \item The existence of weak solutions is well-known since Leray's fundamental work \cite{leray1934mouvement} in 1934. Later on more general proofs has been given for the global existence of weak solutions, see \cite{temam2001navier} for example.
+  \item For an initial velocity $\mathbf{v}_0 \in H^1_x$ the Navier-Stokes equations in three space dimensions have a unique local in time strong solution.
   \item The existence of global strong solutions in three dimensions is an open problem (except for some specific cases, see for example \cite{li2019primitive}).
 \end{enumerate}
 
 \subsection{The primitive equations}\label{PEsgeneraldescription}
 
-The complete set of equations (\ref{originalEQ-V})-(\ref{originalEQ-I}) is extremely complex and due to its (for the moment being) unreasonable computational demands it is seldom used in real-world applications. At the core of many flood prediction systems, weather forecast softwares, global circulation models or ocean global circulation models we find the following different system called the primitive equations.
+The complete set of equations (\ref{originalEQ-V})-(\ref{originalEQ-I}) is extremely complex and due to its (for the moment being) unreasonable computational demands it is seldom used in real-world applications. At the core of many flood prediction systems, weather forecast softwares, global circulation models or ocean global circulation models we find the following different system called the primitive equations:
 
-\begin{equation} \label{PE_orignal_1} \partial_t \mathbf{v}_h + \mathbf{v}_h \cdot \nabla_h \mathbf{v}_h + v_3 \partial_z \mathbf{v}_h - \Delta_{\nu} \mathbf{v}_h + \nabla_h q + 2 (\mathbf{w} \times \mathbf{v})_h = 0 \end{equation}
+\begin{equation} \label{PE_orignal_1} \partial_t \mathbf{v}_h + \mathbf{v}_h \cdot \nabla_h \mathbf{v}_h + v_3 \partial_z \mathbf{v}_h - \Delta_{\nu} \mathbf{v}_h + \nabla_h q + 2 (\mathbf{w} \times \mathbf{v})_h = 0, \end{equation}
 
-\begin{equation} \label{PE_orignal_2} \frac{\partial q}{\partial z} = - \mathbf{g} \end{equation}
+\begin{equation} \label{PE_orignal_2} \frac{\partial q}{\partial z} = - \mathbf{g}, \end{equation}
 
-\begin{equation} \label{PE_orignal_3} \nabla \cdot \mathbf{v} = 0 \end{equation}
+\begin{equation} \label{PE_orignal_3} \nabla \cdot \mathbf{v} = 0. \end{equation}
 
-Note that the difference between (\ref{originalEQ-V})--(\ref{originalEQ-I}) and (\ref{PE_orignal_1})--(\ref{PE_orignal_3}) lies in the richness of information we have in the vertical momentum equation in the full 3D Navier-Stokes equation compared to the much simpler (\ref{PE_orignal_2}) equation. In particular, this latter states nothing else but a global scale equilibrium suggested by empirical observations and historical data in meteorology: the hydrostatic balance. For this reason the primitive equations are often referred to as the hydrostatic system as well. 
+Note that the difference between the systems (\ref{originalEQ-V})--(\ref{originalEQ-I}) and (\ref{PE_orignal_1})--(\ref{PE_orignal_3}) lies in the richness of information we have in the vertical momentum equation in the full 3D Navier-Stokes equations compared to the much simpler (\ref{PE_orignal_2}) equation. In particular, this latter states nothing else but a global scale equilibrium suggested by empirical observations and historical data in meteorology: the hydrostatic balance. For this reason the primitive equations are often referred to as the hydrostatic system as well. 
 
-As far as we know, the primitive equations were proposed by L. F. Richardson (\cite{lions1992new}) in 1922. Based on their high accuracy, the hydrostatic equations are the central component for describing the dynamics of large-scale water bodies such as big lakes and oceans, the equation describing hydrostatic equilibrium has widespread acceptance as the fundamental component for studying complicated atmospheric phenomena.
+As far as we know, the primitive equations were proposed by L. F. Richardson (\cite{lions1992new}) in 1922. Based on their high accuracy, the hydrostatic equations are a central tool for describing the dynamics of large-scale water bodies such as big lakes and oceans, the equation describing hydrostatic equilibrium has widespread acceptance as the fundamental component for studying complicated atmospheric phenomena.
 
-The intensive mathematical research on the primitive equations was initiated by J. L. Lions, R. Temam, and S. Wang, and they obtained the existence for all time of weak solutions, see their original works \cite{lions1992new}, \cite{lions1992equations}, and \cite{lions1995mathematical} from the 1990s. Further study and results in this field has practically brought the mathematical theory of the primitive equations to a level where we are able to state more on the topic of these reduced equations than the complete Navier-Stokes system (the global existence of strong solutions has been proved for the primitive equations). This seems trivial, but on the contrary, it is not at all true that the hydrostatic equations are more simple in every sense. From a physical point of they are definitely more favourable, but an added complexity becomes part of the system where the
+The intensive mathematical research on the primitive equations was initiated by J. L. Lions, R. Temam, and S. Wang, and they obtained the existence for all time of weak solutions, see their original works \cite{lions1992new}, \cite{lions1992equations}, and \cite{lions1995mathematical} from the 1990s. Further study and results in this field has practically brought the mathematical theory of the primitive equations to a level where we are able to state more on the topic of these reduced equations than the complete Navier-Stokes system (for the case of primitive equations the question of global existence of strong solutions has been resolved with a positive result). It might seem obvious to expect that for the case of this reduced system there should be a mathematical theory at least as clear as the theory available for the complete system, but on the contrary, it is not at all true that the hydrostatic equations are simpler in every sense. From a physical point of view they are definitely more favourable, but an added complexity becomes part of the system where the
 
 \begin{equation} \text{velocity} \times \text{first order derivatives of velocity}\end{equation}
 
@@ -184,7 +182,13 @@ nonlinear term in the Navier-Stokes equations is replaced by the
   \end{split}
 \end{equation}
 
-nonlinear term in the hydrostatic system (\cite{temam2005some}). This is due to the standard technique of replacing the vertical velocity with a function of first order derivatives of horizontal velocity via the divergence-free condition when working with the primitive equations (see later in more detail).
+nonlinear term in the hydrostatic system (\cite{temam2005some}). This is due to a standard technique often applied in the primitive equations framework: using the divergence-free condition we can replace the vertical velocity by
+
+\begin{equation}
+  v_3 = - \int_0^z \nabla_h \cdot \mathbf{v}_h (x, y, \xi, t) \diff \xi,
+\end{equation}
+
+assuming the domain $\Omega_0$ can be expressed as $\Omega_0 = \mathcal{M} \times [0, h].$
 
 We conclude this subsection with the most important results currently available on the topic of primitive equations.
 
@@ -200,13 +204,13 @@ We conclude this subsection with the most important results currently available 
 %%% ANISOTROPIC AND HYDROSTATIC MODELS %%%
 \section{The anisotropic and hydrostatic models of the polluted atmosphere}\label{anis-hydr-connection}
 
-In this section we aim to create atmosphere models in two different coordinate systems: in Section \ref{eqsdescribingatmpluspollution_gfc} we work in the classical geophysical coordinates, while in Section \ref{eqsdescribingatmpluspollution_dwmc} we define a more considerately chosen coordinate system, the so-called downwind-matching coordinates. Before we start the development process, in Section \ref{modellingfoundations} we collect some fundamental features shared by both of the models we will construct in the following, and we extend the velocity system we considered until now with a pollution concentration function.
+In this section we aim to create atmosphere models in two different coordinate systems: in Section \ref{eqsdescribingatmpluspollution_gfc} we work in the relatively classical geophysical coordinates, while in Section \ref{eqsdescribingatmpluspollution_dwmc} we define a more considerately chosen coordinate system, the so-called downwind-matching coordinates. Before we start the development process, in Section \ref{modellingfoundations} we collect some fundamental features shared by both of the models we will construct in the following. We also complete the velocity system with a concentration function representing pollutants in the atmosphere.
 
 \subsection{Modelling foundations}\label{modellingfoundations}
 
-As a first step of this section, we extend the velocity equations (\ref{originalEQ-V})--(\ref{originalEQ-I}) with an additional equation governing the trajectories of a pollutant present in the atmosphere in concentration $p_c.$
+As a first step of this section, we extend the velocity system (\ref{originalEQ-V})--(\ref{originalEQ-I}) with an additional equation governing the motion of a pollutant present in the atmosphere in concentration $p_c.$
 
-Contaminants emitted into the atmosphere are transported by the wind, mixed and dispersed by turbulent behaviour, and deposited onto the ground by gravity. The dispersion of pollutants is commonly modelled by a continuity equation of the form
+The two most important concepts regarding contaminants emitted into the atmosphere are diffusion (the pollutant is mixed and dispersed by turbulent behaviour) and convection (the contaminant is transported by the wind). Thus, the dispersion of pollutants is commonly modelled by a continuity equation of the form
     
 \begin{equation} \label{diffusive}
   \partial_t p_c + \mathbf{v} \cdot \nabla p_c = \nabla \cdot (\mathbf{K} \nabla p_c) + q \quad \text{ in } \Omega_0 \times (0,T),
@@ -214,17 +218,17 @@ Contaminants emitted into the atmosphere are transported by the wind, mixed and 
 
 where $p_c$ is the pollution concentration and $\mathbf{K}$ is the $3 \times 3$ diffusion matrix --- the diagonal terms represent the strength of the diffusion in the $x, y, z$ directions, while the non-diagonal terms reflect the correlation of random motions between each pair of principal directions. Here $q$ represents the sources of the pollutant in the atmosphere i.e. its emission, removal from the atmosphere by dry and wet deposition, and chemical reactions.
 
-Now we are ready to introduce a concept which will be indispensable throughout the thesis. To motivate this, we remind that in Section \ref{3DNSgeneraldescription} we have defined a theoretically correct model describing phenomena in geophysical fluid dynamics, while in Section \ref{PEsgeneraldescription} we introduced the primitive equations. This latter system is significantly different from the general 3D incompressible Navier-Stokes equations, however it results to be highly accurate in modelling atmospheric motions. An important step in order to understand what connects these two models is to consider under what circumstances they are "close" to each other. It is not in any given fluid dynamics problem acceptable to use the primitive equations  instead of the complete Navier-Stokes equations: according to empirical observations in meteorology the hydrostatic approximation works well principally for large-scale fluids.
+Now we are ready to introduce a concept which will be indispensable throughout the thesis. To motivate this, we remind that in Section \ref{3DNSgeneraldescription} we have defined a theoretically correct model describing phenomena in geophysical fluid dynamics, while in Section \ref{PEsgeneraldescription} we introduced the primitive equations. This latter system is significantly different from the general 3D incompressible Navier-Stokes equations, however it results to be highly accurate in modelling atmospheric motions. An important step in order to understand what connects these two models is to consider under what circumstances they are "close" to each other. It is not in any case acceptable to use the primitive equations instead of the complete Navier-Stokes equations: according to empirical observations in meteorology, the hydrostatic approximation works well principally for large-scale fluids.
 
-The key characteristics the atmosphere naturally shares with seas and oceans is the shallowness of its domain. This means that these fluids are excessively greater horizontally than in the vertical dimension (several thousand kilometres versus 1-20 kms). Thanks to this feature it is reasonable to neglect some of the occurring physical phenomena, such as effects related to vertical viscosity, as we will see later. Hence, the idea is to incorporate this important characteristics into the original fluid dynamical model (\ref{originalEQ-V})--(\ref{originalEQ-I}) with the explicit inclusion with the shallowness parameter
+The key characteristics that large-scale fluids such as the atmosphere, seas and oceans naturally have in common is the shallowness of their domain. This means that these fluids are excessively greater horizontally than in the vertical dimension (several thousand kilometres versus 1-20 kms). Thanks to this feature it is reasonable to neglect some of the occurring physical phenomena, such as effects related to vertical viscosity, as we will see later. Hence, the idea is to incorporate this important characteristics into the original fluid dynamical model (\ref{originalEQ-V})--(\ref{originalEQ-I}) with the explicit inclusion of the shallowness parameter
 
 $$\epsilon = \frac{\text{characteristic depth}}{\text{characteristic width}}$$
 
 representing the small aspect ratio of the physical domain.
 
-We highlight that the concept of shallowness --- and specifically, the "proximity" of the previously mentioned two main models to one another for the case shallow domains --- is essentially the heart of this thesis. In the following two chapters we prove nothing else that the original, three-dimensional Navier-Stokes equations' solution functions (both weak and strong) approximate the solutions of the hydrostatic system. We will show that the two fundamental properties of the atmosphere --- shallowness and hydrostatic balance --- are in fact inseparable, as the hydrostatic equilibrium is a direct consequence of the shallow nature of the domain.
+We highlight that the concept of shallowness --- and specifically, the "proximity" of the previously mentioned two main models to one another for the case shallow domains --- is essentially the heart of this thesis. In the following two chapters we prove nothing else that the solutions (both weak and strong) of the "shallow version" of three-dimensional Navier-Stokes equations approximate the solutions of the hydrostatic system. We will show that the two fundamental properties of the atmosphere --- shallowness and hydrostatic balance --- are in fact inseparable, as the hydrostatic equilibrium is a direct consequence of the shallow nature of its domain.
 
-An important simplification we make at this point is to apply the so-called $\beta$-plane approximation. This means that we concentrate our efforts on a local domain on the surface of the rotating Earth, or, more accurately, on the corresponding $\beta$-plane case. As a consequence, we can neglect the curvature of the Earth and we can use Cartesian coordinates. We will set the orientation of the axes later in two different ways: everything stated and defined in this section is understood without any particular direction of the axes.
+An important simplification we make at this point is to apply the so-called $\beta$-plane approximation. This means that we concentrate our efforts on a local domain on the surface of the rotating Earth, or, more accurately speaking, on the corresponding $\beta$-plane case. As a consequence, we can neglect the curvature of the Earth and we can use Cartesian coordinates. We will set the orientation of the axes in two different ways later: everything stated and defined in this section is understood without any particular direction of the coordinate axes.
 
 We define the domain we consider by the set
 
@@ -234,7 +238,7 @@ We define the domain we consider by the set
 
 where $\omega$ is a Lipschitz-domain in $\mathbb{R}^2$, $h$ is a nonnegative Lipschitzian application.
 
-Now, we perform a vertical scaling to make the domain independent of $\epsilon.$
+Now, we perform a vertical scaling to make the domain independent of $\epsilon:$
 
 \begin{equation}\label{scaling_eq_x}x=x_1, \quad y=x_2, \quad z=\epsilon x_3.\end{equation}
     
@@ -262,7 +266,7 @@ Finally we obtain the rescaling equations for the pollution concentration and th
     
 Note that from this point we have $\nabla = (\partial_1, \partial_2, \partial_3) $ and $ \Delta_\nu = \nu_1 \partial^2_{11} + \nu_2 \partial^2_{22}  + \nu_3 \partial^2_{33} $. 
 
-We will build in the scaling equations (\ref{scaling_eq_x}), (\ref{scaling_eq_vpnu}), (\ref{scaling_eq_c}) into the original, 3D Navier-Stokes equations (\ref{originalEQ-V})--(\ref{originalEQ-I}) combined with the convection-diffusion equation (\ref{diffusive}), considered for two different coordinate choices in the following two sections, respectively.
+In the next two sections we consider two different coordinate choices, and within the framework of each of these coordinate systems we apply the scaling equations (\ref{scaling_eq_x}), (\ref{scaling_eq_vpnu}), (\ref{scaling_eq_c}) to the original, 3D Navier-Stokes equations (\ref{originalEQ-V})--(\ref{originalEQ-I}) combined with the convection-diffusion equation (\ref{diffusive}).
 
 %%% GEOPHYSICAL COORDINATES %%%
 \subsection{The polluted atmosphere model in geophysical coordinates} \label{eqsdescribingatmpluspollution_gfc}
@@ -609,7 +613,7 @@ To conclude the description of the model we highlight an important feature of th
 \chapter{The asymptotic behaviour of the anisotropic solutions in geophysical coordinates}\label{geophysicalchapter}
 
 %%% *** WEAK FORMULATION AND MAIN RESULT*** %%%
-\section{Weak formulation and Main Result} \label{weakformulationmainresult}
+\section{Weak formulation and Main Result} \label{weakformulationmainresult_gfc}
 
 In this section we describe the weak formulation of the merged equations in both the anisotropic and hydrostatic case we are going to use in the thesis, and we state our main result.
   
@@ -698,7 +702,7 @@ Now we are ready to state our main result.
 \end{theorem}
 
 %%% *** PROOF *** %%%
-\section{Proof of the main theorem} \label{proof}
+\section{Proof of the main theorem} \label{proof_weak_gfc}
  
  This section is devoted to the proof of Theorem \ref{maintheorem}. In the extended case with the pollution equation the proof relies on a priori estimates gained from the energy inequality and, as we will see this is sufficient to pass to the limit in the linear terms. Concerning the nonlinear terms we will prove a uniform in $\epsilon$ space time estimate for $\mathbf{u}^\epsilon$ and $C^\epsilon$ that will allow us to apply a compactness criterion proved in \cite{azerad2001mathematical}.
 
@@ -1224,7 +1228,7 @@ As we have mentioned it in the introduction, in this case we will work with a mo
     
 We highlight the difference between the boundary conditions of the original, east-north oriented, and the new, downwind-matching model for the case of weak solutions.
 
-The difference in the kind of boundary conditions we can "afford" to have on the lower boundary for the concentration comes from the energy inequality. In the east-north-upwards oriented coordinate system we do not have an $\epsilon$ in the diffusion matrix, and thus, having any of the $\partial_i c^\epsilon$ terms different from 0 does not create any problems, not even for the case of the ocean where $\partial_3 c^\epsilon$ becomes nonzero as well (they are required however to be bounded of course). On the other hand, the downwind-matching coordinate system brings in an $\epsilon$ term in front of the $K_1$ diffusion coefficient, which makes the model more sensitive to assigning boundary conditions for $c^\epsilon.$ This means that we can not anymore have the relatively relaxed boundedness requirement for any $\partial_i c^\epsilon$ except for $i=1.$ All other $\partial_2 c^\epsilon, \partial_3 c^\epsilon$ derivatives must be zero on the lower boundary, otherwise they would result in an $(\epsilon - \text{const.})$ negative term appearing in the energy inequality --- for more details see Section $\ref{proof}$. This also means that we will consider exclusively the inland domain scenario for the case of this coordinate system.
+The difference in the kind of boundary conditions we can "afford" to have on the lower boundary for the concentration comes from the energy inequality. In the east-north-upwards oriented coordinate system we do not have an $\epsilon$ in the diffusion matrix, and thus, having any of the $\partial_i c^\epsilon$ terms different from 0 does not create any problems, not even for the case of the ocean where $\partial_3 c^\epsilon$ becomes nonzero as well (they are required however to be bounded of course). On the other hand, the downwind-matching coordinate system brings in an $\epsilon$ term in front of the $K_1$ diffusion coefficient, which makes the model more sensitive to assigning boundary conditions for $c^\epsilon.$ This means that we can not anymore have the relatively relaxed boundedness requirement for any $\partial_i c^\epsilon$ except for $i=1.$ All other $\partial_2 c^\epsilon, \partial_3 c^\epsilon$ derivatives must be zero on the lower boundary, otherwise they would result in an $(\epsilon - \text{const.})$ negative term appearing in the energy inequality --- for more details see Section $\ref{proof_weak_dwmc}$. This also means that we will consider exclusively the inland domain scenario for the case of this coordinate system.
 
 Concerning the initial data, we set $${\mathbf{u}_h}_0 \in H^1 (\Omega), {u_3}_0 \in L^2(\Omega) \text{ with } \nabla \cdot \mathbf{u}_0 = 0, \text{ and } c_0 \in L^2 (\Omega).$$ We highlight here that we are still working in classical Leray framework of weak solutions, even though we use an $H^1(\Omega)$ regularity assumption on ${\mathbf{u}_h}_0,$ which is stronger than the more usual $L^2$ space regularity requirement for weak solutions (\cite{azerad2001mathematical}, \cite{pollatmws2019}). The reason we need this stronger regularity is to counterbalance the decreased control we have on the concentration function due to the coordinate choice, but overall this does not lead us out of the field of weak solutions.
 
@@ -1247,7 +1251,7 @@ Following the main ideas described above, we set
 \end{equation}
 
 %%% *** WEAK FORMULATION AND MAIN RESULT*** %%%
-\subsection{Weak Formulation and Main Result} \label{weakformulationmainresult}
+\subsection{Weak Formulation and Main Result} \label{weakformulationmainresult_dwmc}
 
 In this section we describe the weak formulation of the merged equations in both the anisotropic and hydrostatic case, and we state our main result.
   
@@ -1329,7 +1333,7 @@ Now we are ready to state the main theorem of this section.
 The statement of the main theorem of this first part of the chapter is analogous to our previous result stated for the case of the geophysical frame, but we highlight the difference that here we use the initial data ${\mathbf{u}_h}_0 \in H^1,$ while for the case of the geophysical frame an $L^2$ initial velocity was sufficient.
   
 %%% *** PROOF *** %%%
-\subsection{Proof of the main theorem} \label{proof}
+\subsection{Proof of the main theorem} \label{proof_weak_dwmc}
 
 This section is dedicated to the verification of Theorem \ref{maintheoremWEAK}. Structurally we follow a similar chain of thought as in the previous chapter --- until the point where the proof diverges reaching the weak convergence of the nonlinear term $u_3^\epsilon c^\epsilon,$ where in this case we can not benefit from an $H^1$-regular concentration function. In more detail, we begin by calculating the energy inequality and collect the a priori estimates that derive from it, then verify the less problematic weak convergence results. Finally we elaborate the steps that bring the convergence of the $u_3^\epsilon c^\epsilon$ term to a closure. The main idea here is to temporarily ignore the $c^\epsilon$ function and prove a strong convergence result considering only the velocity functions. Throughout this step we go beyond the weak solutions quality and show that we are working with strong solutions. In this new setting with more favourable regularities we can prove the convergence result we need, and eventually return to the frame of weak solutions where we can merge back together the velocity and concentration functions into a unified solution. Finally as a byproduct we get a convergence rate for the velocity (see Proposition \ref{convrateweakframework}).
 
