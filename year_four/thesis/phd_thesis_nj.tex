@@ -106,11 +106,11 @@ The research of DD and NJ leading to these results has received funding from the
 
 \chapter{The mathematical models of the polluted atmosphere} \label{state_of_art_and_models}
 
-The aim of this chapter is to provide a comprehensive, general overview of the most significant concepts, modelling equations and challenging aspects in the mathematics of atmosphere modelling, and at the same time, more specifically, to describe in detail the process of obtaining the systems we are investigating in the thesis.
+The aim of this chapter on the one hand is to provide a general overview of the most significant concepts, modelling equations and challenging aspects in the mathematics of atmosphere modelling. On the other hand, more specifically, we describe in detail the process of obtaining the systems we are investigating in the thesis.
 
-\section{The fundamental concepts and the state of art in mathematical meteorology} \label{state_of_art_foundations_section}
+\section{The fundamental concepts and equations of mathematical meteorology} \label{state_of_art_foundations_section}
 
-We begin by presenting the basic ideas, approaches, and well-known results in this field regarding fluid velocity. Specifically, we focus on two significant models used in atmosphere modelling: in Section \ref{3DNSgeneraldescription} we provide a brief overview on the 3D Navier-Stokes equations, while in Section \ref{PEsgeneraldescription} we introduce the concept of primitive equations. The connection between these two models will be described in the following Section \ref{anis-hydr-connection}.
+We begin by presenting the basic ideas, approaches, and well-known results in this field regarding fluid velocity. Specifically, we focus on two significant models used in atmosphere modelling: in Section \ref{3DNSgeneraldescription} we provide an overview on the 3D Navier-Stokes equations, while in Section \ref{PEsgeneraldescription} we introduce the concept of primitive equations. The connection between these two models will be described in the following Section \ref{anis-hydr-connection}.
 
 \subsection{The 3D Navier-Stokes equations}\label{3DNSgeneraldescription}
 
@@ -130,7 +130,7 @@ We combine equation (\ref{original_general_NS}) with three other important conce
 
 \item The Coriolis force needs to be taken into account since we are describing a large-scale phenomena on the surface of the rotating Earth. It is definitely an important force to reckon with from a modelling point of view, however, its contribution to the level of theoretical complexity is rather small, as it results in linear velocity terms.
 
-\item The third feature we integrate into the Navier-Stokes equations is the assumption that the volume of any fluid element is constant in time. An equivalent condition (see for example \cite{boyer2012mathematical}) is requiring the velocity field $\mathbf{v}$ to be solenoidal, i.e. $\text{div}(\mathbf{v})(t,x) = 0.$ This incompressibility condition is reasonable to assume for gases in standard conditions and for low-speed fluid flows where the Mach number is small. Note in particular that the divergence-free condition is nothing less than a new equation that the velocity function now has to satisfy, and as a consequence the pressure is related differently to the other thermodynamical variables for the case of incompressible flows. In more detail, as we will see in our computations later, results and estimates on the divergence-free velocity function can be obtained separately from the pressure. We also highlight here that the pressure function is defined only up to a constant, or in other words, it is only the pressure gradient i.e. the fluctuation of the pressure that has a physical meaning, and not the absolute pressure value itself.
+\item The third feature we integrate into the Navier-Stokes equations is the assumption that the volume of any fluid element is constant in time. An equivalent condition (see for example \cite{boyer2012mathematical}) is requiring the velocity field $\mathbf{v}$ to be solenoidal, i.e. $\text{div}(\mathbf{v})(t,x) = 0.$ This incompressibility condition is reasonable to assume for gases in standard conditions and for low-speed fluid flows where the Mach number is small. Note in particular that the divergence-free condition is nothing less than a new equation that the velocity function now has to satisfy, and as a consequence the pressure is related differently to the other thermodynamical variables for the case of incompressible flows. In more detail, as we will see in our computations later, results and estimates on the divergence-free velocity function can be obtained separately from the pressure. We also highlight here that the pressure function is defined only up to a constant, or in other words, it is only the pressure gradient (i.e. the fluctuation of the pressure) that has a physical meaning, and not the absolute pressure value itself.
 
 \end{enumerate}
 
@@ -204,9 +204,9 @@ We conclude this subsection with the most important results currently available 
 %%% ANISOTROPIC AND HYDROSTATIC MODELS %%%
 \section{The anisotropic and hydrostatic models of the polluted atmosphere}\label{anis-hydr-connection}
 
-In this section we aim to create atmosphere models in two different coordinate systems: in Section \ref{eqsdescribingatmpluspollution_gfc} we work in the relatively classical geophysical coordinates, while in Section \ref{eqsdescribingatmpluspollution_dwmc} we define a more considerately chosen coordinate system, the so-called downwind-matching coordinates. Before we start the development process, in Section \ref{modellingfoundations} we collect some fundamental features shared by both of the models we will construct in the following. We also complete the velocity system with a concentration function representing pollutants in the atmosphere.
+In this section firstly we complete the velocity system governing air flow with a concentration function representing contaminants in the atmosphere. Once we have constructed this extended system, we aim to create atmosphere models including pollution in two different coordinate systems: in Section \ref{eqsdescribingatmpluspollution_gfc} we work in the relatively classical geophysical coordinates, while in Section \ref{eqsdescribingatmpluspollution_dwmc} we define a more considerately chosen coordinate system by introducing the so-called downwind-matching coordinates. Before we start the development process, in Section \ref{modellingfoundations} we collect some fundamental features shared by both of the models.
 
-\subsection{Modelling foundations}\label{modellingfoundations}
+\subsection{Basic concepts in mathematical atmosphere modelling}\label{modellingfoundations}
 
 As a first step of this section, we extend the velocity system (\ref{originalEQ-V})--(\ref{originalEQ-I}) with an additional equation governing the motion of a pollutant present in the atmosphere in concentration $p_c.$
 
@@ -218,19 +218,19 @@ The two most important concepts regarding contaminants emitted into the atmosphe
 
 where $p_c$ is the pollution concentration and $\mathbf{K}$ is the $3 \times 3$ diffusion matrix --- the diagonal terms represent the strength of the diffusion in the $x, y, z$ directions, while the non-diagonal terms reflect the correlation of random motions between each pair of principal directions. Here $q$ represents the sources of the pollutant in the atmosphere i.e. its emission, removal from the atmosphere by dry and wet deposition, and chemical reactions.
 
-Now we are ready to introduce a concept which will be indispensable throughout the thesis. To motivate this, we remind that in Section \ref{3DNSgeneraldescription} we have defined a theoretically correct model describing phenomena in geophysical fluid dynamics, while in Section \ref{PEsgeneraldescription} we introduced the primitive equations. This latter system is significantly different from the general 3D incompressible Navier-Stokes equations, however it results to be highly accurate in modelling atmospheric motions. An important step in order to understand what connects these two models is to consider under what circumstances they are "close" to each other. It is not in any case acceptable to use the primitive equations instead of the complete Navier-Stokes equations: according to empirical observations in meteorology, the hydrostatic approximation works well principally for large-scale fluids.
+Now we are ready to introduce a concept which will be indispensable throughout the thesis. To motivate this, we remind that in Section \ref{3DNSgeneraldescription} we have defined a theoretically correct model describing phenomena in geophysical fluid dynamics, while in Section \ref{PEsgeneraldescription} we introduced the primitive equations. This latter system is significantly different from the general 3D incompressible Navier-Stokes equations, however it results to be highly accurate in modelling atmospheric motions in real-world applications. An important step in order to understand what connects these two models is to consider under what circumstances they are "close" to each other. It is not in any case acceptable to use the primitive equations instead of the complete Navier-Stokes equations: according to empirical observations in meteorology, the hydrostatic approximation works well principally for large-scale fluids.
 
-The key characteristics that large-scale fluids such as the atmosphere, seas and oceans naturally have in common is the shallowness of their domain. This means that these fluids are excessively greater horizontally than in the vertical dimension (several thousand kilometres versus 1-20 kms). Thanks to this feature it is reasonable to neglect some of the occurring physical phenomena, such as effects related to vertical viscosity, as we will see later. Hence, the idea is to incorporate this important characteristics into the original fluid dynamical model (\ref{originalEQ-V})--(\ref{originalEQ-I}) with the explicit inclusion of the shallowness parameter
+The key characteristics that large-scale fluids such as the atmosphere, seas and oceans naturally have in common is the shallowness of their domain. This means that these fluids are excessively greater horizontally than in the vertical dimension (several thousand kilometres versus 1-20 kms). Thanks to this feature it is reasonable to neglect some of the occurring physical phenomena, such as effects related to vertical viscosity, as we will see later. Hence, the idea is to incorporate this important characteristics into the original fluid dynamical model (\ref{originalEQ-V})--(\ref{originalEQ-I}) by the explicit inclusion of the shallowness parameter
 
-$$\epsilon = \frac{\text{characteristic depth}}{\text{characteristic width}}$$
+$$\epsilon = \frac{\text{characteristic depth}}{\text{characteristic width}},$$
 
-representing the small aspect ratio of the physical domain.
+which represents the small aspect ratio of the physical domain.
 
 We highlight that the concept of shallowness --- and specifically, the "proximity" of the previously mentioned two main models to one another for the case shallow domains --- is essentially the heart of this thesis. In the following two chapters we prove nothing else that the solutions (both weak and strong) of the "shallow version" of three-dimensional Navier-Stokes equations approximate the solutions of the hydrostatic system. We will show that the two fundamental properties of the atmosphere --- shallowness and hydrostatic balance --- are in fact inseparable, as the hydrostatic equilibrium is a direct consequence of the shallow nature of its domain.
 
-An important simplification we make at this point is to apply the so-called $\beta$-plane approximation. This means that we concentrate our efforts on a local domain on the surface of the rotating Earth, or, more accurately speaking, on the corresponding $\beta$-plane case. As a consequence, we can neglect the curvature of the Earth and we can use Cartesian coordinates. We will set the orientation of the axes in two different ways later: everything stated and defined in this section is understood without any particular direction of the coordinate axes.
+An important simplification we make at this point is to apply the so-called $\beta$-plane approximation. This means that we focus on a local domain on the surface of the rotating Earth, or, more accurately speaking, on the corresponding $\beta$-plane case. As a consequence of working on a tangent space, we can neglect the curvature of the Earth and we can use Cartesian coordinates. We will set the orientation of the axes in two different ways later: everything stated and defined now in this section is understood without any particular direction of the coordinate axes.
 
-We define the domain we consider by the set
+Now we are ready to move on from the original, generic $\Omega_0$ set to the following, more refined domain carrying information about its shallowness. We define
 
 \begin{equation}
   \Omega_{\epsilon} = \{(x,y,z) \in \mathbb{R}^3 ; (x,y) \in \omega, 0 < z < \epsilon h(x,y) \},
@@ -238,7 +238,7 @@ We define the domain we consider by the set
 
 where $\omega$ is a Lipschitz-domain in $\mathbb{R}^2$, $h$ is a nonnegative Lipschitzian application.
 
-Now, we perform a vertical scaling to make the domain independent of $\epsilon:$
+Now we have a clear initial idea of how the shallowness parameter is present in the model, note however that the inclusion of $\epsilon$ in the model is still rather deeply nested in the sense that at this point it is difficult to see its practical effects on the model parameters and solution functions. In other words, our next step is to transplant within the model so that it is included in a more explicit and visible way. In order to achieve this, we perform a vertical scaling to make the domain independent of $\epsilon:$
 
 \begin{equation}\label{scaling_eq_x}x=x_1, \quad y=x_2, \quad z=\epsilon x_3.\end{equation}
     
