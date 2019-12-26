@@ -773,14 +773,14 @@ We will omit the proof of the existence of weak solutions (see Definition \ref{d
 
 Now we are ready to state our main result.
   
-\begin{theorem} \label{maintheorem}
+\begin{theorem} \label{maintheorem_weak_GFC}
   Let $\mathbf{u}_0$ $\in$ $L^2 (\Omega)^3$, with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 \cdot \mathbf{n} = 0$ on $\partial \Omega$; let $C_0 \in$ $L^2 (\Omega)$, $C_0 = 0$ on $ \partial \Omega$, and assume that the boundary conditions (\ref{ANSC8_coordinates_GFC}) hold; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, C^\epsilon)$ of the anisotropic equations (\ref{ANSC1_coordinates_GFC}) - (\ref{ANSC5_coordinates_GFC}) converge to a weak solution $(\mathbf{u}, C)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1_coordinates_GFC}) - (\ref{HNSC5_coordinates_GFC}).
 \end{theorem}
 
 %%% *** PROOF *** %%%
 \section{Proof of the main theorem} \label{proof_weak_gfc}
  
- This section is devoted to the proof of Theorem \ref{maintheorem}. In the extended case with the pollution equation the proof relies on a priori estimates gained from the energy inequality and, as we will see this is sufficient to pass to the limit in the linear terms. Concerning the nonlinear terms we will prove a uniform in $\epsilon$ space time estimate for $\mathbf{u}^\epsilon$ and $C^\epsilon$ that will allow us to apply a compactness criterion proved in \cite{azerad2001mathematical}.
+ This section is devoted to the proof of Theorem \ref{maintheorem_weak_GFC}. In the extended case with the pollution equation the proof relies on a priori estimates gained from the energy inequality and, as we will see this is sufficient to pass to the limit in the linear terms. Concerning the nonlinear terms we will prove a uniform in $\epsilon$ space time estimate for $\mathbf{u}^\epsilon$ and $C^\epsilon$ that will allow us to apply a compactness criterion proved in \cite{azerad2001mathematical}.
 
   \subsection{Energy inequality}
   
@@ -857,7 +857,7 @@ Now we are ready to state our main result.
 
 \subsection{Passing to the limit}
 
-    In order to conclude the proof of Theorem \ref{maintheorem} we pass to the limit in the weak formulation (\ref{anisotropicWF_U})-(\ref{anisotropicWF_C}). To take the limit for the linear velocity terms that do not include the concentration function $C^\epsilon$ we can use (\ref{WeakConvUHEps}), (\ref{WeakConvU3Eps}) and (\ref{WeakConvU3NoEps}), and the bounds (\ref{propositionExtra}), (\ref{proposition2}). As for the nonlinear terms, the convergence can be shown using a time compactness theorem that is based on a result by Simon \cite{simon1986compact}. The key point is to apply a sort of generalisation of the classical translation criterium of Riesz-Frechet-Kolmogorov which enables us to get strong convergence for the horizontal velocities. This is achieved by establishing a bound for the perturbation of $\mathbf{u}_H$ of the form $\norm{\tau_h \mathbf{u}_H - \mathbf{u}_H}_{L^p(0,T-h, \mathbf{Y})} \leq \varphi(h) + \psi(\epsilon),$ where $\mathbf{Y}$ is a Banach space, $\varphi$ and $\psi$ are appropriate functions with their limits vanishing at zero, and $\tau_h \mathbf{u}_H = \mathbf{u}_H (t+h) $. After obtaining strong convergence for $\mathbf{u}_H,$ the proof of the convergence for these nonlinear terms can be closed by applying basic interpolation techniques and the generalised H\"older inequality. The details are omitted since they are analogous to those described in \cite{azerad2001mathematical}.
+    In order to conclude the proof of Theorem \ref{maintheorem_weak_GFC} we pass to the limit in the weak formulation (\ref{anisotropicWF_U})-(\ref{anisotropicWF_C}). To take the limit for the linear velocity terms that do not include the concentration function $C^\epsilon$ we can use (\ref{WeakConvUHEps}), (\ref{WeakConvU3Eps}) and (\ref{WeakConvU3NoEps}), and the bounds (\ref{propositionExtra}), (\ref{proposition2}). As for the nonlinear terms, the convergence can be shown using a time compactness theorem that is based on a result by Simon \cite{simon1986compact}. The key point is to apply a sort of generalisation of the classical translation criterium of Riesz-Frechet-Kolmogorov which enables us to get strong convergence for the horizontal velocities. This is achieved by establishing a bound for the perturbation of $\mathbf{u}_H$ of the form $\norm{\tau_h \mathbf{u}_H - \mathbf{u}_H}_{L^p(0,T-h, \mathbf{Y})} \leq \varphi(h) + \psi(\epsilon),$ where $\mathbf{Y}$ is a Banach space, $\varphi$ and $\psi$ are appropriate functions with their limits vanishing at zero, and $\tau_h \mathbf{u}_H = \mathbf{u}_H (t+h) $. After obtaining strong convergence for $\mathbf{u}_H,$ the proof of the convergence for these nonlinear terms can be closed by applying basic interpolation techniques and the generalised H\"older inequality. The details are omitted since they are analogous to those described in \cite{azerad2001mathematical}.
   
     For the linear terms including the concentration $C^\epsilon$ we can directly apply the weak convergence result of (\ref{WeakConvCEps1}).
     
@@ -1245,7 +1245,7 @@ The numerical simulations were obtained in collaboration with Professor Omar Lak
 
 The first two sections of this chapter are dedicated to state and prove a rigorous connection on the level of solutions between the anisotropic and hydrostatic models introduced in Section \ref{eqsdescribingatmpluspollution_dwmc}, while in the final section we prove an existence result regarding the limit system.
 
-In order to keep this chapter as compact as possible, here we repeat the definition of the two main systems we will work with from now on. The anisotropic equations of the polluted atmosphere in downwind-matching coordinates are given by
+In order to keep this chapter as compact as possible, here we repeat the definition of the two main systems we will work with from this point. The anisotropic equations of the polluted atmosphere in downwind-matching coordinates are given by
 
 \begin{equation} \label{ANSC1_coordinates_DWMC}
   \partial_t u^\epsilon _1 + \mathbf{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\gamma u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
@@ -1297,14 +1297,14 @@ Still in the same coordinate system, the hydrostatic equations are obtained by n
   u_i (\cdot, t=0) = u_{0 i}, \quad c (\cdot, t=0) = c_0 \text{ in } \Omega, \text{$i$ = 1,2}.
 \end{equation}
 
-As for the plan of this chapter, in more detail, Section \ref{sectionWS_dwmc} focuses on the verification of a convergence result between the models (\ref{ANSC1_coordinates_DWMC})-(\ref{ANSC6_coordinates_DWMC}) and (\ref{HNSC1_coordinates_DWMC})-(\ref{HNSC6_coordinates_DWMC}) in the framework of weak solutions. In Section \ref{sectionSTRONGsol} we apply stronger initial regularities and -- from the computations' point of view -- a more favourable boundary structure: here we describe an analogous result to that in Section \ref{sectionWS_dwmc}, but the statement holds for strong solutions.
+As for the plan of this chapter, Section \ref{sectionWS_dwmc} focuses on the verification of a convergence result between the models (\ref{ANSC1_coordinates_DWMC})-(\ref{ANSC6_coordinates_DWMC}) and (\ref{HNSC1_coordinates_DWMC})-(\ref{HNSC6_coordinates_DWMC}) in the framework of weak solutions. In Section \ref{sectionSTRONGsol} we apply stronger initial regularities and -- from the computations' point of view -- a more favourable boundary structure: in Section \ref{sectionSTRONGsol_convergence} we describe an analogous convergence theorem to that in Section \ref{sectionWS_dwmc}, but the statement holds for strong solutions. The proof of the global existence of strong solutions of the downwind-oriented complete velocity--concentration system is found in Section \ref{strongexistencesection}.
 
 The theorems we prove in detail in this chapter are our original results and they may also be found in \cite{dwmhydro2020}.
 
 %%% WEAK SOLUTIONS %%%
 \section{Weak solutions framework} \label{sectionWS_dwmc}
 
-This section is dedicated to extend the weak convergence result of previous chapter to the downwind-matching coordinate system in the framework of weak solutions. We begin by making the modelling equations complete by defining the boundary conditions. In the scenario of weak solutions we aim to be as close as possible to the original domain, thus we consider a classical non-periodic local domain on the surface of the Earth with minimal modifications due to the new $\epsilon$ term.
+This section is dedicated to extend the weak convergence result of the previous chapter (Theorem \ref{maintheorem_weak_GFC}) to the downwind-matching coordinate system in the framework of weak solutions. We begin by making the modelling equations complete by defining the boundary conditions. In the scenario of weak solutions we aim to be as close as possible to the original domain, thus we consider a classical non-periodic local domain on the surface of the Earth with minimal modifications due to the new $\epsilon$ term.
 
 Here the boundary structure of the domain is identical to what we used in geophysical coordinate system, i.e. the upper boundary of the $\Omega$ domain is denoted by $\Gamma_U$, the lateral boundary is $\Gamma_L$, and the lower boundary of the domain is $\Gamma_G$, while the complete boundary is denoted by $\Gamma$ (see Figure $\ref{structdomaingraphboundaries_weak}$). For simplicity we assume that the altitude of $\Omega$ is $1$, thus we can also express the full domain as $\Omega =  \Gamma_G \times [0,1],$ which will be useful later for estimating integrals.
 
