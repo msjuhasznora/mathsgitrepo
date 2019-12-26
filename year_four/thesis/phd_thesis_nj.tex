@@ -232,23 +232,23 @@ An important simplification we make at this point is to apply the so-called $\be
 
 Now we are ready to move on from the original, generic $\Omega_0$ set to the following, more refined domain carrying information about its shallowness. We define
 
-\begin{equation}
+\begin{equation} \label{OmegaEps}
   \Omega_{\epsilon} = \{(x,y,z) \in \mathbb{R}^3 ; (x,y) \in \omega, 0 < z < \epsilon h(x,y) \},
 \end{equation}
 
 where $\omega$ is a Lipschitz-domain in $\mathbb{R}^2$, $h$ is a nonnegative Lipschitzian application.
 
-Now we have a clear initial idea of how the shallowness parameter is present in the model, note however that the inclusion of $\epsilon$ in the model is still rather deeply nested in the sense that at this point it is difficult to see its practical effects on the model parameters and solution functions. In other words, our next step is to transplant within the model so that it is included in a more explicit and visible way. In order to achieve this, we perform a vertical scaling to make the domain independent of $\epsilon:$
+From (\ref{OmegaEps}) we have a clear initial idea of how exactly the shallowness parameter is present in the model, note however that the inclusion of $\epsilon$ is still rather deeply nested --- at this point it is difficult to see its practical effects on the model parameters and solution functions. Hence, our next step is to transplant $\epsilon$ within the model so that it is included in a more explicit and visible way. In order to achieve this, we perform a vertical scaling:
 
 \begin{equation}\label{scaling_eq_x}x=x_1, \quad y=x_2, \quad z=\epsilon x_3.\end{equation}
+
+As a result, $\epsilon$ will be included in the model on the level of equations (the upcoming sections will show this in detail), while the domain itself will be independent from the shallowness parameter:
+
+\begin{equation} \Omega =  \{(x_1,x_2,x_3) \in \mathbb{R}^3 ; (x_1,x_2) \in \omega, 0 < x_3 < h (x_1 , x_2) \}.\end{equation}
     
 For simplicity of notation we will use $\partial_i = \partial_{x_i} $ for $i = 1,2,3.$
     
-We have the following new, $\epsilon$ - independent domain
-    
-\begin{equation} \Omega =  \{(x_1,x_2,x_3) \in \mathbb{R}^3 ; (x_1,x_2) \in \omega, 0 < x_3 < h (x_1 , x_2) \}.\end{equation}
-    
-The corresponding scaling regarding the kinematic, pressure and viscosity terms are
+The corresponding scaling equations regarding the kinematic, pressure and viscosity terms are
  \begin{equation}\label{scaling_eq_vpnu}
    \begin{split}
       &v_1 = u_1^{\epsilon}, \quad v_2 = u_2^{\epsilon}, \quad v_3 = \epsilon u_3^{\epsilon}, \quad p = p^{\epsilon},\\
@@ -256,7 +256,7 @@ The corresponding scaling regarding the kinematic, pressure and viscosity terms 
   \end{split}
  \end{equation}
  
-where the later embodies the different eddy viscosity hypothesis that we mentioned earlier, and $p$ is the pressure term including the gravity potential $\varphi,$ i.e., $p = q - \varphi$. Basically the scaling of the viscosity parameters can be heuristically deduced from the viscosity dimensions: $\text{typical length}^2 / \text{typical time}$, more details on the subject can be found in \cite{besson1992some}, \cite{azerad2001mathematical}.
+where $p$ is the pressure term including the gravity potential $\varphi,$ i.e., $p = q - \varphi$, and the latter scaling identities embody the different eddy viscosity hypothesis. Basically, this approach used in the scaling of the viscosity parameters can be heuristically deduced from the viscosity dimensions: $\text{typical length}^2 / \text{typical time}$, more details on the subject can be found in \cite{besson1992some}, \cite{azerad2001mathematical}.
 
 Finally we obtain the rescaling equations for the pollution concentration and the source term by considering their physical dimensions, namely: $\text{typical molar density} / \text{typical volume},$ from which we deduce
 
@@ -264,7 +264,7 @@ Finally we obtain the rescaling equations for the pollution concentration and th
   p_c = \frac{1}{\epsilon} c^\epsilon, \quad q = \frac{1}{\epsilon} s^\epsilon.
 \end{equation}
     
-Note once the rescaling is enabled, afterwards we will have $\nabla = (\partial_1, \partial_2, \partial_3) $ and $ \Delta_\nu = \nu_1 \partial^2_{11} + \nu_2 \partial^2_{22}  + \nu_3 \partial^2_{33} $. 
+Note that once the rescaling is enabled, afterwards we will use $\nabla = (\partial_1, \partial_2, \partial_3) $ and $ \Delta_\nu = \nu_1 \partial^2_{11} + \nu_2 \partial^2_{22}  + \nu_3 \partial^2_{33} $. 
 
 In the next two sections we consider two different coordinate choices, and within the framework of each of these coordinate systems we apply the scaling equations (\ref{scaling_eq_x}), (\ref{scaling_eq_vpnu}), (\ref{scaling_eq_c}) to the original, 3D Navier-Stokes equations (\ref{originalEQ-V})--(\ref{originalEQ-I}) combined with the convection-diffusion equation (\ref{diffusive}).
 
@@ -285,7 +285,7 @@ To complete the scaling process, we combine equations (\ref{scaling_eq_x}), (\re
 
 where we used a rescaling methodology analogous to that applied to the viscosity terms.
 
-Altogether these scaling equations are applied in order to pass from the $\epsilon-$ dependent $\Omega^\epsilon$ original domain to the rescaled, $\epsilon-$free $\Omega$ domain.
+Altogether these scaling equations are applied in order to pass from the $\epsilon-$ dependent $\Omega^\epsilon$ domain to the rescaled, $\epsilon-$free $\Omega$ domain.
 
 Here we emphasise that the diffusivity matrix $\mathbf{M}$ is assumed to have the coercivity property
 
@@ -491,7 +491,7 @@ Here $s$ stands for the $\delta$ limit distribution. We keep the notation $s$ fo
 
 We start out this section by a simplicity requirement. We assume the $\mathbf{K}$ diffusion matrix to be diagonal, thus we are working only with the $K_x, K_y, K_z$ diffusion coefficients here.
 
-The key point of this new model is to integrate some of the main ideas of the Gaussian plume dispersion model into the two main models describing the polluted atmosphere (i.e. the (\ref{originalEQ-V}), (\ref{originalEQ-I}), (\ref{diffusive}) complete system and the (\ref{PE_orignal_1}),  (\ref{PE_orignal_2}), (\ref{PE_orignal_3}), (\ref{diffusive}) model using the hydrostatic approximation). Therefore we begin by fixing the local Cartesian coordinate system to be adjusted to the downwind direction, i.e. $z$ is oriented upwards, while $x$ is the downwind, and $y$ is the crosswind direction. Another assumption the Gaussian dispersion models typically use is that advection is more dominant than diffusion along the downwind direction, which leads to the appearance of an extra $\epsilon$ term in the concentration equation's Laplacian. Namely, we have
+The key point of this new model is to integrate some of the main ideas of the Gaussian plume dispersion model into the two main systems describing the polluted atmosphere (i.e. the (\ref{originalEQ-V}), (\ref{originalEQ-I}), (\ref{diffusive}) complete model and the (\ref{PE_orignal_1})--(\ref{PE_orignal_3}), (\ref{diffusive}) equations using the hydrostatic approximation). Therefore we begin by fixing the local Cartesian coordinate system to be adjusted to the downwind direction, i.e. $z$ is oriented upwards, while $x$ is the downwind, and $y$ is the crosswind direction. Another assumption the Gaussian dispersion models typically use is that advection is more dominant than diffusion along the downwind direction, which leads to the appearance of an extra $\epsilon$ term in the concentration equation's Laplacian. Namely, we have
 
 \begin{equation} \abs{u_1 \partial_{1} c} \gg | K_x \partial_{11} ^2 c | ,\end{equation}
 
