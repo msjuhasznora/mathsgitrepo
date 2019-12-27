@@ -979,11 +979,11 @@ As we have mentioned previously, the generic definition of the $\boldsymbol{\sig
 \end{remark}
 
 \begin{remark}
-\normalfont In the paper \cite{temam2005some} it is suggested that the domain we work on has the form of $p_0 < p < p_1$, because for the thin portion of air between the earth and the isobar $p = p_1$, another specific simplified model would be necessary. This means that a way to make the model more precise is to cut the domain at an isobar a little bit off the physical ground. This would of course radically change the boundary conditions we use for the functions (in fact it is not trivial how to change them for this case), because it would take away the advantage of having a wall-like, natural and physical boundary condition for the domain we work on. If we are positively above the ground, $\partial_3 C = 0$ would represent a strange reflective layer.
+\normalfont In the paper \cite{temam2005some} it is suggested that the domain we work on has the form of $p_0 < p < p_1$, because for the thin portion of air between the earth and the isobar $p = p_1$, another specific simplified model would be necessary. This means that a way to make the model more precise is to cut the domain at an isobar a little bit off the physical ground. This would of course radically change the boundary conditions we use for the functions (in fact it is not trivial how to change them for this case), because it would take away the advantage of having a wall-like, natural and physical boundary condition for the domain we work on. If we are positively above the ground, $\partial_3 c = 0$ would represent a strange reflective layer.
 \end{remark}
 
 \begin{remark}
-\normalfont Note that the aspect ratio going to zero is not only legitimate on a global scale. When we switch from a global model to a local one in order to be able to use the beta plane approximation, we still have hundreds of thousands of square kilometres versus 1---5 kilometres.
+\normalfont Note that the aspect ratio going to zero is not only legitimate on a global scale. When we switch from a global model to a local one in order to be able to use the beta plane approximation, we still have hundreds of thousands of square kilometres versus 1--5 kilometres.
 \end{remark}
 
 \begin{remark} \label{source_options}
@@ -1000,26 +1000,6 @@ As we have mentioned previously, the generic definition of the $\boldsymbol{\sig
   \end{enumerate}
   
   The Gaussian and Lorentzian version of the source term is continuous and bounded on $\Omega$, it is actually in $L^\infty$ in space (and in $L^2$ as a consequence), while it is easy to see that the piecewise constant unit pulse is in $L^2$ as well. Since the time dependence of this source is described by the Heaviside function, the time norm is also finite.
-  
-\end{remark}
-
-\begin{remark}
-\normalfont However the results of this chapter were achieved in a classical, fixed Cartesian coordinate system, there are other possibilities to build up the model in. We will briefly consider two of these.
-
-  \begin{enumerate}
-  
-    \item One option is to fix the coordinate system in such a way that the $x$ axis matches the downwind direction (\cite{goyal2011mathematical}). In other words, $z$ is the vertical direction, while $x$ is the main wind, and $y$ is the crosswind direction. It is a legitimate assumption if we are considering a time interval which is not too long in the sense that it is reasonable to assume that we have a permanent, relatively stable downwind direction. For this scenario we consider a diagonal diffusion matrix, i.e. diffusion coefficients $K_x, K_y, K_z,$ and more strict boundary conditions, namely we require $\partial_2 C$ and $\partial_3 C$ to vanish on the lower boundary. This is necessary because of the changes in the energy inequality caused by the additional $\epsilon$ term that we will introduce in the following. The adjusted coordinate system makes it possible to add another equation in the scaling process, which is different in nature from the previous ones in the sense that it is not derived from the shallowness of the domain but rather suggested by the fact that in the downwind direction it is natural to assume that the diffusion is negligible compared to downwind transport, i.e.
-    
-    \begin{equation} \abs{u_1 \partial_x C} \gg \abs{ \textit{K}_{x} \partial_{xx} ^2 C }\end{equation}
-    which leads us to using
-    \[ K_x = \epsilon M_1 \]
-    in this convection dominated scenario.
-    
-    Adding this equation on the one hand makes the concentration equation in the hydrostatic limit model one term shorter, since the first diffusion term drops out. On the other hand it leads to a new mathematical challenge handling the weak convergence of the nonlinear term $\mathbf{u}^\epsilon C^\epsilon$ in a situation where we do not have the $H^1_x$ regularity of $C^\epsilon$ --- as we have $L^2_x$ boundedness only for $\sqrt{\epsilon} \partial_1 C^\epsilon$, and not for $\partial_1 C^\epsilon$ itself.
-    
-    \item Another possibility is to adjust the coordinate system in a way that the $x$ axis matches not with the downwind, but the wind velocity vector function $\mathbf{u}^\epsilon$ itself. This option brings along a $\mathbf{u}^\epsilon$-dependent coordinate transform matrix in every equation, however it also makes the velocity vector one dimensional in the new coordinate system, which can be a potential benefit in a computational application.
-
-  \end{enumerate}
   
 \end{remark}
 
