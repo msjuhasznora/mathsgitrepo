@@ -189,7 +189,7 @@ nonlinear term in the hydrostatic system (\cite{temam2005some}). This is due to 
   v_3 = - \int_0^z \nabla_h \cdot \mathbf{v}_h (x, y, \xi, t) \diff \xi,
 \end{equation}
 
-assuming the domain $\Omega_0$ can be expressed as $\Omega_0 = \mathcal{M} \times [0, \mathscr{h}].$
+assuming the domain $\Omega_0$ can be expressed as $\Omega_0 = M \times [0, a].$
 
 We conclude this subsection with the most important results currently available on the topic of primitive equations.
 
@@ -234,10 +234,10 @@ An important simplification we make at this point is to apply the so-called $\be
 Now we are ready to move on from the original, generic $\Omega_0$ set to the following, more refined domain carrying information about its shallowness. We define
 
 \begin{equation} \label{OmegaEps}
-  \Omega_{\epsilon} = \{(x,y,z) \in \mathbb{R}^3 ; (x,y) \in \omega, 0 < z < \epsilon h(x,y) \},
+  \Omega_{\epsilon} = \{(x,y,z) \in \mathbb{R}^3 ; (x,y) \in M, 0 < z < \epsilon a(x,y) \},
 \end{equation}
 
-where $\omega$ is a Lipschitz-domain in $\mathbb{R}^2$, $h$ is a nonnegative Lipschitzian application.
+where $M$ is a Lipschitz-domain in $\mathbb{R}^2$, $h$ is a nonnegative Lipschitzian application.
 
 From (\ref{OmegaEps}) we have a clear initial idea of how exactly the shallowness parameter is present in the model, note however that the inclusion of $\epsilon$ is still rather deeply nested --- at this point it is difficult to see its practical effects on the model parameters and solution functions. Hence, our next step is to transplant $\epsilon$ within the model so that it is included in a more explicit and visible way. In order to achieve this, we perform a vertical scaling:
 
@@ -245,7 +245,7 @@ From (\ref{OmegaEps}) we have a clear initial idea of how exactly the shallownes
 
 As a result, $\epsilon$ will be included in the model on the level of equations (the upcoming sections will show this in detail), while the domain itself will be independent from the shallowness parameter:
 
-\begin{equation} \Omega =  \{(x_1,x_2,x_3) \in \mathbb{R}^3 ; (x_1,x_2) \in \omega, 0 < x_3 < h (x_1 , x_2) \}.\end{equation}
+\begin{equation} \Omega =  \{(x_1,x_2,x_3) \in \mathbb{R}^3 ; (x_1,x_2) \in M, 0 < x_3 < a (x_1 , x_2) \}.\end{equation}
     
 For simplicity of notation we will use $\partial_i = \partial_{x_i} $ for $i = 1,2,3.$
     
@@ -299,12 +299,12 @@ for all $x \in \mathbb{R}^3$ with the coercivity constant $\lambda > 0.$ In othe
 In this model we will use localised point sources as suggested in \cite{zhuk2016source} and we use what is called a parametrised nascent delta function to describe the source term $s^\epsilon$.
 
 Let us consider a gas plume with intensity $I$ originating at emission coordinates $\mathbf{x}_s$ beginning at time $t_s$. At the beginning we assume zero concentration.
-An abrupt gas emission is modelled by a source term represented as a product of an approximated delta function $\delta_\eta (\mathbf{x} - \mathbf{x}_s)$ (centered at $\mathbf{x}_s$ with a constant parameter $\eta$) and a Heaviside function $a$ (switching from 0 to $I$ at time $t_s.$)
+An abrupt gas emission is modelled by a source term represented as a product of an approximated delta function $\delta_\eta (\mathbf{x} - \mathbf{x}_s)$ (centered at $\mathbf{x}_s$ with a constant parameter $\eta$) and a Heaviside function $\mathscr{a}$ (switching from 0 to $I$ at time $t_s.$)
 In fact, this source term models the continuous emission of the gas at constant rate and fixed location.
-Basically $a(t;t_s)$ is a function which activates the source, namely $a(t;t_s) := IH(t - t_s)$ where $H(\cdot)$ is the Heaviside step function and $0 \leq t_s \leq T.$ We arrive to the complete source term model of the form
+Basically $\mathscr{a}(t;t_s)$ is a function which activates the source, namely $\mathscr{a}(t;t_s) := IH(t - t_s)$ where $H(\cdot)$ is the Heaviside step function and $0 \leq t_s \leq T.$ We arrive to the complete source term model of the form
 
 \begin{equation} \label{approxsourceterm}
-  s_\eta (t, t_s, x, x_s) = a(t; t_s) \delta_\eta (\mathbf{x} - \mathbf{x_s}),
+  s_\eta (t, t_s, x, x_s) = \mathscr{a}(t; t_s) \delta_\eta (\mathbf{x} - \mathbf{x_s}),
 \end{equation}
 
 while in the limit model the source term $s$ naturally stands for the $\delta$ distribution.
@@ -1953,33 +1953,33 @@ We verify that the previously shown connection between the anisotropic and hydro
 
 The concept detailed here is a general approach, and we apply it both in the hydrostatic and anisotropic cases.
 
-Let's consider $\Omega_0 = M \times (-h, 0)$ with $M = (0,1) \times (0,1).$ We define the boundary conditions
+Let's consider $\Omega_0 = M \times (-a, 0)$ with $M = (0,1) \times (0,1).$ We define the boundary conditions
 
 \begin{equation}
   \begin{split}
     & \mathbf{u}_h, u_3 \text{ and } c \text{ are periodic in } x \text{ and } y, \\
-    & (\partial_3 \mathbf{u}_h, u_3) | _{z = -h, 0} = 0, \\
-    & c |_{z = -h} = 1, c |_{z = 0} = 0.
+    & (\partial_3 \mathbf{u}_h, u_3) | _{z = -a, 0} = 0, \\
+    & c |_{z = -a} = 1, c |_{z = 0} = 0.
   \end{split}
 \end{equation}
 
-Defining a new concentration function $c^*$ by setting $c^* = c + \frac{z}{h},$ we obtain a function that is zero on both the upper and lower boundary of the domain. This enables us to consider the standard extensions (see also \cite{li2019primitive}) of the horizontal velocity, vertical velocity, pressure and concentration functions to the new $\Omega = M \times (-h, h)$ domain by requiring these functions to be even, odd, even and odd in $z$, respectively, and set the domain to be periodic in all three dimensions.
+Defining a new concentration function $c^*$ by setting $c^* = c + \frac{z}{a},$ we obtain a function that is zero on both the upper and lower boundary of the domain. This enables us to consider the standard extensions (see also \cite{li2019primitive}) of the horizontal velocity, vertical velocity, pressure and concentration functions to the new $\Omega = M \times (-a, a)$ domain by requiring these functions to be even, odd, even and odd in $z$, respectively, and set the domain to be periodic in all three dimensions.
 
 Applying these ideas to the original concentration dynamics equations (\ref{ANSC5_coordinates_DWMC}) and (\ref{HNSC5_coordinates_DWMC}), we obtain that
 
 \begin{equation} \label{HNSC5_strong_cshift_coordinates_DWMC}
   \begin{split}
-    \partial_t c + \mathbf{u}_h \cdot \nabla_h c + u_3 \bigg ( \partial_3 c - \frac{1}{h} \bigg ) = \Delta_d c + s \text{ in } \Omega \times (0,T)
+    \partial_t c + \mathbf{u}_h \cdot \nabla_h c + u_3 \bigg ( \partial_3 c - \frac{1}{a} \bigg ) = \Delta_d c + s \text{ in } \Omega \times (0,T)
   \end{split}
 \end{equation}
 
 is the new form of the hydrostatic concentration equation, while the governing equation for the anisotropic case becomes
     
 \begin{equation} \label{ANSC5_strong_cshift_coordinates_DWMC}
-    \partial_t c^\epsilon + \mathbf{u}_h^\epsilon \cdot \nabla_h c^\epsilon + u_3^\epsilon \bigg ( \partial_3 c^\epsilon - \frac{1}{h} \bigg )= \epsilon K_1 \partial_{11} ^ 2 c^\epsilon + \Delta_d c^\epsilon + s^\epsilon \text{ in } \Omega \times (0,T),
+    \partial_t c^\epsilon + \mathbf{u}_h^\epsilon \cdot \nabla_h c^\epsilon + u_3^\epsilon \bigg ( \partial_3 c^\epsilon - \frac{1}{a} \bigg )= \epsilon K_1 \partial_{11} ^ 2 c^\epsilon + \Delta_d c^\epsilon + s^\epsilon \text{ in } \Omega \times (0,T),
 \end{equation}
     
-where after using $c = c^* - \frac{z}{h},$ and $c^\epsilon = {c^\epsilon}^* - \frac{z}{h} $ we returned to the original $c$ and $c^\epsilon$ notations for simplicity.
+where after using $c = c^* - \frac{z}{a},$ and $c^\epsilon = {c^\epsilon}^* - \frac{z}{a} $ we returned to the original $c$ and $c^\epsilon$ notations for simplicity.
 
 In terms of boundary conditions now the (\ref{ANSC1_coordinates_DWMC})--(\ref{ANSC4_coordinates_DWMC}), (\ref{ANSC5_strong_cshift_coordinates_DWMC}), (\ref{ANSC6_coordinates_DWMC}) anisotropic system the and (\ref{HNSC1_coordinates_DWMC})--(\ref{HNSC4_coordinates_DWMC}), (\ref{HNSC5_strong_cshift_coordinates_DWMC}), (\ref{HNSC6_coordinates_DWMC}) hydrostatic system are combined with the
 
@@ -2006,7 +2006,7 @@ It is easy to check that the restriction of a solution to (\ref{ANSC1_coordinate
 We highlight here that the steps detailed above constructing a fully periodic domain are indeed necessary since, generally speaking, it is physically meaningful to consider the Earth's atmosphere as a domain that is periodic in the horizontal dimensions, however it is highly unnatural to immediately assume vertical periodicity as well. This strategy of adjusting the boundary value of the concentration function and extending the functions according to certain symmetries shows that the choice of a fully periodic domain can actually be a well-grounded choice for the atmosphere, given that the required symmetries hold.
 
 \begin{remark}
-\normalfont Note that the $\Omega$ domain we construct this way is rather artificial and as a whole it is meaningful only in a theoretical sense: the odd extension of the concentration function beyond the $(-h, 0)$ domain implies that in the $(0,h)$ region we have negative concentration values. The restriction from $\Omega$ to $\Omega_0$ however remains completely meaningful in a physical sense as well.
+\normalfont Note that the $\Omega$ domain we construct this way is rather artificial and as a whole it is meaningful only in a theoretical sense: the odd extension of the concentration function beyond the $(-a, 0)$ domain implies that in the $(0,a)$ region we have negative concentration values. The restriction from $\Omega$ to $\Omega_0$ however remains completely meaningful in a physical sense as well.
 \end{remark}
 
 Our next step is the specification of the source terms, which in this case involves a convolution with a smooth function in order to have a regular source fitting the strong solution scheme.
@@ -2115,7 +2115,7 @@ The focus of the proof's remaining part is to construct an estimate for the conc
 Analogously to the $\mathbf{U}_h^\epsilon, U_3^\epsilon$ notation we will use $C^\epsilon = c^\epsilon-c$ and $S^\epsilon = s^\epsilon-s$ to denote the difference between anisotropic and hydrostatic functions. Subtracting (\ref{HNSC5_strong_cshift_coordinates_DWMC}) from (\ref{ANSC5_strong_cshift_coordinates_DWMC}) we obtain the governing equation for $C^\epsilon:$
 
 \begin{equation}
-  \partial_t C^\epsilon + \mathbf{u}^\epsilon \cdot \nabla c^\epsilon - \mathbf{u} \cdot \nabla c = \frac{1}{h} U_3^\epsilon + \epsilon K_1 \partial_{11} c^\epsilon + \Delta_d C^\epsilon + S^\epsilon.
+  \partial_t C^\epsilon + \mathbf{u}^\epsilon \cdot \nabla c^\epsilon - \mathbf{u} \cdot \nabla c = \frac{1}{a} U_3^\epsilon + \epsilon K_1 \partial_{11} c^\epsilon + \Delta_d C^\epsilon + S^\epsilon.
 \end{equation}
 
 We reformulate $\mathbf{u}^\epsilon \cdot \nabla c^\epsilon - \mathbf{u} \cdot \nabla c$ as $\mathbf{U}^\epsilon \nabla C^\epsilon  + \mathbf{U}^\epsilon \nabla c+ \mathbf{u} \nabla C^\epsilon,$ which yields
@@ -2123,7 +2123,7 @@ We reformulate $\mathbf{u}^\epsilon \cdot \nabla c^\epsilon - \mathbf{u} \cdot \
 \begin{equation} \label{governCepsilon}
   \begin{split}
    & \partial_t C^\epsilon + \mathbf{U}^\epsilon \nabla C^\epsilon  + \mathbf{U}^\epsilon \nabla c+ \mathbf{u} \nabla C^\epsilon \\
-   & = \frac{1}{h} U_3^\epsilon + \epsilon K_1 \partial_{11} C^\epsilon + \epsilon K_1 \partial_{11} c + \Delta_d C^\epsilon + S^\epsilon.
+   & = \frac{1}{a} U_3^\epsilon + \epsilon K_1 \partial_{11} C^\epsilon + \epsilon K_1 \partial_{11} c + \Delta_d C^\epsilon + S^\epsilon.
    \end{split}
 \end{equation}
 
@@ -2133,7 +2133,7 @@ Multiplying (\ref{governCepsilon}) by $- \partial_{ii} C^\epsilon, i=1,2,3$ we o
   \begin{split}
       & \frac{1}{2}\frac{\diff}{\diff t} \norm{\nabla C^\epsilon}_2^2 + \epsilon K_1 \norm{\partial_{11} C^\epsilon}_2^2 + K_2 \norm{\partial_{22} C^\epsilon}_2^2 + K_3 \norm{\partial_{33} C^\epsilon}_2^2 + \sum_{i \neq j} C_{ij} \norm{\partial_{ij} C^\epsilon}_2^2 \\
       & = \sum_{i = 1,2,3} \int_\Omega \mathbf{U}^\epsilon \nabla C^\epsilon \partial_{ii} C^\epsilon + \int_\Omega \mathbf{U}^\epsilon \nabla c \partial_{ii} C^\epsilon + \int_\Omega \mathbf{u} \nabla C^\epsilon \partial_{ii} C^\epsilon - \int_\Omega \epsilon K_1 \partial_{11} c \partial_{ii} C^\epsilon \\
-      & - \sum_{i = 1,2,3} \int_\Omega S^\epsilon \partial_{ii} C^\epsilon - \frac{1}{h} \int_\Omega U_3^\epsilon \partial_{ii} C^\epsilon \\
+      & - \sum_{i = 1,2,3} \int_\Omega S^\epsilon \partial_{ii} C^\epsilon - \frac{1}{a} \int_\Omega U_3^\epsilon \partial_{ii} C^\epsilon \\
       & = \sum_{i = 1,2,3} I_1(i)  + I_2(i) + I_3(i) + I_4(i) + I_5(i) + I_6(i),
   \end{split}
 \end{equation}
@@ -2165,8 +2165,8 @@ thus using the H\"older inequality we obtain
 \begin{equation}
   \begin{split}
     & I_1(1)(a) = \int_\Omega U_1^\epsilon \partial_1 C^\epsilon \partial_{11} C^\epsilon \\
-    & \leq C \norm{\partial_1 U_1^\epsilon}_{L^\infty} \cdot \norm{\partial_1 C^\epsilon}_2^2 \leq C \norm{\partial_1 U_1^\epsilon}_{H^2} \cdot \norm{\nabla C^\epsilon}_2^2 \\
-    & \leq C \norm{U_1^\epsilon}_{H^3} \cdot \norm{\nabla C^\epsilon}_2^2.
+    & \lesssim \norm{\partial_1 U_1^\epsilon}_{L^\infty} \cdot \norm{\partial_1 C^\epsilon}_2^2 \lesssim \norm{\partial_1 U_1^\epsilon}_{H^2} \cdot \norm{\nabla C^\epsilon}_2^2 \\
+    & \lesssim \norm{U_1^\epsilon}_{H^3} \cdot \norm{\nabla C^\epsilon}_2^2.
   \end{split}
 \end{equation}
 
@@ -2200,7 +2200,7 @@ Altogether for $j = 2,3$ we have
 \begin{equation}
   \begin{split}
     & I_1(1)(b) + I_1(1)(c) = \sum_{j=2}^3 \int_\Omega U_j^\epsilon \partial_j C^\epsilon \partial_{11} C^\epsilon \\
-    & \leq C \sum_{j=2}^3 \zeta \norm{\nabla \partial_j C^\epsilon}_2^2 + C \frac{1}{\zeta} \norm{\mathbf{U}_h}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2.
+    & \lesssim \sum_{j=2}^3 \zeta \norm{\nabla \partial_j C^\epsilon}_2^2 + \frac{1}{\zeta} \norm{\mathbf{U}_h}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2.
   \end{split}
 \end{equation}
 
@@ -2299,7 +2299,7 @@ Integration by parts combined with the H\"older and Young inequalities easily gi
 
 \begin{equation}
   \begin{split}
-    & - \frac{1}{h} \int_\Omega U_3^\epsilon \partial_{ii} C^\epsilon \lesssim \norm{\nabla U_3^\epsilon}_2 \norm{\nabla C^\epsilon}_2 \lesssim \norm{\mathbf{U}_h^\epsilon}_{H^2}^2 + \norm{\nabla C^\epsilon}_2^2.
+    & - \frac{1}{a} \int_\Omega U_3^\epsilon \partial_{ii} C^\epsilon \lesssim \norm{\nabla U_3^\epsilon}_2 \norm{\nabla C^\epsilon}_2 \lesssim \norm{\mathbf{U}_h^\epsilon}_{H^2}^2 + \norm{\nabla C^\epsilon}_2^2.
   \end{split}
 \end{equation}
 
@@ -2376,14 +2376,14 @@ As far as local existence is concerned, the proof given in sections 2 and 3 in \
   \item We apply a commonly used idea regarding the formal elimination of the vertical velocity by expressing it through the divergence-free condition:
   
   \begin{equation} \label{u_3_expressed_div_free}
-  u_3 = - \int_{-h}^z \nabla_h \cdot \mathbf{u}_h (x, y, \xi, t) \diff \xi.
+  u_3 = - \int_{-a}^z \nabla_h \cdot \mathbf{u}_h (x, y, \xi, t) \diff \xi.
   \end{equation}
   
   On the other hand, we define a modified version of the convection-diffusion equation (\ref{HNSC5_strong_cshift_coordinates_DWMC}) by completing the missing term in the Laplacian adding the term $\mu \partial_{11} c$ with $\mu > 0$; specifically, the set of  equations takes the form
   
   \begin{equation} \label{existenceeqs1}
     \begin{split}
-    \partial_t \mathbf{u}_h + \Delta_\nu \mathbf{u}_h + & (\mathbf{u}_h \cdot \nabla_h) \mathbf{u}_h - \bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h (x, y, \xi, t) \diff \xi \bigg ) \partial_3 \mathbf{u}_h \\
+    \partial_t \mathbf{u}_h + \Delta_\nu \mathbf{u}_h + & (\mathbf{u}_h \cdot \nabla_h) \mathbf{u}_h - \bigg ( \int_{-a}^z \nabla_h \cdot \mathbf{u}_h (x, y, \xi, t) \diff \xi \bigg ) \partial_3 \mathbf{u}_h \\
     & + f_0 k \times \mathbf{u}_h + \nabla_h p_s (x,y,t) = 0,
     \end{split}
   \end{equation}
@@ -2394,12 +2394,12 @@ As far as local existence is concerned, the proof given in sections 2 and 3 in \
   
   \begin{equation} \label{existenceeqs3}
     \begin{split}
-      \partial_t c+ \mathbf{u}_h \cdot \nabla_h c + \bigg ( - & \int_{-h}^z \nabla_h \cdot \mathbf{u}_h (x, y, \xi, t) \diff \xi \bigg ) \cdot \bigg (\partial_3 c - \frac{1}{h} \bigg ) \\
+      \partial_t c+ \mathbf{u}_h \cdot \nabla_h c + \bigg ( - & \int_{-a}^z \nabla_h \cdot \mathbf{u}_h (x, y, \xi, t) \diff \xi \bigg ) \cdot \bigg (\partial_3 c - \frac{1}{a} \bigg ) \\
       & - \Delta_{d} c - \mu \partial_{11} c = 0.
     \end{split}
   \end{equation}
   
-  Here $\bar{\mathbf{u}}_h$ is the vertically averaged version of the function, i.e. $$\frac{1}{2h} \int_{-h}^h \mathbf{u}_h (x,y,z) \diff z,$$ and $p_s$ is the classical notation for a pressure function depending on only the horizontal variables. Fore more details of this standard reformulation process see for example \cite{cao2014local} and \cite{cao2007global}.
+  Here $\bar{\mathbf{u}}_h$ is the vertically averaged version of the function, i.e. $$\frac{1}{2a} \int_{-a}^a \mathbf{u}_h (x,y,z) \diff z,$$ and $p_s$ is the classical notation for a pressure function depending on only the horizontal variables. Fore more details of this standard reformulation process see for example \cite{cao2014local} and \cite{cao2007global}.
   
   \item Using the contractive mapping principle, we can prove that for any fix positive $\mu$ value there exist local strong solutions $\mathbf{u}_h^\mu$ and $c^\mu$ to the modified system (\ref{existenceeqs1}) -- (\ref{existenceeqs3}) on $\Omega \times (0, t_\mu)$ such that
   
@@ -2439,7 +2439,7 @@ Let's take an arbitrary positive finite $T$ time. Plugging the identity (\ref{u_
 \begin{equation} \label{firstformboundc}
   \begin{split}
     & \frac{1}{2} \frac{\diff}{\diff t} \norm{\Delta c}_2^2 + \kappa \norm{\Delta \nabla_d c}_2^2 \\
-    & \leq \int_\Omega \Delta s \Delta c - \Delta ( \mathbf{u}_h \cdot \nabla_h c) \cdot \Delta c + \Delta \bigg ( \bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \bigg ( \partial_3 c - \frac{1}{h} \bigg) \bigg ) \cdot \Delta c.
+    & \leq \int_\Omega \Delta s \Delta c - \Delta ( \mathbf{u}_h \cdot \nabla_h c) \cdot \Delta c + \Delta \bigg ( \bigg ( \int_{-a}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \bigg ( \partial_3 c - \frac{1}{a} \bigg) \bigg ) \cdot \Delta c.
   \end{split}
 \end{equation}
 
@@ -2465,20 +2465,20 @@ In the following we construct an estimate for each term on the right-hand side.
   
   Finally the third term in the right-hand side of (\ref{firstformboundc}) can be separated as
   
-  $$\int_\Omega \Delta \bigg ( \bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \bigg ( \partial_3 c - \frac{1}{h}\bigg) \bigg ) \cdot \Delta c = I_1 + I_2 + I_3,$$
+  $$\int_\Omega \Delta \bigg ( \bigg ( \int_{-a}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \bigg ( \partial_3 c - \frac{1}{a}\bigg) \bigg ) \cdot \Delta c = I_1 + I_2 + I_3,$$
   
   and by the H\"older and Young inequalities we have
 
 \begin{equation} \label{term3estimateGE_1}
   \begin{split}
-    &  I_1 = \int_\Omega \bigg ( \int_{-h}^z \Delta \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \bigg ( \partial_3 c - \frac{1}{h}\bigg)  \cdot \Delta c \\
-    & = - \frac{1}{h} \int_\Omega \bigg ( \int_{-h}^z \Delta \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \cdot \Delta c + \int_\Omega \bigg ( \int_{-h}^z \Delta \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \partial_3 c \cdot \Delta c \\
-    & = - \frac{1}{h} \int_\Omega \bigg ( \int_{-h}^z \Delta \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \cdot \Delta c - \int_\Omega  (\Delta \nabla_h \cdot \mathbf{u}_h) c \cdot \Delta c - \int_\Omega \bigg ( \int_{-h}^z \Delta \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) c \cdot \Delta \partial_3 c \\
-    & \lesssim \int_\Omega \bigg ( \int_{-h}^0 \abs{\Delta \nabla_h \cdot \mathbf{u}_h} \diff \xi \bigg) \abs{\Delta c} \\
-    & + \norm{c}_{L^\infty} \int_\Omega  \abs{\Delta \nabla_h \cdot \mathbf{u}_h} \abs{\Delta c} + \norm{c}_{L^\infty} \int_\Omega \bigg ( \int_{-h}^z \abs{ \Delta \nabla_h \cdot \mathbf{u}_h} \diff \xi \bigg) \abs{\Delta \partial_3 c} \\
-    & \lesssim \int_M \bigg ( \int_{-h}^0 \abs{\Delta \nabla_h \cdot \mathbf{u}_h} \diff \xi \bigg) \bigg ( \int_{-h}^0 \abs{\Delta c} \diff z \bigg ) \\
-    & + \norm{c}_{L^\infty}   \norm{\Delta \nabla_h \cdot \mathbf{u}_h}_2 \norm{\Delta c}_2 + \norm{c}_{L^\infty} \int_\Omega \bigg ( \int_{-h}^0 \abs{ \Delta \nabla_h \cdot \mathbf{u}_h} \diff \xi \bigg) \abs{\Delta \partial_3 c} \\
-    & \lesssim \bigg ( \int_M \bigg ( \int_{-h}^0 \abs{\Delta \nabla_h \cdot \mathbf{u}_h}^2 \diff \xi \bigg) \bigg )^{1/2} \bigg ( \int_M \bigg ( \int_{-h}^0 \abs{\Delta c}^2 \diff z \bigg ) \bigg )^{1/2} \\
+    &  I_1 = \int_\Omega \bigg ( \int_{-a}^z \Delta \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \bigg ( \partial_3 c - \frac{1}{a}\bigg)  \cdot \Delta c \\
+    & = - \frac{1}{a} \int_\Omega \bigg ( \int_{-a}^z \Delta \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \cdot \Delta c + \int_\Omega \bigg ( \int_{-a}^z \Delta \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \partial_3 c \cdot \Delta c \\
+    & = - \frac{1}{a} \int_\Omega \bigg ( \int_{-a}^z \Delta \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \cdot \Delta c - \int_\Omega  (\Delta \nabla_h \cdot \mathbf{u}_h) c \cdot \Delta c - \int_\Omega \bigg ( \int_{-a}^z \Delta \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) c \cdot \Delta \partial_3 c \\
+    & \lesssim \int_\Omega \bigg ( \int_{-a}^0 \abs{\Delta \nabla_h \cdot \mathbf{u}_h} \diff \xi \bigg) \abs{\Delta c} \\
+    & + \norm{c}_{L^\infty} \int_\Omega  \abs{\Delta \nabla_h \cdot \mathbf{u}_h} \abs{\Delta c} + \norm{c}_{L^\infty} \int_\Omega \bigg ( \int_{-a}^z \abs{ \Delta \nabla_h \cdot \mathbf{u}_h} \diff \xi \bigg) \abs{\Delta \partial_3 c} \\
+    & \lesssim \int_M \bigg ( \int_{-a}^0 \abs{\Delta \nabla_h \cdot \mathbf{u}_h} \diff \xi \bigg) \bigg ( \int_{-a}^0 \abs{\Delta c} \diff z \bigg ) \\
+    & + \norm{c}_{L^\infty}   \norm{\Delta \nabla_h \cdot \mathbf{u}_h}_2 \norm{\Delta c}_2 + \norm{c}_{L^\infty} \int_\Omega \bigg ( \int_{-a}^0 \abs{ \Delta \nabla_h \cdot \mathbf{u}_h} \diff \xi \bigg) \abs{\Delta \partial_3 c} \\
+    & \lesssim \bigg ( \int_M \bigg ( \int_{-a}^0 \abs{\Delta \nabla_h \cdot \mathbf{u}_h}^2 \diff \xi \bigg) \bigg )^{1/2} \bigg ( \int_M \bigg ( \int_{-a}^0 \abs{\Delta c}^2 \diff z \bigg ) \bigg )^{1/2} \\
     & + \norm{c}_{L^\infty} (\norm{\mathbf{u}_h}_{H^3}^2 + \norm{\Delta c}_2^2) + \norm{c}_{L^\infty} \norm{\mathbf{u}_h}_{H^3} \norm{\Delta \partial_3 c}_2 \\
     & \lesssim \norm{\mathbf{u}_h}_{H^3} \norm{\Delta c}_2 + \norm{c}_{L^\infty} \norm{\mathbf{u}_h}_{H^3}^2 + \norm{c}_{L^\infty} \norm{\Delta c}_2^2 + \kappa(\zeta) \norm{c}_{L^\infty}^2 \norm{\mathbf{u}_h}_{H^3}^2 + \zeta \norm{\Delta \partial_3 c}_2^2, \raisetag{60pt} \\
   \end{split}
@@ -2490,9 +2490,9 @@ For the second part we obtain
 
 \begin{equation} \label{term3estimateGE_2}
   \begin{split}
-    & I_2 = \int_\Omega \bigg ( \int_{-h}^z \nabla \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg)  \nabla \partial_3 c \cdot \Delta c \\
-    & \lesssim \int_\Omega \bigg ( \int_{-h}^0 \abs{\nabla \nabla_h \cdot \mathbf{u}_h} \diff \xi \bigg)  \abs{\nabla \partial_3 c} \abs{\Delta c} \\
-    & \lesssim \int_\Omega h \sup \abs{\nabla \nabla_h \cdot \mathbf{u}_h} \abs{\nabla \partial_3 c} \abs{\Delta c} \lesssim \norm{\mathbf{u}_h}_{H^4} \norm{\Delta c}_2^2,
+    & I_2 = \int_\Omega \bigg ( \int_{-a}^z \nabla \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg)  \nabla \partial_3 c \cdot \Delta c \\
+    & \lesssim \int_\Omega \bigg ( \int_{-a}^0 \abs{\nabla \nabla_h \cdot \mathbf{u}_h} \diff \xi \bigg)  \abs{\nabla \partial_3 c} \abs{\Delta c} \\
+    & \lesssim \int_\Omega a \sup \abs{\nabla \nabla_h \cdot \mathbf{u}_h} \abs{\nabla \partial_3 c} \abs{\Delta c} \lesssim \norm{\mathbf{u}_h}_{H^4} \norm{\Delta c}_2^2,
   \end{split}
 \end{equation}
 
@@ -2500,8 +2500,8 @@ while for the third term we compute
 
 \begin{equation} \label{term3estimateGE_3}
   \begin{split}
-    & I_3 = \int_\Omega \bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \Delta \partial_3 c  \cdot \Delta c \leq \int_\Omega \bigg ( \int_{-h}^0 \abs{\nabla_h \cdot \mathbf{u}_h} \diff \xi \bigg)  \abs{\Delta \partial_3 c} \abs{\Delta c}\\
-    & \lesssim \int_\Omega h \sup{\abs{\nabla_h \cdot \mathbf{u}_h}} \abs{\Delta \partial_3 c} \abs{\Delta c} \lesssim \norm{\mathbf{u}_h}_{H^3} (\zeta \norm{\Delta \partial_3 c}_2^2 + \kappa(\zeta)\norm{\Delta c}_2^2 ).
+    & I_3 = \int_\Omega \bigg ( \int_{-a}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \Delta \partial_3 c  \cdot \Delta c \leq \int_\Omega \bigg ( \int_{-a}^0 \abs{\nabla_h \cdot \mathbf{u}_h} \diff \xi \bigg)  \abs{\Delta \partial_3 c} \abs{\Delta c}\\
+    & \lesssim \int_\Omega a \sup{\abs{\nabla_h \cdot \mathbf{u}_h}} \abs{\Delta \partial_3 c} \abs{\Delta c} \lesssim \norm{\mathbf{u}_h}_{H^3} (\zeta \norm{\Delta \partial_3 c}_2^2 + \kappa(\zeta)\norm{\Delta c}_2^2 ).
   \end{split}
 \end{equation}
 
