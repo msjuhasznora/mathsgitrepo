@@ -295,7 +295,7 @@ Here we emphasise that the diffusivity matrix $\mathbf{M}$ is assumed to have th
 
 for all $x \in \mathbb{R}^3$ with the coercivity constant $\lambda > 0.$ In other words we require that $\lambda = \min {\lambda_i} > 0$ where $\lambda_i$ are the eigenvalues of $\mathbf{M}.$
 
-In this model we will use localised point sources as suggested in \cite{zhuk2016source} and we use what is called a parametrised nascent delta function (a Gaussian impulse, specifically) to describe the source term $s^\epsilon$.
+In this model we will use localised point sources as suggested in \cite{zhuk2016source} and we use what is called a parametrised nascent delta function to describe the source term $s^\epsilon$.
 
 Let us consider a gas plume with intensity $I$ originating at emission coordinates $\mathbf{x}_s$ beginning at time $t_s$. At the beginning we assume zero concentration.
 An abrupt gas emission is modelled by a source term represented as a product of an approximated delta function $\delta_\eta (\mathbf{x} - \mathbf{x}_s)$ (centered at $\mathbf{x}_s$ with a constant parameter $\eta$) and a Heaviside function $a$ (switching from 0 to $I$ at time $t_s.$)
@@ -308,17 +308,23 @@ Basically $a(t;t_s)$ is a function which activates the source, namely $a(t;t_s) 
 
 while in the limit model the source term $s$ naturally stands for the $\delta$ distribution.
     
-Eventually, note that it is convenient to reformulate (\ref{approxsourceterm}) in terms of $\epsilon$, which then will be the standard deviation parameter of the distribution describing the source. In other words, we choose $\eta$ to be $\epsilon$ and the following function will give shape to the source term:
+Eventually, note that it is convenient to reformulate (\ref{approxsourceterm}) in terms of $\epsilon$, which then will be the new parameter of the distribution describing the source. In other words, we choose $\eta$ to be $\epsilon$ and the following function to give shape to the source term:
 
-\[\delta_\epsilon (\mathbf{x}-\mathbf{x_s}) = \gamma \epsilon^{-3} e ^ {\frac{-(\mathbf{x}-\mathbf{x_s})^2}{\epsilon^2}};\]
+\[
+\delta_\epsilon (x) = 
+  \begin{cases}
+       \frac{1}{\epsilon^3} \exp{\bigg ( \frac{1}{\abs{{\frac{x}{\epsilon}}}^2-1} \bigg ) } &\quad \abs{x} < \epsilon \\
+       0 &\quad \abs{x} \geq \epsilon; \\
+  \end{cases}
+\]
 
 and finally
 
 \begin{equation} \label{sourcedefinition}
-  s^\epsilon = I H(t-t_s) \gamma \epsilon^{-3} e ^ {\frac{-(\mathbf{x}-\mathbf{x_s})^2}{\epsilon^2}},
+  s^\epsilon = I H(t-t_s) \delta_\epsilon (x).
 \end{equation}
 
-where $\gamma$ is a normalising constant. Later we will take the limit as $\epsilon$ goes to zero, and the above setting will result in having the $\delta$ distribution representing the hydrostatic source term, which is a physically natural choice.
+Later we will take the limit as $\epsilon$ goes to zero, and the above setting will result in having the $\delta$ distribution representing the hydrostatic source term, which is a physically natural choice.
     
 Putting this condition and the previously described rescaling terms together with the original equations (\ref{originalEQ-V}), (\ref{originalEQ-I}), (\ref{diffusive}) considered on the $\Omega$ domain, we arrive to the merged anisotropic equations of the polluted atmosphere above inland surface:
   
@@ -978,13 +984,15 @@ As we have mentioned previously, the generic definition of the $\boldsymbol{\sig
 \end{remark}
 
 \begin{remark}
-\normalfont We chose the Gaussian nascent delta function to give shape to the source term, but it can be defined in several different ways using the many different pulses that approximate the delta function (choosing only those however that are physically meaningful in our case, for example its values are nonnegative), e.g.
+\normalfont We chose a specific nascent delta function to give shape to the source term, but it can be defined in several different ways using the many different pulses that approximate the delta function (choosing only those however that are physically meaningful in our case, for example its values are nonnegative), e.g.
 
   \begin{enumerate}
   
-    \item the unit impulse: $\delta_\epsilon (\mathbf{x}-\mathbf{x_s}) = \epsilon/2, \abs{(\mathbf{x}-\mathbf{x_s})} < 1/\epsilon $,
+    \item the Gaussian impulse: \[\delta_\epsilon (\mathbf{x}) = \gamma \epsilon^{-3} e ^ {\frac{-(\mathbf{x}-\mathbf{x_s})^2}{\epsilon^2}};\]
   
-    \item the Lorentzian pulse: $\delta_\epsilon (\mathbf{x}-\mathbf{x_s}) = \epsilon / (1 + \pi^2 \epsilon^2 (\mathbf{x}-\mathbf{x_s})^2$).
+    \item the unit impulse: $\delta_\epsilon (\mathbf{x}) = \epsilon/2, \abs{(\mathbf{x}-\mathbf{x_s})} < 1/\epsilon $,
+  
+    \item the Lorentzian pulse: $\delta_\epsilon (\mathbf{x}) = \epsilon / (1 + \pi^2 \epsilon^2 (\mathbf{x}-\mathbf{x_s})^2$).
 
   \end{enumerate}
   
