@@ -325,6 +325,8 @@ and finally
 \end{equation}
 
 Later we will take the limit as $\epsilon$ goes to zero, and the above setting will result in having the $\delta$ distribution representing the hydrostatic source term, which is a physically natural choice.
+
+Further options concerning the shape of the source function can be found in Remark \ref{source_options} in Section \ref{concludingremarks}.
     
 Putting this condition and the previously described rescaling terms together with the original equations (\ref{originalEQ-V}), (\ref{originalEQ-I}), (\ref{diffusive}) considered on the $\Omega$ domain, we arrive to the merged anisotropic equations of the polluted atmosphere above inland surface:
   
@@ -983,7 +985,7 @@ As we have mentioned previously, the generic definition of the $\boldsymbol{\sig
 \normalfont Note that the aspect ratio going to zero is not only legitimate on a global scale. When we switch from a global model to a local one in order to be able to use the beta plane approximation, we still have hundreds of thousands of square kilometres versus 1---5 kilometres.
 \end{remark}
 
-\begin{remark}
+\begin{remark} \label{source_options}
 \normalfont We chose a specific nascent delta function to give shape to the source term, but it can be defined in several different ways using the many different pulses that approximate the delta function (choosing only those however that are physically meaningful in our case, for example its values are nonnegative), e.g.
 
   \begin{enumerate}
@@ -2011,6 +2013,8 @@ Our next step is the specification of the source terms, which in this case invol
 Let $\delta_\epsilon$ be as specified in (\ref{delta_eps_source_def}) and let $\varphi$ be a $C^\infty_0 (\Omega)$ smooth function. We define the anisotropic and hydrostatic source terms respectively as the following convolutions:
 
 \begin{equation} \label{sourcetermdefinitionstrong} s^\epsilon = \delta^\epsilon \ast \varphi, \quad s = \delta \ast \varphi.\end{equation}
+
+As also noted in Remark \ref{source_options} in Section \ref{concludingremarks}, within the framework of weak solutions there were several options apart from (\ref{delta_eps_source_def}) to give shape to the source function. We highlight that this degree of freedom is not transferred to the case we currently investigate, for two main reasons. Firstly, in the framework of strong solutions we are working with the convoluted versions of the source terms since we naturally need more regular functions. The presence of this added operation requires source terms with a compact support in order to keep to proof manageable later. Secondly, the periodic boundary conditions also have accessory prerequisites that exclude certain source functions.
 
 \subsection{Main strong convergence theorem}\label{sectionSTRONGsol_convergence}
 
