@@ -115,30 +115,77 @@ We begin by presenting the basic ideas, approaches, and well-known results in th
 
 \subsection{The 3D Navier-Stokes equations}\label{3DNSgeneraldescription}
 
-The mathematical equations describing the motion of geophysical fluids such as oceans and the atmosphere are derived from the conservation laws of physics. Specifically, it is the conservation of mass, momentum and energy (and in some cases these are complemented with some additional components such as humidity, salt or chemical pollutants) that serve as a basis for the fundamental equations of fluid dynamics, the Navier-Stokes equations:
+The mathematical equations describing the motion of geophysical fluids such as oceans and the atmosphere are derived from the conservation laws of physics. Specifically, it is the conservation of momentum, mass and energy (and in some cases these are complemented with some additional components such as humidity, salt or chemical pollutants) that serve as a basis for the fundamental equations of fluid dynamics. The following model combines the Navier-Stokes equations with two continuity equations representing mass and temperature, respectively; and it provides a relatively comprehensive picture of the relationship between the most significant variables in atmosphere modelling. The system is defined by
 
 \begin{equation} \label{original_general_NS}
   \partial_t (\rho \mathbf{v}) + \rho (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + \nabla q = \rho \mathbf{g} \quad \text{ in } \Omega_0 \times (0,T),
 \end{equation}
 
-where $\mathbf{v}$ is the velocity function, $\rho$ is the density, $\nu = (\nu_1, \nu_2, \nu_3)$ represents the viscosity constants, and $q$ denotes the pressure. For the moment being, we simply consider an open, bounded Lipschitzian domain $\Omega_0$ in $\mathbb{R}^3$ and for a given time $T$ a time interval $[0,T).$
+\begin{equation} \label{original_general_mass_cons}
+  \partial_t \rho + \nabla \cdot (\rho \mathbf{v})  = 0 \quad \text{ in } \Omega_0 \times (0,T),
+\end{equation}
 
-We combine equation (\ref{original_general_NS}) with three other important concepts: the so-called Boussinesq approximation, the Coriolis force and the incompressibility condition.
+\begin{equation} \label{original_general_temperature}
+  \partial_t T + \mathbf{v} \nabla T = k \Delta T + \frac{Q}{\rho C_\rho} \quad \text{ in } \Omega_0 \times (0,T),
+\end{equation}
+
+where $\mathbf{v}$ is the velocity function, $\rho$ is the density, $\nu = (\nu_1, \nu_2, \nu_3)$ represents the viscosity constants, and $q$ denotes the pressure. In the heat flow equation $T$ is the temperature, $Q$ represents the rate per unit volume of internal heat production, $k$ denotes thermal diffusivity, while the the heat capacity per unit volume, $\rho C_\rho$, is assumed to be constant.
+For the moment being, we simply consider an open, bounded Lipschitzian domain $\Omega_0$ in $\mathbb{R}^3$ and for a given time $T$ a time interval $[0,T).$
+
+We complete equations (\ref{original_general_NS})--(\ref{original_general_temperature}) with four other important concepts: the Coriolis force, the so-called Boussinesq approximation, the notion of an isothermal process, and the incompressibility condition.
 
 \begin{enumerate}
 
-\item The Boussinesq approximation is a simplification of the model, it assumes a $\rho = \rho_0$ constant density. Without the loss of generality we take a density function identically equal to one.
+\item The $2 \mathbf{\omega} \times \mathbf{v}$ Coriolis force needs to be taken into account since we are describing a large-scale phenomena on the surface of the rotating Earth. It is definitely an important force to reckon with from a modelling point of view, however, its contribution to the level of theoretical complexity is rather small, as it results in linear velocity terms. The extended version of the momentum conservation equation takes the form
 
-\item The Coriolis force needs to be taken into account since we are describing a large-scale phenomena on the surface of the rotating Earth. It is definitely an important force to reckon with from a modelling point of view, however, its contribution to the level of theoretical complexity is rather small, as it results in linear velocity terms.
+\begin{equation} \label{original_general_NS_coriolis}
+  \partial_t (\rho \mathbf{v}) + \rho (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + 2 \mathbf{\omega} \times \mathbf{v} + \nabla q = \rho \mathbf{g} \quad \text{ in } \Omega_0 \times (0,T).
+\end{equation}
 
-\item The third feature we integrate into the Navier-Stokes equations is the assumption that the volume of any fluid element is constant in time. An equivalent condition (see for example \cite{boyer2012mathematical}) is requiring the velocity field $\mathbf{v}$ to be solenoidal, i.e. $\text{div}(\mathbf{v})(t,x) = 0.$ This incompressibility condition is reasonable to assume for gases in standard conditions and for low-speed fluid flows where the Mach number is small. Note in particular that the divergence-free condition is nothing less than a new equation that the velocity function now has to satisfy, and as a consequence the pressure is related differently to the other thermodynamical variables for the case of incompressible flows. In more detail, as we will see in our computations later, results and estimates on the divergence-free velocity function can be obtained separately from the pressure. We also highlight here that the pressure function is defined only up to a constant, or in other words, it is only the pressure gradient (i.e. the fluctuation of the pressure) that has a physical meaning, and not the absolute pressure value itself.
+\item The Boussinesq approximation is a simplification used in the field of buoyancy-driven flows. It assumes a $\rho = \rho_0$ constant density with the exception of gravity-related terms, i.e. fluid density variations are considered exclusively in terms multiplied by the gravitational acceleration $\mathbf{g}$. The Boussinesq approximation is applied in fluid dynamical problems where the temperature of the fluid is considered as a function too. Specifically, in this approach on the one hand we assume that in the gravity - related terms the density has a linear dependence on the temperature fluctuation:
+
+\begin{equation}
+  \rho = \rho_0 - \Xi \rho_0(T-T_0),
+\end{equation}
+
+where $T_0$ is a reference temperature value, and $\Xi$ is a constant coefficient. On the other hand, as explained before, in all remaining terms we take $\rho = \rho_0.$ Without the loss of generality we set the density value to be one: $\rho_0 = 1.$
+
+Boussinesq flows include gas motions in standard conditions and low-speed fluid flows where the Mach number is small. Specifically, the approximation is reasonable to use in ocean circulation models and to study atmospheric phenomena: the Boussinesq approximation results to be highly accurate for these processes. The final model is described by the system
+
+\begin{equation} \label{original_general_NS_boussinesq}
+  \partial_t \mathbf{v} + (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + 2 \mathbf{\omega} \times \mathbf{v} + \nabla q = \rho \mathbf{g} \quad \text{ in } \Omega_0 \times (0,T),
+\end{equation}
+
+\begin{equation} \label{original_general_mass_cons_boussinesq}
+  \nabla \cdot \mathbf{v}  = 0 \quad \text{ in } \Omega_0 \times (0,T),
+\end{equation}
+
+\begin{equation} \label{original_general_temperature_boussinesq}
+  \partial_t T + \mathbf{v} \nabla T = k \Delta T + Q \quad \text{ in } \Omega_0 \times (0,T),
+\end{equation}
+
+\begin{equation}\label{rho_boussinesq}
+  \rho = \rho_0 - \Xi \rho_0(T-T_0).
+\end{equation}
+
+\item The second simplification we make is to consider an isothermal process, i.e. a process where the fluid temperature remains constant. It follows immediately from (\ref{rho_boussinesq}) that combining the Boussinesq approximation with a $T \equiv T_0$ tempreature we arrive to a constant density $\rho = \rho_0$ in all terms on the entire $\Omega_0 \times (0,T)$ domain. From this point we remove $T$ from the set of functions we are working with and our system is reduced to the equations describing velocity and pressure:
+
+\begin{equation} \label{original_general_NS_isothermal}
+  \partial_t \mathbf{v} + (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + 2 \mathbf{\omega} \times \mathbf{v} + \nabla q = \mathbf{g} \quad \text{ in } \Omega_0 \times (0,T),
+\end{equation}
+
+\begin{equation} \label{original_general_mass_cons_isothermal}
+  \nabla \cdot \mathbf{v}  = 0 \quad \text{ in } \Omega_0 \times (0,T).
+\end{equation}
+
+\item Because of its importance, we separately highlight the incompressibility condition (\ref{original_general_mass_cons_boussinesq}). As we have seen, this is a direct consequence of the Boussinesq approximation. The constraint for the fluid flow $\mathbf{v}$ to be solenoidal --- i.e. the $\text{div}(\mathbf{v})(t,x) = 0$ divergence-free condition --- is equivalent to requiring that the volume of any fluid element is constant in time (see \cite{boyer2012mathematical} for example). Note in particular that the divergence-free condition is nothing less than a new equation that the velocity function (without the additional degree of freedom that the presence of $\rho$ contributed to the general, compressible equations (\ref{original_general_NS}), (\ref{original_general_mass_cons})) now has to satisfy, and as a consequence the pressure is related differently to the other thermodynamical variables for the case of incompressible flows. In more detail, as we will see in our computations later, results and estimates on the divergence-free velocity function can be obtained separately from the pressure. We also highlight here that the pressure function is defined only up to a constant, or in other words, it is only the pressure gradient (i.e. the fluctuation of the pressure) that has a physical meaning, and not the absolute pressure value itself.
 
 \end{enumerate}
 
 Combining the aforementioned ideas, the equations governing the air velocity $\mathbf{v}$ and pressure $q$ in the atmosphere are the incompressible Navier-Stokes equations including the Coriolis term with constant density $\rho \equiv 1$, thus we have:
 
 \begin{equation} \label{originalEQ-V}
-  \partial_t \mathbf{v} + (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + \nabla q + 2 \mathbf{w} \times \mathbf{v}= \mathbf{g} \text{ in } \Omega_0 \times (0,T),
+  \partial_t \mathbf{v} + (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + \nabla q + 2 \mathbf{\omega} \times \mathbf{v}= \mathbf{g} \text{ in } \Omega_0 \times (0,T),
 \end{equation}
     
 \begin{equation} \label{originalEQ-I}
@@ -160,7 +207,7 @@ In the following we collect some of the main results currently available on the 
 
 The complete set of equations (\ref{originalEQ-V})-(\ref{originalEQ-I}) is extremely complex and due to its (for the moment being) unreasonable computational demands it is seldom used in real-world applications. At the core of many flood prediction systems, weather forecast softwares, global circulation models or ocean global circulation models we find the following different system called the primitive equations:
 
-\begin{equation} \label{PE_orignal_1} \partial_t \mathbf{v}_h + \mathbf{v}_h \cdot \nabla_h \mathbf{v}_h + v_3 \partial_z \mathbf{v}_h - \Delta_{\nu} \mathbf{v}_h + \nabla_h q + 2 (\mathbf{w} \times \mathbf{v})_h = 0, \end{equation}
+\begin{equation} \label{PE_orignal_1} \partial_t \mathbf{v}_h + \mathbf{v}_h \cdot \nabla_h \mathbf{v}_h + v_3 \partial_z \mathbf{v}_h - \Delta_{\nu} \mathbf{v}_h + \nabla_h q + 2 (\mathbf{\omega} \times \mathbf{v})_h = 0, \end{equation}
 
 \begin{equation} \label{PE_orignal_2} \frac{\partial q}{\partial z} = - \mathbf{g}, \end{equation}
 
