@@ -130,7 +130,7 @@ The mathematical equations describing the motion of geophysical fluids such as o
 \end{equation}
 
 \begin{equation}\label{equation_of_state}
-  \rho = f(\tau).
+  \rho = f(\tau)  \quad \text{ in } \Omega_0 \times (0,T).
 \end{equation}
 
 Here $\mathbf{v}$ is the velocity function, $\rho$ is the density, $\nu = (\nu_1, \nu_2, \nu_3)$ represents the viscosity constants, and $q$ denotes the pressure. In the heat flow equation $\tau$ is the temperature, $Q$ represents the rate per unit volume of internal heat production, $k$ denotes thermal diffusivity, while the the heat capacity per unit volume, $\rho C_\rho$, is assumed to be constant.
@@ -169,10 +169,10 @@ Boussinesq flows include gas motions in standard conditions and low-speed fluid 
 \end{equation}
 
 \begin{equation}\label{rho_boussinesq}
-  \rho = \rho_0 - \Xi \rho_0(\tau-\tau_0).
+  \rho = \rho_0 - \Xi \rho_0(\tau-\tau_0) \quad \text{ in } \Omega_0 \times (0,T).
 \end{equation}
 
-\item The second simplification we make is to consider an isothermal process, i.e. a process where the fluid temperature remains constant. It follows immediately from (\ref{rho_boussinesq}) that combining the Boussinesq approximation with a $\tau \equiv \tau_0$ tempreature we arrive to a constant density $\rho \equiv \rho_0$ in all terms on the entire $\Omega_0 \times (0,T)$ domain. Thus, from this point we remove $\tau$ from the set of functions we are working with and our system is reduced to the equations describing velocity and pressure:
+\item The second simplification we make is to consider an isothermal process, i.e. a process where the fluid temperature remains constant. It follows immediately from (\ref{rho_boussinesq}) that combining the Boussinesq approximation with a $\tau \equiv \tau_0$ temperature we arrive to a constant density $\rho \equiv \rho_0$ in all terms on the entire $\Omega_0 \times [0,T)$ domain. Thus, from this point we remove $\tau$ from the set of functions we are working with and our system is reduced to the equations describing velocity and pressure:
 
 \begin{equation} \label{original_general_NS_isothermal}
   \partial_t \mathbf{v} + (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + 2 \mathbf{\omega} \times \mathbf{v} + \nabla q = \mathbf{g} \quad \text{ in } \Omega_0 \times (0,T),
