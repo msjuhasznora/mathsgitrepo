@@ -674,6 +674,19 @@ To conclude the description of the model we highlight an important feature of th
 %%% GEOPHYSICAL COORDINATES %%% 
 \chapter{The asymptotic behaviour of the anisotropic solutions in geophysical coordinates}\label{geophysicalchapter}
 
+As we highlighted before, the focus of this thesis is essentially to identify different kind of scenarios, or more precisely, identify
+\begin{itemize}
+  \item different types of solutions
+  \item considered in different kinds coordinate systems
+  \item combined with different regularities assumed for initial data
+  \item and completed with different kinds of boundary conditions,
+\end{itemize}
+for which we are able to state that a certain kind of connection (a convergence result in particular) holds for shallow domains between the anisotropic and hydrostatic models. 
+
+In this chapter we verify the first such convergence result of the thesis: we choose the framework of weak solutions, we work in geophysical coordinates, the domain is set to a local domain with classical non-periodic boundaries and in Section \ref{proof_weak_gfc} we prove that for $\mathbf{u}_0 \in L^2 (\Omega), c_0 \in L^2(\Omega)$ initial data any weak solution of the anisotropic equations (\ref{ANSC1_coordinates_GFC})--(\ref{ANSC8_coordinates_GFC}) defined below converges weakly to a weak solution of the hydrostatic system (\ref{HNSC1_coordinates_GFC})--(\ref{HNSC8_coordinates_GFC}). To complete our proof, in Section \ref{existenceweakhydrostatic} we show the existence of weak solutions of the limit system.
+
+Section \ref{visualizationFEM} examines the convergence phenomena in a different light: here we use the finite element method and the software components of FEniCS to visualise our results.
+
 In order to enhance readability and keep this chapter self-contained, we firstly repeat the definitions of the anisotropic and hydrostatic models of the polluted atmosphere expressed in geophysical coordinates. The equations of the anisotropic systems, and the initial and boundary conditions we combine them with are given by the system
 
 \begin{equation} \label{ANSC1_coordinates_GFC}
@@ -771,12 +784,12 @@ In this section we describe the weak formulation of the merged equations in both
   
   \begin{definition} \label{definitionhydrostaticWF}
   
-  Find $(\mathbf{u}, C)$ such that $\mathbf{u} = (\mathbf{u}_H, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_H \in L^\infty (0,T; L^2(\Omega)^2),$ and $C \in L^\infty(0,T; L^2(\Omega))$ with $C \in L^2(0,T; H^1(\Omega))$, such that
+  Find $(\mathbf{u}, c)$ such that $\mathbf{u} = (\mathbf{u}_h, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_h \in L^\infty (0,T; L^2(\Omega)^2),$ and $c \in L^\infty(0,T; L^2(\Omega))$ with $c \in L^2(0,T; H^1(\Omega))$, such that
   
   \begin{equation}
     \begin{split}
-      & \int_0^T \bigg[ -(\mathbf{u}_H, \partial_t \mathbf{\tilde{u}}_H) + (\nabla_\nu \mathbf{u}_H, \nabla_\nu \mathbf{\tilde{u}}_H) - (\mathbf{u}_H, (\mathbf{u} \cdot \nabla) \mathbf{\tilde{u}}_H) + (b(\mathbf{u}_H), \mathbf{\tilde{u}}_H) \bigg ] \diff t \\
-      & = (\mathbf{u}_{0H}, \mathbf{\tilde{u}}_H(0)) \diff t \raisetag{15pt}\label{hydrostaticWF_U}
+      & \int_0^T \bigg[ -(\mathbf{u}_h, \partial_t \mathbf{\tilde{u}}_h) + (\nabla_\nu \mathbf{u}_h, \nabla_\nu \mathbf{\tilde{u}}_h) - (\mathbf{u}_h, (\mathbf{u} \cdot \nabla) \mathbf{\tilde{u}}_h) + (b(\mathbf{u}_h), \mathbf{\tilde{u}}_H) \bigg ] \diff t \\
+      & = ({\mathbf{u}_h}_0, \mathbf{\tilde{u}}_h(0)) \diff t \raisetag{15pt}\label{hydrostaticWF_U}
     \end{split}
   \end{equation}
   
@@ -784,33 +797,33 @@ In this section we describe the weak formulation of the merged equations in both
   
     \begin{equation}
     \begin{split}
-      & \int_0^T \bigg[ -(C, \partial_t \tilde{C}) -(\mathbf{u}C, \nabla \tilde{C}) +  (\mathbf{M} \nabla C, \nabla \tilde{C}) - \int_{\Gamma_G} \boldsymbol{\sigma} \mathbf{M} \tilde{C} \vec{\boldsymbol{n}}_{\Gamma_G} \bigg ] \diff t \\
-      & = (C(0), \tilde{C}(0)) + \int_0^T (S,\tilde{C}) \diff t \raisetag{20pt} \label{hydrostaticWF_C}
+      & \int_0^T \bigg[ -(c, \partial_t \tilde{c}) -(\mathbf{u}c, \nabla \tilde{c}) +  (\mathbf{M} \nabla c, \nabla \tilde{c}) - \int_{\Gamma_G} \boldsymbol{\sigma} \mathbf{M} \tilde{c} \vec{\boldsymbol{n}}_{\Gamma_G} \bigg ] \diff t \\
+      & = (c(0), \tilde{c}(0)) + \int_0^T (s,\tilde{c}) \diff t \raisetag{20pt} \label{hydrostaticWF_C}
     \end{split}
   \end{equation}
   
-  for all $(\mathbf{\tilde{u}}, \tilde{C})$ with $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_H, \tilde{u}_3) \in H^1 (0,T, \mathbf{W})$, $\mathbf{\tilde{u}}_H (T) = 0$ and $\partial_3 \mathbf{\tilde{u}}_H \in L^\infty (0, T; L^3 (\Omega)^2)$ and  $\tilde{C} \in L^2 (0,T, H^2_{\Gamma_A} (\Omega)) \cap H^1 (0,T, L^2)$, $\tilde{C} (T) = 0$. 
+  for all $(\mathbf{\tilde{u}}, \tilde{c})$ with $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T, \mathbf{W})$, $\mathbf{\tilde{u}}_h (T) = 0$ and $\partial_3 \mathbf{\tilde{u}}_h \in L^\infty (0, T; L^3 (\Omega)^2)$ and  $\tilde{c} \in L^2 (0,T, H^2_{\Gamma_A} (\Omega)) \cap H^1 (0,T, L^2)$, $\tilde{c} (T) = 0$. 
   
   \end{definition}
   
-  Note that the term $\int_0^T (S,\tilde{C}) \diff t$ makes sense since in this case $S$ denotes the delta distribution and we have 
+  Note that the term $\int_0^T (s,\tilde{c}) \diff t$ makes sense since in this case $s$ denotes the delta distribution and we have 
   
-  \[ (S,\tilde{C}) = \int_\Omega \delta(\mathbf{x} - \mathbf{x}_s) \tilde{C}(\mathbf{x}) \diff \mathbf{x} = \tilde{C}(\mathbf{x}_s).\]
+  \[ (s,\tilde{c}) = \int_\Omega \delta(\mathbf{x} - \mathbf{x}_s) \tilde{c}(\mathbf{x}) \diff \mathbf{x} = \tilde{c}(\mathbf{x}_s).\]
   
-  The existence of weak solution for the hydrostatic system (\ref{HNSC1_coordinates_GFC}) - (\ref{HNSC8_coordinates_GFC}) can be proved in the spirit of \cite{temam2005some}. In appendix A we will outline the main steps of the proof and the differences compared to the ocean model.
+  The existence of weak solution for the hydrostatic system (\ref{HNSC1_coordinates_GFC}) - (\ref{HNSC8_coordinates_GFC}) can be proved in the spirit of \cite{temam2005some}. In Section \ref{existenceweakhydrostatic} we will outline the main steps of the proof and the differences compared to the ocean model.
 
   The weak form of the anisotropic system is as follows.
   
-  \begin{definition} \label{definitionanisotropicWF}
+  \begin{definition} \label{definitionanisotropicWF_gfc}
   
-  Find $\mathbf{u}^\epsilon = (\mathbf{u}^\epsilon_H, u^\epsilon_3) \in L^2 (0,T ; \mathbf{V}) \cap L^\infty (0, T; L^2 (\Omega)^3)$ and $C^\epsilon \in L^\infty (0,T; L^2(\Omega)) \cap L^2 (0,T; H^1(\Omega))$, such that
+  Find $\mathbf{u}^\epsilon = (\mathbf{u}^\epsilon_h, u^\epsilon_3) \in L^2 (0,T ; \mathbf{V}) \cap L^\infty (0, T; L^2 (\Omega)^3)$ and $c^\epsilon \in L^\infty (0,T; L^2(\Omega)) \cap L^2 (0,T; H^1(\Omega))$, such that
   
   \begin{equation}
     \begin{split}
-      & \int_0^T \bigg [ -(\mathbf{u}^\epsilon_H, \partial_t \mathbf{\tilde{u}}_H) + (\nabla_\nu \mathbf{u}^\epsilon_H, \nabla_\nu \mathbf{\tilde{u}}_H) - (\mathbf{u}^\epsilon_H, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{\tilde{u}}_H) + (b(\mathbf{u}^\epsilon_H), \mathbf{\tilde{u}}_H) \bigg ] \diff t \\
+      & \int_0^T \bigg [ -(\mathbf{u}^\epsilon_h, \partial_t \mathbf{\tilde{u}}_h) + (\nabla_\nu \mathbf{u}^\epsilon_h, \nabla_\nu \mathbf{\tilde{u}}_h) - (\mathbf{u}^\epsilon_h, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{\tilde{u}}_h) + (b(\mathbf{u}^\epsilon_h), \mathbf{\tilde{u}}_h) \bigg ] \diff t \\
       & + \epsilon \beta \int_0 ^ T \big [ (u_3 ^\epsilon, \tilde{u}_1) - (u_1^\epsilon, \tilde{u}_3) \big ] \diff t\\
       & + \epsilon^2 \int _0 ^ T \big [ -(u_3^\epsilon, \partial_t \tilde{u}_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, \tilde{u}_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu \tilde{u}_3) \big ] \diff t \\
-      & = (\mathbf{u}^\epsilon_{0H}, \mathbf{\tilde{u}}_H(0)) + \epsilon^2 (u_{03}^\epsilon, \tilde{u}_3 (0)) \diff t \raisetag{20pt} \label{anisotropicWF_U}
+      & = ({\mathbf{u}_h}_0, \mathbf{\tilde{u}}_h(0)) + \epsilon^2 (u_{03}^\epsilon, \tilde{u}_3 (0)) \diff t \raisetag{20pt} \label{anisotropicWF_U}
     \end{split}
   \end{equation}
   
@@ -818,29 +831,29 @@ In this section we describe the weak formulation of the merged equations in both
   
     \begin{equation}
     \begin{split}
-      & \int_0^T \bigg [ -(C^\epsilon, \partial_t \tilde{C}) -(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) + (\mathbf{M} \nabla C^\epsilon, \nabla \tilde{C}) - \int_{\Gamma_G} \boldsymbol{\sigma} \mathbf{M} \tilde{C} \vec{\boldsymbol{n}}_{\Gamma_G} \bigg ] \diff t \\
-      & =  (C^\epsilon (0), \tilde{C} (0)) + \int_0^T (S^\epsilon,\tilde{C}) \diff t \raisetag{20pt} \label{anisotropicWF_C}
+      & \int_0^T \bigg [ -(c^\epsilon, \partial_t \tilde{c}) -(\mathbf{u}^\epsilon c^\epsilon, \nabla \tilde{c}) + (\mathbf{M} \nabla c^\epsilon, \nabla \tilde{c}) - \int_{\Gamma_G} \boldsymbol{\sigma} \mathbf{M} \tilde{c} \vec{\boldsymbol{n}}_{\Gamma_G} \bigg ] \diff t \\
+      & =  (c_0, \tilde{c} (0)) + \int_0^T (s^\epsilon,\tilde{c}) \diff t \raisetag{20pt} \label{anisotropicWF_C}
     \end{split}
   \end{equation}
   
-  for all $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_H, \tilde{u}_3) \in H^1 (0,T;\mathbf{V})$ with $\mathbf{\tilde{u}}(T) = 0$ and $\tilde{C}$ such that $\tilde{C} \in H^1 (0,T, H^2_{\Gamma_A} (\Omega))$ and $\tilde{C} (T) = 0$.
+  for all $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T;\mathbf{V})$ with $\mathbf{\tilde{u}}(T) = 0$ and $\tilde{c}$ such that $\tilde{c} \in H^1 (0,T, H^2_{\Gamma_A} (\Omega))$ and $\tilde{c} (T) = 0$.
   
   \end{definition}
   
-  Note that since in our case the source term $S^\epsilon$ is given by (\ref{approxsourceterm}), the last term in (\ref{anisotropicWF_C}) is well defined. If we use a source function of a different and more general form, it needs to satisfy the $L_t^2 L_x^2$ boundedness criteria for the weak formulation to make sense.
+  Note that since in our case the source term $s^\epsilon$ is given by (\ref{approxsourceterm}), the last term in (\ref{anisotropicWF_C}) is well defined. If we use a source function of a different and more general form, it needs to satisfy the $L_t^2 L_x^2$ boundedness criteria for the weak formulation to make sense.
 
-We will omit the proof of the existence of weak solutions (see Definition \ref{definitionanisotropicWF}.) for the anisotropic system (\ref{ANSC1_coordinates_GFC}) - (\ref{ANSC8_coordinates_GFC}) since it follows by standard finite-dimensional Galerkin approximation.
+We will omit the proof of the existence of weak solutions (see Definition \ref{definitionanisotropicWF_gfc}.) for the anisotropic system (\ref{ANSC1_coordinates_GFC}) - (\ref{ANSC8_coordinates_GFC}) since it follows by standard finite-dimensional Galerkin approximation.
 
 Now we are ready to state our main result.
   
 \begin{theorem} \label{maintheorem_weak_GFC}
-  Let $\mathbf{u}_0$ $\in$ $L^2 (\Omega)^3$, with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 \cdot \mathbf{n} = 0$ on $\partial \Omega$; let $C_0 \in$ $L^2 (\Omega)$, $C_0 = 0$ on $ \partial \Omega$, and assume that the boundary conditions (\ref{ANSC8_coordinates_GFC}) hold; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, C^\epsilon)$ of the anisotropic equations (\ref{ANSC1_coordinates_GFC}) - (\ref{ANSC5_coordinates_GFC}) converge to a weak solution $(\mathbf{u}, C)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1_coordinates_GFC}) - (\ref{HNSC5_coordinates_GFC}).
+  Let $\mathbf{u}_0 \in L^2 (\Omega)$, with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 \cdot \mathbf{n} = 0$ on $\partial \Omega$; let $c_0 \in L^2 (\Omega)$, $c_0 = 0$ on $ \partial \Omega$, and assume that the boundary conditions (\ref{ANSC8_coordinates_GFC}) hold; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1_coordinates_GFC}) - (\ref{ANSC5_coordinates_GFC}) converge to a weak solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1_coordinates_GFC}) - (\ref{HNSC5_coordinates_GFC}).
 \end{theorem}
 
 %%% *** PROOF *** %%%
 \section{Proof of the main theorem} \label{proof_weak_gfc}
  
- This section is devoted to the proof of Theorem \ref{maintheorem_weak_GFC}. In the extended case with the pollution equation the proof relies on a priori estimates gained from the energy inequality and, as we will see this is sufficient to pass to the limit in the linear terms. Concerning the nonlinear terms we will prove a uniform in $\epsilon$ space time estimate for $\mathbf{u}^\epsilon$ and $C^\epsilon$ that will allow us to apply a compactness criterion proved in \cite{azerad2001mathematical}.
+ This section is devoted to the proof of Theorem \ref{maintheorem_weak_GFC}. In the extended case with the pollution equation the proof relies on a priori estimates gained from the energy inequality and, as we will see this is sufficient to pass to the limit in the linear terms. Concerning the nonlinear terms we will prove a uniform in $\epsilon$ space time estimate for $\mathbf{u}^\epsilon$ and $c^\epsilon$ that will allow us to apply a compactness criterion proved in \cite{azerad2001mathematical}.
 
   \subsection{Energy inequality}
   
@@ -848,26 +861,26 @@ Now we are ready to state our main result.
   
   \begin{equation}
     \begin{split}  
-    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \big[ \norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \big] \diff \tau \\
-    & + \int_0 ^ t  (\mathbf{M} \nabla C^\epsilon, \nabla C^\epsilon) d \tau \\
-    & \leq \int_0^t (S^\epsilon,C^\epsilon) \diff \tau + \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon_0}_{L^2}^2) \\
-    & + \int _ 0 ^ t  \int_{\Gamma_G} ((\nabla C^\epsilon) \mathbf{M}) C^\epsilon \vec{\mathbf{n}}_{\Gamma_G}  \diff \tau \\
+    & \frac{1}{2} (\norm{\mathbf{u}_h^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{c^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \big[ \norm{\nabla_\nu \mathbf{u}_h^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \big] \diff \tau \\
+    & + \int_0 ^ t  (\mathbf{M} \nabla c^\epsilon, \nabla c^\epsilon) d \tau \\
+    & \leq \int_0^t (s^\epsilon,c^\epsilon) \diff \tau + \frac{1}{2} (\norm{\mathbf{u}_h^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{c^\epsilon_0}_{L^2}^2) \\
+    & + \int _ 0 ^ t  \int_{\Gamma_G} ((\nabla c^\epsilon) \mathbf{M}) c^\epsilon \vec{\mathbf{n}}_{\Gamma_G}  \diff \tau \\
     & = I_1 + I_2 + I_3. \raisetag{70pt} \label{energyIEQ}
     \end{split}
   \end{equation}    
   
-  From the hypothesis on the initial data and since the $S^\epsilon$ source term is in $L^\infty_x (\Omega)$, $I_1$ and $I_2$ are bounded. The only terms we need to work on further are the expressions in $I_3$.
+  From the hypothesis on the initial data and since the $s^\epsilon$ source term is in $L^\infty_x (\Omega)$, $I_1$ and $I_2$ are bounded. The only terms we need to work on further are the expressions in $I_3$.
   
   By using the H\"older inequality and the generalised Young inequality for any $\zeta > 0,$ we can estimate this term in the following way.
   
   \begin{equation}
     \begin{split}  \label{boundI_3}
-    I_3 & = \int _ 0 ^ t \int_{\Gamma_G} \sum_{i=1}^3 \bigg( \big(\sum_{j=1}^3 M_{ij} \partial_j C^\epsilon \big) C^\epsilon \mathbf{n}_{\Gamma_G, i} \bigg) \diff \tau \\
-    & \leq \sum_{i,j = 1}^3 M_{ij} \int _ 0 ^ t \norm{\partial_i C^\epsilon}_{L^2 (\Gamma_G)}  \norm{C^\epsilon}_{L^2 (\Gamma_G)} \diff \tau \\
-    & \leq \sum_{i,j = 1}^3 \frac{1}{\zeta} M_{ij} \frac{1}{2} \int_0 ^ t \norm{\partial_i C^\epsilon}^2 _{L^2 (\Gamma_G)} \diff \tau + \zeta M_{ij} \int_0 ^ t \frac{1}{2} \norm{C^\epsilon}^2 _{L^2 (\Gamma_G)} \diff \tau \\
-    & \leq \sum_{i,j = 1}^3 \frac{1}{\zeta} M_{ij} \frac{1}{2} \int_0 ^ t \norm{\partial_i C^\epsilon}^2 _{L^2 (\Gamma_G)} \diff \tau + \zeta \frac{1}{2} M_{ij} c_T \int_0 ^ t \norm{C^\epsilon}^2 _{W^{1,2} (\Omega)} \diff \tau \\
-    & \leq \sum_{i,j = 1}^3 \bigg( \frac{1}{\zeta} M_{ij} \frac{1}{2} \int_0 ^ t \norm{\partial_i C^\epsilon}^2 _{L^2 (\Gamma_G)} \diff \tau + \zeta \frac{1}{2} M_{ij} c_T  \int_0 ^ t \norm{\nabla C^\epsilon}^2 _{L^2 (\Omega) }  \diff \tau \\
-    & + \zeta \frac{1}{2} M_{ij} c_T  \int_0 ^ t \norm{C^\epsilon}^2 _{L^2 (\Omega) } \diff \tau \bigg), \raisetag{30pt}
+    I_3 & = \int _ 0 ^ t \int_{\Gamma_G} \sum_{i=1}^3 \bigg( \big(\sum_{j=1}^3 M_{ij} \partial_j c^\epsilon \big) c^\epsilon \mathbf{n}_{\Gamma_G, i} \bigg) \diff \tau \\
+    & \leq \sum_{i,j = 1}^3 M_{ij} \int _ 0 ^ t \norm{\partial_i c^\epsilon}_{L^2 (\Gamma_G)}  \norm{c^\epsilon}_{L^2 (\Gamma_G)} \diff \tau \\
+    & \leq \sum_{i,j = 1}^3 \frac{1}{\zeta} M_{ij} \frac{1}{2} \int_0 ^ t \norm{\partial_i c^\epsilon}^2 _{L^2 (\Gamma_G)} \diff \tau + \zeta M_{ij} \int_0 ^ t \frac{1}{2} \norm{c^\epsilon}^2 _{L^2 (\Gamma_G)} \diff \tau \\
+    & \leq \sum_{i,j = 1}^3 \frac{1}{\zeta} M_{ij} \frac{1}{2} \int_0 ^ t \norm{\partial_i c^\epsilon}^2 _{L^2 (\Gamma_G)} \diff \tau + \zeta \frac{1}{2} M_{ij} c_T \int_0 ^ t \norm{c^\epsilon}^2 _{W^{1,2} (\Omega)} \diff \tau \\
+    & \leq \sum_{i,j = 1}^3 \bigg( \frac{1}{\zeta} M_{ij} \frac{1}{2} \int_0 ^ t \norm{\partial_i c^\epsilon}^2 _{L^2 (\Gamma_G)} \diff \tau + \zeta \frac{1}{2} M_{ij} c_T  \int_0 ^ t \norm{\nabla c^\epsilon}^2 _{L^2 (\Omega) }  \diff \tau \\
+    & + \zeta \frac{1}{2} M_{ij} c_T  \int_0 ^ t \norm{c^\epsilon}^2 _{L^2 (\Omega) } \diff \tau \bigg), \raisetag{30pt}
     \end{split}
   \end{equation}  
   
@@ -877,10 +890,10 @@ Now we are ready to state our main result.
 
   \begin{equation}
     \begin{split}  
-    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \big [\norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2 \big ] \diff \tau \\
-    & + \int_0 ^ t \bigg[ (\lambda - \sum_{i,j = 1}^3 \zeta \frac{1}{2} M_{ij} c_T) \norm{\nabla C^\epsilon}_{L^2}^2  \bigg] \diff \tau \\
-    & \leq \sum_{i,j = 1}^3 \frac{1}{\zeta} M_{ij} \frac{1}{2} \int_0 ^ t \norm{\sigma_i}^2 _{L^2 (\Gamma_G)} \diff \tau + \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C^\epsilon (0)}_{L^2}^2) \\
-    & + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau + \sum_{i,j = 1}^3 \zeta \frac{1}{2} M_{ij} c_T  \int_0 ^ t \norm{C^\epsilon}^2 _{L^2 (\Omega) } \diff \tau. \raisetag{90pt} \label{finalformEIEQ}
+    & \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{c^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \big [\norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2 \big ] \diff \tau \\
+    & + \int_0 ^ t \bigg[ (\lambda - \sum_{i,j = 1}^3 \zeta \frac{1}{2} M_{ij} c_T) \norm{\nabla c^\epsilon}_{L^2}^2  \bigg] \diff \tau \\
+    & \leq \sum_{i,j = 1}^3 \frac{1}{\zeta} M_{ij} \frac{1}{2} \int_0 ^ t \norm{\sigma_i}^2 _{L^2 (\Gamma_G)} \diff \tau + \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{c^\epsilon (0)}_{L^2}^2) \\
+    & + \int_0^t (s^\epsilon,c^\epsilon) \diff \tau + \sum_{i,j = 1}^3 \zeta \frac{1}{2} M_{ij} c_T  \int_0 ^ t \norm{c^\epsilon}^2 _{L^2 (\Omega) } \diff \tau. \raisetag{90pt} \label{finalformEIEQ_gfc}
     \end{split}
   \end{equation}  
     
@@ -891,47 +904,47 @@ Now we are ready to state our main result.
   From the final form of the energy inequality we obtain uniform a priori estimates that we summarise in the following proposition.
   
   \begin{prop}
-    Let $u^\epsilon_1, u^\epsilon_2, u^\epsilon_3$ and $C^\epsilon$ be the weak solutions of the system (\ref{ANSC1_coordinates_GFC}) - (\ref{ANSC5_coordinates_GFC}) in the sense of Definition \ref{definitionanisotropicWF}. Then it holds,
+    Let $u^\epsilon_1, u^\epsilon_2, u^\epsilon_3$ and $c^\epsilon$ be the weak solutions of the system (\ref{ANSC1_coordinates_GFC}) - (\ref{ANSC5_coordinates_GFC}) in the sense of Definition \ref{definitionanisotropicWF_gfc}. Then it holds,
     
     \begin{align}
-      & u^\epsilon_1, u^\epsilon_2, \epsilon u^\epsilon_3, C^\epsilon & \quad & \text{are bounded in $L^\infty (0,T; L^2(\Omega)),$} \label{proposition1} \\
-      & u^\epsilon_3 & \quad & \text{is bounded in $L^2 (0,T; L^2(\Omega)),$} \label{propositionExtra} \\
-      & u^\epsilon_1, u^\epsilon_2, \epsilon u^\epsilon_3 & \quad & \text{are bounded in $L^2(0,T; H^1(\Omega)),$} \label{proposition2} \\
-      & C^\epsilon & \quad & \text{is bounded in $L^2(0,T;H^1(\Omega)).$} \label{proposition3}
+      & u^\epsilon_1, u^\epsilon_2, \epsilon u^\epsilon_3, c^\epsilon & \quad & \text{are bounded in $L^\infty (0,T; L^2(\Omega)),$} \label{proposition1_gfc} \\
+      & u^\epsilon_3 & \quad & \text{is bounded in $L^2 (0,T; L^2(\Omega)),$} \label{propositionExtra_gfc} \\
+      & u^\epsilon_1, u^\epsilon_2, \epsilon u^\epsilon_3 & \quad & \text{are bounded in $L^2(0,T; H^1(\Omega)),$} \label{proposition2_gfc} \\
+      & c^\epsilon & \quad & \text{is bounded in $L^2(0,T;H^1(\Omega)).$} \label{proposition3_gfc}
     \end{align}
     
   \end{prop}
   
   \begin{proof}
-  By applying the classical Gr\"onwall inequality, (\ref{proposition1}), (\ref{proposition2}) and (\ref{proposition3}) follow directly by the energy inequality (\ref{finalformEIEQ}). On the other hand, (\ref{propositionExtra}) can be verified by using the divergence free condition and that as a consequence, we have $\partial_3 u_3 = - \partial_1 u_1 - \partial_2 u_2$ bounded in $L^2_t L^2 _x$. The bound holds for $u_3$ itself as well, owing to the Poincar\'e inequality in the vertical direction, and using that $u_3$ vanishes on the boundary.
+  By applying the classical Gr\"onwall inequality, (\ref{proposition1_gfc}), (\ref{proposition2_gfc}) and (\ref{proposition3_gfc}) follow directly by the energy inequality (\ref{finalformEIEQ_gfc}). On the other hand, (\ref{propositionExtra_gfc}) can be verified by using the divergence free condition and that as a consequence, we have $\partial_3 u_3 = - \partial_1 u_1 - \partial_2 u_2$ bounded in $L^2_t L^2 _x$. The bound holds for $u_3$ itself as well, owing to the Poincar\'e inequality in the vertical direction, and using that $u_3$ vanishes on the boundary.
   \end{proof}
   
   As a consequence, up to subsequences still denoted by the same way, we have the following weak convergence results.
   
   \begin{align} 
-    &  \mathbf{u}_H^\epsilon \rightharpoonup \mathbf{u}_H &\quad & \text{weakly in $L_t^\infty L_x^2 \cap L_t^2 H_x^1$,} \label{WeakConvUHEps} \\
-    &  \epsilon^2 u_3^\epsilon \to 0 &\quad & \text{strongly in $L_t^\infty L_x^2 \cap L_t^2 H_x^1$,} \label{WeakConvU3Eps} \\ 
-    & u_3^\epsilon \rightharpoonup u_3  &\quad & \text{weakly in $L_t^2 L_x^2$,} \label{WeakConvU3NoEps} \\
-    & C^\epsilon \rightharpoonup C &\quad & \text{weakly in $L_t^\infty L_x^2 \cap L_t^2 H_x^1$} \label{WeakConvCEps1}
+    &  \mathbf{u}_H^\epsilon \rightharpoonup \mathbf{u}_H &\quad & \text{weakly in $L_t^\infty L_x^2 \cap L_t^2 H_x^1$,} \label{WeakConvUHEps_gfc} \\
+    &  \epsilon^2 u_3^\epsilon \to 0 &\quad & \text{strongly in $L_t^\infty L_x^2 \cap L_t^2 H_x^1$,} \label{WeakConvU3Eps_gfc} \\ 
+    & u_3^\epsilon \rightharpoonup u_3  &\quad & \text{weakly in $L_t^2 L_x^2$,} \label{WeakConvU3NoEps_gfc} \\
+    & c^\epsilon \rightharpoonup c &\quad & \text{weakly in $L_t^\infty L_x^2 \cap L_t^2 H_x^1$} \label{WeakConvCEps1_gfc}
   \end{align} 
 
 \subsection{Passing to the limit}
 
-    In order to conclude the proof of Theorem \ref{maintheorem_weak_GFC} we pass to the limit in the weak formulation (\ref{anisotropicWF_U})-(\ref{anisotropicWF_C}). To take the limit for the linear velocity terms that do not include the concentration function $C^\epsilon$ we can use (\ref{WeakConvUHEps}), (\ref{WeakConvU3Eps}) and (\ref{WeakConvU3NoEps}), and the bounds (\ref{propositionExtra}), (\ref{proposition2}). As for the nonlinear terms, the convergence can be shown using a time compactness theorem that is based on a result by Simon \cite{simon1986compact}. The key point is to apply a sort of generalisation of the classical translation criterium of Riesz-Frechet-Kolmogorov which enables us to get strong convergence for the horizontal velocities. This is achieved by establishing a bound for the perturbation of $\mathbf{u}_H$ of the form $\norm{\tau_h \mathbf{u}_H - \mathbf{u}_H}_{L^p(0,T-h, \mathbf{Y})} \leq \varphi(h) + \psi(\epsilon),$ where $\mathbf{Y}$ is a Banach space, $\varphi$ and $\psi$ are appropriate functions with their limits vanishing at zero, and $\tau_h \mathbf{u}_H = \mathbf{u}_H (t+h) $. After obtaining strong convergence for $\mathbf{u}_H,$ the proof of the convergence for these nonlinear terms can be closed by applying basic interpolation techniques and the generalised H\"older inequality. The details are omitted since they are analogous to those described in \cite{azerad2001mathematical}.
+In order to conclude the proof of Theorem \ref{maintheorem_weak_GFC} we pass to the limit in the weak formulation (\ref{anisotropicWF_U})-(\ref{anisotropicWF_C}). To take the limit for the linear velocity terms that do not include the concentration function $c^\epsilon$ we can use (\ref{WeakConvUHEps_gfc}), (\ref{WeakConvU3Eps_gfc}) and (\ref{WeakConvU3NoEps_gfc}), and the bounds (\ref{propositionExtra_gfc}), (\ref{proposition2_gfc}). As for the nonlinear terms, the convergence can be shown using a time compactness theorem that is based on a result by Simon \cite{simon1986compact}. The key point is to apply a sort of generalisation of the classical translation criterium of Riesz-Frechet-Kolmogorov which enables us to get strong convergence for the horizontal velocities. This is achieved by establishing a bound for the perturbation of $\mathbf{u}_H$ of the form $\norm{\tau_h \mathbf{u}_H - \mathbf{u}_H}_{L^p(0,T-h, \mathbf{Y})} \leq \varphi(h) + \psi(\epsilon),$ where $\mathbf{Y}$ is a Banach space, $\varphi$ and $\psi$ are appropriate functions with their limits vanishing at zero, and $\tau_h \mathbf{u}_H = \mathbf{u}_H (t+h) $. After obtaining strong convergence for $\mathbf{u}_H,$ the proof of the convergence for these nonlinear terms can be closed by applying basic interpolation techniques and the generalised H\"older inequality. The details are omitted since they are analogous to those described in \cite{azerad2001mathematical}.
   
-    For the linear terms including the concentration $C^\epsilon$ we can directly apply the weak convergence result of (\ref{WeakConvCEps1}).
+For the linear terms including the concentration $c^\epsilon$ we can directly apply the weak convergence result of (\ref{WeakConvCEps1_gfc}).
     
-    We get
+We get
     
-    \[ \int_0 ^ T (C^\epsilon , \partial_t \tilde{C}) d \mathrm{t} \to \int_0^T (C, \partial_t \tilde{C}) \diff t,\]
+$$ \int_0^T (c^\epsilon , \partial_t \tilde{c}) \diff t \to \int_0^T (c, \partial_t \tilde{c}) \diff t, $$
     
-    \[ \int_0 ^ T  (\mathbf{M} \nabla C^\epsilon, \nabla \tilde{C}) d \mathrm{t} \to \int_0^T (\mathbf{M} \nabla C, \nabla \tilde{C}) \diff t.\]
+$$ \int_0^T (\mathbf{M} \nabla c^\epsilon, \nabla \tilde{c}) \diff t \to \int_0^T (\mathbf{M} \nabla c, \nabla \tilde{c}) \diff t. $$
       
-    For the source term, by applying standard results for distribution functions, we get $(S^\epsilon, \tilde{C}) \to  (S, \tilde{C}).$ 
+For the source term, by applying standard results for distribution functions, we get $(s^\epsilon, \tilde{c}) \to (s, \tilde{c}).$ 
       
-Finally we have to deal with the nonlinear term $(\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}).$
+Finally we have to deal with the nonlinear term $(\mathbf{u}^\epsilon c^\epsilon, \nabla \tilde{c}).$
   
-By analysing this nonlinear term in a more precise way we see that $u^\epsilon_i C^\epsilon$ for $i=1,2$ is weakly convergent since as we mentioned before, we have the strong convergence of the horizontal velocities, while in the case of $i=3$ this property does not hold. We overcome this difficulty by proving a compactness property for the pollution concentration $C^\epsilon.$ The key tool will be the following compactness criterion (for the proof see Theorem 5.1 in \cite{azerad2001mathematical}).
+By analysing this nonlinear term in a more precise way we see that $u^\epsilon_i c^\epsilon$ for $i=1,2$ is weakly convergent since as we mentioned before, we have the strong convergence of the horizontal velocities, while in the case of $i=3$ this property does not hold. We overcome this difficulty by proving a compactness property for the pollution concentration $c^\epsilon.$ The key tool will be the following compactness criterion (for the proof see Theorem 5.1 in \cite{azerad2001mathematical}).
 
 \begin{theorem}
 Let $T>0,$ and let the Banach spaces $\mathbf{X} \hookrightarrow \mathbf{B} \hookrightarrow \mathbf{Y},$ where $\mathbf{X}$ is compactly embedded in $\mathbf{B},$ and $\mathbf{B}$ is continuously embedded in $\mathbf{Y}.$ Let $(f_\epsilon)_{\epsilon>0}$ be a family of functions of $L^p (0,T; \mathbf{X}), 1 \leq p \leq \infty,$ with the extra condition $(f_\epsilon)_{\epsilon>0} \subset C (0,T; \mathbf{Y})$ if $p = \infty,$ such that
@@ -951,54 +964,54 @@ Then the family $(f_\epsilon)_{\epsilon>0}$ possesses a cluster point in $L^p (0
 
 We will be able to apply the statement of this theorem for $p=2$ and the spaces $H^1 \hookrightarrow L^2 \hookrightarrow {H^2}^*,$ where ${H^2}^*$ is the dual of ${H^2}$, obtaining that
 
-\[C^\epsilon \to C \text{ strongly in } L^2_t L^2_x,\]
+\[c^\epsilon \to c \text{ strongly in } L^2_t L^2_x,\]
 
-and thus we have the weak convergence result $u^\epsilon_3 C^\epsilon \rightharpoonup u_3 C.$
+and thus we have the weak convergence result $u^\epsilon_3 c^\epsilon \rightharpoonup u_3 c.$
 
-In the following we will verify that the theorem's conditions hold for our choice of spaces and $p$. Since (\ref{proposition3}) is already given, we only have to show the bound $\norm{\tau_h C^\epsilon - C^\epsilon}_{L^2(0,T-h, {H^2}^*)} \leq \varphi(h) + \psi(\epsilon)$ in order to close the argument regarding the weak convergence of $u^\epsilon_3 C^\epsilon$.
+In the following we will verify that the theorem's conditions hold for our choice of spaces and $p$. Since (\ref{proposition3_gfc}) is already given, we only have to show the bound $\norm{\tau_h c^\epsilon - c^\epsilon}_{L^2(0,T-h, {H^2}^*)} \leq \varphi(h) + \psi(\epsilon)$ in order to close the argument regarding the weak convergence of $u^\epsilon_3 c^\epsilon$.
 
 \begin{prop}
-The estimate $\norm{\tau_h C^\epsilon - C^\epsilon}_{L^2(0,T-h, {H^2}^*)} \leq c \cdot h^{1/4}$ holds.
+The estimate $\norm{\tau_h c^\epsilon - c^\epsilon}_{L^2(0,T-h, {H^2}^*)} \leq \kappa \cdot h^{1/4}$ holds.
 \end{prop}
 
 \begin{proof}
 The spatial weak form of the anisotropic system (\ref{ANSC1_coordinates_GFC}) - (\ref{ANSC5_coordinates_GFC}) is
 
-\begin{equation} \bigg (\frac{\partial C^\epsilon}{\partial t}, \tilde{C} \bigg ) - (\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) + (\mathbf{M} \nabla C^\epsilon, \nabla \tilde{C}) = (S^\epsilon, \tilde{C}), \label{spatialWeakForm} \end{equation}
+\begin{equation} \bigg (\frac{\partial c^\epsilon}{\partial t}, \tilde{c} \bigg ) - (\mathbf{u}^\epsilon c^\epsilon, \nabla \tilde{c}) + (\mathbf{M} \nabla c^\epsilon, \nabla \tilde{c}) = (s^\epsilon, \tilde{c}), \label{spatialWeakForm} \end{equation}
 
-where in this case the equality has to hold for all $\tilde{C} \in H^2_x.$
+where in this case the equality has to hold for all $\tilde{c} \in H^2_x.$
 
-Now we take a test function $\tilde{C} \in H^2_x$  in (\ref{spatialWeakForm}) and integrate over $(t, t+h),$ i. e. we have
+Now we take a test function $\tilde{c} \in H^2_x$  in (\ref{spatialWeakForm}) and integrate over $(t, t+h),$ i. e. we have
 
-\[ (\tau_h C^\epsilon (t) - C^\epsilon (t), \tilde{C}) = \int_t^{t+h} \iota^\epsilon (s) \diff s,\]
+\[ (\tau_h c^\epsilon (t) - c^\epsilon (t), \tilde{c}) = \int_t^{t+h} \iota^\epsilon (\xi) \diff \xi,\]
 
 where
 
-\[ \iota^\epsilon (s) = (\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) - (\mathbf{M} \nabla C^\epsilon, \nabla \tilde{C}) + (S^\epsilon, \tilde{C}). \]
+\[ \iota^\epsilon (\xi) = (\mathbf{u}^\epsilon c^\epsilon, \nabla \tilde{c}) - (\mathbf{M} \nabla c^\epsilon, \nabla \tilde{c}) + (s^\epsilon, \tilde{c}). \]
 
 In the next step we prove the bound
 
-\begin{equation} \norm{\iota^\epsilon}_{L^{4/3}(0,T)} \leq c \big \| \tilde{C} \big \| _{H^2} \label{bound_iota} \end{equation}
+\begin{equation} \norm{\iota^\epsilon}_{L^{4/3}(0,T)} \leq \kappa \big \| \tilde{c} \big \| _{H^2} \label{bound_iota} \end{equation}
 
-for $\iota^\epsilon(s)$, where $c$ stands for a constant. In order to do this, we estimate each term of $\iota^\epsilon.$
+for $\iota^\epsilon(\xi)$. In order to do this, we estimate each term of $\iota^\epsilon.$
 
 \begin{align} 
-  &  (S^\epsilon, \tilde{C}) &\quad & \text{is bounded in $L^2(0,T)$,}  \\ 
-  & \label{lineartermboundgradC} (\mathbf{M} \nabla C^\epsilon, \nabla \tilde{C}) \leq c \big \| \tilde{C} \big \| _{H^1} \big \| C^\epsilon \big \| _{H^1} &\quad & \text{is bounded in $L^2(0,T)$,}  \\
-  & (\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) \leq \norm{\mathbf{u}^\epsilon}_{L^2} \norm{C^\epsilon}_{L^3}  \big \| \tilde{C} \big \| _{H^2} &\quad & \text{is bounded in $L^{4/3}(0,T).$}
+  &  (s^\epsilon, \tilde{c}) &\quad & \text{is bounded in $L^2(0,T)$,}  \\ 
+  & \label{lineartermboundgradC} (\mathbf{M} \nabla c^\epsilon, \nabla \tilde{c}) \leq c \big \| \tilde{c} \big \| _{H^1} \big \| c^\epsilon \big \| _{H^1} &\quad & \text{is bounded in $L^2(0,T)$,}  \\
+  & (\mathbf{u}^\epsilon c^\epsilon, \nabla \tilde{c}) \leq \norm{\mathbf{u}^\epsilon}_{L^2} \norm{c^\epsilon}_{L^3}  \big \| \tilde{c} \big \| _{H^2} &\quad & \text{is bounded in $L^{4/3}(0,T).$}
 \end{align} 
 
-The first bound regarding the source term holds because of the $L^2_t L^2_x$ regularity of the source (see (\ref{sourcedefinition}) and Remark \ref{sourceregularityremark}.); the bound of the linear term (\ref{lineartermboundgradC}) is a direct consequence of the Cauchy-Schwartz inequality; while the ultimate bound can be verified using (\ref{proposition1}) and (\ref{propositionExtra}), moreover considering the interpolation between $L^\infty(0,T; L^2)$ and $L^2(0,T; L^6),$ which yields that $C^\epsilon$ is in $L^4(0,T; L^3)$.
+The first bound regarding the source term holds because of the $L^2_t L^2_x$ regularity of the source (see (\ref{sourcedefinition})); the bound of the linear term (\ref{lineartermboundgradC}) is a direct consequence of the Cauchy-Schwartz inequality; while the ultimate bound can be verified using (\ref{proposition1_gfc}) and (\ref{propositionExtra_gfc}), moreover considering the interpolation between $L^\infty(0,T; L^2)$ and $L^2(0,T; L^6),$ which yields that $c^\epsilon$ is in $L^4(0,T; L^3)$.
 
 Finally, as we have now showed (\ref{bound_iota}), we apply the H\"older inequality combined with this latter and arrive to
 
-\[ \int_t^{t+h} \abs{\iota^\epsilon (s)} \diff s \leq c \big \| \tilde{C} \big \| _{H^2} h^{1/4},\]
+\[ \int_t^{t+h} \abs{\iota^\epsilon (\xi)} \diff \xi \leq \kappa \big \| \tilde{c} \big \| _{H^2} h^{1/4},\]
 
 which gives the proof of the lemma.
 
 \end{proof}
    
-  Eventually, we obtain the strong convergence result $C^\epsilon \to C$ in $L^2(0,T; L^2),$ and the weak convergence $\mathbf{u}^\epsilon C^\epsilon \rightharpoonup \mathbf{u} C$ of the nonlinear term. This, combined with the previously described linear terms, concludes the proof of the main theorem.
+  Eventually, we obtain the strong convergence result $c^\epsilon \to c$ in $L^2(0,T; L^2),$ and the weak convergence $\mathbf{u}^\epsilon c^\epsilon \rightharpoonup \mathbf{u} c$ of the nonlinear term. This, combined with the previously described linear terms, concludes the proof of the main theorem.
 
 %%% *** CONCLUDING REMARKS *** %%%
 \section{Concluding remarks} \label{concludingremarks}
@@ -1471,7 +1484,7 @@ In this section we describe the weak formulation of the merged equations in both
   
   Giving definition to the weak formulation of the (\ref{ANSC1_coordinates_DWMC}) - (\ref{ANSC6_coordinates_DWMC}), (\ref{ANSC7-weak_coordinates_DWMC}) anisotropic system we underline a feature regarding the spaces we use here. The velocity part of the solution is set to be in $C_w$ since it corresponds to the requirements of the proof detailed later. Even though we do not need the same weak continuity in time for the concentration function, this follows as a consequence once the velocity is a Leray-Hopf weak solution. Thus, overall we work with Leray-Hopf weak solutions, but the spaces in the below definition are kept minimal (in other words we use $L^\infty$ regularity instead of $C_w$ regularity where it is sufficient).
 
- \begin{definition} \label{definitionanisotropicWF}
+ \begin{definition} \label{definitionanisotropicWF_dwmc}
   
   Find $\mathbf{u}^\epsilon = (\mathbf{u}_h, u^\epsilon_3) \in L^2 (0,T ; \mathbf{V}) \cap C_w (0, T; L^2 (\Omega)^3)$ and $c^\epsilon \in L^\infty (0,T; L^2(\Omega)) \cap L^2 (0,T; H^1(\Omega))$, such that
   
@@ -1547,7 +1560,7 @@ This section is dedicated to the verification of Theorem \ref{maintheoremWEAK}. 
   From the final form of the energy inequality (\ref{finalformEIEQ}) we obtain uniform a priori estimates that we summarise in the following proposition.
   
   \begin{prop} \label{aprioriprop}
-    Let $u^\epsilon_1, u^\epsilon_2, u^\epsilon_3$ and $c^\epsilon$ be the weak solutions of the system (\ref{ANSC1_coordinates_DWMC}) - (\ref{ANSC5_coordinates_DWMC}) in the sense of Definition \ref{definitionanisotropicWF}. Then, similarly to the geophysical case, it holds,
+    Let $u^\epsilon_1, u^\epsilon_2, u^\epsilon_3$ and $c^\epsilon$ be the weak solutions of the system (\ref{ANSC1_coordinates_DWMC}) - (\ref{ANSC5_coordinates_DWMC}) in the sense of Definition \ref{definitionanisotropicWF_dwmc}. Then, similarly to the geophysical case, it holds,
     
     \begin{align}
       & u^\epsilon_1, u^\epsilon_2, \epsilon u^\epsilon_3, c^\epsilon & \quad & \text{are bounded in $L^\infty (0,T; L^2(\Omega)),$} \label{proposition1} \\
