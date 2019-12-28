@@ -274,7 +274,7 @@ $$\epsilon = \frac{\text{characteristic depth}}{\text{characteristic width}},$$
 
 which represents the small aspect ratio of the physical domain.
 
-We highlight that the concept of shallowness --- and specifically, the "proximity" of the previously mentioned two main models to one another for the case shallow domains --- is essentially the heart of this thesis. In the following two chapters we prove nothing else that the solutions (both weak and strong) of the "shallow version" of three-dimensional Navier-Stokes equations approximate the solutions of the hydrostatic system. We will show that the two fundamental properties of the atmosphere --- shallowness and hydrostatic balance --- are in fact inseparable, as the hydrostatic equilibrium is a direct consequence of the shallow nature of its domain.
+We highlight that the concept of shallowness --- and specifically, the "proximity" of the previously mentioned two main models to one another for the case shallow domains --- is essentially the heart of this thesis. In the following two chapters we prove that the solutions (both weak and strong) of the "shallow version" of three-dimensional Navier-Stokes equations approximate the solutions of the hydrostatic system. We will show that the two fundamental properties of the atmosphere --- shallowness and hydrostatic balance --- are in fact inseparable, as the hydrostatic equilibrium is a direct consequence of the shallow nature of its domain.
 
 An important simplification we make at this point is to apply the so-called $\beta$-plane approximation. This means that we focus on a local domain on the surface of the rotating Earth, or, more accurately speaking, on the corresponding $\beta$-plane case. As a consequence of working on a tangent space, we can neglect the curvature of the Earth and we can use Cartesian coordinates. We will set the orientation of the axes in two different ways later: everything stated and defined now in this section is understood without any particular direction of the coordinate axes.
 
@@ -328,7 +328,7 @@ To complete the scaling process, we combine equations (\ref{scaling_eq_x}), (\re
  =
   \begin{bmatrix}
     M_{11} & M_{12} & \epsilon M_{13} \\ M_{21} & M_{22} & \epsilon M_{23} \\ \epsilon M_{31} & \epsilon M_{32} & \epsilon^2 M_{33}
-  \end{bmatrix},
+  \end{bmatrix} = \mathbf{M},
 \end{gather}
 
 where we used a rescaling methodology analogous to that applied to the viscosity terms.
@@ -341,12 +341,12 @@ Here we emphasise that the diffusivity matrix $\mathbf{M}$ is assumed to have th
   \lambda \norm{x}^2 \leq (\mathbf{M} x, x)
 \end{equation}
 
-for all $x \in \mathbb{R}^3$ with the coercivity constant $\lambda > 0.$ In other words we require that $\lambda = \min {\lambda_i} > 0$ where $\lambda_i$ are the eigenvalues of $\mathbf{M}.$
+for all $x \in \mathbb{R}^3$ with the coercivity constant $\lambda > 0,$ where $\lambda$ is independent from $\epsilon.$ In other words we require that $\lambda = \min {\lambda_i} > 0$ where $\lambda_i$ are the eigenvalues of $\mathbf{M}.$
 
 In this model we will use localised point sources as suggested in \cite{zhuk2016source} and we use what is called a parametrised nascent delta function to describe the source term $s^\epsilon$.
 
 Let us consider a gas plume with intensity $I$ originating at emission coordinates $\mathbf{x}_s$ beginning at time $t_s$. At the beginning we assume zero concentration.
-An abrupt gas emission is modelled by a source term represented as a product of an approximated delta function $\delta_\eta (\mathbf{x} - \mathbf{x}_s)$ (centered at $\mathbf{x}_s$ with a constant parameter $\eta$) and a Heaviside function $\mathscr{a}$ (switching from 0 to $I$ at time $t_s.$)
+An abrupt gas emission is modelled by a source term represented as a product of an approximated delta function $\delta_\eta (\mathbf{x} - \mathbf{x}_s)$ (centered at $\mathbf{x}_s$ with a constant parameter $\eta$) and a Heaviside function $\mathscr{a}$ (switching from 0 to $I$ at time $t_s$).
 In fact, this source term models the continuous emission of the gas at constant rate and fixed location.
 Basically $\mathscr{a}(t;t_s)$ is a function which activates the source, namely $\mathscr{a}(t;t_s) := IH(t - t_s)$ where $H(\cdot)$ is the Heaviside step function and $0 \leq t_s \leq T.$ We arrive to the complete source term model of the form
 
