@@ -115,7 +115,7 @@ We begin by presenting the basic ideas, approaches, and well-known results in th
 
 \subsection{The 3D Navier-Stokes equations}\label{3DNSgeneraldescription}
 
-The mathematical equations describing the motion of geophysical fluids such as oceans and the atmosphere are derived from the conservation laws of physics. Specifically, it is the conservation of momentum, mass and energy (and in some cases these are complemented with some additional components such as humidity, salt or chemical pollutants) that serve as a basis for the fundamental equations of fluid dynamics. The following model combines the Navier-Stokes equations (\ref{original_general_NS}) with a simplified version of the equation of state (equation (\ref{equation_of_state})) and with two continuity equations representing mass and temperature, respectively ((\ref{original_general_mass_cons}) and (\ref{original_general_temperature})). The system below provides a relatively comprehensive picture of the relationship between the most significant variables in atmosphere modelling, it is defined by
+The mathematical equations describing the motion of geophysical fluids such as oceans and the atmosphere are derived from the conservation laws of physics. Specifically, it is the conservation of momentum, mass and energy (and in some cases these are complemented with some additional components such as humidity, salt or chemical pollutants) that serve as a basis for the fundamental equations of fluid dynamics. The following system provides a relatively comprehensive picture of the relationship between the most significant variables in atmosphere modelling. It combines the Navier-Stokes equations with two continuity equations describing conservation of mass and thermal energy, respectively, and with a simplified version of the equation of state:
 
 \begin{equation} \label{original_general_NS}
   \partial_t (\rho \mathbf{v}) + \rho (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + \nabla q = \rho \mathbf{g} \quad \text{ in } \Omega_0 \times (0,T),
@@ -130,13 +130,13 @@ The mathematical equations describing the motion of geophysical fluids such as o
 \end{equation}
 
 \begin{equation}\label{equation_of_state}
-  \rho = f(\tau),
+  \rho = f(\tau).
 \end{equation}
 
-where $\mathbf{v}$ is the velocity function, $\rho$ is the density, $\nu = (\nu_1, \nu_2, \nu_3)$ represents the viscosity constants, and $q$ denotes the pressure. In the heat flow equation $\tau$ is the temperature, $Q$ represents the rate per unit volume of internal heat production, $k$ denotes thermal diffusivity, while the the heat capacity per unit volume, $\rho C_\rho$, is assumed to be constant.
+Here $\mathbf{v}$ is the velocity function, $\rho$ is the density, $\nu = (\nu_1, \nu_2, \nu_3)$ represents the viscosity constants, and $q$ denotes the pressure. In the heat flow equation $\tau$ is the temperature, $Q$ represents the rate per unit volume of internal heat production, $k$ denotes thermal diffusivity, while the the heat capacity per unit volume, $\rho C_\rho$, is assumed to be constant.
 For the moment being, we simply consider an open, bounded Lipschitzian domain $\Omega_0$ in $\mathbb{R}^3$ and for a given time $T$ a time interval $[0,T).$
 
-We complete equations (\ref{original_general_NS})--(\ref{original_general_temperature}) with four other important concepts: the Coriolis force, the so-called Boussinesq approximation, the notion of an isothermal process, and the incompressibility condition.
+We complete equations (\ref{original_general_NS})--(\ref{equation_of_state}) with four other important concepts: the Coriolis force, the so-called Boussinesq approximation, the notion of an isothermal process, and the incompressibility condition.
 
 \begin{enumerate}
 
@@ -146,15 +146,15 @@ We complete equations (\ref{original_general_NS})--(\ref{original_general_temper
   \partial_t (\rho \mathbf{v}) + \rho (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + 2 \mathbf{\omega} \times \mathbf{v} + \nabla q = \rho \mathbf{g} \quad \text{ in } \Omega_0 \times (0,T).
 \end{equation}
 
-\item The Boussinesq approximation is a simplification used in the field of buoyancy-driven flows, it assumes a $\rho = \rho_0$ constant density with the exception of gravity-related terms and the equation of state. In other words, fluid density variations are considered exclusively in terms multiplied by the gravitational acceleration $\mathbf{g}$ and, of course, in the equation describing the $\rho$ -- $\tau$ relationship for the buoyancy terms. Specifically, in this approach on the one hand we assume that in the gravity - related terms the density has a linear dependence on the temperature fluctuation:
+\item The Boussinesq approximation is a simplification used in the field of buoyancy-driven flows, it assumes a $\rho \equiv \rho_0$ constant density with the exception of gravity-related terms and the equation of state. In other words, fluid density variations are considered exclusively in terms multiplied by the gravitational acceleration $\mathbf{g}$ and, of course, in the equation describing the $\rho$ -- $\tau$ relationship for the case of the buoyancy terms. Specifically, in this approach on the one hand we assume that in the gravity - related terms the density has a linear dependence on the temperature fluctuation:
 
 \begin{equation}
   \rho = \rho_0 - \Xi \rho_0(\tau-\tau_0),
 \end{equation}
 
-where $\tau_0$ is a reference temperature value, and $\Xi$ is a constant coefficient. On the other hand, as explained before, in all remaining terms we take $\rho = \rho_0.$ Without the loss of generality we set the density value to be one: $\rho_0 = 1.$
+where $\tau_0$ is a reference temperature value, and $\Xi$ is a constant coefficient. On the other hand, as explained before, in all remaining terms we take $\rho \equiv \rho_0.$ Without the loss of generality we set this latter constant density value to one: $\rho_0 \equiv 1.$
 
-Boussinesq flows include gas motions in standard conditions and low-speed fluid flows where the Mach number is small. Specifically, the approximation is reasonable to use in ocean circulation models and to study atmospheric phenomena: the Boussinesq approximation results to be highly accurate for these processes. The final model (a.k.a. the Boussinesq equations of the atmosphere) is described by the system
+Boussinesq flows include gas motions in standard conditions and low-speed fluid flows where the Mach number is small. In particular, the approximation is reasonable to use in ocean circulation models and in studies in the field of atmospheric phenomena: the Boussinesq approximation results to be highly accurate for these processes. The final model (a.k.a. the Boussinesq equations of the atmosphere) is described by the system
 
 \begin{equation} \label{original_general_NS_boussinesq}
   \partial_t \mathbf{v} + (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + 2 \mathbf{\omega} \times \mathbf{v} + \nabla q = \rho \mathbf{g} \quad \text{ in } \Omega_0 \times (0,T),
@@ -172,7 +172,7 @@ Boussinesq flows include gas motions in standard conditions and low-speed fluid 
   \rho = \rho_0 - \Xi \rho_0(\tau-\tau_0).
 \end{equation}
 
-\item The second simplification we make is to consider an isothermal process, i.e. a process where the fluid temperature remains constant. It follows immediately from (\ref{rho_boussinesq}) that combining the Boussinesq approximation with a $\tau \equiv \tau_0$ tempreature we arrive to a constant density $\rho = \rho_0$ in all terms on the entire $\Omega_0 \times (0,T)$ domain. From this point we remove $\tau$ from the set of functions we are working with and our system is reduced to the equations describing velocity and pressure:
+\item The second simplification we make is to consider an isothermal process, i.e. a process where the fluid temperature remains constant. It follows immediately from (\ref{rho_boussinesq}) that combining the Boussinesq approximation with a $\tau \equiv \tau_0$ tempreature we arrive to a constant density $\rho \equiv \rho_0$ in all terms on the entire $\Omega_0 \times (0,T)$ domain. Thus, from this point we remove $\tau$ from the set of functions we are working with and our system is reduced to the equations describing velocity and pressure:
 
 \begin{equation} \label{original_general_NS_isothermal}
   \partial_t \mathbf{v} + (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + 2 \mathbf{\omega} \times \mathbf{v} + \nabla q = \mathbf{g} \quad \text{ in } \Omega_0 \times (0,T),
@@ -182,7 +182,7 @@ Boussinesq flows include gas motions in standard conditions and low-speed fluid 
   \nabla \cdot \mathbf{v}  = 0 \quad \text{ in } \Omega_0 \times (0,T).
 \end{equation}
 
-\item Because of its importance, we separately highlight the incompressibility condition (\ref{original_general_mass_cons_boussinesq}). As we have seen, this is a direct consequence of the Boussinesq approximation. The constraint for the fluid flow $\mathbf{v}$ to be solenoidal --- i.e. the $\text{div}(\mathbf{v})(t,x) = 0$ divergence-free condition --- is equivalent to requiring that the volume of any fluid element is constant in time (see \cite{boyer2012mathematical} for example). Note in particular that the divergence-free condition is nothing less than a new equation that the velocity function (without the additional degree of freedom that the presence of $\rho$ contributed to the general, compressible equations (\ref{original_general_NS}), (\ref{original_general_mass_cons})) now has to satisfy, and as a consequence the pressure is related differently to the other thermodynamical variables for the case of incompressible flows. In more detail, as we will see in our computations later, results and estimates on the divergence-free velocity function can be obtained separately from the pressure. We also highlight here that the pressure function is defined only up to a constant, or in other words, it is only the pressure gradient (i.e. the fluctuation of the pressure) that has a physical meaning, and not the absolute pressure value itself.
+\item Because of its importance, we separately discuss the incompressibility condition (\ref{original_general_mass_cons_boussinesq}). As we have seen, this is a direct consequence of the Boussinesq approximation. The constraint for the fluid flow $\mathbf{v}$ to be solenoidal --- i.e. the $\text{div}(\mathbf{v})(t,x) = 0$ divergence-free condition --- is equivalent to requiring that the volume of any fluid element is constant in time (see \cite{boyer2012mathematical} for example). Note in particular that the divergence-free condition is nothing less than a new equation that the velocity function now has to satisfy (without the additional degree of freedom that the presence of $\rho$ contributed to the general, compressible equations (\ref{original_general_NS}), (\ref{original_general_mass_cons})), and as a consequence the pressure is related differently to the other thermodynamical variables for the case of incompressible flows. In more detail, as we will see in our computations later, results and estimates on the divergence-free velocity function can be obtained separately from the pressure. We also highlight here that the pressure function is defined only up to a constant, or in other words, it is only the pressure gradient (i.e. the fluctuation of the pressure) that has a physical meaning, and not the absolute pressure value itself.
 
 \end{enumerate}
 
