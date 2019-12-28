@@ -115,7 +115,7 @@ We begin by presenting the basic ideas, approaches, and well-known results in th
 
 \subsection{The 3D Navier-Stokes equations}\label{3DNSgeneraldescription}
 
-The mathematical equations describing the motion of geophysical fluids such as oceans and the atmosphere are derived from the conservation laws of physics. Specifically, it is the conservation of momentum, mass and energy (and in some cases these are complemented with some additional components such as humidity, salt or chemical pollutants) that serve as a basis for the fundamental equations of fluid dynamics. The following model combines the Navier-Stokes equations with two continuity equations representing mass and temperature, respectively; and it provides a relatively comprehensive picture of the relationship between the most significant variables in atmosphere modelling. The system is defined by
+The mathematical equations describing the motion of geophysical fluids such as oceans and the atmosphere are derived from the conservation laws of physics. Specifically, it is the conservation of momentum, mass and energy (and in some cases these are complemented with some additional components such as humidity, salt or chemical pollutants) that serve as a basis for the fundamental equations of fluid dynamics. The following model combines the Navier-Stokes equations (\ref{original_general_NS}) with a simplified version of the equation of state (equation (\ref{equation_of_state})) and with two continuity equations representing mass and temperature, respectively ((\ref{original_general_mass_cons}) and (\ref{original_general_temperature})). The system below provides a relatively comprehensive picture of the relationship between the most significant variables in atmosphere modelling, it is defined by
 
 \begin{equation} \label{original_general_NS}
   \partial_t (\rho \mathbf{v}) + \rho (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + \nabla q = \rho \mathbf{g} \quad \text{ in } \Omega_0 \times (0,T),
@@ -127,6 +127,10 @@ The mathematical equations describing the motion of geophysical fluids such as o
 
 \begin{equation} \label{original_general_temperature}
   \partial_t \tau + \mathbf{v} \nabla \tau = k \Delta \tau + \frac{Q}{\rho C_\rho} \quad \text{ in } \Omega_0 \times (0,T),
+\end{equation}
+
+\begin{equation}\label{equation_of_state}
+  \rho = f(\tau),
 \end{equation}
 
 where $\mathbf{v}$ is the velocity function, $\rho$ is the density, $\nu = (\nu_1, \nu_2, \nu_3)$ represents the viscosity constants, and $q$ denotes the pressure. In the heat flow equation $\tau$ is the temperature, $Q$ represents the rate per unit volume of internal heat production, $k$ denotes thermal diffusivity, while the the heat capacity per unit volume, $\rho C_\rho$, is assumed to be constant.
@@ -142,7 +146,7 @@ We complete equations (\ref{original_general_NS})--(\ref{original_general_temper
   \partial_t (\rho \mathbf{v}) + \rho (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + 2 \mathbf{\omega} \times \mathbf{v} + \nabla q = \rho \mathbf{g} \quad \text{ in } \Omega_0 \times (0,T).
 \end{equation}
 
-\item The Boussinesq approximation is a simplification used in the field of buoyancy-driven flows. It assumes a $\rho = \rho_0$ constant density with the exception of gravity-related terms, i.e. fluid density variations are considered exclusively in terms multiplied by the gravitational acceleration $\mathbf{g}$. The Boussinesq approximation is applied in fluid dynamical problems where the temperature of the fluid is considered as a function too. Specifically, in this approach on the one hand we assume that in the gravity - related terms the density has a linear dependence on the temperature fluctuation:
+\item The Boussinesq approximation is a simplification used in the field of buoyancy-driven flows, it assumes a $\rho = \rho_0$ constant density with the exception of gravity-related terms and the equation of state. In other words, fluid density variations are considered exclusively in terms multiplied by the gravitational acceleration $\mathbf{g}$ and, of course, in the equation describing the $\rho$ -- $\tau$ relationship for the buoyancy terms. Specifically, in this approach on the one hand we assume that in the gravity - related terms the density has a linear dependence on the temperature fluctuation:
 
 \begin{equation}
   \rho = \rho_0 - \Xi \rho_0(\tau-\tau_0),
@@ -150,7 +154,7 @@ We complete equations (\ref{original_general_NS})--(\ref{original_general_temper
 
 where $\tau_0$ is a reference temperature value, and $\Xi$ is a constant coefficient. On the other hand, as explained before, in all remaining terms we take $\rho = \rho_0.$ Without the loss of generality we set the density value to be one: $\rho_0 = 1.$
 
-Boussinesq flows include gas motions in standard conditions and low-speed fluid flows where the Mach number is small. Specifically, the approximation is reasonable to use in ocean circulation models and to study atmospheric phenomena: the Boussinesq approximation results to be highly accurate for these processes. The final model is described by the system
+Boussinesq flows include gas motions in standard conditions and low-speed fluid flows where the Mach number is small. Specifically, the approximation is reasonable to use in ocean circulation models and to study atmospheric phenomena: the Boussinesq approximation results to be highly accurate for these processes. The final model (a.k.a. the Boussinesq equations of the atmosphere) is described by the system
 
 \begin{equation} \label{original_general_NS_boussinesq}
   \partial_t \mathbf{v} + (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + 2 \mathbf{\omega} \times \mathbf{v} + \nabla q = \rho \mathbf{g} \quad \text{ in } \Omega_0 \times (0,T),
