@@ -126,10 +126,10 @@ The mathematical equations describing the motion of geophysical fluids such as o
 \end{equation}
 
 \begin{equation} \label{original_general_temperature}
-  \partial_t T + \mathbf{v} \nabla T = k \Delta T + \frac{Q}{\rho C_\rho} \quad \text{ in } \Omega_0 \times (0,T),
+  \partial_t \tau + \mathbf{v} \nabla \tau = k \Delta \tau + \frac{Q}{\rho C_\rho} \quad \text{ in } \Omega_0 \times (0,T),
 \end{equation}
 
-where $\mathbf{v}$ is the velocity function, $\rho$ is the density, $\nu = (\nu_1, \nu_2, \nu_3)$ represents the viscosity constants, and $q$ denotes the pressure. In the heat flow equation $T$ is the temperature, $Q$ represents the rate per unit volume of internal heat production, $k$ denotes thermal diffusivity, while the the heat capacity per unit volume, $\rho C_\rho$, is assumed to be constant.
+where $\mathbf{v}$ is the velocity function, $\rho$ is the density, $\nu = (\nu_1, \nu_2, \nu_3)$ represents the viscosity constants, and $q$ denotes the pressure. In the heat flow equation $\tau$ is the temperature, $Q$ represents the rate per unit volume of internal heat production, $k$ denotes thermal diffusivity, while the the heat capacity per unit volume, $\rho C_\rho$, is assumed to be constant.
 For the moment being, we simply consider an open, bounded Lipschitzian domain $\Omega_0$ in $\mathbb{R}^3$ and for a given time $T$ a time interval $[0,T).$
 
 We complete equations (\ref{original_general_NS})--(\ref{original_general_temperature}) with four other important concepts: the Coriolis force, the so-called Boussinesq approximation, the notion of an isothermal process, and the incompressibility condition.
@@ -145,10 +145,10 @@ We complete equations (\ref{original_general_NS})--(\ref{original_general_temper
 \item The Boussinesq approximation is a simplification used in the field of buoyancy-driven flows. It assumes a $\rho = \rho_0$ constant density with the exception of gravity-related terms, i.e. fluid density variations are considered exclusively in terms multiplied by the gravitational acceleration $\mathbf{g}$. The Boussinesq approximation is applied in fluid dynamical problems where the temperature of the fluid is considered as a function too. Specifically, in this approach on the one hand we assume that in the gravity - related terms the density has a linear dependence on the temperature fluctuation:
 
 \begin{equation}
-  \rho = \rho_0 - \Xi \rho_0(T-T_0),
+  \rho = \rho_0 - \Xi \rho_0(\tau-\tau_0),
 \end{equation}
 
-where $T_0$ is a reference temperature value, and $\Xi$ is a constant coefficient. On the other hand, as explained before, in all remaining terms we take $\rho = \rho_0.$ Without the loss of generality we set the density value to be one: $\rho_0 = 1.$
+where $\tau_0$ is a reference temperature value, and $\Xi$ is a constant coefficient. On the other hand, as explained before, in all remaining terms we take $\rho = \rho_0.$ Without the loss of generality we set the density value to be one: $\rho_0 = 1.$
 
 Boussinesq flows include gas motions in standard conditions and low-speed fluid flows where the Mach number is small. Specifically, the approximation is reasonable to use in ocean circulation models and to study atmospheric phenomena: the Boussinesq approximation results to be highly accurate for these processes. The final model is described by the system
 
@@ -161,14 +161,14 @@ Boussinesq flows include gas motions in standard conditions and low-speed fluid 
 \end{equation}
 
 \begin{equation} \label{original_general_temperature_boussinesq}
-  \partial_t T + \mathbf{v} \nabla T = k \Delta T + Q \quad \text{ in } \Omega_0 \times (0,T),
+  \partial_t \tau + \mathbf{v} \nabla \tau = k \Delta \tau + Q \quad \text{ in } \Omega_0 \times (0,T),
 \end{equation}
 
 \begin{equation}\label{rho_boussinesq}
-  \rho = \rho_0 - \Xi \rho_0(T-T_0).
+  \rho = \rho_0 - \Xi \rho_0(\tau-\tau_0).
 \end{equation}
 
-\item The second simplification we make is to consider an isothermal process, i.e. a process where the fluid temperature remains constant. It follows immediately from (\ref{rho_boussinesq}) that combining the Boussinesq approximation with a $T \equiv T_0$ tempreature we arrive to a constant density $\rho = \rho_0$ in all terms on the entire $\Omega_0 \times (0,T)$ domain. From this point we remove $T$ from the set of functions we are working with and our system is reduced to the equations describing velocity and pressure:
+\item The second simplification we make is to consider an isothermal process, i.e. a process where the fluid temperature remains constant. It follows immediately from (\ref{rho_boussinesq}) that combining the Boussinesq approximation with a $\tau \equiv \tau_0$ tempreature we arrive to a constant density $\rho = \rho_0$ in all terms on the entire $\Omega_0 \times (0,T)$ domain. From this point we remove $\tau$ from the set of functions we are working with and our system is reduced to the equations describing velocity and pressure:
 
 \begin{equation} \label{original_general_NS_isothermal}
   \partial_t \mathbf{v} + (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + 2 \mathbf{\omega} \times \mathbf{v} + \nabla q = \mathbf{g} \quad \text{ in } \Omega_0 \times (0,T),
