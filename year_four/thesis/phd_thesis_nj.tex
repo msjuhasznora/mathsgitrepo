@@ -843,8 +843,16 @@ In this section we describe the weak formulation of the merged equations in both
   \end{definition}
   
   Note that since in our case the source term $s^\epsilon$ is given by (\ref{approxsourceterm}), the last term in (\ref{anisotropicWF_C}) is well defined. If we use a source function of a different and more general form, it needs to satisfy the $L_t^2 L_x^2$ boundedness criteria for the weak formulation to make sense.
+  
+  Regarding the smoothness of the initial data, we use the
+  
+  \begin{equation}\label{initialregularities_weak_gfc}
+    \mathbf{u}_0 \in L^2 (\Omega), c_0 \in L^2 (\Omega)
+  \end{equation}
+  
+initial regularities classically used in the weak solution framework.
 
-We will omit the proof of the existence of weak solutions (see Definition \ref{definitionanisotropicWF_gfc}.) for the anisotropic system (\ref{ANSC1_coordinates_GFC}) - (\ref{ANSC8_coordinates_GFC}) since it follows by standard finite-dimensional Galerkin approximation.
+We will omit the proof of the existence of weak solutions (see Definition \ref{definitionanisotropicWF_gfc}.) for the anisotropic system (\ref{ANSC1_coordinates_GFC}) - (\ref{ANSC8_coordinates_GFC}) since it follows by standard finite-dimensional Galerkin approximation using (\ref{initialregularities_weak_gfc}).
 
 Now we are ready to state our main result.
   
@@ -1438,7 +1446,7 @@ We highlight the difference between the boundary conditions of the original, eas
 
 The difference in the kind of boundary conditions we can "afford" to have on the lower boundary for the concentration comes from the energy inequality. In the east-north-upwards oriented coordinate system we do not have an $\epsilon$ in the diffusion matrix, and thus, having any of the $\partial_i c^\epsilon$ terms different from 0 does not create any problems, not even for the case of the ocean where $\partial_3 c^\epsilon$ becomes nonzero as well (they are required however to be bounded of course). On the other hand, the downwind-matching coordinate system brings in an $\epsilon$ term in front of the $K_1$ diffusion coefficient, which makes the model more sensitive to assigning boundary conditions for $c^\epsilon.$ This means that we can not anymore have the relatively relaxed boundedness requirement for any $\partial_i c^\epsilon$ except for $i=1.$ All other $\partial_2 c^\epsilon, \partial_3 c^\epsilon$ derivatives must be zero on the lower boundary, otherwise they would result in an $(\epsilon - \text{const.})$ negative term appearing in the energy inequality --- for more details see the proof of the weak convergence theorem of this chapter in Section $\ref{proof_weak_dwmc}$. This also means that we will consider exclusively the inland domain scenario for the case of this coordinate system.
 
-Concerning the initial data, we set $${\mathbf{u}_h}_0 \in H^1 (\Omega), {u_3}_0 \in L^2(\Omega) \text{ with } \nabla \cdot \mathbf{u}_0 = 0, \text{ and } c_0 \in L^2 (\Omega).$$ We highlight here that we are still working in classical Leray framework of weak solutions, even though we use an $H^1(\Omega)$ regularity assumption on ${\mathbf{u}_h}_0,$ which is stronger than the more usual $L^2$ space regularity requirement for weak solutions (see the assumptions of Theorem \ref{maintheorem_weak_GFC} in Chapter \ref{geophysicalchapter}, or \cite{azerad2001mathematical} for example). The reason we need this stronger regularity is to counterbalance the decreased control we have on the concentration function due to the coordinate choice, but overall this does not lead us out of the field of weak solutions.
+Concerning the initial data, we set $${\mathbf{u}_h}_0 \in H^1 (\Omega), {u_3}_0 \in L^2(\Omega) \text{ with } \nabla \cdot \mathbf{u}_0 = 0, \text{ and } c_0 \in L^2 (\Omega).$$ We highlight here that we are still working in classical Leray framework of weak solutions, even though we use an $H^1(\Omega)$ regularity assumption on ${\mathbf{u}_h}_0,$ which is stronger than the more usual $L^2$ space regularity requirement for weak solutions (see (\ref{initialregularities_weak_gfc}) in Chapter \ref{geophysicalchapter}, or \cite{azerad2001mathematical} for example). The reason we need this stronger regularity is to counterbalance the decreased control we have on the concentration function due to the coordinate choice, but overall this does not lead us out of the field of weak solutions.
 
 Finally, the $s^\epsilon$ and $s$ source terms are formulated analogously to the geophysical case (Section \ref{eqsdescribingatmpluspollution_gfc}): the hydrostatic $s$ function is defined as a point source, while the anisotropic source function $s^\epsilon$ is modelled with a parametrised nascent delta function. For simplicity we assume here that the pollution process begins at $t = 0,$ thus we omit the multiplication by a Heaviside function representing the activation of the source, furthermore without loss of generality we assume that the source is centred in $x=0$ and we set the intensity constant $I$ to be $1.$
 
