@@ -1171,7 +1171,7 @@ with
 
 \[ b = b_1 + K_c b_2\]
 
-\[ b_1 (U, \tilde{U}, U^\#) = - \int_\Omega (\mathbf{u}_h \mathbf{\tilde{u}}_h + \mathbf{u}_h \tilde{u}_3) \nabla \mathbf{u}_H^\# \]
+\[ b_1 (U, \tilde{U}, U^\#) = - \int_\Omega (\mathbf{u}_h \mathbf{\tilde{u}}_h + \mathbf{u}_h \tilde{u}_3) \nabla \mathbf{u}_h^\# \]
 
 \[ b_2 (U, \tilde{U}, U^\#) = -  \int_\Omega (\mathbf{u}_h \tilde{c} + u_3 \tilde{c}) \nabla c^\# \]
 
@@ -1318,7 +1318,7 @@ which is the same as (\ref{timedependentWFE}), and which thus finally leads us t
 
 \begin{theorem}
 
-Given $T > 0$, $U_0 \in H,$ and a source term $s = \delta$ or $s \in L^2(\Omega),$ then there exists $(\mathbf{u}, c)$ with $u_3 = - \int_0^T \nabla \cdot \mathbf{u}_h$, $\mathbf{u} = (\mathbf{u}_h, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_h \in L^\infty (0,T; L^2(\Omega)^2),$ and $c \in L^\infty (0,T; L^2 (\Omega)) \cap L^2( 0,T; H^1(\Omega))$, which is solution to (\ref{hydrostaticWF_U})-(\ref{hydrostaticWF_C}).
+Given $T > 0$, $U_0 \in H,$ and a source term $s = \delta$ or $s \in L^2(\Omega),$ then there exists $(\mathbf{u}, c)$ with $u_3 = - \int_0^z \nabla_h \cdot \mathbf{u}_h$, $\mathbf{u} = (\mathbf{u}_h, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_h \in L^\infty (0,T; L^2(\Omega)),$ and $c \in L^\infty (0,T; L^2 (\Omega)) \cap L^2( 0,T; H^1(\Omega))$, which is solution to (\ref{hydrostaticWF_U})-(\ref{hydrostaticWF_C}).
 
 \end{theorem}
 
