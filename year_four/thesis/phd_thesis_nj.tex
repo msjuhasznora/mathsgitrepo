@@ -782,7 +782,7 @@ In this section we describe the weak formulation of the merged equations in both
   
   Then the weak formulation of the hydrostatic system (\ref{HNSC1_coordinates_GFC}) - (\ref{HNSC8_coordinates_GFC}) takes the following form.
   
-  \begin{definition} \label{definitionhydrostaticWF}
+  \begin{definition} \label{definitionhydrostaticWF_gfc}
   
   Find $(\mathbf{u}, c)$ such that $\mathbf{u} = (\mathbf{u}_h, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_h \in L^\infty (0,T; L^2(\Omega)^2),$ and $c \in L^\infty(0,T; L^2(\Omega))$ with $c \in L^2(0,T; H^1(\Omega))$, such that
   
@@ -1100,13 +1100,13 @@ In this section for completeness we sketch the proof of the existence of weak so
 
 The idea is that the polluted atmosphere can be viewed as the air-analogous version of the salty sea water in terms of the equations that represent it. In both cases we have a fluid which can be seen approximately as a homogenous incompressible fluid carrying some other particles in a significant concentration, the basis fluid motion is well described by the incompressible Navier-Stokes equations, and the additional concentration is described by an advection-diffusion equation. 
 
-The paper of \cite{temam2005some} provides an existence result for an arbitrary time interval $[0, t_1]$ for the system describing the salty ocean water with temperature. The structure of the equations themselves describing the system is essentially the same, if we drop the equation describing the temperature, we basically arrive to the same system that describes the polluted atmosphere.
+\cite{temam2005some} provides an existence result for an arbitrary time interval $[0, t_1]$ for the system describing the salty ocean water with temperature. The structure of the equations themselves describing the system is essentially the same, if we drop the equation describing the temperature, we basically arrive to the same system that describes the polluted atmosphere.
 
 The main difference consists in the boundary conditions: on every boundary they use a zero flux for the salinity. This coincides with our lower boundary conditions, but on the lateral boundary we use a fix constant.
 
-We will follow step by step the structure of the proof in \cite{temam2005some}, redefining the necessary quantities to be valid for our case and verify that the proof holds in the case of the polluted atmosphere as well (this is necessary not only because of using altered boundary conditions but also because the regularities of the functions are different in some cases).
+We will follow the structure of the proof in \cite{temam2005some}, we redefine the necessary quantities in order to be valid for our case and we verify that the proof holds in the case of the polluted atmosphere as well. This is necessary not only because of the altered boundary conditions but also because the regularities of the functions are different in some cases.
 
-\textbf{Step 1.} Firstly we redefine the norms and the functional setting in order to make them match our system.
+\textbf{Step 1.} Firstly we redefine the norms and the functional setting to make them match our system.
 
 Throughout this section we will use the $V = V_1 \times V_2, H = H_1 \times H_2, \mathcal{V} = \mathcal{V}_1 \times \mathcal{V}_2,$ and $V_{(2)}$ function spaces, where $V$ and $H$ essentially represent $H^1$ and $L^2$ regularities, while $\mathcal{V}$ and $V_{(2)}$ stand for a subset of the $C^{\infty}$ function space and its closure in $H^2,$ respectively. In more details, we introduce
 
@@ -1123,23 +1123,23 @@ and
 $$ H_2 = L^2(\Omega) $$
 
 %% \mathcal{V} --- the C^infty version of V
-Let $\mathcal{V}_1$ be the space of $C^\infty$ vector functions $\mathbf{u}_H$ which vanish in a neighborhood of $\Gamma$ and such that $$\nabla \cdot \int_h^0 \mathbf{u}_H \diff z = 0,$$ and let $\mathcal{V}_2$ denote the $C^\infty$ functions on $\bar{\Omega}$.
+Let $\mathcal{V}_1$ be the space of $C^\infty$ vector functions $\mathbf{u}_h$ which vanish in a neighborhood of $\Gamma$ and such that $$\nabla \cdot \int_h^0 \mathbf{u}_h \diff z = 0,$$ and let $\mathcal{V}_2$ denote the $C^\infty$ functions on $\bar{\Omega}$.
 
 Finally we introduce the space $V_{(2)}:$
 %% The closure in H^2
 $$ V_{(2)} \text{ is the closure of } \mathcal{V} \text{ in } (H^2(\Omega))^3.$$
 
-We denote by $U$ the vector $(\mathbf{u}_H, C).$ The scalar products and norms in the case of the polluted atmosphere are defined as follows.
+We denote by $U$ the vector $(\mathbf{u}_h, c).$ The scalar products and norms in the case of the polluted atmosphere are defined as follows.
 
-\[ ((U, \tilde{U})) = ((\mathbf{u}_H, \mathbf{\tilde{u}}_H))_1 + K_C ((C, \tilde{C}))_2 \]
+\[ ((U, \tilde{U})) = ((\mathbf{u}_h, \mathbf{\tilde{u}}_h))_1 + K_c ((c, \tilde{c}))_2 \]
 
-\[ ((\mathbf{u}_H, \mathbf{\tilde{u}}_H))_1 = \int_\Omega \nabla_\nu \mathbf{u}_H \nabla_\nu \mathbf{\tilde{u}}_H \diff \omega \]
+\[ ((\mathbf{u}_h, \mathbf{\tilde{u}}_h))_1 = \int_\Omega \nabla_\nu \mathbf{u}_h \nabla_\nu \mathbf{\tilde{u}}_h \diff \omega \]
 
-\[ ((C, \tilde{C}))_2 = \int _\Omega \big  (\nabla C)^T \mathbf{M} \nabla \tilde{C} \diff \omega \]
+\[ ((c, \tilde{c}))_2 = \int _\Omega \big  (\nabla c)^T \mathbf{M} \nabla \tilde{c} \diff \omega \]
 
 \[\norm{U} = ((U,U)) ^ {1/2}\]
 
-\[ (U, \tilde{U})_H = \int _\Omega \big [ -\mathbf{u}_H \mathbf{\tilde{u}}_H - K_C C \tilde{C} \big ] \diff \omega \]
+\[ (U, \tilde{U})_H = \int _\Omega \big [ -\mathbf{u}_h \mathbf{\tilde{u}}_h - K_c c \tilde{c} \big ] \diff \omega \]
 
 \[\abs{U}_H = \abs{(U,U)_H}^{1/2}\]
 
@@ -1147,37 +1147,37 @@ We denote by $U$ the vector $(\mathbf{u}_H, C).$ The scalar products and norms i
 
 %% make a comment about the regularities and why it is fine to use the time derivative here.
 \begin{equation} \label{EXISTENCEFORMAT}
-  \bigg ( \frac{\diff}{\diff t} U, \tilde{U} \bigg ) _H + a(U, \tilde{U}) + b(U,U,\tilde{U}) + e(U, \tilde{U}) = l(\tilde{U}) \\
+  \bigg ( \frac{\diff}{\diff t} U, \tilde{U} \bigg )_H + a(U, \tilde{U}) + b(U,U,\tilde{U}) + e(U, \tilde{U}) = l(\tilde{U}) \\
 \end{equation}
 
 with
 
-\[ a(U,\tilde{U}) = a_1 (U, \tilde{U}) + K_C a_2 (U, \tilde{U})\]
+\[ a(U,\tilde{U}) = a_1 (U, \tilde{U}) + K_c a_2 (U, \tilde{U})\]
 
-\[ a_1 (U, \tilde{U}) = \int_\Omega \nabla_\nu \mathbf{u}_H \nabla_\nu \mathbf{\tilde{u}}_H \diff \omega \]
+\[ a_1 (U, \tilde{U}) = \int_\Omega \nabla_\nu \mathbf{u}_h \nabla_\nu \mathbf{\tilde{u}}_h \diff \omega \]
 
-\[ a_2 (U, \tilde{U}) = \int_\Omega (\nabla C)^T \mathbf{M} \nabla \tilde{C} \diff \omega \]
+\[ a_2 (U, \tilde{U}) = \int_\Omega (\nabla c)^T \mathbf{M} \nabla \tilde{c} \diff \omega \]
 
-\[ b = b_1 + K_C b_2\]
+\[ b = b_1 + K_c b_2\]
 
-\[ b_1 (U, \tilde{U}, U^\#) = - \int_\Omega (\mathbf{u}_H \mathbf{\tilde{u}}_H + \mathbf{u}_H \tilde{u}_3) \nabla \mathbf{u}_H^\# \]
+\[ b_1 (U, \tilde{U}, U^\#) = - \int_\Omega (\mathbf{u}_h \mathbf{\tilde{u}}_h + \mathbf{u}_h \tilde{u}_3) \nabla \mathbf{u}_H^\# \]
 
-\[ b_2 (U, \tilde{U}, U^\#) = -  \int_\Omega (\mathbf{u}_H \tilde{C} + u_3 \tilde{C}) \nabla C^\# \]
+\[ b_2 (U, \tilde{U}, U^\#) = -  \int_\Omega (\mathbf{u}_h \tilde{c} + u_3 \tilde{c}) \nabla c^\# \]
 
-\[ e(U, \tilde{U}) = \int_\Omega b(\mathbf{u}_H) \mathbf{\tilde{u}}_H \diff \omega \]
+\[ e(U, \tilde{U}) = \int_\Omega b(\mathbf{u}_h) \mathbf{\tilde{u}}_h \diff \omega \]
 
-\[ l(\tilde{U}) = - \int_\Omega S \tilde{C} \diff \omega + \big[((\nabla C)^ T \mathbf{M}) \tilde{C} \vec{\mathbf{1}} \big] _{\Gamma_G}. \]
+\[ l(\tilde{U}) = - \int_\Omega s \tilde{c} \diff \omega + \big[((\nabla c)^ T \mathbf{M}) \tilde{c} \vec{\mathbf{1}} \big] _{\Gamma_G}. \]
 
-Here the term $b(\mathbf{u}_H) = \alpha (-u_2, u_1)$ represents the cross product, and we use the fact that the vertical velocity $w$ can be expressed as $u_3 = u_3(\mathbf{u}_H)$ because the divergence of the three dimensional velocity is zero.
+Here the term $b(\mathbf{u}_h) = \alpha (-u_2, u_1)$ represents the cross product, and we use the fact that the vertical velocity can be expressed as $u_3 = u_3(\mathbf{u}_h)$ because the divergence of the three dimensional velocity is zero.
 
 \textbf{Step 3.} It is straightforward to see that $a$ is trilinear continuous, the coercivity of $a$ is also trivial, moreover $e$ is bilinear continuous and $e(U,U) = 0$.
 
 What changes slightly is the verification of the results available on the form $b,$ since the space derivatives in our case are applied on the test function. In the first two points below we discuss the difference in the proof that guarantees the trilinear continuity of $b,$ that is,
 
 \begin{equation} \label{trilincontb}
-  \lvert b(U, \tilde{U}, U^\# ) \rvert \leq \begin{cases}
-    c \norm{U} \big \|\tilde{U}\big \|  \big \| U^\#  \big \|_{V_{(2)}}, & \forall \text{ } U, \tilde{U} \in V, U^\# \in V_{(2)}, \\
-    c \norm{U} \big \|\tilde{U}\big \| _{V_{(2)}} \big \| U^\#  \big \|, & \forall \text{ } U, U^\# \in V, \tilde{U}  \in V_{(2)};
+  \lvert b(U, \tilde{U}, U^\# ) \rvert \lesssim \begin{cases}
+    \norm{U} \big \|\tilde{U}\big \|  \big \| U^\#  \big \|_{V_{(2)}}, & \forall \text{ } U, \tilde{U} \in V, U^\# \in V_{(2)}, \\
+    \norm{U} \big \|\tilde{U}\big \| _{V_{(2)}} \big \| U^\#  \big \|, & \forall \text{ } U, U^\# \in V, \tilde{U}  \in V_{(2)};
   \end{cases}
 \end{equation}
 
@@ -1185,34 +1185,34 @@ finally we also adjust the original steps that provide the antisymmetric propert
 
 \begin{itemize}
 
-  \item To prove the first bound for the case of $U, \tilde{U} \in V, U^\# \in V_{(2)}$ in (\ref{trilincontb}), let us consider the typical term $$ \int_\Omega u_3 \tilde{C} \nabla C^\# d \omega.$$ We observe that we need to change the original choice of constants $(p_1 = p_2 = 2, p_3 = \infty)$ for applying the H\"older inequality. We can not use the $L_\infty$ bound on the third term, since we would eventually arrive to $\big \| C^\# \big \| _{H^3}$, which would prevent us from closing the bound. Instead, we can use
+  \item To prove the first bound for the case of $U, \tilde{U} \in V, U^\# \in V_{(2)}$ in (\ref{trilincontb}), let us consider the typical term $$ \int_\Omega u_3 \tilde{c} \nabla c^\# d \omega.$$ We observe that we need to change the original choice of constants $(p_1 = p_2 = 2, p_3 = \infty)$ for applying the H\"older inequality. We can not use the $L_\infty$ bound on the third term, since we would eventually arrive to $\big \| c^\# \big \| _{H^3}$, which would prevent us from closing the bound. Instead, we can use
   
-  \[ \int_\Omega u_3 \tilde{C} \nabla C^\# d \omega \leq c  \norm{u_3}_{L^2} \big \| \tilde{C} \big \| _{L^4} \big \| \nabla C^\# \big \| _{L^4} \leq \]
-  \[ \leq c  \norm{U} \big \|\tilde{U}\big \|  \big \|\nabla C^\#  \big \|_{H^1} \leq c \norm{U} \big \|\tilde{U}\big \| \big \| U^\# \big \|_{V_{(2)}}, \]
+  \[ \int_\Omega u_3 \tilde{c} \nabla c^\# d \omega \lesssim \norm{u_3}_{L^2} \big \| \tilde{c} \big \| _{L^4} \big \| \nabla c^\# \big \| _{L^4} \]
+  \[ \lesssim \norm{U} \big \|\tilde{U}\big \|  \big \|\nabla c^\#  \big \|_{H^1} \lesssim \norm{U} \big \|\tilde{U}\big \| \big \| U^\# \big \|_{V_{(2)}}, \]
   
   which yields the needed result.
   
   \item Similarly, for the case of $U, U^\#  \in V, \tilde{U} \in V_{(2)}$ in the second inequality of (\ref{trilincontb}), we need to adjust the space choices according to the present scenario. With the updated $L^p$ constants we arrive to the
   
-  \[ \int_\Omega u_3 \tilde{C} \nabla C^\# d \omega \leq c  \big \| \tilde{C} \big \| _{L^\infty} \norm{ u_3}_{L^2}\big \| \nabla C^\# \big \| _{L^2}  \leq c \norm{U} \big \|\tilde{U}\big \| _{V^{(2)}} \big \| U^\# \big \| \]
+  \[ \int_\Omega u_3 \tilde{c} \nabla c^\# \diff \omega \lesssim {\| \tilde{c} \|}_{L^\infty} \norm{ u_3}_{L^2} {\| \nabla c^\# \|}_{L^2}  \lesssim \norm{U} { \| \tilde{U} \| }_{V^{(2)}} \| U^\# \| \]
   
   new inequality that provides the continuity property.
   
   \item The proof of $$b(U, \tilde{U}, U^\# ) = - b(U, U^\#, \tilde{U} ) \text{ for } U, \tilde{U}, U^\# \in V \text{ and } \tilde{U} \text{ or } U^\# \text{ in } V_{(2)}$$ can be derived by integration by parts as we have
   
-  \[ \int_0 ^T  (\mathbf{u} \nabla C, \tilde{C}) \diff t =  - \int_0 ^T  ( \mathbf{u} C, \nabla \tilde{C}) \diff t, \]
+  \[ \int_0 ^T  (\mathbf{u} \nabla c, \tilde{c}) \diff t =  - \int_0 ^T  ( \mathbf{u} c, \nabla \tilde{c}) \diff t, \]
   
   observing that the boundary terms disappear.
   
   \item To establish the improvement $$ \lvert b(U, \tilde{U}, U^\#) \rvert  \leq c   \norm{U}   \lvert \tilde{U} \rvert _H^{1/2}     \big \| \tilde{U} \big \| ^{1/2}    \big \| U^\# \big \| _{V_{(2)}}     $$ of the first bound for $U, \tilde{U} \in V, U^{\#} \in V_{(2)}$, we consider the most typical term and we bound it by
   
-  \[  \int_\Omega u_3 \tilde{C} \nabla C^\# \diff \omega  \leq  \norm{u_3}_{L^2} \big \| \tilde{C} \big \| _{L^3} \big \| \nabla C^\# \big \| _{L^6}.\]
+  \[  \int_\Omega u_3 \tilde{c} \nabla c^\# \diff \omega  \leq  \norm{u_3}_{L^2} \big \| \tilde{c} \big \| _{L^3} \big \| \nabla c^\# \big \| _{L^6}.\]
   
   Note that since our definition of the form $b$ is different from \cite{temam2005some}, thus we need to skip the switch of function arguments caused by the application of $ \lvert b(U, \tilde{U}, U^\#) \rvert = \lvert b(U, U^\#, \tilde{U}) \rvert$, otherwise the bound can not be closed.
   
-  Now, using the $\norm{\varphi}_{L^3} \leq c \norm{\varphi}_{L^2}^{1/2} \norm{\varphi}_{H^1}^{1/2}$ Sobolev-Ladyzhenskaya inequality in space dimension $3,$ we can bound this term by
+  Now, using the $\norm{\varphi}_{L^3} \lesssim \norm{\varphi}_{L^2}^{1/2} \norm{\varphi}_{H^1}^{1/2}$ Sobolev-Ladyzhenskaya inequality in space dimension $3,$ we can bound this term by
   
-  \[ c \norm{\mathbf{u}_H} \big \| U^\# \big \| _{V_{(2)}} \lvert \tilde{U} \rvert ^ {1/2} \big \| \tilde{U} \big \| ^{1/2} ,\]
+  \[ \norm{\mathbf{u}_h} \big \| U^\# \big \| _{V_{(2)}} \lvert \tilde{U} \rvert ^ {1/2} \big \| \tilde{U} \big \| ^{1/2} ,\]
   
   which gives the inequality.
 
@@ -1227,7 +1227,7 @@ The weak formulation is as follows.
 %% our concentration source is delta, S = \delta.  we need the L^2 regularity only for the weak formulation to make sense.
 
 \begin{definition}
-Given a source term $S = \delta$ or $S \in L^2(\Omega),$ find $U = (\mathbf{v}, C),$ that satisfies the hypothesis of Definition \ref{definitionhydrostaticWF} in the space dimensions, moreover
+Given a source term $s = \delta$ or $s \in L^2(\Omega),$ find $U = (\mathbf{u}_h, c),$ that satisfies the hypothesis of Definition \ref{definitionhydrostaticWF_gfc} in the space dimensions, moreover
 \begin{equation} \label{FWSTAT} a(U, \tilde{U}) + b(U,U, \tilde{U}) + e(U, \tilde{U}) = l(\tilde{U}) \end{equation}
 for every $\tilde{U} \in V_{(2)}.$
 \end{definition}
@@ -1237,7 +1237,7 @@ Note that the definition of the weak formulation in our case is a bit more gener
 We have the following theorem establishing the existence of solutions of the stationary equations, which can be proved by Galerkin method using the fundamental results we verified for the functions $a,b$ and $e$.
 
 \begin{theorem}
-We are given $S = \delta$ or $S$ in $L^2(\Omega),$ then the problem (\ref{FWSTAT}) possesses at least one solution $U \in V$ such that
+We are given $s = \delta$ or $s$ in $L^2(\Omega),$ then the problem (\ref{FWSTAT}) possesses at least one solution $U \in V$ such that
 
 \[ \norm{U} \leq \frac{1}{c_1} \norm{l}_{V'},\] where $c_1$ is the coercivity constant.
 
@@ -1259,7 +1259,7 @@ The weak formulation in the time-dependent case takes the following form.
 
 \begin{definition}
 
-Given $T,$ $U_0 \in H,$ and a source term $S = \delta$ or $S \in L^2(\Omega),$ find $U$ that satisfies the hypothesis of Definition \ref{definitionhydrostaticWF}, moreover
+Given $T,$ $U_0 \in H,$ and a source term $s = \delta$ or $s \in L^2(\Omega),$ find $U$ that satisfies the hypothesis of Definition \ref{definitionhydrostaticWF_gfc}, moreover
 
 \begin{equation} \label{timedependentWFE}
   \begin{split}
@@ -1294,7 +1294,7 @@ which is the same as (\ref{timedependentWFE}), and which thus finally leads us t
 
 \begin{theorem}
 
-Given $T > 0$, $U_0 \in H,$ and a source term $S = \delta$ or $S \in L^2(\Omega),$ then there exists $(\mathbf{u}, C)$ with $u_3 = - \int_0^T \nabla \cdot \mathbf{u}_H$, $\mathbf{u} = (\mathbf{u}_H, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_H \in L^\infty (0,T; L^2(\Omega)^2),$ and $C \in L^\infty (0,T; L^2 (\Omega)) \cap L^2( 0,T; H^1(\Omega))$, which is solution to (\ref{hydrostaticWF_U})-(\ref{hydrostaticWF_C}).
+Given $T > 0$, $U_0 \in H,$ and a source term $s = \delta$ or $s \in L^2(\Omega),$ then there exists $(\mathbf{u}, c)$ with $u_3 = - \int_0^T \nabla \cdot \mathbf{u}_h$, $\mathbf{u} = (\mathbf{u}_h, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_h \in L^\infty (0,T; L^2(\Omega)^2),$ and $c \in L^\infty (0,T; L^2 (\Omega)) \cap L^2( 0,T; H^1(\Omega))$, which is solution to (\ref{hydrostaticWF_U})-(\ref{hydrostaticWF_C}).
 
 \end{theorem}
 
