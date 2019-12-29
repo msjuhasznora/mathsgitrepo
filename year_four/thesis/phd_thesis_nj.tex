@@ -82,6 +82,8 @@ The research of DD and NJ leading to these results has received funding from the
 \item $\epsilon = \frac{\text{characteristic depth}}{\text{characteristic width}} = $ the aspect ratio,
 \item $\nu = $ viscosity,
 \item $\Omega^\epsilon, \Omega = $ the original and the rescaled ($\epsilon$-independent) domain, respectively,
+\item the constant $a$ denotes the hight of the domain (with the flexibility that depending on the case this could either mean the domain is composed as $M \times [0,a]$ or $M \times [-a, a]$),
+\item the letter $h$ in an index position stands for the horizontal part of the given function or operator,
 \item $\nabla$ stands for the gradient vector; specifically, $(\partial_x, \partial_y, \partial_z)$ before, and $(\partial_1, \partial_2, \partial_3)$ after rescaling,
 \item $\nabla_\nu = (\nu_x^{1/2} \partial_x, \nu_y^{1/2} \partial_y, \nu_z^{1/2} \partial_z)$ on $\Omega^\epsilon$, $\nabla_\nu = (\nu_1^{1/2} \partial_1, \nu_2^{1/2} \partial_2, \nu_3^{1/2} \partial_3)$ on the rescaled domain $\Omega,$
 \item $ \Delta_\nu$ stands for the anisotropic Laplacian operators $\nu_x \partial^2_{xx} + \nu_y \partial^2_{yy}  + \nu_z \partial^2_{zz}$ and $\nu_1 \partial^2_{11} + \nu_2 \partial^2_{22}  + \nu_3 \partial^2_{33}$ on the original and rescaled domains, respectively,
@@ -91,7 +93,7 @@ The research of DD and NJ leading to these results has received funding from the
 \item $\phi = l(y) = $ latitude, $f = $ the module of the Earth rotation vector
 \item $\alpha = -2 f \sin(\theta)\cos(\phi), \beta = 2 f \cos(\theta) \cos(\phi), \gamma = 2 f \sin(\phi),$
 %\item $\mathbf{c}(\mathbf{u}) = (\mathbf{c}_h (\mathbf{u}), c_3 (\mathbf{u}_h)) = ( -\gamma u_2^\epsilon + \epsilon \beta u_3^\epsilon, \alpha \epsilon u^\epsilon_3 - \gamma u_1^\epsilon, \alpha u^\epsilon_2 - \beta u_1^\epsilon),$ the Coriolis force terms 
-\item $\mathbf{K}$ represents the diagonal diffusion matrix,
+\item $\mathbf{K}$ represents the diffusion matrix,
 \item $( \cdot,\cdot) = $ the scalar product in $L^2(\Omega)^d, d \geq 1$ or the duality $L^p (\Omega)$, $L^{p'} (\Omega),$
 \item $< \cdot,\cdot>_{\Gamma} = $ the scalar product or duality on the boundary curve $\Gamma$ ($H^{-1/2}(\Gamma)$, $H^{1/2}(\Gamma)$),
 \item $\mathbf{u}_h$ = the horizontal velocity components $(u_1, u_2),$
@@ -1094,6 +1096,7 @@ On the other hand, the term that took form in the original version as
 $\zeta M_{ij} \int_0 ^ t \frac{1}{2} \norm{c^\epsilon}^2 _{L^2 (\Gamma_G)} \diff \tau,$ now is present without the $M_{ij}$ coefficient, since that has been incorporated into the first term of the product in (\ref{boundI_3}) --- and as a consequence, $M_{ij}$ vanishes from the left-hand side of the energy inequality (\ref{finalformEIEQ_gfc}) as well.
 \end{remark}
 
+%%% EXISTENCE WEAK HYDROSTATIC %%%
 \section{The existence of weak solution of the hydrostatic system of the polluted atmosphere}\label{existenceweakhydrostatic}
 
 In this section for completeness we sketch the proof of the existence of weak solutions of the system (\ref{HNSC1_coordinates_GFC}) - (\ref{HNSC8_coordinates_GFC}).
@@ -1111,19 +1114,19 @@ We will follow the structure of the proof in \cite{temam2005some}, we redefine t
 Throughout this section we will use the $V = V_1 \times V_2, H = H_1 \times H_2, \mathcal{V} = \mathcal{V}_1 \times \mathcal{V}_2,$ and $V_{(2)}$ function spaces, where $V$ and $H$ essentially represent $H^1$ and $L^2$ regularities, while $\mathcal{V}$ and $V_{(2)}$ stand for a subset of the $C^{\infty}$ function space and its closure in $H^2,$ respectively. In more details, we introduce
 
 %% V --- hypothesis of Definition 1. We don't need to add the boundary zero conditions for the velocity or the L^2 regularity because they are all covered by H^1_Gamma.
-$$ V_1 = \{ \mathbf{u}_H \in H^1_{\Gamma_A} (\Omega) \times H^1_{\Gamma_A} (\Omega), \nabla \cdot \int_h^0 \mathbf{u}_H \diff z = 0  \}, $$
+$$ V_1 = \{ \mathbf{u}_h \in H^1_{\Gamma_A} (\Omega) \times H^1_{\Gamma_A} (\Omega), \nabla_h \cdot \int_0^a \mathbf{u}_h \diff z = 0  \}, $$
 
 $$ V_2 = H^1(\Omega), $$
 
 %% H is the space in where we take the inner product between dU / dt and tilde{U}, and where we take U_0 from, essentially the L^2 version of the V space.
-$$ H_1 =  \{ \mathbf{u}_H \in H^0_{\Gamma_A} (\Omega) \times H^0_{\Gamma_A} (\Omega), \nabla \cdot \int_h^0 \mathbf{u}_H \diff z = 0  \}, $$
+$$ H_1 =  \{ \mathbf{u}_h \in H^0_{\Gamma_A} (\Omega) \times H^0_{\Gamma_A} (\Omega), \nabla_h \cdot \int_0^a \mathbf{u}_h \diff z = 0  \}, $$
 
 and
 
 $$ H_2 = L^2(\Omega) $$
 
 %% \mathcal{V} --- the C^infty version of V
-Let $\mathcal{V}_1$ be the space of $C^\infty$ vector functions $\mathbf{u}_h$ which vanish in a neighborhood of $\Gamma$ and such that $$\nabla \cdot \int_h^0 \mathbf{u}_h \diff z = 0,$$ and let $\mathcal{V}_2$ denote the $C^\infty$ functions on $\bar{\Omega}$.
+Let $\mathcal{V}_1$ be the space of $C^\infty$ vector functions $\mathbf{u}_h$ which vanish in a neighborhood of $\Gamma$ and such that $$\nabla_h \cdot \int_0^a \mathbf{u}_h \diff z = 0,$$ and let $\mathcal{V}_2$ denote the $C^\infty$ functions on $\bar{\Omega}$.
 
 Finally we introduce the space $V_{(2)}:$
 %% The closure in H^2
@@ -1176,8 +1179,8 @@ What changes slightly is the verification of the results available on the form $
 
 \begin{equation} \label{trilincontb}
   \lvert b(U, \tilde{U}, U^\# ) \rvert \lesssim \begin{cases}
-    \norm{U} \big \|\tilde{U}\big \|  \big \| U^\#  \big \|_{V_{(2)}}, & \forall \text{ } U, \tilde{U} \in V, U^\# \in V_{(2)}, \\
-    \norm{U} \big \|\tilde{U}\big \| _{V_{(2)}} \big \| U^\#  \big \|, & \forall \text{ } U, U^\# \in V, \tilde{U}  \in V_{(2)};
+    \norm{U} \|\tilde{U} \|  {\| U^\#  \|}_{V_{(2)}}, & \forall \text{ } U, \tilde{U} \in V, U^\# \in V_{(2)}, \\
+    \norm{U} { \|\tilde{U} \|}_{V_{(2)}} \| U^\# \|, & \forall \text{ } U, U^\# \in V, \tilde{U}  \in V_{(2)};
   \end{cases}
 \end{equation}
 
@@ -1185,10 +1188,10 @@ finally we also adjust the original steps that provide the antisymmetric propert
 
 \begin{itemize}
 
-  \item To prove the first bound for the case of $U, \tilde{U} \in V, U^\# \in V_{(2)}$ in (\ref{trilincontb}), let us consider the typical term $$ \int_\Omega u_3 \tilde{c} \nabla c^\# d \omega.$$ We observe that we need to change the original choice of constants $(p_1 = p_2 = 2, p_3 = \infty)$ for applying the H\"older inequality. We can not use the $L_\infty$ bound on the third term, since we would eventually arrive to $\big \| c^\# \big \| _{H^3}$, which would prevent us from closing the bound. Instead, we can use
+  \item To prove the first bound for the case of $U, \tilde{U} \in V, U^\# \in V_{(2)}$ in (\ref{trilincontb}), let us consider the typical term $$ \int_\Omega u_3 \tilde{c} \nabla c^\# d \omega.$$ We observe that we need to change the original choice of constants $(p_1 = p_2 = 2, p_3 = \infty)$ for applying the H\"older inequality. We can not use the $L_\infty$ bound on the third term, since we would eventually arrive to ${ \| c^\# \|}_{H^3}$, which would prevent us from closing the bound. Instead, we can use
   
-  \[ \int_\Omega u_3 \tilde{c} \nabla c^\# d \omega \lesssim \norm{u_3}_{L^2} \big \| \tilde{c} \big \| _{L^4} \big \| \nabla c^\# \big \| _{L^4} \]
-  \[ \lesssim \norm{U} \big \|\tilde{U}\big \|  \big \|\nabla c^\#  \big \|_{H^1} \lesssim \norm{U} \big \|\tilde{U}\big \| \big \| U^\# \big \|_{V_{(2)}}, \]
+  \[ \int_\Omega u_3 \tilde{c} \nabla c^\# d \omega \lesssim \norm{u_3}_{L^2} {\| \tilde{c} \|}_{L^4} {\| \nabla c^\# \|}_{L^4} \]
+  \[ \lesssim \norm{U} \|\tilde{U} \| {\|\nabla c^\# \|}_{H^1} \lesssim \norm{U}  \|\tilde{U} \| {\| U^\# \|}_{V_{(2)}}, \]
   
   which yields the needed result.
   
@@ -1198,21 +1201,34 @@ finally we also adjust the original steps that provide the antisymmetric propert
   
   new inequality that provides the continuity property.
   
-  \item The proof of $$b(U, \tilde{U}, U^\# ) = - b(U, U^\#, \tilde{U} ) \text{ for } U, \tilde{U}, U^\# \in V \text{ and } \tilde{U} \text{ or } U^\# \text{ in } V_{(2)}$$ can be derived by integration by parts as we have
+  \item The proof of
+  
+  \begin{equation}
+    \begin{split}
+    & b(U, \tilde{U}, U^\# ) = - b(U, U^\#, \tilde{U} ) \text{ for \textit{i)} } U, \tilde{U}, U^\# \in V\\
+    & \text{ and \textit{ii)} } \tilde{U} \text{ or } U^\# \text{ is in } V_{(2)}
+    \end{split}
+  \end{equation}
+    
+  can be derived by integration by parts as we have
   
   \[ \int_0 ^T  (\mathbf{u} \nabla c, \tilde{c}) \diff t =  - \int_0 ^T  ( \mathbf{u} c, \nabla \tilde{c}) \diff t, \]
   
   observing that the boundary terms disappear.
   
-  \item To establish the improvement $$ \lvert b(U, \tilde{U}, U^\#) \rvert  \leq c   \norm{U}   \lvert \tilde{U} \rvert _H^{1/2}     \big \| \tilde{U} \big \| ^{1/2}    \big \| U^\# \big \| _{V_{(2)}}     $$ of the first bound for $U, \tilde{U} \in V, U^{\#} \in V_{(2)}$, we consider the most typical term and we bound it by
+  \item To establish the improvement
   
-  \[  \int_\Omega u_3 \tilde{c} \nabla c^\# \diff \omega  \leq  \norm{u_3}_{L^2} \big \| \tilde{c} \big \| _{L^3} \big \| \nabla c^\# \big \| _{L^6}.\]
+  $$ \lvert b(U, \tilde{U}, U^\#) \rvert \lesssim \norm{U} \lvert \tilde{U} \rvert _H^{1/2} \| \tilde{U} \| ^{1/2} \| U^\# \| _{V_{(2)}} $$
+  
+  of the first bound for $U, \tilde{U} \in V, U^{\#} \in V_{(2)}$, we consider the most typical term and we bound it by
+  
+  \[  \int_\Omega u_3 \tilde{c} \nabla c^\# \diff \omega \leq \norm{u_3}_{L^2} {\| \tilde{c} \|}_{L^3} {\| \nabla c^\# \|}_{L^6}.\]
   
   Note that since our definition of the form $b$ is different from \cite{temam2005some}, thus we need to skip the switch of function arguments caused by the application of $ \lvert b(U, \tilde{U}, U^\#) \rvert = \lvert b(U, U^\#, \tilde{U}) \rvert$, otherwise the bound can not be closed.
   
   Now, using the $\norm{\varphi}_{L^3} \lesssim \norm{\varphi}_{L^2}^{1/2} \norm{\varphi}_{H^1}^{1/2}$ Sobolev-Ladyzhenskaya inequality in space dimension $3,$ we can bound this term by
   
-  \[ \norm{\mathbf{u}_h} \big \| U^\# \big \| _{V_{(2)}} \lvert \tilde{U} \rvert ^ {1/2} \big \| \tilde{U} \big \| ^{1/2} ,\]
+  \[ \norm{\mathbf{u}_h} \| U^\# \| _{V_{(2)}} \lvert \tilde{U} \rvert ^ {1/2} \| \tilde{U} \| ^{1/2} ,\]
   
   which gives the inequality.
 
