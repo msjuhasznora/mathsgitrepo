@@ -362,13 +362,13 @@ while in the limit model the source term $s$ naturally stands for the $\delta$ d
     
 Eventually, note that it is convenient to reformulate (\ref{approxsourceterm}) in terms of $\epsilon$, which then will be the new parameter of the distribution describing the source. In other words, we choose $\eta$ to be $\epsilon$ and the following function to give shape to the source term:
 
-\[
+\begin{equation} \label{shapedefinition}
 \delta_\epsilon (x) = 
   \begin{cases}
        \frac{1}{\epsilon^3} \exp{\bigg ( \frac{1}{\abs{{\frac{x}{\epsilon}}}^2-1} \bigg ) } &\quad \abs{x} < \epsilon \\
        0 &\quad \abs{x} \geq \epsilon; \\
   \end{cases}
-\]
+\end{equation}
 
 and finally
 
@@ -847,7 +847,7 @@ We will omit the proof of the existence of weak solutions (see Definition \ref{d
 Now we are ready to state our main result.
   
 \begin{theorem} \label{maintheorem_weak_GFC}
-  Let $\mathbf{u}_0 \in L^2 (\Omega)$, with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 \cdot \mathbf{n} = 0$ on $\partial \Omega$; let $c_0 \in L^2 (\Omega)$, $c_0 = 0$ on $ \partial \Omega$, and assume that the boundary conditions (\ref{ANSC8_coordinates_GFC}) hold; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1_coordinates_GFC}) - (\ref{ANSC5_coordinates_GFC}) converge to a weak solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1_coordinates_GFC}) - (\ref{HNSC5_coordinates_GFC}).
+  Let $\mathbf{u}_0 \in L^2 (\Omega)$, with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 \cdot \mathbf{n} = 0$ on $\partial \Omega$; let $c_0 \in L^2 (\Omega)$, $c_0 = 0$ on $ \partial \Omega$, and assume that the boundary conditions (\ref{ANSC8_coordinates_GFC}) hold; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1_coordinates_GFC}) - (\ref{ANSC5_coordinates_GFC}) converges to a weak solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1_coordinates_GFC}) - (\ref{HNSC5_coordinates_GFC}).
 \end{theorem}
 
 %%% *** PROOF *** %%%
@@ -1001,7 +1001,7 @@ for $\iota^\epsilon(\xi)$. In order to do this, we estimate each term of $\iota^
   & (\mathbf{u}^\epsilon c^\epsilon, \nabla \tilde{c}) \leq \norm{\mathbf{u}^\epsilon}_{L^2} \norm{c^\epsilon}_{L^3}  \big \| \tilde{c} \big \| _{H^2} &\quad & \text{is bounded in $L^{4/3}(0,T).$}
 \end{align} 
 
-The first bound regarding the source term holds because of the $L^2_t L^2_x$ regularity of the source (see (\ref{sourcedefinition})); the bound of the linear term (\ref{lineartermboundgradC}) is a direct consequence of the Cauchy-Schwartz inequality; while the ultimate bound can be verified using (\ref{proposition1_gfc}) and (\ref{propositionExtra_gfc}), moreover considering the interpolation between $L^\infty(0,T; L^2)$ and $L^2(0,T; L^6),$ which yields that $c^\epsilon$ is in $L^4(0,T; L^3)$.
+The first bound regarding the source term holds because of the $L^2_t L^2_x$ regularity of the source (see (\ref{shapedefinition})); the bound of the linear term (\ref{lineartermboundgradC}) is a direct consequence of the Cauchy-Schwartz inequality; while the ultimate bound can be verified using (\ref{proposition1_gfc}) and (\ref{propositionExtra_gfc}), moreover considering the interpolation between $L^\infty(0,T; L^2)$ and $L^2(0,T; L^6),$ which yields that $c^\epsilon$ is in $L^4(0,T; L^3)$.
 
 Finally, as we have now showed (\ref{bound_iota}), we apply the H\"older inequality combined with this latter and arrive to
 
@@ -1016,7 +1016,7 @@ which gives the proof of the lemma.
 %%% *** CONCLUDING REMARKS *** %%%
 \section{Concluding remarks} \label{concludingremarks}
 
-We are finishing the theoretical part of this chapter briefly mentioning a few ideas regarding the physical aspects of the model and some additional choices concerning the source term specifically.
+In this section we collect some remarks completing the results obtained thus far. We briefly mention a few ideas regarding the physical aspects of the model, a generalisation possibility is explained for the diffusivity matrix, and we describe some additional choices concerning the source term specifically.
 
 \begin{remark}
 \normalfont
@@ -1039,19 +1039,24 @@ We are finishing the theoretical part of this chapter briefly mentioning a few i
 \end{tikzpicture}
 \end{figure}
 
-As we have mentioned previously, the generic definition of the $\boldsymbol{\sigma}$ boundary function and the structure of the proof makes it easy to consider a generalised model adapted for seaside conditions where the lower boundary consists of $\Gamma_G = \Gamma_E \cup \Gamma_I$ --- here $\Gamma_I$ is the interface between air and water where rigid and no-slip boundary conditions are switched for ones expressing interactions. The main difference regarding the concentration function is that the $\sigma_3$ sediment is not zero in this case. Since we never exploited $\sigma_3$ being zero in the inland scenario, and we only used the bounded nature of this function, the generalisation does not bring any additional challenge in this front. For the velocity function the wind traction is represented by the new boundary condition $\nu_3 \partial_3 \mathbf{u}^\epsilon_H = \theta_H, u_3 = 0$ with assuming a finite wind energy, i.e. the function $\theta$ being in $L^2(0,T; H^{-1/2}(\Gamma_I))$. This part of the work has already been done by \cite{azerad2001mathematical}.
+As we have mentioned previously, the generic definition of the $\boldsymbol{\sigma}$ boundary function and the structure of the proof makes it easy to consider a generalised model adapted for seaside conditions where the lower boundary consists of $\Gamma_G = \Gamma_E \cup \Gamma_I$ --- here $\Gamma_I$ is the interface between air and water where rigid and no-slip boundary conditions are switched for ones expressing interactions. The main difference regarding the concentration function is that the $\sigma_3$ sediment is not zero in this case. Since we never exploited $\sigma_3$ being zero in the inland scenario, and we only used the bounded nature of this function, the generalisation does not bring any additional challenge in this front.
+
+We also highlight that this will be not the case at all in the framework of downwind-matching coordinates (see (\ref{HNSC7-weak_coordinates_DWMC}) in the next chapter): the geophysical coordinate system enjoys the benefits of these relatively relaxed boundary conditions because of its more balanced continuity equation (i.e. all diffusion terms are present with a non-disappearing constant coefficient).
+
+For the velocity function the wind traction is represented by the new boundary condition $\nu_3 \partial_3 \mathbf{u}^\epsilon_H = \theta_H, u_3 = 0$ with assuming a finite wind energy, i.e. the function $\theta$ being in $L^2(0,T; H^{-1/2}(\Gamma_I))$. This part of the work has already been done in \cite{azerad2001mathematical}.
 \end{remark}
 
 \begin{remark}
-\normalfont In the paper \cite{temam2005some} it is suggested that the domain we work on has the form of $p_0 < p < p_1$, because for the thin portion of air between the earth and the isobar $p = p_1$, another specific simplified model would be necessary. This means that a way to make the model more precise is to cut the domain at an isobar a little bit off the physical ground. This would of course radically change the boundary conditions we use for the functions (in fact it is not trivial how to change them for this case), because it would take away the advantage of having a wall-like, natural and physical boundary condition for the domain we work on. If we are positively above the ground, $\partial_3 c = 0$ would represent a strange reflective layer.
+\normalfont
+Obviously, there are plenty of improvement possibilities to create a physically more accurate model describing further variables and respecting additional processes taking place in the real-world atmosphere. Many of these ideas sound indeed simple from a physical point of view, but as soon as we try to include them in the model in terms of boundary conditions, or work with them on the level of inequalities and computations, they can often turn out to be quite a challenge. In some sense the entire Chapter \ref{DWMCchapter} is an immediate example for this. The idea of negligible diffusion effects in the downwind direction is easy to comprehend --- however, the impact that a single additional $\epsilon$ multiplier has on the upper bound constructions is so significant as if, in some sense, we were working on a different model. To mention another example we take the approach of \cite{temam2005some} suggesting to take the $p_0 < p < p_1$ pressure condition to characterise the domain we work on. The reason for this is that if we are considering a model that is constructed more rigorously from a physical point of view, then the thin portion of air between the earth and the isobar $p = p_1$ would need another specific model. This means that a way to make the model more precise is to cut the domain at an isobar a little bit off the physical ground. This would, of course, radically change the boundary conditions, as it would take away the advantage of having a wall-like, natural and physical boundary condition for the domain. If the domain's lower boundary were defined to be positively above the ground, then the boundary conditions would need to be updated --- but the energy inequality and the boundedness results are affected instantly by newly added nonzero boundary conditions, and hence so is the whole proof itself. This is a simple example, but it gives a clear idea of how sensitive the structure of the computations can be with respect to introducing new informations to the model.
 \end{remark}
 
 \begin{remark}
-\normalfont Note that the aspect ratio going to zero is not only legitimate on a global scale. When we switch from a global model to a local one in order to be able to use the beta plane approximation, we still have hundreds of thousands of square kilometres versus 1--5 kilometres.
+\normalfont Note that the aspect ratio being "almost zero" is a legitimate assumption not exclusively on the scale of the entire planet. When we switch from a global model to a local one in order to use the beta plane approximation, we still have hundreds of thousands of square kilometres versus 1--5 kilometres.
 \end{remark}
 
 \begin{remark} \label{source_options}
-\normalfont We chose a specific nascent delta function to give shape to the source term, but it can be defined in several different ways using the many different pulses that approximate the delta function (choosing only those however that are physically meaningful in our case, for example its values are nonnegative), e.g.
+\normalfont We chose a specific nascent delta function (see (\ref{sourcedefinition})) to give shape to the source term, but it can be defined in several different ways using the many different pulses that approximate the delta function (choosing only those however that are physically meaningful in our case, for example its values are nonnegative), e.g.
 
   \begin{enumerate}
   
@@ -1063,12 +1068,12 @@ As we have mentioned previously, the generic definition of the $\boldsymbol{\sig
 
   \end{enumerate}
   
-  The Gaussian and Lorentzian version of the source term is continuous and bounded on $\Omega$, it is actually in $L^\infty$ in space (and in $L^2$ as a consequence), while it is easy to see that the piecewise constant unit pulse is in $L^2$ as well. Since the time dependence of this source is described by the Heaviside function, the time norm is also finite.
+  The Gaussian and Lorentzian version of the source term is continuous and bounded on $\Omega$, it is actually in $L^\infty$ in space (and in $L^2$ as a consequence), while it is easy to see that the piecewise constant unit pulse is in $L^2$ as well. Since the time dependence of this source is described by the Heaviside function, the time norm is finite too.
   
 \end{remark}
 
 \begin{remark}
-\normalfont Note that, --- with some slight modifications, --- the steps made leading to the final form of the energy inequality remain true even if we use a diffusion matrix function with nonconstant coefficients of the form $M(x)$ and such that the uniform ellipticity condition (\ref{coercivity}) holds in the form
+\normalfont Note that --- with some slight modifications --- the steps leading to the final form of the energy inequality remain true even if we use a diffusion matrix function with non-constant coefficients of the form $M(x)$ and such that the uniform ellipticity condition (\ref{coercivity}) holds in the form
 
 \begin{equation}
    \sum_{i,j = 1}^3 M_{ij}(x) \xi_i \xi_j \geq \lambda \norm{\xi}^2
@@ -1079,14 +1084,14 @@ The term $I_3$ in (\ref{boundI_3}) now can be bounded as
 
   \begin{equation}
     \begin{split}  
-I_3 & \leq \sum_{i,j = 1}^3 \int _ 0 ^ t \norm{ M_{ij} (x) \partial_i C^\epsilon}_{L^2 (\Gamma_G)}  \norm{C^\epsilon}_{L^2 (\Gamma_G)} \diff \tau\\
- & \leq \sum_{i,j = 1}^3 \big \|{M_{ij} \big \|}^2_{L^\infty(\Gamma_G)} \int_0 ^ t \norm{\sigma_i} _{L^2 (\Gamma_G)} \norm{C^\epsilon} _{L^2 (\Gamma_G)} \diff \tau. 
+I_3 & \leq \sum_{i,j = 1}^3 \int _ 0 ^ t \norm{ M_{ij} (x) \partial_i c^\epsilon}_{L^2 (\Gamma_G)}  \norm{c^\epsilon}_{L^2 (\Gamma_G)} \diff \tau\\
+ & \leq \sum_{i,j = 1}^3 \big \|{M_{ij} \big \|}^2_{L^\infty(\Gamma_G)} \int_0 ^ t \norm{\sigma_i} _{L^2 (\Gamma_G)} \norm{c^\epsilon} _{L^2 (\Gamma_G)} \diff \tau. 
       \end{split}  
   \end{equation}
 
 
 On the other hand, the term that took form in the original version as
-$\zeta M_{ij} \int_0 ^ t \frac{1}{2} \norm{C^\epsilon}^2 _{L^2 (\Gamma_G)} \diff \tau,$ now is present without the $M_{ij}$ coefficient, since that has been incorporated into the first term of the product in (\ref{boundI_3}) --- and as a consequence, $M_{ij}$ vanishes from the lefthand side of the final form (\ref{finalformEIEQ_gfc}) of the inequality as well.
+$\zeta M_{ij} \int_0 ^ t \frac{1}{2} \norm{c^\epsilon}^2 _{L^2 (\Gamma_G)} \diff \tau,$ now is present without the $M_{ij}$ coefficient, since that has been incorporated into the first term of the product in (\ref{boundI_3}) --- and as a consequence, $M_{ij}$ vanishes from the left-hand side of the energy inequality (\ref{finalformEIEQ_gfc}) as well.
 \end{remark}
 
 \section{The existence of weak solution of the hydrostatic system of the polluted atmosphere}\label{existenceweakhydrostatic}
