@@ -16,11 +16,17 @@
 \setlist[enumerate,1]{label=\roman*)}
 \setlist[enumerate,2]{label=\alph*)}
 \newtheorem{theorem}{Theorem}
+\numberwithin{theorem}{chapter}
 \newtheorem{corollary}{Corollary}
+\numberwithin{corollary}{chapter}
 \newtheorem{lemma}{Lemma}
+\numberwithin{lemma}{chapter}
 \newtheorem{remark}{Remark}
+\numberwithin{remark}{chapter}
 \newtheorem{definition}{Definition}
+\numberwithin{definition}{chapter}
 \newtheorem{prop}{Proposition}
+\numberwithin{prop}{chapter}
 \newcommand*\diff{\mathop{}\!\mathrm{d}}
 \usepackage{tikz}
 \usetikzlibrary{arrows,shapes,trees, calc}
@@ -117,14 +123,14 @@ We begin by presenting the basic ideas, approaches, and well-known results in th
 
 \subsection{The 3D Navier-Stokes equations}\label{3DNSgeneraldescription}
 
-The mathematical equations describing the motion of geophysical fluids such as oceans and the atmosphere are derived from the conservation laws of physics. Specifically, it is the conservation of momentum, mass and energy (and in some cases these are complemented with some additional components such as humidity, salt or chemical pollutants) that serve as a basis for the fundamental equations of fluid dynamics. The following system provides a relatively comprehensive picture of the relationship between the most significant variables in atmosphere modelling. It combines the Navier-Stokes equations with two continuity equations describing conservation of mass and thermal energy, respectively, and with a simplified version of the equation of state:
-
-\begin{equation} \label{original_general_NS}
-  \partial_t (\rho \mathbf{v}) + \rho (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + \nabla q = \rho \mathbf{g} \quad \text{ in } \Omega_0 \times (0,T),
-\end{equation}
+The mathematical equations describing the motion of geophysical fluids such as oceans and the atmosphere are derived from the conservation laws of physics. Specifically, it is the conservation of momentum, mass and energy (and in some cases these are complemented with some additional components such as humidity, salt or chemical pollutants) that serve as a basis for the fundamental equations of fluid dynamics. The following system provides a relatively comprehensive picture of the relationship between the most significant variables in atmosphere modelling. It combines the Navier-Stokes equations with two continuity equations describing conservation of mass and thermal energy, respectively, and with the equation of state:
 
 \begin{equation} \label{original_general_mass_cons}
   \partial_t \rho + \nabla \cdot (\rho \mathbf{v})  = 0 \quad \text{ in } \Omega_0 \times (0,T),
+\end{equation}
+
+\begin{equation} \label{original_general_NS}
+  \partial_t (\rho \mathbf{v}) + \rho (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + \nabla q = \rho \mathbf{g} \quad \text{ in } \Omega_0 \times (0,T),
 \end{equation}
 
 \begin{equation} \label{original_general_temperature}
@@ -132,13 +138,13 @@ The mathematical equations describing the motion of geophysical fluids such as o
 \end{equation}
 
 \begin{equation}\label{equation_of_state}
-  \rho = f(\tau)  \quad \text{ in } \Omega_0 \times (0,T).
+  \rho = f(\tau, q)  \quad \text{ in } \Omega_0 \times (0,T).
 \end{equation}
 
 Here $\mathbf{v}$ is the velocity function, $\rho$ is the density, $\nu = (\nu_1, \nu_2, \nu_3)$ represents the viscosity constants, and $q$ denotes the pressure. In the heat flow equation $\tau$ is the temperature, $Q$ represents the rate per unit volume of internal heat production, $k$ denotes thermal diffusivity, while the the heat capacity per unit volume, $\rho C_\rho$, is assumed to be constant.
 For the moment being, we simply consider an open, bounded Lipschitzian domain $\Omega_0$ in $\mathbb{R}^3$ and for a given time $T$ a time interval $[0,T).$
 
-We complete equations (\ref{original_general_NS})--(\ref{equation_of_state}) with four other important concepts: the Coriolis force, the so-called Boussinesq approximation, the notion of an isothermal process, and the incompressibility condition.
+We complete equations (\ref{original_general_mass_cons})--(\ref{equation_of_state}) with four other important concepts: the Coriolis force, the so-called Boussinesq approximation, the notion of an isothermal process, and the incompressibility condition.
 
 \begin{enumerate}
 
@@ -184,7 +190,7 @@ Boussinesq flows include gas motions in standard conditions and low-speed fluid 
   \nabla \cdot \mathbf{v}  = 0 \quad \text{ in } \Omega_0 \times (0,T).
 \end{equation}
 
-\item Because of its importance, we separately discuss the incompressibility condition (\ref{original_general_mass_cons_boussinesq}). As we have seen, this is a direct consequence of the Boussinesq approximation. The constraint for the fluid flow $\mathbf{v}$ to be solenoidal --- i.e. the $\text{div}(\mathbf{v})(t,x) = 0$ divergence-free condition --- is equivalent to requiring that the volume of any fluid element is constant in time (see \cite{boyer2012mathematical} for example). Note in particular that the divergence-free condition is nothing less than a new equation that the velocity function now has to satisfy (without the additional degree of freedom that the presence of $\rho$ contributed to the general, compressible equations (\ref{original_general_NS}), (\ref{original_general_mass_cons})), and as a consequence the pressure is related differently to the other thermodynamical variables for the case of incompressible flows. In more detail, as we will see in our computations later, results and estimates on the divergence-free velocity function can be obtained separately from the pressure. We also highlight here that the pressure function is defined only up to a constant, or in other words, it is only the pressure gradient (i.e. the fluctuation of the pressure) that has a physical meaning, and not the absolute pressure value itself.
+\item Because of its importance, we separately discuss the incompressibility condition (\ref{original_general_mass_cons_boussinesq}). As we have seen, this is a direct consequence of the Boussinesq approximation. The constraint for the fluid flow $\mathbf{v}$ to be solenoidal --- i.e. the $\text{div}(\mathbf{v})(t,x) = 0$ divergence-free condition --- is equivalent to requiring that the volume of any fluid element is constant in time (see \cite{boyer2012mathematical} for example). Note in particular that the divergence-free condition is nothing less than a new equation that the velocity function now has to satisfy (without the additional degree of freedom that the presence of $\rho$ contributed to the general, compressible equations (\ref{original_general_mass_cons}), (\ref{original_general_NS})), and as a consequence the pressure is related differently to the other thermodynamical variables for the case of incompressible flows. In more detail, as we will see in our computations later, results and estimates on the divergence-free velocity function can be obtained separately from the pressure. We also highlight here that the pressure function is defined only up to a constant, or in other words, it is only the pressure gradient (i.e. the fluctuation of the pressure) that has a physical meaning, and not the absolute pressure value itself.
 
 \end{enumerate}
 
@@ -676,7 +682,7 @@ To conclude the description of the model we highlight an important feature of th
 %%% GEOPHYSICAL COORDINATES %%% 
 \chapter{The asymptotic behaviour of the anisotropic solutions in geophysical coordinates}\label{geophysicalchapter}
 
-As we highlighted before, the focus of this thesis is essentially to identify different kind of scenarios, or more precisely, identify
+As we highlighted before, the focus of this thesis is essentially to identify different kind of scenarios, or more precisely, identify concrete combinations of
 \begin{itemize}
   \item different types of solutions
   \item considered in different kinds coordinate systems
@@ -940,7 +946,7 @@ Now we are ready to state our main result.
 
 \subsection{Passing to the limit}
 
-In order to conclude the proof of Theorem \ref{maintheorem_weak_GFC} we pass to the limit in the weak formulation (\ref{anisotropicWF_U})-(\ref{anisotropicWF_C}). To take the limit for the linear velocity terms that do not include the concentration function $c^\epsilon$ we can use (\ref{WeakConvUHEps_gfc}), (\ref{WeakConvU3Eps_gfc}) and (\ref{WeakConvU3NoEps_gfc}), and the bounds (\ref{propositionExtra_gfc}), (\ref{proposition2_gfc}). As for the nonlinear terms, the convergence can be shown using a time compactness theorem that is based on a result by Simon \cite{simon1986compact}. The key point is to apply a sort of generalisation of the classical translation criterium of Riesz-Frechet-Kolmogorov which enables us to get strong convergence for the horizontal velocities. This is achieved by establishing a bound for the perturbation of $\mathbf{u}_H$ of the form $\norm{\tau_h \mathbf{u}_H - \mathbf{u}_H}_{L^p(0,T-h, \mathbf{Y})} \leq \varphi(h) + \psi(\epsilon),$ where $\mathbf{Y}$ is a Banach space, $\varphi$ and $\psi$ are appropriate functions with their limits vanishing at zero, and $\tau_h \mathbf{u}_H = \mathbf{u}_H (t+h) $. After obtaining strong convergence for $\mathbf{u}_H,$ the proof of the convergence for these nonlinear terms can be closed by applying basic interpolation techniques and the generalised H\"older inequality. The details are omitted since they are analogous to those described in \cite{azerad2001mathematical}.
+In order to conclude the proof of Theorem \ref{maintheorem_weak_GFC} we pass to the limit in the weak formulation (\ref{anisotropicWF_U})-(\ref{anisotropicWF_C}). To take the limit for the linear velocity terms that do not include the concentration function $c^\epsilon$ we can use (\ref{WeakConvUHEps_gfc}), (\ref{WeakConvU3Eps_gfc}) and (\ref{WeakConvU3NoEps_gfc}), and the bounds (\ref{propositionExtra_gfc}), (\ref{proposition2_gfc}). As for the nonlinear terms, the convergence can be shown using a time compactness theorem that is based on a result by Simon \cite{simon1986compact}. The key point is to apply a sort of generalisation of the classical translation criterium of Riesz-Frechet-Kolmogorov which enables us to get strong convergence for the horizontal velocities. This is achieved by establishing a bound for the perturbation of $\mathbf{u}_h$ of the form $\norm{\tau_\upsilon \mathbf{u}_h - \mathbf{u}_h}_{L^p(0,T-\upsilon, \mathbf{Y})} \leq \varphi(\upsilon) + \psi(\epsilon),$ where $\mathbf{Y}$ is a Banach space, $\varphi$ and $\psi$ are appropriate functions with their limits vanishing at zero, and $\tau_\upsilon \mathbf{u}_h = \mathbf{u}_h (t+\upsilon) $. After obtaining strong convergence for $\mathbf{u}_h,$ the proof of the convergence for these nonlinear terms can be closed by applying basic interpolation techniques and the generalised H\"older inequality. The details are omitted since they are analogous to those described in \cite{azerad2001mathematical}.
   
 For the linear terms including the concentration $c^\epsilon$ we can directly apply the weak convergence result of (\ref{WeakConvCEps1_gfc}).
     
@@ -1325,7 +1331,9 @@ Given $T > 0$, $U_0 \in H,$ and a source term $s = \delta$ or $s \in L^2(\Omega)
 \section{Visualisation of the convergence result by means of the finite element method}\label{visualizationFEM}
 The numerical simulations were obtained in collaboration with Professor Omar Lakkis from the University of Sussex.
 
-\chapter{The primitive equations as a weak and strong limit model in downwind-matching coordinates}\label{DWMCchapter}
+Some of the technical questions raised throughout the development process were resolved with the kind help of the FEniCS discuss group \cite{fenicsgroup}.
+
+\chapter{The equations of the polluted atmosphere as a weak and strong limit model in downwind-matching coordinates}\label{DWMCchapter}
 
 In this chapter we are working in the framework of the downwind-matching coordinate system introduced in Section \ref{eqsdescribingatmpluspollution_dwmc}. The first two sections are dedicated to stating and proving a rigorous connection --- on the level of both weak and strong solutions --- between the anisotropic and hydrostatic models, while in the final section we prove an existence result regarding the limit system.
 
@@ -1355,7 +1363,7 @@ In order to keep this chapter as compact as possible, here we repeat the definit
   \mathbf{u}^\epsilon (\cdot, t = 0) = \mathbf{u}_0, \quad c^\epsilon (\cdot, t=0) = c_0  \quad \text{ in } \Omega.
 \end{equation}
 
-The hydrostatic equations are obtained by neglecting the $\epsilon$--including terms in the anisotropic equations:
+The hydrostatic equations are obtained formally by neglecting the $\epsilon$--including terms in the anisotropic equations:
 
 \begin{equation} \label{HNSC1_coordinates_DWMC}    
   \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\gamma u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T)
@@ -1381,14 +1389,14 @@ The hydrostatic equations are obtained by neglecting the $\epsilon$--including t
   u_i (\cdot, t=0) = u_{0 i}, \quad c (\cdot, t=0) = c_0 \text{ in } \Omega, \text{$i$ = 1,2}.
 \end{equation}
 
-Section \ref{sectionWS_dwmc} focuses on the verification of a convergence result between the models (\ref{ANSC1_coordinates_DWMC})--(\ref{ANSC6_coordinates_DWMC}) and (\ref{HNSC1_coordinates_DWMC})--(\ref{HNSC6_coordinates_DWMC}) in the framework of weak solutions. We have been able to show the fact of the convergence at the cost of using a slightly smoother, $H^1$--regular initial data ${\mathbf{u}_h}_0.$ In Section \ref{sectionSTRONGsol} we apply stronger initial regularities (namely, ${\mathbf{u}_h}_0 \in H^3(\Omega)$ and $c_0 \in H^2(\Omega)$) and -- from the computations' point of view -- a more favourable boundary structure: in Section \ref{sectionSTRONGsol_convergence} we describe an analogous convergence theorem to that in Section \ref{sectionWS_dwmc}, but the statement holds for strong solutions this time. In order to make the proof complete, in Section \ref{strongexistencesection} we verify the global existence of strong solutions.
+Section \ref{sectionWS_dwmc} focuses on the verification of a convergence result between the models (\ref{ANSC1_coordinates_DWMC})--(\ref{ANSC6_coordinates_DWMC}) and (\ref{HNSC1_coordinates_DWMC})--(\ref{HNSC6_coordinates_DWMC}) in the framework of weak solutions. We will be able to show the fact of the convergence at the cost of using a slightly smoother, $H^1$--regular initial data ${\mathbf{u}_h}_0$ (compare with (\ref{initialregularities_weak_gfc}) in Chapter \ref{geophysicalchapter}). In Section \ref{sectionSTRONGsol} we apply stronger initial regularities (namely, ${\mathbf{u}_h}_0 \in H^3(\Omega)$ and $c_0 \in H^2(\Omega)$) and -- from the computations' point of view -- a more favourable boundary structure: in Section \ref{sectionSTRONGsol_convergence} we describe an analogous convergence theorem to that in Section \ref{sectionWS_dwmc}, but the statement holds for strong solutions this time. In order to make the proof complete, in Section \ref{strongexistencesection} we verify the global existence of strong solutions.
 
 The theorems we prove in detail in this chapter are our original results and they may also be found in \cite{dwmhydro2020}.
 
 %%% WEAK SOLUTIONS %%%
 \section{Weak solutions framework} \label{sectionWS_dwmc}
 
-This section focuses on extending the weak convergence result of Theorem \ref{maintheorem_weak_GFC} from the previous chapter dedicated to geophysical coordinates: our goal here is to verify the fact of weak convergence in the downwind-matching coordinate system as well. We begin by making the modelling equations complete with the definition of boundary conditions. In the scenario of weak solutions we aim to be as close as possible to the original domain, thus we consider a classical non-periodic local domain on the surface of the Earth with minimal modifications due to the new $\epsilon$ term.
+This section focuses on extending the weak convergence result of Theorem \ref{maintheorem_weak_GFC} from the previous chapter dedicated to geophysical coordinates: our goal here is to verify the weak convergence in the downwind-matching coordinate system as well. We begin by making the modelling equations complete with the definition of boundary conditions. In the scenario of weak solutions we aim to be as close as possible to the original domain, thus we consider a classical non-periodic local domain on the surface of the Earth with minimal modifications due to the new $\epsilon$ term.
 
 Here the boundary structure of the domain is identical to what we used in geophysical coordinate system, i.e. the upper boundary of the $\Omega$ domain is denoted by $\Gamma_U$, the lateral boundary is $\Gamma_L$, and the lower boundary of the domain is $\Gamma_G$, while the complete boundary is denoted by $\Gamma$ (see Figure $\ref{structdomaingraphboundaries_weak}$). For simplicity we assume that the altitude of $\Omega$ is $1$, thus we can also express the full domain as $\Omega =  \Gamma_G \times [0,1],$ which will be useful later for estimating integrals.
 
@@ -1440,9 +1448,9 @@ while for the hydrostatic case we use
     
 The meaning of $\partial_1 c^\epsilon = \sigma$ above is identical to the notion explained in Section \ref{eqsdescribingatmpluspollution_gfc} for the case of geophysical coordinates: we naturally assume $\partial_1 c^\epsilon$ to be equal to some sufficiently regular $\sigma$ function defined on the respective boundary.
 
-As we have mentioned it in the introduction, in this case we will work with a more regular ${\mathbf{u}_h}_0 \in H^1$ initial data, so we directly use the $u_3 = 0$ equality on the boundary instead of the original $u_3 n_3 = 0$ constraint that we had used.
+As we have mentioned it before, in this case we will work with a more regular ${\mathbf{u}_h}_0 \in H^1$ initial data, so we directly use the $u_3 = 0$ equality on the boundary instead of the original $u_3 n_3 = 0$ constraint that we had used in (\ref{ANSC8_coordinates_GFC}).
     
-We highlight the difference between the boundary conditions of the original, east-north oriented, and the new, downwind-matching model for the case of weak solutions.
+We highlight the difference between the boundary conditions of the original, east-north oriented model of Chapter \ref{geophysicalchapter}, and the new, downwind-matching model for the case of weak solutions.
 
 The difference in the kind of boundary conditions we can "afford" to have on the lower boundary for the concentration comes from the energy inequality. In the east-north-upwards oriented coordinate system we do not have an $\epsilon$ in the diffusion matrix, and thus, having any of the $\partial_i c^\epsilon$ terms different from 0 does not create any problems, not even for the case of the ocean where $\partial_3 c^\epsilon$ becomes nonzero as well (they are required however to be bounded of course). On the other hand, the downwind-matching coordinate system brings in an $\epsilon$ term in front of the $K_1$ diffusion coefficient, which makes the model more sensitive to assigning boundary conditions for $c^\epsilon.$ This means that we can not anymore have the relatively relaxed boundedness requirement for any $\partial_i c^\epsilon$ except for $i=1.$ All other $\partial_2 c^\epsilon, \partial_3 c^\epsilon$ derivatives must be zero on the lower boundary, otherwise they would result in an $(\epsilon - \text{const.})$ negative term appearing in the energy inequality --- for more details see the proof of the weak convergence theorem of this chapter in Section $\ref{proof_weak_dwmc}$. This also means that we will consider exclusively the inland domain scenario for the case of this coordinate system.
 
@@ -1489,7 +1497,7 @@ In this section we describe the weak formulation of the merged equations in both
   
   \begin{definition} \label{definitionhydrostaticWF}
   
-  Find $(\mathbf{u}, c)$ such that $\mathbf{u} = (\mathbf{u}_h, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_h \in L^\infty (0,T; L^2(\Omega)^2),$ and $c \in L_t^\infty L_x^2$ with $\partial_2 c, \partial_3 c \in L^2_t L^2_x$, such that
+  Find $(\mathbf{u}, c)$ such that $\mathbf{u} = (\mathbf{u}_h, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_h \in L^\infty (0,T; L^2(\Omega)^2),$ and $c \in L^\infty (0, T; L^2(\Omega))$ with $\partial_2 c, \partial_3 c \in L^2(0, T; L^2(\Omega))$, such that
   
   \begin{equation}
     \begin{split}
@@ -1549,7 +1557,7 @@ Now we are ready to state the main theorem of this section.
 The statement of the main weak convergence theorem of this chapter is analogous to our previous result stated for the case of the geophysical frame, but we highlight the difference that here we use the initial data ${\mathbf{u}_h}_0 \in H^1,$ while for the case of the geophysical frame an $L^2$ initial velocity was sufficient.
   
 %%% *** PROOF *** %%%
-\subsection{Proof of the main theorem} \label{proof_weak_dwmc}
+\subsection{Proof of Theorem \ref{maintheoremWEAK}} \label{proof_weak_dwmc}
 
 This section is dedicated to the verification of Theorem \ref{maintheoremWEAK}. Structurally we follow a similar chain of thought as in Section \ref{proof_weak_gfc} in the previous chapter --- until the point where the proof diverges reaching the weak convergence of the nonlinear term $u_3^\epsilon c^\epsilon,$ where in this case we can not benefit from an $H^1$-regular concentration function. In more detail, we begin by calculating the energy inequality and collect the a priori estimates that derive from it, then verify the less problematic weak convergence results. Finally we elaborate the steps that bring the convergence of the $u_3^\epsilon c^\epsilon$ term to a closure. The main idea here is to temporarily ignore the $c^\epsilon$ function and prove a strong convergence result considering only the velocity functions. Throughout this step we go beyond the weak solutions quality and show that we are working with strong solutions. In this new setting with more favourable regularities we can prove the convergence result we need, and eventually return to the frame of weak solutions where we can merge back together the velocity and concentration functions into a unified solution. Finally as a byproduct we get a convergence rate for the velocity (see Proposition \ref{convrateweakframework}).
 
@@ -1602,7 +1610,7 @@ This section is dedicated to the verification of Theorem \ref{maintheoremWEAK}. 
   
     \subsubsection{Weak convergence - Part 1.}
   
-  The convergence of the linear terms and also the convergence of the nonlinear terms with the exception of $u_3^\epsilon c^\epsilon$ can be proved analogously to the geophysical case in Section \ref{proof_weak_gfc} --- the proofs of these properties are not affected by the modifications induced by the coordinate change. Hence, for completeness we will describe the main steps leading to these results, but we will skip the details. For technical or specific issues see \cite{azerad2001mathematical}.
+  The convergence of the linear terms and also the convergence of the nonlinear terms with the exception of $u_3^\epsilon c^\epsilon$ can be proved analogously to the geophysical case in Section \ref{proof_weak_gfc} --- the proofs of these properties are not affected by the modifications induced by the coordinate change. Hence, for completeness we will describe the main steps leading to these results, but we will skip the details.
   
   As a consequence of Proposition \ref{aprioriprop}, up to subsequences still denoted by the same way, we have the following weak convergence results.
   
@@ -1617,7 +1625,7 @@ This section is dedicated to the verification of Theorem \ref{maintheoremWEAK}. 
   \end{align} 
   
   In order to conclude the proof of Theorem \ref{maintheoremWEAK} we pass to the limit in the weak formulation (\ref{anisotropicWF}). Taking the limit for the linear terms can be done in a standard way using the previously obtained results.
-   Concerning the nonlinear velocity terms (i.e. nonlinear terms that do not include the concentration function), the convergence can be shown applying a generalisation of the classical translation criterium of Riesz-Frechet-Kolmogorov which enables us to get strong convergence for the horizontal velocities. This is achieved by establishing a bound for the perturbation of $\mathbf{u}_h$ of the form $\norm{\tau_\pi \mathbf{u}_h - \mathbf{u}_h}_{L^2(0,T-\pi, {H^2}^*)} \leq \lambda(\pi) + \mu(\epsilon),$ where $\lambda$ and $\mu$ are appropriate functions with their limits vanishing at zero, and $\tau_\pi \mathbf{u}_h = \mathbf{u}_h (t+\pi) $. After obtaining strong convergence for $\mathbf{u}_h,$ the proof of the convergence for these nonlinear terms can be closed by applying basic interpolation techniques and the generalised Young inequality. 
+   The convergence of the nonlinear velocity terms (i.e. nonlinear terms that do not include the concentration function) will be the direct consequence of our calculations detailed in the following subsection (see (\ref{horizontal_velocities_convergence}) in Proposition \ref{convrateweakframework}), observe however that for these specific terms the original argument of Chapter \ref{geophysicalchapter} works too. In particular, the convergence of these velocity terms can be shown applying a generalisation of the classical translation criterium of Riesz-Frechet-Kolmogorov which enables us to get strong convergence for the horizontal velocities. This is achieved by establishing a bound for the perturbation of $\mathbf{u}_h$ of the form $\norm{\tau_\pi \mathbf{u}_h - \mathbf{u}_h}_{L^2(0,T-\pi, {H^2}^*)} \leq \lambda(\pi) + \mu(\epsilon),$ where $\lambda$ and $\mu$ are appropriate functions with their limits vanishing at zero, and $\tau_\pi \mathbf{u}_h = \mathbf{u}_h (t+\pi) $. After obtaining strong convergence for $\mathbf{u}_h,$ the proof of the convergence for these nonlinear terms can be closed by applying basic interpolation techniques and the generalised H\"older inequality. 
   Finally, as for the concentration-including nonlinear terms, we have the convergence of $(u_i c^\epsilon, \partial_i \tilde{c})$ for $i=1,2,$ since as we mentioned before, we have the strong convergence of the horizontal velocities --- while in the case of $i=3$ this property does not hold for $u_3$ and from the energy bound we do not have more than the weak convergence of $c^\epsilon$. Because of its complexity we handle this specific nonlinear compound product term in the next section.
   
   \subsubsection{Weak convergence - Part 2.}
@@ -1785,7 +1793,7 @@ With this we are ready to estimate the difference between the solutions of the s
 
 Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ and $(\mathbf{u}_h,u_3)$ be the solutions of (\ref{ANSC1_coordinates_DWMC}) - (\ref{ANSC4_coordinates_DWMC}) and (\ref{HNSC1_coordinates_DWMC}) - (\ref{HNSC4_coordinates_DWMC}), respectively, with initial data $({\mathbf{u}_h}_0, {u_3}_0),$ where ${\mathbf{u}_h}_0 \in H^1(\Omega)$ and ${u_3}_0 = - \int_0^z \nabla_h \cdot {\mathbf{u}_h}_0 \diff z'.$ Then the following estimate holds for the difference function $(\mathbf{U}_h^\epsilon, U_3^\epsilon):$
 
-\begin{equation}
+\begin{equation}\label{horizontal_velocities_convergence}
   \begin{split}
     & \sup_{0 \leq t < \infty} ( \norm{\mathbf{U}_h^\epsilon}_2^2 + \epsilon^2 \norm{U_3^\epsilon}_2^2)(t) + \int_0 ^ \infty ( \norm{\nabla \mathbf{U}_h^\epsilon}_2^2 + \epsilon^2 \norm{\nabla U_3^\epsilon}_2^2)\diff s \\
     & \leq \kappa (\norm{{\mathbf{u}_h}_0}_{H^1}, \Gamma_G) \epsilon^2 (\norm{{\mathbf{u}_h}_0}_2^2 + \epsilon^2 \norm{{u_3}_0}_2^2 + 1).
@@ -2021,7 +2029,7 @@ In this section we increase the regularity of the initial data: specifically, we
 We verify that the previously shown connection between the anisotropic and hydrostatic equations has an analogous version that holds in the scenario of strong solutions as well. In order to describe our result we firstly need to give exact definition to the domain and set the boundary conditions. Here we follow the main ideas of \cite{cao2014local} and create a periodic domain $\Omega$ in three steps as described below.
 
 \begin{remark}
-\normalfont In the weak solutions framework we defined a local domain with classical closed boundaries. Preserving this non-periodic domain in the case of strong solutions would naturally require higher order terms to be zero on the boundaries (otherwise the computations can not be brought to a closure, consider for example Lemma 2.2 in \cite{li2019primitive} in a non-periodic case). Since in this framework we essentially need a domain structure where the $H^2$ norm is equivalent to the $L^2$ norm of the Laplacian, thus for simplicity we use the technically more clear choice of assuming periodic boundaries. At the same time we point out that the periodic boundary conditions can be substituted by boundary conditions of type $\nabla^k u = 0, \nabla^k c = 0$ defined on a non-periodic, standard domain. Applying these alternative boundary conditions it is possible to switch back to a classical domain and still benefit from the disappearing boundary integrals.
+\normalfont In the weak solutions framework we defined a local domain with classical closed boundaries. Preserving this non-periodic domain in the case of strong solutions would naturally require higher order terms to be zero on the boundaries (otherwise the computations can not be brought to a closure, consider for example Lemma 2.2 in \cite{li2019primitive} in a non-periodic case). Since in this framework we essentially need a domain structure where the $H^2$ norm is equivalent to the $L^2$ norm of the Laplacian, thus for simplicity we use the technically more clear choice of assuming periodic boundaries. At the same time we point out that the periodic boundary conditions can be substituted by boundary conditions of type $\nabla^k u = 0, \nabla^k c = 0, k \geq 1$ defined on a non-periodic, standard domain. Applying these alternative boundary conditions it is possible to switch back to a classical domain and still benefit from the disappearing boundary integrals.
 \end{remark}
 
 The concept detailed here is a general approach, and we apply it both in the hydrostatic and anisotropic cases.
@@ -2126,7 +2134,7 @@ We provide the proof of Theorem \ref{existenceconcentrationSTRONG} in Section \r
 Now we are ready to describe this section's main theorem.
 
 \begin{theorem} \label{maintheoremSTRONG}
-Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0$, and let $c_0 \in H^2 (\Omega).$ There is a positive $\epsilon_0$ threshold such that for any $\epsilon < \epsilon_0$ as the aspect ratio $\epsilon$ tends to zero, the unique global strong solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1_coordinates_DWMC})--(\ref{ANSC4_coordinates_DWMC}), (\ref{ANSC5_strong_cshift_coordinates_DWMC}), (\ref{ANSC6_coordinates_DWMC}), (\ref{ANSC7-strong_coordinates_DWMC}) converges strongly to the unique global strong solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1_coordinates_DWMC})--(\ref{HNSC4_coordinates_DWMC}), (\ref{HNSC5_strong_cshift_coordinates_DWMC}), (\ref{HNSC6_coordinates_DWMC}), (\ref{HNSC7-strong_coordinates_DWMC}). In more detail, the following strong convergence results hold:
+Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0$, and let $c_0 \in H^2 (\Omega).$ There is a positive $\epsilon_0$ threshold such that for any $\epsilon < \epsilon_0,$ the strong solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1_coordinates_DWMC})--(\ref{ANSC4_coordinates_DWMC}), (\ref{ANSC5_strong_cshift_coordinates_DWMC}), (\ref{ANSC6_coordinates_DWMC}), (\ref{ANSC7-strong_coordinates_DWMC}) exists globally in time and as the aspect ratio $\epsilon$ tends to zero, it conconverges strongly to the unique global strong solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1_coordinates_DWMC})--(\ref{HNSC4_coordinates_DWMC}), (\ref{HNSC5_strong_cshift_coordinates_DWMC}), (\ref{HNSC6_coordinates_DWMC}), (\ref{HNSC7-strong_coordinates_DWMC}). In more detail, the following strong convergence results hold:
 
   \begin{align} 
     & (\mathbf{u}_h^\epsilon, \epsilon u_3^\epsilon) \to (\mathbf{u}_h, 0) &\quad & \text{in $L_t^\infty H_x^2$,} \label{StrongConvVelocity1statement} \\
