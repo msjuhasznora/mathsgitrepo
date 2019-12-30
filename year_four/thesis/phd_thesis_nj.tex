@@ -316,7 +316,8 @@ The corresponding scaling equations regarding the kinematic, pressure and viscos
   \end{split}
  \end{equation}
  
-where $p$ is the pressure term including the gravity potential $\varphi,$ i.e., $p = q - \varphi$, and the latter scaling identities embody the different eddy viscosity hypothesis. Basically, this approach used in the scaling of the viscosity parameters can be heuristically deduced from the viscosity dimensions: $\text{typical length}^2 / \text{typical time}$, more details on the subject can be found in \cite{besson1992some}, \cite{azerad2001mathematical}.
+where $p$ is the pressure term including the gravity potential $\varphi,$ i.e., $p = q - \varphi$, and the latter scaling identities embody the different eddy viscosity hypothesis. Basically, this approach used in the scaling of the viscosity parameters can be heuristically deduced from the viscosity dimensions: $\text{typical length}^2 / \text{typical time}$. Anisotropic viscosity coefficients initially might seem like minor, nice-to-have accessories in the model --- their role, on the contrary, is essential. It has been showed in \cite{bresch1999vertical} that for the case of $\nu_x, \nu_y, \nu_z = \mathcal{O}(1)$ the stationary Navier-Stokes equations converge to a linear system with only vertical dissipation. Anisotropic viscosity and diffusivity constants are widespread utilised outside of theoretical computations as well, see the finite element ocean model in \cite{danilov2002finite} for example.
+More details on the subject can be found in \cite{besson1992some}, \cite{azerad2001mathematical}.
 
 Finally we obtain the rescaling equations for the pollution concentration and the source term by considering their physical dimensions, namely: $\text{typical molar density} / \text{typical volume},$ from which we deduce
 
@@ -1333,7 +1334,7 @@ The numerical simulations were obtained in collaboration with Professor Omar Lak
 
 Some of the technical questions raised throughout the development process were resolved with the kind help of the FEniCS discuss group \cite{fenicsgroup}.
 
-\chapter{The equations of the polluted atmosphere as a weak and strong limit model in downwind-matching coordinates}\label{DWMCchapter}
+\chapter{The polluted atmosphere system as a weak and strong limit model in downwind-matching coordinates}\label{DWMCchapter}
 
 In this chapter we are working in the framework of the downwind-matching coordinate system introduced in Section \ref{eqsdescribingatmpluspollution_dwmc}. The first two sections are dedicated to stating and proving a rigorous connection --- on the level of both weak and strong solutions --- between the anisotropic and hydrostatic models, while in the final section we prove an existence result regarding the limit system.
 
