@@ -683,16 +683,20 @@ To conclude the description of the model we highlight an important feature of th
 %%% GEOPHYSICAL COORDINATES %%% 
 \chapter{The asymptotic behaviour of the anisotropic solutions in geophysical coordinates}\label{geophysicalchapter}
 
-Each main scenario we investigate throughout the thesis is a combination of modelling choices focusing on two requirements: minimality and funcionality. First of all, in the entire development process we aim to construct models where the system's extra demands (regarding simplifications and additionally assumed regularities) are kept as little as possible. On the other hand, we need to make sure that the building blocks of the system are strong enough so that our computations work in their framework. In other words, keeping the aforementioned minimalistic approach in mind, our goal is to identify
-\begin{itemize}
-  \item[--] different types of solutions
-  \item[--] considered in different coordinate systems
-  \item[--] combined with different regularities assumed for the initial data
-  \item[--] and completed with different kinds of boundary conditions,
-\end{itemize}
-for which we are able to state that a certain kind of connection (a convergence result in particular) holds for shallow domains between the anisotropic and hydrostatic models.
+We examine the connection between the anisotropic and hydrostatic models in the case of three main scenarios in this thesis. Chapter \ref{geophysicalchapter} is dedicated to investigate this relationship within the first such analytical setting. At this point it is important to understand that the word "model" has two meanings on two different levels. On a small scale it refers to the equations themselves, and in particular whether we use the full momentum equation in the vertical direction or we apply the hydrostatic approximation. On a larger scale we use it to describe an entire scenario, i.e. a collection of modelling choices including
 
-In this chapter we define the first main analytical setting and verify the first such convergence result of the thesis.
+\begin{itemize}
+  \item[--] whether we consider weak or strong solutions,
+  \item[--] the specific coordinate system we express the modelling equations in,
+  \item[--] the exact regularities we assume for the initial data,
+  \item[--] and finally the boundary structure combined with the concrete boundary conditions.
+\end{itemize}
+
+In all three main cases (Chapter \ref{geophysicalchapter}, Section \ref{sectionWS_dwmc}, and Section \ref{sectionSTRONGsol}) the anisotropic and hydrostatic models are considered together and embedded within a specific framework of a well-defined scenario. Now that these concepts are clear, we will use the "scenario", "framework" and "model" expressions interchangeably as their meaning in the concrete context is always obvious.
+
+The two main viewpoints we keep in mind setting up a scenario described above are minimality and functionality. This means firstly that in the entire development process we aim to construct a model where the system's demands (regarding simplifications and additionally assumed regularities) are kept as little as possible. On the other hand, we need to make sure that the building blocks of the system are strong enough so that the final forms of the fundamental inequalities have manageable bounds within their framework.
+
+In this chapter we define the first main analytical setting and verify a convergence result between the anisotropic equations and the primitive equations planted into the system.
 
 We choose the framework of weak solutions, we work in geophysical coordinates, the domain is set to a local domain with classical non-periodic boundaries and in Section \ref{proof_weak_gfc} we prove that for $\mathbf{u}_0 \in L^2 (\Omega), c_0 \in L^2(\Omega)$ initial data any weak solution of the anisotropic equations (\ref{ANSC1_coordinates_GFC})--(\ref{ANSC8_coordinates_GFC}) defined below converges weakly to a weak solution of the hydrostatic system (\ref{HNSC1_coordinates_GFC})--(\ref{HNSC8_coordinates_GFC}). To complete our proof, in Section \ref{existenceweakhydrostatic} we show the existence of weak solutions of the limit system.
 
