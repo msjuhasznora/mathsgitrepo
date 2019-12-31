@@ -683,7 +683,7 @@ To conclude the description of the model we highlight an important feature of th
 %%% GEOPHYSICAL COORDINATES %%% 
 \chapter{The asymptotic behaviour of the anisotropic solutions in geophysical coordinates}\label{geophysicalchapter}
 
-We examine the connection between the anisotropic and hydrostatic models in the case of three main scenarios in this thesis. Chapter \ref{geophysicalchapter} is dedicated to investigate this relationship within the first such analytical setting. At this point it is important to understand that the word "model" has two meanings on two different levels. On a small scale it refers to the equations themselves, and in particular whether we use the full momentum equation in the vertical direction or we apply the hydrostatic approximation. On a larger scale we use it to describe an entire scenario, i.e. a collection of modelling choices including
+We examine the connection between the anisotropic and hydrostatic models in the case of three main scenarios in this thesis. Chapter \ref{geophysicalchapter} is dedicated to investigate this relationship within the first such analytical setting. At this point it is important to understand that the word "model" has two meanings on two different levels. On a small scale it refers to the equations themselves, and in particular if we use the full momentum equation in the vertical direction or we apply the hydrostatic approximation. On a larger scale we use it to describe an entire scenario, i.e. a collection of modelling choices including
 
 \begin{itemize}
   \item[--] whether we consider weak or strong solutions,
@@ -953,7 +953,24 @@ Now we are ready to state our main result.
 
 \subsection{Passing to the limit}
 
-In order to conclude the proof of Theorem \ref{maintheorem_weak_GFC} we pass to the limit in the weak formulation (\ref{anisotropicWF_U})-(\ref{anisotropicWF_C}). To take the limit for the linear velocity terms that do not include the concentration function $c^\epsilon$ we can use (\ref{WeakConvUHEps_gfc}), (\ref{WeakConvU3Eps_gfc}) and (\ref{WeakConvU3NoEps_gfc}), and the bounds (\ref{propositionExtra_gfc}), (\ref{proposition2_gfc}). As for the nonlinear terms, the convergence can be shown using a time compactness theorem that is based on a result by Simon \cite{simon1986compact}. The key point is to apply a sort of generalisation of the classical translation criterium of Riesz-Fr\'echet-Kolmogorov which enables us to get strong convergence for the horizontal velocities. This is achieved by establishing a bound for the perturbation of $\mathbf{u}_h$ of the form $\norm{\tau_\upsilon \mathbf{u}_h - \mathbf{u}_h}_{L^p(0,T-\upsilon, \mathbf{Y})} \leq \varphi(\upsilon) + \psi(\epsilon),$ where $\mathbf{Y}$ is a Banach space, $\varphi$ and $\psi$ are appropriate functions with their limits vanishing at zero, and $\tau_\upsilon \mathbf{u}_h = \mathbf{u}_h (t+\upsilon) $. After obtaining strong convergence for $\mathbf{u}_h,$ the proof of the convergence for these nonlinear terms can be closed by applying basic interpolation techniques and the generalised H\"older inequality. The details are omitted since they are analogous to those described in \cite{azerad2001mathematical}.
+In order to conclude the proof of Theorem \ref{maintheorem_weak_GFC} we pass to the limit in the weak formulation (\ref{anisotropicWF_U})-(\ref{anisotropicWF_C}). To take the limit for the linear velocity terms that do not include the concentration function $c^\epsilon$ we can use (\ref{WeakConvUHEps_gfc}), (\ref{WeakConvU3Eps_gfc}) and (\ref{WeakConvU3NoEps_gfc}), and the bounds (\ref{propositionExtra_gfc}), (\ref{proposition2_gfc}). As for the nonlinear terms, the convergence can be shown using a time compactness theorem that is based on a result by Simon \cite{simon1986compact}. The key point is to apply a sort of generalisation of the classical translation criterium of Riesz-Fr\'echet-Kolmogorov which enables us to get strong convergence for the horizontal velocities. This is achieved by establishing a bound for the perturbation of $\mathbf{u}_h$ of the form $\norm{\tau_\upsilon \mathbf{u}_h - \mathbf{u}_h}_{L^p(0,T-\upsilon, \mathbf{Y})} \leq \varphi(\upsilon) + \psi(\epsilon),$ where $\mathbf{Y}$ is a Banach space, $\varphi$ and $\psi$ are appropriate functions with their limits vanishing at zero, and $\tau_\upsilon \mathbf{u}_h = \mathbf{u}_h (t+\upsilon) $. The theorem is included at a later point as Theorem \ref{compactnessbyperturbation}.
+
+In particular, the nonlinear terms fall into four categories:
+
+\begin{itemize}
+  \item[(I)] $\epsilon^2 \int_0^T (u_i^\epsilon \partial_i u_3^\epsilon, v_3) \diff t, \quad 1 \leq i \leq 2,$
+  \item[(II)] $\epsilon^2 (u_3^\epsilon \partial_3 u_3^\epsilon, v_3) \diff t,$
+  \item[(III)] $\int_0^T (u_i^\epsilon u_j^\epsilon, \partial_j v_i) \diff t \quad 1 \leq i, j \leq 2,$
+  \item[(IV)] $\int_0^T (u_i^\epsilon u_3^\epsilon, \partial_3 v_i) \diff t, \quad 1 \leq i \leq 2.$
+\end{itemize}
+
+It is easy to see that the type (I) and (II) terms are $\mathcal{O}(\epsilon)$ and thus they vanish as $\epsilon$ tends to zero. We need the aforementioned compactness result to handle the (III) and (IV) type terms. Applying the generalised Riesz-Fr\'echet-Kolmogorov criterium with $p=2, f_\epsilon = \mathbf{u}_h^\epsilon$ in the horizontal spaces (and using the $H^1 \hookrightarrow L^2 \hookrightarrow {H^2}^*$ embedding), we obtain a subsequence, still denoted by $\mathbf{u}_h^\epsilon,$ such that
+
+\begin{equation} \label{R-F-K_applied}
+  \mathbf{u}_h^\epsilon \to \mathbf{u}_h \text{ in } L^2(0, T; L^2 (\Omega)) \text{ strongly.}
+\end{equation}
+
+We obtain the convergence of (III) and (IV) type terms by combining (\ref{proposition1_gfc}), (\ref{proposition2_gfc}), and the above obtained (\ref{R-F-K_applied}) with basic interpolation techniques and the generalised H\"older inequality. The details are omitted since they are analogous to those described in \cite{azerad2001mathematical}.
   
 For the linear terms including the concentration $c^\epsilon$ we can directly apply the weak convergence result of (\ref{WeakConvCEps1_gfc}).
     
@@ -969,7 +986,7 @@ Finally we have to deal with the nonlinear term $(\mathbf{u}^\epsilon c^\epsilon
   
 By analysing this nonlinear term in a more precise way we see that $u^\epsilon_i c^\epsilon$ for $i=1,2$ is weakly convergent since as we mentioned before, we have the strong convergence of the horizontal velocities, while in the case of $i=3$ this property does not hold. We overcome this difficulty by proving a compactness property for the pollution concentration $c^\epsilon.$ The key tool will be the following compactness criterion (for the proof see Theorem 5.1 in \cite{azerad2001mathematical}).
 
-\begin{theorem}
+\begin{theorem} \label{compactnessbyperturbation}
 Let $T>0,$ and let the Banach spaces $\mathbf{X} \hookrightarrow \mathbf{B} \hookrightarrow \mathbf{Y},$ where $\mathbf{X}$ is compactly embedded in $\mathbf{B},$ and $\mathbf{B}$ is continuously embedded in $\mathbf{Y}.$ Let $(f_\epsilon)_{\epsilon>0}$ be a family of functions of $L^p (0,T; \mathbf{X}), 1 \leq p \leq \infty,$ with the extra condition $(f_\epsilon)_{\epsilon>0} \subset C (0,T; \mathbf{Y})$ if $p = \infty,$ such that
 \begin{enumerate}
   \item $(f_\epsilon)_{\epsilon>0}$ is bounded in $L^p (0,T; \mathbf{X}),$
