@@ -2,6 +2,14 @@
 # The former does not really work for (2,1) as it develops strange unnatural layers in the pressure.
 # The latter does not work for (2,2) as the Newton iterations do not converge --- probably because we do not have the first derivative of u3 in the scheme and u3 is second order in that case.
 
+# BOUNDARY comments:
+# 1.) the Dirichlet part of the boundary, \Gamma: you do not add the boundary terms on \Gamma to the F form itself as something like c.dx(1)*d*dx(\Gamma). instead, you define a DirichletBC condition, and then apply it to the Problem itself.
+# 2.) on parts of the boundary where we have a DirichletBC defined, the test functions go to zero, thus an added boundary integral would not change anything
+# 3.) in FEniCS the test functions go to zero on and only on the boundary section for which we have DirichletBC defined
+# 4.) boundary integral terms in the F form should be used exactly for those boundary sections where we do not have a DirichletBC. And among these, where we do not have a Dirichlet condition, we either have a NeumannBC, or, we risk the problem being ill-posed.
+# 5.) on a boundary section where we do not have a DirichletBC: in many problems the h value of the Neumann BC is zero, and the boundary term is therefore omitted; this case is sometimes referred to as the “do-nothing boundary condition”.
+# 6.) something like grad(u)*v*dx(\Gamma) in itself for Neumann BC-s should not be used. you know that grad(u) = h for a given h on \Gamma, then you add h*v*dx(\Gamma) in the form F.
+
 import matplotlib.pyplot as plt
 from dolfin import *
 import numpy as np
@@ -340,7 +348,7 @@ def hydrostatic_solver(VP, up_, vertical_velocity_degree, mesh_h, f1, f3, theta,
     F = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx - p * div(v) * dx + q * div(u) * dx + p.dx(1) * q.dx(1) * dx - f1 * v1 * dx - f3 * v3 * dx - inner(theta, v) * ds(1)
     
     F = action(F, up_)
-    J  = derivative(F, up_, up)
+    J = derivative(F, up_, up)
     
     # nonlinear solver for the velocity and pressure
     problem = NonlinearVariationalProblem(F, up_, bcu, J)
@@ -439,6 +447,7 @@ def anisotropic_solver(VP, eps, vertical_velocity_degree, mesh_h, f1, f3, theta,
     c_sol = Function(C)
     
     # works for 0 BC concentation. otherwise, -c.dx(0)*d*ds(0)-c.dx(1)*d*ds(0) should be added, but for some reason the concentration error convergence values are not great for those cases, even if the velocity is very close
+    # note that in a first order function space div(grad(u))v dx != inner(n,grad(u))ds + inner(grad(u),grad(v))dx, since by definition, first-order spaces contain linear functions, and for these the second-order derivative div(grad(u))v vanishes. so it is important to use the weak form here instead of the original second-order Laplacian of the deffusive term
     a = inner(u, grad(c)) * d * dx + c.dx(0) * d.dx(0) * dx + c.dx(1) * d.dx(1) * dx
     
     # explanation of the degree parameter: https://fenicsproject.discourse.group/t/how-to-define-source-term-function/1893, Scan_29_Nov_2019.pdf.
