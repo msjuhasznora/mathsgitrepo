@@ -458,7 +458,7 @@ def anisotropic_solver(VP, eps, vertical_velocity_degree, mesh_h, f1, f3, theta,
     # Also: if degree is set to a high value, e.g. degree = 20, a warning message comes from fenics:
     # "WARNING: The number of integration points for each cell will be: 144"
     # i.e. this degree variable is responsable for the number of integration points
-    anis_c_source_instance = anis_c_source(eps, id, degree = 5)
+    anis_c_source_instance = anis_c_source(eps, id, degree = 10)
     L = inner(anis_c_source_instance, d) * dx
     
     A, b = assemble_system(a, L, bcc)
