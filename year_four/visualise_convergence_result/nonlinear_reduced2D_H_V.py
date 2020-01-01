@@ -354,8 +354,8 @@ def hydrostatic_solver(VP, up_, vertical_velocity_degree, mesh_h, f1, f3, theta,
     problem = NonlinearVariationalProblem(F, up_, bcu, J)
     solver  = NonlinearVariationalSolver(problem)
     prm = solver.parameters
-    prm['newton_solver']['absolute_tolerance'] = 1e-3
-    prm['newton_solver']['relative_tolerance'] = 1e-2
+    prm['newton_solver']['absolute_tolerance'] = 1e-9
+    prm['newton_solver']['relative_tolerance'] = 1e-9
     prm['newton_solver']['maximum_iterations'] = 5
     solver.solve()
 
