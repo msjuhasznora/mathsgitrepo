@@ -20,7 +20,7 @@ import numpy
 from math import log
 import os
 
-import problem_data_definitions
+import problem_data_definitions as pdd
 import write_plot_tools
 import global_lists
 import helper_functions
@@ -124,7 +124,7 @@ def boundaryconditions_pd(id, VP):
     else:
         return []
 
-test_problem_data_list = [problem_data_definitions.problem_data1, problem_data_definitions.problem_data2, problem_data_definitions.problem_data3, problem_data_definitions.problem_data4]
+test_problem_data_list = [pdd.problem_data1, pdd.problem_data2, pdd.problem_data3, pdd.problem_data4]
 
 class anis_c_source(UserExpression):
     def __init__(self,eps,id,**kwargs):
@@ -338,8 +338,8 @@ if (doHydrostatic):
     vertical_velocity_degree_hydr = 1
     VPH = VP_functionspace(mesh, vertical_velocity_degree_hydr)
     up_ = Function(VPH) #initial guess for the Newton solver if filled, otherwise blank and start by default
-    bcu = boundaryconditions_pd(problem_data_definitions.problem_data0.id, VPH)
-    upc_sol_hydr = hydrostatic_solver(VPH, up_, vertical_velocity_degree_hydr, mesh, bcu, problem_data_definitions.problem_data0)
+    bcu = boundaryconditions_pd(pdd.problem_data0.id, VPH)
+    upc_sol_hydr = hydrostatic_solver(VPH, up_, vertical_velocity_degree_hydr, mesh, bcu, pdd.problem_data0)
 
 # **********************************************
 # *** Define anisotropic variational problem ***
@@ -350,12 +350,12 @@ if (doAnisotropicLoop):
     VP = VP_functionspace(mesh, vertical_velocity_degree_anis)
     up_sol_anis_eps = Function(VP)
     
-    bcu = boundaryconditions_pd(problem_data_definitions.problem_data0.id, VP)
+    bcu = boundaryconditions_pd(pdd.problem_data0.id, VP)
     foldermarker = "_eps_conv"
 
     while eps > epsilon_lower_limit:
     
-        upc_sol_anis_eps = anisotropic_solver(VP, eps, vertical_velocity_degree_anis, mesh, bcu, foldermarker, problem_data_definitions.problem_data0)
+        upc_sol_anis_eps = anisotropic_solver(VP, eps, vertical_velocity_degree_anis, mesh, bcu, foldermarker, pdd.problem_data0)
         up_sol_anis_eps = upc_sol_anis_eps[0]
         write_plot_tools.difference_info(eps, upc_sol_anis_eps, VP, upc_sol_hydr, VPH, verbose)
         eps = eps / 2.0
@@ -368,7 +368,7 @@ if (doAnisotropicLoop):
 if (doAnisotropicLoop and doInitGuessHydro):
     # hydrostatic model solved with initial guess for degree 2 vertical velocity space
     vertical_velocity_degree_hydr = 2
-    hydrostatic_solver(VP, up_sol_anis_eps, vertical_velocity_degree_hydr, mesh, bcu, problem_data_definitions.problem_data0)
+    hydrostatic_solver(VP, up_sol_anis_eps, vertical_velocity_degree_hydr, mesh, bcu, pdd.problem_data0)
 
 # **************************************************************
 # *** Define anisotropic variational problem  with degree = 1 **
@@ -378,12 +378,12 @@ if (doDegree1Anisopic):
     vertical_velocity_degree_anis = 1
     VP = VP_functionspace(mesh, vertical_velocity_degree_anis)
 
-    bcu = boundaryconditions_pd(problem_data_definitions.problem_data0.id, VP)
+    bcu = boundaryconditions_pd(pdd.problem_data0.id, VP)
     foldermarker = "_eps_conv"
 
     while eps > epsilon_lower_limit:
     
-        anisotropic_solver(VP, eps, vertical_velocity_degree_anis, mesh, bcu, foldermarker, problem_data_definitions.problem_data0)
+        anisotropic_solver(VP, eps, vertical_velocity_degree_anis, mesh, bcu, foldermarker, pdd.problem_data0)
         eps = eps / 2.0
 
 # **************************************************************
