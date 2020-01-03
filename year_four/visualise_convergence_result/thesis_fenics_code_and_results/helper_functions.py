@@ -2,6 +2,24 @@ from dolfin import *
 from math import log
 
 import global_lists
+import bcc_and_source
+import solvers
+
+def solve_on_refined_domain(resultsfolder, problem_data, nx, eps, vertical_velocity_degree_anis, foldermarker):
+    mesh_h = UnitSquareMesh(nx, nx)
+    VP = VP_functionspace(mesh_h, vertical_velocity_degree_anis)
+    bcu = bcc_and_source.boundaryconditions_pd(problem_data.id, VP)
+    upc_sol_anis_eps = solvers.anisotropic_solver(resultsfolder, VP, eps, vertical_velocity_degree_anis, mesh_h, bcu, foldermarker, problem_data)
+    return upc_sol_anis_eps
+
+# create a functionspace ((V_h, V_v), P) with given degree of V_v
+def VP_functionspace(mesh, v_vert_deg):
+    V_h = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 2) #horizontal velocity
+    V_v = FiniteElement("Lagrange", mesh.ufl_cell(), degree = v_vert_deg) #vertical velocity
+    V = V_h * V_v
+    P = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 1) #pressure
+    VP = FunctionSpace(mesh, V * P)
+    return VP
 
 def plot_exact_solutions(resultsfolder, nx, problem_data, foldermarker):
 
