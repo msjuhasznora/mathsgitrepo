@@ -37,3 +37,29 @@ def global_lists_init():
     
     global anis_and_hydr_difference_norm_c_values
     anis_and_hydr_difference_norm_c_values = []
+    
+    
+    global log_errorvalues_L2_u1
+    log_errorvalues_L2_u1 = []
+    global log_errorvalues_L2_u3
+    log_errorvalues_L2_u3 = []
+    global log_errorvalues_L2_p
+    log_errorvalues_L2_p = []
+    global log_errorvalues_L2_c
+    log_errorvalues_L2_c = []
+    
+    global log_errorvalues_H1_u1
+    log_errorvalues_H1_u1 = []
+    global log_errorvalues_H1_u3
+    log_errorvalues_H1_u3 = []
+    global log_errorvalues_H1_p
+    log_errorvalues_H1_p = []
+    global log_errorvalues_H1_c
+    log_errorvalues_H1_c = []
+    
+    global nxvalues
+    nxvalues = []
+    global errorvalues
+    errorvalues = []
+    global eocvalues
+    eocvalues = []

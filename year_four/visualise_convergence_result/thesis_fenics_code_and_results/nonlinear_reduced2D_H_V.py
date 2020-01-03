@@ -15,7 +15,6 @@ from dolfin import *
 import numpy as np
 import datetime
 from numpy.random import rand
-from dolfin import *
 import argparse
 import numpy
 from math import log
@@ -23,25 +22,13 @@ import os
 
 import write_plot_tools
 import global_lists
+import helper_functions
 
 global_lists.global_lists_init()
 
 # Define constants
 
 epsilon_lower_limit = 1.0e-07 #up 1.0e-07 c 5e-04
-
-log_errorvalues_L2_u1 = []
-log_errorvalues_L2_u3 = []
-log_errorvalues_L2_p = []
-log_errorvalues_L2_c = []
-log_errorvalues_H1_u1 = []
-log_errorvalues_H1_u3 = []
-log_errorvalues_H1_p = []
-log_errorvalues_H1_c = []
-nxvalues = []
-
-errorvalues = []
-eocvalues = []
 
 timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
 
@@ -270,64 +257,6 @@ def VP_functionspace(mesh, v_vert_deg):
     VP = FunctionSpace(mesh, V * P)
     return VP
 
-def calculate_errorvalues(problem_data, upc_sol_anis_eps, nx):
-
-    up_sol_anis_eps = upc_sol_anis_eps[0]
-    c = upc_sol_anis_eps[1]
-    (u, p) = up_sol_anis_eps.split(True)
-    (u1, u3) = u.split(True)
-    Eu1 = errornorm(problem_data.u1_exact, u1, norm_type='L2')
-    Eu3 = errornorm(problem_data.u3_exact, u3, norm_type='L2')
-    Ep = errornorm(problem_data.p_exact, p, norm_type='L2')
-    Ec = errornorm(problem_data.c_exact, c, norm_type='L2', mesh = UnitSquareMesh(nx, nx))
-    
-    Eu1_H = errornorm(problem_data.u1_exact, u1, norm_type='H1')
-    Eu3_H = errornorm(problem_data.u3_exact, u3, norm_type='H1')
-    Ep_H = errornorm(problem_data.p_exact, p, norm_type='H1')
-    Ec_H = errornorm(problem_data.c_exact, c, norm_type='H1', mesh = UnitSquareMesh(nx, nx))
-    errorvalues.append(nx)
-    errorvalues.append(Eu1)
-    errorvalues.append(Eu3)
-    errorvalues.append(Ep)
-    errorvalues.append(Ec)
-    errorvalues.append(Eu1_H)
-    errorvalues.append(Eu3_H)
-    errorvalues.append(Ep_H)
-    errorvalues.append(Ec_H)
-    
-    nxvalues.append(nx)
-    log_errorvalues_L2_u1.append(log(max(Eu1, DOLFIN_EPS)))
-    log_errorvalues_L2_u3.append(log(max(Eu3, DOLFIN_EPS)))
-    log_errorvalues_L2_p.append(log(max(Ep, DOLFIN_EPS)))
-    log_errorvalues_L2_c.append(log(max(Ec, DOLFIN_EPS)))
-    log_errorvalues_H1_u1.append(log(max(Eu1_H, DOLFIN_EPS)))
-    log_errorvalues_H1_u3.append(log(max(Eu3_H, DOLFIN_EPS)))
-    log_errorvalues_H1_p.append(log(max(Ep_H, DOLFIN_EPS)))
-    log_errorvalues_H1_c.append(log(max(Ec_H, DOLFIN_EPS)))
-    
-    error_L2 = [Eu1, Eu3, Ep, Ec]
-    
-    return error_L2
-
-def plot_exact_solutions(resultsfolder, nx, problem_data, foldermarker):
-
-    mesh_h = UnitSquareMesh(nx, nx)
-    W = FunctionSpace(mesh_h, 'Lagrange', 2)
-    P = FunctionSpace(mesh_h, 'Lagrange', 1)
-    C = FunctionSpace(mesh_h, 'Lagrange', 1)
-    u1_W = interpolate(problem_data.u1_exact, W)
-    u3_W = interpolate(problem_data.u3_exact, W)
-    p_P = interpolate(problem_data.p_exact, P)
-    c_C = interpolate(problem_data.c_exact, C)
-    u1_exact_plot = File(resultsfolder + "velocity" + foldermarker + "/u1_exact_nx_" + str(nx) + ".pvd")
-    u1_exact_plot << u1_W
-    u3_exact_plot = File(resultsfolder + "velocity" + foldermarker + "/u3_exact_nx_" + str(nx) + ".pvd")
-    u3_exact_plot << u3_W
-    p_exact_plot = File(resultsfolder + "pressure" + foldermarker + "/p_exact_nx_" + str(nx) + ".pvd")
-    p_exact_plot << p_P
-    c_exact_plot = File(resultsfolder + "concentration" + foldermarker + "/c_exact_nx_" + str(nx) + ".pvd")
-    c_exact_plot << c_C
-
 def hydrostatic_solver(VP, up_, vertical_velocity_degree, mesh_h, f1, f3, theta, bcu):
 
     nr_cells = mesh_h.num_cells()
@@ -475,58 +404,7 @@ def anisotropic_solver(VP, eps, vertical_velocity_degree, mesh_h, f1, f3, theta,
     print("ANIS. c: %.15g" % c_sol.vector().norm("l2"))
     
     return [up_, c_sol]
-
-def difference_info(eps, upc_sol_anis_eps, VPA, upc_sol_hydr, VPH):
-
-    up_sol_anis_eps = upc_sol_anis_eps[0]
-    c = upc_sol_anis_eps[1]
-    (u, p) = up_sol_anis_eps.split(True)
-    (u1, u3) = u.split(True)
-    
-    global_lists.anisotropic_norm_u1_values.append(u1.vector().norm("l2"))
-    global_lists.anisotropic_norm_u3_values.append(u3.vector().norm("l2"))
-    global_lists.anisotropic_norm_p_values.append(p.vector().norm("l2"))
-    global_lists.anisotropic_norm_c_values.append(c.vector().norm("l2"))
-    
-    up_interpolate_hydr = Function(VPH)
-    up_interpolate_hydr = interpolate(up_sol_anis_eps, VPH)
-    (u_interpolate_hydr, p_interpolate_hydr) = up_interpolate_hydr.split(True)
-    (u1_interpolate_hydr, u3_interpolate_hydr) = u_interpolate_hydr.split(True)
-    
-    global_lists.anisotropic_interpolated_norm_u1_values.append(u1_interpolate_hydr.vector().norm("l2"))
-    global_lists.anisotropic_interpolated_norm_u3_values.append(u3_interpolate_hydr.vector().norm("l2"))
-    global_lists.anisotropic_interpolated_norm_p_values.append(p_interpolate_hydr.vector().norm("l2"))
-    
-    up_sol_hydr = upc_sol_hydr[0]
-    c_sol_hydr = upc_sol_hydr[1]
-    (u_sol_hydr, p_sol_hydr) = up_sol_hydr.split(True)
-    (u1_sol_hydr, u3_sol_hydr) = u_sol_hydr.split(True)
-    
-    global_lists.interpolated_and_hydr_difference_norm_u1_values.append((u1_interpolate_hydr.vector() - u1_sol_hydr.vector()).norm("l2"))
-    global_lists.interpolated_and_hydr_difference_norm_u3_values.append((u3_interpolate_hydr.vector() - u3_sol_hydr.vector()).norm("l2"))
-    global_lists.interpolated_and_hydr_difference_norm_p_values.append((p_interpolate_hydr.vector() - p_sol_hydr.vector()).norm("l2"))
-    
-    global_lists.anis_and_hydr_difference_norm_u1_values.append((u1.vector() - u1_sol_hydr.vector()).norm("l2"))
-    # this does not make sense for different degree spaces
-    #anis_and_hydr_difference_norm_u3_values.append((u3.vector() - u3_sol_hydr.vector()).norm("l2"))
-    global_lists.anis_and_hydr_difference_norm_p_values.append((p.vector() - p_sol_hydr.vector()).norm("l2"))
-    global_lists.anis_and_hydr_difference_norm_c_values.append((c.vector() - c_sol_hydr.vector()).norm("l2"))
-    
-    if (verbose):
-        print(eps)
-        print("Anistropic. u: %.15g" % u.vector().norm("l2"))
-        print("Anistropic. u1: %.15g" % u1.vector().norm("l2"))
-        print("Anistropic. u3: %.15g" % u3.vector().norm("l2"))
-        print("Anistropic. p: %.15g" % p.vector().norm("l2"))
-        print("Anistropic Interpolated. u: %.15g" % u_interpolate_hydr.vector().norm("l2"))
-        print("Anistropic Interpolated. u1: %.15g" % u1_interpolate_hydr.vector().norm("l2"))
-        print("Anistropic Interpolated. u3: %.15g" % u3_interpolate_hydr.vector().norm("l2"))
-        print("Anistropic Interpolated. p: %.15g" % p_interpolate_hydr.vector().norm("l2"))
-        print("Anistropic Interpolated - Hydrostatic. u: %.15g" % (u_interpolate_hydr.vector() - u_sol_hydr.vector()).norm("l2"))
-        print("Anistropic Interpolated - Hydrostatic. u1: %.15g" % (u1_interpolate_hydr.vector() - u1_sol_hydr.vector()).norm("l2"))
-        print("Anistropic Interpolated - Hydrostatic. u3: %.15g" % (u3_interpolate_hydr.vector() - u3_sol_hydr.vector()).norm("l2"))
-        print("Anistropic Interpolated - Hydrostatic. p: %.15g" % (p_interpolate_hydr.vector() - p_sol_hydr.vector()).norm("l2"))
-    
+   
 def solve_on_refined_domain(problem_data, nx, eps, vertical_velocity_degree_anis, theta, foldermarker):
     mesh_h = UnitSquareMesh(nx, nx)
     VP = VP_functionspace(mesh_h, vertical_velocity_degree_anis)
@@ -534,51 +412,6 @@ def solve_on_refined_domain(problem_data, nx, eps, vertical_velocity_degree_anis
     upc_sol_anis_eps = anisotropic_solver(VP, eps, vertical_velocity_degree_anis, mesh_h, problem_data.f1, problem_data.f3, theta, bcu, foldermarker, problem_data.id)
     return upc_sol_anis_eps
 
-def plot_error_values(problem_data):
-
-    os.mkdir(resultsfolder + "log_errorvalues" + str(problem_data.id))
-    
-    np.savetxt(resultsfolder + "log_errorvalues" + str(problem_data.id) + "/L2_u1_problemdata_" + str(problem_data.id) + ".txt", log_errorvalues_L2_u1)
-    np.savetxt(resultsfolder + "log_errorvalues" + str(problem_data.id) + "/L2_u3_problemdata_" + str(problem_data.id) + ".txt", log_errorvalues_L2_u3)
-    np.savetxt(resultsfolder + "log_errorvalues" + str(problem_data.id) + "/L2_p_problemdata_" + str(problem_data.id) + ".txt", log_errorvalues_L2_p)
-    np.savetxt(resultsfolder + "log_errorvalues" + str(problem_data.id) + "/L2_c_problemdata_" + str(problem_data.id) + ".txt", log_errorvalues_L2_c)
-    
-    np.savetxt(resultsfolder + "log_errorvalues" + str(problem_data.id) + "/H1_u1_problemdata_" + str(problem_data.id) + ".txt", log_errorvalues_H1_u1)
-    np.savetxt(resultsfolder + "log_errorvalues" + str(problem_data.id) + "/H1_u3_problemdata_" + str(problem_data.id) + ".txt", log_errorvalues_H1_u3)
-    np.savetxt(resultsfolder + "log_errorvalues" + str(problem_data.id) + "/H1_p_problemdata_" + str(problem_data.id) + ".txt", log_errorvalues_H1_p)
-    np.savetxt(resultsfolder + "log_errorvalues" + str(problem_data.id) + "/H1_c_problemdata_" + str(problem_data.id) + ".txt", log_errorvalues_H1_c)
-    
-    plt.scatter(nxvalues, log_errorvalues_L2_u1)
-    plt.savefig(resultsfolder + "log_errorvalues" + str(problem_data.id) + "/L2_u1__id" + str(problem_data.id) + ".png")
-    plt.clf()
-    
-    plt.scatter(nxvalues, log_errorvalues_L2_u3)
-    plt.savefig(resultsfolder + "log_errorvalues" + str(problem_data.id) + "/L2_u3__id" + str(problem_data.id) + ".png")
-    plt.clf()
-    
-    plt.scatter(nxvalues, log_errorvalues_L2_p)
-    plt.savefig(resultsfolder + "log_errorvalues" + str(problem_data.id) + "/L2_p__id" + str(problem_data.id) + ".png")
-    plt.clf()
-    
-    plt.scatter(nxvalues, log_errorvalues_L2_c)
-    plt.savefig(resultsfolder + "log_errorvalues" + str(problem_data.id) + "/L2_c__id" + str(problem_data.id) + ".png")
-    plt.clf()
-
-    plt.scatter(nxvalues, log_errorvalues_H1_u1)
-    plt.savefig(resultsfolder + "log_errorvalues" + str(problem_data.id) + "/H1_u1__id" + str(problem_data.id) + ".png")
-    plt.clf()
-    
-    plt.scatter(nxvalues, log_errorvalues_H1_u3)
-    plt.savefig(resultsfolder + "log_errorvalues" + str(problem_data.id) + "/H1_u3__id" + str(problem_data.id) + ".png")
-    plt.clf()
-    
-    plt.scatter(nxvalues, log_errorvalues_H1_p)
-    plt.savefig(resultsfolder + "log_errorvalues" + str(problem_data.id) + "/H1_p__id" + str(problem_data.id) + ".png")
-    plt.clf()
-    
-    plt.scatter(nxvalues, log_errorvalues_H1_c)
-    plt.savefig(resultsfolder + "log_errorvalues" + str(problem_data.id) + "/H1_c__id" + str(problem_data.id) + ".png")
-    plt.clf()
 
 # **********************************************
 # *** Define hydrostatic variational problem ***
@@ -615,7 +448,7 @@ if (doAnisotropicLoop):
     
         upc_sol_anis_eps = anisotropic_solver(VP, eps, vertical_velocity_degree_anis, mesh, f1, f3, theta, bcu, foldermarker, 0)
         up_sol_anis_eps = upc_sol_anis_eps[0]
-        difference_info(eps, upc_sol_anis_eps, VP, upc_sol_hydr, VPH)
+        write_plot_tools.difference_info(eps, upc_sol_anis_eps, VP, upc_sol_hydr, VPH, verbose)
         eps = eps / 2.0
     
     write_plot_tools.writedifference(vertical_velocity_degree_anis, vertical_velocity_degree_hydr, resultsfolder)
@@ -660,18 +493,18 @@ if (doErrorCalc):
     
     for problem_data in problem_data_list:
     
-        nxvalues = []
-        log_errorvalues_L2_u1 = []
-        log_errorvalues_L2_u3 = []
-        log_errorvalues_L2_p = []
-        log_errorvalues_L2_c = []
-        log_errorvalues_H1_u1 = []
-        log_errorvalues_H1_u3 = []
-        log_errorvalues_H1_p = []
-        log_errorvalues_H1_c = []
+        global_lists.nxvalues = []
+        global_lists.log_errorvalues_L2_u1 = []
+        global_lists.log_errorvalues_L2_u3 = []
+        global_lists.log_errorvalues_L2_p = []
+        global_lists.log_errorvalues_L2_c = []
+        global_lists.log_errorvalues_H1_u1 = []
+        global_lists.log_errorvalues_H1_u3 = []
+        global_lists.log_errorvalues_H1_p = []
+        global_lists.log_errorvalues_H1_c = []
     
-        errorvalues = []
-        eocvalues = []
+        global_lists.errorvalues = []
+        global_lists.eocvalues = []
         foldermarker = "_empirical_error_calc_pd_" + str(problem_data.id)
 
         nx_exp = 3
@@ -683,32 +516,31 @@ if (doErrorCalc):
         while nx < 2 ** 8:
     
             upc_sol_anis_eps = solve_on_refined_domain(problem_data, nx, eps, vertical_velocity_degree_anis, theta, foldermarker)
-            error_next = calculate_errorvalues(problem_data, upc_sol_anis_eps, nx)
+            error_next = helper_functions.calculate_errorvalues(problem_data, upc_sol_anis_eps, nx)
             h_next = (1/nx)*sqrt(2)
-            eocvalues.append(nx)
+            global_lists.eocvalues.append(nx)
             
             for i in [0, 1, 2, 3]:
                 if error_prev[i] > DOLFIN_EPS and error_next[i] > DOLFIN_EPS:
                     eoc_i = log(error_next[i]/error_prev[i])/log(h_next/h_prev)
                 else:
                     eoc_i = -1.0
-                eocvalues.append(error_next[i])
-                eocvalues.append(error_prev[i])
-                eocvalues.append(h_next)
-                eocvalues.append(h_prev)
-                eocvalues.append(eoc_i)
+                global_lists.eocvalues.append(error_next[i])
+                global_lists.eocvalues.append(error_prev[i])
+                global_lists.eocvalues.append(h_next)
+                global_lists.eocvalues.append(h_prev)
+                global_lists.eocvalues.append(eoc_i)
             
             h_prev = h_next
             error_prev = error_next
             
             nx = 2 * nx
         
-        np.savetxt(resultsfolder + "eocvalues_problemdata_" + str(problem_data.id) + ".txt", eocvalues)
-        np.savetxt(resultsfolder + "errorvalues_problemdata_" + str(problem_data.id) + ".txt", errorvalues)
+        np.savetxt(resultsfolder + "eocvalues_problemdata_" + str(problem_data.id) + ".txt", global_lists.eocvalues)
+        np.savetxt(resultsfolder + "errorvalues_problemdata_" + str(problem_data.id) + ".txt", global_lists.errorvalues)
         
-        plot_error_values(problem_data)
-
-        plot_exact_solutions(resultsfolder, nx, problem_data, foldermarker)
+        write_plot_tools.plot_error_values(resultsfolder, problem_data)
+        helper_functions.plot_exact_solutions(resultsfolder, nx, problem_data, foldermarker)
     
 
 # *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- #
