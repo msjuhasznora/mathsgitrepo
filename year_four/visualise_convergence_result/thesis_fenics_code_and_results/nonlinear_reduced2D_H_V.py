@@ -20,9 +20,11 @@ import numpy
 from math import log
 import os
 
+import problem_data_definitions
 import write_plot_tools
 import global_lists
 import helper_functions
+import boundary_domains
 
 global_lists.global_lists_init()
 
@@ -46,38 +48,6 @@ doDegree1Anisopic = True
 doErrorCalc = True
 
 mesh = UnitSquareMesh(30, 30)
-
-# set boundary domains
-
-class LateralBoundary(SubDomain):
-    def inside(self, x, on_boundary):
-        tol = 1E-14
-        return on_boundary and (near(x[0], 0.0, tol) or near(x[0], 1.0, tol))
-
-class UpperBottomBoundary(SubDomain):
-    def inside(self, x, on_boundary):
-        tol = 1E-14
-        return on_boundary and (near(x[1], 0.0, tol) or near(x[1], 1.0, tol))
-
-class UpperBoundary(SubDomain):
-    def inside(self, x, on_boundary):
-        tol = 1E-14
-        return on_boundary and near(x[1], 1.0)
-    
-class LowerBoundary(SubDomain):
-    def inside(self, x, on_boundary):
-        tol = 1E-14
-        return on_boundary and near(x[1], 0.0, tol)
-        
-class LeftBoundary(SubDomain):
-    def inside(self, x, on_boundary):
-        tol = 1E-14
-        return on_boundary and near(x[0], 0.0, tol)
- 
-class RightBoundary(SubDomain):
-    def inside(self, x, on_boundary):
-        tol = 1E-14
-        return on_boundary and near(x[0], 1.0, tol)
         
 def concentration_BCs_pd(id, C):
 
@@ -99,12 +69,12 @@ def concentration_BCs_pd(id, C):
 
 def boundaryconditions_pd(id, VP):
 
-    lateral_boundary = LateralBoundary()
-    upper_bottom_boundary = UpperBottomBoundary()
-    upper_boundary = UpperBoundary()
-    lower_boundary = LowerBoundary()
-    left_boundary = LeftBoundary()
-    right_boundary = RightBoundary()
+    lateral_boundary = boundary_domains.LateralBoundary()
+    upper_bottom_boundary = boundary_domains.UpperBottomBoundary()
+    upper_boundary = boundary_domains.UpperBoundary()
+    lower_boundary = boundary_domains.LowerBoundary()
+    left_boundary = boundary_domains.LeftBoundary()
+    right_boundary = boundary_domains.RightBoundary()
 
     if id == 0:
     
@@ -154,61 +124,7 @@ def boundaryconditions_pd(id, VP):
     else:
         return []
 
-class ProblemData(UserExpression):
-    def __init__(self, id, u1_exact, u3_exact, p_exact, f1, f3, c_exact):
-        self.id = id
-        self.u1_exact = u1_exact
-        self.u3_exact = u3_exact
-        self.p_exact = p_exact
-        self.f1 = f1
-        self.f3 = f3
-        self.c_exact = c_exact
-
-# for the symbolic computations providing the forcing terms using the exact solutions we use sympy-1.4: Documents/sympy-1.4/examples/beginner/differentiation.py
-# PROBLEM 0
-# the actual one we solve
-
-# PROBLEM 1
-id = 1
-u1_exact = Expression('0', degree = 5)
-u3_exact = Expression('0', degree = 5)
-p_exact = Expression('0', degree = 5)
-f1 = Expression('0.0', degree = 5)
-f3 = Expression('0.0', degree = 5)
-c_exact = Expression('0.0', degree = 5)
-problem_data1 = ProblemData(id, u1_exact, u3_exact, p_exact, f1, f3, c_exact)
-
-# PROBLEM 2
-id = 2
-u1_exact = Expression('0', degree = 5)
-u3_exact = Expression('0', degree = 5)
-p_exact = Expression('0', degree = 5)
-f1 = Expression('0.0', degree = 5)
-f3 = Expression('0.0', degree = 5)
-c_exact = Expression('x[0]*(1-x[0])*x[1]*(1-x[1])', degree = 5)
-problem_data2 = ProblemData(id, u1_exact, u3_exact, p_exact, f1, f3, c_exact)
-
-# PROBLEM 3
-id = 3
-u1_exact = Expression('x[0]', degree = 5)
-u3_exact = Expression('-x[1]', degree = 5)
-p_exact = Expression('0', degree = 5)
-f1 = Expression('x[0]', degree = 5)
-f3 = Expression('x[1]', degree = 5)
-c_exact = Expression('x[0]*(1-x[0])*x[1]*(1-x[1])', degree = 5)
-problem_data3 = ProblemData(id, u1_exact, u3_exact, p_exact, f1, f3, c_exact)
-
-# PROBLEM 4
-id = 4
-u1_exact = Expression('sin(2*pi*x[0])*cos(2*pi*x[1])', degree = 5)
-u3_exact = Expression('-cos(2*pi*x[0])*sin(2*pi*x[1])', degree = 5)
-p_exact = Expression('0', degree = 5)
-f1 = Expression('2*pi*sin(2*pi*x[0])*sin(2*pi*x[1])*sin(2*pi*x[1])*cos(2*pi*x[0]) + 2*pi*sin(2*pi*x[0])*cos(2*pi*x[0])*cos(2*pi*x[1])*cos(2*pi*x[1]) + 8*pi*pi*sin(2*pi*x[0])*cos(2*pi*x[1])', degree = 5)
-f3 = Expression('2*pi*sin(2*pi*x[0])*sin(2*pi*x[0])*sin(2*pi*x[1])*cos(2*pi*x[1]) + 2*pi*sin(2*pi*x[1])*cos(2*pi*x[0])*cos(2*pi*x[0])*cos(2*pi*x[1]) - 8*pi*pi*sin(2*pi*x[1])*cos(2*pi*x[0])', degree = 5)
-c_exact = Expression('(1-x[0])*(1-x[1])*sin(2*pi*x[1])*sin(2*pi*x[0])', degree = 5)
-problem_data4 = ProblemData(id, u1_exact, u3_exact, p_exact, f1, f3, c_exact)
-
-problem_data_list = [problem_data1, problem_data2, problem_data3, problem_data4]
+test_problem_data_list = [problem_data_definitions.problem_data1, problem_data_definitions.problem_data2, problem_data_definitions.problem_data3, problem_data_definitions.problem_data4]
 
 class anis_c_source(UserExpression):
     def __init__(self,eps,id,**kwargs):
@@ -257,11 +173,11 @@ def VP_functionspace(mesh, v_vert_deg):
     VP = FunctionSpace(mesh, V * P)
     return VP
 
-def hydrostatic_solver(VP, up_, vertical_velocity_degree, mesh_h, f1, f3, theta, bcu):
+def hydrostatic_solver(VP, up_, vertical_velocity_degree, mesh_h, bcu, problem_data):
 
     nr_cells = mesh_h.num_cells()
 
-    upperboundary = UpperBoundary()
+    upperboundary = boundary_domains.UpperBoundary()
     boundaries = MeshFunction("size_t", mesh_h, mesh_h.topology().dim() - 1)
     boundaries.set_all(0)
     upperboundary.mark(boundaries, 1)
@@ -277,7 +193,7 @@ def hydrostatic_solver(VP, up_, vertical_velocity_degree, mesh_h, f1, f3, theta,
     (u1_, u3_) = u_.split(True)
     
     # the hydrostatic weak formulation without an initial guess (for now) is constructed with the vertical velocity space being of degree 1 and the additional constraint p.dx(1) * q.dx(1) * dx representing that we have a hydrostatic pressure. using a lower degree for the vertical velocities for the case of the primitive equations come from the article of Danilov, Gennady, Schroter, 2002 (even though they use elementwise constant representations)
-    F = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx - p * div(v) * dx + q * div(u) * dx + p.dx(1) * q.dx(1) * dx - f1 * v1 * dx - f3 * v3 * dx - inner(theta, v) * ds(1)
+    F = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx - p * div(v) * dx + q * div(u) * dx + p.dx(1) * q.dx(1) * dx - problem_data.f1 * v1 * dx - problem_data.f3 * v3 * dx - inner(problem_data.theta, v) * ds(1)
     
     F = action(F, up_)
     J = derivative(F, up_, up)
@@ -334,11 +250,11 @@ def hydrostatic_solver(VP, up_, vertical_velocity_degree, mesh_h, f1, f3, theta,
     
     return [up_, c_sol]
     
-def anisotropic_solver(VP, eps, vertical_velocity_degree, mesh_h, f1, f3, theta, bcu, foldermarker, id):
+def anisotropic_solver(VP, eps, vertical_velocity_degree, mesh_h, bcu, foldermarker, problem_data):
 
     nr_cells = mesh_h.num_cells()
 
-    upperboundary = UpperBoundary()
+    upperboundary = boundary_domains.UpperBoundary()
     boundaries = MeshFunction("size_t", mesh_h, mesh_h.topology().dim() - 1)
     boundaries.set_all(0)
     upperboundary.mark(boundaries, 1)
@@ -355,7 +271,7 @@ def anisotropic_solver(VP, eps, vertical_velocity_degree, mesh_h, f1, f3, theta,
     (u1_, u3_) = split(u_)
     
     # the anisotropic weak formulation is created using the Taylor-Hood elements, the vertical velocity is from a quadratic space. Using a degree 1 vertical velocity space in the anisotropic case we have a strange layered unnatural pressure.
-    F = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx + eps*eps*inner(u, grad(u3)) * v3 * dx + eps*eps*inner(grad(u3),grad(v3)) * dx - p * div(v) * dx + q * div(u) * dx - f1 * v1 * dx - f3 * v3 * dx - inner(theta, v) * ds(1)
+    F = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx + eps*eps*inner(u, grad(u3)) * v3 * dx + eps*eps*inner(grad(u3),grad(v3)) * dx - p * div(v) * dx + q * div(u) * dx - problem_data.f1 * v1 * dx - problem_data.f3 * v3 * dx - inner(problem_data.theta, v) * ds(1)
     
     F = action(F, up_)
     J = derivative(F, up_)
@@ -373,7 +289,7 @@ def anisotropic_solver(VP, eps, vertical_velocity_degree, mesh_h, f1, f3, theta,
     
     C = FiniteElement("Lagrange", mesh_h.ufl_cell(), degree = 1)
     C = FunctionSpace(mesh_h, C)
-    bcc = concentration_BCs_pd(id, C)
+    bcc = concentration_BCs_pd(problem_data.id, C)
     c = TrialFunction(C)
     d = TestFunction(C)
     c_sol = Function(C)
@@ -390,7 +306,7 @@ def anisotropic_solver(VP, eps, vertical_velocity_degree, mesh_h, f1, f3, theta,
     # Also: if degree is set to a high value, e.g. degree = 20, a warning message comes from fenics:
     # "WARNING: The number of integration points for each cell will be: 144"
     # i.e. this degree variable is responsable for the number of integration points
-    anis_c_source_instance = anis_c_source(eps, id, degree = 10)
+    anis_c_source_instance = anis_c_source(eps, problem_data.id, degree = 10)
     L = inner(anis_c_source_instance, d) * dx
     
     A, b = assemble_system(a, L, bcc)
@@ -405,11 +321,11 @@ def anisotropic_solver(VP, eps, vertical_velocity_degree, mesh_h, f1, f3, theta,
     
     return [up_, c_sol]
    
-def solve_on_refined_domain(problem_data, nx, eps, vertical_velocity_degree_anis, theta, foldermarker):
+def solve_on_refined_domain(problem_data, nx, eps, vertical_velocity_degree_anis, foldermarker):
     mesh_h = UnitSquareMesh(nx, nx)
     VP = VP_functionspace(mesh_h, vertical_velocity_degree_anis)
     bcu = boundaryconditions_pd(problem_data.id, VP)
-    upc_sol_anis_eps = anisotropic_solver(VP, eps, vertical_velocity_degree_anis, mesh_h, problem_data.f1, problem_data.f3, theta, bcu, foldermarker, problem_data.id)
+    upc_sol_anis_eps = anisotropic_solver(VP, eps, vertical_velocity_degree_anis, mesh_h, bcu, foldermarker, problem_data)
     return upc_sol_anis_eps
 
 
@@ -419,15 +335,11 @@ def solve_on_refined_domain(problem_data, nx, eps, vertical_velocity_degree_anis
 
 if (doHydrostatic):
     # hydrostatic model solved without initial guess for degree 1 vertical velocity space
-    wind_shear_x = 10.0
-    theta = Constant((wind_shear_x, 0.0))
-    f1 = Expression('0', degree = 2)
-    f3 = Expression('0', degree = 2)
     vertical_velocity_degree_hydr = 1
     VPH = VP_functionspace(mesh, vertical_velocity_degree_hydr)
     up_ = Function(VPH) #initial guess for the Newton solver if filled, otherwise blank and start by default
-    bcu = boundaryconditions_pd(0, VPH)
-    upc_sol_hydr = hydrostatic_solver(VPH, up_, vertical_velocity_degree_hydr, mesh, f1, f3, theta, bcu)
+    bcu = boundaryconditions_pd(problem_data_definitions.problem_data0.id, VPH)
+    upc_sol_hydr = hydrostatic_solver(VPH, up_, vertical_velocity_degree_hydr, mesh, bcu, problem_data_definitions.problem_data0)
 
 # **********************************************
 # *** Define anisotropic variational problem ***
@@ -437,16 +349,13 @@ if (doAnisotropicLoop):
     vertical_velocity_degree_anis = 2
     VP = VP_functionspace(mesh, vertical_velocity_degree_anis)
     up_sol_anis_eps = Function(VP)
-    wind_shear_x = 10.0
-    theta = Constant((wind_shear_x, 0.0))
-    f1 = Expression('0', degree = 2)
-    f3 = Expression('0', degree = 2)
-    bcu = boundaryconditions_pd(0, VP)
+    
+    bcu = boundaryconditions_pd(problem_data_definitions.problem_data0.id, VP)
     foldermarker = "_eps_conv"
 
     while eps > epsilon_lower_limit:
     
-        upc_sol_anis_eps = anisotropic_solver(VP, eps, vertical_velocity_degree_anis, mesh, f1, f3, theta, bcu, foldermarker, 0)
+        upc_sol_anis_eps = anisotropic_solver(VP, eps, vertical_velocity_degree_anis, mesh, bcu, foldermarker, problem_data_definitions.problem_data0)
         up_sol_anis_eps = upc_sol_anis_eps[0]
         write_plot_tools.difference_info(eps, upc_sol_anis_eps, VP, upc_sol_hydr, VPH, verbose)
         eps = eps / 2.0
@@ -459,7 +368,7 @@ if (doAnisotropicLoop):
 if (doAnisotropicLoop and doInitGuessHydro):
     # hydrostatic model solved with initial guess for degree 2 vertical velocity space
     vertical_velocity_degree_hydr = 2
-    hydrostatic_solver(VP, up_sol_anis_eps, vertical_velocity_degree_hydr, mesh, f1, f3, theta, bcu)
+    hydrostatic_solver(VP, up_sol_anis_eps, vertical_velocity_degree_hydr, mesh, bcu, problem_data_definitions.problem_data0)
 
 # **************************************************************
 # *** Define anisotropic variational problem  with degree = 1 **
@@ -468,16 +377,13 @@ if (doDegree1Anisopic):
     eps = 1.0
     vertical_velocity_degree_anis = 1
     VP = VP_functionspace(mesh, vertical_velocity_degree_anis)
-    wind_shear_x = 10.0
-    theta = Constant((wind_shear_x, 0.0))
-    f1 = Expression('0', degree = 2)
-    f3 = Expression('0', degree = 2)
-    bcu = boundaryconditions_pd(0, VP)
+
+    bcu = boundaryconditions_pd(problem_data_definitions.problem_data0.id, VP)
     foldermarker = "_eps_conv"
 
     while eps > epsilon_lower_limit:
     
-        anisotropic_solver(VP, eps, vertical_velocity_degree_anis, mesh, f1, f3, theta, bcu, foldermarker, 0)
+        anisotropic_solver(VP, eps, vertical_velocity_degree_anis, mesh, bcu, foldermarker, problem_data_definitions.problem_data0)
         eps = eps / 2.0
 
 # **************************************************************
@@ -488,10 +394,8 @@ if (doErrorCalc):
 
     vertical_velocity_degree_anis = 2
     eps = 1.0
-    wind_shear_x = 0.0
-    theta = Constant((wind_shear_x, 0.0))
     
-    for problem_data in problem_data_list:
+    for problem_data in test_problem_data_list:
     
         global_lists.nxvalues = []
         global_lists.log_errorvalues_L2_u1 = []
@@ -515,7 +419,7 @@ if (doErrorCalc):
         
         while nx < 2 ** 8:
     
-            upc_sol_anis_eps = solve_on_refined_domain(problem_data, nx, eps, vertical_velocity_degree_anis, theta, foldermarker)
+            upc_sol_anis_eps = solve_on_refined_domain(problem_data, nx, eps, vertical_velocity_degree_anis, foldermarker)
             error_next = helper_functions.calculate_errorvalues(problem_data, upc_sol_anis_eps, nx)
             h_next = (1/nx)*sqrt(2)
             global_lists.eocvalues.append(nx)
