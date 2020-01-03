@@ -1,19 +1,18 @@
-import matplotlib.pyplot as plt
 from dolfin import *
+from math import log
+
+import matplotlib.pyplot as plt
 import numpy as np
 import datetime
-from numpy.random import rand
 import argparse
-import numpy
-from math import log
 import os
 
 import problem_data_definitions as pdd
 import write_plot_tools
-import global_lists
 import helper_functions
 import boundary_domains
 import bcc_and_source
+import global_lists
 import solvers
 
 global_lists.global_lists_init()
@@ -36,8 +35,6 @@ doDegree1Anisopic = True
 doErrorCalc = True
 
 mesh = UnitSquareMesh(30, 30)
-
-test_problem_data_list = [pdd.problem_data1, pdd.problem_data2, pdd.problem_data3, pdd.problem_data4]
    
 # **********************************************
 # *** Define hydrostatic variational problem ***
@@ -51,9 +48,11 @@ if (doHydrostatic):
     bcu = bcc_and_source.boundaryconditions_pd(pdd.problem_data0.id, VPH)
     upc_sol_hydr = solvers.hydrostatic_solver(resultsfolder, VPH, up_, vertical_velocity_degree_hydr, mesh, bcu, pdd.problem_data0)
 
+
 # **********************************************
 # *** Define anisotropic variational problem ***
 # **********************************************
+
 if (doAnisotropicLoop):
     eps = 1.0
     vertical_velocity_degree_anis = 2
@@ -72,17 +71,21 @@ if (doAnisotropicLoop):
     
     write_plot_tools.writedifference(vertical_velocity_degree_anis, vertical_velocity_degree_hydr, resultsfolder)
 
+
 # **********************************************
 # *** degree 2 for the hydrostatic weak form ***
 # **********************************************
+
 if (doAnisotropicLoop and doInitGuessHydro):
     # hydrostatic model solved with initial guess for degree 2 vertical velocity space
     vertical_velocity_degree_hydr = 2
     solvers.hydrostatic_solver(resultsfolder, VP, up_sol_anis_eps, vertical_velocity_degree_hydr, mesh, bcu, pdd.problem_data0)
 
+
 # **************************************************************
 # *** Define anisotropic variational problem  with degree = 1 **
 # **************************************************************
+
 if (doDegree1Anisopic):
     eps = 1.0
     vertical_velocity_degree_anis = 1
@@ -96,11 +99,14 @@ if (doDegree1Anisopic):
         solvers.anisotropic_solver(resultsfolder, VP, eps, vertical_velocity_degree_anis, mesh, bcu, foldermarker, pdd.problem_data0)
         eps = eps / 2.0
 
+
 # **************************************************************
 # ************************** Loop in h *************************
 # **************************************************************
 
 if (doErrorCalc):
+
+    test_problem_data_list = [pdd.problem_data1, pdd.problem_data2, pdd.problem_data3, pdd.problem_data4]
 
     vertical_velocity_degree_anis = 2
     eps = 1.0
