@@ -75,6 +75,10 @@ def calculate_errorvalues(problem_data, upc_sol_anis_eps, nx):
     global_lists.log_errorvalues_H1_u3.append(log(max(Eu3_H, DOLFIN_EPS)))
     global_lists.log_errorvalues_H1_p.append(log(max(Ep_H, DOLFIN_EPS)))
     global_lists.log_errorvalues_H1_c.append(log(max(Ec_H, DOLFIN_EPS)))
+    global_lists.errorvalues_H1_u1.append(Eu1_H)
+    global_lists.errorvalues_H1_u3.append(Eu3_H)
+    global_lists.errorvalues_H1_p.append(Ep_H)
+    global_lists.errorvalues_H1_c.append(Ec_H)
 
     error_L2 = [Eu1, Eu3, Ep, Ec]
 

@@ -122,6 +122,10 @@ if (doErrorCalc):
         global_lists.log_errorvalues_H1_u3 = []
         global_lists.log_errorvalues_H1_p = []
         global_lists.log_errorvalues_H1_c = []
+        global_lists.errorvalues_H1_u1 = []
+        global_lists.errorvalues_H1_u3 = []
+        global_lists.errorvalues_H1_p = []
+        global_lists.errorvalues_H1_c = []
     
         global_lists.errorvalues = []
         global_lists.eocvalues = []

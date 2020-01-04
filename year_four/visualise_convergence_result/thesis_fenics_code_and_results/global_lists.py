@@ -57,6 +57,15 @@ def global_lists_init():
     global log_errorvalues_H1_c
     log_errorvalues_H1_c = []
     
+    global errorvalues_H1_u1
+    errorvalues_H1_u1 = []
+    global errorvalues_H1_u3
+    errorvalues_H1_u3 = []
+    global errorvalues_H1_p
+    errorvalues_H1_p = []
+    global errorvalues_H1_c
+    errorvalues_H1_c = []
+    
     global nxvalues
     nxvalues = []
     global errorvalues
