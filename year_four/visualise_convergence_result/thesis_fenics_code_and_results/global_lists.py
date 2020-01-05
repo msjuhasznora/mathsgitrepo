@@ -1,4 +1,5 @@
 def global_lists_init():
+
     global anisotropic_norm_u1_values
     anisotropic_norm_u1_values = []
     
@@ -66,9 +67,20 @@ def global_lists_init():
     global errorvalues_H1_c
     errorvalues_H1_c = []
     
+    global eocvalues_L2_u1
+    eocvalues_L2_u1 = []
+    global eocvalues_L2_u3
+    eocvalues_L2_u3 = []
+    global eocvalues_L2_p
+    eocvalues_L2_p = []
+    global eocvalues_L2_c
+    eocvalues_L2_c = []
+    
     global nxvalues
     nxvalues = []
     global errorvalues
     errorvalues = []
     global eocvalues
     eocvalues = []
+    global eoc_nxvalues
+    eoc_nxvalues = []

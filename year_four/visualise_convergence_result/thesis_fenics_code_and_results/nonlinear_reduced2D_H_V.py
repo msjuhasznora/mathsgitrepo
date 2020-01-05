@@ -112,8 +112,10 @@ if (doErrorCalc):
     eps = 1.0
     
     for problem_data in test_problem_data_list:
-    
+        
         global_lists.nxvalues = []
+        global_lists.eoc_nxvalues = []
+        
         global_lists.log_errorvalues_L2_u1 = []
         global_lists.log_errorvalues_L2_u3 = []
         global_lists.log_errorvalues_L2_p = []
@@ -122,19 +124,27 @@ if (doErrorCalc):
         global_lists.log_errorvalues_H1_u3 = []
         global_lists.log_errorvalues_H1_p = []
         global_lists.log_errorvalues_H1_c = []
+        
         global_lists.errorvalues_H1_u1 = []
         global_lists.errorvalues_H1_u3 = []
         global_lists.errorvalues_H1_p = []
         global_lists.errorvalues_H1_c = []
-    
+        
+        global_lists.eocvalues_L2_u1 = []
+        global_lists.eocvalues_L2_u3 = []
+        global_lists.eocvalues_L2_p = []
+        global_lists.eocvalues_L2_c = []
+        
         global_lists.errorvalues = []
         global_lists.eocvalues = []
+        
+        eoclists = [global_lists.eocvalues_L2_u1, global_lists.eocvalues_L2_u3, global_lists.eocvalues_L2_p, global_lists.eocvalues_L2_c]
         foldermarker = "_empirical_error_calc_pd_" + str(problem_data.id)
 
         nx_exp = 3
         nx = 2 ** nx_exp # to control the number of cells, UnitSquareMesh(nx, nx)
         
-        h_prev = 1.0
+        h_prev = 0.25*sqrt(2)
         error_prev = [1.0, 1.0, 1.0, 1.0]
         
         while nx < 2 ** 8:
@@ -142,18 +152,19 @@ if (doErrorCalc):
             upc_sol_anis_eps = helper_functions.solve_on_refined_domain(resultsfolder, problem_data, nx, eps, vertical_velocity_degree_anis, foldermarker)
             error_next = helper_functions.calculate_errorvalues(problem_data, upc_sol_anis_eps, nx)
             h_next = (1/nx)*sqrt(2)
-            global_lists.eocvalues.append(nx)
+            if nx > 2 ** 3:
+                global_lists.eocvalues.append(nx)
+                global_lists.eoc_nxvalues.append(nx)
             
             for i in [0, 1, 2, 3]:
                 if error_prev[i] > DOLFIN_EPS and error_next[i] > DOLFIN_EPS:
                     eoc_i = log(error_next[i]/error_prev[i])/log(h_next/h_prev)
                 else:
                     eoc_i = -1.0
-                global_lists.eocvalues.append(error_next[i])
-                global_lists.eocvalues.append(error_prev[i])
-                global_lists.eocvalues.append(h_next)
-                global_lists.eocvalues.append(h_prev)
-                global_lists.eocvalues.append(eoc_i)
+                    
+                if nx > 2 ** 3:
+                    global_lists.eocvalues.append(eoc_i)
+                    (eoclists[i]).append(eoc_i)
             
             h_prev = h_next
             error_prev = error_next
