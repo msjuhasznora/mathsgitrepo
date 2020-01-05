@@ -1498,8 +1498,6 @@ The numerical simulations were obtained in collaboration with Professor Omar Lak
   \caption{Hydrostatic model.}
 \end{figure}
 
-\newpage
-
 \subsubsection{The tendency of the vertical velocity solution}
 
 \begin{figure}[H]
@@ -1648,37 +1646,174 @@ The numerical simulations were obtained in collaboration with Professor Omar Lak
 %%% TESTING %%%
 \subsection{Code validation}\label{codetestingsection}
 
+In this section we investigate the correctness of the code via executing it in basic test scenarios where the expected solutions are well-known. We design each case by defining certain $\texttt{u\_exact, p\_exact, c\_exact}$ functions, and setting all other necessary variables of the model accordingly, i.e. we use boundary conditions and forcing functions according to the $\texttt{u\_exact, p\_exact,}$ $\texttt{c\_exact}$ functions we chose. In more detail, we plug in these functions into modelling equations, and we set the velocity and concentration forcing functions to the result of the computations. Once the forcing functions and the boundary conditions are set, we execute the code with these parameters: we expect that the $\texttt{u\_sol, p\_sol, c\_sol}$ solution we obtain are "close" in $H^1$ norm to the $\texttt{u\_exact, p\_exact, c\_exact}$ functions, moreover the computed solutions need to approximate the exact solutions better as the mesh size of the domain decreases. We will see that both criteria is satisfied in the examples detailed below.
+
 %%% TEST 1 %%%
 \subsubsection{Testcase 1}
+
+We begin with the trivial test case where all functions are constant zero.
+
+\begin{equation}
+  \begin{split}
+    & \texttt{u1\_exact = 0, u3\_exact = 0, p\_exact = 0}, \\
+    & \texttt{f1 = 0, f3 = 0}, \\
+    & \texttt{c\_exact = 0, anis\_c\_source = 0}
+  \end{split}
+\end{equation}
+
+Calculating the error values for each function we can see that the errors are immediately identical to zero, even for the case of lower mesh resolutions.
 
 \begin{figure}[H]
 \centering
 \begin{minipage}{0.5\textwidth}
   \centering
-  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/errorvalues1/H1_c__id1}
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/errorvalues1/H1_u1__id1}
   %\captionof{figure}{Error values calculated for the concentration function}
 \end{minipage}%
 \begin{minipage}{0.5\textwidth}
   \centering
-  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/errorvalues1/H1_p__id1}
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/errorvalues1/H1_u3__id1}
   %\captionof{figure}{Error values calculated for the pressure function}
 \end{minipage}
-\caption{Error values calculated for concentration and pressure}
+\caption{Error values calculated for the horizontal and vertical velocity}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/errorvalues1/H1_p__id1}
+  %\captionof{figure}{Error values calculated for the concentration function}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/errorvalues1/H1_c__id1}
+  %\captionof{figure}{Error values calculated for the pressure function}
+\end{minipage}
+\caption{Error values calculated for pressure and concentration}
 \end{figure}
 
 %%% TEST 2 %%%
 \subsubsection{Testcase 2}
 
+The second test case we consider is defined by the setting
+
+\begin{equation}
+  \begin{split}
+    & \texttt{u1\_exact = 0, u3\_exact = 0, p\_exact = 0}, \\
+    & \texttt{f1 = 0, f3 = 0}, \\
+    & \texttt{c\_exact = x[0]*(1-x[0])*x[1]*(1-x[1]), anis\_c\_source = 2*x[0]*(1-x[0]) + 2*x[1]*(1-x[1])}
+  \end{split}
+\end{equation}
+
+The error values for calculated for the velocity and the pressure are identical to zero in this case as well, while the error values obtained for the concentration function are decreasing as we double the number of division points in each dimension of the domain. We emphasise the fact that for the case of the concentration, we plot the logarithm of the error values.
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/errorvalues2/H1_u1__id2}
+  %\captionof{figure}{Error values calculated for the concentration function}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/errorvalues2/H1_u3__id2}
+  %\captionof{figure}{Error values calculated for the pressure function}
+\end{minipage}
+\caption{Error values calculated for the horizontal and vertical velocity}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/errorvalues2/H1_p__id2}
+  %\captionof{figure}{Error values calculated for the concentration function}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/log_errorvalues2/H1_c__id2}
+  %\captionof{figure}{Error values calculated for the pressure function}
+\end{minipage}
+\caption{Error values calculated for pressure and concentration}
+\end{figure}
+
+Since the convergence for the case of the concentration function is not immediate, it is interesting to consider the EOC (experimentally determined orders of convergence) values for $c:$
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/eocplots2/EOC_plots2}
+  \caption{Concentration EOC values}
+\end{figure}
+
 %%% TEST 3 %%%
 \subsubsection{Testcase 3}
+
+In this section we examine what changes compared to the previous test case if we modify the the velocity functions, while leaving the concentration and pressure unchanged.
+
+\begin{equation}
+  \begin{split}
+    & \texttt{u1\_exact = x[0], u3\_exact = - x[1], p\_exact = 0}, \\
+    & \texttt{f1 = x[0], f3 = x[1]}, \\
+    & \texttt{c\_exact = x[0]*(1-x[0])*x[1]*(1-x[1])}
+  \end{split}
+\end{equation}
+
+The value of $\texttt{anis\_c\_source}$ is a long expression obtained via plugging in the above values into the concentration-diffusion equation. Since it is not of any particular interest or challenge, we will not include it here, it can be found in the code.
+
+Similarly to test case 2, where the velocity error values were identical to zero ($\texttt{0e+00}$), in this case their orders oscillate between $\texttt{1.0e-12}$ and $\texttt{1.0e-14}$ for the different mesh sizes. As the error plots show, in terms of error values this case is essentially identical to the previous one.
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/errorvalues3/H1_u1__id3}
+  %\captionof{figure}{Error values calculated for the concentration function}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/errorvalues3/H1_u3__id3}
+  %\captionof{figure}{Error values calculated for the pressure function}
+\end{minipage}
+\caption{Error values calculated for the horizontal and vertical velocity}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/errorvalues3/H1_p__id3}
+  %\captionof{figure}{Error values calculated for the concentration function}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/log_errorvalues3/H1_c__id3}
+  %\captionof{figure}{Error values calculated for the pressure function}
+\end{minipage}
+\caption{Error values calculated for pressure and concentration}
+\end{figure}
+
+Naturally, the EOC plot calculates for $c$ is also very similar to the one we obtained for test case 2:
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/eocplots3/EOC_plots3}
+  \caption{Concentration EOC values}
+\end{figure}
 
 %%% TEST 4 %%%
 \subsubsection{Testcase 4}
 
 \begin{figure}[H]
   \centering
+  \includegraphics{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/log_errorvalues4/H_1_errors4}
+  \caption{Errors calculated for the horizontal and vertical velocity, pressure and concentration}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
   \includegraphics{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/eocplots4/EOC_plots4}
-  \caption{EOC}
+  \caption{EOC values calculated for the horizontal and vertical velocity, pressure and concentration}
 \end{figure}
 
 \chapter{The polluted atmosphere system as a weak and strong limit model in downwind-matching coordinates}\label{DWMCchapter}
