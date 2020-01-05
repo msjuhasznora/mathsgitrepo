@@ -32,6 +32,7 @@
 \usetikzlibrary{arrows,shapes,trees, calc}
 \usepackage{titlesec}
 \usepackage{lipsum}
+\usepackage{caption}
 
 \title{The PDE polluted atmosphere model: a mathematical justification of a meteorological approach}
 \begin{document}
@@ -1350,12 +1351,335 @@ Given $T > 0$, $U_0 \in H,$ and a source term $s = \delta$ or $s \in L^2(\Omega)
 
 \end{theorem}
 
+%%% FENICS %%%
 \section{Visualisation of the convergence result by means of the finite element method}\label{visualizationFEM}
-The numerical simulations were obtained in collaboration with Professor Omar Lakkis from the University of Sussex.
 
-For the moment being, the code is available in a private github repository on \textit{https://github.com/msjuhasznora}, access can be granted via contacting the github user msjuhasznora.
+In this section we visualise the previously obtained weak convergence result with \textbf{FEniCS}: this open-source computing platform is designed for solving PDEs using their variational form. We begin this section by outlining the major challenge in translating the theoretical problem into the field of numerical analysis, and in particular, the finite element method.
+
+The major challenge in numerically approaching the tendency of the solutions as $\epsilon$ goes to zero is the disappearing dependence of the scheme on certain terms. Picard iterations and the Chorin method for example are widely used methods in the field of the (complete) Navier-Stokes equations, but once we introduce an $\epsilon$ into the equations, these schemes "collapse" rather quickly as this parameter becomes zero.
+
+In the \textbf{Chorin method} the $u \nabla u_1 v_1$ nonlinear term is replaced by
+
+\texttt{inner(u\_prev, grad(u\_prev1)) * v1 * dx},
+
+where essentially we don't have any unknowns at all anymore. The first step of the Chorin method calculates a tentative velocity. The \texttt{u1, u2, u3} functions are the unknowns, while \texttt{u\_prev} is calculated from the previous time step. It is easy to see in the following pseudo code that the scheme depends on \texttt{u3} only through $\epsilon^2.$
+
+\texttt{
+\\
+F = (1/dt)((u\_H - u\_prev\_H)*v\_H + $\epsilon^2$*(u3 - u\_prev3)*v3 ) + \\
+inner(u\_prev, grad(u\_prev\_H)) * v\_H\\
+ + $\epsilon^2$*inner(u\_prev, grad(u\_prev3)) * v3 + \\
+ inner(grad(u\_H),grad(v\_H)) + $\epsilon^2$*inner(grad(u3),grad(v3)) \\
+}
+
+Similarly, the linearisation technique of \textbf{Picard iterations} also lead to a problematic scheme:
+
+\texttt{
+\\
+a = inner(u, grad(u\_k\_H)) * v\_H + $\epsilon^2$*inner(u, grad(u\_k3)) * v3 + \\
+inner(grad(u\_H),grad(v\_H)) + $\epsilon^2$*inner(grad(u3),grad(v3)),\\
+}
+
+where the dependence on \texttt{u\_k3} decreases with $\epsilon^2.$ This suggests in our case to avoid linearisation techniques and conserve the nonlinear nature of the problem, which can improve the dependence of the scheme on its variables.
+
+We consider a simplified model that still contains this fundamental phenomena (the decreasing dependence as $\epsilon \to 0$) in space. Thus, we consider
+
+\begin{enumerate}
+  \item the stationary case
+  \item without the Coriolis term,
+  \item moreover we make the two horizontal dimensions fall into one. It is easy to see that in a theoretical point of view, and also in terms of proving regularities, the two horizontal dimensions are not different. The problem consists of having $n-1$ dimensions with $\mathcal{O}(1)$ scale, and $1$ dimension with $\mathcal{O}(\epsilon)$ scale. Instead of the $n-1$ dimensions we can use 1 for quicker computations and easier visualisation.
+  \item Finally, in order to obtain better results, we take the same equations, but we use them as equations describing water flow. The convergence result is the same, the boundary conditions are slightly different, and using wind traction over the water surface helps to highlight the point of our result.
+\end{enumerate}
+
+Taking these ideas into account, we will use the Newton solver as the pseudo code below suggests:
+
+\texttt{
+\\
+F = inner(u, grad(u1)) * v1 + inner(grad(u1),grad(v1)) \\
++ $\epsilon^2$*inner(u, grad(u3)) * v3 + $\epsilon^2$*inner(grad(u3),grad(v3)) \\
+ - p * div(v)  + q * div(u)  - inner(theta, v) * ds(1), \\
+}
+
+and we apply
+
+\texttt{
+\\
+problem = NonlinearVariationalProblem(F, up\_, bcu, J)\\
+solver  = NonlinearVariationalSolver(problem), \\
+}
+
+to the \texttt{F} scheme. Note that here, instead of $\texttt{u\_H}$ we denote the horizontal velocity by $\texttt{u1}$ to express that we use the dimension reduction idea for the horizontal velocity during the computations. We highlight the fact that in the definition above, \texttt{F} has an $\mathcal{O}(1)$ dependence on each coordinate function of the $\texttt{u}$ unknown solution.
+
+Similarly, for the hydrostatic model we use an analogous scheme where the $\epsilon$- including terms are missing.
+
+The most important difference is that while for the anisotropic model we use a finite element space of degree $2$ for the vertical velocity, for the case of the hydrostatic scheme we use a degree $1$ space for the same variable, following the idea of \cite{danilov2004finite}. This phenomena is yet to be investigated further, but we have observed that the hydrostatic scheme, which contains significantly less information about the vertical velocity, does not converge for the case of a degree $2$ vertical space (unless the hydrostatic Newton solver is initialised with the anisotropic solution obtained for very small $\epsilon$, with slightly less strict error tolerance values).
+
+To summarise, we have been able to visualise the convergence of the weak solutions for the following cases:
+
+\begin{itemize}
+  \item Anisotropic scheme with degree $2$ horizontal velocity space and degree $2$ vertical velocity space: works until $\epsilon = \exp{-7},$ and visibly approaches the solution of the hydrostatic scheme obtained for degree $2$ horizontal space and degree $1$ vertical space. The following three sections of graphs were obtained for this case.
+  \item The hydrostatic scheme with (2,2) space degrees initialised with the anisotropic solution obtained with the $\exp{-7} $ $\epsilon$ value as an initial guess: converges immediately. In this case the Newton solver verifies in a single step that the initial guess, i.e. the solution for the anisotropic model for a very small $\epsilon$ value is in fact a solution for the hydrostatic model.
+  \item Remark: The anisotropic scheme with degrees (2,1) is theoretically unadvisable to use as the so called lim-sup stability condition is not satisfied.
+\end{itemize}
+
+This section is organised as follows. Section \ref{actualvisualisationsection} is dedicated to visualise the convergence result, while Section \ref{codetestingsection} contains tests in order to validate our code. For the moment being, the code is available in a private github repository on \textit{https://github.com/msjuhasznora}, access can be granted via contacting the github user msjuhasznora.
 
 Some of the technical questions raised throughout the development process were resolved with the kind help of the FEniCS discuss group \cite{fenicsgroup}.
+
+The numerical simulations were obtained in collaboration with Professor Omar Lakkis from the University of Sussex.
+
+%%% CONVERGENCE RESULT %%%
+\subsection{Visualisation of the convergence result}\label{actualvisualisationsection}
+
+\subsubsection{The tendency of the pressure solution}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/pressure_eps_conv/pressure_anis_1_0000000}
+  \captionof{figure}{$\epsilon = 1.0000000.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/pressure_eps_conv/pressure_anis_0_5000000}
+  \captionof{figure}{$\epsilon = 0.5000000.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/pressure_eps_conv/pressure_anis_0_0625000}
+  \captionof{figure}{$\epsilon = 0.0625000.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/pressure_eps_conv/pressure_anis_0_0312500}
+  \captionof{figure}{$\epsilon = 0.0312500.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/pressure_eps_conv/pressure_anis_0_0156250}
+  \captionof{figure}{$\epsilon = 0.0156250.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/pressure_hydr/pressure_hydr}
+  \captionof{figure}{Hydrostatic model.}
+  \label{fig:test2}
+\end{minipage}
+\end{figure}
+
+\newpage
+
+\subsubsection{The tendency of the horizontal velocity solution}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=3in]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/velocity_eps_conv/velocity_h_anis_1_0000000}
+  \caption{$\epsilon = 1.0000000.$}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=3in]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/velocity_eps_conv/velocity_h_anis_0_0078125}
+  \caption{$\epsilon = 0.0078125.$}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=3in]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/velocity_hydr/velocity_h_hydr}
+  \caption{Hydrostatic model.}
+\end{figure}
+
+\newpage
+
+\subsubsection{The tendency of the vertical velocity solution}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/velocity_eps_conv/velocity_v_anis_1_0000000}
+  \captionof{figure}{$\epsilon = 1.0000000.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/velocity_eps_conv/velocity_v_anis_0_5000000}
+  \captionof{figure}{$\epsilon = 0.5000000.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/velocity_eps_conv/velocity_v_anis_0_2500000}
+  \captionof{figure}{$\epsilon = 0.2500000.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/velocity_eps_conv/velocity_v_anis_0_1250000}
+  \captionof{figure}{$\epsilon = 0.1250000.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/velocity_eps_conv/velocity_v_anis_0_0625000}
+  \captionof{figure}{$\epsilon = 0.0625000.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/velocity_eps_conv/velocity_v_anis_0_0312500}
+  \captionof{figure}{$\epsilon = 0.0312500.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/velocity_eps_conv/velocity_v_anis_0_015625}
+  \captionof{figure}{$\epsilon = 0.0156250.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/velocity_eps_conv/velocity_v_anis_0_0078125}
+  \captionof{figure}{$\epsilon = 0.0078125.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/velocity_eps_conv/velocity_v_anis_1_19e-07}
+  \captionof{figure}{$\epsilon = 1.19 \exp{(-7)}.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/velocity_hydr/velocity_v_hydr}
+  \captionof{figure}{Hydrostatic model.}
+\end{minipage}
+\end{figure}
+
+\subsubsection{The tendency of the concentration solution}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/concentration_eps_conv/concentration_anis_1_00000}
+  \captionof{figure}{$\epsilon = 1.0000000.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/concentration_eps_conv/concentration_anis_0_50000}
+  \captionof{figure}{$\epsilon = 0.5000000.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/concentration_eps_conv/concentration_anis_0_25000}
+  \captionof{figure}{$\epsilon = 0.2500000.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/concentration_eps_conv/concentration_anis_0_12500}
+  \captionof{figure}{$\epsilon = 0.1250000.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/concentration_eps_conv/concentration_anis_0_06250}
+  \captionof{figure}{$\epsilon = 0.0625000.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/concentration_eps_conv/concentration_anis_0_01562}
+  \captionof{figure}{$\epsilon = 0.015625.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/concentration_eps_conv/concentration_anis_0_00781}
+  \captionof{figure}{$\epsilon = 0.0078125.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/concentration_eps_conv/concentration_anis_0_00390}
+  \captionof{figure}{$\epsilon = 0.00390.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/concentration_eps_conv/concentration_anis_0_00195}
+  \captionof{figure}{$\epsilon = 0.00195.$}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/concentration_hydr/concentration_hydr}
+  \captionof{figure}{Hydrostatic model.}
+\end{minipage}
+\end{figure}
+
+
+%%% TESTING %%%
+\subsection{Code validation}\label{codetestingsection}
+
+%%% TEST 1 %%%
+\subsubsection{Testcase 1}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/errorvalues1/H1_c__id1}
+  %\captionof{figure}{Error values calculated for the concentration function}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/errorvalues1/H1_p__id1}
+  %\captionof{figure}{Error values calculated for the pressure function}
+\end{minipage}
+\caption{Error values calculated for concentration and pressure}
+\end{figure}
+
+%%% TEST 2 %%%
+\subsubsection{Testcase 2}
+
+%%% TEST 3 %%%
+\subsubsection{Testcase 3}
+
+%%% TEST 4 %%%
+\subsubsection{Testcase 4}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/eocplots4/EOC_plots4}
+  \caption{EOC}
+\end{figure}
 
 \chapter{The polluted atmosphere system as a weak and strong limit model in downwind-matching coordinates}\label{DWMCchapter}
 
