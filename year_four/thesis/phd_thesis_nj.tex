@@ -1363,7 +1363,7 @@ Some of the technical questions raised throughout the development process were r
 The numerical simulations were obtained in collaboration with Professor Omar Lakkis from the University of Sussex.
 
 %%% TRANSLATION %%%
-\subsection{The translation of the theoretical results to a scheme in numerical analysis}\label{translationfromtheorytonumerics_section}
+\subsection{The translation of the theoretical result to a scheme in numerical analysis}\label{translationfromtheorytonumerics_section}
 
 The major challenge in numerically approaching the tendency of the solutions as $\epsilon$ goes to zero is the disappearing dependence of the scheme on certain terms. Picard iterations and the Chorin method for example are widely used methods in the field of the (complete) Navier-Stokes equations, but once we introduce an $\epsilon$ into the equations, these standard schemes "collapse" rather quickly as this parameter becomes zero. This shows that we have to be careful with the adaptation of classical methods to the concrete phenomena we need to visualise.
 
@@ -1381,7 +1381,7 @@ inner(u\_prev, grad(u\_prev\_h)) * v\_h\\
  inner(grad(u\_h),grad(v\_h)) + $\epsilon^2$*inner(grad(u3),grad(v3)) \\
 }
 
-Similarly, the linearisation technique of Picard iterations also lead to a problematic scheme:
+Similarly, the linearisation technique of Picard iterations also leads to a problematic scheme:
 
 \texttt{
 \\
@@ -1391,7 +1391,7 @@ inner(grad(u\_h),grad(v\_h)) + $\epsilon^2$*inner(grad(u3),grad(v3)),\\
 
 where the dependence on \texttt{u\_k3} decreases with $\epsilon^2.$ This suggests in our case to avoid linearisation techniques and conserve the nonlinear nature of the problem, which can improve the dependence of the scheme on its variables.
 
-We consider a simplified model that still contains this fundamental phenomena (the decreasing dependence as $\epsilon \to 0$) in space. Thus, we consider
+We focus our attention to a simplified scenario that still contains the fundamental phenomena of the model's decreasing dependence on certain variables as $\epsilon$ tends to zero. Thus, we consider
 
 \begin{enumerate}
   \item the stationary case
@@ -1414,29 +1414,30 @@ and we apply
 \texttt{
 \\
 problem = NonlinearVariationalProblem(F, up\_, bcu, J)\\
-solver  = NonlinearVariationalSolver(problem), \\
+solver  = NonlinearVariationalSolver(problem) \\
 }
 
 to the \texttt{F} scheme. Note that here, instead of $\texttt{u\_h}$ we denote the horizontal velocity by $\texttt{u1}$ to express that we use the dimension reduction idea for the horizontal velocity during the computations. We highlight the fact that in the definition above, \texttt{F} has an $\mathcal{O}(1)$ dependence on each coordinate function of the $\texttt{u}$ unknown solution.
 
-Similarly, for the hydrostatic model we use an analogous scheme where the $\epsilon$-- including terms are missing.
+Analogously, for the hydrostatic model we use a similar scheme where the $\epsilon$-- including terms are missing.
 
-The most important difference is that while for the anisotropic model we use a finite element space of degree $2$ for the vertical velocity, for the case of the hydrostatic scheme we use a degree $1$ space for the same variable, following the idea of \cite{danilov2002finite}. Horizontal velocities are represented by degree $2$ spaces in both cases. In the following the notation $(i,j)$ stands for (degree of horizontal velocity space, degree of vertical velocity space).
+The most important difference is that while for the anisotropic model we use a finite element space of degree $2$ for the vertical velocity, for the case of the hydrostatic scheme we use a degree $1$ space for the same variable, following the idea of \cite{danilov2002finite}. Horizontal velocities are represented by degree $2$ spaces in both cases. In the following the notation $(i,j)$ stands for
+$$\text{(degree of horizontal velocity space, degree of vertical velocity space).}$$
 This phenomena is yet to be investigated further, but we have observed that the hydrostatic scheme, which contains significantly less information about the vertical velocity, does not converge in a degree $(2,2)$ space (unless the hydrostatic Newton solver is initialised with the anisotropic solution obtained for very small $\epsilon$, with slightly less strict error tolerance values). On the other hand, a degree $(2,1)$ velocity space fails to work for the anisotropic scheme. Since the degrees of the respective velocity spaces are of key importance, we summarise and extend the previous statements; in particular
 
 \begin{itemize}
-  \item a degree $(2,2)$ velocity space works well for the anisotropic scheme until $\epsilon$ reaches $\mathcal{O}(\exp{-7}):$ at this point the scheme becomes unstable as it practically loses its dependence on the gradient of the vertical velocity. Note that since $\epsilon$ is present in the model as $\epsilon^2,$ this means that the point where the scheme stops converging is essentially around machine precision.
+  \item a degree $(2,2)$ velocity space works well for the anisotropic scheme until $\epsilon$ reaches $\mathcal{O}(\exp{-7}):$ at this point the system becomes unstable as it practically loses its dependence on the gradient of the vertical velocity. Note that since $\epsilon$ is present in the model as $\epsilon^2,$ this means that the point where the scheme stops converging is essentially around machine precision.
   \item Using a degree $(2,1)$ space for the anisotropic model results in an unrealistic, layered pressure structure: this is not surprising since in this case the so-called inf-sup stability condition is not satisfied. The symmetry of the information we have on each velocity function for the case of the complete anisotropic system (assuming that $\epsilon$ is not small yet) also suggests the definition of a more balanced space, such as that of degree $(2,2)$.
-  \item On the other hand, a degree $(2,1)$ space works well for our hydrostatic scheme. Reducing the vertical velocity space degree seems to a good choice for this model where at the same time the information on the vertical velocity is reduced as well.
-  \item Finally, in the general case, using degree $(2,2)$ spaces for the hydrostatic scheme leads to a non-invertible Jacobian matrix: the Newton-solver does not converge in this case. The only exception to this is when we have an extraordinarily good initial guess.
+  \item On the other hand, a degree $(2,1)$ space does work well for our hydrostatic model. Reducing the vertical velocity space degree seems to be a good choice for this system where the information on the vertical velocity is reduced as well.
+  \item Finally, in the general case, using a degree $(2,2)$ space for the hydrostatic scheme leads to a non-invertible Jacobian matrix: the Newton-solver does not converge in this case. The only exception to this is when we have an extraordinarily good initial guess.
 \end{itemize}
 
-The above pieces of information give a good idea of how significant the presence of the $\epsilon$ parameter is to the model, and specifically, of how sensitive the "in-between" case is where $\epsilon$ is already small enough so that we can not benefit from the stabilising effect of the full-information model including the gradient of the vertical velocity, but at the same time $\epsilon$ is still strictly positive, and thus the advantage of a simpler pressure function is also unavailable. At this point the finite element matrix becomes badly conditioned, but it is still not perfectly clear where exactly our scheme fails as $\epsilon$ reaches $\mathcal{O}(\exp{-7}).$
+The above pieces of information give a good idea of how significant the presence of the $\epsilon$ parameter is to the model's finite element representation, and specifically, of how sensitive the "in-between" case is where $\epsilon$ is already small enough so that we can not benefit from the stabilising effect of the full-information model including the gradient of the vertical velocity, but at the same time $\epsilon$ is still strictly positive, and thus the advantage of a simpler pressure function is also unavailable. Somewhere in this in-between phase the finite element matrix becomes badly conditioned, but it is still not perfectly clear where exactly our scheme fails as $\epsilon$ reaches $\mathcal{O}(\exp{-7}).$
 
 As we will see in the following section in detail, we are able to visualise and confirm the convergence of the weak solutions for the following two main cases.
 
 \begin{enumerate}[label=\arabic*)]
-  \item The anisotropic scheme of degree $(2,2)$ works until $\epsilon = \exp{-7},$ and its solutions visibly approach the solution of the hydrostatic scheme of degree $(2,1)$. For later reference, here we include the $L^2$ norms of the hydrostatic solution functions.
+  \item The anisotropic model of degree $(2,2)$ works until $\epsilon = \exp{-7},$ and its solutions visibly approach the solution of the hydrostatic system of degree $(2,1)$. For later reference, here we include the $L^2$ norms of the hydrostatic solution functions.
   
 \begin{table}[H]
 \caption{Hydrostatic result norms, vertical velocity degree = 1}
@@ -1451,7 +1452,7 @@ As we will see in the following section in detail, we are able to visualise and 
 \end{center}
 \end{table}
   
-  \item As we emphasised before, there is a specific exception for which the hydrostatic model works in a degree $(2,2)$ scenario. Initialising this latter scheme with the anisotropic solution obtained with the $\mathcal{O}(\exp{-7})$ $\epsilon$ value as an initial guess we obtain immediate convergence. In this case the Newton solver verifies in a single step that the initial guess, i.e. the solution for the anisotropic model for a very small $\epsilon$ value is in fact a solution for the hydrostatic model. The $L^2$ norms in this case are the following.
+  \item As we emphasised before, there is a specific exception for which the hydrostatic model does work in a degree $(2,2)$ scenario. Initialising this latter scheme with the anisotropic solution obtained with the $\mathcal{O}(\exp{-7})$ $\epsilon$ value as an initial guess we obtain immediate convergence. In this case the Newton solver verifies in a single step that the initial guess, i.e. the solution for the anisotropic model for a very small $\epsilon$ value is in fact a solution for the hydrostatic model. The $L^2$ norms in this case are the following.
   
   \begin{table}[H]
 \caption{Hydrostatic result norms, vertical velocity degree = 2}
@@ -1468,12 +1469,12 @@ As we will see in the following section in detail, we are able to visualise and 
   
 \end{enumerate}
 
-By hydrostatic model and hydrostatic solutions in the following we understand the solutions we obtain in a degree $(2,1)$ space, without using an initial guess. The next section is a collection of the visualisation results we obtained with FEniCS.
+By "hydrostatic model" and "hydrostatic solutions" in the following we understand the solutions we obtain in a degree $(2,1)$ space, without using an initial guess. The next section is a collection of the visualisation results we obtained with FEniCS.
 
 %%% CONVERGENCE RESULT %%%
 \subsection{Visualisation of the convergence result}\label{actualvisualisationsection}
 
-In the following we consider the tendency of the anisotropic solutions $u_1^\epsilon, u_3^\epsilon, p^\epsilon, c^\epsilon$ as the $\epsilon$ parameter decreases step by step. We finish each sequence by inserting the respective hydrostatic solution function as the last graph. Finally for completeness we also include a table for each function that contains the numerical $L^2$ norm values of the difference between the anisotropic and hydrostatic solutions. We emphasise that we work in finite element spaces of different degrees, thus these differences are not expected to vanish completely.
+In the following we consider the tendency of the anisotropic solutions $u_1^\epsilon, u_3^\epsilon,$ $p^\epsilon,$ $c^\epsilon$ as the $\epsilon$ parameter decreases step by step. We finish each image sequence by inserting the respective hydrostatic solution function as the last graph. Finally for completeness we also include a table for each function that contains the numerical $L^2$ norm values of the difference between the anisotropic and hydrostatic solutions. We emphasise that we work in finite element spaces of different degrees, thus these differences are not expected to vanish completely.
 
 \subsubsection{The tendency of the pressure solution}
 
@@ -1525,7 +1526,7 @@ We begin by depicting the tendency of the anisotropic pressure functions: as $\e
 The numerical error norms (with respect to the hydrostatic solution) are the following.
 
 \begin{table}[H]
-\caption{Norm differences, $p$}
+\caption{Differences for the pressure function}
 \begin{center}
 \begin{tabular}{ccc}
     \hline
@@ -1565,7 +1566,7 @@ The anisotropic horizontal velocity functions do not display a particularly visi
 \end{figure}
 
 \begin{table}[H]
-\caption{Norm differences, $u_1$}
+\caption{Differences for the horizontal velocity}
 \begin{center}
 \begin{tabular}{ccc}
     \hline
@@ -1584,7 +1585,7 @@ The anisotropic horizontal velocity functions do not display a particularly visi
 
 \subsubsection{The tendency of the vertical velocity solution}
 
-Naturally, it is the case of the vertical velocity solutions where we really see the effect of using a degree $(2,2)$ anisotropic space and a hydrostatic scheme of degree $(2,1)$. The tendency of the anisotropic solutions and their "closeness" to the hydrostatic solution is apparent, however they numerically do approximate it particularly well as the structures of the spaces we compute the solutions are different.
+Naturally, it is the case of the vertical velocity solutions where we really see the effect of using a degree $(2,2)$ anisotropic space and a hydrostatic scheme of degree $(2,1)$. The tendency of the anisotropic solutions and their "closeness" to the hydrostatic solution is apparent, however they numerically do approximate it particularly well as the structures of the spaces are different.
 
 \begin{figure}[H]
 \centering
@@ -1659,11 +1660,11 @@ Naturally, it is the case of the vertical velocity solutions where we really see
 Note that as the anisotropic vertical velocity is in a degree $2$ space, the difference $\texttt{u3\_sol - u3\_hydr}$ simply does not make sense. We overcome this issue by interpolating the second-order anisotropic function in the first-order hydrostatic space. The numerical values we obtain are as follows.
 
 \begin{table}[H]
-\caption{Norm differences, $u_3$}
+\caption{Differences for the vertical velocity}
 \begin{center}
 \begin{tabular}{cccc}
     \hline
-    $\epsilon$ & norm anis. $u_3$ & norm anis. interp. $u_3$ & norm ($u_3$ anis. interp. - $u_3$ hydr.)\\
+    $\epsilon$ & norm anis. $u_3$ & norm anis. ip. $u_3$ & norm ($u_3$ anis. ip. - $u_3$ hydr.)\\
     \hline
     1.000 & 9.837 & 4.916 & 12.142 \\
     0.5 & 17.784 & 8.889 & 10.144 \\
@@ -1750,11 +1751,11 @@ Finally we observe that the anisotropic concentration solutions visibly approxim
 \end{minipage}
 \end{figure}
 
-We note that this rather visible tendency towards the hydrostatic solution holds only until $\epsilon$ reaches the $0.0039$ threshold value. As $\epsilon$ becomes smaller, beyond this level the solutions become physically unrealistic. The reason for this is presumably the $\epsilon^2$ term in the approximate delta function we apply in the anisotropic source term, but this phenomena is yet to be investigated.
+We note that this rather visible tendency towards the hydrostatic solution holds only until $\epsilon$ reaches the $0.0039$ threshold value. As $\epsilon$ becomes smaller, beyond this level the solutions become physically unrealistic. The reason for this is presumably the $\epsilon^2$ term in the approximate delta function we apply in the anisotropic source term, but this phenomena is yet to be further investigated.
 We conclude with the table containing the $L^2$ difference norms computed for the concentration function.
 
 \begin{table}[H]
-\caption{Norm differences, $c$}
+\caption{Differences for the concentration function}
 \begin{center}
 \begin{tabular}{ccc}
     \hline
