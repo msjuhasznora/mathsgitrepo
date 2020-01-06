@@ -1354,11 +1354,18 @@ Given $T > 0$, $U_0 \in H,$ and a source term $s = \delta$ or $s \in L^2(\Omega)
 %%% FENICS %%%
 \section{Visualisation of the convergence result by means of the finite element method}\label{visualizationFEM}
 
-In this section we visualise the previously obtained weak convergence result with \textbf{FEniCS}: this open-source computing platform is designed for solving PDEs using their variational form. We begin this section by outlining the major challenge in translating the theoretical problem into the field of numerical analysis, and in particular, the finite element method.
+In this final part of Chapter \ref{geophysicalchapter} we use FEniCS to visualise the previously obtained weak convergence result of Theorem \ref{maintheorem_weak_GFC}: this open-source computing platform is designed for solving PDEs using their variational form. In order to give a brief overview of the main methods available for this kind of problems, in Section \ref{translationfromtheorytonumerics_section} we begin by outlining some of the most important approaches and their critical features with respect to the specific problem we are dealing with. The goal of this part is to give an idea about the major challenges in expressing a theoretical result in the framework of numerical analysis, and in particular, the finite element method. The convergence results we obtained with FEniCS are collected in Section \ref{actualvisualisationsection}, while Section \ref{codetestingsection} contains the tests we ran in order to validate our code. For the moment being, the python scripts are available in a private github repository on \textit{https://github.com}, access can be granted via contacting the github user msjuhasznora.
+
+Some of the technical questions raised throughout the development process were resolved with the kind help of the FEniCS discuss group \cite{fenicsgroup}.
+
+The numerical simulations were obtained in collaboration with Professor Omar Lakkis from the University of Sussex.
+
+%%% TRANSLATION %%%
+\subsection{The translation of the theoretical results to a scheme in numerical analysis}\label{translationfromtheorytonumerics_section}
 
 The major challenge in numerically approaching the tendency of the solutions as $\epsilon$ goes to zero is the disappearing dependence of the scheme on certain terms. Picard iterations and the Chorin method for example are widely used methods in the field of the (complete) Navier-Stokes equations, but once we introduce an $\epsilon$ into the equations, these schemes "collapse" rather quickly as this parameter becomes zero.
 
-In the \textbf{Chorin method} the $u \nabla u_1 v_1$ nonlinear term is replaced by
+In the Chorin method the $u \nabla u_1 v_1$ nonlinear term is replaced by
 
 \texttt{inner(u\_prev, grad(u\_prev1)) * v1 * dx},
 
@@ -1372,7 +1379,7 @@ inner(u\_prev, grad(u\_prev\_H)) * v\_H\\
  inner(grad(u\_H),grad(v\_H)) + $\epsilon^2$*inner(grad(u3),grad(v3)) \\
 }
 
-Similarly, the linearisation technique of \textbf{Picard iterations} also lead to a problematic scheme:
+Similarly, the linearisation technique of Picard iterations also lead to a problematic scheme:
 
 \texttt{
 \\
@@ -1412,21 +1419,15 @@ to the \texttt{F} scheme. Note that here, instead of $\texttt{u\_H}$ we denote t
 
 Similarly, for the hydrostatic model we use an analogous scheme where the $\epsilon$- including terms are missing.
 
-The most important difference is that while for the anisotropic model we use a finite element space of degree $2$ for the vertical velocity, for the case of the hydrostatic scheme we use a degree $1$ space for the same variable, following the idea of \cite{danilov2004finite}. This phenomena is yet to be investigated further, but we have observed that the hydrostatic scheme, which contains significantly less information about the vertical velocity, does not converge for the case of a degree $2$ vertical space (unless the hydrostatic Newton solver is initialised with the anisotropic solution obtained for very small $\epsilon$, with slightly less strict error tolerance values).
+The most important difference is that while for the anisotropic model we use a finite element space of degree $2$ for the vertical velocity, for the case of the hydrostatic scheme we use a degree $1$ space for the same variable, following the idea of \cite{danilov2002finite}. This phenomena is yet to be investigated further, but we have observed that the hydrostatic scheme, which contains significantly less information about the vertical velocity, does not converge for the case of a degree $2$ vertical space (unless the hydrostatic Newton solver is initialised with the anisotropic solution obtained for very small $\epsilon$, with slightly less strict error tolerance values).
 
 To summarise, we have been able to visualise the convergence of the weak solutions for the following cases:
 
 \begin{itemize}
-  \item Anisotropic scheme with degree $2$ horizontal velocity space and degree $2$ vertical velocity space: works until $\epsilon = \exp{-7},$ and visibly approaches the solution of the hydrostatic scheme obtained for degree $2$ horizontal space and degree $1$ vertical space. The following three sections of graphs were obtained for this case.
+  \item Anisotropic scheme with degree $2$ horizontal velocity space and degree $2$ vertical velocity space: works until $\epsilon = \exp{-7},$ and visibly approaches the solution of the hydrostatic scheme obtained for degree $2$ horizontal space and degree $1$ vertical space. The following four sections of graphs were obtained for this case.
   \item The hydrostatic scheme with (2,2) space degrees initialised with the anisotropic solution obtained with the $\exp{-7} $ $\epsilon$ value as an initial guess: converges immediately. In this case the Newton solver verifies in a single step that the initial guess, i.e. the solution for the anisotropic model for a very small $\epsilon$ value is in fact a solution for the hydrostatic model.
-  \item Remark: The anisotropic scheme with degrees (2,1) is theoretically unadvisable to use as the so called lim-sup stability condition is not satisfied.
+  \item Remark: The anisotropic scheme with degrees (2,1) is theoretically unadvisable to use as the so-called lim-sup stability condition is not satisfied.
 \end{itemize}
-
-This section is organised as follows. Section \ref{actualvisualisationsection} is dedicated to visualise the convergence result, while Section \ref{codetestingsection} contains tests in order to validate our code. For the moment being, the code is available in a private github repository on \textit{https://github.com/msjuhasznora}, access can be granted via contacting the github user msjuhasznora.
-
-Some of the technical questions raised throughout the development process were resolved with the kind help of the FEniCS discuss group \cite{fenicsgroup}.
-
-The numerical simulations were obtained in collaboration with Professor Omar Lakkis from the University of Sussex.
 
 %%% CONVERGENCE RESULT %%%
 \subsection{Visualisation of the convergence result}\label{actualvisualisationsection}
@@ -1646,18 +1647,23 @@ The numerical simulations were obtained in collaboration with Professor Omar Lak
 %%% TESTING %%%
 \subsection{Code validation}\label{codetestingsection}
 
-In this section we investigate the correctness of the code via executing it in basic test scenarios where the expected solutions are well-known. We design each case by defining certain $\texttt{u\_exact, p\_exact, c\_exact}$ functions, and setting all other necessary variables of the model accordingly, i.e. we use boundary conditions and forcing functions according to the $\texttt{u\_exact, p\_exact,}$ $\texttt{c\_exact}$ functions we chose. In more detail, we plug in these functions into modelling equations, and we set the velocity and concentration forcing functions to the result of the computations. Once the forcing functions and the boundary conditions are set, we execute the code with these parameters: we expect that the $\texttt{u\_sol, p\_sol, c\_sol}$ solution we obtain are "close" in $H^1$ norm to the $\texttt{u\_exact, p\_exact, c\_exact}$ functions, moreover the computed solutions need to approximate the exact solutions better as the mesh size of the domain decreases. We will see that both criteria is satisfied in the examples detailed below.
+In this section we investigate the correctness of the code via executing it in basic test scenarios where the expected solutions are well-known. We emphasise here that these empirical tests do not substitute an elaborate proof verifying the convergence of the numerical scheme, but that falls outside the scope of this work. The goal of this section is to visualise and confirm that the computed solutions do approximate the real solutions in some concrete cases, and thus to have a basic affirmation of the correctness of our code.
+We design each case by defining certain $\texttt{u\_exact, p\_exact, c\_exact}$ functions, and setting all other necessary parameters of the model accordingly: we define boundary conditions and forcing functions exploiting the information we have on the $\texttt{u\_exact, p\_exact,}$ $\texttt{c\_exact}$ functions. The cornerstone idea of this experimental testing process is to set model parameters that are compatible with the predefined solutions, where compatibility is understood in the following very strong sense. We plug in the exact solution functions into modelling equations, and we set the velocity and concentration forcing functions to the result of these computations --- in other words, we build up the forcing terms from the known solutions. The same approach is applied to boundary conditions. Once the forcing functions and the boundary conditions are set, we execute the code with these parameters. We expect that the $\texttt{u\_sol, p\_sol, c\_sol}$ solution we obtain will be "close" in $H^1$ norm to the $\texttt{u\_exact, p\_exact, c\_exact}$ functions, i.e. that the result of
+
+$$\texttt{errornorm(problem\_data.u1\_exact, u1\_sol, norm\_type='H1')}$$
+
+will be "small." Moreover, accuracy is expected to increase as the mesh size of the domain decreases (except for the cases where accuracy is already at the level of machine precision for coarse meshes). We will see that both criteria is satisfied in the examples detailed below.
 
 %%% TEST 1 %%%
 \subsubsection{Testcase 1}
 
-We begin with the trivial test case where all functions are constant zero.
+We begin with the trivial test case where all functions are constant zero, thus we set
 
 \begin{equation}
   \begin{split}
     & \texttt{u1\_exact = 0, u3\_exact = 0, p\_exact = 0}, \\
     & \texttt{f1 = 0, f3 = 0}, \\
-    & \texttt{c\_exact = 0, anis\_c\_source = 0}
+    & \texttt{c\_exact = 0, anis\_c\_source = 0.}
   \end{split}
 \end{equation}
 
@@ -1696,17 +1702,18 @@ Calculating the error values for each function we can see that the errors are im
 %%% TEST 2 %%%
 \subsubsection{Testcase 2}
 
-The second test case we consider is defined by the setting
+The second test case we consider is defined by
 
 \begin{equation}
   \begin{split}
     & \texttt{u1\_exact = 0, u3\_exact = 0, p\_exact = 0}, \\
     & \texttt{f1 = 0, f3 = 0}, \\
-    & \texttt{c\_exact = x[0]*(1-x[0])*x[1]*(1-x[1]), anis\_c\_source = 2*x[0]*(1-x[0]) + 2*x[1]*(1-x[1])}
+    & \texttt{c\_exact = x[0]*(1-x[0])*x[1]*(1-x[1])}, \\
+    & \texttt{anis\_c\_source = 2*x[0]*(1-x[0]) + 2*x[1]*(1-x[1])}.
   \end{split}
 \end{equation}
 
-The error values for calculated for the velocity and the pressure are identical to zero in this case as well, while the error values obtained for the concentration function are decreasing as we double the number of division points in each dimension of the domain. We emphasise the fact that for the case of the concentration, we plot the logarithm of the error values.
+The error values calculated for the velocity and the pressure are identical to zero in this case as well, while the error values obtained for the concentration function are decreasing as we double the number of division points in each dimension of the domain. We emphasise the fact that for the case of the concentration, we plot the logarithm of the error values.
 
 \begin{figure}[H]
 \centering
@@ -1759,9 +1766,9 @@ In this section we examine what changes compared to the previous test case if we
   \end{split}
 \end{equation}
 
-The value of $\texttt{anis\_c\_source}$ is a long expression obtained via plugging in the above values into the concentration-diffusion equation. Since it is not of any particular interest or challenge, we will not include it here, it can be found in the code.
+The value of $\texttt{anis\_c\_source}$ is a long expression obtained via plugging in the above values into the concentration-diffusion equation. Since it is not of any particular interest or challenge, we will not include it here.
 
-Similarly to test case 2, where the velocity error values were identical to zero ($\texttt{0e+00}$), in this case their orders oscillate between $\texttt{1.0e-12}$ and $\texttt{1.0e-14}$ for the different mesh sizes. As the error plots show, in terms of error values this case is essentially identical to the previous one.
+As the error plots show, in terms of error values this case is essentially identical to the previous one; however, for test case 2 the velocity error values were identical to zero ($\texttt{0e+00}$), in this case their orders oscillate between $\texttt{1.0e-12}$ and $\texttt{1.0e-14}$ for the different mesh sizes.
 
 \begin{figure}[H]
 \centering
@@ -1793,7 +1800,7 @@ Similarly to test case 2, where the velocity error values were identical to zero
 \caption{Error values calculated for pressure and concentration}
 \end{figure}
 
-Naturally, the EOC plot calculates for $c$ is also very similar to the one we obtained for test case 2:
+Naturally, the EOC plot calculated for $c$ is also very similar to the one we obtained for test case 2:
 
 \begin{figure}[H]
   \centering
@@ -1804,17 +1811,34 @@ Naturally, the EOC plot calculates for $c$ is also very similar to the one we ob
 %%% TEST 4 %%%
 \subsubsection{Testcase 4}
 
+We use trigonometric functions to build up the fourth test case. The important feature of these functions is that they fall outside of any polynomial finite element function space, thus the errors calculated in this case will all be strictly positive.
+
+\begin{equation} \label{testcase4definition}
+  \begin{split}
+    & \texttt{u1\_exact = sin(2*pi*x[0])*cos(2*pi*x[1])}, \\ 
+    & \texttt{u3\_exact = -cos(2*pi*x[0])*sin(2*pi*x[1]), p\_exact = 0}, \\
+    & \texttt{f1 = x[0], f3 = x[1]}, \\
+    & \texttt{c\_exact = (1-x[0])*(1-x[1])*sin(2*pi*x[1])*sin(2*pi*x[0])} \raisetag{35pt}
+  \end{split}
+\end{equation}
+
+The next graph shows the logarithm of the $H^1$ norm calculated for each function. Note that the error values for the horizontal and vertical velocity functions are almost identical (on $\texttt{mesh(8,8)}$ the error for $\texttt{u1}$ is appr. $\texttt{2.5624601e-01}$, while for $\texttt{u3}$ we obtain appr. $\texttt{2.5624705e-01}$), thus in the picture the horizontal velocity error values are hidden behind the $\texttt{u3}$ values.
+
 \begin{figure}[H]
   \centering
   \includegraphics{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/log_errorvalues4/H_1_errors4}
   \caption{Errors calculated for the horizontal and vertical velocity, pressure and concentration}
 \end{figure}
 
+Examining the following graph, the experimental order of convergence value turns out to be the highest for the case of the pressure, which is the only constant expression in the test case definition (\ref{testcase4definition}). It is also apparent that the difference between the EOC values between pressure and velocity gradually vanish as the mesh of the domain becomes more fine. Compared to the pressure and velocity functions, the convergence rate of the concentration function appears to be slower:
+
 \begin{figure}[H]
   \centering
   \includegraphics{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/eocplots4/EOC_plots4}
   \caption{EOC values calculated for the horizontal and vertical velocity, pressure and concentration}
 \end{figure}
+
+As we highlighted before, the numerical experiments conducted in the present section are not by any means equivalent to a rigorous proof verifying the correctness of the code, but this latter falls outside of the scope of this thesis. We crafted these simple tests to have a basic and rather empirical idea about whether our numerical scheme converges as expected or not in certain concrete scenarios: this does seem to be confirmed for test cases 1--4.
 
 \chapter{The polluted atmosphere system as a weak and strong limit model in downwind-matching coordinates}\label{DWMCchapter}
 
