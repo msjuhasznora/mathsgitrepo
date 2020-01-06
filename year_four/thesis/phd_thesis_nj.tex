@@ -1647,15 +1647,15 @@ To summarise, we have been able to visualise the convergence of the weak solutio
 %%% TESTING %%%
 \subsection{Code validation}\label{codetestingsection}
 
-In this section we investigate the correctness of the code via executing it in basic test scenarios where the expected solutions are well-known. We emphasise here that these empirical tests do not substitute an elaborate proof verifying the convergence of the numerical scheme, but that falls outside the scope of this work. The goal of this section is to visualise and confirm that the computed solutions do approximate the real solutions in some concrete cases, and thus to have a basic affirmation of the correctness of our code.
-We design each case by defining certain $\texttt{u\_exact, p\_exact, c\_exact}$ functions, and setting all other necessary parameters of the model accordingly: we define boundary conditions and forcing functions exploiting the information we have on the $\texttt{u\_exact, p\_exact,}$ $\texttt{c\_exact}$ functions. The cornerstone idea of this experimental testing process is to set model parameters that are compatible with the predefined solutions, where compatibility is understood in the following very strong sense. We plug in the exact solution functions into modelling equations, and we set the velocity and concentration forcing functions to the result of these computations --- in other words, we build up the forcing terms from the known solutions. The same approach is applied to boundary conditions. Once the forcing functions and the boundary conditions are set, we execute the code with these parameters. We expect that the $\texttt{u\_sol, p\_sol, c\_sol}$ solution we obtain will be "close" in $H^1$ norm to the $\texttt{u\_exact, p\_exact, c\_exact}$ functions, i.e. that the result of
+In this section we investigate the correctness of the code via executing it in basic test scenarios where the expected solutions are well-known. We emphasise here that these empirical tests do not substitute an elaborate proof verifying the convergence of the numerical scheme, but that falls beyond the scope of this work. The goal of this section is to visualise and confirm that the computed solutions do approximate the real solutions in some concrete cases, and thus to have a basic affirmation of the correctness of our code.
+We design each case by defining certain $\texttt{u\_exact, p\_exact, c\_exact}$ functions, and setting all other necessary parameters of the model accordingly: we define boundary conditions and forcing functions exploiting the information we have on the $\texttt{u\_exact, p\_exact,}$ $\texttt{c\_exact}$ functions. The cornerstone idea of this experimental testing process is to set model parameters that are compatible with the predefined solutions, where compatibility is understood in the following very strong sense. We plug in the exact solution functions into modelling equations, and we set the velocity and concentration forcing functions to the result of these computations --- in other words, we build up the forcing terms from the known solutions. The same approach is applied to boundary conditions. Once the forcing functions and the boundary conditions are set, we execute the code with these parameters. We expect that the $\texttt{u\_sol, p\_sol, c\_sol}$ solutions we obtain will be "close" in $H^1$ norm to the $\texttt{u\_exact, p\_exact, c\_exact}$ functions, i.e. that the result of
 
 $$\texttt{errornorm(problem\_data.u1\_exact, u1\_sol, norm\_type='H1')}$$
 
-will be "small." Moreover, accuracy is expected to increase as the mesh size of the domain decreases (except for the cases where accuracy is already at the level of machine precision for coarse meshes). We will see that both criteria is satisfied in the examples detailed below.
+will be "small." Moreover, accuracy is expected to increase as the mesh size of the domain decreases (except for the cases where accuracy is already around the level of machine precision for coarse meshes). We will see that both criteria is satisfied in the examples detailed below.
 
 %%% TEST 1 %%%
-\subsubsection{Testcase 1}
+\subsubsection{Test case 1}
 
 We begin with the trivial test case where all functions are constant zero, thus we set
 
@@ -1699,8 +1699,10 @@ Calculating the error values for each function we can see that the errors are im
 \caption{Error values calculated for pressure and concentration}
 \end{figure}
 
+Note that the parameter $\texttt{nx}$ is the number of divisions in one dimension of the domain. This means that for $\texttt{nx} = 8$ we have $64$ rectangles in the domain, and as all triangles are divided to two triangles, the domain is composed of a total number of $128$ triangles. Accordingly, when $\texttt{nx}$ reaches the value of $128,$ the domain is divided into $32768$ triangles.
+
 %%% TEST 2 %%%
-\subsubsection{Testcase 2}
+\subsubsection{Test case 2}
 
 The second test case we consider is defined by
 
@@ -1713,7 +1715,7 @@ The second test case we consider is defined by
   \end{split}
 \end{equation}
 
-The error values calculated for the velocity and the pressure are identical to zero in this case as well, while the error values obtained for the concentration function are decreasing as we double the number of division points in each dimension of the domain. We emphasise the fact that for the case of the concentration, we plot the logarithm of the error values.
+The error values calculated for the velocity and the pressure are identical to zero in this case as well, while the error values obtained for the concentration function are decreasing as we double the number of division points in each dimension of the domain. We emphasise the fact that for the case of the concentration we plot the logarithm of the error values.
 
 \begin{figure}[H]
 \centering
@@ -1745,7 +1747,13 @@ The error values calculated for the velocity and the pressure are identical to z
 \caption{Error values calculated for pressure and concentration}
 \end{figure}
 
-Since the convergence for the case of the concentration function is not immediate, it is interesting to consider the EOC (experimentally determined orders of convergence) values for $c:$
+Since the convergence for the case of the concentration function is not immediate, it is interesting to consider the EOC (experimentally determined order of convergence) values. They are considered to be a good empirical approximation to the order of convergence, their definition is given by the formula
+
+$$ \texttt{log(error\_next/error\_prev)/log(h\_next/h\_prev)},$$
+
+where the $\texttt{h\_next, h\_prev}$ values represent the mesh resolutions between two steps in the process of gradually refining the mesh, while the $\texttt{error\_next}$, $\texttt{error\_prev}$ values are the computed error values, respectively.
+
+In this case the EOC values for the concentration appear to be around $2,$ as the graph below shows:
 
 \begin{figure}[H]
   \centering
@@ -1754,9 +1762,9 @@ Since the convergence for the case of the concentration function is not immediat
 \end{figure}
 
 %%% TEST 3 %%%
-\subsubsection{Testcase 3}
+\subsubsection{Test case 3}
 
-In this section we examine what changes compared to the previous test case if we modify the the velocity functions, while leaving the concentration and pressure unchanged.
+In this section we examine what changes compared to the previous test case if we modify the the velocity functions, while leaving the concentration and pressure unmodified.
 
 \begin{equation}
   \begin{split}
@@ -1766,7 +1774,7 @@ In this section we examine what changes compared to the previous test case if we
   \end{split}
 \end{equation}
 
-The value of $\texttt{anis\_c\_source}$ is a long expression obtained via plugging in the above values into the concentration-diffusion equation. Since it is not of any particular interest or challenge, we will not include it here.
+The value of $\texttt{anis\_c\_source}$ is a relatively long expression obtained via plugging in the above values into the concentration-diffusion equation. Since it is not of any particular interest or challenge, we will not include it here.
 
 As the error plots show, in terms of error values this case is essentially identical to the previous one; however, for test case 2 the velocity error values were identical to zero ($\texttt{0e+00}$), in this case their orders oscillate between $\texttt{1.0e-12}$ and $\texttt{1.0e-14}$ for the different mesh sizes.
 
@@ -1809,20 +1817,22 @@ Naturally, the EOC plot calculated for $c$ is also very similar to the one we ob
 \end{figure}
 
 %%% TEST 4 %%%
-\subsubsection{Testcase 4}
+\subsubsection{Test case 4}
 
 We use trigonometric functions to build up the fourth test case. The important feature of these functions is that they fall outside of any polynomial finite element function space, thus the errors calculated in this case will all be strictly positive.
 
 \begin{equation} \label{testcase4definition}
   \begin{split}
     & \texttt{u1\_exact = sin(2*pi*x[0])*cos(2*pi*x[1])}, \\ 
-    & \texttt{u3\_exact = -cos(2*pi*x[0])*sin(2*pi*x[1]), p\_exact = 0}, \\
-    & \texttt{f1 = x[0], f3 = x[1]}, \\
+    & \texttt{u3\_exact = -cos(2*pi*x[0])*sin(2*pi*x[1])}, \\
+    & \texttt{p\_exact = 0}, \\
     & \texttt{c\_exact = (1-x[0])*(1-x[1])*sin(2*pi*x[1])*sin(2*pi*x[0])} \raisetag{35pt}
   \end{split}
 \end{equation}
 
-The next graph shows the logarithm of the $H^1$ norm calculated for each function. Note that the error values for the horizontal and vertical velocity functions are almost identical (on $\texttt{mesh(8,8)}$ the error for $\texttt{u1}$ is appr. $\texttt{2.5624601e-01}$, while for $\texttt{u3}$ we obtain appr. $\texttt{2.5624705e-01}$), thus in the picture the horizontal velocity error values are hidden behind the $\texttt{u3}$ values.
+Again, the concentration and velocity forcing functions are quite complex trigonometric expressions which we will omit here.
+
+The next graph shows the logarithm of the $H^1$ norm calculated for each function. Note that the error values for the horizontal and vertical velocity functions are almost identical (on a $\texttt{mesh(8,8)}$ the error for $\texttt{u1}$ is appr. $\texttt{2.5624601e-01}$, while for $\texttt{u3}$ we obtain appr. $\texttt{2.5624705e-01}$), thus in the picture the horizontal velocity error values are hidden behind the $\texttt{u3}$ values.
 
 \begin{figure}[H]
   \centering
