@@ -51,7 +51,6 @@ def hydrostatic_solver(resultsfolder, VP, up_, vertical_velocity_degree, mesh_h,
     hydrostatic_values.append(u1.vector().norm("l2"))
     hydrostatic_values.append(u3.vector().norm("l2"))
     hydrostatic_values.append(p.vector().norm("l2"))
-    np.savetxt(resultsfolder + "hydrostatic_values_degree_" + str(vertical_velocity_degree)+ ".txt", hydrostatic_values)
     
     # concentration
     C = FiniteElement("Lagrange", mesh_h.ufl_cell(), degree = 1)
@@ -77,6 +76,9 @@ def hydrostatic_solver(resultsfolder, VP, up_, vertical_velocity_degree, mesh_h,
     cfile_pvd_hydr = File(resultsfolder + "concentration_hydr/concentration_hydr_degree" + str(vertical_velocity_degree) + "_nr_cells_" + str(nr_cells) + ".pvd")
     cfile_pvd_hydr << c_sol
     print("HYDR. c: %.15g" % c_sol.vector().norm("l2"))
+    
+    hydrostatic_values.append(c_sol.vector().norm("l2"))
+    np.savetxt(resultsfolder + "hydrostatic_values_degree_" + str(vertical_velocity_degree)+ ".txt", hydrostatic_values)
     
     return [up_, c_sol]
     
