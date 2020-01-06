@@ -32,7 +32,7 @@ doHydrostatic = True
 doAnisotropicLoop = True
 doInitGuessHydro = True
 doDegree1Anisopic = True
-doErrorCalc = True
+doErrorCalc = False
 
 mesh = UnitSquareMesh(30, 30)
    
