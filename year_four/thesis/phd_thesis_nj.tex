@@ -1431,6 +1431,32 @@ To summarise, we have been able to visualise the convergence of the weak solutio
   \item Remark: The anisotropic scheme with degrees (2,1) is theoretically unadvisable to use as the so-called lim-sup stability condition is not satisfied.
 \end{itemize}
 
+\begin{table}[H]
+\caption{Hydrostatic result norms, vertical velocity degree = 1}
+\begin{center}
+\begin{tabular}{cccc}
+    \hline
+    norm($u_1$) & norm($u_3$) & norm($p$) & norm($c$) \\
+    \hline
+    36.731 & 15.107 & 126.224 & 12.4946 \\
+    \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[H]
+\caption{Hydrostatic result norms, vertical velocity degree = 2}
+\begin{center}
+\begin{tabular}{cccc}
+    \hline
+    norm($u_1$) & norm($u_3$) & norm($p$) & norm($c$) \\
+    \hline
+     36.756 & 29.176 & 126.228 & 12.488 \\
+    \hline
+\end{tabular}
+\end{center}
+\end{table}
+
 %%% CONVERGENCE RESULT %%%
 \subsection{Visualisation of the convergence result}\label{actualvisualisationsection}
 
@@ -1479,7 +1505,23 @@ To summarise, we have been able to visualise the convergence of the weak solutio
 \end{minipage}
 \end{figure}
 
-\newpage
+\begin{table}[H]
+\caption{Norm differences, $p$}
+\begin{center}
+\begin{tabular}{ccc}
+    \hline
+    $\epsilon$ & norm anis. $p$ &  norm ($p$ anis. - $p$ hydr.)\\
+    \hline
+    1.000 & 161.766 & 138.317 \\
+    0.5 & 134.327 & 83.035 \\
+    0.25 &128.400 & 52.245 \\   
+    0. 125 & 127.652 & 36.910 \\
+    ... & ... & ...  \\       
+    1.19 $\exp(-7)$ & 126.228 & 1.248 \\       
+    \hline
+\end{tabular}
+\end{center}
+\end{table}
 
 \subsubsection{The tendency of the horizontal velocity solution}
 
@@ -1500,6 +1542,24 @@ To summarise, we have been able to visualise the convergence of the weak solutio
   \includegraphics[width=3in]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/velocity_hydr/velocity_h_hydr}
   \caption{Hydrostatic model.}
 \end{figure}
+
+\begin{table}[H]
+\caption{Norm differences, $u_1$}
+\begin{center}
+\begin{tabular}{ccc}
+    \hline
+    $\epsilon$ & norm anis. $u_1$ &  norm($u_1$ anis. - $u_1$ hydr.)\\
+    \hline
+    1.000 & 18.109 & 21.030 \\
+    0.5 & 26.044 & 12.428 \\
+    0.25 & 31.536 & 6.630 \\   
+    0. 125 & 34.251& 3.471 \\
+    ... & ... & ... \\
+    1.19 $\exp(-7)$ &36.756 & 0.042 \\       
+    \hline
+\end{tabular}
+\end{center}
+\end{table}
 
 \subsubsection{The tendency of the vertical velocity solution}
 
@@ -1573,6 +1633,24 @@ To summarise, we have been able to visualise the convergence of the weak solutio
 \end{minipage}
 \end{figure}
 
+\begin{table}[H]
+\caption{Norm differences, $u_3$}
+\begin{center}
+\begin{tabular}{cccc}
+    \hline
+    $\epsilon$ & norm anis. $u_3$ & norm anis. interp. $u_3$ & norm ($u_3$ anis. interp. - $u_3$ hydr.)\\
+    \hline
+    1.000 & 9.837 & 4.916 & 12.142 \\
+    0.5 & 17.784 & 8.889 & 10.144 \\
+    0.25 & 22.924 & 11.456 & 8.465 \\    
+    0. 125 & 25.462 & 12.709 & 6.717 \\
+    ... & ... & ... & ... \\    
+    1.19 $\exp(-7)$ & 29.176 & 13.199 & 4.474 \\        
+    \hline
+\end{tabular}
+\end{center}
+\end{table}
+
 \subsubsection{The tendency of the concentration solution}
 
 \begin{figure}[H]
@@ -1645,6 +1723,23 @@ To summarise, we have been able to visualise the convergence of the weak solutio
 \end{minipage}
 \end{figure}
 
+\begin{table}[H]
+\caption{Norm differences, $c$}
+\begin{center}
+\begin{tabular}{ccc}
+    \hline
+    $\epsilon$ & norm anis. $c$ &  norm ($c$ anis. - $c$ hydr.)\\
+    \hline
+    1.000 & 1.460 & 11.05 \\
+    0.5 & 3.843 & 8.701 \\
+    0.25 & 6.944 & 5.64 \\   
+    0.031 & 11.6 & 0.962 \\
+    ... & ... & ...  \\       
+    0.0039 & 12.36 & 0.181 \\       
+    \hline
+\end{tabular}
+\end{center}
+\end{table}
 
 %%% TESTING %%%
 \subsection{Code validation}\label{codetestingsection}
