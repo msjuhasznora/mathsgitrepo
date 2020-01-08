@@ -121,7 +121,7 @@ def anisotropic_solver(resultsfolder, VP, eps, vertical_velocity_degree, mesh_h,
     
     C = FiniteElement("Lagrange", mesh_h.ufl_cell(), degree = 1)
     C = FunctionSpace(mesh_h, C)
-    bcc = bcc_and_source.concentration_BCs_pd(problem_data.id, C)
+    bcc = bcc_and_source.concentration_BCs_pd(problem_data, C)
     c = TrialFunction(C)
     d = TestFunction(C)
     c_sol = Function(C)

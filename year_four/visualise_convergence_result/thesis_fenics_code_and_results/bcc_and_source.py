@@ -2,81 +2,53 @@ from dolfin import *
 
 import boundary_domains
 
-def concentration_BCs_pd(id, C):
+def concentration_BCs_pd(problemdata, C):
 
-    zerotop_concentration = DirichletBC(C, 0.0, "on_boundary && x[1] > 1 - DOLFIN_EPS")
-    zerobc = DirichletBC(C, 0.0, "on_boundary")
-
-    if id == 0:
-        return [zerotop_concentration]
-    elif id == 1 :
-        return [zerobc]
-    elif id == 2:
-        return [zerobc]
-    elif id == 3:
-        return [zerobc]
-    elif id == 4:
-        return [zerobc]
-    else:
-        return []
-
-
-def boundaryconditions_pd(id, VP):
-
-    lateral_boundary = boundary_domains.LateralBoundary()
-    upper_bottom_boundary = boundary_domains.UpperBottomBoundary()
-    upper_boundary = boundary_domains.UpperBoundary()
-    lower_boundary = boundary_domains.LowerBoundary()
-    left_boundary = boundary_domains.LeftBoundary()
-    right_boundary = boundary_domains.RightBoundary()
-
-    if id == 0:
-
-        noslipbasin = DirichletBC(VP.sub(0), Constant((0, 0)), "on_boundary && x[1] < 1.0 - DOLFIN_EPS")
-        zerotopvertical = DirichletBC(VP.sub(0).sub(1), 0, "on_boundary && x[1] > 1.0 - DOLFIN_EPS")
-        bcu = [noslipbasin, zerotopvertical]
-        return bcu
-
-    elif id == 1:
-
-        zeroboundaryu = DirichletBC(VP.sub(0), Constant((0, 0)), "on_boundary")
-        bcuerrest = [zeroboundaryu]
-        return bcuerrest
-
-    elif id == 2:
-
-        zeroboundaryu = DirichletBC(VP.sub(0), Constant((0, 0)), "on_boundary")
-        bcuerrest = [zeroboundaryu]
-        return bcuerrest
-
-    elif id == 3:
-
-        zeroleftu1 = DirichletBC(VP.sub(0).sub(0), 0.0, left_boundary)
-        onerightu1 = DirichletBC(VP.sub(0).sub(0), 1.0, right_boundary)
-        zeroloweru3 = DirichletBC(VP.sub(0).sub(1), 0.0, lower_boundary)
-        minusoneupperu3 = DirichletBC(VP.sub(0).sub(1), -1.0, upper_boundary)
-
-        p_lateral = Expression('0', degree = 3)
-        p_upperbottom = Expression('0', degree = 3)
-        pressureBClateral = DirichletBC(VP.sub(1), p_lateral, lateral_boundary)
-        pressureBCupperbottom = DirichletBC(VP.sub(1), p_upperbottom, upper_bottom_boundary)
-
-        bcuerrest = [zeroleftu1, onerightu1, zeroloweru3, minusoneupperu3, pressureBClateral, pressureBCupperbottom]
-        return bcuerrest
-
-    elif id == 4 :
-
-        zerolateralu1 = DirichletBC(VP.sub(0).sub(0), 0.0, lateral_boundary)
-        zerotopbottomu3 = DirichletBC(VP.sub(0).sub(1), 0.0, upper_bottom_boundary)
-        p_lateral = Expression('0', degree = 3)
-        p_upperbottom = Expression('0', degree = 3)
-        pressureBClateral = DirichletBC(VP.sub(1), p_lateral, lateral_boundary)
-        pressureBCupperbottom = DirichletBC(VP.sub(1), p_upperbottom, upper_bottom_boundary)
-        bcuerrest = [zerolateralu1, zerotopbottomu3, pressureBClateral, pressureBCupperbottom]
-        return bcuerrest
+    dirichlet_bc_c_list = []
+    
+    number_of_bcs = len(problemdata.bcc_list)
         
-    else:
-        return []
+    for i in range(number_of_bcs):
+    
+        bcc_compact = problemdata.bcc_list[i]
+        
+        bcc_space = bcc_compact[0]
+        bcc_where = bcc_compact[1]
+        bcc_value = bcc_compact[2]
+        
+        if bcc_space == "c":
+            new_bc_c = DirichletBC(C, bcc_value, bcc_where)
+        dirichlet_bc_c_list.append(new_bc_c)
+
+    return dirichlet_bc_c_list
+
+
+def boundaryconditions_pd(problemdata, VP):
+    
+    dirichlet_bc_up_list = []
+        
+    number_of_bcs = len(problemdata.bcu_list)
+            
+    for i in range(number_of_bcs):
+        
+        bcu_compact = problemdata.bcu_list[i]
+            
+        bcu_space = bcu_compact[0]
+        bcu_where = bcu_compact[1]
+        bcu_value = bcu_compact[2]
+        
+        if bcu_space == "u":
+            new_bc_up = DirichletBC(VP.sub(0), bcu_value, bcu_where)
+        elif bcu_space == "u1":
+            new_bc_up = DirichletBC(VP.sub(0).sub(0), bcu_value, bcu_where)
+        elif bcu_space == "u3":
+            new_bc_up = DirichletBC(VP.sub(0).sub(1), bcu_value, bcu_where)
+        elif bcu_space == "p":
+            new_bc_up = DirichletBC(VP.sub(1), bcu_value, bcu_where)
+            
+        dirichlet_bc_up_list.append(new_bc_up)
+        
+    return dirichlet_bc_up_list
 
 
 class anis_c_source(UserExpression):
