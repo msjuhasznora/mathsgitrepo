@@ -35,14 +35,11 @@ u1_exact = "unknown"
 u3_exact = "unknown"
 p_exact = "unknown"
 c_exact = "unknown"
-
 bc_up_1 = ["u", "on_boundary && x[1] < 1.0 - DOLFIN_EPS", Constant((0, 0))]
 bc_up_2 = ["u3", "on_boundary && x[1] > 1.0 - DOLFIN_EPS", 0]
 bcu_list = [bc_up_1, bc_up_2]
-
 bc_c_1 = ["c", "on_boundary && x[1] > 1 - DOLFIN_EPS", 0.0]
 bcc_list = [bc_c_1]
-
 f_c = Expression('0.0', degree = 2)
 problem_data0 = ProblemData(id, u1_exact, u3_exact, p_exact, f1, f3, c_exact, theta, bcu_list, bcc_list, f_c)
 
@@ -56,13 +53,10 @@ u1_exact = Expression('0', degree = 5)
 u3_exact = Expression('0', degree = 5)
 p_exact = Expression('0', degree = 5)
 c_exact = Expression('0.0', degree = 5)
-
 bc_up_1 = ["u", "on_boundary", Constant((0, 0))]
 bcu_list = [bc_up_1]
-
 bc_c_1 = ["c", "on_boundary", 0.0]
 bcc_list = [bc_c_1]
-
 f_c = Expression('0.0', degree = 2)
 problem_data1 = ProblemData(id, u1_exact, u3_exact, p_exact, f1, f3, c_exact, theta, bcu_list, bcc_list, f_c)
 
@@ -76,13 +70,10 @@ u1_exact = Expression('0', degree = 5)
 u3_exact = Expression('0', degree = 5)
 p_exact = Expression('0', degree = 5)
 c_exact = Expression('x[0]*(1-x[0])*x[1]*(1-x[1])', degree = 5)
-
 bc_up_1 = ["u", "on_boundary", Constant((0, 0))]
 bcu_list = [bc_up_1]
-
 bc_c_1 = ["c", "on_boundary", 0.0]
 bcc_list = [bc_c_1]
-
 f_c = Expression('0.0', degree = 2)
 problem_data2 = ProblemData(id, u1_exact, u3_exact, p_exact, f1, f3, c_exact, theta, bcu_list, bcc_list, f_c)
 
@@ -96,7 +87,6 @@ u1_exact = Expression('x[0]', degree = 5)
 u3_exact = Expression('-x[1]', degree = 5)
 p_exact = Expression('0', degree = 5)
 c_exact = Expression('x[0]*(1-x[0])*x[1]*(1-x[1])', degree = 5)
-
 bc_up_1 = ["u1", left_boundary, 0.0]
 bc_up_2 = ["u1", right_boundary, 1.0]
 bc_up_3 = ["u3", lower_boundary, 0.0]
@@ -104,10 +94,8 @@ bc_up_4 = ["u3", upper_boundary, -1.0]
 bc_up_5 = ["p", lateral_boundary, Expression('0', degree = 3)]
 bc_up_6 = ["p", upper_bottom_boundary, Expression('0', degree = 3)]
 bcu_list = [bc_up_1, bc_up_2, bc_up_3, bc_up_4, bc_up_5, bc_up_6]
-
 bc_c_1 = ["c", "on_boundary", 0.0]
 bcc_list = [bc_c_1]
-
 f_c = Expression('0.0', degree = 2)
 problem_data3 = ProblemData(id, u1_exact, u3_exact, p_exact, f1, f3, c_exact, theta, bcu_list, bcc_list, f_c)
 
@@ -121,15 +109,12 @@ u1_exact = Expression('sin(2*pi*x[0])*cos(2*pi*x[1])', degree = 5)
 u3_exact = Expression('-cos(2*pi*x[0])*sin(2*pi*x[1])', degree = 5)
 p_exact = Expression('0', degree = 5)
 c_exact = Expression('(1-x[0])*(1-x[1])*sin(2*pi*x[1])*sin(2*pi*x[0])', degree = 5)
-
 bc_up_1 = ["u1", lateral_boundary, 0.0]
 bc_up_2 = ["u3", upper_bottom_boundary, 0.0]
 bc_up_3 = ["p", lateral_boundary, Expression('0', degree = 3)]
 bc_up_4 = ["p", upper_bottom_boundary, Expression('0', degree = 3)]
 bcu_list = [bc_up_1, bc_up_2, bc_up_3, bc_up_4]
-
 bc_c_1 = ["c", "on_boundary", 0.0]
 bcc_list = [bc_c_1]
-
 f_c = Expression('0.0', degree = 2)
 problem_data4 = ProblemData(id, u1_exact, u3_exact, p_exact, f1, f3, c_exact, theta, bcu_list, bcc_list, f_c)
