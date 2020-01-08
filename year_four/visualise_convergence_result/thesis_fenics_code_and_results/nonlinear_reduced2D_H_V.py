@@ -45,7 +45,7 @@ if (doHydrostatic):
     vertical_velocity_degree_hydr = 1
     VPH = helper_functions.VP_functionspace(mesh, vertical_velocity_degree_hydr)
     up_ = Function(VPH) #initial guess for the Newton solver if filled, otherwise blank and start by default
-    bcu = bcc_and_source.boundaryconditions_pd(pdd.problem_data0, VPH)
+    bcu = bcc_and_source.boundaryconditions_u_p(pdd.problem_data0, VPH)
     upc_sol_hydr = solvers.hydrostatic_solver(resultsfolder, VPH, up_, vertical_velocity_degree_hydr, mesh, bcu, pdd.problem_data0)
 
 
@@ -59,7 +59,7 @@ if (doAnisotropicLoop):
     VP = helper_functions.VP_functionspace(mesh, vertical_velocity_degree_anis)
     up_sol_anis_eps = Function(VP)
     
-    bcu = bcc_and_source.boundaryconditions_pd(pdd.problem_data0, VP)
+    bcu = bcc_and_source.boundaryconditions_u_p(pdd.problem_data0, VP)
     foldermarker = "_eps_conv"
 
     while eps > epsilon_lower_limit:
@@ -91,7 +91,7 @@ if (doDegree1Anisopic):
     vertical_velocity_degree_anis = 1
     VP = helper_functions.VP_functionspace(mesh, vertical_velocity_degree_anis)
 
-    bcu = bcc_and_source.boundaryconditions_pd(pdd.problem_data0, VP)
+    bcu = bcc_and_source.boundaryconditions_u_p(pdd.problem_data0, VP)
     foldermarker = "_eps_conv"
 
     while eps > epsilon_lower_limit:

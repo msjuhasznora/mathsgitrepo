@@ -2,7 +2,7 @@ from dolfin import *
 
 import boundary_domains
 
-def concentration_BCs_pd(problemdata, C):
+def boundaryconditions_c(problemdata, C):
 
     dirichlet_bc_c_list = []
     
@@ -23,7 +23,7 @@ def concentration_BCs_pd(problemdata, C):
     return dirichlet_bc_c_list
 
 
-def boundaryconditions_pd(problemdata, VP):
+def boundaryconditions_u_p(problemdata, VP):
     
     dirichlet_bc_up_list = []
         
