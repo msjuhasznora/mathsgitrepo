@@ -10,7 +10,6 @@ import os
 import problem_data_definitions as pdd
 import write_plot_tools
 import helper_functions
-import boundary_domains
 import bcc_and_source
 import global_lists
 import solvers

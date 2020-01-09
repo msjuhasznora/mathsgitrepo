@@ -1,7 +1,5 @@
 from dolfin import *
 
-import boundary_domains
-
 def boundaryconditions_c(problemdata, C):
 
     dirichlet_bc_c_list = []
