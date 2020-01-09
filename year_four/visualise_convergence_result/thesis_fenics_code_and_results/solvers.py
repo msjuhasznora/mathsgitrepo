@@ -55,12 +55,7 @@ def shallow_domain_solver(a_h_switch, resultsfolder, VP, up_, eps, vertical_velo
     
     C = FiniteElement("Lagrange", mesh_h.ufl_cell(), degree = 1)
     C = FunctionSpace(mesh_h, C)
-    
-    if a_h_switch == "hydrostatic":
-        zerotop_concentration = DirichletBC(C, 0, "on_boundary && x[1] > 1 - DOLFIN_EPS")
-        bcc = [zerotop_concentration]
-    elif a_h_switch == "anisotropic":
-        bcc = bcc_and_source.boundaryconditions_c(problem_data, C)
+    bcc = bcc_and_source.boundaryconditions_c(problem_data, C)
         
     c = TrialFunction(C)
     d = TestFunction(C)
@@ -85,13 +80,5 @@ def shallow_domain_solver(a_h_switch, resultsfolder, VP, up_, eps, vertical_velo
     
     cfile_pvd = File(resultsfolder + "concentration" + foldermarker + "/concentration__vert_velocity_degree_" + str(vertical_velocity_degree) + "__eps_" + str(eps) + "__nr_cells_" + str(nr_cells) + ".pvd")
     cfile_pvd << c_sol
-    
-    if a_h_switch == "hydrostatic":
-        hydrostatic_values = []
-        hydrostatic_values.append(u1.vector().norm("l2"))
-        hydrostatic_values.append(u3.vector().norm("l2"))
-        hydrostatic_values.append(p.vector().norm("l2"))
-        hydrostatic_values.append(c_sol.vector().norm("l2"))
-        np.savetxt(resultsfolder + "hydrostatic_values_degree_" + str(vertical_velocity_degree)+ ".txt", hydrostatic_values)
     
     return [up_, c_sol]

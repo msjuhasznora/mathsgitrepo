@@ -48,6 +48,7 @@ if (doHydrostatic):
     eps = 0.0
     foldermarker = "_hydr"
     upc_sol_hydr = solvers.shallow_domain_solver("hydrostatic", resultsfolder, VPH, up_, eps, vertical_velocity_degree_hydr, mesh, bcu, foldermarker, pdd.problem_data0)
+    write_plot_tools.hydr_info(upc_sol_hydr, resultsfolder, vertical_velocity_degree_hydr)
 
 
 # **********************************************
@@ -83,7 +84,8 @@ if (doAnisotropicLoop and doInitGuessHydro):
     vertical_velocity_degree_hydr = 2
     eps = 0.0
     foldermarker = "_hydr"
-    solvers.shallow_domain_solver("hydrostatic", resultsfolder, VP, up_sol_anis_eps, eps, vertical_velocity_degree_hydr, mesh, bcu, foldermarker, pdd.problem_data0)
+    upc_sol_hydr = solvers.shallow_domain_solver("hydrostatic", resultsfolder, VP, up_sol_anis_eps, eps, vertical_velocity_degree_hydr, mesh, bcu, foldermarker, pdd.problem_data0)
+    write_plot_tools.hydr_info(upc_sol_hydr, resultsfolder, vertical_velocity_degree_hydr)
 
 
 # **************************************************************

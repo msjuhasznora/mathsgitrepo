@@ -5,6 +5,21 @@ from matplotlib.ticker import StrMethodFormatter
 import numpy as np
 import os
 
+def hydr_info(upc_sol_hydr, resultsfolder, vertical_velocity_degree):
+
+    up = upc_sol_hydr[0]
+    c = upc_sol_hydr[1]
+    (u, p) = up.split(True)
+    (u1, u3) = u.split(True)
+    
+    hydrostatic_values = []
+    hydrostatic_values.append(u1.vector().norm("l2"))
+    hydrostatic_values.append(u3.vector().norm("l2"))
+    hydrostatic_values.append(p.vector().norm("l2"))
+    hydrostatic_values.append(c.vector().norm("l2"))
+    np.savetxt(resultsfolder + "hydrostatic_values_degree_" + str(vertical_velocity_degree)+ ".txt", hydrostatic_values)
+    
+
 def writedifference(degree_anis, degree_hydr, resultsfolder):
     np.savetxt(resultsfolder + "anisotropic_norm_u1_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", global_lists.anisotropic_norm_u1_values)
     np.savetxt(resultsfolder + "anisotropic_norm_u3_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", global_lists.anisotropic_norm_u3_values)
