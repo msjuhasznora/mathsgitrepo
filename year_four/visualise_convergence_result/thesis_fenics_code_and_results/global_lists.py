@@ -1,4 +1,4 @@
-def global_lists_init():
+def init_anis_hydr_lists():
 
     global anisotropic_norm_u1_values
     anisotropic_norm_u1_values = []
@@ -38,8 +38,10 @@ def global_lists_init():
     
     global anis_and_hydr_difference_norm_c_values
     anis_and_hydr_difference_norm_c_values = []
-    
-    
+
+
+def init_error_lists():
+
     global log_errorvalues_L2_u1
     log_errorvalues_L2_u1 = []
     global log_errorvalues_L2_u3

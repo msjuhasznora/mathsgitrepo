@@ -84,30 +84,3 @@ def calculate_errorvalues(problem_data, upc_sol_anis_eps, nx):
     error_L2 = [Eu1, Eu3, Ep, Ec]
 
     return error_L2
-
-def global_lists_reinit():
-
-    global_lists.nxvalues = []
-    global_lists.eoc_nxvalues = []
-
-    global_lists.log_errorvalues_L2_u1 = []
-    global_lists.log_errorvalues_L2_u3 = []
-    global_lists.log_errorvalues_L2_p = []
-    global_lists.log_errorvalues_L2_c = []
-    global_lists.log_errorvalues_H1_u1 = []
-    global_lists.log_errorvalues_H1_u3 = []
-    global_lists.log_errorvalues_H1_p = []
-    global_lists.log_errorvalues_H1_c = []
-
-    global_lists.errorvalues_H1_u1 = []
-    global_lists.errorvalues_H1_u3 = []
-    global_lists.errorvalues_H1_p = []
-    global_lists.errorvalues_H1_c = []
-
-    global_lists.eocvalues_L2_u1 = []
-    global_lists.eocvalues_L2_u3 = []
-    global_lists.eocvalues_L2_p = []
-    global_lists.eocvalues_L2_c = []
-
-    global_lists.errorvalues = []
-    global_lists.eocvalues = []
