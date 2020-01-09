@@ -14,8 +14,6 @@ import bcc_and_source
 import global_lists
 import shallow_domain_solver
 
-global_lists.global_lists_init()
-
 epsilon_lower_limit = 1.0e-07 #up 1.0e-07 c 5e-04
 
 timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
@@ -64,6 +62,8 @@ if (doAnisotropicLoop):
     
     bcu = bcc_and_source.boundaryconditions_u_p(pdd.problem_data0, VP)
     foldermarker = "_eps_conv"
+    
+    global_lists.init_anis_hydr_lists()
 
     while eps > epsilon_lower_limit:
     
@@ -119,7 +119,7 @@ if (doErrorCalc):
     
     for problem_data in test_problem_data_list:
         
-        helper_functions.global_lists_reinit()
+        global_lists.init_error_lists()
         
         eoclists = [global_lists.eocvalues_L2_u1, global_lists.eocvalues_L2_u3, global_lists.eocvalues_L2_p, global_lists.eocvalues_L2_c]
         foldermarker = "_empirical_error_calc_pd_" + str(problem_data.id)
@@ -159,4 +159,3 @@ if (doErrorCalc):
         
         write_plot_tools.plot_error_values(resultsfolder, problem_data)
         helper_functions.plot_exact_solutions(resultsfolder, nx, problem_data, foldermarker)
-
