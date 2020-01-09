@@ -1,4 +1,4 @@
-import global_lists
+import list_container
 from dolfin import *
 import matplotlib.pyplot as plt
 from matplotlib.ticker import StrMethodFormatter
@@ -21,19 +21,19 @@ def hydr_info(upc_sol_hydr, resultsfolder, vertical_velocity_degree):
     
 
 def writedifference(degree_anis, degree_hydr, resultsfolder):
-    np.savetxt(resultsfolder + "anisotropic_norm_u1_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", global_lists.anisotropic_norm_u1_values)
-    np.savetxt(resultsfolder + "anisotropic_norm_u3_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", global_lists.anisotropic_norm_u3_values)
-    np.savetxt(resultsfolder + "anisotropic_norm_p_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", global_lists.anisotropic_norm_p_values)
-    np.savetxt(resultsfolder + "anisotropic_norm_c_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", global_lists.anisotropic_norm_c_values)
-    np.savetxt(resultsfolder + "anisotropic_interpolated_norm_u1_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", global_lists.anisotropic_interpolated_norm_u1_values)
-    np.savetxt(resultsfolder + "anisotropic_interpolated_norm_u3_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", global_lists.anisotropic_interpolated_norm_u3_values)
-    np.savetxt(resultsfolder + "anisotropic_interpolated_norm_p_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", global_lists.anisotropic_interpolated_norm_p_values)
-    np.savetxt(resultsfolder + "interpolated_and_hydr_difference_norm_u1_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", global_lists.interpolated_and_hydr_difference_norm_u1_values)
-    np.savetxt(resultsfolder + "interpolated_and_hydr_difference_norm_u3_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", global_lists.interpolated_and_hydr_difference_norm_u3_values)
-    np.savetxt(resultsfolder + "interpolated_and_hydr_difference_norm_p_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", global_lists.interpolated_and_hydr_difference_norm_p_values)
-    np.savetxt(resultsfolder + "anis_and_hydr_difference_norm_u1_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", global_lists.anis_and_hydr_difference_norm_u1_values)
-    np.savetxt(resultsfolder + "anis_and_hydr_difference_norm_p_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", global_lists.anis_and_hydr_difference_norm_p_values)
-    np.savetxt(resultsfolder + "anis_and_hydr_difference_norm_c_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", global_lists.anis_and_hydr_difference_norm_c_values)
+    np.savetxt(resultsfolder + "anisotropic_norm_u1_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", list_container.anisotropic_norm_u1_values)
+    np.savetxt(resultsfolder + "anisotropic_norm_u3_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", list_container.anisotropic_norm_u3_values)
+    np.savetxt(resultsfolder + "anisotropic_norm_p_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", list_container.anisotropic_norm_p_values)
+    np.savetxt(resultsfolder + "anisotropic_norm_c_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", list_container.anisotropic_norm_c_values)
+    np.savetxt(resultsfolder + "anisotropic_interpolated_norm_u1_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", list_container.anisotropic_interpolated_norm_u1_values)
+    np.savetxt(resultsfolder + "anisotropic_interpolated_norm_u3_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", list_container.anisotropic_interpolated_norm_u3_values)
+    np.savetxt(resultsfolder + "anisotropic_interpolated_norm_p_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", list_container.anisotropic_interpolated_norm_p_values)
+    np.savetxt(resultsfolder + "interpolated_and_hydr_difference_norm_u1_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", list_container.interpolated_and_hydr_difference_norm_u1_values)
+    np.savetxt(resultsfolder + "interpolated_and_hydr_difference_norm_u3_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", list_container.interpolated_and_hydr_difference_norm_u3_values)
+    np.savetxt(resultsfolder + "interpolated_and_hydr_difference_norm_p_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", list_container.interpolated_and_hydr_difference_norm_p_values)
+    np.savetxt(resultsfolder + "anis_and_hydr_difference_norm_u1_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", list_container.anis_and_hydr_difference_norm_u1_values)
+    np.savetxt(resultsfolder + "anis_and_hydr_difference_norm_p_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", list_container.anis_and_hydr_difference_norm_p_values)
+    np.savetxt(resultsfolder + "anis_and_hydr_difference_norm_c_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", list_container.anis_and_hydr_difference_norm_c_values)
 
 
 def plot_error_values(resultsfolder, problem_data):
@@ -42,34 +42,34 @@ def plot_error_values(resultsfolder, problem_data):
     os.mkdir(resultsfolder + "errorvalues" + str(problem_data.id))
     os.mkdir(resultsfolder + "eocplots" + str(problem_data.id))
 
-    np.savetxt(resultsfolder + "log_errorvalues" + str(problem_data.id) + "/L2_u1_problemdata_" + str(problem_data.id) + ".txt", global_lists.log_errorvalues_L2_u1)
-    np.savetxt(resultsfolder + "log_errorvalues" + str(problem_data.id) + "/L2_u3_problemdata_" + str(problem_data.id) + ".txt", global_lists.log_errorvalues_L2_u3)
-    np.savetxt(resultsfolder + "log_errorvalues" + str(problem_data.id) + "/L2_p_problemdata_" + str(problem_data.id) + ".txt", global_lists.log_errorvalues_L2_p)
-    np.savetxt(resultsfolder + "log_errorvalues" + str(problem_data.id) + "/L2_c_problemdata_" + str(problem_data.id) + ".txt", global_lists.log_errorvalues_L2_c)
+    np.savetxt(resultsfolder + "log_errorvalues" + str(problem_data.id) + "/L2_u1_problemdata_" + str(problem_data.id) + ".txt", list_container.log_errorvalues_L2_u1)
+    np.savetxt(resultsfolder + "log_errorvalues" + str(problem_data.id) + "/L2_u3_problemdata_" + str(problem_data.id) + ".txt", list_container.log_errorvalues_L2_u3)
+    np.savetxt(resultsfolder + "log_errorvalues" + str(problem_data.id) + "/L2_p_problemdata_" + str(problem_data.id) + ".txt", list_container.log_errorvalues_L2_p)
+    np.savetxt(resultsfolder + "log_errorvalues" + str(problem_data.id) + "/L2_c_problemdata_" + str(problem_data.id) + ".txt", list_container.log_errorvalues_L2_c)
 
-    np.savetxt(resultsfolder + "log_errorvalues" + str(problem_data.id) + "/H1_u1_problemdata_" + str(problem_data.id) + ".txt", global_lists.log_errorvalues_H1_u1)
-    np.savetxt(resultsfolder + "log_errorvalues" + str(problem_data.id) + "/H1_u3_problemdata_" + str(problem_data.id) + ".txt", global_lists.log_errorvalues_H1_u3)
-    np.savetxt(resultsfolder + "log_errorvalues" + str(problem_data.id) + "/H1_p_problemdata_" + str(problem_data.id) + ".txt", global_lists.log_errorvalues_H1_p)
-    np.savetxt(resultsfolder + "log_errorvalues" + str(problem_data.id) + "/H1_c_problemdata_" + str(problem_data.id) + ".txt", global_lists.log_errorvalues_H1_c)
+    np.savetxt(resultsfolder + "log_errorvalues" + str(problem_data.id) + "/H1_u1_problemdata_" + str(problem_data.id) + ".txt", list_container.log_errorvalues_H1_u1)
+    np.savetxt(resultsfolder + "log_errorvalues" + str(problem_data.id) + "/H1_u3_problemdata_" + str(problem_data.id) + ".txt", list_container.log_errorvalues_H1_u3)
+    np.savetxt(resultsfolder + "log_errorvalues" + str(problem_data.id) + "/H1_p_problemdata_" + str(problem_data.id) + ".txt", list_container.log_errorvalues_H1_p)
+    np.savetxt(resultsfolder + "log_errorvalues" + str(problem_data.id) + "/H1_c_problemdata_" + str(problem_data.id) + ".txt", list_container.log_errorvalues_H1_c)
     
-    np.savetxt(resultsfolder + "errorvalues" + str(problem_data.id) + "/H1_u1_problemdata_" + str(problem_data.id) + ".txt", global_lists.errorvalues_H1_u1)
-    np.savetxt(resultsfolder + "errorvalues" + str(problem_data.id) + "/H1_u3_problemdata_" + str(problem_data.id) + ".txt", global_lists.errorvalues_H1_u3)
-    np.savetxt(resultsfolder + "errorvalues" + str(problem_data.id) + "/H1_p_problemdata_" + str(problem_data.id) + ".txt", global_lists.errorvalues_H1_p)
-    np.savetxt(resultsfolder + "errorvalues" + str(problem_data.id) + "/H1_c_problemdata_" + str(problem_data.id) + ".txt", global_lists.errorvalues_H1_c)
+    np.savetxt(resultsfolder + "errorvalues" + str(problem_data.id) + "/H1_u1_problemdata_" + str(problem_data.id) + ".txt", list_container.errorvalues_H1_u1)
+    np.savetxt(resultsfolder + "errorvalues" + str(problem_data.id) + "/H1_u3_problemdata_" + str(problem_data.id) + ".txt", list_container.errorvalues_H1_u3)
+    np.savetxt(resultsfolder + "errorvalues" + str(problem_data.id) + "/H1_p_problemdata_" + str(problem_data.id) + ".txt", list_container.errorvalues_H1_p)
+    np.savetxt(resultsfolder + "errorvalues" + str(problem_data.id) + "/H1_c_problemdata_" + str(problem_data.id) + ".txt", list_container.errorvalues_H1_c)
     
-    np.savetxt(resultsfolder + "eocplots" + str(problem_data.id) + "/L2_u1_eoc_problemdata_" + str(problem_data.id) + ".txt", global_lists.eocvalues_L2_u1)
-    np.savetxt(resultsfolder + "eocplots" + str(problem_data.id) + "/L2_u3_eoc_problemdata_" + str(problem_data.id) + ".txt", global_lists.eocvalues_L2_u3)
-    np.savetxt(resultsfolder + "eocplots" + str(problem_data.id) + "/L2_p_eoc_problemdata_" + str(problem_data.id) + ".txt", global_lists.eocvalues_L2_p)
-    np.savetxt(resultsfolder + "eocplots" + str(problem_data.id) + "/L2_c_eoc_problemdata_" + str(problem_data.id) + ".txt", global_lists.eocvalues_L2_c)
+    np.savetxt(resultsfolder + "eocplots" + str(problem_data.id) + "/L2_u1_eoc_problemdata_" + str(problem_data.id) + ".txt", list_container.eocvalues_L2_u1)
+    np.savetxt(resultsfolder + "eocplots" + str(problem_data.id) + "/L2_u3_eoc_problemdata_" + str(problem_data.id) + ".txt", list_container.eocvalues_L2_u3)
+    np.savetxt(resultsfolder + "eocplots" + str(problem_data.id) + "/L2_p_eoc_problemdata_" + str(problem_data.id) + ".txt", list_container.eocvalues_L2_p)
+    np.savetxt(resultsfolder + "eocplots" + str(problem_data.id) + "/L2_c_eoc_problemdata_" + str(problem_data.id) + ".txt", list_container.eocvalues_L2_c)
 
     if problem_data.id == 4:
     
         # L2 ERRORVALUES
     
-        line1 = plt.scatter(global_lists.nxvalues, global_lists.log_errorvalues_L2_u1, color = "blue")
-        line2 = plt.scatter(global_lists.nxvalues, global_lists.log_errorvalues_L2_u3, color = "lightgreen")
-        line3 = plt.scatter(global_lists.nxvalues, global_lists.log_errorvalues_L2_p, color = "coral")
-        line4 = plt.scatter(global_lists.nxvalues, global_lists.log_errorvalues_L2_c, color = "orange")
+        line1 = plt.scatter(list_container.nxvalues, list_container.log_errorvalues_L2_u1, color = "blue")
+        line2 = plt.scatter(list_container.nxvalues, list_container.log_errorvalues_L2_u3, color = "lightgreen")
+        line3 = plt.scatter(list_container.nxvalues, list_container.log_errorvalues_L2_p, color = "coral")
+        line4 = plt.scatter(list_container.nxvalues, list_container.log_errorvalues_L2_c, color = "orange")
         plt.legend((line1, line2, line3, line4), ('horizontal velocity', 'vertical velocity', 'pressure', 'concentration'))
         plt.title("Testcase " + str(problem_data.id), fontsize = 14)
         plt.ylim(top = 0)
@@ -84,10 +84,10 @@ def plot_error_values(resultsfolder, problem_data):
         
         # H1 ERRORVALUES
         
-        line1 = plt.scatter(global_lists.nxvalues, global_lists.log_errorvalues_H1_u1, color = "blue")
-        line2 = plt.scatter(global_lists.nxvalues, global_lists.log_errorvalues_H1_u3, color = "lightgreen")
-        line3 = plt.scatter(global_lists.nxvalues, global_lists.log_errorvalues_H1_p, color = "coral")
-        line4 = plt.scatter(global_lists.nxvalues, global_lists.log_errorvalues_H1_c, color = "orange")
+        line1 = plt.scatter(list_container.nxvalues, list_container.log_errorvalues_H1_u1, color = "blue")
+        line2 = plt.scatter(list_container.nxvalues, list_container.log_errorvalues_H1_u3, color = "lightgreen")
+        line3 = plt.scatter(list_container.nxvalues, list_container.log_errorvalues_H1_p, color = "coral")
+        line4 = plt.scatter(list_container.nxvalues, list_container.log_errorvalues_H1_c, color = "orange")
         plt.legend((line1, line2, line3, line4), ('horizontal velocity', 'vertical velocity', 'pressure', 'concentration'))
         plt.title("Testcase " + str(problem_data.id), fontsize = 14)
         plt.ylim(top = 0)
@@ -102,10 +102,10 @@ def plot_error_values(resultsfolder, problem_data):
         
         # H1 EOC PLOTS
         
-        line1, = plt.plot(global_lists.eoc_nxvalues, global_lists.eocvalues_L2_u1, '-o', color = "blue")
-        line2, = plt.plot(global_lists.eoc_nxvalues, global_lists.eocvalues_L2_u3, '-o', color = "lightgreen")
-        line3, = plt.plot(global_lists.eoc_nxvalues, global_lists.eocvalues_L2_p, '-o', color = "coral")
-        line4, = plt.plot(global_lists.eoc_nxvalues, global_lists.eocvalues_L2_c, '-o', color = "orange")
+        line1, = plt.plot(list_container.eoc_nxvalues, list_container.eocvalues_L2_u1, '-o', color = "blue")
+        line2, = plt.plot(list_container.eoc_nxvalues, list_container.eocvalues_L2_u3, '-o', color = "lightgreen")
+        line3, = plt.plot(list_container.eoc_nxvalues, list_container.eocvalues_L2_p, '-o', color = "coral")
+        line4, = plt.plot(list_container.eoc_nxvalues, list_container.eocvalues_L2_c, '-o', color = "orange")
         plt.legend([line1, line2, line3, line4], ['horizontal velocity', 'vertical velocity', 'pressure', 'concentration'])
         plt.title("EOC values for testcase " + str(problem_data.id), fontsize = 14)
         plt.ylim(top = 4)
@@ -120,7 +120,7 @@ def plot_error_values(resultsfolder, problem_data):
         
     else :
     
-        line = plt.scatter(global_lists.nxvalues, global_lists.errorvalues_H1_u1, color = "blue")
+        line = plt.scatter(list_container.nxvalues, list_container.errorvalues_H1_u1, color = "blue")
         plt.legend(fontsize = 20)
         plt.legend((line,), ('horizontal velocity',))
         plt.title("Testcase " + str(problem_data.id), fontsize = 20)
@@ -134,7 +134,7 @@ def plot_error_values(resultsfolder, problem_data):
         plt.savefig(resultsfolder + "errorvalues" + str(problem_data.id) + "/H1_u1__id" + str(problem_data.id) + ".pdf")
         plt.clf()
 
-        line = plt.scatter(global_lists.nxvalues, global_lists.errorvalues_H1_u3, color = "lightgreen")
+        line = plt.scatter(list_container.nxvalues, list_container.errorvalues_H1_u3, color = "lightgreen")
         plt.legend(fontsize = 20)
         plt.legend((line,), ('vertical velocity',))
         plt.title("Testcase " + str(problem_data.id), fontsize = 20)
@@ -148,7 +148,7 @@ def plot_error_values(resultsfolder, problem_data):
         plt.savefig(resultsfolder + "errorvalues" + str(problem_data.id) + "/H1_u3__id" + str(problem_data.id) + ".pdf")
         plt.clf()
 
-        line = plt.scatter(global_lists.nxvalues, global_lists.errorvalues_H1_p, color = "coral")
+        line = plt.scatter(list_container.nxvalues, list_container.errorvalues_H1_p, color = "coral")
         plt.legend(fontsize = 20)
         plt.legend((line,), ('pressure',))
         plt.title("Testcase " + str(problem_data.id), fontsize = 20)
@@ -165,7 +165,7 @@ def plot_error_values(resultsfolder, problem_data):
         if problem_data.id == 1:
         
             # H_1 error values without log
-            line = plt.scatter(global_lists.nxvalues, global_lists.errorvalues_H1_c, color = "orange")
+            line = plt.scatter(list_container.nxvalues, list_container.errorvalues_H1_c, color = "orange")
             plt.legend(fontsize = 20)
             plt.legend((line,), ('concentration',))
             plt.title("Testcase " + str(problem_data.id), fontsize = 20)
@@ -182,7 +182,7 @@ def plot_error_values(resultsfolder, problem_data):
         else:
 
             # log(H_1 error values)
-            line = plt.scatter(global_lists.nxvalues, global_lists.log_errorvalues_H1_c, color = "orange")
+            line = plt.scatter(list_container.nxvalues, list_container.log_errorvalues_H1_c, color = "orange")
             plt.legend(fontsize = 20)
             plt.legend((line,), ('concentration',))
             plt.title("Testcase " + str(problem_data.id), fontsize = 20)
@@ -197,7 +197,7 @@ def plot_error_values(resultsfolder, problem_data):
             plt.clf()
             
             # EOC values for c
-            line, = plt.plot(global_lists.eoc_nxvalues, global_lists.eocvalues_L2_c, '-o', color = "orange")
+            line, = plt.plot(list_container.eoc_nxvalues, list_container.eocvalues_L2_c, '-o', color = "orange")
             plt.legend([line,], ['concentration',])
             plt.title("EOC values for testcase " + str(problem_data.id), fontsize = 20)
             plt.xlabel("The nx parameter in mesh(nx, nx)", fontsize = 20)
@@ -220,34 +220,34 @@ def difference_info(eps, upc_sol_anis_eps, VPA, upc_sol_hydr, VPH, verbose):
    (u, p) = up_sol_anis_eps.split(True)
    (u1, u3) = u.split(True)
    
-   global_lists.anisotropic_norm_u1_values.append(u1.vector().norm("l2"))
-   global_lists.anisotropic_norm_u3_values.append(u3.vector().norm("l2"))
-   global_lists.anisotropic_norm_p_values.append(p.vector().norm("l2"))
-   global_lists.anisotropic_norm_c_values.append(c.vector().norm("l2"))
+   list_container.anisotropic_norm_u1_values.append(u1.vector().norm("l2"))
+   list_container.anisotropic_norm_u3_values.append(u3.vector().norm("l2"))
+   list_container.anisotropic_norm_p_values.append(p.vector().norm("l2"))
+   list_container.anisotropic_norm_c_values.append(c.vector().norm("l2"))
    
    up_interpolate_hydr = Function(VPH)
    up_interpolate_hydr = interpolate(up_sol_anis_eps, VPH)
    (u_interpolate_hydr, p_interpolate_hydr) = up_interpolate_hydr.split(True)
    (u1_interpolate_hydr, u3_interpolate_hydr) = u_interpolate_hydr.split(True)
    
-   global_lists.anisotropic_interpolated_norm_u1_values.append(u1_interpolate_hydr.vector().norm("l2"))
-   global_lists.anisotropic_interpolated_norm_u3_values.append(u3_interpolate_hydr.vector().norm("l2"))
-   global_lists.anisotropic_interpolated_norm_p_values.append(p_interpolate_hydr.vector().norm("l2"))
+   list_container.anisotropic_interpolated_norm_u1_values.append(u1_interpolate_hydr.vector().norm("l2"))
+   list_container.anisotropic_interpolated_norm_u3_values.append(u3_interpolate_hydr.vector().norm("l2"))
+   list_container.anisotropic_interpolated_norm_p_values.append(p_interpolate_hydr.vector().norm("l2"))
    
    up_sol_hydr = upc_sol_hydr[0]
    c_sol_hydr = upc_sol_hydr[1]
    (u_sol_hydr, p_sol_hydr) = up_sol_hydr.split(True)
    (u1_sol_hydr, u3_sol_hydr) = u_sol_hydr.split(True)
    
-   global_lists.interpolated_and_hydr_difference_norm_u1_values.append((u1_interpolate_hydr.vector() - u1_sol_hydr.vector()).norm("l2"))
-   global_lists.interpolated_and_hydr_difference_norm_u3_values.append((u3_interpolate_hydr.vector() - u3_sol_hydr.vector()).norm("l2"))
-   global_lists.interpolated_and_hydr_difference_norm_p_values.append((p_interpolate_hydr.vector() - p_sol_hydr.vector()).norm("l2"))
+   list_container.interpolated_and_hydr_difference_norm_u1_values.append((u1_interpolate_hydr.vector() - u1_sol_hydr.vector()).norm("l2"))
+   list_container.interpolated_and_hydr_difference_norm_u3_values.append((u3_interpolate_hydr.vector() - u3_sol_hydr.vector()).norm("l2"))
+   list_container.interpolated_and_hydr_difference_norm_p_values.append((p_interpolate_hydr.vector() - p_sol_hydr.vector()).norm("l2"))
    
-   global_lists.anis_and_hydr_difference_norm_u1_values.append((u1.vector() - u1_sol_hydr.vector()).norm("l2"))
+   list_container.anis_and_hydr_difference_norm_u1_values.append((u1.vector() - u1_sol_hydr.vector()).norm("l2"))
    # this does not make sense for different degree spaces
    #anis_and_hydr_difference_norm_u3_values.append((u3.vector() - u3_sol_hydr.vector()).norm("l2"))
-   global_lists.anis_and_hydr_difference_norm_p_values.append((p.vector() - p_sol_hydr.vector()).norm("l2"))
-   global_lists.anis_and_hydr_difference_norm_c_values.append((c.vector() - c_sol_hydr.vector()).norm("l2"))
+   list_container.anis_and_hydr_difference_norm_p_values.append((p.vector() - p_sol_hydr.vector()).norm("l2"))
+   list_container.anis_and_hydr_difference_norm_c_values.append((c.vector() - c_sol_hydr.vector()).norm("l2"))
    
    if (verbose):
        print(eps)

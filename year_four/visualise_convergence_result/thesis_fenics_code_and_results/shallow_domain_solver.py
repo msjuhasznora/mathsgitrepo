@@ -2,7 +2,7 @@ from dolfin import *
 import numpy as np
 
 import boundary_domains
-import bcc_and_source
+import apply_bcc
 
 def run(a_h_switch, resultsfolder, VP, up_, eps, vertical_velocity_degree, mesh_h, bcu, foldermarker, problem_data):
 
@@ -12,7 +12,7 @@ def run(a_h_switch, resultsfolder, VP, up_, eps, vertical_velocity_degree, mesh_
     boundaries = MeshFunction("size_t", mesh_h, mesh_h.topology().dim() - 1)
     boundaries.set_all(0)
     upperboundary.mark(boundaries, 1)
-    ds = Measure('ds')[boundaries]
+    ds = Measure('ds')(subdomain_data = boundaries)
 
     up = TrialFunction(VP)
     u, p = split(up) # u,p are "trial function" type (special to FEniCS)
@@ -55,7 +55,7 @@ def run(a_h_switch, resultsfolder, VP, up_, eps, vertical_velocity_degree, mesh_
     
     C = FiniteElement("Lagrange", mesh_h.ufl_cell(), degree = 1)
     C = FunctionSpace(mesh_h, C)
-    bcc = bcc_and_source.boundaryconditions_c(problem_data, C)
+    bcc = apply_bcc.boundaryconditions_c(problem_data, C)
         
     c = TrialFunction(C)
     d = TestFunction(C)

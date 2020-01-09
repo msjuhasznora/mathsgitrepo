@@ -1,15 +1,15 @@
 from dolfin import *
 from math import log
 
-import global_lists
-import bcc_and_source
+import list_container
+import apply_bcc
 import shallow_domain_solver
 
 def solve_on_refined_domain(a_h_switch, resultsfolder, problem_data, nx, eps, vertical_velocity_degree_anis, foldermarker):
     mesh_h = UnitSquareMesh(nx, nx)
     VP = VP_functionspace(mesh_h, vertical_velocity_degree_anis)
     up_ = Function(VP)
-    bcu = bcc_and_source.boundaryconditions_u_p(problem_data, VP)
+    bcu = apply_bcc.boundaryconditions_u_p(problem_data, VP)
     upc_sol_anis_eps = shallow_domain_solver.run(a_h_switch, resultsfolder, VP, up_, eps, vertical_velocity_degree_anis, mesh_h, bcu, foldermarker, problem_data)
     return upc_sol_anis_eps
 
@@ -57,29 +57,29 @@ def calculate_errorvalues(problem_data, upc_sol_anis_eps, nx):
     Eu3_H = errornorm(problem_data.u3_exact, u3, norm_type='H1')
     Ep_H = errornorm(problem_data.p_exact, p, norm_type='H1')
     Ec_H = errornorm(problem_data.c_exact, c, norm_type='H1', mesh = UnitSquareMesh(nx, nx))
-    global_lists.errorvalues.append(nx)
-    global_lists.errorvalues.append(Eu1)
-    global_lists.errorvalues.append(Eu3)
-    global_lists.errorvalues.append(Ep)
-    global_lists.errorvalues.append(Ec)
-    global_lists.errorvalues.append(Eu1_H)
-    global_lists.errorvalues.append(Eu3_H)
-    global_lists.errorvalues.append(Ep_H)
-    global_lists.errorvalues.append(Ec_H)
+    list_container.errorvalues.append(nx)
+    list_container.errorvalues.append(Eu1)
+    list_container.errorvalues.append(Eu3)
+    list_container.errorvalues.append(Ep)
+    list_container.errorvalues.append(Ec)
+    list_container.errorvalues.append(Eu1_H)
+    list_container.errorvalues.append(Eu3_H)
+    list_container.errorvalues.append(Ep_H)
+    list_container.errorvalues.append(Ec_H)
 
-    global_lists.nxvalues.append(nx)
-    global_lists.log_errorvalues_L2_u1.append(log(max(Eu1, DOLFIN_EPS)))
-    global_lists.log_errorvalues_L2_u3.append(log(max(Eu3, DOLFIN_EPS)))
-    global_lists.log_errorvalues_L2_p.append(log(max(Ep, DOLFIN_EPS)))
-    global_lists.log_errorvalues_L2_c.append(log(max(Ec, DOLFIN_EPS)))
-    global_lists.log_errorvalues_H1_u1.append(log(max(Eu1_H, DOLFIN_EPS)))
-    global_lists.log_errorvalues_H1_u3.append(log(max(Eu3_H, DOLFIN_EPS)))
-    global_lists.log_errorvalues_H1_p.append(log(max(Ep_H, DOLFIN_EPS)))
-    global_lists.log_errorvalues_H1_c.append(log(max(Ec_H, DOLFIN_EPS)))
-    global_lists.errorvalues_H1_u1.append(Eu1_H)
-    global_lists.errorvalues_H1_u3.append(Eu3_H)
-    global_lists.errorvalues_H1_p.append(Ep_H)
-    global_lists.errorvalues_H1_c.append(Ec_H)
+    list_container.nxvalues.append(nx)
+    list_container.log_errorvalues_L2_u1.append(log(max(Eu1, DOLFIN_EPS)))
+    list_container.log_errorvalues_L2_u3.append(log(max(Eu3, DOLFIN_EPS)))
+    list_container.log_errorvalues_L2_p.append(log(max(Ep, DOLFIN_EPS)))
+    list_container.log_errorvalues_L2_c.append(log(max(Ec, DOLFIN_EPS)))
+    list_container.log_errorvalues_H1_u1.append(log(max(Eu1_H, DOLFIN_EPS)))
+    list_container.log_errorvalues_H1_u3.append(log(max(Eu3_H, DOLFIN_EPS)))
+    list_container.log_errorvalues_H1_p.append(log(max(Ep_H, DOLFIN_EPS)))
+    list_container.log_errorvalues_H1_c.append(log(max(Ec_H, DOLFIN_EPS)))
+    list_container.errorvalues_H1_u1.append(Eu1_H)
+    list_container.errorvalues_H1_u3.append(Eu3_H)
+    list_container.errorvalues_H1_p.append(Ep_H)
+    list_container.errorvalues_H1_c.append(Ec_H)
 
     error_L2 = [Eu1, Eu3, Ep, Ec]
 

@@ -6,6 +6,12 @@
 
 # note that in a first order function space div(grad(u))v dx != inner(n,grad(u))ds + inner(grad(u),grad(v))dx, since by definition, first-order spaces contain linear functions, and for these the second-order derivative div(grad(u))v vanishes. so it is important to use the weak form here instead of the original second-order Laplacian of the deffusive term
 
+
+# the hydrostatic weak formulation without an initial guess (for now) is constructed with the vertical velocity space being of degree 1 and the additional constraint p.dx(1) * q.dx(1) * dx representing that we have a hydrostatic pressure. using a lower degree for the vertical velocities for the case of the primitive equations come from the article of Danilov, Gennady, Schroter, 2002 (even though they use elementwise constant representations)
+
+# the anisotropic weak formulation is created using the Taylor-Hood elements, the vertical velocity is from a quadratic space. Using a degree 1 vertical velocity space in the anisotropic case we have a strange layered unnatural pressure.
+
+
 # explanation of the degree parameter: https://fenicsproject.discourse.group/t/how-to-define-source-term-function/1893, Scan_29_Nov_2019.pdf.
 # the main idea is that "degree" is a built-in parameter in this class, we do not need to "create" it. it gets defined through the call,
 # and it probably has an effect on the degree of approximation in terms of what degree is used in the \int s * phi dx integral

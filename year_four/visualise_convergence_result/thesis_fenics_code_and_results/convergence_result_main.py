@@ -10,8 +10,8 @@ import os
 import problem_data_definitions as pdd
 import write_plot_tools
 import helper_functions
-import bcc_and_source
-import global_lists
+import apply_bcc
+import list_container
 import shallow_domain_solver
 
 epsilon_lower_limit = 1.0e-07 #up 1.0e-07 c 5e-04
@@ -42,7 +42,7 @@ if (doHydrostatic):
     vertical_velocity_degree_hydr = 1
     VPH = helper_functions.VP_functionspace(mesh, vertical_velocity_degree_hydr)
     up_ = Function(VPH) #initial guess for the Newton solver if filled, otherwise blank and start by default
-    bcu = bcc_and_source.boundaryconditions_u_p(pdd.problem_data0, VPH)
+    bcu = apply_bcc.boundaryconditions_u_p(pdd.problem_data0, VPH)
     eps = 0.0
     foldermarker = "_hydr"
     upc_sol_hydr = shallow_domain_solver.run("hydrostatic", resultsfolder, VPH, up_, eps, vertical_velocity_degree_hydr, mesh, bcu, foldermarker, pdd.problem_data0)
@@ -60,10 +60,10 @@ if (doAnisotropicLoop):
     up_ = Function(VP)
     up_sol_anis_eps = Function(VP)
     
-    bcu = bcc_and_source.boundaryconditions_u_p(pdd.problem_data0, VP)
+    bcu = apply_bcc.boundaryconditions_u_p(pdd.problem_data0, VP)
     foldermarker = "_eps_conv"
     
-    global_lists.init_anis_hydr_lists()
+    list_container.init_anis_hydr_lists()
 
     while eps > epsilon_lower_limit:
     
@@ -97,7 +97,7 @@ if (doDegree1Anisopic):
     vertical_velocity_degree_anis = 1
     VP = helper_functions.VP_functionspace(mesh, vertical_velocity_degree_anis)
     up_ = Function(VP)
-    bcu = bcc_and_source.boundaryconditions_u_p(pdd.problem_data0, VP)
+    bcu = apply_bcc.boundaryconditions_u_p(pdd.problem_data0, VP)
     foldermarker = "_eps_conv"
 
     while eps > epsilon_lower_limit:
@@ -119,9 +119,9 @@ if (doErrorCalc):
     
     for problem_data in test_problem_data_list:
         
-        global_lists.init_error_lists()
+        list_container.init_error_lists()
         
-        eoclists = [global_lists.eocvalues_L2_u1, global_lists.eocvalues_L2_u3, global_lists.eocvalues_L2_p, global_lists.eocvalues_L2_c]
+        eoclists = [list_container.eocvalues_L2_u1, list_container.eocvalues_L2_u3, list_container.eocvalues_L2_p, list_container.eocvalues_L2_c]
         foldermarker = "_empirical_error_calc_pd_" + str(problem_data.id)
 
         nx_exp = 3
@@ -136,8 +136,8 @@ if (doErrorCalc):
             error_next = helper_functions.calculate_errorvalues(problem_data, upc_sol_anis_eps, nx)
             h_next = (1/nx)*sqrt(2)
             if nx > 2 ** 3:
-                global_lists.eocvalues.append(nx)
-                global_lists.eoc_nxvalues.append(nx)
+                list_container.eocvalues.append(nx)
+                list_container.eoc_nxvalues.append(nx)
             
             for i in [0, 1, 2, 3]:
                 if error_prev[i] > DOLFIN_EPS and error_next[i] > DOLFIN_EPS:
@@ -146,7 +146,7 @@ if (doErrorCalc):
                     eoc_i = -1.0
                     
                 if nx > 2 ** 3:
-                    global_lists.eocvalues.append(eoc_i)
+                    list_container.eocvalues.append(eoc_i)
                     (eoclists[i]).append(eoc_i)
             
             h_prev = h_next
@@ -154,8 +154,8 @@ if (doErrorCalc):
             
             nx = 2 * nx
         
-        np.savetxt(resultsfolder + "eocvalues_problemdata_" + str(problem_data.id) + ".txt", global_lists.eocvalues)
-        np.savetxt(resultsfolder + "errorvalues_problemdata_" + str(problem_data.id) + ".txt", global_lists.errorvalues)
+        np.savetxt(resultsfolder + "eocvalues_problemdata_" + str(problem_data.id) + ".txt", list_container.eocvalues)
+        np.savetxt(resultsfolder + "errorvalues_problemdata_" + str(problem_data.id) + ".txt", list_container.errorvalues)
         
         write_plot_tools.plot_error_values(resultsfolder, problem_data)
         helper_functions.plot_exact_solutions(resultsfolder, nx, problem_data, foldermarker)
