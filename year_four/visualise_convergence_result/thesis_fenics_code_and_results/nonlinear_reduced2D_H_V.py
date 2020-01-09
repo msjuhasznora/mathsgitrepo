@@ -12,7 +12,7 @@ import write_plot_tools
 import helper_functions
 import bcc_and_source
 import global_lists
-import solvers
+import shallow_domain_solver
 
 global_lists.global_lists_init()
 
@@ -47,7 +47,7 @@ if (doHydrostatic):
     bcu = bcc_and_source.boundaryconditions_u_p(pdd.problem_data0, VPH)
     eps = 0.0
     foldermarker = "_hydr"
-    upc_sol_hydr = solvers.shallow_domain_solver("hydrostatic", resultsfolder, VPH, up_, eps, vertical_velocity_degree_hydr, mesh, bcu, foldermarker, pdd.problem_data0)
+    upc_sol_hydr = shallow_domain_solver.run("hydrostatic", resultsfolder, VPH, up_, eps, vertical_velocity_degree_hydr, mesh, bcu, foldermarker, pdd.problem_data0)
     write_plot_tools.hydr_info(upc_sol_hydr, resultsfolder, vertical_velocity_degree_hydr)
 
 
@@ -67,7 +67,7 @@ if (doAnisotropicLoop):
 
     while eps > epsilon_lower_limit:
     
-        upc_sol_anis_eps = solvers.shallow_domain_solver("anisotropic", resultsfolder, VP, up_, eps, vertical_velocity_degree_anis, mesh, bcu, foldermarker, pdd.problem_data0)
+        upc_sol_anis_eps = shallow_domain_solver.run("anisotropic", resultsfolder, VP, up_, eps, vertical_velocity_degree_anis, mesh, bcu, foldermarker, pdd.problem_data0)
         up_sol_anis_eps = upc_sol_anis_eps[0]
         write_plot_tools.difference_info(eps, upc_sol_anis_eps, VP, upc_sol_hydr, VPH, verbose)
         eps = eps / 2.0
@@ -84,7 +84,7 @@ if (doAnisotropicLoop and doInitGuessHydro):
     vertical_velocity_degree_hydr = 2
     eps = 0.0
     foldermarker = "_hydr"
-    upc_sol_hydr = solvers.shallow_domain_solver("hydrostatic", resultsfolder, VP, up_sol_anis_eps, eps, vertical_velocity_degree_hydr, mesh, bcu, foldermarker, pdd.problem_data0)
+    upc_sol_hydr = shallow_domain_solver.run("hydrostatic", resultsfolder, VP, up_sol_anis_eps, eps, vertical_velocity_degree_hydr, mesh, bcu, foldermarker, pdd.problem_data0)
     write_plot_tools.hydr_info(upc_sol_hydr, resultsfolder, vertical_velocity_degree_hydr)
 
 
@@ -102,7 +102,7 @@ if (doDegree1Anisopic):
 
     while eps > epsilon_lower_limit:
     
-        solvers.shallow_domain_solver("anisotropic", resultsfolder, VP, up_, eps, vertical_velocity_degree_anis, mesh, bcu, foldermarker, pdd.problem_data0)
+        shallow_domain_solver.run("anisotropic", resultsfolder, VP, up_, eps, vertical_velocity_degree_anis, mesh, bcu, foldermarker, pdd.problem_data0)
         eps = eps / 2.0
 
 

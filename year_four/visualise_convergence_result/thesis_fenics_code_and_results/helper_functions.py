@@ -3,14 +3,14 @@ from math import log
 
 import global_lists
 import bcc_and_source
-import solvers
+import shallow_domain_solver
 
 def solve_on_refined_domain(a_h_switch, resultsfolder, problem_data, nx, eps, vertical_velocity_degree_anis, foldermarker):
     mesh_h = UnitSquareMesh(nx, nx)
     VP = VP_functionspace(mesh_h, vertical_velocity_degree_anis)
     up_ = Function(VP)
     bcu = bcc_and_source.boundaryconditions_u_p(problem_data, VP)
-    upc_sol_anis_eps = solvers.shallow_domain_solver(a_h_switch, resultsfolder, VP, up_, eps, vertical_velocity_degree_anis, mesh_h, bcu, foldermarker, problem_data)
+    upc_sol_anis_eps = shallow_domain_solver.run(a_h_switch, resultsfolder, VP, up_, eps, vertical_velocity_degree_anis, mesh_h, bcu, foldermarker, problem_data)
     return upc_sol_anis_eps
 
 # create a functionspace ((V_h, V_v), P) with given degree of V_v
