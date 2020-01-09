@@ -46,7 +46,9 @@ if (doHydrostatic):
     VPH = helper_functions.VP_functionspace(mesh, vertical_velocity_degree_hydr)
     up_ = Function(VPH) #initial guess for the Newton solver if filled, otherwise blank and start by default
     bcu = bcc_and_source.boundaryconditions_u_p(pdd.problem_data0, VPH)
-    upc_sol_hydr = solvers.hydrostatic_solver(resultsfolder, VPH, up_, vertical_velocity_degree_hydr, mesh, bcu, pdd.problem_data0)
+    eps = 0.0
+    foldermarker = "_hydr"
+    upc_sol_hydr = solvers.shallow_domain_solver("hydrostatic", resultsfolder, VPH, up_, eps, vertical_velocity_degree_hydr, mesh, bcu, foldermarker, pdd.problem_data0)
 
 
 # **********************************************
@@ -57,6 +59,7 @@ if (doAnisotropicLoop):
     eps = 1.0
     vertical_velocity_degree_anis = 2
     VP = helper_functions.VP_functionspace(mesh, vertical_velocity_degree_anis)
+    up_ = Function(VP)
     up_sol_anis_eps = Function(VP)
     
     bcu = bcc_and_source.boundaryconditions_u_p(pdd.problem_data0, VP)
@@ -64,7 +67,7 @@ if (doAnisotropicLoop):
 
     while eps > epsilon_lower_limit:
     
-        upc_sol_anis_eps = solvers.anisotropic_solver(resultsfolder, VP, eps, vertical_velocity_degree_anis, mesh, bcu, foldermarker, pdd.problem_data0)
+        upc_sol_anis_eps = solvers.shallow_domain_solver("anisotropic", resultsfolder, VP, up_, eps, vertical_velocity_degree_anis, mesh, bcu, foldermarker, pdd.problem_data0)
         up_sol_anis_eps = upc_sol_anis_eps[0]
         write_plot_tools.difference_info(eps, upc_sol_anis_eps, VP, upc_sol_hydr, VPH, verbose)
         eps = eps / 2.0
@@ -79,7 +82,9 @@ if (doAnisotropicLoop):
 if (doAnisotropicLoop and doInitGuessHydro):
     # hydrostatic model solved with initial guess for degree 2 vertical velocity space
     vertical_velocity_degree_hydr = 2
-    solvers.hydrostatic_solver(resultsfolder, VP, up_sol_anis_eps, vertical_velocity_degree_hydr, mesh, bcu, pdd.problem_data0)
+    eps = 0.0
+    foldermarker = "_hydr"
+    solvers.shallow_domain_solver("hydrostatic", resultsfolder, VP, up_sol_anis_eps, eps, vertical_velocity_degree_hydr, mesh, bcu, foldermarker, pdd.problem_data0)
 
 
 # **************************************************************
@@ -90,13 +95,13 @@ if (doDegree1Anisopic):
     eps = 1.0
     vertical_velocity_degree_anis = 1
     VP = helper_functions.VP_functionspace(mesh, vertical_velocity_degree_anis)
-
+    up_ = Function(VP)
     bcu = bcc_and_source.boundaryconditions_u_p(pdd.problem_data0, VP)
     foldermarker = "_eps_conv"
 
     while eps > epsilon_lower_limit:
     
-        solvers.anisotropic_solver(resultsfolder, VP, eps, vertical_velocity_degree_anis, mesh, bcu, foldermarker, pdd.problem_data0)
+        solvers.shallow_domain_solver("anisotropic", resultsfolder, VP, up_, eps, vertical_velocity_degree_anis, mesh, bcu, foldermarker, pdd.problem_data0)
         eps = eps / 2.0
 
 
@@ -113,30 +118,7 @@ if (doErrorCalc):
     
     for problem_data in test_problem_data_list:
         
-        global_lists.nxvalues = []
-        global_lists.eoc_nxvalues = []
-        
-        global_lists.log_errorvalues_L2_u1 = []
-        global_lists.log_errorvalues_L2_u3 = []
-        global_lists.log_errorvalues_L2_p = []
-        global_lists.log_errorvalues_L2_c = []
-        global_lists.log_errorvalues_H1_u1 = []
-        global_lists.log_errorvalues_H1_u3 = []
-        global_lists.log_errorvalues_H1_p = []
-        global_lists.log_errorvalues_H1_c = []
-        
-        global_lists.errorvalues_H1_u1 = []
-        global_lists.errorvalues_H1_u3 = []
-        global_lists.errorvalues_H1_p = []
-        global_lists.errorvalues_H1_c = []
-        
-        global_lists.eocvalues_L2_u1 = []
-        global_lists.eocvalues_L2_u3 = []
-        global_lists.eocvalues_L2_p = []
-        global_lists.eocvalues_L2_c = []
-        
-        global_lists.errorvalues = []
-        global_lists.eocvalues = []
+        helper_functions.global_lists_reinit()
         
         eoclists = [global_lists.eocvalues_L2_u1, global_lists.eocvalues_L2_u3, global_lists.eocvalues_L2_p, global_lists.eocvalues_L2_c]
         foldermarker = "_empirical_error_calc_pd_" + str(problem_data.id)
@@ -149,7 +131,7 @@ if (doErrorCalc):
         
         while nx < 2 ** 8:
     
-            upc_sol_anis_eps = helper_functions.solve_on_refined_domain(resultsfolder, problem_data, nx, eps, vertical_velocity_degree_anis, foldermarker)
+            upc_sol_anis_eps = helper_functions.solve_on_refined_domain("anisotropic", resultsfolder, problem_data, nx, eps, vertical_velocity_degree_anis, foldermarker)
             error_next = helper_functions.calculate_errorvalues(problem_data, upc_sol_anis_eps, nx)
             h_next = (1/nx)*sqrt(2)
             if nx > 2 ** 3:

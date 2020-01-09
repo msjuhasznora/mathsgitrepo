@@ -5,11 +5,12 @@ import global_lists
 import bcc_and_source
 import solvers
 
-def solve_on_refined_domain(resultsfolder, problem_data, nx, eps, vertical_velocity_degree_anis, foldermarker):
+def solve_on_refined_domain(a_h_switch, resultsfolder, problem_data, nx, eps, vertical_velocity_degree_anis, foldermarker):
     mesh_h = UnitSquareMesh(nx, nx)
     VP = VP_functionspace(mesh_h, vertical_velocity_degree_anis)
+    up_ = Function(VP)
     bcu = bcc_and_source.boundaryconditions_u_p(problem_data, VP)
-    upc_sol_anis_eps = solvers.anisotropic_solver(resultsfolder, VP, eps, vertical_velocity_degree_anis, mesh_h, bcu, foldermarker, problem_data)
+    upc_sol_anis_eps = solvers.shallow_domain_solver(a_h_switch, resultsfolder, VP, up_, eps, vertical_velocity_degree_anis, mesh_h, bcu, foldermarker, problem_data)
     return upc_sol_anis_eps
 
 # create a functionspace ((V_h, V_v), P) with given degree of V_v
@@ -83,3 +84,30 @@ def calculate_errorvalues(problem_data, upc_sol_anis_eps, nx):
     error_L2 = [Eu1, Eu3, Ep, Ec]
 
     return error_L2
+
+def global_lists_reinit():
+
+    global_lists.nxvalues = []
+    global_lists.eoc_nxvalues = []
+
+    global_lists.log_errorvalues_L2_u1 = []
+    global_lists.log_errorvalues_L2_u3 = []
+    global_lists.log_errorvalues_L2_p = []
+    global_lists.log_errorvalues_L2_c = []
+    global_lists.log_errorvalues_H1_u1 = []
+    global_lists.log_errorvalues_H1_u3 = []
+    global_lists.log_errorvalues_H1_p = []
+    global_lists.log_errorvalues_H1_c = []
+
+    global_lists.errorvalues_H1_u1 = []
+    global_lists.errorvalues_H1_u3 = []
+    global_lists.errorvalues_H1_p = []
+    global_lists.errorvalues_H1_c = []
+
+    global_lists.eocvalues_L2_u1 = []
+    global_lists.eocvalues_L2_u3 = []
+    global_lists.eocvalues_L2_p = []
+    global_lists.eocvalues_L2_c = []
+
+    global_lists.errorvalues = []
+    global_lists.eocvalues = []
