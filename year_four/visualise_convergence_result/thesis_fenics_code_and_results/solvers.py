@@ -128,7 +128,7 @@ def anisotropic_solver(resultsfolder, VP, eps, vertical_velocity_degree, mesh_h,
     
     a = inner(u, grad(c)) * d * dx + c.dx(0) * d.dx(0) * dx + c.dx(1) * d.dx(1) * dx
     
-    anis_c_source_instance = bcc_and_source.anis_c_source(eps, problem_data.id, degree = 10)
+    anis_c_source_instance = problem_data.f_c(eps, degree = 10)
     L = inner(anis_c_source_instance, d) * dx
     
     A, b = assemble_system(a, L, bcc)

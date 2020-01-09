@@ -7,6 +7,7 @@ upper_boundary = boundary_domains.UpperBoundary()
 lower_boundary = boundary_domains.LowerBoundary()
 left_boundary = boundary_domains.LeftBoundary()
 right_boundary = boundary_domains.RightBoundary()
+underwater_boundary = boundary_domains.UnderwaterBoundary()
 
 class ProblemData(UserExpression):
     def __init__(self, id, u1_exact, u3_exact, p_exact, f1, f3, c_exact, theta, bcu_list, bcc_list, f_c):
@@ -24,6 +25,7 @@ class ProblemData(UserExpression):
 
 # for the symbolic computations providing the forcing terms using the exact solutions we use sympy-1.4: Documents/sympy-1.4/examples/beginner/differentiation.py
 
+
 # PROBLEM 0
 # the actual one we solve
 id = 0
@@ -35,13 +37,26 @@ u1_exact = "unknown"
 u3_exact = "unknown"
 p_exact = "unknown"
 c_exact = "unknown"
-bc_up_1 = ["u", "on_boundary && x[1] < 1.0 - DOLFIN_EPS", Constant((0, 0))]
-bc_up_2 = ["u3", "on_boundary && x[1] > 1.0 - DOLFIN_EPS", 0]
+bc_up_1 = ["u", underwater_boundary, Constant((0, 0))]
+bc_up_2 = ["u3", upper_boundary, 0]
 bcu_list = [bc_up_1, bc_up_2]
-bc_c_1 = ["c", "on_boundary && x[1] > 1 - DOLFIN_EPS", 0.0]
+bc_c_1 = ["c", upper_boundary, 0.0]
 bcc_list = [bc_c_1]
-f_c = Expression('0.0', degree = 2)
-problem_data0 = ProblemData(id, u1_exact, u3_exact, p_exact, f1, f3, c_exact, theta, bcu_list, bcc_list, f_c)
+
+class f_c_pd0(UserExpression):
+
+    def __init__(self,eps,**kwargs):
+        super().__init__(**kwargs)
+        self.eps = eps
+
+    def eval(self, values, x):
+        eps = self.eps
+        values[0] = (1/(2 * pi)) * (eps / ( (x[0] - 0.5)**2 + (x[1] - 0.5)**2 + eps**2 )**(1.5) )
+        
+    def value_shape(self):
+        return ()
+
+problem_data0 = ProblemData(id, u1_exact, u3_exact, p_exact, f1, f3, c_exact, theta, bcu_list, bcc_list, f_c_pd0)
 
 # PROBLEM 1
 id = 1
@@ -57,8 +72,21 @@ bc_up_1 = ["u", "on_boundary", Constant((0, 0))]
 bcu_list = [bc_up_1]
 bc_c_1 = ["c", "on_boundary", 0.0]
 bcc_list = [bc_c_1]
-f_c = Expression('0.0', degree = 2)
-problem_data1 = ProblemData(id, u1_exact, u3_exact, p_exact, f1, f3, c_exact, theta, bcu_list, bcc_list, f_c)
+
+class f_c_pd1(UserExpression):
+
+    def __init__(self,eps,**kwargs):
+        super().__init__(**kwargs)
+        self.eps = eps
+
+    def eval(self, values, x):
+        eps = self.eps
+        values[0] = 0.0
+        
+    def value_shape(self):
+        return ()
+
+problem_data1 = ProblemData(id, u1_exact, u3_exact, p_exact, f1, f3, c_exact, theta, bcu_list, bcc_list, f_c_pd1)
 
 # PROBLEM 2
 id = 2
@@ -74,8 +102,21 @@ bc_up_1 = ["u", "on_boundary", Constant((0, 0))]
 bcu_list = [bc_up_1]
 bc_c_1 = ["c", "on_boundary", 0.0]
 bcc_list = [bc_c_1]
-f_c = Expression('0.0', degree = 2)
-problem_data2 = ProblemData(id, u1_exact, u3_exact, p_exact, f1, f3, c_exact, theta, bcu_list, bcc_list, f_c)
+
+class f_c_pd2(UserExpression):
+
+    def __init__(self,eps,**kwargs):
+        super().__init__(**kwargs)
+        self.eps = eps
+
+    def eval(self, values, x):
+        eps = self.eps
+        values[0] = 2*x[0]*(1-x[0]) + 2*x[1]*(1-x[1])
+        
+    def value_shape(self):
+        return ()
+
+problem_data2 = ProblemData(id, u1_exact, u3_exact, p_exact, f1, f3, c_exact, theta, bcu_list, bcc_list, f_c_pd2)
 
 # PROBLEM 3
 id = 3
@@ -96,8 +137,21 @@ bc_up_6 = ["p", upper_bottom_boundary, Expression('0', degree = 3)]
 bcu_list = [bc_up_1, bc_up_2, bc_up_3, bc_up_4, bc_up_5, bc_up_6]
 bc_c_1 = ["c", "on_boundary", 0.0]
 bcc_list = [bc_c_1]
-f_c = Expression('0.0', degree = 2)
-problem_data3 = ProblemData(id, u1_exact, u3_exact, p_exact, f1, f3, c_exact, theta, bcu_list, bcc_list, f_c)
+
+class f_c_pd3(UserExpression):
+
+    def __init__(self,eps,**kwargs):
+        super().__init__(**kwargs)
+        self.eps = eps
+
+    def eval(self, values, x):
+        eps = self.eps
+        values[0] = 2*x[0]*(-x[0] + 1) + x[0]*(-x[0]*x[1]*(-x[1] + 1) + x[1]*(-x[0] + 1)*(-x[1] + 1)) + 2*x[1]*(-x[1] + 1) - x[1]*(-x[0]*x[1]*(-x[0] + 1) + x[0]*(-x[0] + 1)*(-x[1] + 1))
+        
+    def value_shape(self):
+        return ()
+
+problem_data3 = ProblemData(id, u1_exact, u3_exact, p_exact, f1, f3, c_exact, theta, bcu_list, bcc_list, f_c_pd3)
 
 # PROBLEM 4
 id = 4
@@ -116,5 +170,18 @@ bc_up_4 = ["p", upper_bottom_boundary, Expression('0', degree = 3)]
 bcu_list = [bc_up_1, bc_up_2, bc_up_3, bc_up_4]
 bc_c_1 = ["c", "on_boundary", 0.0]
 bcc_list = [bc_c_1]
-f_c = Expression('0.0', degree = 2)
-problem_data4 = ProblemData(id, u1_exact, u3_exact, p_exact, f1, f3, c_exact, theta, bcu_list, bcc_list, f_c)
+
+class f_c_pd4(UserExpression):
+
+    def __init__(self,eps,**kwargs):
+        super().__init__(**kwargs)
+        self.eps = eps
+
+    def eval(self, values, x):
+        eps = self.eps
+        values[0] = 8*(pi**2)*(-x[0] + 1)*(-x[1] + 1)*sin(2*pi*x[0])*sin(2*pi*x[1]) + 4*pi*(-x[0] + 1)*sin(2*pi*x[0])*cos(2*pi*x[1]) + 4*pi*(-x[1] + 1)*sin(2*pi*x[1])*cos(2*pi*x[0]) - (2*pi*(-x[0] + 1)*(-x[1] + 1)*sin(2*pi*x[0])*cos(2*pi*x[1]) - (-x[0] + 1)*sin(2*pi*x[0])*sin(2*pi*x[1]))*sin(2*pi*x[1])*cos(2*pi*x[0]) + (2*pi*(-x[0] + 1)*(-x[1] + 1)*sin(2*pi*x[1])*cos(2*pi*x[0]) - (-x[1] + 1)*sin(2*pi*x[0])*sin(2*pi*x[1]))*sin(2*pi*x[0])*cos(2*pi*x[1])
+        
+    def value_shape(self):
+        return ()
+
+problem_data4 = ProblemData(id, u1_exact, u3_exact, p_exact, f1, f3, c_exact, theta, bcu_list, bcc_list, f_c_pd4)
