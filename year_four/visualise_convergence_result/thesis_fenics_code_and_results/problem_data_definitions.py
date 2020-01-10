@@ -77,10 +77,8 @@ class f_c_pd1(UserExpression):
 
     def __init__(self,eps,**kwargs):
         super().__init__(**kwargs)
-        self.eps = eps
 
     def eval(self, values, x):
-        eps = self.eps
         values[0] = 0.0
         
     def value_shape(self):
@@ -107,10 +105,8 @@ class f_c_pd2(UserExpression):
 
     def __init__(self,eps,**kwargs):
         super().__init__(**kwargs)
-        self.eps = eps
 
     def eval(self, values, x):
-        eps = self.eps
         values[0] = 2*x[0]*(1-x[0]) + 2*x[1]*(1-x[1])
         
     def value_shape(self):
@@ -142,10 +138,8 @@ class f_c_pd3(UserExpression):
 
     def __init__(self,eps,**kwargs):
         super().__init__(**kwargs)
-        self.eps = eps
 
     def eval(self, values, x):
-        eps = self.eps
         values[0] = 2*x[0]*(-x[0] + 1) + x[0]*(-x[0]*x[1]*(-x[1] + 1) + x[1]*(-x[0] + 1)*(-x[1] + 1)) + 2*x[1]*(-x[1] + 1) - x[1]*(-x[0]*x[1]*(-x[0] + 1) + x[0]*(-x[0] + 1)*(-x[1] + 1))
         
     def value_shape(self):
@@ -175,10 +169,8 @@ class f_c_pd4(UserExpression):
 
     def __init__(self,eps,**kwargs):
         super().__init__(**kwargs)
-        self.eps = eps
 
     def eval(self, values, x):
-        eps = self.eps
         values[0] = 8*(pi**2)*(-x[0] + 1)*(-x[1] + 1)*sin(2*pi*x[0])*sin(2*pi*x[1]) + 4*pi*(-x[0] + 1)*sin(2*pi*x[0])*cos(2*pi*x[1]) + 4*pi*(-x[1] + 1)*sin(2*pi*x[1])*cos(2*pi*x[0]) - (2*pi*(-x[0] + 1)*(-x[1] + 1)*sin(2*pi*x[0])*cos(2*pi*x[1]) - (-x[0] + 1)*sin(2*pi*x[0])*sin(2*pi*x[1]))*sin(2*pi*x[1])*cos(2*pi*x[0]) + (2*pi*(-x[0] + 1)*(-x[1] + 1)*sin(2*pi*x[1])*cos(2*pi*x[0]) - (-x[1] + 1)*sin(2*pi*x[0])*sin(2*pi*x[1]))*sin(2*pi*x[0])*cos(2*pi*x[1])
         
     def value_shape(self):
