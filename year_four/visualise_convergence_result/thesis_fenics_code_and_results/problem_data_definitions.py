@@ -9,8 +9,6 @@ left_boundary = boundary_domains.LeftBoundary()
 right_boundary = boundary_domains.RightBoundary()
 underwater_boundary = boundary_domains.UnderwaterBoundary()
 
-epsilon_init = 1.0
-
 class ProblemData(UserExpression):
     def __init__(self, id, u1_exact, u3_exact, p_exact, f1, f3, c_exact, theta, bcu_list, bcc_list, c_source):
         self.id = id
@@ -43,9 +41,11 @@ bc_up_2 = ["u3", upper_boundary, 0]
 bcu_list = [bc_up_1, bc_up_2]
 bc_c_1 = ["c", upper_boundary, 0.0]
 bcc_list = [bc_c_1]
-#source_instance = Expression('(1/(2 * pi)) * (eps / pow(( pow((x[0] - 0.5),2) + pow((x[1] - 0.5),2) + pow(eps,2) ),(1.5)) )', degree = 10, eps = epsilon_init)
 
 def c_source(eps, x):
+    # definining the source as an expression gives a better approximation at the 9th epsilon round, but here there is the restriction of specifying a degree, and it leads to negative concentration for eps appr. 0.0002
+    #source_instance = Expression('(1/(2 * pi)) * (eps / pow(( pow((x[0] - 0.5),2) + pow((x[1] - 0.5),2) + pow(eps,2) ),(1.5)) )', eps = eps, degree = 10)
+    # here we just define spatially-varying terms in UFL. overall it seems to be a better option as the concentration stays non-negative, even though the c solution function seems to vanish overall for small epsilon
     source_instance = (1/(2 * pi)) * (eps / ( (x[0] - 0.5)**2 + (x[1] - 0.5)**2 + eps**2 )**(1.5) )
     return source_instance
 
@@ -65,7 +65,6 @@ bc_up_1 = ["u", "on_boundary", Constant((0, 0))]
 bcu_list = [bc_up_1]
 bc_c_1 = ["c", "on_boundary", 0.0]
 bcc_list = [bc_c_1]
-#source_instance = Expression('0.0', degree = 5, eps = epsilon_init)
 
 def c_source(eps, x):
     source_instance = Constant(0.0)
@@ -87,7 +86,6 @@ bc_up_1 = ["u", "on_boundary", Constant((0, 0))]
 bcu_list = [bc_up_1]
 bc_c_1 = ["c", "on_boundary", 0.0]
 bcc_list = [bc_c_1]
-#source_instance = Expression('2*x[0]*(1-x[0]) + 2*x[1]*(1-x[1])', degree = 5, eps = epsilon_init)
 
 def c_source(eps, x):
     source_instance = 2*x[0]*(1-x[0]) + 2*x[1]*(1-x[1])
@@ -114,7 +112,6 @@ bc_up_6 = ["p", upper_bottom_boundary, Expression('0', degree = 3)]
 bcu_list = [bc_up_1, bc_up_2, bc_up_3, bc_up_4, bc_up_5, bc_up_6]
 bc_c_1 = ["c", "on_boundary", 0.0]
 bcc_list = [bc_c_1]
-#source_instance = Expression('2*x[0]*(-x[0] + 1) + x[0]*(-x[0]*x[1]*(-x[1] + 1) + x[1]*(-x[0] + 1)*(-x[1] + 1)) + 2*x[1]*(-x[1] + 1) - x[1]*(-x[0]*x[1]*(-x[0] + 1) + x[0]*(-x[0] + 1)*(-x[1] + 1))', degree = 5, eps = epsilon_init)
 
 def c_source(eps, x):
     source_instance = 2*x[0]*(-x[0] + 1) + x[0]*(-x[0]*x[1]*(-x[1] + 1) + x[1]*(-x[0] + 1)*(-x[1] + 1)) + 2*x[1]*(-x[1] + 1) - x[1]*(-x[0]*x[1]*(-x[0] + 1) + x[0]*(-x[0] + 1)*(-x[1] + 1))
@@ -139,7 +136,6 @@ bc_up_4 = ["p", upper_bottom_boundary, Expression('0', degree = 3)]
 bcu_list = [bc_up_1, bc_up_2, bc_up_3, bc_up_4]
 bc_c_1 = ["c", "on_boundary", 0.0]
 bcc_list = [bc_c_1]
-#source_instance = Expression('8*pow(pi,2)*(-x[0] + 1)*(-x[1] + 1)*sin(2*pi*x[0])*sin(2*pi*x[1]) + 4*pi*(-x[0] + 1)*sin(2*pi*x[0])*cos(2*pi*x[1]) + 4*pi*(-x[1] + 1)*sin(2*pi*x[1])*cos(2*pi*x[0]) - (2*pi*(-x[0] + 1)*(-x[1] + 1)*sin(2*pi*x[0])*cos(2*pi*x[1]) - (-x[0] + 1)*sin(2*pi*x[0])*sin(2*pi*x[1]))*sin(2*pi*x[1])*cos(2*pi*x[0]) + (2*pi*(-x[0] + 1)*(-x[1] + 1)*sin(2*pi*x[1])*cos(2*pi*x[0]) - (-x[1] + 1)*sin(2*pi*x[0])*sin(2*pi*x[1]))*sin(2*pi*x[0])*cos(2*pi*x[1])', degree = 5, eps = epsilon_init)
 
 def c_source(eps, x):
     source_instance = 8*pi**2*(-x[0] + 1)*(-x[1] + 1)*sin(2*pi*x[0])*sin(2*pi*x[1]) + 4*pi*(-x[0] + 1)*sin(2*pi*x[0])*cos(2*pi*x[1]) + 4*pi*(-x[1] + 1)*sin(2*pi*x[1])*cos(2*pi*x[0]) - (2*pi*(-x[0] + 1)*(-x[1] + 1)*sin(2*pi*x[0])*cos(2*pi*x[1]) - (-x[0] + 1)*sin(2*pi*x[0])*sin(2*pi*x[1]))*sin(2*pi*x[1])*cos(2*pi*x[0]) + (2*pi*(-x[0] + 1)*(-x[1] + 1)*sin(2*pi*x[1])*cos(2*pi*x[0]) - (-x[1] + 1)*sin(2*pi*x[0])*sin(2*pi*x[1]))*sin(2*pi*x[0])*cos(2*pi*x[1])
