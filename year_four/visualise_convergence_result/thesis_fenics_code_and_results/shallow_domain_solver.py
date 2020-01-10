@@ -69,8 +69,8 @@ def run(a_h_switch, resultsfolder, VP, up_, eps, vertical_velocity_degree, mesh_
         delta = PointSource(C, Point(0.5, 0.5), 1)
         delta.apply(b)
     elif a_h_switch == "anisotropic":
-        anis_c_source_instance = problem_data.f_c(eps, degree = 10)
-        L = inner(anis_c_source_instance, d) * dx
+        x = SpatialCoordinate(mesh_h)
+        L = inner(problem_data.c_source(eps, x), d) * dx
         A, b = assemble_system(a, L, bcc)
     
     solver = KrylovSolver('gmres', 'ilu')
