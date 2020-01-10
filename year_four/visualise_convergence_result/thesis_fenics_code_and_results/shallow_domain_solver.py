@@ -25,9 +25,9 @@ def run(a_h_switch, resultsfolder, VP, up_, eps, vertical_velocity_degree, mesh_
     
     if a_h_switch == "hydrostatic":
         # the hydrostatic weak formulation without an initial guess (for now) is constructed with the vertical velocity space being of degree 1 and the additional constraint p.dx(1) * q.dx(1) * dx representing that we have a hydrostatic pressure. using a lower degree for the vertical velocities for the case of the primitive equations come from the article of Danilov, Gennady, Schroter, 2002 (even though they use elementwise constant representations)
-        F = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx - p * div(v) * dx + q * div(u) * dx + p.dx(1) * q.dx(1) * dx - problem_data.f1 * v1 * dx - problem_data.f3 * v3 * dx - inner(problem_data.theta, v) * ds(1)
+        F = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx + eps*eps*inner(u, grad(u3)) * v3 * dx + eps*eps*inner(grad(u3),grad(v3)) * dx - p * div(v) * dx + q * div(u) * dx - problem_data.f1 * v1 * dx - problem_data.f3 * v3 * dx - inner(problem_data.theta, v) * ds(1) + p.dx(1) * q.dx(1) * dx
     elif a_h_switch == "anisotropic":
-        # the anisotropic weak formulation is created using the Taylor-Hood elements, the vertical velocity is from a quadratic space. Using a degree 1 vertical velocity space in the anisotropic case we have a strange layered unnatural pressure.
+        # The vertical velocity is from a quadratic space. Using a degree 1 vertical velocity space in the anisotropic case we have a strange layered unnatural pressure.
         F = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx + eps*eps*inner(u, grad(u3)) * v3 * dx + eps*eps*inner(grad(u3),grad(v3)) * dx - p * div(v) * dx + q * div(u) * dx - problem_data.f1 * v1 * dx - problem_data.f3 * v3 * dx - inner(problem_data.theta, v) * ds(1)
 
     F = action(F, up_)
@@ -41,15 +41,15 @@ def run(a_h_switch, resultsfolder, VP, up_, eps, vertical_velocity_degree, mesh_
         prm['newton_solver']['absolute_tolerance'] = 1e-9
         prm['newton_solver']['relative_tolerance'] = 1e-9
         prm['newton_solver']['maximum_iterations'] = 5
-    print("Solving for u, p. Problemdata " + str(problem_data.id) + " for epsilon=" + str(eps) + ".")
+    print("Solving for u, p. Problemdata " + str(problem_data.id) + " for epsilon=" + str(float(eps)) + ".")
     solver.solve()
     
     # from now on we process the data (note the usage of u,p as auxilliary variables of "function" type
     (u, p) = up_.split(True)
     (u1, u3) = u.split(True)
     
-    ufile_pvd = File(resultsfolder + "velocity" + foldermarker + "/velocity__vert_velocity_degree" + str(vertical_velocity_degree) + "__eps_" + str(eps) + "__nr_cells_" + str(nr_cells) + ".pvd")
-    pfile_pvd = File(resultsfolder + "pressure" + foldermarker + "/pressure__vert_velocity_degree" + str(vertical_velocity_degree) + "__eps_" + str(eps) + "__nr_cells_" + str(nr_cells) + ".pvd")
+    ufile_pvd = File(resultsfolder + "velocity" + foldermarker + "/velocity__vert_velocity_degree" + str(vertical_velocity_degree) + "__eps_" + str(float(eps)) + "__nr_cells_" + str(nr_cells) + ".pvd")
+    pfile_pvd = File(resultsfolder + "pressure" + foldermarker + "/pressure__vert_velocity_degree" + str(vertical_velocity_degree) + "__eps_" + str(float(eps)) + "__nr_cells_" + str(nr_cells) + ".pvd")
     ufile_pvd << u
     pfile_pvd << p
     
@@ -74,11 +74,11 @@ def run(a_h_switch, resultsfolder, VP, up_, eps, vertical_velocity_degree, mesh_
         A, b = assemble_system(a, L, bcc)
     
     solver = KrylovSolver('gmres', 'ilu')
-    print("Solving for c. Problemdata " + str(problem_data.id) + " for epsilon=" + str(eps) + ".")
+    print("Solving for c. Problemdata " + str(problem_data.id) + " for epsilon=" + str(float(eps)) + ".")
     solver.solve(A, c_sol.vector(), b)
     print("c sol norm: " + str(c_sol.vector().norm("l2")))
     
-    cfile_pvd = File(resultsfolder + "concentration" + foldermarker + "/concentration__vert_velocity_degree_" + str(vertical_velocity_degree) + "__eps_" + str(eps) + "__nr_cells_" + str(nr_cells) + ".pvd")
+    cfile_pvd = File(resultsfolder + "concentration" + foldermarker + "/concentration__vert_velocity_degree_" + str(vertical_velocity_degree) + "__eps_" + str(float(eps)) + "__nr_cells_" + str(nr_cells) + ".pvd")
     cfile_pvd << c_sol
     
     return [up_, c_sol]

@@ -43,7 +43,7 @@ if (doHydrostatic):
     VPH = helper_functions.VP_functionspace(mesh, vertical_velocity_degree_hydr)
     up_ = Function(VPH) #initial guess for the Newton solver if filled, otherwise blank and start by default
     bcu = apply_bcc.boundaryconditions_u_p(pdd.problem_data0, VPH)
-    eps = 0.0
+    eps = Constant(0.0)
     foldermarker = "_hydr"
     upc_sol_hydr = shallow_domain_solver.run("hydrostatic", resultsfolder, VPH, up_, eps, vertical_velocity_degree_hydr, mesh, bcu, foldermarker, pdd.problem_data0)
     write_plot_tools.hydr_info(upc_sol_hydr, resultsfolder, vertical_velocity_degree_hydr)
@@ -82,7 +82,7 @@ if (doAnisotropicLoop):
 if (doAnisotropicLoop and doInitGuessHydro):
     # hydrostatic model solved with initial guess for degree 2 vertical velocity space
     vertical_velocity_degree_hydr = 2
-    eps = 0.0
+    eps = Constant(0.0)
     foldermarker = "_hydr"
     upc_sol_hydr = shallow_domain_solver.run("hydrostatic", resultsfolder, VP, up_sol_anis_eps, eps, vertical_velocity_degree_hydr, mesh, bcu, foldermarker, pdd.problem_data0)
     write_plot_tools.hydr_info(upc_sol_hydr, resultsfolder, vertical_velocity_degree_hydr)
