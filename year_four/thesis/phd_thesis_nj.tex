@@ -1469,7 +1469,12 @@ As we will see in the following section in detail, we are able to visualise and 
   
 \end{enumerate}
 
-By "hydrostatic model" and "hydrostatic solutions" in the following we understand the solutions we obtain in a degree $(2,1)$ space, without using an initial guess. Since the next section focuses on the tendency of the solutions and the convergence phenomena itself, here we dedicate a few words to the natural meaning of the functions. In order to have a clear idea of the physical process we obtain as a result, let us consider the following three graphs describing the behaviour of the velocity functions.
+By "hydrostatic model" and "hydrostatic solutions" in the following we understand the solutions we obtain in a degree $(2,1)$ space, without using an initial guess. The next section is a collection of the visualisation results we obtained with FEniCS.
+
+%%% CONVERGENCE RESULT %%%
+\subsection{Visualisation of the convergence result}\label{actualvisualisationsection}
+
+Before we focus on the tendency of the solutions and the convergence phenomena itself, here we firstly dedicate a few words to the natural meaning of the functions. In order to have a clear idea of the physical process we obtain as a result, let us consider the following three graphs describing the behaviour of the velocity functions. We remind that we are using a simplified domain filled with water: we use no-slip boundary conditions on the lateral boundaries and at the bottom of the domain, while on the top we consider the effect of wind traction.
 
 \begin{figure}[H]
   \centering
@@ -1492,6 +1497,8 @@ In Figure \ref{background_colour_y} and Figure \ref{background_colour_x} the bac
 
 The top red background colour of Figure \ref{background_colour_y} represents the primary result of the wind force, namely that the water close to the surface starts to move parallel to the air flow, while the $y$-direction coloured large arrows along the lateral boundaries depict the secondary consequences of this force: relatively strong vertical water currents are created in these areas.
 
+Finally, Figure \ref{background_colour_x} shows the same phenomena with the opposite colouring technique.
+
 \begin{figure}[H]
   \centering
   \includegraphics[width=5.4in]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder_new/velocity_hydr/velocity_hydr__degree1__coloring_x}
@@ -1499,10 +1506,9 @@ The top red background colour of Figure \ref{background_colour_y} represents the
   \label{background_colour_x}
 \end{figure}
 
-%%% CONVERGENCE RESULT %%%
-\subsection{Visualisation of the convergence result}\label{actualvisualisationsection}
+Now that we understand the physical process better, we are ready to examine the convergence phenomena.
 
-In the following we consider the tendency of the anisotropic solutions $u_1^\epsilon, u_3^\epsilon,$ $p^\epsilon,$ $c^\epsilon$ as the $\epsilon$ parameter decreases step by step. We remind that we are using a simplified domain filled with water: we use no-slip boundary conditions on the lateral boundaries and at the bottom of the domain, while on the top we consider the effect of wind traction. We finish each image sequence by inserting the respective hydrostatic solution function as the last graph. Finally for completeness we also include a table for each function that contains the numerical $L^2$ norm values of the difference between the anisotropic and hydrostatic solutions. We emphasise that we work in finite element spaces of different degrees, thus these differences are not expected to vanish completely.
+In the following we consider the tendency of the anisotropic solutions $u_1^\epsilon, u_3^\epsilon,$ $p^\epsilon,$ $c^\epsilon$ as the $\epsilon$ parameter decreases step by step. We finish each image sequence by inserting the respective hydrostatic solution function as the last graph. Finally for completeness we also include a table for each function that contains the numerical $L^2$ norm values of the difference between the anisotropic and hydrostatic solutions. We emphasise that we work in finite element spaces of different degrees, thus these differences are not expected to vanish completely.
 
 \subsubsection{The tendency of the pressure solution}
 
