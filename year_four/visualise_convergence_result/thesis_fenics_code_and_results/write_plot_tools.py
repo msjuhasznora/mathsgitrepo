@@ -34,9 +34,8 @@ def writedifference(degree_anis, degree_hydr, resultsfolder):
     np.savetxt(resultsfolder + "anis_and_hydr_difference_norm_u1_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", list_container.anis_and_hydr_difference_norm_u1_values)
     np.savetxt(resultsfolder + "anis_and_hydr_difference_norm_p_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", list_container.anis_and_hydr_difference_norm_p_values)
     np.savetxt(resultsfolder + "anis_and_hydr_difference_norm_c_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", list_container.anis_and_hydr_difference_norm_c_values)
-
-
-def plot_error_values(resultsfolder, problem_data):
+    
+def write_test_error_values(resultsfolder, problem_data):
 
     os.mkdir(resultsfolder + "log_errorvalues" + str(problem_data.id))
     os.mkdir(resultsfolder + "errorvalues" + str(problem_data.id))
@@ -62,7 +61,14 @@ def plot_error_values(resultsfolder, problem_data):
     np.savetxt(resultsfolder + "eocplots" + str(problem_data.id) + "/L2_p_eoc_problemdata_" + str(problem_data.id) + ".txt", list_container.eocvalues_L2_p)
     np.savetxt(resultsfolder + "eocplots" + str(problem_data.id) + "/L2_c_eoc_problemdata_" + str(problem_data.id) + ".txt", list_container.eocvalues_L2_c)
 
+
+def plot_error_values(resultsfolder, problem_data):
+
+    write_test_error_values(resultsfolder, problem_data)
+
     if problem_data.id == 4:
+    
+        plt.rc('legend', fontsize = 10)
     
         # L2 ERRORVALUES
     
@@ -120,8 +126,9 @@ def plot_error_values(resultsfolder, problem_data):
         
     else :
     
+        plt.rc('legend', fontsize = 18)
+    
         line = plt.scatter(list_container.nxvalues, list_container.errorvalues_H1_u1, color = "blue")
-        plt.legend(fontsize = 20)
         plt.legend((line,), ('horizontal velocity',))
         plt.title("Testcase " + str(problem_data.id), fontsize = 20)
         plt.xlabel("The nx parameter in mesh(nx, nx)", fontsize = 20)
@@ -135,7 +142,6 @@ def plot_error_values(resultsfolder, problem_data):
         plt.clf()
 
         line = plt.scatter(list_container.nxvalues, list_container.errorvalues_H1_u3, color = "lightgreen")
-        plt.legend(fontsize = 20)
         plt.legend((line,), ('vertical velocity',))
         plt.title("Testcase " + str(problem_data.id), fontsize = 20)
         plt.xlabel("The nx parameter in mesh(nx, nx)", fontsize = 20)
@@ -149,7 +155,6 @@ def plot_error_values(resultsfolder, problem_data):
         plt.clf()
 
         line = plt.scatter(list_container.nxvalues, list_container.errorvalues_H1_p, color = "coral")
-        plt.legend(fontsize = 20)
         plt.legend((line,), ('pressure',))
         plt.title("Testcase " + str(problem_data.id), fontsize = 20)
         plt.xlabel("The nx parameter in mesh(nx, nx)", fontsize = 20)
@@ -166,7 +171,6 @@ def plot_error_values(resultsfolder, problem_data):
         
             # H_1 error values without log
             line = plt.scatter(list_container.nxvalues, list_container.errorvalues_H1_c, color = "orange")
-            plt.legend(fontsize = 20)
             plt.legend((line,), ('concentration',))
             plt.title("Testcase " + str(problem_data.id), fontsize = 20)
             plt.xlabel("The nx parameter in mesh(nx, nx)", fontsize = 20)
@@ -183,7 +187,6 @@ def plot_error_values(resultsfolder, problem_data):
 
             # log(H_1 error values)
             line = plt.scatter(list_container.nxvalues, list_container.log_errorvalues_H1_c, color = "orange")
-            plt.legend(fontsize = 20)
             plt.legend((line,), ('concentration',))
             plt.title("Testcase " + str(problem_data.id), fontsize = 20)
             plt.xlabel("The nx parameter in mesh(nx, nx)", fontsize = 20)
@@ -195,6 +198,8 @@ def plot_error_values(resultsfolder, problem_data):
             plt.gca().yaxis.set_major_formatter(StrMethodFormatter('{x:,.1f}'))
             plt.savefig(resultsfolder + "log_errorvalues" + str(problem_data.id) + "/H1_c__id" + str(problem_data.id) + ".pdf")
             plt.clf()
+            
+            plt.rc('legend', fontsize = 16)
             
             # EOC values for c
             line, = plt.plot(list_container.eoc_nxvalues, list_container.eocvalues_L2_c, '-o', color = "orange")
