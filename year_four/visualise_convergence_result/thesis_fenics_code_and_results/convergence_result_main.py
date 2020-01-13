@@ -135,7 +135,7 @@ if (doErrorCalc):
             upc_sol_anis_eps = helper_functions.solve_on_refined_domain("anisotropic", resultsfolder, problem_data, nx, eps, vertical_velocity_degree_anis, foldermarker)
             error_next = helper_functions.calculate_errorvalues(problem_data, upc_sol_anis_eps, nx)
             h_next = (1/nx)*sqrt(2)
-            if nx > 2 ** 3:
+            if nx > 2 ** nx_exp:
                 list_container.eocvalues.append(nx)
                 list_container.eoc_nxvalues.append(nx)
             
