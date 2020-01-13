@@ -78,6 +78,7 @@ This thesis is composed by three chapters, and our original results and work are
 \end{itemize}
 
 Concerning the future improvement of the results of this work, one of the most obvious directions is the inclusion of the temperature function and to investigate the behaviour of the extended system we obtain (considering the additional dependences). Pollution concentration and temperature are distinguished by a fundamental structural difference from the viewpoint of the system: the equation expressing hydrostatic pressure does involve the temperature function, while it is independent from the pollution concentration. This feature makes sure that adding the temperature is a significant novelty in the model. Another direction to expand our results is the field of computational fluid dynamics --- we are committed to explore some of the many upgrade ideas regarding the FEniCS code developed for visualisation purposes. The investigation of the "collapsing" phenomena taking place for very small $\epsilon$ values is one of the most intriguing topics in this direction. Further improvement possibilities include increasing the number of dimensions, introducing time dependence and experimenting with adaptation techniques.
+\smallskip
 
 The research leading to these results has received funding from the European Union's Horizon 2020 Research and Innovation Programme under the Marie Sklodowska-Curie Grant Agreement No 642768 (Project Name: ModCompShock).
 
@@ -1478,8 +1479,16 @@ By "hydrostatic model" and "hydrostatic solutions" in the following we understan
 
 Before we focus on the tendency of the solutions and the convergence phenomena itself, here we firstly dedicate a few words to the natural meaning of the functions. In order to have a clear idea of the physical process we obtain as a result, let us consider the following three graphs describing the behaviour of the velocity functions. We remind that we are using a simplified domain filled with water: we use no-slip boundary conditions on the lateral boundaries and at the bottom of the domain, while on the top we consider the effect of wind traction.
 
-The background colour of Figure \ref{background_colour_magnitude} shows the absolute value of the 2D hydrostatic velocity vector, the arrows are oriented w.r.t the solution.
-The result of \texttt{shallow\_domain\_solver.run("hydrostatic", ...)} is thus showing us that a circular fluid motion is formed in the solution flow, and a small, central subdomain of the water body is at rest. This corresponds to our expectations considering the physical reality of the process, i.e. the force that the wind traction exerts on the system from above, and the no-slip boundary conditions we defined on the lateral and bottom boundaries.
+We will use the Stream Tracer and Glyphs filters of ParaView to understand the fluid motion better. Stream Tracer gives a set of continuous lines that go through the data set following the vector field, and it is more of a rigorous mathematical construction (and thus more costly), while Glyphs is a rendering feature, and it provides a geometry displayed one some points of the dataset. The concept of Glyphs is quite generic, its definition can be modified (oriented and scaled) following the data at the corresponding point. We will set this latter filter for each point to be an arrow oriented as the velocity vector, with a norm proportional it. In Figure \ref{streamlines} the result of Stream Tracer shows that the fluid particles follow "almost circular" courses (note that the individual paths are not closed).
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=5.4in]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder_new/velocity_hydr/streamlines}
+  \caption{Velocity streamlines obtained with Stream Tracer}
+  \label{streamlines}
+\end{figure}
+
+To obtain more information, we apply the tools provided by the Glyphs filter. The background colour of Figure \ref{background_colour_magnitude} shows the absolute value of the 2D hydrostatic velocity vector, the arrows are oriented with respect to the solution. The result of applying Glyphs to the output of our solver (\texttt{shallow\_domain\_solver.run("hydrostatic", ...)}) is showing us the direction of the circular fluid motion, moreover a small, central subdomain of the water body is visibly at rest. This corresponds to our expectations considering the physical reality of the process, i.e. the force that the wind traction exerts on the system from above, and the no-slip boundary conditions we defined on the lateral and bottom boundaries.
 
 \begin{figure}[H]
   \centering
@@ -1488,7 +1497,7 @@ The result of \texttt{shallow\_domain\_solver.run("hydrostatic", ...)} is thus s
   \label{background_colour_magnitude}
 \end{figure}
 
-In Figure \ref{background_colour_y} and Figure \ref{background_colour_x} the background colours are set to the horizontal and vertical velocity values, respectively. The glyph arrows generated by means of Paraview are still directed according to the velocity vector itself.
+In Figure \ref{background_colour_y} the background colour is set to the horizontal velocity values. The glyph arrows generated by means of Paraview are still directed according to the velocity vector itself.
 
 \begin{figure}[H]
   \centering
@@ -1498,15 +1507,6 @@ In Figure \ref{background_colour_y} and Figure \ref{background_colour_x} the bac
 \end{figure}
 
 The top red background colour of Figure \ref{background_colour_y} represents the primary result of the wind force, namely that the water close to the surface starts to move parallel to the air flow, while the $y$-direction coloured large arrows along the lateral boundaries depict the secondary consequences of this force: relatively strong vertical water currents are created in these areas.
-
-Finally, Figure \ref{background_colour_x} shows the same phenomena with the opposite colouring technique.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=5.4in]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder_new/velocity_hydr/velocity_hydr__degree1__coloring_x}
-  \caption{Glyph vector colouring w.r.t the $x$ coordinate}
-  \label{background_colour_x}
-\end{figure}
 
 Now that we understand the physical process better, we are ready to examine the convergence phenomena.
 
