@@ -1,4 +1,4 @@
-# apply_bcc.py: these functions are necessary because at the moment of definition of the problem_data objects, we don't yet know the mesh (as it is changing). So each time we need to apply the BCs when the mesh is known in the given loop.
+# apply_bcc.py: these functions are necessary because at the moment of definition of the problem_data objects, we don't yet know the mesh (as it is changing). So each time we need to apply the BCs when the mesh is known in the given loop. a technical interest: while the BCs itself remain the same within a problem, they have to be redefined as the function space changes, since the mesh changes.
 
 # *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- *** --- #
 
