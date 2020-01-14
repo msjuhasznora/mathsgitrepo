@@ -1,10 +1,10 @@
+from matplotlib.ticker import StrMethodFormatter
+import matplotlib.pyplot as plt
+from global_constants import *
 import list_container
 from dolfin import *
-import matplotlib.pyplot as plt
-from matplotlib.ticker import StrMethodFormatter
 import numpy as np
 import os
-from global_constants import *
 
 def hydr_info(upc_sol_hydr, vertical_velocity_degree):
 

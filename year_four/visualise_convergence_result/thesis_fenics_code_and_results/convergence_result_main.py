@@ -74,7 +74,6 @@ if (doDegree1Anisopic):
     up_ = Function(VP)
     bcu = apply_bcc.boundaryconditions_u_p(pdd.problem_data0, VP)
     foldermarker = "_eps_conv"
-
     helper_functions.solve_epsilon_loop_basic(watertop_problemdata, VP, up_, vertical_velocity_degree_anis, default_mesh, bcu, foldermarker)
 
 
