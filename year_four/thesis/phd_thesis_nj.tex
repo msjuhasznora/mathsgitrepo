@@ -1464,7 +1464,7 @@ As we will see in the following section in detail, we are able to visualise and 
     \hline
     norm($u_1$) & norm($u_3$) & norm($p$) & norm($c$) \\
     \hline
-     36.756 & 29.176 & 126.228 & 12.488 \\
+     36.756 & 29.108 & 126.227 & 12.488 \\
     \hline
 \end{tabular}
 \end{center}
@@ -1570,10 +1570,14 @@ The numerical error norms (with respect to the hydrostatic solution) are the fol
     \hline
     1.000 & 161.766 & 138.317 \\
     0.5 & 134.327 & 83.035 \\
-    0.25 &128.400 & 52.245 \\   
+    0.25 &128.400 & 52.246 \\   
     0. 125 & 127.652 & 36.910 \\
-    ... & ... & ...  \\       
-    1.19 $\exp(-7)$ & 126.228 & 1.248 \\       
+    ... & ... & ...  \\
+    \textbf{0.0039} & 126.19 & \textbf{0.504} \\
+    0.00195 & 126.218 & 1.054 \\
+    0.000244 & 126.227 & 1.246 \\
+    ... & ... & ...  \\
+    1.19 $\exp(-7)$ & 126.227 & 1.249 \\       
     \hline
 \end{tabular}
 \end{center}
@@ -1613,7 +1617,11 @@ The anisotropic horizontal velocity functions do not display a particularly visi
     0.25 & 31.536 & 6.630 \\   
     0. 125 & 34.251& 3.471 \\
     ... & ... & ... \\
-    1.19 $\exp(-7)$ &36.756 & 0.042 \\       
+    \textbf{0.0039} & 36.739 & \textbf{0.014} \\
+    0.00195 & 36.752 & 0.0350 \\
+    0.000244 & 36.757 & 0.0421 \\
+    ... & ... & ... \\
+    1.19 $\exp(-7)$ &36.756 & 0.042 \\ 
     \hline
 \end{tabular}
 \end{center}
@@ -1702,12 +1710,13 @@ Note that as the anisotropic vertical velocity is in a degree $2$ space, the dif
     \hline
     $\epsilon$ & norm anis. $u_3$ & norm anis. ip. $u_3$ & norm ($u_3$ anis. ip. - $u_3$ hydr.)\\
     \hline
-    1.000 & 9.837 & 4.916 & 12.142 \\
-    0.5 & 17.784 & 8.889 & 10.144 \\
+    1.000 & 9.837 & 4.916 & 12.14 \\
+    0.5 & 17.78 & 8.89 & 10.14 \\
     0.25 & 22.924 & 11.456 & 8.465 \\    
-    0. 125 & 25.462 & 12.709 & 6.717 \\
+    0. 125 & 25.462 & 12.71 & 6.717 \\
+    \textbf{0.016} & 28.27 & 13.28 & \textbf{4.20} \\
     ... & ... & ... & ... \\    
-    1.19 $\exp(-7)$ & 29.176 & 13.199 & 4.474 \\        
+    1.19 $\exp(-7)$ & 29.1 & 13.058 & 4.51 \\        
     \hline
 \end{tabular}
 \end{center}
@@ -1801,8 +1810,13 @@ We conclude with the table containing the $L^2$ difference norms computed for th
     0.5 & 3.843 & 8.701 \\
     0.25 & 6.944 & 5.64 \\   
     0.031 & 11.6 & 0.962 \\
-    ... & ... & ...  \\       
-    0.0039 & 12.36 & 0.181 \\       
+    ... & ... & ...  \\
+    \textbf{0.0078} & 12.67 & \textbf{0.249} \\
+    0.0039 & 11.78 & 0.727 \\
+    0.00195 & 8.11 & 4.38 \\
+    0.000244 & 1.172 & 11.32 \\
+    ... & ... & ...  \\
+    1.19 $\exp(-7)$ & 5.7 $\exp(-4)$ & 12.5 \\
     \hline
 \end{tabular}
 \end{center}
