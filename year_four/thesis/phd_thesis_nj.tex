@@ -1403,28 +1403,37 @@ We focus our attention to a simplified scenario that still contains the fundamen
   \item Finally, in order to obtain better results, we take the same equations, but we use them as equations describing water flow. The convergence result is the same, the boundary conditions are slightly different, and using wind traction (represented by $\theta$ in the code) over the water surface helps to highlight the point of our result.
 \end{enumerate}
 
-Taking these ideas into account, we will use the Newton solver as the pseudo code below suggests:
+Taking these ideas into account, we have the following reduced system.
+
+EQ1
+EQ2
+div-free
+BCs
+
+This set of equations might seem over-simplified, but as we will see, the core problems within the system has remained unchanged, and in this new model we can focus our efforts on the main issues. One of the important differences between our theoretical result and its finite element implementation is the approach to the divergence-free condition. In Theorem \ref{} we worked with the weak form of the momentum equations, but we did take advantage of $\nabla \cdot \mathbf{u}^\epsilon = 0$ directly, and the number of test functions was equal to the space dimension. In computational fluid dynamics a widely used approach is to keep the pressure function in the calculations as well, and to consider an additional $q$ test function multiplying the divergence-free condition.
+Another crucial problem is the representation of the functions. In the the previous sections the phrase "as $\epsilon$ goes to zero" possessed a sense of continuity, which falls apart to several ranges in this numerical approach. Firstly, we can not seem to have one single finite element space for the entire phenomena. The $\epsilon > 0$ anisotropic case and the $\epsilon = 0$ limit case work well in spaces of different degrees --- while there is a smooth transition in the way $\epsilon$ approaches zero, the degree of the vertical velocity space changes from 2 to 1 as $\epsilon$ changes from a small positive value to zero. Secondly, the code works differently in cases when $\epsilon$ is, roughly speaking, excessively small and in cases when it is small, but not smaller than approximately $2^{-6} -- 2^{-8}.$
+
+Taking the weak form of the system above we arrive to:
 
 \texttt{
 \\
-F = inner(u, grad(u1)) * v1 + inner(grad(u1),grad(v1)) \\
+F\_anis = inner(u, grad(u1)) * v1 + inner(grad(u1),grad(v1)) \\
 + $\epsilon^2$*inner(u, grad(u3)) * v3 + $\epsilon^2$*inner(grad(u3),grad(v3)) \\
  - p * div(v)  + q * div(u)  - inner(theta, v) * ds(1), \\
 }
 
-and we apply
+Note that here, instead of $\texttt{u\_h}$ we denote the horizontal velocity by $\texttt{u1}$ to express that we use the dimension reduction idea for the horizontal velocity during the computations. We highlight the fact that in the definition above, \texttt{F} has an $\mathcal{O}(1)$ dependence on each coordinate function of the $\texttt{u}$ unknown solution.
+
+Defining the weak form and the finite element space for the limit model takes some considerations. If we use the classical setup of Taylor-Hood elements, namely, degree 2 space for velocity and degree 1 space for pressure, the scheme for $\epsilon = 0$ does not converge. Following the idea of \cite{danilov2002finite}, we introduce vertical velocity spaces of different degrees: for the anisotropic model we use a finite element space of degree $2$ for the vertical velocity, for the case of the hydrostatic scheme we use a degree $1$ space for the same variable (Horizontal velocities are represented by degree $2$ spaces in both cases.). We highlight that using a degree 1 velocity space is usually an unstable construction for the Navier-Stokes equation, and even though in this limit case we do decide to use it, we counterbalance this choice with the addition of a stabilising term in the weak form, namely $\texttt{p.dx(1) * q.dx(1)}$ representing the weak form of the hydrostatic pressure.
 
 \texttt{
 \\
-problem = NonlinearVariationalProblem(F, up\_, bcu, J)\\
-solver  = NonlinearVariationalSolver(problem) \\
+F\_hydr = inner(u, grad(u1)) * v1 + inner(grad(u1),grad(v1)) \\
++ $\epsilon^2$*inner(u, grad(u3)) * v3 + $\epsilon^2$*inner(grad(u3),grad(v3)) \\
++ p.dx(1) * q.dx(1) - p * div(v)  + q * div(u)  - inner(theta, v) * ds(1), \\
 }
 
-to the \texttt{F} scheme. Note that here, instead of $\texttt{u\_h}$ we denote the horizontal velocity by $\texttt{u1}$ to express that we use the dimension reduction idea for the horizontal velocity during the computations. We highlight the fact that in the definition above, \texttt{F} has an $\mathcal{O}(1)$ dependence on each coordinate function of the $\texttt{u}$ unknown solution.
-
-Analogously, for the hydrostatic model we use a similar scheme where the $\epsilon$-- including terms are missing.
-
-The most important difference is that while for the anisotropic model we use a finite element space of degree $2$ for the vertical velocity, for the case of the hydrostatic scheme we use a degree $1$ space for the same variable, following the idea of \cite{danilov2002finite}. Horizontal velocities are represented by degree $2$ spaces in both cases. In the following the notation $(i,j)$ stands for
+In the following the notation $(i,j)$ stands for
 $$\text{(degree of horizontal velocity space, degree of vertical velocity space).}$$
 This phenomena is yet to be investigated further, but we have observed that the hydrostatic scheme, which contains significantly less information about the vertical velocity, does not converge in a degree $(2,2)$ space (unless the hydrostatic Newton solver is initialised with the anisotropic solution obtained for very small $\epsilon$, with slightly less strict error tolerance values). On the other hand, a degree $(2,1)$ velocity space fails to work for the anisotropic scheme. Since the degrees of the respective velocity spaces are of key importance, we summarise and extend the previous statements; in particular
 
@@ -1436,6 +1445,16 @@ This phenomena is yet to be investigated further, but we have observed that the 
 \end{itemize}
 
 The above pieces of information give a good idea of how significant the presence of the $\epsilon$ parameter is to the model's finite element representation, and specifically, of how sensitive the "in-between" case is where $\epsilon$ is already small enough so that we can not benefit from the stabilising effect of the full-information model including the gradient of the vertical velocity, but at the same time $\epsilon$ is still strictly positive, and thus the advantage of a simpler pressure function is also unavailable. Somewhere in this in-between phase the finite element matrix becomes badly conditioned, but it is still not perfectly clear where exactly our scheme fails as $\epsilon$ reaches $\mathcal{O}(\exp{-7}).$
+
+Once the function spaces and the variational forms are defined, we apply the nonlinear Newton solver
+
+\texttt{
+\\
+problem = NonlinearVariationalProblem(F, up\_, bcu, J)\\
+solver  = NonlinearVariationalSolver(problem) \\
+}
+
+to the respective \texttt{F} scheme.
 
 As we will see in the following section in detail, we are able to visualise and confirm the convergence of the weak solutions for the following two main cases.
 
