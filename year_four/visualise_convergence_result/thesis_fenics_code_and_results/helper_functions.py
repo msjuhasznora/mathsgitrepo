@@ -1,16 +1,45 @@
 from dolfin import *
 from math import log
 
+import problem_data_definitions as pdd
+import write_plot_tools
 import list_container
 import apply_bcc
 import shallow_domain_solver
+from global_constants import *
 
-def solve_on_refined_domain(a_h_switch, resultsfolder, problem_data, nx, eps, vertical_velocity_degree_anis, foldermarker):
+def solve_epsilon_loop_basic(VP, up_, vertical_velocity_degree_anis, mesh, bcu, foldermarker):
+
+    eps = 1.0
+
+    while eps > epsilon_lower_limit:
+
+        shallow_domain_solver.run("anisotropic", VP, up_, eps, vertical_velocity_degree_anis, mesh, bcu, foldermarker, pdd.problem_data0)
+        eps = eps / 2.0
+
+def solve_epsilon_loop_plus_info(VP, up_, vertical_velocity_degree_anis, mesh, bcu, foldermarker, upc_sol_hydr, VPH, vertical_velocity_degree_hydr):
+
+    eps = 1.0
+
+    list_container.init_anis_hydr_lists()
+
+    while eps > epsilon_lower_limit:
+
+        upc_sol_anis_eps = shallow_domain_solver.run("anisotropic", VP, up_, eps, vertical_velocity_degree_anis, mesh, bcu, foldermarker, pdd.problem_data0)
+        up_sol_anis_eps = upc_sol_anis_eps[0]
+        write_plot_tools.difference_info(eps, upc_sol_anis_eps, VP, upc_sol_hydr, VPH, verbose)
+        eps = eps / 2.0
+
+    write_plot_tools.writedifference(vertical_velocity_degree_anis, vertical_velocity_degree_hydr)
+    
+    return up_sol_anis_eps
+
+def solve_on_refined_domain(a_h_switch, problem_data, nx, eps, vertical_velocity_degree_anis, foldermarker):
     mesh_h = UnitSquareMesh(nx, nx)
     VP = VP_functionspace(mesh_h, vertical_velocity_degree_anis)
     up_ = Function(VP)
     bcu = apply_bcc.boundaryconditions_u_p(problem_data, VP)
-    upc_sol_anis_eps = shallow_domain_solver.run(a_h_switch, resultsfolder, VP, up_, eps, vertical_velocity_degree_anis, mesh_h, bcu, foldermarker, problem_data)
+    upc_sol_anis_eps = shallow_domain_solver.run(a_h_switch, VP, up_, eps, vertical_velocity_degree_anis, mesh_h, bcu, foldermarker, problem_data)
     return upc_sol_anis_eps
 
 # create a functionspace ((V_h, V_v), P) with given degree of V_v
@@ -22,7 +51,7 @@ def VP_functionspace(mesh, v_vert_deg):
     VP = FunctionSpace(mesh, V * P)
     return VP
 
-def plot_exact_solutions(resultsfolder, nx, problem_data, foldermarker):
+def plot_exact_solutions(nx, problem_data, foldermarker):
 
     mesh_h = UnitSquareMesh(nx, nx)
     W = FunctionSpace(mesh_h, 'Lagrange', 2)

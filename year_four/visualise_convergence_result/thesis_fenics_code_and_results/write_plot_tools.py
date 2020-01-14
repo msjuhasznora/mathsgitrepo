@@ -4,8 +4,9 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import StrMethodFormatter
 import numpy as np
 import os
+from global_constants import *
 
-def hydr_info(upc_sol_hydr, resultsfolder, vertical_velocity_degree):
+def hydr_info(upc_sol_hydr, vertical_velocity_degree):
 
     up = upc_sol_hydr[0]
     c = upc_sol_hydr[1]
@@ -20,7 +21,7 @@ def hydr_info(upc_sol_hydr, resultsfolder, vertical_velocity_degree):
     np.savetxt(resultsfolder + "hydrostatic_values_degree_" + str(vertical_velocity_degree)+ ".txt", hydrostatic_values)
     
 
-def writedifference(degree_anis, degree_hydr, resultsfolder):
+def writedifference(degree_anis, degree_hydr):
     np.savetxt(resultsfolder + "anisotropic_norm_u1_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", list_container.anisotropic_norm_u1_values)
     np.savetxt(resultsfolder + "anisotropic_norm_u3_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", list_container.anisotropic_norm_u3_values)
     np.savetxt(resultsfolder + "anisotropic_norm_p_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", list_container.anisotropic_norm_p_values)
@@ -35,7 +36,7 @@ def writedifference(degree_anis, degree_hydr, resultsfolder):
     np.savetxt(resultsfolder + "anis_and_hydr_difference_norm_p_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", list_container.anis_and_hydr_difference_norm_p_values)
     np.savetxt(resultsfolder + "anis_and_hydr_difference_norm_c_values_degree_" + str(degree_anis) + "_" + str(degree_hydr) + ".txt", list_container.anis_and_hydr_difference_norm_c_values)
     
-def write_test_error_values(resultsfolder, problem_data):
+def write_test_error_values(problem_data):
 
     os.mkdir(resultsfolder + "log_errorvalues" + str(problem_data.id))
     os.mkdir(resultsfolder + "errorvalues" + str(problem_data.id))
@@ -62,9 +63,9 @@ def write_test_error_values(resultsfolder, problem_data):
     np.savetxt(resultsfolder + "eocplots" + str(problem_data.id) + "/L2_c_eoc_problemdata_" + str(problem_data.id) + ".txt", list_container.eocvalues_L2_c)
 
 
-def plot_error_values(resultsfolder, problem_data):
+def plot_error_values(problem_data):
 
-    write_test_error_values(resultsfolder, problem_data)
+    write_test_error_values(problem_data)
 
     if problem_data.id == 4:
     

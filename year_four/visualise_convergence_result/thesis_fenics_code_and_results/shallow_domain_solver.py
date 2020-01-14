@@ -1,10 +1,11 @@
 from dolfin import *
 import numpy as np
 
+from global_constants import *
 import boundary_domains
 import apply_bcc
 
-def run(a_h_switch, resultsfolder, VP, up_, eps, vertical_velocity_degree, mesh_h, bcu, foldermarker, problem_data):
+def run(a_h_switch, VP, up_, eps, vertical_velocity_degree, mesh_h, bcu, foldermarker, problem_data):
 
     nr_cells = mesh_h.num_cells()
 

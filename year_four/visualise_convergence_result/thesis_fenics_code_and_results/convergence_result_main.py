@@ -1,37 +1,23 @@
 from dolfin import *
-from math import log
 
 import matplotlib.pyplot as plt
+from math import log
 import numpy as np
-import datetime
-import argparse
 import os
 
 import problem_data_definitions as pdd
+from global_constants import *
+import shallow_domain_solver
 import write_plot_tools
 import helper_functions
-import apply_bcc
 import list_container
-import shallow_domain_solver
-
-epsilon_lower_limit = 1.0e-07 #up 1.0e-07 c 5e-04
-
-timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
-
-parser = argparse.ArgumentParser()
-parser.add_argument("-r", "--resultfolder", default="current_results_H_V", help="default: results, custom: name of results folder")
-xargs = parser.parse_args(None)
-resultsfolder = str(timestamp) + xargs.resultfolder + "/"
-
-verbose = True
+import apply_bcc
 
 doHydrostatic = True
 doAnisotropicLoop = True
 doInitGuessHydro = True
 doDegree1Anisopic = True
 doErrorCalc = True
-
-mesh = UnitSquareMesh(30, 30)
    
 # **********************************************
 # *** Define hydrostatic variational problem ***
@@ -40,13 +26,13 @@ mesh = UnitSquareMesh(30, 30)
 if (doHydrostatic):
     # hydrostatic model solved without initial guess for degree 1 vertical velocity space
     vertical_velocity_degree_hydr = 1
-    VPH = helper_functions.VP_functionspace(mesh, vertical_velocity_degree_hydr)
+    VPH = helper_functions.VP_functionspace(default_mesh, vertical_velocity_degree_hydr)
     up_ = Function(VPH) #initial guess for the Newton solver if filled, otherwise blank and start by default
     bcu = apply_bcc.boundaryconditions_u_p(pdd.problem_data0, VPH)
     eps = Constant(0.0)
     foldermarker = "_hydr"
-    upc_sol_hydr = shallow_domain_solver.run("hydrostatic", resultsfolder, VPH, up_, eps, vertical_velocity_degree_hydr, mesh, bcu, foldermarker, pdd.problem_data0)
-    write_plot_tools.hydr_info(upc_sol_hydr, resultsfolder, vertical_velocity_degree_hydr)
+    upc_sol_hydr = shallow_domain_solver.run("hydrostatic", VPH, up_, eps, vertical_velocity_degree_hydr, default_mesh, bcu, foldermarker, pdd.problem_data0)
+    write_plot_tools.hydr_info(upc_sol_hydr, vertical_velocity_degree_hydr)
 
 
 # **********************************************
@@ -54,25 +40,13 @@ if (doHydrostatic):
 # **********************************************
 
 if (doAnisotropicLoop):
-    eps = 1.0
     vertical_velocity_degree_anis = 2
-    VP = helper_functions.VP_functionspace(mesh, vertical_velocity_degree_anis)
+    VP = helper_functions.VP_functionspace(default_mesh, vertical_velocity_degree_anis)
     up_ = Function(VP)
     up_sol_anis_eps = Function(VP)
-    
     bcu = apply_bcc.boundaryconditions_u_p(pdd.problem_data0, VP)
     foldermarker = "_eps_conv"
-    
-    list_container.init_anis_hydr_lists()
-
-    while eps > epsilon_lower_limit:
-    
-        upc_sol_anis_eps = shallow_domain_solver.run("anisotropic", resultsfolder, VP, up_, eps, vertical_velocity_degree_anis, mesh, bcu, foldermarker, pdd.problem_data0)
-        up_sol_anis_eps = upc_sol_anis_eps[0]
-        write_plot_tools.difference_info(eps, upc_sol_anis_eps, VP, upc_sol_hydr, VPH, verbose)
-        eps = eps / 2.0
-    
-    write_plot_tools.writedifference(vertical_velocity_degree_anis, vertical_velocity_degree_hydr, resultsfolder)
+    up_sol_anis_eps = helper_functions.solve_epsilon_loop_plus_info(VP, up_, vertical_velocity_degree_anis, default_mesh, bcu, foldermarker, upc_sol_hydr, VPH, vertical_velocity_degree_hydr)
 
 
 # **********************************************
@@ -84,8 +58,8 @@ if (doAnisotropicLoop and doInitGuessHydro):
     vertical_velocity_degree_hydr = 2
     eps = Constant(0.0)
     foldermarker = "_hydr"
-    upc_sol_hydr = shallow_domain_solver.run("hydrostatic", resultsfolder, VP, up_sol_anis_eps, eps, vertical_velocity_degree_hydr, mesh, bcu, foldermarker, pdd.problem_data0)
-    write_plot_tools.hydr_info(upc_sol_hydr, resultsfolder, vertical_velocity_degree_hydr)
+    upc_sol_hydr = shallow_domain_solver.run("hydrostatic", VP, up_sol_anis_eps, eps, vertical_velocity_degree_hydr, default_mesh, bcu, foldermarker, pdd.problem_data0)
+    write_plot_tools.hydr_info(upc_sol_hydr, vertical_velocity_degree_hydr)
 
 
 # **************************************************************
@@ -93,17 +67,13 @@ if (doAnisotropicLoop and doInitGuessHydro):
 # **************************************************************
 
 if (doDegree1Anisopic):
-    eps = 1.0
     vertical_velocity_degree_anis = 1
-    VP = helper_functions.VP_functionspace(mesh, vertical_velocity_degree_anis)
+    VP = helper_functions.VP_functionspace(default_mesh, vertical_velocity_degree_anis)
     up_ = Function(VP)
     bcu = apply_bcc.boundaryconditions_u_p(pdd.problem_data0, VP)
     foldermarker = "_eps_conv"
 
-    while eps > epsilon_lower_limit:
-    
-        shallow_domain_solver.run("anisotropic", resultsfolder, VP, up_, eps, vertical_velocity_degree_anis, mesh, bcu, foldermarker, pdd.problem_data0)
-        eps = eps / 2.0
+    helper_functions.solve_epsilon_loop_basic(VP, up_, vertical_velocity_degree_anis, default_mesh, bcu, foldermarker)
 
 
 # **************************************************************
@@ -132,7 +102,7 @@ if (doErrorCalc):
         
         while nx < 2 ** 8:
     
-            upc_sol_anis_eps = helper_functions.solve_on_refined_domain("anisotropic", resultsfolder, problem_data, nx, eps, vertical_velocity_degree_anis, foldermarker)
+            upc_sol_anis_eps = helper_functions.solve_on_refined_domain("anisotropic", problem_data, nx, eps, vertical_velocity_degree_anis, foldermarker)
             error_next = helper_functions.calculate_errorvalues(problem_data, upc_sol_anis_eps, nx)
             h_next = (1/nx)*sqrt(2)
             if nx > 2 ** nx_exp:
@@ -157,5 +127,5 @@ if (doErrorCalc):
         np.savetxt(resultsfolder + "eocvalues_problemdata_" + str(problem_data.id) + ".txt", list_container.eocvalues)
         np.savetxt(resultsfolder + "errorvalues_problemdata_" + str(problem_data.id) + ".txt", list_container.errorvalues)
         
-        write_plot_tools.plot_error_values(resultsfolder, problem_data)
-        helper_functions.plot_exact_solutions(resultsfolder, nx, problem_data, foldermarker)
+        write_plot_tools.plot_error_values(problem_data)
+        helper_functions.plot_exact_solutions(nx, problem_data, foldermarker)
