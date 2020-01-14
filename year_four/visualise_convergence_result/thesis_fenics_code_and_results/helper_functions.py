@@ -8,16 +8,16 @@ import apply_bcc
 import shallow_domain_solver
 from global_constants import *
 
-def solve_epsilon_loop_basic(VP, up_, vertical_velocity_degree_anis, mesh, bcu, foldermarker):
+def solve_epsilon_loop_basic(problemdata, VP, up_, vertical_velocity_degree_anis, mesh, bcu, foldermarker):
 
     eps = 1.0
 
     while eps > epsilon_lower_limit:
 
-        shallow_domain_solver.run("anisotropic", VP, up_, eps, vertical_velocity_degree_anis, mesh, bcu, foldermarker, pdd.problem_data0)
+        shallow_domain_solver.run("anisotropic", VP, up_, eps, vertical_velocity_degree_anis, mesh, bcu, foldermarker, problemdata)
         eps = eps / 2.0
 
-def solve_epsilon_loop_plus_info(VP, up_, vertical_velocity_degree_anis, mesh, bcu, foldermarker, upc_sol_hydr, VPH, vertical_velocity_degree_hydr):
+def solve_epsilon_loop_plus_info(problemdata, VP, up_, vertical_velocity_degree_anis, mesh, bcu, foldermarker, upc_sol_hydr, VPH, vertical_velocity_degree_hydr):
 
     eps = 1.0
 
@@ -25,7 +25,7 @@ def solve_epsilon_loop_plus_info(VP, up_, vertical_velocity_degree_anis, mesh, b
 
     while eps > epsilon_lower_limit:
 
-        upc_sol_anis_eps = shallow_domain_solver.run("anisotropic", VP, up_, eps, vertical_velocity_degree_anis, mesh, bcu, foldermarker, pdd.problem_data0)
+        upc_sol_anis_eps = shallow_domain_solver.run("anisotropic", VP, up_, eps, vertical_velocity_degree_anis, mesh, bcu, foldermarker, problemdata)
         up_sol_anis_eps = upc_sol_anis_eps[0]
         write_plot_tools.difference_info(eps, upc_sol_anis_eps, VP, upc_sol_hydr, VPH, verbose)
         eps = eps / 2.0

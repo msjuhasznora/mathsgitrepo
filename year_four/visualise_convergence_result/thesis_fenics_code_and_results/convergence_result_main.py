@@ -18,6 +18,8 @@ doAnisotropicLoop = True
 doInitGuessHydro = True
 doDegree1Anisopic = True
 doErrorCalc = True
+
+watertop_problemdata = pdd.problem_data0
    
 # **********************************************
 # *** Define hydrostatic variational problem ***
@@ -31,7 +33,7 @@ if (doHydrostatic):
     bcu = apply_bcc.boundaryconditions_u_p(pdd.problem_data0, VPH)
     eps = Constant(0.0)
     foldermarker = "_hydr"
-    upc_sol_hydr = shallow_domain_solver.run("hydrostatic", VPH, up_, eps, vertical_velocity_degree_hydr, default_mesh, bcu, foldermarker, pdd.problem_data0)
+    upc_sol_hydr = shallow_domain_solver.run("hydrostatic", VPH, up_, eps, vertical_velocity_degree_hydr, default_mesh, bcu, foldermarker, watertop_problemdata)
     write_plot_tools.hydr_info(upc_sol_hydr, vertical_velocity_degree_hydr)
 
 
@@ -46,7 +48,7 @@ if (doAnisotropicLoop):
     up_sol_anis_eps = Function(VP)
     bcu = apply_bcc.boundaryconditions_u_p(pdd.problem_data0, VP)
     foldermarker = "_eps_conv"
-    up_sol_anis_eps = helper_functions.solve_epsilon_loop_plus_info(VP, up_, vertical_velocity_degree_anis, default_mesh, bcu, foldermarker, upc_sol_hydr, VPH, vertical_velocity_degree_hydr)
+    up_sol_anis_eps = helper_functions.solve_epsilon_loop_plus_info(watertop_problemdata, VP, up_, vertical_velocity_degree_anis, default_mesh, bcu, foldermarker, upc_sol_hydr, VPH, vertical_velocity_degree_hydr)
 
 
 # **********************************************
@@ -58,7 +60,7 @@ if (doAnisotropicLoop and doInitGuessHydro):
     vertical_velocity_degree_hydr = 2
     eps = Constant(0.0)
     foldermarker = "_hydr"
-    upc_sol_hydr = shallow_domain_solver.run("hydrostatic", VP, up_sol_anis_eps, eps, vertical_velocity_degree_hydr, default_mesh, bcu, foldermarker, pdd.problem_data0)
+    upc_sol_hydr = shallow_domain_solver.run("hydrostatic", VP, up_sol_anis_eps, eps, vertical_velocity_degree_hydr, default_mesh, bcu, foldermarker, watertop_problemdata)
     write_plot_tools.hydr_info(upc_sol_hydr, vertical_velocity_degree_hydr)
 
 
@@ -73,7 +75,7 @@ if (doDegree1Anisopic):
     bcu = apply_bcc.boundaryconditions_u_p(pdd.problem_data0, VP)
     foldermarker = "_eps_conv"
 
-    helper_functions.solve_epsilon_loop_basic(VP, up_, vertical_velocity_degree_anis, default_mesh, bcu, foldermarker)
+    helper_functions.solve_epsilon_loop_basic(watertop_problemdata, VP, up_, vertical_velocity_degree_anis, default_mesh, bcu, foldermarker)
 
 
 # **************************************************************
