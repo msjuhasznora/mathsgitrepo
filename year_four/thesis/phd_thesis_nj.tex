@@ -1510,7 +1510,9 @@ The top red background colour of Figure \ref{background_colour_y} represents the
 
 Now that we understand the physical process better, we are ready to examine the convergence phenomena.
 
-In the following we consider the tendency of the anisotropic solutions $u_1^\epsilon, u_3^\epsilon,$ $p^\epsilon,$ $c^\epsilon$ as the $\epsilon$ parameter decreases step by step. We finish each image sequence by inserting the respective hydrostatic solution function as the last graph. Finally for completeness we also include a table for each function that contains the numerical $L^2$ norm values of the difference between the anisotropic and hydrostatic solutions. We emphasise that we work in finite element spaces of different degrees, thus these differences are not expected to vanish completely.
+In the following we consider the tendency of the anisotropic solutions $u_1^\epsilon, u_3^\epsilon,$ $p^\epsilon,$ $c^\epsilon$ as the $\epsilon$ parameter decreases step by step. We finish each image sequence by inserting the respective hydrostatic solution function as the last graph. For completeness we also include a table for each function that contains the numerical $L^2$ norm values of the difference between the anisotropic and hydrostatic solutions. We emphasise that we work in finite element spaces of different degrees, thus these differences are not expected to vanish completely.
+
+As we will see, all tables are characterised by a special feature related to the previously mentioned "in-between" phase: here the $\epsilon$ parameter enters into range where it is still positive, but in some sense becomes "too small". For all four functions we examine this happens at a relatively specific threshold level, namely after the 7th -- 9th iteration of dividing $\epsilon$ by 2 (the total number of iterations is $24$). The hydrostatic and anisotropic solutions are the closest in norm when the scale of $\epsilon$ reaches this technical limit magnitude. For the case of the anisotropic velocity and pressure functions we experience only a slight divergence when we decrease $\epsilon$ beyond this level, however the $(\texttt{u\_eps, u})$ and $(\texttt{p\_eps, p})$ solutions apparently remain close to each other respectively even after this point and the difference remains overall small. The $\texttt{c\_eps}$ concentration solution results to be more unstable w.r.t. excessively small $\epsilon$ values, the reason for this might be the additional complexity of using the approximate delta function we use as a pollution source term.
 
 \subsubsection{The tendency of the pressure solution}
 
@@ -1559,7 +1561,7 @@ We begin by depicting the tendency of the anisotropic pressure functions. For th
 \end{minipage}
 \end{figure}
 
-The numerical error norms (with respect to the hydrostatic solution) are the following.
+The numerical error norms (with respect to the hydrostatic solution) are collected in the following table, the approximation for $\norm{p^\epsilon - p}_{L^2}$ is minimal in the 9th iteration, for $\epsilon = \frac{1}{2^8} \approx 0.0039.$
 
 \begin{table}[H]
 \caption{Differences for the pressure function}
@@ -1701,7 +1703,7 @@ Naturally, it is the case of the vertical velocity solutions where we really see
 \end{minipage}
 \end{figure}
 
-Note that as the anisotropic vertical velocity is in a degree $2$ space, the difference $\texttt{u3\_sol - u3\_hydr}$ simply does not make sense. We overcome this issue by interpolating the second-order anisotropic function in the first-order hydrostatic space. The numerical values we obtain are as follows.
+Note that as the anisotropic vertical velocity is in a degree $2$ space, the difference $\texttt{u3\_sol - u3\_hydr}$ simply does not make sense. We overcome this issue by interpolating the second-order anisotropic function in the first-order hydrostatic space. The numerical values we obtain are as follows, the norm of the difference function is minimal at $\epsilon = \frac{1}{2^6} \approx 0.016.$
 
 \begin{table}[H]
 \caption{Differences for the vertical velocity}
@@ -1724,7 +1726,7 @@ Note that as the anisotropic vertical velocity is in a degree $2$ space, the dif
 
 \subsubsection{The tendency of the concentration solution}
 
-Finally we observe that the anisotropic concentration solutions visibly approximate the hydrostatic function we obtained by using a point source.
+Finally we observe that as $\epsilon$ decreases from $1$ to $\frac{1}{2^7},$ the anisotropic concentration solutions visibly approximate the hydrostatic function we obtained by using a point source.
 
 \begin{figure}[H]
 \centering
@@ -1796,7 +1798,7 @@ Finally we observe that the anisotropic concentration solutions visibly approxim
 \end{minipage}
 \end{figure}
 
-We note that this rather visible tendency towards the hydrostatic solution holds only until $\epsilon$ reaches the $0.0039$ threshold value. As $\epsilon$ becomes smaller, beyond this level the solutions become physically unrealistic. The reason for this is presumably the $\epsilon^2$ term in the approximate delta function we apply in the anisotropic source term, but this phenomena is yet to be further investigated.
+We note that this rather visible tendency towards the hydrostatic solution holds only until $\epsilon$ reaches the $0.00390$ -- $0.00195$ threshold range. As $\epsilon$ becomes smaller, beyond this level the solutions "collapse" and they become closer and closer to the constant zero function. The reason for this is presumably the $\epsilon^2$ term in the approximate delta function we apply in the anisotropic source term, but this phenomena is yet to be further investigated.
 We conclude with the table containing the $L^2$ difference norms computed for the concentration function.
 
 \begin{table}[H]
