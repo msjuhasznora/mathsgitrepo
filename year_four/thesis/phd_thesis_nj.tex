@@ -1357,7 +1357,21 @@ Given $T > 0$, $U_0 \in H,$ and a source term $s = \delta$ or $s \in L^2(\Omega)
 %%% FENICS %%%
 \section{Visualisation of the convergence result by means of the finite element method}\label{visualizationFEM}
 
-In this final part of Chapter \ref{geophysicalchapter} we apply the finite element method to visualise the previously obtained weak convergence result of Theorem \ref{maintheorem_weak_GFC}. Specifically, we work with FEniCS, an open-source computing platform that is designed for solving PDEs using their variational form. In order to give an idea about the major challenges of expressing the theoretical result in the framework of numerical analysis, in Section \ref{translationfromtheorytonumerics_section} we begin by outlining some of the main standard approaches and highlighting their critical features with respect to the specific problem we are dealing with. The convergence results we obtained with FEniCS are collected in Section \ref{actualvisualisationsection}. Finally, Section \ref{codetestingsection} contains the description and outcome of four simple test cases we designed to examine the convergence of the numerical scheme.
+In this final part of Chapter \ref{geophysicalchapter} we apply the finite element method to visualise the previously obtained weak convergence result of Theorem \ref{maintheorem_weak_GFC}.
+
+The finite element method is a relatively new technique in numerical analysis and currently it is one of the most widely used computational approaches for obtaining approximate solutions to partial differential equations (\cite{jing-fem}). Instead of directly discretising the PDE itself (as for example in the case of the finite difference method), the first step of the finite element method is to introduce the variational form of the equation, and divide the domain into a (relatively big) number of subdomains called finite elements. On each element the solution function is approximated by a polynomial function, then the final solution on the complete domain is eventually given by piecing these individual, locally defined polynomials solutions together. In some sense this principle of the finite element method is similar to the practice of Fourier analysis where a $f \in H^1_0$ function can be represented as
+
+$$ f(x) = \sum_{n=1}^\infty f_j \sin(n \pi x) \approx \sum_{n=1}^N f_j \sin(n \pi x).$$
+
+The approximate solution takes the customary form
+
+$$ U (\mathbf{x}) = \sum_{j=1}^N c_j \phi_j(\mathbf{x}),$$
+
+where thus $U$ is a weighted blend of the basis functions $\phi_j,$ where these latter are defined a piecewise manner over subregions, and in our application they are chosen to be polynomials of low degree.
+
+The variational integral is then evaluated as a sum of contributions from each element, the result is an algebraic system for the finite-dimensional approximate solution. We highlight here that in this approach the calculated solution is known in the entire domain (unlike in the case of the finite difference method where the approximations are computed only in a set of points).
+
+There are several software packages designed to solve computational fluid dynamics problems, specifically we will work with FEniCS, an open-source computing platform that is designed for solving PDEs using their variational form. In order to give an idea about the major challenges of expressing the theoretical result in the framework of numerical analysis, in Section \ref{translationfromtheorytonumerics_section} we begin by outlining some of the main standard approaches and highlighting their critical features with respect to the specific problem we are dealing with. The convergence results we obtained with FEniCS are collected in Section \ref{actualvisualisationsection}. Finally, Section \ref{codetestingsection} contains the description and outcome of four simple test cases we designed to examine the convergence of the numerical scheme.
 
 For the moment being, the python scripts are available in a private github repository on \textit{https://github.com}, access can be granted via contacting the github user msjuhasznora.
 
@@ -1403,7 +1417,7 @@ We focus our attention to a simplified scenario that still contains the fundamen
   \item Finally, in order to obtain better results, we take the same equations, but we use them as equations describing water flow. The convergence result is the same, the boundary conditions are slightly different, and using wind traction (represented by $\theta$ in the code) over the water surface helps to highlight the point of our result.
 \end{enumerate}
 
-Taking these ideas into account, we have the following reduced anisotropic system for the velocity and pressure.
+Taking these ideas into account, we have the following reduced system for the velocity and pressure.
 
 \begin{equation} \label{fenics_strong_horizontal}
   \mathbf{\texttt{u}} \cdot \nabla \texttt{u1} - \Delta \texttt{u1} + \partial_1 \texttt{p} = 0 \text{ in } \Omega,
