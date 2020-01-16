@@ -1415,7 +1415,7 @@ We focus our attention to a simplified scenario that still contains the fundamen
   \item Finally, in order to obtain better results, we take the same equations, but we use them as equations describing water flow. The convergence result is the same, the boundary conditions are slightly different, and using wind traction (represented by $\theta$ in the code) over the water surface helps to highlight the point of our result.
 \end{enumerate}
 
-Taking these ideas into account, we have the following reduced system for the velocity and pressure.
+Taking these ideas into account, we have the following reduced system.
 
 \begin{equation} \label{fenics_strong_horizontal}
   \mathbf{\texttt{u}} \cdot \nabla \texttt{u1} - \Delta \texttt{u1} + \partial_1 \texttt{p} = 0 \text{ in } \Omega,
@@ -1429,24 +1429,35 @@ Taking these ideas into account, we have the following reduced system for the ve
   \nabla \cdot \mathbf{\texttt{u}} = 0 \text{ in } \Omega.
 \end{equation}
 
-Note that here, instead of $\texttt{u}_h$ we denote the horizontal velocity by $\texttt{u1}$ to express that we use the dimension reduction idea for the horizontal velocity during the computations. 
+\begin{equation} \label{fenics_strong_concentration}
+  \texttt{u} \cdot \nabla \texttt{c} - \Delta \texttt{c} = \texttt{s} \text{ in } \Omega
+\end{equation}
+
+Note that here we denote the horizontal velocity by \texttt{u1} to express that we use the dimension reduction idea for the horizontal velocity during the computations. For the vertical velocity we keep the standard \texttt{u3} notation for better readability.
 
 The boundary conditions are set to mathematically grasp the physical scenario described in iv), thus we use no-slip boundary conditions on the entire basin (i.e. on the lateral boundaries and on the bottom of the water), while on the top of the water we have a wind traction force generating the fluid flow:
 
 \begin{equation} \label{fenics_strong_bcs}
   \begin{split}
     & \mathbf{\texttt{u}} = 0 \text{ on } \Gamma_{\text{basin}}, \\
-    & \partial_3 \texttt{u1} = \theta, \texttt{u3} = 0 \text{ on } \Gamma_{\text{top}}.
+    & \partial_3 \texttt{u1} = \theta, \texttt{u3} = 0 \text{ on } \Gamma_{\text{top}}, \\
+    & \texttt{c} = \text{ on } \Gamma_{\text{top}}.
    \end{split}
 \end{equation}
 
 The above set of equations might seem over-simplified, but as we will see, the core problems within the system has in fact remained unchanged, and in this new model we can focus our efforts on the main issues.
 
-Before we define the variational forms of (\ref{fenics_strong_horizontal})--(\ref{fenics_strong_bcs}), we briefly outline some of the new features we need to pay attention to when translating a theoretical result into finite element code. One of the important differences between this chapter's convergence result and its implementation is the approach to the divergence-free condition. In Theorem \ref{maintheorem_weak_GFC} we worked with the weak form of the momentum equations, but we did take advantage of $\nabla \cdot \mathbf{u}^\epsilon = 0$ directly. As a consequence, the pressure function was cancelled from the calculations immediately, and the number of test functions was equal to the number of space dimensions. In the numerical simulations we keep the pressure function in the calculations as well, and thus we will have an additional $q$ pressure test function multiplying the (\ref{fenics_strong_divergencefree}) divergence-free condition.
+Before we define the variational forms of (\ref{fenics_strong_horizontal})--(\ref{fenics_strong_bcs}), we briefly outline some of the new features we need to pay attention to when translating a theoretical result into finite element code.
+
+One of the important differences between this chapter's convergence result and its implementation is the approach to the divergence-free condition. In Theorem \ref{maintheorem_weak_GFC} we worked with the weak form of the momentum equations, but we did take advantage of $\nabla \cdot \mathbf{u}^\epsilon = 0$ directly. As a consequence, the pressure function was cancelled from the calculations immediately, and the number of test functions was equal to the number of space dimensions. In the numerical simulations we keep the pressure function in the calculations as well, and thus we will have an additional $q$ pressure test function multiplying the (\ref{fenics_strong_divergencefree}) divergence-free condition.
 
 Another crucial issue is the representation of the functions, namely the specification of the finite element function spaces. In the the previous sections the phrase "as $\epsilon$ goes to zero" possessed a sense of continuity, which falls apart to several ranges in this numerical approach. Firstly, we can not seem to have one single velocity function space for the entire phenomena. The $\epsilon > 0$ anisotropic case and the $\epsilon = 0$ limit case work well in spaces of different degrees (i.e. where the degrees of the $\phi_j$ polynomial basis functions are different). While there is a smooth transition in the way $\epsilon$ approaches zero, the degree of the vertical velocity space changes from 2 to 1 as $\epsilon$ changes from a small positive value to zero. Secondly, our experiments show that the code works differently in cases when $\epsilon$ is, roughly speaking, excessively small and in cases when it is small, but not smaller than approximately $2^{-6}$ -- $2^{-8}.$
 
-Now we are ready to introduce the weak form of the anisotropic system. Let's multiply equations (\ref{fenics_strong_horizontal}), (\ref{fenics_strong_vertical}) and (\ref{fenics_strong_divergencefree}) by the $\texttt{v1},$ $\texttt{v3}$  and $q$ test functions, respectively, and integrate the result on the whole domain. We obtain that the variational form of the anisotropic pressure--velocity system is
+A further interesting aspect to keep in mind is that some of the widely used reformulation techniques do not hold for low--degree function spaces. Let's consider for example arbitrarily smooth $c, d$ functions assuming that $c, d$ and $\nabla c, \nabla d$ vanish on the domain boundary. In this case it is valid to rewrite $\int _\Omega (\Delta c) d$ as $\int_\Omega \nabla c \nabla d,$ but if $c$ and $d$ are represented in first-order function spaces in the implementation, then \texttt{div(grad(c)) * d * dx} in general is not equal to \texttt{inner(grad(c), grad(d)) * dx}: the second-order \texttt{div(grad(c))} term always vanishes for the piecewise linear \texttt{c}, while the latter is still a function of the degrees of freedom composing \texttt{c} and \texttt{d}. This shows that for first-order function spaces it is crucial to use the weak form instead of the original second-order Laplacian (for example in the $\Delta \texttt{c}$ diffusive term).
+
+Now we are ready to introduce the weak form of the anisotropic system. Since the concentration function can be obtained in a separate step once the velocity and pressure solutions are known, and the code section responsible for finding \texttt{c} is rather self-explanatory, here we will dedicate our attention to the pressure--velocity system.
+
+Let's multiply equations (\ref{fenics_strong_horizontal}), (\ref{fenics_strong_vertical}) and (\ref{fenics_strong_divergencefree}) by the $\texttt{v1},$ $\texttt{v3}$  and $q$ test functions, respectively, and integrate the result on the whole domain. We obtain that the variational form of the anisotropic pressure--velocity system is
 
 \texttt{
 \\
@@ -1478,22 +1489,90 @@ In particular
 
 \begin{itemize}
   \item a degree $(2,2)$ velocity space works well for the anisotropic scheme until $\epsilon$ reaches $\mathcal{O}(\exp{-7}):$ at this point the system becomes unstable as it practically loses its dependence on the gradient of the vertical velocity. Note that since $\epsilon$ is present in the model as $\epsilon^2,$ this means that the point where the scheme stops converging is essentially around machine precision.
-  \item Using a degree $(2,1)$ space for the anisotropic model results in an unrealistic, layered pressure structure: this is not surprising since in this case the so-called inf-sup stability condition is not satisfied. The symmetry of the information we have on each velocity function for the case of the complete anisotropic system (assuming that $\epsilon$ is not small yet) also suggests the definition of a more balanced space, such as that of degree $(2,2)$.
+  \item Using a degree $(2,1)$ space for the anisotropic model results in an unrealistic, layered pressure structure: this is not surprising since here we are using an unstable scheme for the complete Navier-Stokes system. The symmetry of the information we have on each velocity function for the case of the complete anisotropic system (assuming that $\epsilon$ is not small yet) also suggests the definition of a more balanced space, such as that of degree $(2,2)$.
   \item On the other hand, a degree $(2,1)$ space does work well for our hydrostatic model. Reducing the vertical velocity space degree seems to be a good choice for this system where the information on the vertical velocity is reduced as well.
   \item Finally, in the general case, using a degree $(2,2)$ space for the hydrostatic scheme leads to a non-invertible Jacobian matrix: the Newton-solver does not converge in this case. The only exception to this is when we have an extraordinarily good initial guess.
 \end{itemize}
 
 The above pieces of information give a good idea of how significant the presence of the $\epsilon$ parameter is to the model's finite element representation, and specifically, of how sensitive the "in-between" case is where $\epsilon$ is already small enough so that we can not benefit from the stabilising effect of the full-information model including the gradient of the vertical velocity, but at the same time $\epsilon$ is still strictly positive, and thus the advantage of a simpler pressure function is also unavailable. Somewhere in this in-between phase the finite element matrix becomes badly conditioned, but it is still not perfectly clear where exactly our scheme fails as $\epsilon$ reaches $\mathcal{O}(\exp{-7}).$
 
-Once the function spaces and the variational forms are defined, we apply the nonlinear Newton solver
+Once the function spaces and the variational forms are defined, we apply the nonlinear Newton solver to obtain the pressure and velocity solutions.
 
-\texttt{
-\\
-problem = NonlinearVariationalProblem(F, up\_, bcu, J)\\
-solver  = NonlinearVariationalSolver(problem) \\
-}
+For completeness we include (most of) the code of the \texttt{run()} function defined in \texttt{shallow\_domain\_solver.py}, since this is the section where the numerical solutions are defined.
 
-to the respective \texttt{F} scheme.
+\begin{verbatim}
+def run(a_h_switch, VP, up_, eps, vertical_velocity_degree,
+  mesh, bcu, foldermarker, problem_data):
+
+  upperboundary = boundary_domains.UpperBoundary()
+  boundaries = MeshFunction(..., mesh.topology().dim() - 1)
+  boundaries.set_all(0)
+  upperboundary.mark(boundaries, 1)
+  ds = Measure('ds')(subdomain_data = boundaries)
+
+  up = TrialFunction(VP)
+  u, p = split(up)
+  u1, u3 = split(u)
+  (v, q) = TestFunctions(VP)
+  v1, v3 = split(v)
+
+  (u_, p_) = up_.split(True)
+  (u1_, u3_) = u_.split(True)
+    
+  if a_h_switch == "hydrostatic":
+    F = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx
+      + eps*eps*inner(u, grad(u3)) * v3 * dx
+      + eps*eps*inner(grad(u3),grad(v3)) * dx
+      - p * div(v) * dx + q * div(u) * dx
+      - problem_data.f1 * v1 * dx - problem_data.f3 * v3 * dx
+      - inner(problem_data.theta, v) * ds(1) + p.dx(1) * q.dx(1) * dx
+  elif a_h_switch == "anisotropic":
+    F = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx
+      + eps*eps*inner(u, grad(u3)) * v3 * dx
+      + eps*eps*inner(grad(u3),grad(v3)) * dx
+      - p * div(v) * dx + q * div(u) * dx
+      - problem_data.f1 * v1 * dx - problem_data.f3 * v3 * dx
+      - inner(problem_data.theta, v) * ds(1)
+
+  F = action(F, up_)
+  J = derivative(F, up_, up)
+    
+  problem = NonlinearVariationalProblem(F, up_, bcu, J)
+  solver  = NonlinearVariationalSolver(problem)
+  ...
+        
+  solver.solve()
+    
+  (u, p) = up_.split(True)
+  (u1, u3) = u.split(True)
+    
+  C = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 1)
+  C = FunctionSpace(mesh, C)
+  bcc = apply_bcc.boundaryconditions_c(problem_data, C)
+        
+  c = TrialFunction(C)
+  d = TestFunction(C)
+  c_sol = Function(C)
+    
+  a = inner(u, grad(c)) * d * dx + c.dx(0) * d.dx(0) * dx
+    + c.dx(1) * d.dx(1) * dx
+    
+  if a_h_switch == "hydrostatic":
+    L = Constant(0) * d * dx
+    A, b = assemble_system(a, L, bcc)
+    delta = PointSource(C, Point(0.5, 0.5), 1)
+    delta.apply(b)
+  elif a_h_switch == "anisotropic":
+    x = SpatialCoordinate(mesh)
+    L = inner(problem_data.c_source(eps, x), d) * dx
+    A, b = assemble_system(a, L, bcc)
+    
+  solver = KrylovSolver('gmres', 'ilu')
+  solver.solve(A, c_sol.vector(), b)
+    
+  return [up_, c_sol]
+\end{verbatim}
+
 
 To summarise, the three main ideas of the numerical approach of this present code are \textit{a)} avoiding the application of standard linearisation techniques and keeping the model nonlinear, \textit{b)} introducing finite element spaces where the degree of the vertical velocity space depends on whether $\epsilon$ is positive or we are in the limit case (within the code see \texttt{VP\_functionspace(mesh, v\_vert\_deg)}), and finally \textit{c)} to introduce the $\partial_3 p \cdot \partial_3 q$ penalty term in the limit model to counterbalance the effects of the reduced degree--$1$ vertical velocity space. As we will see in the following section in detail, using these ideas combined with the simplifications i) -- iv) we are able to visualise and confirm the convergence of the weak solutions for the following two main cases.
 
