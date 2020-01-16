@@ -5,12 +5,12 @@ from global_constants import *
 import boundary_domains
 import apply_bcc
 
-def run(a_h_switch, VP, up_, eps, vertical_velocity_degree, mesh_h, bcu, foldermarker, problem_data):
+def run(a_h_switch, VP, up_, eps, vertical_velocity_degree, mesh, bcu, foldermarker, problem_data):
 
-    nr_cells = mesh_h.num_cells()
+    nr_cells = mesh.num_cells()
 
     upperboundary = boundary_domains.UpperBoundary()
-    boundaries = MeshFunction("size_t", mesh_h, mesh_h.topology().dim() - 1)
+    boundaries = MeshFunction("size_t", mesh, mesh.topology().dim() - 1)
     boundaries.set_all(0)
     upperboundary.mark(boundaries, 1)
     ds = Measure('ds')(subdomain_data = boundaries)
@@ -24,12 +24,12 @@ def run(a_h_switch, VP, up_, eps, vertical_velocity_degree, mesh_h, bcu, folderm
     (u_, p_) = up_.split(True)
     (u1_, u3_) = u_.split(True)
     
+    F_base = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx + eps*eps*inner(u, grad(u3)) * v3 * dx + eps*eps*inner(grad(u3),grad(v3)) * dx - p * div(v) * dx + q * div(u) * dx - problem_data.f1 * v1 * dx - problem_data.f3 * v3 * dx - inner(problem_data.theta, v) * ds(1)
+    
     if a_h_switch == "hydrostatic":
-        # the hydrostatic weak formulation without an initial guess (for now) is constructed with the vertical velocity space being of degree 1 and the additional constraint p.dx(1) * q.dx(1) * dx representing that we have a hydrostatic pressure. using a lower degree for the vertical velocities for the case of the primitive equations come from the article of Danilov, Gennady, Schroter, 2002 (even though they use elementwise constant representations)
-        F = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx + eps*eps*inner(u, grad(u3)) * v3 * dx + eps*eps*inner(grad(u3),grad(v3)) * dx - p * div(v) * dx + q * div(u) * dx - problem_data.f1 * v1 * dx - problem_data.f3 * v3 * dx - inner(problem_data.theta, v) * ds(1) + p.dx(1) * q.dx(1) * dx
+        F = F_base + p.dx(1) * q.dx(1) * dx
     elif a_h_switch == "anisotropic":
-        # The vertical velocity is from a quadratic space. Using a degree 1 vertical velocity space in the anisotropic case we have a strange layered unnatural pressure.
-        F = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx + eps*eps*inner(u, grad(u3)) * v3 * dx + eps*eps*inner(grad(u3),grad(v3)) * dx - p * div(v) * dx + q * div(u) * dx - problem_data.f1 * v1 * dx - problem_data.f3 * v3 * dx - inner(problem_data.theta, v) * ds(1)
+        F = F_base
 
     F = action(F, up_)
     J = derivative(F, up_, up)
@@ -54,8 +54,8 @@ def run(a_h_switch, VP, up_, eps, vertical_velocity_degree, mesh_h, bcu, folderm
     ufile_pvd << u
     pfile_pvd << p
     
-    C = FiniteElement("Lagrange", mesh_h.ufl_cell(), degree = 1)
-    C = FunctionSpace(mesh_h, C)
+    C = FiniteElement("Lagrange", mesh.ufl_cell(), degree = 1)
+    C = FunctionSpace(mesh, C)
     bcc = apply_bcc.boundaryconditions_c(problem_data, C)
         
     c = TrialFunction(C)
@@ -70,7 +70,7 @@ def run(a_h_switch, VP, up_, eps, vertical_velocity_degree, mesh_h, bcu, folderm
         delta = PointSource(C, Point(0.5, 0.5), 1)
         delta.apply(b)
     elif a_h_switch == "anisotropic":
-        x = SpatialCoordinate(mesh_h)
+        x = SpatialCoordinate(mesh)
         L = inner(problem_data.c_source(eps, x), d) * dx
         A, b = assemble_system(a, L, bcc)
     
