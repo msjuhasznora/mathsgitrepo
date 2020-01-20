@@ -1460,14 +1460,14 @@ inner(grad(u\_h), grad(v\_h)) + eps**2*inner(grad(u3), grad(v3)).\\
 
 Here the dependence on \texttt{u\_k3} decreases with $\epsilon^2,$ meaning that the result obtained for the vertical velocity in the previous Picard iteration does not have a chance to influence the computations in the next iteration.
 
-The observations made examining these two classical schemes suggest to avoid linearisation techniques in our case and conserve the nonlinear nature of the problem: since our model already includes terms representing vanishing information to begin with, we need to carefully choose a scheme that preserves the remaining dependences as well as possible.
+The observations made examining these two classical schemes suggest to avoid linearisation techniques in our case and conserve the nonlinear nature of the problem: since our model already includes terms representing vanishing information, we need to carefully choose a scheme that preserves the remaining dependences as well as possible.
 
-In order to construct a numerical scheme more adequate for our specific problem, we focus our attention to a simplified scenario that still contains the fundamental phenomena of the model's decreasing dependence on certain variables as $\epsilon$ tends to zero. Thus, we enable the alterations detailed below.
+In order to construct a numerical scheme more suited to our specific problem, we focus our attention to a simplified scenario that still contains the fundamental phenomena of the model's decreasing dependence on certain variables as $\epsilon$ tends to zero. Thus, we enable the alterations detailed below.
 
 \begin{enumerate}
   \item We consider the stationary case.
   \item The Coriolis terms are neglected.
-  \item We make the two horizontal dimensions fall into one. It is easy to see that in a theoretical point of view, and also in terms of proving regularities, there is no tangible difference between the two horizontal dimensions. The problem consists of having $n-1$ dimensions with an $\mathcal{O}(1)$ scale, and $1$ dimension with an $\mathcal{O}(\epsilon)$ scale. Instead of the $n-1$ space dimensions we can use 1 for quicker computations and easier visualisation.
+  \item We make the two horizontal dimensions fall into one. It is easy to see that in a theoretical point of view, and also in terms of proving regularities, there is no tangible difference between the two horizontal dimensions. The problem has $n-1$ dimensions with an $\mathcal{O}(1)$ scale, and $1$ dimension with an $\mathcal{O}(\epsilon)$ scale. Instead of the $n-1$ space dimensions we can use 1 for quicker computations and easier visualisation.
   \item In order to obtain better results, we take the same equations, but we use them as equations describing water flow. The convergence result itself is the same, but the boundary conditions are slightly different, and using wind traction (represented by $\theta$ in the code) over the water surface helps to highlight the point of our result.
 \end{enumerate}
 
