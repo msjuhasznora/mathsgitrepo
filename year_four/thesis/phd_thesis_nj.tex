@@ -1387,9 +1387,21 @@ $$ \int_\Omega \frac{1}{\Delta t^n} (\mathbf{u}^* - \mathbf{u}^{n-1}) \cdot \mat
 
 $$ \int_\Omega \nabla p^n \nabla q = - \frac{1}{\Delta t^n} \int_\Omega (\nabla \cdot \mathbf{u}^*) q,$$
 
-$$ \int_\Omega \mathbf{u}^n\cdot \mathbf{v} = \int_\Omega \mathbf{u}^* \cdot \mathbf{v} - \frac{1}{\Delta t^n} \int_\Omega \nabla p^n \cdot \mathbf{v}.$$
+$$ \int_\Omega \mathbf{u}^n\cdot \mathbf{v} = \int_\Omega \mathbf{u}^* \cdot \mathbf{v} - \frac{1}{\Delta t^n} \int_\Omega \nabla p^n \cdot \mathbf{v},$$
+
+for all $\mathbf{v}, q$ test functions in the appropriate spaces.
 
 For our specific case however, the variational form of the first step becomes
+
+\begin{equation}
+  \begin{split}
+    & \int_\Omega \frac{1}{\Delta t^n} (\mathbf{u}_h^* - \mathbf{u}_h^{n-1}) \cdot \mathbf{v}_h + \epsilon^2 \int_\Omega \frac{1}{\Delta t^n} (u_3^* - u_3^{n-1}) \cdot v_3 \\
+    & + \int_\Omega \nabla \mathbf{u}_h^{n-1} \cdot \mathbf{u}^{n-1} \cdot \mathbf{v}_h + \epsilon^2 \int_\Omega \nabla u_3^{n-1} \cdot \mathbf{u}^{n-1} \cdot v_3 \\
+    & + \int_\Omega \nabla \mathbf{u}_h^* \cdot \nabla \mathbf{v}_h + \epsilon^2 \int_\Omega \nabla u_3^* \cdot \nabla v_3 = 0.
+  \end{split}
+\end{equation}
+
+We have
 
 \texttt{
 \\
