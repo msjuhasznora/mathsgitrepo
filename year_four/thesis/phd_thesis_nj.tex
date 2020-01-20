@@ -1670,7 +1670,7 @@ By "hydrostatic model" and "hydrostatic solutions" in the following we understan
 %%% CONVERGENCE RESULT %%%
 \subsection{Visualisation of the convergence result}\label{actualvisualisationsection}
 
-Before we focus on the tendency of the solutions and the convergence phenomena itself, here we firstly dedicate a few words to the natural meaning of the functions. In order to have a clear idea of the physical process we obtain as a result, let us consider the following three graphs describing the behaviour of the velocity functions. We remind that we are using a simplified domain filled with water: we use no-slip boundary conditions on the lateral boundaries and at the bottom of the domain, while on the top we consider the effect of wind traction.
+Before we focus on the perceived trend of the solutions and the convergence phenomena itself, here we firstly dedicate a few words to the natural meaning of the functions. In order to have a clear idea of the physical process we obtain as a result, let us consider the following three graphs describing the behaviour of the velocity functions. We remind that we are using a simplified domain filled with water: we use no-slip boundary conditions on the lateral boundaries and at the bottom of the domain, while on the top we consider the effect of wind traction.
 
 We will use the Stream Tracer and Glyphs filters of ParaView to understand the fluid motion better. Stream Tracer gives a set of continuous lines that go through the data set following the vector field, and it is more of a rigorous mathematical construction (and thus more costly), while Glyphs is a rendering feature, and it provides a geometry displayed on some points of the dataset. The concept of Glyphs is quite generic, its definition can be modified (oriented and scaled) following the data at the corresponding point. We will set this latter filter for each point to be an arrow oriented as the velocity vector, with a norm proportional it. In Figure \ref{streamlines} the result of Stream Tracer shows that the fluid particles follow "circular-like" courses.
 
@@ -1703,13 +1703,13 @@ The top red background colour of Figure \ref{background_colour_y} represents the
 
 Now that we understand the physical process better, we are ready to examine the convergence phenomena.
 
-In the following we consider the tendency of the anisotropic solutions $u_1^\epsilon, u_3^\epsilon,$ $p^\epsilon,$ $c^\epsilon$ as the $\epsilon$ parameter decreases step by step. We finish each image sequence by inserting the respective hydrostatic solution function as the last graph. For completeness we also include a table for each function that contains the numerical $L^2$ norm values of the difference between the anisotropic and hydrostatic solutions. We emphasise that we work in finite element spaces of different degrees, thus these differences are not expected to vanish completely.
+In the following we consider the observed trend of the anisotropic solutions $u_1^\epsilon, u_3^\epsilon,$ $p^\epsilon,$ $c^\epsilon$ as the $\epsilon$ parameter decreases step by step. We finish each image sequence by inserting the respective hydrostatic solution function as the last graph. For completeness we also include a table for each function that contains the numerical $L^2$ norm values of the difference between the anisotropic and hydrostatic solutions. We emphasise that we work in finite element spaces of different degrees, thus these differences are not expected to vanish completely.
 
 As we will see, all tables are characterised by a special feature related to the previously mentioned "in-between" phase: here the $\epsilon$ parameter enters into range where it is still positive, but in some sense becomes "too small". For all four functions we examine this happens at a relatively specific threshold level, namely after the 7th -- 9th iteration of dividing $\epsilon$ by 2 (the total number of iterations is $24$). The hydrostatic and anisotropic solutions are the closest in norm when the scale of $\epsilon$ reaches this technical limit magnitude. For the case of the anisotropic velocity and pressure functions we experience only a slight divergence when we decrease $\epsilon$ beyond this level, however the $(\texttt{u\_eps, u})$ and $(\texttt{p\_eps, p})$ solutions apparently remain close to each other respectively even after this point and the difference remains overall small. The $\texttt{c\_eps}$ concentration solution results to be more unstable w.r.t. excessively small $\epsilon$ values, the reason for this might be the additional complexity of using the approximate delta function we use as a pollution source term, but in this question further examinations are required.
 
-\subsubsection{The tendency of the pressure solution}
+\subsubsection{The perceived trend of the pressure solution}
 
-We begin by depicting the tendency of the anisotropic pressure functions. For the initial $\epsilon$ values we can observe that a negative pressure has developed in the left upper corner, and symmetrically, in the right upper corner a positive pressure has formed. This is exactly what we would expect considering the external force that wind exerts on the top of the water. As $\epsilon$ decreases, the gradual formation of the hydrostatic pressure is apparent.
+We begin by depicting the behaviour of the anisotropic pressure functions. For the initial $\epsilon$ values we can observe that a negative pressure has developed in the left upper corner, and symmetrically, in the right upper corner a positive pressure has formed. This is exactly what we would expect considering the external force that wind exerts on the top of the water. As $\epsilon$ decreases, the gradual formation of the hydrostatic pressure is apparent.
 
 \begin{figure}[H]
 \centering
@@ -1778,9 +1778,9 @@ The numerical error norms (with respect to the hydrostatic solution) are collect
 \end{center}
 \end{table}
 
-\subsubsection{The tendency of the horizontal velocity solution}
+\subsubsection{The perceived trend of the horizontal velocity solution}
 
-The anisotropic horizontal velocity functions do not display a particularly visible change as $\epsilon$ decreases, the tendency of the solutions is more apparent if we consider the exact numbers on the legend of each graph, and the table following the sequence of images.
+The anisotropic horizontal velocity functions do not display a particularly visible change as $\epsilon$ decreases, the trend of the solutions is more apparent if we consider the exact numbers on the legend of each graph, and the table following the sequence of images.
 
 \begin{figure}[H]
   \centering
@@ -1822,9 +1822,9 @@ The anisotropic horizontal velocity functions do not display a particularly visi
 \end{center}
 \end{table}
 
-\subsubsection{The tendency of the vertical velocity solution}
+\subsubsection{The perceived trend of the vertical velocity solution}
 
-Naturally, it is the case of the vertical velocity solutions where we really see the effect of using a degree $(2,2)$ anisotropic space and a hydrostatic scheme of degree $(2,1)$. The tendency of the anisotropic solutions and their "closeness" to the hydrostatic solution is apparent, however they numerically do not approximate it particularly well as the structures of the spaces are different.
+Naturally, it is the case of the vertical velocity solutions where we really see the effect of using a degree $(2,2)$ anisotropic space and a hydrostatic scheme of degree $(2,1)$. The convergent behaviour of the anisotropic solutions and their "closeness" to the hydrostatic solution is apparent, however they numerically do not approximate it particularly well as the structures of the spaces are different.
 
 \begin{figure}[H]
 \centering
@@ -1917,7 +1917,7 @@ Note that as the anisotropic vertical velocity is in a degree $2$ space, the dif
 \end{center}
 \end{table}
 
-\subsubsection{The tendency of the concentration solution}
+\subsubsection{The perceived trend of the concentration solution}
 
 Finally we observe that as $\epsilon$ decreases from $1$ to $\frac{1}{2^7},$ the anisotropic concentration solutions visibly approximate the hydrostatic function we obtained by using a point source.
 
@@ -1991,7 +1991,7 @@ Finally we observe that as $\epsilon$ decreases from $1$ to $\frac{1}{2^7},$ the
 \end{minipage}
 \end{figure}
 
-We note that this rather visible tendency towards the hydrostatic solution holds only until $\epsilon$ reaches the $0.00390$ -- $0.00195$ threshold range. As $\epsilon$ becomes smaller, beyond this level the solutions "collapse" and they become closer and closer to the constant zero function. The reason for this is presumably the $\epsilon^2$ term in the approximate delta function we apply in the anisotropic source term, but this phenomena is yet to be further investigated.
+We note that this rather visible perceived trend towards the hydrostatic solution holds only until $\epsilon$ reaches the $0.00390$ -- $0.00195$ threshold range. As $\epsilon$ becomes smaller, beyond this level the solutions "collapse" and they become closer and closer to the constant zero function. The reason for this is presumably the $\epsilon^2$ term in the approximate delta function we apply in the anisotropic source term, but this phenomena is yet to be further investigated.
 We conclude with the table containing the $L^2$ difference norms computed for the concentration function.
 
 \begin{table}[H]
