@@ -1392,10 +1392,10 @@ For our specific case however, the variational form of the first step becomes
 
 \texttt{
 \\
-F = (1/dt)((u\_h - u\_prev\_h) * v\_h + $\epsilon^2$*(u3 - u\_prev3)*v3 ) + \\
+F = (1/dt)((u\_h - u\_prev\_h) * v\_h + eps**2*(u3 - u\_prev3)*v3 ) + \\
 inner(u\_prev, grad(u\_prev\_h)) * v\_h\\
- + $\epsilon^2$*inner(u\_prev, grad(u\_prev3)) * v3 + \\
- inner(grad(u\_h),grad(v\_h)) + $\epsilon^2$*inner(grad(u3),grad(v3)), \\
+ + eps**2*inner(u\_prev, grad(u\_prev3)) * v3 + \\
+ inner(grad(u\_h),grad(v\_h)) + eps**2*inner(grad(u3),grad(v3)), \\
 }
 
 where it is easy to see that the scheme depends on \texttt{u3} only through $\epsilon^2$ (in the pseudo code above \texttt{u1, u2, u3} denote the unknowns, while \texttt{u\_prev} is calculated from the previous time step).
@@ -1404,8 +1404,8 @@ Similarly, the linearisation technique of Picard iterations also leads to a prob
 
 \texttt{
 \\
-F = inner(u, grad(u\_k\_h)) * v\_h + $\epsilon^2$*inner(u, grad(u\_k3)) * v3 + \\
-inner(grad(u\_h), grad(v\_h)) + $\epsilon^2$*inner(grad(u3), grad(v3)).\\
+F = inner(u, grad(u\_k\_h))*v\_h + eps**2*inner(u, grad(u\_k3))*v3 + \\
+inner(grad(u\_h), grad(v\_h)) + eps**2*inner(grad(u3), grad(v3)).\\
 }
 
 Here the dependence on \texttt{u\_k3} decreases with $\epsilon^2,$ meaning that the result obtained for the vertical velocity in the previous Picard iteration does not have a chance to influence the computations in the next iteration.
@@ -1468,8 +1468,8 @@ Let's multiply equations (\ref{fenics_strong_horizontal}), (\ref{fenics_strong_v
 \texttt{
 \\
 F\_anis=inner(u, grad(u1))*v1*dx + inner(grad(u1), grad(v1))*dx \\
-+ $\epsilon^2$*inner(u, grad(u3))*v3*dx + $\epsilon^2$*inner(grad(u3), grad(v3))*dx \\
- - p * div(v)*dx + q*div(u)*dx - inner($\theta$, v)*ds(1). \\
++ eps**2*inner(u, grad(u3))*v3*dx + eps**2*inner(grad(u3), grad(v3))*dx \\
+ - p * div(v)*dx + q*div(u)*dx - inner(theta, v)*ds(1). \\
 }
 
 We highlight the fact that in the definition above, \texttt{F\_anis} has an $\mathcal{O}(1)$ dependence on each coordinate function of the $\texttt{u}$ unknown velocity function.
@@ -1480,9 +1480,9 @@ As a starting point we mention that a classical setup for function spaces used f
 \texttt{
 \\
 F\_hydr=inner(u, grad(u1))*v1*dx + inner(grad(u1), grad(v1))*dx \\
-+ $\epsilon^2$*inner(u, grad(u3))*v3*dx + $\epsilon^2$*inner(grad(u3), grad(v3))*dx \\
++ eps**2*inner(u, grad(u3))*v3*dx + eps**2*inner(grad(u3), grad(v3))*dx \\
 + p.dx(1)*q.dx(1)*dx - p*div(v)*dx + q*div(u)*dx\\
-- inner($\theta$, v)*ds(1). \\
+- inner(theta, v)*ds(1). \\
 }
 
 In the code the above expression is used with $\epsilon$ being \texttt{Constant(0.0)}, we keep the $\epsilon$ in the form for flexibility purposes and to highlight that apart from the hydrostatic penalty term the anisotropic and hydrostatic weak formulations are structurally the same.
@@ -1526,8 +1526,8 @@ def run(a_h_switch, VP, up_, eps, vertical_velocity_degree, mesh,
   (u1_, u3_) = u_.split(True)
     
   F_base = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx
-    + eps*eps*inner(u, grad(u3)) * v3 * dx
-    + eps*eps*inner(grad(u3),grad(v3)) * dx - p * div(v) * dx + q * div(u) * dx
+    + eps**2*inner(u, grad(u3)) * v3 * dx
+    + eps**2*inner(grad(u3),grad(v3)) * dx - p * div(v) * dx + q * div(u) * dx
     - problem_data.f1 * v1 * dx - problem_data.f3 * v3 * dx
     - inner(problem_data.theta, v) * ds(1)
     
