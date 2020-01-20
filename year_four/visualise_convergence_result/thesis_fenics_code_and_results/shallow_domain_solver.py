@@ -24,7 +24,7 @@ def run(a_h_switch, VP, up_, eps, vertical_velocity_degree, mesh, bcu, foldermar
     (u_, p_) = up_.split(True)
     (u1_, u3_) = u_.split(True)
     
-    F_base = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx + eps*eps*inner(u, grad(u3)) * v3 * dx + eps*eps*inner(grad(u3),grad(v3)) * dx - p * div(v) * dx + q * div(u) * dx - problem_data.f1 * v1 * dx - problem_data.f3 * v3 * dx - inner(problem_data.theta, v) * ds(1)
+    F_base = inner(u, grad(u1)) * v1 * dx + inner(grad(u1),grad(v1)) * dx + eps**2*inner(u, grad(u3)) * v3 * dx + eps**2*inner(grad(u3),grad(v3)) * dx - p * div(v) * dx + q * div(u) * dx - problem_data.f1 * v1 * dx - problem_data.f3 * v3 * dx - inner(problem_data.theta, v) * ds(1)
     
     if a_h_switch == "hydrostatic":
         F = F_base + p.dx(1) * q.dx(1) * dx
