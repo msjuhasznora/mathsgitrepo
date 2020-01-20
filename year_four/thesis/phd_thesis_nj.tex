@@ -4,6 +4,7 @@
 \usepackage{bm}
 \usepackage{mathtools}
 \usepackage{hyperref}
+\usepackage{afterpage}
 \usepackage{amsmath}
 \usepackage{commath}
 \usepackage{amsthm}
@@ -35,12 +36,48 @@
 \usepackage{lipsum}
 \usepackage{caption}
 
+\newcommand\blankpage{%
+    \null
+    \thispagestyle{empty}%
+    \addtocounter{page}{-1}%
+    \newpage}
+
 \title{The PDE polluted atmosphere model: a mathematical justification of a meteorological approach}
 \begin{document}
 \maketitle
 \newpage
+\afterpage{\blankpage}
+\pagenumbering{roman}
+
+\chapter*{Acknowledgements} \addcontentsline{toc}{chapter}{Acknowledgements}
+
+\hspace*{5mm} \textit{Professor Donatelli.} Thank you for your ceaseless support throughout the years from beginning to end, what I owe you is beyond evaluation. Thank you so much for everything.
+
+\textit{Prof. Omar Lakkis.} You have showed me the importance and benefits of approaching problems from different viewpoints, I appreciate that a lot. Thank you for your friendly welcome at Sussex University.
+
+\textit{FEniCS and ParaView experts} who kindly and in detail answer beginners' technical questions online - some of the graphs in this thesis can be here because of you. Thank you for helping your community.
+
+\textit{Anya \'es Apa.} K\"oszi a vas\'arnap d\'elut\'ani telefonbesz\'elget\'eseket \'es mindig amikor m\'ar kint v\'artatok mikor bekanyarodott a ZT a Melinda utc\'aba.
+
+\textit{Stelios.} One of my favourite ways to work was sharing an office with you in Sussex, both of us immersed in our own business, yet not alone. 
+
+\textit{Gloria.} Grazie per tutte le volte quando andavamo sul SS80 prestissimo nella mattina e parlavamo dei pini, di cultura e caff\`e - e per tutte le parole che m'hai spiegato mentre aspettavamo.
+
+\textit{Jon, Astrid, Ira, Cl\'ementine, Jimmy, Anna.} Guys thanks so much for all the good times, the encouragement, the wisdom and the recipes.
+
+\textit{Ankan.} I appreciate your spontaneity (with or without lentils), your openness, your support and reminding me of a different worldview.
+
+\textit{Philip.} Thank you for inspiring me to make an effort and move out of my temporary comfort zone - not by words, but by you doing the same.
+
+\textit{Licia.} Time after time you seemed to almost miraculously know when I needed either a personal advice or a friend with a car. Thank you for being there.
+
+\newpage
+\afterpage{\blankpage}
+
 \tableofcontents
 \newpage
+
+\pagenumbering{arabic}
 
 %%% *** INTRODUCTION *** %%%
 \chapter*{Introduction}\addcontentsline{toc}{chapter}{Introduction} \label{Introduction}
@@ -1360,11 +1397,11 @@ Given $T > 0$, $U_0 \in H,$ and a source term $s = \delta$ or $s \in L^2(\Omega)
 
 In this final part of Chapter \ref{geophysicalchapter} we apply the finite element method to visualise the previously obtained weak convergence result of Theorem \ref{maintheorem_weak_GFC}.
 
-The finite element method is a well-established technique in numerical analysis and it is one of the most widely used computational strategies for obtaining approximate solutions to PDEs (\cite{jing-fem}). Instead of directly discretising the differential equation itself (as for example in the case of the finite difference method), the first step of the finite element approach is to introduce the variational form of the equation, and define finite dimensional spaces on which the variational form is restricted or extended, depending on whether the space is a subspace or not of the infinite dimensional space. Such spaces are obtained by decomposing the domain into finitely many polygonal subdomains called finite elements. On each element the solution is approximated by a polynomial function, then the final solution on the complete domain is obtained by piecing these individual, locally defined functions together into a single, global, piecewise polynomial solution that could be continuous, discontinuous or partially continuous across the element's boundaries. The approximate finite element solution takes the customary form
+The finite element method is a well-established technique in numerical analysis and it is one of the most widely used computational strategies for obtaining approximate solutions to PDEs \cite{jing-fem}. Instead of directly discretising the differential equation itself (as for example in the case of the finite difference method), the first step of the finite element approach is to introduce the variational form of the equation, and define finite dimensional spaces on which the variational form is restricted or extended, depending on whether the space is a subspace or not of the infinite dimensional space. Such spaces are obtained by decomposing the domain into finitely many polygonal subdomains called finite elements. On each element the solution is approximated by a polynomial function, then the final solution on the complete domain is obtained by piecing these individual, locally defined functions together into a single, global, piecewise polynomial solution that could be continuous, discontinuous or partially continuous across the element's boundaries. The approximate finite element solution takes the customary form
 
 $$ U (\mathbf{x}) = \sum_{j=1}^N c_j \phi_j(\mathbf{x}),$$
 
-where thus $U$ is a linear combination of the $\phi_j$ basis functions also known as shape functions. These latter are defined a piecewise manner over small collections of elements sharing parts of their boundaries (vertices, edges, faces). In our application they are chosen to be continuous polynomials of low degree (1 or 2).
+where thus $U$ is a linear combination of the $\phi_j$ basis functions also known as shape functions. These latter are defined a piecewise manner over small collections of elements sharing parts of their boundaries (vertices, edges, faces). In our application they are chosen to be continuous polynomials of degree $1$ or $2$.
 
 The variational integral is then evaluated as a sum of contributions from each element, the result is an algebraic system for the finite-dimensional approximate solution. We highlight here that in this approach the approximate function is defined in the entire domain (unlike in the case of the finite difference method where the numerical solution is computed only at a set of points).
 
@@ -1377,11 +1414,11 @@ Some of the technical questions raised throughout the development process were r
 The numerical simulations were obtained in collaboration with Professor Omar Lakkis from the University of Sussex.
 
 %%% TRANSLATION %%%
-\subsection{The translation of the theoretical result to a scheme in numerical analysis}\label{translationfromtheorytonumerics_section}
+\subsection{Implementation of the theoretical result}\label{translationfromtheorytonumerics_section}
 
 The major challenge in numerically approaching the asymptotic behaviour of the solutions as $\epsilon$ goes to zero is the scheme's disappearing dependence upon certain terms. Picard iterations and the Chorin method for example are widely used methods in the field of the (complete) Navier-Stokes equations, but once we introduce the $\epsilon$ multiplier into the equations, these standard schemes "collapse" as $\epsilon$ decreases. This indicates that we have to be careful in adapting classical methods to the concrete phenomena we need to visualise.
 
-A well-known numerical approach for the incompressible Navier-Stokes equations is the splitting method proposed by Chorin and Temam (\cite{fenicsproject}). In this strategy, instead of directly stepping forward in time from $(n-1) \cdot \Delta t$ to $n \cdot \Delta t,$ we first calculate a tentative $\mathbf{u}^*$ value ignoring the pressure in the momentum equation. Next we project the velocity onto a space of divergence-free fields. We omit the details (\cite{langtangen2016solving}), we only state that the equations of the Chorin method in the general case of the complete 3D Navier-Stokes equations take the form as given below:
+A well-known numerical approach for the incompressible Navier-Stokes equations is the splitting method proposed by Chorin and Temam \cite{fenicsproject}. In this strategy, instead of directly stepping forward in time from $(n-1) \cdot \Delta t$ to $n \cdot \Delta t,$ we first calculate a tentative $\mathbf{u}^*$ value ignoring the pressure in the momentum equation. Next we project the velocity onto a space of divergence-free fields. We omit the details (see \cite{langtangen2016solving} for example), we only state that the equations of the Chorin method in the general case of the complete 3D Navier-Stokes equations take the form as given below:
 
 $$ \int_\Omega \frac{1}{\Delta t^n} (\mathbf{u}^* - \mathbf{u}^{n-1}) \cdot \mathbf{v} + \int_\Omega \nabla \mathbf{u}^{n-1} \cdot \mathbf{u}^{n-1} \cdot \mathbf{v} + \int_\Omega \nu \nabla \mathbf{u}^* \cdot \nabla \mathbf{v} = \int_\Omega f \mathbf{v},$$
 
@@ -1425,13 +1462,13 @@ Here the dependence on \texttt{u\_k3} decreases with $\epsilon^2,$ meaning that 
 
 The observations made examining these two classical schemes suggest to avoid linearisation techniques in our case and conserve the nonlinear nature of the problem: since our model already includes terms representing vanishing information to begin with, we need to carefully choose a scheme that preserves the remaining dependences as well as possible.
 
-In order to construct a numerical scheme more adequate for our specific problem, we focus our attention to a simplified scenario that still contains the fundamental phenomena of the model's decreasing dependence on certain variables as $\epsilon$ tends to zero. Thus, we consider
+In order to construct a numerical scheme more adequate for our specific problem, we focus our attention to a simplified scenario that still contains the fundamental phenomena of the model's decreasing dependence on certain variables as $\epsilon$ tends to zero. Thus, we enable the alterations detailed below.
 
 \begin{enumerate}
-  \item the stationary case
-  \item without the Coriolis term,
-  \item moreover we make the two horizontal dimensions fall into one. It is easy to see that in a theoretical point of view, and also in terms of proving regularities, there is no tangible difference between the two horizontal dimensions. The problem consists of having $n-1$ dimensions with an $\mathcal{O}(1)$ scale, and $1$ dimension with an $\mathcal{O}(\epsilon)$ scale. Instead of the $n-1$ space dimensions we can use 1 for quicker computations and easier visualisation.
-  \item Finally, in order to obtain better results, we take the same equations, but we use them as equations describing water flow. The convergence result itself is the same, but the boundary conditions are slightly different, and using wind traction (represented by $\theta$ in the code) over the water surface helps to highlight the point of our result.
+  \item We consider the stationary case.
+  \item The Coriolis terms are neglected.
+  \item We make the two horizontal dimensions fall into one. It is easy to see that in a theoretical point of view, and also in terms of proving regularities, there is no tangible difference between the two horizontal dimensions. The problem consists of having $n-1$ dimensions with an $\mathcal{O}(1)$ scale, and $1$ dimension with an $\mathcal{O}(\epsilon)$ scale. Instead of the $n-1$ space dimensions we can use 1 for quicker computations and easier visualisation.
+  \item In order to obtain better results, we take the same equations, but we use them as equations describing water flow. The convergence result itself is the same, but the boundary conditions are slightly different, and using wind traction (represented by $\theta$ in the code) over the water surface helps to highlight the point of our result.
 \end{enumerate}
 
 Taking these ideas into account, we have the following reduced system:
