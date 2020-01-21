@@ -1407,7 +1407,7 @@ The variational integral is then evaluated as a sum of contributions from each e
 
 There are several software packages designed to solve computational fluid dynamics problems, we will work with FEniCS, an open-source platform supporting finite element programming in Python. In order to give an idea about the major challenges of expressing the theoretical result in the framework of numerical analysis, in Section \ref{translationfromtheorytonumerics_section} we begin by outlining some of the main standard approaches and highlighting their critical features with respect to the specific problem we are dealing with. The convergence results we obtained with FEniCS are collected in Section \ref{actualvisualisationsection}. Finally, Section \ref{codetestingsection} contains the description and outcome of four simple test cases we designed to examine the convergence of the numerical scheme.
 
-The Python scripts are currently available in a private github repository on \href{https://github.com/msjuhasznora/}{github.com}, access can be granted via contacting the github user msjuhasznora.
+The Python scripts are currently available in a private repository on \href{https://github.com/msjuhasznora/}{github.com}, access can be granted via contacting the github user msjuhasznora.
 
 Some of the technical questions raised throughout the development process were resolved with the kind help of the FEniCS and ParaView discourse groups (\cite{fenicsgroup}, \cite{paraviewdiscourse}).
 
@@ -1438,7 +1438,7 @@ For our specific case however, the variational form of the first step becomes
   \end{split}
 \end{equation}
 
-We have
+The variational form of the finite element code is thus given by
 
 \texttt{
 \\
@@ -1547,14 +1547,14 @@ In particular
 
 \begin{itemize}
   \item a degree $(2,2)$ velocity space works well for the anisotropic scheme until $\epsilon$ reaches $\mathcal{O}(\exp{-7}):$ at this point the system becomes unstable as it practically loses its dependence on the gradient of the vertical velocity. Note that since $\epsilon$ is present in the model as $\epsilon^2,$ this means that the point where the scheme stops converging is essentially around machine precision.
-  \item If we set a degree $(2,1)$ space for the anisotropic model, the output of our code is an unrealistic, layered pressure structure: this matches with the expectations considering that the stable Taylor-Hood scheme for the complete Navier-Stokes system uses quadratic velocity functions. The symmetry of the information we have on each velocity function for the case of the full anisotropic system (assuming that $\epsilon$ is not small yet) also suggests the definition of a more balanced space, such as that of degree $(2,2)$.
+  \item If we set a degree $(2,1)$ space for the anisotropic model, the output of our code is an unrealistic, layered pressure structure: this matches with the expectations considering that the symmetry of the information we have on each velocity function for the case of the full anisotropic system (assuming that $\epsilon$ is not small yet) also suggests the definition of a more balanced space, such as that of degree $(2,2)$.
   \item On the other hand, a degree $(2,1)$ space does work well for our hydrostatic model. Decreasing the vertical velocity space degree seems to be a good choice for this system where the information on the vertical velocity is reduced as well.
   \item Finally, in the general case, using a degree $(2,2)$ space for the hydrostatic scheme leads to a non-invertible Jacobian matrix: the Newton-solver does not converge in this case. The only exception to this is when we have an extraordinarily good initial guess.
 \end{itemize}
 
 The above pieces of information give a good idea of how significant the presence of the $\epsilon$ parameter is to the model's finite element representation, and specifically, of how sensitive the "in-between" case is where $\epsilon$ is already small enough so that we can not benefit from the stabilising effect of the full-information model including the gradient of the vertical velocity, but at the same time $\epsilon$ is still strictly positive, and thus the advantage of a simpler pressure function is also unavailable. Somewhere in this in-between phase the finite element matrix becomes badly conditioned, but it is still not perfectly clear where exactly our scheme fails as $\epsilon$ reaches $\mathcal{O}(\exp{-7}).$
 
-Once the function spaces and the variational forms are defined, we apply the nonlinear Newton solver to obtain the pressure and velocity solutions. The concentration function is obtained in a separate, next step, where the velocity solution is already known.
+Once the function spaces and the variational forms are defined, we apply the nonlinear Newton solver to obtain the pressure and velocity solutions. The concentration function is calculated in a separate, next step, where the velocity solution is already known.
 
 For completeness we include (most of) the code of the \texttt{run()} function defined in \texttt{shallow\_domain\_solver.py}, since this is the cardinal part where the numerical solutions are defined.
 
@@ -1633,7 +1633,7 @@ def run(a_h_switch, VP, up_, eps, vertical_velocity_degree, mesh,
 To summarise, the three main ideas of the numerical approach of this present code are \textit{a)} avoiding the application of standard linearisation techniques and keeping the model nonlinear, \textit{b)} introducing finite element spaces where the degree of the vertical velocity space depends on whether $\epsilon$ is positive or we are in the limit case (within the code see \texttt{VP\_functionspace(mesh, v\_vert\_deg)}), and finally \textit{c)} to introduce the $\partial_3 p \cdot \partial_3 q$ penalty term in the limit model to counterbalance the effects of the reduced first degree vertical velocity space. As we will see in the following section in detail, using these ideas combined with the simplifications i) -- iv) we are able to visualise and confirm the convergence of the weak solutions for the following two main cases.
 
 \begin{enumerate}[label=\arabic*)]
-  \item The anisotropic model of degree $(2,2)$ works until $\epsilon = \exp{-7},$ and its solutions visibly approach the solution of the hydrostatic system of degree $(2,1)$. For later reference, here we include the $L^2$ norms of the hydrostatic solution functions.
+  \item The anisotropic model of degree $(2,2)$ works until $\epsilon = \mathcal{O}(\exp{-7}),$ and its solutions visibly approach the solution of the hydrostatic system of degree $(2,1)$. For later reference, here we include the $L^2$ norms of the hydrostatic solution functions.
   
 \begin{table}[H]
 \caption{Hydrostatic result norms, vertical velocity degree = 1}
