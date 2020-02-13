@@ -227,36 +227,34 @@ where $\gamma$ is a normalising constant. Later we will take the limit as $\epsi
     
     Putting this condition and the previously described rescaling terms together to the original equations (\ref{originalEQ-V})-(\ref{diffusive}), we arrive to the merged anisotropic equations of the polluted atmosphere above inland surface:
   
-    \begin{equation} \label{ANSC1}
+\begin{equation} \label{ANSC1}
     \partial_t u^\epsilon _1 + \mathbf{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\alpha u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
-    \end{equation}
-    
-    \begin{equation} \label{ANSC2}
+\end{equation}
+%
+\begin{equation} \label{ANSC2}
     \partial_t u_2^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_2^\epsilon -\Delta_\nu u_2^\epsilon + \alpha u_1^\epsilon + \partial_2 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
-    \end{equation}
-    
-    \begin{equation} \label{ANSC3}
+\end{equation}
+%
+\begin{equation} \label{ANSC3}
     \epsilon^2 \{  \partial_t u_3^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon -\Delta_\nu u_3^{\epsilon} \} - \epsilon \beta u_1^\epsilon + \partial_3 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
-    \end{equation}
-    
-    \begin{equation} \label{ANSC4}
+\end{equation}
+%
+\begin{equation} \label{ANSC4}
     \nabla \cdot \mathbf{u}^\epsilon= 0 \text{ in } \Omega \times (0,T)
-    \end{equation}
-    
-    \begin{equation} \label{ANSC5}
+\end{equation}
+%
+\begin{equation} \label{ANSC5}
     \partial_t C^\epsilon + \mathbf{u^\epsilon} \cdot \nabla C^\epsilon = \nabla \cdot (\mathbf{M} \nabla C^\epsilon) + S^\epsilon \text{ in } \Omega \times (0,T)
-    \end{equation}
+\end{equation}
     
 %    \begin{equation} \label{ANSC6}
 %    \mathbf{u}^\epsilon = 0 \text{ on } \Gamma \times (0,T)
 %    \end{equation} 
 
 The initial condition for the velocity and the pollution concentration are
-    
-    \begin{equation} \label{ANSC7}
+\begin{equation} \label{ANSC7}
     \mathbf{u}^\epsilon (\cdot, t = 0) = \mathbf{u}_0, \quad C^\epsilon (\cdot, t=0) = C_0  \quad \text{ in } \Omega.
-    \end{equation}
-    
+\end{equation} 
 To make the above set of equations complete, we need to assign the boundary conditions.
 
 \begin{figure}[!h]
@@ -343,59 +341,57 @@ As we mentioned before, the case we are investigating is that of inland domains 
   \end{itemize}
   Specifically, for the pollution concentration reaching the ground level we use a similar approach as the one classically used for the wind traction reaching the top of the ocean (see for example \cite{azerad2001mathematical}, \cite{temam2005some}). We assume that the functions $\partial_1 C^\epsilon, \partial_2 C^\epsilon, \partial_3 C^\epsilon$ are equal to some sufficiently regular functions defined on the respective boundary. More accurately, we assume that we have $\nabla C^\epsilon = \boldsymbol{\sigma}$ on the lower boundary, where $\boldsymbol{\sigma} \in L^2(0,T;L^2(\Gamma_G))$, and the $\sigma_i$ terms denote the components of $\boldsymbol{\sigma}$. In particular in this inland case $\sigma_3$ is equal to zero on the $\Gamma_G$.
   
-  Finally, the boundary conditions to describe the anisotropic system can be summarised as follows:
-  
-    \begin{equation} \label{ANSC8}
+Finally, the boundary conditions to describe the anisotropic system (\ref{ANSC1}) - (\ref{ANSC7}) can be summarised as follows:
+\begin{equation} \label{ANSC8}
       \begin{split}
         & \mathbf{u}^\epsilon = 0 \text{ on } \Gamma \times (0,T), \\
         &C^\epsilon = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
         & \partial_1 C^\epsilon = \sigma_1, \partial_2 C^\epsilon = \sigma_2,\ \partial_3 C^\epsilon= 0 \text{ on } \Gamma_G \times (0,T), \\
         & \boldsymbol{\sigma} = (\sigma_1, \sigma_2, 0) \in L^2(0,T; \Gamma_G)\\
       \end{split} \raisetag{40pt}
-    \end{equation}
-
+\end{equation}
 Note that we have a domain where the lower and upper boundaries represent a physically existent layer (i.e. the ground and the planetary boundary layer), but outside the lateral boundary the physical world continues without influence and without any particular external condition. On boundaries of such nature we have to apply OBCs (open boundary conditions), which is not a trivial task, see for example \cite{wang2014ocean}. We need to avoid any spurious reflection or constraint which is unnatural, but at the same time we want the model to remain mathematically manageable.
 
 If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and $\epsilon$ in the anisotropic equations, we formally arrive to the hydrostatic Navier-Stokes equations (i.e., primitive equations) combined with pollution.
 
-    \begin{equation} \label{HNSC1}    
+\begin{equation} \label{HNSC1}    
     \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\alpha u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T)
-    \end{equation}
-    
-    \begin{equation} \label{HNSC2}   
+\end{equation}
+%
+\begin{equation} \label{HNSC2}   
     \partial_t u_2 + \mathbf{u} \cdot \nabla u_2 - \Delta_\nu u_2 -\alpha u_1 + \partial_2 p = 0 \text{ in } \Omega \times (0,T)
-    \end{equation}
-    
-    \begin{equation} \label{HNSC3}   
+\end{equation}
+%
+\begin{equation} \label{HNSC3}   
     \partial_3 p = 0 \text{ in } \Omega \times (0,T)
-    \end{equation}
-    
-    \begin{equation} \label{HNSC4}   
+\end{equation}
+%
+\begin{equation} \label{HNSC4}   
     \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \times (0,T)
-    \end{equation}
-    
-    \begin{equation} \label{HNSC5}   
+\end{equation}
+%
+\begin{equation} \label{HNSC5}   
     \partial_t C + \mathbf{u} \cdot \nabla C = \nabla \cdot (\mathbf{M} \nabla C) + S \text{ in } \Omega \times (0,T)
-    \end{equation}
-    
-    \begin{equation} \label{HNSC6}   
+\end{equation}
+%
+\begin{equation} \label{HNSC6}   
     u_1 = u_2 = u_3 n_3 = 0 \text{ on } \Gamma \times (0,T)
-    \end{equation}
-    
-    \begin{equation} \label{HNSC7}   
+\end{equation}
+%
+\begin{equation} \label{HNSC7}   
     u_i (\cdot, t=0) = u_{0 i}, C (\cdot, t=0) = C_0 \text{ in } \Omega, \text{$i$ = 1,2}
-    \end{equation}
-    
-    \begin{equation} \label{HNSC8}
+\end{equation}
+%
+\begin{equation} \label{HNSC8}
       \begin{split}
         &C = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
         & \partial_1 C = \sigma_1, \partial_2 C = \sigma_2, \partial_3  C = 0, \boldsymbol{\sigma} = (\sigma_1, \sigma_2, 0) \in L^2(0,T; \Gamma_G)\\
       \end{split}
-    \end{equation}
-    
-  \begin{remark} \label{sourceregularityremark}
+\end{equation}
+%
+\begin{remark} \label{sourceregularityremark}
     Here $S$ stands for the $\delta$ limit distribution. We keep the notation $S$ for generality, since as we will see later, instead of the approximated delta functions and the delta distribution, it is possible to use any sort of "sufficiently smooth" source term (which can be independent from $\epsilon$ in the anisotropic case as well) that is bounded in $L^2_t L^2_x.$
-  \end{remark}
+\end{remark}
 
 %%% *** WEAK FORMULATION AND MAIN RESULT*** %%%
 \section{Weak formulation and Main Result} \label{weakformulationmainresult}
@@ -448,7 +444,7 @@ In this section we describe the weak formulation of the merged equations in both
   
   The existence of weak solution for the hydrostatic system (\ref{HNSC1}) - (\ref{HNSC8}) can be proved in the spirit of \cite{temam2005some}. In appendix A we will outline the main steps of the proof and the differences compared to the ocean model.
 
-  The weak form of the anisotropic system is as follows.
+  The weak form of the anisotropic system (\ref{ANSC1}) - (\ref{ANSC8}) is as follows.
   
   \begin{definition} \label{definitionanisotropicWF}
   
@@ -493,7 +489,7 @@ Now we are ready to state our main result.
 
   \subsection{Energy inequality}
   
-  As we mentioned before, one of the most fundamental tools in this proof is the energy inequality. If we calculate it for the anisotropic system, we obtain that for a.e. $t \in [0,T]$ the following holds:
+  As we mentioned before, one of the most fundamental tools in this proof is the energy inequality. If we calculate it for the anisotropic system (\ref{ANSC1}) - (\ref{ANSC8}), we obtain that for a.e. $t \in [0,T]$ the following holds:
   
   \begin{equation}
     \begin{split}  
