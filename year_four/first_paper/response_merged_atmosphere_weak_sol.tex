@@ -1,0 +1,131 @@
+\documentclass[11pt]{article}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{commath}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{float} 
+\usepackage{array}
+\usepackage{outlines}
+\usepackage{setspace}
+\usepackage[colorinlistoftodos]{todonotes}
+\definecolor{green}{rgb}{0.4, 0.69, 0.2}
+\definecolor{asparagus}{rgb}{0.53, 0.66, 0.42}
+\definecolor{blue}{rgb}{0.0, 0.53, 0.74}
+\definecolor{terracotta}{HTML}{e2725b}
+\definecolor{mocassin}{HTML}{FFE4B5}
+\definecolor{coral}{HTML}{FFAA80}
+\setlist[enumerate,1]{label=\roman*)}
+\setlist[enumerate,2]{label=\alph*)}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,trees, calc}
+\usepackage{graphicx}
+\usepackage{subfig}
+
+
+%%% *** PREAMBLE *** %%%
+\title{Answers}
+
+\date{}
+
+%%%***  CONTENT *** %%%
+\begin{document}
+
+\maketitle
+
+\section{Major queries or issues}
+
+\subsection{Motivation for non-zero vertical velocity component}
+
+The principal reason why our approach is different than the shallow water case is that we perform asymptotical analysis. In this process it is crucial to keep every term, however small their order is. Other approaches such as using an averaged version of a function or omitting terms that are smaller than a certain order are not admissible in our case --- we investigate the asymptotic behaviour of solutions and thus we are bound to keep each term precisely.
+
+\subsection{The matrix $\mathbf{M}$}
+
+\begin{enumerate}
+
+  \item Upper bound of $\mathbf{M}$ and the coercivity $\lambda$: Generally speaking, in the scaling process we take each variable and express its possible $\epsilon$-depen-dence in an explicit way such that the remaining variable is $\epsilon$-free. For example, $z$ is the original vertical variable, in the scaling process we rewrite it as $z = \epsilon x_3,$ where now $x_3 = \mathcal{O}(1).$ Similarly, $\mathbf{K}$ is the original ("pre-scaling") diffusion matrix, and according to the (5) scaling process, the new $\mathbf{M}$ matrix is $\epsilon$-free, i.e. $M_{ij} = \mathcal{O}(1),$ simply by definition of the scaling equality. The reason why this was not clear is possibly that we did not explicitly highlight the fact that
+  
+\begin{gather}
+ \mathbf{M}
+ =
+  \begin{bmatrix}
+    M_{11} & M_{12} & M_{13} \\ M_{21} & M_{22} & M_{23} \\ M_{31} & M_{32} & M_{33}
+  \end{bmatrix},
+\end{gather}
+
+and not 
+\begin{gather}
+  \begin{bmatrix}
+    M_{11} & M_{12} & \epsilon M_{13} \\ M_{21} & M_{22} & \epsilon M_{23} \\ \epsilon M_{31} & \epsilon M_{32} & \epsilon^2 M_{33}
+  \end{bmatrix},
+\end{gather}
+
+which is $\mathbf{K}.$
+
+This is now added as equation (6) in the updated file.
+
+Considering this, $\lambda$ is naturally $\epsilon$-independent as it is a constant defined via $\mathbf{M},$ and we do not need any further boundedness assumptions throughout the proof.
+  
+  \item The word "homogeneous" and the identity matrix as $\mathbf{K}$: We have canceled the word homogeneous from the introduction and the general description of the phenomena since in fact we do consider a more general case. We have added a comment after equation (6) pointing out that the case of homogeneous air corresponds to
+  
+\begin{gather}
+ \mathbf{K}
+ =
+  \begin{bmatrix}
+    1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & \epsilon^2.
+  \end{bmatrix}
+\end{gather}
+  
+  \item The expectation that the vertical diffusivity blows up as $\epsilon \to 0$:
+  \begin{itemize}
+    \item Firstly, it is true that in some atmospheric models vertical viscosity is "a lot" bigger than horizontal diffusivities, but to our knowledge that is generally the consequence of specifically assuming dominant horizontal winds, and considering that in this case horizontal diffusivity effects are negligible compared to the prevailing major horizontal currents. This is certainly a possibility and an existing model in physics, but in this article we do not make this assumption, moreover even in these cases where the horizontal diffusivity constants are set to 0, the vertical diffusivity constant does not blow up as $\epsilon \to 0,$ in fact it becomes smaller and smaller as $\epsilon$ decreases as explained in the next point.
+    \item Using the physical definitions for kinematic viscosity, heat diffusion and contaminant diffusion, it is generally true for these quantities that their dimensions are given by
+    
+    $$ [\kappa_i] = \frac{\text{length}_i^2}{\text{sec}}, $$
+    
+    where $\kappa_i$ is the given quantity (viscosity or diffusivity) in the $x_i$ direction, and $\text{length}_i$ is the length scale in the $x_i$ direction. This also suggests that vertical diffusivity is small ($\mathcal{O}(\epsilon^2)$) when the length scale in the vertical direction is small ($\mathcal{O}(\epsilon)$). We have updated the original $\text{typical length}^2 / \text{typical time}$ explanation to $[\nu_{x_i}] = \text{typical length}_i^2 / \text{typical time}$ to support the correctness of the scaling.
+    \item To answer this suggestion from another viewpoint, let's consider the following experiment. Let's take a shallow closed acquarium of 1 meter x 1 meter x 1 cm. The acquarium contains clean air, and at we place a high concentration of pollens in the middle of the domain. The physical reality is that pollens diffuse in horizontal directions, and they do not stay concentrated along the $z$ axis. (while vertical diffusivity blowing up for shallow domains would mean that the diffusion of pollens happens most dominantly along $z,$ and almost no pollen diffusion towards the horizontal directions.
+    \item Finally, using the analogy between large-scale ocean models and large-scale atmosphere models, it is reasonable to expect that diffusion effects in the calm fluid take place in similar orders. In the finite element Northern Atlantic ocean model of \cite{danilov2004finite} horizontal diffusivity is set to 200 $m^2/s,$ while vertical diffusivity is $0.0002$ $m^2 /s.$ Observed values for horizontal and vertical diffusivity in \cite{talley2011descriptive} are 2 $m^2 / s$ and $10^{-4}$ $m^2/s$, respectively. Thus, empirical results suggests that vertical diffusivity in shallow domains is by several orders smaller than horizontal diffusivity.
+    
+  \end{itemize}
+  
+  \item The boundedness of the matrix $\mathbf{M}$ with respect to $\epsilon$: as described above, $M_{ij} = \mathcal{O}(1),$ and we do not use any further assumptions.
+  
+  \item denoting $\mathbf{M}$ by $\mathbf{M}^\epsilon:$ the functions such as $\mathbf{u}^\epsilon$ have an $\epsilon$ in their notation because they are solutions of an equation containing an $\epsilon$ parameter. However, the constants $\nu_i$ and $\mathbf{M}$ do not depend on $\epsilon$, and in these parameters we do not use the $\epsilon$ notation.
+
+\end{enumerate}
+
+\subsection{Regularised Dirac masses}
+
+\begin{enumerate}
+
+  \item Why we regularise in the anisotropic system: when we calculate the energy inequality (32), the $\int_0^t (S^\epsilon, C^\epsilon) d \tau$ term needs to be bounded, and for this we use the $L^\infty(\Omega)$ regularity of $S^\epsilon.$
+  
+  \item Why the regularisation parameter $\kappa$ is isotropic: because at this point the scaling process is already complete. We have passed from the original $Q$ source term to $S^\epsilon$ in (8). Once the scaling process is done, we start by giving a concrete form to the source function on $\Omega,$ and we choose to use Gaussians with regularisation parameter $\kappa$ for this purpose. We could make the decision to keep two small parameters that tend to zero in the model: $\epsilon$ representing shallowness, while $\kappa$ representing a regularisation parameter in the Gaussians. Keeping these two different parameters does not give any additional value to the theoretical results, for simplicity we set $\kappa$ to $\epsilon.$
+
+\end{enumerate}
+
+\section{Minor queries}
+
+\nocite{*}
+\bibliographystyle{abbrv}
+\begin{thebibliography}{1}
+
+\bibitem{danilov2004finite}
+S.~Danilov, G.~Kivman, and J.~Schr{\"o}ter.
+\newblock A finite-element ocean model: principles and evaluation.
+\newblock {\em Ocean Modelling}, 6(2):125--150, 2004.
+
+\bibitem{talley2011descriptive}
+L.~D. Talley.
+\newblock {\em Descriptive physical oceanography: an introduction}.
+\newblock Academic press, 2011.
+
+\end{thebibliography}
+
+\end{document}
+
