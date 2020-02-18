@@ -161,6 +161,46 @@ Number: 2. To our knowledge, "analogues" is a noun in plural form, while "analog
 
 \end{enumerate}
 
+\subsection{Page 10}
+
+Number: 2. What we mean here is in case we have $C^\epsilon(x,y,z) = c$ on the boundaries, then we can take this $c$ value, make a change of variables $C^\epsilon_\text{new} = C^\epsilon_\text{original} - c$ on $\Omega,$ obtaining a new $C^\epsilon$ concentration function that is constant $0$ on the boundary. The original concentration function has this additional "background flow" of contaminants of constant concentration with respect to the new function obtained after the change of variables.
+
+\subsection{Page 12}
+
+\begin{enumerate}
+
+\item Number: 1. $\Gamma_A$ is the part of the $\partial \Omega = \Gamma$ boundary that is above the ground ("A" stands for "above"). We use this notation ($\Gamma_A$ in the index) to emphasise that the functions in this space are required to vanish only on this given part of the entire $\Gamma$ boundary.
+
+\item Number: 2. The missing "A" has been added. The definition has been updated with the appropriate vanishing $\partial^\alpha v = 0$ requirements. We do need this definition for $k=2$ in Definition 1 and Definition 2 for the $\tilde{C}$ test function.
+
+\end{enumerate}
+
+\subsection{Page 13}
+
+Number: 1. As the paper has a section called Notations in the beginning dedicated only to clarify certain notations, and since the definition of $b$ is given there (Point \textit{n)}), we feel like it is possibly redundant to mention more about it at this point.
+
+\subsection{Page 15}
+
+\begin{enumerate}
+
+\item Number: 1. The nonlinear terms fall out because of the divergence-free condition and integrating by parts using the boundary conditions. For example, using integration by parts and exploiting that we do not have boundary terms as $\mathbf{u} = 0$ on the whole $\partial \Omega = \Gamma$ boundary, the $(\mathbf{u} \cdot \nabla u_1, u_1)$ inner product is equal to $ - \int_\Omega (\nabla \cdot \mathbf{u}) \cdot u_1^2 - \int_\Omega \mathbf{u} u_1 \nabla u_1.$ Hence, using div($\mathbf{u}$) = 0, we have
+
+$$ \int_\Omega u_j \partial_j u_1 \cdot u_1 = - \int_\Omega u_j u_1 \partial_j u_1,$$
+
+thus these nonlinear terms are zero.
+
+On the other hand, the $b(\mathbf{u}_h) \cdot \mathbf{u}_H$ term vanishes as a direct consequence of the definition of $b$ (Notations / \textit{n)}), as 
+
+$$b(\mathbf{u}_h) \cdot \mathbf{u}_H = \alpha (-u_2, u_1) \cdot (u_1, u_2) = \alpha \cdot 0 = 0.$$
+
+\item Number: 2. For better readability we prefer to keep the larger bracket.
+
+\end{enumerate}
+
+\subsection{Page 17}
+
+Number: 1. The time shift parameter $h$ is a non-negative number here (we take the norm $\norm{\tau_h \mathbf{u}_H - \mathbf{u}_H}$ in the $L^p(0, T-h, \mathbf{Y})$ space, thus, specifically, on the time interval $[0, T-h]$). The respective criteria for a negative $h$ value would be $\norm{\tau_h \mathbf{u}_H - \mathbf{u}_H}_{L^p(h, T, \mathbf{Y})} \leq \varphi(h) + \psi(\epsilon).$ For clarity we have noted that $h$ is non-negative in our description.
+
 \nocite{*}
 \bibliographystyle{abbrv}
 \begin{thebibliography}{1}
