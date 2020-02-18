@@ -11,6 +11,7 @@
 \usepackage{array}
 \usepackage{outlines}
 \usepackage{setspace}
+\usepackage{hyperref}
 \usepackage[colorinlistoftodos]{todonotes}
 \definecolor{green}{rgb}{0.4, 0.69, 0.2}
 \definecolor{asparagus}{rgb}{0.53, 0.66, 0.42}
@@ -43,7 +44,7 @@
 
 The principal reason why our approach is different than the shallow water case is that we perform asymptotical analysis. In this process it is crucial to keep every term, however small their order is. Other approaches such as using an averaged version of a function or omitting terms that are smaller than a certain order are not admissible in our case --- we investigate the asymptotic behaviour of solutions and thus we are bound to keep each term precisely.
 
-\subsection{The matrix $\mathbf{M}$}
+\subsection{The matrix $\mathbf{M}$}\label{M---lambda}
 
 \begin{enumerate}
 
@@ -116,11 +117,49 @@ Further references have been added.
 
 \subsection{p. 6-7 discussion around pollution source}
 
+We have chosen to use the "approximated" terminology and throughout the paper we have replaced the term "nascent" with this. Furthermore, we have shortened the description of the pollution source.
+
 \subsection{Definition 1 and 2}
+
+These definitions have been updated.
 
 \section{Typos, Grammar}
 
 \subsection{Extra space following each displayed equation}
+
+The additional empty lines have been eliminated.
+
+\section{Further comments}
+
+\subsection{Page 4}
+Number: 2. To our knowledge, "analogues" is a noun in plural form, while "analogous" is an adjective. Since in our text we use this word as "air-analogous version", hence as an adjective, we feel that the "ou" spelling is the one we need. (e.g. \href{https://www.merriam-webster.com/dictionary/analogue}{https://www.merriam-webster.com/dictionary/analogue})
+
+\subsection{Page 6}
+
+\begin{enumerate}
+  \item Number: 1. As it is described in page 5, "$x$,$y$ and $z$ are oriented towards east, north, and upwards, respectively," and in this case the $\mathbf{w}$ term takes the orientation $\mathbf{w} = f \cdot (0, \cos(l(y)), \sin(l(y))),$ where $l$ is the latitude, and $f$ is the module (see \cite{azerad2001mathematical} for example). For simplicity we denote $2 \mathbf{w} = (0, \beta, \alpha).$ As for the question regarding whether the Earth rotation angular speed makes sense in our approach, we highlight that we do not "flatten out" the Earth: it is still described as a rotating globe. We focus our attention on a local area on the surface of this rotating globe, and we approximate this surface with a tangent plane. This plane is still assumed to be rotating, hence we have the effect of the Coriolis force in our model.
+  \item Number: 2. Our system and our theoretical result are principally set in the framework of the atmosphere and pollutants, but we aim to leave space for generalisations and further natural transplantations of the model. For example, beyond the example of the atmosphere, the mathematical result and system itself can be used to describe phenomenon such as sand mixing in the ocean, and possibly other physical processes that right now are unpredictable for us. The diffusion matrix can be calibrated as necessary, our results are valid whether we use a diagonal matrix or not, we never assumed or exploited the non-diagonal terms to be non-zero. We simply chose to work with the more general case, allowing these terms to be either zero or non-zero depending on the concrete case the model is applied to.
+\end{enumerate}
+
+\subsection{Page 7}
+
+\begin{enumerate}
+
+  \item Number: 3. $\lambda$ is independent of $\epsilon.$ This issue is explained in detail Section \ref{M---lambda} of this document.
+  \item Number: 4. We have decided to avoid concentration definitions that include technical terms from chemistry unnecessarily overshadowing mathematical clarity, thus we simply use mass / volume dimensions to grasp concentration. Conversion rules to ppmv units can be found for example in \href{https://en.wikipedia.org/wiki/Air\_pollutant\_concentrations}{https://en.wikipedia.org/wiki/Air\_pollutant\_concentrations}.
+  \item Number: 8. We mean that it is constant with respect to $\mathbf{x}$ and $t$ (in the case of $S^\epsilon,$ for a given $\epsilon$ value).
+  \item Number: 11. As the word "smoke" might suggest that we consider particles from a source of burning, we use the word "contaminant".
+  
+\end{enumerate}
+
+\subsection{Page 8}
+
+\begin{enumerate}
+
+\item Number: 8. As detailed at a later point in the article, in Remark 6 specifically, there are several good choices to give concrete shape to the source function. We chose one to give an example, but as long as the requirements of smoothness and physical meaningfulness are satisfied, several other options are possible.
+\item Number: 9. The constant $\gamma$ is indeed $\pi ^ {3/2}.$ Since the exact numerical value of this constant does not play an important role in the calculations, we omit its value for simplicity.
+
+\end{enumerate}
 
 \nocite{*}
 \bibliographystyle{abbrv}
@@ -135,6 +174,12 @@ S.~Danilov, G.~Kivman, and J.~Schr{\"o}ter.
 L.~D. Talley.
 \newblock {\em Descriptive physical oceanography: an introduction}.
 \newblock Academic press, 2011.
+
+\bibitem{azerad2001mathematical}
+P.~Az{\'e}rad and F.~Guill{\'e}n.
+\newblock Mathematical justification of the hydrostatic approximation in the
+  primitive equations of geophysical fluid dynamics.
+\newblock {\em SIAM Journal on Mathematical Analysis}, 33(4):847--859, 2001.
 
 \end{thebibliography}
 
