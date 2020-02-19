@@ -201,8 +201,8 @@ P = \frac{1}{\epsilon} C^\epsilon, \quad Q = \frac{1}{\epsilon} S^\epsilon.
 %
 In this model we will use localised point sources as suggested in \cite{zhuk2016source} and we use what is called a parametrised approximated delta function $\delta_\kappa$ (a Gaussian distribution, specifically) to describe the source term $S^\epsilon$.
 
-Let us consider a gas plume with intensity $I$ originating at emission coordinates $\mathbf{x}_s$ beginning at time $t_s$. At the beginning we assume zero concentration.
-An abrupt gas emission is modelled by a source term represented as a product of an approximated delta function $\delta_\kappa (\mathbf{x} - \mathbf{x}_s)$ (centered at $\mathbf{x}_s$ with a constant parameter $\kappa$) and a scaled Heaviside function $s$ centred at time (switching from 0 to $I$ at time $t_s.$)
+Let us consider a contaminant plume with intensity $I$ originating at emission coordinates $\mathbf{x}_s$ beginning at time $t_s$. At the beginning we assume zero concentration.
+An abrupt emission is modelled by a source term represented as a product of an approximated delta function $\delta_\kappa (\mathbf{x} - \mathbf{x}_s)$ (centered at $\mathbf{x}_s$ with a constant parameter $\kappa$) and a scaled Heaviside function $s$ centred at time (switching from 0 to $I$ at time $t_s.$)
 In fact, this source term models the continuous emission of the contaminant at constant rate and fixed location.
 Basically $s(t;t_s)$ is a function which activates the source, namely $s(t;t_s) := IH(t - t_s).$ We arrive to the complete source term model of the form
 %
@@ -410,6 +410,8 @@ We need to define the following spaces:
 \[ H_0 (\partial_3, \Omega) = \overline{C_0 ^\infty (\Omega)}^{H (\partial_3, \Omega)} = \{ v \in H(\partial_3, \Omega); v n_3 = 0 \text{ on } \Gamma \} \]
 %
 \[ \mathbf{W} = \{ \mathbf{u} \in H^1_{\Gamma_A} (\Omega) \times H^1_{\Gamma_A} (\Omega) \times H_0 (\partial_3, \Omega); \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \} \]
+
+Furthermore we introduce the notation $b(\mathbf{u}_H)$ = $\alpha (-u_2 , u_1).$
 
 Then the weak formulation of the hydrostatic system (\ref{HNSC1}) - (\ref{HNSC8}) takes the following form.
 
