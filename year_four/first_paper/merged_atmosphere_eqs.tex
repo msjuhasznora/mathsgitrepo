@@ -149,7 +149,7 @@ The corresponding scaling regarding the kinematic, pressure and viscosity terms 
 \[v_x = u_1^{\epsilon}, \quad v_y = u_2^{\epsilon}, \quad v_z = \epsilon u_3^{\epsilon}, \quad p = p^{\epsilon}, \]
 \[\nu_x = \nu_1, \quad \nu_y = \nu_2 , \quad \nu_z = \epsilon ^ 2\nu_3, \]
 %
-where the latter embodies the different eddy viscosity hypothesis that we mentioned earlier, and $p$ is the pressure term including the gravity potential $\varphi,$ i.e., $p = q - \varphi$. Basically the scaling of the viscosity parameters can be heuristically deduced from the viscosity dimensions: $[\nu_{x_i}] = \text{typical length}_i^2 / \text{typical time}$, more details on the subject can be found in \cite{besson1992some}, \cite{azerad2001mathematical}.
+where the latter embodies the different eddy viscosity hypothesis that we mentioned earlier, and $p$ is the pressure term including the gravity potential $\varphi,$ i.e., $p = q - \varphi$. Basically the scaling of the viscosity parameters can be heuristically deduced from the viscosity dimensions: $[\nu_{x_i}] = \text{typical length}_{x_i}^2 / \text{typical time}$, more details on the subject can be found in \cite{besson1992some}, \cite{azerad2001mathematical}.
 
 Note that from this point we have $\nabla = (\partial_1, \partial_2, \partial_3) $ and $ \Delta_\nu = \nu_1 \partial^2_{11} + \nu_2 \partial^2_{22} + \nu_3 \partial^2_{33} $.
 
@@ -212,7 +212,7 @@ S_\kappa (t, t_s, x, x_s) = s(t; t_s) \delta_\kappa (\mathbf{x} - \mathbf{x}_s),
 %
 while in the limit model the source term $S$ naturally stands for the Dirac $\delta$ distribution.
 
-Eventually, as we mentioned before, we use a Gaussian to approximate the delta function to represent the source, so it is convenient to reformulate (\ref{approxsourceterm}) in terms of $\epsilon$, in a fixed proportion to the standard deviation parameter of the Gaussian distribution describing the source. Thus, we choose $\kappa$ to be $\epsilon$ and the following function will give shape to the source term:
+Eventually, as we mentioned before, we use a Gaussian to approximate the delta function to represent the source, so it is convenient to reformulate (\ref{approxsourceterm}) in terms of $\epsilon.$ In particular, we choose the latter to be in a fixed proportion to the standard deviation parameter $\sigma$ of the Gaussian distribution describing the source (specifically, $2\sigma^2 = \epsilon^2$). In other words we set $\kappa$ to be $\epsilon$ and the following function will give shape to the source term:
 
 \[\delta_\epsilon (\mathbf{x}-\mathbf{x_s}) = \gamma \epsilon^{-3} e ^ {\frac{-\abs{\mathbf{x}-\mathbf{x_s}}^2}{\epsilon^2}};\]
 %
@@ -398,17 +398,17 @@ Here $S$ stands for the $\delta$ limit distribution. We keep the notation $S$ fo
 In this section we describe the weak formulation of the merged equations in both the anisotropic and hydrostatic case we are going to use in the paper, and we state our main result.
 
 We need to define the following spaces:
-
+%
 \[ C^{\infty}_{\Gamma_A} (\Omega) = \{ \varphi \in C^\infty (\bar{\Omega}); \varphi = 0 \text{ on some neighbourhood of } \Gamma_A \} \]
-
+%
 \[ H^k_{\Gamma_A} (\Omega) = \overline{C_{\Gamma_A} ^ \infty (\Omega)} ^ {H^k (\Omega)} = \{ v \in H^k(\Omega); \partial^\alpha v=0 \text{ on } \Gamma_A \text{ for any } \abs{\alpha} < k \} \]
-
+%
 \[ \mathbf{V} = \{ \mathbf{v} \in H^1_{\Gamma_A} (\Omega) \times H^1_{\Gamma_A} (\Omega) \times H^1_0 (\Omega); \nabla \cdot \mathbf{v} = 0 \text{ in } \Omega \} \]
-
+%
 \[ H (\partial_3, \Omega) = \{ v \in L^2(\Omega); \partial_3 v \in L^2 (\Omega)\} \]
-
+%
 \[ H_0 (\partial_3, \Omega) = \overline{C_0 ^\infty (\Omega)}^{H (\partial_3, \Omega)} = \{ v \in H(\partial_3, \Omega); v n_3 = 0 \text{ on } \Gamma \} \]
-
+%
 \[ \mathbf{W} = \{ \mathbf{u} \in H^1_{\Gamma_A} (\Omega) \times H^1_{\Gamma_A} (\Omega) \times H_0 (\partial_3, \Omega); \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \} \]
 
 Then the weak formulation of the hydrostatic system (\ref{HNSC1}) - (\ref{HNSC8}) takes the following form.
