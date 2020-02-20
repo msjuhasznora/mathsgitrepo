@@ -351,7 +351,7 @@ Finally, the boundary conditions to describe the anisotropic system (\ref{ANSC1}
 \end{equation}
 Note that we have a domain where the lower and upper boundaries represent a physically existent layer (i.e. the ground and the planetary boundary layer), but outside the lateral boundary the physical world continues without influence and without any particular external condition. On boundaries of such nature we have to apply OBCs (open boundary conditions), which is not a trivial task, see for example \cite{wang2014ocean}. We need to avoid any spurious reflection or constraint which is unnatural, but at the same time we want the model to remain mathematically manageable.
 
-If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and $\epsilon$ in the anisotropic equations (\ref{ANSC1}) - (\ref{ANSC8}), we formally arrive to the following hydrostatic Navier-Stokes equations (i.e., primitive equations) combined with pollution:
+If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and $\epsilon$ in the anisotropic equations (\ref{ANSC1}) - (\ref{ANSC7}), (\ref{ANSC8}), we formally arrive to the following hydrostatic Navier-Stokes equations (i.e., primitive equations) combined with pollution:
 %
 \begin{equation} \label{HNSC1}
 \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\alpha u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T)
@@ -373,18 +373,16 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
 \partial_t C + \mathbf{u} \cdot \nabla C = \nabla \cdot (\mathbf{M} \nabla C) + S \text{ in } \Omega \times (0,T)
 \end{equation}
 %
-\begin{equation} \label{HNSC6}
-u_1 = u_2 = u_3 n_3 = 0 \text{ on } \Gamma \times (0,T)
-\end{equation}
-%
 \begin{equation} \label{HNSC7}
 u_i (\cdot, t=0) = u_{0 i}, C (\cdot, t=0) = C_0 \text{ in } \Omega, \text{$i$ = 1,2}
 \end{equation}
 %
 \begin{equation} \label{HNSC8}
 \begin{split}
+& u_1 = u_2 = u_3 n_3 = 0 \text{ on } \Gamma \times (0,T) \\
 & C = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
-& \partial_1 C = \sigma_1, \partial_2 C = \sigma_2, \partial_3 C = 0, \boldsymbol{\sigma} = (\sigma_1, \sigma_2, 0) \in L^2(0,T; \Gamma_G)\\
+& \partial_1 C = \sigma_1, \partial_2 C = \sigma_2, \partial_3 C = 0 \text{ on } \Gamma_G \times (0,T), \\
+& \boldsymbol{\sigma} = (\sigma_1, \sigma_2, 0) \in L^2(0,T; \Gamma_G)\\
 \end{split}
 \end{equation}
 %
@@ -417,7 +415,7 @@ Then the weak formulation of the hydrostatic system (\ref{HNSC1}) - (\ref{HNSC8}
 
 \begin{definition} \label{definitionhydrostaticWF}
 
-The pair $(\mathbf{u}, C)$ is called a weak solution of the a hydrostatic system (\ref{HNSC1}) - (\ref{HNSC5}) subject to (\ref{HNSC6}) - (\ref{HNSC8}) if $\mathbf{u} = (\mathbf{u}_H, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_H \in L^\infty (0,T; L^2(\Omega)^2),$ and $C \in L^\infty(0,T; L^2(\Omega))$ with $C \in L^2(0,T; H^1(\Omega))$, moreover $\mathbf{u}$ and $C$ satisfy the integral identities
+The pair $(\mathbf{u}, C)$ is called a weak solution of the a hydrostatic system (\ref{HNSC1}) - (\ref{HNSC5}) subject to (\ref{HNSC7}) - (\ref{HNSC8}) if $\mathbf{u} = (\mathbf{u}_H, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_H \in L^\infty (0,T; L^2(\Omega)^2),$ and $C \in L^\infty(0,T; L^2(\Omega))$ with $C \in L^2(0,T; H^1(\Omega))$, moreover $\mathbf{u}$ and $C$ satisfy the integral identities
 %
 \begin{equation}
 \begin{split}
@@ -444,7 +442,7 @@ Note that the term $\int_0^T (S,\tilde{C}) \diff t$ makes sense since in this ca
 %
 The existence of weak solution for the hydrostatic system (\ref{HNSC1}) - (\ref{HNSC8}) can be proved in the spirit of \cite{temam2005some}. In appendix A we will outline the main steps of the proof and the differences compared to the ocean model.
 
-The weak form of the anisotropic system (\ref{ANSC1}) - (\ref{ANSC8}) is as follows.
+The weak form of the anisotropic system (\ref{ANSC1}) - (\ref{ANSC7}), (\ref{ANSC8}) is as follows.
 
 \begin{definition} \label{definitionanisotropicWF}
 
@@ -473,7 +471,7 @@ for all $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_H, \tilde{u}_3) \in H^1 (0,T;\
 
 Note that since in our case the source term $S^\epsilon$ is given by (\ref{approxsourceterm}), the last term in (\ref{anisotropicWF_C}) is well defined. If we use a source function of a different and more general form, it suffices to be bounded in $L_t^2 L_x^2$ for the weak formulation to make sense.
 
-We will omit the proof of the existence of weak solutions (see Definition \ref{definitionanisotropicWF}.) for the anisotropic system (\ref{ANSC1}) - (\ref{ANSC8}) since it follows by standard finite-dimensional Galerkin approximation.
+We will omit the proof of the existence of weak solutions (see Definition \ref{definitionanisotropicWF}.) for the anisotropic system (\ref{ANSC1}) - (\ref{ANSC7}), (\ref{ANSC8}) since it follows by standard finite-dimensional Galerkin approximation.
 
 Now we are ready to state our main result.
 
@@ -488,7 +486,7 @@ This section is devoted to the proof of Theorem \ref{maintheorem}. In the extend
 
 \subsection{Energy inequality}
 
-As we mentioned before, one of the most fundamental tools in this proof is the energy inequality. If we derive it for the anisotropic system (\ref{ANSC1}) - (\ref{ANSC8}), we obtain that for a.e. $t \in [0,T]$ the following holds:
+As we mentioned before, one of the most fundamental tools in this proof is the energy inequality. If we derive it for the anisotropic system (\ref{ANSC1}) - (\ref{ANSC7}), (\ref{ANSC8}), we obtain that for a.e. $t \in [0,T]$ the following holds:
 %
 \begin{equation}
 \begin{split}
@@ -606,7 +604,7 @@ The estimate $\norm{\tau_h C^\epsilon - C^\epsilon}_{L^2(0,T-h, {H^2}^*)} \leq c
 \end{prop}
 
 \begin{proof}
-The spatial weak form of the anisotropic system (\ref{ANSC5}) is
+The spatial weak form of the anisotropic concentration equation (\ref{ANSC5}) is
 %
 \begin{equation}
 \bigg (\frac{\partial C^\epsilon}{\partial t}, \tilde{C} \bigg ) - (\mathbf{u}^\epsilon C^\epsilon, \nabla \tilde{C}) + (\mathbf{M} \nabla C^\epsilon, \nabla \tilde{C}) = (S^\epsilon, \tilde{C}), \label{spatialWeakForm}
