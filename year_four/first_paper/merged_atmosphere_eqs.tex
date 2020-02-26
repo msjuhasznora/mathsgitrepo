@@ -451,7 +451,7 @@ The pair $(\mathbf{u}^\epsilon, C^\epsilon)$ is called a weak solution of the an
 \begin{equation}
 \begin{split}
 & \int_0^T \bigg [ -(\mathbf{u}^\epsilon_H, \partial_t \mathbf{\tilde{u}}_H) + (\nabla_\nu \mathbf{u}^\epsilon_H, \nabla_\nu \mathbf{\tilde{u}}_H) - (\mathbf{u}^\epsilon_H, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{\tilde{u}}_H) + (b(\mathbf{u}^\epsilon_H), \mathbf{\tilde{u}}_H) \bigg ] \diff t \\
-& + \epsilon \beta \int_0 ^ T \big [ (u_3 ^\epsilon, \tilde{u}_1) - (u_1^\epsilon, \tilde{u}_3) \big ] \diff t\\
+& + \epsilon \int_0 ^ T \big [ (\beta u_3 ^\epsilon, \tilde{u}_1) - (\beta u_1^\epsilon, \tilde{u}_3) \big ] \diff t\\
 & + \epsilon^2 \int _0 ^ T \big [ -(u_3^\epsilon, \partial_t \tilde{u}_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, \tilde{u}_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu \tilde{u}_3) \big ] \diff t \\
 & = (\mathbf{u}^\epsilon_{0H}, \mathbf{\tilde{u}}_H(0)) + \epsilon^2 (u_{03}^\epsilon, \tilde{u}_3 (0)) \diff t \raisetag{20pt} \label{anisotropicWF_U}
 \end{split}
@@ -812,7 +812,7 @@ with
 
 \[ l(\tilde{U}) = - \int_\Omega S \tilde{C} \diff \omega + \big[((\nabla C)^ T \mathbf{M}) \tilde{C} \vec{\mathbf{1}} \big] _{\Gamma_G}. \]
 
-Here the term $b(\mathbf{u}_H) = \alpha (-u_2, u_1)$ represents the cross product, and we use the fact that the vertical velocity $w$ can be expressed as $u_3 = u_3(\mathbf{u}_H)$ because the divergence of the three dimensional velocity is zero.
+Here the term $b(\mathbf{u}_H)$ represents the $\alpha (-u_2, u_1)$ vector, and we use the fact that the vertical velocity $w$ can be expressed as $u_3 = u_3(\mathbf{u}_H)$ because the divergence of the three dimensional velocity is zero.
 
 \textbf{Step 3.} It is straightforward to see that $a$ is trilinear continuous, the coercivity of $a$ is also trivial, moreover $e$ is bilinear continuous and $e(U,U) = 0$.
 
