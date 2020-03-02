@@ -370,7 +370,7 @@ In the next two sections we consider two different coordinate choices, and withi
 
 Our first step is the orientation of the coordinate system. Here we set the axes to be independent from the wind direction: $x, y$ and $z$ are oriented towards east, north, and upwards, respectively. The coordinate system we obtain this way is the so-called geophysical coordinate system. This is a widely used coordinate system choice because in this specific system the rotation vector, and as a consequence, the Coriolis force takes a simpler form.
     
-To complete the scaling process, we combine equations (\ref{scaling_eq_x}), (\ref{scaling_eq_vpnu}), (\ref{scaling_eq_c}) with an equation for the diffusivity constants in (\ref{diffusive}). We use a rescaling methodology analogous to that applied to the viscosity terms.:
+To complete the scaling process, we combine equations (\ref{scaling_eq_x}), (\ref{scaling_eq_vpnu}), (\ref{scaling_eq_c}) with an equation for the diffusivity constants in (\ref{diffusive}). We use a rescaling methodology analogous to that applied to the viscosity terms:
     
 \begin{gather}\label{scaling_eq_diffusion_gfc}
 \mathbf{K}
@@ -379,7 +379,7 @@ To complete the scaling process, we combine equations (\ref{scaling_eq_x}), (\re
  =
   \begin{bmatrix}
     M_{11} & M_{12} & \epsilon M_{13} \\ M_{21} & M_{22} & \epsilon M_{23} \\ \epsilon M_{31} & \epsilon M_{32} & \epsilon^2 M_{33}
-  \end{bmatrix}.
+  \end{bmatrix},
 \end{gather}
 
 where
@@ -556,7 +556,7 @@ As we mentioned before, the case we are investigating is that of domains over a 
 
 Specifically, for the pollution concentration reaching the ground level we use a similar approach as the one classically used for the wind traction reaching the top of the ocean (see for example \cite{azerad2001mathematical}, \cite{temam2005some}). We assume that the functions $\partial_1 c^\epsilon, \partial_2 c^\epsilon, \partial_3 c^\epsilon$ are equal to some sufficiently regular functions defined on the respective boundary. More accurately, we assume that we have $\nabla c^\epsilon = \boldsymbol{\sigma}$ on the lower boundary, where $\boldsymbol{\sigma} \in L^2(0,T;L^2(\Gamma_G))$, and the $\sigma_i$ terms denote the components of $\boldsymbol{\sigma}$. In particular in this inland case $\sigma_3$ is equal to zero on the $\Gamma_G$.
   
-Finally, the boundary conditions to describe the anisotropic system (\ref{ANSC1_coordinates_GFC}) - (\ref{ANSC5_coordinates_GFC}), (\ref{ANSC_init_coordinates_GFC}) can be summarised as follows:
+Finally, the boundary conditions to describe the anisotropic system (\ref{ANSC1_coordinates_GFC}) - (\ref{ANSC_init_coordinates_GFC}) can be summarised as follows:
 %
 \begin{equation} \label{ANSC_bc_coordinates_GFC}
   \begin{split}
@@ -751,7 +751,7 @@ The two main viewpoints we keep in mind setting up a scenario described above ar
 
 In this chapter we define the first main analytical setting and verify a convergence result between the anisotropic equations and the primitive equations planted into the system.
 
-We choose the framework of weak solutions, we work in geophysical coordinates, the domain is set to a local domain with classical non-periodic boundaries and in Section \ref{proof_weak_gfc} we prove that for $\mathbf{u}_0 \in L^2 (\Omega), c_0 \in L^2(\Omega)$ initial data any weak solution of the anisotropic equations (\ref{ANSC1_coordinates_GFC})--(\ref{ANSC5_coordinates_GFC}), (\ref{ANSC_init_coordinates_GFC}), (\ref{ANSC_bc_coordinates_GFC}) defined below converges weakly to a weak solution of the hydrostatic system (\ref{HNSC1_coordinates_GFC})--(\ref{HNSC5_coordinates_GFC}), (\ref{HNSC_init_coordinates_GFC}), (\ref{HNSC_bc_coordinates_GFC}). To complete our proof, in Section \ref{existenceweakhydrostatic} we show the existence of weak solutions of the limit system.
+We choose the framework of weak solutions, we work in geophysical coordinates, the domain is set to a local domain with classical non-periodic boundaries and in Section \ref{proof_weak_gfc} we prove that for $\mathbf{u}_0 \in L^2 (\Omega), c_0 \in L^2(\Omega)$ initial data any weak solution of the anisotropic equations (\ref{ANSC1_coordinates_GFC}) - (\ref{ANSC_bc_coordinates_GFC}) defined below converges weakly to a weak solution of the hydrostatic system (\ref{HNSC1_coordinates_GFC}) - (\ref{HNSC_bc_coordinates_GFC}). To complete our proof, in Section \ref{existenceweakhydrostatic} we show the existence of weak solutions of the limit system.
 
 Section \ref{visualizationFEM} examines the convergence phenomena in a different light: here we use the finite element method and the software components of FEniCS to visualise our results.
 
@@ -808,7 +808,7 @@ As suggested in Section \ref{eqsdescribingatmpluspollution_gfc}, the hydrostatic
   \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
 %
-\begin{equation} \label{HNSC5_coordinates_GFC}   
+\begin{equation} \label{HNSC5_coordinates_GFC}
   \partial_t c + \mathbf{u} \cdot \nabla c = \nabla \cdot (\mathbf{M} \nabla c) + s \text{ in } \Omega \times (0,T)
 \end{equation}
 % 
@@ -847,7 +847,7 @@ We need to define the following spaces:
 
 Furthermore we introduce the notation $b(\mathbf{u}_H)$ = $\gamma (-u_2 , u_1).$
 
-Then the weak formulation of the hydrostatic system (\ref{HNSC1_coordinates_GFC}) - (\ref{HNSC5_coordinates_GFC}), \ref{HNSC_init_coordinates_GFC}), \ref{HNSC_bc_coordinates_GFC}) takes the following form.
+Then the weak formulation of the hydrostatic system (\ref{HNSC1_coordinates_GFC}) - (\ref{HNSC_bc_coordinates_GFC}) takes the following form.
   
 \begin{definition} \label{definitionhydrostaticWF_gfc}
 
@@ -877,9 +877,9 @@ Note that the term $\int_0^T (s,\tilde{c}) \diff t$ makes sense since in this ca
   
 \[ (s,\tilde{c}) = \int_\Omega \delta(\mathbf{x} - \mathbf{x}_s) \tilde{c}(\mathbf{x}) \diff \mathbf{x} = \tilde{c}(\mathbf{x}_s).\]
   
-The existence of weak solution for the hydrostatic system (\ref{HNSC1_coordinates_GFC}) -- (\ref{HNSC5_coordinates_GFC}), (\ref{HNSC_init_coordinates_GFC}), (\ref{HNSC_bc_coordinates_GFC}) can be proved in the spirit of \cite{temam2005some}. In Section \ref{existenceweakhydrostatic} we will outline the main steps of the proof and the differences compared to the ocean model.
+The existence of weak solution for the hydrostatic system (\ref{HNSC1_coordinates_GFC}) - (\ref{HNSC_bc_coordinates_GFC}) can be proved in the spirit of \cite{temam2005some}. In Section \ref{existenceweakhydrostatic} we will outline the main steps of the proof and the differences compared to the ocean model.
 
-The weak form of the anisotropic system (\ref{ANSC1_coordinates_GFC}) -- (\ref{ANSC5_coordinates_GFC}), (\ref{ANSC_init_coordinates_GFC}), (\ref{ANSC_bc_coordinates_GFC}) is as follows.
+The weak form of the anisotropic system (\ref{ANSC1_coordinates_GFC}) - (\ref{ANSC_bc_coordinates_GFC}) is as follows.
   
 \begin{definition} \label{definitionanisotropicWF_gfc}
 
@@ -916,7 +916,7 @@ Regarding the smoothness of the initial data, we use the
 
 initial regularities classically used in the weak solution framework.
 
-We will omit the proof of the existence of weak solutions (see Definition \ref{definitionanisotropicWF_gfc}.) for the anisotropic system (\ref{ANSC1_coordinates_GFC}) - (\ref{ANSC5_coordinates_GFC}), (\ref{ANSC_init_coordinates_GFC}), (\ref{ANSC_bc_coordinates_GFC}) since it follows by standard finite-dimensional Galerkin approximation using (\ref{initialregularities_weak_gfc}).
+We will omit the proof of the existence of weak solutions (see Definition \ref{definitionanisotropicWF_gfc}.) for the anisotropic system (\ref{ANSC1_coordinates_GFC}) - (\ref{ANSC_bc_coordinates_GFC}) since it follows by standard finite-dimensional Galerkin approximation using (\ref{initialregularities_weak_gfc}).
 
 Now we are ready to state our main result.
 
@@ -931,7 +931,7 @@ This section is devoted to the proof of Theorem \ref{maintheorem_weak_GFC}. In t
 
 \subsection{Energy inequality}
   
-As we mentioned before, one of the most fundamental tools in this proof is the energy inequality. If we derive it for the anisotropic system (\ref{ANSC1_coordinates_GFC}) - (\ref{ANSC5_coordinates_GFC}), (\ref{ANSC_init_coordinates_GFC}), (\ref{ANSC_bc_coordinates_GFC}), we obtain that for a.e. $t \in [0,T]$ the following holds:
+As we mentioned before, one of the most fundamental tools in this proof is the energy inequality. If we derive it for the anisotropic system (\ref{ANSC1_coordinates_GFC}) - (\ref{ANSC_bc_coordinates_GFC}), we obtain that for a.e. $t \in [0,T]$ the following holds:
 \begin{equation}
     \begin{split}  
     & \frac{1}{2} (\norm{\mathbf{u}_h^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{c^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \big[ \norm{\nabla_\nu \mathbf{u}_h^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \big] \diff \tau \\
@@ -1174,7 +1174,7 @@ for almost any $x \in \Omega$ and all $\xi \in \mathbb{R}^3$.
 %%% EXISTENCE WEAK HYDROSTATIC %%%
 \section{The existence of weak solution of the hydrostatic system of the polluted atmosphere}\label{existenceweakhydrostatic}
 
-In this section for completeness we sketch the proof of the existence of weak solutions of the system (\ref{HNSC1_coordinates_GFC}) - (\ref{HNSC5_coordinates_GFC}), (\ref{HNSC_init_coordinates_GFC}), (\ref{HNSC_bc_coordinates_GFC}).
+In this section for completeness we sketch the proof of the existence of weak solutions of the system (\ref{HNSC1_coordinates_GFC}) - (\ref{HNSC_bc_coordinates_GFC}).
 
 The idea is that the polluted atmosphere can be viewed as the air-analogous version of the salty sea water in terms of the equations that represent it. In both cases we have a fluid which can be seen approximately as an incompressible fluid carrying some other particles in a significant concentration, the basis fluid motion is well described by the incompressible Navier-Stokes equations, and the additional concentration is described by an advection-diffusion equation. 
 
@@ -1300,17 +1300,15 @@ finally we also adjust the original steps that provide the antisymmetric propert
   
   \[  \int_\Omega u_3 \tilde{c} \nabla c^\# \diff \omega \leq \norm{u_3}_{L^2} {\| \tilde{c} \|}_{L^3} {\| \nabla c^\# \|}_{L^6}.\]
   
-  Note that since our definition of the form $b$ is different from \cite{temam2005some}, thus we need to skip the switch of function arguments caused by the application of $ \lvert b(U, \tilde{U}, U^\#) \rvert = \lvert b(U, U^\#, \tilde{U}) \rvert$, otherwise the bound can not be closed.
+Note that since our definition of the form $b$ is different from \cite{temam2005some}, thus we need to skip the switch of function arguments caused by the application of $ \lvert b(U, \tilde{U}, U^\#) \rvert = \lvert b(U, U^\#, \tilde{U}) \rvert$, otherwise the bound can not be closed.
   
-  Now, using the $\norm{\varphi}_{L^3} \lesssim \norm{\varphi}_{L^2}^{1/2} \norm{\varphi}_{H^1}^{1/2}$ Sobolev-Ladyzhenskaya inequality in space dimension $3,$ we can bound this term by
-  
-  \[ \norm{\mathbf{u}_h} \| U^\# \| _{V_{(2)}} \lvert \tilde{U} \rvert ^ {1/2} \| \tilde{U} \| ^{1/2} ,\]
-  
-  which gives the inequality.
+Now, using the $\norm{\varphi}_{L^3} \lesssim \norm{\varphi}_{L^2}^{1/2} \norm{\varphi}_{H^1}^{1/2}$ Sobolev-Ladyzhenskaya inequality in space dimension $3,$ we can bound this term by
+\[ \norm{\mathbf{u}_h} \| U^\# \| _{V_{(2)}} \lvert \tilde{U} \rvert ^ {1/2} \| \tilde{U} \| ^{1/2} ,\]
+which gives the inequality.
 
 \end{itemize}
 
-This means that all the necessary properties of the forms $a, b$ and $e$ are equally valid for our set of equations (\ref{HNSC1_coordinates_GFC}) - (\ref{HNSC5_coordinates_GFC}), (\ref{HNSC_init_coordinates_GFC}), (\ref{HNSC_bc_coordinates_GFC}), and we can use them to prove a stationary-case existence theorem identically as the proof is constructed in \cite{temam2005some}. 
+This means that all the necessary properties of the forms $a, b$ and $e$ are equally valid for our set of equations (\ref{HNSC1_coordinates_GFC}) - (\ref{HNSC_bc_coordinates_GFC}), and we can use them to prove a stationary-case existence theorem identically as the proof is constructed in \cite{temam2005some}. 
 
 The weak formulation is as follows.
 
@@ -1429,11 +1427,11 @@ for all $\mathbf{v}, q$ test functions in the appropriate spaces.
 For our specific case however, the variational form of the first step becomes
 
 \begin{equation}
-  \begin{split}
-    & \int_\Omega \frac{1}{\Delta t^n} (\mathbf{u}_h^* - \mathbf{u}_h^{n-1}) \cdot \mathbf{v}_h + \epsilon^2 \int_\Omega \frac{1}{\Delta t^n} (u_3^* - u_3^{n-1}) \cdot v_3 \\
-    & + \int_\Omega \nabla \mathbf{u}_h^{n-1} \cdot \mathbf{u}^{n-1} \cdot \mathbf{v}_h + \epsilon^2 \int_\Omega \nabla u_3^{n-1} \cdot \mathbf{u}^{n-1} \cdot v_3 \\
-    & + \int_\Omega \nabla \mathbf{u}_h^* \cdot \nabla \mathbf{v}_h + \epsilon^2 \int_\Omega \nabla u_3^* \cdot \nabla v_3 = 0.
-  \end{split}
+\begin{split}
+& \int_\Omega \frac{1}{\Delta t^n} (\mathbf{u}_h^* - \mathbf{u}_h^{n-1}) \cdot \mathbf{v}_h + \epsilon^2 \int_\Omega \frac{1}{\Delta t^n} (u_3^* - u_3^{n-1}) \cdot v_3 \\
+& + \int_\Omega \nabla \mathbf{u}_h^{n-1} \cdot \mathbf{u}^{n-1} \cdot \mathbf{v}_h + \epsilon^2 \int_\Omega \nabla u_3^{n-1} \cdot \mathbf{u}^{n-1} \cdot v_3 \\
+& + \int_\Omega \nabla \mathbf{u}_h^* \cdot \nabla \mathbf{v}_h + \epsilon^2 \int_\Omega \nabla u_3^* \cdot \nabla v_3 = 0.
+\end{split}
 \end{equation}
 
 The variational form of the finite element code is thus given by
@@ -1492,11 +1490,11 @@ Note that here we denote the horizontal velocity by \texttt{u1} to express that 
 The boundary conditions are set to mathematically grasp the physical scenario described in iv), thus we use no-slip boundary conditions on the entire basin (i.e. on the lateral boundaries and on the bottom of the water), while on the top we have a wind traction force generating the fluid flow:
 
 \begin{equation} \label{fenics_strong_bcs}
-  \begin{split}
-    & \mathbf{\texttt{u}} = 0 \text{ on } \Gamma_{\text{basin}}, \\
-    & \partial_3 \texttt{u1} = \theta, \texttt{u3} = 0 \text{ on } \Gamma_{\text{top}}, \\
-    & \texttt{c} = \text{ on } \Gamma_{\text{top}}.
-   \end{split}
+\begin{split}
+& \mathbf{\texttt{u}} = 0 \text{ on } \Gamma_{\text{basin}}, \\
+& \partial_3 \texttt{u1} = \theta, \texttt{u3} = 0 \text{ on } \Gamma_{\text{top}}, \\
+& \texttt{c} = \text{ on } \Gamma_{\text{top}}.
+\end{split}
 \end{equation}
 
 The above set of equations might seem over-simplified, but as we will see, the core problems within the system has in fact remained unchanged, and in this new model we can focus our efforts on the main issues.
@@ -2450,7 +2448,7 @@ This section is dedicated to the verification of Theorem \ref{maintheoremWEAK}. 
 
   \subsubsection{Energy inequality and a priori estimates}
   
-  Calculating the energy inequality for the anisotropic system, we obtain that for a.e. $t \in [0,T]$ the following holds:
+Calculating the energy inequality for the anisotropic system, we obtain that for a.e. $t \in [0,T]$ the following holds:
   
   \begin{equation}
     \begin{split}  
@@ -2461,7 +2459,7 @@ This section is dedicated to the verification of Theorem \ref{maintheoremWEAK}. 
     \end{split}
   \end{equation}
   
-  Using standard techniques, the generalised Young inequality with a $\zeta > 0$ constant, the H\"older inequality and the Trace Theorem, (\ref{energyIEQ}) takes the final form
+Using standard techniques, the generalised Young inequality with a $\zeta > 0$ constant, the H\"older inequality and the Trace Theorem, (\ref{energyIEQ}) takes the final form
 
   \begin{equation}
     \begin{split}  
@@ -2515,15 +2513,15 @@ This section is dedicated to the verification of Theorem \ref{maintheoremWEAK}. 
    The convergence of the nonlinear velocity terms (i.e. nonlinear terms that do not include the concentration function), requiring the compactness of $\mathbf{u}_h^\epsilon$, will be the direct consequence of our calculations detailed in the following subsection (see (\ref{horizontal_velocities_convergence}) in Proposition \ref{convrateweakframework}), observe however that for these specific terms the original argument of Chapter \ref{geophysicalchapter} works too. In particular, the convergence of these velocity terms can be shown applying a generalisation of the classical translation criterium of Riesz-Fr\'echet-Kolmogorov (see Theorem \ref{compactnessbyperturbation}) which enables us to get strong convergence for the horizontal velocities. This is achieved by establishing a bound for the perturbation of $\mathbf{u}_h$ of the form $\norm{\tau_\upsilon \mathbf{u}_h - \mathbf{u}_h}_{L^2(0,T-\upsilon, {H^2}^*)} \leq \varphi(\upsilon) + \psi(\epsilon),$ where $\varphi$ and $\psi$ are appropriate functions with their limits vanishing at zero, and $\tau_\upsilon \mathbf{u}_h = \mathbf{u}_h (t+\upsilon) $. After obtaining strong convergence for $\mathbf{u}_h,$ the proof of the convergence for these nonlinear terms can be closed by applying basic interpolation techniques and the generalised H\"older inequality. 
   Finally, as for the concentration-including nonlinear terms, we have the convergence of $(u_i c^\epsilon, \partial_i \tilde{c})$ for $i=1,2,$ since as we mentioned before, we have the strong convergence of the horizontal velocities --- while in the case of $i=3$ this property does not hold for $u_3$ and from the energy bound we do not have more than the weak convergence of $c^\epsilon$. Because of its complexity we handle this specific nonlinear compound product term in the next section.
   
-  \subsubsection{Weak convergence - Part 2.}
+\subsubsection{Weak convergence - Part 2.}
   
-  As we mentioned before, the cornerstone idea for obtaining the convergence of the remaining product term $u_3^\epsilon c^\epsilon$ is to exploit the $H^1$ regularity of the initial horizontal velocity. Indeed, given an $H^1$ initial data for $\mathbf{u}_h,$ according to the theory developed in \cite{cao2007global}, there exists a unique global strong solution for the primitive equations $(\ref{HNSC1_coordinates_DWMC})$ - $(\ref{HNSC4_coordinates_DWMC}).$ We recall here this result (for more details see \cite{cao2007global}).
+As we mentioned before, the cornerstone idea for obtaining the convergence of the remaining product term $u_3^\epsilon c^\epsilon$ is to exploit the $H^1$ regularity of the initial horizontal velocity. Indeed, given an $H^1$ initial data for $\mathbf{u}_h,$ according to the theory developed in \cite{cao2007global}, there exists a unique global strong solution for the primitive equations $(\ref{HNSC1_coordinates_DWMC})$ - $(\ref{HNSC4_coordinates_DWMC}).$ We recall here this result (for more details see \cite{cao2007global}).
   
   \begin{theorem} \label{PE3DWellPosedness}
     Let ${\mathbf{u}_h}_0 \in H^1(\Omega).$ Then there exists a unique strong solution $\mathbf{u}_h$ of the reformulated Primitive Equations $(\ref{HNSC1_coordinates_DWMC})$ - $(\ref{HNSC4_coordinates_DWMC})$, $(\ref{HNSC_init_coordinates_DWMC})$ such that $$\mathbf{u}_h \in C([0, \infty), H^1(\Omega)) \cap L^2_{loc}([0, \infty), H^2(\Omega))$$ and $$\partial_t \mathbf{u}_h \in L^2_{loc} ([0,\infty), L^2(\Omega)).$$
   \end{theorem}
   
-  In more detail, we have the following regularities for the strong solution of the primitive equations for the case of an $H^1$ initial data:
+In more detail, we have the following regularities for the strong solution of the primitive equations for the case of an $H^1$ initial data:
   
   \begin{corollary} \label{StrongSolPE_boundedness}
   
@@ -2533,9 +2531,9 @@ This section is dedicated to the verification of Theorem \ref{maintheoremWEAK}. 
   
   \end{corollary}
   
-  This is a direct consequence of Theorem \ref{PE3DWellPosedness}, but for completeness we also mention that for the simpler case of a periodic domain it has also been verified in \cite{li2019primitive}, where the proof becomes more straightforward thanks to the structure of the domain.
+This is a direct consequence of Theorem \ref{PE3DWellPosedness}, but for completeness we also mention that for the simpler case of a periodic domain it has also been verified in \cite{li2019primitive}, where the proof becomes more straightforward thanks to the structure of the domain.
   
-  The result of Corollary \ref{StrongSolPE_boundedness} on the strong solutions of the primitive equations will be indispensable later, as we will use these strong solution functions for testing the scaled Navier-Stokes equations.
+The result of Corollary \ref{StrongSolPE_boundedness} on the strong solutions of the primitive equations will be indispensable later, as we will use these strong solution functions for testing the scaled Navier-Stokes equations.
   
   The following part of the proof is dedicated to verifying the strong convergence of $u_3^\epsilon,$ and is based on the idea of \cite{li2019primitive} --- our scenario is different however in that \textit{a)} first of all our domain is bounded, while the domain the authors of \cite{li2019primitive} consider is periodic, \textit{b)} we do not assume zero-averaged functions, and finally \textit{c)} in our case the Coriolis terms are incorporated to the model as well. Our strategy in providing the proof is to give a self-contained result that describes all the steps that build up the verification process, but we elaborate in more detail where the above mentioned \textit{a), b), c)} points have a tangible effect. Some technical details that are identical to those in \cite{li2019primitive} will be skipped.
 
