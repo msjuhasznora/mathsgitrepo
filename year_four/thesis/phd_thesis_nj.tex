@@ -9,7 +9,7 @@
 \usepackage{amsthm}
 \usepackage[scr=boondoxo]{mathalfa}
 \usepackage{enumitem}
-\usepackage{float} 
+\usepackage{float}
 \usepackage{array}
 \usepackage{outlines}
 \usepackage{setspace}
@@ -370,7 +370,7 @@ In the next two sections we consider two different coordinate choices, and withi
 
 Our first step is the orientation of the coordinate system. Here we set the axes to be independent from the wind direction: $x, y$ and $z$ are oriented towards east, north, and upwards, respectively. The coordinate system we obtain this way is the so-called geophysical coordinate system. This is a widely used coordinate system choice because in this specific system the rotation vector, and as a consequence, the Coriolis force takes a simpler form.
     
-To complete the scaling process, we combine equations (\ref{scaling_eq_x}), (\ref{scaling_eq_vpnu}), (\ref{scaling_eq_c}) with an equation for the diffusivity constants in (\ref{diffusive}), where we use a rescaling methodology analogous to that applied to the viscosity terms.:
+To complete the scaling process, we combine equations (\ref{scaling_eq_x}), (\ref{scaling_eq_vpnu}), (\ref{scaling_eq_c}) with an equation for the diffusivity constants in (\ref{diffusive}). We use a rescaling methodology analogous to that applied to the viscosity terms.:
     
 \begin{gather}\label{scaling_eq_diffusion_gfc}
 \mathbf{K}
@@ -382,7 +382,7 @@ To complete the scaling process, we combine equations (\ref{scaling_eq_x}), (\re
   \end{bmatrix}.
 \end{gather}
 
-Here
+where
 
 \begin{gather}
  \mathbf{M}
@@ -445,7 +445,7 @@ Later we will take the limit as $\epsilon$ goes to zero, and the above setting w
 
 Further options concerning the shape of the source function can be found in Remark \ref{source_options} in Section \ref{concludingremarks}.
     
-Putting this condition and the previously described rescaling terms together with the original equations (\ref{originalEQ-V}), (\ref{originalEQ-I}), (\ref{diffusive}) considered on the $\Omega$ domain, we arrive to the merged anisotropic equations of the polluted atmosphere above inland surface:
+Putting this condition and the previously described rescaling terms together with the original equations (\ref{originalEQ-V}), (\ref{originalEQ-I}), (\ref{diffusive}) considered on the $\Omega$ domain, we arrive to the merged anisotropic equations of the polluted atmosphere above a general surface:
   
 \begin{equation} \label{ANSC1_coordinates_GFC}
   \partial_t u^\epsilon _1 + \mathbf{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\alpha u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
@@ -469,7 +469,7 @@ Putting this condition and the previously described rescaling terms together wit
 
 The initial condition for the velocity and the pollution concentration are
     
-\begin{equation} \label{ANSC7_coordinates_GFC}
+\begin{equation} \label{ANSC_init_coordinates_GFC}
   \mathbf{u}^\epsilon (\cdot, t = 0) = \mathbf{u}_0, \quad c^\epsilon (\cdot, t=0) = c_0  \quad \text{ in } \Omega.
 \end{equation}
     
@@ -502,7 +502,7 @@ To make the above set of equations complete, we need to assign the boundary cond
 Concerning the pollution concentration it is vital to choose boundary conditions that are as physically relevant as possible and yet simple enough. As we can see in many related papers, in the case of LAMs (limited area models) finding the right boundary conditions can be challenging.
 
 In order to describe the boundary conditions precisely we divide $\Gamma = \partial \Omega$ as follows. The upper boundary of the $\Omega$ domain is denoted by $\Gamma_U$, the lateral boundary is $\Gamma_L$, the lower boundary of the domain is $\Gamma_G,$ and for the collective $\Gamma_L \cup \Gamma_U$ section we use the notion $\Gamma_A$ (above the ground).
-As we mentioned before, the case we are investigating is that of inland domains $\Omega$, i.e. the case of landscapes and cities with no significant nearby water surface.  This is very important since the boundary conditions for both wind velocity and pollution concentration in the air are different depending whether we are above solid ground or water surface. The boundary conditions we choose to use in the inland scenario are the following:
+As we mentioned before, the case we are investigating is that of domains over a general surface, i.e. we equally allow inland scenarios and coastal landscapes with significant nearby water surface. The boundary conditions we choose to use in this case are the following:
 
 \begin{figure}[!h]
   \centering
@@ -556,9 +556,9 @@ As we mentioned before, the case we are investigating is that of inland domains 
 
 Specifically, for the pollution concentration reaching the ground level we use a similar approach as the one classically used for the wind traction reaching the top of the ocean (see for example \cite{azerad2001mathematical}, \cite{temam2005some}). We assume that the functions $\partial_1 c^\epsilon, \partial_2 c^\epsilon, \partial_3 c^\epsilon$ are equal to some sufficiently regular functions defined on the respective boundary. More accurately, we assume that we have $\nabla c^\epsilon = \boldsymbol{\sigma}$ on the lower boundary, where $\boldsymbol{\sigma} \in L^2(0,T;L^2(\Gamma_G))$, and the $\sigma_i$ terms denote the components of $\boldsymbol{\sigma}$. In particular in this inland case $\sigma_3$ is equal to zero on the $\Gamma_G$.
   
-Finally, the boundary conditions to describe the anisotropic system (\ref{ANSC1_coordinates_GFC}) - (\ref{ANSC7_coordinates_GFC}) can be summarised as follows:
+Finally, the boundary conditions to describe the anisotropic system (\ref{ANSC1_coordinates_GFC}) - (\ref{ANSC5_coordinates_GFC}), (\ref{ANSC_init_coordinates_GFC}) can be summarised as follows:
 %
-\begin{equation} \label{ANSC8_coordinates_GFC}
+\begin{equation} \label{ANSC_bc_coordinates_GFC}
   \begin{split}
     & \mathbf{u}^\epsilon = 0 \text{ on } \Gamma \times (0,T), \\
     & c^\epsilon = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
@@ -583,7 +583,7 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
   \partial_3 p = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
 %
-\begin{equation} \label{HNSC4_coordinates_GFC}   
+\begin{equation} \label{HNSC4_coordinates_GFC}
   \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
 %
@@ -591,11 +591,11 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
   \partial_t c + \mathbf{u} \cdot \nabla c = \nabla \cdot (\mathbf{M} \nabla c) + s \text{ in } \Omega \times (0,T)
 \end{equation}
 %
-\begin{equation} \label{HNSC7_coordinates_GFC}   
+\begin{equation} \label{HNSC_init_coordinates_GFC}   
   u_i (\cdot, t=0) = u_{0 i}, c (\cdot, t=0) = c_0 \text{ in } \Omega, \text{$i$ = 1,2}
 \end{equation}
 %
-\begin{equation} \label{HNSC8_coordinates_GFC}
+\begin{equation} \label{HNSC_bc_coordinates_GFC}
 \begin{split}
 & u_1 = u_2 = u_3 n_3 = 0 \text{ on } \Gamma \times (0,T), \\
 & c = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
@@ -668,37 +668,37 @@ i.e. $2 \omega = (\alpha, \beta, \gamma),$ then using this, the Coriolis force t
  =
  \begin{bmatrix}  \beta \epsilon u_3 - \gamma u_2 \\ \gamma u_1 - \alpha \epsilon u_3  \\ \alpha u_2 - \beta u_1 \end{bmatrix}.
 \end{gather}
-
+%
 Thus, these are the terms that appear in the three velocity equations below; but note that in the rescaled version of the vertical velocity equation the third component of the Coriolis term is present with an $\epsilon$ multiplier, which is obtained from the $\epsilon$ term in the denominator of $\partial_z p.$
 
 Using the expanded form of the Coriolis terms and applying the scaling identities (\ref{scaling_eq_x}), (\ref{scaling_eq_vpnu}), (\ref{scaling_eq_c}), ($\ref{scaling_eq_diffusion_dwmc}$), $(\ref{ksepsk1})$ to the complete system, we arrive to the merged anisotropic equations of the polluted atmosphere above inland surface:
-  
+%
 \begin{equation} \label{ANSC1_coordinates_DWMC}
   \partial_t u^\epsilon _1 + \mathbf{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\gamma u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-    
+%
 \begin{equation} \label{ANSC2_coordinates_DWMC}
   \partial_t u_2^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_2^\epsilon -\Delta_\nu u_2^\epsilon + \gamma u_1^\epsilon - \alpha \epsilon u^\epsilon_3  + \partial_2 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-    
+%
 \begin{equation} \label{ANSC3_coordinates_DWMC}
   \epsilon^2 \{  \partial_t u_3^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon -\Delta_\nu u_3^{\epsilon} \} + \epsilon \alpha u^\epsilon_2 - \epsilon \beta u_1^\epsilon + \partial_3 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
-    \end{equation}
-    
+\end{equation}
+%
 \begin{equation} \label{ANSC4_coordinates_DWMC}
   \nabla \cdot \mathbf{u}^\epsilon= 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-    
+%
 \begin{equation} \label{ANSC5_coordinates_DWMC}
    \partial_t c^\epsilon + \mathbf{u^\epsilon} \cdot \nabla c^\epsilon = \epsilon K_1 \partial_{11} ^ 2 c^\epsilon + K_2 \partial_{22} ^ 2 c^\epsilon + K_3 \partial_{33} ^ 2 c^\epsilon + s^\epsilon \text{ in } \Omega \times (0,T).
 \end{equation}
-
+%
 The initial condition for the velocity and the pollution concentration are
     
-\begin{equation} \label{ANSC6_coordinates_DWMC}
+\begin{equation} \label{ANSC_init_coordinates_DWMC}
   \mathbf{u}^\epsilon (\cdot, t = 0) = \mathbf{u}_0, \quad c^\epsilon (\cdot, t=0) = c_0  \quad \text{ in } \Omega.
 \end{equation}
-  
+%
 We will specify the regularity of the initial data in Sections \ref{sectionWS_dwmc} and \ref{sectionSTRONGsol} according to the fact whether we are dealing with weak or strong solutions.
 
 This system will become complete when we define the boundary conditions --- we describe these in detail in Sections \ref{sectionWS_dwmc} and \ref{sectionSTRONGsol} as they are chosen with different considerations depending on the type of the solutions we are dealing with.
@@ -708,27 +708,27 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
 \begin{equation} \label{HNSC1_coordinates_DWMC}    
   \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\gamma u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-    
+%
 \begin{equation} \label{HNSC2_coordinates_DWMC}   
   \partial_t u_2 + \mathbf{u} \cdot \nabla u_2 - \Delta_\nu u_2 + \gamma u_1 + \partial_2 p = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-    
+%
 \begin{equation} \label{HNSC3_coordinates_DWMC}   
   \partial_3 p = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-    
+%
 \begin{equation} \label{HNSC4_coordinates_DWMC}   
   \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-    
+%
 \begin{equation} \label{HNSC5_coordinates_DWMC}   
   \partial_t c + \mathbf{u} \cdot \nabla c = K_2 \partial_{22} ^ 2 c + K_3 \partial_{33} ^2 c + s \text{ in } \Omega \times (0,T)
 \end{equation}
-    
-\begin{equation} \label{HNSC6_coordinates_DWMC}   
+%
+\begin{equation} \label{HNSC_init_coordinates_DWMC}
   u_i (\cdot, t=0) = u_{0 i}, \quad c (\cdot, t=0) = c_0 \text{ in } \Omega, \text{$i$ = 1,2}
 \end{equation}
-    
+%
 The specific definitions of the $s^\epsilon$ and $s$ source terms also depend on whether we consider weak or strong solutions. In both cases they are fundamentally based on the notion of the nascent delta function with parameter $\epsilon$ and the delta distribution, but their exact definitions will be given in the subsections according to the regularity of the solutions.
 
 To conclude the description of the model we highlight an important feature of the system that is suggested also by the structure of the governing equations (\ref{ANSC5_coordinates_DWMC}) and (\ref{HNSC5_coordinates_DWMC}). With respect to pollution diffusion, directions $y$ and $z$ have a particular and shared importance compared to the $x$ direction, namely that we have diffusion taking place on $\mathcal{O}(1)$ scale in the former ones. This suggests the introduction of the generalised direction $d$ which includes directions $y$ and $z$ (similarly to the more standard concept of $h$ standing for the horizontal directions $x$ and $y$). Furthermore, we accordingly introduce the notations $\Delta_d = K_2 \partial_{22}^2 + K_3 \partial_{33}^2$ and $\nabla_d = (\partial_2, \partial_3).$
@@ -751,7 +751,7 @@ The two main viewpoints we keep in mind setting up a scenario described above ar
 
 In this chapter we define the first main analytical setting and verify a convergence result between the anisotropic equations and the primitive equations planted into the system.
 
-We choose the framework of weak solutions, we work in geophysical coordinates, the domain is set to a local domain with classical non-periodic boundaries and in Section \ref{proof_weak_gfc} we prove that for $\mathbf{u}_0 \in L^2 (\Omega), c_0 \in L^2(\Omega)$ initial data any weak solution of the anisotropic equations (\ref{ANSC1_coordinates_GFC})--(\ref{ANSC8_coordinates_GFC}) defined below converges weakly to a weak solution of the hydrostatic system (\ref{HNSC1_coordinates_GFC})--(\ref{HNSC8_coordinates_GFC}). To complete our proof, in Section \ref{existenceweakhydrostatic} we show the existence of weak solutions of the limit system.
+We choose the framework of weak solutions, we work in geophysical coordinates, the domain is set to a local domain with classical non-periodic boundaries and in Section \ref{proof_weak_gfc} we prove that for $\mathbf{u}_0 \in L^2 (\Omega), c_0 \in L^2(\Omega)$ initial data any weak solution of the anisotropic equations (\ref{ANSC1_coordinates_GFC})--(\ref{ANSC5_coordinates_GFC}), (\ref{ANSC_init_coordinates_GFC}), (\ref{ANSC_bc_coordinates_GFC}) defined below converges weakly to a weak solution of the hydrostatic system (\ref{HNSC1_coordinates_GFC})--(\ref{HNSC5_coordinates_GFC}), (\ref{HNSC_init_coordinates_GFC}), (\ref{HNSC_bc_coordinates_GFC}). To complete our proof, in Section \ref{existenceweakhydrostatic} we show the existence of weak solutions of the limit system.
 
 Section \ref{visualizationFEM} examines the convergence phenomena in a different light: here we use the finite element method and the software components of FEniCS to visualise our results.
 
@@ -760,28 +760,28 @@ In order to enhance readability and keep this chapter self-contained, we firstly
 \begin{equation} \label{ANSC1_coordinates_GFC}
   \partial_t u^\epsilon _1 + \mathbf{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\alpha u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-    
+%
 \begin{equation} \label{ANSC2_coordinates_GFC}
   \partial_t u_2^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_2^\epsilon -\Delta_\nu u_2^\epsilon + \alpha u_1^\epsilon + \partial_2 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-    
+%
 \begin{equation} \label{ANSC3_coordinates_GFC}
   \epsilon^2 \{  \partial_t u_3^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon -\Delta_\nu u_3^{\epsilon} \} - \epsilon \beta u_1^\epsilon + \partial_3 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-    
+%
 \begin{equation} \label{ANSC4_coordinates_GFC}
   \nabla \cdot \mathbf{u}^\epsilon= 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-    
+%
 \begin{equation} \label{ANSC5_coordinates_GFC}
   \partial_t c^\epsilon + \mathbf{u^\epsilon} \cdot \nabla c^\epsilon = \nabla \cdot (\mathbf{M} \nabla c^\epsilon) + s^\epsilon \text{ in } \Omega \times (0,T)
 \end{equation}
-    
-\begin{equation} \label{ANSC7_coordinates_GFC}
+%
+\begin{equation} \label{ANSC_init_coordinates_GFC}
   \mathbf{u}^\epsilon (\cdot, t = 0) = \mathbf{u}_0, \quad c^\epsilon (\cdot, t=0) = c_0  \quad \text{ in } \Omega
 \end{equation}
-
-\begin{equation} \label{ANSC8_coordinates_GFC}
+%
+\begin{equation} \label{ANSC_bc_coordinates_GFC}
   \begin{split}
     & \mathbf{u}^\epsilon = 0 \text{ on } \Gamma \times (0,T), \\
     & c^\epsilon = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
@@ -789,42 +789,39 @@ In order to enhance readability and keep this chapter self-contained, we firstly
     & \boldsymbol{\sigma} = (\sigma_1, \sigma_2, 0) \in L^2(0,T; \Gamma_G).\\
    \end{split} \raisetag{40pt}
 \end{equation}
-
+%
 As suggested in Section \ref{eqsdescribingatmpluspollution_gfc}, the hydrostatic equations are derived from this latter system by formally taking $\epsilon = 0,$ and thus obtaining the primitive equations written in geophysical coordinates:
 
 \begin{equation} \label{HNSC1_coordinates_GFC}    
   \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\alpha u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-    
+%
 \begin{equation} \label{HNSC2_coordinates_GFC}   
   \partial_t u_2 + \mathbf{u} \cdot \nabla u_2 - \Delta_\nu u_2 -\alpha u_1 + \partial_2 p = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-    
+%
 \begin{equation} \label{HNSC3_coordinates_GFC}   
   \partial_3 p = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-    
+%
 \begin{equation} \label{HNSC4_coordinates_GFC}   
   \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-    
+%
 \begin{equation} \label{HNSC5_coordinates_GFC}   
   \partial_t c + \mathbf{u} \cdot \nabla c = \nabla \cdot (\mathbf{M} \nabla c) + s \text{ in } \Omega \times (0,T)
 \end{equation}
-    
-\begin{equation} \label{HNSC6_coordinates_GFC}   
-  u_1 = u_2 = u_3 n_3 = 0 \text{ on } \Gamma \times (0,T)
-\end{equation}
-    
-\begin{equation} \label{HNSC7_coordinates_GFC}   
+% 
+\begin{equation} \label{HNSC_init_coordinates_GFC}
   u_i (\cdot, t=0) = u_{0 i}, c (\cdot, t=0) = c_0 \text{ in } \Omega, \text{$i$ = 1,2}
 \end{equation}
-    
-\begin{equation} \label{HNSC8_coordinates_GFC}
-  \begin{split}
-    & c = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
-    & \partial_1 c = \sigma_1, \partial_2 c = \sigma_2, \partial_3 c = 0, \boldsymbol{\sigma} = (\sigma_1, \sigma_2, 0) \in L^2(0,T; \Gamma_G).\\
-  \end{split}
+%
+\begin{equation} \label{HNSC_bc_coordinates_GFC}
+\begin{split}
+& u_1 = u_2 = u_3 n_3 = 0 \text{ on } \Gamma \times (0,T) , \\
+& c = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
+& \partial_1 c = \sigma_1, \partial_2 c = \sigma_2, \partial_3 c = 0, \boldsymbol{\sigma} = (\sigma_1, \sigma_2, 0) \in L^2(0,T; \Gamma_G).\\
+\end{split}
 \end{equation}
 
 The theorems we prove in detail in this chapter are our original results and they may also be found in \cite{pollatmws2019}.
@@ -850,11 +847,11 @@ We need to define the following spaces:
 
 Furthermore we introduce the notation $b(\mathbf{u}_H)$ = $\gamma (-u_2 , u_1).$
 
-Then the weak formulation of the hydrostatic system (\ref{HNSC1_coordinates_GFC}) - (\ref{HNSC8_coordinates_GFC}) takes the following form.
+Then the weak formulation of the hydrostatic system (\ref{HNSC1_coordinates_GFC}) - (\ref{HNSC5_coordinates_GFC}), \ref{HNSC_init_coordinates_GFC}), \ref{HNSC_bc_coordinates_GFC}) takes the following form.
   
 \begin{definition} \label{definitionhydrostaticWF_gfc}
 
-The pair $(\mathbf{u}, c)$ is called a weak solution of the a hydrostatic system (\ref{HNSC1_coordinates_GFC}) - (\ref{HNSC5_coordinates_GFC}) subject to (\ref{HNSC7_coordinates_GFC}) - (\ref{HNSC8_coordinates_GFC}) if $\mathbf{u} = (\mathbf{u}_h, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_h \in L^\infty (0,T; L^2(\Omega)^2),$ and $c \in L^\infty(0,T; L^2(\Omega))$ with $c \in L^2(0,T; H^1(\Omega))$, moreover $\mathbf{u}$ and $c$ satisfy the integral identities
+The pair $(\mathbf{u}, c)$ is called a weak solution of the a hydrostatic system (\ref{HNSC1_coordinates_GFC}) - (\ref{HNSC5_coordinates_GFC}) subject to (\ref{HNSC_init_coordinates_GFC}) - (\ref{HNSC_bc_coordinates_GFC}) if $\mathbf{u} = (\mathbf{u}_h, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_h \in L^\infty (0,T; L^2(\Omega)^2),$ and $c \in L^\infty(0,T; L^2(\Omega))$ with $c \in L^2(0,T; H^1(\Omega))$, moreover $\mathbf{u}$ and $c$ satisfy the integral identities
   
 \begin{equation}
 \begin{split}
@@ -880,13 +877,13 @@ Note that the term $\int_0^T (s,\tilde{c}) \diff t$ makes sense since in this ca
   
 \[ (s,\tilde{c}) = \int_\Omega \delta(\mathbf{x} - \mathbf{x}_s) \tilde{c}(\mathbf{x}) \diff \mathbf{x} = \tilde{c}(\mathbf{x}_s).\]
   
-The existence of weak solution for the hydrostatic system (\ref{HNSC1_coordinates_GFC}) - (\ref{HNSC8_coordinates_GFC}) can be proved in the spirit of \cite{temam2005some}. In Section \ref{existenceweakhydrostatic} we will outline the main steps of the proof and the differences compared to the ocean model.
+The existence of weak solution for the hydrostatic system (\ref{HNSC1_coordinates_GFC}) -- (\ref{HNSC5_coordinates_GFC}), (\ref{HNSC_init_coordinates_GFC}), (\ref{HNSC_bc_coordinates_GFC}) can be proved in the spirit of \cite{temam2005some}. In Section \ref{existenceweakhydrostatic} we will outline the main steps of the proof and the differences compared to the ocean model.
 
-The weak form of the anisotropic system (\ref{ANSC1_coordinates_GFC}) - (\ref{ANSC7_coordinates_GFC}), (\ref{ANSC8_coordinates_GFC}) is as follows.
+The weak form of the anisotropic system (\ref{ANSC1_coordinates_GFC}) -- (\ref{ANSC5_coordinates_GFC}), (\ref{ANSC_init_coordinates_GFC}), (\ref{ANSC_bc_coordinates_GFC}) is as follows.
   
 \begin{definition} \label{definitionanisotropicWF_gfc}
 
-The pair $(\mathbf{u}^\epsilon, c^\epsilon)$ is called a weak solution of the anisotropic system (\ref{ANSC1_coordinates_GFC}) - (\ref{ANSC5_coordinates_GFC}) subject to (\ref{ANSC7_coordinates_GFC}), (\ref{ANSC8_coordinates_GFC}) if $\mathbf{u}^\epsilon = (\mathbf{u}^\epsilon_h, u^\epsilon_3) \in L^2 (0,T ; \mathbf{V}) \cap L^\infty (0, T; L^2 (\Omega)^3)$ and $c^\epsilon \in L^\infty (0,T; L^2(\Omega)) \cap L^2 (0,T; H^1(\Omega))$, moreover $\mathbf{u}^\epsilon$ and $c^\epsilon$ satisfy the integral identities
+The pair $(\mathbf{u}^\epsilon, c^\epsilon)$ is called a weak solution of the anisotropic system (\ref{ANSC1_coordinates_GFC}) -- (\ref{ANSC5_coordinates_GFC}) subject to (\ref{ANSC_init_coordinates_GFC}), (\ref{ANSC_bc_coordinates_GFC}) if $\mathbf{u}^\epsilon = (\mathbf{u}^\epsilon_h, u^\epsilon_3) \in L^2 (0,T ; \mathbf{V}) \cap L^\infty (0, T; L^2 (\Omega)^3)$ and $c^\epsilon \in L^\infty (0,T; L^2(\Omega)) \cap L^2 (0,T; H^1(\Omega))$, moreover $\mathbf{u}^\epsilon$ and $c^\epsilon$ satisfy the integral identities
   
 \begin{equation}
 \begin{split}
@@ -919,12 +916,12 @@ Regarding the smoothness of the initial data, we use the
 
 initial regularities classically used in the weak solution framework.
 
-We will omit the proof of the existence of weak solutions (see Definition \ref{definitionanisotropicWF_gfc}.) for the anisotropic system (\ref{ANSC1_coordinates_GFC}) - (\ref{ANSC7_coordinates_GFC}), (\ref{ANSC8_coordinates_GFC}) since it follows by standard finite-dimensional Galerkin approximation using (\ref{initialregularities_weak_gfc}).
+We will omit the proof of the existence of weak solutions (see Definition \ref{definitionanisotropicWF_gfc}.) for the anisotropic system (\ref{ANSC1_coordinates_GFC}) - (\ref{ANSC5_coordinates_GFC}), (\ref{ANSC_init_coordinates_GFC}), (\ref{ANSC_bc_coordinates_GFC}) since it follows by standard finite-dimensional Galerkin approximation using (\ref{initialregularities_weak_gfc}).
 
 Now we are ready to state our main result.
 
 \begin{theorem} \label{maintheorem_weak_GFC}
-Let $\mathbf{u}_0 \in L^2 (\Omega)$, with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 \cdot \mathbf{n} = 0$ on $\partial \Omega$; let $c_0 \in L^2 (\Omega)$, $c_0 = 0$ on $ \partial \Omega$, and assume that the boundary conditions (\ref{ANSC8_coordinates_GFC}) hold; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1_coordinates_GFC}) - (\ref{ANSC5_coordinates_GFC}) converges to a weak solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1_coordinates_GFC}) - (\ref{HNSC5_coordinates_GFC}).
+Let $\mathbf{u}_0 \in L^2 (\Omega)$, with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 \cdot \mathbf{n} = 0$ on $\partial \Omega$; let $c_0 \in L^2 (\Omega)$, $c_0 = 0$ on $ \partial \Omega$, and assume that the boundary conditions (\ref{ANSC_bc_coordinates_GFC}) hold; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1_coordinates_GFC}) - (\ref{ANSC5_coordinates_GFC}) converges to a weak solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1_coordinates_GFC}) - (\ref{HNSC5_coordinates_GFC}).
 \end{theorem}
 
 %%% *** PROOF *** %%%
@@ -934,8 +931,7 @@ This section is devoted to the proof of Theorem \ref{maintheorem_weak_GFC}. In t
 
 \subsection{Energy inequality}
   
-As we mentioned before, one of the most fundamental tools in this proof is the energy inequality. If we derive it for the anisotropic system (\ref{ANSC1_coordinates_GFC}) - (\ref{ANSC7_coordinates_GFC}), (\ref{ANSC8_coordinates_GFC}), we obtain that for a.e. $t \in [0,T]$ the following holds:
-  
+As we mentioned before, one of the most fundamental tools in this proof is the energy inequality. If we derive it for the anisotropic system (\ref{ANSC1_coordinates_GFC}) - (\ref{ANSC5_coordinates_GFC}), (\ref{ANSC_init_coordinates_GFC}), (\ref{ANSC_bc_coordinates_GFC}), we obtain that for a.e. $t \in [0,T]$ the following holds:
 \begin{equation}
     \begin{split}  
     & \frac{1}{2} (\norm{\mathbf{u}_h^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{c^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \big[ \norm{\nabla_\nu \mathbf{u}_h^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \big] \diff \tau \\
@@ -945,7 +941,7 @@ As we mentioned before, one of the most fundamental tools in this proof is the e
     & = I_1 + I_2 + I_3. \raisetag{70pt} \label{energyIEQ}
     \end{split}
 \end{equation}    
-  
+%
 From the hypothesis on the initial data and since the $s^\epsilon$ source term is in $L^\infty_x (\Omega)$, $I_1$ and $I_2$ are bounded. The only terms we need to work on further are the expressions in $I_3$.
   
 By using the H\"older inequality and the generalised Young inequality for any $\zeta > 0,$ we can estimate this term in the following way.
@@ -1134,7 +1130,7 @@ In this section we collect some remarks completing the results obtained thus far
 
 As we have mentioned previously, the generic definition of the $\boldsymbol{\sigma}$ boundary function and the structure of the proof makes it easy to consider a generalised model adapted for seaside conditions where the lower boundary consists of $\Gamma_G = \Gamma_E \cup \Gamma_I$ --- here $\Gamma_I$ is the interface between air and water where rigid and no-slip boundary conditions are switched for ones expressing interactions. The main difference regarding the concentration function is that the $\sigma_3$ sediment is not zero in this case. Since we never exploited $\sigma_3$ being zero in the inland scenario, and we only used the bounded nature of this function, the generalisation does not bring any additional challenge in this front.
 
-We also highlight that this will be not the case at all in the framework of downwind-matching coordinates (see (\ref{HNSC7-weak_coordinates_DWMC}) in the next chapter): the geophysical coordinate system enjoys the benefits of these relatively relaxed boundary conditions because of its more balanced continuity equation (i.e. all diffusion terms are present with a non-disappearing constant coefficient).
+We also highlight that this will be not the case at all in the framework of downwind-matching coordinates (see (\ref{HNSC_bc-weak_coordinates_DWMC}) in the next chapter): the geophysical coordinate system enjoys the benefits of these relatively relaxed boundary conditions because of its more balanced continuity equation (i.e. all diffusion terms are present with a non-disappearing constant coefficient).
 
 For the velocity function the wind traction is represented by the new boundary condition $\nu_3 \partial_3 \mathbf{u}^\epsilon_H = \theta_H, u_3 = 0$ with assuming a finite wind energy, i.e. the function $\theta$ being in $L^2(0,T; H^{-1/2}(\Gamma_I))$. This part of the work has already been done in \cite{azerad2001mathematical}.
 \end{remark}
@@ -1178,7 +1174,7 @@ for almost any $x \in \Omega$ and all $\xi \in \mathbb{R}^3$.
 %%% EXISTENCE WEAK HYDROSTATIC %%%
 \section{The existence of weak solution of the hydrostatic system of the polluted atmosphere}\label{existenceweakhydrostatic}
 
-In this section for completeness we sketch the proof of the existence of weak solutions of the system (\ref{HNSC1_coordinates_GFC}) - (\ref{HNSC8_coordinates_GFC}).
+In this section for completeness we sketch the proof of the existence of weak solutions of the system (\ref{HNSC1_coordinates_GFC}) - (\ref{HNSC5_coordinates_GFC}), (\ref{HNSC_init_coordinates_GFC}), (\ref{HNSC_bc_coordinates_GFC}).
 
 The idea is that the polluted atmosphere can be viewed as the air-analogous version of the salty sea water in terms of the equations that represent it. In both cases we have a fluid which can be seen approximately as an incompressible fluid carrying some other particles in a significant concentration, the basis fluid motion is well described by the incompressible Navier-Stokes equations, and the additional concentration is described by an advection-diffusion equation. 
 
@@ -1314,7 +1310,7 @@ finally we also adjust the original steps that provide the antisymmetric propert
 
 \end{itemize}
 
-This means that all the necessary properties of the forms $a, b$ and $e$ are equally valid for our set of equations (\ref{HNSC1_coordinates_GFC}) - (\ref{HNSC8_coordinates_GFC}), and we can use them to prove a stationary-case existence theorem identically as the proof is constructed in \cite{temam2005some}. 
+This means that all the necessary properties of the forms $a, b$ and $e$ are equally valid for our set of equations (\ref{HNSC1_coordinates_GFC}) - (\ref{HNSC5_coordinates_GFC}), (\ref{HNSC_init_coordinates_GFC}), (\ref{HNSC_bc_coordinates_GFC}), and we can use them to prove a stationary-case existence theorem identically as the proof is constructed in \cite{temam2005some}. 
 
 The weak formulation is as follows.
 
@@ -2236,24 +2232,24 @@ In order to keep this chapter as compact as possible, here we repeat the definit
 \begin{equation} \label{ANSC1_coordinates_DWMC}
   \partial_t u^\epsilon _1 + \mathbf{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\gamma u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-    
+%
 \begin{equation} \label{ANSC2_coordinates_DWMC}
   \partial_t u_2^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_2^\epsilon -\Delta_\nu u_2^\epsilon + \gamma u_1^\epsilon - \alpha \epsilon u^\epsilon_3  + \partial_2 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-    
+%
 \begin{equation} \label{ANSC3_coordinates_DWMC}
   \epsilon^2 \{  \partial_t u_3^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon -\Delta_\nu u_3^{\epsilon} \} + \epsilon \alpha u^\epsilon_2 - \epsilon \beta u_1^\epsilon + \partial_3 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
-    \end{equation}
-    
+\end{equation}
+%
 \begin{equation} \label{ANSC4_coordinates_DWMC}
   \nabla \cdot \mathbf{u}^\epsilon= 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-    
+%
 \begin{equation} \label{ANSC5_coordinates_DWMC}
    \partial_t c^\epsilon + \mathbf{u^\epsilon} \cdot \nabla c^\epsilon = \epsilon K_1 \partial_{11} ^ 2 c^\epsilon + K_2 \partial_{22} ^ 2 c^\epsilon + K_3 \partial_{33} ^ 2 c^\epsilon + s^\epsilon \text{ in } \Omega \times (0,T)
 \end{equation}
-    
-\begin{equation} \label{ANSC6_coordinates_DWMC}
+ %
+\begin{equation} \label{ANSC_init_coordinates_DWMC}
   \mathbf{u}^\epsilon (\cdot, t = 0) = \mathbf{u}_0, \quad c^\epsilon (\cdot, t=0) = c_0  \quad \text{ in } \Omega.
 \end{equation}
 
@@ -2262,28 +2258,28 @@ The hydrostatic equations are obtained formally by neglecting the $\epsilon$--in
 \begin{equation} \label{HNSC1_coordinates_DWMC}    
   \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\gamma u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-    
+%
 \begin{equation} \label{HNSC2_coordinates_DWMC}   
   \partial_t u_2 + \mathbf{u} \cdot \nabla u_2 - \Delta_\nu u_2 + \gamma u_1 + \partial_2 p = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-    
+%
 \begin{equation} \label{HNSC3_coordinates_DWMC}   
   \partial_3 p = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-    
+%
 \begin{equation} \label{HNSC4_coordinates_DWMC}   
   \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-    
+%
 \begin{equation} \label{HNSC5_coordinates_DWMC}   
   \partial_t c + \mathbf{u} \cdot \nabla c = K_2 \partial_{22} ^ 2 c + K_3 \partial_{33} ^2 c + s \text{ in } \Omega \times (0,T)
 \end{equation}
-    
-\begin{equation} \label{HNSC6_coordinates_DWMC}   
+%
+\begin{equation} \label{HNSC_init_coordinates_DWMC}   
   u_i (\cdot, t=0) = u_{0 i}, \quad c (\cdot, t=0) = c_0 \text{ in } \Omega, \text{$i$ = 1,2}.
 \end{equation}
 
-Section \ref{sectionWS_dwmc} focuses on the verification of a convergence result between the models (\ref{ANSC1_coordinates_DWMC})--(\ref{ANSC6_coordinates_DWMC}) and (\ref{HNSC1_coordinates_DWMC})--(\ref{HNSC6_coordinates_DWMC}) in the framework of weak solutions. We will be able to show the fact of the convergence at the cost of using a slightly smoother, $H^1$--regular initial data ${\mathbf{u}_h}_0$ (compare with (\ref{initialregularities_weak_gfc}) in Chapter \ref{geophysicalchapter}). In Section \ref{sectionSTRONGsol} we apply stronger initial regularities (namely, ${\mathbf{u}_h}_0 \in H^3(\Omega)$ and $c_0 \in H^2(\Omega)$) and -- from the computations' point of view -- a more favourable boundary structure: in Section \ref{sectionSTRONGsol_convergence} we describe an analogous convergence theorem to that in Section \ref{sectionWS_dwmc}, but the statement holds for strong solutions this time. In order to make the proof complete, in Section \ref{strongexistencesection} we verify the global existence of strong solutions.
+Section \ref{sectionWS_dwmc} focuses on the verification of a convergence result between the models (\ref{ANSC1_coordinates_DWMC}) - (\ref{ANSC5_coordinates_DWMC}), (\ref{ANSC_init_coordinates_DWMC}), and (\ref{HNSC1_coordinates_DWMC}) - (\ref{HNSC5_coordinates_DWMC}), (\ref{HNSC_init_coordinates_DWMC}) in the framework of weak solutions. We will be able to show the fact of the convergence at the cost of using a slightly smoother, $H^1$--regular initial data ${\mathbf{u}_h}_0$ (compare with (\ref{initialregularities_weak_gfc}) in Chapter \ref{geophysicalchapter}). In Section \ref{sectionSTRONGsol} we apply stronger initial regularities (namely, ${\mathbf{u}_h}_0 \in H^3(\Omega)$ and $c_0 \in H^2(\Omega)$) and -- from the computations' point of view -- a more favourable boundary structure: in Section \ref{sectionSTRONGsol_convergence} we describe an analogous convergence theorem to that in Section \ref{sectionWS_dwmc}, but the statement holds for strong solutions this time. In order to make the proof complete, in Section \ref{strongexistencesection} we verify the global existence of strong solutions.
 
 The theorems we prove in detail in this chapter are our original results and they may also be found in \cite{dwmhydro2020}.
 
@@ -2321,28 +2317,25 @@ Here the boundary structure of the domain is identical to what we used in geophy
 \end{figure}
 
 The boundary conditions to describe the anisotropic system can be summarised as
-  
-    \begin{equation} \label{ANSC7-weak_coordinates_DWMC}
+    \begin{equation} \label{ANSC_bc-weak_coordinates_DWMC}
       \begin{split}
         & \mathbf{u}^\epsilon = 0 \text{ on } \Gamma \times (0,T), \\
         & c^\epsilon = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
         & \partial_2 c^\epsilon = \partial_3 c^\epsilon = 0 \text{ on } \Gamma_G \times (0,T), \quad \partial_1 c^\epsilon = \sigma \in L^2 (0,T; \Gamma_G), \\
       \end{split}
     \end{equation}
-
 while for the hydrostatic case we use
-    
-    \begin{equation} \label{HNSC7-weak_coordinates_DWMC}
+    \begin{equation} \label{HNSC_bc-weak_coordinates_DWMC}
       \begin{split} 
         & u_1 = u_2 = u_3 = 0 \text{ on } \Gamma \times (0,T) \\
         & c = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
         & \partial_2 c = \partial_3 c = 0 \text{ on } \Gamma_G \times (0,T), \quad \partial_1 c = \sigma \in L^2 L^2 (0,T; \Gamma_G). \\
       \end{split}
     \end{equation}
-    
+%
 The meaning of $\partial_1 c^\epsilon = \sigma$ above is identical to the notion explained in Section \ref{eqsdescribingatmpluspollution_gfc} for the case of geophysical coordinates: we naturally assume $\partial_1 c^\epsilon$ to be equal to some sufficiently regular $\sigma$ function defined on the respective boundary.
 
-As we have mentioned it before, in this case we will work with a more regular ${\mathbf{u}_h}_0 \in H^1$ initial data, so we directly use the $u_3 = 0$ equality on the boundary instead of the original $u_3 n_3 = 0$ constraint that we had used in (\ref{ANSC8_coordinates_GFC}).
+As we have mentioned it before, in this case we will work with a more regular ${\mathbf{u}_h}_0 \in H^1$ initial data, so we directly use the $u_3 = 0$ equality on the boundary instead of the original $u_3 n_3 = 0$ constraint that we had used in (\ref{ANSC_bc_coordinates_GFC}).
     
 We highlight the difference between the boundary conditions of the original, east-north oriented model of Chapter \ref{geophysicalchapter}, and the new, downwind-matching model for the case of weak solutions.
 
@@ -2387,9 +2380,9 @@ In this section we describe the weak formulation of the merged equations in both
   
   \[ \mathbf{W} = \{ \mathbf{u} \in  H^1_{\Gamma} (\Omega) \times H^1_{\Gamma} (\Omega) \times H_\Gamma (\partial_3, \Omega); \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \} \]
   
-  Then the weak formulation of the hydrostatic system (\ref{HNSC1_coordinates_DWMC}) - (\ref{HNSC6_coordinates_DWMC}), (\ref{HNSC7-weak_coordinates_DWMC}) takes the following form.
+Then the weak formulation of the hydrostatic system (\ref{HNSC1_coordinates_DWMC}) - (\ref{HNSC5_coordinates_DWMC}), (\ref{HNSC_init_coordinates_DWMC}), (\ref{HNSC_bc-weak_coordinates_DWMC}) takes the following form.
   
-  \begin{definition} \label{definitionhydrostaticWF}
+\begin{definition} \label{definitionhydrostaticWF}
   
   Find $(\mathbf{u}, c)$ such that $\mathbf{u} = (\mathbf{u}_h, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_h \in L^\infty (0,T; L^2(\Omega)^2),$ and $c \in L^\infty (0, T; L^2(\Omega))$ with $\partial_2 c, \partial_3 c \in L^2(0, T; L^2(\Omega))$, such that
   
@@ -2413,7 +2406,7 @@ In this section we describe the weak formulation of the merged equations in both
   
   \end{definition}
   
-  Giving definition to the weak formulation of the (\ref{ANSC1_coordinates_DWMC}) - (\ref{ANSC6_coordinates_DWMC}), (\ref{ANSC7-weak_coordinates_DWMC}) anisotropic system we underline a feature regarding the spaces we use here. The velocity part of the solution is set to be in $C_w$ since it corresponds to the requirements of the proof detailed later. Even though we do not need the same weak continuity in time for the concentration function, this follows as a consequence once the velocity is a Leray-Hopf weak solution. Thus, overall we work with Leray-Hopf weak solutions, but the spaces in the below definition are kept minimal (in other words we use $L^\infty$ regularity instead of $C_w$ regularity where it is sufficient).
+  Giving definition to the weak formulation of the (\ref{ANSC1_coordinates_DWMC}) - (\ref{ANSC5_coordinates_DWMC}), (\ref{ANSC_init_coordinates_DWMC}), (\ref{ANSC_bc-weak_coordinates_DWMC}) anisotropic system we underline a feature regarding the spaces we use here. The velocity part of the solution is set to be in $C_w$ since it corresponds to the requirements of the proof detailed later. Even though we do not need the same weak continuity in time for the concentration function, this follows as a consequence once the velocity is a Leray-Hopf weak solution. Thus, overall we work with Leray-Hopf weak solutions, but the spaces in the below definition are kept minimal (in other words we use $L^\infty$ regularity instead of $C_w$ regularity where it is sufficient).
 
  \begin{definition} \label{definitionanisotropicWF_dwmc}
   
@@ -2445,7 +2438,7 @@ Find $\mathbf{u}^\epsilon = (\mathbf{u}^\epsilon_h, u^\epsilon_3) \in L^2 (0,T ;
 Now we are ready to state the main theorem of this section.
 
 \begin{theorem} \label{maintheoremWEAK}
-  Let ${\mathbf{u}_h}_0$ $\in$ $H^1 (\Omega)$, ${u_3}_0 \in L^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 = 0$ on $\partial \Omega$; let $c_0 \in$ $L^2 (\Omega)$, $c_0 = 0$ on $ \partial \Omega$, and assume that the boundary conditions (\ref{ANSC7-weak_coordinates_DWMC}) hold; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1_coordinates_DWMC}) - (\ref{ANSC6_coordinates_DWMC}) converges to a weak solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1_coordinates_DWMC}) - (\ref{HNSC6_coordinates_DWMC}).
+Let ${\mathbf{u}_h}_0$ $\in$ $H^1 (\Omega)$, ${u_3}_0 \in L^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 = 0$ on $\partial \Omega$; let $c_0 \in$ $L^2 (\Omega)$, $c_0 = 0$ on $ \partial \Omega$, and assume that the boundary conditions (\ref{ANSC_bc-weak_coordinates_DWMC}) hold; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1_coordinates_DWMC}) - (\ref{ANSC5_coordinates_DWMC}), (\ref{ANSC_init_coordinates_DWMC}) converges to a weak solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1_coordinates_DWMC}) - (\ref{HNSC5_coordinates_DWMC}), (\ref{HNSC_init_coordinates_DWMC}).
 \end{theorem}
 
 The statement of the main weak convergence theorem of this chapter is analogous to our previous result stated for the case of the geophysical frame, but we highlight the difference that here we use the initial data ${\mathbf{u}_h}_0 \in H^1,$ while for the case of the geophysical frame an $L^2$ initial velocity was sufficient.
@@ -2527,7 +2520,7 @@ This section is dedicated to the verification of Theorem \ref{maintheoremWEAK}. 
   As we mentioned before, the cornerstone idea for obtaining the convergence of the remaining product term $u_3^\epsilon c^\epsilon$ is to exploit the $H^1$ regularity of the initial horizontal velocity. Indeed, given an $H^1$ initial data for $\mathbf{u}_h,$ according to the theory developed in \cite{cao2007global}, there exists a unique global strong solution for the primitive equations $(\ref{HNSC1_coordinates_DWMC})$ - $(\ref{HNSC4_coordinates_DWMC}).$ We recall here this result (for more details see \cite{cao2007global}).
   
   \begin{theorem} \label{PE3DWellPosedness}
-    Let ${\mathbf{u}_h}_0 \in H^1(\Omega).$ Then there exists a unique strong solution $\mathbf{u}_h$ of the reformulated Primitive Equations $(\ref{HNSC1_coordinates_DWMC})$ - $(\ref{HNSC4_coordinates_DWMC})$, $(\ref{HNSC6_coordinates_DWMC})$ such that $$\mathbf{u}_h \in C([0, \infty), H^1(\Omega)) \cap L^2_{loc}([0, \infty), H^2(\Omega))$$ and $$\partial_t \mathbf{u}_h \in L^2_{loc} ([0,\infty), L^2(\Omega)).$$
+    Let ${\mathbf{u}_h}_0 \in H^1(\Omega).$ Then there exists a unique strong solution $\mathbf{u}_h$ of the reformulated Primitive Equations $(\ref{HNSC1_coordinates_DWMC})$ - $(\ref{HNSC4_coordinates_DWMC})$, $(\ref{HNSC_init_coordinates_DWMC})$ such that $$\mathbf{u}_h \in C([0, \infty), H^1(\Omega)) \cap L^2_{loc}([0, \infty), H^2(\Omega))$$ and $$\partial_t \mathbf{u}_h \in L^2_{loc} ([0,\infty), L^2(\Omega)).$$
   \end{theorem}
   
   In more detail, we have the following regularities for the strong solution of the primitive equations for the case of an $H^1$ initial data:
@@ -2956,9 +2949,9 @@ is the new form of the hydrostatic concentration equation, while the governing e
     
 where after using $c = c^* - \frac{z}{a},$ and $c^\epsilon = {c^\epsilon}^* - \frac{z}{a} $ we returned to the original $c$ and $c^\epsilon$ notations for simplicity.
 
-In terms of boundary conditions now the (\ref{ANSC1_coordinates_DWMC})--(\ref{ANSC4_coordinates_DWMC}), (\ref{ANSC5_strong_cshift_coordinates_DWMC}), (\ref{ANSC6_coordinates_DWMC}) anisotropic system the and (\ref{HNSC1_coordinates_DWMC})--(\ref{HNSC4_coordinates_DWMC}), (\ref{HNSC5_strong_cshift_coordinates_DWMC}), (\ref{HNSC6_coordinates_DWMC}) hydrostatic system are combined with the
+In terms of boundary conditions now the (\ref{ANSC1_coordinates_DWMC})--(\ref{ANSC4_coordinates_DWMC}), (\ref{ANSC5_strong_cshift_coordinates_DWMC}), (\ref{ANSC_init_coordinates_DWMC}) anisotropic system the and (\ref{HNSC1_coordinates_DWMC})--(\ref{HNSC4_coordinates_DWMC}), (\ref{HNSC5_strong_cshift_coordinates_DWMC}), (\ref{HNSC_init_coordinates_DWMC}) hydrostatic system are combined with the
 
-\begin{equation} \label{ANSC7-strong_coordinates_DWMC}
+\begin{equation} \label{ANSC_bc-strong_coordinates_DWMC}
   \begin{split}
     & \mathbf{u}^\epsilon, p^\epsilon \text{ and } c^\epsilon \text{ are periodic in } x,y,z, \\
     & \mathbf{u}_h^\epsilon \text{ and } p^\epsilon \text{ are even in $z$}, \text{ and } u_3^\epsilon \text{ and } c^\epsilon \text{ are odd in $z$}
@@ -2967,7 +2960,7 @@ In terms of boundary conditions now the (\ref{ANSC1_coordinates_DWMC})--(\ref{AN
 
 and
 
-\begin{equation} \label{HNSC7-strong_coordinates_DWMC}
+\begin{equation} \label{HNSC_bc-strong_coordinates_DWMC}
   \begin{split}
     & \mathbf{u}, p \text{ and } c \text{ are periodic in } x,y,z \\
     & \mathbf{u}_h \text{ and } p \text{ are even in $z$}, \text{ and } u_3 \text{ and } c \text{ are odd in $z$}
@@ -2976,7 +2969,7 @@ and
 
 boundary conditions, respectively.
 
-It is easy to check that the restriction of a solution to (\ref{ANSC1_coordinates_DWMC})--(\ref{ANSC4_coordinates_DWMC}), (\ref{ANSC5_strong_cshift_coordinates_DWMC}), (\ref{ANSC6_coordinates_DWMC}), (\ref{ANSC7-strong_coordinates_DWMC}) from $\Omega$ to $\Omega_0$ is a solution to the original system, and the analogous statement holds for the hydrostatic equations, hence here we exclusively focus on the study of these new versions of the two main systems.
+It is easy to check that the restriction of a solution to (\ref{ANSC1_coordinates_DWMC})--(\ref{ANSC4_coordinates_DWMC}), (\ref{ANSC5_strong_cshift_coordinates_DWMC}), (\ref{ANSC_init_coordinates_DWMC}), (\ref{ANSC_bc-strong_coordinates_DWMC}) from $\Omega$ to $\Omega_0$ is a solution to the original system, and the analogous statement holds for the hydrostatic equations, hence here we exclusively focus on the study of these new versions of the two main systems.
 
 We highlight here that the steps detailed above constructing a fully periodic domain are indeed necessary since, generally speaking, it is physically meaningful to consider the Earth's atmosphere as a domain that is periodic in the horizontal dimensions, however it is highly unnatural to immediately assume vertical periodicity as well. This strategy of adjusting the boundary value of the concentration function and extending the functions according to certain symmetries shows that the choice of a fully periodic domain can actually be a well-grounded choice for the atmosphere, given that the required symmetries hold.
 
@@ -2997,7 +2990,7 @@ As also noted in Remark \ref{source_options} in Section \ref{concludingremarks},
 The main result of this section describing the convergence of strong solutions is analogous to Theorem \ref{maintheoremWEAK}; with the two major differences being --- apart from the quality of the solutions themselves --- the change to a periodic domain, and the assumption of an $H^3$ and $H^2$ initial data for the horizontal velocity and the concentration, respectively. Before stating the main convergence theorem of this section, we first describe a hydrostatic existence result that is essential for the fact of the convergence.
 
 \begin{theorem} \label{existenceconcentrationSTRONG}
-Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0$, let $c_0 \in H^2 (\Omega),$ and let's assume that the boundary conditions (\ref{HNSC7-strong_coordinates_DWMC}) hold. Then there exists a unique global strong solution $(\mathbf{u}, c)$ of the downwind-matching hydrostatic polluted atmosphere limit model (\ref{HNSC1_coordinates_DWMC})--(\ref{HNSC4_coordinates_DWMC}), (\ref{HNSC5_strong_cshift_coordinates_DWMC}), (\ref{HNSC6_coordinates_DWMC}). Specifically, the concentration function $c$ satisfies
+Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0$, let $c_0 \in H^2 (\Omega),$ and let's assume that the boundary conditions (\ref{HNSC_bc-strong_coordinates_DWMC}) hold. Then there exists a unique global strong solution $(\mathbf{u}, c)$ of the downwind-matching hydrostatic polluted atmosphere limit model (\ref{HNSC1_coordinates_DWMC})--(\ref{HNSC4_coordinates_DWMC}), (\ref{HNSC5_strong_cshift_coordinates_DWMC}), (\ref{HNSC_init_coordinates_DWMC}). Specifically, the concentration function $c$ satisfies
 
     \begin{equation} \label{regularity_c_first}
       c \in L^\infty([0, \infty), H^2(\Omega)) \text{ and } \nabla_d c \in L^2_{loc}([0, \infty), H^2(\Omega)),
@@ -3028,7 +3021,7 @@ We provide the proof of Theorem \ref{existenceconcentrationSTRONG} in Section \r
 Now we are ready to describe this section's main theorem.
 
 \begin{theorem} \label{maintheoremSTRONG}
-Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0$, and let $c_0 \in H^2 (\Omega).$ There is a positive $\epsilon_0$ threshold such that for any $\epsilon < \epsilon_0,$ the strong solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1_coordinates_DWMC})--(\ref{ANSC4_coordinates_DWMC}), (\ref{ANSC5_strong_cshift_coordinates_DWMC}), (\ref{ANSC6_coordinates_DWMC}), (\ref{ANSC7-strong_coordinates_DWMC}) exists globally in time and as the aspect ratio $\epsilon$ tends to zero, it conconverges strongly to the unique global strong solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1_coordinates_DWMC})--(\ref{HNSC4_coordinates_DWMC}), (\ref{HNSC5_strong_cshift_coordinates_DWMC}), (\ref{HNSC6_coordinates_DWMC}), (\ref{HNSC7-strong_coordinates_DWMC}). In more detail, the following strong convergence results hold:
+Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0$, and let $c_0 \in H^2 (\Omega).$ There is a positive $\epsilon_0$ threshold such that for any $\epsilon < \epsilon_0,$ the strong solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1_coordinates_DWMC})--(\ref{ANSC4_coordinates_DWMC}), (\ref{ANSC5_strong_cshift_coordinates_DWMC}), (\ref{ANSC_init_coordinates_DWMC}), (\ref{ANSC_bc-strong_coordinates_DWMC}) exists globally in time and as the aspect ratio $\epsilon$ tends to zero, it conconverges strongly to the unique global strong solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1_coordinates_DWMC})--(\ref{HNSC4_coordinates_DWMC}), (\ref{HNSC5_strong_cshift_coordinates_DWMC}), (\ref{HNSC_init_coordinates_DWMC}), (\ref{HNSC_bc-strong_coordinates_DWMC}). In more detail, the following strong convergence results hold:
 
   \begin{align} 
     & (\mathbf{u}_h^\epsilon, \epsilon u_3^\epsilon) \to (\mathbf{u}_h, 0) &\quad & \text{in $L_t^\infty H_x^2$,} \label{StrongConvVelocity1statement} \\
@@ -3331,7 +3324,7 @@ Combining the velocity convergence results (\ref{StrongConvVelocity1})--(\ref{St
 
 \subsection{Existence of the strong solutions of the hydrostatic equations of the polluted atmosphere} \label{strongexistencesection}
 
-The section is dedicated to showing the existence of the unique global strong solution $(\mathbf{u}_h, u_3, c)$ of the hydrostatic limit system (\ref{HNSC1_coordinates_DWMC})--(\ref{HNSC4_coordinates_DWMC}), (\ref{HNSC5_strong_cshift_coordinates_DWMC}), (\ref{HNSC6_coordinates_DWMC}), (\ref{HNSC7-strong_coordinates_DWMC}) --- in other words we prove Theorem \ref{existenceconcentrationSTRONG}. The proof's first part strongly uses the existence result achieved in \cite{cao2014local}: here the authors focus on a system that is very similar to ours, including an incomplete Laplacian in the convection-diffusion equation. However, while they work with a temperature function $T,$ in our case the additional function to the velocity-pressure pair is the concentration $c.$ Even though there is a strong analogy between the equations describing the dynamics of concentration and temperature, yet the variant nature of how each of these functions are coupled with the velocity equations overall contributes to a very significant structural divergence. Specifically, the difference between the equations $$ \partial_3 p + T = 0$$ and $$ \partial_3 p = 0$$ turns out to be a cardinal one concerning global existence. Observe in these equations that for the case of the temperature there is a reciprocal coupling between the momentum equations and the convection-diffusion equation, on the other hand the coupling for the pollution concentration is one-sided, the hydrostatic equation does not depend on the function $c.$
+The section is dedicated to showing the existence of the unique global strong solution $(\mathbf{u}_h, u_3, c)$ of the hydrostatic limit system (\ref{HNSC1_coordinates_DWMC})--(\ref{HNSC4_coordinates_DWMC}), (\ref{HNSC5_strong_cshift_coordinates_DWMC}), (\ref{HNSC_init_coordinates_DWMC}), (\ref{HNSC_bc-strong_coordinates_DWMC}) --- in other words we prove Theorem \ref{existenceconcentrationSTRONG}. The proof's first part strongly uses the existence result achieved in \cite{cao2014local}: here the authors focus on a system that is very similar to ours, including an incomplete Laplacian in the convection-diffusion equation. However, while they work with a temperature function $T,$ in our case the additional function to the velocity-pressure pair is the concentration $c.$ Even though there is a strong analogy between the equations describing the dynamics of concentration and temperature, yet the variant nature of how each of these functions are coupled with the velocity equations overall contributes to a very significant structural divergence. Specifically, the difference between the equations $$ \partial_3 p + T = 0$$ and $$ \partial_3 p = 0$$ turns out to be a cardinal one concerning global existence. Observe in these equations that for the case of the temperature there is a reciprocal coupling between the momentum equations and the convection-diffusion equation, on the other hand the coupling for the pollution concentration is one-sided, the hydrostatic equation does not depend on the function $c.$
 
 The method of \cite{cao2014local} is easily applicable with minor changes to our system until reaching the verification of local existence; the transplantation of their global existence proof on the other hand becomes very problematic. The presence of $T$ in the hydrostatic equation makes certain cancellations possible in their case which eventually guarantee the ability to close estimates that otherwise would not lead to meaningful implications. Since our hydrostatic equation does not include $c,$ we will work out a set of rather independent estimates to show the continuability of the concentration function.
 
