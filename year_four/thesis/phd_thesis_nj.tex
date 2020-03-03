@@ -351,7 +351,6 @@ The corresponding scaling equations regarding the kinematic, pressure and viscos
       &\nu_x = \nu_1, \quad \nu_y = \nu_2, \quad \nu_z = \epsilon^2 \nu_3,
   \end{split}
  \end{equation}
-%
 where $p$ is the pressure term including the gravity potential $\varphi,$ i.e., $p = q - \varphi$, and the latter scaling identities embody the different eddy viscosity hypothesis. Basically, this approach used in the scaling of the viscosity parameters can be heuristically deduced from the viscosity dimensions: $[\nu_{x_i}] = \text{typical length}_{x_i}^2 / \text{typical time}$. The concept of anisotropic viscosity coefficients initially might seems like a minor, nice-to-have accessory in the model --- its role, on the contrary, is essential. For the case of $\nu_x, \nu_y, \nu_z = \mathcal{O}(1)$ isotropic viscosities the stationary Navier-Stokes equations converge to a linear system with only vertical dissipation, see \cite{bresch1999vertical}. Anisotropic viscosity and diffusivity constants are widespread utilised outside of theoretical computations as well, see the finite element ocean model in \cite{danilov2002finite} for example.
 More details on the subject can be found in \cite{besson1992some}, \cite{azerad2001mathematical}.
 
@@ -450,19 +449,19 @@ Putting this condition and the previously described rescaling terms together wit
 \begin{equation} \label{ANSC1_coordinates_GFC}
   \partial_t u^\epsilon _1 + \mathbf{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\alpha u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-%
+
 \begin{equation} \label{ANSC2_coordinates_GFC}
   \partial_t u_2^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_2^\epsilon -\Delta_\nu u_2^\epsilon + \alpha u_1^\epsilon + \partial_2 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-%
+
 \begin{equation} \label{ANSC3_coordinates_GFC}
   \epsilon^2 \{  \partial_t u_3^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon -\Delta_\nu u_3^{\epsilon} \} - \epsilon \beta u_1^\epsilon + \partial_3 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-%
+
 \begin{equation} \label{ANSC4_coordinates_GFC}
   \nabla \cdot \mathbf{u}^\epsilon= 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-%
+
 \begin{equation} \label{ANSC5_coordinates_GFC}
   \partial_t c^\epsilon + \mathbf{u^\epsilon} \cdot \nabla c^\epsilon = \nabla \cdot (\mathbf{M} \nabla c^\epsilon) + s^\epsilon \text{ in } \Omega \times (0,T)
 \end{equation}
@@ -557,7 +556,7 @@ As we mentioned before, the case we are investigating is that of domains over a 
 Specifically, for the pollution concentration reaching the ground level we use a similar approach as the one classically used for the wind traction reaching the top of the ocean (see for example \cite{azerad2001mathematical}, \cite{temam2005some}). We assume that the functions $\partial_1 c^\epsilon, \partial_2 c^\epsilon, \partial_3 c^\epsilon$ are equal to some sufficiently regular functions defined on the respective boundary. More accurately, we assume that we have $\nabla c^\epsilon = \boldsymbol{\sigma}$ on the lower boundary, where $\boldsymbol{\sigma} \in L^2(0,T;L^2(\Gamma_G))$, and the $\sigma_i$ terms denote the components of $\boldsymbol{\sigma}$. In particular in this inland case $\sigma_3$ is equal to zero on the $\Gamma_G$.
   
 Finally, the boundary conditions to describe the anisotropic system (\ref{ANSC1_coordinates_GFC}) - (\ref{ANSC_init_coordinates_GFC}) can be summarised as follows:
-%
+
 \begin{equation} \label{ANSC_bc_coordinates_GFC}
   \begin{split}
     & \mathbf{u}^\epsilon = 0 \text{ on } \Gamma \times (0,T), \\
@@ -566,35 +565,35 @@ Finally, the boundary conditions to describe the anisotropic system (\ref{ANSC1_
     & \boldsymbol{\sigma} = (\sigma_1, \sigma_2, 0) \in L^2(0,T; \Gamma_G)\\
    \end{split} \raisetag{40pt}
 \end{equation}
-%
+
 Note that we have a domain where the lower and upper boundaries represent a physically existent layer (i.e. the ground and the planetary boundary layer), but outside the lateral boundary the physical world continues without influence and without any particular external condition. On boundaries of such nature we have to apply OBCs (open boundary conditions), which is not a trivial task, see for example \cite{wang2014ocean}. We need to avoid any spurious reflection or constraint which is unnatural, but at the same time we want the model to remain mathematically manageable.
 
 If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and $\epsilon$ in the anisotropic equations, we formally arrive to the following hydrostatic Navier-Stokes equations (i.e., primitive equations) combined with pollution:
-%
+
 \begin{equation} \label{HNSC1_coordinates_GFC}    
   \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\alpha u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-%
+
 \begin{equation} \label{HNSC2_coordinates_GFC}   
   \partial_t u_2 + \mathbf{u} \cdot \nabla u_2 - \Delta_\nu u_2 -\alpha u_1 + \partial_2 p = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-%
+
 \begin{equation} \label{HNSC3_coordinates_GFC}   
   \partial_3 p = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-%
+
 \begin{equation} \label{HNSC4_coordinates_GFC}
   \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-%
+
 \begin{equation} \label{HNSC5_coordinates_GFC}   
   \partial_t c + \mathbf{u} \cdot \nabla c = \nabla \cdot (\mathbf{M} \nabla c) + s \text{ in } \Omega \times (0,T)
 \end{equation}
-%
+
 \begin{equation} \label{HNSC_init_coordinates_GFC}   
   u_i (\cdot, t=0) = u_{0 i}, c (\cdot, t=0) = c_0 \text{ in } \Omega, \text{$i$ = 1,2}
 \end{equation}
-%
+
 \begin{equation} \label{HNSC_bc_coordinates_GFC}
 \begin{split}
 & u_1 = u_2 = u_3 n_3 = 0 \text{ on } \Gamma \times (0,T), \\
@@ -602,7 +601,7 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
 & \partial_1 c = \sigma_1, \partial_2 c = \sigma_2, \partial_3 c = 0, \boldsymbol{\sigma} = (\sigma_1, \sigma_2, 0) \in L^2(0,T; \Gamma_G)\\
 \end{split}
 \end{equation}
-%
+
 \begin{remark} \label{sourceregularityremark}
 Here $s$ stands for the $\delta$ limit distribution. We keep the notation $s$ for generality, since as we will see later, instead of the approximated delta functions and the delta distribution, it is possible to use any sort of "sufficiently smooth" source term (which can be independent from $\epsilon$ in the anisotropic case as well) that is bounded in $L^2_t L^2_x.$
 \end{remark} 
@@ -668,37 +667,37 @@ i.e. $2 \omega = (\alpha, \beta, \gamma),$ then using this, the Coriolis force t
  =
  \begin{bmatrix}  \beta \epsilon u_3 - \gamma u_2 \\ \gamma u_1 - \alpha \epsilon u_3  \\ \alpha u_2 - \beta u_1 \end{bmatrix}.
 \end{gather}
-%
+
 Thus, these are the terms that appear in the three velocity equations below; but note that in the rescaled version of the vertical velocity equation the third component of the Coriolis term is present with an $\epsilon$ multiplier, which is obtained from the $\epsilon$ term in the denominator of $\partial_z p.$
 
 Using the expanded form of the Coriolis terms and applying the scaling identities (\ref{scaling_eq_x}), (\ref{scaling_eq_vpnu}), (\ref{scaling_eq_c}), ($\ref{scaling_eq_diffusion_dwmc}$), $(\ref{ksepsk1})$ to the complete system, we arrive to the merged anisotropic equations of the polluted atmosphere above inland surface:
-%
+
 \begin{equation} \label{ANSC1_coordinates_DWMC}
   \partial_t u^\epsilon _1 + \mathbf{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\gamma u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-%
+
 \begin{equation} \label{ANSC2_coordinates_DWMC}
   \partial_t u_2^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_2^\epsilon -\Delta_\nu u_2^\epsilon + \gamma u_1^\epsilon - \alpha \epsilon u^\epsilon_3  + \partial_2 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-%
+
 \begin{equation} \label{ANSC3_coordinates_DWMC}
   \epsilon^2 \{  \partial_t u_3^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon -\Delta_\nu u_3^{\epsilon} \} + \epsilon \alpha u^\epsilon_2 - \epsilon \beta u_1^\epsilon + \partial_3 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-%
+
 \begin{equation} \label{ANSC4_coordinates_DWMC}
   \nabla \cdot \mathbf{u}^\epsilon= 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-%
+
 \begin{equation} \label{ANSC5_coordinates_DWMC}
    \partial_t c^\epsilon + \mathbf{u^\epsilon} \cdot \nabla c^\epsilon = \epsilon K_1 \partial_{11} ^ 2 c^\epsilon + K_2 \partial_{22} ^ 2 c^\epsilon + K_3 \partial_{33} ^ 2 c^\epsilon + s^\epsilon \text{ in } \Omega \times (0,T).
 \end{equation}
-%
+
 The initial condition for the velocity and the pollution concentration are
     
 \begin{equation} \label{ANSC_init_coordinates_DWMC}
   \mathbf{u}^\epsilon (\cdot, t = 0) = \mathbf{u}_0, \quad c^\epsilon (\cdot, t=0) = c_0  \quad \text{ in } \Omega.
 \end{equation}
-%
+
 We will specify the regularity of the initial data in Sections \ref{sectionWS_dwmc} and \ref{sectionSTRONGsol} according to the fact whether we are dealing with weak or strong solutions.
 
 This system will become complete when we define the boundary conditions --- we describe these in detail in Sections \ref{sectionWS_dwmc} and \ref{sectionSTRONGsol} as they are chosen with different considerations depending on the type of the solutions we are dealing with.
@@ -708,27 +707,27 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
 \begin{equation} \label{HNSC1_coordinates_DWMC}    
   \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\gamma u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-%
+
 \begin{equation} \label{HNSC2_coordinates_DWMC}   
   \partial_t u_2 + \mathbf{u} \cdot \nabla u_2 - \Delta_\nu u_2 + \gamma u_1 + \partial_2 p = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-%
+
 \begin{equation} \label{HNSC3_coordinates_DWMC}   
   \partial_3 p = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-%
+
 \begin{equation} \label{HNSC4_coordinates_DWMC}   
   \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-%
+
 \begin{equation} \label{HNSC5_coordinates_DWMC}   
   \partial_t c + \mathbf{u} \cdot \nabla c = K_2 \partial_{22} ^ 2 c + K_3 \partial_{33} ^2 c + s \text{ in } \Omega \times (0,T)
 \end{equation}
-%
+
 \begin{equation} \label{HNSC_init_coordinates_DWMC}
   u_i (\cdot, t=0) = u_{0 i}, \quad c (\cdot, t=0) = c_0 \text{ in } \Omega, \text{$i$ = 1,2}
 \end{equation}
-%
+
 The specific definitions of the $s^\epsilon$ and $s$ source terms also depend on whether we consider weak or strong solutions. In both cases they are fundamentally based on the notion of the nascent delta function with parameter $\epsilon$ and the delta distribution, but their exact definitions will be given in the subsections according to the regularity of the solutions.
 
 To conclude the description of the model we highlight an important feature of the system that is suggested also by the structure of the governing equations (\ref{ANSC5_coordinates_DWMC}) and (\ref{HNSC5_coordinates_DWMC}). With respect to pollution diffusion, directions $y$ and $z$ have a particular and shared importance compared to the $x$ direction, namely that we have diffusion taking place on $\mathcal{O}(1)$ scale in the former ones. This suggests the introduction of the generalised direction $d$ which includes directions $y$ and $z$ (similarly to the more standard concept of $h$ standing for the horizontal directions $x$ and $y$). Furthermore, we accordingly introduce the notations $\Delta_d = K_2 \partial_{22}^2 + K_3 \partial_{33}^2$ and $\nabla_d = (\partial_2, \partial_3).$
@@ -760,27 +759,27 @@ In order to enhance readability and keep this chapter self-contained, we firstly
 \begin{equation} \label{ANSC1_coordinates_GFC}
   \partial_t u^\epsilon _1 + \mathbf{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\alpha u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-%
+
 \begin{equation} \label{ANSC2_coordinates_GFC}
   \partial_t u_2^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_2^\epsilon -\Delta_\nu u_2^\epsilon + \alpha u_1^\epsilon + \partial_2 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-%
+
 \begin{equation} \label{ANSC3_coordinates_GFC}
   \epsilon^2 \{  \partial_t u_3^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon -\Delta_\nu u_3^{\epsilon} \} - \epsilon \beta u_1^\epsilon + \partial_3 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-%
+
 \begin{equation} \label{ANSC4_coordinates_GFC}
   \nabla \cdot \mathbf{u}^\epsilon= 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-%
+
 \begin{equation} \label{ANSC5_coordinates_GFC}
   \partial_t c^\epsilon + \mathbf{u^\epsilon} \cdot \nabla c^\epsilon = \nabla \cdot (\mathbf{M} \nabla c^\epsilon) + s^\epsilon \text{ in } \Omega \times (0,T)
 \end{equation}
-%
+
 \begin{equation} \label{ANSC_init_coordinates_GFC}
   \mathbf{u}^\epsilon (\cdot, t = 0) = \mathbf{u}_0, \quad c^\epsilon (\cdot, t=0) = c_0  \quad \text{ in } \Omega
 \end{equation}
-%
+
 \begin{equation} \label{ANSC_bc_coordinates_GFC}
   \begin{split}
     & \mathbf{u}^\epsilon = 0 \text{ on } \Gamma \times (0,T), \\
@@ -789,33 +788,33 @@ In order to enhance readability and keep this chapter self-contained, we firstly
     & \boldsymbol{\sigma} = (\sigma_1, \sigma_2, 0) \in L^2(0,T; \Gamma_G).\\
    \end{split} \raisetag{40pt}
 \end{equation}
-%
+
 As suggested in Section \ref{eqsdescribingatmpluspollution_gfc}, the hydrostatic equations are derived from this latter system by formally taking $\epsilon = 0,$ and thus obtaining the primitive equations written in geophysical coordinates:
 
 \begin{equation} \label{HNSC1_coordinates_GFC}    
   \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\alpha u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-%
+
 \begin{equation} \label{HNSC2_coordinates_GFC}   
   \partial_t u_2 + \mathbf{u} \cdot \nabla u_2 - \Delta_\nu u_2 -\alpha u_1 + \partial_2 p = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-%
+
 \begin{equation} \label{HNSC3_coordinates_GFC}   
   \partial_3 p = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-%
+
 \begin{equation} \label{HNSC4_coordinates_GFC}   
   \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-%
+
 \begin{equation} \label{HNSC5_coordinates_GFC}
   \partial_t c + \mathbf{u} \cdot \nabla c = \nabla \cdot (\mathbf{M} \nabla c) + s \text{ in } \Omega \times (0,T)
 \end{equation}
-% 
+
 \begin{equation} \label{HNSC_init_coordinates_GFC}
   u_i (\cdot, t=0) = u_{0 i}, c (\cdot, t=0) = c_0 \text{ in } \Omega, \text{$i$ = 1,2}
 \end{equation}
-%
+
 \begin{equation} \label{HNSC_bc_coordinates_GFC}
 \begin{split}
 & u_1 = u_2 = u_3 n_3 = 0 \text{ on } \Gamma \times (0,T) , \\
@@ -832,17 +831,17 @@ The theorems we prove in detail in this chapter are our original results and the
 In this section we describe the weak formulation of the merged equations in both the anisotropic and hydrostatic case we are going to use in the thesis, and we state our main result.
   
 We need to define the following spaces:
-%
+
 \[ C^{\infty}_{\Gamma_A} (\Omega) = \{ \varphi \in C^\infty (\bar{\Omega}); \varphi = 0 \text{ on some neighbourhood of } \Gamma_A \} \]
-%
+
 \[ H^k_{\Gamma_A} (\Omega) = \overline{C_{\Gamma_A} ^ \infty (\Omega)} ^ {H^k (\Omega)} = \{ v \in H^k(\Omega); \partial^\alpha v=0 \text{ on } \Gamma_A \text{ for any } \abs{\alpha} < k \} \]
-%
+
 \[ \mathbf{V} = \{ \mathbf{v} \in  H^1_{\Gamma_A} (\Omega) \times H^1_{\Gamma_A} (\Omega) \times H^1_0 (\Omega); \nabla \cdot \mathbf{v} = 0 \text{ in } \Omega \} \]
-%
+
 \[ H (\partial_3, \Omega) = \{ v \in L^2(\Omega); \partial_3 v \in L^2 (\Omega)\} \]
-%
+
 \[ H_0 (\partial_3, \Omega) = \overline{C_0 ^\infty (\Omega)}^{H (\partial_3, \Omega)} = \{ v \in H(\partial_3, \Omega); v n_3 = 0 \text{ on } \Gamma \} \]
-%
+
 \[ \mathbf{W} = \{ \mathbf{u} \in  H^1_{\Gamma_A} (\Omega) \times H^1_{\Gamma_A} (\Omega) \times H_0 (\partial_3, \Omega); \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \} \]
 
 Furthermore we introduce the notation $b(\mathbf{u}_H)$ = $\gamma (-u_2 , u_1).$
@@ -941,7 +940,7 @@ As we mentioned before, one of the most fundamental tools in this proof is the e
     & = I_1 + I_2 + I_3. \raisetag{70pt} \label{energyIEQ}
     \end{split}
 \end{equation}    
-%
+
 From the hypothesis on the initial data and since the $s^\epsilon$ source term is in $L^\infty_x (\Omega)$, $I_1$ and $I_2$ are bounded. The only terms we need to work on further are the expressions in $I_3$.
   
 By using the H\"older inequality and the generalised Young inequality for any $\zeta > 0,$ we can estimate this term in the following way.
@@ -969,7 +968,7 @@ After applying the coercivity property (\ref{coercivity}) of the diffusion matri
     & + \int_0^t (s^\epsilon,c^\epsilon) \diff \tau + \sum_{i,j = 1}^3 \zeta \frac{1}{2} M_{ij} c_T  \int_0 ^ t \norm{c^\epsilon}^2 _{L^2 (\Omega) } \diff \tau. \raisetag{90pt} \label{finalformEIEQ_gfc}
     \end{split}
   \end{equation}  
-%
+
 It is now straightforward to see that the coefficients of the pollution terms are positive, since the $\zeta = \zeta(\lambda)$ constant of the generalised Young inequality can be freely chosen in a way such that the requirement $(\lambda - \sum \zeta \frac{1}{2} M_{ij} c_T) > \lambda/2 > 0$ is satisfied.
     
   \subsection{A priori estimates and weak convergence}
@@ -2230,23 +2229,23 @@ In order to keep this chapter as compact as possible, here we repeat the definit
 \begin{equation} \label{ANSC1_coordinates_DWMC}
   \partial_t u^\epsilon _1 + \mathbf{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\gamma u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-%
+
 \begin{equation} \label{ANSC2_coordinates_DWMC}
   \partial_t u_2^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_2^\epsilon -\Delta_\nu u_2^\epsilon + \gamma u_1^\epsilon - \alpha \epsilon u^\epsilon_3  + \partial_2 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-%
+
 \begin{equation} \label{ANSC3_coordinates_DWMC}
   \epsilon^2 \{  \partial_t u_3^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon -\Delta_\nu u_3^{\epsilon} \} + \epsilon \alpha u^\epsilon_2 - \epsilon \beta u_1^\epsilon + \partial_3 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-%
+
 \begin{equation} \label{ANSC4_coordinates_DWMC}
   \nabla \cdot \mathbf{u}^\epsilon= 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-%
+
 \begin{equation} \label{ANSC5_coordinates_DWMC}
    \partial_t c^\epsilon + \mathbf{u^\epsilon} \cdot \nabla c^\epsilon = \epsilon K_1 \partial_{11} ^ 2 c^\epsilon + K_2 \partial_{22} ^ 2 c^\epsilon + K_3 \partial_{33} ^ 2 c^\epsilon + s^\epsilon \text{ in } \Omega \times (0,T)
 \end{equation}
- %
+
 \begin{equation} \label{ANSC_init_coordinates_DWMC}
   \mathbf{u}^\epsilon (\cdot, t = 0) = \mathbf{u}_0, \quad c^\epsilon (\cdot, t=0) = c_0  \quad \text{ in } \Omega.
 \end{equation}
@@ -2256,23 +2255,23 @@ The hydrostatic equations are obtained formally by neglecting the $\epsilon$--in
 \begin{equation} \label{HNSC1_coordinates_DWMC}    
   \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\gamma u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-%
+
 \begin{equation} \label{HNSC2_coordinates_DWMC}   
   \partial_t u_2 + \mathbf{u} \cdot \nabla u_2 - \Delta_\nu u_2 + \gamma u_1 + \partial_2 p = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-%
+
 \begin{equation} \label{HNSC3_coordinates_DWMC}   
   \partial_3 p = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-%
+
 \begin{equation} \label{HNSC4_coordinates_DWMC}   
   \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
-%
+
 \begin{equation} \label{HNSC5_coordinates_DWMC}   
   \partial_t c + \mathbf{u} \cdot \nabla c = K_2 \partial_{22} ^ 2 c + K_3 \partial_{33} ^2 c + s \text{ in } \Omega \times (0,T)
 \end{equation}
-%
+
 \begin{equation} \label{HNSC_init_coordinates_DWMC}   
   u_i (\cdot, t=0) = u_{0 i}, \quad c (\cdot, t=0) = c_0 \text{ in } \Omega, \text{$i$ = 1,2}.
 \end{equation}
