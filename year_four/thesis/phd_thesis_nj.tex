@@ -540,13 +540,19 @@ The boundary conditions we choose to use in this case are the following:
     \begin{remark}
     If we wanted to use $c^\epsilon(x,y,z) = \kappa$ with some $\kappa$ constant value, we could make a change of variables subtracting that background flow and arrive back to the same mathematical problem with $c^\epsilon$ being zero.
     \end{remark}
-  \item In this model we neglect topological variations or large waves, and the $z=0$ plane represents the lower boundary. On the ground level we have
     
+  \item In this model we neglect topological variations or large waves, and the $z=0$ plane represents the lower boundary. On the ground level the boundary conditions are defined as follows. For the vertical air velocity we have the
+  
     \begin{equation}
-      \nu_3 \partial_3 \mathbf{u}^\epsilon_h = \theta_h, \quad u^\epsilon_3 = 0 \quad \text{ on } \Gamma_G \times (0,T) .
+      u^\epsilon_3 = 0 \quad \text{ on } \Gamma_G \times (0,T),
     \end{equation}
-    
-    This is the mathematical way of expressing wind traction with a $\theta_h$ parameter for the horizontal air flow, and the impervious nature of the ground with respect to the wind. As for the concentration, we assume that the pollution is not absorbed by the ground, so we use the
+condition, which represents the impervious nature of the ground with respect to the wind. For the horizontal velocities we set
+
+    \begin{equation}
+      \nu_3 \partial_3 \mathbf{u}^\epsilon_h = \theta_h \quad \text{ on } \Gamma_G \times (0,T),
+    \end{equation}
+%
+where, roughly speaking, the $\theta_h$ parameter represents how "smooth" the braking effect of the terrain is. For example if we consider air flow above a water surface, in this case there is a $\theta_h$ degree of freedom in the slowing process of the wind as the horizontal air layers are vertically closer and closer to the $\Gamma_G$ lower boundary. Above a rocky inland surface this degree of freedom is zero, as the no-slip boundary conditions force the air flow to a full stop on the boundary, while above water bodies the braking effect is not immediate: horizontal wind traction generates movement in the water, which leaves space for air flow even on the boundary. As for the concentration, we assume that the pollution is not absorbed by the ground, so we use the
     
     $$\mathbf{M} \nabla c^\epsilon \cdot \vec{\boldsymbol{n}}_{\Gamma_G} = 0 \quad \text{ on } \Gamma_G$$
     
@@ -983,17 +989,19 @@ After applying the coercivity property (\ref{coercivity}) of the diffusion matri
 In order to conclude the proof of Theorem \ref{maintheorem_weak_GFC} we pass to the limit in the weak formulation (\ref{anisotropicWF_U})-(\ref{anisotropicWF_C}). To take the limit for the linear velocity terms that do not include the concentration function $c^\epsilon$ we can use (\ref{WeakConvUHEps_gfc}), (\ref{WeakConvU3Eps_gfc}) and (\ref{WeakConvU3NoEps_gfc}), and the bounds (\ref{propositionExtra_gfc}), (\ref{proposition2_gfc}). As for the nonlinear terms, the convergence can be shown using a time compactness theorem that is based on a result by Simon \cite{simon1986compact}. The key point is to apply the following generalisation of the classical translation criterium of Riesz-Fr\'echet-Kolmogorov which enables us to get strong convergence for the horizontal velocities (for the proof of the result below see Theorem 5.1 in \cite{azerad2001mathematical}).
 
 \begin{theorem} \label{compactnessbyperturbation}
-Let $T>0,$ and let the Banach spaces $\mathbf{X} \hookrightarrow \mathbf{B} \hookrightarrow \mathbf{Y},$ where $\mathbf{X}$ is compactly embedded in $\mathbf{B},$ and $\mathbf{B}$ is continuously embedded in $\mathbf{Y}.$ Let's denote $\tau_\upsilon \mathbf{u}_h = \mathbf{u}_h (t+\upsilon),$ and let $(f_\epsilon)_{\epsilon>0}$ be a family of functions of $L^p (0,T; \mathbf{X}), 1 \leq p \leq \infty,$ with the extra condition $(f_\epsilon)_{\epsilon>0} \subset C (0,T; \mathbf{Y})$ if $p = \infty,$ such that
+Let $T>0,$ and let the Banach spaces $\mathbf{X} \hookrightarrow \mathbf{B} \hookrightarrow \mathbf{Y},$ where $\mathbf{X}$ is compactly embedded in $\mathbf{B},$ and $\mathbf{B}$ is continuously embedded in $\mathbf{Y}.$ Let $(f_\epsilon)_{\epsilon>0}$ be a family of functions of $L^p (0,T; \mathbf{X}), 1 \leq p \leq \infty,$ with the extra condition $(f_\epsilon)_{\epsilon>0} \subset C (0,T; \mathbf{Y})$ if $p = \infty,$ such that
 \begin{enumerate}
   \item $(f_\epsilon)_{\epsilon>0}$ is bounded in $L^p (0,T; \mathbf{X}),$
   \item $\norm{\tau_\upsilon f_\epsilon - f_\epsilon}_{L^p(0,T-\upsilon; \mathbf{Y})} \leq \varphi(\upsilon) + \psi(\epsilon)$ for a given pair of functions $\varphi, \psi$ with
   $$
     \begin{cases}
       \lim_{\upsilon \to 0} \varphi(\upsilon) = 0,\\
-      \lim_{\epsilon \to 0} \psi(\epsilon) = 0.
+      \lim_{\epsilon \to 0} \psi(\epsilon) = 0,
     \end{cases}
   $$
   \end{enumerate}
+  
+where $\tau_\upsilon f_\epsilon$ denotes $f_\epsilon (t+\upsilon), \upsilon > 0.$
   
 Then the family $(f_\epsilon)_{\epsilon>0}$ possesses a cluster point in $L^p (0,T; \mathbf{B})$ and also in $\mathcal{C}(0,T; \mathbf{B})$ if $p = \infty$ as $\epsilon \to 0.$
 \end{theorem}
@@ -1007,13 +1015,13 @@ In particular, the nonlinear terms fall into four categories:
   \item[(IV)] $\int_0^T (u_i^\epsilon u_3^\epsilon, \partial_3 v_i) \diff t, \quad 1 \leq i \leq 2.$
 \end{itemize}
 
-It is easy to see that the type (I) and (II) terms are $\mathcal{O}(\epsilon)$ and thus they vanish as $\epsilon$ tends to zero. We need the aforementioned compactness result to handle the (III) and (IV) type terms. Applying the generalised Riesz-Fr\'echet-Kolmogorov criterium with $p=2, f_\epsilon = \mathbf{u}_h^\epsilon$ in the horizontal spaces (and using the $H^1 \hookrightarrow L^2 \hookrightarrow {H^2}^*$ embedding), we obtain a subsequence, still denoted by $\mathbf{u}_h^\epsilon,$ such that
+It is easy to see that the type (I) and (II) terms are $\mathcal{O}(\epsilon)$ and thus they vanish as $\epsilon$ tends to zero. We need the aforementioned compactness result to handle the (III) and (IV) type terms. We apply the generalised Riesz-Fr\'echet-Kolmogorov criterium with $p=2, f_\epsilon = \mathbf{u}_h^\epsilon$ in the horizontal spaces (and using the $H^1 \hookrightarrow L^2 \hookrightarrow {H^2}^*$ embedding). Indeed, we use (\ref{proposition2_gfc}) to get \textit{i)} and (\ref{proposition1_gfc}), (\ref{proposition2_gfc}) with basic interpolation techniques and the generalised H\"older inequality to satisfy \textit{ii)} and we obtain a subsequence, still denoted by $\mathbf{u}_h^\epsilon,$ such that
 
 \begin{equation} \label{R-F-K_applied}
   \mathbf{u}_h^\epsilon \to \mathbf{u}_h \text{ in } L^2(0, T; L^2 (\Omega)) \text{ strongly.}
 \end{equation}
 
-We obtain the convergence of (III) and (IV) type terms by combining (\ref{proposition1_gfc}), (\ref{proposition2_gfc}), and the above obtained (\ref{R-F-K_applied}) with basic interpolation techniques and the generalised H\"older inequality. The details are omitted since they are analogous to those described in \cite{azerad2001mathematical}.
+Hence we obtain the convergence of (III) and (IV). The details are omitted since they are analogous to those described in \cite{azerad2001mathematical}.
   
 For the linear terms including the concentration $c^\epsilon$ we can directly apply the weak convergence result of (\ref{WeakConvCEps1_gfc}).
     
@@ -1086,30 +1094,7 @@ In this section we collect some remarks completing the results obtained thus far
 
 \begin{remark}
 \normalfont
-
-\begin{figure}[!h]
-\centering
-\begin{tikzpicture}
-\draw (0,0) -- (2,0) -- (4,0) -- (4,2) -- (4,4) -- (2,4) -- (0,4) -- (0,2) -- (0,0);
-\draw (2,2)node{$\Omega$};
-\draw[green, thick] (0,0) -- (2,0);
-\draw[blue,thick,dashed] (2,0) -- (4,0);
-
-    \draw (2,2)node{$\Omega$};
-    \draw (4,2)node[right] {$\Gamma_L$ $\mathbf{u^\epsilon} = 0, c^\epsilon=0 $};
-    \draw (2,4)node[above] {$\Gamma_U$ $\mathbf{u^\epsilon} = 0, c^\epsilon=0 $};
-    \draw (0,2)node[left] {$\Gamma_L$ $\mathbf{u^\epsilon} = 0, c^\epsilon=0 $};
-    \draw (1,0)node[below]{$\Gamma_E$};
-    \draw (3,0)node[below]{$\Gamma_I$};
-    
-\end{tikzpicture}
-\end{figure}
-
-As we have mentioned previously, the generic definition of the $\boldsymbol{\sigma}$ boundary function and the structure of the proof makes it easy to consider a generalised model adapted for seaside conditions where the lower boundary consists of $\Gamma_G = \Gamma_E \cup \Gamma_I$ --- here $\Gamma_I$ is the interface between air and water where rigid and no-slip boundary conditions are switched for ones expressing interactions. The main difference regarding the concentration function is that the $\sigma_3$ sediment is not zero in this case. Since we never exploited $\sigma_3$ being zero in the inland scenario, and we only used the bounded nature of this function, the generalisation does not bring any additional challenge in this front.
-
-We also highlight that this will be not the case at all in the framework of downwind-matching coordinates (see (\ref{HNSC_bc-weak_coordinates_DWMC}) in the next chapter): the geophysical coordinate system enjoys the benefits of these relatively relaxed boundary conditions because of its more balanced continuity equation (i.e. all diffusion terms are present with a non-disappearing constant coefficient).
-
-For the velocity function the wind traction is represented by the new boundary condition $\nu_3 \partial_3 \mathbf{u}^\epsilon_H = \theta_H, u_3 = 0$ with assuming a finite wind energy, i.e. the function $\theta$ being in $L^2(0,T; H^{-1/2}(\Gamma_I))$. This part of the work has already been done in \cite{azerad2001mathematical}.
+As previously explained in detail, the results obtained in this chapter hold for a generic landscape. In order to achieve this, we use the $\nu_3 \partial_3 \mathbf{u}_h^\epsilon = \theta_h$ Neumann type boundary condition on $\Gamma_G.$ For the special case of inland domains we can switch the Neumann boundary condition to the $\mathbf{u}^\epsilon = 0$ Dirichlet type condition.
 \end{remark}
 
 \begin{remark}
