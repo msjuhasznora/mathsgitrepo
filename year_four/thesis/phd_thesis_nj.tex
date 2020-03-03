@@ -1148,7 +1148,7 @@ We will follow the structure of the proof in \cite{temam2005some}, we redefine t
 
 \textbf{Step 1.} Firstly we redefine the norms and the functional setting to make them match our system.
 
-Throughout this section we will use the $V = V_1 \times V_2, H = H_1 \times H_2, \mathcal{V} = \mathcal{V}_1 \times \mathcal{V}_2,$ and $V_{(2)}$ function spaces, where $V$ and $H$ essentially represent $H^1$ and $L^2$ regularities, while $\mathcal{V}$ and $V_{(2)}$ stand for a subset of the $C^{\infty}$ function space and its closure in $H^2,$ respectively. In more details, we introduce
+Throughout this section we will use the $V = V_1 \times V_2, H = H_1 \times H_2, \mathcal{V} = \mathcal{V}_1 \times \mathcal{V}_2,$ and $V_{(2)}$ function spaces, where $V$ and $H$ essentially represent $H^1$ and $L^2$ regularities, while $\mathcal{V}$ and $V_{(2)}$ stand for a subset of the $C^{\infty}$ function space and its closure in $H^2,$ respectively. In more detail, we introduce
 
 %% V --- hypothesis of Definition 1. We don't need to add the boundary zero conditions for the velocity or the L^2 regularity because they are all covered by H^1_Gamma.
 $$ V_1 = \{ \mathbf{u}_h \in H^1_{\Gamma_A} (\Omega) \times H^1_{\Gamma_A} (\Omega), \nabla_h \cdot \int_0^a \mathbf{u}_h \diff z = 0  \}, $$
@@ -1206,7 +1206,7 @@ with
 
 \[ e(U, \tilde{U}) = \int_\Omega b(\mathbf{u}_h) \mathbf{\tilde{u}}_h \diff \omega \]
 
-\[ l(\tilde{U}) = - \int_\Omega s \tilde{c} \diff \omega + \big[((\nabla c)^ T \mathbf{M}) \tilde{c} \vec{\mathbf{1}} \big] _{\Gamma_G}. \]
+\[ l(\tilde{U}) = - \int_\Omega s \tilde{c} \diff \omega + \langle \theta_h, \tilde{u}_h \rangle _{\Gamma_G}. \]
 
 Here the term $b(\mathbf{u}_H)$ represents the $\gamma (-u_2, u_1)$ vector, and we use the fact that the vertical velocity can be expressed as $u_3 = u_3(\mathbf{u}_h)$ because the divergence of the three dimensional velocity is zero.
 
@@ -1279,7 +1279,7 @@ The weak formulation is as follows.
 %% our concentration source is delta, S = \delta.  we need the L^2 regularity only for the weak formulation to make sense.
 
 \begin{definition}
-Given a source term $s = \delta$ or $s \in L^2(\Omega),$ find $U = (\mathbf{u}_h, c),$ that satisfies the hypothesis of Definition \ref{definitionhydrostaticWF_gfc} in the space dimensions, moreover
+Given a source term $s = \delta$ or $s \in L^2(\Omega),$ and a wind traction parameter $\theta_h \in L^2(0,T;H^{-1/2}(\Gamma_G)),$ find $U = (\mathbf{u}_h, c),$ that satisfies the hypothesis of Definition \ref{definitionhydrostaticWF_gfc} in the space dimensions, moreover
 \begin{equation} \label{FWSTAT} a(U, \tilde{U}) + b(U,U, \tilde{U}) + e(U, \tilde{U}) = l(\tilde{U}) \end{equation}
 for every $\tilde{U} \in V_{(2)}.$
 \end{definition}
@@ -1289,7 +1289,7 @@ Note that the definition of the weak formulation in our case is a bit more gener
 We have the following theorem establishing the existence of solutions of the stationary equations, which can be proved by Galerkin method using the fundamental results we verified for the functions $a,b$ and $e$.
 
 \begin{theorem}
-We are given $s = \delta$ or $s$ in $L^2(\Omega),$ then the problem (\ref{FWSTAT}) possesses at least one solution $U \in V$ such that
+We are given $s = \delta$ or $s$ in $L^2(\Omega),$ and a wind traction parameter $\theta_h \in L^2(0,T;H^{-1/2}(\Gamma_G)),$ then the problem (\ref{FWSTAT}) possesses at least one solution $U \in V$ such that
 
 \[ \norm{U} \leq \frac{1}{c_1} \norm{l}_{V'},\] where $c_1$ is the coercivity constant.
 
@@ -1311,7 +1311,7 @@ The weak formulation in the time-dependent case takes the following form.
 
 \begin{definition}
 
-Given $T,$ $U_0 \in H,$ and a source term $s = \delta$ or $s \in L^2(\Omega),$ find $U$ that satisfies the hypothesis of Definition \ref{definitionhydrostaticWF_gfc}, moreover
+Given $T,$ $U_0 \in H,$ $\theta_h \in L^2(0,T;H^{-1/2}(\Gamma_G)),$ and a source term $s = \delta$ or $s \in L^2(\Omega),$ find $U$ that satisfies the hypothesis of Definition \ref{definitionhydrostaticWF_gfc}, moreover
 
 \begin{equation} \label{timedependentWFE}
   \begin{split}
@@ -1346,7 +1346,7 @@ which is the same as (\ref{timedependentWFE}), and which thus finally leads us t
 
 \begin{theorem}
 
-Given $T > 0$, $U_0 \in H,$ and a source term $s = \delta$ or $s \in L^2(\Omega),$ then there exists $(\mathbf{u}, c)$ with $u_3 = - \int_0^z \nabla_h \cdot \mathbf{u}_h$, $\mathbf{u} = (\mathbf{u}_h, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_h \in L^\infty (0,T; L^2(\Omega)),$ and $c \in L^\infty (0,T; L^2 (\Omega)) \cap L^2( 0,T; H^1(\Omega))$, which is solution to (\ref{hydrostaticWF_U})-(\ref{hydrostaticWF_C}).
+Given $T > 0$, $U_0 \in H,$ $\theta_h \in L^2(0,T; H^{-1/2}(\Gamma_G))$ and a source term $s = \delta$ or $s \in L^2(\Omega),$ then there exists $(\mathbf{u}, c)$ with $u_3 = - \int_0^z \nabla_h \cdot \mathbf{u}_h$, $\mathbf{u} = (\mathbf{u}_h, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_h \in L^\infty (0,T; L^2(\Omega)),$ and $c \in L^\infty (0,T; L^2 (\Omega)) \cap L^2( 0,T; H^1(\Omega))$, which is solution to (\ref{hydrostaticWF_U})--(\ref{hydrostaticWF_C}).
 
 \end{theorem}
 
@@ -1426,7 +1426,7 @@ In order to construct a numerical scheme more suited to our specific problem, we
   \item We consider the stationary case.
   \item The Coriolis terms are neglected.
   \item We make the two horizontal dimensions fall into one. It is easy to see that in a theoretical point of view, and also in terms of proving regularities, there is no tangible difference between the two horizontal dimensions. The problem has $n-1$ dimensions with an $\mathcal{O}(1)$ scale, and $1$ dimension with an $\mathcal{O}(\epsilon)$ scale. Instead of the $n-1$ space dimensions we can use 1 for quicker computations and easier visualisation.
-  \item In order to obtain better results, we take the same equations, but we use them as equations describing water flow. The convergence result itself is the same, but the boundary conditions are slightly different, and using wind traction (represented by $\theta$ in the code) over the water surface helps to highlight the point of our result.
+  \item Because of its physical relevance (especially concerning the lateral boundary conditions), we switch to the waterbody scenario: we take the exact same equations, but we use them as equations describing water flow instead of air. The convergence result itself is practically the same, the only difference is that the boundary conditions are "upside down" --- the lower wind traction boundary condition of the atmosphere case now becomes the upper boundary condition of the ocean scenario.
 \end{enumerate}
 
 Taking these ideas into account, we have the following reduced system:
