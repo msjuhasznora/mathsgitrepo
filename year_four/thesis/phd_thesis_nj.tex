@@ -2239,7 +2239,7 @@ The hydrostatic equations are obtained formally by neglecting the $\epsilon$--in
   u_i (\cdot, t=0) = u_{0 i}, \quad c (\cdot, t=0) = c_0 \text{ in } \Omega, \text{$i$ = 1,2}.
 \end{equation}
 
-Section \ref{sectionWS_dwmc} focuses on the verification of a convergence result between the models (\ref{ANSC1_coordinates_DWMC}) - (\ref{ANSC5_coordinates_DWMC}), (\ref{ANSC_init_coordinates_DWMC}), and (\ref{HNSC1_coordinates_DWMC}) - (\ref{HNSC5_coordinates_DWMC}), (\ref{HNSC_init_coordinates_DWMC}) in the framework of weak solutions. We will be able to show the fact of the convergence at the cost of using a slightly smoother, $H^1$--regular initial data ${\mathbf{u}_h}_0$ (compare with (\ref{initialregularities_weak_gfc}) in Chapter \ref{geophysicalchapter}). In Section \ref{sectionSTRONGsol} we apply stronger initial regularities (namely, ${\mathbf{u}_h}_0 \in H^3(\Omega)$ and $c_0 \in H^2(\Omega)$) and -- from the computations' point of view -- a more favourable boundary structure: in Section \ref{sectionSTRONGsol_convergence} we describe an analogous convergence theorem to that in Section \ref{sectionWS_dwmc}, but the statement holds for strong solutions this time. In order to make the proof complete, in Section \ref{strongexistencesection} we verify the global existence of strong solutions.
+Section \ref{sectionWS_dwmc} focuses on the verification of a convergence result between the models (\ref{ANSC1_coordinates_DWMC}) - (\ref{ANSC5_coordinates_DWMC}), (\ref{ANSC_init_coordinates_DWMC}), and (\ref{HNSC1_coordinates_DWMC}) - (\ref{HNSC5_coordinates_DWMC}), (\ref{HNSC_init_coordinates_DWMC}) in the framework of weak solutions. We will be able to show the fact of the convergence at the cost of using a slightly smoother, $H^1$--regular initial data ${\mathbf{u}_h}_0$ (compare with (\ref{initialregularities_weak_gfc}) in Chapter \ref{geophysicalchapter}) and applying an inland setting for the boundary conditions. In Section \ref{sectionSTRONGsol} we apply stronger initial regularities (namely, ${\mathbf{u}_h}_0 \in H^3(\Omega)$ and $c_0 \in H^2(\Omega)$) and -- from the computations' point of view -- a more favourable boundary structure: in Section \ref{sectionSTRONGsol_convergence} we describe an analogous convergence theorem to that in Section \ref{sectionWS_dwmc}, but the statement holds for strong solutions this time. In order to make the proof complete, in Section \ref{strongexistencesection} we verify the global existence of strong solutions.
 
 The theorems we prove in detail in this chapter are our original results and they may also be found in \cite{dwmhydro2020}.
 
@@ -2248,7 +2248,7 @@ The theorems we prove in detail in this chapter are our original results and the
 
 This section focuses on extending the weak convergence result of Theorem \ref{maintheorem_weak_GFC} from the previous chapter dedicated to geophysical coordinates: our goal here is to verify the weak convergence in the downwind-matching coordinate system as well. We begin by making the modelling equations complete with the definition of boundary conditions. In the scenario of weak solutions we aim to be as close as possible to the original domain, thus we consider a classical non-periodic local domain on the surface of the Earth with minimal modifications due to the new $\epsilon$ term.
 
-Here the boundary structure of the domain is identical to what we used in geophysical coordinate system, i.e. the upper boundary of the $\Omega$ domain is denoted by $\Gamma_U$, the lateral boundary is $\Gamma_L$, and the lower boundary of the domain is $\Gamma_G$, while the complete boundary is denoted by $\Gamma$ (see Figure $\ref{structdomaingraphboundaries_weak}$). For simplicity we assume that the altitude of $\Omega$ is $1$, thus we can also express the full domain as $\Omega =  \Gamma_G \times [0,1],$ which will be useful later for estimating integrals.
+Here the boundary structure of the domain is identical to what we used in geophysical coordinate system, the only difference is made by the kind of boundary conditions we allow on the lower boundary, since here we consider exclusively inland domains. The notations are the same as before, i.e. the upper boundary of the $\Omega$ domain is denoted by $\Gamma_U$, the lateral boundary is $\Gamma_L$, and the lower boundary of the domain is $\Gamma_G$, while the complete boundary is denoted by $\Gamma$ (see Figure $\ref{structdomaingraphboundaries_weak}$). For simplicity we assume that the altitude of $\Omega$ is $1$, thus we can also express the full domain as $\Omega =  \Gamma_G \times [0,1],$ which will be useful later for estimating integrals.
 
   \begin{figure}[!h]
   \centering
@@ -2277,31 +2277,29 @@ Here the boundary structure of the domain is identical to what we used in geophy
 \end{figure}
 
 The boundary conditions to describe the anisotropic system can be summarised as
+%
     \begin{equation} \label{ANSC_bc-weak_coordinates_DWMC}
       \begin{split}
         & \mathbf{u}^\epsilon = 0 \text{ on } \Gamma \times (0,T), \\
         & c^\epsilon = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
-        & \partial_2 c^\epsilon = \partial_3 c^\epsilon = 0 \text{ on } \Gamma_G \times (0,T), \quad \partial_1 c^\epsilon = \sigma \in L^2 (0,T; \Gamma_G), \\
+        & \partial_3 c^\epsilon = 0 \text{ on } \Gamma_G \times (0,T), \\
       \end{split}
     \end{equation}
 while for the hydrostatic case we use
+%
     \begin{equation} \label{HNSC_bc-weak_coordinates_DWMC}
       \begin{split} 
         & u_1 = u_2 = u_3 = 0 \text{ on } \Gamma \times (0,T) \\
         & c = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
-        & \partial_2 c = \partial_3 c = 0 \text{ on } \Gamma_G \times (0,T), \quad \partial_1 c = \sigma \in L^2 L^2 (0,T; \Gamma_G). \\
+        & \partial_3 c = 0 \text{ on } \Gamma_G \times (0,T). \\
       \end{split}
     \end{equation}
-%
-The meaning of $\partial_1 c^\epsilon = \sigma$ above is identical to the notion explained in Section \ref{eqsdescribingatmpluspollution_gfc} for the case of geophysical coordinates: we naturally assume $\partial_1 c^\epsilon$ to be equal to some sufficiently regular $\sigma$ function defined on the respective boundary.
+
+We highlight two important features concerning the above boundary conditions defined on $\Gamma_G$. Firstly, since now we are working on an inland case, we overwrite the Neumann boundary conditions for $\mathbf{u}_h$ we originally used for the geophysical coordinate system in (\ref{HNSC_bc_coordinates_GFC}). Here we can simply use the $\mathbf{u}=0$ Dirichlet boundary condition for the velocity --- this will be crucial later as it allows us to use the Poincar\'e inequality. Concerning the concentration function, note that the condition $\mathbf{M} \nabla c \cdot \vec{\boldsymbol{n}}_{\Gamma_G} = 0$ reduces exactly to $\partial_3 c = 0$ for the case of diagonal diffusion matrices, which we have previously assumed to use here (see Section \ref{eqsdescribingatmpluspollution_dwmc}).
 
 As we have mentioned it before, in this case we will work with a more regular ${\mathbf{u}_h}_0 \in H^1$ initial data, so we directly use the $u_3 = 0$ equality on the boundary instead of the original $u_3 n_3 = 0$ constraint that we had used in (\ref{ANSC_bc_coordinates_GFC}).
-    
-We highlight the difference between the boundary conditions of the original, east-north oriented model of Chapter \ref{geophysicalchapter}, and the new, downwind-matching model for the case of weak solutions.
 
-The difference in the kind of boundary conditions we can "afford" to have on the lower boundary for the concentration comes from the energy inequality. In the east-north-upwards oriented coordinate system we do not have an $\epsilon$ in the diffusion matrix, and thus, having any of the $\partial_i c^\epsilon$ terms different from 0 does not create any problems, not even for the case of the ocean where $\partial_3 c^\epsilon$ becomes nonzero as well (they are required however to be bounded of course). On the other hand, the downwind-matching coordinate system brings in an $\epsilon$ term in front of the $K_1$ diffusion coefficient, which makes the model more sensitive to assigning boundary conditions for $c^\epsilon.$ This means that we can not anymore have the relatively relaxed boundedness requirement for any $\partial_i c^\epsilon$ except for $i=1.$ All other $\partial_2 c^\epsilon, \partial_3 c^\epsilon$ derivatives must be zero on the lower boundary, otherwise they would result in an $(\epsilon - \text{const.})$ negative term appearing in the energy inequality --- for more details see the proof of the weak convergence theorem of this chapter in Section $\ref{proof_weak_dwmc}$. This also means that we will consider exclusively the inland domain scenario for the case of this coordinate system.
-
-Concerning the initial data, we set $${\mathbf{u}_h}_0 \in H^1 (\Omega), {u_3}_0 \in L^2(\Omega) \text{ with } \nabla \cdot \mathbf{u}_0 = 0, \text{ and } c_0 \in L^2 (\Omega).$$ We highlight here that we are still working in classical Leray framework of weak solutions, even though we use an $H^1(\Omega)$ regularity assumption on ${\mathbf{u}_h}_0,$ which is stronger than the more usual $L^2$ space regularity requirement for weak solutions (see (\ref{initialregularities_weak_gfc}) in Chapter \ref{geophysicalchapter}, or \cite{azerad2001mathematical} for example). The reason we need this stronger regularity is to counterbalance the decreased control we have on the concentration function due to the coordinate choice, but overall this does not lead us out of the field of weak solutions.
+Concerning the initial data, we set $${\mathbf{u}_h}_0 \in H^1 (\Omega), {u_3}_0 \in L^2(\Omega) \text{ with } \nabla \cdot \mathbf{u}_0 = 0, \text{ and } c_0 \in L^2 (\Omega).$$ We emphasise here that we are still working in classical Leray framework of weak solutions, even though we use an $H^1(\Omega)$ regularity assumption on ${\mathbf{u}_h}_0,$ which is stronger than the more usual $L^2$ space regularity requirement for weak solutions (see (\ref{initialregularities_weak_gfc}) in Chapter \ref{geophysicalchapter}, or \cite{azerad2001mathematical} for example). The reason we need this stronger regularity is to counterbalance the decreased control we have on the concentration function due to the coordinate choice, but overall this does not lead us out of the field of weak solutions.
 
 Finally, the $s^\epsilon$ and $s$ source terms are formulated analogously to the geophysical case (Section \ref{eqsdescribingatmpluspollution_gfc}): the hydrostatic $s$ function is defined as a point source, while the anisotropic source function $s^\epsilon$ is modelled with a parametrised nascent delta function. For simplicity we assume here that the pollution process begins at $t = 0,$ thus we omit the multiplication by a Heaviside function representing the activation of the source, furthermore without loss of generality we assume that the source is centred in $x=0$ and we set the intensity constant $I$ to be $1.$
 
@@ -2343,8 +2341,8 @@ In this section we describe the weak formulation of the merged equations in both
 Then the weak formulation of the hydrostatic system (\ref{HNSC1_coordinates_DWMC}) - (\ref{HNSC5_coordinates_DWMC}), (\ref{HNSC_init_coordinates_DWMC}), (\ref{HNSC_bc-weak_coordinates_DWMC}) takes the following form.
   
 \begin{definition} \label{definitionhydrostaticWF}
-  
-  Find $(\mathbf{u}, c)$ such that $\mathbf{u} = (\mathbf{u}_h, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_h \in L^\infty (0,T; L^2(\Omega)^2),$ and $c \in L^\infty (0, T; L^2(\Omega))$ with $\partial_2 c, \partial_3 c \in L^2(0, T; L^2(\Omega))$, such that
+
+The pair $(\mathbf{u}, c)$ is called a weak solution of the a hydrostatic system (\ref{HNSC1_coordinates_DWMC}) - (\ref{HNSC5_coordinates_DWMC}) subject to (\ref{HNSC_init_coordinates_DWMC}), (\ref{HNSC_bc-weak_coordinates_DWMC}) if $\mathbf{u} = (\mathbf{u}_h, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_h \in L^\infty (0,T; L^2(\Omega)^2),$ and $c \in L^\infty (0, T; L^2(\Omega))$ with $\partial_2 c, \partial_3 c \in L^2(0, T; L^2(\Omega)),$ moreover $\mathbf{u}$ and $c$ satisfy the integral identities
   
   \begin{equation}
     \begin{split}
@@ -2368,32 +2366,32 @@ Then the weak formulation of the hydrostatic system (\ref{HNSC1_coordinates_DWMC
   
   Giving definition to the weak formulation of the (\ref{ANSC1_coordinates_DWMC}) - (\ref{ANSC5_coordinates_DWMC}), (\ref{ANSC_init_coordinates_DWMC}), (\ref{ANSC_bc-weak_coordinates_DWMC}) anisotropic system we underline a feature regarding the spaces we use here. The velocity part of the solution is set to be in $C_w$ since it corresponds to the requirements of the proof detailed later. Even though we do not need the same weak continuity in time for the concentration function, this follows as a consequence once the velocity is a Leray-Hopf weak solution. Thus, overall we work with Leray-Hopf weak solutions, but the spaces in the below definition are kept minimal (in other words we use $L^\infty$ regularity instead of $C_w$ regularity where it is sufficient).
 
- \begin{definition} \label{definitionanisotropicWF_dwmc}
+\begin{definition} \label{definitionanisotropicWF_dwmc}
+
+The pair $(\mathbf{u}^\epsilon, c^\epsilon)$ is called a weak solution of the anisotropic system (\ref{ANSC1_coordinates_DWMC}) - (\ref{ANSC5_coordinates_DWMC}) subject to (\ref{ANSC_init_coordinates_DWMC}), (\ref{ANSC_bc-weak_coordinates_DWMC}) if $\mathbf{u}^\epsilon = (\mathbf{u}^\epsilon_h, u^\epsilon_3) \in L^2 (0,T ; \mathbf{V}) \cap C_w (0, T; L^2 (\Omega)^3)$ and $c^\epsilon \in L^\infty (0,T; L^2(\Omega)) \cap L^2 (0,T; H^1(\Omega))$, moreover $\mathbf{u}^\epsilon$ and $c^\epsilon$ satisfy the integral identities
   
-Find $\mathbf{u}^\epsilon = (\mathbf{u}^\epsilon_h, u^\epsilon_3) \in L^2 (0,T ; \mathbf{V}) \cap C_w (0, T; L^2 (\Omega)^3)$ and $c^\epsilon \in L^\infty (0,T; L^2(\Omega)) \cap L^2 (0,T; H^1(\Omega))$, such that
+\begin{equation}
+\begin{split}
+& \int_0^T \bigg [ -(\mathbf{u}^\epsilon_h, \partial_t \mathbf{\tilde{u}}_h) + (\nabla_\nu \mathbf{u}^\epsilon_h, \nabla_\nu \mathbf{\tilde{u}}_h) - (\mathbf{u}^\epsilon_h, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{\tilde{u}}_h) + (b(\mathbf{u}^\epsilon_h), \mathbf{\tilde{u}}_h) \bigg ] \diff t \\
+& + \epsilon \int_0 ^ T \big [ (\beta u_3 ^\epsilon, \tilde{u}_1) - (\beta u_1^\epsilon, \tilde{u}_3) \big ] \diff t + \epsilon \int_0 ^ T \big [ (\alpha u_2 ^\epsilon, \tilde{u}_3) - (\alpha u_3^\epsilon, \tilde{u}_2) \big ] \diff t\\
+& + \epsilon^2 \int _0 ^ T \big [ -(u_3^\epsilon, \partial_t \tilde{u}_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, \tilde{u}_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu \tilde{u}_3) \big ] \diff t \\
+& = - ({\mathbf{u}^\epsilon_h}_0, \mathbf{\tilde{u}}_h(0)) - \epsilon^2 ({u^\epsilon_3}_0, \tilde{u}_3 (0)) \diff t \raisetag{20pt} \label{anisotropicWF}
+\end{split}
+\end{equation}
+%  
+and
   
-  \begin{equation}
-    \begin{split}
-      & \int_0^T \bigg [ -(\mathbf{u}^\epsilon_h, \partial_t \mathbf{\tilde{u}}_h) + (\nabla_\nu \mathbf{u}^\epsilon_h, \nabla_\nu \mathbf{\tilde{u}}_h) - (\mathbf{u}^\epsilon_h, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{\tilde{u}}_h) + (b(\mathbf{u}^\epsilon_h), \mathbf{\tilde{u}}_h) \bigg ] \diff t \\
-      & + \epsilon \int_0 ^ T \big [ (\beta u_3 ^\epsilon, \tilde{u}_1) - (\beta u_1^\epsilon, \tilde{u}_3) \big ] \diff t + \epsilon \int_0 ^ T \big [ (\alpha u_2 ^\epsilon, \tilde{u}_3) - (\alpha u_3^\epsilon, \tilde{u}_2) \big ] \diff t\\
-      & + \epsilon^2 \int _0 ^ T \big [ -(u_3^\epsilon, \partial_t \tilde{u}_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, \tilde{u}_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu \tilde{u}_3) \big ] \diff t \\
-      & = - ({\mathbf{u}^\epsilon_h}_0, \mathbf{\tilde{u}}_h(0)) - \epsilon^2 ({u^\epsilon_3}_0, \tilde{u}_3 (0)) \diff t \raisetag{20pt} \label{anisotropicWF}
-    \end{split}
-  \end{equation}
+\begin{equation}
+\begin{split} \nonumber
+& \int_0^T \bigg [ -(c^\epsilon, \partial_t \tilde{c}) -(\mathbf{u}^\epsilon c^\epsilon, \nabla \tilde{c}) + \epsilon K_1 (\partial_1 c^\epsilon, \partial_1 \tilde{c}) \\
+& + K_2 (\partial_2 c^\epsilon, \partial_2 \tilde{c}) + K_3 (\partial_3 c^\epsilon, \partial_3 \tilde{c}) \bigg ] \diff t \\
+& =  - (c_0, \tilde{c} (0)) + \int_0^T (s^\epsilon,\tilde{c}) \diff t
+\end{split}
+\end{equation}
+%  
+for all $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T;\mathbf{V})$ with $\mathbf{\tilde{u}}(T) = 0$ and $\tilde{c}$ such that $\tilde{c} \in H^1 (0,T, H^3_{\Gamma} (\Omega))$ and $\tilde{c} (T) = 0$.
   
-    and
-  
-    \begin{equation}
-    \begin{split} \nonumber
-      & \int_0^T \bigg [ -(c^\epsilon, \partial_t \tilde{c}) -(\mathbf{u}^\epsilon c^\epsilon, \nabla \tilde{c}) + \epsilon K_1 (\partial_1 c^\epsilon, \partial_1 \tilde{c}) - \epsilon K_1 \sigma \big[\tilde{c} \big] _{\Gamma_G} \\
-      & + K_2 (\partial_2 c^\epsilon, \partial_2 \tilde{c}) + K_3 (\partial_3 c^\epsilon, \partial_3 \tilde{c}) \bigg ] \diff t \\
-      & =  - (c_0, \tilde{c} (0)) + \int_0^T (s^\epsilon,\tilde{c}) \diff t
-    \end{split}
-  \end{equation}
-  
-  for all $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T;\mathbf{V})$ with $\mathbf{\tilde{u}}(T) = 0$ and $\tilde{c}$ such that $\tilde{c} \in H^1 (0,T, H^3_{\Gamma} (\Omega))$ and $\tilde{c} (T) = 0$.
-  
-  \end{definition}
+\end{definition}
 
 Now we are ready to state the main theorem of this section.
 
@@ -2416,30 +2414,13 @@ Calculating the energy inequality for the anisotropic system, we obtain that for
     \begin{split}  
     & \frac{1}{2} (\norm{\mathbf{u}_h^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{c^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \big[ \norm{\nabla_\nu \mathbf{u}_h^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \big] \diff \tau \\
     & + \int_0 ^ t  \big [ \epsilon K_1 \norm{\partial_1 c^\epsilon}_{L^2}^2  + K_2 \norm{\partial_2 c^\epsilon}_{L^2}^2 + K_3 \norm{\partial_3 c^\epsilon}_{L^2}^2 \big ] d \tau \\
-    & \leq \int_0^t (s^\epsilon,c^\epsilon) \diff \tau + \frac{1}{2} (\norm{\mathbf{u}_h^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{c^\epsilon_0}_{L^2}^2) \\
-    & + \int _ 0 ^ t \epsilon K_1 \langle \partial_1 c^\epsilon, c^\epsilon \rangle_{\Gamma_G} \diff \tau \raisetag{70pt} \label{energyIEQ}
+    & \leq \int_0^t (s^\epsilon,c^\epsilon) \diff \tau + \frac{1}{2} (\norm{\mathbf{u}_h^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{c^\epsilon_0}_{L^2}^2) \raisetag{50pt} \label{finalformEIEQ}
     \end{split}
   \end{equation}
-  
-Using standard techniques, the generalised Young inequality with a $\zeta > 0$ constant, the H\"older inequality and the Trace Theorem, (\ref{energyIEQ}) takes the final form
-
-  \begin{equation}
-    \begin{split}  
-    & \frac{1}{2} (\norm{\mathbf{u}_h^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{c^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \big [\norm{\nabla_\nu \mathbf{u}_h^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2 \big ] \diff \tau \\
-    & + \int_0 ^ t \bigg[ (\epsilon K_1 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_1 c^\epsilon}_{L^2}^2  + (K_2 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_2 c^\epsilon}_{L^2}^2 \\
-    & + (K_3 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_3 c^\epsilon}_{L^2}^2 \bigg] \diff \tau \\
-    & \leq \frac{1}{\zeta} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 c^\epsilon}^2 _{L^2 (\Gamma_G)} + \frac{1}{2} (\norm{\mathbf{u}_h^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{c^\epsilon (0)}_{L^2}^2) \\
-    & + \int_0^t (s^\epsilon, c^\epsilon) \diff \tau, \raisetag{20pt} \label{finalformEIEQ}
-    \end{split}
-  \end{equation}
-  
-  where $c_T$ and $c_S$ are the constants provided by the Trace Theorem and Sobolev embeddings. The boundary term is bounded because of the a priori assumptions made on the boundary conditions.
     
-  The right-hand side of the energy inequality is now apparently bounded, and it is easy to see that the coefficients of the pollution terms on the left-hand side are positive, since the $\zeta$ constant of the generalised Young inequality can be freely chosen in a way such that the requirements $\epsilon K_1 (1 - \zeta \frac{1}{2} c_T (c_S + 1)) > 0, (K_2 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) > 0, (K_3 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) > 0 $ are all satisfied.
+  The right-hand side of the energy inequality is apparently bounded.
   
   We note that the most significant difference in this new form of the energy inequality (\ref{finalformEIEQ}) is having $\sqrt{\epsilon} \partial_1 c^\epsilon$ in the place of $\partial_1 c^\epsilon,$ which is what we had for the case of the geophysical coordinate system. It leads to the disappearance of the $H^1$ regularity of $c^\epsilon,$ and thus we don't have the strong convergence feature of the concentration function anymore --- which was of key importance for proving the weak convergence of a nonlinear term in the case of the classical geophysical frame.
-  
-  This form of the energy inequality also shows why we need the $\partial_2 c^\epsilon, \partial_3 c^\epsilon$ terms to vanish on the boundary. Otherwise, using the Trace Theorem on these boundary terms would contribute to the appearance of negative, $\epsilon$-free terms in the coefficient of $\norm{\partial_1 c^\epsilon}_{L^2}^2,$ which would undermine the structure of the energy inequality.
   
   From the final form of the energy inequality (\ref{finalformEIEQ}) we obtain uniform a priori estimates that we summarise in the following proposition.
   
@@ -2881,7 +2862,7 @@ We verify that the previously shown connection between the anisotropic and hydro
 
 The concept detailed here is a general approach, and we apply it both in the hydrostatic and anisotropic cases.
 
-Let's consider $\Omega_0 = M \times (-a, 0)$ with $M = (0,1) \times (0,1).$ We define the boundary conditions
+Let's consider $\Omega_0 = M \times (-a, 0)$ with $M = (0,1) \times (0,1)$ over an inland domain. We define the boundary conditions
 
 \begin{equation}
   \begin{split}
