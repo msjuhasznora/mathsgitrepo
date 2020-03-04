@@ -544,7 +544,7 @@ The boundary conditions we choose to use in this case are the following:
   \item In this model we neglect topological variations or large waves, and the $z=0$ plane represents the lower boundary. On the ground level the boundary conditions are defined as follows. For the vertical air velocity we have the
   
     \begin{equation}
-      u^\epsilon_3 = 0 \quad \text{ on } \Gamma_G \times (0,T),
+      u^\epsilon_3 = 0 \quad \text{ on } \Gamma_G \times (0,T)
     \end{equation}
 condition, which represents the impervious nature of the ground with respect to the wind. For the horizontal velocities we set
 
@@ -552,7 +552,7 @@ condition, which represents the impervious nature of the ground with respect to 
       \nu_3 \partial_3 \mathbf{u}^\epsilon_h = \theta_h \quad \text{ on } \Gamma_G \times (0,T),
     \end{equation}
 %
-where, roughly speaking, the $\theta_h$ parameter represents how "smooth" the braking effect of the terrain is. For example if we consider air flow above a water surface, in this case there is a $\theta_h$ degree of freedom in the slowing process of the wind as the horizontal air layers are vertically closer and closer to the $\Gamma_G$ lower boundary. Above a rocky inland surface this degree of freedom is zero, as the no-slip boundary conditions force the air flow to a full stop on the boundary, while above water bodies the braking effect is not immediate: horizontal wind traction generates movement in the water, which leaves space for air flow even on the boundary. Note that it is possible to introduce this parameter at an earlier point in the model development process: if we define the braking function as a $\sigma_h$ parameter before the scaling, we need to apply the $\sigma_h = \epsilon \theta_h$ scaling equation (for details see \cite{azerad2001mathematical}). As for the concentration, we assume that the pollution is not absorbed by the ground, so we use the
+where, roughly speaking, the $\theta_h$ parameter represents how "smooth" the braking effect of the terrain is. For example if we consider air flow above a water surface, in this case there is a $\theta_h$ degree of freedom in the slowing process of the wind: as the horizontal air layers are closer and closer to the $\Gamma_G$ lower boundary, $\mathbf{u}_h$ gradually becomes smaller, but it does not necessarily disappear. In other words, above water bodies the braking effect is not immediate: horizontal wind traction generates movement in the water, which leaves space for air flow even on the boundary. On the other hand, above a rocky inland surface this degree of freedom is zero, as the no-slip boundary conditions force the air flow to a full stop on the boundary. Note that it is possible to introduce this parameter at an earlier point in the model development process: if we define the braking function as a $\sigma_h$ parameter before the scaling, we need to apply the $\sigma_h = \epsilon \theta_h$ scaling equation (for details see \cite{azerad2001mathematical}). As for the concentration, we assume that the pollution is not absorbed by the ground, so we use the
     
     $$\mathbf{M} \nabla c^\epsilon \cdot \vec{\boldsymbol{n}}_{\Gamma_G} = 0 \quad \text{ on } \Gamma_G$$
     
