@@ -1093,7 +1093,7 @@ In this section we collect some remarks completing the results obtained thus far
 
 \begin{remark}
 \normalfont
-As previously explained in detail, the results obtained in this chapter hold for a generic landscape. In order to achieve this, we use the $\nu_3 \partial_3 \mathbf{u}_h^\epsilon = \theta_h$ Neumann type boundary condition on $\Gamma_G.$ For the special case of inland domains we can switch the Neumann boundary condition to the $\mathbf{u}^\epsilon = 0$ Dirichlet type condition, paying attention to accordingly change the definition of weak formulations as well.
+As previously explained in detail, the results obtained in this chapter hold for a generic landscape. In order to achieve this, we use the $\nu_3 \partial_3 \mathbf{u}_h^\epsilon = \theta_h$ Neumann type boundary condition on $\Gamma_G.$ For the special case of inland domains we can switch the Neumann boundary condition to the $\mathbf{u}^\epsilon = 0$ Dirichlet type condition, paying attention to accordingly changing the definition of weak formulations as well.
 \end{remark}
 
 \begin{remark}
@@ -2186,9 +2186,9 @@ As we highlighted before, the numerical experiments conducted in the present sec
 
 In this chapter we are working in the framework of the downwind-matching coordinate system introduced in Section \ref{eqsdescribingatmpluspollution_dwmc}. The first two sections are dedicated to stating and proving a rigorous connection --- on the level of both weak and strong solutions --- between the anisotropic and hydrostatic models, while in the final section we prove an existence result regarding the limit system.
 
-As in this setup we will repeatedly consider the velocity function separately from the concentration solution, we begin by making a technical assumption, namely that
+As in this setup in certain computations we consider the velocity function separately from the concentration solution, we begin the chapter by making a technical assumption, namely that
 \begin{equation}\label{u_independent_from_c}\text{air velocity is not changed by the presence of contaminants.}\end{equation}
-This also means that the velocity of air particles and the velocity of pollutants can be different. The diffusion of aerosols or pollens does not generate significant atmospheric air flows, thus assumption (\ref{u_independent_from_c}) is a reasonable simplification, and it allows us to consider $\mathbf{u}^\epsilon$ on its own.
+This also means that the velocity of air particles and the velocity of pollutants can be different. Considering that the diffusion of aerosols or pollens does not generate significant atmospheric air flows, assumption (\ref{u_independent_from_c}) is a reasonable simplification, and thus we are allowed to consider $\mathbf{u}^\epsilon$ on its own when needed.
 
 In order to keep this chapter as compact as possible, here we repeat the definition of the two main systems. The anisotropic equations of the polluted atmosphere in downwind-matching coordinates are given by the system
 
@@ -2300,7 +2300,7 @@ while for the hydrostatic case we use
 
 We highlight two important features concerning the above boundary conditions defined on $\Gamma_G$. Firstly, since now we are working on an inland case, we overwrite the Neumann boundary conditions for $\mathbf{u}_h$ we originally used for the geophysical coordinate system in (\ref{HNSC_bc_coordinates_GFC}). Here we can simply use the $\mathbf{u}=0$ Dirichlet boundary condition for the velocity --- this will be crucial later as it allows us to use the Poincar\'e inequality. Concerning the concentration function, note that the condition $\mathbf{M} \nabla c \cdot \vec{\boldsymbol{n}}_{\Gamma_G} = 0$ reduces exactly to $\partial_3 c = 0$ for the case of diagonal diffusion matrices, which we have previously assumed to use here (see Section \ref{eqsdescribingatmpluspollution_dwmc}).
 
-As we have mentioned it before, in this case we will work with a more regular ${\mathbf{u}_h}_0 \in H^1$ initial data, so we directly use the $u_3 = 0$ equality on the boundary instead of the original $u_3 n_3 = 0$ constraint that we had used in (\ref{ANSC_bc_coordinates_GFC}).
+As we have mentioned it before, in this case we will work with a more regular ${\mathbf{u}_h}_0 \in H^1$ initial data, so we directly use the $u_3 = 0$ equality on the boundary instead of the original $u_3 n_3 = 0$ constraint that we had used in (\ref{HNSC_bc_coordinates_GFC}).
 
 Concerning the initial data, we set $${\mathbf{u}_h}_0 \in H^1 (\Omega), {u_3}_0 \in L^2(\Omega) \text{ with } \nabla \cdot \mathbf{u}_0 = 0, \text{ and } c_0 \in L^2 (\Omega).$$ We emphasise here that we are still working in classical Leray framework of weak solutions, even though we use an $H^1(\Omega)$ regularity assumption on ${\mathbf{u}_h}_0,$ which is stronger than the more usual $L^2$ space regularity requirement for weak solutions (see (\ref{initialregularities_weak_gfc}) in Chapter \ref{geophysicalchapter}, or \cite{azerad2001mathematical} for example). The reason we need this stronger regularity is to counterbalance the decreased control we have on the concentration function due to the coordinate choice, but overall this does not lead us out of the field of weak solutions.
 
@@ -2363,7 +2363,7 @@ The pair $(\mathbf{u}, c)$ is called a weak solution of the a hydrostatic system
     \end{split}
   \end{equation}
   
-  for all $(\mathbf{\tilde{u}}, \tilde{c})$ with $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T, \mathbf{W})$, with $\mathbf{\tilde{u}}_h (T) = 0$ and $\partial_3 \mathbf{\tilde{u}}_h \in L^\infty (0, T; L^3 (\Omega)^2)$ and $\tilde{c}$ with $\tilde{c} \in L^2 (0,T, H^3_{\Gamma} (\Omega))$, $\tilde{c} \in H^1 (0,T, L^2)$, $\tilde{c} (T) = 0$. 
+  for all $(\mathbf{\tilde{u}}, \tilde{c})$ with $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T, \mathbf{W})$, with $\mathbf{\tilde{u}}_h (T) = 0$ and $\partial_3 \mathbf{\tilde{u}}_h \in L^\infty (0, T; L^3 (\Omega)^2)$ and $\tilde{c}$ with $\tilde{c} \in L^2 (0,T, H^3_{\Gamma} (\Omega)) \cap H^1 (0,T, L^2)$, $\tilde{c} (T) = 0$. 
   
   \end{definition}
   
@@ -2771,7 +2771,7 @@ Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ and $(\mathbf{u}_h,u_3)$ be the solu
       
       \begin{equation}
         \begin{split}
-         I_{41} = & \int_{Q_{t_0}} \epsilon \alpha U_2^\epsilon u_3 \diff x \diff y \diff z \diff t \leq 2f \int_0^{t_0} \norm{U_2^\epsilon} \norm{\epsilon u_3} \diff t \\
+         I_{41} = & \int_{Q_{t_0}} \epsilon \alpha U_2^\epsilon u_3 \diff x \diff y \diff z \diff t \lesssim \int_0^{t_0} \norm{U_2^\epsilon} \norm{\epsilon u_3} \diff t \\
           & \lesssim \int_0^{t_0} \zeta \norm{U_2^\epsilon}^2_2 \diff t + \int_0^{t_0} \frac{1}{\zeta} \epsilon^2 \norm{u_3}^2_2 \diff t \\
           & \lesssim \int_0^{t_0} \zeta \norm{\nabla U_2^\epsilon}^2_2 \diff t + \int_0^{t_0} \frac{1}{\zeta} \epsilon^2 \norm{u_3}^2_2 \diff t.
         \end{split}
@@ -2789,7 +2789,7 @@ Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ and $(\mathbf{u}_h,u_3)$ be the solu
       
       \item For the term $ I_{43} = \epsilon \beta U_3^\epsilon u_1$ we can use the idea that $\| U_3^\epsilon \| \leq \| \nabla \mathbf{U}_h^\epsilon \|.$ As we have $\partial_3 u_3^\epsilon = \nabla_h \mathbf{u}_h^\epsilon,$ and $\partial_3 u_3 = \nabla_h \mathbf{u}_h,$ we naturally have $\partial_3 U_3^\epsilon = \nabla_h \mathbf{U}_h^\epsilon,$ and by the vertical Poincar\'e inequality we have $$\norm{U_3^\epsilon} \leq \norm{\partial_3 U_3^\epsilon} = \norm{\nabla \mathbf{U}_h^\epsilon}.$$ This way we are able to bound the $U_3^\epsilon$ term without keeping the $\epsilon^2$ multiplier attached to it when we apply the Young inequality. We have
       
-      $$ \hspace{-1em}\int_{Q_{t_0}} \epsilon \beta U_3^\epsilon u_1 \diff x \diff y \diff z \diff t \leq 2f \int_0^{t_0} \epsilon \norm{U_3^\epsilon}_2 \norm{u_1}_2 \diff t \lesssim \int_0^{t_0} \epsilon \| \nabla \mathbf{U}_h^\epsilon \|_2 \norm{u_1}_2 \diff t, $$
+      $$ \hspace{-1em}\int_{Q_{t_0}} \epsilon \beta U_3^\epsilon u_1 \diff x \diff y \diff z \diff t \lesssim \int_0^{t_0} \epsilon \norm{U_3^\epsilon}_2 \norm{u_1}_2 \diff t \lesssim \int_0^{t_0} \epsilon \| \nabla \mathbf{U}_h^\epsilon \|_2 \norm{u_1}_2 \diff t, $$
       
       and finally, after applying the Young inequality we arrive to
       
@@ -2980,7 +2980,7 @@ Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\nabla \
 
 We begin by stating that from now on we always assume $\epsilon < \epsilon_0$ where $\epsilon_0$ is a constant defined in \cite{li2019primitive} depending only on $\norm{{\mathbf{u}_h}_0}_{H^3}$ and the domain itself.
 
-The first part of the proof concerns exclusively the velocity functions (the present approach is correct thanks to (\ref{u_independent_from_c})), and it follows easily from the achievements of \cite{li2019primitive} and \cite{petcu2005sobolev}. Regarding specific details we refer to these above mentioned papers; here we collect only the most important cornerstones of the calculations regarding $\mathbf{u}^\epsilon$ and $\mathbf{u}$ for completeness.
+The first part of the proof concerns exclusively the velocity functions (thanks to (\ref{u_independent_from_c}) it is valid to consider the velocity solutions separately from the concentration functions), and it follows easily from the achievements of \cite{li2019primitive} and \cite{petcu2005sobolev}. Regarding specific details we refer to these above mentioned papers; here we collect only the most important cornerstones of the calculations regarding $\mathbf{u}^\epsilon$ and $\mathbf{u}$ for completeness.
 
 \begin{enumerate}
 
@@ -3340,7 +3340,7 @@ As far as local existence is concerned, the proof given in sections 2 and 3 in \
 %%% GLOBAL EXISTENCE %%%
 \textbf{Part 2: Global existence}
 
-As we mentioned in the introductory part of this proof, here we only need to provide estimates verifying the continuability of $c,$ as the global existence of the velocity function immediately follows from the results of \cite{li2019primitive} and \cite{petcu2005sobolev} (see also (\ref{u_independent_from_c})).
+As we mentioned in the introductory part of this proof, here we only need to provide estimates verifying the continuability of $c,$ as the global existence of the velocity function immediately follows from the results of \cite{li2019primitive} and \cite{petcu2005sobolev} (the correctness of our approach is also guaranteed by (\ref{u_independent_from_c})).
 
 \bigskip
 
