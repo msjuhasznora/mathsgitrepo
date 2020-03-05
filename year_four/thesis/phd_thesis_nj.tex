@@ -2335,11 +2335,7 @@ In this section we describe the weak formulation of the merged equations in both
   
   \[ \mathbf{V} = \{ \mathbf{v} \in  H^1_{\Gamma} (\Omega) \times H^1_{\Gamma} (\Omega) \times H^1_{\Gamma} (\Omega); \nabla \cdot \mathbf{v} = 0 \text{ in } \Omega \} \]
   
-  \[ H (\partial_3, \Omega) = \{ v \in L^2(\Omega); \partial_3 v \in L^2 (\Omega)\} \]
-  
-  \[ H_\Gamma (\partial_3, \Omega) = \overline{C_0 ^\infty (\Omega)}^{H (\partial_3, \Omega)} = \{ v \in H(\partial_3, \Omega); v = 0 \text{ on } \Gamma \} \]
-  
-  \[ \mathbf{W} = \{ \mathbf{u} \in  H^1_{\Gamma} (\Omega) \times H^1_{\Gamma} (\Omega) \times H_\Gamma (\partial_3, \Omega); \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \} \]
+  \[ \mathbf{W} = \{ \mathbf{u} \in  (H^1_{\Gamma} (\Omega) \cap H^2(\Omega)) \times (H^1_{\Gamma} (\Omega) \cap H^2(\Omega)) \times H^1_{\Gamma} (\Omega); \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \} \]
   
 Then the weak formulation of the hydrostatic system (\ref{HNSC1_coordinates_DWMC}) - (\ref{HNSC5_coordinates_DWMC}), (\ref{HNSC_init_coordinates_DWMC}), (\ref{HNSC_bc-weak_coordinates_DWMC}) takes the following form.
   
