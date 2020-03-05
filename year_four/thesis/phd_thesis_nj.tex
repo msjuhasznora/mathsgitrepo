@@ -401,8 +401,6 @@ Note that we do not assume the air to be homogeneous, but for completeness we hi
   \end{bmatrix}.
 \end{gather}
 
-Altogether these scaling equations are applied in order to pass from the $\epsilon-$ dependent $\Omega^\epsilon$ domain to the rescaled, $\epsilon-$free $\Omega$ domain.
-
 Here we emphasise that the diffusivity matrix $\mathbf{M}$ is assumed to have the coercivity property
 
 \begin{equation} \label{coercivity}
@@ -515,7 +513,7 @@ The boundary conditions we choose to use in this case are the following:
     \draw[green, thick] (0,0) -- (4,0);
     
     \draw (2,2)node{$\Omega$};
-    \draw (2,0)node[below] {$\nu_3 \partial_3 \mathbf{u}^\epsilon_h = \theta_h,$ $ u_3 = 0$ and $\mathbf{M} \nabla c^\epsilon \cdot \vec{\boldsymbol{n}}_{\Gamma_G} = 0$};
+    \draw (2,0)node[below] {$\nu_3 \partial_3 \mathbf{u}^\epsilon_h = \theta_h,$ $ u_3^\epsilon = 0$ and $\mathbf{M} \nabla c^\epsilon \cdot \vec{\boldsymbol{n}}_{\Gamma_G} = 0$};
     \draw (4,2)node[right] {$\mathbf{u^\epsilon} = 0, c^\epsilon=0 $};
     \draw (2,4)node[above] {$\mathbf{u^\epsilon} = 0, c^\epsilon=0 $};
     \draw (0,2)node[left] {$\mathbf{u^\epsilon} = 0, c^\epsilon=0 $};
@@ -552,11 +550,11 @@ condition, which represents the impervious nature of the ground with respect to 
       \nu_3 \partial_3 \mathbf{u}^\epsilon_h = \theta_h \quad \text{ on } \Gamma_G \times (0,T),
     \end{equation}
 %
-where, roughly speaking, the $\theta_h$ parameter represents how "smooth" the braking effect of the terrain is. For example if we consider air flow above a water surface, in this case there is a $\theta_h$ degree of freedom in the slowing process of the wind: as the horizontal air layers are closer and closer to the $\Gamma_G$ lower boundary, $\mathbf{u}_h$ gradually becomes smaller, but it does not necessarily disappear. In other words, above water bodies the braking effect is not immediate: horizontal wind traction generates movement in the water, which leaves space for air flow even on the boundary. On the other hand, above a rocky inland surface this degree of freedom is zero, as the no-slip boundary conditions force the air flow to a full stop on the boundary. Note that it is possible to introduce this parameter at an earlier point in the model development process: if we define the braking function as a $\sigma_h$ parameter before the scaling, we need to apply the $\sigma_h = \epsilon \theta_h$ scaling equation (for details see \cite{azerad2001mathematical}). As for the concentration, we assume that the pollution is not absorbed by the ground, so we use the
+where, roughly speaking, the $\theta_h = (\theta_1, \theta_2)$ parameter represents how "smooth" the braking effect of the terrain is. For example if we consider air flow above a water surface, in this case there is a $\theta_h$ degree of freedom in the slowing process of the wind: as the horizontal air layers are closer and closer to the $\Gamma_G$ lower boundary, $\mathbf{u}_h^\epsilon$ gradually becomes smaller, but it does not necessarily disappear. In other words, above water bodies the braking effect is not immediate: horizontal wind traction generates movement in the water, which leaves space for air flow even on the boundary. On the other hand, above a rocky inland surface this degree of freedom is zero, as the no-slip boundary conditions force the air flow to a full stop on the boundary. Note that it is possible to introduce this parameter at an earlier point in the model development process: if we define the braking function as a $\sigma_h$ parameter before the scaling, we need to apply the $\sigma_h = \epsilon \theta_h$ scaling equation (for details see \cite{azerad2001mathematical}). As for the concentration, we assume that the pollution is not absorbed by the ground, so we use the
     
     $$\mathbf{M} \nabla c^\epsilon \cdot \vec{\boldsymbol{n}}_{\Gamma_G} = 0 \quad \text{ on } \Gamma_G$$
     
-    boundary condition (see also for example \cite{yeh1975three}). More explicitly, this means $M_{31}\partial_1 c^\epsilon + M_{32} \partial_2 c^\epsilon + M_{33} \partial_3 c^\epsilon = 0$
+    boundary condition (see also for example \cite{yeh1975three}), where $\vec{\boldsymbol{n}}_{\Gamma_G}$ is the outward normal vector to $\Gamma_G$. More explicitly, this means $M_{31}\partial_1 c^\epsilon + M_{32} \partial_2 c^\epsilon + M_{33} \partial_3 c^\epsilon = 0$ on $\Gamma_G.$
   
 \end{itemize}
   
@@ -601,10 +599,12 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
 \begin{equation} \label{HNSC_bc_coordinates_GFC_intro}
 \begin{split}
 & \mathbf{u}_h = 0, u_3 n_3 = 0, c = 0 \text{ on } \Gamma_A \times (0,T), \\
-& \nu_3 \partial_3 \mathbf{u}_h = \theta_h, u_3 n_3 = 0 \text{ on } \Gamma_G \times (0,T), \\
-& \mathbf{M} \nabla c \cdot \vec{\boldsymbol{n}}_{\Gamma_G} = 0 \text{ on } \Gamma_G \times (0,T)
+& \nu_3 \partial_3 \mathbf{u}_h = \theta_h, u_3 = 0 \text{ on } \Gamma_G \times (0,T), \\
+& \mathbf{M} \nabla c \cdot \vec{\boldsymbol{n}}_{\Gamma_G} = 0 \text{ on } \Gamma_G \times (0,T),
 \end{split}
 \end{equation}
+
+where $\vec{\boldsymbol{n}} = (n_1, n_2, n_3)$ is the outward normal vector to the boundary.
 
 \begin{remark} \label{sourceregularityremark}
 Here $s$ stands for the $\delta$ limit distribution. We keep the notation $s$ for generality, since as we will see later, instead of the approximated delta functions and the delta distribution, it is possible to use any sort of "sufficiently smooth" source term (which can be independent from $\epsilon$ in the anisotropic case as well) that is bounded in $L^2_t L^2_x.$
@@ -821,7 +821,7 @@ As suggested in Section \ref{eqsdescribingatmpluspollution_gfc}, the hydrostatic
 \begin{equation} \label{HNSC_bc_coordinates_GFC}
 \begin{split}
 & \mathbf{u}_h = 0, u_3 n_3 = 0, c = 0 \text{ on } \Gamma_A \times (0,T), \\
-& \nu_3 \partial_3 \mathbf{u}_h = \theta_h, u_3 n_3 = 0 \text{ on } \Gamma_G \times (0,T), \\
+& \nu_3 \partial_3 \mathbf{u}_h = \theta_h, u_3 = 0 \text{ on } \Gamma_G \times (0,T), \\
 & \mathbf{M} \nabla c \cdot \vec{\boldsymbol{n}}_{\Gamma_G} = 0 \text{ on } \Gamma_G \times (0,T).
 \end{split}
 \end{equation}
@@ -853,7 +853,7 @@ Then the weak formulation of the hydrostatic system (\ref{HNSC1_coordinates_GFC}
   
 \begin{definition} \label{definitionhydrostaticWF_gfc}
 
-The pair $(\mathbf{u}, c)$ is called a weak solution of the a hydrostatic system (\ref{HNSC1_coordinates_GFC})--(\ref{HNSC5_coordinates_GFC}) subject to (\ref{HNSC_init_coordinates_GFC})--(\ref{HNSC_bc_coordinates_GFC}) if $\mathbf{u} = (\mathbf{u}_h, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_h \in L^\infty (0,T; L^2(\Omega)^2),$ and $c \in L^\infty(0,T; L^2(\Omega))$ with $c \in L^2(0,T; H^1(\Omega))$, moreover $\mathbf{u}$ and $c$ satisfy the integral identities
+The pair $(\mathbf{u}, c)$ is called a weak solution of the a hydrostatic system (\ref{HNSC1_coordinates_GFC})--(\ref{HNSC5_coordinates_GFC}) subject to (\ref{HNSC_init_coordinates_GFC})--(\ref{HNSC_bc_coordinates_GFC}) if $\mathbf{u} = (\mathbf{u}_h, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_h \in L^\infty (0,T; L^2(\Omega)^2),$ and $c \in L^\infty(0,T; L^2(\Omega)) \cap L^2(0,T; H^1(\Omega))$, moreover $\mathbf{u}$ and $c$ satisfy the integral identities
   
 \begin{equation}
 \begin{split}
@@ -867,7 +867,7 @@ and
 \begin{equation}
 \begin{split}
 & \int_0^T \bigg[ -(c, \partial_t \tilde{c}) -(\mathbf{u}c, \nabla \tilde{c}) +  (\mathbf{M} \nabla c, \nabla \tilde{c}) \bigg ] \diff t \\
-& = (c(0), \tilde{c}(0)) + \int_0^T (s,\tilde{c}) \diff t \raisetag{20pt} \label{hydrostaticWF_C}
+& = (c_0, \tilde{c}(0)) + \int_0^T (s,\tilde{c}) \diff t \raisetag{20pt} \label{hydrostaticWF_C}
 \end{split}
 \end{equation}
   
@@ -938,11 +938,11 @@ As we mentioned before, one of the most fundamental tools in this proof is the e
     \begin{split}  
     & \frac{1}{2} (\norm{\mathbf{u}_h^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{c^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \big[ \norm{\nabla_\nu \mathbf{u}_h^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \big] \diff \tau \\
     & + \int_0 ^ t  (\mathbf{M} \nabla c^\epsilon, \nabla c^\epsilon) d \tau \\
-    & \leq \int_0^t \abs{\langle \theta_h, \mathbf{u}^\epsilon_h \rangle_{\Gamma_G}} \diff \tau + \int_0^t (s^\epsilon,c^\epsilon) \diff \tau + \frac{1}{2} (\norm{\mathbf{u}_h^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{c^\epsilon_0}_{L^2}^2). \raisetag{60pt} \label{energyIEQ_GFC}
+    & \leq \int_0^t \abs{\langle \theta_h, \mathbf{u}^\epsilon_h \rangle_{\Gamma_G}} \diff \tau + \int_0^t (s^\epsilon,c^\epsilon) \diff \tau + \frac{1}{2} (\norm{\mathbf{u}_h^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{c_0}_{L^2}^2). \raisetag{60pt} \label{energyIEQ_GFC}
     \end{split}
 \end{equation}    
 
-The left-hand side is bounded because of the hypothesis on the initial data, using that the $s^\epsilon$ source term is in $L^\infty_x (\Omega)$ and $\theta_h \in L^2(0,T; H^{-1/2}(\Gamma_G))$.
+The right-hand side is bounded because of the hypothesis on the initial data, using that the $s^\epsilon$ source term is in $L^\infty_x (\Omega)$ and $\theta_h \in L^2(0,T; H^{-1/2}(\Gamma_G))$.
   
 After applying the coercivity property (\ref{coercivity}) of the diffusion matrix, (\ref{energyIEQ_GFC}) now takes the form of the following energy inequality:
 
@@ -950,7 +950,7 @@ After applying the coercivity property (\ref{coercivity}) of the diffusion matri
     \begin{split}  
     & \frac{1}{2} (\norm{\mathbf{u}_h^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{c^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \big [\norm{\nabla_\nu \mathbf{u}_h^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2 \big ] \diff \tau \\
     & + \int_0 ^ t \lambda \norm{\nabla c^\epsilon}_{L^2}^2 \diff \tau \\
-    & \leq \int_0^t \abs{\langle \theta_h, \mathbf{u}^\epsilon_h \rangle_{\Gamma_G}} \diff \tau + \int_0^t (s^\epsilon,c^\epsilon) \diff \tau + \frac{1}{2} (\norm{\mathbf{u}_h^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{c^\epsilon (0)}_{L^2}^2). \raisetag{60pt} \label{finalformEIEQ_gfc}
+    & \leq \int_0^t \abs{\langle \theta_h, \mathbf{u}^\epsilon_h \rangle_{\Gamma_G}} \diff \tau + \int_0^t (s^\epsilon,c^\epsilon) \diff \tau + \frac{1}{2} (\norm{\mathbf{u}_h^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{c_0}_{L^2}^2). \raisetag{60pt} \label{finalformEIEQ_gfc}
     \end{split}
   \end{equation}
     
@@ -1020,7 +1020,7 @@ It is easy to see that the type (I) and (II) terms are $\mathcal{O}(\epsilon)$ a
   \mathbf{u}_h^\epsilon \to \mathbf{u}_h \text{ in } L^2(0, T; L^2 (\Omega)) \text{ strongly.}
 \end{equation}
 
-Hence we obtain the convergence of (III) and (IV). The details are omitted since they are analogous to those described in \cite{azerad2001mathematical}.
+Hence we get the convergence of (III) and (IV). The details are omitted since they are analogous to those described in \cite{azerad2001mathematical}.
   
 For the linear terms including the concentration $c^\epsilon$ we can directly apply the weak convergence result of (\ref{WeakConvCEps1_gfc}).
     
@@ -2186,6 +2186,10 @@ As we highlighted before, the numerical experiments conducted in the present sec
 
 In this chapter we are working in the framework of the downwind-matching coordinate system introduced in Section \ref{eqsdescribingatmpluspollution_dwmc}. The first two sections are dedicated to stating and proving a rigorous connection --- on the level of both weak and strong solutions --- between the anisotropic and hydrostatic models, while in the final section we prove an existence result regarding the limit system.
 
+As in this setup we will repeatedly consider the velocity function separately from the concentration solution, we begin by making a technical assumption, namely that
+\begin{equation}\label{u_independent_from_c}\text{air velocity is not changed by the presence of contaminants.}\end{equation}
+This also means that the velocity of air particles and the velocity of pollutants can be different. The diffusion of aerosols or pollens does not generate significant atmospheric air flows, thus assumption (\ref{u_independent_from_c}) is a reasonable simplification, and it allows us to consider $\mathbf{u}^\epsilon$ on its own.
+
 In order to keep this chapter as compact as possible, here we repeat the definition of the two main systems. The anisotropic equations of the polluted atmosphere in downwind-matching coordinates are given by the system
 
 \begin{equation} \label{ANSC1_coordinates_DWMC}
@@ -2329,7 +2333,7 @@ In this section we describe the weak formulation of the merged equations in both
   
   \[ H^k_{\Gamma} (\Omega) = \overline{C_\Gamma ^ \infty (\Omega)} ^ {H^k (\Omega)} = \{ v \in H^k(\Omega); \partial^\alpha v=0 \text{ on } \Gamma \text{ for any } \abs{\alpha} < k \} \]
   
-  \[ \mathbf{V} = \{ \mathbf{u} \in  H^1_{\Gamma} (\Omega) \times H^1_{\Gamma} (\Omega) \times H^1_{\Gamma} (\Omega); \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \} \]
+  \[ \mathbf{V} = \{ \mathbf{v} \in  H^1_{\Gamma} (\Omega) \times H^1_{\Gamma} (\Omega) \times H^1_{\Gamma} (\Omega); \nabla \cdot \mathbf{v} = 0 \text{ in } \Omega \} \]
   
   \[ H (\partial_3, \Omega) = \{ v \in L^2(\Omega); \partial_3 v \in L^2 (\Omega)\} \]
   
@@ -2976,7 +2980,7 @@ Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\nabla \
 
 We begin by stating that from now on we always assume $\epsilon < \epsilon_0$ where $\epsilon_0$ is a constant defined in \cite{li2019primitive} depending only on $\norm{{\mathbf{u}_h}_0}_{H^3}$ and the domain itself.
 
-The first part of the proof concerns exclusively the velocity functions, and it follows easily from the achievements of \cite{li2019primitive} and \cite{petcu2005sobolev}. Regarding specific details we refer to these above mentioned papers; here we collect only the most important cornerstones of the calculations regarding $\mathbf{u}^\epsilon$ and $\mathbf{u}$ for completeness.
+The first part of the proof concerns exclusively the velocity functions (the present approach is correct thanks to (\ref{u_independent_from_c})), and it follows easily from the achievements of \cite{li2019primitive} and \cite{petcu2005sobolev}. Regarding specific details we refer to these above mentioned papers; here we collect only the most important cornerstones of the calculations regarding $\mathbf{u}^\epsilon$ and $\mathbf{u}$ for completeness.
 
 \begin{enumerate}
 
@@ -3336,7 +3340,7 @@ As far as local existence is concerned, the proof given in sections 2 and 3 in \
 %%% GLOBAL EXISTENCE %%%
 \textbf{Part 2: Global existence}
 
-As we mentioned in the introductory part of this proof, here we only need to provide estimates verifying the continuability of $c,$ as the global existence of the velocity function immediately follows from the results of \cite{li2019primitive} and \cite{petcu2005sobolev}.
+As we mentioned in the introductory part of this proof, here we only need to provide estimates verifying the continuability of $c,$ as the global existence of the velocity function immediately follows from the results of \cite{li2019primitive} and \cite{petcu2005sobolev} (see also (\ref{u_independent_from_c})).
 
 \bigskip
 
