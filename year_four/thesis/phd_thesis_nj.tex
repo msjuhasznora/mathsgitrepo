@@ -391,6 +391,14 @@ where
   \end{bmatrix}.
 \end{gather}
 
+Here we emphasise that the diffusivity matrix $\mathbf{M}$ is assumed to have the coercivity property
+
+\begin{equation} \label{coercivity}
+  \lambda \norm{\mathbf{x}}^2 \leq (\mathbf{M} \mathbf{x}, \mathbf{x})
+\end{equation}
+
+for all $\mathbf{x} \in \mathbb{R}^3$ with the coercivity constant $\lambda > 0,$ where $\lambda$ is independent from $\epsilon.$ In other words we require that $\lambda = \min {\lambda_i} > 0$ where $\lambda_i$ are the eigenvalues of $\mathbf{M}.$
+
 Note that we do not assume the air to be homogeneous, but for completeness we highlight that the specific case of homogeneous air corresponds to $\mathbf{K}$ taking the form
 
 \begin{gather} \nonumber
@@ -400,14 +408,6 @@ Note that we do not assume the air to be homogeneous, but for completeness we hi
     1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & \epsilon^2
   \end{bmatrix}.
 \end{gather}
-
-Here we emphasise that the diffusivity matrix $\mathbf{M}$ is assumed to have the coercivity property
-
-\begin{equation} \label{coercivity}
-  \lambda \norm{\mathbf{x}}^2 \leq (\mathbf{M} \mathbf{x}, \mathbf{x})
-\end{equation}
-
-for all $\mathbf{x} \in \mathbb{R}^3$ with the coercivity constant $\lambda > 0,$ where $\lambda$ is independent from $\epsilon.$ In other words we require that $\lambda = \min {\lambda_i} > 0$ where $\lambda_i$ are the eigenvalues of $\mathbf{M}.$
 
 In this model we will use localised point sources as suggested in \cite{zhuk2016source} and we use what is called a parametrised nascent delta function $\delta_\kappa$ to describe the source term $s^\epsilon$.
 
