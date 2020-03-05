@@ -734,6 +734,10 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
 
 The specific definitions of the $s^\epsilon$ and $s$ source terms also depend on whether we consider weak or strong solutions. In both cases they are fundamentally based on the notion of the nascent delta function with parameter $\epsilon$ and the delta distribution, but their exact definitions will be given in the subsections according to the regularity of the solutions.
 
+Working with this setup in Chapter \ref{DWMCchapter} in certain computations we will deal with the velocity function separately from the concentration solution, hence here we make a technical assumption, namely that
+\begin{equation}\label{u_independent_from_c}\text{air velocity is not changed by the presence of contaminants.}\end{equation}
+This also means that the velocity of air particles and the velocity of pollutants can be different. Considering that the diffusion of aerosols or pollens does not generate significant atmospheric air flows, assumption (\ref{u_independent_from_c}) is a reasonable simplification, and thus we will be able to consider $\mathbf{u}^\epsilon$ and $\mathbf{u}$ without the respective concentration functions.
+
 To conclude the description of the model we highlight an important feature of the system that is suggested also by the structure of the governing equations (\ref{ANSC5_coordinates_DWMC_intro}) and (\ref{HNSC5_coordinates_DWMC_intro}). With respect to pollution diffusion, directions $y$ and $z$ have a particular and shared importance compared to the $x$ direction, namely that we have diffusion taking place on $\mathcal{O}(1)$ scale in the former ones. This suggests the introduction of the generalised direction $d$ which includes directions $y$ and $z$ (similarly to the more standard concept of $h$ standing for the horizontal directions $x$ and $y$). Furthermore, we accordingly introduce the notations $\Delta_d = K_2 \partial_{22}^2 + K_3 \partial_{33}^2$ and $\nabla_d = (\partial_2, \partial_3).$
 
 %%% GEOPHYSICAL COORDINATES %%% 
@@ -845,7 +849,7 @@ We need to define the following spaces:
 
 \[ H_0 (\partial_3, \Omega) = \overline{C_0 ^\infty (\Omega)}^{H (\partial_3, \Omega)} = \{ v \in H(\partial_3, \Omega); v n_3 = 0 \text{ on } \Gamma \} \]
 
-\[ \mathbf{W} = \{ \mathbf{u} \in  H^1_{\Gamma_A} (\Omega) \times H^1_{\Gamma_A} (\Omega) \times H_0 (\partial_3, \Omega); \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \} \]
+\[ \mathbf{W} = \{ \mathbf{v} \in  H^1_{\Gamma_A} (\Omega) \times H^1_{\Gamma_A} (\Omega) \times H_0 (\partial_3, \Omega); \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \} \]
 
 Furthermore we introduce the notation $b(\mathbf{u}_h)$ = $\gamma (-u_2 , u_1).$
 
@@ -2186,10 +2190,6 @@ As we highlighted before, the numerical experiments conducted in the present sec
 
 In this chapter we are working in the framework of the downwind-matching coordinate system introduced in Section \ref{eqsdescribingatmpluspollution_dwmc}. The first two sections are dedicated to stating and proving a rigorous connection --- on the level of both weak and strong solutions --- between the anisotropic and hydrostatic models, while in the final section we prove an existence result regarding the limit system.
 
-As in this setup in certain computations we consider the velocity function separately from the concentration solution, we begin the chapter by making a technical assumption, namely that
-\begin{equation}\label{u_independent_from_c}\text{air velocity is not changed by the presence of contaminants.}\end{equation}
-This also means that the velocity of air particles and the velocity of pollutants can be different. Considering that the diffusion of aerosols or pollens does not generate significant atmospheric air flows, assumption (\ref{u_independent_from_c}) is a reasonable simplification, and thus we are allowed to consider $\mathbf{u}^\epsilon$ on its own when needed.
-
 In order to keep this chapter as compact as possible, here we repeat the definition of the two main systems. The anisotropic equations of the polluted atmosphere in downwind-matching coordinates are given by the system
 
 \begin{equation} \label{ANSC1_coordinates_DWMC}
@@ -2335,13 +2335,13 @@ In this section we describe the weak formulation of the merged equations in both
   
   \[ \mathbf{V} = \{ \mathbf{v} \in  H^1_{\Gamma} (\Omega) \times H^1_{\Gamma} (\Omega) \times H^1_{\Gamma} (\Omega); \nabla \cdot \mathbf{v} = 0 \text{ in } \Omega \} \]
   
-  \[ \mathbf{W} = \{ \mathbf{u} \in  (H^1_{\Gamma} (\Omega) \cap H^2(\Omega)) \times (H^1_{\Gamma} (\Omega) \cap H^2(\Omega)) \times H^1_{\Gamma} (\Omega); \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \} \]
+  \[ \mathbf{W} = \{ \mathbf{v} \in  (H^1_{\Gamma} (\Omega) \cap H^2(\Omega)) \times (H^1_{\Gamma} (\Omega) \cap H^2(\Omega)) \times H^1_{\Gamma} (\Omega); \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \} \]
   
-Then the weak formulation of the hydrostatic system (\ref{HNSC1_coordinates_DWMC}) - (\ref{HNSC5_coordinates_DWMC}), (\ref{HNSC_init_coordinates_DWMC}), (\ref{HNSC_bc-weak_coordinates_DWMC}) takes the following form.
+Then the weak formulation of the hydrostatic system (\ref{HNSC1_coordinates_DWMC}) - (\ref{HNSC5_coordinates_DWMC}), (\ref{HNSC_init_coordinates_DWMC}), (\ref{HNSC_bc-weak_coordinates_DWMC}) takes the following form (see also \cite{cao2007global} for example).
   
 \begin{definition} \label{definitionhydrostaticWF}
 
-The pair $(\mathbf{u}, c)$ is called a weak solution of the a hydrostatic system (\ref{HNSC1_coordinates_DWMC}) - (\ref{HNSC5_coordinates_DWMC}) subject to (\ref{HNSC_init_coordinates_DWMC}), (\ref{HNSC_bc-weak_coordinates_DWMC}) if $\mathbf{u} = (\mathbf{u}_h, u_3) \in L^2 (0, T; \mathbf{W}) \cap L^\infty (0,T; L^2(\Omega)^3),$ and $c \in L^\infty (0, T; L^2(\Omega))$ with $\partial_2 c, \partial_3 c \in L^2(0, T; L^2(\Omega)),$ moreover $\mathbf{u}$ and $c$ satisfy the integral identities
+The pair $(\mathbf{u}, c)$ is called a weak solution of the a hydrostatic system (\ref{HNSC1_coordinates_DWMC}) - (\ref{HNSC5_coordinates_DWMC}) subject to (\ref{HNSC_init_coordinates_DWMC}), (\ref{HNSC_bc-weak_coordinates_DWMC}) if $\mathbf{u} = (\mathbf{u}_h, u_3) \in L^2 (0, T; \mathbf{W}) \cap L^\infty (0,T; L^2(\Omega)^3),$ $\mathbf{u}_h \in L^\infty(0,T; H^1(\Omega)),$ and $c \in L^\infty (0, T; L^2(\Omega))$ with $\partial_2 c$, $\partial_3 c \in L^2(0, T; L^2(\Omega)),$ moreover $\mathbf{u}$ and $c$ satisfy the integral identities
   
   \begin{equation}
     \begin{split}
@@ -2976,7 +2976,7 @@ Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\nabla \
 
 We begin by stating that from now on we always assume $\epsilon < \epsilon_0$ where $\epsilon_0$ is a constant defined in \cite{li2019primitive} depending only on $\norm{{\mathbf{u}_h}_0}_{H^3}$ and the domain itself.
 
-The first part of the proof concerns exclusively the velocity functions (we remind of (\ref{u_independent_from_c})), and it follows easily from the achievements of \cite{li2019primitive} and \cite{petcu2005sobolev}. Regarding specific details we refer to these above mentioned papers; here we collect only the most important cornerstones of the calculations regarding $\mathbf{u}^\epsilon$ and $\mathbf{u}$ for completeness.
+The first part of the proof concerns exclusively the velocity functions, and it follows easily from the achievements of \cite{li2019primitive} and \cite{petcu2005sobolev}. Regarding specific details we refer to these above mentioned papers; here we collect only the most important cornerstones of the calculations regarding $\mathbf{u}^\epsilon$ and $\mathbf{u}$ for completeness.
 
 \begin{enumerate}
 
@@ -3336,7 +3336,7 @@ As far as local existence is concerned, the proof given in sections 2 and 3 in \
 %%% GLOBAL EXISTENCE %%%
 \textbf{Part 2: Global existence}
 
-As we mentioned in the introductory part of this proof, here we only need to provide estimates verifying the continuability of $c,$ as the global existence of the velocity function immediately follows from the results of \cite{li2019primitive} and \cite{petcu2005sobolev} (the correctness of our approach is also guaranteed by (\ref{u_independent_from_c})).
+As we mentioned in the introductory part of this proof, here we only need to provide estimates verifying the continuability of $c,$ as the global existence of the velocity function immediately follows from the results of \cite{li2019primitive} and \cite{petcu2005sobolev}.
 
 \bigskip
 
