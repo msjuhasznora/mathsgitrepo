@@ -163,7 +163,13 @@ Number: 2. To our knowledge, "analogues" is a noun in plural form, while "analog
 
 \subsection{Page 10}
 
-Number: 2. What we mean here is in case we have $C^\epsilon(x,y,z) = c$ on the boundaries, then we can take this $c$ value, make a change of variables $C^\epsilon_\text{new} = C^\epsilon_\text{original} - c$ on $\Omega,$ obtaining a new $C^\epsilon$ concentration function that is constant $0$ on the boundary. The original concentration function has this additional "background flow" of contaminants of constant concentration with respect to the new function obtained after the change of variables.
+\begin{enumerate}
+
+\item Number: 2. What we mean here is in case we have $C^\epsilon(x,y,z) = c$ on the boundaries, then we can take this $c$ value, make a change of variables $C^\epsilon_\text{new} = C^\epsilon_\text{original} - c$ on $\Omega,$ obtaining a new $C^\epsilon$ concentration function that is constant $0$ on the boundary. The original concentration function has this additional "background flow" of contaminants of constant concentration with respect to the new function obtained after the change of variables.
+
+\item Additional point: We emphasise that we have changed the ground-level boundary conditions of the model, see Figure 2. and equations (20) and (21).
+
+\end{enumerate}
 
 \subsection{Page 12}
 
@@ -183,7 +189,7 @@ Number: 1. We have added a line before Definition 1 to define the $b$ term. Furt
 
 \begin{enumerate}
 
-\item Number: 1. The nonlinear terms fall out because of the divergence-free condition and integrating by parts using the boundary conditions. For example, using integration by parts and exploiting that we do not have boundary terms as $\mathbf{u} = 0$ on the whole $\partial \Omega = \Gamma$ boundary, the $(\mathbf{u} \cdot \nabla u_1, u_1)$ inner product is equal to $ - \int_\Omega (\nabla \cdot \mathbf{u}) \cdot u_1^2 - \int_\Omega \mathbf{u} u_1 \nabla u_1.$ Hence, using div($\mathbf{u}$) = 0, we have
+\item Number: 1. The nonlinear terms fall out because of the divergence-free condition and integrating by parts using the boundary conditions. For example, using integration by parts and exploiting that $\mathbf{u} = 0$ above the ground i.e. on the $\Gamma_A$ boundary, the $(\mathbf{u} \cdot \nabla u_1, u_1)$ inner product is equal to $\int_{\Gamma_G} \mathbf{u} u_1^2 \cdot \boldsymbol{\vec{n}}_{\Gamma_G} - \int_\Omega (\nabla \cdot \mathbf{u}) \cdot u_1^2 - \int_\Omega \mathbf{u} u_1 \nabla u_1.$ Hence, using div($\mathbf{u}$) = 0, the fact the $u_3$ vanishes on $\Gamma_G,$ moreover that $\mathbf{u}_H$ is orthogonal to the outward normal vector $\boldsymbol{\vec{n}}_{\Gamma_G}$ on $\Gamma_G,$ we have
 
 $$ \int_\Omega u_j \partial_j u_1 \cdot u_1 = - \int_\Omega u_j u_1 \partial_j u_1,$$
 
@@ -193,13 +199,13 @@ On the other hand, the $b(\mathbf{u}_h) \cdot \mathbf{u}_H$ term vanishes as a d
 
 $$b(\mathbf{u}_h) \cdot \mathbf{u}_H = \alpha (-u_2, u_1) \cdot (u_1, u_2) = \alpha \cdot 0 = 0.$$
 
-\item Number: 2. For better readability we prefer to keep the larger bracket.
+\item Number: 2. This term is no longer present due to changes in the boundary conditions.
 
 \end{enumerate}
 
 \subsection{Page 17}
 
-Number: 1. The time shift parameter $h$ is a non-negative number here (we take the norm $\norm{\tau_h \mathbf{u}_H - \mathbf{u}_H}$ in the $L^p(0, T-h, \mathbf{Y})$ space, thus, specifically, on the time interval $[0, T-h]$). The respective criteria for a negative $h$ value would be $\norm{\tau_h \mathbf{u}_H - \mathbf{u}_H}_{L^p(h, T, \mathbf{Y})} \leq \varphi(h) + \psi(\epsilon).$ For clarity we have noted that $h$ is non-negative in our description.
+Number: 1. The time shift parameter $h$ is a non-negative number here, see also the details under point \textit{b)} of Theorem 2. We take the norm $\norm{\tau_h \mathbf{u}_H - \mathbf{u}_H}$ in the $L^p(0, T-h, \mathbf{Y})$ space, thus, specifically, on the time interval $[0, T-h]$. The respective criteria for a negative $h$ value would be $\norm{\tau_h \mathbf{u}_H - \mathbf{u}_H}_{L^p(h, T, \mathbf{Y})} \leq \varphi(h) + \psi(\epsilon).$ For clarity we have noted that $h$ is non-negative in our description.
 
 \nocite{*}
 \bibliographystyle{abbrv}
