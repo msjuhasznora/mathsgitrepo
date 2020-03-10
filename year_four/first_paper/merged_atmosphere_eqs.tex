@@ -347,7 +347,7 @@ Finally, the boundary conditions to describe the anisotropic system (\ref{ANSC1}
 \begin{split}
 & \mathbf{u}^\epsilon_H = 0, u^\epsilon_3 = 0, C^\epsilon = 0 \text{ on } \Gamma_A \times (0,T), \\
 & \nu_3 \partial_3 \mathbf{u}^\epsilon_H = \theta_H, u^\epsilon_3 = 0 \text{ on } \Gamma_G \times (0,T), \\
-& \mathbf{M} \nabla C^\epsilon \cdot \vec{\boldsymbol{n}}_{\Gamma_G} = 0 \text{ on } \Gamma_G \times (0,T)
+& \mathbf{M} \nabla C^\epsilon \cdot \vec{\boldsymbol{n}}_{\Gamma_G} = 0 \text{ on } \Gamma_G \times (0,T).
 \end{split} \raisetag{40pt}
 \end{equation}
 Note that we have a domain where the lower and upper boundaries represent a physically existent layer (i.e. the ground and the planetary boundary layer), but outside the lateral boundary the physical world continues without influence and without any particular external condition. On boundaries of such nature we have to apply OBCs (open boundary conditions), which is not a trivial task, see for example \cite{wang2014ocean}. We need to avoid any spurious reflection or constraint which is unnatural, but at the same time we want the model to remain mathematically manageable.
@@ -382,7 +382,7 @@ u_i (\cdot, t=0) = u_{0 i}, C (\cdot, t=0) = C_0 \text{ in } \Omega, \text{$i$ =
 \begin{split}
 & \mathbf{u}_H = 0, u_3 n_3 = 0, C = 0 \text{ on } \Gamma_A \times (0,T), \\
 & \nu_3 \partial_3 \mathbf{u}_H = \theta_H, u_3 = 0 \text{ on } \Gamma_G \times (0,T), \\
-& \mathbf{M} \nabla C \cdot \vec{\boldsymbol{n}}_{\Gamma_G} = 0 \text{ on } \Gamma_G \times (0,T),
+& \mathbf{M} \nabla C \cdot \vec{\boldsymbol{n}}_{\Gamma_G} = 0 \text{ on } \Gamma_G \times (0,T).
 \end{split}
 \end{equation}
 %
@@ -490,9 +490,10 @@ As we mentioned before, one of the most fundamental tools in this proof is the e
 %
 \begin{equation}
 \begin{split}  
-& \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \big[ \norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \big] \diff \tau \\
-& + \int_0 ^ t  (\mathbf{M} \nabla C^\epsilon, \nabla C^\epsilon) d \tau \\
-& \leq \int_0^t \abs{\langle \theta_H, \mathbf{u}^\epsilon_H \rangle_{\Gamma_G}} \diff \tau + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau + \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C_0}_{L^2}^2). \raisetag{60pt} \label{energyIEQ}
+& \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) \\
+& + \int_0 ^ t \big[ \norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  + (\mathbf{M} \nabla C^\epsilon, \nabla C^\epsilon) \big] \diff \tau \\
+& \leq \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C_0}_{L^2}^2) \\
+& + \int_0^t \abs{\langle \theta_H, \mathbf{u}^\epsilon_H \rangle_{\Gamma_G}} \diff \tau + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau. \raisetag{60pt} \label{energyIEQ}
 \end{split}
 \end{equation}
 
@@ -502,9 +503,10 @@ After applying the coercivity property (\ref{coercivity}) of the diffusion matri
 %
 \begin{equation}
 \begin{split}  
-& \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \big [\norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2 \big ] \diff \tau \\
-& + \int_0 ^ t \lambda \norm{\nabla C^\epsilon}_{L^2}^2 \diff \tau \\
-& \leq \int_0^t \abs{\langle \theta_H, \mathbf{u}^\epsilon_H \rangle_{\Gamma_G}} \diff \tau + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau + \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C_0}_{L^2}^2). \raisetag{60pt} \label{finalformEIEQ}
+& \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{C^\epsilon (t)}_{L^2}^2) \\
+& + \int_0 ^ t \big [\norm{\nabla_\nu \mathbf{u}_H^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2 + \lambda \norm{\nabla C^\epsilon}_{L^2}^2 \big ] \diff \tau \\
+& \leq \frac{1}{2} (\norm{\mathbf{u}_H^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{C_0}_{L^2}^2) \\
+& + \int_0^t \abs{\langle \theta_H, \mathbf{u}^\epsilon_H \rangle_{\Gamma_G}} \diff \tau + \int_0^t (S^\epsilon,C^\epsilon) \diff \tau. \raisetag{60pt} \label{finalformEIEQ}
 \end{split}
 \end{equation}
 
