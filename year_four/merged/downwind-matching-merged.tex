@@ -69,9 +69,9 @@ A local domain on the surface of the rotating Earth is often described in what i
 
 Migrating convergence results from one of the above described coordinate systems to the other is not trivial: as a result of an additional $\epsilon$ term in the downwind-matching scenario, certain boundedness and regularity features that are satisfied for the geophysical rotating frame are at the same time not valid for the downwind-matching Cartesian coordinate system.
 
-In \cite{pollatmws2019} we have proved a weak convergence theorem for the case of the classical north-west oriented coordinate system --- the first main part of the present article is dedicated to show that this result still holds true in the downwind-matching coordinate system assuming some medium-level changes in the initial and boundary conditions. The theorem we will migrate between these two coordinate systems is focused on the polluted atmosphere as a shallow domain. Incorporating the shallowness into the model via introducing the $$\epsilon = \frac{\text{characteristic depth}}{\text{characteristic width}}$$ shallowness parameter we have proved the theoretical correctness of the hydrostatic approximation for the combination of a three-dimensional velocity function and a pollution concentration function. Specifically, we have showed that any weak solution of the shallow polluted atmosphere converges weakly to a weak solution of the so-called primitive equations representing the hydrostatic limit model. In the first part of this article our goal is to verify an analogous version of this convergence theorem for the case of the more considerately chosen downwind-matching coordinate system. As in this scenario the advection is dominant compared to diffusion effects along the $x$ axis, this approach on the one hand naturally contributes to the simplification of the limit model. On the other hand it brings an additional $\epsilon$ term in the Laplacian of the concentration equation, and along with this the challenge of proving a weak convergence result for the product of the vertical velocity and the concentration. The difficulty is due to the phenomena of the $\norm{\partial_1 c^\epsilon}$ term being replaced by $\| \sqrt{\epsilon} \partial_1 c^\epsilon \|$ in the energy inequality, where $c^\epsilon$ is the pollution concentration. As the a priori estimates extracted from the energy inequality serve as fundamental building blocks of the proof, having a weakened, $\epsilon$-including version of one of the estimates has significant consequences for the verification process --- we lose the strong convergence of the concentration function.  This issue is overcome by using a more regular initial horizontal velocity function, namely ${\mathbf{u}_h}_0 \in H^1.$ The stronger initial regularity will naturally result in a $\mathbf{u}^\epsilon$ function with stronger regularities, allowing us to pass to the field of strong solutions for the velocity part of the solution, and thus will compensate the lost $H^1$ regularity of the concentration function $c^\epsilon.$ We mention that we will also use slightly different, stricter boundary conditions for the concentration function --- these additional requirements too are motivated by the presence of the new $\epsilon$ term in the energy inequality.
+In \cite{pollatmws2019} we have proved a weak convergence theorem for the case of the classical north-west oriented coordinate system --- the first main part of the present article is dedicated to show that this result still holds true in the downwind-matching coordinate system assuming some medium-level changes in the initial and boundary conditions. The theorem we will migrate between these two coordinate systems is focused on the polluted atmosphere as a shallow domain. Incorporating the shallowness into the model via introducing the $$\epsilon = \frac{\text{characteristic depth}}{\text{characteristic width}}$$ shallowness parameter we have proved the theoretical correctness of the hydrostatic approximation for the combination of a three-dimensional velocity function and a pollution concentration function. Specifically, we have showed that any weak solution of the shallow polluted atmosphere converges weakly to a weak solution of the so-called primitive equations representing the hydrostatic limit model. In the first part of this article our goal is to verify an analogous version of this convergence theorem for the case of the more considerately chosen downwind-matching coordinate system. As in this scenario the advection is dominant compared to diffusion effects along the $x$ axis, this approach on the one hand naturally contributes to the simplification of the limit model. On the other hand it brings an additional $\epsilon$ term in the Laplacian of the concentration equation, and along with this the challenge of proving a weak convergence result for the product of the vertical velocity and the concentration. The difficulty is due to the phenomenon of the $\norm{\partial_1 c^\epsilon}$ term being replaced by $\| \sqrt{\epsilon} \partial_1 c^\epsilon \|$ in the energy inequality, where $c^\epsilon$ is the pollution concentration. As the a priori estimates extracted from the energy inequality serve as fundamental building blocks of the proof, having a weakened, $\epsilon$-including version of one of the estimates has significant consequences for the verification process --- we lose the strong convergence of the concentration function.  This issue is overcome by using a more regular initial horizontal velocity function, namely ${\mathbf{u}_h}_0 \in H^1.$ The stronger initial regularity will naturally result in a $\mathbf{u}^\epsilon$ function with stronger regularities, allowing us to pass to the field of strong solutions for the velocity part of the solution, and thus will compensate the lost $H^1$ regularity of the concentration function $c^\epsilon.$ We mention that we will also use slightly different, stricter boundary conditions for the concentration function --- these additional requirements too are motivated by the presence of the new $\epsilon$ term in the energy inequality.
 
-In the second part of this article we investigate the connection between the anisotropic and hydrostatic models of the polluted atmosphere on the level of strong solutions. The downwind-matching coordinate system and the set of modelling equations we work with are essentially identical to those defined in part one --- what separates the two main sections is the quality of the convergence we are able to state. We begin the second part of this paper by examining in detail what modifications and changes are necessary in the model so that we can prove a convergence theorem analogous to that formulated in the first part, but stated for the case of strong solutions this time. The higher order of derivatives due to considering strong solutions would mean more complicated integral terms on the domain's boundary, hence in this case we describe a method (see also \cite{cao2014local}) that justifies the definition of a domain that is periodic not just along the horizontal variables, but in the vertical direction as well (note that this, considering the natural structure of the atmosphere, is not trivial). Concerning the regularity of the initial data, our proofs require $c_0$ to be in $H^2(\Omega)$ and ${\mathbf{u}_h}_0$ to be in $H^3(\Omega)$ --- the relatively high regularity of the initial horizontal velocity is necessary due to the presence of the additional $\epsilon$ multiplier in the $K_x$ diffusion term. In other words, similarly to the phenomena described for the weak solutions, in this case we also need to tailor our proofs carefully at the points where the downwind-matching coordinate choice affects the estimates: it is these modifications that require higher level of regularities. In more detail, following otherwise standard procedures of multiplying the equations by Laplacians and integrating on $\Omega,$ in this specific coordinate system we obtain only $\epsilon \norm{\partial_{11} c^\epsilon}$ on the equation's left-hand side. This means that the usual strategy of bringing high-order terms multiplied by a Young inequality coefficient to the left-hand side will not work in the case of the downwind-matching coordinate system. We overcome this issue by constructing different types of estimates where the $\epsilon$-free $\partial_{11} c^\epsilon$ term does not appear in the final bound, and by exploiting the increased $H^3$ regularity of ${\mathbf{u}_h}_0$ --- in the spirit of \cite{li2019primitive} this guarantees an increased regularity for the velocity solutions as well.
+In the second part of this article we investigate the connection between the anisotropic and hydrostatic models of the polluted atmosphere on the level of strong solutions. The downwind-matching coordinate system and the set of modelling equations we work with are essentially identical to those defined in part one --- what separates the two main sections is the quality of the convergence we are able to state. We begin the second part of this paper by examining in detail what modifications and changes are necessary in the model so that we can prove a convergence theorem analogous to that formulated in the first part, but stated for the case of strong solutions this time. The higher order of derivatives due to considering strong solutions would mean more complicated integral terms on the domain's boundary, hence in this case we describe a method (see also \cite{cao2014local}) that justifies the definition of a domain that is periodic not just along the horizontal variables, but in the vertical direction as well (note that this, considering the natural structure of the atmosphere, is not trivial). Concerning the regularity of the initial data, our proofs require $c_0$ to be in $H^2(\Omega)$ and ${\mathbf{u}_h}_0$ to be in $H^3(\Omega)$ --- the relatively high regularity of the initial horizontal velocity is necessary due to the presence of the additional $\epsilon$ multiplier in the $K_x$ diffusion term. In other words, similarly to the phenomenon described for the weak solutions, in this case we also need to tailor our proofs carefully at the points where the downwind-matching coordinate choice affects the estimates: it is these modifications that require higher level of regularities. In more detail, following otherwise standard procedures of multiplying the equations by Laplacians and integrating on $\Omega,$ in this specific coordinate system we obtain only $\epsilon \norm{\partial_{11} c^\epsilon}$ on the equation's left-hand side. This means that the usual strategy of bringing high-order terms multiplied by a Young inequality coefficient to the left-hand side will not work in the case of the downwind-matching coordinate system. We overcome this issue by constructing different types of estimates where the $\epsilon$-free $\partial_{11} c^\epsilon$ term does not appear in the final bound, and by exploiting the increased $H^3$ regularity of ${\mathbf{u}_h}_0$ --- in the spirit of \cite{li2019primitive} this guarantees an increased regularity for the velocity solutions as well.
 
 This paper is organised in the following way. In Section \ref{eqsdescribingatmpluspollution} we describe the downwind-matching coordinate system, the physical model of the polluted atmosphere and the scaling leading to the hydrostatic equations. In Section \ref{sectionWS} we state and prove the main convergence result regarding weak solutions, while in Section \ref{sectionSTRONGsol} we elaborate the analogous result for strong solutions. Finally, in order to make the strong convergence result of the latter section complete, we prove an existence theorem on strong solutions regarding the hydrostatic system in the Appendix.
 
@@ -95,7 +95,7 @@ We end up this section with some notations we will use through the paper.
 % \item $\mathbf{c}(\mathbf{u}) = (\mathbf{c}_h (\mathbf{u}), c_3 (\mathbf{u}_h)) = ( -\gamma u_2^\epsilon + \epsilon \beta u_3^\epsilon, \alpha \epsilon u^\epsilon_3 - \gamma u_1^\epsilon, \alpha u^\epsilon_2 - \beta u_1^\epsilon),$ the Coriolis force terms 
 \item $\mathbf{K}$ represents the diagonal diffusion matrix,
 \item $( \cdot,\cdot) = $ the scalar product in $L^2(\Omega)^d, d \geq 1$ or the duality $L^p (\Omega)$, $L^{p'} (\Omega),$
-\item $< \cdot,\cdot>_{\Gamma} = $ the scalar product or duality on the boundary curve $\Gamma$ ($H^{-1/2}(\Gamma)$, $H^{1/2}(\Gamma)$),
+\item $\langle \cdot,\cdot \rangle_{\Gamma} = $ the scalar product or duality on the boundary curve $\Gamma$ ($H^{-1/2}(\Gamma)$, $H^{1/2}(\Gamma)$),
 \item $\mathbf{u}_h$ = the horizontal velocity components $(u_1, u_2),$
 \item $b(\mathbf{u}_h)$ = $\gamma ( - u_2 , u_1),$
 \item $\Delta_d = K_2 \partial_{22}^2 + K_3 \partial_{33}^2$
@@ -118,7 +118,7 @@ which leads us to introducing the new scaling identity
 
 \begin{equation} \label{ksepsk1} K_x = \epsilon K_1. \end{equation}
 
-We use this diffusion rescaling result in addition to the original set of scaling equations described below. Every element of this latter set is a result of the shallowness of the domain, and they are applied in order to pass from the $\epsilon-$ dependent $\Omega^\epsilon$ original domain to the rescaled, $\epsilon-$free $\Omega$ domain.
+We use this diffusion rescaling result in addition to the original set of scaling equations described below. Every element of the latter set is a result of the shallowness of the domain, and they are applied in order to pass from the $\epsilon-$ dependent $\Omega^\epsilon$ original domain to the rescaled, $\epsilon-$free $\Omega$ domain.
 
 Here the original $\Omega_\epsilon$ domain we consider is a local slice of the atmosphere written in Cartesian coordinates:
 
@@ -126,9 +126,9 @@ Here the original $\Omega_\epsilon$ domain we consider is a local slice of the a
   \Omega_{\epsilon} = \{(x,y,z) \in \mathbb{R}^3 ; (x,y) \in \omega, 0 < z < \epsilon h(x,y) \},
 \end{equation}
 
-where $\omega$ is a Lipschitz-domain in $\mathbb{R}^2$, $h$ is a nonnegative Lipschitzian application.
+where $\omega$ is a Lipschitz-domain in $\mathbb{R}^2$, $h$ is a nonnegative Lipschitz-continuous function.
 
-In order to obtain the set of equations that describe the pollution phenomena in the atmosphere, we start with the original set of equations
+In order to obtain the set of equations that describe the pollution phenomenon in the atmosphere, we start with the original set of equations
 
 \begin{equation} \label{originalEQ-V}
   \partial_t \mathbf{v} + (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + \nabla q + 2 \mathbf{\omega} \times \mathbf{v}= \mathbf{g} \text{ in } \Omega_{\epsilon} \times (0,T)
@@ -149,7 +149,7 @@ Each of these following scaling equations can be heuristically deduced from the 
 \begin{equation} \label{shallownessscalingeqs}
   \begin{split}
     & x = x_1, \quad y = x_2, \quad z = \epsilon x_3, \\
-    & v_1 = u_1^{\epsilon}, \quad v_2 = u_2^{\epsilon}, \quad v_3 = \epsilon u_3^{\epsilon}, \\
+    & v_x = u_1^{\epsilon}, \quad v_y = u_2^{\epsilon}, \quad v_z = \epsilon u_3^{\epsilon}, \\
     & \nu_x = \nu_1, \quad \nu_y = \nu_2 , \quad \nu_z = \epsilon ^ 2\nu_3, \\
     & K_y = K_2 , \quad K_z = \epsilon^2 K_3, \\
     & P = \frac{1}{\epsilon} c^\epsilon, \quad Q = \frac{1}{\epsilon} s^\epsilon, \quad p = p^{\epsilon}
@@ -170,7 +170,7 @@ set.
   \end{itemize}
 \end{remark}
 
-Choosing the coordinate system in this particular way results in changes in three main points of the system with respect to the case of the rotating geophysical frame. One of these is the Coriolis term, since now the $x$ axis is not necessarily perpendicular to the rotation vector. We need to revisit the boundary conditions as well, and as discussed above, a modification in the pollution concentration equation also has to be taken into account. We will describe these changes and their consequences in detail --- the main challenge in proving this paper's convergence results is in fact to handle the effect of this latter change in the inequalities that provide boundedness for the required quantities.
+Choosing the coordinate system in this particular way results in changes in three main points of the system with respect to the case of the rotating geophysical frame. One of these is the Coriolis term, since now the $x$ axis is not necessarily perpendicular to the rotation vector. We need to revisit the boundary conditions as well, and as discussed above, a modification in the pollution concentration equation also has to be taken into account. We will describe these changes and their consequences in detail --- the main challenge in proving this paper's convergence results is in fact to handle the effect of the latter change in the inequalities that provide boundedness for the required quantities.
 
 \begin{remark} \normalfont
 For clarity, we add a comment here regarding the intuitive meaning of what we understand by the downwind direction $\mathbf{x}$ (which gives orientation to a coordinate axes), and the velocity $\mathbf{v}$ itself (which is the solution function). The downwind direction is an approximately steady-in-time direction, it can be seen as the direction marked by the wind direction trackers on an airport or meteorological point. When we consider the downwind, we neglect the small perturbations in its orientation, it can be viewed as a time-averaged direction as long as the fluctuation is relatively small. On the other hand, the velocity itself is a three-dimensional, time dependent vector that changes second after second.
@@ -232,7 +232,7 @@ We will specify the regularity of the initial data in Sections \ref{sectionWS} a
 
 This system will become complete when we define the boundary conditions --- we describe these in detail in Sections \ref{sectionWS} and \ref{sectionSTRONGsol} as they are chosen with different considerations depending on the type of the solutions we are dealing with.
 
-If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and $\epsilon$ including terms in the anisotropic equations, we formally arrive to the hydrostatic Navier-Stokes equations (i.e. primitive equations) combined with pollution.
+If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and $\epsilon$ including terms in the anisotropic equations (\ref{ANSC1})-(\ref{ANSC5}), we formally arrive to the following hydrostatic Navier-Stokes equations (i.e. primitive equations) combined with pollution:
 
     \begin{equation} \label{HNSC1}    
     \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\gamma u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T)
@@ -258,7 +258,11 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
     u_i (\cdot, t=0) = u_{0 i}, \quad c (\cdot, t=0) = c_0 \text{ in } \Omega, \text{$i$ = 1,2}
     \end{equation}
     
-The specific definitions of the $s^\epsilon$ and $s$ source terms also depend on whether we consider weak or strong solutions. In both cases they are fundamentally based on the notion of the approximated delta function with parameter $\epsilon$ and the delta distribution, but their exact definitions will be given in the subsections according to the regularity of the solutions.
+The specific definitions of the $s^\epsilon$ and $s$ source terms also depend on whether we consider weak or strong solutions. In both cases they are fundamentally based on the notion of the approximated delta function with parameter $\epsilon$ and the Dirac delta distribution, but their exact definitions will be given in the subsections according to the regularity of the solutions.
+
+Working with this setup in the following sections, in certain computations we will deal with the velocity function separately from the concentration solution, hence here we make a technical assumption, namely that
+\begin{equation}\label{u_independent_from_c}\text{air velocity is not changed by the presence of contaminants.}\end{equation}
+This also means that the velocity of air particles and the velocity of pollutants can be different. Taking into account that the diffusion of aerosols or pollens does not generate significant atmospheric air flows, assumption (\ref{u_independent_from_c}) is a reasonable simplification, and thus we will be able to consider $\mathbf{u}^\epsilon$ and $\mathbf{u}$ without the respective concentration functions.
 
 To conclude the description of the model we highlight an important feature of the system that is suggested also by the structure of the governing equations (\ref{ANSC5}) and (\ref{HNSC5}). With respect to pollution diffusion, directions $y$ and $z$ have a particular and shared importance compared to the $x$ direction, namely that we have diffusion taking place on $\mathcal{O}(1)$ scale in the former ones. This suggests the introduction of the generalised direction $d$ which includes directions $y$ and $z$ (similarly to the more standard concept of $h$ standing for the horizontal directions $x$ and $y$). Furthermore, we accordingly introduce the notations $\Delta_d = K_2 \partial_{22}^2 + K_3 \partial_{33}^2$ and $\nabla_d = (\partial_2, \partial_3).$
 
@@ -297,7 +301,7 @@ Here the boundary structure of the domain is identical to what we used in \cite{
   \label{structdomaingraphboundaries_weak}
 \end{figure}
 
-The boundary conditions to describe the anisotropic system can be summarised as
+The boundary conditions to describe the anisotropic system (\ref{ANSC1})-(\ref{ANSC_init}) can be summarised as
   
 %
     \begin{equation} \label{ANSC_bc-weak}
@@ -323,11 +327,11 @@ Compared to \cite{pollatmws2019}, we highlight two important features concerning
 
 As we have mentioned it in the introduction, in this case we will work with a more regular ${\mathbf{u}_h}_0 \in H^1$ initial data, so we directly use the $u_3 = 0$ equality on the boundary instead of the original $u_3 n_3 = 0$ constraint that we had used.
 
-Concerning the initial data, we set $${\mathbf{u}_h}_0 \in H^1 (\Omega), {u_3}_0 \in L^2(\Omega) \text{ with } \nabla \cdot \mathbf{u}_0 = 0, \text{ and } c_0 \in L^2 (\Omega).$$ We highlight here that we are still working in classical Leray framework of weak solutions, even though we use an $H^1(\Omega)$ regularity assumption on ${\mathbf{u}_h}_0,$ which is stronger than the more usual $L^2$ space regularity requirement for weak solutions (\cite{azerad2001mathematical}, \cite{pollatmws2019}). The reason we need this stronger regularity is to counterbalance the decreased control we have on the concentration function due to the coordinate choice, but overall this does not lead us out of the field of weak solutions.
+Concerning the initial data, we set $${\mathbf{u}_h}_0 \in H^1 (\Omega), {u_3}_0 \in L^2(\Omega) \text{ with } \nabla \cdot \mathbf{u}_0 = 0, \text{ and } c_0 \in L^2 (\Omega).$$ We emphasise here that we are still working in classical Leray framework of weak solutions, even though we use an $H^1(\Omega)$ regularity assumption on ${\mathbf{u}_h}_0,$ which is stronger than the more usual $L^2$ space regularity requirement for weak solutions (\cite{azerad2001mathematical}, \cite{pollatmws2019}). The reason we need this stronger regularity is to counterbalance the decreased control we have on the concentration function due to the coordinate choice, but overall this does not lead us out of the field of weak solutions.
 
 Finally, the $s^\epsilon$ and $s$ source terms are formulated in the spirit of our previous result \cite{pollatmws2019}: the hydrostatic $s$ function is defined as a point source, while the anisotropic source function $s^\epsilon$ is modelled with a parametrised approximated delta function. For simplicity we assume here that the pollution process begins at $t = 0,$ thus we omit the multiplication by a Heaviside function representing the activation of the source, furthermore without loss of generality we assume that the source is centred in $x=0$ and we set the intensity constant $I$ to be $1.$
 
-Let $\delta_\epsilon$ be the approximation of the $\delta$ distribution given below:
+Let $\delta_\epsilon$ be the approximation of the Dirac $\delta$ distribution given below:
 %
 \begin{equation} \label{delta_eps_source_def}
 \delta_\epsilon = 
@@ -426,40 +430,23 @@ The statement of the main theorem of this first part of the paper is analogous t
 %%% *** PROOF *** %%%
 \subsection{Proof of the main theorem} \label{proof}
 
-This section is dedicated to the verification of Theorem \ref{maintheoremWEAK}. Structurally we follow a similar chain of thought as in our previous paper --- until the point where the proof diverges reaching the weak convergence of the nonlinear term $u_3^\epsilon c^\epsilon,$ where in this case we can not benefit from an $H^1$-regular concentration function. In more detail, we begin by calculating the energy inequality and collect the a priori estimates that derive from it, then verify the less problematic weak convergence results. Finally we elaborate the steps that bring the convergence of the $u_3^\epsilon c^\epsilon$ term to a closure. The main idea here is to temporarily ignore the $c^\epsilon$ function and prove a strong convergence result considering only the velocity functions. Throughout this step we go beyond the weak solutions quality and show that we are working with strong solutions. In this new setting with more favourable regularities we can prove the convergence result we need, and eventually return to the frame of weak solutions where we can merge back together the velocity and concentration functions into a unified solution. Finally as a byproduct we get a convergence rate for the velocity (see Proposition \ref{convrateweakframework}).
+This section is dedicated to the verification of Theorem \ref{maintheoremWEAK}. Structurally we follow a similar chain of thought as in our previous paper --- until the point where the proof diverges reaching the weak convergence of the nonlinear term $u_3^\epsilon c^\epsilon,$ where in this case we can not benefit from an $H^1$-regular concentration function. In more detail, we begin by deriving the energy inequality and collect the a priori estimates that derive from it, then verify the less problematic weak convergence results. Finally we elaborate the steps that bring the convergence of the $u_3^\epsilon c^\epsilon$ term to a closure. The main idea here is to temporarily ignore the $c^\epsilon$ function and prove a strong convergence result considering only the velocity functions. Throughout this step we go beyond the weak solutions quality and show that we are working with strong solutions. In this new setting with more favourable regularities we can prove the convergence result we need, and eventually return to the frame of weak solutions where we can merge back together the velocity and concentration functions into a unified solution. Finally as a byproduct we get a convergence rate for the velocity (see Proposition \ref{convrateweakframework}).
 
   \subsubsection{Energy inequality and a priori estimates}
   
-  Calculating the energy inequality for the anisotropic system, we obtain that for a.e. $t \in [0,T]$ the following holds:
+Deriving the energy inequality for the anisotropic system (\ref{ANSC1}) - (\ref{ANSC_init}), (\ref{ANSC_bc-weak}), we obtain that for a.e. $t \in [0,T]$ the following holds:
   
   \begin{equation}
     \begin{split}  
     & \frac{1}{2} (\norm{\mathbf{u}_h^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{c^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \big[ \norm{\nabla_\nu \mathbf{u}_h^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \big] \diff \tau \\
     & + \int_0 ^ t  \big [ \epsilon K_1 \norm{\partial_1 c^\epsilon}_{L^2}^2  + K_2 \norm{\partial_2 c^\epsilon}_{L^2}^2 + K_3 \norm{\partial_3 c^\epsilon}_{L^2}^2 \big ] d \tau \\
-    & \leq \int_0^t (s^\epsilon,c^\epsilon) \diff \tau + \frac{1}{2} (\norm{\mathbf{u}_h^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{c^\epsilon_0}_{L^2}^2) \\
-    & + \int _ 0 ^ t \epsilon K_1 \langle \partial_1 c^\epsilon, c^\epsilon \rangle_{\Gamma_G} \diff \tau \raisetag{70pt} \label{energyIEQ}
+    & \leq \int_0^t (s^\epsilon,c^\epsilon) \diff \tau + \frac{1}{2} (\norm{\mathbf{u}_h^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{c^\epsilon_0}_{L^2}^2). \raisetag{50pt} \label{finalformEIEQ}
     \end{split}
   \end{equation}
-  
-  Using standard techniques, the generalised Young inequality with a $\zeta > 0$ constant, the H\"older inequality and the Trace Theorem, (\ref{energyIEQ}) takes the final form
-
-  \begin{equation}
-    \begin{split}  
-    & \frac{1}{2} (\norm{\mathbf{u}_h^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{c^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \big [\norm{\nabla_\nu \mathbf{u}_h^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2 \big ] \diff \tau \\
-    & + \int_0 ^ t \bigg[ (\epsilon K_1 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_1 c^\epsilon}_{L^2}^2  + (K_2 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_2 c^\epsilon}_{L^2}^2 \\
-    & + (K_3 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) \norm{\partial_3 c^\epsilon}_{L^2}^2 \bigg] \diff \tau \\
-    & \leq \frac{1}{\zeta} K_1 \frac{\epsilon}{2} \int_0 ^ t \norm{\partial_1 c^\epsilon}^2 _{L^2 (\Gamma_G)} + \frac{1}{2} (\norm{\mathbf{u}_h^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{c^\epsilon (0)}_{L^2}^2) \\
-    & + \int_0^t (s^\epsilon, c^\epsilon) \diff \tau, \raisetag{20pt} \label{finalformEIEQ}
-    \end{split}
-  \end{equation}
-%
-where $c_T$ and $c_S$ are the constants provided by the Trace Theorem and Sobolev embeddings. The boundary term is bounded because of the a priori assumptions made on the boundary conditions.
     
-  The right-hand side of the energy inequality is now apparently bounded, and it is easy to see that the coefficients of the pollution terms on the left-hand side are positive, since the $\zeta$ constant of the generalised Young inequality can be freely chosen in a way such that the requirements $\epsilon K_1 (1 - \zeta \frac{1}{2} c_T (c_S + 1)) > 0, (K_2 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) > 0, (K_3 - \zeta \frac{\epsilon}{2} K_1 c_T (c_S + 1)) > 0 $ are all satisfied.
+The right-hand side of the energy inequality is apparently bounded.
   
   We note that the most significant difference in this new form of the energy inequality (\ref{finalformEIEQ}) is having $\sqrt{\epsilon} \partial_1 c^\epsilon$ in the place of $\partial_1 c^\epsilon,$ which is what we had for the case of the geophysical coordinate system. It leads to the disappearance of the $H^1$ regularity of $c^\epsilon,$ and thus we don't have the strong convergence feature of the concentration function anymore --- which was of key importance for proving the weak convergence of a nonlinear term in the case of the classical geophysical frame.
-  
-  This form of the energy inequality also shows why we need the $\partial_2 c^\epsilon, \partial_3 c^\epsilon$ terms to vanish on the boundary. Otherwise, using the Trace Theorem on these boundary terms would contribute to the appearance of negative, $\epsilon$-free terms in the coefficient of $\norm{\partial_1 c^\epsilon}_{L^2}^2,$ which would undermine the structure of the energy inequality.
   
   From the final form of the energy inequality (\ref{finalformEIEQ}) we obtain uniform a priori estimates that we summarise in the following proposition.
   
@@ -809,7 +796,7 @@ Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ and $(\mathbf{u}_h,u_3)$ be the solu
       
       \begin{equation}
         \begin{split}
-         I_{41} = & \int_{Q_{t_0}} \epsilon \alpha U_2^\epsilon u_3 \diff x \diff y \diff z \diff t \leq 2f \int_0^{t_0} \norm{U_2^\epsilon} \norm{\epsilon u_3} \diff t \\
+         I_{41} = & \int_{Q_{t_0}} \epsilon \alpha U_2^\epsilon u_3 \diff x \diff y \diff z \diff t \lesssim \int_0^{t_0} \norm{U_2^\epsilon} \norm{\epsilon u_3} \diff t \\
           & \lesssim \int_0^{t_0} \zeta \norm{U_2^\epsilon}^2_2 \diff t + \int_0^{t_0} \frac{1}{\zeta} \epsilon^2 \norm{u_3}^2_2 \diff t \\
           & \lesssim \int_0^{t_0} \zeta \norm{\nabla U_2^\epsilon}^2_2 \diff t + \int_0^{t_0} \frac{1}{\zeta} \epsilon^2 \norm{u_3}^2_2 \diff t.
         \end{split}
@@ -827,7 +814,7 @@ Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ and $(\mathbf{u}_h,u_3)$ be the solu
       
       \item For the term $ I_{43} = \epsilon \beta U_3^\epsilon u_1$ we can use the idea that $\| U_3^\epsilon \| \leq \| \nabla \mathbf{U}_h^\epsilon \|.$ As we have $\partial_3 u_3^\epsilon = \nabla_h \mathbf{u}_h^\epsilon,$ and $\partial_3 u_3 = \nabla_h \mathbf{u}_h,$ we naturally have $\partial_3 U_3^\epsilon = \nabla_h \mathbf{U}_h^\epsilon,$ and by the vertical Poincar\'e inequality we have $$\norm{U_3^\epsilon} \leq \norm{\partial_3 U_3^\epsilon} = \norm{\nabla \mathbf{U}_h^\epsilon}.$$ This way we are able to bound the $U_3^\epsilon$ term without keeping the $\epsilon^2$ multiplier attached to it when we apply the Young inequality. We have
       
-      $$ \hspace{-1em}\int_{Q_{t_0}} \epsilon \beta U_3^\epsilon u_1 \diff x \diff y \diff z \diff t \leq 2f \int_0^{t_0} \epsilon \norm{U_3^\epsilon}_2 \norm{u_1}_2 \diff t \lesssim \int_0^{t_0} \epsilon \| \nabla \mathbf{U}_h^\epsilon \|_2 \norm{u_1}_2 \diff t, $$
+      $$ \hspace{-1em}\int_{Q_{t_0}} \epsilon \beta U_3^\epsilon u_1 \diff x \diff y \diff z \diff t \lesssim \int_0^{t_0} \epsilon \norm{U_3^\epsilon}_2 \norm{u_1}_2 \diff t \lesssim \int_0^{t_0} \epsilon \| \nabla \mathbf{U}_h^\epsilon \|_2 \norm{u_1}_2 \diff t, $$
       
       and finally, after applying the Young inequality we arrive to
       
@@ -903,7 +890,7 @@ We verify that the previously shown connection between the anisotropic and hydro
 
 The concept detailed here is a general approach, and we apply it both in the hydrostatic and anisotropic cases.
 
-Let's consider $\Omega_0 = M \times (-h, 0)$ with $M = (0,1) \times (0,1).$ We define the boundary conditions
+Let's consider $\Omega_0 = M \times (-h, 0)$ with $M = (0,1) \times (0,1)$ over an inland domain. We define the boundary conditions
 
 \begin{equation}
   \begin{split}
@@ -1482,7 +1469,7 @@ Now we are ready to utilise the Gr\"onwall inequality, provided the multiplicati
   \end{split}
 \end{equation}
 
-moreover we calculate
+moreover we derive
 
 \begin{equation} \label{gronwall_add}
   \begin{split}
