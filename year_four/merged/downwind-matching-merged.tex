@@ -110,7 +110,7 @@ We end up this section with some notations we will use through the paper.
 %%% *** THE MODEL FOR THE POLLUTED ATMOSPHERE *** %%%
 \section{The model for the polluted atmosphere} \label{eqsdescribingatmpluspollution}
 
-The key point of this new model is to integrate some of the main ideas of the Gaussian plume dispersion model into the system describing the polluted atmosphere. The cardinal assumption these dispersion models typically use is that advection is more dominant than diffusion along the downwind direction. In order to mathematically grasp and build these concepts into our model, we begin by fixing the local Cartesian coordinate system to be adjusted to the downwind direction, i.e. $z$ is oriented upwards, while $x$ is the downwind, and $y$ is the crosswind direction.
+The key point of this new model is to integrate some of the main ideas of the Gaussian plume dispersion model into the system describing the polluted atmosphere. The cardinal assumption these dispersion models typically use is that advection is more dominant than diffusion along the downwind direction. In order to mathematically grasp these concepts and build them into our model, we begin by fixing the local Cartesian coordinate system to be adjusted to the downwind direction, i.e. $z$ is oriented upwards, while $x$ is the downwind, and $y$ is the crosswind direction.
 
 The next step is to obtain a set of equations that describe the pollution phenomenon in the atmosphere, specifically including the information that the domain we work on is shallow.
 
@@ -138,11 +138,11 @@ After setting the domain, we start with the original set of equations
 %
 where the fluid velocity is denoted by $\mathbf{v}$ and the function $P$ represents the pollutant concentration.
 
-Now, for each space coordinate in the domain given by (\ref{original_domain_eps_including}) and all variables in equations (\ref{originalEQ-V}) - (\ref{diffusive}) we introduce a set of scaling equations. These allow us to pass from the $\epsilon-$ dependent $\Omega^\epsilon$ original domain to an $\epsilon-$free $\Omega$ domain, and at the same time as a result the $\epsilon$ shallowness parameter will be explicitly present in the momentum and convection-diffusion equations themselves.
+Now, for each space coordinate in the domain given by (\ref{original_domain_eps_including}) and all variables in equations (\ref{originalEQ-V}) - (\ref{diffusive}) we introduce a set of scaling equations. These allow us to pass from the $\epsilon-$ dependent $\Omega^\epsilon$ original domain to an $\epsilon-$free $\Omega$ domain. On the other hand, the $\epsilon$ shallowness parameter will be explicitly present in the momentum and convection-diffusion equations themselves.
 
-The complete set of rescaling equations are a result of two different steps motivated by two separate aspects: shallowness and the concept of downwind.
+The complete set of rescaling equations are a result of two different steps motivated by two separate aspects of the model: the shallowness of the domain and the concept of downwind.
 
-Firstly, we consider the consequences of shallowness. Each of these following scaling equations can be heuristically deduced from the typical physical dimension of the quantities. Specifically, we remind that viscosity constants have physical dimensions $[\nu_{x_i}] = \text{typical length}_{x_i}^2 / \text{typical time},$ and the same holds for diffusivity (see also \cite{pollatmws2019}, \cite{azerad2001mathematical}, \cite{besson1992some}). In detail, we use the following scaling identities to arrive to the rescaled model.
+Firstly, we consider the consequences of shallowness. Each of the scaling equations defined below can be heuristically deduced from the typical physical dimension of the respective quantities. Specifically, we remind that viscosity constants have physical dimensions $[\nu_{x_i}] = \text{typical length}_{x_i}^2 / \text{typical time},$ and the same holds for diffusivity (see also \cite{pollatmws2019}, \cite{azerad2001mathematical}, \cite{besson1992some}). In detail, we use the following scaling identities to arrive to the rescaled model.
 
 \begin{equation} \label{shallownessscalingeqs}
   \begin{split}
@@ -154,7 +154,7 @@ Firstly, we consider the consequences of shallowness. Each of these following sc
   \end{split}
 \end{equation}
 
-Rigorously speaking, here we also perform $K_x = K_1,$ but as the second step of the rescaling process focuses on this parameter, we keep the $K_x$ notation in the first step.
+Rigorously speaking, here we also use $K_x = K_1,$ but as the second step of the rescaling process focuses on this parameter, we keep the $K_x$ notation in the first step.
 
 Now we are ready to take into account the effect of the coordinate choice itself. As diffusion is negligible compared to advection effects in the downwind direction, we have
 
@@ -419,7 +419,7 @@ The pair $(\mathbf{u}^\epsilon, c^\epsilon)$ is called a weak solution of the an
 %
     \begin{equation}
     \begin{split} \nonumber
-      & \int_0^T \bigg [ -(c^\epsilon, \partial_t \tilde{c}) -(\mathbf{u}^\epsilon c^\epsilon, \nabla \tilde{c}) + \epsilon K_1 (\partial_1 c^\epsilon, \partial_1 \tilde{c}) - \epsilon K_1 \sigma \big[\tilde{c} \big] _{\Gamma_G} \\
+      & \int_0^T \bigg [ -(c^\epsilon, \partial_t \tilde{c}) -(\mathbf{u}^\epsilon c^\epsilon, \nabla \tilde{c}) + \epsilon K_1 (\partial_1 c^\epsilon, \partial_1 \tilde{c}) \\
       & + K_2 (\partial_2 c^\epsilon, \partial_2 \tilde{c}) + K_3 (\partial_3 c^\epsilon, \partial_3 \tilde{c}) \bigg ] \diff t \\
       & =  - (c_0, \tilde{c} (0)) + \int_0^T (s^\epsilon,\tilde{c}) \diff t
     \end{split}
