@@ -110,25 +110,19 @@ We end up this section with some notations we will use through the paper.
 %%% *** THE MODEL FOR THE POLLUTED ATMOSPHERE *** %%%
 \section{The model for the polluted atmosphere} \label{eqsdescribingatmpluspollution}
 
-The key point of this new model is to integrate some of the main ideas of the Gaussian plume dispersion model into the system describing the polluted atmosphere. Therefore we begin by fixing the local Cartesian coordinate system to be adjusted to the downwind direction, i.e. $z$ is oriented upwards, while $x$ is the downwind, and $y$ is the crosswind direction. Another assumption the Gaussian dispersion models typically use is that advection is more dominant than diffusion along the downwind direction, which leads to the appearance of an extra $\epsilon$ term in the concentration equation's Laplacian. Namely, we have
+The key point of this new model is to integrate some of the main ideas of the Gaussian plume dispersion model into the system describing the polluted atmosphere. The cardinal assumption these dispersion models typically use is that advection is more dominant than diffusion along the downwind direction. In order to mathematically grasp and build these concepts into our model, we begin by fixing the local Cartesian coordinate system to be adjusted to the downwind direction, i.e. $z$ is oriented upwards, while $x$ is the downwind, and $y$ is the crosswind direction.
 
-\begin{equation} \abs{u_1 \partial_{1} c} \gg | K_x \partial_{11} ^2 c | ,\end{equation}
-%
-which leads us to introducing the new scaling identity
-
-\begin{equation} \label{ksepsk1} K_x = \epsilon K_1. \end{equation}
-
-We use this diffusion rescaling result in addition to the original set of scaling equations described below. Every element of the latter set is a result of the shallowness of the domain, and they are applied in order to pass from the $\epsilon-$ dependent $\Omega^\epsilon$ original domain to the rescaled, $\epsilon-$free $\Omega$ domain.
+The next step is to obtain a set of equations that describe the pollution phenomenon in the atmosphere, specifically including the information that the domain we work on is shallow.
 
 Here the original $\Omega_\epsilon$ domain we consider is a local slice of the atmosphere written in Cartesian coordinates:
 
-\begin{equation}
+\begin{equation}\label{original_domain_eps_including}
   \Omega_{\epsilon} = \{(x,y,z) \in \mathbb{R}^3 ; (x,y) \in \omega, 0 < z < \epsilon h(x,y) \},
 \end{equation}
 %
 where $\omega$ is a Lipschitz-domain in $\mathbb{R}^2$, $h$ is a nonnegative Lipschitz-continuous function.
 
-In order to obtain the set of equations that describe the pollution phenomenon in the atmosphere, we start with the original set of equations
+After setting the domain, we start with the original set of equations
 
 \begin{equation} \label{originalEQ-V}
   \partial_t \mathbf{v} + (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + \nabla q + 2 \mathbf{\omega} \times \mathbf{v}= \mathbf{g} \text{ in } \Omega_{\epsilon} \times (0,T)
@@ -142,9 +136,13 @@ In order to obtain the set of equations that describe the pollution phenomenon i
   \partial_t P + \mathbf{v} \cdot \nabla P = \nabla \cdot (\mathbf{K} \nabla P) + Q \text{ in } \Omega_{\epsilon} \times (0,T),
 \end{equation}
 %
-where the fluid velocity is denoted by $\mathbf{v}$ and the function $P$ represents the pollutant concentration. 
+where the fluid velocity is denoted by $\mathbf{v}$ and the function $P$ represents the pollutant concentration.
 
-Each of these following scaling equations can be heuristically deduced from the typical physical dimension of the quantities. Specifically, we remind that both diffusivity and viscosity constants have physical dimensions $[\nu_{x_i}] = \text{typical length}_{x_i}^2 / \text{typical time}$ (for more details see \cite{besson1992some}, \cite{azerad2001mathematical}, \cite{pollatmws2019}). On the contrary, the previously presented equation ($\ref{ksepsk1}$) is the effect of the coordinate choice itself. In detail, apart from the already introduced equation ($\ref{ksepsk1}$) we use the following scaling identities to arrive to the rescaled model.
+Now, for each space coordinate in the domain given by (\ref{original_domain_eps_including}) and all variables in equations (\ref{originalEQ-V}) - (\ref{diffusive}) we introduce a set of scaling equations. These allow us to pass from the $\epsilon-$ dependent $\Omega^\epsilon$ original domain to an $\epsilon-$free $\Omega$ domain, and at the same time as a result the $\epsilon$ shallowness parameter will be explicitly present in the momentum and convection-diffusion equations themselves.
+
+The complete set of rescaling equations are a result of two different steps motivated by two separate aspects: shallowness and the concept of downwind.
+
+Firstly, we consider the consequences of shallowness. Each of these following scaling equations can be heuristically deduced from the typical physical dimension of the quantities. Specifically, we remind that viscosity constants have physical dimensions $[\nu_{x_i}] = \text{typical length}_{x_i}^2 / \text{typical time},$ and the same holds for diffusivity (see also \cite{pollatmws2019}, \cite{azerad2001mathematical}, \cite{besson1992some}). In detail, we use the following scaling identities to arrive to the rescaled model.
 
 \begin{equation} \label{shallownessscalingeqs}
   \begin{split}
@@ -156,7 +154,19 @@ Each of these following scaling equations can be heuristically deduced from the 
   \end{split}
 \end{equation}
 
-Once we apply the above scaling, we pass from the original $\Omega_\epsilon$ domain to the $\epsilon-$ independent
+Rigorously speaking, here we also perform $K_x = K_1,$ but as the second step of the rescaling process focuses on this parameter, we keep the $K_x$ notation in the first step.
+
+Now we are ready to take into account the effect of the coordinate choice itself. As diffusion is negligible compared to advection effects in the downwind direction, we have
+
+\begin{equation} \abs{u_1 \partial_{1} c} \gg | K_x \partial_{11} ^2 c | ,\end{equation}
+%
+which leads us to introducing the new scaling identity
+
+\begin{equation} \label{ksepsk1} K_x = \epsilon K_1. \end{equation}
+
+Note that as an immediate result, we will have an extra $\epsilon$ term in the concentration equation's Laplacian.
+
+Once we apply (\ref{shallownessscalingeqs}) combined with (\ref{ksepsk1}), we pass from the original $\Omega_\epsilon$ domain to the $\epsilon-$ independent
 
 \begin{equation} \Omega =  \{(x_1,x_2,x_3) \in \mathbb{R}^3 ; (x_1,x_2) \in \omega, 0 < x_3 < h (x_1 , x_2) \} \end{equation}
 %
