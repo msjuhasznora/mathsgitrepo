@@ -113,7 +113,7 @@ We end up this section with some notations we will use through the paper.
 The key point of this new model is to integrate some of the main ideas of the Gaussian plume dispersion model into the system describing the polluted atmosphere. Therefore we begin by fixing the local Cartesian coordinate system to be adjusted to the downwind direction, i.e. $z$ is oriented upwards, while $x$ is the downwind, and $y$ is the crosswind direction. Another assumption the Gaussian dispersion models typically use is that advection is more dominant than diffusion along the downwind direction, which leads to the appearance of an extra $\epsilon$ term in the concentration equation's Laplacian. Namely, we have
 
 \begin{equation} \abs{u_1 \partial_{1} c} \gg | K_x \partial_{11} ^2 c | ,\end{equation}
-
+%
 which leads us to introducing the new scaling identity
 
 \begin{equation} \label{ksepsk1} K_x = \epsilon K_1. \end{equation}
@@ -125,7 +125,7 @@ Here the original $\Omega_\epsilon$ domain we consider is a local slice of the a
 \begin{equation}
   \Omega_{\epsilon} = \{(x,y,z) \in \mathbb{R}^3 ; (x,y) \in \omega, 0 < z < \epsilon h(x,y) \},
 \end{equation}
-
+%
 where $\omega$ is a Lipschitz-domain in $\mathbb{R}^2$, $h$ is a nonnegative Lipschitz-continuous function.
 
 In order to obtain the set of equations that describe the pollution phenomenon in the atmosphere, we start with the original set of equations
@@ -141,7 +141,7 @@ In order to obtain the set of equations that describe the pollution phenomenon i
 \begin{equation} \label{diffusive}
   \partial_t P + \mathbf{v} \cdot \nabla P = \nabla \cdot (\mathbf{K} \nabla P) + Q \text{ in } \Omega_{\epsilon} \times (0,T),
 \end{equation}
-
+%
 where the fluid velocity is denoted by $\mathbf{v}$ and the function $P$ represents the pollutant concentration. 
 
 Each of these following scaling equations can be heuristically deduced from the typical physical dimension of the quantities. Specifically, we remind that both diffusivity and viscosity constants have physical dimensions $[\nu_{x_i}] = \text{typical length}_{x_i}^2 / \text{typical time}$ (for more details see \cite{besson1992some}, \cite{azerad2001mathematical}, \cite{pollatmws2019}). On the contrary, the previously presented equation ($\ref{ksepsk1}$) is the effect of the coordinate choice itself. In detail, apart from the already introduced equation ($\ref{ksepsk1}$) we use the following scaling identities to arrive to the rescaled model.
@@ -159,7 +159,7 @@ Each of these following scaling equations can be heuristically deduced from the 
 Once we apply the above scaling, we pass from the original $\Omega_\epsilon$ domain to the $\epsilon-$ independent
 
 \begin{equation} \Omega =  \{(x_1,x_2,x_3) \in \mathbb{R}^3 ; (x_1,x_2) \in \omega, 0 < x_3 < h (x_1 , x_2) \} \end{equation}
-
+%
 set.
 
 \begin{remark} \normalfont
@@ -187,7 +187,7 @@ To expand the $2 \mathbf{\omega} \times \mathbf{v}$ Coriolis term, firstly it is
 Now, let
 
 $$\alpha = -2 f \sin(\theta)\cos(\phi), \quad \beta = 2 f \cos(\theta) \cos(\phi), \quad \gamma = 2 f \sin(\phi),$$
-
+%
 i.e. $2 \omega = (\alpha, \beta, \gamma),$ then using this, the Coriolis force takes the form
 
 \begin{gather}
@@ -394,7 +394,7 @@ Giving definition to the weak formulation of the (\ref{ANSC1}) - (\ref{ANSC_init
 
 \begin{definition} \label{definitionanisotropicWF}
   
-The pair $(\mathbf{u}^\epsilon, c^\epsilon)$ is called a weak solution of the anisotropic system (\ref{ANSC1}) - (\ref{ANSC5}) subject to (\ref{ANSC_init_}), (\ref{ANSC_bc-weak}) if $\mathbf{u}^\epsilon = (\mathbf{u}^\epsilon_h, u^\epsilon_3) \in L^2 (0,T ; \mathbf{V}) \cap C_w (0, T; L^2 (\Omega)^3)$ and $c^\epsilon \in L^\infty (0,T; L^2(\Omega)) \cap L^2 (0,T; H^1(\Omega))$, moreover $\mathbf{u}^\epsilon$ and $c^\epsilon$ satisfy the integral identities
+The pair $(\mathbf{u}^\epsilon, c^\epsilon)$ is called a weak solution of the anisotropic system (\ref{ANSC1}) - (\ref{ANSC5}) subject to (\ref{ANSC_init}), (\ref{ANSC_bc-weak}) if $\mathbf{u}^\epsilon = (\mathbf{u}^\epsilon_h, u^\epsilon_3) \in L^2 (0,T ; \mathbf{V}) \cap C_w (0, T; L^2 (\Omega)^3)$ and $c^\epsilon \in L^\infty (0,T; L^2(\Omega)) \cap L^2 (0,T; H^1(\Omega))$, moreover $\mathbf{u}^\epsilon$ and $c^\epsilon$ satisfy the integral identities
   
   \begin{equation}
     \begin{split}
@@ -520,16 +520,16 @@ Another structural difference we need to underline in connection with the proof 
       & \lesssim \norm{f}_2^{1/2} \big ( \norm{f}_2^{1/2} + \norm{\nabla_h f}_2^{1/2} \big ) \norm{g}_2 \norm{h}_2^{1/2} \big (\norm{h}_2^{1/2} + \norm{\nabla_h h}_2^{1/2} \big ),
     \end{split}
   \end{equation}
-  
+%
   and
-  
+%
   \begin{equation}\nonumber
     \begin{split}
       & \int_{\Gamma_G} \bigg ( \int_0^1 f(x,y,z) \diff z \bigg) \bigg ( \int_0^1 g(x,y,z) h(x,y,z) \diff z \bigg ) \diff x \diff y \\
       & \lesssim \norm{f}_2 \norm{g}_2^{1/2} \big ( \norm{g}_2^{1/2} + \norm{\nabla_h g}_2^{1/2} \big ) \norm{h}_2^{1/2} \big (\norm{h}_2^{1/2} + \norm{\nabla_h h}_2^{1/2} \big )
     \end{split}
   \end{equation}
-  
+%
   hold true for any $f,g,h$ set of functions such that the right-hand sides make sense and are finite.
 
 \end{lemma}
@@ -551,7 +551,7 @@ Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ and $(\mathbf{u}_h,u_3)$ be the solu
     & + \int_{Q_t}  ( \gamma u_2^\epsilon u_1 - \epsilon \beta u_3^\epsilon u_1 + \alpha \epsilon u_3^\epsilon u_2 - \gamma u_1^\epsilon u_2 - \epsilon \alpha u^\epsilon_2 u_3 + \epsilon \beta u_1^\epsilon u_3)
   \end{split}
 \end{equation}
-
+%
 for any $t \in [0, \infty),$ where $Q_t = \Omega \times (0,t).$
 
 \end{prop}
@@ -567,7 +567,7 @@ We recall the definition of weak solution for the scaled Navier-Stokes equations
     & + \int_Q  \gamma u_2^\epsilon \tilde{u}_1 - \epsilon \beta u_3^\epsilon \tilde{u}_1 + \alpha \epsilon u_3^\epsilon \tilde{u}_2 - \gamma u_1^\epsilon \tilde{u}_2 - \epsilon \alpha u_2^\epsilon \tilde{u}_3 + \epsilon \beta u_1^\epsilon \tilde{u}_3
   \end{split}
 \end{equation}
-
+%
 for any $\tilde{\mathbf{u}} = (\tilde{\mathbf{u}}_h, \tilde{u}_3) \in H^1 (0,T;\mathbf{V})$ with $\tilde{\mathbf{u}}(T) = 0.$
 
 Now, let's define $\chi \in C_0^\infty ([0, \infty))$ with $0 \leq \chi \leq 1$ and $\chi (0) = 1$ and set $\tilde{\mathbf{u}} = (\mathbf{u}_h,u_3) \chi (t).$ By using the density argument it is valid to choose this $\tilde{\mathbf{u}}$ function as a testing function as long as all the integral terms remain well-defined in $(\ref{WFreminder}),$ which we verify in the following.
@@ -603,7 +603,7 @@ Now we are justified to take $\tilde{\mathbf{u}}$ as a test function, and thus, 
     & + \int_Q  ( \gamma u_2^\epsilon u_1 - \epsilon \beta u_3^\epsilon u_1 + \alpha \epsilon u_3^\epsilon u_2 - \gamma u_1^\epsilon u_2 - \epsilon \alpha u^\epsilon_2 u_3 + \epsilon \beta u_1^\epsilon u_3) \chi,\raisetag{80pt}
   \end{split}
 \end{equation}
-
+%
 for any $\chi \in C^\infty_0 ([0,\infty)),$ with $0 \leq \chi \leq 1$ and $\chi (0) = 1.$
 
 Since the estimate $(\ref{integralIdentity_prop})$ is localised in time, we take an arbitrary $t_0 \in (0, \infty)$ and a sufficiently small positive $\delta \in (0, t_0).$ Choose a cut-off function with the properties $\chi_\delta \in C^\infty_0 [0,t_0),$ such that $\chi_\delta \equiv 1$ on $[0, t_0 -\delta], 0 \leq \chi_\delta \leq 1$ on $[t_0 - \delta, t_0 )$ and $\abs{\chi_\delta '} \leq \frac{2}{\delta}$ on $[0, t_0).$ Now, taking $\chi = \chi_\delta$ in $(\ref{rewrittenform})$ as $\delta \to 0,$ one can arrive to the desired equality after performing the calculations for passing to the limit. It is easy to see that because of the velocities vanishing on the boundaries, the technical details remain uneffected, even though we are not on a periodic domain.
@@ -616,13 +616,13 @@ In more detail, the term $ \langle \partial_t u_3, u_3^\epsilon \rangle _{H^{-1}
     & = - \int_{\partial \Omega} \bigg ( \int_0^z \partial_t \mathbf{u}_h \diff z' \bigg ) u_3^\epsilon \mathbf{n}_h + \int_\Omega \bigg ( \int_0^z \partial_t \mathbf{u}_h \diff z' \bigg) \cdot \nabla_h u_3^\epsilon \diff x \diff y \diff z,
   \end{split}
 \end{equation}
-
+%
 where $\mathbf{n}_h$ is the horizontal component of the outward facing normal vector on the $\partial \Omega$ boundary.
     
 By using that $u_3^\epsilon = 0$ on $\partial \Omega$ we arrive easily to the more simple
     
 $$ \langle \partial_t u_3, u_3^\epsilon \rangle _{H^{-1} \times H^1} = \int_\Omega \bigg ( \int_0^z \partial_t \mathbf{u}_h \diff z' \bigg) \cdot \nabla_h u_3^\epsilon \diff x \diff y \diff z,$$
-     
+%
 which is the form one would have on a periodic domain. Similarly, 
      
 $$ \langle \partial_t u_3, u_3^\epsilon - u_3 \rangle _{H^{-1} \times H^1} = \int_\Omega \bigg ( \int_0^z \partial_t \mathbf{u}_h \diff z' \bigg) \cdot \nabla_h (u_3^\epsilon - u_3),$$ as the boundary term $$\int_{\partial \Omega} \bigg ( \int_0^z \partial_t \mathbf{u}_h \diff z' \bigg ) (u_3^\epsilon - u_3) \mathbf{n}_h$$ becomes zero, since we have $u_3 = 0, u_3^\epsilon = 0$ on $\Gamma.$ 
@@ -638,7 +638,7 @@ After some technical details that we omit here we eventually obtain
     & + \int_{Q_{t_0}}  ( \gamma u_2^\epsilon u_1 - \epsilon \beta u_3^\epsilon u_1 + \alpha \epsilon u_3^\epsilon u_2 - \gamma u_1^\epsilon u_2 - \epsilon \alpha u_2^\epsilon u_3 + \epsilon \beta u_1^\epsilon u_3)
   \end{split}
 \end{equation}
-
+%
 for any $t_0 \in [0, \infty),$ which verifies the statement of the proposition.
 
 \end{proof}
@@ -674,7 +674,7 @@ Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ and $(\mathbf{u}_h,u_3)$ be the solu
   \begin{equation} \label{identity_obtained_by_v}
     \frac{1}{2} \norm{\mathbf{u}_h(t_0)}_2^2 + \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^2 \diff t = \frac{1}{2} \norm{{\mathbf{u}_h}_0}_2^2,
   \end{equation}
-  
+%
   for any $t_0 \in [0, \infty).$ At the same time we also know by definition that
   
   \begin{equation} \label{bound_by_definition}
@@ -683,7 +683,7 @@ Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ and $(\mathbf{u}_h,u_3)$ be the solu
       & \leq \frac{1}{2} (\norm{{\mathbf{u}_h}_0}_2^2 + \epsilon^2 \norm{{u_3}_0}_2^2),
     \end{split}
   \end{equation}
-  
+%
   for almost every $t_0 \in [0, \infty).$
   
   Now, summing ($\ref{bound_by_definition}$) and ($\ref{identity_obtained_by_v}$) and from their result subtracting ($\ref{integralIdentity_prop}$) (where we take $t= t_0$) and ($\ref{identity_obtained_by_v_eps}$) we obtain
@@ -697,7 +697,7 @@ Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ and $(\mathbf{u}_h,u_3)$ be the solu
       & + \int_{Q_{t_0}}  \epsilon \beta u_3^\epsilon u_1 - \epsilon \alpha u_3^\epsilon u_2 + \epsilon \alpha u_2^\epsilon u_3 - \epsilon \beta u_1^\epsilon u_3 \diff x \diff y \diff z \diff t := I_1 + I_2 + I_3 + I_4, \raisetag{80pt}
     \end{split}
   \end{equation}
-  
+%
   for almost every $t_0 \in [0, \infty).$
   
   The next step of the proof is to provide a bound for each of the $I_1, I_2, I_3, I_4$ terms above, in which the regularity of the strong solutions of the primitive equations (see Corollary $\ref{StrongSolPE_boundedness}$) plays a crucial role.
@@ -738,7 +738,7 @@ Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ and $(\mathbf{u}_h,u_3)$ be the solu
       & =  \int_{Q_{t_0}} [\nabla_h \cdot \mathbf{U}_h^\epsilon \mathbf{U}_h^\epsilon \mathbf{u}_h - U^\epsilon_3 \mathbf{U}_h^\epsilon \cdot \partial_z \mathbf{u}_h ] \diff x \diff y \diff z \diff t := I_{21}'' + I_{22}'',
     \end{split}
   \end{equation}
-  
+%
   where $I_{21}''$ can be bounded by the same term as $I_2'$ in $(\ref{I_2_prime}),$ while for $I_{22}''$ we will follow the steps below in order to construct an estimate.
   
   \begin{equation} \nonumber
@@ -751,7 +751,7 @@ Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ and $(\mathbf{u}_h,u_3)$ be the solu
       & \lesssim \zeta \| \nabla \mathbf{U}_h^\epsilon \| ^2_2 + \kappa(\zeta) \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^4 \| \mathbf{U}_h^\epsilon \|_2^2 \diff t + \kappa(\zeta) \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^2  \norm{\Delta \mathbf{u}_h}_2^2 \| \mathbf{U}_h^\epsilon \| _2^2 \diff t,
     \end{split}
   \end{equation}
-  
+%
   where we utilised the divergence-free condition, the Young inequality, the $\| \mathbf{U}_h^\epsilon \|_2 \leq \| \nabla \mathbf{U}_h^\epsilon \|_2$ first-order bound thanks to the zero boundary conditions, and we applied Lemma $\ref{LadyzhenskayatypeIEQ}$ using
   
   $$f = \nabla_h \mathbf{U}_h^\epsilon, g = \mathbf{U}_h^\epsilon, h = \partial_z \mathbf{u}_h.$$
@@ -774,7 +774,7 @@ Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ and $(\mathbf{u}_h,u_3)$ be the solu
       & + \epsilon^2 \norm{u_3^\epsilon}_2^2 \norm{\nabla u_3^\epsilon}_2^2 \bigg ) \diff t + \zeta \big ( \| \nabla \mathbf{U}_h^\epsilon \|_{L^2(Q_{t_0})}^2 + \epsilon^2 \norm{\nabla U_3^\epsilon}_{L^2(Q_{t_0})}^2  \big),
     \end{split}
   \end{equation}
-  
+%
   where we used the Young inequality and Lemma \ref{LadyzhenskayatypeIEQ}, keeping in mind that passing from $\norm{\nabla \mathbf{u}_h}$ to $\norm{\Delta \mathbf{u}_h}$ in the estimating process is not legitimate. Note at the same time that in this case the additional $\norm{\nabla \mathbf{u}_h}_2^2 \cdot \norm{\nabla \mathbf{u}_h}_2^2$ term will not have a permanent role in the bound, as in the following step it will be estimated by the same $\kappa (\norm{{\mathbf{u}_h}_0}_{H^1}, \Gamma_G)$ term that is used to estimate the Laplacian. Specifically, using Corollary $\ref{StrongSolPE_boundedness}$ we arrive back to the same conclusion ($\ref{I3Bound}$) that was calculated for the boundary-free scenario:
 
   \begin{equation} \label{I3Bound}
@@ -783,7 +783,7 @@ Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ and $(\mathbf{u}_h,u_3)$ be the solu
       & + \kappa \epsilon^2 [(\norm{{\mathbf{u}_h}_0}_2^2 + \epsilon^2 \norm{{u_3}_0}_2^2)^2 + \kappa( \| {\mathbf{u}_h}_0 \| _{H^1}, \Gamma_G)],
     \end{split}
   \end{equation}
-  
+%
   where we also used $(\ref{bound_by_definition})$.
 
   \textbf{Bound for $I_4.$} We add $ - \epsilon \beta u_3 u_1 +  \epsilon \beta u_3 u_1 - \epsilon \alpha u_3 u_2 + \epsilon \alpha u_3 u_2 = 0 $ to $I_4$, thus instead of bounding the original version of the term, now we need to bound the equivalent term
@@ -805,7 +805,6 @@ Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ and $(\mathbf{u}_h,u_3)$ be the solu
       Here the $\int_0^{t_0} \zeta \norm{\nabla U_2^\epsilon}^2_2$  term can be merged into the left-hand side of ($\ref{introduce_I_terms}$), while
       
       $$\int_0^{t_0} \frac{1}{\zeta} \epsilon^2 \norm{u_3}^2_2 \leq \frac{1}{\zeta} \epsilon^2 \norm{u_3}^2_{L^2(Q_{t_0})} \leq \frac{1}{\zeta} \epsilon^2 \kappa (\norm{{\mathbf{u}_h}_0}_{H^1}, \Gamma_G),$$
-      
       where we used the Corollary $\ref{StrongSolPE_boundedness}$, and the fact that $\norm{u_3} \leq \norm{\nabla \mathbf{u}_h}.$
       
       Here $\zeta$ is the constant of the Young inequality, and it only has to be small enough to keep the coefficient of $\norm{\nabla \mathbf{U}_h^\epsilon}$ positive.
@@ -815,16 +814,16 @@ Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ and $(\mathbf{u}_h,u_3)$ be the solu
       \item For the term $ I_{43} = \epsilon \beta U_3^\epsilon u_1$ we can use the idea that $\| U_3^\epsilon \| \leq \| \nabla \mathbf{U}_h^\epsilon \|.$ As we have $\partial_3 u_3^\epsilon = \nabla_h \mathbf{u}_h^\epsilon,$ and $\partial_3 u_3 = \nabla_h \mathbf{u}_h,$ we naturally have $\partial_3 U_3^\epsilon = \nabla_h \mathbf{U}_h^\epsilon,$ and by the vertical Poincar\'e inequality we have $$\norm{U_3^\epsilon} \leq \norm{\partial_3 U_3^\epsilon} = \norm{\nabla \mathbf{U}_h^\epsilon}.$$ This way we are able to bound the $U_3^\epsilon$ term without keeping the $\epsilon^2$ multiplier attached to it when we apply the Young inequality. We have
       
       $$ \hspace{-1em}\int_{Q_{t_0}} \epsilon \beta U_3^\epsilon u_1 \diff x \diff y \diff z \diff t \lesssim \int_0^{t_0} \epsilon \norm{U_3^\epsilon}_2 \norm{u_1}_2 \diff t \lesssim \int_0^{t_0} \epsilon \| \nabla \mathbf{U}_h^\epsilon \|_2 \norm{u_1}_2 \diff t, $$
-      
+%
       and finally, after applying the Young inequality we arrive to
-      
+%
       \begin{equation}
         \begin{split}
           I_{43} = & \int_{Q_{t_0}} \epsilon \beta U_3^\epsilon u_1 \diff x \diff y \diff z \diff t \lesssim \zeta \int_0^{t_0} \norm{\nabla \mathbf{U}_h^\epsilon}_2^2 \diff s + \frac{1}{\zeta} \epsilon^2 \int_0^{t_0} \norm{u_1}_2^2 \diff s \\
           & \lesssim \zeta \int_0^{t_0} \norm{\nabla \mathbf{U}_h^\epsilon}_2^2 \diff t + \frac{1}{\zeta} \epsilon^2 \kappa (\norm{{\mathbf{u}_h}_0}_{H^1}, \Gamma_G),
         \end{split}
       \end{equation}
-      
+%
       where the first term can be merged into the left-hand side of ($\ref{introduce_I_terms}$).
             
       \item The estimate of $ I_{44} = \alpha \epsilon U_3^\epsilon u_2$ is structurally analogous.
@@ -840,7 +839,7 @@ Using the bounds we now have for the terms $I_1, I_2, I_3$ and $I_4$, ($\ref{int
   & + \int_0^{t} \norm{\nabla \mathbf{u}_h}_2^4 \norm{\mathbf{U}_h^\epsilon}_2^2 \diff s + \int_0^{t} \norm{\nabla \mathbf{u}_h}_2^2  \norm{\Delta \mathbf{u}_h}_2^2 \norm{\mathbf{U}_h^\epsilon}_2^2 \diff s =: \Psi(t),
   \end{split}
 \end{equation}
-
+%
 for almost any $t_0 \in [0, \infty).$ With this we have
 
 \begin{equation}
@@ -849,16 +848,16 @@ for almost any $t_0 \in [0, \infty).$ With this we have
    & \lesssim (\norm{\nabla \mathbf{u}_h}_2^4 + \norm{\nabla \mathbf{u}_h}_2^2  \norm{\Delta \mathbf{u}_h}_2^2) \Phi (t) \lesssim (\norm{\nabla \mathbf{u}_h}_2^4 + \norm{\nabla \mathbf{u}_h}_2^2  \norm{\Delta \mathbf{u}_h}_2^2)\Psi(t),
   \end{split}
 \end{equation}
-
+%
 from which, applying the Gr\"onwall inequality and using Corollary $\ref{StrongSolPE_boundedness}$ we deduce
-
+%
 \begin{equation}
   \begin{split} \nonumber
     & \Phi (t) \lesssim \Psi (t) \leq e^{\kappa \int_0 ^ t (\norm{\nabla \mathbf{u}_h}_2^4 + \norm{\nabla \mathbf{u}_h}_2^2  \norm{\Delta \mathbf{u}_h}_2^2) \diff s} \Psi (0) \leq e^{\kappa(\norm{{\mathbf{u}_h}_0}_{H^1}, \Gamma_G)} \Psi(0) \\
     & \leq \epsilon^2 \kappa (\norm{{\mathbf{u}_h}_0}_{H^1}, \Gamma_G) (\norm{{\mathbf{u}_h}_0}_2^2 + \epsilon^2 \norm{{u_3}_0}_2^2 + 1)^2,
   \end{split}
 \end{equation}
-
+%
 which concludes the proof.
   
 \end{proof}
@@ -866,15 +865,15 @@ which concludes the proof.
 Thus, we now have
 
 $$ (\norm{\mathbf{U}_h^\epsilon}_2^2 + \epsilon^2 \norm{U_3^\epsilon}_2^2)(t) + \int_0^t (\norm{\nabla \mathbf{U}_h^\epsilon}_2^2 + \epsilon^2 \norm{\nabla U_3^\epsilon}_2^2) \diff s \leq \epsilon^2 \kappa,$$
-
+%
 where the $\kappa$ constant only depends on the domain structure and the initial data. With this we arrive to the strong convergence result $$\nabla \mathbf{U}_h^\epsilon \to 0 \text{ in } L^2_t L^2_x,$$ and as a direct consequence, we have $$\nabla \mathbf{u}_h^\epsilon \to \nabla \mathbf{u}_h \text{ in } L^2_t L^2_x$$ as well. Using the relation between the horizontal and vertical velocity functions through the divergence-free condition, we immediately obtain $$\partial_3 u_3^\epsilon \to \partial_3 u_3 \text{ in } L^2_t L^2_x,$$ and using the vertical Poincar\'e inequality eventually we deduce that
 
 \begin{equation}\label{strongconvresultu3}u_3^\epsilon \to u_3 \text{ strongly in } L^2_t L^2_x.\end{equation}
 
 This has been the last missing part of the proof of the main theorem, since combining the weak convergence result ($\ref{WeakConvCEps1}$) for $c^\epsilon$ and the strong convergence ($\ref{strongconvresultu3}$) of $u_3^\epsilon,$ we are finally able to state that
-
+%
 \begin{equation}c^\epsilon u_3^\epsilon \rightharpoonup c u_3 \text{ weakly in } L_t^2 L_x^2,\end{equation}
-
+%
 and we can conclude the proof of Theorem $\ref{maintheoremWEAK}$.
 
 %%% STRONG SOLUTIONS %%%
@@ -903,39 +902,39 @@ Let's consider $\Omega_0 = M \times (-h, 0)$ with $M = (0,1) \times (0,1)$ over 
 Defining a new concentration function $c^*$ by setting $c^* = c + \frac{z}{h},$ we obtain a function that is zero on both the upper and lower boundary of the domain. This enables us to consider the standard extensions (see also \cite{li2019primitive}) of the horizontal velocity, vertical velocity, pressure and concentration functions to the new $\Omega = M \times (-h, h)$ domain by requiring these functions to be even, odd, even and odd in $z$, respectively, and set the domain to be periodic in all three dimensions.
 
 Applying these ideas to the original concentration dynamics equations (\ref{ANSC5}) and (\ref{HNSC5}), we obtain that
-
+%
 \begin{equation} \label{HNSC5_strong_cshift}
   \begin{split}
     \partial_t c + \mathbf{u}_h \cdot \nabla_h c + u_3 \bigg ( \partial_3 c - \frac{1}{h} \bigg ) = \Delta_d c + s \text{ in } \Omega \times (0,T)
   \end{split}
 \end{equation}
-
+%
 is the new form of the hydrostatic concentration equation, while the governing equation for the anisotropic case becomes
     
 \begin{equation} \label{ANSC5_strong_cshift}
     \partial_t c^\epsilon + \mathbf{u}_h^\epsilon \cdot \nabla_h c^\epsilon + u_3^\epsilon \bigg ( \partial_3 c^\epsilon - \frac{1}{h} \bigg )= \epsilon K_1 \partial_{11} ^ 2 c^\epsilon + \Delta_d c^\epsilon + s^\epsilon \text{ in } \Omega \times (0,T),
 \end{equation}
-    
+%
 where after using $c = c^* - \frac{z}{h},$ and $c^\epsilon = {c^\epsilon}^* - \frac{z}{h} $ we returned to the original $c$ and $c^\epsilon$ notations for simplicity.
 
 In terms of boundary conditions now the (\ref{ANSC1})--(\ref{ANSC4}), (\ref{ANSC5_strong_cshift}), (\ref{ANSC_init}) anisotropic system the and (\ref{HNSC1})--(\ref{HNSC4}), (\ref{HNSC5_strong_cshift}), (\ref{HNSC_init}) hydrostatic system are combined with the
-
+%
 \begin{equation} \label{ANSC7-strong}
   \begin{split}
     & \mathbf{u}^\epsilon, p^\epsilon \text{ and } c^\epsilon \text{ are periodic in } x,y,z, \\
     & \mathbf{u}_h^\epsilon \text{ and } p^\epsilon \text{ are even in $z$}, \text{ and } u_3^\epsilon \text{ and } c^\epsilon \text{ are odd in $z$}
   \end{split}
 \end{equation}
-
+%
 and
-
+%
 \begin{equation} \label{HNSC7-strong}
   \begin{split}
     & \mathbf{u}, p \text{ and } c \text{ are periodic in } x,y,z \\
     & \mathbf{u}_h \text{ and } p \text{ are even in $z$}, \text{ and } u_3 \text{ and } c \text{ are odd in $z$}
   \end{split}
 \end{equation}
-
+%
 boundary conditions, respectively.
 
 It is easy to check that the restriction of a solution to (\ref{ANSC1})--(\ref{ANSC4}), (\ref{ANSC5_strong_cshift}), (\ref{ANSC_init}), (\ref{ANSC7-strong}) from $\Omega$ to $\Omega_0$ is a solution to the original system, and the analogous statement holds for the hydrostatic equations, hence here we exclusively focus on the study of these new versions of the two main systems.
@@ -958,29 +957,29 @@ The main result of this section describing the strong solutions is analogous to 
 
 \begin{theorem} \label{existenceconcentrationSTRONG}
 Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0$, let $c_0 \in H^2 (\Omega),$ and let's assume that the boundary conditions (\ref{HNSC7-strong}) hold. Then there exists a unique global strong solution $(\mathbf{u}, c)$ of the downwind-matching hydrostatic polluted atmosphere limit model (\ref{HNSC1})--(\ref{HNSC4}), (\ref{HNSC5_strong_cshift}), (\ref{HNSC_init}). Specifically, the concentration function $c$ satisfies
-
+%
     \begin{equation} \label{regularity_c_first}
       c \in L^\infty([0, \infty), H^2(\Omega)) \text{ and } \nabla_d c \in L^2_{loc}([0, \infty), H^2(\Omega)),
     \end{equation}
-    
+%
     and
-    
+%
     \begin{equation}
       \partial_t c \in L^2_{loc}([0, \infty), H^1(\Omega)),
     \end{equation}
-    
+%
     while the horizontal velocity strong solution $\mathbf{u}_h$ has the regularities
-    
+%
     \begin{equation} \label{u_regularities_first}
       \mathbf{u}_h \in L^\infty([0, \infty), H^3(\Omega)) \cap L^2_{loc}([0, \infty), H^4(\Omega))
     \end{equation}
-    
+%
     and
-    
+%
     \begin{equation} \label{u_regularities_second}
       \partial_t \mathbf{u}_h \in L^2_{loc}([0, \infty), H^2(\Omega)).
     \end{equation}
-    
+%
 \end{theorem}
 
 We provide the proof of Theorem \ref{existenceconcentrationSTRONG} in the appendix of this article.
@@ -1010,17 +1009,17 @@ The first part of the proof concerns exclusively the velocity functions, and it 
   \item There exist $\mathbf{u}^\epsilon$ and $\mathbf{u}$ unique global strong solutions for the anisotropic and hydrostatic velocity systems respectively, assuming $\epsilon < \epsilon_0$ and ${\mathbf{u}_h}_0 \in H^3(\Omega).$
   
   Specifically, for ${\mathbf{u}_h}_0 \in H^3(\Omega),$ the horizontal velocity strong solution $\mathbf{u}_h$ satisfies
-    
+%
     \begin{equation} \label{u_regularities_first}
       \mathbf{u}_h \in L^\infty([0, \infty), H^3(\Omega)) \cap L^2_{loc}([0, \infty), H^4(\Omega))
     \end{equation}
-    
+%
     and
-    
+%
     \begin{equation} \label{u_regularities_second}
       \partial_t \mathbf{u}_h \in L^2_{loc}([0, \infty), H^2(\Omega)).
     \end{equation}
-    
+%
   \item We also mention that for an ${\mathbf{u}_h}_0 \in H^3(\Omega)$ initial data the velocity difference functions (\ref{velocitydifferencefunctions}) satisfy
   
   \begin{equation} \label{UdifferenceEstimate}
@@ -1063,7 +1062,7 @@ We reformulate $\mathbf{u}^\epsilon \cdot \nabla c^\epsilon - \mathbf{u} \cdot \
 \end{equation}
 
 Multiplying (\ref{governCepsilon}) by $- \partial_{ii} C^\epsilon, i=1,2,3$ we obtain
-
+%
 \begin{equation}
   \begin{split}
       & \frac{1}{2}\frac{\diff}{\diff t} \norm{\nabla C^\epsilon}_2^2 + \epsilon K_1 \norm{\partial_{11} C^\epsilon}_2^2 + K_2 \norm{\partial_{22} C^\epsilon}_2^2 + K_3 \norm{\partial_{33} C^\epsilon}_2^2 + \sum_{i \neq j} C_{ij} \norm{\partial_{ij} C^\epsilon}_2^2 \\
@@ -1072,7 +1071,7 @@ Multiplying (\ref{governCepsilon}) by $- \partial_{ii} C^\epsilon, i=1,2,3$ we o
       & = \sum_{i = 1,2,3} I_1(i)  + I_2(i) + I_3(i) + I_4(i) + I_5(i) + I_6(i),
   \end{split}
 \end{equation}
-
+%
 for any $1 \leq j \leq 3.$
 
 In the following we estimate the terms on the right-hand side one by one. The separation to indices $i = 1,2,3$ and the following individual construction of the upper bounds is necessary since the full, $\epsilon$-free Laplacian is missing from the left-hand side, and this forces us to change the standard uniform approach and consider some of the integral terms on their own.
@@ -1092,9 +1091,9 @@ We begin by taking $i=1.$
 \end{equation}
 
 Firstly we estimate $I_1(1)(a).$ Integration by parts gives
-
+%
 $$\int_\Omega U_1^\epsilon \partial_1 C^\epsilon \partial_{11} C^\epsilon = - \frac{1}{2} \int_\Omega \partial_1 U_1^\epsilon (\partial_1 C^\epsilon)^2,$$
-
+%
 thus using the H\"older inequality we obtain
 
 \begin{equation}
@@ -1153,7 +1152,7 @@ Finally to estimate $I_1(i)$ for $i = 2,3$ we can simply use
 \textbf{Estimate for $I_2(i), i=1,2,3.$}
 
 By using the H\"older and Young inequalities, for $i = 1$ we obtain
-
+%
 \begin{equation} \label{cH2normappears}
   \begin{split}
     & I_2(1) = \int_\Omega \mathbf{U}^\epsilon \nabla c \partial_{11} C^\epsilon = -\int_\Omega \partial_1 \mathbf{U}^\epsilon \nabla c \partial_1 C^\epsilon - \int_\Omega \mathbf{U}^\epsilon \nabla \partial_1 c \partial_1 C^\epsilon \\
@@ -1162,16 +1161,16 @@ By using the H\"older and Young inequalities, for $i = 1$ we obtain
     & \lesssim \|  \mathbf{U}_h^\epsilon \|_{H^3} \norm{c}_{H^2} \norm{\partial_1 C^\epsilon}_2 \lesssim \|  \mathbf{U}_h^\epsilon \|_{H^3}^2 + \norm{c}_{H^2}^2 \norm{\nabla C^\epsilon}_2^2,
   \end{split}
 \end{equation}
-
+%
 while $I_2(i), i = 2,3$ can be estimated by
-
+%
 \begin{equation}
   \begin{split}
   & I_2(2) + I_2(3) = \sum_{i=2,3} \int_\Omega \mathbf{U}^\epsilon \nabla c \partial_{ii} C^\epsilon \leq \sum_{i=2,3} \norm{\mathbf{U}^\epsilon}_{L^\infty} \norm{\nabla c}_2 \norm{\partial_{ii} C^\epsilon}_2 \\
   & \leq \sum_{i=2,3} \zeta \norm{\partial_{ii} C^\epsilon}_2^2 + \kappa \frac{1}{\zeta} \norm{\mathbf{U}_h^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2.
   \end{split}
 \end{equation}
-
+%
 Note that the regularities (\ref{regularity_c_first}) listed in Theorem \ref{existenceconcentrationSTRONG} guarantee that the appearance of $\norm{c}_{H^2}^2$ in (\ref{cH2normappears}) is not problematic concerning further estimates.
 
 \bigskip
@@ -1199,14 +1198,14 @@ Note that thanks to (\ref{u_regularities_first}) the $\norm{\nabla C^\epsilon}_2
 \textbf{Estimate for $I_4(i), i = 1,2,3.$}
 
 In this case we do not need to separate the case $i=1$ from $i=2,3,$ and we can use the general estimate
-
+%
 \begin{equation}
   \begin{split}
     & I_4(i) = \epsilon K_1 \int_\Omega \partial_{11} c \partial_{ii} C^\epsilon \lesssim \epsilon \norm{\partial_{11} c}_2 \norm{\partial_{ii} C^\epsilon}_2 \\
     & \lesssim \epsilon \zeta \norm{\partial_{ii} C^\epsilon}_2^2 + \frac{1}{\zeta}\epsilon \norm{\partial_{11} c}_2^2
   \end{split}
 \end{equation}
-
+%
 for all $i =1,2,3.$ Since here we do have an $\epsilon$ in front of the Laplacian $ \norm{\partial_{ii} C^\epsilon}_2^2,$ it can be merged into the left-hand side later even for $i = 1.$
 
 \bigskip
@@ -1214,7 +1213,7 @@ for all $i =1,2,3.$ Since here we do have an $\epsilon$ in front of the Laplacia
 \textbf{Estimate for $I_5 (i), i = 1,2,3.$}
 
 For all $i = 1,2,3$ values we have
-
+%
 \begin{equation}
   \begin{split}
     & - \int_\Omega S^\epsilon \partial_{ii} C^\epsilon = - \int_\Omega (s^\epsilon - s) \partial_{ii} C^\epsilon  = - \int_\Omega \big ( (\delta^\epsilon - \delta ) \ast \varphi \big ) \cdot \partial_{ii} C^\epsilon \\
@@ -1223,7 +1222,7 @@ For all $i = 1,2,3$ values we have
     & \lesssim \int_\Omega \bigg ( (\delta^\epsilon - \delta ) \ast \partial_i \varphi \bigg ) ^2 \diff x + \norm{\nabla C^\epsilon}_2^2 \lesssim \epsilon^2 + \norm{\nabla C^\epsilon}_2^2,
   \end{split}
 \end{equation}
-
+%
 where we have used the properties of $\delta^\epsilon$ and $\delta.$
 
 \bigskip
@@ -1241,7 +1240,7 @@ Integration by parts combined with the H\"older and Young inequalities easily gi
 \bigskip
 
 Summarising the previously obtained six estimates for $I_1$ -- $I_6$ and merging the second order concentration terms into the left-hand side (note that it is indeed possible to do so as we have constructed the bounds in a way that $\partial_{11} C^\epsilon$ is only present with an $\epsilon$ multiplier), we eventually have
-
+%
 \begin{equation}
   \begin{split}
     & \frac{1}{2} \frac{\diff}{\diff t} \norm{\nabla C^\epsilon}_2^2 + \epsilon K_1 \norm{\partial_{11} C^\epsilon}_2^2 + K_2 \norm{\partial_{22} C^\epsilon}_2^2 + K_3 \norm{\partial_{33} C^\epsilon}_2^2 + \sum_{i \neq j} C_{ij} \norm{\partial_{ij} C^\epsilon}_2^2 \\
@@ -1250,22 +1249,22 @@ Summarising the previously obtained six estimates for $I_1$ -- $I_6$ and merging
     & = A(t)  \norm{\nabla C^\epsilon}_2^2 + B(t) \raisetag{40pt}
   \end{split}
 \end{equation}
-
+%
 for any $1 \leq j \leq 3.$
 
 Now taking into account (\ref{regularity_c_first}), (\ref{u_regularities_first}) and (\ref{UdifferenceEstimate}), we have that
-
+%
 \[ \int_0^T B(t) \diff \tau = \kappa \int_0^T \epsilon \norm{\partial_{11} c}_2^2 + \norm{\mathbf{U}_h^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2 + \norm{\mathbf{U}_h^\epsilon}_{H^3}^2 + \epsilon^2 \diff \tau \lesssim \epsilon + \epsilon^2 + \epsilon^2 T,\]
-
+%
 and
-
+%
 \begin{equation}
   \begin{split}
     & \int_0^T A(t) \diff \tau = \kappa \int_0^T \norm{\mathbf{U}_h^\epsilon}_{H^3} + \norm{\mathbf{u}_h}_{H^3} + \norm{\mathbf{U}_h^\epsilon}_{H^3}^2 + \norm{\mathbf{u}_h}_{H^3}^2 + \norm{c}_{H^2}^2 + 1 \diff \tau \\
     & \lesssim \sqrt{T} + 1 + T.
   \end{split}
 \end{equation}
-
+%
 Keeping in mind that $C^\epsilon(0) = 0,$ eventually the Gr\"onwall inequality yields
 
 \begin{equation} \label{finalboundforCepsilon}
@@ -1278,11 +1277,11 @@ Keeping in mind that $C^\epsilon(0) = 0,$ eventually the Gr\"onwall inequality y
 Here we highlight an important structural difference in the (\ref{finalboundforCepsilon}) final estimate compared to that in \cite{li2019primitive} (for example Proposition 5.3): the time uniformity of the bound is not preserved for our extended, concentration-including version of the modelling equations. The estimate provides a meaningful bound for any arbitrarily big finite point in time, but the estimate's time-dependence also means that the convergence gets slower as time evolves. Note also that (\ref{finalboundforCepsilon}) implies the global existence of $c^\epsilon,$ as it suggests that $C^\epsilon$ can be continued from any arbitrary finite $T^* > 0$ time.
 
 Finally we conclude that for any given time $T > 0$ we have the global strong convergence results
-
+%
 \begin{equation} \label{finalstrongconvresultC}
 c^\epsilon \to c \text{ in } L_t^\infty H_x^1 \text{ and } \nabla_d c^\epsilon \to \nabla_d c \text{ in } L_t^2 H_x^1,
 \end{equation}
-
+%
 moreover the rate of convergence is $\epsilon.$
 
 Combining the velocity convergence results (\ref{StrongConvVelocity1})--(\ref{StrongConvVelocity3}) with the (\ref{finalstrongconvresultC}) concentration convergence obtained above completes the proof.
@@ -1317,18 +1316,18 @@ As far as local existence is concerned, the proof given in sections 2 and 3 in \
   \end{equation}
   
   On the other hand, we define a modified version of the convection-diffusion equation (\ref{HNSC5_strong_cshift}) by completing the missing term in the Laplacian adding the term $\mu \partial_{11} c$ with $\mu > 0$; specifically, the set of  equations takes the form
-  
+%
   \begin{equation} \label{existenceeqs1}
     \begin{split}
     \partial_t \mathbf{u}_h + \Delta_\nu \mathbf{u}_h + & (\mathbf{u}_h \cdot \nabla_h) \mathbf{u}_h - \bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h (x, y, \xi, t) \diff \xi \bigg ) \partial_3 \mathbf{u}_h \\
     & + f_0 k \times \mathbf{u}_h + \nabla_h p_s (x,y,t) = 0,
     \end{split}
   \end{equation}
-  
+%
   \begin{equation} \label{existenceeqs2}
     \nabla_h \cdot \bar{\mathbf{u}}_h = 0,
   \end{equation}
-  
+%
   \begin{equation} \label{existenceeqs3}
     \begin{split}
       \partial_t c+ \mathbf{u}_h \cdot \nabla_h c + \bigg ( - & \int_{-h}^z \nabla_h \cdot \mathbf{u}_h (x, y, \xi, t) \diff \xi \bigg ) \cdot \bigg (\partial_3 c - \frac{1}{h} \bigg ) \\
@@ -1339,9 +1338,9 @@ As far as local existence is concerned, the proof given in sections 2 and 3 in \
   Here $\bar{\mathbf{u}}_h$ is the vertically averaged version of the function, i.e. $$\frac{1}{2h} \int_{-h}^h \mathbf{u}_h (x,y,z) \diff z,$$ and $p_s$ is the classical notation for a pressure function depending on only the horizontal variables. Fore more details of this standard reformulation process see for example \cite{cao2014local} and \cite{cao2007global}.
   
   \item Using the contractive mapping principle, we can prove that for any fix positive $\mu$ value there exist local strong solutions $\mathbf{u}_h^\mu$ and $c^\mu$ to the modified system (\ref{existenceeqs1}) -- (\ref{existenceeqs3}) on $\Omega \times (0, t_\mu)$ such that
-  
+
   \[ (\mathbf{u}_h^\mu, c^\mu) \in L^2 (0, t^\mu; H^3(\Omega)), \quad (\partial_t \mathbf{u}_h^\mu, \partial_t c^\mu) \in L^2 (0, t^\mu; H^1 (\Omega)), \]
-  
+%
   where $t^\mu$ depends only on $\Omega, \mu, $ the initial data, and the viscosity and diffusivity constants.
   
   \item We derive the existence of the unique local strong solution $\mathbf{u}_h, c$ of the limit system as the strong limit of the sequences $\mathbf{u}_h^\mu, c^\mu,$ having the parameter $\mu$ tend to zero. In more detail, we establish uniform in $\mu$ estimates for $\mathbf{u}_h^\mu, c^\mu$ and we construct $\mu-$ independent lower bounds for the existence time $t_0$. These estimates combined with a version of the Aubin-Lions lemma yield
@@ -1349,9 +1348,9 @@ As far as local existence is concerned, the proof given in sections 2 and 3 in \
   \begin{equation}
     (\mathbf{u}_h^{\mu_j}, c^{\mu_j}) \to (\mathbf{u}_h, c) \text{ in } C(0, t_0; H^1(\Omega)),
   \end{equation}
-  
+%
   and
-  
+%
   \begin{equation}
     \mathbf{u}_h^{\mu_j} \to \mathbf{u}_h \text{ in } L^2(0, t_0; H^2(\Omega)), \quad \nabla_d c^{\mu_j} \to \nabla_d c \text{ in } L^2(0, t_0; H^1(\Omega)).
   \end{equation}
@@ -1403,7 +1402,7 @@ In the following we construct an estimate for each term on the right-hand side.
   Finally the third term in the right-hand side of (\ref{firstformboundc}) can be separated as
   
   $$\int_\Omega \Delta \bigg ( \bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \bigg ( \partial_3 c - \frac{1}{h}\bigg) \bigg ) \cdot \Delta c = I_1 + I_2 + I_3,$$
-  
+%
   and by the H\"older and Young inequalities we have
 
 \begin{equation} \label{term3estimateGE_1}
@@ -1420,7 +1419,7 @@ In the following we construct an estimate for each term on the right-hand side.
     & \lesssim \norm{\mathbf{u}_h}_{H^3} \norm{\Delta c}_2 + \norm{c}_{L^\infty} \norm{\mathbf{u}_h}_{H^3}^2 + \norm{c}_{L^\infty} \norm{\Delta c}_2^2 + \kappa(\zeta) \norm{c}_{L^\infty}^2 \norm{\mathbf{u}_h}_{H^3}^2 + \zeta \norm{\Delta \partial_3 c}_2^2, \raisetag{60pt} \\
   \end{split}
 \end{equation}
-
+%
 where $ \zeta \norm{\Delta \partial_3 c}_2^2$ is merged into the left-hand side of (\ref{firstformboundc}).
 
 For the second part we obtain
@@ -1432,9 +1431,9 @@ For the second part we obtain
     & \lesssim \int_\Omega h \sup \abs{\nabla \nabla_h \cdot \mathbf{u}_h} \abs{\nabla \partial_3 c} \abs{\Delta c} \lesssim \norm{\mathbf{u}_h}_{H^4} \norm{\Delta c}_2^2,
   \end{split}
 \end{equation}
-
+%
 while for the third term we compute
-
+%
 \begin{equation} \label{term3estimateGE_3}
   \begin{split}
     & I_3 = \int_\Omega \bigg ( \int_{-h}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \Delta \partial_3 c  \cdot \Delta c \leq \int_\Omega \bigg ( \int_{-h}^0 \abs{\nabla_h \cdot \mathbf{u}_h} \diff \xi \bigg)  \abs{\Delta \partial_3 c} \abs{\Delta c}\\
@@ -1468,9 +1467,9 @@ Now we are ready to utilise the Gr\"onwall inequality, provided the multiplicati
     & \lesssim (T + T\norm{\mathbf{u}_h}_{L^\infty_t H^3_x} + T \norm{\mathbf{u}_h}_{L^\infty_t H^3_x}^2 + \norm{\mathbf{u}_h}_{L^2_t H^4_x}  +  T^2) : = G_1,
   \end{split}
 \end{equation}
-
+%
 moreover we derive
-
+%
 \begin{equation} \label{gronwall_add}
   \begin{split}
     & \int_0^T \norm{\Delta s}_2^2 + \norm{c}_{L^\infty} \norm{\mathbf{u}_h}_{H^3}^2 + \norm{c}_{L^\infty}^2 \norm{\mathbf{u}_h}_{H^3}^2 + \norm{\mathbf{u}_h}_{H^3} \diff t\\
