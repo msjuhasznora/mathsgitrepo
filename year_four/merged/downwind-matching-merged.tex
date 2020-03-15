@@ -154,7 +154,7 @@ Firstly, we consider the consequences of shallowness. Each of the scaling equati
   \end{split}
 \end{equation}
 
-Rigorously speaking, here we also use $K_x = K_1,$ but as the second step of the rescaling process focuses on this parameter, we keep the $K_x$ notation in the first step.
+Strictly speaking, here we also use $K_x = K_1,$ but as the second step of the rescaling process focuses on this parameter, we keep the $K_x$ notation in the first step.
 
 Now we are ready to take into account the effect of the coordinate choice itself. As diffusion is negligible compared to advection effects in the downwind direction, we have
 
@@ -163,6 +163,10 @@ Now we are ready to take into account the effect of the coordinate choice itself
 which leads us to introducing the new scaling identity
 
 \begin{equation} \label{ksepsk1} K_x = \epsilon K_1. \end{equation}
+
+\begin{remark}
+Rigorously speaking, technically we have two different small parameters in our model: the shallowness of the domain ($z = \epsilon_1 x_3$) and diffusion effects in the downwind direction ($K_x = \epsilon_2 K_1$). For simplicity we assume that these two vanishing parameters are the same, we use $\epsilon = \epsilon_1 = \epsilon_2.$
+\end{remark}
 
 Note that as an immediate result, we will have an extra $\epsilon$ term in the concentration equation's Laplacian.
 
@@ -432,7 +436,7 @@ for all $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T;\
 Now we are ready to state the main theorem of this section.
 
 \begin{theorem} \label{maintheoremWEAK}
-Let ${\mathbf{u}_h}_0$ $\in$ $H^1 (\Omega)$, ${u_3}_0 \in L^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 = 0$ on $\partial \Omega$; let $c_0 \in$ $L^2 (\Omega)$, $c_0 = 0$ on $ \partial \Omega$, and assume that the boundary conditions (\ref{ANSC_bc-weak}) hold; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1}) - (\ref{ANSC_init}) converges to a weak solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1}) - (\ref{HNSC_init}).
+Let ${\mathbf{u}_h}_0$ $\in$ $H^1 (\Omega)$, ${u_3}_0 \in L^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 = 0$ on $\partial \Omega$; let $c_0 \in$ $L^2 (\Omega)$, $c_0 = 0$ on $ \partial \Omega$, and assume that the boundary conditions (\ref{ANSC_bc-weak}) hold; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1}) - (\ref{ANSC_init}) converges weakly to a weak solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1}) - (\ref{HNSC_init}).
 \end{theorem}
 
 The statement of the main theorem of this first part of the paper is analogous to our previous result stated for the case of the geophysical frame, but we highlight the difference that here we use the initial data ${\mathbf{u}_h}_0 \in H^1,$ while for the case of the geophysical frame an $L^2$ initial velocity was sufficient.
