@@ -309,10 +309,10 @@ As a first step of this section, we extend the velocity system (\ref{originalEQ-
 The two most important concepts regarding contaminants emitted into the atmosphere are diffusion (the pollutant is mixed and dispersed by turbulent behaviour) and convection (the contaminant is transported by the wind). Thus, the dispersion of pollutants is commonly modelled by a continuity equation of the form
     
 \begin{equation} \label{diffusive}
-  \partial_t p_c + \mathbf{v} \cdot \nabla p_c = \nabla \cdot (\mathbf{K} \nabla p_c) + q \quad \text{ in } \Omega_0 \times (0,T),
+  \partial_t p_c + \mathbf{v} \cdot \nabla p_c = \nabla \cdot (\mathbf{K} \nabla p_c) + q_c \quad \text{ in } \Omega_0 \times (0,T),
 \end{equation}
 
-where $p_c$ is the pollution concentration and $\mathbf{K}$ is the $3 \times 3$ diffusion matrix --- the diagonal terms represent the strength of the diffusion in the $x, y, z$ directions, while the non-diagonal terms reflect the correlation of random motions between each pair of principal directions. Here $q$ represents the sources of the pollutant in the atmosphere i.e. its emission, removal from the atmosphere by dry and wet deposition, and chemical reactions.
+where $p_c$ is the pollution concentration and $\mathbf{K}$ is the $3 \times 3$ diffusion matrix --- the diagonal terms represent the strength of the diffusion in the $x, y, z$ directions, while the non-diagonal terms reflect the correlation of random motions between each pair of principal directions. Here $q_c$ represents the sources of the pollutant in the atmosphere i.e. its emission, removal from the atmosphere by dry and wet deposition, and chemical reactions.
 
 Now we are ready to introduce a concept which will be indispensable throughout the thesis. To motivate this, we remind that in Section \ref{3DNSgeneraldescription} we have defined a theoretically correct model describing phenomena in geophysical fluid dynamics, while in Section \ref{PEsgeneraldescription} we introduced the primitive equations. This latter system is significantly different from the general 3D incompressible Navier-Stokes equations, however it results to be highly accurate in modelling atmospheric motions in real-world applications. An important step in order to understand what connects these two models is to consider under what circumstances they are "close" to each other. It is not in any case acceptable to use the primitive equations instead of the complete Navier-Stokes equations: according to empirical observations in meteorology, the hydrostatic approximation works well principally for large-scale fluids.
 
@@ -357,7 +357,7 @@ More details on the subject can be found in \cite{besson1992some}, \cite{azerad2
 Finally we obtain the rescaling equations for the pollution concentration and the source term by considering their physical dimensions, namely: $\text{typical mass} / \text{typical volume},$ from which we deduce
 
 \begin{equation}\label{scaling_eq_c}
-  p_c = \frac{1}{\epsilon} c^\epsilon, \quad q = \frac{1}{\epsilon} s^\epsilon.
+  p_c = \frac{1}{\epsilon} c^\epsilon, \quad q_c = \frac{1}{\epsilon} s^\epsilon.
 \end{equation}
     
 Note that once the rescaling is enabled, afterwards we will use $\nabla = (\partial_1, \partial_2, \partial_3) $ and $ \Delta_\nu = \nu_1 \partial^2_{11} + \nu_2 \partial^2_{22}  + \nu_3 \partial^2_{33} $.
@@ -624,7 +624,11 @@ which leads us to introducing the new scaling identity
 
 \begin{equation} \label{ksepsk1} K_x = \epsilon K_1. \end{equation}
 
-Note that this latter equation is different in nature from the previous scaling equations: (\ref{ksepsk1})  is the effect of the coordinate choice itself, while the original scaling identities were motivated by the shallowness of the domain.
+\begin{remark}
+Rigorously speaking, technically we have two different small parameters in our model: the shallowness of the domain ($z = \epsilon_1 x_3$) and diffusion effects in the downwind direction ($K_x = \epsilon_2 K_1$). For simplicity we assume that these two vanishing parameters are the same, we use $\epsilon = \epsilon_1 = \epsilon_2.$
+\end{remark}
+
+Note that the latter equation is different in nature from the previous scaling equations: (\ref{ksepsk1}) is the effect of the coordinate choice itself, while the original scaling identities were motivated by the shallowness of the domain.
 
 In addition to (\ref{ksepsk1}) and the original scaling equations (\ref{scaling_eq_x}), (\ref{scaling_eq_vpnu}), (\ref{scaling_eq_c}) we finally define the following equation for the remaining diffusivity terms:
 
@@ -927,7 +931,7 @@ We will omit the proof of the existence of weak solutions (see Definition \ref{d
 Now we are ready to state our main result.
 
 \begin{theorem} \label{maintheorem_weak_GFC}
-Let $\mathbf{u}_0 \in L^2 (\Omega)$, with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 \cdot \mathbf{n} = 0$ on $\partial \Omega$; $\theta_h \in L^2(0,T; H^{-1/2}(\Gamma_G)),$ let $c_0 \in L^2 (\Omega)$, $c_0 = 0$ on $ \partial \Omega$, and assume that the boundary conditions (\ref{ANSC_bc_coordinates_GFC}) hold; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1_coordinates_GFC}) - (\ref{ANSC5_coordinates_GFC}) converges to a weak solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1_coordinates_GFC}) - (\ref{HNSC5_coordinates_GFC}).
+Let $\mathbf{u}_0 \in L^2 (\Omega)$, with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 \cdot \mathbf{n} = 0$ on $\partial \Omega$; $\theta_h \in L^2(0,T; H^{-1/2}(\Gamma_G)),$ let $c_0 \in L^2 (\Omega)$, $c_0 = 0$ on $ \partial \Omega$, and assume that the boundary conditions (\ref{ANSC_bc_coordinates_GFC}) hold; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1_coordinates_GFC}) - (\ref{ANSC5_coordinates_GFC}) converges weakly to a weak solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1_coordinates_GFC}) - (\ref{HNSC5_coordinates_GFC}).
 \end{theorem}
 
 %%% *** PROOF *** %%%
@@ -2395,7 +2399,7 @@ for all $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T;\
 Now we are ready to state the main theorem of this section.
 
 \begin{theorem} \label{maintheoremWEAK}
-Let ${\mathbf{u}_h}_0$ $\in$ $H^1 (\Omega)$, ${u_3}_0 \in L^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 = 0$ on $\partial \Omega$; let $c_0 \in$ $L^2 (\Omega)$, $c_0 = 0$ on $ \partial \Omega$, and assume that the boundary conditions (\ref{ANSC_bc-weak_coordinates_DWMC}) hold; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1_coordinates_DWMC}) - (\ref{ANSC5_coordinates_DWMC}), (\ref{ANSC_init_coordinates_DWMC}) converges to a weak solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1_coordinates_DWMC}) - (\ref{HNSC5_coordinates_DWMC}), (\ref{HNSC_init_coordinates_DWMC}).
+Let ${\mathbf{u}_h}_0$ $\in$ $H^1 (\Omega)$, ${u_3}_0 \in L^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 = 0$ on $\partial \Omega$; let $c_0 \in$ $L^2 (\Omega)$, $c_0 = 0$ on $ \partial \Omega$, and assume that the boundary conditions (\ref{ANSC_bc-weak_coordinates_DWMC}) hold; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1_coordinates_DWMC}) - (\ref{ANSC5_coordinates_DWMC}), (\ref{ANSC_init_coordinates_DWMC}) converges weakly to a weak solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1_coordinates_DWMC}) - (\ref{HNSC5_coordinates_DWMC}), (\ref{HNSC_init_coordinates_DWMC}).
 \end{theorem}
 
 The statement of the main weak convergence theorem of this chapter is analogous to our previous result stated for the case of the geophysical frame, but we highlight the difference that here we use the initial data ${\mathbf{u}_h}_0 \in H^1,$ while for the case of the geophysical frame an $L^2$ initial velocity was sufficient.
