@@ -34,3 +34,8 @@ class UnderwaterBoundary(SubDomain):
     def inside(self, x, on_boundary):
         tol = 1E-14
         return on_boundary and not near(x[1], 1.0, tol)
+        
+class AbovewaterBoundary(SubDomain):
+    def inside(self, x, on_boundary):
+        tol = 1E-14
+        return on_boundary and not near(x[1], 0.0, tol)

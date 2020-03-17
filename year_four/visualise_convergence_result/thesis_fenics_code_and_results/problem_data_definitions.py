@@ -8,9 +8,10 @@ lower_boundary = boundary_domains.LowerBoundary()
 left_boundary = boundary_domains.LeftBoundary()
 right_boundary = boundary_domains.RightBoundary()
 underwater_boundary = boundary_domains.UnderwaterBoundary()
+abovewater_boundary = boundary_domains.AbovewaterBoundary()
 
 class ProblemData(UserExpression):
-    def __init__(self, id, u1_exact, u3_exact, p_exact, f1, f3, c_exact, theta, bcu_list, bcc_list, c_source):
+    def __init__(self, id, u1_exact, u3_exact, p_exact, f1, f3, c_exact, theta, bcu_list, bcc_list, c_source, domaincase):
         self.id = id
         self.u1_exact = u1_exact
         self.u3_exact = u3_exact
@@ -22,6 +23,7 @@ class ProblemData(UserExpression):
         self.bcu_list = bcu_list
         self.bcc_list = bcc_list
         self.c_source = c_source
+        self.domaincase = domaincase
 
 # for the symbolic computations providing the forcing terms using the exact solutions we use sympy-1.4: Documents/sympy-1.4/examples/beginner/differentiation.py
 
@@ -49,7 +51,9 @@ def c_source(eps, x):
     source_instance = (1/(2 * pi)) * (eps / ( (x[0] - 0.5)**2 + (x[1] - 0.5)**2 + eps**2 )**(1.5) )
     return source_instance
 
-problem_data0 = ProblemData(id, u1_exact, u3_exact, p_exact, f1, f3, c_exact, theta, bcu_list, bcc_list, c_source)
+domaincase = "ocean"
+
+problem_data0 = ProblemData(id, u1_exact, u3_exact, p_exact, f1, f3, c_exact, theta, bcu_list, bcc_list, c_source, domaincase)
 
 # PROBLEM 1
 id = 1
@@ -70,7 +74,9 @@ def c_source(eps, x):
     source_instance = Constant(0.0)
     return source_instance
 
-problem_data1 = ProblemData(id, u1_exact, u3_exact, p_exact, f1, f3, c_exact, theta, bcu_list, bcc_list, c_source)
+domaincase = "ocean"
+
+problem_data1 = ProblemData(id, u1_exact, u3_exact, p_exact, f1, f3, c_exact, theta, bcu_list, bcc_list, c_source, domaincase)
 
 # PROBLEM 2
 id = 2
@@ -91,7 +97,9 @@ def c_source(eps, x):
     source_instance = 2*x[0]*(1-x[0]) + 2*x[1]*(1-x[1])
     return source_instance
 
-problem_data2 = ProblemData(id, u1_exact, u3_exact, p_exact, f1, f3, c_exact, theta, bcu_list, bcc_list, c_source)
+domaincase = "ocean"
+
+problem_data2 = ProblemData(id, u1_exact, u3_exact, p_exact, f1, f3, c_exact, theta, bcu_list, bcc_list, c_source, domaincase)
 
 # PROBLEM 3
 id = 3
@@ -117,7 +125,9 @@ def c_source(eps, x):
     source_instance = 2*x[0]*(-x[0] + 1) + x[0]*(-x[0]*x[1]*(-x[1] + 1) + x[1]*(-x[0] + 1)*(-x[1] + 1)) + 2*x[1]*(-x[1] + 1) - x[1]*(-x[0]*x[1]*(-x[0] + 1) + x[0]*(-x[0] + 1)*(-x[1] + 1))
     return source_instance
 
-problem_data3 = ProblemData(id, u1_exact, u3_exact, p_exact, f1, f3, c_exact, theta, bcu_list, bcc_list, c_source)
+domaincase = "ocean"
+
+problem_data3 = ProblemData(id, u1_exact, u3_exact, p_exact, f1, f3, c_exact, theta, bcu_list, bcc_list, c_source, domaincase)
 
 # PROBLEM 4
 id = 4
@@ -141,4 +151,6 @@ def c_source(eps, x):
     source_instance = 8*pi**2*(-x[0] + 1)*(-x[1] + 1)*sin(2*pi*x[0])*sin(2*pi*x[1]) + 4*pi*(-x[0] + 1)*sin(2*pi*x[0])*cos(2*pi*x[1]) + 4*pi*(-x[1] + 1)*sin(2*pi*x[1])*cos(2*pi*x[0]) - (2*pi*(-x[0] + 1)*(-x[1] + 1)*sin(2*pi*x[0])*cos(2*pi*x[1]) - (-x[0] + 1)*sin(2*pi*x[0])*sin(2*pi*x[1]))*sin(2*pi*x[1])*cos(2*pi*x[0]) + (2*pi*(-x[0] + 1)*(-x[1] + 1)*sin(2*pi*x[1])*cos(2*pi*x[0]) - (-x[1] + 1)*sin(2*pi*x[0])*sin(2*pi*x[1]))*sin(2*pi*x[0])*cos(2*pi*x[1])
     return source_instance
 
-problem_data4 = ProblemData(id, u1_exact, u3_exact, p_exact, f1, f3, c_exact, theta, bcu_list, bcc_list, c_source)
+domaincase = "ocean"
+
+problem_data4 = ProblemData(id, u1_exact, u3_exact, p_exact, f1, f3, c_exact, theta, bcu_list, bcc_list, c_source, domaincase)

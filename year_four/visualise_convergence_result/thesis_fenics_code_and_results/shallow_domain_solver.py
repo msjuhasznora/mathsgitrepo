@@ -9,10 +9,15 @@ def run(a_h_switch, VP, up_, eps, vertical_velocity_degree, mesh, bcu, foldermar
 
     nr_cells = mesh.num_cells()
 
-    upperboundary = boundary_domains.UpperBoundary()
     boundaries = MeshFunction("size_t", mesh, mesh.topology().dim() - 1)
     boundaries.set_all(0)
-    upperboundary.mark(boundaries, 1)
+    if problem_data.domaincase == "atmosphere":
+        lowerboundary = boundary_domains.LowerBoundary()
+        lowerboundary.mark(boundaries, 1)
+    if problem_data.domaincase == "ocean":
+        upperboundary = boundary_domains.UpperBoundary()
+        upperboundary.mark(boundaries, 1)
+    
     ds = Measure('ds')(subdomain_data = boundaries)
 
     up = TrialFunction(VP)
