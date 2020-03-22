@@ -177,7 +177,7 @@ The mathematical equations describing the motion of geophysical fluids such as o
   \rho = f(\tau, q)  \quad \text{ in } \Omega_0 \times (0,T).
 \end{equation}
 
-Here $\mathbf{v}$ is the velocity function, $\rho$ is the density, $\nu = (\nu_1, \nu_2, \nu_3)$ represents the viscosity constants, and $q$ denotes the pressure. In the heat flow equation $\tau$ is the temperature, $Q$ represents the rate per unit volume of internal heat production, $k$ denotes thermal diffusivity, while the the heat capacity per unit volume, $\rho C_\rho$, is assumed to be constant.
+Here $\mathbf{v}$ is the velocity function, $\rho$ is the density, $\nu = (\nu_1, \nu_2, \nu_3)$ represents the viscosity constants, and $q$ denotes the pressure. In the heat flow equation $\tau$ is the temperature, $Q$ represents the rate per unit volume of internal heat production, $k$ denotes thermal diffusivity, while the heat capacity per unit volume, $\rho C_\rho$, is assumed to be constant.
 For the moment being, we simply consider an open, bounded Lipschitzian domain $\Omega_0$ in $\mathbb{R}^3$ and for a given time $T$ a time interval $[0,T).$
 
 We complete equations (\ref{original_general_mass_cons})--(\ref{equation_of_state}) with four other important concepts: the Coriolis force, the so-called Boussinesq approximation, the notion of an isothermal process, and the incompressibility condition.
@@ -332,13 +332,13 @@ Now we are ready to move on from the original, generic $\Omega_0$ set to the fol
   \Omega_{\epsilon} = \{(x,y,z) \in \mathbb{R}^3 ; (x,y) \in M, 0 < z < \epsilon a(x,y) \},
 \end{equation}
 
-where $M$ is a Lipschitz-domain in $\mathbb{R}^2$, $h$ is a nonnegative Lipschitz-continuous function.
+where $M$ is a Lipschitz-domain in $\mathbb{R}^2$, $a$ is a nonnegative Lipschitz-continuous function.
 
 From (\ref{OmegaEps}) we have a clear initial idea of how exactly the shallowness parameter is present in the model, note however that the inclusion of $\epsilon$ is still rather deeply nested --- at this point it is difficult to see its practical effects on the model parameters and solution functions. Hence, our next step is to transplant $\epsilon$ within the model so that it is included in a more explicit and visible way. In order to achieve this, we perform a vertical scaling:
 
 \begin{equation}\label{scaling_eq_x}x=x_1, \quad y=x_2, \quad z=\epsilon x_3.\end{equation}
 
-As a result, $\epsilon$ will be included in the model on the level of equations (the upcoming sections will show this in detail), while the domain itself will be independent from the shallowness parameter:
+As a result, $\epsilon$ will be included in the model on the level of equations (the upcoming sections will show this in detail), while the domain itself will be independent of the shallowness parameter:
 
 \begin{equation} \Omega =  \{(x_1,x_2,x_3) \in \mathbb{R}^3 ; (x_1,x_2) \in M, 0 < x_3 < a (x_1 , x_2) \}.\end{equation}
     
@@ -367,7 +367,7 @@ In the next two sections we consider two different coordinate choices, and withi
 %%% GEOPHYSICAL COORDINATES %%%
 \subsection{The polluted atmosphere model in geophysical coordinates} \label{eqsdescribingatmpluspollution_gfc}
 
-Our first step is the orientation of the coordinate system. Here we set the axes to be independent from the wind direction: $x, y$ and $z$ are oriented towards east, north, and upwards, respectively. The coordinate system we obtain this way is the so-called geophysical coordinate system. This is a widely used coordinate system choice because in this specific system the rotation vector, and as a consequence, the Coriolis force takes a simpler form.
+Our first step is the orientation of the coordinate system. Here we set the axes to be independent of the wind direction: $x, y$ and $z$ are oriented towards east, north, and upwards, respectively. The coordinate system we obtain this way is the so-called geophysical coordinate system. This is a widely used coordinate system choice because in this specific system the rotation vector, and as a consequence, the Coriolis force takes a simpler form.
     
 To complete the scaling process, we combine equations (\ref{scaling_eq_x}), (\ref{scaling_eq_vpnu}), (\ref{scaling_eq_c}) with an equation for the diffusivity constants in (\ref{diffusive}). We use a rescaling methodology analogous to that applied to the viscosity terms:
     
@@ -397,7 +397,7 @@ Here we emphasise that the diffusivity matrix $\mathbf{M}$ is assumed to have th
   \lambda \norm{\mathbf{x}}^2 \leq (\mathbf{M} \mathbf{x}, \mathbf{x})
 \end{equation}
 
-for all $\mathbf{x} \in \mathbb{R}^3$ with the coercivity constant $\lambda > 0,$ where $\lambda$ is independent from $\epsilon.$ In other words we require that $\lambda = \min {\lambda_i} > 0$ where $\lambda_i$ are the eigenvalues of $\mathbf{M}.$
+for all $\mathbf{x} \in \mathbb{R}^3$ with the coercivity constant $\lambda > 0,$ where $\lambda$ is independent of $\epsilon.$ In other words we require that $\lambda = \min {\lambda_i} > 0$ where $\lambda_i$ are the eigenvalues of $\mathbf{M}.$
 
 Note that we do not assume the air to be homogeneous, but for completeness we highlight that the specific case of homogeneous air corresponds to $\mathbf{K}$ taking the form
 
@@ -573,11 +573,11 @@ Note that we have a domain where the lower and upper boundaries represent a phys
 If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and $\epsilon$ in the anisotropic equations, we formally arrive to the following hydrostatic Navier-Stokes equations (i.e., primitive equations) combined with pollution:
 
 \begin{equation} \label{HNSC1_coordinates_GFC_intro}    
-  \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\alpha u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T)
+  \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 - \alpha u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
 
 \begin{equation} \label{HNSC2_coordinates_GFC_intro}   
-  \partial_t u_2 + \mathbf{u} \cdot \nabla u_2 - \Delta_\nu u_2 -\alpha u_1 + \partial_2 p = 0 \text{ in } \Omega \times (0,T)
+  \partial_t u_2 + \mathbf{u} \cdot \nabla u_2 - \Delta_\nu u_2 + \alpha u_1 + \partial_2 p = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
 
 \begin{equation} \label{HNSC3_coordinates_GFC_intro}   
@@ -607,7 +607,7 @@ If we assume $\mathbf{u}^\epsilon = O(1)$, then neglecting the $\epsilon^2$ and 
 where $\vec{\boldsymbol{n}} = (n_1, n_2, n_3)$ is the outward normal vector to the boundary.
 
 \begin{remark} \label{sourceregularityremark}
-Here $s$ stands for the $\delta$ limit distribution. We keep the notation $s$ for generality, since as we will see later, instead of the approximated delta functions and the delta distribution, it is possible to use any sort of "sufficiently smooth" source term (which can be independent from $\epsilon$ in the anisotropic case as well) that is bounded in $L^2_t L^2_x.$
+Here $s$ stands for the $\delta$ limit distribution. We keep the notation $s$ for generality, since as we will see later, instead of the approximated delta functions and the delta distribution, it is possible to use any sort of "sufficiently smooth" source term (which can be independent of $\epsilon$ in the anisotropic case as well) that is bounded in $L^2_t L^2_x.$
 \end{remark} 
 
 
@@ -803,11 +803,11 @@ In order to enhance readability and keep this chapter self-contained, we firstly
 As suggested in Section \ref{eqsdescribingatmpluspollution_gfc}, the hydrostatic equations are derived from this latter system by formally taking $\epsilon = 0,$ and thus obtaining the primitive equations written in geophysical coordinates:
 
 \begin{equation} \label{HNSC1_coordinates_GFC}    
-  \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\alpha u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T)
+  \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 - \alpha u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
 
 \begin{equation} \label{HNSC2_coordinates_GFC}   
-  \partial_t u_2 + \mathbf{u} \cdot \nabla u_2 - \Delta_\nu u_2 -\alpha u_1 + \partial_2 p = 0 \text{ in } \Omega \times (0,T)
+  \partial_t u_2 + \mathbf{u} \cdot \nabla u_2 - \Delta_\nu u_2 + \alpha u_1 + \partial_2 p = 0 \text{ in } \Omega \times (0,T)
 \end{equation}
 
 \begin{equation} \label{HNSC3_coordinates_GFC}   
@@ -855,7 +855,7 @@ We need to define the following spaces:
 
 \[ \mathbf{W} = \{ \mathbf{v} \in  H^1_{\Gamma_A} (\Omega) \times H^1_{\Gamma_A} (\Omega) \times H_0 (\partial_3, \Omega); \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \} \]
 
-Furthermore we introduce the notation $b(\mathbf{u}_h)$ = $\gamma (-u_2 , u_1).$
+Furthermore we introduce the notation $b(\mathbf{u}_h)$ = $\alpha (-u_2 , u_1).$
 
 Then the weak formulation of the hydrostatic system (\ref{HNSC1_coordinates_GFC}) - (\ref{HNSC_bc_coordinates_GFC}) takes the following form.
   
@@ -865,7 +865,7 @@ The pair $(\mathbf{u}, c)$ is called a weak solution of the a hydrostatic system
   
 \begin{equation}
 \begin{split}
-& \int_0^T \bigg[ -(\mathbf{u}_h, \partial_t \mathbf{\tilde{u}}_h) + (\nabla_\nu \mathbf{u}_h, \nabla_\nu \mathbf{\tilde{u}}_h) - (\mathbf{u}_h, (\mathbf{u} \cdot \nabla) \mathbf{\tilde{u}}_h) + (b(\mathbf{u}_h), \mathbf{\tilde{u}}_H) \bigg ] \diff t \\
+& \int_0^T \bigg[ -(\mathbf{u}_h, \partial_t \mathbf{\tilde{u}}_h) + (\nabla_\nu \mathbf{u}_h, \nabla_\nu \mathbf{\tilde{u}}_h) - (\mathbf{u}_h, (\mathbf{u} \cdot \nabla) \mathbf{\tilde{u}}_h) + (b(\mathbf{u}_h), \mathbf{\tilde{u}}_h) \bigg ] \diff t \\
 & = ({\mathbf{u}_h}_0, \mathbf{\tilde{u}}_h(0)) - \int_0^T \langle \theta_h, \mathbf{\tilde{u}}_h \rangle_{\Gamma_G} \diff t \raisetag{15pt}\label{hydrostaticWF_U}
 \end{split}
 \end{equation}
@@ -1472,7 +1472,7 @@ Before we define the variational forms of (\ref{fenics_strong_horizontal})--(\re
 
 One of the important differences between this chapter's convergence result and its implementation is the approach to the divergence-free condition. In Theorem \ref{maintheorem_weak_GFC} we worked with the weak form of the momentum equations, but we did take advantage of $\nabla \cdot \mathbf{u}^\epsilon = 0$ directly. As a consequence, the pressure function was cancelled from the equations immediately, and the number of test functions was equal to the number of space dimensions. In the numerical simulations we keep the pressure function in the calculations, and thus we will have an additional $q$ pressure test function multiplying the (\ref{fenics_strong_divergencefree}) divergence-free condition.
 
-Another crucial issue is the representation of the functions, namely the specification of the finite element function spaces. In the the previous sections the phrase "as $\epsilon$ goes to zero" possessed a sense of continuity, which falls apart to several ranges in this numerical approach. Firstly, we can not seem to have one single velocity function space for the entire phenomena. The $\epsilon > 0$ anisotropic case and the $\epsilon = 0$ limit case work well in spaces of different degrees (i.e. where the degrees of the $\phi_j$ polynomial basis functions are different). While there is a smooth transition in the way $\epsilon$ approaches zero, the degree of the vertical velocity space changes abruptly from 2 to 1 as $\epsilon$ changes from a small positive value to zero. Secondly, our experiments show that the code works differently in cases when $\epsilon$ is, roughly speaking, excessively small and in cases when it is small, but not smaller than approximately $2^{-6}$ -- $2^{-8}.$
+Another crucial issue is the representation of the functions, namely the specification of the finite element function spaces. In the previous sections the phrase "as $\epsilon$ goes to zero" possessed a sense of continuity, which falls apart to several ranges in this numerical approach. Firstly, we can not seem to have one single velocity function space for the entire phenomena. The $\epsilon > 0$ anisotropic case and the $\epsilon = 0$ limit case work well in spaces of different degrees (i.e. where the degrees of the $\phi_j$ polynomial basis functions are different). While there is a smooth transition in the way $\epsilon$ approaches zero, the degree of the vertical velocity space changes abruptly from 2 to 1 as $\epsilon$ changes from a small positive value to zero. Secondly, our experiments show that the code works differently in cases when $\epsilon$ is, roughly speaking, excessively small and in cases when it is small, but not smaller than approximately $2^{-6}$ -- $2^{-8}.$
 
 A further interesting aspect to keep in mind is that some of the widely used reformulation techniques do not hold for low--degree function spaces. Let's consider for example two arbitrarily smooth $c$ and $d$ functions assuming that $c, d$ and $\nabla c, \nabla d$ vanish on the domain boundary. In this case it is valid to rewrite $\int _\Omega (\Delta c) d$ as $\int_\Omega \nabla c \nabla d,$ but if $c$ and $d$ are represented in first-order function spaces in the implementation, then \texttt{div(grad(c)) * d * dx} in general is not equal to \texttt{inner(grad(c), grad(d)) * dx}: the second-order derivative always vanishes for a piecewise linear \texttt{c}, while the latter expression is still a function of the degrees of freedom composing \texttt{c} and \texttt{d}. This shows that for first-order function spaces it is crucial to use the weak form instead of the original second-order Laplacian (for example in the $\Delta \texttt{c}$ diffusive term).
 
@@ -2350,7 +2350,7 @@ The pair $(\mathbf{u}, c)$ is called a weak solution of the a hydrostatic system
   \begin{equation}
     \begin{split}
       & \int_0^T \bigg[ -(\mathbf{u}_h, \partial_t \mathbf{\tilde{u}}_h) + (\nabla_\nu \mathbf{u}_h, \nabla_\nu \mathbf{\tilde{u}}_h) - (\mathbf{u}_h, (\mathbf{u} \cdot \nabla) \mathbf{\tilde{u}}_h) + (b(\mathbf{u}_h), \mathbf{\tilde{u}}_h) \bigg ] \diff t \\
-      & = - ({\mathbf{u}_h}_0, \mathbf{\tilde{u}}_h(0)) \diff t \label{hydrostaticWF}
+      & = - ({\mathbf{u}_h}_0, \mathbf{\tilde{u}}_h(0)) \label{hydrostaticWF}
     \end{split}
   \end{equation}
   
@@ -2378,7 +2378,7 @@ The pair $(\mathbf{u}^\epsilon, c^\epsilon)$ is called a weak solution of the an
 & \int_0^T \bigg [ -(\mathbf{u}^\epsilon_h, \partial_t \mathbf{\tilde{u}}_h) + (\nabla_\nu \mathbf{u}^\epsilon_h, \nabla_\nu \mathbf{\tilde{u}}_h) - (\mathbf{u}^\epsilon_h, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{\tilde{u}}_h) + (b(\mathbf{u}^\epsilon_h), \mathbf{\tilde{u}}_h) \bigg ] \diff t \\
 & + \epsilon \int_0 ^ T \big [ (\beta u_3 ^\epsilon, \tilde{u}_1) - (\beta u_1^\epsilon, \tilde{u}_3) \big ] \diff t + \epsilon \int_0 ^ T \big [ (\alpha u_2 ^\epsilon, \tilde{u}_3) - (\alpha u_3^\epsilon, \tilde{u}_2) \big ] \diff t\\
 & + \epsilon^2 \int _0 ^ T \big [ -(u_3^\epsilon, \partial_t \tilde{u}_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, \tilde{u}_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu \tilde{u}_3) \big ] \diff t \\
-& = - ({\mathbf{u}^\epsilon_h}_0, \mathbf{\tilde{u}}_h(0)) - \epsilon^2 ({u^\epsilon_3}_0, \tilde{u}_3 (0)) \diff t \raisetag{20pt} \label{anisotropicWF}
+& = - ({\mathbf{u}^\epsilon_h}_0, \mathbf{\tilde{u}}_h(0)) - \epsilon^2 ({u^\epsilon_3}_0, \tilde{u}_3 (0)) \raisetag{20pt} \label{anisotropicWF}
 \end{split}
 \end{equation}
 %  
@@ -2471,7 +2471,7 @@ In more detail, we have the following regularities for the strong solution of th
   
   \begin{corollary} \label{StrongSolPE_boundedness}
   
-    Let $(\mathbf{u}_h,u_3)$ be the the unique global strong solution to the primitive equations (\ref{HNSC1_coordinates_DWMC}) - (\ref{HNSC4_coordinates_DWMC}) with an initial data ${\mathbf{u}_h}_0 \in H^1(\Omega).$ Then we have the following boundedness result:
+    Let $(\mathbf{u}_h,u_3)$ be the unique global strong solution to the primitive equations (\ref{HNSC1_coordinates_DWMC}) - (\ref{HNSC4_coordinates_DWMC}) with an initial data ${\mathbf{u}_h}_0 \in H^1(\Omega).$ Then we have the following boundedness result:
     
     $$ \sup_{0 \leq t < \infty} \norm{\mathbf{u}_h}_{H^1}^2 (t) + \int_0^\infty \norm{\nabla \mathbf{u}_h}_{H^1}^2 \diff t \leq \kappa (\norm{{\mathbf{u}_h}_0}_{H^1}, \Gamma_G).$$
   
@@ -2547,11 +2547,11 @@ for any $\tilde{\mathbf{u}} = (\tilde{\mathbf{u}}_h, \tilde{u}_3) \in H^1 (0,T;\
 
 Now, let's define $\chi \in C_0^\infty ([0, \infty))$ with $0 \leq \chi \leq 1$ and $\chi (0) = 1$ and set $\tilde{\mathbf{u}} = (\mathbf{u}_h,u_3) \chi (t).$ By using the density argument it is valid to choose this $\tilde{\mathbf{u}}$ function as a testing function as long as all the integral terms remain well-defined in $(\ref{WFreminder}),$ which we verify in the following.
 
-It is important to highlight at this point that since we are not restricted to zero-averaged functions and we are not on a periodic domain, we need to pay special attention when verifying boundedness results using the Poincar\'e inequality. Note that as the value of the velocity functions are defined to be zero on the boundary, any first-order estimate of the type $\norm{\mathbf{u}_h^\epsilon} \leq \norm{\nabla \mathbf{u}_h^\epsilon}$ is valid, using the zero-trace version of the Poincar\'e inequality for functions in $W^{1,2}_0.$ However, since it is only the value of the functions that vanishes on the boundary, but not their derivatives, higher order estimates such as passing from $\norm{\nabla \mathbf{u}_h^\epsilon}$ to $\norm{\Delta \mathbf{u}_h^\epsilon}$ in the process of constructing an upper bound can not be applied in general. Which is why, for example, the estimate of the the term below is rather involved as follows:
+It is important to highlight at this point that since we are not restricted to zero-averaged functions and we are not on a periodic domain, we need to pay special attention when verifying boundedness results using the Poincar\'e inequality. Note that as the value of the velocity functions are defined to be zero on the boundary, any first-order estimate of the type $\norm{\mathbf{u}_h^\epsilon} \leq \norm{\nabla \mathbf{u}_h^\epsilon}$ is valid, using the zero-trace version of the Poincar\'e inequality for functions in $W^{1,2}_0.$ However, since it is only the value of the functions that vanishes on the boundary, but not their derivatives, higher order estimates such as passing from $\norm{\nabla \mathbf{u}_h^\epsilon}$ to $\norm{\Delta \mathbf{u}_h^\epsilon}$ in the process of constructing an upper bound can not be applied in general. Which is why, for example, the estimate of the term below is rather involved as follows:
 
 \begin{equation}
   \begin{split}
-    & \int_Q \abs{\mathbf{u}^\epsilon} \abs{\nabla u_3^\epsilon} \abs{u_3} \chi \diff x \diff y \diff z \\
+    & \int_Q \abs{\mathbf{u}^\epsilon} \abs{\nabla u_3^\epsilon} \abs{u_3} \chi \diff x \diff y \diff z \diff t \\
     & \leq  \int_0 ^ T \int_{\Gamma_G} \bigg ( \int_0^1 \abs{\mathbf{u}^\epsilon} \abs{\nabla u_3^\epsilon} \diff z \int_0^1 \abs{\nabla_h \mathbf{u}_h} \diff z \bigg ) \diff x \diff y \diff t \\
     & \lesssim \int_0^T \norm{\mathbf{u}^\epsilon}_2^{1/2} \norm{\nabla \mathbf{u}^\epsilon}_2^{1/2} \norm{\nabla u_3^\epsilon}_2 \norm{\nabla_h \mathbf{u}_h}_2^{1/2} (\norm{\nabla_h \mathbf{u}_h}_2^{1/2} + \norm{\Delta \mathbf{u}_h}_2^{1/2}) \diff t \\
     & \lesssim \sup_{0 \leq t \leq T} \bigg( \norm{\mathbf{u}^\epsilon}_2^{1/2} \norm{\nabla \mathbf{u}_h}_2^{1/2} \bigg) \bigg( \int_0^T \norm{\nabla \mathbf{u}^\epsilon}^2_2 \diff t \bigg)^{1/4} \bigg ( \int_0^T \norm{\nabla u_3^\epsilon}_2^2 \diff t \bigg)^{1/2} \\
