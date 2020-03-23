@@ -139,7 +139,6 @@ The research leading to these results has received funding from the European Uni
 \item $( \cdot,\cdot) = $ the scalar product in $L^2(\Omega)^d, d \geq 1$ or the duality $L^p (\Omega)$, $L^{p'} (\Omega),$
 \item $\langle \cdot,\cdot \rangle_{\Gamma} = $ the scalar product or duality on the boundary curve $\Gamma$ ($H^{-1/2}(\Gamma)$, $H^{1/2}(\Gamma)$),
 \item $\mathbf{u}_h$ = the horizontal velocity components $(u_1, u_2),$
-\item $b(\mathbf{u}_h)$ = $\gamma (- u_2 , u_1),$
 \item $\Delta_d = K_2 \partial_{22}^2 + K_3 \partial_{33}^2$
 \item $\nabla_d = (\partial_2, \partial_3)$ ($d$ stands for directions in which we have diffusion),
 \item $L^p_t L^q_x$ is the abbreviated notation for $L^p (0, T; L^q(\Omega)),$
@@ -367,7 +366,7 @@ In the next two sections we consider two different coordinate choices, and withi
 %%% GEOPHYSICAL COORDINATES %%%
 \subsection{The polluted atmosphere model in geophysical coordinates} \label{eqsdescribingatmpluspollution_gfc}
 
-Our first step is the orientation of the coordinate system. Here we set the axes to be independent of the wind direction: $x, y$ and $z$ are oriented towards east, north, and upwards, respectively. The coordinate system we obtain this way is the so-called geophysical coordinate system. This is a widely used coordinate system choice because in this specific system the rotation vector, and as a consequence, the Coriolis force takes a simpler form.
+Our first step is the orientation of the coordinate system. Here we set the axes to be independent from the wind direction: $x, y$ and $z$ are oriented towards east, north, and upwards, respectively. The coordinate system we obtain this way is the so-called geophysical coordinate system. This is a widely used coordinate system choice because in this specific system the rotation vector, and as a consequence, the Coriolis force takes a simpler form.
     
 To complete the scaling process, we combine equations (\ref{scaling_eq_x}), (\ref{scaling_eq_vpnu}), (\ref{scaling_eq_c}) with an equation for the diffusivity constants in (\ref{diffusive}). We use a rescaling methodology analogous to that applied to the viscosity terms:
     
@@ -861,7 +860,7 @@ Then the weak formulation of the hydrostatic system (\ref{HNSC1_coordinates_GFC}
   
 \begin{definition} \label{definitionhydrostaticWF_gfc}
 
-The pair $(\mathbf{u}, c)$ is called a weak solution of the a hydrostatic system (\ref{HNSC1_coordinates_GFC})--(\ref{HNSC5_coordinates_GFC}) subject to (\ref{HNSC_init_coordinates_GFC})--(\ref{HNSC_bc_coordinates_GFC}) if $\mathbf{u} = (\mathbf{u}_h, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_h \in L^\infty (0,T; L^2(\Omega)^2),$ and $c \in L^\infty(0,T; L^2(\Omega)) \cap L^2(0,T; H^1(\Omega))$, moreover $\mathbf{u}$ and $c$ satisfy the integral identities
+The pair $(\mathbf{u}, c)$ is called a weak solution of the a hydrostatic system (\ref{HNSC1_coordinates_GFC})--(\ref{HNSC5_coordinates_GFC}) subject to (\ref{HNSC_init_coordinates_GFC})--(\ref{HNSC_bc_coordinates_GFC}) if $\mathbf{u} = (\mathbf{u}_h, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_h \in L^\infty (0,T; L^2(\Omega)^2),$ and $c \in L^\infty(0,T; L^2(\Omega)) \cap L^2(0,T; H^1_{\Gamma_A}(\Omega))$, moreover $\mathbf{u}$ and $c$ satisfy the integral identities
   
 \begin{equation}
 \begin{split}
@@ -893,7 +892,7 @@ The weak form of the anisotropic system (\ref{ANSC1_coordinates_GFC}) - (\ref{AN
   
 \begin{definition} \label{definitionanisotropicWF_gfc}
 
-The pair $(\mathbf{u}^\epsilon, c^\epsilon)$ is called a weak solution of the anisotropic system (\ref{ANSC1_coordinates_GFC})--(\ref{ANSC5_coordinates_GFC}) subject to (\ref{ANSC_init_coordinates_GFC}), (\ref{ANSC_bc_coordinates_GFC}) if $\mathbf{u}^\epsilon = (\mathbf{u}^\epsilon_h, u^\epsilon_3) \in L^2 (0,T ; \mathbf{V}) \cap L^\infty (0, T; L^2 (\Omega)^3)$ and $c^\epsilon \in L^\infty (0,T; L^2(\Omega)) \cap L^2 (0,T; H^1(\Omega))$, moreover $\mathbf{u}^\epsilon$ and $c^\epsilon$ satisfy the integral identities
+The pair $(\mathbf{u}^\epsilon, c^\epsilon)$ is called a weak solution of the anisotropic system (\ref{ANSC1_coordinates_GFC})--(\ref{ANSC5_coordinates_GFC}) subject to (\ref{ANSC_init_coordinates_GFC}), (\ref{ANSC_bc_coordinates_GFC}) if $\mathbf{u}^\epsilon = (\mathbf{u}^\epsilon_h, u^\epsilon_3) \in L^2 (0,T ; \mathbf{V}) \cap L^\infty (0, T; L^2 (\Omega)^3)$ and $c^\epsilon \in L^\infty (0,T; L^2(\Omega)) \cap L^2 (0,T; H^1_{\Gamma_A}(\Omega))$, moreover $\mathbf{u}^\epsilon$ and $c^\epsilon$ satisfy the integral identities
   
 \begin{equation}
 \begin{split}
@@ -917,6 +916,10 @@ for all $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T;\
 
 \end{definition}
 
+\begin{remark}
+Note that in the above definitions the spaces we set for the velocity test functions are not strictly minimal: our choice is motivated by simplicity. For completeness we highlight that in Definition \ref{definitionhydrostaticWF_gfc} it is sufficient to require that $\mathbf{\tilde{u}} \in L^2 (0,T, \mathbf{W}) \cap H^1(0,T, L^2(\Omega).$ Analogously, in Definition \ref{definitionanisotropicWF_gfc} we can reduce the $H^1 (0,T;\mathbf{V})$ space setting applied for $\mathbf{\tilde{u}}$ to $ L^2 (0,T;\mathbf{V}) \cap H^1 (0,T; L^2(\Omega)).$
+\end{remark}
+
 Note that since in our case the source term $s^\epsilon$ is given by (\ref{approxsourceterm}), the last term in (\ref{anisotropicWF_C}) is well defined. If we use a source function of a different and more general form, it suffices to be bounded in $L_t^2 L_x^2$ for the weak formulation to make sense.
 
 Regarding the smoothness of the initial data, we use the
@@ -926,12 +929,12 @@ Regarding the smoothness of the initial data, we use the
 
 initial regularities classically used in the weak solution framework.
 
-We will omit the proof of the existence of weak solutions (see Definition \ref{definitionanisotropicWF_gfc}.) for the anisotropic system (\ref{ANSC1_coordinates_GFC}) - (\ref{ANSC_bc_coordinates_GFC}) since it follows by standard finite-dimensional Galerkin approximation using (\ref{initialregularities_weak_gfc}).
+We will omit the proof of the existence of weak solutions (see Definition \ref{definitionanisotropicWF_gfc}.) for the anisotropic system (\ref{ANSC1_coordinates_GFC}) - (\ref{ANSC_bc_coordinates_GFC}) since it follows straightforwardly by combining  the standard finite-dimensional Galerkin approximation used for the existence of weak solutions of the Navier Stokes equations (see \cite{temam2001navier}) with the one used for the weak solutions for the parabolic equations (see \cite{evans2010partial} Chapter 7).
 
 Now we are ready to state our main result.
 
 \begin{theorem} \label{maintheorem_weak_GFC}
-Let $\mathbf{u}_0 \in L^2 (\Omega)$, with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 \cdot \mathbf{n} = 0$ on $\partial \Omega$; $\theta_h \in L^2(0,T; H^{-1/2}(\Gamma_G)),$ let $c_0 \in L^2 (\Omega)$, $c_0 = 0$ on $ \partial \Omega$, and assume that the boundary conditions (\ref{ANSC_bc_coordinates_GFC}) hold; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1_coordinates_GFC}) - (\ref{ANSC5_coordinates_GFC}) converges weakly to a weak solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1_coordinates_GFC}) - (\ref{HNSC5_coordinates_GFC}).
+Let $\mathbf{u}_0 \in L^2 (\Omega)$, with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 \cdot \mathbf{n} = 0$ on $\partial \Omega$; $\theta_h \in L^2(0,T; H^{-1/2}(\Gamma_G)),$ let $c_0 \in L^2 (\Omega)$, and assume that the boundary conditions (\ref{ANSC_bc_coordinates_GFC}) hold; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1_coordinates_GFC}) - (\ref{ANSC5_coordinates_GFC}) converges (up to a subsequence) weakly to a weak solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1_coordinates_GFC}) - (\ref{HNSC5_coordinates_GFC}).
 \end{theorem}
 
 %%% *** PROOF *** %%%
@@ -2341,11 +2344,15 @@ In this section we describe the weak formulation of the merged equations in both
   
   \[ \mathbf{W} = \{ \mathbf{v} \in  (H^1_{\Gamma} (\Omega) \cap H^2(\Omega)) \times (H^1_{\Gamma} (\Omega) \cap H^2(\Omega)) \times H^1_{\Gamma} (\Omega); \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \} \]
   
+  \[ L^2_{\Gamma_A}(\Omega) = \{ c \in L^2(\Omega); c = 0 \text{ on } \Gamma_A \text{ in the sense of } \langle H^{-1/2} , H^{1/2} \rangle_{\Gamma_A} \} \]
+  
+Furthermore we introduce the notation $b(\mathbf{u}_h)$ = $\gamma (-u_2 , u_1).$
+  
 Then the weak formulation of the hydrostatic system (\ref{HNSC1_coordinates_DWMC}) - (\ref{HNSC5_coordinates_DWMC}), (\ref{HNSC_init_coordinates_DWMC}), (\ref{HNSC_bc-weak_coordinates_DWMC}) takes the following form (see also \cite{cao2007global} for example).
   
 \begin{definition} \label{definitionhydrostaticWF}
 
-The pair $(\mathbf{u}, c)$ is called a weak solution of the a hydrostatic system (\ref{HNSC1_coordinates_DWMC}) - (\ref{HNSC5_coordinates_DWMC}) subject to (\ref{HNSC_init_coordinates_DWMC}), (\ref{HNSC_bc-weak_coordinates_DWMC}) if $\mathbf{u} = (\mathbf{u}_h, u_3) \in L^2 (0, T; \mathbf{W}) \cap L^\infty (0,T; L^2(\Omega)^3),$ $\mathbf{u}_h \in L^\infty(0,T; H^1(\Omega)),$ and $c \in L^\infty (0, T; L^2(\Omega))$ with $\partial_2 c$, $\partial_3 c \in L^2(0, T; L^2(\Omega)),$ moreover $\mathbf{u}$ and $c$ satisfy the integral identities
+The pair $(\mathbf{u}, c)$ is called a weak solution of the a hydrostatic system (\ref{HNSC1_coordinates_DWMC}) - (\ref{HNSC5_coordinates_DWMC}) subject to (\ref{HNSC_init_coordinates_DWMC}), (\ref{HNSC_bc-weak_coordinates_DWMC}) if $\mathbf{u} = (\mathbf{u}_h, u_3) \in L^2 (0, T; \mathbf{W}) \cap L^\infty (0,T; L^2(\Omega)^3),$ $\mathbf{u}_h \in L^\infty(0,T; H^1(\Omega)),$ and $c \in L^\infty (0, T; L^2_{\Gamma_A}(\Omega))$ with $\partial_2 c$, $\partial_3 c \in L^2(0, T; L^2(\Omega)),$ moreover $\mathbf{u}$ and $c$ satisfy the integral identities
   
   \begin{equation}
     \begin{split}
@@ -2371,7 +2378,7 @@ The pair $(\mathbf{u}, c)$ is called a weak solution of the a hydrostatic system
 
 \begin{definition} \label{definitionanisotropicWF_dwmc}
 
-The pair $(\mathbf{u}^\epsilon, c^\epsilon)$ is called a weak solution of the anisotropic system (\ref{ANSC1_coordinates_DWMC}) - (\ref{ANSC5_coordinates_DWMC}) subject to (\ref{ANSC_init_coordinates_DWMC}), (\ref{ANSC_bc-weak_coordinates_DWMC}) if $\mathbf{u}^\epsilon = (\mathbf{u}^\epsilon_h, u^\epsilon_3) \in L^2 (0,T ; \mathbf{V}) \cap C_w (0, T; L^2 (\Omega)^3)$ and $c^\epsilon \in L^\infty (0,T; L^2(\Omega)) \cap L^2 (0,T; H^1(\Omega))$, moreover $\mathbf{u}^\epsilon$ and $c^\epsilon$ satisfy the integral identities
+The pair $(\mathbf{u}^\epsilon, c^\epsilon)$ is called a weak solution of the anisotropic system (\ref{ANSC1_coordinates_DWMC}) - (\ref{ANSC5_coordinates_DWMC}) subject to (\ref{ANSC_init_coordinates_DWMC}), (\ref{ANSC_bc-weak_coordinates_DWMC}) if $\mathbf{u}^\epsilon = (\mathbf{u}^\epsilon_h, u^\epsilon_3) \in L^2 (0,T ; \mathbf{V}) \cap C_w (0, T; L^2 (\Omega)^3)$ and $c^\epsilon \in L^\infty (0,T; L^2(\Omega)) \cap L^2 (0,T; H^1_{\Gamma_A}(\Omega))$, moreover $\mathbf{u}^\epsilon$ and $c^\epsilon$ satisfy the integral identities
   
 \begin{equation}
 \begin{split}
@@ -2399,7 +2406,7 @@ for all $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T;\
 Now we are ready to state the main theorem of this section.
 
 \begin{theorem} \label{maintheoremWEAK}
-Let ${\mathbf{u}_h}_0$ $\in$ $H^1 (\Omega)$, ${u_3}_0 \in L^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 = 0$ on $\partial \Omega$; let $c_0 \in$ $L^2 (\Omega)$, $c_0 = 0$ on $ \partial \Omega$, and assume that the boundary conditions (\ref{ANSC_bc-weak_coordinates_DWMC}) hold; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1_coordinates_DWMC}) - (\ref{ANSC5_coordinates_DWMC}), (\ref{ANSC_init_coordinates_DWMC}) converges weakly to a weak solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1_coordinates_DWMC}) - (\ref{HNSC5_coordinates_DWMC}), (\ref{HNSC_init_coordinates_DWMC}).
+Let ${\mathbf{u}_h}_0$ $\in$ $H^1 (\Omega)$, ${u_3}_0 \in L^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0, {\mathbf{u}_h}_0 = 0, {u_3}_0 n_3 = 0$ on $\partial \Omega$; let $c_0 \in$ $L^2 (\Omega)$, and assume that the boundary conditions (\ref{ANSC_bc-weak_coordinates_DWMC}) hold; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1_coordinates_DWMC}) - (\ref{ANSC5_coordinates_DWMC}), (\ref{ANSC_init_coordinates_DWMC}) converges (up to a subsequence) weakly to a weak solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1_coordinates_DWMC}) - (\ref{HNSC5_coordinates_DWMC}), (\ref{HNSC_init_coordinates_DWMC}).
 \end{theorem}
 
 The statement of the main weak convergence theorem of this chapter is analogous to our previous result stated for the case of the geophysical frame, but we highlight the difference that here we use the initial data ${\mathbf{u}_h}_0 \in H^1,$ while for the case of the geophysical frame an $L^2$ initial velocity was sufficient.
@@ -2965,7 +2972,7 @@ We provide the proof of Theorem \ref{existenceconcentrationSTRONG} in Section \r
 Now we are ready to describe this section's main theorem.
 
 \begin{theorem} \label{maintheoremSTRONG}
-Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0$, and let $c_0 \in H^2 (\Omega).$ There is a positive $\epsilon_0$ threshold such that for any $\epsilon < \epsilon_0,$ the strong solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1_coordinates_DWMC})--(\ref{ANSC4_coordinates_DWMC}), (\ref{ANSC5_strong_cshift_coordinates_DWMC}), (\ref{ANSC_init_coordinates_DWMC}), (\ref{ANSC_bc-strong_coordinates_DWMC}) exists globally in time and as the aspect ratio $\epsilon$ tends to zero, it conconverges strongly to the unique global strong solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1_coordinates_DWMC})--(\ref{HNSC4_coordinates_DWMC}), (\ref{HNSC5_strong_cshift_coordinates_DWMC}), (\ref{HNSC_init_coordinates_DWMC}), (\ref{HNSC_bc-strong_coordinates_DWMC}). In more detail, the following strong convergence results hold:
+Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\int_\Omega {\mathbf{u}_h}_0 \diff x \diff y \diff z = 0$ and $\nabla \cdot \mathbf{u}_0 = 0,$ and let $c_0 \in H^2 (\Omega).$ There is a positive $\epsilon_0$ threshold such that for any $\epsilon < \epsilon_0,$ the strong solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1_coordinates_DWMC})--(\ref{ANSC4_coordinates_DWMC}), (\ref{ANSC5_strong_cshift_coordinates_DWMC}), (\ref{ANSC_init_coordinates_DWMC}), (\ref{ANSC_bc-strong_coordinates_DWMC}) exists globally in time and as the aspect ratio $\epsilon$ tends to zero, it conconverges strongly to the unique global strong solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1_coordinates_DWMC})--(\ref{HNSC4_coordinates_DWMC}), (\ref{HNSC5_strong_cshift_coordinates_DWMC}), (\ref{HNSC_init_coordinates_DWMC}), (\ref{HNSC_bc-strong_coordinates_DWMC}). In more detail, the following strong convergence results hold:
 
   \begin{align} 
     & (\mathbf{u}_h^\epsilon, \epsilon u_3^\epsilon) \to (\mathbf{u}_h, 0) &\quad & \text{in $L_t^\infty H_x^2$,} \label{StrongConvVelocity1statement} \\
