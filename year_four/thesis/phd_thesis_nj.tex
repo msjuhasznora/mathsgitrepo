@@ -624,7 +624,7 @@ which leads us to introducing the new scaling identity
 \begin{equation} \label{ksepsk1} K_x = \epsilon K_1. \end{equation}
 
 \begin{remark}
-Rigorously speaking, technically we have two different small parameters in our model: the shallowness of the domain ($z = \epsilon_1 x_3$) and diffusion effects in the downwind direction ($K_x = \epsilon_2 K_1$). For simplicity we assume that these two vanishing parameters are the same, we use $\epsilon = \epsilon_1 = \epsilon_2.$
+Rigorously speaking, technically we have two different small parameters in our model: the shallowness of the domain ($z = \epsilon_1 x_3$) and diffusion effects in the downwind direction ($K_x = \epsilon_2 K_1$). For simplicity we assume that these two vanishing parameters are the same, we take $\epsilon = \epsilon_1 = \epsilon_2.$
 \end{remark}
 
 Note that the latter equation is different in nature from the previous scaling equations: (\ref{ksepsk1}) is the effect of the coordinate choice itself, while the original scaling identities were motivated by the shallowness of the domain.
@@ -2344,7 +2344,10 @@ In this section we describe the weak formulation of the merged equations in both
   
   \[ \mathbf{W} = \{ \mathbf{v} \in  (H^1_{\Gamma} (\Omega) \cap H^2(\Omega)) \times (H^1_{\Gamma} (\Omega) \cap H^2(\Omega)) \times H^1_{\Gamma} (\Omega); \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \} \]
   
-  \[ L^2_{\Gamma_A}(\Omega) = \{ c \in L^2(\Omega); c = 0 \text{ on } \Gamma_A \text{ in the sense of } \langle H^{-1/2} , H^{1/2} \rangle_{\Gamma_A} \} \]
+\begin{align}
+L^2_{\Gamma_A}(\Omega) = & \{ c \in L^2(\Omega); c = 0 \text{ on } \Gamma_A \text{ in the sense of } \langle c , \tilde{c} \rangle_{H^{-1/2} (\Gamma_A) \times H^{1/2} (\Gamma_A)} = 0 \nonumber \\
+& \text{ for any } \tilde{c} \in H^{1/2}(\Gamma_A) \nonumber \}
+\end{align}
   
 Furthermore we introduce the notation $b(\mathbf{u}_h)$ = $\gamma (-u_2 , u_1).$
   
@@ -2370,7 +2373,7 @@ The pair $(\mathbf{u}, c)$ is called a weak solution of the a hydrostatic system
     \end{split}
   \end{equation}
   
-  for all $(\mathbf{\tilde{u}}, \tilde{c})$ with $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T, \mathbf{W})$, with $\mathbf{\tilde{u}}_h (T) = 0$ and $\partial_3 \mathbf{\tilde{u}}_h \in L^\infty (0, T; L^3 (\Omega)^2)$ and $\tilde{c}$ with $\tilde{c} \in L^2 (0,T, H^3_{\Gamma} (\Omega)) \cap H^1 (0,T, L^2)$, $\tilde{c} (T) = 0$. 
+  for all $(\mathbf{\tilde{u}}, \tilde{c})$ with $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T, \mathbf{W})$, with $\mathbf{\tilde{u}}_h (T) = 0$ and $\partial_3 \mathbf{\tilde{u}}_h \in L^\infty (0, T; L^3 (\Omega)^2)$ and $\tilde{c}$ with $\tilde{c} \in L^2 (0,T, H^3_{\Gamma_A} (\Omega)) \cap H^1 (0,T, L^2)$, $\tilde{c} (T) = 0$. 
   
   \end{definition}
   
@@ -2399,7 +2402,7 @@ and
 \end{split}
 \end{equation}
 %  
-for all $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T;\mathbf{V})$ with $\mathbf{\tilde{u}}(T) = 0$ and $\tilde{c}$ such that $\tilde{c} \in H^1 (0,T, H^3_{\Gamma} (\Omega))$ and $\tilde{c} (T) = 0$.
+for all $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T;\mathbf{V})$ with $\mathbf{\tilde{u}}(T) = 0$ and $\tilde{c}$ such that $\tilde{c} \in H^1 (0,T, H^3_{\Gamma_A} (\Omega))$ and $\tilde{c} (T) = 0$.
   
 \end{definition}
 
