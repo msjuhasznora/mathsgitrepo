@@ -2493,7 +2493,7 @@ As we mentioned before, the cornerstone idea for obtaining the convergence of th
     Let ${\mathbf{u}_h}_0 \in H^1(\Omega).$ Then there exists a unique strong solution $\mathbf{u}_h$ of the reformulated Primitive Equations $(\ref{HNSC1_coordinates_DWMC})$ - $(\ref{HNSC4_coordinates_DWMC})$, $(\ref{HNSC_init_coordinates_DWMC})$ such that $$\mathbf{u}_h \in C([0, \infty), H^1(\Omega)) \cap L^2_{loc}([0, \infty), H^2(\Omega))$$ and $$\partial_t \mathbf{u}_h \in L^2_{loc} ([0,\infty), L^2(\Omega)).$$
   \end{theorem}
   
-In more detail, we have the following regularities for the strong solution of the primitive equations for the case of an $H^1$ initial data:
+In more detail, we have the following regularities for the strong solution of the primitive equations for the case of an $H^1$-regular horizontal initial data:
   
   \begin{corollary} \label{StrongSolPE_boundedness}
   
@@ -2509,7 +2509,7 @@ The result of Corollary \ref{StrongSolPE_boundedness} on the strong solutions of
   
   The following part of the proof is dedicated to verifying the strong convergence of $u_3^\epsilon,$ and is based on the idea of \cite{li2019primitive} --- our scenario is different however in that \textit{a)} first of all our domain is bounded, while the domain the authors of \cite{li2019primitive} consider is periodic, \textit{b)} we do not assume zero-averaged functions, and finally \textit{c)} in our case the Coriolis terms are incorporated to the model as well. Our strategy in providing the proof is to give a self-contained result that describes all the steps that build up the verification process, but we elaborate in more detail where the above mentioned \textit{a), b), c)} points have a tangible effect. Some technical details that are identical to those in \cite{li2019primitive} will be skipped.
 
-Another structural difference we need to underline in connection with the proof is that instead of using the $[-1,1]$ set to represent the $\epsilon$-free vertical domain (i.e. the $\Gamma_L$ section), we use $[0,1],$ without assuming the vertical velocity function $u_3^\epsilon$ to be odd with respect to $z.$ The vertical section is commonly set to $[-1,1],$ or equivalently, to $[-a,a]$ in works that use the periodical domain scenario, see also \cite{cao2016global}, \cite{cao2017global}. In our case however we use a bounded domain without the assuming a symmetry line in the vertical midpoint --- thus we work with the $[0,1]$ set as the vertical domain. As a consequence, the Ladyzhenskaya-type inequality presented in different versions in \cite{cao2003global} and \cite{li2019primitive} will be used here in the following form:
+Another structural difference we need to underline in connection with the proof is that instead of using the $[-1,1]$ set to represent the $\epsilon$-free vertical domain (i.e. the $\Gamma_L$ section), we use $[0,1],$ without assuming the vertical velocity function $u_3^\epsilon$ to be odd with respect to $z.$ The vertical section is commonly set to $[-1,1],$ or equivalently, to $[-a,a]$ in works that use the periodical domain scenario, see also \cite{cao2016global}, \cite{cao2017global}. In our case however we use a bounded domain without assuming a symmetry line in the vertical midpoint --- thus we work with the $[0,1]$ set as the vertical domain. As a consequence, the Ladyzhenskaya-type inequality presented in different versions in \cite{cao2003global} and \cite{li2019primitive} will be used here in the following form:
 
 \begin{lemma}\label{LadyzhenskayatypeIEQ}
 
@@ -2541,7 +2541,7 @@ The main idea in order to prove the strong convergence of $u^\epsilon_3$ lies in
 
 \begin{prop} \label{propIdentity}
 
-Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ and $(\mathbf{u}_h,u_3)$ be the solutions of (\ref{ANSC1_coordinates_DWMC}) - (\ref{ANSC4_coordinates_DWMC}) and (\ref{HNSC1_coordinates_DWMC}) - (\ref{HNSC4_coordinates_DWMC}), respectively, with initial data $({\mathbf{u}_h}_0, {u_3}_0),$ where ${\mathbf{u}_h}_0 \in H^1(\Omega)$ and ${u_3}_0 = - \int_0^z \nabla_h \cdot {\mathbf{u}_h}_0 \diff z'.$ Then we have the following integral identity:
+Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ be a Leray-Hopf weak solution of (\ref{ANSC1_coordinates_DWMC}) - (\ref{ANSC4_coordinates_DWMC}), let $(\mathbf{u}_h,u_3)$ be the unique global strong solution of (\ref{HNSC1_coordinates_DWMC}) - (\ref{HNSC4_coordinates_DWMC}), moreover for both cases let $({\mathbf{u}_h}_0, {u_3}_0)$ be the initial data, where ${\mathbf{u}_h}_0 \in H^1(\Omega)$ and ${u_3}_0 = - \int_0^z \nabla_h \cdot {\mathbf{u}_h}_0 \diff z'.$ Then we have the following integral identity:
 
 \begin{equation} \label{integralIdentity_prop}
   \begin{split}
@@ -2607,7 +2607,7 @@ Now we are justified to take $\tilde{\mathbf{u}}$ as a test function, and thus, 
 %
 for any $\chi \in C^\infty_0 ([0,\infty)),$ with $0 \leq \chi \leq 1$ and $\chi (0) = 1.$
 
-Since the estimate $(\ref{integralIdentity_prop})$ is localised in time, we take an arbitrary $t_0 \in (0, \infty)$ and a sufficiently small positive $\delta \in (0, t_0).$ Choose a cut-off function with the properties $\chi_\delta \in C^\infty_0 [0,t_0),$ such that $\chi_\delta \equiv 1$ on $[0, t_0 -\delta], 0 \leq \chi_\delta \leq 1$ on $[t_0 - \delta, t_0 )$ and $\abs{\chi_\delta '} \leq \frac{2}{\delta}$ on $[0, t_0).$ Now, taking $\chi = \chi_\delta$ in $(\ref{rewrittenform})$ as $\delta \to 0,$ one can arrive to the desired equality after performing the calculations for passing to the limit. It is easy to see that because of the velocities vanishing on the boundaries, the technical details remain uneffected, even though we are not on a periodic domain.
+Since the estimate $(\ref{integralIdentity_prop})$ is localised in time, we take an arbitrary $t_0 \in (0, \infty)$ and a sufficiently small positive $\delta \in (0, t_0).$ Choose a cut-off function with the properties $\chi_\delta \in C^\infty_0 [0,t_0),$ such that $\chi_\delta \equiv 1$ on $[0, t_0 -\delta], 0 \leq \chi_\delta \leq 1$ on $[t_0 - \delta, t_0 )$ and $\abs{\chi_\delta '} \leq \frac{2}{\delta}$ on $[0, t_0).$ Now, taking $\chi = \chi_\delta$ in $(\ref{rewrittenform})$ and let $\delta$ go to $0,$ one can arrive to the desired equality after performing the calculations needed for passing to the limit. It is easy to see that because of the velocities vanishing on the boundaries, the technical details remain unaffected, even though we are not on a periodic domain.
 
 In more detail, the term $ \langle \partial_t u_3, u_3^\epsilon \rangle _{H^{-1} \times H^1}$ now takes the form 
 
