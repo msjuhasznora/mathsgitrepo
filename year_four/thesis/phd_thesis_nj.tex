@@ -1999,7 +1999,7 @@ We conclude with the table containing the $L^2$ difference norms computed for th
 \subsection{Code validation}\label{codetestingsection}
 
 In this section we investigate the correctness of the code via executing it in basic test scenarios where the expected solutions are well-known. We emphasise here that these empirical tests do not substitute an elaborate proof verifying the convergence of the numerical scheme, but that falls beyond the scope of this work. The goal of this section is to visualise and confirm that the computed solutions do approximate the real solutions in some concrete cases, and thus to have a basic affirmation of the functionality of our code.
-We design each case by defining certain $\texttt{u\_exact, p\_exact, c\_exact}$ functions, and setting all other necessary parameters of the model accordingly: we define boundary conditions and forcing functions exploiting the information we have on the $\texttt{u\_exact, p\_exact,}$ $\texttt{c\_exact}$ functions. The cornerstone idea of this experimental testing process is to set model parameters that are compatible with the predefined solutions, where compatibility is understood in the following very strong sense. We plug in the exact solution functions into modelling equations, and we set the velocity and concentration forcing functions to the result of these computations --- in other words, we build up the forcing terms from the known solutions. The same approach is applied to boundary conditions. Once the forcing functions and the boundary conditions are set, we execute the code and run the respective solver with these parameters. We expect that the $\texttt{u\_sol, p\_sol, c\_sol}$ solutions we obtain will be "close" in $H^1$ norm to the $\texttt{u\_exact, p\_exact, c\_exact}$ functions, i.e. that the result of
+We design each case by defining certain $\texttt{u\_exact, p\_exact, c\_exact}$ functions, and setting all other necessary parameters of the model accordingly: we define boundary conditions and forcing functions exploiting the information we have on the $\texttt{u\_exact, p\_exact,}$ $\texttt{c\_exact}$ functions. The cornerstone idea of this experimental testing process is to set model parameters that are compatible with the predefined solutions, where compatibility is understood in the following very strong sense. We plug in the exact solution functions into the modelling equations, and we set the velocity and concentration forcing functions to the result of these computations --- in other words, we build up the forcing terms from the known solutions. The same approach is applied to boundary conditions. Once the forcing functions and the boundary conditions are set, we execute the code and run the respective solver with these parameters. We expect that the $\texttt{u\_sol, p\_sol, c\_sol}$ solutions we obtain will be "close" in $H^1$ norm to the $\texttt{u\_exact, p\_exact, c\_exact}$ functions, i.e. that the result of
 %
 $$\texttt{errornorm(problem\_data.u1\_exact, u1\_sol, norm\_type='H1')}$$
 %
@@ -2127,7 +2127,7 @@ In this section we examine what changes compared to the previous test case if we
   \end{split}
 \end{equation}
 
-The value of $\texttt{anis\_c\_source}$ is a relatively long expression obtained via plugging in the above values into the concentration-diffusion equation. Since it is not of any particular interest or challenge, we will not include it here.
+The value of $\texttt{anis\_c\_source}$ is a relatively long expression obtained via plugging in the above values into the concentration-diffusion equation. Since its exact form is not of any particular interest, we will not include it here.
 
 As the error plots show, in terms of error values this case is essentially identical to the previous one; however, for test case 2 the velocity error values were identical to zero ($\texttt{0e+00}$), in this case their orders oscillate between $\texttt{1.0e-12}$ and $\texttt{1.0e-14}$ for the different mesh sizes.
 
@@ -2183,9 +2183,9 @@ We use trigonometric functions to build up the fourth test case. The important f
   \end{split}
 \end{equation}
 
-Again, the concentration and velocity forcing functions are quite complex trigonometric expressions which we will omit here.
+Again, the concentration and velocity forcing functions are rather complex trigonometric expressions which we will omit here.
 
-The next graph shows the logarithm of the $H^1$ norm calculated for each function. Note that the error values for the horizontal and vertical velocity functions are almost identical (on a $\texttt{mesh(8,8)}$ the error for $\texttt{u1}$ is appr. $\texttt{2.5624601e-01}$, while for $\texttt{u3}$ we obtain appr. $\texttt{2.5624705e-01}$), thus in the picture the horizontal velocity error values are hidden behind the $\texttt{u3}$ values.
+The next graph shows the logarithm of the $H^1$ error norm calculated for each function. Note that the error values for the horizontal and vertical velocity functions are almost identical (on a $\texttt{mesh(8,8)}$ the error for $\texttt{u1}$ is appr. $\texttt{2.5624601e-01}$, while for $\texttt{u3}$ we obtain appr. $\texttt{2.5624705e-01}$), thus in the picture the horizontal velocity error values are hidden behind the $\texttt{u3}$ values.
 
 \begin{figure}[H]
   \centering
@@ -2319,7 +2319,11 @@ We highlight two important features concerning the above boundary conditions def
 
 As we have mentioned it before, in this case we will work with a more regular ${\mathbf{u}_h}_0 \in H^1$ initial data, so we directly use the $u_3 = 0$ equality on the boundary instead of the original $u_3 n_3 = 0$ constraint that we had used in (\ref{HNSC_bc_coordinates_GFC}).
 
-Concerning the initial data, we set $${\mathbf{u}_h}_0 \in H^1 (\Omega), {u_3}_0 \in L^2(\Omega) \text{ with } \nabla \cdot \mathbf{u}_0 = 0, \text{ and } c_0 \in L^2 (\Omega).$$ We emphasise here that we are still working in classical Leray framework of weak solutions, even though we use an $H^1(\Omega)$ regularity assumption on ${\mathbf{u}_h}_0,$ which is stronger than the more usual $L^2$ space regularity requirement for weak solutions (see (\ref{initialregularities_weak_gfc}) in Chapter \ref{geophysicalchapter}, or \cite{azerad2001mathematical} for example). The reason we need this stronger regularity is to counterbalance the decreased control we have on the concentration function due to the coordinate choice, but overall this does not lead us out of the field of weak solutions.
+Concerning the initial data, we set
+
+$${\mathbf{u}_h}_0 \in H^1 (\Omega), {u_3}_0 \in L^2(\Omega) \text{ with } \nabla \cdot \mathbf{u}_0 = 0, \text{ and } c_0 \in L^2 (\Omega).$$
+
+We emphasise here that we are still working in the classical Leray framework of weak solutions, even though we use an $H^1(\Omega)$ regularity assumption on ${\mathbf{u}_h}_0,$ which is stronger than the more usual $L^2$ space regularity requirement for weak solutions (see (\ref{initialregularities_weak_gfc}) in Chapter \ref{geophysicalchapter}, or \cite{azerad2001mathematical} for example). The reason we need this stronger regularity is to counterbalance the decreased control we have on the concentration function due to the coordinate choice, but overall this does not lead us out of the field of weak solutions.
 
 Finally, the $s^\epsilon$ and $s$ source terms are formulated analogously to the geophysical case (Section \ref{eqsdescribingatmpluspollution_gfc}): the hydrostatic $s$ function is defined as a point source, while the anisotropic source function $s^\epsilon$ is modelled with a parametrised nascent delta function. For simplicity we assume here that the pollution process begins at $t = 0,$ thus we omit the multiplication by a Heaviside function representing the activation of the source, furthermore without loss of generality we assume that the source is centred in $x=0$ and we set the intensity constant $I$ to be $1.$
 
@@ -2385,7 +2389,7 @@ The pair $(\mathbf{u}, c)$ is called a weak solution of the a hydrostatic system
     \end{split}
   \end{equation}
 %
-for all $(\mathbf{\tilde{u}}, \tilde{c})$ with $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T, \mathbf{W})$, with $\mathbf{\tilde{u}}_h (T) = 0$ and $\partial_3 \mathbf{\tilde{u}}_h \in L^\infty (0, T; L^3 (\Omega)^2)$ and $\tilde{c}$ with $\tilde{c} \in L^2 (0,T, H^3_{\Gamma_A} (\Omega)) \cap H^1 (0,T, L^2)$, $\tilde{c} (T) = 0$. 
+for all $(\mathbf{\tilde{u}}, \tilde{c})$ with $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T, \mathbf{W})$, with $\mathbf{\tilde{u}}_h (T) = 0$ and $\tilde{c}$ with $\tilde{c} \in L^2 (0,T, H^3_{\Gamma_A} (\Omega)) \cap H^1 (0,T, L^2)$, $\tilde{c} (T) = 0$. 
   
   \end{definition}
   
