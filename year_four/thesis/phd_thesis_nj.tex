@@ -58,9 +58,13 @@
 
 \textit{Anya \'es Apa.} K\"oszi a vas\'arnap d\'elut\'ani telefonbesz\'elget\'eseket \'es mindig amikor m\'ar kint v\'artatok mikor bekanyarodott a ZT a Melinda utc\'aba.
 
+\textit{M\'at\'e.} Hogy Mr. Ping klasszikus\'at id\'ezzem: "Good to have you back".
+
+\textit{Rolfi.} K\"oszi hogy elj\"ott\'el amikor elt\"ort a bok\'am (m\'eg ha akkor ezt nem is mondtam) \'es hogy a v\'eg\'en is itt \'allt\'al mellettem.
+
 \textit{Stelios.} One of my favourite ways to work was sharing an office with you in Sussex, both of us immersed in our own business, yet not alone. 
 
-\textit{Gloria.} Grazie per tutte le volte quando andavamo sul SS80 prestissimo nella mattina e parlavamo dei pini, di cultura e caff\`e - e per tutte le parole che m'hai spiegato mentre aspettavamo.
+\textit{Gloria.} Grazie per tutte le volte quando andavamo sul SS80 prestissimo nella mattina e parlavamo dei pini e di caff\`e - e per tutte le parole che m'hai spiegato mentre aspettavamo.
 
 \textit{Jon, Astrid, Ira, Cl\'ementine, Jimmy, Anna.} Guys thanks so much for all the good times, the encouragement, the wisdom and the recipes.
 
@@ -2207,7 +2211,7 @@ As we highlighted before, the numerical experiments conducted in the present sec
 
 In this chapter we are working in the framework of the downwind-matching coordinate system introduced in Section \ref{eqsdescribingatmpluspollution_dwmc}. The first two sections are dedicated to stating and proving a rigorous connection --- on the level of both weak and strong solutions --- between the anisotropic and hydrostatic models, while in the final section we prove an existence result regarding the limit system.
 
-In order to keep this chapter as compact as possible, here we repeat the definition of the two main systems. The anisotropic equations of the polluted atmosphere in downwind-matching coordinates are given by the system
+In order to keep this chapter as compact as possible, here we repeat the definition of the two main models. The anisotropic equations of the polluted atmosphere in downwind-matching coordinates are given by the system
 
 \begin{equation} \label{ANSC1_coordinates_DWMC}
   \partial_t u^\epsilon _1 + \mathbf{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\gamma u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
@@ -2233,7 +2237,7 @@ In order to keep this chapter as compact as possible, here we repeat the definit
   \mathbf{u}^\epsilon (\cdot, t = 0) = \mathbf{u}_0, \quad c^\epsilon (\cdot, t=0) = c_0  \quad \text{ in } \Omega.
 \end{equation}
 
-The hydrostatic equations are obtained formally by neglecting the $\epsilon$--including terms in the anisotropic equations:
+The hydrostatic equations are obtained formally by neglecting the $\epsilon$--including terms in the anisotropic model:
 
 \begin{equation} \label{HNSC1_coordinates_DWMC}    
   \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\gamma u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T)
@@ -2259,7 +2263,7 @@ The hydrostatic equations are obtained formally by neglecting the $\epsilon$--in
   u_i (\cdot, t=0) = u_{0 i}, \quad c (\cdot, t=0) = c_0 \text{ in } \Omega, \text{$i$ = 1,2}.
 \end{equation}
 
-Section \ref{sectionWS_dwmc} focuses on the verification of a convergence result between the models (\ref{ANSC1_coordinates_DWMC}) - (\ref{ANSC5_coordinates_DWMC}), (\ref{ANSC_init_coordinates_DWMC}), and (\ref{HNSC1_coordinates_DWMC}) - (\ref{HNSC5_coordinates_DWMC}), (\ref{HNSC_init_coordinates_DWMC}) in the framework of weak solutions. We will be able to show the fact of the convergence at the cost of using a slightly smoother, $H^1$--regular initial data ${\mathbf{u}_h}_0$ (compare with (\ref{initialregularities_weak_gfc}) in Chapter \ref{geophysicalchapter}) and applying an inland setting for the boundary conditions. In Section \ref{sectionSTRONGsol} we apply stronger initial regularities (namely, ${\mathbf{u}_h}_0 \in H^3(\Omega)$ and $c_0 \in H^2(\Omega)$) and -- from the computations' point of view -- a more favourable boundary structure: in Section \ref{sectionSTRONGsol_convergence} we describe an analogous convergence theorem to that in Section \ref{sectionWS_dwmc}, but the statement holds for strong solutions this time. In order to make the proof complete, in Section \ref{strongexistencesection} we verify the global existence of strong solutions.
+Section \ref{sectionWS_dwmc} focuses on the verification of a convergence result between models (\ref{ANSC1_coordinates_DWMC}) - (\ref{ANSC5_coordinates_DWMC}), (\ref{ANSC_init_coordinates_DWMC}), and (\ref{HNSC1_coordinates_DWMC}) - (\ref{HNSC5_coordinates_DWMC}), (\ref{HNSC_init_coordinates_DWMC}) in the framework of weak solutions. We will be able to show the fact of the convergence at the cost of using a slightly smoother, $H^1$--regular initial data ${\mathbf{u}_h}_0$ (compare with (\ref{initialregularities_weak_gfc}) in Chapter \ref{geophysicalchapter}) and defining an inland setting for the boundary conditions. In Section \ref{sectionSTRONGsol} we apply stronger initial regularities (namely, ${\mathbf{u}_h}_0 \in H^3(\Omega)$ and $c_0 \in H^2(\Omega)$) and -- from the computations' point of view -- a more favourable boundary structure: in Section \ref{sectionSTRONGsol_convergence} we describe an analogous convergence theorem to that in Section \ref{sectionWS_dwmc}, but the statement holds for strong solutions this time. In order to make the proof complete, in Section \ref{strongexistencesection} we verify the global existence of strong solutions.
 
 The theorems we prove in detail in this chapter are our original results and they may also be found in \cite{dwmhydro2020}.
 
@@ -2315,7 +2319,7 @@ while for the hydrostatic case we use
       \end{split}
     \end{equation}
 
-We highlight two important features concerning the above boundary conditions defined on $\Gamma_G$. Firstly, since now we are working on an inland case, we overwrite the Neumann boundary conditions for $\mathbf{u}_h$ we originally used for the geophysical coordinate system in (\ref{HNSC_bc_coordinates_GFC}). Here we can simply use the $\mathbf{u}=0$ Dirichlet boundary condition for the velocity --- this will be crucial later as it allows us to use the Poincar\'e inequality. Concerning the concentration function, note that the condition $\mathbf{M} \nabla c \cdot \vec{\boldsymbol{n}}_{\Gamma_G} = 0$ reduces exactly to $\partial_3 c = 0$ for the case of diagonal diffusion matrices, which we have previously assumed to use here (see Section \ref{eqsdescribingatmpluspollution_dwmc}).
+We highlight two important features concerning the above boundary conditions defined on $\Gamma_G$. Firstly, since now we are working on an inland case, we overwrite the Neumann boundary conditions we originally used for $\mathbf{u}_h$ for the geophysical coordinate system in (\ref{HNSC_bc_coordinates_GFC}). Here we can simply use the $\mathbf{u}=0$ Dirichlet boundary condition for the velocity --- this will be crucial later as it allows us to use the Poincar\'e inequality. Concerning the concentration function, note that the condition $\mathbf{M} \nabla c \cdot \vec{\boldsymbol{n}}_{\Gamma_G} = 0$ reduces exactly to $\partial_3 c = 0$ for the case of diagonal diffusion matrices, which we have previously assumed to use here (see Section \ref{eqsdescribingatmpluspollution_dwmc}).
 
 As we have mentioned it before, in this case we will work with a more regular ${\mathbf{u}_h}_0 \in H^1$ initial data, so we directly use the $u_3 = 0$ equality on the boundary instead of the original $u_3 n_3 = 0$ constraint that we had used in (\ref{HNSC_bc_coordinates_GFC}).
 
@@ -2537,7 +2541,7 @@ hold true for any $f,g,h$ set of functions such that the right-hand sides make s
 
 Note that this lemma simply states the inequality for the complete domain even in the version in \cite{li2019primitive}, not assuming an odd $u_3^\epsilon$ function or a $z$-symmetrical vertical structure of $\Omega$.
   
-The main idea in order to prove the strong convergence of $u^\epsilon_3$ lies in establishing a bound of $O(\epsilon^a)$ for some $a>0$ for the difference \begin{equation}\label{velocitydifferencefunctions}(\mathbf{U}_h^\epsilon, U_3^\epsilon): = (\mathbf{u}_h^\epsilon - \mathbf{u}_h, u_3^\epsilon - u_3).\end{equation} This will be achieved by using the strong solution $(\mathbf{u}_h,u_3)$ as a test function in the weak formulation's integral identity $(\ref{anisotropicWF})$. Following this method we arrive to
+The main idea in order to prove the strong convergence of $u^\epsilon_3$ lies in establishing a bound of $O(\epsilon^\kappa)$ for some $\kappa>0$ for the difference \begin{equation}\label{velocitydifferencefunctions}(\mathbf{U}_h^\epsilon, U_3^\epsilon): = (\mathbf{u}_h^\epsilon - \mathbf{u}_h, u_3^\epsilon - u_3).\end{equation} This will be achieved by using the strong solution $(\mathbf{u}_h,u_3)$ as a test function in the weak formulation's integral identity $(\ref{anisotropicWF})$. Following this method we arrive to
 
 \begin{prop} \label{propIdentity}
 
@@ -2676,7 +2680,7 @@ Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ be a Leray-Hopf weak solution of (\r
     \frac{1}{2} \norm{\mathbf{u}_h(t_0)}_2^2 + \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^2 \diff t = \frac{1}{2} \norm{{\mathbf{u}_h}_0}_2^2,
   \end{equation}
 %
-for any $t_0 \in [0, \infty).$ At the same time we also know by definition that
+for any $t_0 \in [0, \infty).$ At the same time, by the definition of Leray-Hopf weak solutions, we also know that
 
   \begin{equation} \label{bound_by_definition}
     \begin{split}
@@ -2759,7 +2763,7 @@ where we utilised the divergence-free condition, the Young inequality, the $\| \
    
   We highlight the presence of the new, additional term $\int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^4 \| \mathbf{U}_h^\epsilon \| _2^2 \diff t$ in the bound compared to the estimate obtained in \cite{li2019primitive}. The difference is manifested at the point when we apply Lemma $\ref{LadyzhenskayatypeIEQ}$, since we can not apply the Poincar\'e inequality for $\nabla \mathbf{u}_h,$ and as a consequence, instead of $\norm{h}_2^{1/2} \norm{\nabla h}_2^{1/2}$ we will have the complete $\norm{h}_2^{1/2} (\norm{h}_2^{1/2} + \norm{\nabla h}_2^{1/2})$  expression, which leads to the appearance of $\kappa(\zeta) \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^4 \| \mathbf{U}_h^\epsilon \|_2^2 \diff t.$
   
-  Combining the estimates for $I_2', I_{21}''$ and $I_{22}'',$ we can estimate the $I_2$ term by
+  Combining the bounds for $I_2', I_{21}''$ and $I_{22}'',$ we can estimate the $I_2$ term by
   
   $$ I_2 \lesssim \zeta \| \nabla \mathbf{U}_h^\epsilon \| ^2_2 + \kappa(\zeta) \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^4 \| \mathbf{U}_h^\epsilon \| _2^2 \diff t + \kappa(\zeta) \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^2  \norm{\Delta \mathbf{u}_h}_2^2 \| \mathbf{U}_h^\epsilon \| _2^2 \diff t. $$
   
@@ -2787,7 +2791,7 @@ where we used the Young inequality and Lemma \ref{LadyzhenskayatypeIEQ}, keeping
 %
 where we also used $(\ref{bound_by_definition})$.
 
-  \textbf{Bound for $I_4.$} We add $ - \epsilon \beta u_3 u_1 +  \epsilon \beta u_3 u_1 - \epsilon \alpha u_3 u_2 + \epsilon \alpha u_3 u_2 = 0 $ to $I_4$, thus instead of bounding the original version of the term, now we need to bound the equivalent term
+  \textbf{Bound for $I_4.$} We add $ - \epsilon \beta u_3 u_1 +  \epsilon \beta u_3 u_1 - \epsilon \alpha u_3 u_2 + \epsilon \alpha u_3 u_2 = 0 $ to $I_4$, thus instead of estimating the original version of the term, now we need to bound the equivalent term
 
     $$ I_4 = \int_{Q_{t_0}}  ( \epsilon \alpha U_2^\epsilon u_3 - \epsilon \beta U_1^\epsilon u_3 + \epsilon \beta U_3^\epsilon u_1 - \epsilon \alpha U_3^\epsilon u_2 ) \diff x \diff y \diff z \diff t = I_{41} + I_{42} + I_{43} + I_{44}.$$
     
@@ -2886,7 +2890,7 @@ In this section we increase the regularity of the initial data: specifically, we
 We verify that the previously shown connection between the anisotropic and hydrostatic equations has an analogous version that holds in the scenario of strong solutions as well. In order to describe our result we firstly need to give exact definition to the domain and set the boundary conditions. Here we follow the main ideas of \cite{cao2014local} and create a periodic domain $\Omega$ in three steps as described below.
 
 \begin{remark}
-\normalfont In the weak solutions framework we defined a local domain with classical closed boundaries. Preserving this non-periodic domain in the case of strong solutions would naturally require higher order terms to be zero on the boundaries (otherwise the computations can not be brought to a closure, consider for example Lemma 2.2 in \cite{li2019primitive} in a non-periodic case). Since in this framework we essentially need a domain structure where the $H^2$ norm is equivalent to the $L^2$ norm of the Laplacian, thus for simplicity we use the technically more clear choice of assuming periodic boundaries. At the same time we point out that the periodic boundary conditions can be substituted by boundary conditions of type $\nabla^k u = 0, \nabla^k c = 0, k \geq 1$ defined on a non-periodic, standard domain. Applying these alternative boundary conditions it is possible to switch back to a classical domain and still benefit from the disappearing boundary integrals.
+\normalfont In the weak solutions framework we defined a local domain with classical closed boundaries. Preserving this non-periodic domain in the case of strong solutions would naturally require higher order terms to be zero on the boundaries (otherwise the computations can not be brought to a closure, consider for example Lemma 2.2 in \cite{li2019primitive} in a non-periodic case). In this framework we essentially need a domain structure where the $H^2$ norm is equivalent to the $L^2$ norm of the Laplacian, hence, for simplicity we make the technically more clear choice of assuming periodic boundaries. At the same time we point out that the periodic boundary conditions can be substituted by boundary conditions of type $\nabla^k u = 0, \nabla^k c = 0, k \geq 1$ defined on a non-periodic, standard domain. Applying these alternative boundary conditions it is possible to switch back to a classical domain and still benefit from the disappearing boundary integrals.
 \end{remark}
 
 The concept detailed here is a general approach, and we apply it both in the hydrostatic and anisotropic cases.
@@ -2917,7 +2921,7 @@ is the new form of the hydrostatic concentration equation, while the governing e
     \partial_t c^\epsilon + \mathbf{u}_h^\epsilon \cdot \nabla_h c^\epsilon + u_3^\epsilon \bigg ( \partial_3 c^\epsilon - \frac{1}{a} \bigg )= \epsilon K_1 \partial_{11} ^ 2 c^\epsilon + \Delta_d c^\epsilon + s^\epsilon \text{ in } \Omega \times (0,T),
 \end{equation}
 %
-where after using $c = c^* - \frac{z}{a},$ and $c^\epsilon = {c^\epsilon}^* - \frac{z}{a} $ we returned to the original $c$ and $c^\epsilon$ notations for simplicity.
+where after using $c = c^* - \frac{z}{a}$ and $c^\epsilon = {c^\epsilon}^* - \frac{z}{a},$ we returned to the original $c$ and $c^\epsilon$ notations for simplicity.
 
 In terms of boundary conditions now the (\ref{ANSC1_coordinates_DWMC})--(\ref{ANSC4_coordinates_DWMC}), (\ref{ANSC5_strong_cshift_coordinates_DWMC}), (\ref{ANSC_init_coordinates_DWMC}) anisotropic system the and (\ref{HNSC1_coordinates_DWMC})--(\ref{HNSC4_coordinates_DWMC}), (\ref{HNSC5_strong_cshift_coordinates_DWMC}), (\ref{HNSC_init_coordinates_DWMC}) hydrostatic system are combined with the
 %
@@ -2941,7 +2945,7 @@ boundary conditions, respectively.
 
 It is easy to check that the restriction of a solution to (\ref{ANSC1_coordinates_DWMC})--(\ref{ANSC4_coordinates_DWMC}), (\ref{ANSC5_strong_cshift_coordinates_DWMC}), (\ref{ANSC_init_coordinates_DWMC}), (\ref{ANSC_bc-strong_coordinates_DWMC}) from $\Omega$ to $\Omega_0$ is a solution to the original system, and the analogous statement holds for the hydrostatic equations, hence here we exclusively focus on the study of these new versions of the two main systems.
 
-We highlight here that the steps detailed above constructing a fully periodic domain are indeed necessary since, generally speaking, it is physically meaningful to consider the Earth's atmosphere as a domain that is periodic in the horizontal dimensions, however it is highly unnatural to immediately assume vertical periodicity as well. This strategy of adjusting the boundary value of the concentration function and extending the functions according to certain symmetries shows that the choice of a fully periodic domain can actually be a well-grounded choice for the atmosphere, given that the required symmetries hold.
+We highlight here that the steps detailed above constructing a fully periodic domain are indeed necessary since, generally speaking, it is physically meaningful to consider the Earth's atmosphere as a domain that is periodic in the horizontal dimensions, however it is highly unnatural to immediately assume vertical periodicity as well. This strategy of adjusting the boundary value of the concentration function and extending the functions according to certain symmetries shows that the setting of a fully periodic domain can actually be a well-grounded choice for the atmosphere, given that the required symmetries hold.
 
 \begin{remark}
 \normalfont Note that the $\Omega$ domain we construct this way is rather artificial and as a whole it is meaningful only in a theoretical sense: the odd extension of the concentration function beyond the $(-a, 0)$ domain implies that in the $(0,a)$ region we have negative concentration values. The restriction from $\Omega$ to $\Omega_0$ however remains completely meaningful in a physical sense as well.
@@ -3012,7 +3016,7 @@ The first part of the proof concerns exclusively the velocity functions, and it 
 
   \item There exist $\mathbf{u}^\epsilon$ and $\mathbf{u}$ unique global strong solutions for the anisotropic and hydrostatic velocity systems respectively, assuming $\epsilon < \epsilon_0$ and ${\mathbf{u}_h}_0 \in H^3(\Omega).$
   
-  Specifically, for ${\mathbf{u}_h}_0 \in H^3(\Omega),$ the horizontal velocity strong solution $\mathbf{u}_h$ satisfies
+  Specifically, for ${\mathbf{u}_h}_0 \in H^3(\Omega),$ the hydrostatic horizontal velocity strong solution $\mathbf{u}_h$ satisfies
 %
     \begin{equation} \label{u_regularities_first}
       \mathbf{u}_h \in L^\infty([0, \infty), H^3(\Omega)) \cap L^2_{loc}([0, \infty), H^4(\Omega))
@@ -3050,7 +3054,7 @@ The focus of the proof's remaining part is to construct an estimate for the conc
   c^\epsilon \to c \text{ in } L_t^\infty H_x^1 \text{ and } \nabla_d c^\epsilon \to \nabla_d c \text{ in } L_t^2 H_x^1.
 \end{equation}
 
-Analogously to the $\mathbf{U}_h^\epsilon, U_3^\epsilon$ notation we will use $C^\epsilon = c^\epsilon-c$ and $S^\epsilon = s^\epsilon-s$ to denote the difference between anisotropic and hydrostatic functions. Subtracting (\ref{HNSC5_strong_cshift_coordinates_DWMC}) from (\ref{ANSC5_strong_cshift_coordinates_DWMC}) we obtain the governing equation for $C^\epsilon:$
+Analogously to the $\mathbf{U}_h^\epsilon, U_3^\epsilon$ notation we introduce $C^\epsilon = c^\epsilon-c$ and $S^\epsilon = s^\epsilon-s$ to denote the difference between anisotropic and hydrostatic functions. Subtracting (\ref{HNSC5_strong_cshift_coordinates_DWMC}) from (\ref{ANSC5_strong_cshift_coordinates_DWMC}) we obtain the governing equation for $C^\epsilon:$
 
 \begin{equation}
   \partial_t C^\epsilon + \mathbf{u}^\epsilon \cdot \nabla c^\epsilon - \mathbf{u} \cdot \nabla c = \frac{1}{a} U_3^\epsilon + \epsilon K_1 \partial_{11} c^\epsilon + \Delta_d C^\epsilon + S^\epsilon.
@@ -3175,7 +3179,7 @@ while $I_2(i), i = 2,3$ can be estimated by
   \end{split}
 \end{equation}
 
-Note that the regularities (\ref{regularity_c_first}) listed in Theorem \ref{existenceconcentrationSTRONG} guarantee that the appearance of $\norm{c}_{H^2}^2$ in (\ref{cH2normappears}) is not problematic concerning further estimates.
+Note that the regularities (\ref{regularity_c_first}) listed in Theorem \ref{existenceconcentrationSTRONG} guarantee that the $\norm{c}_{H^2}^2$ term in (\ref{cH2normappears}) is bounded.
 
 \bigskip
 
@@ -3294,7 +3298,7 @@ Combining the velocity convergence results (\ref{StrongConvVelocity1})--(\ref{St
 
 \subsection{Existence of the strong solutions of the hydrostatic equations of the polluted atmosphere} \label{strongexistencesection}
 
-The section is dedicated to showing the existence of the unique global strong solution $(\mathbf{u}_h, u_3, c)$ of the hydrostatic limit system (\ref{HNSC1_coordinates_DWMC})--(\ref{HNSC4_coordinates_DWMC}), (\ref{HNSC5_strong_cshift_coordinates_DWMC}), (\ref{HNSC_init_coordinates_DWMC}), (\ref{HNSC_bc-strong_coordinates_DWMC}) --- in other words we prove Theorem \ref{existenceconcentrationSTRONG}. The proof's first part strongly uses the existence result achieved in \cite{cao2014local}: here the authors focus on a system that is very similar to ours, including an incomplete Laplacian in the convection-diffusion equation. However, while they work with a temperature function $T,$ in our case the additional function to the velocity-pressure pair is the concentration $c.$ Even though there is a strong analogy between the equations describing the dynamics of concentration and temperature, yet the variant nature of how each of these functions are coupled with the velocity equations overall contributes to a very significant structural divergence. Specifically, the difference between the equations $$ \partial_3 p + T = 0$$ and $$ \partial_3 p = 0$$ turns out to be a cardinal one concerning global existence. Observe in these equations that for the case of the temperature there is a reciprocal coupling between the momentum equations and the convection-diffusion equation, on the other hand the coupling for the pollution concentration is one-sided, the hydrostatic equation does not depend on the function $c.$
+The section is dedicated to showing the existence of the unique global strong solution $(\mathbf{u}_h, u_3, c)$ of the hydrostatic limit system (\ref{HNSC1_coordinates_DWMC})--(\ref{HNSC4_coordinates_DWMC}), (\ref{HNSC5_strong_cshift_coordinates_DWMC}), (\ref{HNSC_init_coordinates_DWMC}), (\ref{HNSC_bc-strong_coordinates_DWMC}) --- in other words we prove Theorem \ref{existenceconcentrationSTRONG}. The proof's first part strongly uses the existence result achieved in \cite{cao2014local}: here the authors focus on a system that is very similar to ours, including an incomplete Laplacian in the convection-diffusion equation. However, while they work with a temperature function $T,$ in our case the additional function to the velocity-pressure pair is the concentration $c.$ Even though there is a strong analogy between the equations describing the dynamics of concentration and temperature, yet the nature of how each of these functions are coupled with the velocity equations is variant, and overall this contributes to a very significant structural divergence. Specifically, the difference between the equations $$ \partial_3 p + T = 0$$ and $$ \partial_3 p = 0$$ turns out to be a cardinal one concerning global existence. Observe in these equations that for the case of the temperature there is a reciprocal coupling between the momentum equations and the convection-diffusion equation, on the other hand the coupling for the pollution concentration is one-sided, the hydrostatic equation does not depend on the function $c.$
 
 The method of \cite{cao2014local} is easily applicable with minor changes to our system until reaching the verification of local existence; the transplantation of their global existence proof on the other hand becomes very problematic. The presence of $T$ in the hydrostatic equation makes certain cancellations possible in their case which eventually guarantee the ability to close estimates that otherwise would not lead to meaningful implications. Since our hydrostatic equation does not include $c,$ we will work out a set of rather independent estimates to show the continuability of the concentration function.
 
@@ -3422,7 +3426,7 @@ In the following we construct an estimate for each term on the right-hand side.
   \end{split}
 \end{equation}
 %
-where $ \zeta \norm{\Delta \partial_3 c}_2^2$ is merged into the left-hand side of (\ref{firstformboundc}).
+where $ \zeta \norm{\Delta \partial_3 c}_2^2$ can be merged into the left-hand side of (\ref{firstformboundc}).
 
 For the second part we obtain
 %
@@ -3445,7 +3449,7 @@ while for the third term we compute
 
 Here the $\zeta \norm{\mathbf{u}_h}_{H^3} \norm{\Delta \partial_3 c}_2^2$ term can be merged into the left-hand side of (\ref{firstformboundc}), as $d$ contains the direction $z,$ and $\norm{\mathbf{u}_h}_{H^3}$ is finite.
 
-Now, merging estimates (\ref{term1estimateGE}), (\ref{term2estimateGE}), (\ref{term3estimateGE_1}),(\ref{term3estimateGE_2}), (\ref{term3estimateGE_3}) in (\ref{firstformboundc}) we eventually arrive to
+Now, merging estimates (\ref{term1estimateGE}), (\ref{term2estimateGE}), (\ref{term3estimateGE_1}),(\ref{term3estimateGE_2}), (\ref{term3estimateGE_3}) into (\ref{firstformboundc}) we eventually arrive to
 
 \begin{equation} \label{Gronwallstructureready}
   \begin{split}
