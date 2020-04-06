@@ -58,8 +58,6 @@
 
 \textit{Anya \'es Apa.} K\"oszi a vas\'arnap d\'elut\'ani telefonbesz\'elget\'eseket \'es mindig amikor m\'ar kint v\'artatok mikor bekanyarodott a ZT a Melinda utc\'aba.
 
-\textit{M\'at\'e.} Hogy Mr. Ping klasszikus\'at id\'ezzem: "Good to have you back".
-
 \textit{Rolfi.} K\"oszi hogy elj\"ott\'el amikor elt\"ort a bok\'am (m\'eg ha akkor ezt nem is mondtam) \'es hogy a v\'eg\'en is itt \'allt\'al mellettem.
 
 \textit{Stelios.} One of my favourite ways to work was sharing an office with you in Sussex, both of us immersed in our own business, yet not alone. 
@@ -889,7 +887,7 @@ and
 \end{split}
 \end{equation}
 %
-for all $(\mathbf{\tilde{u}}, \tilde{c})$ with $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T, \mathbf{W})$, $\mathbf{\tilde{u}}_h (T) = 0$ and $\partial_3 \mathbf{\tilde{u}}_h \in L^\infty (0, T; L^3 (\Omega)^2)$ and  $\tilde{c} \in L^2 (0,T, H^2_{\Gamma_A} (\Omega)) \cap H^1 (0,T, L^2)$, $\tilde{c} (T) = 0$.
+for all $(\mathbf{\tilde{u}}, \tilde{c})$ with $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T, \mathbf{W})$, $\mathbf{\tilde{u}}_h (T) = 0$ and $\partial_3 \mathbf{\tilde{u}}_h \in L^\infty (0, T; L^3 (\Omega)^2)$ and  $\tilde{c} \in H^1 (0,T, H^2_{\Gamma_A} (\Omega))$, $\tilde{c} (T) = 0$.
   
 \end{definition}
 
@@ -1008,12 +1006,12 @@ After applying the coercivity property (\ref{coercivity}) of the diffusion matri
 
 \subsection{Passing to the limit}
 
-In order to conclude the proof of Theorem \ref{maintheorem_weak_GFC} we pass to the limit in the weak formulation (\ref{anisotropicWF_U})-(\ref{anisotropicWF_C}). To take the limit for the linear velocity terms that do not include the concentration function $c^\epsilon$ we can use (\ref{WeakConvUHEps_gfc}), (\ref{WeakConvU3Eps_gfc}) and (\ref{WeakConvU3NoEps_gfc}), and the bounds (\ref{propositionExtra_gfc}), (\ref{proposition2_gfc}). As for the nonlinear terms, the convergence can be shown using a time compactness theorem that is based on a result by Simon \cite{simon1986compact}. The key point is to apply the following generalisation of the classical translation criterium of Riesz-Fr\'echet-Kolmogorov which enables us to get strong convergence for the horizontal velocities (for the proof of the result below see Theorem 5.1 in \cite{azerad2001mathematical}).
+In order to conclude the proof of Theorem \ref{maintheorem_weak_GFC} we pass to the limit in the weak formulation (\ref{anisotropicWF_U})-(\ref{anisotropicWF_C}). To take the limit for the linear velocity terms that do not include the concentration function $c^\epsilon$ we can use (\ref{WeakConvUHEps_gfc}), (\ref{WeakConvU3Eps_gfc}) and (\ref{WeakConvU3NoEps_gfc}). As for the nonlinear terms, the convergence can be shown using a time compactness theorem that is based on a result by Simon \cite{simon1986compact}. The key point is to apply the following generalisation of the classical translation criterium of Riesz-Fr\'echet-Kolmogorov which enables us to get strong convergence for the horizontal velocities (for the proof of the result below see Theorem 5.1 in \cite{azerad2001mathematical}).
 
 \begin{theorem} \label{compactnessbyperturbation}
 Let $T>0,$ and let the Banach spaces $\mathbf{X} \hookrightarrow \mathbf{B} \hookrightarrow \mathbf{Y},$ where $\mathbf{X}$ is compactly embedded in $\mathbf{B},$ and $\mathbf{B}$ is continuously embedded in $\mathbf{Y}.$ Let $(f_\epsilon)_{\epsilon>0}$ be a family of functions of $L^p (0,T; \mathbf{X}), 1 \leq p \leq \infty,$ with the extra condition $(f_\epsilon)_{\epsilon>0} \subset C (0,T; \mathbf{Y})$ if $p = \infty,$ such that
 \begin{enumerate}
-  \item $(f_\epsilon)_{\epsilon>0}$ is bounded in $L^p (0,T; \mathbf{X}),$
+  \item $(f_\epsilon)_{\epsilon>0}$ is uniformly bounded in $L^p (0,T; \mathbf{X}),$
   \item $\norm{\tau_\upsilon f_\epsilon - f_\epsilon}_{L^p(0,T-\upsilon; \mathbf{Y})} \leq \varphi(\upsilon) + \psi(\epsilon)$ for a given pair of functions $\varphi, \psi$ with
   $$
     \begin{cases}
@@ -2358,7 +2356,7 @@ In this section we describe the weak formulation of the merged equations in both
   
   \[ H^k_{\Gamma} (\Omega) = \overline{C_\Gamma ^ \infty (\Omega)} ^ {H^k (\Omega)} = \{ v \in H^k(\Omega); \partial^\alpha v=0 \text{ on } \Gamma \text{ for any } \abs{\alpha} < k \} \]
   
-  \[ H^k_{\Gamma_A} (\Omega) = \overline{C_{\Gamma_A} ^ \infty (\Omega)} ^ {H^k (\Omega)} = \{ c \in H^k(\Omega); \partial^\alpha c=0 \text{ on } \Gamma_A \text{ for any } \abs{\alpha} < k \} \]
+  \[ H^k_{\Gamma_A} (\Omega) = \{ c \in H^k(\Omega); \partial^\alpha c=0 \text{ on } \Gamma_A \text{ for any } \abs{\alpha} < k \} \]
   
   \[ \mathbf{V} = \{ \mathbf{v} \in  H^1_{\Gamma} (\Omega) \times H^1_{\Gamma} (\Omega) \times H^1_{\Gamma} (\Omega); \nabla \cdot \mathbf{v} = 0 \text{ in } \Omega \} \]
   
@@ -2393,7 +2391,7 @@ The pair $(\mathbf{u}, c)$ is called a weak solution of the a hydrostatic system
     \end{split}
   \end{equation}
 %
-for all $(\mathbf{\tilde{u}}, \tilde{c})$ with $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T, \mathbf{W})$, with $\mathbf{\tilde{u}}_h (T) = 0$ and $\tilde{c}$ with $\tilde{c} \in L^2 (0,T, H^3_{\Gamma_A} (\Omega)) \cap H^1 (0,T, L^2)$, $\tilde{c} (T) = 0$. 
+for all $(\mathbf{\tilde{u}}, \tilde{c})$ with $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T, \mathbf{W})$, with $\mathbf{\tilde{u}}_h (T) = 0$ and $\tilde{c}$ with $\tilde{c} \in L^2 (0,T, H^2_{\Gamma_A} (\Omega)) \cap H^1 (0,T, L^2)$, $\tilde{c} (T) = 0$. 
   
   \end{definition}
   
@@ -2878,7 +2876,7 @@ where the $\kappa$ constant only depends on the domain structure and the initial
 
 This has been the last missing part of the proof of the main theorem, since combining the weak convergence result ($\ref{WeakConvCEps1}$) for $c^\epsilon$ and the strong convergence ($\ref{strongconvresultu3}$) of $u_3^\epsilon,$ we are finally able to state that
 %
-\begin{equation}c^\epsilon u_3^\epsilon \rightharpoonup c u_3 \text{ weakly in } L_t^2 L_x^2,\end{equation}
+\begin{equation}c^\epsilon u_3^\epsilon \rightharpoonup c u_3 \text{ weakly in } L_t^2 L_x^1,\end{equation}
 %
 and we can conclude the proof of Theorem $\ref{maintheoremWEAK}$.
 
