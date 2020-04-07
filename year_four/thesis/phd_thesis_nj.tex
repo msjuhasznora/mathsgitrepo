@@ -58,7 +58,7 @@
 
 \textit{Anya \'es Apa.} K\"oszi a vas\'arnap d\'elut\'ani telefonbesz\'elget\'eseket \'es mindig amikor m\'ar kint v\'artatok mikor bekanyarodott a ZT a Melinda utc\'aba.
 
-\textit{Rolfi.} K\"oszi hogy elj\"ott\'el amikor elt\"ort a bok\'am (m\'eg ha akkor ezt nem is mondtam) \'es hogy a v\'eg\'en is itt \'allt\'al mellettem.
+\textit{Rolf.} K\"oszi hogy elj\"ott\'el amikor elt\"ort a bok\'am (m\'eg ha akkor ezt nem is mondtam) \'es hogy a v\'eg\'en is itt \'allt\'al mellettem.
 
 \textit{Stelios.} One of my favourite ways to work was sharing an office with you in Sussex, both of us immersed in our own business, yet not alone. 
 
@@ -1159,7 +1159,7 @@ for almost any $x \in \Omega$ and all $\xi \in \mathbb{R}^3$, $\lambda \in \math
 %%% EXISTENCE WEAK HYDROSTATIC %%%
 \section{Existence of weak solutions of the hydrostatic system of the polluted atmosphere}\label{existenceweakhydrostatic}
 
-Our next step in this chapter is to point out that the existence of weak solutions for the hydrostatic system of the polluted atmosphere can be proved directly and not only as the result of the small aspect ratio limit of the anisotropic Navier-Stokes system. In this section, for completeness, we sketch this proof of existence.
+We conclude the theoretical analysis of our models in geophysical coordinates by pointing out that the existence of weak solutions for the hydrostatic system of the polluted atmosphere can be proved directly and not only as the result of the small aspect ratio limit of the anisotropic Navier-Stokes system. In this section, for completeness, we sketch this proof of existence.
 
 The idea is that the polluted atmosphere can be viewed as the air-analogous version of the salty sea water in terms of the equations that represent it. In both cases we have a fluid which can be seen approximately as an incompressible fluid carrying some other particles in a significant concentration, the basis fluid motion is well described by the incompressible Navier-Stokes equations, and the additional concentration is described by an advection-diffusion equation. 
 
@@ -2325,7 +2325,12 @@ As we have mentioned it before, in this case we will work with a more regular ${
 
 Concerning the initial data, we set
 
-$${\mathbf{u}_h}_0 \in H^1 (\Omega), {u_3}_0 \in L^2(\Omega) \text{ with } \nabla \cdot \mathbf{u}_0 = 0, \text{ and } c_0 \in L^2 (\Omega).$$
+\begin{equation}
+\begin{gathered}\label{DWMC_weak_initial_data_regularities}
+{\mathbf{u}_h}_0 \in H^1 (\Omega), {u_3}_0 \in L^2(\Omega) \text{ with } \nabla \cdot \mathbf{u}_0 = 0,\\
+{u_3}_0 = - \int_0^z \nabla_h \cdot {\mathbf{u}_h}_0 \diff z' \text{ and } c_0 \in L^2 (\Omega).
+\end{gathered}
+\end{equation}
 
 We emphasise here that we are still working in the classical Leray framework of weak solutions, even though we use an $H^1(\Omega)$ regularity assumption on ${\mathbf{u}_h}_0,$ which is stronger than the more usual $L^2$ space regularity requirement for weak solutions (see (\ref{initialregularities_weak_gfc}) in Chapter \ref{geophysicalchapter}, or \cite{azerad2001mathematical} for example). The reason we need this stronger regularity is to counterbalance the decreased control we have on the concentration function due to the coordinate choice, but overall this does not lead us out of the field of weak solutions.
 
@@ -2545,7 +2550,7 @@ The main idea in order to prove the strong convergence of $u^\epsilon_3$ lies in
 
 \begin{prop} \label{propIdentity}
 
-Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ be a Leray-Hopf weak solution of (\ref{ANSC1_coordinates_DWMC}) - (\ref{ANSC4_coordinates_DWMC}), let $(\mathbf{u}_h,u_3)$ be the unique global strong solution of (\ref{HNSC1_coordinates_DWMC}) - (\ref{HNSC4_coordinates_DWMC}), moreover for both cases let $({\mathbf{u}_h}_0, {u_3}_0)$ be the initial data, where ${\mathbf{u}_h}_0 \in H^1(\Omega)$ and ${u_3}_0 = - \int_0^z \nabla_h \cdot {\mathbf{u}_h}_0 \diff z'.$ Then we have the following integral identity:
+Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ be a Leray-Hopf weak solution of (\ref{ANSC1_coordinates_DWMC}) - (\ref{ANSC4_coordinates_DWMC}), let $(\mathbf{u}_h,u_3)$ be the unique global strong solution of (\ref{HNSC1_coordinates_DWMC}) - (\ref{HNSC4_coordinates_DWMC}), moreover let the initial data as given in (\ref{ANSC_init_coordinates_DWMC}) and (\ref{HNSC_init_coordinates_DWMC}), furthermore we assume the regularities defined in (\ref{DWMC_weak_initial_data_regularities}). Then we have the following integral identity:
 
 \begin{equation} \label{integralIdentity_prop}
   \begin{split}
@@ -2652,7 +2657,7 @@ With this we are ready to estimate the difference between the solutions of the s
 
 \begin{prop} \label{convrateweakframework}
 
-Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ be a Leray-Hopf weak solution of (\ref{ANSC1_coordinates_DWMC}) - (\ref{ANSC4_coordinates_DWMC}), let $(\mathbf{u}_h,u_3)$ be the unique global strong solution of (\ref{HNSC1_coordinates_DWMC}) - (\ref{HNSC4_coordinates_DWMC}), moreover for both cases let $({\mathbf{u}_h}_0, {u_3}_0)$ be the initial data, where ${\mathbf{u}_h}_0 \in H^1(\Omega)$ and ${u_3}_0 = - \int_0^z \nabla_h \cdot {\mathbf{u}_h}_0 \diff z'.$ Then the following estimate holds for the difference function $(\mathbf{U}_h^\epsilon, U_3^\epsilon):$
+Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ be a Leray-Hopf weak solution of (\ref{ANSC1_coordinates_DWMC}) - (\ref{ANSC4_coordinates_DWMC}), let $(\mathbf{u}_h,u_3)$ be the unique global strong solution of (\ref{HNSC1_coordinates_DWMC}) - (\ref{HNSC4_coordinates_DWMC}), moreover let the initial data as given in (\ref{ANSC_init_coordinates_DWMC}) and (\ref{HNSC_init_coordinates_DWMC}), furthermore we assume the regularities defined in (\ref{DWMC_weak_initial_data_regularities}). Then the following estimate holds for the difference function $(\mathbf{U}_h^\epsilon, U_3^\epsilon):$
 
 \begin{equation}\label{horizontal_velocities_convergence}
   \begin{split}
