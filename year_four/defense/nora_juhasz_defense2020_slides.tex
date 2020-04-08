@@ -28,6 +28,22 @@
 \titlepage
 \end{frame}
 
+\begin{frame}{Plan of the defence}
+
+We present our results in the following structure:
+
+\begin{enumerate}
+\item Motivation: already well-known facts and general outline of the two main models describing large-scale geophysical flows.
+\item The focus of our work: we prove a rigorous \textbf{connection and justification} in three different frameworks:
+\begin{enumerate}
+\item \textbf{Framework 1.} Geophysical coordinate system + weak solutions. \textit{\underline{Key focus}:} Strong convergence of the concentration function, visualisation of the results.
+\item \textbf{Framework 2.} Downwind - matching coordinate system + weak solutions. \textit{\underline{Key focus}:} Classical, non-periodic domain, Coriolis terms.
+\item \textbf{Framework 3.} Downwind - matching coordinate system + strong solutions. \textit{\underline{Key focus}:} Strong convergence of the concentration function, existence result for the limit system.
+\end{enumerate}
+\end{enumerate}
+
+\end{frame}
+
 %%% MODELLING FOUNDATIONS %%%
 \section{Modelling foundations}
 
@@ -51,10 +67,10 @@ We combine these equations with the following four basic concepts.
 
 \begin{enumerate}
 
-\item The Coriolis force: $2 \omega \times \mathbf{v}$ --- due to working with a large-scale phenomena on the surface of the rotating Earth.
-\item The Boussinesq approximation: a simplification used in the field of buoyancy-driven flows. We use $\rho \equiv \rho_0$ everywhere except in the gravity term and the state equation.
-\item The notion of an isothermal process: $\tau \equiv \tau_0,$ and as a consequence, $\rho \equiv \rho_0$ everywhere.
-\item The incompressibility condition: a consequence of the Boussinesq approximation.
+\item \textbf{The Coriolis force}: $2 \omega \times \mathbf{v}$ --- due to working with a large-scale phenomena on the surface of the rotating Earth.
+\item \textbf{The Boussinesq approximation}: a simplification used in the field of buoyancy-driven flows. We use $\rho \equiv \rho_0$ everywhere except in the gravity term and the state equation.
+\item The notion of an \textbf{isothermal process}: $\tau \equiv \tau_0,$ and as a consequence, $\rho \equiv \rho_0$ everywhere.
+\item \textbf{The incompressibility condition}: a consequence of the Boussinesq approximation.
 
 \end{enumerate}
 
@@ -62,11 +78,13 @@ We combine these equations with the following four basic concepts.
 
 \begin{frame}{Incompressible Navier-Stokes equations}
 
-Incorporating these ideas, we arrive to the following, more simple system: the incompressible Navier-Stokes equations.
+Incorporating these ideas, we arrive to the incompressible Navier-Stokes equations:
 
 $$ \partial_t \mathbf{v} + (\mathbf{v} \cdot \nabla)\mathbf{v} -\Delta_{\nu} \mathbf{v} + \nabla q + 2 \mathbf{\omega} \times \mathbf{v}= \mathbf{g} \text{ in } \Omega_0 \times (0,T), $$
     
 $$ \nabla \cdot \mathbf{v} = 0 \text{ in } \Omega_0 \times (0,T). $$
+
+\textit{Important}: in all three space dimensions we a \textbf{complete momentum equation} for the velocity.
 
 \end{frame}
 
@@ -155,7 +173,7 @@ $$\partial_t p_c + \mathbf{v} \cdot \nabla p_c = \nabla \cdot (\mathbf{K} \nabla
 
 \end{frame}
 
-\begin{frame}{Scaling part 1}
+\begin{frame}{Scaling - shallowness part 1}
 
 \textbf{"$\beta$-plane approximation"} $\to$ this means that we can neglect the curvature of the Earth (valid locally) $\to$ we can use Cartesian coordinates.
 
@@ -173,25 +191,101 @@ $$\epsilon = \frac{\text{characteristic depth}}{\text{characteristic width}} = \
 
 \end{frame}
 
+\begin{frame}{Scaling - shallowness part 2}
+We need to consider the highly anisotropic nature of viscosity and diffusivity $\to$ this means that these rates are strongly different in horizontal and vertical directions.
+Rescaling these parameters according to the largely different scales:
+
+  \begin{enumerate}
+    \item $ \nu_x = \nu_1, \quad \nu_y = \nu_2 , \quad \nu_z = \epsilon ^ 2\nu_3, $
+    \item
+     \begin{gather}
+      \begin{bmatrix} K_{xx} & K_{xy} & K_{xz} \\ K_{yx} & K_{yy} & K_{yz} \\ K_{zx} & K_{zy} & K_{zz} \end{bmatrix}
+       =
+      \begin{bmatrix}
+    M_{11} & M_{12} & \epsilon M_{13} \\ M_{21} & M_{22} & \epsilon M_{23} \\ \epsilon M_{31} & \epsilon M_{32} & \epsilon^2 M_{33}
+  \end{bmatrix} \nonumber
+\end{gather}
+  \end{enumerate}
+  
+The diffusivity matrix is assumed to be coercive.
+
+\end{frame}
+
+\begin{frame}{Source term}
+
+Let us consider a contaminant plume
+\begin{itemize}
+\item with intensity $I,$
+\item originating at emission coordinates $\mathbf{x}_s,$
+\item beginning at time $t_s.$
+\end{itemize}
+
+We arrive to the complete source term model of the form
+%
+$$s_\eta (t, t_s, x, x_s) = I H(t-t_s) \delta_\eta (\mathbf{x} - \mathbf{x}_s), $$
+%
+where $\delta_\eta$ is an approximated delta function.
+
+In the limit model the source term $s$ naturally stands for the Dirac $\delta$ distribution.
+
+\end{frame}
+
+\begin{frame}{Source term part 2}
+We reformulate the above expression in terms of $\epsilon$ --- new parameter of the distribution.
+
+The following function will give shape to the source term:
+%
+$$
+\delta_\epsilon (\mathbf{x}) = 
+  \begin{cases}
+       \frac{1}{\epsilon^3} \exp{\bigg ( \frac{1}{\abs{{\frac{\mathbf{x}}{\epsilon}}}^2-1} \bigg ) } &\quad \abs{\mathbf{x}} < \epsilon \\
+       0 &\quad \abs{\mathbf{x}} \geq \epsilon; \\
+  \end{cases}
+$$
+%
+and finally
+
+\begin{equation} \label{sourcedefinition}
+  s^\epsilon = I H(t-t_s) \delta_\epsilon (\mathbf{x} - \mathbf{x}_s).
+\end{equation}
+\end{frame}
+
 %%% GFC %%%
 \section{Geophysical coordinates}
 
 % Modeling and scaling %
-\subsection{Modelling and scaling}
+\subsection{Modelling}
 
-\begin{frame}{Start: 3D Navier-Stokes}
+\begin{frame}{Geophysical coordinates}
+
+Geophysical rotating frame: $x$ --- East, $y$ --- North, $z$ --- Vertical coordinate ("upwards").
+
+\textbf{Result: simpler Coriolis term.}
+
+Earth rotation angular speed: $\omega = f (0, \cos(l(x_2)), \sin(l(x_2))),$ where we introduce $\alpha = 2f \sin(l(x_2)), \beta = 2f \cos(l(x_2)).$ 
+
+The $2 \omega \times \mathbf{u}^\epsilon$ Coriolis acceleration becomes
+
+\begin{gather}
+\begin{bmatrix} 0 \\ \beta \\ \alpha \end{bmatrix}
+ \times
+ \begin{bmatrix} u^\epsilon_1 \\ u^\epsilon_2 \\ \epsilon u^\epsilon_3 \end{bmatrix}
+ =
+ \begin{bmatrix}  \beta \epsilon u^\epsilon_3 - \alpha u^\epsilon_2 \\ \alpha u^\epsilon_1  \\ - \beta u^\epsilon_1 \end{bmatrix}.
+\end{gather}
+
 \end{frame}
 
 % Weak solutions convergence result %
 \subsection{Weak solutions convergence result}
 
-\begin{frame}{Start: 3D Navier-Stokes}
+\begin{frame}
 \end{frame}
 
 % Visualisation with FEniCS %
 \subsection{Visualisation with FEniCS}
 
-\begin{frame}{Start: 3D Navier-Stokes}
+\begin{frame}
 \end{frame}
 
 %%% DWMC %%%
@@ -200,19 +294,19 @@ $$\epsilon = \frac{\text{characteristic depth}}{\text{characteristic width}} = \
 % Modeling and scaling %
 \subsection{Modelling and scaling}
 
-\begin{frame}{Start: 3D Navier-Stokes}
+\begin{frame}
 \end{frame}
 
 % Weak solutions framework %
 \subsection{Weak solutions framework}
 
-\begin{frame}{Start: 3D Navier-Stokes}
+\begin{frame}
 \end{frame}
 
 % Strong solutions framework %
 \subsection{Strong solutions framework}
 
-\begin{frame}{Start: 3D Navier-Stokes}
+\begin{frame}
 \end{frame}
 
 \end{document}
