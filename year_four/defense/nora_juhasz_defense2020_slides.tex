@@ -6,6 +6,7 @@
 \usepackage{lmodern}
 \usepackage{scrextend}
 \usepackage{xcolor}
+\usepackage{capt-of}
 \newcommand*\diff{\mathop{}\!\mathrm{d}}
 \usetheme{Frankfurt}
 \useoutertheme[subsection=false, footline=authortitle]{miniframes}
@@ -474,21 +475,50 @@ We can apply the statement of this theorem for $p=2$ and the spaces $H^1 \hookri
 
 \begin{itemize}
   \item $ (\tau_\upsilon c^\epsilon (t) - c^\epsilon (t), \tilde{c}) = \int_t^{t+\upsilon} \iota^\epsilon (s) \diff s, $ where we define $ \iota^\epsilon (s) = (\mathbf{u}^\epsilon c^\epsilon, \nabla \tilde{c}) - (\mathbf{M} \nabla c^\epsilon, \nabla \tilde{c}) + (s^\epsilon, \tilde{c}).$
-  \item We show that $\norm{\iota^\epsilon}_{L^{4/3}(0,T)} \leq c  \| \tilde{c}  \| _{H^2}$ using
+  \item We show that $\norm{\iota^\epsilon}_{L^{4/3}(0,T)} \leq \kappa  \| \tilde{c}  \| _{H^2}$ using
   \setbeamertemplate{itemize items}[circle]
   \begin{itemize}
      \item $(s^\epsilon, \tilde{c}) \quad  \text{is bounded in $L^2(0,T)$,}$
      \item $ (\mathbf{M} \nabla c^\epsilon, \nabla \tilde{c}) \leq \kappa \big \| \tilde{c} \big \| _{H^1} \| c^\epsilon \| _{H^1} \quad  \text{is bounded in $L^2(0,T)$,}$
-     \item $(\mathbf{u}^\epsilon c^\epsilon, \nabla \tilde{c}) \leq \norm{\mathbf{u}^\epsilon}_{L^2} \norm{c^\epsilon}_{L^3}  \| \tilde{c}  \| _{H^2} \quad  \text{is bounded in $L^{4/3}(0,T),$} $ using the interpolation between $L_t^\infty L_x^2$ and $L_t^2 L_x^6$ for $c^\epsilon,$ obtaining that it is in $L_t^4 L^3_x$
+     \item $(\mathbf{u}^\epsilon c^\epsilon, \nabla \tilde{c}) \leq \norm{\mathbf{u}^\epsilon}_{L^2} \norm{c^\epsilon}_{L^3}  \| \tilde{c}  \| _{H^2} \quad  \text{is bounded in $L^{4/3}(0,T),$} $ using the interpolation between $L_t^\infty L_x^2$ and $L_t^2 L_x^6$ for $c^\epsilon,$ obtaining that it is in $L_t^4 L^3_x.$
   \end{itemize}
   \setbeamertemplate{itemize items}[square]
-  \item We apply the H\"older inequality and arrive to $$ \int_t^{t+\upsilon} \abs{\iota^\epsilon (s)} \diff s \leq \kappa  \| \tilde{c}  \| _{H^2} \upsilon^{1/4}$$
+  \item We apply the H\"older inequality and arrive to $$ \int_t^{t+\upsilon} \abs{\iota^\epsilon (s)} \diff s \leq \kappa  \| \tilde{c}  \| _{H^2} \upsilon^{1/4}.$$
   \item We conclude $$c^\epsilon \to c \text{ strongly in } L^2_t L^2_x,$$ and $$u^\epsilon_3 c^\epsilon \rightharpoonup u_3 c \text{ weakly.}$$
 \end{itemize}
 
 \end{frame}
 
-\begin{frame}
+\begin{frame}{Visualisation results}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.35\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/pressure_eps_conv/pressure_anis_1_0000000}
+  \captionof{figure}{$\epsilon = 1.0000000.$}
+\end{minipage}%
+\begin{minipage}{0.35\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/pressure_eps_conv/pressure_anis_0_5000000}
+  \captionof{figure}{$\epsilon = 0.5000000.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.35\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/pressure_eps_conv/pressure_anis_0_0625000}
+  \captionof{figure}{$\epsilon = 0.0625000.$}
+\end{minipage}%
+\begin{minipage}{0.35\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/pressure_eps_conv/pressure_anis_0_0312500}
+  \captionof{figure}{$\epsilon = 0.0312500.$}
+\end{minipage}
+\end{figure}
+
 \end{frame}
 
 %%% DWMC %%%
