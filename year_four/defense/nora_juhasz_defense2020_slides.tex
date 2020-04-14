@@ -489,7 +489,44 @@ We can apply the statement of this theorem for $p=2$ and the spaces $H^1 \hookri
 
 \end{frame}
 
-\begin{frame}{Visualisation results}
+\begin{frame}{Visualisation of the convergence result}
+
+\textit{Tools for visualisation:} FEM + FEniCS (Python) + ParaView.
+
+\textbf{The finite element method}:
+\begin{itemize}
+\item No direct discretising of the PDE itself
+\item We use the variational form of the equation
+\item We define finite dimensional spaces on which the variational form is restricted (or extended): we decompose the domain into finitely many polygonal subdomains called finite element
+\item On each element the solution is approximated by a polynomial function
+\item The approximate finite element solution takes the customary form $$ U(\mathbf{x}) = \sum_{j=1}^N c_j \phi_j (\mathbf{x})$$
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{What makes the visualisation computationally interesting}
+
+\textbf{The major challenge}: the scheme's disappearing dependence upon certain terms. \textit{Picard iterations} and the \textit{Chorin method} are widely used, standard methods in the field of the \textcolor{red}{complete} Navier-Stokes equations $\to$ but once we introduce the $\epsilon$ multiplier into the equations, these standard schemes become problematic as $\epsilon$ decreases.
+
+\end{frame}
+
+\begin{frame}{Example: disappearing dependecies}
+
+\textit{Picard iterations}: Representing the $(\mathbf{u} \nabla \mathbf{u}_h, \mathbf{v}_h) + \epsilon^2 ( \mathbf{u} \nabla u_3, v_3)$ nonlinear term by the $( \texttt{u}^{k+1} \nabla \texttt{u}_h^k, \texttt{v}_h ) + \epsilon^2 (\texttt{u}^{k+1} \nabla \texttt{u}_3^k, \texttt{v}_3 )$ linearised version $\to$ the result obtained for the vertical velocity in the previous Picard iteration does not have a chance to influence the computations in the next iteration.
+
+The variational form of the first step in the \textit{Chorin method} becomes
+
+\begin{equation} \nonumber
+\begin{split}
+& \int_\Omega \frac{1}{\Delta t^n} (\mathbf{u}_h^* - \mathbf{u}_h^{n-1}) \cdot \mathbf{v}_h + \epsilon^2 \int_\Omega \frac{1}{\Delta t^n} (u_3^* - u_3^{n-1}) \cdot v_3 \\
+& + \int_\Omega \nabla \mathbf{u}_h^{n-1} \cdot \mathbf{u}^{n-1} \cdot \mathbf{v}_h + \epsilon^2 \int_\Omega \nabla u_3^{n-1} \cdot \mathbf{u}^{n-1} \cdot v_3 \\
+& + \int_\Omega \nabla \mathbf{u}_h^* \cdot \nabla \mathbf{v}_h + \epsilon^2 \int_\Omega \nabla u_3^* \cdot \nabla v_3 = 0.
+\end{split}
+\end{equation}
+
+\end{frame}
+
+\begin{frame}{Pressure}
 
 \begin{figure}[H]
 \centering
