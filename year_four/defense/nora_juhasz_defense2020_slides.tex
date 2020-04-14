@@ -526,7 +526,77 @@ The variational form of the first step in the \textit{Chorin method} becomes
 
 \end{frame}
 
-\begin{frame}{Pressure}
+\begin{frame}
+Previous observations $\to$ avoid linearisation techniques + conserve the nonlinear nature of the problem. We focus our attention to a simplified scenario --- key: keep the main challenging feature yet make the problem manageable.
+
+\begin{description}
+\item[S1] Stationary case
+\item[S2] We ignore the Coriolis terms
+\item[S3] We make the two horizontal dimensions fall into one.
+\item[S4] For physical relevance, we consider a water body.
+\end{description}
+
+\end{frame}
+
+\begin{frame}{Reduced system}
+
+\begin{equation} \nonumber
+  \mathbf{\texttt{u}} \cdot \nabla \texttt{u1} - \Delta \texttt{u1} + \partial_1 \texttt{p} = 0 \text{ in } \Omega,
+\end{equation}
+    
+\begin{equation} \nonumber
+  \epsilon^2 \mathbf{\texttt{u}} \cdot \nabla \texttt{u3} - \epsilon^2 \Delta \texttt{u3} + \partial_3 \texttt{p}  = 0 \text{ in } \Omega,
+\end{equation}
+    
+\begin{equation} \nonumber
+  \nabla \cdot \mathbf{\texttt{u}} = 0 \text{ in } \Omega,
+\end{equation}
+
+\begin{equation} \nonumber
+  \texttt{u} \cdot \nabla \texttt{c} - \Delta \texttt{c} = \texttt{s} \text{ in } \Omega.
+\end{equation}
+
+\end{frame}
+
+\begin{frame}
+
+Highlight: $\mathcal{O}(1)$ dependence on each coordinate function of the $\texttt{u}$ unknown velocity function.
+
+\texttt{
+\\
+F\_anis=inner(u, grad(u1))*v1*dx + inner(grad(u1), grad(v1))*dx \\
++ eps**2*inner(u, grad(u3))*v3*dx \\
++ eps**2*inner(grad(u3), grad(v3))*dx \\
+ - p * div(v)*dx + q*div(u)*dx - inner(theta, v)*ds(1). \\
+}
+
+\end{frame}
+
+\begin{frame}
+
+The three main ideas of the numerical approach of this present code are 
+\begin{enumerate}
+\item avoiding the application of standard linearisation techniques and keeping the model nonlinear,
+\item the definition of finite element spaces: degree of the vertical velocity space $\to$ is $\epsilon$ positive or we are in the limit case?
+\item to introduce the $\partial_3 p \cdot \partial_3 q$ penalty term in the limit model to counterbalance the effects of the reduced first degree vertical velocity space.
+\end{enumerate}
+
+Using these ideas combined with the simplifications S1 -- S4 we are able to visualise and confirm the convergence of the weak solutions.
+
+\end{frame}
+
+\begin{frame}{The physical meaning of the solutions}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=3.5in]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/velocity_hydr/velocity_hydr__degree1__coloring_magnitude}
+  \caption{Glyph vector colouring w.r.t the magnitude of the velocity}
+  \label{background_colour_magnitude}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}{The perceived trend of the pressure solution}
 
 \begin{figure}[H]
 \centering
@@ -553,6 +623,168 @@ The variational form of the first step in the \textit{Chorin method} becomes
   \centering
   \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/pressure_eps_conv/pressure_anis_0_0312500}
   \captionof{figure}{$\epsilon = 0.0312500.$}
+\end{minipage}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.35\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/pressure_eps_conv/pressure_anis_0_0156250}
+  \captionof{figure}{$\epsilon = 0.0156250.$}
+\end{minipage}%
+\begin{minipage}{0.35\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/pressure_hydr/pressure_hydr}
+  \captionof{figure}{$\epsilon = 0.0$}
+  \label{fig:test2}
+\end{minipage}
+\end{figure}
+
+\begin{table}[H]
+\caption{Differences for the pressure function}
+\begin{center}
+\begin{tabular}{ccc}
+    \hline
+    $\epsilon$ & norm anis. $p$ &  norm ($p$ anis. - $p$ hydr.)\\
+    \hline
+    1.000 & 161.766 & 138.317 \\  
+    0.125 & 127.652 & 36.910 \\
+    \textbf{0.0039} & 126.19 & \textbf{0.504} \\
+    0.00195 & 126.218 & 1.054 \\
+    0.000244 & 126.227 & 1.246 \\
+    1.19 $\exp(-7)$ & 126.227 & 1.249 \\       
+    \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+
+\end{frame}
+
+\begin{frame}
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.35\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/velocity_eps_conv/velocity_v_anis_1_0000000}
+  \captionof{figure}{$\epsilon = 1.0000000.$}
+\end{minipage}%
+\begin{minipage}{0.35\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/velocity_eps_conv/velocity_v_anis_0_5000000}
+  \captionof{figure}{$\epsilon = 0.5000000.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.35\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/velocity_eps_conv/velocity_v_anis_0_2500000}
+  \captionof{figure}{$\epsilon = 0.2500000.$}
+\end{minipage}%
+\begin{minipage}{0.35\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/velocity_eps_conv/velocity_v_anis_0_1250000}
+  \captionof{figure}{$\epsilon = 0.1250000.$}
+\end{minipage}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.35\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/velocity_eps_conv/velocity_v_anis_0_0625000}
+  \captionof{figure}{$\epsilon = 0.0625000.$}
+\end{minipage}%
+\begin{minipage}{0.35\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/velocity_eps_conv/velocity_v_anis_0_015625}
+  \captionof{figure}{$\epsilon = 0.0156250.$}
+\end{minipage}%
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.35\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/velocity_eps_conv/velocity_v_anis_1_19e-07}
+  \captionof{figure}{$\epsilon = \mathcal{O}(-7).$}
+\end{minipage}%
+\begin{minipage}{0.35\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/velocity_hydr/velocity_v_hydr}
+  \captionof{figure}{$\epsilon = 0.0$}
+\end{minipage}
+
+\end{figure}
+
+\end{frame}
+
+\begin{frame}
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.35\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/concentration_eps_conv/concentration_anis_1_00000}
+  \captionof{figure}{$\epsilon = 1.0000000.$}
+\end{minipage}%
+\begin{minipage}{0.35\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/concentration_eps_conv/concentration_anis_0_50000}
+  \captionof{figure}{$\epsilon = 0.5000000.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.35\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/concentration_eps_conv/concentration_anis_0_25000}
+  \captionof{figure}{$\epsilon = 0.2500000.$}
+\end{minipage}%
+\begin{minipage}{0.35\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/concentration_eps_conv/concentration_anis_0_12500}
+  \captionof{figure}{$\epsilon = 0.1250000.$}
+\end{minipage}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.35\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/concentration_eps_conv/concentration_anis_0_06250}
+  \captionof{figure}{$\epsilon = 0.0625000.$}
+\end{minipage}%
+\begin{minipage}{0.35\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/concentration_eps_conv/concentration_anis_0_01562}
+  \captionof{figure}{$\epsilon = 0.015625.$}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.35\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/concentration_eps_conv/concentration_anis_0_00195}
+  \captionof{figure}{$\epsilon = 0.00195.$}
+\end{minipage}%
+\begin{minipage}{0.35\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/concentration_hydr/concentration_hydr}
+  \captionof{figure}{$\epsilon = 0.0$}
 \end{minipage}
 \end{figure}
 
