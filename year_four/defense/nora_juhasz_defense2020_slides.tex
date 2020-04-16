@@ -12,6 +12,7 @@
 \usetheme{Frankfurt}
 \useoutertheme[subsection=false, footline=authortitle]{miniframes}
 \usecolortheme{crane}
+\newtheorem{prop}{Proposition}
 
 \title{The PDE polluted atmosphere model: a mathematical justification of a meteorological approach}
 \author[N\'ora Juh\'asz]{N\'ora Juh\'asz \\[1mm] \textit{supervisor: Prof. Donatella Donatelli}}
@@ -1007,7 +1008,7 @@ Let ${\mathbf{u}_h}_0$ $\in$ $H^1 (\Omega)$, ${u_3}_0 \in L^2(\Omega)$ with $\na
 
 \end{frame}
 
-\begin{frame}{Proof}
+\begin{frame}{Proof - preparation steps}
 
 \textbf{First observation:} Most of the steps made in the GFC are still valid: the proof diverges when we reach the weak convergence of the nonlinear term $u_3^\epsilon c^\epsilon$ --- here we can not benefit from an $H^1$-regular concentration function.
 
@@ -1061,7 +1062,46 @@ Let ${\mathbf{u}_h}_0 \in H^1(\Omega).$ Then there exists a unique strong soluti
 \end{frame}
 
 \begin{frame}
-We use this theorem to verify the strong convergence of $u_3^\epsilon,$ keeping in mind that \textit{a)} our domain is non-periodic, \textit{b)} we do not assume zero-averaged functions, and \textit{c)} the Coriolis terms are incorporated to the model as well.
+We use this theorem to verify the strong convergence of $u_3^\epsilon,$ keeping in mind that
+\begin{description}
+\item[a)] our domain is non-periodic,
+\item[b)] we do not assume zero-averaged functions, and
+\item[c)] the Coriolis terms are incorporated to the model as well.
+\end{description}
+
+The main idea to prove the strong convergence of $u^\epsilon_3$: establish a bound for \begin{equation} \nonumber (\mathbf{U}_h^\epsilon, U_3^\epsilon): = (\mathbf{u}_h^\epsilon - \mathbf{u}_h, u_3^\epsilon - u_3).\end{equation}
+
+This is achieved by using the strong solution $(\mathbf{u}_h,u_3)$ as a test function in the weak formulation's integral identity.
+
+\end{frame}
+
+\begin{frame}{Proof - Step 1: Main inequality}
+
+\changefontsizes{10pt}
+
+Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ be a Leray-Hopf weak solution of the anisotropic velocity system, let $(\mathbf{u}_h,u_3)$ be the unique global strong solution of the hydrostatic velocity system, moreover let the initial data as previously specified. Then we have the following integral identity:
+
+\begin{equation} \nonumber
+  \begin{split}
+    & - \frac{\epsilon^2}{2} \norm{u_3(t)}_2^2 + \bigg ( (\mathbf{u}_h^\epsilon \cdot \mathbf{u}_h + \epsilon^2 u_3^\epsilon u_3) \diff x \diff y \diff z  \bigg ) (t) \\
+    & + \int_{Q_t} (-\mathbf{u}_h^\epsilon \cdot \partial_t \mathbf{u}_h + \nabla \mathbf{u}_h^\epsilon : \nabla \mathbf{u}_h + \epsilon^2 \nabla u_3^\epsilon \cdot \nabla u_3) \diff x \diff y \diff z \diff s \\
+    & = \frac{\epsilon^2}{2} \norm{{u_3}_0}_2^2 + \norm{{\mathbf{u}_h}_0}_2^2 + \epsilon^2 \int_{Q_t} \bigg ( \int_0^z \partial_t \mathbf{u}_h \diff z' \bigg ) \cdot \nabla_h U_3^\epsilon \diff x \diff y \diff z \diff s \\
+    & - \int_{Q_t} [(\mathbf{u}^\epsilon \cdot \nabla) \mathbf{u}_h^\epsilon \cdot \mathbf{u}_h + \epsilon^2 \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon u_3] \diff x \diff y \diff z \diff s \\
+    & + \int_{Q_t}  ( \gamma u_2^\epsilon u_1 - \epsilon \beta u_3^\epsilon u_1 + \alpha \epsilon u_3^\epsilon u_2 - \gamma u_1^\epsilon u_2 - \epsilon \alpha u^\epsilon_2 u_3 + \epsilon \beta u_1^\epsilon u_3)
+  \end{split}
+\end{equation}
+%
+\hspace{0.5cm} for any $t \in [0, \infty),$ where $Q_t = \Omega \times (0,t).$
+
+\end{frame}
+
+\begin{frame}{Proof - Step 2: Estimates}
+\end{frame}
+
+\begin{frame}{Proof - Step 3: Gr\"onwall inequality}
+\end{frame}
+
+\begin{frame}{Proof - Closing step}
 \end{frame}
 
 \begin{frame}{DWMC: Strong solutions framework}
