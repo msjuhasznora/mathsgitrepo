@@ -7,6 +7,7 @@
 \usepackage{scrextend}
 \usepackage{xcolor}
 \usepackage{capt-of}
+\usepackage{tikz}
 \newcommand*\diff{\mathop{}\!\mathrm{d}}
 \usetheme{Frankfurt}
 \useoutertheme[subsection=false, footline=authortitle]{miniframes}
@@ -29,7 +30,7 @@
 \titlepage
 \end{frame}
 
-\begin{frame}{Plan of the defence}
+\begin{frame}{Plan of the defense}
 
 We present our results in the following structure:
 
@@ -262,7 +263,7 @@ Earth rotation angular speed: $\omega = f (0, \cos(l(x_2)), \sin(l(x_2))),$ wher
 
 The $2 \omega \times \mathbf{u}^\epsilon$ Coriolis acceleration becomes
 
-\begin{gather}
+\begin{gather} \nonumber
 \begin{bmatrix} 0 \\ \beta \\ \alpha \end{bmatrix}
  \times
  \begin{bmatrix} u^\epsilon_1 \\ u^\epsilon_2 \\ \epsilon u^\epsilon_3 \end{bmatrix}
@@ -793,13 +794,277 @@ Using these ideas combined with the simplifications S1 -- S4 we are able to visu
 %%% DWMC %%%
 \section{Downwind-matching coordinates}
 
-\begin{frame}
+\begin{frame}{Downwind-matching coordinate system}
+\textbf{The physical idea}: another viewpoint for fixing the orientation of the coordinate system:
+
+\begin{itemize}
+  \item naturally distinctive and meteorologically more meaningful,
+  \item introduce \textbf{downwind and crosswind},
+  \item match the horizontal axes to these meteorological parameters,
+  \item $z$ is oriented upwards, while $x$ is the downwind, and $y$ is the crosswind direction
+\end{itemize}
+
+Important features of the result model:
+
+\begin{enumerate}
+  \item advection is dominant compared to diffusion effects along the $x$ axis
+  \item an additional $\epsilon$ term in the Laplacian of the concentration equation
+\end{enumerate}
+
+\center{For simplicity, here we use a diagonal diffusion matrix.}
+
+\end{frame}
+
+\begin{frame}{Scaling}
+
+$\textbf{Additional scaling equation}$: different in nature from the previous ones $\to$ it is not derived from the shallowness of the domain --- it is suggested by the fact that in the downwind direction it is natural to assume that $\textit{ the diffusion is negligible compared to downwind transport}$ i.e.
+
+    $$\abs{u_1 \partial_1 c} \gg \abs{ K_x \partial_{11}^2 c } ,$$
+    which leads us to using
+    $$K_x = \epsilon K_1.$$
+    
+The concentration equation becomes
+$$ \partial_t c^\epsilon + \mathbf{u^\epsilon} \cdot \nabla c^\epsilon = \epsilon K_1 \partial_{11} ^ 2 c^\epsilon + K_2 \partial_{22} ^ 2 c^\epsilon + K_3 \partial_{33} ^ 2 c^\epsilon + s_\epsilon $$
+
+\end{frame}
+
+\begin{frame}{DWMC Anisotropic equations}
+
+\begin{equation} \nonumber
+  \partial_t u^\epsilon _1 + \mathbf{u}^\epsilon \cdot \nabla u^\epsilon _1 -\Delta_\nu u^\epsilon _1 -\gamma u_2^\epsilon + \epsilon \beta u_3^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+\end{equation}
+
+\begin{equation} \nonumber
+  \partial_t u_2^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_2^\epsilon -\Delta_\nu u_2^\epsilon + \gamma u_1^\epsilon - \alpha \epsilon u^\epsilon_3  + \partial_2 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+\end{equation}
+
+\begin{equation} \nonumber
+  \epsilon^2 \{  \partial_t u_3^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon -\Delta_\nu u_3^{\epsilon} \} + \epsilon \alpha u^\epsilon_2 - \epsilon \beta u_1^\epsilon + \partial_3 p^\epsilon = 0 \text{ in } \Omega \times (0,T)
+\end{equation}
+
+\begin{equation} \nonumber
+  \nabla \cdot \mathbf{u}^\epsilon= 0 \text{ in } \Omega \times (0,T)
+\end{equation}
+
+\begin{equation} \nonumber
+   \partial_t c^\epsilon + \mathbf{u^\epsilon} \cdot \nabla c^\epsilon = \epsilon K_1 \partial_{11} ^ 2 c^\epsilon + K_2 \partial_{22} ^ 2 c^\epsilon + K_3 \partial_{33} ^ 2 c^\epsilon + s^\epsilon \text{ in } \Omega \times (0,T).
+\end{equation}
+    
+\begin{equation} \nonumber
+  \mathbf{u}^\epsilon (\cdot, t = 0) = \mathbf{u}_0, \quad c^\epsilon (\cdot, t=0) = c_0  \quad \text{ in } \Omega.
+\end{equation}
+
+\end{frame}
+
+\begin{frame}{DWMC Hydrostatic equations}
+
+\begin{equation} \nonumber   
+  \partial_t u_1 + \mathbf{u} \cdot \nabla u_1 - \Delta_\nu u_1 -\gamma u_2 + \partial_1 p = 0 \text{ in } \Omega \times (0,T)
+\end{equation}
+
+\begin{equation} \nonumber   
+  \partial_t u_2 + \mathbf{u} \cdot \nabla u_2 - \Delta_\nu u_2 + \gamma u_1 + \partial_2 p = 0 \text{ in } \Omega \times (0,T)
+\end{equation}
+
+\begin{equation} \nonumber   
+  \partial_3 p = 0 \text{ in } \Omega \times (0,T)
+\end{equation}
+
+\begin{equation} \nonumber  
+  \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \times (0,T)
+\end{equation}
+
+\begin{equation} \nonumber  
+  \partial_t c + \mathbf{u} \cdot \nabla c = K_2 \partial_{22} ^ 2 c + K_3 \partial_{33} ^2 c + s \text{ in } \Omega \times (0,T)
+\end{equation}
+
+\begin{equation} \nonumber
+  u_i (\cdot, t=0) = u_{0 i}, \quad c (\cdot, t=0) = c_0 \text{ in } \Omega, \text{$i$ = 1,2}
+\end{equation}
+
+\end{frame}
+
+\begin{frame}{DWMC: Weak solutions framework}
+
+\textbf{Boundary conditions:} weak solutions framework $\to$ we aim to be as close as possible to the original domain --- classical non-periodic local domain on the surface of the Earth + minimal modifications due to the new $\epsilon$ term (inland domains).
+
+  \begin{figure}[!h]
+  \centering
+  \begin{tikzpicture}
+    \fill[color=blue!10] (2,0) -- (2,3) arc (360:180:2cm and 0.5cm) -- (-2,0) arc (180:360:2cm and 0.5cm);
+    \fill[color=blue!5] (0,3) circle (2cm and 0.5cm);
+    
+    \draw[thick] (-2,3) -- (-2,0) arc (180:360:2cm and 0.5cm) -- (2,3) ++ (-2,0) circle (2cm and 0.5cm);
+    \draw[densely dashed, thick] (-2,0) arc (180:0:2cm and 0.5cm);
+    \draw (-2,1) -- (-3,1) --(-5,-1) -- (3,-1) -- (5,1) -- (2,1);
+    \draw[dashed] (-2,1) -- (2,1);
+    
+    \fill[green!10,opacity=0.5] (-2,0) -- (-2,1) -- (-3,1) -- (-5,-1) -- (3,-1) -- (5,1) -- (2,1) -- (2,0) arc (0:180:2cm and -0.5cm);
+    \fill[color=green!5] (0,0) circle (2cm and 0.5cm);
+    
+    \draw (0,1.5) node {$\Omega$};
+    \draw (0,3) node {$\Gamma_U$};
+    \draw (0,0) node {$\Gamma_G$};
+    \draw (-2.3,1.5) node {$\Gamma_L$};
+    \draw (2.3,1.5) node {$\Gamma_L$};
+    
+    \draw[thick] (2,0) arc (360:180:2cm and 0.5cm);
+  \end{tikzpicture}
+  \caption{The boundary structure of $\Omega$ for the case of weak solutions}
+  \label{structdomaingraphboundaries_weak}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}{Boundary conditions}
+
+\begin{enumerate}
+\item Anisotropic model:
+    \begin{equation} \nonumber
+      \begin{split}
+        & \mathbf{u}^\epsilon = 0 \text{ on } \Gamma \times (0,T), \\
+        & c^\epsilon = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
+        & \partial_3 c^\epsilon = 0 \text{ on } \Gamma_G \times (0,T), \\
+      \end{split}
+    \end{equation}
+\item Hydrostatic model:
+    \begin{equation} \nonumber
+      \begin{split} 
+        & u_1 = u_2 = u_3 = 0 \text{ on } \Gamma \times (0,T) \\
+        & c = 0 \text{ on } ( \Gamma_U \cup \Gamma_L) \times (0,T), \\
+        & \partial_3 c = 0 \text{ on } \Gamma_G \times (0,T). \\
+      \end{split}
+    \end{equation}
+\end{enumerate}
 \end{frame}
 
 \begin{frame}
+Initial data:
+\begin{equation}
+\begin{gathered}\nonumber
+{\mathbf{u}_h}_0 \in H^1 (\Omega), {u_3}_0 \in L^2(\Omega) \text{ with } \nabla \cdot \mathbf{u}_0 = 0,\\
+{u_3}_0 = - \int_0^z \nabla_h \cdot {\mathbf{u}_h}_0 \diff z' \text{ and } c_0 \in L^2 (\Omega).
+\end{gathered}
+\end{equation}
+
+\underline{Highlight}: Stronger horizontal regularity $\to$ counterbalance the decreased control we have on $c^\epsilon.$ However, in the anisotropic model we are still within the Leray framework of weak solutions.
 \end{frame}
 
 \begin{frame}
+  \[ C^{\infty}_\Gamma (\Omega) = \{ \varphi \in C^\infty (\bar{\Omega}); \varphi = 0 \text{ on some neighbourhood of } \Gamma\} \]
+  
+  \[ H^k_{\Gamma} (\Omega) = \overline{C_\Gamma ^ \infty (\Omega)} ^ {H^k (\Omega)} = \{ v \in H^k(\Omega); \partial^\alpha v=0 \text{ on } \Gamma \text{ for any } \abs{\alpha} < k \} \]
+  
+  \[ H^k_{\Gamma_A} (\Omega) = \{ v \in H^k(\Omega); \partial^\alpha v=0 \text{ on } \Gamma_A \text{ for any } \abs{\alpha} < k \} \]
+  
+  \[ \mathbf{V} = \{ \mathbf{v} \in  H^1_{\Gamma} (\Omega) \times H^1_{\Gamma} (\Omega) \times H^1_{\Gamma} (\Omega); \nabla \cdot \mathbf{v} = 0 \text{ in } \Omega \} \]
+  
+  \[ \mathbf{W} = \{ \mathbf{v} \in  (H^1_{\Gamma} (\Omega) \cap H^2(\Omega)) \times (H^1_{\Gamma} (\Omega) \cap H^2(\Omega)) \times H^1_{\Gamma} (\Omega); \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \} \]
+  
+\begin{align}
+L^2_{\Gamma_A}(\Omega) = & \{ c \in L^2(\Omega); c = 0 \text{ on } \Gamma_A \text{ in the sense of } \nonumber \\
+& \langle c , \tilde{c} \rangle_{H^{-1/2} (\Gamma_A) \times H^{1/2} (\Gamma_A)} = 0 \text{ for any } \tilde{c} \in H^{1/2}(\Gamma_A) \nonumber \}
+\end{align}
+\end{frame}
+
+\begin{frame}{Weak formulation - anisotropic system, part 1}
+
+The pair $(\mathbf{u}^\epsilon, c^\epsilon)$ is called a weak solution of the anisotropic system if $\mathbf{u}^\epsilon = (\mathbf{u}^\epsilon_h, u^\epsilon_3) \in L^2 (0,T ; \mathbf{V}) \cap C_w (0, T; L^2 (\Omega)^3)$ and $c^\epsilon \in L^\infty (0,T; L^2(\Omega)) \cap L^2 (0,T; H^1_{\Gamma_A}(\Omega))$, moreover $\mathbf{u}^\epsilon$ and $c^\epsilon$ satisfy the integral identities
+  
+\begin{equation} \nonumber
+\begin{split}
+& \int_0^T \bigg [ -(\mathbf{u}^\epsilon_h, \partial_t \mathbf{\tilde{u}}_h) + (\nabla_\nu \mathbf{u}^\epsilon_h, \nabla_\nu \mathbf{\tilde{u}}_h) - (\mathbf{u}^\epsilon_h, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{\tilde{u}}_h) + (b(\mathbf{u}^\epsilon_h), \mathbf{\tilde{u}}_h) \bigg ] \diff t \\
+& + \epsilon \int_0 ^ T \big [ (\beta u_3 ^\epsilon, \tilde{u}_1) - (\beta u_1^\epsilon, \tilde{u}_3) \big ] \diff t + \epsilon \int_0 ^ T \big [ (\alpha u_2 ^\epsilon, \tilde{u}_3) - (\alpha u_3^\epsilon, \tilde{u}_2) \big ] \diff t\\
+& + \epsilon^2 \int _0 ^ T \big [ -(u_3^\epsilon, \partial_t \tilde{u}_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, \tilde{u}_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu \tilde{u}_3) \big ] \diff t \\
+& = - ({\mathbf{u}^\epsilon_h}_0, \mathbf{\tilde{u}}_h(0)) - \epsilon^2 ({u^\epsilon_3}_0, \tilde{u}_3 (0)) \raisetag{20pt} \label{anisotropicWF}
+\end{split}
+\end{equation}
+%  
+\hspace{2cm} and ...
+
+\end{frame}
+
+\begin{frame}{Weak formulation - anisotropic system, part 2}
+ ... and
+  
+\begin{equation}
+\begin{split} \nonumber
+& \int_0^T \bigg [ -(c^\epsilon, \partial_t \tilde{c}) -(\mathbf{u}^\epsilon c^\epsilon, \nabla \tilde{c}) + \epsilon K_1 (\partial_1 c^\epsilon, \partial_1 \tilde{c}) \\
+& + K_2 (\partial_2 c^\epsilon, \partial_2 \tilde{c}) + K_3 (\partial_3 c^\epsilon, \partial_3 \tilde{c}) \bigg ] \diff t \\
+& =  - (c_0, \tilde{c} (0)) + \int_0^T (s^\epsilon,\tilde{c}) \diff t
+\end{split}
+\end{equation}
+%
+for all $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T;\mathbf{V})$ with $\mathbf{\tilde{u}}(T) = 0$ and $\tilde{c}$ such that $\tilde{c} \in H^1 (0,T, H^3_{\Gamma_A} (\Omega))$ and $\tilde{c} (T) = 0$.
+
+\end{frame}
+
+\begin{frame}{DWMC, weak solutions: Main theorem}
+
+\begin{theorem} \label{maintheoremWEAK}
+Let ${\mathbf{u}_h}_0$ $\in$ $H^1 (\Omega)$, ${u_3}_0 \in L^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0, {\mathbf{u}_h}_0 = 0, {u_3}_0 n_3 = 0$ on $\partial \Omega$; let $c_0 \in$ $L^2 (\Omega)$, and assume that the previously given boundary conditions hold; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations converges (up to a subsequence) weakly to a weak solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere.
+\end{theorem}
+
+\end{frame}
+
+\begin{frame}{Proof}
+
+\textbf{First observation:} Most of the steps made in the GFC are still valid: the proof diverges when we reach the weak convergence of the nonlinear term $u_3^\epsilon c^\epsilon$ --- here we can not benefit from an $H^1$-regular concentration function.
+
+The structure we will follow:
+
+\begin{enumerate}
+\item energy inequality \checkmark
+\item a priori estimates \checkmark
+\item less problematic weak convergence results, strong convergence of $\mathbf{u}_h^\epsilon$ \checkmark
+\item \textbf{challenge}: weak convergence of $u_3^\epsilon c^\epsilon$ --- temporarily ignore the $c^\epsilon$ function and prove a strong convergence result only for the velocity functions
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}{Energy inequality}
+  \begin{equation} \nonumber
+    \begin{split}  
+    & \frac{1}{2} (\norm{\mathbf{u}_h^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{c^\epsilon (t)}_{L^2}^2) \\
+    & + \int_0 ^ t \big[ \norm{\nabla_\nu \mathbf{u}_h^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \big] \diff \tau \\
+    & + \int_0 ^ t  \big [ \textcolor{orange}{\epsilon} K_1 \norm{\partial_1 c^\epsilon}_{L^2}^2  + K_2 \norm{\partial_2 c^\epsilon}_{L^2}^2 + K_3 \norm{\partial_3 c^\epsilon}_{L^2}^2 \big ] d \tau \\
+    & \leq \int_0^t (s^\epsilon,c^\epsilon) \diff \tau + \frac{1}{2} (\norm{\mathbf{u}_h^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{c^\epsilon_0}_{L^2}^2)
+    \end{split}
+  \end{equation}
+\end{frame}
+
+\begin{frame}{Convergence results}
+\begin{enumerate}
+\item Convergence results obtained from the energy inequality:
+    \begin{align} 
+    &  \mathbf{u}_h^\epsilon \rightharpoonup \mathbf{u}_h &\quad & \text{weakly in $L_t^\infty L_x^2 \cap L_t^2 H_x^1$,} \nonumber \\
+    &  \epsilon^2 u_3^\epsilon \to 0 &\quad & \text{strongly in $L_t^\infty L_x^2 \cap L_t^2 H_x^1$,} \nonumber \\ 
+    & u_3^\epsilon \rightharpoonup u_3  &\quad & \text{weakly in $L_t^2 L_x^2$,} \nonumber \\
+    & c^\epsilon \rightharpoonup c &\quad & \text{weakly in $L_t^\infty L_x^2$,} \nonumber \\
+    & \partial_2 c^\epsilon \rightharpoonup \partial_2 c &\quad & \text{weakly in $L_t^2 L_x^2$,} \nonumber \\
+    & \partial_3 c^\epsilon \rightharpoonup \partial_3 c &\quad & \text{weakly in $L_t^2 L_x^2$,} \nonumber \\
+    & \sqrt{\epsilon} \partial_1 c^\epsilon \rightharpoonup e &\quad & \text{weakly for some limit element $e$ in $L_t^2 L_x^2$.} \nonumber
+  \end{align}
+\item Strong convergence of $\mathbf{u}_h^\epsilon$ --- classical translation criterium.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+Key to the remaining product term $u_3^\epsilon c^\epsilon$: exploit the $H^1$ regularity of the initial horizontal velocity.
+
+\textit{Idea}: We do not have a complete $H^1$ initial data for the Navier-Stokes equations point of view --- but we do have an $H^1$ initial data from the Primitive Equations point of view.
+
+\begin{theorem}[C. Cao and E. S. Titi., 2007]
+Let ${\mathbf{u}_h}_0 \in H^1(\Omega).$ Then there exists a unique strong solution $\mathbf{u}_h$ of the reformulated Primitive Equations such that $$\mathbf{u}_h \in C([0, \infty), H^1(\Omega)) \cap L^2_{loc}([0, \infty), H^2(\Omega))$$ and $$\partial_t \mathbf{u}_h \in L^2_{loc} ([0,\infty), L^2(\Omega)).$$
+\end{theorem}
+
+\end{frame}
+
+\begin{frame}
+We use this theorem to verify the strong convergence of $u_3^\epsilon,$ keeping in mind that \textit{a)} our domain is non-periodic, \textit{b)} we do not assume zero-averaged functions, and \textit{c)} the Coriolis terms are incorporated to the model as well.
+\end{frame}
+
+\begin{frame}{DWMC: Strong solutions framework}
 \end{frame}
 
 \end{document}
