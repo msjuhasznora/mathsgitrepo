@@ -1075,7 +1075,7 @@ This is achieved by using the strong solution $(\mathbf{u}_h,u_3)$ as a test fun
 
 \end{frame}
 
-\begin{frame}{Proof - Step 1: Main inequality}
+\begin{frame}{Proof - Step 1: Auxiliary inequality}
 
 \changefontsizes{10pt}
 
@@ -1095,10 +1095,24 @@ Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ be a Leray-Hopf weak solution of the
 
 \end{frame}
 
-\begin{frame}{Proof - Step 2: Estimates}
+\begin{frame}{Verification}
+
+\textbf{Main idea}: we use the definition of weak solutions of the scaled Navier-Stokes equations, using $\mathbf{u}$ as a test function --- but test functions have compact support in time.
+\begin{description}
+\item[Step 1.] Test function: $\varphi \in C_0^\infty (\bar{\Omega} \times [0, \infty))$
+\item[Step 2.] Using the density argument, we set $\varphi = \mathbf{u} \cdot \chi(t),$ with $\chi \in C_0^\infty ([0, \infty)).$
+\item[Step 3.] Define a series of appropriate $\chi_\delta \in C_0^\infty ([0, t_0))$ functions, where $\chi \equiv 1$ on $[0, t_0- \delta],$ $\abs{\chi_\delta'} \leq \frac{2}{\delta}$
+\item[Step 4.] Choose $\chi = \chi_\delta$ in the previously obtained results and let $\delta \to 0.$
+\end{description}
 \end{frame}
 
-\begin{frame}{Proof - Step 3: Gr\"onwall inequality}
+\begin{frame}{Proof - Step 2: Main inequality}
+\end{frame}
+
+\begin{frame}{Proof - Step 3: Estimates}
+\end{frame}
+
+\begin{frame}{Proof - Step 4: Gr\"onwall inequality}
 \end{frame}
 
 \begin{frame}{Proof - Closing step}
