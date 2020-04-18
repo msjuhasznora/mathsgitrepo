@@ -1104,12 +1104,71 @@ Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ be a Leray-Hopf weak solution of the
 \item[Step 3.] Define a series of appropriate $\chi_\delta \in C_0^\infty ([0, t_0))$ functions, where $\chi \equiv 1$ on $[0, t_0- \delta],$ $\abs{\chi_\delta'} \leq \frac{2}{\delta}$
 \item[Step 4.] Choose $\chi = \chi_\delta$ in the previously obtained results and let $\delta \to 0.$
 \end{description}
+
+Following these ideas we complete the verification of the auxiliary equation.
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+
+\item We have seen the combination (SNS) --- $\mathbf{u}$.
+
+\item Combination (PEs) --- $\mathbf{u}_h^\epsilon$:
+  
+  \begin{equation} \nonumber
+    \begin{split}
+      & \int_{Q_{t_0}} (\partial_t \mathbf{u}_h \cdot \mathbf{u}_h^\epsilon + \nabla \mathbf{u}_h : \nabla \mathbf{u}_h^\epsilon) \diff x \diff y \diff z \diff t \\
+      & = - \int_{Q_{t_0}} (\mathbf{u} \cdot \nabla) \mathbf{u}_h \cdot \mathbf{u}_h^\epsilon + \gamma u_2 u_1^\epsilon - \gamma u_1 u_2^\epsilon \diff x \diff y \diff z \diff t.
+    \end{split}
+  \end{equation}
+  
+\item (PEs) --- $\mathbf{u}$: $\frac{1}{2} \norm{\mathbf{u}_h(t_0)}_2^2 + \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^2 \diff t = \frac{1}{2} \norm{{\mathbf{u}_h}_0}_2^2$
+\item Combination (SNS) --- $\mathbf{u}_h^\epsilon$: energy inequality for Leray-Hopf weak solutions:
+\begin{equation} \nonumber
+\begin{split}
+& \frac{1}{2}( \norm{\mathbf{u}_h^\epsilon (t_0)}_2^2 + \epsilon^2 \norm{u_3^\epsilon(t_0)}_2^2)+ \int_0^{t_0} (\norm{\nabla \mathbf{u}_h^\epsilon}_2^2 + \epsilon^2 \norm{\nabla u_3^\epsilon}_2^2) \diff s \\
+& \leq \frac{1}{2} (\norm{{\mathbf{u}_h}_0}_2^2 + \epsilon^2 \norm{{u_3}_0}_2^2).
+\end{split}
+\end{equation}
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Proof - Step 2: Main inequality}
+
+  \begin{equation} \nonumber
+    \begin{split}
+      & \frac{1}{2} (\norm{\mathbf{U}_h^\epsilon}_2^2 + \epsilon^2 \norm{U_3^\epsilon}_2^2) (t_0) + \int_0^{t_0} (\norm{\nabla \mathbf{U}_h^\epsilon}_2^2 + \epsilon^2 \norm{\nabla U_3^\epsilon}_2^2) \diff t  \\
+      & \leq - \epsilon^2 \int_{Q_{t_0}} \bigg [ \bigg ( \int_0^z \partial_t \mathbf{u}_h \diff z' \bigg ) \cdot \nabla_h U_3^\epsilon + \nabla u_3 \cdot \nabla U_3^\epsilon \bigg ] \diff x \diff y \diff z \diff t \\
+      & + \int_{Q_{t_0}} [(\mathbf{u}^\epsilon \cdot \nabla) \mathbf{u}_h^\epsilon \cdot \mathbf{u}_h + (\mathbf{u} \cdot \nabla )\mathbf{u}_h \cdot \mathbf{u}_h^\epsilon] \diff x \diff y \diff z \diff t \\
+      & + \epsilon^2 \int_{Q_{t_0}} \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon u_3 \diff x \diff y \diff z \diff t \\
+      & + \int_{Q_{t_0}}  \epsilon \beta u_3^\epsilon u_1 - \epsilon \alpha u_3^\epsilon u_2 + \epsilon \alpha u_2^\epsilon u_3 - \epsilon \beta u_1^\epsilon u_3 \diff x \diff y \diff z \diff t \\
+      & := I_1 + I_2 + I_3 + I_4
+    \end{split}
+  \end{equation}
+
 \end{frame}
 
 \begin{frame}{Proof - Step 3: Estimates}
+In the estimates of all four terms $I_1, I_2, I_3$ and $I_4$ the upper bound can consist of two parts:
+\begin{enumerate}
+\item $\zeta \cdot$ ... - type terms that can be merged into the left-hand side,
+\item $\kappa \epsilon^2$ - type terms,
+\item terms we can handle with the Gr\"onwall inequality later: $\int_0^{t} \text{(sg. bounded)} \norm{\mathbf{U}_h^\epsilon}_2^2 \diff s$
+\end{enumerate}
+
+The complete set of estimates is rather long --- we will show selected steps. We will need the following inequality:
+\begin{equation}\nonumber
+    \begin{split}
+      & \int_{\Gamma_G} \bigg ( \int_0^1 f(x,y,z) \diff z \bigg) \bigg ( \int_0^1 g(x,y,z) h(x,y,z) \diff z \bigg ) \diff x \diff y \\
+      & \lesssim \norm{f}_2 \norm{g}_2^{1/2} \big ( \norm{g}_2^{1/2} + \norm{\nabla_h g}_2^{1/2} \big ) \norm{h}_2^{1/2} \big (\norm{h}_2^{1/2} + \norm{\nabla_h h}_2^{1/2} \big )
+    \end{split}
+\end{equation}
+\end{frame}
+
+\begin{frame}{Proof - Step 3: Estimates ($I_2$)}
+\end{frame}
+
+\begin{frame}{Proof - Step 3: Estimates ($I_4$)}
 \end{frame}
 
 \begin{frame}{Proof - Step 4: Gr\"onwall inequality}
