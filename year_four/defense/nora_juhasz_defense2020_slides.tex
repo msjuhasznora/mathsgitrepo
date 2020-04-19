@@ -6,6 +6,13 @@
 \usepackage{lmodern}
 \usepackage{scrextend}
 \usepackage{xcolor}
+\definecolor{green}{rgb}{0.4, 0.69, 0.2}
+\definecolor{asparagus}{rgb}{0.53, 0.66, 0.42}
+\definecolor{blue}{rgb}{0.0, 0.53, 0.74}
+\definecolor{antiquefuchsia}{rgb}{0.57, 0.36, 0.51}
+\definecolor{terracotta}{HTML}{e2725b}
+\definecolor{mocassin}{HTML}{FFE4B5}
+\definecolor{coral}{HTML}{FFAA80}
 \usepackage{capt-of}
 \usepackage{tikz}
 \newcommand*\diff{\mathop{}\!\mathrm{d}}
@@ -1254,7 +1261,7 @@ Using the bounds we now have for the terms $I_1, I_2, I_3$ and $I_4$, now we hav
   \end{split}
 \end{equation}
 %
-for almost any $t_0 \in [0, \infty).$
+for almost any $t \in [0, \infty).$
 
 \end{frame}
 
@@ -1300,6 +1307,71 @@ Combining this with $c^\epsilon \rightharpoonup c$ weakly in $L_t^\infty L_x^2$ 
 \end{frame}
 
 \begin{frame}{DWMC: Strong solutions framework}
+\begin{enumerate}
+\item \textbf{Initial regularities}: We assume \begin{equation}\nonumber{\mathbf{u}_h}_0 \in H^3(\Omega), {u_3}_0 \in H^2(\Omega) \text{ with } \nabla \cdot \mathbf{u}_0 = 0, \text{ and } c_0 \in H^2 (\Omega).\end{equation}
+\item \textbf{Source term}: let $\varphi$ be a $C^\infty_0 (\Omega),$ we set $$s^\epsilon = \delta^\epsilon \ast \varphi, \quad s = \delta \ast \varphi.$$
+\item \textbf{Boundary structure}: we use a 3-step method to construct a well-established periodic domain. \textit{Motivation}: technically clearer choice --- otherwise it needs to be substituted by boundary conditions of type $\nabla^k u = 0, \nabla^k c = 0, k \geq 1$ defined on a non-periodic, standard domain.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Domain structure}
+\textcolor{antiquefuchsia}{\textit{\textbf{Step one.}}} Let's consider $\Omega_0 = M \times (-a, 0)$ with $M = (0,1) \times (0,1)$ over an inland domain. We define the boundary conditions
+%
+\begin{equation}\nonumber
+\begin{split}
+& \mathbf{u}_h, u_3 \text{ and } c \text{ are periodic in } x \text{ and } y, \\
+& (\partial_3 \mathbf{u}_h, u_3) | _{z = -a, 0} = 0, \\
+& c |_{z = -a} = 1, c |_{z = 0} = 0.
+\end{split}
+\end{equation}
+%
+\textcolor{antiquefuchsia}{\textit{\textbf{Step two.}}} We define a new concentration function $c^*$: $c^* = c + \frac{z}{a}.$ Result: we obtain a function that is zero on both the upper and lower boundary of the domain. $to$ We can consider the standard extensions of $\mathbf{u}_h$, $u_3$, $p$ and $c$ to the new $\Omega = M \times (-a, a)$ domain.
+
+\underline{Method}: we require these functions to be even, odd, even and odd
+
+\hspace{0.2cm} in $z$, respectively, and set the domain to be periodic in all three
+
+\hspace{0.2cm} dimensions.
+\end{frame}
+
+\begin{frame}
+Applying these ideas to the original concentration dynamics equations, we obtain that
+%
+\begin{equation} \nonumber
+\partial_t c + \mathbf{u}_h \cdot \nabla_h c + u_3 \bigg ( \partial_3 c - \frac{1}{a} \bigg ) = \Delta_d c + s \text{ in } \Omega \times (0,T)
+\end{equation}
+%
+is the new form of the hydrostatic concentration equation, while the governing equation for the anisotropic case becomes
+%
+\begin{equation} \nonumber
+\partial_t c^\epsilon + \mathbf{u}_h^\epsilon \cdot \nabla_h c^\epsilon + u_3^\epsilon \bigg ( \partial_3 c^\epsilon - \frac{1}{a} \bigg )= \epsilon K_1 \partial_{11} ^ 2 c^\epsilon + \Delta_d c^\epsilon + s^\epsilon \text{ in } \Omega \times (0,T).
+\end{equation}
+%
+Note: after using $c = c^* - \frac{z}{a}$ and $c^\epsilon = {c^\epsilon}^* - \frac{z}{a},$ we returned to the original $c$ and $c^\epsilon$ notations for simplicity.
+\end{frame}
+
+\begin{frame}
+\textcolor{antiquefuchsia}{\textit{\textbf{Step three.}}} Now the anisotropic and hydrostatic systems are combined with the
+%
+\begin{equation} \nonumber
+\begin{split}
+& \mathbf{u}^\epsilon, p^\epsilon \text{ and } c^\epsilon \text{ are periodic in } x,y,z, \\
+& \mathbf{u}_h^\epsilon \text{ and } p^\epsilon \text{ are even in $z$}, \text{ and } u_3^\epsilon \text{ and } c^\epsilon \text{ are odd in $z$}
+\end{split}
+\end{equation}
+%
+and
+%
+\begin{equation} \nonumber
+\begin{split}
+& \mathbf{u}, p \text{ and } c \text{ are periodic in } x,y,z \\
+& \mathbf{u}_h \text{ and } p \text{ are even in $z$}, \text{ and } u_3 \text{ and } c \text{ are odd in $z$}
+\end{split}
+\end{equation}
+%
+boundary conditions, respectively.
+
+The restrictions from $\Omega$ to $\Omega_0$ are solutions to the original systems.
 \end{frame}
 
 \end{document}
