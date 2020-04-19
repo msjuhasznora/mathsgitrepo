@@ -394,10 +394,27 @@ The pair $(\mathbf{u}^\epsilon, c^\epsilon)$ is called a weak solution of the an
 for all $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T;\mathbf{V})$ with $\mathbf{\tilde{u}}(T) = 0$ and $\tilde{c}$ such that $\tilde{c} \in H^1 (0,T, H^2_{\Gamma_A} (\Omega))$ and $\tilde{c} (T) = 0$.
 \end{frame}
 
-\begin{frame}{Weak formulation - hydrostatic system, part 1}
-\end{frame}
+\begin{frame}{Weak formulation - hydrostatic system}
+\changefontsizes{10pt}
+The pair $(\mathbf{u}, c)$ is called a weak solution of the a hydrostatic system if $\mathbf{u} = (\mathbf{u}_h, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_h \in L^\infty (0,T; L^2(\Omega)^2),$ and $c \in L^\infty(0,T; L^2(\Omega)) \cap L^2(0,T; H^1_{\Gamma_A}(\Omega))$, moreover $\mathbf{u}$ and $c$ satisfy the integral identities
+%
+\begin{equation} \nonumber
+\begin{split}
+& \int_0^T \bigg[ -(\mathbf{u}_h, \partial_t \mathbf{\tilde{u}}_h) + (\nabla_\nu \mathbf{u}_h, \nabla_\nu \mathbf{\tilde{u}}_h) - (\mathbf{u}_h, (\mathbf{u} \cdot \nabla) \mathbf{\tilde{u}}_h) + (b(\mathbf{u}_h), \mathbf{\tilde{u}}_h) \bigg ] \diff t \\
+& = ({\mathbf{u}_h}_0, \mathbf{\tilde{u}}_h(0)) - \int_0^T \langle \theta_h, \mathbf{\tilde{u}}_h \rangle_{\Gamma_G} \diff t
+\end{split}
+\end{equation}
+%
+and
+%
+\begin{equation} \nonumber
+\int_0^T \bigg[ -(c, \partial_t \tilde{c}) -(\mathbf{u}c, \nabla \tilde{c}) +  (\mathbf{M} \nabla c, \nabla \tilde{c}) \bigg ] \diff t = (c_0, \tilde{c}(0)) + \int_0^T (s,\tilde{c}) \diff t
+\end{equation}
+%
+\hspace{0.5cm}for all $(\mathbf{\tilde{u}}, \tilde{c})$ with $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T, \mathbf{W})$, $\mathbf{\tilde{u}}_h (T) = 0$ and
 
-\begin{frame}{Weak formulation - hydrostatic system, part 2}
+\hspace{0.5cm}$\partial_3 \mathbf{\tilde{u}}_h \in L^\infty (0, T; L^3 (\Omega)^2)$ and  $\tilde{c} \in H^1 (0,T, H^2_{\Gamma_A} (\Omega))$, $\tilde{c} (T) = 0$.
+
 \end{frame}
 
 \begin{frame}{Main theorem}
@@ -1016,9 +1033,29 @@ for all $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T;\
 \end{frame}
 
 \begin{frame}{Weak formulation - hydrostatic system, part 1}
-\end{frame}
+\changefontsizes{10pt}
+The pair $(\mathbf{u}, c)$ is called a weak solution of the a hydrostatic system if $\mathbf{u} = (\mathbf{u}_h, u_3) \in L^2 (0, T; \mathbf{W}) \cap L^\infty (0,T; L^2(\Omega)^3),$ $\mathbf{u}_h \in L^\infty(0,T; H^1(\Omega)),$ and $c \in L^\infty (0, T; L^2_{\Gamma_A}(\Omega))$ with $\partial_2 c$, $\partial_3 c \in L^2(0, T; L^2(\Omega)),$ moreover $\mathbf{u}$ and $c$ satisfy the integral identities
+\changefontsizes{9pt}
+%
+\begin{equation}\nonumber
+\int_0^T \bigg[ -(\mathbf{u}_h, \partial_t \mathbf{\tilde{u}}_h) + (\nabla_\nu \mathbf{u}_h, \nabla_\nu \mathbf{\tilde{u}}_h) - (\mathbf{u}_h, (\mathbf{u} \cdot \nabla) \mathbf{\tilde{u}}_h) + (b(\mathbf{u}_h), \mathbf{\tilde{u}}_h) \bigg ] \diff t = - ({\mathbf{u}_h}_0, \mathbf{\tilde{u}}_h(0))
+\end{equation}
+%
+\changefontsizes{10pt}
+and
+\changefontsizes{9pt}
+%
+\begin{equation}\nonumber
+\begin{split}
+&+ \int_0^T \bigg[ -(c, \partial_t \tilde{c}) -(\mathbf{u}c, \nabla \tilde{c}) + K_2 (\partial_2 c, \partial_2 \tilde{c}) + K_3 (\partial_3 c, \partial_3 \tilde{c}) \bigg ] \diff t \\
+& = - (c_0, \tilde{c}(0)) + \int_0^T (s,\tilde{c}) \diff t
+\end{split}
+\end{equation}
+\changefontsizes{10pt}
+%
+\hspace{0.3cm}for all $(\mathbf{\tilde{u}}, \tilde{c})$ with $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T, \mathbf{W})$, with $\mathbf{\tilde{u}}_h (T) = 0$ and $\tilde{c}$
 
-\begin{frame}{Weak formulation - hydrostatic system, part 2}
+\hspace{0.4cm}with $\tilde{c} \in H^1 (0,T, H^2_{\Gamma_A} (\Omega))$, $\tilde{c} (T) = 0$.
 \end{frame}
 
 \begin{frame}{DWMC, weak solutions: Main theorem}
