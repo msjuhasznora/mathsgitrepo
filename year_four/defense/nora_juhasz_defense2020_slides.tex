@@ -7,6 +7,7 @@
 \usepackage{scrextend}
 \usepackage{xcolor}
 \definecolor{green}{rgb}{0.4, 0.69, 0.2}
+\definecolor{dartmouthgreen}{rgb}{0.05, 0.5, 0.06}
 \definecolor{asparagus}{rgb}{0.53, 0.66, 0.42}
 \definecolor{blue}{rgb}{0.0, 0.53, 0.74}
 \definecolor{antiquefuchsia}{rgb}{0.57, 0.36, 0.51}
@@ -22,10 +23,11 @@
 \newtheorem{prop}{Proposition}
 
 \title{The PDE polluted atmosphere model: a mathematical justification of a meteorological approach}
+\subtitle{PhD thesis defense}
 \author[N\'ora Juh\'asz]{N\'ora Juh\'asz \\[1mm] \textit{supervisor: Prof. Donatella Donatelli}}
 \institute{Department of Information Engineering, Computer Science and Mathematics \\ University of L'Aquila }
 
-\date{May, 2020}
+\date{8th May, 2020}
 
 \logo{
     \includegraphics[width=1cm,height=1cm,keepaspectratio]{LogoModCompShock.jpg}\hspace*{10.5cm}~%
@@ -46,9 +48,9 @@ We present our results in the following structure:
 \item Motivation: already well-known facts and general outline of the two main models describing large-scale geophysical flows.
 \item The focus of our work: we prove a rigorous \textbf{connection and justification} in three different frameworks:
 \begin{enumerate}
-\item \textbf{Framework 1.} Geophysical coordinate system + weak solutions. \textit{\underline{Key focus}:} Strong convergence of the concentration function, visualisation of the results.
-\item \textbf{Framework 2.} Downwind - matching coordinate system + weak solutions. \textit{\underline{Key focus}:} Classical, non-periodic domain, Coriolis terms.
-\item \textbf{Framework 3.} Downwind - matching coordinate system + strong solutions. \textit{\underline{Key focus}:} Strong convergence of the concentration function, existence result for the limit system.
+\item \textbf{Framework 1.} Geophysical coordinate system + weak solutions. \textit{\textcolor{terracotta}{Key focus}:} Strong convergence of the concentration function, visualisation of the results.
+\item \textbf{Framework 2.} Downwind - matching coordinate system + weak solutions. \textit{\textcolor{terracotta}{Key focus}:} Classical, non-periodic domain, Coriolis terms.
+\item \textbf{Framework 3.} Downwind - matching coordinate system + strong solutions. \textit{\textcolor{terracotta}{Key focus}:} Strong convergence of the concentration function, existence result for the limit system.
 \end{enumerate}
 \end{enumerate}
 
@@ -392,12 +394,18 @@ The pair $(\mathbf{u}^\epsilon, c^\epsilon)$ is called a weak solution of the an
 for all $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T;\mathbf{V})$ with $\mathbf{\tilde{u}}(T) = 0$ and $\tilde{c}$ such that $\tilde{c} \in H^1 (0,T, H^2_{\Gamma_A} (\Omega))$ and $\tilde{c} (T) = 0$.
 \end{frame}
 
+\begin{frame}{Weak formulation - hydrostatic system, part 1}
+\end{frame}
+
+\begin{frame}{Weak formulation - hydrostatic system, part 2}
+\end{frame}
+
 \begin{frame}{Main theorem}
 
 We show a rigorous connection between the two sets --- taking the limit in the solutions we arrive to a justification of the hydrostatic model for the case of the polluted atmosphere.
 
 \begin{theorem} \label{maintheorem_weak_GFC}
-Let $\mathbf{u}_0 \in L^2 (\Omega)$, with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 \cdot \mathbf{n} = 0$ on $\partial \Omega$; $\theta_h \in L^2(0,T; H^{-1/2}(\Gamma_G)),$ let $c_0 \in L^2 (\Omega)$; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations converges (up to a subsequence) weakly to a weak solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere.
+Let $\mathbf{u}_0 \in L^2 (\Omega)$, with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 \cdot \mathbf{n} = 0$ on $\partial \Omega$; $\theta_h \in L^2(0,T; H^{-1/2}(\Gamma_G)),$ let $c_0 \in L^2 (\Omega)$; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, \textcolor{terracotta}{c^\epsilon})$ of the anisotropic equations converges (up to a subsequence) weakly to a weak solution $(\mathbf{u}, \textcolor{terracotta}{c})$ of the hydrostatic equations of the polluted atmosphere.
 \end{theorem}
   
 \end{frame}
@@ -515,7 +523,7 @@ We can apply the statement of this theorem for $p=2$ and the spaces $H^1 \hookri
 
 \begin{frame}{What makes the visualisation computationally interesting}
 
-\textbf{The major challenge}: the scheme's disappearing dependence upon certain terms. \textit{Picard iterations} and the \textit{Chorin method} are widely used, standard methods in the field of the \textcolor{red}{complete} Navier-Stokes equations $\to$ but once we introduce the $\epsilon$ multiplier into the equations, these standard schemes become problematic as $\epsilon$ decreases.
+\textbf{The major challenge}: \textcolor{terracotta}{obtaining numerical results for a model where the scheme has disappearing dependence upon certain terms}. \textit{Picard iterations} and the \textit{Chorin method} are widely used, standard methods in the field of the \textbf{complete} Navier-Stokes equations $\to$ but once we introduce the $\epsilon$ multiplier into the equations, these standard schemes become problematic as $\epsilon$ decreases.
 
 \end{frame}
 
@@ -536,7 +544,7 @@ The variational form of the first step in the \textit{Chorin method} becomes
 \end{frame}
 
 \begin{frame}
-Previous observations $\to$ avoid linearisation techniques + conserve the nonlinear nature of the problem. We focus our attention to a simplified scenario --- key: keep the main challenging feature yet make the problem manageable.
+Previous observations $\to$ \textcolor{terracotta}{avoid linearisation techniques} + conserve the nonlinear nature of the problem. We focus our attention to a simplified scenario --- key: keep the main challenging feature yet make the problem manageable.
 
 \begin{description}
 \item[S1] Stationary case
@@ -894,7 +902,7 @@ $$ \partial_t c^\epsilon + \mathbf{u^\epsilon} \cdot \nabla c^\epsilon = \epsilo
 
 \begin{frame}{DWMC: Weak solutions framework}
 
-\textbf{Boundary conditions:} weak solutions framework $\to$ we aim to be as close as possible to the original domain --- classical non-periodic local domain on the surface of the Earth + minimal modifications due to the new $\epsilon$ term (inland domains).
+\textbf{Boundary conditions:} weak solutions framework $\to$ we aim to be as close as possible to the original domain --- \textcolor{terracotta}{classical non-periodic local domain} on the surface of the Earth + minimal modifications due to the new $\epsilon$ term (inland domains).
 
   \begin{figure}[!h]
   \centering
@@ -1007,10 +1015,16 @@ for all $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T;\
 
 \end{frame}
 
+\begin{frame}{Weak formulation - hydrostatic system, part 1}
+\end{frame}
+
+\begin{frame}{Weak formulation - hydrostatic system, part 2}
+\end{frame}
+
 \begin{frame}{DWMC, weak solutions: Main theorem}
 
 \begin{theorem} \label{maintheoremWEAK}
-Let ${\mathbf{u}_h}_0$ $\in$ $H^1 (\Omega)$, ${u_3}_0 \in L^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0, {\mathbf{u}_h}_0 = 0, {u_3}_0 n_3 = 0$ on $\partial \Omega$; let $c_0 \in$ $L^2 (\Omega)$, and assume that the previously given boundary conditions hold; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations converges (up to a subsequence) weakly to a weak solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere.
+Let ${\mathbf{u}_h}_0$ $\in$ $H^1 (\Omega)$, ${u_3}_0 \in L^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0, {\mathbf{u}_h}_0 = 0, {u_3}_0 n_3 = 0$ on $\partial \Omega$; let $c_0 \in$ $L^2 (\Omega)$, and assume that the previously \textcolor{terracotta}{given boundary conditions} hold; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, \textcolor{terracotta}{c^\epsilon})$ of the anisotropic equations converges (up to a subsequence) weakly to a weak solution $(\mathbf{u}, \textcolor{terracotta}{c})$ of the hydrostatic equations of the polluted atmosphere.
 \end{theorem}
 
 \end{frame}
@@ -1035,7 +1049,7 @@ The structure we will follow:
     \begin{split}  
     & \frac{1}{2} (\norm{\mathbf{u}_h^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{c^\epsilon (t)}_{L^2}^2) \\
     & + \int_0 ^ t \big[ \norm{\nabla_\nu \mathbf{u}_h^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \big] \diff \tau \\
-    & + \int_0 ^ t  \big [ \textcolor{orange}{\epsilon} K_1 \norm{\partial_1 c^\epsilon}_{L^2}^2  + K_2 \norm{\partial_2 c^\epsilon}_{L^2}^2 + K_3 \norm{\partial_3 c^\epsilon}_{L^2}^2 \big ] d \tau \\
+    & + \int_0 ^ t  \big [ \textcolor{terracotta}{\epsilon} K_1 \norm{\partial_1 c^\epsilon}_{L^2}^2  + K_2 \norm{\partial_2 c^\epsilon}_{L^2}^2 + K_3 \norm{\partial_3 c^\epsilon}_{L^2}^2 \big ] d \tau \\
     & \leq \int_0^t (s^\epsilon,c^\epsilon) \diff \tau + \frac{1}{2} (\norm{\mathbf{u}_h^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{c^\epsilon_0}_{L^2}^2)
     \end{split}
   \end{equation}
@@ -1069,7 +1083,7 @@ Let ${\mathbf{u}_h}_0 \in H^1(\Omega).$ Then there exists a unique strong soluti
 \end{frame}
 
 \begin{frame}
-We use this theorem to verify the strong convergence of $u_3^\epsilon,$ keeping in mind that
+We use this theorem to verify the strong convergence of $u_3^\epsilon,$ \textcolor{terracotta}{keeping in mind that}
 \begin{description}
 \item[a)] our domain is non-periodic,
 \item[b)] we do not assume zero-averaged functions, and
@@ -1203,9 +1217,9 @@ The complete set of estimates is rather long --- we will show selected steps. We
       & I_{22}'' = - \int_{Q_{t_0}}  U^\epsilon_3 \mathbf{U}_h^\epsilon \cdot \partial_z \mathbf{u}_h \diff x \diff y \diff z \diff t \\
       & \leq \int_0^{t_0} \int_\Omega \bigg ( \int_0^z \nabla_h \cdot \mathbf{U}_h^\epsilon \diff z' \bigg ) (\mathbf{U}_h^\epsilon \cdot \partial_z \mathbf{u}_h) \diff x \diff y \diff z \diff t \\
       & \lesssim \int_0^{t_0} \int_{\Gamma_G} \bigg ( \int_0^1 \abs{\nabla_h \mathbf{U}_h^\epsilon} \diff z \bigg) \bigg ( \int_0^1 \abs{\mathbf{U}_h^\epsilon} \abs{\partial_z \mathbf{u}_h} \diff z \bigg ) \diff x \diff y \diff t \\
-      & \lesssim \int_0^{t_0} \| \nabla \mathbf{U}_h^\epsilon \| _2^{3/2} \| \mathbf{U}_h^\epsilon \| _2^{1/2} \norm{\nabla \mathbf{u}_h}_2^{1/2} (\textcolor{orange}{\norm{\nabla \mathbf{u}_h}_2^{1/2}} + \norm{\Delta \mathbf{u}_h}_2^{1/2}) \diff t \\
-      & \lesssim \zeta \| \nabla \mathbf{U}_h^\epsilon \| ^2_2 + \kappa(\zeta) \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^2 (\textcolor{orange}{\norm{\nabla \mathbf{u}_h}_2^{1/2}} + \norm{\Delta \mathbf{u}_h}_2^{1/2})^4 \| \mathbf{U}_h^\epsilon \|_2^2 \diff t \\
-      & \lesssim \zeta \| \nabla \mathbf{U}_h^\epsilon \| ^2_2 + \textcolor{orange}{\kappa(\zeta) \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^4 \| \mathbf{U}_h^\epsilon \|_2^2 \diff t} + \kappa(\zeta) \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^2  \norm{\Delta \mathbf{u}_h}_2^2 \| \mathbf{U}_h^\epsilon \| _2^2 \diff t.
+      & \lesssim \int_0^{t_0} \| \nabla \mathbf{U}_h^\epsilon \| _2^{3/2} \| \mathbf{U}_h^\epsilon \| _2^{1/2} \norm{\nabla \mathbf{u}_h}_2^{1/2} (\textcolor{terracotta}{\norm{\nabla \mathbf{u}_h}_2^{1/2}} + \norm{\Delta \mathbf{u}_h}_2^{1/2}) \diff t \\
+      & \lesssim \zeta \| \nabla \mathbf{U}_h^\epsilon \| ^2_2 + \kappa(\zeta) \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^2 (\textcolor{terracotta}{\norm{\nabla \mathbf{u}_h}_2^{1/2}} + \norm{\Delta \mathbf{u}_h}_2^{1/2})^4 \| \mathbf{U}_h^\epsilon \|_2^2 \diff t \\
+      & \lesssim \zeta \| \nabla \mathbf{U}_h^\epsilon \| ^2_2 + \textcolor{terracotta}{\kappa(\zeta) \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^4 \| \mathbf{U}_h^\epsilon \|_2^2 \diff t} + \kappa(\zeta) \int_0^{t_0} \norm{\nabla \mathbf{u}_h}_2^2  \norm{\Delta \mathbf{u}_h}_2^2 \| \mathbf{U}_h^\epsilon \| _2^2 \diff t.
     \end{split}
   \end{equation}
 
@@ -1315,7 +1329,7 @@ Combining this with $c^\epsilon \rightharpoonup c$ weakly in $L_t^\infty L_x^2$ 
 \end{frame}
 
 \begin{frame}{Domain structure}
-\textcolor{antiquefuchsia}{\textit{\textbf{Step one.}}} Let's consider $\Omega_0 = M \times (-a, 0)$ with $M = (0,1) \times (0,1)$ over an inland domain. We define the boundary conditions
+\textit{\textbf{Step one.}} Let's consider $\Omega_0 = M \times (-a, 0)$ with $M = (0,1) \times (0,1)$ over an inland domain. We define the boundary conditions
 %
 \begin{equation}\nonumber
 \begin{split}
@@ -1325,7 +1339,7 @@ Combining this with $c^\epsilon \rightharpoonup c$ weakly in $L_t^\infty L_x^2$ 
 \end{split}
 \end{equation}
 %
-\textcolor{antiquefuchsia}{\textit{\textbf{Step two.}}} We define a new concentration function $c^*$: $c^* = c + \frac{z}{a}.$ Result: we obtain a function that is zero on both the upper and lower boundary of the domain. $to$ We can consider the standard extensions of $\mathbf{u}_h$, $u_3$, $p$ and $c$ to the new $\Omega = M \times (-a, a)$ domain.
+\textit{\textbf{Step two.}} We define a new concentration function $c^*$: $c^* = c + \frac{z}{a}.$ Result: we obtain a function that is zero on both the upper and lower boundary of the domain. $to$ We can consider the standard extensions of $\mathbf{u}_h$, $u_3$, $p$ and $c$ to the new $\Omega = M \times (-a, a)$ domain.
 
 \underline{Method}: we require these functions to be even, odd, even and odd
 
@@ -1351,7 +1365,7 @@ Note: after using $c = c^* - \frac{z}{a}$ and $c^\epsilon = {c^\epsilon}^* - \fr
 \end{frame}
 
 \begin{frame}
-\textcolor{antiquefuchsia}{\textit{\textbf{Step three.}}} Now the anisotropic and hydrostatic systems are combined with the
+\textit{\textbf{Step three.}} Now the anisotropic and hydrostatic systems are combined with the
 %
 \begin{equation} \nonumber
 \begin{split}
@@ -1372,6 +1386,117 @@ and
 boundary conditions, respectively.
 
 The restrictions from $\Omega$ to $\Omega_0$ are solutions to the original systems.
+\end{frame}
+
+\begin{frame}
+We first describe a hydrostatic existence result.
+
+\begin{theorem}
+Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0$, let $c_0 \in H^2 (\Omega),$ and let's assume that the given boundary conditions hold. Then there exists a unique global strong solution $(\mathbf{u}, \textcolor{terracotta}{c})$ of the downwind-matching hydrostatic polluted atmosphere limit model:
+%
+    \begin{equation} \nonumber
+      c \in L^\infty([0, \infty), H^2(\Omega)) \text{ and } \nabla_d c \in L^2_{loc}([0, \infty), H^2(\Omega)),
+    \end{equation}
+%
+    \begin{equation} \nonumber
+      \partial_t c \in L^2_{loc}([0, \infty), H^1(\Omega)),
+    \end{equation}
+%
+    \begin{equation} \nonumber
+      \mathbf{u}_h \in L^\infty([0, \infty), H^3(\Omega)) \cap L^2_{loc}([0, \infty), H^4(\Omega)), \text{ and }
+    \end{equation}
+%
+    \begin{equation} \nonumber
+      \partial_t \mathbf{u}_h \in L^2_{loc}([0, \infty), H^2(\Omega)).
+    \end{equation}
+%
+\end{theorem}
+
+\end{frame}
+
+\begin{frame}{DWMC, strong solutions: Main theorem}
+\begin{theorem}[Main theorem]
+Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\int_\Omega {\mathbf{u}_h}_0 \diff x \diff y \diff z = 0$ and $\nabla \cdot \mathbf{u}_0 = 0,$ and let $c_0 \in H^2 (\Omega).$ There is a positive $\epsilon_0$ threshold such that for any $\epsilon < \epsilon_0,$ the strong solution $(\mathbf{u}^\epsilon, \textcolor{terracotta}{c^\epsilon})$ of the anisotropic equations exists globally in time and as the aspect ratio $\epsilon$ tends to zero, it converges strongly to the unique global strong solution $(\mathbf{u}, \textcolor{terracotta}{c})$ of the hydrostatic equations of the polluted atmosphere.
+
+\end{theorem}
+\end{frame}
+
+\begin{frame}
+\begin{theorem}[Main theorem (continued)]
+In more detail, the following strong convergence results hold:
+
+  \begin{align} 
+    & (\mathbf{u}_h^\epsilon, \epsilon u_3^\epsilon) \to (\mathbf{u}_h, 0) &\quad & \text{in $L_t^\infty H_x^2$,} \nonumber \\
+    & (\nabla \mathbf{u}_h^\epsilon, \epsilon \nabla u_3^\epsilon, u_3^\epsilon) \to (\nabla \mathbf{u}_h, 0, u_3) &\quad & \text{in $L_t^2 H_x^2$,} \nonumber \\ 
+    & (u_3^\epsilon, c^\epsilon) \to (u_3, c) &\quad & \text{in $L_t^\infty H_x^1,$} \nonumber \\
+    & \nabla_d c^\epsilon \to \nabla_d c &\quad & \text{in $L_t^2 H_x^1.$} \nonumber
+  \end{align}
+\end{theorem}  
+\end{frame}
+
+\begin{frame}{Proof - velocity}
+This part is based on [Li, J., Titi, E. S. (2019)], and $\epsilon < \epsilon_0.$
+
+For an ${\mathbf{u}_h}_0 \in H^3(\Omega)$ initial data the velocity difference functions satisfy
+%
+\begin{equation} \nonumber
+\sup_{0 \leq t < \infty}{\norm{(\mathbf{U}_h^\epsilon, \epsilon U_3^\epsilon)}_{H^2}^2} + \int_0^\infty \norm{\nabla (\mathbf{U}_h^\epsilon, \epsilon U_3^\epsilon)}_{H^2}^2 \leq \kappa \epsilon^2.
+\end{equation}
+%
+As a consequence, the following strong convergences hold for an ${\mathbf{u}_h}_0 \in H^3(\Omega)$ initial data:
+\begin{align}
+&  (\mathbf{u}_h^\epsilon, \epsilon u_3^\epsilon) \to (\mathbf{u}_h, 0) &\quad & \text{strongly in $L_t^\infty H_x^2$,} \nonumber \\
+&  (\nabla \mathbf{u}_h^\epsilon, \epsilon \nabla u_3^\epsilon, u_3^\epsilon) \to (\nabla \mathbf{u}_h, 0, u_3) &\quad & \text{strongly in $L_t^2 H_x^2$,} \nonumber \\ 
+&  u_3^\epsilon \to u_3 &\quad & \text{strongly in $L_t^\infty H_x^1.$} \nonumber
+\end{align}
+\end{frame}
+
+\begin{frame}
+The focus of the proof's remaining part is show that
+%
+\begin{equation}\nonumber
+  c^\epsilon \to c \text{ in } L_t^\infty H_x^1 \text{ and } \nabla_d c^\epsilon \to \nabla_d c \text{ in } L_t^2 H_x^1.
+\end{equation}
+We introduce $C^\epsilon = c^\epsilon-c$ and $S^\epsilon = s^\epsilon-s.$
+
+Subtracting the governing equations we obtain
+\begin{equation}\nonumber
+\partial_t C^\epsilon + \mathbf{u}^\epsilon \cdot \nabla c^\epsilon - \mathbf{u} \cdot \nabla c = \frac{1}{a} U_3^\epsilon + \epsilon K_1 \partial_{11} c^\epsilon + \Delta_d C^\epsilon + S^\epsilon.
+\end{equation}
+After reformulation we have:
+\begin{equation} \nonumber
+  \begin{split}
+   & \partial_t C^\epsilon + \mathbf{U}^\epsilon \nabla C^\epsilon  + \mathbf{U}^\epsilon \nabla c+ \mathbf{u} \nabla C^\epsilon \\
+   & = \frac{1}{a} U_3^\epsilon + \epsilon K_1 \partial_{11} C^\epsilon + \epsilon K_1 \partial_{11} c + \Delta_d C^\epsilon + S^\epsilon.
+   \end{split}
+\end{equation}
+\end{frame}
+
+\begin{frame}
+\changefontsizes{10pt}
+Multiplying the previous equation by $- \partial_{ii} C^\epsilon, i=1,2,3.$ \textit{Highlight}: separation to individual indices $i = 1,2,3$ --- we can not use a uniform approach. We get
+%
+\begin{equation} \nonumber
+  \begin{split}
+      & \frac{1}{2}\frac{\diff}{\diff t} \norm{\nabla C^\epsilon}_2^2 + \epsilon K_1 \norm{\partial_{11} C^\epsilon}_2^2 + K_2 \norm{\partial_{22} C^\epsilon}_2^2 + K_3 \norm{\partial_{33} C^\epsilon}_2^2 + \sum_{i \neq j} \kappa_{ij} \norm{\partial_{ij} C^\epsilon}_2^2 \\
+      & = \sum_{i = 1,2,3} \int_\Omega \mathbf{U}^\epsilon \nabla C^\epsilon \partial_{ii} C^\epsilon + \int_\Omega \mathbf{U}^\epsilon \nabla c \partial_{ii} C^\epsilon + \int_\Omega \mathbf{u} \nabla C^\epsilon \partial_{ii} C^\epsilon - \int_\Omega \epsilon K_1 \partial_{11} c \partial_{ii} C^\epsilon \\
+      & - \sum_{i = 1,2,3} \int_\Omega S^\epsilon \partial_{ii} C^\epsilon - \frac{1}{a} \int_\Omega U_3^\epsilon \partial_{ii} C^\epsilon \\
+      & = \sum_{i = 1,2,3} I_1(i)  + I_2(i) + I_3(i) + I_4(i) + I_5(i) + I_6(i),
+  \end{split}
+\end{equation}
+%
+for any $1 \leq j \leq 3.$
+
+\end{frame}
+
+\begin{frame}{Proof - $I_1(i)$}
+The complete process of the estimate construction is long - in many ways $I_1(i)$ is a good example, we examine this in detail.
+\end{frame}
+
+\begin{frame}{Closing steps}
+\end{frame}
+
+\begin{frame}{DWMC, strong solutions: Existence for the hydrostatic system}
 \end{frame}
 
 \end{document}
