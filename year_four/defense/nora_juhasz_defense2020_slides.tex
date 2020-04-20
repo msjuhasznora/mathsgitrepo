@@ -1622,9 +1622,165 @@ Finally to estimate $I_1(i)$ for $i = 2,3$ we can simply use
 \end{frame}
 
 \begin{frame}{Closing steps}
+Summarising the previously obtained six estimates for $I_1$ -- $I_6$ and merging the second order concentration terms into the left-hand side (note that it is indeed possible to do so as we have constructed the bounds in a way that $\partial_{11} C^\epsilon$ is only present with an $\epsilon$ multiplier), we eventually have
+\changefontsizes{10pt}
+%
+\begin{equation} \nonumber
+  \begin{split}
+    & \frac{1}{2} \frac{\diff}{\diff t} \norm{\nabla C^\epsilon}_2^2 + \epsilon K_1 \norm{\partial_{11} C^\epsilon}_2^2 + K_2 \norm{\partial_{22} C^\epsilon}_2^2 + K_3 \norm{\partial_{33} C^\epsilon}_2^2 + \sum_{i \neq j} \kappa_{ij} \norm{\partial_{ij} C^\epsilon}_2^2 \\
+    & \lesssim (\norm{\mathbf{u}_h}_{H^3} + \norm{\mathbf{u}_h}_{H^3}^2 + \norm{\mathbf{U}_h^\epsilon}_{H^3} + \norm{\mathbf{U}_h^\epsilon}_{H^3}^2 + 1 + \norm{c}_{H^2}^2) \norm{\nabla C^\epsilon}_2^2 \\
+    & + \norm{\mathbf{U}_h^\epsilon}_{H^3}^2 + \norm{\mathbf{U}_h^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2 + \epsilon K_1 \norm{\partial_{11} c}_2^2 + \epsilon^2 \\
+    & = A(t)  \norm{\nabla C^\epsilon}_2^2 + B(t)
+  \end{split}
+\end{equation}
+%
+\changefontsizes{12pt}
+for any $1 \leq j \leq 3.$
 \end{frame}
 
-\begin{frame}{DWMC, strong solutions: Existence for the hydrostatic system}
+\begin{frame}
+Now we have that
+%
+\changefontsizes{10pt}
+\[ \int_0^T B(t) \diff \tau = \kappa \int_0^T \epsilon \norm{\partial_{11} c}_2^2 + \norm{\mathbf{U}_h^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2 + \norm{\mathbf{U}_h^\epsilon}_{H^3}^2 + \epsilon^2 \diff \tau \lesssim \epsilon + \epsilon^2 + \epsilon^2 T,\]
+\changefontsizes{12pt}
+%
+and
+%
+\changefontsizes{10pt}
+\begin{equation} \nonumber
+\begin{split}
+& \int_0^T A(t) \diff \tau = \kappa \int_0^T \norm{\mathbf{U}_h^\epsilon}_{H^3} + \norm{\mathbf{u}_h}_{H^3} + \norm{\mathbf{U}_h^\epsilon}_{H^3}^2 + \norm{\mathbf{u}_h}_{H^3}^2 + \norm{c}_{H^2}^2 + 1 \diff \tau \\
+& \lesssim \sqrt{T} + 1 + T.
+\end{split}
+\end{equation}
+\changefontsizes{12pt}
+%
+Eventually the Gr\"onwall inequality yields
+%
+\begin{equation} \nonumber
+\begin{split}
+& \norm{C^\epsilon}_{L^\infty(0,T; H^1(\Omega))} + \norm{\nabla_d C^\epsilon}_{L^2(0,T; H^1(\Omega))} \\
+& \lesssim (\epsilon + \epsilon^2 \cdot T) \exp{\kappa (\sqrt{T} + 1 + T)}.
+\end{split}
+\end{equation}
+\end{frame}
+
+\begin{frame}
+Finally we conclude that for any given time $T > 0$ we have the global strong convergence results
+%
+\begin{equation} \nonumber
+c^\epsilon \to c \text{ in } L_t^\infty H_x^1 \text{ and } \nabla_d c^\epsilon \to \nabla_d c \text{ in } L_t^2 H_x^1,
+\end{equation}
+%
+moreover the rate of convergence is $\epsilon$ (note however: the estimate's time-dependence also means that the convergence gets slower as time evolves).
+
+Combining this convergence result with the strong converges already detailed for the velocity, our proof is finished.
+\end{frame}
+
+\begin{frame}{DWMC, strong solutions: P.E. Existence}
+\begin{theorem}
+Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0$, let $c_0 \in H^2 (\Omega),$ and let's assume that the given boundary conditions hold. Then there exists a unique global strong solution $(\mathbf{u}, \textcolor{terracotta}{c})$ of the downwind-matching hydrostatic polluted atmosphere limit model:
+%
+    \begin{equation} \nonumber
+      c \in L^\infty([0, \infty), H^2(\Omega)) \text{ and } \nabla_d c \in L^2_{loc}([0, \infty), H^2(\Omega)),
+    \end{equation}
+%
+    \begin{equation} \nonumber
+      \partial_t c \in L^2_{loc}([0, \infty), H^1(\Omega)),
+    \end{equation}
+%
+    \begin{equation} \nonumber
+      \mathbf{u}_h \in L^\infty([0, \infty), H^3(\Omega)) \cap L^2_{loc}([0, \infty), H^4(\Omega)), \text{ and }
+    \end{equation}
+%
+    \begin{equation} \nonumber
+      \partial_t \mathbf{u}_h \in L^2_{loc}([0, \infty), H^2(\Omega)).
+    \end{equation}
+%
+\end{theorem}
+\end{frame}
+
+\begin{frame}
+The proof is partly based on based on [C. Cao, J. Li, and E. S. Titi, 2014] --- a system that is very similar to ours (including an incomplete Laplacian).
+
+\textit{Similarities}: strong analogy between the equations describing the dynamics of $T$ and $c$.
+
+\textcolor{terracotta}{Cardinal difference}: Reciprocal vs. one-sided coupling $\to$ overall this contributes to a very significant structural divergence.
+
+\textit{Key}: the difference between the equations $$ \partial_3 p + T = 0$$ and $$ \partial_3 p = 0.$$ Reciprocal coupling makes certain cancellations possible, one-sided coupling allows creating bounds for $\mathbf{u}$ and $c$ consecutively.
+
+\hspace{0.3cm} We give a rough outline of the proof.
+\end{frame}
+
+\begin{frame}{Step 1: Mollified system}
+\begin{equation} \nonumber
+\begin{split}
+\partial_t \mathbf{u}_h + \Delta_\nu \mathbf{u}_h + & (\mathbf{u}_h \cdot \nabla_h) \mathbf{u}_h - \bigg ( \int_{-a}^z \nabla_h \cdot \mathbf{u}_h (x, y, \xi, t) \diff \xi \bigg ) \partial_3 \mathbf{u}_h \\
+& + f_0 k \times \mathbf{u}_h + \nabla_h p_s (x,y,t) = 0,
+\end{split}
+\end{equation}
+%
+\begin{equation} \nonumber
+\nabla_h \cdot \bar{\mathbf{u}}_h = 0,
+\end{equation}
+%
+\begin{equation} \nonumber
+\begin{split}
+\partial_t c+ \mathbf{u}_h \cdot \nabla_h c + \bigg ( - & \int_{-a}^z \nabla_h \cdot \mathbf{u}_h (x, y, \xi, t) \diff \xi \bigg ) \cdot \bigg (\partial_3 c - \frac{1}{a} \bigg ) \\
+& - \Delta_{d} c - \mu \partial_{11} c = 0.
+\end{split}
+\end{equation}
+
+Using the contractive mapping principle, we can prove that for any fix positive $\mu$ value there exist local strong solutions $\mathbf{u}_h^\mu$ and $c^\mu$ to the modified system on $\Omega \times (0, t_\mu)$ such that
+%
+\[ (\mathbf{u}_h^\mu, c^\mu) \in L^2 (0, t^\mu; H^3(\Omega)), \quad (\partial_t \mathbf{u}_h^\mu, \partial_t c^\mu) \in L^2 (0, t^\mu; H^1 (\Omega)). \]
+
+\end{frame}
+
+\begin{frame}{Step 2: Local existence}
+
+Existence of the unique local strong solution $\mathbf{u}_h, c$: as the strong limit of the sequences $\mathbf{u}_h^\mu, c^\mu$ as $\mu \to 0$.
+
+\textbf{Method}: we establish uniform in $\mu$ estimates for $\mathbf{u}_h^\mu, c^\mu$ and we construct $\mu-$ independent lower bounds for the existence time $t_0$. These estimates combined with a version of the Aubin-Lions lemma yield
+  
+\begin{equation} \nonumber
+(\mathbf{u}_h^{\mu_j}, c^{\mu_j}) \to (\mathbf{u}_h, c) \text{ in } C(0, t_0; H^1(\Omega)),
+\end{equation}
+%
+and
+%
+\begin{equation} \nonumber
+\mathbf{u}_h^{\mu_j} \to \mathbf{u}_h \text{ in } L^2(0, t_0; H^2(\Omega)), \quad \nabla_d c^{\mu_j} \to \nabla_d c \text{ in } L^2(0, t_0; H^1(\Omega)).
+\end{equation}
+  
+\hspace{0.3cm}Uniqueness: estimating the difference functions and using the
+
+\hspace{0.3cm}Gr\"onwall inequality.
+
+\end{frame}
+
+\begin{frame}{Global existence}
+\changefontsizes{11pt}
+We only need to work on the \textcolor{terracotta}{continuability of $c$}: multiplying the governing equation by $\Delta^2 c,$ and integrating the result on $\Omega$ gives
+\changefontsizes{10pt}
+\begin{equation} \nonumber
+\begin{split}
+& \frac{1}{2} \frac{\diff}{\diff t} \norm{\Delta c}_2^2 + \kappa \norm{\Delta \nabla_d c}_2^2 \\
+& \leq \int_\Omega \Delta s \Delta c - \Delta ( \mathbf{u}_h \cdot \nabla_h c) \cdot \Delta c + \Delta \bigg ( \bigg ( \int_{-a}^z \nabla_h \cdot \mathbf{u}_h \diff \xi \bigg) \bigg ( \partial_3 c - \frac{1}{a} \bigg) \bigg ) \cdot \Delta c.
+\end{split}
+\end{equation}
+\changefontsizes{11pt}
+%
+Constructing bounds for each term, and applying the Gr\"onwall inequality, we obtain
+%
+\begin{equation} \nonumber
+\sup_{0 \leq t \leq T}\norm{\Delta c}_2^2 + \kappa \int_0^T \norm{\Delta \nabla_d c}_2^2 \leq \kappa (\norm{c_0}_{H^2} + G_2) \exp{G_1},
+\end{equation}
+%
+$$G_1 = (T + T\norm{\mathbf{u}_h}_{L^\infty_t H^3_x} + T \norm{\mathbf{u}_h}_{L^\infty_t H^3_x}^2 + \norm{\mathbf{u}_h}_{L^2_t H^4_x}  +  T^2),$$
+$$G_2 = T \norm{s}_{H^2} + \norm{\mathbf{u}_h}_{L^\infty_t H^3_x}^2 T^2 + \norm{\mathbf{u}_h}_{L^\infty_t H^3_x}^2 T^3 + \norm{\mathbf{u}_h}_{L^\infty_t H^3_x} T.$$
+
 \end{frame}
 
 \end{document}
