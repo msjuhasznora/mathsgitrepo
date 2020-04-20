@@ -1528,6 +1528,97 @@ for any $1 \leq j \leq 3.$
 
 \begin{frame}{Proof - $I_1(i)$}
 The complete process of the estimate construction is long - in many ways $I_1(i)$ is a good example, we examine this in detail.
+
+\textbf{Estimate for $I_1(i), i = 1,2,3.$}
+
+We begin by taking $i=1.$
+
+\begin{equation}\nonumber
+  \begin{split}
+    & I_1(1) = \int_\Omega \mathbf{U}^\epsilon \nabla C^\epsilon \partial_{11} C^\epsilon \\
+    & = \int_\Omega U_1^\epsilon \partial_1 C^\epsilon \partial_{11} C^\epsilon + \int_\Omega U_2^\epsilon \partial_2 C^\epsilon \partial_{11} C^\epsilon + \int_\Omega U_3^\epsilon \partial_3 C^\epsilon \partial_{11} C^\epsilon \\
+    & = I_1(1)(a) + I_1(1)(b) + I_1(1)(c).
+  \end{split}
+\end{equation}
+
+Firstly we estimate $I_1(1)(a).$ Integration by parts gives
+%
+$$\int_\Omega U_1^\epsilon \partial_1 C^\epsilon \partial_{11} C^\epsilon = - \frac{1}{2} \int_\Omega \partial_1 U_1^\epsilon (\partial_1 C^\epsilon)^2,$$
+%
+\hspace{0.4cm} thus using the H\"older inequality we obtain
+
+\end{frame}
+\begin{frame}
+
+\changefontsizes{11pt}
+
+\begin{equation} \nonumber
+  \begin{split}
+    & I_1(1)(a) = \int_\Omega U_1^\epsilon \partial_1 C^\epsilon \partial_{11} C^\epsilon \\
+    & \lesssim \norm{\partial_1 U_1^\epsilon}_{L^\infty} \cdot \norm{\partial_1 C^\epsilon}_2^2 \lesssim \norm{\partial_1 U_1^\epsilon}_{H^2} \cdot \norm{\nabla C^\epsilon}_2^2 \lesssim \norm{U_1^\epsilon}_{H^3} \cdot \norm{\nabla C^\epsilon}_2^2.
+  \end{split}
+\end{equation}
+
+\textit{Note}: the $H^3$ regularity is required sharply.
+
+The estimate of $I_1(1)(b), I_1(1)(c)$. For $j = 2,3$ we have
+
+$$ \int_\Omega U_j^\epsilon \partial_j C^\epsilon \partial_{11} C^\epsilon = - \int_\Omega \partial_1 U_j^\epsilon \partial_j C^\epsilon \partial_1 C^\epsilon - \int_\Omega U_j^\epsilon \partial_{j1} C^\epsilon \partial_1 C^\epsilon.$$
+
+By the H\"older, Ladyzhenskaya and Young inequalities we get
+\begin{equation} \nonumber
+  \begin{split}
+    & \int_\Omega \partial_1 U_j^\epsilon \partial_j C^\epsilon \partial_1 C^\epsilon \leq \| \partial_1 U_j^\epsilon \| _3 \norm{\partial_j C^\epsilon}_6 \norm{\partial_1 C^\epsilon}_2 \\
+    & \leq \| \partial_1 U_j^\epsilon \|_2^{1/2} \|\nabla \partial_1 U_j^\epsilon \|_2^{1/2} \norm{\nabla \partial_j C^\epsilon}_2 \norm{\partial_1 C^\epsilon}_2 \\
+    & \leq \zeta \norm{\nabla \partial_j C^\epsilon}_2^2 + \frac{1}{\zeta} \| \partial_1 U_j^\epsilon \|_2 \|\nabla \partial_1 U_j^\epsilon \|_2 \norm{\partial_1 C^\epsilon}_2^2 \\
+    & \leq \zeta \norm{\nabla \partial_j C^\epsilon}_2^2 + \frac{1}{\zeta} \norm{\mathbf{U}_h^\epsilon}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2.
+  \end{split}
+\end{equation}
+
+\end{frame}
+\begin{frame}
+
+\changefontsizes{11pt}
+
+Note that for $j=3$ this approach --- which is different from what we applied for $I_1(1)(a)$ --- is necessary. Using the analogous estimate $\| \partial_1 U_3^\epsilon \| _ {L^\infty} \leq \norm{U_3^\epsilon}_{H^3} \leq \| \mathbf{U}_h^\epsilon \| _{H^4}$ arrives to an excessively high level of $H^k$ space (we only have an $H^3$ horizontal initial data).
+
+The second term: in $\int_\Omega U_j^\epsilon \partial_{j1} C^\epsilon \partial_1 C^\epsilon$ we do not have a derivative on the velocity function, we can simply use
+
+\begin{equation} \nonumber
+  \begin{split}
+    & \int_\Omega U_j^\epsilon \partial_{j1} C^\epsilon \partial_1 C^\epsilon \leq \| U_j^\epsilon \| _{L^\infty} \norm{\partial_{j1} C^\epsilon}_2 \norm{\partial_1 C^\epsilon}_2 \\
+    &  \leq \zeta \norm{\partial_{j1} C^\epsilon}_2^2 +  \frac{1}{\zeta} \| U_j^\epsilon \| _{L^\infty}^2 \norm{\nabla C^\epsilon}_2^2 \leq \zeta \norm{\partial_{j1} C^\epsilon}_2^2 +  \frac{1}{\zeta} \| \mathbf{U}_h^\epsilon \| _{H^3}^2 \norm{\nabla C^\epsilon}_2^2. 
+  \end{split}
+\end{equation}
+
+Altogether for $j = 2,3$ we have
+
+\begin{equation} \nonumber
+  \begin{split}
+    & I_1(1)(b) + I_1(1)(c) = \sum_{j=2}^3 \int_\Omega U_j^\epsilon \partial_j C^\epsilon \partial_{11} C^\epsilon \\
+    & \lesssim \sum_{j=2}^3 \zeta \norm{\nabla \partial_j C^\epsilon}_2^2 + \frac{1}{\zeta} \norm{\mathbf{U}_h}_{H^3}^2 \norm{\nabla C^\epsilon}_2^2.
+  \end{split}
+\end{equation}
+
+\end{frame}
+
+\begin{frame}
+
+Finally to estimate $I_1(i)$ for $i = 2,3$ we can simply use
+
+\begin{equation} \nonumber
+  \begin{split}
+    & I_1(2) + I_1(3) = \sum_{i = 2,3} \int_\Omega \mathbf{U}^\epsilon \nabla C^\epsilon \partial_{ii} C^\epsilon \\
+    & \leq \sum_{i = 2,3} \| \mathbf{U}^\epsilon \| _{L^\infty} \norm{\nabla C^\epsilon}_2 \norm{\partial_{ii}C^\epsilon}_2 \lesssim \sum_{i = 2,3} \zeta \norm{\partial_{ii} C^\epsilon}_2^2 + \frac{1}{\zeta} \| \mathbf{U}_h^\epsilon \| _ {H^3} ^ 2 \norm{\nabla C^\epsilon}_2^2.
+  \end{split}
+\end{equation}
+
+\textbf{To summarise}: we have constructed bounds where on the right-hand side we have
+\begin{itemize}
+\item first order terms with bounded coefficients,
+\item second order terms excluding $\partial_{11} C^\epsilon,$ and these terms are multiplied by $\zeta$ ("small").
+\end{itemize}
+
 \end{frame}
 
 \begin{frame}{Closing steps}
