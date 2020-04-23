@@ -5,6 +5,7 @@
 \usepackage{amsthm}
 \usepackage{lmodern}
 \usepackage{scrextend}
+\usepackage{stmaryrd}
 \usepackage{xcolor}
 \definecolor{mediumred-violet}{rgb}{0.73, 0.2, 0.52}
 \definecolor{jasper}{rgb}{0.84, 0.23, 0.24}
@@ -358,18 +359,19 @@ Initial and boundary conditions are analogous except for using $$ u_1 = u_2 = u_
 
 \begin{frame}{Weak formulation - anisotropic system, part 1}
 
-The pair $(\mathbf{u}^\epsilon, c^\epsilon)$ is called a weak solution of the anisotropic system if $\mathbf{u}^\epsilon = (\mathbf{u}^\epsilon_h, u^\epsilon_3) \in L^2 (0,T ; \mathbf{V}) \cap L^\infty (0, T; L^2 (\Omega)^3)$ and $c^\epsilon \in L^\infty (0,T; L^2(\Omega)) \cap L^2 (0,T; H^1_{\Gamma_A}(\Omega))$, moreover $\mathbf{u}^\epsilon$ and $c^\epsilon$ satisfy the integral identities
+The pair $(\mathbf{u}^\epsilon, c^\epsilon)$ is a weak solution of the anisotropic system if
+$$\mathbf{u}^\epsilon = (\mathbf{u}^\epsilon_h, u^\epsilon_3) \in L^2 (0,T ; \mathbf{V}) \cap L^\infty (0, T; L^2 (\Omega)^3)$$
+and
+$$c^\epsilon \in L^\infty (0,T; L^2(\Omega)) \cap L^2 (0,T; H^1_{\Gamma_A}(\Omega)),$$ and the following integral identities hold:
 %
 \begin{equation} \nonumber
 \begin{split}
 & \int_0^T \bigg [ -(\mathbf{u}^\epsilon_h, \partial_t \mathbf{\tilde{u}}_h) + (\nabla_\nu \mathbf{u}^\epsilon_h, \nabla_\nu \mathbf{\tilde{u}}_h) - (\mathbf{u}^\epsilon_h, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{\tilde{u}}_h) + (b(\mathbf{u}^\epsilon_h), \mathbf{\tilde{u}}_h) \bigg ] \diff t \\
 & + \epsilon \int_0 ^ T \big [ (\beta u_3 ^\epsilon, \tilde{u}_1) - (\beta u_1^\epsilon, \tilde{u}_3) \big ] \diff t\\
 & + \epsilon^2 \int _0 ^ T \big [ -(u_3^\epsilon, \partial_t \tilde{u}_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, \tilde{u}_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu \tilde{u}_3) \big ] \diff t \\
-& = ({\mathbf{u}_h}_0, \mathbf{\tilde{u}}_h(0)) + \epsilon^2 (u_{03}^\epsilon, \tilde{u}_3 (0)) - \int_0^T \langle \theta_h, \mathbf{\tilde{u}}_h \rangle_{\Gamma_G} \diff t
+& \hspace{0.3cm} = ({\mathbf{u}_h}_0, \mathbf{\tilde{u}}_h(0)) + \epsilon^2 (u_{03}^\epsilon, \tilde{u}_3 (0)) - \int_0^T \langle \theta_h, \mathbf{\tilde{u}}_h \rangle_{\Gamma_G} \diff t
 \end{split}
 \end{equation}
-%
-\hspace{2cm} and ...
 
 \end{frame}
 
@@ -383,12 +385,16 @@ The pair $(\mathbf{u}^\epsilon, c^\epsilon)$ is called a weak solution of the an
 \end{split}
 \end{equation}
 %
-for all $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T;\mathbf{V})$ with $\mathbf{\tilde{u}}(T) = 0$ and $\tilde{c}$ such that $\tilde{c} \in H^1 (0,T, H^2_{\Gamma_A} (\Omega))$ and $\tilde{c} (T) = 0$.
+for all
+$$\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T;\mathbf{V}) \text{ with } \mathbf{\tilde{u}}(T) = 0$$ and $$\tilde{c} \in H^1 (0,T, H^2_{\Gamma_A} (\Omega)) \text{ with }\tilde{c} (T) = 0.$$
 \end{frame}
 
-\begin{frame}{Weak formulation - hydrostatic system}
-\changefontsizes{10pt}
-The pair $(\mathbf{u}, c)$ is called a weak solution of the a hydrostatic system if $\mathbf{u} = (\mathbf{u}_h, u_3) \in L^2 (0, T; \mathbf{W})$ with $\mathbf{u}_h \in L^\infty (0,T; L^2(\Omega)^2),$ and $c \in L^\infty(0,T; L^2(\Omega)) \cap L^2(0,T; H^1_{\Gamma_A}(\Omega))$, moreover $\mathbf{u}$ and $c$ satisfy the integral identities
+\begin{frame}{Weak formulation - hydrostatic system, part 1}
+
+The pair $(\mathbf{u}, c)$ is a weak solution of the a hydrostatic system if
+$$\mathbf{u} = (\mathbf{u}_h, u_3) \in L^2 (0, T; \mathbf{W}) \text{ with } \mathbf{u}_h \in L^\infty (0,T; L^2(\Omega)^2),$$
+and
+$$c \in L^\infty(0,T; L^2(\Omega)) \cap L^2(0,T; H^1_{\Gamma_A}(\Omega)),$$ and the following integral identities hold:
 %
 \begin{equation} \nonumber
 \begin{split}
@@ -397,15 +403,19 @@ The pair $(\mathbf{u}, c)$ is called a weak solution of the a hydrostatic system
 \end{split}
 \end{equation}
 %
-and
+\end{frame}
+
+\begin{frame}{Weak formulation - hydrostatic system, part 2}
+... and
 %
 \begin{equation} \nonumber
 \int_0^T \bigg[ -(c, \partial_t \tilde{c}) -(\mathbf{u}c, \nabla \tilde{c}) +  (\mathbf{M} \nabla c, \nabla \tilde{c}) \bigg ] \diff t = (c_0, \tilde{c}(0)) + \int_0^T (s,\tilde{c}) \diff t
 \end{equation}
 %
-\hspace{0.5cm}for all $(\mathbf{\tilde{u}}, \tilde{c})$ with $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T, \mathbf{W})$, $\mathbf{\tilde{u}}_h (T) = 0$ and
-
-\hspace{0.5cm}$\partial_3 \mathbf{\tilde{u}}_h \in L^\infty (0, T; L^3 (\Omega)^2)$ and  $\tilde{c} \in H^1 (0,T, H^2_{\Gamma_A} (\Omega))$, $\tilde{c} (T) = 0$.
+for all
+$$\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T, \mathbf{W}), \mathbf{\tilde{u}}_h (T) = 0 \text{ and } \partial_3 \mathbf{\tilde{u}}_h \in L^\infty (0, T; L^3 (\Omega)^2)$$
+and
+$$\tilde{c} \in H^1 (0,T, H^2_{\Gamma_A} (\Omega)), \tilde{c} (T) = 0.$$
 
 \end{frame}
 
@@ -457,6 +467,10 @@ We show the convergence of the term $(\mathbf{u}^\epsilon c^\epsilon, \nabla \ti
 \begin{itemize}
 
 \item $u^\epsilon_i c^\epsilon$ for $i = 1,2$ is all right --- strong convergence of $\mathbf{u}^\epsilon_h$
+
+\end{itemize}
+
+\begin{itemize}
 \item \textcolor{mediumred-violet}{$u^\epsilon_3 c^\epsilon$} --- \textbf{?}
 
 \end{itemize}
@@ -535,7 +549,7 @@ We can apply the statement of this theorem for $p=2$ and the spaces $H^1 \hookri
 
 \begin{frame}{What makes the visualisation computationally interesting}
 
-\textbf{The major challenge}: \textcolor{mediumred-violet}{obtaining numerical results for a model where the scheme has disappearing dependence upon certain terms}. \textit{Picard iterations} and the \textit{Chorin method} are widely used, standard methods in the field of the \textbf{complete} Navier-Stokes equations $\to$ but once we introduce the $\epsilon$ multiplier into the equations, these standard schemes become problematic as $\epsilon$ decreases.
+\textbf{The major challenge}: \textcolor{mediumred-violet}{obtaining numerical results for a model where the scheme has disappearing dependence upon certain terms}. \textit{Picard iterations} and the \textit{Chorin method} are widely used, standard methods in the field of the \textbf{complete} Navier-Stokes equations $\lightning$ but once we introduce the $\epsilon$ multiplier into the equations, these standard schemes become problematic as $\epsilon$ decreases.
 
 \end{frame}
 
@@ -847,7 +861,7 @@ Important features of the result model:
 
 \begin{frame}{Scaling}
 
-$\textbf{Additional scaling equation}$: different in nature from the previous ones $\to$ it is not derived from the shallowness of the domain --- it is suggested by the fact that in the downwind direction it is natural to assume that $\textit{ the diffusion is negligible compared to downwind transport}$ i.e.
+$\textbf{Additional scaling equation}$: it is not derived from the shallowness of the domain --- it is suggested by the fact that in the downwind direction it is natural to assume that $\textit{ the diffusion is negligible compared to downwind transport}$ i.e.
 
     $$\abs{u_1 \partial_1 c} \gg \abs{ K_x \partial_{11}^2 c } ,$$
     which leads us to using
@@ -999,24 +1013,24 @@ L^2_{\Gamma_A}(\Omega) = & \{ c \in L^2(\Omega); c = 0 \text{ on } \Gamma_A \tex
 
 \begin{frame}{Weak formulation - anisotropic system, part 1}
 
-The pair $(\mathbf{u}^\epsilon, c^\epsilon)$ is called a weak solution of the anisotropic system if $\mathbf{u}^\epsilon = (\mathbf{u}^\epsilon_h, u^\epsilon_3) \in L^2 (0,T ; \mathbf{V}) \cap C_w (0, T; L^2 (\Omega)^3)$ and $c^\epsilon \in L^\infty (0,T; L^2(\Omega)) \cap L^2 (0,T; H^1_{\Gamma_A}(\Omega))$, moreover $\mathbf{u}^\epsilon$ and $c^\epsilon$ satisfy the integral identities
-  
+The pair $(\mathbf{u}^\epsilon, c^\epsilon)$ is a weak solution of the anisotropic system if
+$$\mathbf{u}^\epsilon = (\mathbf{u}^\epsilon_h, u^\epsilon_3) \in L^2 (0,T ; \mathbf{V}) \cap C_w (0, T; L^2 (\Omega)^3)$$
+and
+$$c^\epsilon \in L^\infty (0,T; L^2(\Omega)) \cap L^2 (0,T; H^1_{\Gamma_A}(\Omega)),$$ and the following integral identities hold:
+%
 \begin{equation} \nonumber
 \begin{split}
 & \int_0^T \bigg [ -(\mathbf{u}^\epsilon_h, \partial_t \mathbf{\tilde{u}}_h) + (\nabla_\nu \mathbf{u}^\epsilon_h, \nabla_\nu \mathbf{\tilde{u}}_h) - (\mathbf{u}^\epsilon_h, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{\tilde{u}}_h) + (b(\mathbf{u}^\epsilon_h), \mathbf{\tilde{u}}_h) \bigg ] \diff t \\
 & + \epsilon \int_0 ^ T \big [ (\beta u_3 ^\epsilon, \tilde{u}_1) - (\beta u_1^\epsilon, \tilde{u}_3) \big ] \diff t + \epsilon \int_0 ^ T \big [ (\alpha u_2 ^\epsilon, \tilde{u}_3) - (\alpha u_3^\epsilon, \tilde{u}_2) \big ] \diff t\\
 & + \epsilon^2 \int _0 ^ T \big [ -(u_3^\epsilon, \partial_t \tilde{u}_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, \tilde{u}_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu \tilde{u}_3) \big ] \diff t \\
-& = - ({\mathbf{u}^\epsilon_h}_0, \mathbf{\tilde{u}}_h(0)) - \epsilon^2 ({u^\epsilon_3}_0, \tilde{u}_3 (0))
+& \hspace{0.3cm} = - ({\mathbf{u}^\epsilon_h}_0, \mathbf{\tilde{u}}_h(0)) - \epsilon^2 ({u^\epsilon_3}_0, \tilde{u}_3 (0))
 \end{split}
 \end{equation}
-%  
-\hspace{2cm} and ...
 
 \end{frame}
 
 \begin{frame}{Weak formulation - anisotropic system, part 2}
  ... and
-  
 \begin{equation}
 \begin{split} \nonumber
 & \int_0^T \bigg [ -(c^\epsilon, \partial_t \tilde{c}) -(\mathbf{u}^\epsilon c^\epsilon, \nabla \tilde{c}) + \epsilon K_1 (\partial_1 c^\epsilon, \partial_1 \tilde{c}) \\
@@ -1025,34 +1039,43 @@ The pair $(\mathbf{u}^\epsilon, c^\epsilon)$ is called a weak solution of the an
 \end{split}
 \end{equation}
 %
-for all $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T;\mathbf{V})$ with $\mathbf{\tilde{u}}(T) = 0$ and $\tilde{c}$ such that $\tilde{c} \in H^1 (0,T, H^3_{\Gamma_A} (\Omega))$ and $\tilde{c} (T) = 0$.
+for all $$\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T;\mathbf{V}) \text{ with } \mathbf{\tilde{u}}(T) = 0$$
+and
+$$ \tilde{c} \in H^1 (0,T, H^3_{\Gamma_A} (\Omega)), \text{ with } \tilde{c} (T) = 0.$$
 
 \end{frame}
 
-\begin{frame}{Weak formulation - hydrostatic system}
-\changefontsizes{10pt}
-The pair $(\mathbf{u}, c)$ is called a weak solution of the a hydrostatic system if $\mathbf{u} = (\mathbf{u}_h, u_3) \in L^2 (0, T; \mathbf{W}) \cap L^\infty (0,T; L^2(\Omega)^3),$ $\mathbf{u}_h \in L^\infty(0,T; H^1(\Omega)),$ and $c \in L^\infty (0, T; L^2_{\Gamma_A}(\Omega))$ with $\partial_2 c$, $\partial_3 c \in L^2(0, T; L^2(\Omega)),$ moreover $\mathbf{u}$ and $c$ satisfy the integral identities
-\changefontsizes{9pt}
-%
-\begin{equation}\nonumber
-\int_0^T \bigg[ -(\mathbf{u}_h, \partial_t \mathbf{\tilde{u}}_h) + (\nabla_\nu \mathbf{u}_h, \nabla_\nu \mathbf{\tilde{u}}_h) - (\mathbf{u}_h, (\mathbf{u} \cdot \nabla) \mathbf{\tilde{u}}_h) + (b(\mathbf{u}_h), \mathbf{\tilde{u}}_h) \bigg ] \diff t = - ({\mathbf{u}_h}_0, \mathbf{\tilde{u}}_h(0))
-\end{equation}
-%
-\changefontsizes{10pt}
+\begin{frame}{Weak formulation - hydrostatic system, part 1}
+
+The pair $(\mathbf{u}, c)$ is a weak solution of the a hydrostatic system if
+$$\mathbf{u} = (\mathbf{u}_h, u_3) \in L^2 (0, T; \mathbf{W}) \cap L^\infty (0,T; L^2(\Omega)^3), \mathbf{u}_h \in L^\infty(0,T; H^1(\Omega)),$$
 and
-\changefontsizes{9pt}
+$$c \in L^\infty (0, T; L^2_{\Gamma_A}(\Omega)) \text{ with } \partial_2 c, \partial_3 c \in L^2(0, T; L^2(\Omega)),$$
+and the following integral identities hold:
 %
 \begin{equation}\nonumber
 \begin{split}
-&+ \int_0^T \bigg[ -(c, \partial_t \tilde{c}) -(\mathbf{u}c, \nabla \tilde{c}) + K_2 (\partial_2 c, \partial_2 \tilde{c}) + K_3 (\partial_3 c, \partial_3 \tilde{c}) \bigg ] \diff t \\
+& \int_0^T \bigg[ -(\mathbf{u}_h, \partial_t \mathbf{\tilde{u}}_h) + (\nabla_\nu \mathbf{u}_h, \nabla_\nu \mathbf{\tilde{u}}_h) - (\mathbf{u}_h, (\mathbf{u} \cdot \nabla) \mathbf{\tilde{u}}_h) + (b(\mathbf{u}_h), \mathbf{\tilde{u}}_h) \bigg ] \diff t \\
+& = - ({\mathbf{u}_h}_0, \mathbf{\tilde{u}}_h(0))
+\end{split}
+\end{equation}
+%
+\end{frame}
+
+\begin{frame}{Weak formulation - hydrostatic system, part 2}
+... and
+%
+\begin{equation}\nonumber
+\begin{split}
+& \int_0^T \bigg[ -(c, \partial_t \tilde{c}) -(\mathbf{u}c, \nabla \tilde{c}) + K_2 (\partial_2 c, \partial_2 \tilde{c}) + K_3 (\partial_3 c, \partial_3 \tilde{c}) \bigg ] \diff t \\
 & = - (c_0, \tilde{c}(0)) + \int_0^T (s,\tilde{c}) \diff t
 \end{split}
 \end{equation}
-\changefontsizes{10pt}
 %
-\hspace{0.3cm}for all $(\mathbf{\tilde{u}}, \tilde{c})$ with $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T, \mathbf{W})$, with $\mathbf{\tilde{u}}_h (T) = 0$ and $\tilde{c}$
-
-\hspace{0.4cm}with $\tilde{c} \in H^1 (0,T, H^2_{\Gamma_A} (\Omega))$, $\tilde{c} (T) = 0$.
+for all
+$$\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T, \mathbf{W}), \text{ with } \mathbf{\tilde{u}}_h (T) = 0$$
+and 
+$$\tilde{c} \in H^1 (0,T, H^2_{\Gamma_A} (\Omega)), \tilde{c} (T) = 0.$$
 \end{frame}
 
 \begin{frame}{DWMC, weak solutions: Main theorem}
@@ -1085,7 +1108,7 @@ In this case the energy inequality takes the following form:
     \begin{split}  
     & \frac{1}{2} (\norm{\mathbf{u}_h^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{c^\epsilon (t)}_{L^2}^2) \\
     & + \int_0 ^ t \big[ \norm{\nabla_\nu \mathbf{u}_h^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2  \big] \diff \tau \\
-    & + \int_0 ^ t  \big [ \textcolor{mediumred-violet}{\epsilon} K_1 \norm{\partial_1 c^\epsilon}_{L^2}^2  + K_2 \norm{\partial_2 c^\epsilon}_{L^2}^2 + K_3 \norm{\partial_3 c^\epsilon}_{L^2}^2 \big ] d \tau \\
+    & + \int_0 ^ t  \big [ \textcolor{jasper}{\epsilon} K_1 \norm{\partial_1 c^\epsilon}_{L^2}^2  + K_2 \norm{\partial_2 c^\epsilon}_{L^2}^2 + K_3 \norm{\partial_3 c^\epsilon}_{L^2}^2 \big ] d \tau \\
     & \leq \int_0^t (s^\epsilon,c^\epsilon) \diff \tau + \frac{1}{2} (\norm{\mathbf{u}_h^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{c^\epsilon_0}_{L^2}^2).
     \end{split}
   \end{equation}
@@ -1119,16 +1142,14 @@ Let ${\mathbf{u}_h}_0 \in H^1(\Omega).$ Then there exists a unique strong soluti
 \end{frame}
 
 \begin{frame}
-We use this theorem to verify the strong convergence of $u_3^\epsilon,$ \textcolor{mediumred-violet}{keeping in mind that}
+We use this theorem to verify the strong convergence of $u_3^\epsilon,$ \textcolor{mediumred-violet}{keeping in mind that:}
 \begin{description}
 \item[a)] our domain is non-periodic,
 \item[b)] we do not assume zero-averaged functions, and
 \item[c)] the Coriolis terms are incorporated to the model as well.
 \end{description}
 
-The main idea to prove the strong convergence of $u^\epsilon_3$: establish a bound for \begin{equation} \nonumber (\mathbf{U}_h^\epsilon, U_3^\epsilon): = (\mathbf{u}_h^\epsilon - \mathbf{u}_h, u_3^\epsilon - u_3).\end{equation}
-
-This is achieved by using the strong solution $(\mathbf{u}_h,u_3)$ as a test function in the weak formulation's integral identity.
+Main idea to prove the strong convergence of $u^\epsilon_3$: establish a bound for \begin{equation} \nonumber (\mathbf{U}_h^\epsilon, U_3^\epsilon): = (\mathbf{u}_h^\epsilon - \mathbf{u}_h, u_3^\epsilon - u_3).\end{equation}
 
 \end{frame}
 
@@ -1136,8 +1157,8 @@ This is achieved by using the strong solution $(\mathbf{u}_h,u_3)$ as a test fun
 
 \changefontsizes{10pt}
 
-Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ be a Leray-Hopf weak solution of the anisotropic velocity system, let $(\mathbf{u}_h,u_3)$ be the unique global strong solution of the hydrostatic velocity system (the initial data is as previously specified). Then we have the following integral identity:
-
+By using the strong solution $(\mathbf{u}_h,u_3)$ as a test function in the weak formulation for the velocity of the anisotropic system, we have the following integral identity:
+%
 \begin{equation} \nonumber
   \begin{split}
     & - \frac{\epsilon^2}{2} \norm{u_3(t)}_2^2 + \bigg ( (\mathbf{u}_h^\epsilon \cdot \mathbf{u}_h + \epsilon^2 u_3^\epsilon u_3) \diff x \diff y \diff z  \bigg ) (t) \\
@@ -1154,7 +1175,7 @@ Let $(\mathbf{u}_h^\epsilon, u_3^\epsilon)$ be a Leray-Hopf weak solution of the
 
 \begin{frame}{Verification}
 
-\textbf{Main idea}: we use the definition of weak solutions of the scaled Navier-Stokes equations, using $\mathbf{u}$ as a test function --- but test functions have compact support in time.
+... but test functions have compact support in time.
 \begin{description}
 \item[Step 1.] Test function: $\varphi \in C_0^\infty (\bar{\Omega} \times [0, \infty))$
 \item[Step 2.] Using the density argument, we set $\varphi = \mathbf{u} \cdot \chi(t),$ with $\chi \in C_0^\infty ([0, \infty)).$
@@ -1401,7 +1422,7 @@ Note: after using $c = c^* - \frac{z}{a}$ and $c^\epsilon = {c^\epsilon}^* - \fr
 \end{frame}
 
 \begin{frame}
-\textit{\textbf{Step three.}} Now the anisotropic and hydrostatic systems are combined with the
+\textit{\textbf{Step three.}} Now the anisotropic and hydrostatic systems are set for
 %
 \begin{equation} \nonumber
 \begin{split}
@@ -1415,11 +1436,9 @@ and
 \begin{equation} \nonumber
 \begin{split}
 & \mathbf{u}, p \text{ and } c \text{ are periodic in } x,y,z \\
-& \mathbf{u}_h \text{ and } p \text{ are even in $z$}, \text{ and } u_3 \text{ and } c \text{ are odd in $z$}
+& \mathbf{u}_h \text{ and } p \text{ are even in $z$}, \text{ and } u_3 \text{ and } c \text{ are odd in $z$}.
 \end{split}
 \end{equation}
-%
-boundary conditions, respectively.
 
 The restrictions from $\Omega$ to $\Omega_0$ are solutions to the original systems.
 \end{frame}
@@ -1451,22 +1470,16 @@ Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\nabla \
 \end{frame}
 
 \begin{frame}{DWMC, strong solutions: Main theorem}
+\vspace{-0.7cm}
 \begin{theorem}[Main theorem]
-Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\int_\Omega {\mathbf{u}_h}_0 \diff x \diff y \diff z = 0$ and $\nabla \cdot \mathbf{u}_0 = 0,$ and let $c_0 \in H^2 (\Omega).$ There is a positive $\epsilon_0$ threshold such that for any $\epsilon < \epsilon_0,$ the strong solution $(\mathbf{u}^\epsilon, \textcolor{mediumred-violet}{c^\epsilon})$ of the anisotropic equations exists globally in time and as the aspect ratio $\epsilon$ tends to zero, it converges strongly to the unique global strong solution $(\mathbf{u}, \textcolor{mediumred-violet}{c})$ of the hydrostatic equations of the polluted atmosphere.
-
-\end{theorem}
-\end{frame}
-
-\begin{frame}
-\begin{theorem}[Main theorem (continued)]
+Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega),$ $\int_\Omega {\mathbf{u}_h}_0 \diff x \diff y \diff z = 0,$ $\nabla \cdot \mathbf{u}_0 = 0,$ and let $c_0 \in H^2 (\Omega).$ There is an $\epsilon_0 > 0$ such that for any $\epsilon < \epsilon_0,$ the strong solution $(\mathbf{u}^\epsilon, \textcolor{mediumred-violet}{c^\epsilon})$ of the anisotropic equations exists globally in time and as $\epsilon \to 0$, it converges strongly to $(\mathbf{u}, \textcolor{mediumred-violet}{c}).$ 
 In more detail, the following strong convergence results hold:
-
-  \begin{align} 
-    & (\mathbf{u}_h^\epsilon, \epsilon u_3^\epsilon) \to (\mathbf{u}_h, 0) &\quad & \text{in $L_t^\infty H_x^2$,} \nonumber \\
-    & (\nabla \mathbf{u}_h^\epsilon, \epsilon \nabla u_3^\epsilon, u_3^\epsilon) \to (\nabla \mathbf{u}_h, 0, u_3) &\quad & \text{in $L_t^2 H_x^2$,} \nonumber \\ 
-    & (u_3^\epsilon, c^\epsilon) \to (u_3, c) &\quad & \text{in $L_t^\infty H_x^1,$} \nonumber \\
-    & \nabla_d c^\epsilon \to \nabla_d c &\quad & \text{in $L_t^2 H_x^1.$} \nonumber
-  \end{align}
+\begin{align} 
+& (\mathbf{u}_h^\epsilon, \epsilon u_3^\epsilon) \to (\mathbf{u}_h, 0) &\quad & \text{in $L_t^\infty H_x^2$,} \nonumber \\
+& (\nabla \mathbf{u}_h^\epsilon, \epsilon \nabla u_3^\epsilon, u_3^\epsilon) \to (\nabla \mathbf{u}_h, 0, u_3) &\quad & \text{in $L_t^2 H_x^2$,} \nonumber \\ 
+& (u_3^\epsilon, c^\epsilon) \to (u_3, c) &\quad & \text{in $L_t^\infty H_x^1,$} \nonumber \\
+& \nabla_d c^\epsilon \to \nabla_d c &\quad & \text{in $L_t^2 H_x^1.$} \nonumber
+\end{align}
 \end{theorem}  
 \end{frame}
 
@@ -1493,13 +1506,10 @@ The focus of the proof's remaining part is show that
 \begin{equation}\nonumber
   c^\epsilon \to c \text{ in } L_t^\infty H_x^1 \text{ and } \nabla_d c^\epsilon \to \nabla_d c \text{ in } L_t^2 H_x^1.
 \end{equation}
-We introduce $C^\epsilon = c^\epsilon-c$ and $S^\epsilon = s^\epsilon-s.$
+We introduce $$C^\epsilon = c^\epsilon-c \text{ and } S^\epsilon = s^\epsilon-s.$$
 
 Subtracting the governing equations we obtain
-\begin{equation}\nonumber
-\partial_t C^\epsilon + \mathbf{u}^\epsilon \cdot \nabla c^\epsilon - \mathbf{u} \cdot \nabla c = \frac{1}{a} U_3^\epsilon + \epsilon K_1 \partial_{11} c^\epsilon + \Delta_d C^\epsilon + S^\epsilon.
-\end{equation}
-After reformulation we have:
+
 \begin{equation} \nonumber
   \begin{split}
    & \partial_t C^\epsilon + \mathbf{U}^\epsilon \nabla C^\epsilon  + \mathbf{U}^\epsilon \nabla c+ \mathbf{u} \nabla C^\epsilon \\
