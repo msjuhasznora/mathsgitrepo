@@ -7,6 +7,7 @@
 \usepackage{scrextend}
 \usepackage{xcolor}
 \definecolor{mediumred-violet}{rgb}{0.73, 0.2, 0.52}
+\definecolor{jasper}{rgb}{0.84, 0.23, 0.24}
 \usepackage{capt-of}
 \usepackage{tikz}
 \newcommand*\diff{\mathop{}\!\mathrm{d}}
@@ -16,8 +17,7 @@
 \newtheorem{prop}{Proposition}
 
 \title{The PDE polluted atmosphere model: a mathematical justification of a meteorological approach}
-\subtitle{PhD thesis defense}
-\author[N\'ora Juh\'asz]{N\'ora Juh\'asz \\[1mm] \textit{supervisor: Prof. Donatella Donatelli}}
+\author[N\'ora Juh\'asz]{\textbf{PhD thesis defense} \\[2mm] Candidate: N\'ora Juh\'asz \\[1mm] \textit{Supervisor: Prof. Donatella Donatelli}}
 \institute{Department of Information Engineering, Computer Science and Mathematics \\ University of L'Aquila }
 
 \date{8th May, 2020}
@@ -34,8 +34,6 @@
 \end{frame}
 
 \begin{frame}{Plan of the defense}
-
-We present our results in the following structure:
 
 \begin{enumerate}
 \item Motivation: already well-known facts and general outline of the two main models describing large-scale geophysical flows.
@@ -111,7 +109,7 @@ We collect some of the main results currently available on the solutions of the 
 
 \textbf{Point of apparent theoretical conflict:} The previously described model is \textbf{not} what is widely used in meteorology and oceanology to describe geophysical processes.
 
-The fundamental equations in meteorology -- primitive equations.
+The fundamental equations in meteorology -- \textbf{primitive equations}.
 
 $$ \partial_t \mathbf{v}_h + \mathbf{v}_h \cdot \nabla_h \mathbf{v}_h + v_3 \partial_z \mathbf{v}_h - \Delta_{\nu} \mathbf{v}_h + \nabla_h q + 2 (\mathbf{\omega} \times \mathbf{v})_h = 0, $$
 
@@ -153,7 +151,7 @@ The current state of art regarding the hydrostatic equations:
 \setbeamertemplate{itemize items}[circle]
 \begin{itemize}
 
-  \item The key to the justification process is to take this following phrase: \textbf{\textit{"we are considering a large-scale geophysical fluid on the surface of the Earth,"}} and to include its meaning into the model in mathematical terms.
+  \item Key: \textbf{\textit{"we are considering a large-scale geophysical fluid on the surface of the Earth,"}} $\to$ mathematical terms.
 
   \item Scale analysis will show that the dominant term in the full vertical momentum equation is $\frac{\partial q}{\partial z}$ and the gravity term, resulting in the hydrostatic approximation.
 
@@ -163,7 +161,10 @@ The current state of art regarding the hydrostatic equations:
 
 \begin{frame}{Adding a contaminant to the system}
 
-We extend the velocity system: \textcolor{mediumred-violet}{pollutant present in the atmosphere} in concentration $p_c.$
+We extend the velocity system:
+\begin{center}
+\textcolor{mediumred-violet}{pollutant present in the atmosphere in concentration $p_c.$}
+\end{center}
 
 \textit{The two most important concepts are}
 
@@ -184,15 +185,13 @@ $$\partial_t p_c + \mathbf{v} \cdot \nabla p_c = \nabla \cdot (\mathbf{K} \nabla
 
 Geophysical fluid: shallow domain characteristics --- the domain is greater horizontally than in the vertical dimension.
 
-$$\epsilon = \frac{\text{characteristic depth}}{\text{characteristic width}} = \text{aspect ratio}.$$
+$$\textcolor{jasper}{\epsilon} = \frac{\text{characteristic depth}}{\text{characteristic width}} = \text{aspect ratio}.$$
 
 \textbf{Natural scaling process:}
 
-\begin{enumerate}
-\item $ x=x_1, y=x_2, z=\epsilon x_3 $
-\item $ v_1 = u_1^{\epsilon}, v_2 = u_2^{\epsilon}, v_3 = \epsilon u_3^{\epsilon}, p = p^{\epsilon}, $
-\item $ p_c = \frac{1}{\epsilon} c^\epsilon, q_c = \frac{1}{\epsilon} s^\epsilon. $
-\end{enumerate}
+$$ x=x_1, y=x_2, z= \textcolor{jasper}{\epsilon} x_3,$$
+$$ v_1 = u_1^{\epsilon}, v_2 = u_2^{\epsilon}, v_3 = \textcolor{jasper}{\epsilon} u_3^{\epsilon}, p = p^{\epsilon}, $$
+$$ p_c = \frac{1}{\textcolor{jasper}{\epsilon}} c^\epsilon, q_c = \frac{1}{\textcolor{jasper}{\epsilon}} s^\epsilon. $$
 
 \end{frame}
 
@@ -200,17 +199,17 @@ $$\epsilon = \frac{\text{characteristic depth}}{\text{characteristic width}} = \
 We need to consider the highly anisotropic nature of viscosity and diffusivity $\to$ this means that these rates are strongly different in horizontal and vertical directions.
 Rescaling these parameters according to the largely different scales:
 
-  \begin{enumerate}
-    \item $ \nu_x = \nu_1, \quad \nu_y = \nu_2 , \quad \nu_z = \epsilon ^ 2\nu_3, $
-    \item
-     \begin{gather}
+
+$$ \nu_x = \nu_1, \quad \nu_y = \nu_2 , \quad \nu_z = \textcolor{jasper}{\epsilon^2} \nu_3, $$
+
+\begin{gather}
       \begin{bmatrix} K_{xx} & K_{xy} & K_{xz} \\ K_{yx} & K_{yy} & K_{yz} \\ K_{zx} & K_{zy} & K_{zz} \end{bmatrix}
        =
       \begin{bmatrix}
-    M_{11} & M_{12} & \epsilon M_{13} \\ M_{21} & M_{22} & \epsilon M_{23} \\ \epsilon M_{31} & \epsilon M_{32} & \epsilon^2 M_{33}
+    M_{11} & M_{12} & \textcolor{jasper}{\epsilon} M_{13} \\ M_{21} & M_{22} & \textcolor{jasper}{\epsilon} M_{23} \\ \textcolor{jasper}{\epsilon} M_{31} & \textcolor{jasper}{\epsilon} M_{32} & \textcolor{jasper}{\epsilon^2} M_{33}
   \end{bmatrix} \nonumber
 \end{gather}
-  \end{enumerate}
+
   
 The diffusivity matrix is assumed to be coercive: $\lambda \norm{\mathbf{x}}^2 \leq (\mathbf{M} \mathbf{x}, \mathbf{x}).$
 
@@ -218,7 +217,7 @@ The diffusivity matrix is assumed to be coercive: $\lambda \norm{\mathbf{x}}^2 \
 
 \begin{frame}{Source term}
 
-Let us consider a contaminant plume
+We consider a contaminant plume
 \begin{itemize}
 \item with intensity $I,$
 \item originating at emission coordinates $\mathbf{x}_s,$
@@ -231,8 +230,6 @@ $$s_\eta (t, t_s, x, x_s) = I H(t-t_s) \delta_\eta (\mathbf{x} - \mathbf{x}_s), 
 %
 where $\delta_\eta$ is an approximated delta function.
 
-In the limit model the source term $s$ naturally stands for the Dirac $\delta$ distribution.
-
 \end{frame}
 
 \begin{frame}{Source term part 2}
@@ -243,8 +240,8 @@ The following function will give shape to the source term:
 $$
 \delta_\epsilon (\mathbf{x}) = 
   \begin{cases}
-       \frac{1}{\epsilon^3} \exp{\bigg ( \frac{1}{\abs{{\frac{\mathbf{x}}{\epsilon}}}^2-1} \bigg ) } &\quad \abs{\mathbf{x}} < \epsilon \\
-       0 &\quad \abs{\mathbf{x}} \geq \epsilon; \\
+       \frac{1}{\textcolor{jasper}{\epsilon^3}} \exp{\bigg ( \frac{1}{\abs{{\frac{\mathbf{x}}{\textcolor{jasper}{\epsilon}}}}^2-1} \bigg ) } &\quad \abs{\mathbf{x}} < \textcolor{jasper}{\epsilon} \\
+       0 &\quad \abs{\mathbf{x}} \geq \textcolor{jasper}{\epsilon}; \\
   \end{cases}
 $$
 %
@@ -258,21 +255,25 @@ $$s^\epsilon = I H(t-t_s) \delta_\epsilon (\mathbf{x} - \mathbf{x}_s).$$
 
 \begin{frame}{Geophysical coordinates}
 
-Geophysical rotating frame: $x$ --- East, $y$ --- North, $z$ --- Vertical coordinate ("upwards").
+$x$ --- East, $y$ --- North, $z$ --- Vertical coordinate (zenith).
 
 \textbf{Result: simpler Coriolis term.}
 
-Earth rotation angular speed: $\omega = f (0, \cos(l(x_2)), \sin(l(x_2))),$ where we introduce $\alpha = 2f \sin(l(x_2)), \beta = 2f \cos(l(x_2)).$ 
+Earth rotation angular speed: $\omega = f (0, \cos(l(x_2)), \sin(l(x_2))).$ 
 
-The $2 \omega \times \mathbf{u}^\epsilon$ Coriolis acceleration becomes
+The Coriolis acceleration becomes
 
 \begin{gather} \nonumber
+2 \omega \times \mathbf{v}
+=
 \begin{bmatrix} 0 \\ \beta \\ \alpha \end{bmatrix}
  \times
  \begin{bmatrix} u^\epsilon_1 \\ u^\epsilon_2 \\ \epsilon u^\epsilon_3 \end{bmatrix}
  =
- \begin{bmatrix}  \beta \epsilon u^\epsilon_3 - \alpha u^\epsilon_2 \\ \alpha u^\epsilon_1  \\ - \beta u^\epsilon_1 \end{bmatrix}.
+ \begin{bmatrix}  \beta \epsilon u^\epsilon_3 - \alpha u^\epsilon_2 \\ \alpha u^\epsilon_1  \\ - \beta u^\epsilon_1 \end{bmatrix},
 \end{gather}
+
+where we used $\alpha = 2f \sin(l(x_2)), \beta = 2f \cos(l(x_2)).$
 
 \end{frame}
 
@@ -302,15 +303,13 @@ $$ \partial_t c^\epsilon + \mathbf{u^\epsilon} \cdot \nabla c^\epsilon = \nabla 
 
 The initial and boundary conditions are chosen to be
   
-$$ \mathbf{u}^\epsilon (\cdot, t = 0) = \mathbf{u}_0, \quad c^\epsilon (\cdot, t=0) = c_0  \quad \text{ in } \Omega. $$
+\begin{equation} \nonumber \mathbf{u}^\epsilon (\cdot, t = 0) = \mathbf{u}_0, \quad c^\epsilon (\cdot, t=0) = c_0  \quad \text{ in } \Omega, \end{equation}
 
-\begin{equation} \nonumber
-  \begin{split}
-    & \mathbf{u}^\epsilon_h = 0, u^\epsilon_3 = 0, c^\epsilon = 0 \text{ on } \Gamma_A \times (0,T), \\
-    & \nu_3 \partial_3 \mathbf{u}^\epsilon_h = \theta_h, u^\epsilon_3 = 0 \text{ on } \Gamma_G \times (0,T), \\
-    & \mathbf{M} \nabla c^\epsilon \cdot \vec{\boldsymbol{n}}_{\Gamma_G} = 0 \text{ on } \Gamma_G \times (0,T)
-   \end{split}
-\end{equation}
+\begin{equation} \nonumber \mathbf{u}^\epsilon_h = 0, u^\epsilon_3 = 0, c^\epsilon = 0 \text{ on } \Gamma_A \times (0,T), \end{equation}
+
+\begin{equation} \nonumber \nu_3 \partial_3 \mathbf{u}^\epsilon_h = \theta_h, u^\epsilon_3 = 0 \text{ on } \Gamma_G \times (0,T), \end{equation}
+
+\begin{equation} \nonumber \mathbf{M} \nabla c^\epsilon \cdot \vec{\boldsymbol{n}}_{\Gamma_G} = 0 \text{ on } \Gamma_G \times (0,T). \end{equation}
 
 \end{frame}
 
