@@ -208,7 +208,7 @@ $$ \nu_x = \nu_1, \quad \nu_y = \nu_2 , \quad \nu_z = \textcolor{jasper}{\epsilo
        =
       \begin{bmatrix}
     M_{11} & M_{12} & \textcolor{jasper}{\epsilon} M_{13} \\ M_{21} & M_{22} & \textcolor{jasper}{\epsilon} M_{23} \\ \textcolor{jasper}{\epsilon} M_{31} & \textcolor{jasper}{\epsilon} M_{32} & \textcolor{jasper}{\epsilon^2} M_{33}
-  \end{bmatrix} \nonumber
+  \end{bmatrix}. \nonumber
 \end{gather}
 
   
@@ -242,7 +242,7 @@ $$
 \delta_\epsilon (\mathbf{x}) = 
   \begin{cases}
        \frac{1}{\textcolor{jasper}{\epsilon^3}} \exp{\bigg ( \frac{1}{\abs{{\frac{\mathbf{x}}{\textcolor{jasper}{\epsilon}}}}^2-1} \bigg ) } &\quad \abs{\mathbf{x}} < \textcolor{jasper}{\epsilon} \\
-       0 &\quad \abs{\mathbf{x}} \geq \textcolor{jasper}{\epsilon}; \\
+       0 &\quad \abs{\mathbf{x}} \geq \textcolor{jasper}{\epsilon}, \\
   \end{cases}
 $$
 %
@@ -274,7 +274,7 @@ The Coriolis acceleration becomes
  \begin{bmatrix}  \beta \textcolor{jasper}{\epsilon} u^\epsilon_3 - \alpha u^\epsilon_2 \\ \alpha u^\epsilon_1  \\ - \beta u^\epsilon_1 \end{bmatrix},
 \end{gather}
 
-where we used $\alpha = 2f \sin(l(x_2)), \beta = 2f \cos(l(x_2)).$
+where we use $\alpha = 2f \sin(l(x_2)), \beta = 2f \cos(l(x_2)).$
 
 \end{frame}
 
@@ -686,7 +686,7 @@ Using these ideas combined with the simplifications S1 -- S4 we are able to visu
 \begin{minipage}{0.35\textwidth}
   \centering
   \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/pressure_hydr/pressure_hydr}
-  \captionof{figure}{$\textcolor{jasper}{\epsilon} = 0.0$}
+  \captionof{figure}{$\textcolor{jasper}{\epsilon} = 0.0.$}
   \label{fig:test2}
 \end{minipage}
 \end{figure}
@@ -767,7 +767,7 @@ Using these ideas combined with the simplifications S1 -- S4 we are able to visu
 \begin{minipage}{0.35\textwidth}
   \centering
   \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/velocity_hydr/velocity_v_hydr}
-  \captionof{figure}{$\textcolor{jasper}{\epsilon} = 0.0$}
+  \captionof{figure}{$\textcolor{jasper}{\epsilon} = 0.0.$}
 \end{minipage}
 
 \end{figure}
@@ -830,7 +830,7 @@ Using these ideas combined with the simplifications S1 -- S4 we are able to visu
 \begin{minipage}{0.35\textwidth}
   \centering
   \includegraphics[width=0.9\linewidth]{../visualise_convergence_result/thesis_fenics_code_and_results/reference_folder/concentration_hydr/concentration_hydr}
-  \captionof{figure}{$\textcolor{jasper}{\epsilon} = 0.0$}
+  \captionof{figure}{$\textcolor{jasper}{\epsilon} = 0.0.$}
 \end{minipage}
 \end{figure}
 
@@ -1133,6 +1133,7 @@ In this case the energy inequality takes the following form:
 \end{frame}
 
 \begin{frame}
+\vspace{-0.5cm}
 Key to the remaining product term $u_3^\epsilon c^\epsilon$: exploit the $H^1$ regularity of the initial horizontal velocity.
 
 \textit{Idea}: We do not have a complete $H^1$ initial data for the Navier-Stokes equations point of view --- but we do have an $H^1$ initial data from the Primitive Equations point of view.
@@ -1167,7 +1168,7 @@ By using the strong solution $(\mathbf{u}_h,u_3)$ as a test function in the weak
     & + \int_{Q_t} (-\mathbf{u}_h^\epsilon \cdot \partial_t \mathbf{u}_h + \nabla \mathbf{u}_h^\epsilon : \nabla \mathbf{u}_h + \textcolor{jasper}{\epsilon^2} \nabla u_3^\epsilon \cdot \nabla u_3) \diff x \diff y \diff z \diff s \\
     & = \frac{\textcolor{jasper}{\epsilon^2}}{2} \norm{{u_3}_0}_2^2 + \norm{{\mathbf{u}_h}_0}_2^2 + \textcolor{jasper}{\epsilon^2} \int_{Q_t} \bigg ( \int_0^z \partial_t \mathbf{u}_h \diff z' \bigg ) \cdot \nabla_h U_3^\epsilon \diff x \diff y \diff z \diff s \\
     & - \int_{Q_t} [(\mathbf{u}^\epsilon \cdot \nabla) \mathbf{u}_h^\epsilon \cdot \mathbf{u}_h + \textcolor{jasper}{\epsilon^2} \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon u_3] \diff x \diff y \diff z \diff s \\
-    & + \int_{Q_t}  ( \gamma u_2^\epsilon u_1 - \epsilon \beta u_3^\epsilon u_1 + \textcolor{jasper}{\epsilon} \alpha u_3^\epsilon u_2 - \gamma u_1^\epsilon u_2 - \textcolor{jasper}{\epsilon} \alpha u^\epsilon_2 u_3 + \textcolor{jasper}{\epsilon} \beta u_1^\epsilon u_3)
+    & + \int_{Q_t}  ( \gamma u_2^\epsilon u_1 - \textcolor{jasper}{\epsilon} \beta u_3^\epsilon u_1 + \textcolor{jasper}{\epsilon} \alpha u_3^\epsilon u_2 - \gamma u_1^\epsilon u_2 - \textcolor{jasper}{\epsilon} \alpha u^\epsilon_2 u_3 + \textcolor{jasper}{\epsilon} \beta u_1^\epsilon u_3)
   \end{split}
 \end{equation}
 %
@@ -1417,7 +1418,7 @@ Applying these ideas to the original concentration dynamics equations, we obtain
 is the new form of the hydrostatic concentration equation, while the governing equation for the anisotropic case becomes
 %
 \begin{equation} \nonumber
-\partial_t c^\epsilon + \mathbf{u}_h^\epsilon \cdot \nabla_h c^\epsilon + u_3^\epsilon \bigg ( \partial_3 c^\epsilon - \frac{1}{a} \bigg )= \epsilon K_1 \partial_{11} ^ 2 c^\epsilon + \Delta_d c^\epsilon + s^\epsilon \text{ in } \Omega \times (0,T).
+\partial_t c^\epsilon + \mathbf{u}_h^\epsilon \cdot \nabla_h c^\epsilon + u_3^\epsilon \bigg ( \partial_3 c^\epsilon - \frac{1}{a} \bigg )= \textcolor{jasper}{\epsilon} K_1 \partial_{11} ^ 2 c^\epsilon + \Delta_d c^\epsilon + s^\epsilon \text{ in } \Omega \times (0,T).
 \end{equation}
 %
 Note: after using $c = c^* - \frac{z}{a}$ and $c^\epsilon = {c^\epsilon}^* - \frac{z}{a},$ we returned to the original $c$ and $c^\epsilon$ notations for simplicity.
@@ -1446,6 +1447,7 @@ The restrictions from $\Omega$ to $\Omega_0$ are solutions to the original syste
 \end{frame}
 
 \begin{frame}
+\vspace{-0.5cm}
 We first describe a hydrostatic existence result.
 
 \begin{theorem}
@@ -1474,11 +1476,11 @@ Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\nabla \
 \begin{frame}{DWMC, strong solutions: Main theorem}
 \vspace{-0.7cm}
 \begin{theorem}[Main theorem]
-Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega),$ $\int_\Omega {\mathbf{u}_h}_0 \diff x \diff y \diff z = 0,$ $\nabla \cdot \mathbf{u}_0 = 0,$ and let $c_0 \in H^2 (\Omega).$ There is an $\epsilon_0 > 0$ such that for any $\epsilon < \epsilon_0,$ the strong solution $(\mathbf{u}^\epsilon, \textcolor{mediumred-violet}{c^\epsilon})$ of the anisotropic equations exists globally in time and as $\epsilon \to 0$, it converges strongly to $(\mathbf{u}, \textcolor{mediumred-violet}{c}).$ 
+Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega),$ $\int_\Omega {\mathbf{u}_h}_0 \diff x \diff y \diff z = 0,$ $\nabla \cdot \mathbf{u}_0 = 0,$ and let $c_0 \in H^2 (\Omega).$ There is an $\epsilon_0 > 0$ such that for any $\textcolor{jasper}{\epsilon} < \epsilon_0,$ the strong solution $(\mathbf{u}^\epsilon, \textcolor{mediumred-violet}{c^\epsilon})$ of the anisotropic equations exists globally in time and as $\textcolor{jasper}{\epsilon} \to 0$, it converges strongly to $(\mathbf{u}, \textcolor{mediumred-violet}{c}).$ 
 In more detail, the following strong convergence results hold:
 \begin{align} 
-& (\mathbf{u}_h^\epsilon, \epsilon u_3^\epsilon) \to (\mathbf{u}_h, 0) &\quad & \text{in $L_t^\infty H_x^2$,} \nonumber \\
-& (\nabla \mathbf{u}_h^\epsilon, \epsilon \nabla u_3^\epsilon, u_3^\epsilon) \to (\nabla \mathbf{u}_h, 0, u_3) &\quad & \text{in $L_t^2 H_x^2$,} \nonumber \\ 
+& (\mathbf{u}_h^\epsilon, \textcolor{jasper}{\epsilon} u_3^\epsilon) \to (\mathbf{u}_h, 0) &\quad & \text{in $L_t^\infty H_x^2$,} \nonumber \\
+& (\nabla \mathbf{u}_h^\epsilon, \textcolor{jasper}{\epsilon} \nabla u_3^\epsilon, u_3^\epsilon) \to (\nabla \mathbf{u}_h, 0, u_3) &\quad & \text{in $L_t^2 H_x^2$,} \nonumber \\ 
 & (u_3^\epsilon, c^\epsilon) \to (u_3, c) &\quad & \text{in $L_t^\infty H_x^1,$} \nonumber \\
 & \nabla_d c^\epsilon \to \nabla_d c &\quad & \text{in $L_t^2 H_x^1.$} \nonumber
 \end{align}
@@ -1486,18 +1488,18 @@ In more detail, the following strong convergence results hold:
 \end{frame}
 
 \begin{frame}{Proof - velocity}
-This part is based on [Li, J., Titi, E. S. (2019)], and $\epsilon < \epsilon_0.$
+This part is based on [Li, J., Titi, E. S. (2019)], and $\textcolor{jasper}{\epsilon} < \epsilon_0.$
 
 For an ${\mathbf{u}_h}_0 \in H^3(\Omega)$ initial data the velocity difference functions satisfy
 %
 \begin{equation} \nonumber
-\sup_{0 \leq t < \infty}{\norm{(\mathbf{U}_h^\epsilon, \epsilon U_3^\epsilon)}_{H^2}^2} + \int_0^\infty \norm{\nabla (\mathbf{U}_h^\epsilon, \epsilon U_3^\epsilon)}_{H^2}^2 \leq \kappa \epsilon^2.
+\sup_{0 \leq t < \infty}{\norm{(\mathbf{U}_h^\epsilon, \textcolor{jasper}{\epsilon} U_3^\epsilon)}_{H^2}^2} + \int_0^\infty \norm{\nabla (\mathbf{U}_h^\epsilon, \textcolor{jasper}{\epsilon} U_3^\epsilon)}_{H^2}^2 \leq \kappa \textcolor{jasper}{\epsilon^2}.
 \end{equation}
 %
 As a consequence, the following strong convergences hold for an ${\mathbf{u}_h}_0 \in H^3(\Omega)$ initial data:
 \begin{align}
-&  (\mathbf{u}_h^\epsilon, \epsilon u_3^\epsilon) \to (\mathbf{u}_h, 0) &\quad & \text{strongly in $L_t^\infty H_x^2$,} \nonumber \\
-&  (\nabla \mathbf{u}_h^\epsilon, \epsilon \nabla u_3^\epsilon, u_3^\epsilon) \to (\nabla \mathbf{u}_h, 0, u_3) &\quad & \text{strongly in $L_t^2 H_x^2$,} \nonumber \\ 
+&  (\mathbf{u}_h^\epsilon, \textcolor{jasper}{\epsilon} u_3^\epsilon) \to (\mathbf{u}_h, 0) &\quad & \text{strongly in $L_t^\infty H_x^2$,} \nonumber \\
+&  (\nabla \mathbf{u}_h^\epsilon, \textcolor{jasper}{\epsilon} \nabla u_3^\epsilon, u_3^\epsilon) \to (\nabla \mathbf{u}_h, 0, u_3) &\quad & \text{strongly in $L_t^2 H_x^2$,} \nonumber \\ 
 &  u_3^\epsilon \to u_3 &\quad & \text{strongly in $L_t^\infty H_x^1.$} \nonumber
 \end{align}
 \end{frame}
@@ -1508,14 +1510,14 @@ The focus of the proof's remaining part is show that
 \begin{equation}\nonumber
   c^\epsilon \to c \text{ in } L_t^\infty H_x^1 \text{ and } \nabla_d c^\epsilon \to \nabla_d c \text{ in } L_t^2 H_x^1.
 \end{equation}
-We introduce $$C^\epsilon = c^\epsilon-c \text{ and } S^\epsilon = s^\epsilon-s.$$
+We set $$C^\epsilon = c^\epsilon-c \text{ and } S^\epsilon = s^\epsilon-s.$$
 
-Subtracting the governing equations we obtain
+The governing equation for $C^\epsilon$ then takes the form:
 
 \begin{equation} \nonumber
   \begin{split}
    & \partial_t C^\epsilon + \mathbf{U}^\epsilon \nabla C^\epsilon  + \mathbf{U}^\epsilon \nabla c+ \mathbf{u} \nabla C^\epsilon \\
-   & = \frac{1}{a} U_3^\epsilon + \epsilon K_1 \partial_{11} C^\epsilon + \epsilon K_1 \partial_{11} c + \Delta_d C^\epsilon + S^\epsilon.
+   & = \frac{1}{a} U_3^\epsilon + \textcolor{jasper}{\epsilon} K_1 \partial_{11} C^\epsilon + \textcolor{jasper}{\epsilon} K_1 \partial_{11} c + \Delta_d C^\epsilon + S^\epsilon.
    \end{split}
 \end{equation}
 \end{frame}
@@ -1526,8 +1528,8 @@ Multiplying the previous equation by $- \partial_{ii} C^\epsilon, i=1,2,3.$ \tex
 %
 \begin{equation} \nonumber
   \begin{split}
-      & \frac{1}{2}\frac{\diff}{\diff t} \norm{\nabla C^\epsilon}_2^2 + \epsilon K_1 \norm{\partial_{11} C^\epsilon}_2^2 + K_2 \norm{\partial_{22} C^\epsilon}_2^2 + K_3 \norm{\partial_{33} C^\epsilon}_2^2 + \sum_{i \neq j} \kappa_{ij} \norm{\partial_{ij} C^\epsilon}_2^2 \\
-      & = \sum_{i = 1,2,3} \int_\Omega \mathbf{U}^\epsilon \nabla C^\epsilon \partial_{ii} C^\epsilon + \int_\Omega \mathbf{U}^\epsilon \nabla c \partial_{ii} C^\epsilon + \int_\Omega \mathbf{u} \nabla C^\epsilon \partial_{ii} C^\epsilon - \int_\Omega \epsilon K_1 \partial_{11} c \partial_{ii} C^\epsilon \\
+      & \frac{1}{2}\frac{\diff}{\diff t} \norm{\nabla C^\epsilon}_2^2 + \textcolor{jasper}{\epsilon} K_1 \norm{\partial_{11} C^\epsilon}_2^2 + K_2 \norm{\partial_{22} C^\epsilon}_2^2 + K_3 \norm{\partial_{33} C^\epsilon}_2^2 + \sum_{i \neq j} \kappa_{ij} \norm{\partial_{ij} C^\epsilon}_2^2 \\
+      & = \sum_{i = 1,2,3} \int_\Omega \mathbf{U}^\epsilon \nabla C^\epsilon \partial_{ii} C^\epsilon + \int_\Omega \mathbf{U}^\epsilon \nabla c \partial_{ii} C^\epsilon + \int_\Omega \mathbf{u} \nabla C^\epsilon \partial_{ii} C^\epsilon - \int_\Omega \textcolor{jasper}{\epsilon} K_1 \partial_{11} c \partial_{ii} C^\epsilon \\
       & - \sum_{i = 1,2,3} \int_\Omega S^\epsilon \partial_{ii} C^\epsilon - \frac{1}{a} \int_\Omega U_3^\epsilon \partial_{ii} C^\epsilon \\
       & = \sum_{i = 1,2,3} I_1(i)  + I_2(i) + I_3(i) + I_4(i) + I_5(i) + I_6(i),
   \end{split}
@@ -1538,12 +1540,13 @@ for any $1 \leq j \leq 3.$
 \end{frame}
 
 \begin{frame}{Proof - $I_1(i)$}
+\vspace{-0.2cm}
 The complete process of the estimate construction is long - in many ways $I_1(i)$ is a good example, we examine this in detail.
 
 \textbf{Estimate for $I_1(i), i = 1,2,3.$}
 
 We begin by taking $i=1.$
-
+%
 \begin{equation}\nonumber
   \begin{split}
     & I_1(1) = \int_\Omega \mathbf{U}^\epsilon \nabla C^\epsilon \partial_{11} C^\epsilon \\
@@ -1551,7 +1554,7 @@ We begin by taking $i=1.$
     & = I_1(1)(a) + I_1(1)(b) + I_1(1)(c).
   \end{split}
 \end{equation}
-
+%
 Firstly we estimate $I_1(1)(a).$ Integration by parts gives
 %
 $$\int_\Omega U_1^\epsilon \partial_1 C^\epsilon \partial_{11} C^\epsilon = - \frac{1}{2} \int_\Omega \partial_1 U_1^\epsilon (\partial_1 C^\epsilon)^2,$$
@@ -1638,9 +1641,9 @@ Summarising the estimates for $I_1$ -- $I_6$ and merging the second order concen
 %
 \begin{equation} \nonumber
   \begin{split}
-    & \frac{1}{2} \frac{\diff}{\diff t} \norm{\nabla C^\epsilon}_2^2 + \epsilon K_1 \norm{\partial_{11} C^\epsilon}_2^2 + K_2 \norm{\partial_{22} C^\epsilon}_2^2 + K_3 \norm{\partial_{33} C^\epsilon}_2^2 + \sum_{i \neq j} \kappa_{ij} \norm{\partial_{ij} C^\epsilon}_2^2 \\
+    & \frac{1}{2} \frac{\diff}{\diff t} \norm{\nabla C^\epsilon}_2^2 + \textcolor{jasper}{\epsilon} K_1 \norm{\partial_{11} C^\epsilon}_2^2 + K_2 \norm{\partial_{22} C^\epsilon}_2^2 + K_3 \norm{\partial_{33} C^\epsilon}_2^2 + \sum_{i \neq j} \kappa_{ij} \norm{\partial_{ij} C^\epsilon}_2^2 \\
     & \lesssim (\norm{\mathbf{u}_h}_{H^3} + \norm{\mathbf{u}_h}_{H^3}^2 + \norm{\mathbf{U}_h^\epsilon}_{H^3} + \norm{\mathbf{U}_h^\epsilon}_{H^3}^2 + 1 + \norm{c}_{H^2}^2) \norm{\nabla C^\epsilon}_2^2 \\
-    & + \norm{\mathbf{U}_h^\epsilon}_{H^3}^2 + \norm{\mathbf{U}_h^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2 + \epsilon K_1 \norm{\partial_{11} c}_2^2 + \epsilon^2 \\
+    & + \norm{\mathbf{U}_h^\epsilon}_{H^3}^2 + \norm{\mathbf{U}_h^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2 + \textcolor{jasper}{\epsilon} K_1 \norm{\partial_{11} c}_2^2 + \textcolor{jasper}{\epsilon^2} \\
     & = A(t)  \norm{\nabla C^\epsilon}_2^2 + B(t)
   \end{split}
 \end{equation}
@@ -1653,7 +1656,7 @@ for any $1 \leq j \leq 3.$
 Now we have that
 %
 \changefontsizes{10pt}
-\[ \int_0^T B(t) \diff \tau = \kappa \int_0^T \epsilon \norm{\partial_{11} c}_2^2 + \norm{\mathbf{U}_h^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2 + \norm{\mathbf{U}_h^\epsilon}_{H^3}^2 + \epsilon^2 \diff \tau \lesssim \epsilon + \epsilon^2 + \epsilon^2 T,\]
+\[ \int_0^T B(t) \diff \tau = \kappa \int_0^T \textcolor{jasper}{\epsilon} \norm{\partial_{11} c}_2^2 + \norm{\mathbf{U}_h^\epsilon}_{H^3}^2 \norm{\nabla c}_2^2 + \norm{\mathbf{U}_h^\epsilon}_{H^3}^2 + \textcolor{jasper}{\epsilon^2} \diff \tau \lesssim \textcolor{jasper}{\epsilon} + \textcolor{jasper}{\epsilon^2} + \textcolor{jasper}{\epsilon^2} T,\]
 \changefontsizes{12pt}
 %
 and
@@ -1672,7 +1675,7 @@ Eventually the Gr\"onwall inequality yields
 \begin{equation} \nonumber
 \begin{split}
 & \norm{C^\epsilon}_{L^\infty(0,T; H^1(\Omega))} + \norm{\nabla_d C^\epsilon}_{L^2(0,T; H^1(\Omega))} \\
-& \lesssim (\epsilon + \epsilon^2 \cdot T) \exp{\kappa (\sqrt{T} + 1 + T)}.
+& \lesssim (\textcolor{jasper}{\epsilon} + \textcolor{jasper}{\epsilon^2} \cdot T) \exp{\kappa (\sqrt{T} + 1 + T)}.
 \end{split}
 \end{equation}
 \end{frame}
@@ -1684,12 +1687,13 @@ Finally we conclude that for any given time $T > 0$ we have the global strong co
 c^\epsilon \to c \text{ in } L_t^\infty H_x^1 \text{ and } \nabla_d c^\epsilon \to \nabla_d c \text{ in } L_t^2 H_x^1,
 \end{equation}
 %
-moreover the rate of convergence is $\epsilon$ (note however: the estimate's time-dependence also means that the convergence gets slower as time evolves).
+moreover the rate of convergence is $\textcolor{jasper}{\epsilon}$ (note however: the estimate's time-dependence also means that the convergence gets slower as time evolves).
 
 Combining this convergence result with the strong convergences already detailed for the velocity, our proof is finished.
 \end{frame}
 
 \begin{frame}{DWMC, strong solutions: P.E. Existence}
+\vspace{-0.5cm}
 \begin{theorem}
 Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0$, let $c_0 \in H^2 (\Omega),$ and let's assume that the given boundary conditions hold. Then there exists a unique global strong solution $(\mathbf{u}, \textcolor{mediumred-violet}{c})$ of the downwind-matching hydrostatic polluted atmosphere limit model:
 %
@@ -1725,6 +1729,7 @@ The proof is partly based on [C. Cao, J. Li, and E. S. Titi, 2014], but note tha
 \end{frame}
 
 \begin{frame}{Step 1: Mollified system}
+\vspace{-0.5cm}
 \begin{equation} \nonumber
 \begin{split}
 \partial_t \mathbf{u}_h + \Delta_\nu \mathbf{u}_h + & (\mathbf{u}_h \cdot \nabla_h) \mathbf{u}_h - \bigg ( \int_{-a}^z \nabla_h \cdot \mathbf{u}_h (x, y, \xi, t) \diff \xi \bigg ) \partial_3 \mathbf{u}_h \\
