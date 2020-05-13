@@ -84,6 +84,7 @@ We end up this section with some notations we will use through the paper.
 \item $\epsilon = \frac{\text{characteristic depth}}{\text{characteristic width}} = $ the aspect ratio,
 \item $\nu = $ viscosity,
 \item $\Omega^\epsilon, \Omega = $ the original and the rescaled ($\epsilon$-independent) domain, respectively,
+\item the constant $a$ denotes the height of the domain (with the flexibility that depending on the case this could either mean the domain is composed as $M \times [0,a]$ or $M \times [-a, a]$),
 \item $\nabla$ stands for the gradient vector; specifically, $(\partial_x, \partial_y, \partial_z)$ before, and $(\partial_1, \partial_2, \partial_3)$ after rescaling,
 \item $\nabla_\nu = (\nu_x^{1/2} \partial_x, \nu_y^{1/2} \partial_y, \nu_z^{1/2} \partial_z)$ on $\Omega^\epsilon$, $\nabla_\nu = (\nu_1^{1/2} \partial_1, \nu_2^{1/2} \partial_2, \nu_3^{1/2} \partial_3)$ on the rescaled domain $\Omega,$
 \item $ \Delta_\nu$ stands for the anisotropic Laplacian operators $\nu_x \partial^2_{xx} + \nu_y \partial^2_{yy}  + \nu_z \partial^2_{zz}$ and $\nu_1 \partial^2_{11} + \nu_2 \partial^2_{22}  + \nu_3 \partial^2_{33}$ on the original and rescaled domains, respectively,
@@ -92,7 +93,6 @@ We end up this section with some notations we will use through the paper.
 \item $\mathbf{\omega}$ represents the Earth rotation angular speed,
 \item $\phi = l(y) = $ latitude, $f = $ the module of the Earth rotation vector
 \item $\alpha = -2 f \sin(\theta)\cos(\phi), \beta = 2 f \cos(\theta) \cos(\phi), \gamma = 2 f \sin(\phi),$
-% \item $\mathbf{c}(\mathbf{u}) = (\mathbf{c}_h (\mathbf{u}), c_3 (\mathbf{u}_h)) = ( -\gamma u_2^\epsilon + \epsilon \beta u_3^\epsilon, \alpha \epsilon u^\epsilon_3 - \gamma u_1^\epsilon, \alpha u^\epsilon_2 - \beta u_1^\epsilon),$ the Coriolis force terms 
 \item $\mathbf{K}$ represents the diagonal diffusion matrix,
 \item $( \cdot,\cdot) = $ the scalar product in $L^2(\Omega)^d, d \geq 1$ or the duality $L^p (\Omega)$, $L^{p'} (\Omega),$
 \item $\mathbf{u}_h$ = the horizontal velocity components $(u_1, u_2),$
@@ -119,7 +119,7 @@ Here the original $\Omega_\epsilon$ domain we consider is a local slice of the a
   \Omega_{\epsilon} = \{(x,y,z) \in \mathbb{R}^3 ; (x,y) \in \omega, 0 < z < \epsilon h(x,y) \},
 \end{equation}
 %
-where $\omega$ is a Lipschitz-domain in $\mathbb{R}^2$, $h$ is a nonnegative Lipschitz-continuous function.
+where $\omega$ is a Lipschitz-domain in $\mathbb{R}^2$, $a$ is a nonnegative Lipschitz-continuous function.
 
 After setting the domain, we start with the original set of equations
 
@@ -164,7 +164,7 @@ which leads us to introducing the new scaling identity
 \begin{equation} \label{ksepsk1} K_x = \epsilon K_1. \end{equation}
 
 \begin{remark}
-Rigorously speaking, technically we have two different small parameters in our model: the shallowness of the domain ($z = \epsilon_1 x_3$) and diffusion effects in the downwind direction ($K_x = \epsilon_2 K_1$). For simplicity we assume that these two vanishing parameters are the same, we use $\epsilon = \epsilon_1 = \epsilon_2.$
+Rigorously speaking, technically we have two different small parameters in our model: the shallowness of the domain ($z = \epsilon_1 x_3$) and diffusion effects in the downwind direction ($K_x = \epsilon_2 K_1$). For simplicity we assume that these two vanishing parameters are the same, we take $\epsilon = \epsilon_1 = \epsilon_2.$
 \end{remark}
 
 Note that as an immediate result, we will have an extra $\epsilon$ term in the concentration equation's Laplacian.
@@ -189,7 +189,7 @@ Choosing the coordinate system in this particular way results in changes in thre
 For clarity, we add a comment here regarding the intuitive meaning of what we understand by the downwind direction $\mathbf{x}$ (which gives orientation to a coordinate axes), and the velocity $\mathbf{v}$ itself (which is the solution function). The downwind direction is an approximately steady-in-time direction, it can be seen as the direction marked by the wind direction trackers on an airport or meteorological point. When we consider the downwind, we neglect the small perturbations in its orientation, it can be viewed as a time-averaged direction as long as the fluctuation is relatively small. On the other hand, the velocity itself is a three-dimensional, time dependent vector that changes second after second.
 \end{remark}
 
-To expand the $2 \mathbf{\omega} \times \mathbf{v}$ Coriolis term, firstly it is necessary to understand the structure of the new rotation vector. Note that the downwind-matching coordinate system and the original east-north-upwards oriented system are different only in a rotation around the $z$ axis. Let $\theta$ denote the angle between the respective $x$ axes, $\phi$ denotes the latitude, then the rotation vector expressed in the downwind-matching coordinate system becomes
+To expand the $2 \mathbf{\omega} \times \mathbf{v}$ Coriolis term, firstly it is necessary to understand the structure of the angular velocity vector expressed in this specific coordinate system. We remind that in classical geophysical coordinates $\omega = f (0, \cos(\phi), \sin(\phi)),$ where $\phi$ denotes the latitude. Note that the downwind-matching coordinate system and the classical east-north-upwards oriented geophysical coordinate system are different only in a rotation around the $z$ axis. Let $\theta$ denote the angle between the respective $x$ axes, then the rotation vector expressed in the downwind-matching coordinate system becomes
 
 \begin{gather}
  \begin{bmatrix} \cos(\theta) & -\sin(\theta) & 0 \\ \sin(\theta) & \cos(\theta) & 0 \\ 0 & 0 & 1 \end{bmatrix} \begin{bmatrix} 0 \\ f \cos(\phi) \\ f \sin(\phi) \end{bmatrix}
@@ -374,6 +374,11 @@ We need to define the following spaces:
   \[ \mathbf{V} = \{ \mathbf{v} \in  H^1_{\Gamma} (\Omega) \times H^1_{\Gamma} (\Omega) \times H^1_{\Gamma} (\Omega); \nabla \cdot \mathbf{v} = 0 \text{ in } \Omega \} \]
 %
   \[ \mathbf{W} = \{ \mathbf{v} \in  (H^1_{\Gamma} (\Omega) \cap H^2(\Omega)) \times (H^1_{\Gamma} (\Omega) \cap H^2(\Omega)) \times H^1_{\Gamma} (\Omega); \nabla \cdot \mathbf{v} = 0 \text{ in } \Omega \} \]
+  %
+\begin{align}
+L^2_{\Gamma_A}(\Omega) = & \{ c \in L^2(\Omega); c = 0 \text{ on } \Gamma_A \text{ in the sense of } \langle c , \tilde{c} \rangle_{H^{-1/2} (\Gamma_A) \times H^{1/2} (\Gamma_A)} = 0 \nonumber \\
+& \text{ for any } \tilde{c} \in H^{1/2}(\Gamma_A) \nonumber \}
+\end{align}
   
 Furthermore we introduce the notation $b(\mathbf{u}_h)$ = $\gamma ( - u_2 , u_1).$
   
@@ -381,12 +386,12 @@ Then the weak formulation of the hydrostatic system (\ref{HNSC1}) - (\ref{HNSC_i
   
 \begin{definition} \label{definitionhydrostaticWF}
   
-The pair $(\mathbf{u}, c)$ is called a weak solution of the a hydrostatic system (\ref{HNSC1}) - (\ref{HNSC5}) subject to (\ref{HNSC_init}), (\ref{HNSC_bc-weak}) if $\mathbf{u} = (\mathbf{u}_h, u_3) \in L^2 (0, T; \mathbf{W}) \cap L^\infty (0,T; L^2(\Omega)^3),$ $\mathbf{u}_h \in L^\infty(0,T; H^1(\Omega)),$ and $c \in L^\infty (0, T; L^2(\Omega))$ with $\partial_2 c$, $\partial_3 c \in L^2(0, T; L^2(\Omega)),$ moreover $\mathbf{u}$ and $c$ satisfy the integral identities
+The pair $(\mathbf{u}, c)$ is called a weak solution of the a hydrostatic system (\ref{HNSC1}) - (\ref{HNSC5}) subject to (\ref{HNSC_init}), (\ref{HNSC_bc-weak}) if $\mathbf{u} = (\mathbf{u}_h, u_3) \in L^2 (0, T; \mathbf{W}) \cap L^\infty (0,T; L^2(\Omega)^3),$ $\mathbf{u}_h \in L^\infty(0,T; H^1(\Omega)),$ and $c \in L^\infty (0, T; L_{\Gamma_A}^2(\Omega))$ with $\partial_2 c$, $\partial_3 c \in L^2(0, T; L^2(\Omega)),$ moreover $\mathbf{u}$ and $c$ satisfy the integral identities
   
   \begin{equation}
     \begin{split}
       & \int_0^T \bigg[ -(\mathbf{u}_h, \partial_t \mathbf{\tilde{u}}_h) + (\nabla_\nu \mathbf{u}_h, \nabla_\nu \mathbf{\tilde{u}}_h) - (\mathbf{u}_h, (\mathbf{u} \cdot \nabla) \mathbf{\tilde{u}}_h) + (b(\mathbf{u}_h), \mathbf{\tilde{u}}_h) \bigg ] \diff t \\
-      & = - ({\mathbf{u}_h}_0, \mathbf{\tilde{u}}_h(0)) \diff t \label{hydrostaticWF}
+      & = - ({\mathbf{u}_h}_0, \mathbf{\tilde{u}}_h(0)) \label{hydrostaticWF}
     \end{split}
   \end{equation}
 %
@@ -407,14 +412,14 @@ Giving definition to the weak formulation of the (\ref{ANSC1}) - (\ref{ANSC_init
 
 \begin{definition} \label{definitionanisotropicWF}
   
-The pair $(\mathbf{u}^\epsilon, c^\epsilon)$ is called a weak solution of the anisotropic system (\ref{ANSC1}) - (\ref{ANSC5}) subject to (\ref{ANSC_init}), (\ref{ANSC_bc-weak}) if $\mathbf{u}^\epsilon = (\mathbf{u}^\epsilon_h, u^\epsilon_3) \in L^2 (0,T ; \mathbf{V}) \cap C_w (0, T; L^2 (\Omega)^3)$ and $c^\epsilon \in L^\infty (0,T; L^2(\Omega)) \cap L^2 (0,T; H^1(\Omega))$, moreover $\mathbf{u}^\epsilon$ and $c^\epsilon$ satisfy the integral identities
+The pair $(\mathbf{u}^\epsilon, c^\epsilon)$ is called a weak solution of the anisotropic system (\ref{ANSC1}) - (\ref{ANSC5}) subject to (\ref{ANSC_init}), (\ref{ANSC_bc-weak}) if $\mathbf{u}^\epsilon = (\mathbf{u}^\epsilon_h, u^\epsilon_3) \in L^2 (0,T ; \mathbf{V}) \cap C_w (0, T; L^2 (\Omega)^3)$ and $c^\epsilon \in L^\infty (0,T; L^2(\Omega)) \cap L^2 (0,T; H_{\Gamma_A}^1(\Omega))$, moreover $\mathbf{u}^\epsilon$ and $c^\epsilon$ satisfy the integral identities
   
   \begin{equation}
     \begin{split}
       & \int_0^T \bigg [ -(\mathbf{u}^\epsilon_h, \partial_t \mathbf{\tilde{u}}_h) + (\nabla_\nu \mathbf{u}^\epsilon_h, \nabla_\nu \mathbf{\tilde{u}}_h) - (\mathbf{u}^\epsilon_h, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{\tilde{u}}_h) + (b(\mathbf{u}^\epsilon_h), \mathbf{\tilde{u}}_h) \bigg ] \diff t \\
       & + \epsilon \int_0 ^ T \big [ (\beta u_3 ^\epsilon, \tilde{u}_1) - (\beta u_1^\epsilon, \tilde{u}_3) \big ] \diff t + \epsilon \int_0 ^ T \big [ (\alpha u_2 ^\epsilon, \tilde{u}_3) - (\alpha u_3^\epsilon, \tilde{u}_2) \big ] \diff t \\
       & + \epsilon^2 \int _0 ^ T \big [ -(u_3^\epsilon, \partial_t \tilde{u}_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, \tilde{u}_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu \tilde{u}_3) \big ] \diff t \\
-      & = - ({\mathbf{u}^\epsilon_h}_0, \mathbf{\tilde{u}}_h(0)) - \epsilon^2 ({u^\epsilon_3}_0, \tilde{u}_3 (0)) \diff t \raisetag{20pt} \label{anisotropicWF}
+      & = - ({\mathbf{u}^\epsilon_h}_0, \mathbf{\tilde{u}}_h(0)) - \epsilon^2 ({u^\epsilon_3}_0, \tilde{u}_3 (0)) \raisetag{20pt} \label{anisotropicWF}
     \end{split}
   \end{equation}
 %
@@ -435,7 +440,7 @@ for all $\mathbf{\tilde{u}} = (\mathbf{\tilde{u}}_h, \tilde{u}_3) \in H^1 (0,T;\
 Now we are ready to state the main theorem of this section.
 
 \begin{theorem} \label{maintheoremWEAK}
-Let ${\mathbf{u}_h}_0$ $\in$ $H^1 (\Omega)$, ${u_3}_0 \in L^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 = 0$ on $\partial \Omega$; let $c_0 \in$ $L^2 (\Omega)$, $c_0 = 0$ on $ \partial \Omega$, and assume that the boundary conditions (\ref{ANSC_bc-weak}) hold; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1}) - (\ref{ANSC_init}) converges weakly to a weak solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1}) - (\ref{HNSC_init}).
+Let ${\mathbf{u}_h}_0$ $\in$ $H^1 (\Omega)$, ${u_3}_0 \in L^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0, {\mathbf{u}_h}_0 = 0, {u_3}_0 n_3 = 0$ on $\partial \Omega$; let $c_0 \in$ $L^2 (\Omega)$, and assume that the boundary conditions (\ref{ANSC_bc-weak}) hold; then as the aspect ratio $\epsilon$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1}) - (\ref{ANSC_init}) converges (up to a subsequence) weakly to a weak solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1}) - (\ref{HNSC_init}).
 \end{theorem}
 
 The statement of the main theorem of this first part of the paper is analogous to our previous result stated for the case of the geophysical frame, but we highlight the difference that here we use the initial data ${\mathbf{u}_h}_0 \in H^1,$ while for the case of the geophysical frame an $L^2$ initial velocity was sufficient.
@@ -509,7 +514,7 @@ The right-hand side of the energy inequality is apparently bounded.
   
   \begin{corollary} \label{StrongSolPE_boundedness}
   
-    Let $(\mathbf{u}_h,u_3)$ be the the unique global strong solution to the primitive equations (\ref{HNSC1}) - (\ref{HNSC4}) with an initial data ${\mathbf{u}_h}_0 \in H^1(\Omega).$ Then we have the following boundedness result:
+    Let $(\mathbf{u}_h,u_3)$ be the unique global strong solution to the primitive equations (\ref{HNSC1}) - (\ref{HNSC4}) with an initial data ${\mathbf{u}_h}_0 \in H^1(\Omega).$ Then we have the following boundedness result:
     
     $$ \sup_{0 \leq t < \infty} \norm{\mathbf{u}_h}_{H^1}^2 (t) + \int_0^\infty \norm{\nabla \mathbf{u}_h}_{H^1}^2 \diff t \leq \kappa (\norm{{\mathbf{u}_h}_0}_{H^1}, \Gamma_G).$$
   
@@ -585,11 +590,11 @@ for any $\tilde{\mathbf{u}} = (\tilde{\mathbf{u}}_h, \tilde{u}_3) \in H^1 (0,T;\
 
 Now, let's define $\chi \in C_0^\infty ([0, \infty))$ with $0 \leq \chi \leq 1$ and $\chi (0) = 1$ and set $\tilde{\mathbf{u}} = (\mathbf{u}_h,u_3) \chi (t).$ By using the density argument it is valid to choose this $\tilde{\mathbf{u}}$ function as a testing function as long as all the integral terms remain well-defined in $(\ref{WFreminder}),$ which we verify in the following.
 
-It is important to highlight at this point that since we are not restricted to zero-averaged functions and we are not on a periodic domain, we need to pay special attention when verifying boundedness results using the Poincar\'e inequality. Note that as the value of the velocity functions are defined to be zero on the boundary, any first-order estimate of the type $\norm{\mathbf{u}_h^\epsilon} \leq \norm{\nabla \mathbf{u}_h^\epsilon}$ is valid, using the zero-trace version of the Poincar\'e inequality for functions in $W^{1,2}_0.$ However, since it is only the value of the functions that vanishes on the boundary, but not their derivatives, higher order estimates such as passing from $\norm{\nabla \mathbf{u}_h^\epsilon}$ to $\norm{\Delta \mathbf{u}_h^\epsilon}$ in the process of constructing an upper bound can not be applied in general. Which is why, for example, the estimate of the the term below is rather involved as follows:
+It is important to highlight at this point that since we are not restricted to zero-averaged functions and we are not on a periodic domain, we need to pay special attention when verifying boundedness results using the Poincar\'e inequality. Note that as the value of the velocity functions are defined to be zero on the boundary, any first-order estimate of the type $\norm{\mathbf{u}_h^\epsilon} \leq \norm{\nabla \mathbf{u}_h^\epsilon}$ is valid, using the zero-trace version of the Poincar\'e inequality for functions in $W^{1,2}_0.$ However, since it is only the value of the functions that vanishes on the boundary, but not their derivatives, higher order estimates such as passing from $\norm{\nabla \mathbf{u}_h^\epsilon}$ to $\norm{\Delta \mathbf{u}_h^\epsilon}$ in the process of constructing an upper bound can not be applied in general. Which is why, for example, the estimate of the term below is rather involved as follows:
 
 \begin{equation}
   \begin{split}
-    & \int_Q \abs{\mathbf{u}^\epsilon} \abs{\nabla u_3^\epsilon} \abs{u_3} \chi \diff x \diff y \diff z \\
+    & \int_Q \abs{\mathbf{u}^\epsilon} \abs{\nabla u_3^\epsilon} \abs{u_3} \chi \diff x \diff y \diff z \diff t \\
     & \leq  \int_0 ^ T \int_{\Gamma_G} \bigg ( \int_0^1 \abs{\mathbf{u}^\epsilon} \abs{\nabla u_3^\epsilon} \diff z \int_0^1 \abs{\nabla_h \mathbf{u}_h} \diff z \bigg ) \diff x \diff y \diff t \\
     & \lesssim \int_0^T \norm{\mathbf{u}^\epsilon}_2^{1/2} \norm{\nabla \mathbf{u}^\epsilon}_2^{1/2} \norm{\nabla u_3^\epsilon}_2 \norm{\nabla_h \mathbf{u}_h}_2^{1/2} (\norm{\nabla_h \mathbf{u}_h}_2^{1/2} + \norm{\Delta \mathbf{u}_h}_2^{1/2}) \diff t \\
     & \lesssim \sup_{0 \leq t \leq T} \bigg( \norm{\mathbf{u}^\epsilon}_2^{1/2} \norm{\nabla \mathbf{u}_h}_2^{1/2} \bigg) \bigg( \int_0^T \norm{\nabla \mathbf{u}^\epsilon}^2_2 \diff t \bigg)^{1/4} \bigg ( \int_0^T \norm{\nabla u_3^\epsilon}_2^2 \diff t \bigg)^{1/2} \\
@@ -626,11 +631,11 @@ In more detail, the term $ \langle \partial_t u_3, u_3^\epsilon \rangle _{H^{-1}
 \begin{equation}
   \begin{split}
     & \langle \partial_t u_3, u_3^\epsilon \rangle _{H^{-1} \times H^1} = - \bigg \langle \nabla_h \cdot \bigg ( \int_0^z \partial_t \mathbf{u}_h \diff z' \bigg ) , u_3^\epsilon \bigg \rangle \\
-    & = - \int_{\partial \Omega} \bigg ( \int_0^z \partial_t \mathbf{u}_h \diff z' \bigg ) u_3^\epsilon \mathbf{n}_h + \int_\Omega \bigg ( \int_0^z \partial_t \mathbf{u}_h \diff z' \bigg) \cdot \nabla_h u_3^\epsilon \diff x \diff y \diff z,
+    & = - \int_{\partial \Omega} \bigg ( \int_0^z \partial_t \mathbf{u}_h \diff z' \bigg ) u_3^\epsilon \vec{\boldsymbol{n}}_h + \int_\Omega \bigg ( \int_0^z \partial_t \mathbf{u}_h \diff z' \bigg) \cdot \nabla_h u_3^\epsilon \diff x \diff y \diff z,
   \end{split}
 \end{equation}
 %
-where $\mathbf{n}_h$ is the horizontal component of the outward facing normal vector on the $\partial \Omega$ boundary.
+where $\vec{\boldsymbol{n}}_h$ is the horizontal component of the outward facing normal vector on the $\partial \Omega$ boundary.
     
 By using that $u_3^\epsilon = 0$ on $\partial \Omega$ we arrive easily to the more simple
     
@@ -638,7 +643,7 @@ $$ \langle \partial_t u_3, u_3^\epsilon \rangle _{H^{-1} \times H^1} = \int_\Ome
 %
 which is the form one would have on a periodic domain. Similarly, 
      
-$$ \langle \partial_t u_3, u_3^\epsilon - u_3 \rangle _{H^{-1} \times H^1} = \int_\Omega \bigg ( \int_0^z \partial_t \mathbf{u}_h \diff z' \bigg) \cdot \nabla_h (u_3^\epsilon - u_3),$$ as the boundary term $$\int_{\partial \Omega} \bigg ( \int_0^z \partial_t \mathbf{u}_h \diff z' \bigg ) (u_3^\epsilon - u_3) \mathbf{n}_h$$ becomes zero, since we have $u_3 = 0, u_3^\epsilon = 0$ on $\Gamma.$ 
+$$ \langle \partial_t u_3, u_3^\epsilon - u_3 \rangle _{H^{-1} \times H^1} = \int_\Omega \bigg ( \int_0^z \partial_t \mathbf{u}_h \diff z' \bigg) \cdot \nabla_h (u_3^\epsilon - u_3),$$ as the boundary term $$\int_{\partial \Omega} \bigg ( \int_0^z \partial_t \mathbf{u}_h \diff z' \bigg ) (u_3^\epsilon - u_3) \vec{\boldsymbol{n}}_h$$ becomes zero, since we have $u_3 = 0, u_3^\epsilon = 0$ on $\Gamma.$ 
 
 After some technical details that we omit here we eventually obtain
 
@@ -1000,7 +1005,7 @@ We provide the proof of Theorem \ref{existenceconcentrationSTRONG} in the append
 Now we are ready to describe this section's main theorem.
 
 \begin{theorem} \label{maintheoremSTRONG}
-Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\nabla \cdot \mathbf{u}_0 = 0$, and let $c_0 \in H^2 (\Omega).$ There is a positive $\epsilon_0$ threshold such that for any $\epsilon < \epsilon_0,$ the strong solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1})--(\ref{ANSC4}), (\ref{ANSC5_strong_cshift}), (\ref{ANSC_init}), (\ref{ANSC7-strong}) exists globally in time and as the aspect ratio $\epsilon$ tends to zero, it converges strongly to the unique global strong solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1})--(\ref{HNSC4}), (\ref{HNSC5_strong_cshift}), (\ref{HNSC_init}), (\ref{HNSC7-strong}). In more detail, the following strong convergence results hold:
+Let ${\mathbf{u}_h}_0 \in H^3(\Omega),$ ${u_3}_0 \in H^2(\Omega)$ with $\int_\Omega {\mathbf{u}_h}_0 \diff x \diff y \diff z = 0$ and $\nabla \cdot \mathbf{u}_0 = 0$, and let $c_0 \in H^2 (\Omega).$ There is a positive $\epsilon_0$ threshold such that for any $\epsilon < \epsilon_0,$ the strong solution $(\mathbf{u}^\epsilon, c^\epsilon)$ of the anisotropic equations (\ref{ANSC1})--(\ref{ANSC4}), (\ref{ANSC5_strong_cshift}), (\ref{ANSC_init}), (\ref{ANSC7-strong}) exists globally in time and as the aspect ratio $\epsilon$ tends to zero, it converges strongly to the unique global strong solution $(\mathbf{u}, c)$ of the hydrostatic equations of the polluted atmosphere (\ref{HNSC1})--(\ref{HNSC4}), (\ref{HNSC5_strong_cshift}), (\ref{HNSC_init}), (\ref{HNSC7-strong}). In more detail, the following strong convergence results hold:
 
   \begin{align} 
     & (\mathbf{u}_h^\epsilon, \epsilon u_3^\epsilon) \to (\mathbf{u}_h, 0) &\quad & \text{in $L_t^\infty H_x^2$,} \label{StrongConvVelocity1statement} \\
@@ -1540,14 +1545,14 @@ P.~Az{\'e}rad and F.~Guill{\'e}n.
 
 \bibitem{besson1992some}
 O.~Besson and M.~Laydi.
-\newblock Some estimates for the anisotropic navier-stokes equations and for
+\newblock Some estimates for the anisotropic Navier-Stokes equations and for
   the hydrostatic approximation.
 \newblock {\em ESAIM: Mathematical Modelling and Numerical Analysis},
   26(7):855--865, 1992.
 
 \bibitem{cao2014local}
 C.~Cao, J.~Li, and E.~S. Titi.
-\newblock Local and global well-posedness of strong solutions to the 3d
+\newblock Local and global well-posedness of strong solutions to the 3D
   primitive equations with vertical eddy diffusivity.
 \newblock {\em Archive for Rational Mechanics and Analysis}, 214(1):35--76,
   2014.
@@ -1568,7 +1573,7 @@ C.~Cao, J.~Li, and E.~S. Titi.
 \bibitem{cao2003global}
 C.~Cao and E.~S. Titi.
 \newblock Global well-posedness and finite-dimensional global attractor for a
-  3-d planetary geostrophic viscous model.
+  3-D planetary geostrophic viscous model.
 \newblock {\em Communications on Pure and Applied Mathematics: A Journal Issued
   by the Courant Institute of Mathematical Sciences}, 56(2):198--233, 2003.
 
@@ -1580,7 +1585,7 @@ C.~Cao and E.~S. Titi.
 
 \bibitem{cao2012global}
 C.~Cao and E.~S. Titi.
-\newblock Global well-posedness of the 3d primitive equations with partial
+\newblock Global well-posedness of the 3D primitive equations with partial
   vertical turbulence mixing heat diffusion.
 \newblock {\em Communications in Mathematical Physics}, 310(2):537--568, 2012.
 
@@ -1617,7 +1622,7 @@ P.~Kathirgamanathan, R.~McKibbin, and R.~McLachlan.
 \bibitem{li2019primitive}
 J.~Li and E.~S. Titi.
 \newblock The primitive equations as the small aspect ratio limit of the
-  navier--stokes equations: Rigorous justification of the hydrostatic
+  Navier--Stokes equations: Rigorous justification of the hydrostatic
   approximation.
 \newblock {\em Journal de Math{\'e}matiques Pures et Appliqu{\'e}es},
   124:30--58, 2019.
@@ -1637,7 +1642,7 @@ P.~Marsaleix, F.~Auclair, and C.~Estournel.
 
 \bibitem{monin1959boundary}
 A.~Monin.
-\newblock On the boundary condition on the earth surface for diffusing
+\newblock On the boundary condition on the Earth surface for diffusing
   pollution.
 \newblock In {\em Advances in Geophysics}, volume~6, pages 435--436. Elsevier,
   1959.
@@ -1649,7 +1654,7 @@ J.~Pedlosky.
 
 \bibitem{petcu2005sobolev}
 M.~Petcu and D.~Wirosoetisno.
-\newblock Sobolev and gevrey regularity results for the primitive equations in
+\newblock Sobolev and Gevrey regularity results for the primitive equations in
   three space dimensions.
 \newblock {\em Applicable Analysis}, 84(8):769--788, 2005.
 
@@ -1657,17 +1662,17 @@ M.~Petcu and D.~Wirosoetisno.
 M.~Prodanova, J.~L. Perez, D.~Syrakov, R.~San~Jose, K.~Ganev, N.~Miloshev, and
   S.~Roglev.
 \newblock Application of mathematical models to simulate an extreme air
-  pollution episode in the bulgarian city of stara zagora.
+  pollution episode in the Bulgarian city of Stara Zagora.
 \newblock {\em Applied Mathematical Modelling}, 32(8):1607--1619, 2008.
 
 \bibitem{simon1986compact}
 J.~Simon.
-\newblock Compact sets in the space $l^p(0, t; b)$.
+\newblock Compact sets in the space $L^p(0, t; B)$.
 \newblock {\em Annali di Matematica pura ed applicata}, 146(1):65--96, 1986.
 
 \bibitem{temam2001navier}
 R.~Temam.
-\newblock {\em Navier-Stokes equations: theory and numerical analysis}, volume
+\newblock {\em Navier-Stokes Equations: Theory and Numerical Analysis}, volume
   343.
 \newblock American Mathematical Soc., 2001.
 
@@ -1684,11 +1689,11 @@ Q.~Wang, W.~Zhou, D.~Wang, and D.~Dong.
 
 \bibitem{yeh1975three}
 G.-T. Yeh and C.-H. Huang.
-\newblock Three-dimensional air pollutant modeling in the lower atmosphere.
+\newblock Three-dimensional air pollutant modelling in the lower atmosphere.
 \newblock {\em Boundary-Layer Meteorology}, 9(4):381--390, 1975.
 
 \bibitem{zhuk2016source}
-S.~Zhuk, T.~T. Tchrakian, S.~Moore, R.~Ord{\'o}n?ez-Hurtado, and R.~Shorten.
+S.~Zhuk, T.~T. Tchrakian, S.~Moore, R.~Ord{\'o}{\~n}ez-Hurtado, and R.~Shorten.
 \newblock On source-term parameter estimation for linear advection-diffusion
   equations with uncertain coefficients.
 \newblock {\em SIAM Journal on Scientific Computing}, 38(4):A2334--A2356, 2016.
