@@ -280,7 +280,7 @@ The following two sections are dedicated to state and prove a rigorous connectio
 
 This section is dedicated to extend the weak convergence result of \cite{pollatmws2019} to the downwind-matching coordinate system in the framework of weak solutions. We begin by making the modelling equations complete by defining the boundary conditions. In the scenario of weak solutions we aim to be as close as possible to the original domain, thus we consider a classical non-periodic local domain on the surface of the Earth with minimal modifications due to the new $\epsilon$ term.
 
-Here the boundary structure of the domain is identical to what we used in \cite{pollatmws2019}, the only difference is made by the kind of boundary conditions we allow on the lower boundary, since here we consider exclusively inland domains. The upper boundary of the $\Omega$ domain is denoted by $\Gamma_U$, the lateral boundary is $\Gamma_L$, the notation $\Gamma_A$ stands for the $\Gamma_L \cup \Gamma_U$ set (above the ground), and the lower boundary of the domain is $\Gamma_G$, while the complete boundary is denoted by $\Gamma$ (see Figure $\ref{structdomaingraphboundaries_weak}$). For simplicity we assume that the altitude of $\Omega$ is $1$, thus we can also express the full domain as $\Omega = \Gamma_G \times [0,1],$ which will be useful later for estimating integrals.
+Here the boundary structure of the domain is identical to what we used in \cite{pollatmws2019}, the only difference is made by the kind of boundary conditions we allow on the lower boundary: for the case of the downwind-matching coordinates here we restrict ourselves to the technically simpler inland scenario (i.e. where any significant nearby water body is excluded). The upper boundary of the $\Omega$ domain is denoted by $\Gamma_U$, the lateral boundary is $\Gamma_L$, the notation $\Gamma_A$ stands for the $\Gamma_L \cup \Gamma_U$ set (above the ground), and the lower boundary of the domain is $\Gamma_G$, while the complete boundary is denoted by $\Gamma$ (see Figure $\ref{structdomaingraphboundaries_weak}$). For simplicity we assume that the altitude of $\Omega$ is $1$, thus we can also express the full domain as $\Omega = \Gamma_G \times [0,1],$ which will be useful later for estimating integrals.
 
 \begin{figure}[!h]
 \centering
@@ -467,7 +467,7 @@ Deriving the energy inequality for the anisotropic system (\ref{ANSC1}) - (\ref{
 \begin{split}
 & \frac{1}{2} (\norm{\mathbf{u}_h^\epsilon (t)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (t)}_{L^2}^2 + \norm{c^\epsilon (t)}_{L^2}^2) + \int_0 ^ t \big[ \norm{\nabla_\nu \mathbf{u}_h^\epsilon}_{L^2}^2 + \epsilon ^ 2 \norm{\nabla_\nu u_3^\epsilon}_{L^2}^2 \big] \diff \tau \\
 & + \int_0 ^ t \big [ \epsilon K_1 \norm{\partial_1 c^\epsilon}_{L^2}^2 + K_2 \norm{\partial_2 c^\epsilon}_{L^2}^2 + K_3 \norm{\partial_3 c^\epsilon}_{L^2}^2 \big ] d \tau \\
-& \leq \int_0^t (s^\epsilon,c^\epsilon) \diff \tau + \frac{1}{2} (\norm{\mathbf{u}_h^\epsilon (0)}_{L^2}^2 + \epsilon ^ 2 \norm{u_3^\epsilon (0)}_{L^2}^2 + \norm{c^\epsilon_0}_{L^2}^2). \raisetag{50pt} \label{finalformEIEQ}
+& \leq \int_0^t (s^\epsilon,c^\epsilon) \diff \tau + \frac{1}{2} (\norm{{\mathbf{u}_h}_0}_{L^2}^2 + \epsilon ^ 2 \norm{{u_3}_0}_{L^2}^2 + \norm{c_0}_{L^2}^2). \raisetag{50pt} \label{finalformEIEQ}
 \end{split}
 \end{equation}
 
