@@ -370,11 +370,17 @@ In this section we describe the weak formulation of the merged equations in both
 
 We need to define the following spaces:
 
-\[ C^{\infty}_\Gamma (\Omega) = \{ \varphi \in C^\infty (\bar{\Omega}); \varphi = 0 \text{ on some neighbourhood of } \Gamma\} \]
+\[ C^{\infty}_\Gamma (\Omega) = \{ \varphi \in C^\infty (\bar{\Omega}); \partial^\alpha \varphi = 0 \text{ in some neighbourhood of } \Gamma \text{ for any } \alpha \in \mathbb{N} \} \]
 %
-\[ H^k_{\Gamma} (\Omega) = \overline{C_\Gamma ^ \infty (\Omega)} ^ {H^k (\Omega)} = \{ v \in H^k(\Omega); \partial^\alpha v=0 \text{ on } \Gamma \text{ for any } \abs{\alpha} < k \} \]
+\begin{align}
+H^k_{\Gamma} (\Omega) = & \overline{C_\Gamma ^ \infty (\Omega)} ^ {H^k (\Omega)} = \{ v \in H^k(\Omega); \nonumber \\
+& \partial^\alpha v=0 \text{ in some neighbourhood of } \Gamma \text{ for any } \alpha < k, \alpha \in \mathbb{N} \nonumber \}
+\end{align}
 %
-\[ H^k_{\Gamma_A} (\Omega) = \{ v \in H^k(\Omega); \partial^\alpha v=0 \text{ on } \Gamma_A \text{ for any } \abs{\alpha} < k \} \]
+\begin{align}
+H^k_{\Gamma_A} (\Omega) = & \{ v \in H^k(\Omega); \nonumber \\
+& \partial^\alpha v=0 \text{ in some neighbourhood of } \Gamma_A \text{ for any } \alpha < k, \alpha \in \mathbb{N} \nonumber \}
+\end{align}
 %
 \[ \mathbf{V} = \{ \mathbf{v} \in H^1_{\Gamma} (\Omega) \times H^1_{\Gamma} (\Omega) \times H^1_{\Gamma} (\Omega); \nabla \cdot \mathbf{v} = 0 \text{ in } \Omega \} \]
 %
