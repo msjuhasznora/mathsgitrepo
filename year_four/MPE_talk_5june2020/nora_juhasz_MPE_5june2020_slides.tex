@@ -18,7 +18,8 @@
 \newtheorem{prop}{Proposition}
 
 \title{The polluted atmosphere as a shallow domain}
-\author[N\'ora Juh\'asz] { \textbf{N\'ora Juh\'asz} \\[1mm] \textit{Collaborator: Prof. Donatella Donatelli}}
+\author[N\'ora Juh\'asz] { \textbf{N\'ora Juh\'asz} \\[1mm] \textit{Collaborators: Prof. Donatella Donatelli, Prof. Omar Lakkis}}
+\vspace{10mm}
 \institute{Department of Information Engineering, Computer Science and Mathematics \\ University of L'Aquila }
 
 \date{5th June, 2020}
@@ -78,20 +79,6 @@ $$ \nabla \cdot \mathbf{v} = 0 \text{ in } \Omega_0 \times (0,T). $$
 
 \end{frame}
 
-\begin{frame}{State of art for the Navier-Stokes equations}
-
-We collect some of the main results currently available on the solutions of the Navier-Stokes equations:
-
-\begin{itemize}
-
-\item Global existence of weak solutions (standard terminology: $L^\infty L^2 \cap L^2 H^1$ regularity), the uniqueness in 3D is famously unsolved.
-\item For $\mathbf{v}_0 \in H^1_x$ initial data there exists a unique local in time strong solution (analogously, the terminology refers to an $L^\infty H^1 \cap L^2 H^2$ regular solution)
-\item The existence of global strong solutions in three dimensions is an open problem.
-
-\end{itemize}
-
-\end{frame}
-
 \begin{frame}{Hydrostatic Approximation}
 
 \textbf{Point of apparent theoretical conflict:} The previously described model is \textbf{not} what is widely used in meteorology and oceanology to describe geophysical processes.
@@ -109,18 +96,6 @@ $$ \nabla \cdot \mathbf{v} = 0. $$
 
 accurate for large-scale fluids. 
 \end{center}
-
-\end{frame}
-
-\begin{frame}{State of art for the Primitive Equations}
-
-The current state of art regarding the hydrostatic equations:
-
-\begin{itemize}
-\item Weak solutions exist for all time (in both 2D and 3D).
-\item The uniqueness of weak solutions has been shown in space dimension two, the 3D uniqueness is unresolved.
-\item In both space dimensions two and three we have the global existence and uniqueness of strong solutions. The global existence in 3D is a relatively new result.
-\end{itemize}
 
 \end{frame}
 
@@ -330,7 +305,7 @@ Initial and boundary conditions are analogous except for using $$ u_1 = u_2 = u_
 \end{frame}
 
 \begin{frame}{Fundamental spaces}
-\[ C^{\infty}_{\Gamma_A} (\Omega) = \{ \varphi \in C^\infty (\bar{\Omega}); \partial^\alpha \varphi = 0 \text{ on some neighbourhood of } \Gamma_A, \alpha \in \mathbb{N} \} \]
+\[ C^{\infty}_{\Gamma_A} (\Omega) = \{ \varphi \in C^\infty (\bar{\Omega}); \varphi = 0 \text{ on some neighbourhood of } \Gamma_A \} \]
 
 \[ H^k_{\Gamma_A} (\Omega) = \overline{C_{\Gamma_A} ^ \infty (\Omega)} ^ {H^k (\Omega)} = \{ v \in H^k(\Omega); \partial^\alpha v=0 \text{ on } \Gamma_A \text{ } \forall \alpha \in \mathbb{N}_{k-1} \} \]
 
@@ -340,7 +315,7 @@ Initial and boundary conditions are analogous except for using $$ u_1 = u_2 = u_
 
 \[ H_0 (\partial_3, \Omega) = \overline{C_0 ^\infty (\Omega)}^{H (\partial_3, \Omega)} = \{ v \in H(\partial_3, \Omega); v n_3 = 0 \text{ on } \Gamma \} \]
 
-\[ \mathbf{W} = \{ \mathbf{v} \in  H^1_{\Gamma_A} (\Omega) \times H^1_{\Gamma_A} (\Omega) \times H_0 (\partial_3, \Omega); \nabla \cdot \mathbf{u} = 0 \text{ in } \Omega \} \]
+\[ \mathbf{W} = \{ \mathbf{v} \in  H^1_{\Gamma_A} (\Omega) \times H^1_{\Gamma_A} (\Omega) \times H_0 (\partial_3, \Omega); \nabla \cdot \mathbf{v} = 0 \text{ in } \Omega \} \]
 \end{frame}
 
 \begin{frame}{Weak formulation - anisotropic system, part 1}
@@ -412,6 +387,10 @@ We show a rigorous connection between the two sets --- taking the limit in the s
 \begin{theorem}
 Let $\mathbf{u}_0 \in L^2 (\Omega)$, with $\nabla \cdot \mathbf{u}_0 = 0, \mathbf{u}_0 \cdot \mathbf{n} = 0$ on $\partial \Omega$; $\theta_h \in L^2(0,T; H^{-1/2}(\Gamma_G)),$ let $c_0 \in L^2 (\Omega)$; then as the aspect ratio $\textcolor{jasper}{\epsilon}$ tends to zero, any weak solution $(\mathbf{u}^\epsilon, \textcolor{mediumred-violet}{c^\epsilon})$ of the anisotropic equations converges (up to a subsequence) weakly to a weak solution $(\mathbf{u}, \textcolor{mediumred-violet}{c})$ of the hydrostatic equations of the polluted atmosphere.
 \end{theorem}
+
+To appear in \textit{Mathematical Methods in the Applied Sciences}.
+
+For details see \textit{D. Donatelli, N. Juhasz, Weak solution of the merged mathematical equations of the polluted atmosphere, Preprint 2019, arXiv:1906.09914 [math.AP].}
   
 \end{frame}
 
