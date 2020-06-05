@@ -8,6 +8,8 @@
 \usepackage{stmaryrd}
 \usepackage{xcolor}
 \definecolor{mediumred-violet}{rgb}{0.73, 0.2, 0.52}
+\definecolor{airforceblue}{rgb}{0.36, 0.54, 0.66}
+\definecolor{asparagus}{rgb}{0.53, 0.66, 0.42}
 \definecolor{jasper}{rgb}{0.84, 0.23, 0.24}
 \usepackage{capt-of}
 \usepackage{tikz}
@@ -525,7 +527,7 @@ We can apply the statement of this theorem for $p=2$ and the spaces $H^1 \hookri
 
 \end{frame}
 
-\begin{frame}{Example: disappearing dependecies}
+\begin{frame}{Example: disappearing dependencies}
 
 \textit{Picard iterations}: Representing the $(\mathbf{u} \nabla \mathbf{u}_h, \mathbf{v}_h) + \textcolor{jasper}{\epsilon^2} ( \mathbf{u} \nabla u_3, v_3)$ nonlinear term by the $( \texttt{u}^{k+1} \nabla \texttt{u}_h^k, \texttt{v}_h ) + \textcolor{jasper}{\epsilon^2} (\texttt{u}^{k+1} \nabla \texttt{u}_3^k, \texttt{v}_3 )$ linearised version $\to$ the result obtained for the vertical velocity in the previous Picard iteration does not have a chance to influence the computations in the next iteration.
 
@@ -553,39 +555,15 @@ Previous observations $\to$ \textcolor{mediumred-violet}{avoid linearisation tec
 
 \end{frame}
 
-\begin{frame}{Reduced system}
+\begin{frame}{Complete horizontal symmetry without the Coriolis term}
 
-The simplified problem is represented by
+$$ \partial_t \textcolor{airforceblue}{u_1}^\epsilon + \mathbf{u}^\epsilon \cdot \nabla \textcolor{airforceblue}{u_1}^\epsilon -\Delta_\nu \textcolor{airforceblue}{u_1}^\epsilon + \partial_1 p^\epsilon = 0 \text{ in } \Omega \times (0,T) $$
 
-\begin{equation} \nonumber
-  \mathbf{\texttt{u}} \cdot \nabla \texttt{u1} - \Delta \texttt{u1} + \partial_1 \texttt{p} = 0 \text{ in } \Omega,
-\end{equation}
-    
-\begin{equation} \nonumber
-  \textcolor{jasper}{\epsilon^2} \mathbf{\texttt{u}} \cdot \nabla \texttt{u3} - \textcolor{jasper}{\epsilon^2} \Delta \texttt{u3} + \partial_3 \texttt{p}  = 0 \text{ in } \Omega,
-\end{equation}
-    
-\begin{equation} \nonumber
-  \nabla \cdot \mathbf{\texttt{u}} = 0 \text{ in } \Omega,
-\end{equation}
+$$ \partial_t \textcolor{asparagus}{u_2}^\epsilon + \mathbf{u}^\epsilon \cdot \nabla \textcolor{asparagus}{u_2}^\epsilon -\Delta_\nu \textcolor{asparagus}{u_2}^\epsilon + \partial_2 p^\epsilon = 0 \text{ in } \Omega \times (0,T) $$
 
-\begin{equation} \nonumber
-  \texttt{u} \cdot \nabla \texttt{c} - \Delta \texttt{c} = \texttt{s} \text{ in } \Omega.
-\end{equation}
+$$ \textcolor{jasper}{\epsilon^2} \{  \partial_t u_3^\epsilon + \mathbf{u}^\epsilon \cdot \nabla u_3^\epsilon -\Delta_\nu u_3^{\epsilon} \} + \partial_3 p^\epsilon = 0 \text{ in } \Omega \times (0,T) $$
 
-\end{frame}
-
-\begin{frame}
-
-Highlight: $\mathcal{O}(1)$ dependence on each coordinate function of the $\texttt{u}$ unknown velocity function.
-
-\texttt{
-\\
-F\_anis=inner(u, grad(u1))*v1*dx + inner(grad(u1), grad(v1))*dx \\
-+ \textcolor{jasper}{eps**2}*inner(u, grad(u3))*v3*dx \\
-+ \textcolor{jasper}{eps**2}*inner(grad(u3), grad(v3))*dx \\
- - p * div(v)*dx + q*div(u)*dx - inner(theta, v)*ds(1). \\
-}
+$$ \nabla \cdot \mathbf{u}^\epsilon= 0 \text{ in } \Omega \times (0,T) $$
 
 \end{frame}
 
