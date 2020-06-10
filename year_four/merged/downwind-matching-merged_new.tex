@@ -373,7 +373,7 @@ In this section we describe the weak formulation of the merged equations in both
 
 We need to define the following spaces:
 
-$$C^{\infty}_\Gamma (\Omega) = \{ \varphi \in C^\infty (\bar{\Omega}); \partial^\alpha \varphi = 0 \text{ in some neighbourhood of } \Gamma\}$$
+$$C^{\infty}_\Gamma (\Omega) = \{ \varphi \in C^\infty (\bar{\Omega}); \varphi = 0 \text{ in some neighbourhood of } \Gamma\}$$
 %\[ C^{\infty}_\Gamma (\Omega) = \{ \varphi \in C^\infty (\bar{\Omega}); \partial^\alpha \varphi = 0 \text{ in some neighbourhood of } \Gamma \text{ for any } \alpha \in \mathbb{N} \} \]
 %
 \begin{align}
@@ -405,7 +405,7 @@ The pair $(\mathbf{u}, c)$ is called a weak solution of the a hydrostatic system
 \begin{equation}
 \begin{split}
 & \int_0^T \bigg[ -(\mathbf{u}_h, \partial_t \mathbf{\tilde{u}}_h) + (\nabla_\nu \mathbf{u}_h, \nabla_\nu \mathbf{\tilde{u}}_h) - (\mathbf{u}_h, (\mathbf{u} \cdot \nabla) \mathbf{\tilde{u}}_h) + (b(\mathbf{u}_h), \mathbf{\tilde{u}}_h) \bigg ] \diff t \\
-& = - ({\mathbf{u}_h}_0, \mathbf{\tilde{u}}_h(0)) \label{hydrostaticWF}
+& = - ({\mathbf{u}_h}_0, \mathbf{\tilde{u}}_h(0)) \label{hydrostaticWF_u}
 \end{split}
 \end{equation}
 %
@@ -414,7 +414,7 @@ and
 \begin{equation}
 \begin{split} 
 &+ \int_0^T \bigg[ -(c, \partial_t \tilde{c}) -(\mathbf{u}c, \nabla \tilde{c}) + K_2 (\partial_2 c, \partial_2 \tilde{c}) + K_3 (\partial_3 c, \partial_3 \tilde{c}) \bigg ] \diff t \\
-& = - (c_0, \tilde{c}(0)) + \int_0^T (s,\tilde{c}) \diff t
+& = - (c_0, \tilde{c}(0)) + \int_0^T (s,\tilde{c}) \diff t \label{hydrostaticWF_c}
 \end{split}
 \end{equation}
 %
@@ -433,7 +433,7 @@ The pair $(\mathbf{u}^\epsilon, c^\epsilon)$ is called a weak solution of the an
 & \int_0^T \bigg [ -(\mathbf{u}^\epsilon_h, \partial_t \mathbf{\tilde{u}}_h) + (\nabla_\nu \mathbf{u}^\epsilon_h, \nabla_\nu \mathbf{\tilde{u}}_h) - (\mathbf{u}^\epsilon_h, (\mathbf{u}^\epsilon \cdot \nabla) \mathbf{\tilde{u}}_h) + (b(\mathbf{u}^\epsilon_h), \mathbf{\tilde{u}}_h) \bigg ] \diff t \\
 & + \epsilon \int_0 ^ T \big [ (\beta u_3 ^\epsilon, \tilde{u}_1) - (\beta u_1^\epsilon, \tilde{u}_3) \big ] \diff t + \epsilon \int_0 ^ T \big [ (\alpha u_2 ^\epsilon, \tilde{u}_3) - (\alpha u_3^\epsilon, \tilde{u}_2) \big ] \diff t \\
 & + \epsilon^2 \int _0 ^ T \big [ -(u_3^\epsilon, \partial_t \tilde{u}_3) +(\mathbf{u}^\epsilon \cdot \nabla u_3 ^ \epsilon, \tilde{u}_3) + (\nabla_\nu u_3^\epsilon, \nabla_\nu \tilde{u}_3) \big ] \diff t \\
-& = - ({\mathbf{u}^\epsilon_h}_0, \mathbf{\tilde{u}}_h(0)) - \epsilon^2 ({u^\epsilon_3}_0, \tilde{u}_3 (0)) \raisetag{20pt} \label{anisotropicWF}
+& = - ({\mathbf{u}^\epsilon_h}_0, \mathbf{\tilde{u}}_h(0)) - \epsilon^2 ({u^\epsilon_3}_0, \tilde{u}_3 (0)) \raisetag{20pt} \label{anisotropicWF_u}
 \end{split}
 \end{equation}
 %
@@ -443,7 +443,7 @@ and
 \begin{split} 
 & \int_0^T \bigg [ -(c^\epsilon, \partial_t \tilde{c}) -(\mathbf{u}^\epsilon c^\epsilon, \nabla \tilde{c}) + \epsilon K_1 (\partial_1 c^\epsilon, \partial_1 \tilde{c}) \\
 & + K_2 (\partial_2 c^\epsilon, \partial_2 \tilde{c}) + K_3 (\partial_3 c^\epsilon, \partial_3 \tilde{c}) \bigg ] \diff t \\
-& = - (c_0, \tilde{c} (0)) + \int_0^T (s^\epsilon,\tilde{c}) \diff t
+& = - (c_0, \tilde{c} (0)) + \int_0^T (s^\epsilon,\tilde{c}) \diff t \label{anisotropicWF_c}
 \end{split}
 \end{equation}
 %
@@ -515,23 +515,23 @@ As a consequence of Proposition \ref{aprioriprop}, up to subsequences still deno
 & \sqrt{\epsilon} \partial_1 c^\epsilon \rightharpoonup e &\quad & \text{weakly for some limit element $e$ in $L_t^2 L_x^2$.} \label{WeakConvCEps4}
 \end{align}
 
-Now, the next step is to pass to the limit in the weak formulation (\ref{anisotropicWF}). Taking the limit for the linear terms can be done in a standard way using the previously obtained results.
+Now, the next step is to pass to the limit in the weak formulation (\ref{anisotropicWF_u}) - (\ref{anisotropicWF_c}). Taking the limit for the linear terms can be done in a standard way using the previously obtained results.
 The convergence of the nonlinear velocity terms (i.e. nonlinear terms that do not include the concentration function), requiring the compactness of $\mathbf{u}_h^\epsilon$, 
 %will be the direct consequence of our calculations detailed in the following subsection (see (\ref{horizontal_velocities_convergence}) in Proposition \ref{convrateweakframework}), observe however that for these specific terms the original argument of \cite{pollatmws2019} works too.
 works with same arguments as in \cite{pollatmws2019}. 
 
-In particular, the convergence of these velocity terms can be shown applying a generalisation of the classical translation criterium of Riesz-Fr\'echet-Kolmogorov (see Theorem 5.1 in \cite{azerad2001mathematical}) which enables us to get strong convergence for the horizontal velocities. This is achieved by establishing a bound for the perturbation of $\mathbf{u}_h^{\epsilon}$ of the form $\norm{\tau_\upsilon \mathbf{u}_h^{\epsilon} - \mathbf{u}_h^{\epsilon}}_{L^2(0,T-\upsilon, {H^2}^*)} \leq \varphi(\upsilon) + \psi(\epsilon),$ where $\varphi$ and $\psi$ are appropriate functions with their limits vanishing at zero, and $\tau_\upsilon \mathbf{u}_h^{\epsilon} = \mathbf{u}_h^{\epsilon} (t+\upsilon) $. After obtaining strong convergence for $\mathbf{u}_h,$ the proof of the convergence for these nonlinear terms can be closed by applying basic interpolation techniques and the generalised H\"older inequality. By passing into the limit in \eqref{anisotropicWF} we get that $\mathbf{u}_h$ satisfies the weak formulation \eqref{hydrostaticWF}.
+In particular, the convergence of these velocity terms can be shown applying a generalisation of the classical translation criterium of Riesz-Fr\'echet-Kolmogorov (see Theorem 5.1 in \cite{azerad2001mathematical}) which enables us to get strong convergence for the horizontal velocities. This is achieved by establishing a bound for the perturbation of $\mathbf{u}_h^{\epsilon}$ of the form $\norm{\tau_\upsilon \mathbf{u}_h^{\epsilon} - \mathbf{u}_h^{\epsilon}}_{L^2(0,T-\upsilon, {H^2}^*)} \leq \varphi(\upsilon) + \psi(\epsilon),$ where $\varphi$ and $\psi$ are appropriate functions with their limits vanishing at zero, and $\tau_\upsilon \mathbf{u}_h^{\epsilon} = \mathbf{u}_h^{\epsilon} (t+\upsilon) $. After obtaining strong convergence for $\mathbf{u}_h,$ the proof of the convergence for these nonlinear terms can be closed by applying basic interpolation techniques and the generalised H\"older inequality. By passing into the limit in \eqref{anisotropicWF_u} we get that $\mathbf{u}_h$ satisfies the weak formulation \eqref{hydrostaticWF_u}.
 Finally, as for the concentration-including nonlinear terms, we have the convergence of $(u_i c^\epsilon, \partial_i \tilde{c})$ for $i=1,2,$ since as we mentioned before, we have the strong convergence of the horizontal velocities --- while in the case of $i=3$ this property does not hold for $u_3$ and from the energy bound we do not have more than the weak convergence of $c^\epsilon$. Because of its complexity we handle this specific nonlinear compound product term in the next section.
 
 \subsubsection{Weak convergence - Part 2.}
 
-As we mentioned before, the cornerstone idea for obtaining the convergence of the remaining product term $u_3^\epsilon c^\epsilon$ is to exploit the $H^1$ regularity of the initial horizontal velocity. We have already proved that $\mathbf{u}_h$ satisfies \eqref{hydrostaticWF} therefore it is a weak solution for the velocity primitive equations. On the other hand,  given an $H^1$ initial data for $\mathbf{u}_h,$ according to the theory developed in \cite{cao2007global}, there exists a unique global strong solution for the primitive equations $(\ref{HNSC1})$ - $(\ref{HNSC4}).$ We recall here this result (for more details see \cite{cao2007global}).
+As we mentioned before, the cornerstone idea for obtaining the convergence of the remaining product term $u_3^\epsilon c^\epsilon$ is to exploit the $H^1$ regularity of the initial horizontal velocity. We have already proved that $\mathbf{u}_h$ satisfies \eqref{hydrostaticWF_u} therefore it is a weak solution for the velocity primitive equations. On the other hand,  given an $H^1$ initial data for $\mathbf{u}_h,$ according to the theory developed in \cite{cao2007global}, there exists a unique global strong solution for the primitive equations $(\ref{HNSC1})$ - $(\ref{HNSC4}).$ We recall here this result (for more details see \cite{cao2007global}).
 
 \begin{theorem} \label{PE3DWellPosedness}
 Let ${\mathbf{u}_h}_0 \in H^1(\Omega).$ Then there exists a unique strong solution $\mathbf{u}_h$ of the reformulated Primitive Equations $(\ref{HNSC1})$ - $(\ref{HNSC4})$, $(\ref{HNSC_init})$ such that $$\mathbf{u}_h \in C([0, \infty), H^1(\Omega)) \cap L^2_{loc}([0, \infty), H^2(\Omega))$$ and $$\partial_t \mathbf{u}_h \in L^2_{loc} ([0,\infty), L^2(\Omega)).$$
 \end{theorem}
 
-Therefore by using  weak strong uniqueness results for primitive equations (in the spirit of \cite{GNT2019}), we get that $\mathbf{u}_h$ is a strong solution of (\ref{HNSC1}) - (\ref{HNSC4}).
+Therefore by using  weak--strong uniqueness results for primitive equations (in the spirit of \cite{GNT2019}), we get that $\mathbf{u}_h$ is a strong solution of (\ref{HNSC1}) - (\ref{HNSC4}).
 In more detail, we have the following regularities for the strong solution of the primitive equations for the case of an $H^1$-regular horizontal initial data:
 
 \begin{corollary} \label{StrongSolPE_boundedness}
@@ -576,7 +576,7 @@ hold true for any $f,g,h$ set of functions such that the right-hand sides make s
 
 %Note that this lemma simply states the inequality for the complete domain even in the version in \cite{li2019primitive}, not assuming an odd $u_3^\epsilon$ function or a $z$-symmetrical vertical structure of $\Omega$.
 
-The main idea in order to prove the strong convergence of $u^\epsilon_3$ lies in establishing a bound of $O(\epsilon^\kappa)$ for some $\kappa>0$ for the difference \begin{equation}\label{velocitydifferencefunctions}(\mathbf{U}_h^\epsilon, U_3^\epsilon): = (\mathbf{u}_h^\epsilon - \mathbf{u}_h, u_3^\epsilon - u_3).\end{equation} This will be achieved by using the strong solution $(\mathbf{u}_h,u_3)$ as a test function in the weak formulation's integral identity $(\ref{anisotropicWF})$. Following this method we arrive to
+The main idea in order to prove the strong convergence of $u^\epsilon_3$ lies in establishing a bound of $O(\epsilon^\kappa)$ for some $\kappa>0$ for the difference \begin{equation}\label{velocitydifferencefunctions}(\mathbf{U}_h^\epsilon, U_3^\epsilon): = (\mathbf{u}_h^\epsilon - \mathbf{u}_h, u_3^\epsilon - u_3).\end{equation} This will be achieved by using the strong solution $(\mathbf{u}_h,u_3)$ as a test function in the weak formulation's integral identity $(\ref{anisotropicWF_u})$. Following this method we arrive to
 
 \begin{prop} \label{propIdentity}
 
